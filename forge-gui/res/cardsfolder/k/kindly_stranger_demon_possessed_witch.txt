@@ -16,5 +16,5 @@ Colors:black
 Types:Creature Human Shaman
 PT:4/3
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When this creature transforms into CARDNAME, you may destroy target creature.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature
 Oracle:When this creature transforms into Demon-Possessed Witch, you may destroy target creature.

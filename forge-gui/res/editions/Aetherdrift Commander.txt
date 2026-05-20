@@ -200,13 +200,14 @@ ScryfallCode=DRC
 10 g_3_3_beast @Jason Felix
 11 c_6_6_a_beast @Sara Winters
 12 c_4_4_a_construct @Craig J Spearing
-15 c_3_3_a_golem_flying @Andrew Mar
-16 c_3_3_a_golem_trample @Andrew Mar
+13 c_3_3_a_golem_flying @Andrew Mar
+14 c_3_3_a_golem_trample @Andrew Mar
+15 c_3_3_a_golem_vigilance @Andrew Mar
 16 nalaar_aetherjet @Victor Sales
-17 c_3_3_a_golem_vigilance @Andrew Mar
 
 [other]
-embalm_angel_of_sanctions
-embalm_vizier_of_many_faces
-eternalize_champion_of_wits
-eternalize_timeless_dragon
+1 embalm_angel_of_sanctions @Min Yum
+2 embalm_vizier_of_many_faces @Ryan Yee
+5 eternalize_champion_of_wits @Even Amundsen
+6 eternalize_timeless_dragon @Anastasia Ovchinnikova
+17 energy @Liz Leo

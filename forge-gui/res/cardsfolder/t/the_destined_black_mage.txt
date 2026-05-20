@@ -1,0 +1,14 @@
+Name:The Destined Black Mage
+ManaCost:2 B
+Types:Legendary Creature Human Wizard
+PT:3/2
+K:Deathtouch
+A:AB$ Pump | Cost$ B T | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | KW$ Deathtouch | SpellDescription$ Another target creature you control gains deathtouch until end of turn.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME deals 1 damage to each opponent. If you have a full party, it deals 3 damage to each opponent instead.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ X
+SVar:X:Count$Compare Y EQ4.3.1
+SVar:Y:Count$Party
+SVar:BuffedBy:Cleric,Rogue,Warrior
+DeckHas:Ability$Party
+DeckHints:Type$Cleric|Rogue|Warrior
+Oracle:Deathtouch\n{B}, {T}: Another target creature you control gains deathtouch until end of turn.\nWhenever you cast a noncreature spell, The Destined Black Mage deals 1 damage to each opponent. If you have a full party, it deals 3 damage to each opponent instead.

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Dr No
+Title=Dr No
+Icon=Dr No.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Aaron_Gertler_-_Orzhov_Yorion_(Standard,_#1061547).dck
+Deck Type=constructed
+
+[Main]
+3 Yorion, Sky Nomad
+4 Skyclave Apparition
+4 Archon of Sun's Grace
+4 Glass Casket
+3 Extinction Event
+4 Emeria's Call
+3 Omen of the Sun
+3 The Birth of Meletis
+3 Elspeth's Nightmare
+4 Doom Foretold
+4 Elspeth Conquers Death
+4 Treacherous Blessing
+4 Lithoform Blight
+2 Castle Locthwain
+2 Savai Triome
+4 Fabled Passage
+4 Brightclimb Pathway
+4 Temple of Silence
+7 Plains
+10 Swamp
+[Sideboard]
+1 Extinction Event
+1 Yorion, Sky Nomad
+3 Heartless Act
+3 Duress
+3 Cling to Dust
+4 Mazemind Tome

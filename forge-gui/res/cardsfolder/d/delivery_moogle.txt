@@ -1,0 +1,8 @@
+Name:Delivery Moogle
+ManaCost:3 W
+Types:Creature Moogle
+PT:3/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When this creature enters, search your library and/or graveyard for an artifact card with mana value 2 or less, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Hand | ChangeType$ Artifact.YouOwn+cmcLE2
+Oracle:Flying\nWhen this creature enters, search your library and/or graveyard for an artifact card with mana value 2 or less, reveal it, and put it into your hand. If you search your library this way, shuffle it.

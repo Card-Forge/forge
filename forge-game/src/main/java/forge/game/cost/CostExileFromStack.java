@@ -32,7 +32,6 @@ import java.util.Map;
  * The Class CostExile.
  */
 public class CostExileFromStack extends CostPart {
-    // ExileFromStack<Num/Type{/TypeDescription}>
 
     private static final long serialVersionUID = 1L;
 
@@ -67,7 +66,7 @@ public class CostExileFromStack extends CostPart {
         final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
         sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
 
-        sb.append("from stack");
+        sb.append(" from stack");
 
         return sb.toString();
     }

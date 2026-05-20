@@ -1,6 +1,5 @@
 package forge.gui.framework;
 
-
 /** 
  * An intentionally empty IVDoc to fill field slots unused
  * by the current layout of a match UI.

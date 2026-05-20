@@ -1,0 +1,9 @@
+Name:Sandman's Quicksand
+Variant:UniversesWithin:FlavorName:Miasmic Mist
+ManaCost:1 B B
+Types:Sorcery
+K:Mayhem:3 B
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SubAbility$ DBPumpAll | ConditionDefined$ Self | ConditionPresent$ Card.!CastSa Spell.Mayhem | ConditionCompare$ EQ1 | SpellDescription$ All creatures get -2/-2 until end of turn. If this spell's mayhem cost was paid, creatures your opponents control get -2/-2 until end of turn instead.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -2 | NumDef$ -2 | ConditionDefined$ Self | ConditionPresent$ Card.CastSa Spell.Mayhem | IsCurse$ True
+DeckHints:Ability$Discard
+Oracle:Mayhem {3}{B} (You may cast this card from your graveyard for {3}{B} if you discarded it this turn. Timing rules still apply.)\nAll creatures get -2/-2 until end of turn. If this spell's mayhem cost was paid, creatures your opponents control get -2/-2 until end of turn instead.

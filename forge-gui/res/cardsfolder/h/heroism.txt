@@ -5,6 +5,7 @@ A:AB$ RepeatEach | Cost$ Sac<1/Creature.White/White Creature> | RepeatCards$ Cre
 SVar:DBPump:DB$ Pump | RememberObjects$ Imprinted | UnlessCost$ 2 R | UnlessPayer$ ImprintedController | ShowCurrentCard$ Imprinted
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPrevent | RememberObjects$ Remembered | ForgetOnMoved$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt by that creature.
 SVar:AIPreference:SacCost$Creature.token
 AI:RemoveDeck:Random
 AI:RemoveDeck:All

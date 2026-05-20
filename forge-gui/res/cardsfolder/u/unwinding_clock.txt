@@ -1,6 +1,6 @@
 Name:Unwinding Clock
 ManaCost:4
 Types:Artifact
-S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddHiddenKeyword$ CARDNAME untaps during each other player's untap step. | Description$ Untap all artifacts you control during each other player's untap step.
+S:Mode$ UntapOtherPlayer | ValidCard$ Artifact.YouCtrl | Description$ Untap all artifacts you control during each other player's untap step.
 AI:RemoveDeck:Random
 Oracle:Untap all artifacts you control during each other player's untap step.

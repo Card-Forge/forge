@@ -3,6 +3,6 @@ ManaCost:2 B B
 Types:Artifact
 S:Mode$ Continuous | Affected$ Zombie.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Zombies you control get +1/+1.
 A:AB$ Pump | Cost$ T | TgtZone$ Graveyard | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card in your graveyard | PumpZone$ Graveyard | KW$ Embalm:CardManaCost | SpellDescription$ Target creature card in your graveyard gains embalm until end of turn. The embalm cost is equal to its mana cost. (Exile that card and pay its embalm cost: Create a token that's a copy of it, except it's a white Zombie in addition to its other types and has no mana cost. Embalm only as a sorcery.)
-DeckHints$:Type$Zombie
+DeckHints:Type$Zombie
 AI:RemoveDeck:All
 Oracle:Zombies you control get +1/+1.\n{T}: Target creature card in your graveyard gains embalm until end of turn. The embalm cost is equal to its mana cost. (Exile that card and pay its embalm cost: Create a token that's a copy of it, except it's a white Zombie in addition to its other types and has no mana cost. Embalm only as a sorcery.)

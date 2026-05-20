@@ -1,0 +1,9 @@
+Name:Doc Ock, Sinister Scientist
+Variant:UniversesWithin:FlavorName:Ozor, Chronicler of Collapse
+ManaCost:4 U
+Types:Legendary Creature Human Scientist Villain
+PT:4/5
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 8 | SetToughness$ 8 | IsPresent$ Card.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE8 | Description$ As long as there are eight or more cards in your graveyard, NICKNAME has base power and toughness 8/8.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof | IsPresent$ Villain.YouCtrl+Other | Description$ As long as you control another Villain, NICKNAME has hexproof. (He can't be the target of spells or abilities your opponents control.)
+DeckHints:Ability$Sacrifice|Discard|Mill|Dredge|Graveyard & Type$Villain
+Oracle:As long as there are eight or more cards in your graveyard, Doc Ock has base power and toughness 8/8.\nAs long as you control another Villain, Doc Ock has hexproof. (He can't be the target of spells or abilities your opponents control.)

@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Leela
+Title=Leela
+Icon=Leela.jpg
+Difficulty=Very Hard
+Description=../Modern/Fate_Reforged/Pro_Tour_Fate_Reforged_2015_-_18_Points_or_Better┬á/Thiago_Saporito_-_WBG_Junk_(Modern,_#178742).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Kitchen Finks
+3 Scavenging Ooze
+2 Siege Rhino
+4 Tarmogoyf
+1 Tasigur, the Golden Fang
+4 Voice of Resurgence
+4 Abrupt Decay
+1 Dismember
+2 Path to Exile
+3 Inquisition of Kozilek
+4 Lingering Souls
+1 Maelstrom Pulse
+4 Thoughtseize
+2 Forest
+1 Godless Shrine
+1 Isolated Chapel
+2 Marsh Flats
+1 Overgrown Tomb
+1 Plains
+2 Stirring Wildwood
+1 Swamp
+1 Tectonic Edge
+2 Temple Garden
+2 Treetop Village
+4 Verdant Catacombs
+4 Windswept Heath
+[Sideboard]
+2 Creeping Corrosion
+1 Duress
+2 Engineered Explosives
+1 Nihil Spellbomb
+1 Sorin, Solemn Visitor
+2 Spellskite
+2 Stony Silence
+1 Sword of Light and Shadow
+1 Thrun, the Last Troll

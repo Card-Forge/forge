@@ -1,0 +1,11 @@
+Name:Summon: Yojimbo
+ManaCost:3 W
+Types:Enchantment Creature Saga Samurai
+PT:5/5
+K:Chapter:4:DBExile,DBEffect,DBEffect,DBToken
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact.OppCtrl,Enchantment.OppCtrl,Creature.OppCtrl+tapped | TgtPrompt$ Select artifact, enchantment, or tapped creature an opponent controls | SpellDescription$ Exile target artifact, enchantment, or tapped creature an opponent controls.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ YojimboCantAttack | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, creatures can't attack you unless their controller pays {2} for each of those creatures.
+SVar:YojimboCantAttack:Mode$ CantAttackUnless | ValidCard$ Creature | Target$ You | Cost$ 2 | Description$ Until your next turn, creatures can't attack you unless their controller pays {2} for each of those creatures.
+SVar:DBToken:DB$ Token | TokenAmount$ PlayerCountOpponents$HasPropertycontrolsCreature.powerGE4 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create X Treasure tokens, where X is the number of opponents who control a creature with power 4 or greater.
+K:Vigilance
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Exile target artifact, enchantment, or tapped creature an opponent controls.\nII, III — Until your next turn, creatures can't attack you unless their controller pays {2} for each of those creatures.\nIV — Create X Treasure tokens, where X is the number of opponents who control a creature with power 4 or greater.\nVigilance

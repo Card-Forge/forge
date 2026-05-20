@@ -88,8 +88,8 @@ ScryfallCode=OTP
 80 M Mindslaver @Gossip Goblin
 
 [tokens]
-1 rw_2_1_human_cleric_lifelink_haste @Unknown
-2 rw_1_2_human_rogue_haste_damage @Unknown
-3 rw_3_1_human_warrior_trample_haste @Unknown
+1 rw_2_1_human_cleric_lifelink_haste @Suzanne Helmigh
+2 rw_1_2_human_rogue_haste_damage @Suzanne Helmigh
+3 rw_3_1_human_warrior_trample_haste @Suzanne Helmigh
 4 bg_1_1_pest_lifegain @Ilse Gort
 5 c_a_food_sac @Lucas Graciano

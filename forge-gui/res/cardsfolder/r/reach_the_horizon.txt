@@ -1,0 +1,6 @@
+Name:Reach the Horizon
+ManaCost:3 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | DifferentNames$ True | ChangeTypeDesc$ basic land cards and/or Town cards with different names | Destination$ Battlefield | ChangeType$ Land.Basic,Town | ChangeNum$ 2 | Tapped$ True | SpellDescription$ Search your library for up to two basic land cards and/or Town cards with different names, put them onto the battlefield tapped, then shuffle.
+DeckHints:Type$Town
+Oracle:Search your library for up to two basic land cards and/or Town cards with different names, put them onto the battlefield tapped, then shuffle.

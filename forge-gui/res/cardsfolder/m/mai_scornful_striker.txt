@@ -1,0 +1,8 @@
+Name:Mai, Scornful Striker
+ManaCost:1 B
+Types:Legendary Creature Human Noble Ally
+PT:2/2
+K:First Strike
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Player | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player casts a noncreature spell, they lose 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredActivator | LifeAmount$ 2
+Oracle:First strike\nWhenever a player casts a noncreature spell, they lose 2 life.

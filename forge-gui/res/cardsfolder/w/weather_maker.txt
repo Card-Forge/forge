@@ -1,0 +1,10 @@
+Name:Weather Maker
+ManaCost:3
+Types:Artifact
+T:Mode$ ChangesZone | ValidCard$ Land.YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Landfall — Whenever a land you control enters, put a charge counter on this artifact.
+SVar:TrigCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 1
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Mana | Cost$ T SubCounter<2/CHARGE> | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
+A:AB$ DealDamage | Cost$ T SubCounter<3/CHARGE> | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ It deals 3 damage to any target.
+DeckHas:Ability$Counters
+Oracle:Landfall — Whenever a land you control enters, put a charge counter on this artifact.\n{T}: Add one mana of any color.\n{T}, Remove two charge counters from this artifact: Add {C}{C}.\n{T}, Remove three charge counters from this artifact: It deals 3 damage to any target.

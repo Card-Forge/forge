@@ -6,14 +6,12 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityCantCrew {
 
-    static String MODE = "CantCrew";
-
     public static boolean cantCrew(final Card card) {
         CardCollection list = new CardCollection(card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         list.add(card);
         for (final Card ca : list) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.CantCrew)) {
                     continue;
                 }
                 if (applyCantCrew(stAb, card)) {

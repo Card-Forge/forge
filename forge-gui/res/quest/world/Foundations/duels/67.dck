@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Albert Einstein
+Title=Albert Einstein
+Icon=Albert Einstein.jpg
+Difficulty=Very Hard
+Description=./Modern/Foundations/empanadillahumana_-_Boros_Burn_(Modern,_#2286765).dck
+Deck Type=constructed
+
+[Main]
+4 Goblin Guide
+4 Monastery Swiftspear
+2 Lightning Helix
+4 Lightning Bolt
+3 Searing Blaze
+3 Skullcrack
+4 Boros Charm
+4 Lava Spike
+3 Rift Bolt
+4 Skewer the Critics
+4 Boltwave
+1 Roiling Vortex
+2 Mountain
+2 Sacred Foundry
+2 Bloodstained Mire
+4 Inspiring Vantage
+4 Sunbaked Canyon
+4 Arid Mesa
+2 Barbarian Ring
+[Sideboard]
+1 Orim's Chant
+2 Smash to Smithereens
+1 Searing Blaze
+1 Eidolon of the Great Revel
+2 Deflecting Palm
+2 Exquisite Firecraft
+2 Drannith Magistrate
+2 Roiling Vortex
+2 Sanctifier en-Vec

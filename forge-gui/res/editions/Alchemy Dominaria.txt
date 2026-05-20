@@ -37,3 +37,14 @@ ScryfallCode=YDMU
 28 R Tiana, Angelic Mechanic @Joseph Weston
 29 R Vodalian Tide Mage @Brian Valeza
 30 R Coalition Construct @Artur Treffner
+
+[conjured]
+32 M Ancestral Recall @Ryan Pancoast
+33 M Time Walk @Chris Rahn
+34 M Timetwister @Matt Stewart
+35 M Black Lotus @Chris Rahn
+36 M Mox Emerald @Volkan Baǵa
+37 M Mox Jet @Volkan Baǵa
+38 M Mox Pearl @Volkan Baǵa
+39 M Mox Ruby @Volkan Baǵa
+40 M Mox Sapphire @Volkan Baǵa

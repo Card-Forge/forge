@@ -513,10 +513,9 @@ ScryfallCode=RVR
 1 Chromatic Lantern|RVR
 
 [tokens]
-0 gw_2_2_elf_knight_vigilance @Unknown
-0 rw_1_1_soldier_haste @Unknown
 1 w_1_1_bird_flying @James Ryman
-3 w_4_4_angel_flying @Grzegorz Rutkowski
+2 w_4_4_angel_flying @Steve Argyle
+3 w_4_4_angel_flying_vigilance @Grzegorz Rutkowski
 4 w_1_1_spirit_flying @Dave Allsop
 5 u_1_1_bird_illusion_flying @James Paick
 6 b_2_2_zombie @Simon Dominic
@@ -528,7 +527,11 @@ ScryfallCode=RVR
 12 g_1_1_saproling @Dana Knutson
 13 g_6_6_wurm @Mitch Cotie
 14 rg_4_4_beast_trample @Winona Nelson
-15 w_4_4_angel_flying_vigilance @Grzegorz Rutkowski
+15 gw_2_2_elf_knight_vigilance @Hristo D. Chukov
+16 rw_1_1_soldier_haste @David Palumbo
 17 wu_4_4_sphinx_flying_vigilance @Scott Murphy
 18 wb_1_1_spirit_flying @Cliff Childs
 19 voja @Richard Sardinha
+
+[other]
+20 emblem_domri_rade @Tyler Jacobson

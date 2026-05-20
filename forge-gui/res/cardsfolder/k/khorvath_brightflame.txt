@@ -2,7 +2,7 @@ Name:Khorvath Brightflame
 ManaCost:5 R
 Types:Legendary Creature Dragon
 PT:3/4
-K:Partner:Sylvia Brightspear:Sylvia
+K:Partner with:Sylvia Brightspear:Sylvia
 K:Flying
 K:Haste
 S:Mode$ Continuous | Affected$ Knight.YourTeamCtrl | AddKeyword$ Flying & Haste | Description$ Knights your team controls have flying and haste.

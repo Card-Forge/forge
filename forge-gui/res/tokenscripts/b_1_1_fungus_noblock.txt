@@ -3,5 +3,5 @@ ManaCost:no cost
 Colors:black
 Types:Creature Fungus
 PT:1/1
-S:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ This creature can't block.
+S:Mode$ CantBlock | ValidCard$ Creature.Self | Description$ This creature can't block.
 Oracle:This creature can't block.

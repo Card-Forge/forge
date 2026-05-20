@@ -1,0 +1,9 @@
+Name:Cactuar
+ManaCost:G
+Types:Creature Plant
+PT:3/3
+K:Trample
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+!ThisTurnEntered | Execute$ TrigReturn | TriggerDescription$ At the beginning of your end step, if this creature didn't enter the battlefield this turn, return it to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+K:Trample
+Oracle:At the beginning of your end step, if this creature didn't enter the battlefield this turn, return it to its owner's hand.

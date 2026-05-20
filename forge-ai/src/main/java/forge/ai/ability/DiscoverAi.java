@@ -1,9 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.AiPlayDecision;
-import forge.ai.ComputerUtil;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -16,12 +13,8 @@ import java.util.Map;
 public class DiscoverAi extends SpellAbilityAi {
 
     @Override
-    protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false; // prevent infinite loop
-        }
-
-        return true;
+    protected AiAbilityDecision checkApiLogic(final Player ai, final SpellAbility sa) {
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /**
@@ -36,8 +29,12 @@ public class DiscoverAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        return mandatory || checkApiLogic(ai, sa);
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+        if (mandatory) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return checkApiLogic(ai, sa);
     }
 
     @Override

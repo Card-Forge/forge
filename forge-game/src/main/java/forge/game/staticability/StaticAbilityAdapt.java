@@ -7,13 +7,11 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityAdapt {
 
-    static String MODE = "CanAdapt";
-
     public static boolean anyWithAdapt(final SpellAbility sa, final Card card) {
         final Game game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.CanAdapt)) {
                     continue;
                 }
                 if (applyWithAdapt(stAb, sa, card)) {

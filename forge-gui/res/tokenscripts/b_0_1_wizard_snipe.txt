@@ -1,0 +1,8 @@
+Name:Wizard Token
+ManaCost:no cost
+Colors:black
+Types:Creature Wizard
+PT:0/1
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast a noncreature spell, this token deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+Oracle:Whenever you cast a noncreature spell, this token deals 1 damage to each opponent.

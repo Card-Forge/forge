@@ -1,0 +1,11 @@
+Name:Cryoshatter
+ManaCost:U
+Types:Enchantment Aura
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -5 | Description$ Enchanted creature gets -5/-0.
+T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDestroy1 | TriggerDescription$ When enchanted creature becomes tapped or is dealt damage, destroy it.
+T:Mode$ DamageDoneOnce | ValidTarget$ Creature.EnchantedBy | Execute$ TrigDestroy2 | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ When enchanted creature becomes tapped or is dealt damage, destroy it.
+SVar:TrigDestroy1:DB$ Destroy | Defined$ TriggeredCardLKICopy
+SVar:TrigDestroy2:DB$ Destroy | Defined$ TriggeredTargetLKICopy
+Oracle:Enchant creature\nEnchanted creature gets -5/-0.\nWhen enchanted creature becomes tapped or is dealt damage, destroy it.

@@ -1,10 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Lists;
-import forge.ai.AiAttackController;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -26,27 +23,27 @@ import java.util.List;
 public class DebuffAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision canPlay(final Player ai, final SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
         final Card source = sa.getHostCard();
         final Game game = ai.getGame(); 
         if (!sa.usesTargeting() && !source.isInPlay()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         final Cost cost = sa.getPayCosts();
 
         // temporarily disabled until AI is improved
         if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, cost, source, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 
         if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 40, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 
         if (!ComputerUtilCost.checkRemoveCounterCost(cost, source, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 
         final PhaseHandler ph =  game.getPhaseHandler();
@@ -58,7 +55,7 @@ public class DebuffAi extends SpellAbilityAi {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty, unless there are specific activation phase requirements
             if (!isSorcerySpeed(sa, ai) && !sa.hasParam("ActivationPhases")) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
             }
         }
 
@@ -66,7 +63,7 @@ public class DebuffAi extends SpellAbilityAi {
             List<Card> cards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             final Combat combat = game.getCombat();
-            return cards.stream().anyMatch(c -> {
+            if (cards.stream().anyMatch(c -> {
                 if (c.getController().equals(sa.getActivatingPlayer()) || combat == null)
                     return false;
 
@@ -75,21 +72,34 @@ public class DebuffAi extends SpellAbilityAi {
                 }
                 // don't add duplicate negative keywords
                 return sa.hasParam("Keywords") && c.hasAnyKeyword(Arrays.asList(sa.getParam("Keywords").split(" & ")));
-            });
+            })) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         } else {
-            return debuffTgtAI(ai, sa, sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : null, false);
+            if (debuffTgtAI(ai, sa, sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : null, false)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
         }
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         if (!sa.usesTargeting()) {
             // TODO - copied from AF_Pump.pumpDrawbackAI() - what should be here?
         } else {
-            return debuffTgtAI(ai, sa, sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : null, false);
+            if (debuffTgtAI(ai, sa, sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : null, false)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+
     } // debuffDrawbackAI()
 
     /**
@@ -130,7 +140,7 @@ public class DebuffAi extends SpellAbilityAi {
             Card t = null;
 
             if (list.isEmpty()) {
-                if ((sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().size() == 0)) {
+                if (sa.getTargets().size() < sa.getMinTargets() || sa.getTargets().size() == 0) {
                     if (mandatory) {
                         return debuffMandatoryTarget(ai, sa, mandatory);
                     }
@@ -185,10 +195,9 @@ public class DebuffAi extends SpellAbilityAi {
      * @return a boolean.
      */
     private boolean debuffMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         List<Card> list = CardUtil.getValidCardsToTarget(sa);
 
-        if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+        if (list.size() < sa.getMinTargets()) {
             sa.resetTargets();
             return false;
         }
@@ -234,18 +243,24 @@ public class DebuffAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<>();
 
         if (!sa.usesTargeting()) {
             if (mandatory) {
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+
             }
         } else {
-            return debuffTgtAI(ai, sa, kws, mandatory);
+            if (debuffTgtAI(ai, sa, kws, mandatory)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            } else {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+            }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+
     }
 
 }

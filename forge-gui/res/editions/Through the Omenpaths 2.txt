@@ -1,0 +1,8 @@
+[metadata]
+Code=OM2
+Date=2026-06-23
+Name=Through the Omenpaths 2
+Type=Online
+ScryfallCode=OM2
+
+[cards]

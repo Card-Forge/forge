@@ -1,0 +1,10 @@
+Name:Sothera, the Supervoid
+ManaCost:2 B B
+Types:Legendary Enchantment
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever a creature you control dies, each opponent chooses a creature they control and exiles it.
+SVar:TrigExile:DB$ ChangeZone | ChangeType$ Creature | Origin$ Battlefield | Destination$ Exile | Hidden$ True | Mandatory$ True | DefinedPlayer$ Opponent
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ EQ0 | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your end step, if a player controls no creatures, sacrifice NICKNAME, then put a creature card exiled with it onto the battlefield under your control with two additional +1/+1 counters on it.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Creature.ExiledWithSource | GainControl$ True | Origin$ Exile | Hidden$ True | Mandatory$ True | Destination$ Battlefield | WithCountersType$ P1P1 | WithCountersAmount$ 2
+SVar:X:PlayerCountPlayers$LowestValid Creature.YouCtrl
+Oracle:Whenever a creature you control dies, each opponent chooses a creature they control and exiles it.\nAt the beginning of your end step, if a player controls no creatures, sacrifice Sothera, then put a creature card exiled with it onto the battlefield under your control with two additional +1/+1 counters on it.

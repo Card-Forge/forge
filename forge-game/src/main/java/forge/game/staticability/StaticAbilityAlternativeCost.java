@@ -16,8 +16,6 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityAlternativeCost {
 
-    static String MODE = "AlternativeCost";
-
     public static List<SpellAbility> alternativeCosts(final SpellAbility sa, final Card source, final Player pl) {
         List<SpellAbility> result = Lists.newArrayList();
         // add source first in case it's LKI (alternate host)
@@ -25,7 +23,7 @@ public class StaticAbilityAlternativeCost {
         list.addAll(source.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         for (final Card ca : list) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.AlternativeCost)) {
                     continue;
                 }
 
@@ -86,6 +84,11 @@ public class StaticAbilityAlternativeCost {
                     }
                 }
                 newSA.setDescription(sb.toString());
+
+                // Support for custom cards alternative costs targeting
+                if (stAb.hasParam("Named")) {
+                    newSA.setName(stAb.getParam("Named"));
+                }
 
                 result.add(newSA);
             }

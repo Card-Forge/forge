@@ -1,0 +1,9 @@
+Name:Helitrooper
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:1/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks, another target attacking creature gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+attacking | TgtPrompt$ Select another target attacking creature | KW$ Flying
+S:Mode$ ReduceCost | ValidTarget$ Card.Self | ValidSpell$ Activated.Equip | Activator$ You | Amount$ 2 | Description$ Equip abilities you activate that target this creature cost {2} less to activate.
+Oracle:Flying\nWhenever this creature attacks, another target attacking creature gains flying until end of turn.\nEquip abilities you activate that target this creature cost {2} less to activate.

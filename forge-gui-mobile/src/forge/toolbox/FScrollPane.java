@@ -98,20 +98,35 @@ public abstract class FScrollPane extends FContainer {
     public void scrollIntoView(float childLeft, float childTop, float childWidth, float childHeight, float margin) {
         float childRight = childLeft + childWidth;
         float childBottom = childTop + childHeight;
+        float marginX = margin, marginY = margin;
+        float width = getWidth(), height = getHeight();
+        float dx = 0, dy = 0;
 
-        float dx = 0;
-        if (childLeft < margin) {
-            dx = childLeft - margin;
+        //If the child is too big to fit within the margins, relax them.
+        if (childWidth + 2 * marginX > width)
+            marginX = Math.max((width - childWidth) / 2, 0);
+        if (childHeight + 2 * marginY > height)
+            marginY = Math.max((height - childHeight) / 2, 0);
+
+        //If the child is too big to fit within the page entirely, and it's within the intended margins, leave it be.
+        if (childWidth > width && (childLeft < width - margin || childRight > margin)) { //Using unadjusted margin here
+            dx = 0;
         }
-        else if (childRight > getWidth() - margin) {
-            dx = childRight - getWidth() + margin;
+        else if (childLeft < marginX) {
+            dx = childLeft - marginX;
         }
-        float dy = 0;
-        if (childTop < margin) {
-            dy = childTop - margin;
+        else if (childRight > width - marginX) {
+            dx = childRight - width + marginX;
         }
-        else if (childBottom > getHeight() - margin) {
-            dy = childBottom - getHeight() + margin;
+
+        if (childHeight > height && (childTop < height - margin || childBottom > margin)) {
+            dy = 0;
+        }
+        else if (childTop < marginY) {
+            dy = childTop - marginY;
+        }
+        else if (childBottom > height - marginY) {
+            dy = childBottom - height + marginY;
         }
 
         if (dx == 0 && dy == 0) { return; }

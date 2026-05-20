@@ -2,7 +2,6 @@
 Code=BRO
 Date=2022-11-18
 Name=The Brothers' War
-Code2=BRO
 Type=Expansion
 BoosterCovers=3
 Booster=9 Common:fromsheet("BRO cards"), 3 Uncommon:fromSheet("BRO cards"), 1 RareMythic:fromSheet("BRO cards"), 1 fromSheet("BRO lands"), 1 fromSheet("BRR cards")
@@ -407,18 +406,18 @@ ScryfallCode=BRO
 384 U Blanchwood Armor @Manuel Castañón
 
 [rebalanced]
-A58 C A-Mightstone's Animation @Igor Kieryluk
-A63 U A-Splitting the Powerstone @Campbell White
-A69 U A-Urza, Powerstone Prodigy @Donato Giancola
-A70 R A-Urza's Command @Dominik Mayer
-A132 C A-Excavation Explosion @Campbell White
-A140 U A-Mishra, Excavation Prodigy @Donato Giancola
-A156 R A-Visions of Phyrexia @Dominik Mayer
-A199 U A-Haywire Mite @Izzy
-A219 M A-Saheeli, Filigree Master @Aurore Folny
-A254 R A-Thran Spider @Joshua Cairos
-A263 R A-Hall of Tagsin @Christian Dimitrov
-A289 R A-Geology Enthusiast @Fajareka Setiawan
+A-58 C A-Mightstone's Animation @Igor Kieryluk
+A-63 U A-Splitting the Powerstone @Campbell White
+A-69 U A-Urza, Powerstone Prodigy @Donato Giancola
+A-70 R A-Urza's Command @Dominik Mayer
+A-132 C A-Excavation Explosion @Campbell White
+A-140 U A-Mishra, Excavation Prodigy @Donato Giancola
+A-156 R A-Visions of Phyrexia @Dominik Mayer
+A-199 U A-Haywire Mite @Izzy
+A-219 M A-Saheeli, Filigree Master @Aurore Folny
+A-254 R A-Thran Spider @Joshua Cairos
+A-263 R A-Hall of Tagsin @Christian Dimitrov
+A-289 R A-Geology Enthusiast @Fajareka Setiawan
 
 [lands]
 2 Plains|BRO|1
@@ -451,6 +450,9 @@ A289 R A-Geology Enthusiast @Fajareka Setiawan
 6 c_x_x_a_golem @Olivier Bernard
 7 c_a_powerstone @Karl Kopinski
 8 c_1_1_a_soldier @Gabor Szikszai
-8 c_1_1_a_soldier @Gabor Szikszai
+9 c_1_1_a_soldier @Kev Walker
 10 c_1_1_a_thopter_flying @Samuel Perin
 11 c_3_3_a_zombie @Kieran Yanner
+
+[other]
+12 emblem_saheeli_filigree_master @Aurore Folny

@@ -55,5 +55,4 @@ public enum CardRarity {
         }
         return Unknown;
     }
-
 }

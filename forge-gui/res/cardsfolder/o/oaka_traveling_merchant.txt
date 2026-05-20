@@ -1,0 +1,7 @@
+Name:O'aka, Traveling Merchant
+ManaCost:1 U
+Types:Legendary Creature Human Citizen
+PT:1/2
+A:AB$ Draw | Cost$ T RemoveAnyCounter<1/Any/Permanent.nonLand/nonland permanent> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHints:Ability$Counters
+Oracle:{T}, Remove a counter from a nonland permanent you control: Draw a card.

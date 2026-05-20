@@ -14,6 +14,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
@@ -25,17 +26,6 @@ import org.apache.commons.lang3.StringUtils;
 public class PermanentCreatureAi extends PermanentAi {
 
     /**
-     * Checks if the AI will play a SpellAbility with the specified AiLogic
-     */
-    @Override
-    protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        if ("Never".equals(aiLogic)) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Checks if the AI will play a SpellAbility based on its phase restrictions
      */
     @Override
@@ -43,7 +33,6 @@ public class PermanentCreatureAi extends PermanentAi {
         final Card card = sa.getHostCard();
         final Game game = ai.getGame();
 
-        // FRF Dash Keyword
         if (sa.isDash()) {
             //only checks that the dashed creature will attack
             if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
@@ -76,25 +65,21 @@ public class PermanentCreatureAi extends PermanentAi {
         }
 
         // Flash logic
-        boolean advancedFlash = false;
-        if (ai.getController().isAI()) {
-            advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
-        }
+        boolean advancedFlash = AiProfileUtil.getBoolProperty(ai, AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
         if (card.hasKeyword(Keyword.FLASH) || (!ai.canCastSorcery() && sa.canCastTiming(ai) && !sa.isCastFromPlayEffect())) {
             if (advancedFlash) {
                 return doAdvancedFlashLogic(card, ai, sa);
-            } else {
-                // save cards with flash for surprise blocking
-                if ((ai.isUnlimitedHandSize() || ai.getCardsIn(ZoneType.Hand).size() <= ai.getMaxHandSize()
-                        || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
-                        && ai.getManaPool().totalMana() <= 0
-                        && (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
-                        && (!card.hasETBTrigger(true) && !card.hasSVar("AmbushAI"))
-                        && game.getStack().isEmpty()
-                        && !ComputerUtil.castPermanentInMain1(ai, sa)) {
-                    // AiPlayDecision.AnotherTime;
-                    return false;
-                }
+            }
+            // save cards with flash for surprise blocking
+            if ((ai.isUnlimitedHandSize() || ai.getCardsIn(ZoneType.Hand).size() <= ai.getMaxHandSize()
+                    || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
+                    && ai.getManaPool().totalMana() <= 0
+                    && (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
+                    && !card.hasETBTrigger(true) && !card.hasSVar("AmbushAI")
+                    && game.getStack().isEmpty()
+                    && !ComputerUtil.castPermanentInMain1(ai, sa)) {
+                // AiPlayDecision.AnotherTime;
+                return false;
             }
         }
 
@@ -146,15 +131,15 @@ public class PermanentCreatureAi extends PermanentAi {
             }
         }
 
-        int chanceToObeyAmbushAI = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_OBEY_AMBUSHAI);
-        int chanceToAddBlocker = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_CAST_AS_VALUABLE_BLOCKER);
-        int chanceToCastForETB = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_CAST_DUE_TO_ETB_EFFECTS);
-        int chanceToRespondToStack = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_RESPOND_TO_STACK_WITH_ETB);
-        int chanceToProcETBBeforeMain1 = aic.getIntProperty(AiProps.FLASH_CHANCE_TO_CAST_FOR_ETB_BEFORE_MAIN1);
+        int chanceToObeyAmbushAI = AiProfileUtil.getIntProperty(ai, AiProps.FLASH_CHANCE_TO_OBEY_AMBUSHAI);
+        int chanceToAddBlocker = AiProfileUtil.getIntProperty(ai, AiProps.FLASH_CHANCE_TO_CAST_AS_VALUABLE_BLOCKER);
+        int chanceToCastForETB = AiProfileUtil.getIntProperty(ai, AiProps.FLASH_CHANCE_TO_CAST_DUE_TO_ETB_EFFECTS);
+        int chanceToRespondToStack = AiProfileUtil.getIntProperty(ai, AiProps.FLASH_CHANCE_TO_RESPOND_TO_STACK_WITH_ETB);
+        int chanceToProcETBBeforeMain1 = AiProfileUtil.getIntProperty(ai, AiProps.FLASH_CHANCE_TO_CAST_FOR_ETB_BEFORE_MAIN1);
         boolean canCastAtOppTurn = true;
         for (Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
             for (StaticAbility s : c.getStaticAbilities()) {
-                if ("CantBeCast".equals(s.getParam("Mode")) && StringUtils.contains(s.getParam("Activator"), "NonActive")
+                if (s.checkMode(StaticAbilityMode.CantBeCast) && StringUtils.contains(s.getParam("Activator"), "NonActive")
                         && (!s.getParam("Activator").startsWith("You") || c.getController().equals(ai))) {
                     canCastAtOppTurn = false;
                     break;
@@ -194,9 +179,10 @@ public class PermanentCreatureAi extends PermanentAi {
     }
 
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
-        if (!super.checkApiLogic(ai, sa)) {
-            return false;
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
+        AiAbilityDecision decision = super.checkApiLogic(ai, sa);
+        if (!decision.willingToPlay()) {
+            return decision;
         }
 
         final Card card = sa.getHostCard();
@@ -219,16 +205,15 @@ public class PermanentCreatureAi extends PermanentAi {
         // AiPlayDecision.WouldBecomeZeroToughnessCreature
         if (card.hasStartOfKeyword("etbCounter") || mana.countX() != 0
                 || card.hasETBTrigger(false) || card.hasETBReplacement() || card.hasSVar("NoZeroToughnessAI")) {
-                return true;
+                return decision;
         }
 
         final Card copy = CardCopyService.getLKICopy(card);
         ComputerUtilCard.applyStaticContPT(game, copy, null);
         if (copy.getNetToughness() > 0) {
-            return true;
+            return decision;
         }
 
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.WouldBecomeZeroToughnessCreature);
     }
-
 }

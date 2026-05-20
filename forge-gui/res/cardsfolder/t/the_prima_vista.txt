@@ -1,0 +1,9 @@
+Name:The Prima Vista
+ManaCost:4 U
+Types:Legendary Artifact Vehicle
+PT:5/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | ValidSA$ Spell.ManaSpent GE4 | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a noncreature spell, if at least four mana was spent to cast it, CARDNAME becomes an artifact creature until end of turn.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Types$ Creature,Artifact
+K:Crew:2
+Oracle:Flying\nWhenever you cast a noncreature spell, if at least four mana was spent to cast it, The Prima Vista becomes an artifact creature until end of turn.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

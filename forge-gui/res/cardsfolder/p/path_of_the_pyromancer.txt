@@ -7,8 +7,8 @@ SVar:DBDraw:DB$ Draw | NumCards$ SVar$X/Plus.1 | SubAbility$ DBCleanup | StackDe
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBSpace
 SVar:X:Remembered$Amount
 SVar:DBSpace:DB$ BlankLine | SubAbility$ DBVote | SpellDescription$ ,,,,,,
-SVar:DBVote:DB$ Vote | Defined$ Player | VoteType$ Planeswalk,Chaos | VotePlaneswalk$ DBPlaneswalk | VoteChaos$ DBChaos | Tied$ DBChaos | StackDescription$ SpellDescription | SpellDescription$ Will of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues.
-SVar:DBPlaneswalk:DB$ Planeswalk
-SVar:DBChaos:DB$ ChaosEnsues
+SVar:DBVote:DB$ Vote | Defined$ Player | Choices$ DBPlaneswalk,DBChaos | VoteTiedAbility$ DBChaos | StackDescription$ SpellDescription | SpellDescription$ Will of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues.
+SVar:DBPlaneswalk:DB$ Planeswalk | SpellDescription$ Planeswalk
+SVar:DBChaos:DB$ ChaosEnsues | SpellDescription$ Chaos
 DeckHas:Ability$Discard
 Oracle:Discard all the cards in your hand. Add {R} for each card discarded this way, then draw that many cards plus one.\nWill of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues.

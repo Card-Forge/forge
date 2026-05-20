@@ -14,5 +14,5 @@ Types:Enchantment Room
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ At the beginning of your upkeep, surveil 1. You win the game if there are eight or more different names among unlocked doors of Rooms you control.
 SVar:TrigSurveil:DB$ Surveil | SubAbility$ DBWin
 SVar:DBWin:DB$ WinsGame | Defined$ You | ConditionCheckSVar$ RoomsUnlocked | ConditionSVarCompare$ GE8
-SVar:RoomsUnlocked:Count$DistinctUnlockedDoors Card.Room+YouCtrl
+SVar:RoomsUnlocked:Count$DistinctUnlockedDoors
 Oracle:At the beginning of your upkeep, surveil 1. You win the game if there are eight or more different names among unlocked doors of Rooms you control.

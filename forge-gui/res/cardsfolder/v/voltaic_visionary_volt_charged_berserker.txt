@@ -20,5 +20,5 @@ ManaCost:no cost
 Colors:red
 Types:Creature Human Berserker
 PT:4/3
-K:CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 Oracle:Volt-Charged Berserker can't block.

@@ -1,0 +1,7 @@
+Name:Rydia's Return
+ManaCost:3 G G
+Types:Sorcery
+A:SP$ Charm | Choices$ DBPumpAll,DBChangeZone
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Creatures you control get +3/+3 until end of turn.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouOwn | SpellDescription$ Return up to two target permanent cards from your graveyard to your hand.
+Oracle:Choose one —\n• Creatures you control get +3/+3 until end of turn.\n• Return up to two target permanent cards from your graveyard to your hand.

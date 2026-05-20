@@ -1,0 +1,6 @@
+Name:Pull from the Grave
+ManaCost:2 B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | ValidTgtDesc$ creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBGainLife | SpellDescription$ Return up to two target creature cards from your graveyard to your hand. You gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+Oracle:Return up to two target creature cards from your graveyard to your hand. You gain 2 life.

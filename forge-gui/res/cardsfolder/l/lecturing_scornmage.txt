@@ -1,0 +1,8 @@
+Name:Lecturing Scornmage
+ManaCost:B
+Types:Creature Human Warlock
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigPutCounter1 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TargetsValid$ Creature.inZoneBattlefield | TriggerDescription$ Repartee — Whenever you cast an instant or sorcery spell that targets a creature, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter1:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Repartee — Whenever you cast an instant or sorcery spell that targets a creature, put a +1/+1 counter on this creature.

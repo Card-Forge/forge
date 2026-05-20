@@ -1,0 +1,9 @@
+Name:The Eternity Elevator
+ManaCost:5
+Types:Legendary Artifact Spacecraft
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 3 | SpellDescription$ Add {C}{C}{C}.
+K:Station:20
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE20_CHARGE | AddAbility$ ElevatorMana | Description$ STATION 20+ {T}: Add X mana of any one color, where X is the number of charge counters on CARDNAME.
+SVar:ElevatorMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is the number of charge counters on CARDNAME.
+SVar:X:Count$CardCounters.CHARGE
+Oracle:{T}: Add {C}{C}{C}.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery.)\nSTATION 20+\n{T}: Add X mana of any one color, where X is the number of charge counters on The Eternity Elevator.

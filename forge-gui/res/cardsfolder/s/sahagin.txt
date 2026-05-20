@@ -1,0 +1,9 @@
+Name:Sahagin
+ManaCost:1 U
+Types:Creature Merfolk Warrior
+PT:1/3
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | ValidSA$ Spell.ManaSpent GE4 | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a noncreature spell, if at least four mana was spent to cast it, put a +1/+1 counter on this creature and it can't be blocked this turn.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | SubAbility$ DBUnblockable
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+Oracle:Whenever you cast a noncreature spell, if at least four mana was spent to cast it, put a +1/+1 counter on this creature and it can't be blocked this turn.

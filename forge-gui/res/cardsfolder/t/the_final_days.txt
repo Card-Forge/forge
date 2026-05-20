@@ -1,0 +1,8 @@
+Name:The Final Days
+ManaCost:2 B B
+Types:Sorcery
+K:Flashback:4 B B
+A:SP$ Token | TokenScript$ b_2_2_horror | TokenTapped$ True | TokenAmount$ Y | StackDescription$ REP Create two_{p:You} creates {n:Y} & . If this spell was cast from a graveyard, instead create X of those tokens, where X is the number of creature cards in your graveyard._. | SpellDescription$ Create two tapped 2/2 black Horror creature tokens. If this spell was cast from a graveyard, instead create X of those tokens, where X is the number of creature cards in your graveyard.
+SVar:Y:Count$wasCastFromGraveyard.X.2
+SVar:X:Count$ValidGraveyard Creature.YouCtrl
+Oracle:Create two tapped 2/2 black Horror creature tokens. If this spell was cast from a graveyard, instead create X of those tokens, where X is the number of creature cards in your graveyard.\nFlashback {4}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

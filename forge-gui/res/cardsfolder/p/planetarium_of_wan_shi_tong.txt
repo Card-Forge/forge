@@ -1,0 +1,12 @@
+Name:Planetarium of Wan Shi Tong
+ManaCost:6
+Types:Legendary Artifact
+A:AB$ Scry | Cost$ 1 T | ScryNum$ 2 | SpellDescription$ Scry 2.
+T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPeek | PresentDefined$ Remembered | IsPresent$ Card | PresentCompare$ EQ0 | TriggerDescription$ Whenever you scry or surveil, look at the top card of your library. You may cast that card without paying its mana cost. Do this only once each turn. (Look at the card after you scry or surveil.)
+T:Mode$ Surveil | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPeek | Secondary$ True | PresentDefined$ Remembered | IsPresent$ Card | PresentCompare$ EQ0 | TriggerDescription$ Whenever you scry or surveil, look at the top card of your library. You may cast that card without paying its mana cost. Do this only once each turn. (Look at the card after you scry or surveil.)
+SVar:TrigPeek:DB$ PeekAndReveal | NoReveal$ True | SubAbility$ TrigPlay
+SVar:TrigPlay:DB$ Play | Defined$ TopOfLibrary | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | RememberPlayed$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
+T:Mode$ TurnBegin | ValidPlayer$ Player | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{1}, {T}: Scry 2.\nWhenever you scry or surveil, look at the top card of your library. You may cast that card without paying its mana cost. Do this only once each turn. (Look at the card after you scry or surveil.)

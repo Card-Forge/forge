@@ -1,0 +1,11 @@
+Name:Ambassador of Evendo
+ManaCost:G U
+Types:Creature Insect Advisor
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigRandom | TriggerDescription$ Landfall — Whenever a land you control enters, a random land card in your library perpetually gains "Whenever this land becomes tapped, draw a card."
+SVar:TrigRandom:DB$ ChooseCard | Choices$ Land.YouOwn | ChoiceZone$ Library | AtRandom$ True | Amount$ 1 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | Triggers$ LandTapDraw | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:LandTapDraw:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever this land becomes tapped, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Landfall — Whenever a land you control enters, a random land card in your library perpetually gains "Whenever this land becomes tapped, draw a card."

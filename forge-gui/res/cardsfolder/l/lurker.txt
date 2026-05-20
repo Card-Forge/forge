@@ -2,5 +2,5 @@ Name:Lurker
 ManaCost:2 G
 Types:Creature Beast
 PT:2/3
-S:Mode$ CantTarget | ValidCard$ Card.Self+!attackedThisTurn+!blockedThisTurn | ValidSA$ Spell | Description$ CARDNAME can't be the target of spells unless it attacked or blocked this turn.
+S:Mode$ CantTarget | ValidTarget$ Card.Self+!attackedThisTurn+!blockedThisTurn | ValidSA$ Spell | Description$ CARDNAME can't be the target of spells unless it attacked or blocked this turn.
 Oracle:Lurker can't be the target of spells unless it attacked or blocked this turn.

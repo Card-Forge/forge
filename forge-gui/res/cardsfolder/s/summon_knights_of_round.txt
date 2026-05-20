@@ -1,0 +1,10 @@
+Name:Summon: Knights of Round
+ManaCost:6 W W
+Types:Enchantment Creature Saga Knight
+PT:3/3
+K:Indestructible
+K:Chapter:5:TrigToken,TrigToken,TrigToken,TrigToken,TrigPumpAll
+SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ w_2_2_knight | TokenOwner$ You | SpellDescription$ Create three 2/2 white Knight creature tokens.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.StrictlyOther+YouCtrl | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPutCounter | SpellDescription$ Ultimate End — Other creatures you control get +2/+2 until end of turn. Put an indestructible counter on each of them.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Valid Creature.Other+YouCtrl | CounterType$ Indestructible | CounterNum$ 1
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after V.)\nI, II, III, IV — Create three 2/2 white Knight creature tokens.\nV — Ultimate End — Other creatures you control get +2/+2 until end of turn. Put an indestructible counter on each of them.\nIndestructible

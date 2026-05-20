@@ -1,0 +1,164 @@
+[metadata]
+Code=TD0
+Date=2010-11-08
+Name=Magic Online Theme Decks
+Type=Online
+ScryfallCode=TD0
+
+[cards]
+A1 C Auramancer @Rebecca Guay
+A2 U Condemn @Daren Bader
+A3 R Decree of Justice @Adam Rex
+A4 C Dismantling Blow @Mark Tedin
+A5 U Empyrial Armor @D. Alexander Gregory
+A6 R Enlightened Tutor @Dan Frazier
+A7 U Faith's Fetters @Chippy
+A8 U Ghostly Prison @Lars Grant-West
+A9 C Kami of Ancient Law @Mark Tedin
+A10 C Momentary Blink @Anthony S. Waters
+A11 C Noble Templar @Alex Horley-Orlandelli
+A12 C Oblivion Ring @Franz Vohwinkel
+A13 U Prison Term @Zoltan Boros & Gabor Szikszai
+A14 U Resurrection @Dan Frazier
+A15 C Seal of Cleansing @Christopher Moeller
+A16 U Stonecloaker @Tomas Giorello
+A17 U Swords to Plowshares @Kaja Foglio
+A18 C Capsize @Tom Wänerstrand
+A19 C Compulsive Research @Michael Sutfin
+A20 U Confiscate @Adam Rex
+A21 R Copy Enchantment @Joel Thomas
+A22 U Court Hussar @Ron Spears
+A23 U Fact or Fiction @Terese Nielsen
+A24 U Hinder @Wayne Reynolds
+A25 C Looter il-Kor @Mike Dringenberg
+A26 C Man-o'-War @Jon J Muth
+A27 U Merfolk Looter @Ron Spencer
+A28 C Mulldrifter @Eric Fortune
+A29 U Overwhelming Intellect @Alex Horley-Orlandelli
+A30 U Raven Familiar @Edward P. Beard, Jr.
+A31 C Rhystic Study @Terese Nielsen
+A32 C Shoreline Ranger @Michael Sutfin
+A33 U Willbender @Eric Peterson
+A34 C Abyssal Gatekeeper @Mark Tedin
+A35 R All Hallow's Eve @Christopher Rush
+A36 U Animate Dead @Anson Maddocks
+A37 U Ashes to Ashes @Drew Tucker
+A38 R Avatar of Woe @rk post
+A39 U Buried Alive @Brian Horton
+A40 C Carrion Feeder @Brian Snõddy
+A41 U Dread Return @Kev Walker
+A42 U Golgari Thug @Kev Walker
+A43 C Grim Harvest @Zoltan Boros & Gabor Szikszai
+A44 U Massacre @Pete Venters
+A45 U Nezumi Graverobber @Jim Nelson
+A46 R Phyrexian Arena @Pete Venters
+A47 C Reaping the Graves @Ron Spencer
+A48 U Shriekmaw @Steve Prescott
+A49 C Stinkweed Imp @Edward P. Beard, Jr.
+A50 C Terror @Ron Spencer
+A51 C Twisted Abomination @Daren Bader
+A52 C Anarchist @Brom
+A53 C Ancient Grudge @Jim Nelson
+A54 U Anger @John Avon
+A55 C Chain Lightning @Sandra Everingham
+A56 C Chartooth Cougar @Tony Szczudlo
+A57 U Flametongue Kavu @Pete Venters
+A58 C Hissing Iguanar @Brandon Kitkouski
+A59 C Keldon Vandals @Greg Staples
+A60 C Lightning Bolt @Christopher Rush
+A61 C Resounding Thunder @Jon Foster
+A62 C Borderland Ranger @Jesper Ejsing
+A63 U Brawn @Matt Cavotta
+A64 C Civic Wayfinder @Cyril Van Der Haegen
+A65 U Concordant Crossroads @Amy Weber
+A66 U Constant Mists @Dermot Power
+A67 C Edge of Autumn @Jean-Sébastien Rossbach
+A68 C Elven Cache @John Matson
+A69 C Elvish Visionary @D. Alexander Gregory
+A70 U Eternal Witness @Terese Nielsen
+A71 U Explosive Vegetation @John Avon
+A72 C Fertile Ground @Heather Hudson
+A73 R Genesis @Mark Zug
+A74 R Golgari Grave-Troll @Greg Hildebrandt
+A75 U Harmonize @Rob Alexander
+A76 C Jungle Lion @Janine Johnston
+A77 C Kodama's Reach @Heather Hudson
+A78 C Krosan Tusker @Kev Walker
+A79 R Life from the Loam @Terese Nielsen
+A80 C Moment's Peace @Rebecca Guay
+A81 C Penumbra Bobcat @Heather Hudson
+A82 U Phantom Centaur @Carl Critchlow
+A83 C Rampant Growth @Tom Kyffin
+A84 U Recollect @Pete Venters
+A85 C Rootbreaker Wurm @Richard Kane Ferguson
+A86 C Sakura-Tribe Elder @Carl Critchlow
+A87 C Werebear @Carl Critchlow
+A88 C Wickerbough Elder @Jesper Ejsing
+A89 C Wild Mongrel @Anthony S. Waters
+A90 C Wirewood Guardian @Mark Tedin
+A91 U Wood Elves @Rebecca Guay
+A92 C Yavimaya Elder @Ray Lago
+A93 U Yavimaya Enchantress @Matthew D. Wilson
+A94 U Armadillo Cloak @Paolo Parente
+A95 U Azorius Guildmage @Christopher Moeller
+A96 U Cauldron Dance @Donato Giancola
+A97 U Coiling Oracle @Mark Zug
+A98 U Fires of Yavimaya @Val Mayerik
+A99 U Jungle Barrier @Edward P. Beard, Jr.
+A100 R Mirari's Wake @David Martin
+A101 U Mistmeadow Witch @Greg Staples
+A102 U Putrefy @Jim Nelson
+A103 R Questing Phelddagrif @Matt Cavotta
+A104 R Rubinia Soulsinger @Rob Alexander
+A105 C Shambling Shell @Joel Thomas
+A106 U Sterling Grove @Jeff Miracola
+A107 C Temporal Spring @John Matson
+A108 C Terminate @DiTerlizzi
+A109 R Vampiric Dragon @Gary Ruddell
+A110 R Xira Arien @Melissa A. Benson
+A111 C Azorius Signet @Greg Hildebrandt
+A112 C Golgari Signet @Greg Hildebrandt
+A113 C Gruul Signet @Greg Hildebrandt
+A114 R Illusionary Mask @Amy Weber
+A115 U Lightning Greaves @Jeremy Jarvis
+A116 C Rakdos Signet @Greg Hildebrandt
+A117 U Relic of Progenitus @Jean-Sébastien Rossbach
+A118 C Selesnya Signet @Greg Hildebrandt
+A119 C Simic Signet @Greg Hildebrandt
+A120 U Skullclamp @Luca Zontini
+A121 U Azorius Chancery @John Avon
+A122 C Bant Panorama @Donato Giancola
+A123 C Barren Moor @Heather Hudson
+A124 U Coastal Tower @Don Hazeltine
+A125 U Darigaaz's Caldera @Franz Vohwinkel
+A126 U Elfhame Palace @Jerry Tiritilli
+A127 C Forgotten Cave @Tony Szczudlo
+A128 U Ghost Quarter @Heather Hudson
+A129 C Golgari Rot Farm @John Avon
+A130 C Gruul Turf @John Avon
+A131 C Jund Panorama @Jaime Jones
+A132 R Miren, the Moaning Well @Rob Alexander
+A133 C Rakdos Carnarium @John Avon
+A134 C Rupture Spire @Jaime Jones
+A135 U Savage Lands @Vance Kovacs
+A136 U Seaside Citadel @Volkan Baǵa
+A137 U Selesnya Sanctuary @John Avon
+A138 U Simic Growth Chamber @John Avon
+A139 C Terramorphic Expanse @Dan Murayama Scott
+A140 C Tranquil Thicket @Heather Hudson
+A141 U Treva's Ruins @Jerry Tiritilli
+A142 L Plains @He Jiancheng
+A143 L Plains @He Jiancheng
+A144 L Plains @He Jiancheng
+A145 L Island @Ku Xueming
+A146 L Island @Ku Xueming
+A147 L Island @Ku Xueming
+A148 L Swamp @Wang Chuxiong
+A149 L Swamp @Wang Chuxiong
+A150 L Swamp @Wang Chuxiong
+A151 L Mountain @Qin Jun
+A152 L Mountain @Qin Jun
+A153 L Mountain @Qin Jun
+A154 L Forest @Ji Yong
+A155 L Forest @Ji Yong
+A156 L Forest @Ji Yong

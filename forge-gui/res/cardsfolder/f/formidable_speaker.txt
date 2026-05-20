@@ -1,0 +1,8 @@
+Name:Formidable Speaker
+ManaCost:2 G
+Types:Creature Elf Druid
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When this creature enters, you may discard a card. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Library | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 1
+A:AB$ Untap | Cost$ 1 T | ValidTgts$ Permanent.Other | TgtPrompt$ Select another target permanent. | SpellDescription$ Untap another target permanent.
+Oracle:When this creature enters, you may discard a card. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle.\n{1}, {T}: Untap another target permanent.

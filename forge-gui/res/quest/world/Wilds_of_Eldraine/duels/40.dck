@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Cipher
+Title=Cipher
+Icon=Cipher.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/HossMTG_-_Boros_Aggro_(Standard,_#1748293).dck
+Deck Type=constructed
+
+[Main]
+4 Recruitment Officer
+4 Harried Spearguard
+2 Spellbook Vendor
+3 Charming Scoundrel
+4 Coppercoat Vanguard
+2 Raging Battle Mouse
+3 Feldon, Ronom Excavator
+4 Thalia, Guardian of Thraben
+3 Imodane's Recruiter
+3 Reckless Stormseeker
+4 Adeline, Resplendent Cathar
+2 Witchstalker Frenzy
+6 Plains
+4 Battlefield Forge
+4 Sundown Pass
+4 Secluded Courtyard
+3 Restless Bivouac
+1 Eiganjo, Seat of the Empire
+[Sideboard]
+1 Archangel Elspeth
+2 Guardian of New Benalia
+2 Loran of the Third Path
+2 Break the Spell
+2 Surge of Salvation
+2 Destroy Evil
+2 Witchstalker Frenzy
+2 Glass Casket

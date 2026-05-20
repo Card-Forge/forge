@@ -1,0 +1,9 @@
+Name:Gran-Gran
+ManaCost:U
+Types:Legendary Creature Human Peasant Ally
+PT:1/2
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME becomes tapped, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+S:Mode$ ReduceCost | ValidCard$ Card.nonCreature | Type$ Spell | Activator$ You | Amount$ 1 | IsPresent$ Lesson.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE3 | Description$ Noncreature spells you cast cost {1} less to cast as long as there are three or more Lesson cards in your graveyard.
+Oracle:Whenever Gran-Gran becomes tapped, draw a card, then discard a card.\nNoncreature spells you cast cost {1} less to cast as long as there are three or more Lesson cards in your graveyard.

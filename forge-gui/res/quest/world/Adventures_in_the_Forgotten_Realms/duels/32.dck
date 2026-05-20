@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Niv-Mizzet
+Title=Niv-Mizzet
+Icon=Niv-Mizzet.jpg
+Difficulty=Medium
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Brackmeister_-_Roll_the_Dice_(Standard,_#1229108).dck
+Deck Type=constructed
+
+[Main]
+1 Delina, Wild Mage
+4 Swarming Goblins
+4 Hoarding Ogre
+4 Scion of Stygia
+4 Pixie Guide
+4 Feywild Trickster
+3 Goblin Morningstar
+4 Farideh's Fireball
+4 Frost Bite
+4 Barbarian Class
+4 Volatile Fjord
+8 Snow-Covered Island
+12 Snow-Covered Mountain
+[Sideboard]

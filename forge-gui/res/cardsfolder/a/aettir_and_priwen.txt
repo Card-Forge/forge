@@ -1,0 +1,7 @@
+Name:Aettir and Priwen
+ManaCost:6
+Types:Legendary Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | SetPower$ X | SetToughness$ X | Description$ Equipped creature has base power and toughness X/X, where X is your life total.
+K:Equip:5
+SVar:X:Count$YourLifeTotal
+Oracle:Equipped creature has base power and toughness X/X, where X is your life total.\nEquip {5}

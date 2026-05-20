@@ -1,0 +1,62 @@
+octopus.png
+size: 224,224
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 208, 0
+  size: 16, 16
+Idle 
+  xy: 8, 166
+  size: 16, 16    
+Idle 
+  xy: 40, 166
+  size: 16, 16  
+Idle 
+  xy: 72, 166
+  size: 16, 16  
+Idle 
+  xy: 104, 166
+  size: 16, 16 
+Walk 
+  xy: 8, 38
+  size: 16, 16   
+Walk 
+  xy: 40, 38
+  size: 16, 16
+Walk 
+  xy: 72, 38
+  size: 16, 16
+Walk 
+  xy: 104, 38
+  size: 16, 16
+Attack 
+  xy: 8, 70
+  size: 20, 16   
+Attack 
+  xy: 40, 70
+  size: 20, 16 
+Attack 
+  xy: 72, 70
+  size: 20, 16 
+Attack 
+  xy: 104, 70
+  size: 20, 16 
+Death
+  xy: 8, 200
+  size: 16, 14 
+Death
+  xy: 40, 200
+  size: 16, 14 
+Death
+  xy: 72, 200
+  size: 16, 14 
+Death
+  xy: 104, 200
+  size: 16, 14 
+Death
+  xy: 136, 200
+  size: 16, 14 
+Death
+  xy: 168, 200
+  size: 16, 14 

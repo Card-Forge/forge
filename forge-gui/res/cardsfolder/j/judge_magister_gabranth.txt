@@ -1,0 +1,9 @@
+Name:Judge Magister Gabranth
+ManaCost:W B
+Types:Legendary Creature Human Advisor Knight
+PT:2/2
+K:Menace
+T:Mode$ ChangesZone | ValidCard$ Artifact.Other+YouCtrl,Creature.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature or artifact you control dies, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Menace\nWhenever another creature or artifact you control dies, put a +1/+1 counter on Judge Magister Gabranth.

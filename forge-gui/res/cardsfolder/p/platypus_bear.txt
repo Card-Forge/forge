@@ -1,0 +1,11 @@
+Name:Platypus-Bear
+ManaCost:1 GU
+Types:Creature Platypus Bear
+PT:2/3
+K:Defender
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature enters, mill two cards. (Put the top two cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 2
+S:Mode$ CanAttackDefender | ValidCard$ Card.Self | IsPresent$ Lesson.YouOwn | PresentZone$ Graveyard | Description$ As long as there is a Lesson card in your graveyard, this creature can attack as though it didn't have defender.
+DeckHas:Ability$Mill|Graveyard
+DeckHints:Type$Lesson
+Oracle:Defender\nWhen this creature enters, mill two cards. (Put the top two cards of your library into your graveyard.)\nAs long as there is a Lesson card in your graveyard, this creature can attack as though it didn't have defender.

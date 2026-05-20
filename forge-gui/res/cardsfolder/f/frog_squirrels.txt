@@ -1,0 +1,6 @@
+Name:Frog-Squirrels
+ManaCost:1 G
+Types:Creature Frog Squirrel
+PT:2/2
+K:Reach
+Oracle:Reach (This creature can block creatures with flying.)

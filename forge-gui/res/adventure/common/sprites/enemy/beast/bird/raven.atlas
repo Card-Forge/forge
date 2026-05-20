@@ -1,0 +1,98 @@
+raven.png
+size: 512,288
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 224, 80
+  size: 16, 16    
+Idle 
+  xy: 4, 16
+  size: 25, 16   
+Idle 
+  xy: 36, 16
+  size: 25, 16
+Idle 
+  xy: 68, 16
+  size: 25, 16
+Idle 
+  xy: 100, 16
+  size: 25, 16
+Idle 
+  xy: 132, 16
+  size: 25, 16 
+Idle 
+  xy: 164, 16
+  size: 25, 16
+Idle 
+  xy: 196, 16
+  size: 25, 16
+Idle 
+  xy: 228, 16
+  size: 25, 16 
+Walk
+  xy: 0, 168
+  size: 25, 22    
+Walk
+  xy: 32, 168
+  size: 25, 22   
+Walk
+  xy: 64, 168
+  size: 25, 22   
+Walk
+  xy: 96, 168
+  size: 25, 22   
+Walk
+  xy: 128, 168
+  size: 25, 22   
+Attack
+  xy: 0, 224
+  size: 32, 32
+Attack
+  xy: 32, 224
+  size: 32, 32  
+Attack
+  xy: 64, 224
+  size: 32, 32  
+Attack
+  xy: 96, 224
+  size: 32, 32  
+Attack
+  xy: 128, 224
+  size: 32, 32  
+Attack
+  xy: 160, 224
+  size: 32, 32  
+Attack
+  xy: 192, 224
+  size: 32, 32  
+Attack
+  xy: 224, 224
+  size: 32, 32  
+Attack
+  xy: 256, 224
+  size: 32, 32  
+Attack
+  xy: 288, 224
+  size: 32, 32  
+Death
+  xy: 0, 256
+  size: 25, 32  
+Death
+  xy: 32, 256
+  size: 32, 32  
+Death
+  xy: 64, 256
+  size: 32, 32  
+Death
+  xy: 96, 256
+  size: 32, 32  
+Death
+  xy: 128, 256
+  size: 32, 32  
+Death
+  xy: 160, 256
+  size: 32, 32  
+Death
+  xy: 192, 256
+  size: 32, 32 

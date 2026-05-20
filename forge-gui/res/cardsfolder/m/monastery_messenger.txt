@@ -1,4 +1,4 @@
-Name: Monastery Messenger
+Name:Monastery Messenger
 ManaCost:2U 2R 2W
 Types:Creature Bird Scout
 PT:2/3

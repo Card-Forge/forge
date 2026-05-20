@@ -54,6 +54,7 @@ public class CLobby {
             // General updates when switching back to this view
             view.getBtnStart().requestFocusInWindow();
         });
+        view.getGamesInMatchBinder().load();
     }
 
     public void initialize() {

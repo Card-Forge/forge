@@ -1,0 +1,6 @@
+Name:Full Bore
+ManaCost:R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +3 | NumDef$ +2 | SubAbility$ DBPump | SpellDescription$ Target creature you control gets +3/+2 until end of turn. If that creature was cast for its warp cost, it also gains trample and haste until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample & Haste | ConditionDefined$ Targeted | ConditionPresent$ Card.CastSa Spell.Warp
+Oracle:Target creature you control gets +3/+2 until end of turn. If that creature was cast for its warp cost, it also gains trample and haste until end of turn.

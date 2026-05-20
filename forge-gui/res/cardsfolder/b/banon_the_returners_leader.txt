@@ -1,0 +1,10 @@
+Name:Banon, the Returners' Leader
+ManaCost:R W
+Types:Legendary Creature Human Cleric Rebel
+PT:1/3
+S:Mode$ Continuous | Affected$ Creature.nonLand+ThisTurnEntered+!ThisTurnEnteredFrom_Battlefield | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ Pray — Once during each of your turns, you may cast a creature spell from among cards in your graveyard that were put there from anywhere other than the battlefield this turn.
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, you may pay {1} and discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 1 Discard<1/Card>
+DeckHas:Ability$Discard
+DeckHints:Ability$Graveyard|Mill|Discard
+Oracle:Pray — Once during each of your turns, you may cast a creature spell from among cards in your graveyard that were put there from anywhere other than the battlefield this turn.\nWhenever you attack, you may pay {1} and discard a card. If you do, draw a card.

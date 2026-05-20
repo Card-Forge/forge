@@ -1,0 +1,9 @@
+Name:Pulsar Squadron Ace
+ManaCost:1 W
+Types:Creature Human Pilot
+PT:1/2
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ DBDig | TriggerDescription$ When this creature enters, look at the top five cards of your library. You may reveal a Spacecraft card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. If you didn't put a card into your hand this way, put a +1/+1 counter on this creature.
+SVar:DBDig:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Spacecraft | RestRandomOrder$ True | RememberChanged$ True | SubAbility$ DBPutCounter | StackDescription$ None
+SVar:DBPutCounter:DB$ PutCounter | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When this creature enters, look at the top five cards of your library. You may reveal a Spacecraft card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. If you didn't put a card into your hand this way, put a +1/+1 counter on this creature.

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Quicksilver
+Title=Quicksilver
+Icon=Quicksilver.jpg
+Difficulty=Hard
+Description=../Modern/Fate_Reforged/PPTQ_Mana_Crypt_-_Genzano_di_Roma,_Italy/Damiano_Buttarelli_-_Merfolks_(Modern,_#236679).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+4 Merrow Reejerey
+2 Phantasmal Image
+3 Sejiri Merfolk
+4 Silvergill Adept
+4 AEther Vial
+4 Path to Exile
+3 Spell Pierce
+2 Vapor Snag
+2 Monastery Siege
+4 Spreading Seas
+3 Cavern of Souls
+4 Hallowed Fountain
+5 Island
+4 Misty Rainforest
+4 Mutavault
+[Sideboard]
+2 Hurkyl's Recall
+2 Kataki, War's Wage
+2 Mana Leak
+3 Ratchet Bomb
+2 Spellskite
+2 Surgical Extraction

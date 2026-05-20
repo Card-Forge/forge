@@ -3,7 +3,6 @@ package forge.game.ability;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.spellability.AbilityActivated;
-import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.TargetRestrictions;
 
 import java.util.Map;
@@ -13,19 +12,12 @@ public class AbilityApiBased extends AbilityActivated {
 
     public AbilityApiBased(ApiType api0, Card sourceCard, Cost abCost, TargetRestrictions tgt, Map<String, String> params0) {
         super(sourceCard, abCost, tgt);
-        originalMapParams.putAll(params0);
         mapParams.putAll(params0);
         api = api0;
         effect = api.getSpellEffect();
 
-        if (api.equals(ApiType.Mana) || api.equals(ApiType.ManaReflected)) {
-            this.setManaPart(new AbilityManaPart(this, mapParams));
-            this.setUndoable(true); // will try at least
-        }
-
-        if (api.equals(ApiType.ChangeZone) || api.equals(ApiType.ChangeZoneAll)) {
-            AbilityFactory.adjustChangeZoneTarget(mapParams, this);
-        }
+        effect.buildSpellAbility(this);
+        originalMapParams.putAll(mapParams);
     }
 
     @Override

@@ -1,0 +1,10 @@
+Name:Ultros, Obnoxious Octopus
+ManaCost:1 U
+Types:Legendary Creature Octopus
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | ValidSAonCard$ Spell.ManaSpent GE4 | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you cast a noncreature spell, if at least four mana was spent to cast it, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | ValidSAonCard$ Spell.ManaSpent GE8 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a noncreature spell, if at least eight mana was spent to cast it, put eight +1/+1 counters on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 8
+Oracle:Whenever you cast a noncreature spell, if at least four mana was spent to cast it, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nWhenever you cast a noncreature spell, if at least eight mana was spent to cast it, put eight +1/+1 counters on Ultros.

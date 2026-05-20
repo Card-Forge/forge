@@ -149,7 +149,7 @@ public class DeckgenUtil {
         for(Pair<String, Double> pair:preSelectedCardNames){
             String name = pair.getLeft();
             //remove any cards not valid in format
-            PaperCard cardToAdd = Aggregates.random(StaticData.instance().getCommonCards().getAllCards(name, format.getFilterPrinted()));
+            PaperCard cardToAdd = Aggregates.random(StaticData.instance().getCommonCards().getAllCardsNoAlt(name, format.getFilterPrinted()));
             if (cardToAdd == null)
                 continue;
             if(!cardToAdd.getName().equals(card.getName())) {
@@ -240,7 +240,7 @@ public class DeckgenUtil {
         for(Pair<String, Double> pair:preSelectedCardNames){
             String name = pair.getLeft();
             //remove any cards not valid in format
-            PaperCard cardToAdd = Aggregates.random(StaticData.instance().getCommonCards().getAllCards(name, format.getFilterPrinted()));
+            PaperCard cardToAdd = Aggregates.random(StaticData.instance().getCommonCards().getAllCardsNoAlt(name, format.getFilterPrinted()));
             if(cardToAdd != null && !cardToAdd.getName().equals(card.getName())) {
                 selectedCards.add(cardToAdd);
                 cardCount++;
@@ -352,7 +352,7 @@ public class DeckgenUtil {
             final CardPool cards = gen.getDeck(60, forAi);
 
             if (null == deckName) {
-                deckName = Lang.joinHomogenous(Arrays.asList(selection));
+                deckName = Lang.joinHomogenous(List.of(selection));
             }
 
             // After generating card lists, build deck.
@@ -423,6 +423,11 @@ public class DeckgenUtil {
 
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomOrPreconOrThemeDeck(String colors, boolean forAi, boolean isTheme, boolean useGeneticAI) {
+        return getRandomOrPreconOrThemeDeck(colors, forAi, isTheme, useGeneticAI, null);
+    }
+
+    /** @return {@link forge.deck.Deck} */
+    public static Deck getRandomOrPreconOrThemeDeck(String colors, boolean forAi, boolean isTheme, boolean useGeneticAI, String[] allowedEditions) {
         final List<String> selection = new ArrayList<>();
         Deck deck = null;
         if (advPrecons.isEmpty()) {
@@ -457,6 +462,10 @@ public class DeckgenUtil {
 
             } else {
                 Predicate<DeckProxy> predicate = deckProxy -> deckProxy.getMainSize() <= 60;
+                if (allowedEditions != null && allowedEditions.length > 0) {
+                    Set<String> editionSet = new HashSet<>(Arrays.asList(allowedEditions));
+                    predicate = predicate.and(dp -> dp.getEdition() != null && editionSet.contains(dp.getEdition().getCode()));
+                }
                 if (!selection.isEmpty() && selection.size() < 4)
                     predicate = predicate.and(deckProxy -> deckProxy.getColorIdentity().hasAllColors(ColorSet.fromNames(colors.toCharArray()).getColor()));
                 List<DeckProxy> source = isTheme ? advThemes : advPrecons;
@@ -694,7 +703,7 @@ public class DeckgenUtil {
 
                 if (signatureSpells.size() > 0) { //pass signature spell as partner for simplicity
                     selectedPartner = signatureSpells.get(MyRandom.getRandom().nextInt(signatureSpells.size()));
-                    preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner.getName()));
+                    preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner));
                 }
             }
             else if (commander.getRules().canBePartnerCommander()) {
@@ -708,7 +717,7 @@ public class DeckgenUtil {
 
                 if (partners.size() > 0) {
                     selectedPartner = partners.get(MyRandom.getRandom().nextInt(partners.size()));
-                    preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner.getName()));
+                    preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner));
                 }
             }
             //randomly remove cards
@@ -731,7 +740,7 @@ public class DeckgenUtil {
                 ++i;
             }
             preSelectedCards.removeAll(toRemove);
-            preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(commander.getName()));
+            preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(commander));
             gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner, preSelectedCards, forAi, format);
         }else{
             cardDb = FModel.getMagicDb().getCommonCards();
@@ -781,10 +790,10 @@ public class DeckgenUtil {
             }
             List<PaperCard> shortList = cardList.subList(0, shortlistlength);
             shortList.remove(commander);
-            shortList.removeAll(StaticData.instance().getCommonCards().getAllCards(commander.getName()));
+            shortList.removeAll(StaticData.instance().getCommonCards().getAllCards(commander));
             if (selectedPartner != null) {
                 shortList.remove(selectedPartner);
-                shortList.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner.getName()));
+                shortList.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner));
             }
             gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner, shortList, forAi, format);
         }

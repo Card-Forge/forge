@@ -58,7 +58,7 @@ public class MessageUtil {
                 return sa.hasParam("AtRandom")
                         ? Localizer.getInstance().getMessage("lblRandomTypeChosen", value)
                         : Localizer.getInstance().getMessage("lblPlayerPickedChosen", choser, value);
-            case FlipACoin:
+            case FlipCoin:
                 String flipper = StringUtils.capitalize(mayBeYou(player, target));
                 return sa.hasParam("NoCall")
                         ? Localizer.getInstance().getMessage("lblPlayerFlipComesUpValue", Lang.getInstance().getPossesive(flipper), value)
@@ -84,9 +84,9 @@ public class MessageUtil {
             default:
                 String tgt = mayBeYou(player, target);
                 if (tgt.equals("(null)")) {
-                    return Localizer.getInstance().getMessage("lblCardEffectValueIs", CardTranslation.getTranslatedName(sa.getHostCard().getName()), value);
+                    return Localizer.getInstance().getMessage("lblCardEffectValueIs", sa.getHostCard().getTranslatedName(), value);
                 } else {
-                    return Localizer.getInstance().getMessage("lblCardEffectToTargetValueIs", CardTranslation.getTranslatedName(sa.getHostCard().getName()), tgt, value);
+                    return Localizer.getInstance().getMessage("lblCardEffectToTargetValueIs", sa.getHostCard().getTranslatedName(), tgt, value);
                 }
         }
     }

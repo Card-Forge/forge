@@ -10,11 +10,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import forge.error.ExceptionHandler;
 import forge.localinstance.properties.ForgeConstants;
 import forge.toolbox.FOptionPane;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.Localizer;
+import forge.view.KeyboardShortcutsDialog;
 
 import static forge.localinstance.properties.ForgeConstants.GITHUB_FORGE_URL;
 
@@ -26,8 +28,8 @@ public final class HelpMenu {
         JMenu menu = new JMenu(localizer.getMessage("lblHelp"));
         menu.setMnemonic(KeyEvent.VK_H);
         menu.add(getMenu_GettingStarted());
-        menu.add(getMenu_Articles());
         menu.add(getMenu_Troubleshooting());
+        menu.add(getMenuItem_KeyboardShortcuts());
         menu.addSeparator();
         menu.add(getMenuItem_ReleaseNotes());
         menu.add(getMenuItem_License());
@@ -56,15 +58,6 @@ public final class HelpMenu {
         final Localizer localizer = Localizer.getInstance();
         JMenu mnu = new JMenu(localizer.getMessage("lblTroubleshooting"));
         mnu.add(getMenuItem_OpenLogFile());
-        mnu.add(getMenuItem_ReadMeFile());
-        return mnu;
-    }
-
-    private static JMenu getMenu_Articles() {
-        final Localizer localizer = Localizer.getInstance();
-        JMenu mnu = new JMenu(localizer.getMessage("lblArticles"));
-        mnu.add(getMenuItem_UrlLink("HOW-TO: Customize your Sealed Deck games with fantasy blocks", "http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8164"));
-        mnu.add(getMenuItem_UrlLink("Quest Mode: Guide to Formats, Worlds, and everything", "http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=9258"));
         return mnu;
     }
 
@@ -74,8 +67,14 @@ public final class HelpMenu {
         mnu.add(getMenuItem_HowToPlayFile());
         mnu.addSeparator();
         mnu.add(getMenuItem_UrlLink("Forge Wiki", GITHUB_FORGE_URL + "wiki", KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0)));
-        mnu.add(getMenuItem_UrlLink("What is Forge?", GITHUB_FORGE_URL + "wiki#what-is-forge"));
         return mnu;
+    }
+
+    private static JMenuItem getMenuItem_KeyboardShortcuts() {
+        final Localizer localizer = Localizer.getInstance();
+        JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblKeyboardShortcuts"));
+        menuItem.addActionListener(e -> new KeyboardShortcutsDialog().setVisible(true));
+        return menuItem;
     }
 
     private static JMenuItem getMenuItem_HowToPlayFile() {
@@ -85,16 +84,10 @@ public final class HelpMenu {
         return menuItem;
     }
 
-    private static JMenuItem getMenuItem_ReadMeFile() {
-        JMenuItem menuItem = new JMenuItem("README.txt");
-        menuItem.addActionListener(getOpenFileAction(getFile(ForgeConstants.README_FILE)));
-        return menuItem;
-    }
-
     private static JMenuItem getMenuItem_OpenLogFile() {
         final Localizer localizer = Localizer.getInstance();
         JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblOpenLogFile"));
-        menuItem.addActionListener(getOpenFileAction(getAbsoluteFile(ForgeConstants.LOG_FILE)));
+        menuItem.addActionListener(getOpenFileAction(ExceptionHandler.getActiveLogFile()));
         return menuItem;
     }
 

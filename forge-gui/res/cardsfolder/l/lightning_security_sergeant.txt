@@ -1,0 +1,11 @@
+Name:Lightning, Security Sergeant
+ManaCost:2 R
+Types:Legendary Creature Human Soldier
+PT:2/3
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, exile the top card of your library. You may play that card for as long as you control NICKNAME.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | Duration$ AsLongAsControl | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card for as long as you control EFFECTSOURCE.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever Lightning deals combat damage to a player, exile the top card of your library. You may play that card for as long as you control Lightning.

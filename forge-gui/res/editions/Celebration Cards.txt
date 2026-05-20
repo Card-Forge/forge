@@ -16,7 +16,4 @@ ScryfallCode=PCEL
 9 M Deb Thomas @Kieran Yanner
 
 [eternal]
-8 R Zur the Enchanter @Chase Stone
-
-[tokens]
-r_1_1_employee
+8 R Zur the Enchanter @Chase Stone ${"flavorName": "Post the Enchanter"}

@@ -1,0 +1,11 @@
+Name:Leitmotif Composer
+ManaCost:2 U
+Types:Creature Human Bard
+PT:2/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+T:Mode$ SpellCast | ValidCard$ Instant.cmcGE5,Sorcery.cmcGE5 | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell with mana value 5 or greater, create a token that's a copy of this creature.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self
+A:AB$ Effect | Cost$ 2 U | StaticAbilities$ Unblockable | SpellDescription$ Creatures named Leitmotif Composer can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Creature.namedLeitmotif Composer | Description$ Creatures named Leitmotif Composer can't be blocked this turn.
+Oracle:Whenever this creature deals combat damage to a player, draw a card.\nWhenever you cast an instant or sorcery spell with mana value 5 or greater, create a token that's a copy of this creature.\n{2}{U}: Creatures named Leitmotif Composer can't be blocked this turn.

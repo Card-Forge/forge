@@ -1,7 +1,5 @@
 package forge.game.staticability;
 
-import com.google.common.collect.ImmutableList;
-
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
@@ -23,7 +21,6 @@ import java.util.Map;
 import org.apache.commons.lang3.ArrayUtils;
 
 public class StaticAbilityPanharmonicon {
-    static String MODE = "Panharmonicon";
 
     public static int handlePanharmonicon(final Game game, final Trigger t, final Map<AbilityKey, Object> runParams) {
         int n = 0;
@@ -41,8 +38,7 @@ public class StaticAbilityPanharmonicon {
 
         CardCollectionView cardList = null;
         // if LTB look back
-        if (t.getMode() == TriggerType.Exploited || t.getMode() == TriggerType.Sacrificed || t.getMode() == TriggerType.Destroyed ||
-                (t.getMode() == TriggerType.ChangesZone || t.getMode() == TriggerType.ChangesZoneAll) && "Battlefield".equals(t.getParam("Origin"))) {
+        if (t.looksBackInTime()) {
             if (runParams.containsKey(AbilityKey.LastStateBattlefield)) {
                 cardList = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
             }
@@ -56,7 +52,7 @@ public class StaticAbilityPanharmonicon {
         // Checks only the battlefield, as those effects only work from there
         for (final Card ca : cardList) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.Panharmonicon)) {
                     continue;
                 }
                 // it can't trigger more times than the limit allows
@@ -134,7 +130,7 @@ public class StaticAbilityPanharmonicon {
             }
             CardCollection causesForTrigger = table.filterCards(trigOrigin, trigDestination, trigger.getParam("ValidCards"), trigger.getHostCard(), trigger);
 
-            CardCollection causesForStatic = table.filterCards(origin == null ? null : ImmutableList.of(ZoneType.smartValueOf(origin)), destination == null ? null : ZoneType.listValueOf(destination), stAb.getParam("ValidCause"), host, stAb);
+            CardCollection causesForStatic = table.filterCards(origin == null ? null : List.of(ZoneType.smartValueOf(origin)), destination == null ? null : ZoneType.listValueOf(destination), stAb.getParam("ValidCause"), host, stAb);
 
             // check that whatever caused the trigger to fire is also a cause the static applies for
             if (Collections.disjoint(causesForTrigger, causesForStatic)) {
@@ -185,6 +181,7 @@ public class StaticAbilityPanharmonicon {
                 if (!stAb.matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
                     return false;
                 }
+                @SuppressWarnings("unchecked")
                 Map<Card, Integer> dmgMap = (Map<Card, Integer>) runParams.get(AbilityKey.DamageMap);
                 // 1. check it's valid cause for static
                 // 2. and it must also be valid for trigger event
@@ -200,6 +197,7 @@ public class StaticAbilityPanharmonicon {
                 if (!stAb.matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) {
                     return false;
                 }
+                @SuppressWarnings("unchecked")
                 Map<GameEntity, Integer> dmgMap = (Map<GameEntity, Integer>) runParams.get(AbilityKey.DamageMap);
                 if (dmgMap.keySet().stream().noneMatch(
                         GameObjectPredicates.matchesValidParam(stAb, "ValidTarget")

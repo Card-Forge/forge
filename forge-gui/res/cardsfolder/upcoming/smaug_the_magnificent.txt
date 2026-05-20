@@ -1,0 +1,12 @@
+Name:Smaug the Magnificent
+ManaCost:2 R R
+Types:Legendary Creature Dragon
+PT:4/3
+K:Flying
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever NICKNAME attacks, he deals damage equal to the number of Treasures you control to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:X:Count$Valid Treasure.YouCtrl
+Oracle:Flying, haste\nWhenever Smaug attacks, he deals damage equal to the number of Treasures you control to any target.\nAt the beginning of your upkeep, create a Treasure token.

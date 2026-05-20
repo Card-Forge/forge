@@ -1,0 +1,104 @@
+chicken.png
+size: 256,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none  
+Avatar        
+  xy: 224, 112
+  size: 16, 16
+Idle 
+  xy: 8, 16
+  size: 16, 16  
+Idle 
+  xy: 40, 16
+  size: 16, 16  
+Idle 
+  xy: 72, 16
+  size: 16, 16  
+Idle 
+  xy: 104, 16
+  size: 16, 16  
+Idle 
+  xy: 8, 48
+  size: 16, 16
+Idle 
+  xy: 40, 48
+  size: 16, 16  
+Idle 
+  xy: 72, 48
+  size: 16, 16    
+Idle 
+  xy: 104, 48
+  size: 16, 16    
+Idle 
+  xy: 136, 48
+  size: 16, 16  
+Idle 
+  xy: 168, 48
+  size: 16, 16   
+Idle 
+  xy: 200, 48
+  size: 16, 16     
+Idle 
+  xy: 232, 48
+  size: 16, 16     
+Walk
+  xy: 8, 80
+  size: 16, 16  
+Walk
+  xy: 40, 80
+  size: 16, 16  
+Walk
+  xy: 72, 80
+  size: 16, 16  
+Walk
+  xy: 104, 80
+  size: 16, 16  
+Walk
+  xy: 136, 80
+  size: 16, 16  
+Walk 
+  xy: 168, 80
+  size: 16, 16  
+Walk 
+  xy: 200, 80
+  size: 16, 16  
+Walk 
+  xy: 232, 80
+  size: 16, 16  
+Attack 
+  xy: 8,112 
+  size: 16, 16
+Attack 
+  xy: 40,112 
+  size: 16, 16
+Attack 
+  xy: 72,112 
+  size: 16, 16
+Attack 
+  xy: 104,112 
+  size: 16, 16
+Death 
+  xy: 8, 144
+  size: 16, 16    
+Death 
+  xy: 40, 144
+  size: 16, 16    
+Death 
+  xy: 72, 144
+  size: 16, 16    
+Death 
+  xy: 104, 144
+  size: 16, 16    
+Death 
+  xy: 136, 144
+  size: 16, 16        
+Death 
+  xy: 168, 144
+  size: 16, 16    
+Death 
+  xy: 200, 144
+  size: 16, 16    
+Death 
+  xy: 232, 144
+  size: 16, 16    

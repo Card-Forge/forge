@@ -49,7 +49,7 @@ public class ConquestRegion {
     }
 
     public ISkinImage getArt() {
-        clearArt(); //force clear this so it will be redrawn since loadingcache invalidates the cache every screen change
+        clearArt(); // Force clear this so it will be redrawn since loadingcache invalidates the cache every screen change
         if (art == null) {
             PaperCard pc = cardPool.getCard(artCardName);
 
@@ -84,7 +84,7 @@ public class ConquestRegion {
             }
         }
         if (commanders.isEmpty()) {
-            return plane.getCommanders(); //return all commanders for plane if none found in this region
+            return plane.getCommanders(); // Return all commanders for plane if none found in this region
         }
         return commanders;
     }
@@ -105,7 +105,7 @@ public class ConquestRegion {
         protected ConquestRegion read(String line) {
             String name = null;
             String artCardName = null;
-            ColorSet colorSet = ColorSet.ALL_COLORS;
+            ColorSet colorSet = ColorSet.WUBRG;
             Predicate<PaperCard> pred = x -> true;
 
             String key, value;
@@ -166,7 +166,7 @@ public class ConquestRegion {
 
         if (foundRegion) { return; }
 
-        //if card doesn't match any region's predicate, make card available to all regions
+        // If a card doesn't match any region's predicate, make it available to all regions
         for (ConquestRegion region : regions) {
             region.cardPool.add(pc);
         }

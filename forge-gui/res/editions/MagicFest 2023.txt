@@ -7,6 +7,6 @@ ScryfallCode=PF23
 
 [cards]
 1 R Gandalf, Friend of the Shire @Bakshi Productions
-2 R Tranquil Thicket @Alayna Danner
+2 R Tranquil Thicket @Alayna Danner ${"flavorName": "Caras Galadhon"}
 3 R Reliquary Tower @Carissa Susilo
 4 R TARDIS @Chris Ostrowski

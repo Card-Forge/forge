@@ -1,0 +1,23 @@
+Name:Exdeath, Void Warlock
+ManaCost:1 B G
+Types:Legendary Creature Spirit Warlock
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When NICKNAME enters, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE6 | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your end step, if there are six or more permanent cards in your graveyard, transform NICKNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:X:Count$ValidGraveyard Permanent.YouOwn
+AlternateMode:DoubleFaced
+Oracle:When Exdeath enters, you gain 3 life.\nAt the beginning of your end step, if there are six or more permanent cards in your graveyard, transform Exdeath.
+
+ALTERNATE
+
+Name:Neo Exdeath, Dimension's End
+ManaCost:no cost
+Colors:black,green
+Types:Legendary Creature Spirit Avatar
+PT:*/3
+K:Trample
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ NICKNAME's power is equal to the number of permanent cards in your graveyard.
+SVar:X:Count$ValidGraveyard Permanent.YouOwn
+Oracle:Trample\nNeo Exdeath's power is equal to the number of permanent cards in your graveyard.

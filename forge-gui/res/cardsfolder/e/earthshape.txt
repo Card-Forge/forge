@@ -1,0 +1,8 @@
+Name:Earthshape
+ManaCost:2 W
+Types:Instant
+A:SP$ Earthbend | Num$ 3 | SubAbility$ DBPumpAll | SpellDescription$ Earthbend 3. Then each creature you control with power less than or equal to that land's power gains hexproof and indestructible until end of turn. You gain hexproof until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl+powerLEX | KW$ Hexproof & Indestructible | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ You | KW$ Hexproof
+SVar:X:Targeted$CardPower
+Oracle:Earthbend 3. Then each creature you control with power less than or equal to that land's power gains hexproof and indestructible until end of turn.\nYou gain hexproof until end of turn.

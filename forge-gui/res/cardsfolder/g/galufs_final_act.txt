@@ -1,0 +1,9 @@
+Name:Galuf's Final Act
+ManaCost:1 G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +1 | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gets +1/+0 and gains "When this creature dies, put a number of +1/+1 counters equal to its power on up to one target creature."
+SVar:DBAnimate:DB$ Animate | Triggers$ GalufDeath | Defined$ ParentTarget
+SVar:GalufDeath:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ GalufPutCounter | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, put a number of +1/+1 counters equal to its power on up to one target creature.
+SVar:GalufPutCounter:DB$ PutCounter | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggeredCard$CardPower
+Oracle:Until end of turn, target creature gets +1/+0 and gains "When this creature dies, put a number of +1/+1 counters equal to its power on up to one target creature."

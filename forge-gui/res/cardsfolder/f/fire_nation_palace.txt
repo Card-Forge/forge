@@ -1,0 +1,8 @@
+Name:Fire Nation Palace
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ This land enters tapped unless you control a basic land.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.Basic+YouCtrl | ConditionCompare$ EQ0
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Pump | Cost$ 1 R T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Firebending:4 | SpellDescription$ Target creature you control gains firebending 4 until end of turn. (Whenever it attacks, add {R}{R}{R}{R}. This mana lasts until end of combat.)
+Oracle:This land enters tapped unless you control a basic land.\n{T}: Add {R}.\n{1}{R}, {T}: Target creature you control gains firebending 4 until end of turn. (Whenever it attacks, add {R}{R}{R}{R}. This mana lasts until end of combat.)

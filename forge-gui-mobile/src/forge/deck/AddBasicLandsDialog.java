@@ -21,6 +21,7 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Consumer;
 
 import com.badlogic.gdx.utils.Align;
 
@@ -55,10 +56,10 @@ public class AddBasicLandsDialog extends FDialog {
 
     private final Deck currentDeck;
 
-    private final Callback<CardPool> callback;
+    private final Consumer<CardPool> callback;
 
     private final FLabel lblLandSet = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblLandSet") + ":").font(FSkinFont.get(12)).textColor(FLabel.getInlineLabelColor()).build());
-    private final FComboBox<CardEdition> cbLandSet = add(new FComboBox<>(IterableUtil.filter(StaticData.instance().getEditions(), CardEdition.Predicates.hasBasicLands)));
+    private final FComboBox<CardEdition> cbLandSet = add(new FComboBox<>(IterableUtil.filter(StaticData.instance().getSortedEditions(), CardEdition::hasBasicLands)));
 
     private final FScrollPane scroller = add(new FScrollPane() {
         @Override
@@ -113,7 +114,7 @@ public class AddBasicLandsDialog extends FDialog {
     private int nonLandCount, oldLandCount;
     private CardEdition landSet;
 
-    public AddBasicLandsDialog(Deck deck, CardEdition defaultLandSet, final Callback<CardPool> callback0, List<CardEdition> editionOptions) {
+    public AddBasicLandsDialog(Deck deck, CardEdition defaultLandSet, final Consumer<CardPool> callback0, List<CardEdition> editionOptions) {
         super(Forge.getLocalizer().getMessage("lblAddBasicLandsAutoSuggest").replace("%s", deck.getName()), 2);
 
         callback = callback0;
@@ -149,7 +150,7 @@ public class AddBasicLandsDialog extends FDialog {
             hide();
 
             if (landsToAdd.countAll() > 0) {
-                callback.run(landsToAdd);
+                callback.accept(landsToAdd);
             }
         });
         initButton(1, Forge.getLocalizer().getMessage("lblCancel"), e -> hide());

@@ -7,5 +7,13 @@ ScryfallCode=PSPL
 
 [cards]
 1 R Terror of the Peaks @Richard Kane Ferguson
-2a M Kaldra Compleat @Monztre
-2b M Sword of Forge and Frontier @Sam Guay
+2 M Kaldra Compleat @Monztre
+3 M Sword of Forge and Frontier @Sam Guay
+4 M Cloud, Midgar Mercenary @Tetsuya Nomura
+5 R Get Lost @Dominik Mayer
+6 R Spectacular Spider-Man @Julian Totino Tedesco
+7 R Day of Black Sun @Dom Lay
+8 R Vendilion Clique @Jason A. Engle
+9 M Super Shredder @Chris Seaman
+10 M Liliana Vess @Justyna Dura
+11 R Riddles in the Dark @Tomas Duchek

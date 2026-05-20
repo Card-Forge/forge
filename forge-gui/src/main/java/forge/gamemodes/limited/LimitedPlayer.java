@@ -10,6 +10,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.util.SGuiChoose;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.TextUtil;
 
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class LimitedPlayer {
     // A Player class for inside some type of limited environment, like Draft.
     final protected int order;
+    protected String name;
     protected int currentPack;
     protected int draftedThisRound;
     protected Deck deck;
@@ -70,6 +72,16 @@ public class LimitedPlayer {
         this.draft = draft;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        if(this.name == null)
+            return "Player " + (this.order + 1);
+        return name;
+    }
+
     public Map<String, List<String>> getDraftNotes() {
         return noted;
     }
@@ -108,6 +120,7 @@ public class LimitedPlayer {
             return null;
         }
 
+        debugPrint("Picked: " + bestPick);
         DraftPack chooseFrom = packQueue.peek();
         if (chooseFrom == null) {
             return null;
@@ -139,7 +152,7 @@ public class LimitedPlayer {
             removedFromPool = true;
             removedFromCardPool.add(bestPick);
             if (choice.equals("Animus of Predation")) {
-                addLog(name() + " removed " + bestPick.getName() + " from the draft with " + choice + ".");
+                addLog(name() + " removed " + bestPick.getDisplayName() + " from the draft with " + choice + ".");
             } else if (choice.equals("Cogwork Grinder")) {
                 addLog(name() + " removed a card face down from the draft with " + choice + ".");
             }
@@ -156,14 +169,14 @@ public class LimitedPlayer {
                 // But just log that a reveal "happened"
                 addLog(this.name() + " revealed a card to " + fromPlayer.name() + " via Cogwork Spy.");
             } else {
-                addLog(this.name() + " revealed " + bestPick.getName() + " to you with Cogwork Spy.");
+                addLog(this.name() + " revealed " + bestPick.getDisplayName() + " to you with Cogwork Spy.");
             }
 
             fromPlayer.playerFlags &= ~SpyNextCardDrafted;
         }
 
         if ((playerFlags & SearcherNoteNext) == SearcherNoteNext) {
-            addLog(name() + " revealed " + bestPick.getName() + " for Aether Searcher.");
+            addLog(name() + " revealed " + bestPick.getDisplayName() + " for Aether Searcher.");
             playerFlags &= ~SearcherNoteNext;
             List<String> note = noted.computeIfAbsent("Aether Searcher", k -> Lists.newArrayList());
             note.add(String.valueOf(bestPick.getName()));
@@ -171,7 +184,7 @@ public class LimitedPlayer {
 
         if ((playerFlags & SmugglerCaptainActive) == SmugglerCaptainActive) {
             if (revealWithSmuggler(bestPick)) {
-                addLog(name() + " revealed " + bestPick.getName() + " for Smuggler Captain.");
+                addLog(name() + " revealed " + bestPick.getDisplayName() + " for Smuggler Captain.");
                 playerFlags &= ~SmugglerCaptainActive;
                 List<String> note = noted.computeIfAbsent("Smuggler Captain", k -> Lists.newArrayList());
                 note.add(String.valueOf(bestPick.getName()));
@@ -186,8 +199,9 @@ public class LimitedPlayer {
         }
 
         if ((playerFlags & IllusionaryInformantPeek) == IllusionaryInformantPeek) {
-            if (handleIllusionaryInformant()) {
-                addLog(name() + " peeked at " + fromPlayer.name() + "'s next pick with Illusionary Informant and turned it face down.");
+            LimitedPlayer peekAt = handleIllusionaryInformant();
+            if (peekAt != null) {
+                addLog(name() + " peeked at " + peekAt.name() + "'s next pick with Illusionary Informant and turned it face down.");
                 playerFlags &= ~IllusionaryInformantPeek;
             }
         }
@@ -283,7 +297,7 @@ public class LimitedPlayer {
                 List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
                 note.add(String.valueOf(draftedThisRound));
 
-                addLog(name() + " revealed " + bestPick.getName() + " and noted " + draftedThisRound + " cards drafted this round.");
+                addLog(name() + " revealed " + bestPick.getDisplayName() + " and noted " + draftedThisRound + " cards drafted this round.");
             } else if (Iterables.contains(draftActions, "As you draft CARDNAME, the player to your right chooses a color, you choose another color, then the player to your left chooses a third color.")) {
                 List<String> chosenColors = new ArrayList<>();
 
@@ -306,7 +320,7 @@ public class LimitedPlayer {
                 List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
                 note.add(String.join(",", chosenColors));
 
-                addLog(name() + " revealed " + bestPick.getName() + " and noted " + String.join(",", chosenColors) + " chosen colors.");
+                addLog(name() + " revealed " + bestPick.getDisplayName() + " and noted " + String.join(",", chosenColors) + " chosen colors.");
             }
             else {
                 if (Iterables.contains(draftActions, "You may look at the next card drafted from this booster pack.")) {
@@ -314,7 +328,7 @@ public class LimitedPlayer {
                 } else if (fromPlayer != null && Iterables.contains(draftActions, "Note the player who passed CARDNAME to you.")) {
                     List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
                     note.add(String.valueOf(fromPlayer.order));
-                    addLog(name() + " revealed " + bestPick.getName() + " and noted " + fromPlayer.name() + " passed it.");
+                    addLog(name() + " revealed " + bestPick.getDisplayName() + " and noted " + fromPlayer.name() + " passed it.");
                 } else if (Iterables.contains(draftActions, "Reveal the next card you draft and note its name.")) {
                     playerFlags |= SearcherNoteNext;
                 } else if (Iterables.contains(draftActions, "The next time a player drafts a card from this booster pack, guess that card's name. Then that player reveals the drafted card.")) {
@@ -323,12 +337,12 @@ public class LimitedPlayer {
                     addSingleBoosterPack();
                 }
 
-                addLog(name() + " revealed " + bestPick.getName() + " as " + name() + " drafted it.");
+                addLog(name() + " revealed " + bestPick.getDisplayName() + " as " + name() + " drafted it.");
             }
         }
         if (Iterables.contains(draftActions, "Draft CARDNAME face up.")) {
             faceUp.add(bestPick);
-            addLog(name() + " drafted " + bestPick.getName() + " face up.");
+            addLog(name() + " drafted " + bestPick.getDisplayName() + " face up.");
             if (!alreadyRevealed) {
                 showRevealedCard(bestPick);
             }
@@ -370,10 +384,7 @@ public class LimitedPlayer {
     }
 
     public void addLog(String message) {
-        if (this.draft.getDraftLog() != null) {
-            this.draft.getDraftLog().addLogEntry(message);
-        }
-        // Mobile doesnt have a draft log yet
+        this.draft.addLog(message);
     }
 
     public DraftPack nextChoice() {
@@ -446,9 +457,12 @@ public class LimitedPlayer {
         return SGuiChoose.one("Reveal this " + bestPick + " for Smuggler Captain?", Lists.newArrayList("Yes", "No")).equals("Yes");
     }
 
-    public String name() {
+    /**
+     * @return Name to insert into draft messages.
+     */
+    protected String name() {
         if (this instanceof LimitedPlayerAI) {
-            return "Player[" + order + "]";
+            return getName();
         }
 
         return "You";
@@ -550,7 +564,7 @@ public class LimitedPlayer {
         List<String> note = noted.computeIfAbsent(found.getName(), k -> Lists.newArrayList());
         revealed.add(bestPick);
         note.add(bestPick.getName());
-        addLog(name() + " revealed " + bestPick.getName() + " and noted its name for Noble Banneret.");
+        addLog(name() + " revealed " + bestPick.getDisplayName() + " and noted its name for Noble Banneret.");
         addLog(name() + " has flipped Noble Banneret face down.");
         alreadyRevealed = true;
 
@@ -599,7 +613,7 @@ public class LimitedPlayer {
         List<String> note = noted.computeIfAbsent(found.getName(), k -> Lists.newArrayList());
         revealed.add(bestPick);
         note.addAll(bestPick.getRules().getType().getCreatureTypes());
-        addLog(name() + " revealed " + bestPick.getName() + " and noted - " + TextUtil.join(bestPick.getRules().getType().getCreatureTypes(), ",") + " for Paliano Vanguard.");
+        addLog(name() + " revealed " + bestPick.getDisplayName() + " and noted - " + TextUtil.join(bestPick.getRules().getType().getCreatureTypes(), ",") + " for Paliano Vanguard.");
         addLog(name() + " has flipped Paliano Vanguard face down.");
         alreadyRevealed = true;
 
@@ -621,26 +635,20 @@ public class LimitedPlayer {
             round = SGuiChoose.getInteger("Which round would you like to peek at?", draft.getRound(), 3);
         }
 
-        int playerId = SGuiChoose.getInteger("Which player would you like to peek at?", 0, draft.getOpposingPlayers().length);
-        SGuiChoose.reveal("Peeked booster", peekAtBoosterPack(round, playerId));
+        LimitedPlayer targetPlayer = SGuiChoose.one("Which player would you like to peek at?", draft.getAllPlayers(), null, LimitedPlayer::getName);
+        SGuiChoose.reveal("Peeked booster", peekAtBoosterPack(round, targetPlayer));
         // This reveal popup doesn't update the card detail panel in draft
         // How do we get to do that?
         return true;
     }
 
-    protected DraftPack peekAtBoosterPack(int round, int playerNumber) {
-        if (draft.getRound() > round) {
+    protected DraftPack peekAtBoosterPack(int round, LimitedPlayer player) {
+        if (draft.getRound() > round || player == null) {
             // There aren't any unopened packs from earlier rounds
             return null;
         }
 
         int relativeRound = round - draft.getRound();
-        LimitedPlayer player;
-        if (playerNumber == 0) {
-            player = this.draft.getHumanPlayer();
-        } else {
-            player = this.draft.getOpposingPlayers()[playerNumber - 1];
-        }
         if (relativeRound == 0) {
             // I want to see a pack from the current round
             return player.packQueue.peek();
@@ -649,20 +657,15 @@ public class LimitedPlayer {
         }
     }
 
-    public boolean handleIllusionaryInformant() {
-        Integer player = SGuiChoose.getInteger("Peek at another player's last pick?", 0, draft.getOpposingPlayers().length);
-        if (Objects.equals(player, null)) {
-            return false;
-        }
-
-        LimitedPlayer peekAt = draft.getPlayer(player);
+    public LimitedPlayer handleIllusionaryInformant() {
+        LimitedPlayer peekAt = SGuiChoose.oneOrNone("Peek at another player's last pick?", draft.getAllPlayers(), null, LimitedPlayer::getName);
         if (peekAt == null) {
-            return false;
+            return null;
         }
 
-        SGuiChoose.reveal("Player " + player + " lastPicked: ",  Lists.newArrayList(peekAt.getLastPick()));
+        SGuiChoose.reveal("Player " + peekAt + " lastPicked: ",  Lists.newArrayList(peekAt.getLastPick()));
 
-        return true;
+        return peekAt;
     }
 
     public PaperCard handleSpirePhantasm(DraftPack chooseFrom) {
@@ -674,6 +677,9 @@ public class LimitedPlayer {
     }
 
     public boolean handleLeovoldsOperative(DraftPack pack, PaperCard drafted) {
+        if(pack.isEmpty())
+            return false;
+
         if (Objects.equals(SGuiChoose.one("Draft an extra pick with Leovold's Operative?", Lists.newArrayList("Yes", "No")), "No")) {
             return false;
         }
@@ -683,6 +689,8 @@ public class LimitedPlayer {
     }
 
     public boolean handleCogworkLibrarian(DraftPack pack, PaperCard drafted) {
+        if(pack.isEmpty())
+            return false;
         return !Objects.equals(SGuiChoose.one("Draft an extra pick with Cogwork Librarian?", Lists.newArrayList("Yes", "No")), "No");
     }
 
@@ -694,12 +702,12 @@ public class LimitedPlayer {
         LimitedPlayer guesser = pack.getAwaitingGuess().getKey();
         PaperCard guess = pack.getAwaitingGuess().getValue();
 
-        addLog(name() + " reveals " + drafted.getName() + " from " + guesser.name() + "'s guess of " + guess.getName() + " with Spire Phantasm.");
+        addLog(name() + " reveals " + drafted.getDisplayName() + " from " + guesser.name() + "'s guess of " + guess.getDisplayName() + " with Spire Phantasm.");
         if (guess.equals(drafted)) {
-            addLog(guesser.name() + " correctly guessed " + guess.getName() + " with Spire Phantasm.");
+            addLog(guesser.name() + " correctly guessed " + guess.getDisplayName() + " with Spire Phantasm.");
             guesser.getDraftNotes().computeIfAbsent("Spire Phantasm", k -> Lists.newArrayList()).add(guess.getName());
         } else {
-            addLog(guesser.name() + " incorrectly guessed " + guess.getName() + " with Spire Phantasm.");
+            addLog(guesser.name() + " incorrectly guessed " + guess.getDisplayName() + " with Spire Phantasm.");
         }
 
         pack.resetAwaitingGuess();
@@ -766,7 +774,7 @@ public class LimitedPlayer {
                     continue;
                 }
 
-                addLog(player.name() + " offered " + offer.getName() + " to " + name() + " for " + exchangeCard.getName());
+                addLog(player.name() + " offered " + offer.getDisplayName() + " to " + name() + " for " + exchangeCard.getName());
                 offers.put(offer, player);
             }
 
@@ -787,11 +795,11 @@ public class LimitedPlayer {
             return SGuiChoose.oneOrNone("Choose a card to offer for trade: ", deckCards);
         }
 
-        return SGuiChoose.oneOrNone("Choose a card to trade for " + offer.getName() + ": ", deckCards);
+        return SGuiChoose.oneOrNone("Choose a card to trade for " + offer.getDisplayName() + ": ", deckCards);
     }
 
     protected PaperCard chooseCardToExchange(PaperCard exchangeCard, Map<PaperCard, LimitedPlayer> offers) {
-        return SGuiChoose.oneOrNone("Choose a card to accept trade of " + exchangeCard + ": ", offers.keySet());
+        return SGuiChoose.oneOrNone("Choose a card to accept trade of " + exchangeCard + ": ", offers.keySet(), null, (card) -> card.getDisplayName() + " (" + offers.get(card).getName() + ")");
     }
 
     protected void exchangeAcceptedOffer(PaperCard exchangeCard, LimitedPlayer player, PaperCard offer) {
@@ -812,5 +820,11 @@ public class LimitedPlayer {
             List<String> noteList = player.getDraftNotes().computeIfAbsent(exchangeCard.getName(), k -> Lists.newArrayList());
             noteList.add(note);
         });
+    }
+
+    public void debugPrint(String text) {
+        if(!ForgePreferences.DEV_MODE)
+            return;
+        System.out.println("Player[" + order + "] - " + text);
     }
 }

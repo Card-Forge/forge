@@ -1,0 +1,7 @@
+Name:Freya Crescent
+ManaCost:R
+Types:Legendary Creature Rat Knight
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | Condition$ PlayerTurn | Description$ Jump — During your turn, CARDNAME has flying.
+A:AB$ Mana | Cost$ T | Produced$ R | RestrictValid$ Spell.Equipment,Activated.Equip | SpellDescription$ Add {R}. Spend this mana only to cast an Equipment spell or activate an equip ability.
+Oracle:Jump — During your turn, Freya Crescent has flying.\n{T}: Add {R}. Spend this mana only to cast an Equipment spell or activate an equip ability.

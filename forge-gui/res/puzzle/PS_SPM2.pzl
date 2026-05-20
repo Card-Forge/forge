@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Marvel's Spider-Man #02
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/09/latest-4-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Ensure your solution satisfies all possible opponent decisions and activations! Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Hobgoblin, Mantled Marauder;Chameleon, Master of Disguise;Rocket-Powered Goblin Glider;Romantic Rendezvous;Swarm, Being of Bees;Pumpkin Bombardment
+p0battlefield=Norman Osborn|Modal;Prowler, Clawed Thief;Island;Island;Swamp;Swamp;Mountain;Mountain
+p1life=14
+p1battlefield=Agatha's Soul Cauldron;Spider-Gwen, Free Spirit;Spider-Man, Brooklyn Visionary

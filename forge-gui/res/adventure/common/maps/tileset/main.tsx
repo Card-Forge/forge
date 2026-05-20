@@ -13957,7 +13957,7 @@
    <wangtile tileid="1703" wangid="0,1,0,1,0,0,0,1"/>
    <wangtile tileid="1704" wangid="0,1,0,0,0,1,0,1"/>
   </wangset>
-  <wangset name="LigthPath" type="corner" tile="2019">
+  <wangset name="LightPath" type="corner" tile="2019">
    <wangcolor name="" color="#ff0000" tile="-1" probability="1"/>
    <wangtile tileid="1860" wangid="0,0,0,1,0,0,0,0"/>
    <wangtile tileid="1861" wangid="0,0,0,1,0,1,0,0"/>

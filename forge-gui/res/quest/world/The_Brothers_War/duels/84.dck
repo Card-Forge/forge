@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=The Thing
+Title=The Thing
+Icon=The Thing.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Brothers_War/matyo804_-_Jund_Creativity_(Modern,_#1534218).dck
+Deck Type=constructed
+
+[Main]
+4 Primeval Titan
+4 Archon of Cruelty
+4 Fable of the Mirror-Breaker
+4 Lightning Bolt
+2 Thoughtseize
+4 Persist
+4 Indomitable Creativity
+4 Bitter Reunion
+4 Wrenn and Six
+1 Mountain
+1 Boseiju, Who Endures
+1 Swamp
+1 Bloodstained Mire
+2 Valakut, the Molten Pinnacle
+2 Ziatora's Proving Ground
+3 Stomping Ground
+3 Bloodstained Mire
+4 Blood Crypt
+4 Wooded Foothills
+4 Dwarven Mine
+[Sideboard]
+1 Boseiju, Who Endures
+2 Hidetsugu Consumes All
+2 Necromentia
+2 Brotherhood's End
+2 Collective Brutality
+3 Leyline of the Void
+3 Veil of Summer

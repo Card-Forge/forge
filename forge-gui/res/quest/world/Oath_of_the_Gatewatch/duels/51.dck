@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Aurelia
+Title=Aurelia
+Icon=Aurelia.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/SCG_Invitational_Qualifier_Steubenville/Brian_Grimm_-_Eldrazi_(Modern,_#608074).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Drowner of Hope
+3 Eldrazi Displacer
+4 Eldrazi Mimic
+4 Eldrazi Skyspawner
+4 Endless One
+4 Matter Reshaper
+4 Reality Smasher
+4 Thought-Knot Seer
+2 Dismember
+4 Inquisition of Kozilek
+2 Adarkar Wastes
+2 Caves of Koilos
+4 Eldrazi Temple
+4 Eye of Ugin
+2 Flooded Strand
+1 Ghost Quarter
+1 Hallowed Fountain
+1 Plains
+3 Polluted Delta
+1 Underground River
+1 Urborg, Tomb of Yawgmoth
+1 Watery Grave
+[Sideboard]
+3 Disenchant
+2 Gut Shot
+3 Kataki, War's Wage
+2 Rest in Peace
+3 Stubborn Denial
+2 Thoughtseize

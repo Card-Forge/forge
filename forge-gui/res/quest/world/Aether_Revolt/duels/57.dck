@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Teysa
+Title=Teysa
+Icon=Teysa.jpg
+Difficulty=Very Hard
+Description=../Modern/Aether_Revolt/iKringe_-_Deck_(Modern,_#668732).dck
+Deck Type=constructed
+
+[Main]
+3 Eternal Witness
+3 Geist of Saint Traft
+4 Grim Flayer
+2 Spell Queller
+4 Tarmogoyf
+1 Tombstalker
+3 Abrupt Decay
+3 Fatal Push
+3 Path to Exile
+3 Inquisition of Kozilek
+4 Lingering Souls
+2 Thoughtseize
+2 Liliana, the Last Hope
+1 Breeding Pool
+4 Flooded Strand
+1 Forest
+2 Godless Shrine
+1 Hallowed Fountain
+2 Marsh Flats
+2 Overgrown Tomb
+1 Plains
+4 Polluted Delta
+2 Swamp
+2 Temple Garden
+1 Watery Grave
+[Sideboard]
+1 Abrupt Decay
+2 Blessed Alliance
+3 Celestial Purge
+2 Collective Brutality
+2 Disenchant
+2 Nihil Spellbomb
+1 Path to Exile
+2 Timely Reinforcements

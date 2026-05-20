@@ -475,7 +475,8 @@ Replace=.078F RareMythic:fromSheet("DSK cards")
 417 R Twitching Doll @John Tedrick
 
 [rebalanced]
-A143 R A-Leyline of Resonance @Sergey Glushakov
+A-143 R A-Leyline of Resonance @Sergey Glushakov
+A-187 R A-Kona, Rescue Beastie @Brian Valeza
 
 [special guests]
 1 Collected Company|SPG
@@ -502,7 +503,6 @@ A143 R A-Leyline of Resonance @Sergey Glushakov
 1 Strangled Cemetery|DSK
 
 [tokens]
-#1 copy @Michele Giorgi
 2 c_e_shard_draw @Brian Valeza
 3 w_4_4_beast_lonely @Aaron Miller
 4 w_1_1_e_glimmer @Michele Giorgi
@@ -518,5 +518,8 @@ A143 R A-Leyline of Resonance @Sergey Glushakov
 14 primo_the_indivisible @Michele Giorgi
 15 c_a_treasure_sac @Michele Giorgi
 16 everywhere @Chris Ostrowski
-#17 emblem_kaito_bane_of_nightmares @Joshua Raphael
-#18 manifest @Diana Franco
+
+[other]
+1 copy @Michele Giorgi
+17 emblem_kaito_bane_of_nightmares @Joshua Raphael
+18 manifest @Diana Franco

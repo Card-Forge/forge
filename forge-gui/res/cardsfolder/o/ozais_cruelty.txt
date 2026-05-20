@@ -1,0 +1,6 @@
+Name:Ozai's Cruelty
+ManaCost:2 B
+Types:Sorcery Lesson
+A:SP$ DealDamage | ValidTgts$ Player | NumDmg$ 2 | SubAbility$ DBDiscard | SpellDescription$ CARDNAME deals 2 damage to target player. That player discards two cards.
+SVar:DBDiscard:DB$ Discard | Defined$ TargetedPlayer | NumCards$ 2 | Mode$ TgtChoose
+Oracle:Ozai's Cruelty deals 2 damage to target player. That player discards two cards.

@@ -1,0 +1,20 @@
+[metadata]
+Name=dragon
+[Main]
+11 Mountain|2ED|2
+2 City of Traitors|EXO
+2 Shivan Dragon|2ED
+3 Ancient Tomb|TMP
+3 Earthquake|2ED
+3 Urborg Volcano|INV
+4 Bloodstained Mire|ONS
+4 Covetous Dragon|UDS
+4 Fire Diamond|6ED
+4 Fledgling Dragon|JUD
+4 Lightning Bolt|2ED
+4 Mind Stone|WTH
+4 Serrated Arrows|ATH
+4 Wildfire|7ED
+
+[StartInBattle_Reference]
+1 Fire Diamond|MIR

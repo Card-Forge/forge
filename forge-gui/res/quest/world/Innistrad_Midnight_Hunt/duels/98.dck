@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Gambit
+Title=Gambit
+Icon=Gambit.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Sannabe_Shunsuke_-_UB_Control_(Modern,_#1223395).dck
+Deck Type=constructed
+
+[Main]
+2 Subtlety
+2 Abrupt Decay
+2 Drown in the Loch
+2 Memory Deluge
+2 Siphon Insight
+4 Fatal Push
+4 Counterspell
+4 Archmage's Charm
+1 Damnation
+1 Bloodchief's Thirst
+3 Inquisition of Kozilek
+2 Spreading Seas
+3 Jace, the Mind Sculptor
+3 Liliana, the Last Hope
+1 Breeding Pool
+1 Swamp
+1 Zagoth Triome
+2 Field of Ruin
+3 Misty Rainforest
+4 Watery Grave
+4 Polluted Delta
+4 Drowned Catacomb
+5 Island
+[Sideboard]
+1 Collective Brutality
+1 Nihil Spellbomb
+1 Assassin's Trophy
+1 Surgical Extraction
+2 Aether Gust
+2 Engineered Explosives
+2 Flusterstorm
+2 Thoughtseize
+3 Cling to Dust

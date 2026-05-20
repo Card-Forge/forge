@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Lupin the Third
+Title=Lupin the Third
+Icon=Lupin the Third.jpg
+Difficulty=Easy
+Description=Scars_of_Mirrodin/2010_SoM_Game_Day_-_Menorca,_Spain/RafaHitaMarchante_-_Poison_(Standard,_#7882).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blight Mamba
+2 Hand of the Praetors
+3 Ichor Rats
+2 Necropede
+4 Plague Stinger
+1 Putrefax
+1 Skithiryx, the Blight Dragon
+2 Darksteel Axe
+3 Livewire Lash
+4 Disfigure
+4 Giant Growth
+2 Grasp of Darkness
+3 Groundswell
+3 Prey's Vengeance
+2 Garruk Wildspeaker
+7 Forest
+9 Swamp
+4 Verdant Catacombs
+[Sideboard]
+2 Doom Blade
+4 Duress
+2 Infiltration Lens
+1 Memoricide
+2 Naturalize
+2 Nihil Spellbomb
+2 Vampire Hexmage

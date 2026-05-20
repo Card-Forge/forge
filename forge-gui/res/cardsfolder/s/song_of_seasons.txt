@@ -1,0 +1,8 @@
+Name:Song of Seasons
+ManaCost:1 R G
+Types:Sorcery
+A:SP$ Seek | Types$ Mountain,Forest,Land.nonMountain+nonForest | RememberFound$ True | SubAbility$ DBChangeZone1
+SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land.IsRemembered | ChangeNum$ 1 | Mandatory$ True | SelectPrompt$ Select a card to put onto the battlefield | SubAbility$ DBChangeZone2 | StackDescription$ None
+SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Hand | Destination$ Graveyard | ChangeType$ Land.IsRemembered | ChangeNum$ 1 | Mandatory$ True | SelectPrompt$ Select a card to put onto the graveyard | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Seek a Mountain card, a Forest card, and a non-Mountain, non-Forest land card. Put one of them onto the battlefield and put one of them into your graveyard.

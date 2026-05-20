@@ -3,5 +3,5 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ Combo U B | SpellDescription$ Add {U} or {B}.
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBTap | ReplacementResult$ Updated | Description$ As CARDNAME enters, you may reveal an Island or Swamp card from your hand. If you don't, CARDNAME enters tapped.
-SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Island,Swamp/Island or Swamp> | UnlessPayer$ You | StackDescription$ enters tapped.
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Island;Swamp/Island or Swamp> | UnlessPayer$ You | StackDescription$ enters tapped.
 Oracle:As Choked Estuary enters, you may reveal an Island or Swamp card from your hand. If you don't, Choked Estuary enters tapped.\n{T}: Add {U} or {B}.

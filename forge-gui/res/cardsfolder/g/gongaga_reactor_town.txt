@@ -1,0 +1,7 @@
+Name:Gongaga, Reactor Town
+ManaCost:no cost
+Types:Land Town
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ Combo R G | SpellDescription$ Add {R} or {G}.
+Oracle:This land enters tapped.\n{T}: Add {R} or {G}.

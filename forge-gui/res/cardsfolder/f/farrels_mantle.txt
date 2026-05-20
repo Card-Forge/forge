@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
 T:Mode$ AttackerUnblocked | ValidCard$ Creature.EnchantedBy | Execute$ FarrelDmg | OptionalDecider$ EnchantedController | TriggerDescription$ Whenever enchanted creature attacks and isn't blocked, its controller may have it deal damage equal to its power plus 2 to another target creature. If that player does, the attacking creature assigns no combat damage this turn.
-SVar:FarrelDmg:DB$ DealDamage | ValidTgts$ Creature.NotTriggeredAttacker | TgtPrompt$ Select another target creature | NumDmg$ FarrelX | DamageSource$ TriggeredAttackerLKICopy | SubAbility$ DBNoCombatDamage
+SVar:FarrelDmg:DB$ DealDamage | ValidTgts$ Creature.!TriggeredAttacker | TgtPrompt$ Select another target creature | NumDmg$ FarrelX | DamageSource$ TriggeredAttackerLKICopy | SubAbility$ DBNoCombatDamage
 SVar:DBNoCombatDamage:DB$ Effect | RememberObjects$ TriggeredAttackerLKICopy | StaticAbilities$ SNoCombatDamage | ForgetOnMoved$ Battlefield
 SVar:SNoCombatDamage:Mode$ AssignNoCombatDamage | ValidCard$ Card.IsRemembered | Description$ Remembered creature assigns no combat damage this turn.
 SVar:FarrelX:TriggeredAttacker$CardPower/Plus.2

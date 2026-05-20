@@ -1,0 +1,12 @@
+Name:Vivi Ornitier
+ManaCost:1 U R
+Types:Legendary Creature Wizard
+PT:0/3
+A:AB$ Mana | PlayerTurn$ True | ActivationLimit$ 1 | Cost$ 0 | Produced$ Combo U R | Amount$ X | SpellDescription$ Add X mana in any combination of {U} and/or {R}, where X is CARDNAME's power. Activate only during your turn and only once each turn.
+SVar:X:Count$CardPower
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a noncreature spell, put a +1/+1 counter on CARDNAME and it deals 1 damage to each opponent.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 1
+DeckHas:Ability$Counters
+DeckHints:Type$Artifact|Instant|Sorcery|Enchantment
+Oracle:{0}: Add X mana in any combination of {U} and/or {R}, where X is Vivi Ornitier's power. Activate only during your turn and only once each turn.\nWhenever you cast a noncreature spell, put a +1/+1 counter on Vivi Ornitier and it deals 1 damage to each opponent.

@@ -1,0 +1,80 @@
+giantpanda.png
+size: 192,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar 
+  xy: 48, 96
+  size: 16, 16
+Idle 
+  xy: 5, 25
+  size: 17, 13
+Idle 
+  xy: 37, 25
+  size: 17, 13
+Idle 
+  xy: 69, 25
+  size: 17, 13
+Idle 
+  xy: 101, 25
+  size: 17, 13
+Idle 
+  xy: 133, 25
+  size: 17, 13
+Idle 
+  xy: 165, 25
+  size: 17, 13
+Walk 
+  xy: 5, 6
+  size: 17, 13
+Walk 
+  xy: 37, 6
+  size: 17, 13
+Walk 
+  xy: 69, 6
+  size: 17, 13
+Walk 
+  xy: 101, 6
+  size: 17, 13
+Walk 
+  xy: 133, 6
+  size: 17, 13
+Walk 
+  xy: 165, 6
+  size: 17, 13
+Attack
+  xy: 4, 45
+  size: 20, 13
+Attack
+  xy: 36, 45
+  size: 20, 13
+Attack
+  xy: 68, 45
+  size: 20, 13
+Attack
+  xy: 100, 45
+  size: 20, 13
+Attack
+  xy: 132, 45
+  size: 20, 13
+Attack
+  xy: 164, 45
+  size: 20, 13
+Death
+  xy: 5, 67
+  size: 17, 13
+Death
+  xy: 37, 67
+  size: 17, 13
+Death
+  xy: 69, 67
+  size: 17, 13
+Death
+  xy: 101, 67
+  size: 17, 13
+Death
+  xy: 133, 67
+  size: 17, 13
+Death
+  xy: 165, 67
+  size: 17, 13

@@ -1,0 +1,12 @@
+Name:Summon: Esper Valigarmanda
+ManaCost:3 R
+Types:Enchantment Creature Saga Drake
+PT:3/3
+K:Chapter:4:DBExile,DBMana,DBMana,DBMana
+SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Hidden$ True | Mandatory$ True | DefinedPlayer$ Player | Chooser$ You | ChangeType$ Instant,Sorcery
+SVar:DBMana:DB$ Mana | Produced$ R | Amount$ X | SubAbility$ DBPlay | SpellDescription$ Add {R} for each lore counter on this Saga. You may cast an instant or sorcery card exiled with this Saga, and mana of any type can be spent to cast that spell.
+SVar:DBPlay:DB$ Play | Valid$ Instant.ExiledWithSource,Sorcery.ExiledWithSource | ValidSA$ Spell | ManaConversion$ AnyType->AnyType | ValidZone$ Exile | Optional$ True
+K:Flying
+K:Haste
+SVar:X:Count$CardCounters.LORE
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Exile an instant or sorcery card from each graveyard.\nII, III, IV — Add {R} for each lore counter on this Saga. You may cast an instant or sorcery card exiled with this Saga, and mana of any type can be spent to cast that spell.\nFlying, haste

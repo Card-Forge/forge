@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=SerendibGenie
+Title=SerendibGenie
+Icon=SerendibGenie.jpg
+Difficulty=Medium
+Description=./Standard/Kamigawa_Neon_Dynasty/Chelios#32676_-_Red_(Standard,_#1335682).dck
+Deck Type=constructed
+
+[Main]
+2 Falkenrath Pit Fighter
+2 Voldaren Epicure
+4 Reinforced Ronin
+4 Kumano Faces Kakkazan
+4 Rabbit Battery
+4 Voltaic Visionary
+4 Play with Fire
+2 Roil Eruption
+2 Shackles of Treachery
+4 Igneous Inspiration
+4 Chandra, Dressed to Kill
+2 Sokenzan, Crucible of Defiance
+4 Den of the Bugbear
+18 Mountain
+[Sideboard]
+1 Introduction to Prophecy
+1 Start from Scratch
+1 Expanded Anatomy
+1 Spirit Summoning
+1 Environmental Sciences
+1 Introduction to Annihilation

@@ -1,0 +1,7 @@
+Name:Mob Lookout
+ManaCost:1 UB
+Types:Creature Human Rogue Villain
+PT:0/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerDescription$ When this creature enters, target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+SVar:TrigConnive:DB$ Connive | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+Oracle:When this creature enters, target creature you control connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)

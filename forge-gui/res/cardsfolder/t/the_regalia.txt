@@ -1,0 +1,9 @@
+Name:The Regalia
+ManaCost:4
+Types:Legendary Artifact Vehicle
+PT:4/4
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDigUntil | TriggerDescription$ Whenever CARDNAME attacks, reveal cards from the top of your library until you reveal a land card. Put that card onto the battlefield tapped and the rest on the bottom of your library in a random order.
+SVar:TrigDigUntil:DB$ DigUntil | Valid$ Land | ValidDescription$ land | FoundDestination$ Battlefield | Tapped$ True | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True
+K:Crew:1
+Oracle:Haste\nWhenever The Regalia attacks, reveal cards from the top of your library until you reveal a land card. Put that card onto the battlefield tapped and the rest on the bottom of your library in a random order.\nCrew 1

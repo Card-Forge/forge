@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Medium
+Description=Gatecrash/SCG_Standard_Open_Milwaukee/Jory_White_-_R-G_Aggro_(Standard,_#49928).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Boros Reckoner
+4 Burning-Tree Emissary
+4 Flinthoof Boar
+4 Ghor-Clan Rampager
+4 Hellrider
+4 Lightning Mauler
+2 Pyreheart Wolf
+4 Rakdos Cackler
+4 Stromkirk Noble
+2 Brimstone Volley
+4 Searing Spear
+10 Mountain
+4 Rootbound Crag
+4 Stomping Ground
+2 Temple Garden
+[Sideboard]
+1 Domri Rade
+2 Electrickery
+3 Mizzium Mortars
+2 Pillar of Flame
+3 Skullcrack
+1 Traitorous Blood
+2 Volcanic Strength

@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Beast
+Title=Beast
+Icon=Beast.jpg
+Difficulty=Medium
+Description=New_Phyrexia/Philadelphia/Eric_Wenokor_in_PTQ_Philadelphia_-_Mono_Black_Control_(Standard,_#18209).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Gatekeeper of Malakir
+4 Phyrexian Obliterator
+4 Vampire Nighthawk
+1 Batterskull
+4 Lashwrithe
+4 Dismember
+4 Despise
+4 Duress
+4 Inquisition of Kozilek
+3 Sign in Blood
+24 Swamp
+[Sideboard]
+2 Black Sun's Zenith
+4 Bloodghast
+2 Consuming Vapors
+2 Enslave
+2 Memoricide
+3 Ratchet Bomb

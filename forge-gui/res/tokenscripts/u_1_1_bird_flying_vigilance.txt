@@ -1,0 +1,8 @@
+Name:Bird Token
+ManaCost:no cost
+Colors:blue
+Types:Creature Bird
+PT:1/1
+K:Flying
+K:Vigilance
+Oracle:Flying, vigilance

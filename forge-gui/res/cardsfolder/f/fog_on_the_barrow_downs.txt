@@ -3,5 +3,6 @@ ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | AddType$ Spirit | RemoveCreatureTypes$ True | Description$ Enchanted creature is a Spirit and can't attack or block. (It loses all other creature types.)
+S:Mode$ CantAttack,CantBlock | ValidCard$ Creature.EnchantedBy | Description$ Enchanted creature is a Spirit and can't attack or block. (It loses all other creature types.)
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddType$ Spirit | RemoveCreatureTypes$ True | Secondary$ True | Description$ Enchanted creature is a Spirit and can't attack or block. (It loses all other creature types.)
 Oracle:Enchant creature\nEnchanted creature is a Spirit and can't attack or block. (It loses all other creature types.)

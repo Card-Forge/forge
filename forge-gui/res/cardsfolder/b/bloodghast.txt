@@ -2,7 +2,7 @@ Name:Bloodghast
 ManaCost:B B
 Types:Creature Vampire Spirit
 PT:2/1
-K:CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ X | SVarCompare$ LE10 | Description$ CARDNAME has haste as long as an opponent has 10 or less life.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | OptionalDecider$ You | TriggerZones$ Graveyard | Execute$ TrigChange | TriggerDescription$ Landfall — Whenever a land you control enters, you may return CARDNAME from your graveyard to the battlefield.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield

@@ -2,7 +2,7 @@ Name:Overtaker
 ManaCost:1 U
 Types:Creature Merfolk Spellshaper
 PT:1/1
-A:AB$ Untap | Cost$ 3 U T Discard<1/Card> | ValidTgts$ Creature | SpellDescription$ Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn.
+A:AB$ Untap | Cost$ 3 U T Discard<1/Card> | ValidTgts$ Creature | SubAbility$ DBChange | SpellDescription$ Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn.
 SVar:DBChange:DB$ GainControl | Defined$ Targeted | AddKWs$ Haste | LoseControl$ EOT
 AI:RemoveDeck:All
 Oracle:{3}{U}, {T}, Discard a card: Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn.

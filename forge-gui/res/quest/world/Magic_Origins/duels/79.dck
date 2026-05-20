@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Lex Luthor
+Title=Lex Luthor
+Icon=Lex Luthor.jpg
+Difficulty=Hard
+Description=../Modern/Magic_Origins/SCG_Invitational_Qualifier_Myrtle_Beach/Rufus_Joyce_-_Red_Deck_Wins_(Modern,_#630323).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+1 Lightning Helix
+4 Searing Blaze
+3 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+4 Bloodstained Mire
+3 Mountain
+2 Sacred Foundry
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+4 Destructive Revelry
+1 Ensnaring Bridge
+1 Exquisite Firecraft
+2 Path to Exile
+2 Relic of Progenitus
+3 Young Pyromancer

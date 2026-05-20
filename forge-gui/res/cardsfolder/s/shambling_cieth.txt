@@ -1,0 +1,9 @@
+Name:Shambling Cie'th
+ManaCost:2 B
+Types:Creature Mutant Horror
+PT:3/3
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This creature enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Whenever you cast a noncreature spell, you may pay {B}. If you do, return this card from your graveyard to your hand.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ B | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+Oracle:This creature enters tapped.\nWhenever you cast a noncreature spell, you may pay {B}. If you do, return this card from your graveyard to your hand.

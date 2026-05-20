@@ -1,0 +1,11 @@
+Name:Firion, Wild Rose Warrior
+ManaCost:2 R
+Types:Legendary Creature Human Rebel Warrior
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+equipped | AddKeyword$ Haste | Description$ Equipped creatures you control have haste.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Equipment.YouCtrl+!token+Other | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever a nontoken Equipment you control enters, create a token that's a copy of it, except it has "This Equipment's equip abilities cost {2} less to activate." Sacrifice that token at the beginning of the next upkeep.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | AddStaticAbilities$ EquipReduce | AtEOT$ SacrificeUpkeep
+SVar:EquipReduce:Mode$ ReduceCost | ValidCard$ Card.Self | ValidSpell$ Activated.Equip | Amount$ 2 | Description$ This Equipment's equip abilities cost {2} less to activate.
+DeckHas:Ability$Token
+DeckNeeds:Type$Equipment
+Oracle:Equipped creatures you control have haste.\nWhenever a nontoken Equipment you control enters, create a token that's a copy of it, except it has "This Equipment's equip abilities cost {2} less to activate." Sacrifice that token at the beginning of the next upkeep.

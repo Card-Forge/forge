@@ -1,0 +1,10 @@
+Name:Debris Field Crusher
+ManaCost:4 R
+Types:Artifact Spacecraft
+PT:1/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this Spacecraft enters, it deals 3 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3
+K:Station:8
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE8_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddAbility$ CrusherPump | Description$ STATION 8+ Flying,,,{1}{R}: This Spacecraft gets +2/+0 until end of turn.
+SVar:CrusherPump:AB$ Pump | Cost$ 1 R | NumAtt$ +2 | SpellDescription$ This Spacecraft gets +2/+0 until end of turn.
+Oracle:When this Spacecraft enters, it deals 3 damage to any target.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.)\nSTATION 8+\nFlying\n{1}{R}: This Spacecraft gets +2/+0 until end of turn.

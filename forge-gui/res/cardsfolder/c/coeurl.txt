@@ -1,0 +1,6 @@
+Name:Coeurl
+ManaCost:1 W
+Types:Creature Cat Beast
+PT:2/2
+A:AB$ Tap | Cost$ 1 W T | ValidTgts$ Creature.nonEnchantment | TgtPrompt$ Select target nonenchantment creature | SpellDescription$ Tap target nonenchantment creature.
+Oracle:{1}{W}, {T}: Tap target nonenchantment creature.

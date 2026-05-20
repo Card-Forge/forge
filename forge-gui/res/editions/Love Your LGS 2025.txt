@@ -7,3 +7,4 @@ ScryfallCode=PLG25
 
 [cards]
 1 R Chromatic Lantern @David Álvarez
+2 R Wastes @Ron Spencer

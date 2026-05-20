@@ -1,0 +1,22 @@
+Name:Kuja, Genome Sorcerer
+ManaCost:2 B R
+Types:Legendary Creature Human Mutant Wizard
+PT:3/4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a tapped 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent." Then if you control four or more Wizards, transform Kuja.
+SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ b_0_1_wizard_snipe | TokenOwner$ You | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionPresent$ Card.Wizard+YouCtrl | ConditionCompare$ GE4 | Mode$ Transform
+DeckHints:Type$Wizard
+AlternateMode:DoubleFaced
+Oracle:At the beginning of your end step, create a tapped 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent." Then if you control four or more Wizards, transform Kuja.
+
+ALTERNATE
+
+Name:Trance Kuja, Fate Defied
+ManaCost:no cost
+Colors:black,red
+Types:Legendary Creature Avatar Wizard
+PT:4/6
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Wizard.YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | Description$ Flare Star — If a Wizard you control would deal damage to a permanent or player, it deals double that damage instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+Oracle:Flare Star — If a Wizard you control would deal damage to a permanent or player, it deals double that damage instead.

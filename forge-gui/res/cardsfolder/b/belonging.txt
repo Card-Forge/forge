@@ -1,0 +1,9 @@
+Name:Belonging
+ManaCost:5 W
+Types:Creature Elemental Incarnation
+PT:6/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create three 1/1 colorless Shapeshifter creature tokens with changeling. (They're every creature type.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ c_1_1_shapeshifter_changeling
+K:Encore:6 W W
+DeckHas:Ability$Token
+Oracle:When this creature enters, create three 1/1 colorless Shapeshifter creature tokens with changeling. (They're every creature type.)\nEncore {6}{W}{W} ({6}{W}{W}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

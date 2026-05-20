@@ -503,4 +503,4 @@ ScryfallCode=JMP
 495 C Rupture Spire @Jaime Jones
 
 [rebalanced]
-A206 U A-Blood Artist @Johannes Voss
+A-206 U A-Blood Artist @Johannes Voss

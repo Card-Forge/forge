@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Amphibian
+Title=Amphibian
+Icon=Amphibian.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/Andurin_Wednesday_Evening_Magic/Cesar_Ferrando_-_Rot_from_Within_(Nph_Event_deck)_(Modern,_#20517).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Blight Mamba
+4 Glistener Elf
+2 Ichorclaw Myr
+4 Overgrown Battlement
+3 Putrefax
+3 Rot Wolf
+3 Viridian Corrupter
+1 Contagion Clasp
+4 Carrion Call
+4 Groundswell
+4 Mutagenic Growth
+4 Primal Bellow
+19 Forest
+4 Inkmoth Nexus
+[Sideboard]
+1 Melira, Sylvok Outcast
+2 Obstinate Baloth
+1 Pistus Strike
+3 Trigon of Infestation
+2 Unnatural Predation
+2 Vines of Vastwood

@@ -2,6 +2,6 @@ Name:Slipstream Eel
 ManaCost:5 U U
 Types:Creature Fish Beast
 PT:6/6
-S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
+S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefender$ controlsIsland | Description$ CARDNAME can't attack unless defending player controls an Island.
 K:Cycling:1 U
 Oracle:Slipstream Eel can't attack unless defending player controls an Island.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)

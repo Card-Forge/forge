@@ -1,0 +1,8 @@
+Name:Raging Goblinoids
+Variant:UniversesWithin:FlavorName:Lavaborn Goblins
+ManaCost:4 R
+Types:Creature Goblin Berserker Villain
+PT:5/4
+K:Haste
+K:Mayhem:2 R
+Oracle:Haste\nMayhem {2}{R} (You may cast this card from your graveyard for {2}{R} if you discarded it this turn. Timing rules still apply.)

@@ -5,7 +5,7 @@ Difficulty=hard
 Description=WU Meekstone deck with Meekstone, Marble Titan and creatures with vigilance
 Icon=Pebbles Flintstone.jpg
 Deck Type=constructed
-[main]
+[Main]
 1 Tempest Drake
 1 Armored Griffin
 1 Radiant, Archangel
@@ -28,7 +28,7 @@ Deck Type=constructed
 1 Jhovall Queen
 1 Honor of the Pure
 1 Kismet
-1 Frozen AEther
+1 Frozen Aether
 1 Kazandu Blademaster
 1 Mox Sapphire
 4 Plains|M12
@@ -42,4 +42,4 @@ Deck Type=constructed
 1 Reverence
 2 Imposing Sovereign
 1 Knight of Obligation
-[sideboard]
+[Sideboard]

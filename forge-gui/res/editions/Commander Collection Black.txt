@@ -4,6 +4,7 @@ Date=2022-01-28
 Name=Commander Collection Black
 Type=Collector_Edition
 ScryfallCode=CC2
+TokensCode=CC2
 
 [cards]
 1 M Liliana, Heretical Healer @Bastien L. Deharme
@@ -16,5 +17,5 @@ ScryfallCode=CC2
 8 R Command Tower @Julian Kok Joon Wen
 
 [tokens]
-b_1_1_snake_deathtouch
-b_2_2_zombie
+9 b_1_1_snake_deathtouch @Caroline Gariba
+9☇ b_2_2_zombie @Xavier Ribeiro

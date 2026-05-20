@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Boromir
+Title=Boromir
+Icon=Boromir.jpg
+Difficulty=Very Hard
+Description=../Modern/Aether_Revolt/Terradestroy_-_Eldrazi_Tron_(Modern,_#666219).dck
+Deck Type=constructed
+
+[Main]
+3 Endbringer
+2 Hangarback Walker
+4 Matter Reshaper
+4 Reality Smasher
+4 Thought-Knot Seer
+2 Ulamog, the Ceaseless Hunger
+4 Walking Ballista
+1 Basilisk Collar
+2 Batterskull
+4 Expedition Map
+3 Dismember
+3 Warping Wail
+4 Eldrazi Temple
+3 Ghost Quarter
+1 Sanctum of Ugin
+1 Sea Gate Wreckage
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+3 Wastes
+[Sideboard]
+1 All Is Dust
+3 Chalice of the Void
+1 Karn Liberated
+2 Pithing Needle
+3 Ratchet Bomb
+3 Relic of Progenitus
+1 Ugin, the Spirit Dragon
+1 Warping Wail

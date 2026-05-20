@@ -1,0 +1,6 @@
+Name:Dual-Sun Technique
+ManaCost:1 W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Double Strike | SubAbility$ DBDraw | SpellDescription$ Target creature you control gains double strike until end of turn. If it has a +1/+1 counter on it, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Targeted | ConditionPresent$ Card.counters_GE1_P1P1
+Oracle:Target creature you control gains double strike until end of turn. If it has a +1/+1 counter on it, draw a card.

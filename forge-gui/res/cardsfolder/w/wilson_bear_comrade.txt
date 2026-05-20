@@ -74,8 +74,8 @@ A:AB$ Pump | Cost$ 1 R G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard 
 SVar:DBEffect:DB$ Effect | Name$ Wilson, Ardent Bear's Perpetual Effect | StaticAbilities$ PerpetualDoubleStrike | RememberObjects$ Targeted | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:PerpetualDoubleStrike:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Double Strike | AffectedZone$ All | Description$ This creature perpetually gains double strike.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Keyword$DoubleStrike
-Oracle:Double strike, reach, trample\nWard {2}\n{1}{B}{G}, Exile Wilson, Ardent Bear from your graveyard: Target creature you control perpetually gains double strike. Activate only as a sorcery.
+DeckHas:Keyword$Double Strike
+Oracle:Double strike, reach, trample\nWard {2}\n{1}{R}{G}, Exile Wilson, Ardent Bear from your graveyard: Target creature you control perpetually gains double strike. Activate only as a sorcery.
 
 SPECIALIZE:GREEN
 

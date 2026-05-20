@@ -32,7 +32,6 @@ import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
-import forge.util.Callback;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 
@@ -107,15 +106,12 @@ public class LoadGauntletScreen extends LaunchScreen {
         if (userDeck == null) {
             //give user a chance to select a deck if none saved with gauntlet
             FDeckChooser.promptForDeck(Forge.getLocalizer().getMessage("lblSelectGauntletDeck"), gauntlet.isCommanderGauntlet()
-                    ? GameType.CommanderGauntlet : GameType.Gauntlet, false, new Callback<Deck>() {
-                @Override
-                public void run(Deck result) {
-                    if (result != null) {
-                        gauntlet.setUserDeck(result);
-                        GauntletIO.saveGauntlet(gauntlet);
-                    }
-                }
-            });
+                    ? GameType.CommanderGauntlet : GameType.Gauntlet, false, result -> {
+                        if (result != null) {
+                            gauntlet.setUserDeck(result);
+                            GauntletIO.saveGauntlet(gauntlet);
+                        }
+                    });
             return;
         }
 

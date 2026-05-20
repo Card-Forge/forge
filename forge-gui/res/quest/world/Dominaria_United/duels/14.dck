@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Iblis
+Title=Iblis
+Icon=Iblis.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/CovertGoBlue_-_Angels_(Standard,_#1454371).dck
+Deck Type=constructed
+
+[Main]
+2 Liesa, Forgotten Archangel
+2 Serra Paragon
+3 Enduring Angel
+4 Archangel of Wrath
+4 Fable of the Mirror-Breaker
+4 Spirited Companion
+4 Giada, Font of Hope
+2 Infernal Grasp
+3 Rite of Oblivion
+2 The Meathook Massacre
+4 Wedding Announcement
+2 Liliana of the Veil
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+1 Eiganjo, Seat of the Empire
+1 Plains
+4 Sulfurous Springs
+4 Caves of Koilos
+4 Haunted Ridge
+4 Shattered Sanctum
+4 Sundown Pass
+[Sideboard]

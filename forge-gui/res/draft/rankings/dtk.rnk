@@ -14,18 +14,18 @@
 #13|Descent of the Dragons|M|DTK
 #14|Risen Executioner|M|DTK
 #15|Thunderbreak Regent|R|DTK
-#16|Sidisi Undead Vizier|R|DTK
+#16|Sidisi, Undead Vizier|R|DTK
 #17|Icefall Regent|R|DTK
 #18|Sunscorch Regent|R|DTK
-#19|Surrak the Hunt Caller|R|DTK
+#19|Surrak, the Hunt Caller|R|DTK
 #20|Necromaster Dragon|R|DTK
-#21|Anafenza Kin Tree Spirit|R|DTK
+#21|Anafenza, Kin-Tree Spirit|R|DTK
 #22|Deathbringer Regent|R|DTK
 #23|Boltwing Marauder|R|DTK
 #24|Secure the Wastes|R|DTK
 #25|Hidden Dragonslayer|R|DTK
 #26|Den Protector|R|DTK
-#27|Foe Razer Regent|R|DTK
+#27|Foe-Razer Regent|R|DTK
 #28|Arashin Foremost|R|DTK
 #29|Silumgar Assassin|R|DTK
 #30|Harbinger of the Hunt|R|DTK
@@ -37,7 +37,7 @@
 #36|Silumgar's Command|R|DTK
 #37|Pitiless Horde|R|DTK
 #38|Kolaghan's Command|R|DTK
-#39|Blood Chin Fanatic|R|DTK
+#39|Blood-Chin Fanatic|R|DTK
 #40|Crater Elemental|R|DTK
 #41|Arashin Sovereign|R|DTK
 #42|Ire Shaman|R|DTK
@@ -68,7 +68,7 @@
 #67|Mirror Mockery|R|DTK
 #68|Pacifism|C|DTK
 #69|Swift Warkite|U|DTK
-#70|Foul Tongue Invocation|U|DTK
+#70|Foul-Tongue Invocation|U|DTK
 #71|Volcanic Vision|R|DTK
 #72|Ambuscade Shaman|U|DTK
 #73|Aven Sunstriker|U|DTK
@@ -78,7 +78,7 @@
 #77|Warbringer|U|DTK
 #78|Enduring Scalelord|U|DTK
 #79|Silkwrap|U|DTK
-#80|Blood Chin Rager|U|DTK
+#80|Blood-Chin Rager|U|DTK
 #81|Qal Sisma Behemoth|U|DTK
 #82|Sarkhan's Rage|C|DTK
 #83|Salt Road Ambushers|U|DTK
@@ -96,9 +96,9 @@
 #95|Belltoll Dragon|U|DTK
 #96|Kolaghan Forerunners|U|DTK
 #97|Vulturous Aven|C|DTK
-#98|Acid Spewer Dragon|U|DTK
+#98|Acid-Spewer Dragon|U|DTK
 #99|Haven of the Spirit Dragon|R|DTK
-#100|Silumgar Spell Eater|U|DTK
+#100|Silumgar Spell-Eater|U|DTK
 #101|Ainok Survivalist|U|DTK
 #102|Hand of Silumgar|C|DTK
 #103|Gudul Lurker|U|DTK
@@ -132,14 +132,14 @@
 #131|Dragon Fodder|C|DTK
 #132|Defeat|C|DTK
 #133|Kolaghan Aspirant|C|DTK
-#134|Dragon Scarred Bear|C|DTK
+#134|Dragon-Scarred Bear|C|DTK
 #135|Anticipate|C|DTK
 #136|Press the Advantage|U|DTK
 #137|Lurking Arynx|U|DTK
 #138|Coat with Venom|C|DTK
 #139|Glade Watcher|C|DTK
 #140|Evolving Wilds|C|DTK
-#141|Guardian Shield Bearer|C|DTK
+#141|Guardian Shield-Bearer|C|DTK
 #142|Butcher's Glee|C|DTK
 #143|Dromoka Warrior|C|DTK
 #144|Living Lore|R|DTK
@@ -180,7 +180,7 @@
 #179|Sight Beyond Sight|U|DTK
 #180|Kolaghan Stormsinger|C|DTK
 #181|Graceblade Artisan|U|DTK
-#182|Self Inflicted Wound|U|DTK
+#182|Self-Inflicted Wound|U|DTK
 #183|Sandstorm Charger|C|DTK
 #184|Orator of Ojutai|U|DTK
 #185|Updraft Elemental|C|DTK
@@ -231,7 +231,7 @@
 #230|Naturalize|C|DTK
 #231|Dragon's Eye Sentry|C|DTK
 #232|Fate Forgotten|C|DTK
-#233|Foul Tongue Shriek|C|DTK
+#233|Foul-Tongue Shriek|C|DTK
 #234|Ancient Carp|C|DTK
 #235|Shape the Sands|C|DTK
 #236|Revealing Wind|C|DTK

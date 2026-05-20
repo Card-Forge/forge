@@ -1,0 +1,9 @@
+Name:Boggart Cursecrafter
+ManaCost:B R
+Types:Creature Goblin Warlock
+PT:2/3
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Goblin.Other+YouCtrl | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever another Goblin you control dies, this creature deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 1
+DeckHints:Type$Goblin
+Oracle:Deathtouch\nWhenever another Goblin you control dies, this creature deals 1 damage to each opponent.

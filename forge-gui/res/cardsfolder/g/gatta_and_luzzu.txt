@@ -1,0 +1,11 @@
+Name:Gatta and Luzzu
+ManaCost:2 W
+Types:Legendary Creature Human Soldier
+PT:1/1
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters, choose target creature you control. If damage would be dealt to that creature this turn, prevent that damage and put that many +1/+1 counters on it.
+SVar:TrigEffect:DB$ Effect | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | ReplacementEffects$ DamageEvent | ExileOnMoved$ Battlefield | RememberObjects$ Targeted
+SVar:DamageEvent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Card.IsRemembered | ReplaceWith$ Counters | Description$ If damage would be dealt to that creature this turn, prevent that damage and put that many +1/+1 counters on it.
+SVar:Counters:DB$ PutCounter | Defined$ ReplacedTarget | CounterType$ P1P1 | CounterNum$ X
+SVar:X:ReplaceCount$DamageAmount
+Oracle:Flash\nWhen Gatta and Luzzu enters, choose target creature you control. If damage would be dealt to that creature this turn, prevent that damage and put that many +1/+1 counters on it.

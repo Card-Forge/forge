@@ -266,6 +266,11 @@ public class AdventureQuestStage implements Serializable {
     }
 
     public AdventureQuestController.QuestStatus handleEvent(AdventureQuestEvent event) {
+        if (objective == Fetch && hasRequiredFetchItems()) {
+            status = COMPLETE;
+            return status;
+        }
+
         if (!checkIfTargetLocation(event.poi))
             return status;
 
@@ -325,9 +330,14 @@ public class AdventureQuestStage implements Serializable {
                 }
                 break;
             case Fetch:
-                status = event.type == AdventureQuestEventType.RECEIVEITEM
-                        && (itemNames.isEmpty()) || (event.item != null && itemNames.contains(event.item.name))
-                        && ++progress1 >= count1 ? COMPLETE : status;
+                if (event.type == AdventureQuestEventType.RECEIVEITEM) {
+                    if ((itemNames.isEmpty()) || (event.item != null && itemNames.contains(event.item.name)))
+                        status = ++progress1 >= count1 ? COMPLETE : status;
+                }
+                else if (event.type == AdventureQuestEventType.USEITEM) {
+                    if ((itemNames.isEmpty()) || (event.item != null && itemNames.contains(event.item.name)))
+                        status = ++progress3 >= count3 ? COMPLETE : status;
+                }
                 break;
             case Hunt:
                 if (event.type == AdventureQuestEventType.DESPAWN) {
@@ -373,5 +383,23 @@ public class AdventureQuestStage implements Serializable {
                 break;
         }
         return status;
+    }
+
+    public boolean hasRequiredFetchItems() {
+        if (objective != Fetch || itemNames == null || itemNames.isEmpty()) {
+            return false;
+        }
+
+        int owned = 0;
+        for (String itemName : itemNames) {
+            if (itemName == null || itemName.isEmpty()) {
+                continue;
+            }
+            owned += Current.player().countItem(itemName);
+            if (owned >= count1) {
+                return true;
+            }
+        }
+        return false;
     }
 }

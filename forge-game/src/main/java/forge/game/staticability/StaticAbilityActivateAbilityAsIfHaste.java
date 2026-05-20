@@ -26,12 +26,10 @@ import forge.game.zone.ZoneType;
  */
 public class StaticAbilityActivateAbilityAsIfHaste {
 
-    static String MODE = "ActivateAbilityAsIfHaste";
-
     public static boolean canActivate(final Card card) {
         for (final Card ca : card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.ActivateAbilityAsIfHaste)) {
                     continue;
                 }
 

@@ -1,0 +1,16 @@
+Name:Ishgard, the Holy See
+ManaCost:no cost
+Types:Land Town
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+AlternateMode:Adventure
+Oracle:This land enters tapped.\n{T}: Add {W}.
+
+ALTERNATE
+
+Name:Faith & Grief
+ManaCost:3 W W
+Types:Sorcery Adventure
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target artifact or enchantment card in your graveyard | ValidTgts$ Artifact.YouOwn,Enchantment.YouOwn | SpellDescription$ Return up to two target artifact and/or enchantment cards from your graveyard to your hand. (Then exile this card. You may play the land later from exile.)
+Oracle:Return up to two target artifact and/or enchantment cards from your graveyard to your hand. (Then exile this card. You may play the land later from exile.)

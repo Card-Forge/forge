@@ -10,7 +10,7 @@
  </properties>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
- <layer id="8" name="Colission" width="30" height="30">
+ <layer id="8" name="Collision" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztlUEOwiAQRVmWTePShQcyvaiReitT9RhK6kRsgBlgPnHhS0gTmvD4Q5ka85u4wZj5PS5DP9diP/NXi3O7jWsLws05QzfRugepM7aHFvexwtmKa6xVbWaNrOQu8WvV2LvngvuOOluu/jfgNzUxa6Myc16f+QzogZyX3B5Nv8Qb+jXd0rtV2zNTSPqKtpPI1Rvl9KQyI51ELLOkdxz263PcpUeOVGZk3yJK7lUPLzpzLi/KfXqd7UPQr3s7OXdYq9h/zDvu9ntInaE7twb3/s/KE7hfTLk=
   </data>

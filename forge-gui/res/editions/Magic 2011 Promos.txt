@@ -6,6 +6,9 @@ Type=Promo
 ScryfallCode=PM11
 
 [cards]
+A7 R Knight Exemplar @Jason Chan
 35★ M Sun Titan @Chris Rahn
+113★ R Relentless Rats @Thomas M. Baxa
 122★ R Ancient Hellkite @Wayne Reynolds
+141★ R Goblin Chieftain @Sam Wood
 165★ R Birds of Paradise @Terese Nielsen

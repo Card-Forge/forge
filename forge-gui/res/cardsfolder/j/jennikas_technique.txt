@@ -1,0 +1,6 @@
+Name:Jennika's Technique
+ManaCost:2 R
+Types:Instant
+K:Sneak:R
+A:SP$ DamageAll | NumDmg$ 2 | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 2 damage to each creature.
+Oracle:Sneak {R} (You may cast this spell for {R} if you also return an unblocked attacker you control to hand during the declare blockers step.)\nJennika's Technique deals 2 damage to each creature.

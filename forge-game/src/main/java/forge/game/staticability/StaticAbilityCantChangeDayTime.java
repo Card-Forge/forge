@@ -6,15 +6,13 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityCantChangeDayTime {
 
-    static String MODE = "CantChangeDayTime";
-
     public static boolean cantChangeDay(final Game game, Boolean value) {
         if (value == null) {
             return false;
         }
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.CantChangeDayTime)) {
                     continue;
                 }
                 if (cantChangeDayCheck(stAb, value)) {

@@ -1,0 +1,11 @@
+Name:Minwu, White Mage
+ManaCost:3 W W
+Types:Legendary Creature Human Cleric
+PT:3/3
+K:Vigilance
+K:Lifelink
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on each Cleric you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Cleric.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckHints:Ability$LifeGain & Type$Cleric
+Oracle:Vigilance, lifelink\nWhenever you gain life, put a +1/+1 counter on each Cleric you control.

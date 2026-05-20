@@ -1,16 +1,16 @@
 //Rank|Name|Rarity|Set
-#1|Jace Architect of Thought|M|RTR
+#1|Jace, Architect of Thought|M|RTR
 #2|Angel of Serenity|M|RTR
 #3|Vraska the Unseen|M|RTR
-#4|Isperia Supreme Judge|M|RTR
+#4|Isperia, Supreme Judge|M|RTR
 #5|Armada Wurm|M|RTR
-#6|Sphinxs Revelation|M|RTR
-#7|Niv Mizzet Dracogenius|M|RTR
+#6|Sphinx's Revelation|M|RTR
+#7|Niv-Mizzet, Dracogenius|M|RTR
 #8|Necropolis Regent|M|RTR
-#9|Trostani Selesnyas Voice|M|RTR
-#10|Rakdoss Return|M|RTR
-#11|Rakdos Lord of Riots|M|RTR
-#12|Jarad Golgari Lich Lord|M|RTR
+#9|Trostani, Selesnya's Voice|M|RTR
+#10|Rakdos's Return|M|RTR
+#11|Rakdos, Lord of Riots|M|RTR
+#12|Jarad, Golgari Lich Lord|M|RTR
 #13|Utvara Hellkite|M|RTR
 #14|Mizzium Mortars|R|RTR
 #15|Worldspine Wurm|M|RTR
@@ -34,7 +34,7 @@
 #33|Righteous Authority|R|RTR
 #34|Lotleth Troll|R|RTR
 #35|Corpsejack Menace|R|RTR
-#36|Vitu Ghazi Guildmage|U|RTR
+#36|Vitu-Ghazi Guildmage|U|RTR
 #37|Precinct Captain|R|RTR
 #38|Abrupt Decay|R|RTR
 #39|Palisade Giant|R|RTR
@@ -48,7 +48,7 @@
 #47|Ultimate Price|U|RTR
 #48|Bloodfray Giant|U|RTR
 #49|Lyev Skyknight|U|RTR
-#50|Azors Elocutors|R|RTR
+#50|Azor's Elocutors|R|RTR
 #51|Chromatic Lantern|R|RTR
 #52|Underworld Connections|R|RTR
 #53|Growing Ranks|R|RTR
@@ -68,7 +68,7 @@
 #67|Soulsworn Spirit|U|RTR
 #68|Temple Garden|R|RTR
 #69|Annihilating Fire|C|RTR
-#70|Thrill Kill Assassin|U|RTR
+#70|Thrill-Kill Assassin|U|RTR
 #71|Izzet Charm|U|RTR
 #72|Slime Molding|U|RTR
 #73|Auger Spree|C|RTR
@@ -89,14 +89,14 @@
 #88|Slitherhead|U|RTR
 #89|Teleportal|U|RTR
 #90|Explosive Impact|C|RTR
-#91|Judges Familiar|U|RTR
-#92|Assassins Strike|U|RTR
-#93|Gore House Chainwalker|C|RTR
+#91|Judge's Familiar|U|RTR
+#92|Assassin's Strike|U|RTR
+#93|Gore-House Chainwalker|C|RTR
 #94|Thoughtflare|U|RTR
 #95|Slum Reaper|U|RTR
 #96|Azorius Arrester|C|RTR
 #97|Voidwielder|C|RTR
-#98|Trostanis Judgment|C|RTR
+#98|Trostani's Judgment|C|RTR
 #99|Fencing Ace|U|RTR
 #100|Gatecreeper Vine|C|RTR
 #101|Sunspire Griffin|C|RTR
@@ -107,11 +107,11 @@
 #106|Hover Barrier|U|RTR
 #107|Skyline Predator|U|RTR
 #108|Axebane Guardian|C|RTR
-#109|Centaurs Herald|C|RTR
+#109|Centaur's Herald|C|RTR
 #110|Security Blockade|U|RTR
 #111|Knightly Valor|C|RTR
-#112|Rakdos Shred Freak|C|RTR
-#113|Deaths Presence|R|RTR
+#112|Rakdos Shred-Freak|C|RTR
+#113|Death's Presence|R|RTR
 #114|Selesnya Guildgate|C|RTR
 #115|Golgari Charm|U|RTR
 #116|Ogre Jailbreaker|C|RTR
@@ -123,7 +123,7 @@
 #122|Rakdos Guildgate|C|RTR
 #123|Syncopate|U|RTR
 #124|Phantom General|U|RTR
-#125|Rogues Passage|U|RTR
+#125|Rogue's Passage|U|RTR
 #126|Eyes in the Skies|C|RTR
 #127|Golgari Guildgate|C|RTR
 #128|Sluiceway Scorpion|C|RTR
@@ -142,8 +142,8 @@
 #141|Hussar Patrol|C|RTR
 #142|Korozda Monitor|C|RTR
 #143|Rakdos Keyrune|U|RTR
-#144|Jarads Orders|R|RTR
-#145|Coursers Accord|C|RTR
+#144|Jarad's Orders|R|RTR
+#145|Coursers' Accord|C|RTR
 #146|Tower Drake|C|RTR
 #147|Grim Roustabout|C|RTR
 #148|Risen Sanctuary|U|RTR
@@ -164,7 +164,7 @@
 #163|Stealer of Secrets|C|RTR
 #164|Traitorous Instinct|C|RTR
 #165|Rootborn Defenses|C|RTR
-#166|Isperias Skywatch|C|RTR
+#166|Isperia's Skywatch|C|RTR
 #167|Golgari Keyrune|U|RTR
 #168|Soul Tithe|U|RTR
 #169|Doorkeeper|C|RTR
@@ -203,9 +203,9 @@
 #202|Fall of the Gavel|U|RTR
 #203|Seek the Horizon|U|RTR
 #204|Skull Rend|C|RTR
-#205|Druids Deliverance|C|RTR
-#206|Chemisters Trick|C|RTR
-#207|Horncallers Chant|C|RTR
+#205|Druid's Deliverance|C|RTR
+#206|Chemister's Trick|C|RTR
+#207|Horncaller's Chant|C|RTR
 #208|Treasured Find|U|RTR
 #209|Tavern Swindler|U|RTR
 #210|Bellows Lizard|C|RTR
@@ -229,7 +229,7 @@
 #228|Havoc Festival|R|RTR
 #229|Chronic Flooding|C|RTR
 #230|Catacomb Slug|C|RTR
-#231|Heroes Reunion|U|RTR
+#231|Heroes' Reunion|U|RTR
 #232|Aquus Steed|U|RTR
 #233|Psychic Spiral|U|RTR
 #234|Oak Street Innkeeper|U|RTR
@@ -238,7 +238,7 @@
 #237|Urban Burgeoning|C|RTR
 #238|Rest in Peace|R|RTR
 #239|Pithing Needle|R|RTR
-#240|Fireminds Foresight|R|RTR
+#240|Firemind's Foresight|R|RTR
 #241|Vandalblast|U|RTR
 #242|Street Sweeper|U|RTR
 #243|Shrieking Affliction|U|RTR

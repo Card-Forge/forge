@@ -1,0 +1,47 @@
+cerodon.png
+size: 49,23
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar
+  xy: 7,7
+  size: 16, 16
+Idle
+  xy: 49, 0
+  size: 49,23
+Idle
+  xy: 98, 0
+  size: 49, 23
+Idle
+  xy: 147,0
+  size: 49, 23
+Idle
+  xy: 196, 0
+  size: 49, 23
+Walk
+  xy: 0, 23
+  size: 49, 23
+Walk
+  xy: 49, 23
+  size: 49, 23
+Walk
+  xy: 98, 23
+  size: 49, 23
+Walk
+  xy: 147, 23
+  size: 49, 23
+Walk
+  xy: 196, 23
+  size: 49, 23
+Attack
+  xy: 0, 46
+  size: 49, 23
+Attack
+  xy: 49, 46
+  size: 49, 23
+Attack
+  xy: 98, 46
+  size: 49, 23
+Attack
+  xy: 147, 46
+  size: 49, 23

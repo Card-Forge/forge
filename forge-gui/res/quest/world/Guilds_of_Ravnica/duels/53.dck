@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=King Arthur
+Title=King Arthur
+Icon=King Arthur.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/Antoine57437_-_Abzan_Company_(Modern,_#766138).dck
+Deck Type=constructed
+
+[Main]
+4 Eldrazi Displacer
+2 Eternal Witness
+4 Flickerwisp
+4 Knight of the Reliquary
+4 Noble Hierarch
+3 Scavenging Ooze
+4 Tidehollow Sculler
+4 Wasteland Strangler
+4 Aether Vial
+4 Collected Company
+1 Bojuka Bog
+3 Eldrazi Temple
+1 Field of Ruin
+1 Forest
+1 Godless Shrine
+1 Horizon Canopy
+2 Marsh Flats
+1 Mosswort Bridge
+1 Overgrown Tomb
+2 Plains
+1 Selesnya Sanctuary
+1 Swamp
+1 Temple Garden
+2 Verdant Catacombs
+4 Windswept Heath
+[Sideboard]
+2 Gaddock Teeg
+1 Kambal, Consul of Allocation
+3 Knight of Autumn
+3 Phyrexian Revoker
+2 Sin Collector
+2 Spellskite
+2 Worship

@@ -1,0 +1,9 @@
+Name:Tifa, Martial Artist
+ManaCost:1 R G W
+Types:Legendary Creature Human Monk
+PT:4/4
+K:Melee
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl+powerGE7 | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigUntapAll | TriggerDescription$ Whenever one or more creatures you control with power 7 or greater deal combat damage to a player, untap all creatures you control. If it's the first combat phase of your turn, there is an additional combat phase after this phase.
+SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | ConditionFirstCombat$ True | AfterPhase$ EndCombat
+Oracle:Melee (Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)\nWhenever one or more creatures you control with power 7 or greater deal combat damage to a player, untap all creatures you control. If it's the first combat phase of your turn, there is an additional combat phase after this phase.

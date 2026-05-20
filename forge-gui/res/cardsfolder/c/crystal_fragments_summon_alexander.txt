@@ -1,0 +1,24 @@
+Name:Crystal Fragments
+ManaCost:W
+Types:Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
+A:AB$ ChangeZone | Cost$ 5 W W | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ Exile this Equipment, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | ForgetOtherRemembered$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+Oracle:Equipped creature gets +1/+1.\n{5}{W}{W}: Exile this Equipment, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.\nEquip {1}
+
+ALTERNATE
+
+Name:Summon: Alexander
+ManaCost:no cost
+Colors:white
+Types:Enchantment Creature Saga Construct
+PT:4/3
+K:Chapter:3:DBDefend,DBDefend,DBSubdue
+SVar:DBDefend:DB$ Effect | ReplacementEffects$ RPrevent | SpellDescription$ Prevent all damage that would be dealt to creatures you control this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Creature.YouCtrl | Description$ Prevent all damage that would be dealt to creatures you control this turn.
+SVar:DBSubdue:DB$ TapAll | ValidCards$ Creature.OppCtrl | SpellDescription$ Tap all creatures your opponents control.
+K:Flying
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Prevent all damage that would be dealt to creatures you control this turn.\nIII — Tap all creatures your opponents control.\nFlying

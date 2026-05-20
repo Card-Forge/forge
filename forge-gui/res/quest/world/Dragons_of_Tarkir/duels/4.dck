@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Storm2
+Title=Storm2
+Icon=Storm2.jpg
+Difficulty=Medium
+Description=Dragons_of_Tarkir/Grand_Prix_Toronto_2015_-_Trial_Winners/Gregory_Madden_-_Red_Deck_Wins_(Standard,_#231610).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Eidolon of the Great Revel
+4 Foundry Street Denizen
+2 Goblin Heelcutter
+2 Goblin Rabblemaster
+2 Lightning Berserker
+4 Monastery Swiftspear
+2 Zurgo Bellstriker
+2 Hall of Triumph
+4 Lightning Strike
+4 Stoke the Flames
+4 Wild Slash
+4 Dragon Fodder
+4 Hordeling Outburst
+20 Mountain
+[Sideboard]
+1 Arc Lightning
+2 Outpost Siege
+4 Roast
+2 Thunderbreak Regent

@@ -1,0 +1,12 @@
+Name:Strago and Relm
+ManaCost:2 R
+Types:Legendary Creature Human Wizard
+PT:1/3
+A:AB$ DigUntil | PrecostDesc$ Sketch and Lore | Cost$ 2 R T | ValidTgts$ Opponent | Valid$ Instant,Sorcery,Creature | ValidDescription$ instant, sorcery, or creature | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | IsCurse$ True | SorcerySpeed$ True | SubAbility$ DBPlay | SpellDescription$ Target opponent exiles cards from the top of their library until they exile an instant, sorcery, or creature card. You may cast that card without paying its mana cost. If you cast a creature spell this way, it gains haste and "At the beginning of the end step, sacrifice this creature." Activate only as a sorcery.
+SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | PumpZone$ Stack | Duration$ Permanent | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Triggers$ EOTSac | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature+inZoneStack | Defined$ Remembered | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:EOTSac:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, sacrifice this creature.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Sketch and Lore — {2}{R}, {T}: Target opponent exiles cards from the top of their library until they exile an instant, sorcery, or creature card. You may cast that card without paying its mana cost. If you cast a creature spell this way, it gains haste and "At the beginning of the end step, sacrifice this creature." Activate only as a sorcery.

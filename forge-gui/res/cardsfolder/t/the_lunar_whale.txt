@@ -1,0 +1,9 @@
+Name:The Lunar Whale
+ManaCost:3 U
+Types:Legendary Artifact Vehicle
+PT:3/5
+K:Flying
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | IsPresent$ Card.Self+attackedThisTurn | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayPlay$ True | Description$ As long as CARDNAME attacked this turn, you may play the top card of your library.
+K:Crew:1
+Oracle:Flying\nYou may look at the top card of your library any time.\nAs long as The Lunar Whale attacked this turn, you may play the top card of your library.\nCrew 1

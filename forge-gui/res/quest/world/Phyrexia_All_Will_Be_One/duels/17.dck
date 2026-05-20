@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Wonder Woman
+Title=Wonder Woman
+Icon=Wonder Woman.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/Alejandro_Sepulveda_-_Mono-Red_Aggro_(Standard,_#1596941).dck
+Deck Type=constructed
+
+[Main]
+4 Phoenix Chick
+4 Kumano Faces Kakkazan
+4 Monastery Swiftspear
+4 Bloodthirsty Adversary
+3 Feldon, Ronom Excavator
+3 Squee, Dubious Monarch
+2 Thundering Raiju
+4 Fable of the Mirror-Breaker
+4 Play with Fire
+4 Lightning Strike
+1 Strangle
+4 Mishra's Foundry
+2 Sokenzan, Crucible of Defiance
+17 Mountain
+[Sideboard]
+4 Obliterating Bolt
+2 Koth, Fire of Resistance
+2 Rending Flame
+3 Strangle
+4 Furnace Punisher

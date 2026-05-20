@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Nyarvirazi
+Title=Nyarvirazi
+Icon=Nyarvirazi.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Alain_Bardini_-_Bant_Flash_(Standard,_#797372).dck
+Deck Type=constructed
+
+[Main]
+1 Knight of Autumn
+2 Shalai, Voice of Plenty
+3 God-Eternal Oketra
+3 Deputy of Detention
+4 Llanowar Elves
+4 Incubation Druid
+4 Growth-Chamber Guardian
+4 Frilled Mystic
+4 Hydroid Krasis
+3 Teferi, Time Raveler
+4 Vivien, Champion of the Wilds
+2 Glacial Fortress
+3 Forest
+3 Sunpetal Grove
+4 Hallowed Fountain
+4 Breeding Pool
+4 Hinterland Harbor
+4 Temple Garden
+[Sideboard]
+2 Dovin's Veto
+1 Teferi, Hero of Dominaria
+2 Lyra Dawnbringer
+4 Baffling End
+2 Disdainful Stroke
+1 Teferi, Time Raveler
+2 Knight of Autumn
+1 Deputy of Detention

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Terminator
+Title=Terminator
+Icon=Terminator.jpg
+Difficulty=Hard
+Description=./Modern/Bloomburrow/ueda_yuma_-_Boros_Energy_(Modern,_#2181930).dck
+Deck Type=constructed
+
+[Main]
+3 Ragavan, Nimble Pilferer
+3 Fable of the Mirror-Breaker
+4 Guide of Souls
+4 Ocelot Pride
+4 Amped Raptor
+3 Phlage, Titan of Fire's Fury
+4 Ajani, Nacatl Pariah
+3 Lightning Bolt
+4 Galvanic Discharge
+3 Blood Moon
+3 Static Prison
+2 Plains
+1 Mountain
+3 Aether Hub
+4 Sacred Foundry
+4 Arid Mesa
+4 Marsh Flats
+2 Elegant Parlor
+2 Arena of Glory
+[Sideboard]
+3 Damping Sphere
+2 Wear // Tear
+3 Suncleanser
+2 Bonecrusher Giant
+1 Jegantha, the Wellspring
+2 Unlicensed Hearse
+2 Sunspine Lynx

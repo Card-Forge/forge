@@ -1,0 +1,25 @@
+Name:Esper Origins
+ManaCost:1 G
+Types:Sorcery
+A:SP$ Surveil | Amount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Surveil 2. You gain 2 life. If this spell was cast from a graveyard, exile it, then put it onto the battlefield transformed under its owner's control with a finality counter on it. (If a creature with a finality counter on it would die, exile it instead.)
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | RememberChanged$ True | ConditionDefined$ Self | ConditionPresent$ Card.wasCastFromGraveyard | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | WithCountersType$ FINALITY | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Flashback:3 G
+AlternateMode:DoubleFaced
+DeckHas:Ability$Surveil|Graveyard|LifeGain|Counters
+Oracle:Surveil 2. You gain 2 life. If this spell was cast from a graveyard, exile it, then put it onto the battlefield transformed under its owner's control with a finality counter on it. (If a creature with a finality counter on it would die, exile it instead.)\nFlashback {3}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+
+ALTERNATE
+
+Name:Summon: Esper Maduin
+ManaCost:no cost
+Colors:green
+Types:Enchantment Creature Saga Elemental
+PT:4/4
+K:Chapter:3:DBDig,DBMana,DBPumpAll
+SVar:DBDig:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Permanent | DestinationZone$ Hand | LibraryPosition2$ 0 | SpellDescription$ Reveal the top card of your library. If it's a permanent card, put it into your hand.
+SVar:DBMana:DB$ Mana | Produced$ G G | SpellDescription$ Add {G}{G}.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SpellDescription$ Other creatures you control get +2/+2 and gain trample until end of turn.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Reveal the top card of your library. If it's a permanent card, put it into your hand.\nII — Add {G}{G}.\nIII — Other creatures you control get +2/+2 and gain trample until end of turn.

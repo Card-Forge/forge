@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Obatala
+Title=Obatala
+Icon=Obatala.jpg
+Difficulty=Medium
+Description=New_Phyrexia/Italian_National_Qualifier_-_Sardegna/Fabrizio_Brancatelli_-_GW_Life_(Standard,_#15097).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Acidic Slime
+4 Ajani's Pridemate
+4 Fauna Shaman
+1 Felidar Sovereign
+4 Leonin Relic-Warder
+4 Phyrexian Metamorph
+4 Soul's Attendant
+4 Suture Priest
+4 Vengevine
+2 Journey to Nowhere
+4 Leyline of Vitality
+2 Ajani Goldmane
+4 Copperline Gorge
+3 Forest
+7 Plains
+4 Stirring Wildwood
+4 Sunpetal Grove
+[Sideboard]
+4 Beast Within
+4 Celestial Purge
+3 Naturalize
+4 Torpor Orb

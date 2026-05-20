@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Robot58
+Title=Robot58
+Icon=Yemaya.jpg
+Difficulty=Hard
+Description=Abzan Control 
+Deck Type=constructed
+
+[Main]
+4 Anointer Priest
+4 Champion of Wits
+3 Sacred Cat
+2 The Scarab God
+2 Treasure Map
+4 Fatal Push
+2 Fumigate
+4 Anointed Procession
+2 Cast Out
+4 Hidden Stockpile
+3 Legion's Landing
+4 Concealed Courtyard
+3 Drowned Catacomb
+4 Evolving Wilds
+3 Glacial Fortress
+1 Island
+4 Plains
+1 Shefet Dunes
+4 Swamp
+[Sideboard]
+4 Duress
+1 Fumigate
+2 Harsh Scrutiny
+2 Lost Legacy
+3 Negate
+3 Sunscourge Champion

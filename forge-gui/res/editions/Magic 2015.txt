@@ -2,7 +2,6 @@
 Code=M15
 Date=2014-07-18
 Name=Magic 2015
-Code2=M15
 Type=Core
 BoosterCovers=5
 Booster=10 Common:fromSheet("M15 cards"), 3 Uncommon:fromSheet("M15 cards"), 1 RareMythic:fromSheet("M15 cards"), 1 BasicLand
@@ -304,12 +303,15 @@ ScryfallCode=M15
 2 w_1_1_soldier @Greg Staples
 3 w_1_1_spirit_flying @Mike Sass
 4 u_1_1_squid_islandwalk @Jack Wang
-5 u_1_1_squid_islandwalk @Jack Wang
-6 b_3_3_beast_deathtouch @Dave Kendall
+5 b_3_3_beast_deathtouch @Dave Kendall
 6 b_2_2_zombie @Lucas Graciano
 7 r_2_2_dragon_flying_firebreathing @Jack Wang
-8 r_1_1_goblin_haste @Karl Kopinski
+8 r_1_1_goblin @Karl Kopinski
 9 g_3_3_beast @John Donahue
 10 g_1_1_insect_flying_deathtouch @Martina Pilcerova
 11 g_x_x_treefolk_warrior_total_forests @Todd Lockwood
 12 land_mine @Kev Walker
+
+[other]
+13 emblem_ajani_steadfast @Chris Rahn
+14 emblem_garruk_apex_predator @Tyler Jacobson

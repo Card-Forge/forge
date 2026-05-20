@@ -1,0 +1,9 @@
+Name:Genji Glove
+ManaCost:5
+Types:Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Double Strike | Description$ Equipped creature has double strike.
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | TriggerZones$ Battlefield | FirstCombat$ True | Execute$ DBUntap | TriggerDescription$ Whenever equipped creature attacks, if it's the first combat phase of the turn, untap it. After this phase, there is an additional combat phase.
+SVar:DBUntap:DB$ Untap | Defined$ Equipped | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
+Oracle:Equipped creature has double strike.\nWhenever equipped creature attacks, if it's the first combat phase of the turn, untap it. After this phase, there is an additional combat phase.\nEquip {3}

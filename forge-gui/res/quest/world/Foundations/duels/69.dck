@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Aladdin
+Title=Aladdin
+Icon=Aladdin.jpg
+Difficulty=Very Hard
+Description=./Modern/Foundations/meat_mtg_-_Ritual_Yawggie_17_(Modern,_#2280183).dck
+Deck Type=constructed
+
+[Main]
+3 Arboreal Grazer
+1 Boggart Trawler
+1 Endurance
+1 Geralf's Messenger
+1 Gilded Goose
+1 Haywire Mite
+3 Marionette Apprentice
+4 Orcish Bowmasters
+2 Prosperous Innkeeper
+2 Spinner of Souls
+4 Yawgmoth, Thran Physician
+4 Young Wolf
+2 Enduring Vitality
+3 Chord of Calling
+4 Birthing Ritual
+1 Grist, the Hunger Tide
+3 Blooming Marsh
+2 Boseiju, Who Endures
+1 Dryad Arbor
+2 Forest
+1 Golgari Rot Farm
+1 Misty Rainforest
+2 Overgrown Tomb
+1 Pendelhaven
+1 Swamp
+1 Takenuma, Abandoned Mire
+2 Underground Mortuary
+4 Verdant Catacombs
+1 Windswept Heath
+1 Wooded Foothills
+[Sideboard]
+2 Abrupt Decay
+1 Accursed Marauder
+2 Damping Sphere
+2 Endurance
+3 Fatal Push
+1 Force of Vigor
+1 Reclamation Sage
+1 Soulless Jailer
+2 Thoughtseize

@@ -1,0 +1,9 @@
+Name:Jeong Jeong's Deserters
+ManaCost:1 W
+Types:Creature Human Rebel Ally
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When this creature enters, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+Oracle:When this creature enters, put a +1/+1 counter on target creature.

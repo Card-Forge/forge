@@ -455,7 +455,6 @@ ScryfallCode=NCC
 447 R Windbrisk Heights @Omar Rayyan
 
 [tokens]
-0 rw_1_1_soldier_haste @Unknown
 1 c_10_10_eldrazi @Jack Wang
 2 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
 4 w_2_2_cat_beast @Bayard Wu
@@ -486,6 +485,7 @@ ScryfallCode=NCC
 30 g_x_x_treefolk @Filip Burburan
 31 g_5_5_wurm @Slawomir Maniak
 32 ur_5_5_elemental_flying @Randy Gallegos
+33 rw_1_1_soldier_haste @David Palumbo
 34 c_a_clue_draw @Randy Vargas
 35 c_a_food_sac @Steve Prescott
 36 c_1_1_a_thopter_flying @Richard Wright

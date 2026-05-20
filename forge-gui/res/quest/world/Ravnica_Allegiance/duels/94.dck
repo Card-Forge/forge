@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Orzhov-precon
+Title=Orzhov-precon
+Icon=Orzhov-precon.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Finalnub_-_Puresteel_Combo_(Modern,_#791294).dck
+Deck Type=constructed
+
+[Main]
+1 Monastery Mentor
+4 Puresteel Paladin
+1 Sphinx of Foresight
+4 Sram, Senior Edificer
+4 Accorder's Shield
+4 Cathar's Shield
+4 Mox Opal
+4 Paradise Mantle
+4 Sigil of Distinction
+4 Spidersilk Net
+1 Hurkyl's Recall
+2 Noxious Revival
+3 Repeal
+4 Retract
+1 Grapeshot
+1 Arid Mesa
+4 Flooded Strand
+3 Hallowed Fountain
+3 Marsh Flats
+2 Plains
+1 Sacred Foundry
+1 Seachrome Coast
+[Sideboard]
+3 Monastery Mentor
+3 Burrenton Forge-Tender
+1 Echoing Truth
+2 Fragmentize
+2 Path to Exile
+3 Silence
+1 Swan Song

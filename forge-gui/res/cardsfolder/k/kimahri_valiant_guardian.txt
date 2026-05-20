@@ -1,0 +1,10 @@
+Name:Kimahri, Valiant Guardian
+ManaCost:2 G U
+Types:Legendary Creature Cat Warrior
+PT:3/3
+K:Vigilance
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ RonsoCounter | TriggerDescription$ Ronso Rage — At the beginning of combat on your turn, put a +1/+1 counter on NICKNAME and tap target creature an opponent controls. Then you may have NICKNAME become a copy of that creature, except its name is Kimahri, Valiant Guardian and it has vigilance and this ability.
+SVar:RonsoCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ RonsoTap
+SVar:RonsoTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | SubAbility$ RonsoClone
+SVar:RonsoClone:DB$ Clone | Defined$ Targeted | NewName$ Kimahri, Valiant Guardian | GainThisAbility$ True | AddKeywords$ Vigilance | Optional$ True | AddSVars$ RonsoCounter,RonsoTap,RonsoClone | AILogic$ IfDefinedCreatureIsBetter
+Oracle:Vigilance\nRonso Rage — At the beginning of combat on your turn, put a +1/+1 counter on Kimahri and tap target creature an opponent controls. Then you may have Kimahri become a copy of that creature, except its name is Kimahri, Valiant Guardian and it has vigilance and this ability.

@@ -1,0 +1,7 @@
+Name:Chocobo Knights
+ManaCost:3 W
+Types:Creature Human Knight
+PT:3/3
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, creatures you control with counters on them gain double strike until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl+HasCounters | KW$ Double Strike
+Oracle:Whenever you attack, creatures you control with counters on them gain double strike until end of turn.

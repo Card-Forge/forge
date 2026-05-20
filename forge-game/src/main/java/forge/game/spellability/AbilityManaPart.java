@@ -30,6 +30,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.ability.effects.ManaEffect;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
@@ -50,6 +51,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -74,6 +76,7 @@ public class AbilityManaPart implements java.io.Serializable {
     private final String addsCounters;
     private final String triggersWhenSpent;
     private final boolean persistentMana;
+    private final boolean combatMana;
 
     private transient List<Mana> lastManaProduced = Lists.newArrayList();
 
@@ -104,7 +107,8 @@ public class AbilityManaPart implements java.io.Serializable {
         this.addsKeywordsUntil = params.get("AddsKeywordsUntil");
         this.addsCounters = params.get("AddsCounters");
         this.triggersWhenSpent = params.get("TriggersWhenSpent");
-        this.persistentMana = null != params.get("PersistentMana") && "True".equalsIgnoreCase(params.get("PersistentMana"));
+        this.persistentMana = params.containsKey("PersistentMana");
+        this.combatMana = params.containsKey("CombatMana");
     }
 
     public AbilityManaPart(final Card newSource, AbilityManaPart oldMana) {
@@ -118,6 +122,7 @@ public class AbilityManaPart implements java.io.Serializable {
         this.addsCounters = oldMana.addsCounters;
         this.triggersWhenSpent = oldMana.triggersWhenSpent;
         this.persistentMana = oldMana.persistentMana;
+        this.combatMana = oldMana.combatMana;
         // Do we need to copy over last mana produced somehow? Its kinda gross
     }
 
@@ -176,7 +181,7 @@ public class AbilityManaPart implements java.io.Serializable {
         for (final String c : afterReplace.split(" ")) {
             if (StringUtils.isNumeric(c)) {
                 for (int i = Integer.parseInt(c); i > 0; i--) {
-                    this.lastManaProduced.add(new Mana((byte) ManaAtom.COLORLESS, source, this));
+                    this.lastManaProduced.add(new Mana((byte) ManaAtom.COLORLESS, source, this, player));
                 }
             } else {
                 byte attemptedMana = MagicColor.fromName(c);
@@ -184,14 +189,12 @@ public class AbilityManaPart implements java.io.Serializable {
                     attemptedMana = (byte)ManaAtom.COLORLESS;
                 }
 
-                this.lastManaProduced.add(new Mana(attemptedMana, source, this));
+                this.lastManaProduced.add(new Mana(attemptedMana, source, this, player));
             }
         }
 
-        // add the mana produced to the mana pool
         manaPool.add(this.lastManaProduced);
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
         runParams.put(AbilityKey.Player, player);
         runParams.put(AbilityKey.Produced, afterReplace);
@@ -249,7 +252,7 @@ public class AbilityManaPart implements java.io.Serializable {
         eff.setOwner(sourceCard.getController());
 
         eff.setImageKey(sourceCard.getImageKey());
-        eff.setColor(MagicColor.COLORLESS);
+        eff.setColor(ColorSet.C);
         eff.setGamePieceType(GamePieceType.EFFECT);
 
         String cantcounterstr = "Event$ Counter | ValidSA$ Spell.IsRemembered | Description$ That spell can't be countered.";
@@ -406,14 +409,6 @@ public class AbilityManaPart implements java.io.Serializable {
                 continue;
             }
 
-            if (restriction.equals("MorphOrManifest")) {
-                if ((sa.isSpell() && sa.getHostCard().isCreature() && sa.isCastFaceDown())
-                        || sa.isManifestUp() || sa.isMorphUp()) {
-                    return true;
-                }
-                continue;
-            }
-
             //handled in meetsManaShardRestrictions
             if (restriction.equals("CantPayGenericCosts")) {
                 return true;
@@ -508,12 +503,16 @@ public class AbilityManaPart implements java.io.Serializable {
      * @return a {@link java.lang.String} object.
      */
     public final String mana(SpellAbility sa) {
-        if (isComboMana()) { // when asking combo, just go there
+        if (isComboMana()) {
             return getComboColors(sa);
         }
         String produced = this.getOrigProduced();
         if (produced.contains("Chosen")) {
-            produced = produced.replace("Chosen", this.getChosenColor(sa));
+            produced = produced.replace("Chosen", getChosenColor(sa));
+        }
+        if (isSpecialMana()) {
+            ManaEffect.handleSpecialMana(sa.getActivatingPlayer(), this, sa, false);
+            produced = getExpressChoice();
         }
         return produced;
     }
@@ -653,7 +652,8 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         // replace Chosen for Spire colors
         if (origProduced.contains("ColorID")) {
-            origProduced = origProduced.replace("ColorID", getChosenColorID(sa));
+            String str = sa.getHostCard().getMarkedColors().stream().map(c -> c.getShortName()).collect(Collectors.joining(" "));
+            origProduced = origProduced.replace("ColorID", str);
         }
         if (origProduced.contains("NotedColors")) {
             // Should only be used for Paliano, the High City
@@ -698,28 +698,17 @@ public class AbilityManaPart implements java.io.Serializable {
         return sb.length() == 0 ? "" : sb.substring(0, sb.length() - 1);
     }
 
-    public String getChosenColorID(SpellAbility sa) {
-        if (sa == null) {
-            return "";
-        }
-        Card card = sa.getHostCard();
-        if (card != null && card.hasMarkedColor()) {
-            StringBuilder values = new StringBuilder();
-            for (byte c : card.getMarkedColors()) {
-                values.append(MagicColor.toShortString(c)).append(" ");
-            }
-            return values.toString();
-        }
-        return "";
-    }
-
     public String getChosenColor(SpellAbility sa) {
         if (sa == null) {
             return "";
         }
         Card card = sa.getHostCard();
-        if (card != null && card.hasChosenColor()) {
-            return MagicColor.toShortString(card.getChosenColor());
+        if (card != null) {
+            StringBuilder values = new StringBuilder();
+            for (String c : card.getChosenColors()) {
+                values.append(MagicColor.toShortString(c)).append(" ");
+            }
+            return values.toString().trim();
         }
         return "";
     }
@@ -740,6 +729,9 @@ public class AbilityManaPart implements java.io.Serializable {
      */
     public boolean isPersistentMana() {
         return this.persistentMana;
+    }
+    public boolean isCombatMana() {
+        return this.combatMana;
     }
 
     boolean abilityProducesManaColor(final SpellAbility am, final byte neededColor) {

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Lisa Simpson
+Title=Lisa Simpson
+Icon=Lisa Simpson.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/AMBArda_-_4_Color_Humans_(Modern,_#772915).dck
+Deck Type=constructed
+
+[Main]
+4 Champion of the Parish
+4 Kitesail Freebooter
+4 Mantis Rider
+4 Meddling Mage
+3 Militia Bugler
+4 Noble Hierarch
+3 Phantasmal Image
+4 Reflector Mage
+4 Thalia's Lieutenant
+3 Thalia, Guardian of Thraben
+4 Aether Vial
+4 Ancient Ziggurat
+4 Cavern of Souls
+4 Horizon Canopy
+1 Island
+1 Plains
+1 Seachrome Coast
+4 Unclaimed Territory
+[Sideboard]
+2 Auriok Champion
+2 Damping Sphere
+2 Dismember
+2 Gaddock Teeg
+1 Grafdigger's Cage
+1 Izzet Staticaster
+3 Knight of Autumn
+2 Sin Collector

@@ -1,0 +1,7 @@
+Name:Call the Crash
+ManaCost:3 W B G
+Types:Sorcery
+K:Suspend:2:1 W B G
+A:SP$ MakeCard | Conjure$ True | Name$ Siege Rhino | Amount$ 2 | Zone$ Battlefield | SpellDescription$ Conjure two cards named Siege Rhino onto the battlefield.
+DeckHas:Type$Rhino
+Oracle:Suspend 2—{1}{W}{B}{G}\nConjure two cards named Siege Rhino onto the battlefield.

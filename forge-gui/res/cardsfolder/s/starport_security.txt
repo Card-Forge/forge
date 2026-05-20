@@ -1,0 +1,8 @@
+Name:Starport Security
+ManaCost:W
+Types:Artifact Creature Robot Soldier
+PT:1/1
+A:AB$ Tap | Cost$ 3 W T | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | ReduceCost$ X | SpellDescription$ Tap another target creature. This ability costs {2} less to activate if you control a creature with a +1/+1 counter on it.
+SVar:X:Count$Compare Y GE1.2.0
+SVar:Y:Count$Valid Creature.YouCtrl+counters_GE1_P1P1
+Oracle:{3}{W}, {T}: Tap another target creature. This ability costs {2} less to activate if you control a creature with a +1/+1 counter on it.

@@ -1,0 +1,5 @@
+Name:Fight On!
+ManaCost:2 B
+Types:Instant
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return up to two target creature cards from your graveyard to your hand.
+Oracle:Return up to two target creature cards from your graveyard to your hand.

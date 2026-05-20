@@ -1,0 +1,16 @@
+Name:Scathing Shadelock
+ManaCost:4 B
+Types:Creature Snake Warlock
+PT:4/6
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPrepare | TriggerDescription$ At the beginning of your first main phase, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+AlternateMode:Prepare
+Oracle:At the beginning of your first main phase, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Venomous Words
+ManaCost:B
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | ValidTgtDesc$ creature you control | NumAtt$ +2 | KW$ Deathtouch | SpellDescription$ Target creature you control gets +2/+0 and gains deathtouch until end of turn.
+Oracle:Target creature you control gets +2/+0 and gains deathtouch until end of turn.

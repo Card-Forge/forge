@@ -1,0 +1,24 @@
+[metadata]
+Name=kavu
+[Main]
+1 Battlefield Forge|APC
+1 Plains|INV
+2 Brushland|ICE
+3 Armadillo Cloak|INV
+3 Harrow|INV
+3 Kavu Monarch|INV
+3 Raging Kavu|INV
+4 Elfhame Palace|INV
+4 Fires of Yavimaya|INV
+4 Karplusan Forest|ICE
+4 Kavu Aggressor|INV
+4 Kavu Climber|INV
+4 Kavu Scout|INV
+4 Shivan Oasis|INV
+4 Thornscape Battlemage|PLS
+4 Tribal Flames|INV
+8 Mountain|INV
+9 Forest|INV
+
+[StartInBattle_Reference]
+1 Kavu Monarch|INV

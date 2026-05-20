@@ -1,0 +1,10 @@
+Name:Black Mage's Rod
+ManaCost:1 B
+Types:Artifact Equipment
+K:Job select
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddType$ Wizard | AddTrigger$ TrigSpellCast | Description$ Equipped creature gets +1/+0, has "Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent," and is a Wizard in addition to its other types.
+SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+K:Equip:3
+DeckHas:Ability$Token & Type$Wizard
+Oracle:Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)\nEquipped creature gets +1/+0, has "Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent," and is a Wizard in addition to its other types.\nEquip {3}

@@ -1,0 +1,11 @@
+Name:Buster Sword
+ManaCost:3
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 2 | AddSVar$ BusterSwordCE | Description$ Equipped creature gets +3/+2.
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, draw a card, then you may cast a spell from your hand with mana value less than or equal to that damage without paying its mana cost.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+YouOwn | ValidSA$ Spell.cmcLEX | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True
+SVar:X:TriggerCount$DamageAmount
+SVar:BusterSwordCE:SVar:MustBeBlocked:AttackingPlayerConservative
+Oracle:Equipped creature gets +3/+2.\nWhenever equipped creature deals combat damage to a player, draw a card, then you may cast a spell from your hand with mana value less than or equal to that damage without paying its mana cost.

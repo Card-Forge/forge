@@ -1,0 +1,15 @@
+Name:Human Torch
+ManaCost:3 R
+Types:Legendary Creature Human Hero
+PT:3/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, if you've cast a noncreature spell this turn, CARDNAME gains flying, double strike, and haste until end of turn.
+SVar:TrigPump:DB$ Pump | KW$ Flying & Double Strike & Haste | Defined$ Self
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBEffect | TriggerDescription$ Whenever CARDNAME attacks, you may pay {R}{G}{W}{U}. If you do, until end of turn, whenever he deals combat damage to an opponent, he deals that much damage to each other opponent.
+SVar:DBEffect:AB$ Effect | Cost$ R G W U | Triggers$ TrigDamage
+SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Card.EffectSource | ValidTarget$ Opponent | Execute$ TrigDamageAll | CombatDamage$ True | TriggerDescription$ Whenever EFFECTSOURCE deals combat damage to an opponent, he deals that much damage to each other opponent.
+SVar:TrigDamageAll:DB$ DamageAll | ValidPlayers$ OppNonTriggeredTarget | DamageSource$ EffectSource | NumDmg$ Y
+SVar:X:Count$ThisTurnCast_Card.nonCreature+YouCtrl
+SVar:Y:TriggerCount$DamageAmount
+SVar:HasAttackEffect:TRUE
+SVar:PlayMain1:TRUE
+Oracle:At the beginning of combat on your turn, if you've cast a noncreature spell this turn, Human Torch gains flying, double strike, and haste until end of turn.\nWhenever Human Torch attacks, you may pay {R}{G}{W}{U}. If you do, until end of turn, whenever he deals combat damage to an opponent, he deals that much damage to each other opponent.

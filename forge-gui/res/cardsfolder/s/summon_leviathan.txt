@@ -1,0 +1,12 @@
+Name:Summon: Leviathan
+ManaCost:4 U U
+Types:Enchantment Creature Saga Leviathan
+PT:6/6
+K:Chapter:3:DBBounce,DBDraw,DBDraw
+K:Ward:2
+SVar:DBBounce:DB$ ChangeZoneAll | ChangeType$ Creature.nonKraken+nonLeviathan+nonMerfolk+nonOctopus+nonSerpent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return each creature that isn't a Kraken, Leviathan, Merfolk, Octopus, or Serpent to its owner's hand.
+SVar:DBDraw:DB$ Effect | Triggers$ AttackTrig | SpellDescription$ Until end of turn, whenever a Kraken, Leviathan, Merfolk, Octopus, or Serpent attacks, draw a card.
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Kraken,Card.Leviathan,Card.Merfolk,Card.Octopus,Card.Serpent | Execute$ TrigDraw | TriggerDescription$ Until end of turn, whenever a Kraken, Leviathan, Merfolk, Octopus, or Serpent attacks, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+DeckHints:Type$Kraken|Leviathan|Merfolk|Octopus|Serpent
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Return each creature that isn't a Kraken, Leviathan, Merfolk, Octopus, or Serpent to its owner's hand.\nII, III — Until end of turn, whenever a Kraken, Leviathan, Merfolk, Octopus, or Serpent attacks, draw a card.\nWard {2}

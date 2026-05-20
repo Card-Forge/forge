@@ -1,0 +1,5 @@
+Name:Indicate
+ManaCost:0
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Permanent | StackDescription$ CARDNAME targets {c:Targeted} | SpellDescription$ Target permanent.
+Oracle:Target permanent.

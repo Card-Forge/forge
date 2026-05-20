@@ -1,0 +1,8 @@
+Name:Warrior's Sword
+ManaCost:3 R
+Types:Artifact Equipment
+K:Job select
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 2 | AddType$ Warrior | Description$ Equipped creature gets +3/+2 and is a Warrior in addition to its other types.
+K:Equip:5
+DeckHas:Ability$Token & Type$Warrior
+Oracle:Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)\nEquipped creature gets +3/+2 and is a Warrior in addition to its other types.\nEquip {5}

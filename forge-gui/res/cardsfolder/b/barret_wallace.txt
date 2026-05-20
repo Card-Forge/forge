@@ -1,0 +1,10 @@
+Name:Barret Wallace
+ManaCost:3 R
+Types:Legendary Creature Human Rebel
+PT:4/4
+K:Reach
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals damage equal to the number of equipped creatures you control to defending player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredDefendingPlayer | NumDmg$ X
+SVar:X:Count$Valid Creature.YouCtrl+equipped
+DeckNeeds:Type$Equipment
+Oracle:Reach\nWhenever Barret Wallace attacks, it deals damage equal to the number of equipped creatures you control to defending player.

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Neo
+Title=Neo
+Icon=Neo.jpg
+Difficulty=Very Hard
+Description=../Modern/Battle_for_Zendikar/Standard_Constructed_League/Inez_-_Inez_(5-0)_(Modern,_#519312).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Chief of the Foundry
+3 Eldrazi Skyspawner
+4 Hangarback Walker
+4 Pia and Kiran Nalaar
+2 Thopter Engineer
+4 Vile Aggregate
+4 Whirler Rogue
+4 Ghostfire Blade
+4 Wild Slash
+4 Roast
+2 Outpost Siege
+2 Foundry of the Consuls
+7 Island
+7 Mountain
+4 Shivan Reef
+4 Swiftwater Cliffs
+[Sideboard]
+4 Disdainful Stroke
+2 Dispel
+3 Fiery Impulse
+4 Negate
+2 Radiant Flames

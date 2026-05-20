@@ -1,0 +1,8 @@
+Name:Absolute Virtue
+ManaCost:6 W U
+Types:Legendary Creature Avatar Warrior
+PT:8/8
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
+K:Flying
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Protection:Player.Opponent:each of your opponents | Description$ You have protection from each of your opponents. (You can't be dealt damage, enchanted, or targeted by anything controlled by your opponents.)
+Oracle:This spell can't be countered.\nFlying\nYou have protection from each of your opponents. (You can't be dealt damage, enchanted, or targeted by anything controlled by your opponents.)

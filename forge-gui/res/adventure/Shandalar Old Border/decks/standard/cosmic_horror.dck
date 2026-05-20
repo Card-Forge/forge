@@ -1,0 +1,26 @@
+[metadata]
+Name=cosmic_horror
+[Main]
+1 Brushland|ICE
+1 Plains|4ED|3
+2 Caves of Koilos|APC
+2 Dark Ritual|4ED
+2 Demonic Tutor|LEB
+2 Duress|USG
+2 Hymn to Tourach|ATH
+2 Yavimaya Elder|UDS
+21 Swamp|4ED|3
+4 Bane of the Living|LGN
+4 Black Knight|4ED
+4 Contagion|DKM
+4 Deathgrip|LEA
+4 Forest|4ED|3
+4 Haunting Echoes|ODY
+4 Llanowar Elves|4ED
+4 Llanowar Wastes|APC
+4 Phantom Nishoba|JUD
+4 Reanimate|BRB
+4 Vile Requiem|USG
+
+[StartInBattle_Reference]
+1 Cursed Monstrosity|ODY

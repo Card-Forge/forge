@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Brekyirihunuade
+Title=Brekyirihunuade
+Icon=Brekyirihunuade.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/Anthony_Outeiral_-_5_Colors_(Modern,_#766175).dck
+Deck Type=constructed
+
+[Main]
+4 Champion of the Parish
+4 Kitesail Freebooter
+4 Mantis Rider
+4 Meddling Mage
+2 Militia Bugler
+4 Noble Hierarch
+4 Phantasmal Image
+4 Reflector Mage
+4 Thalia's Lieutenant
+3 Thalia, Guardian of Thraben
+4 Aether Vial
+4 Ancient Ziggurat
+4 Cavern of Souls
+4 Horizon Canopy
+1 Island
+1 Plains
+1 Seachrome Coast
+4 Unclaimed Territory
+[Sideboard]
+2 Dismember
+2 Gaddock Teeg
+1 Grafdigger's Cage
+2 Izzet Staticaster
+1 Kataki, War's Wage
+2 Knight of Autumn
+2 Militia Bugler
+2 Sin Collector

@@ -1,0 +1,9 @@
+Name:Tifa's Limit Break
+ManaCost:G
+Types:Instant
+K:Tiered
+A:SP$ Charm | Choices$ DBSomersault,DBMeteorStrikes,DBFinalHeaven
+SVar:DBSomersault:DB$ Pump | PrecostDesc$ Somersault | ModeCost$ 0 | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
+SVar:DBMeteorStrikes:DB$ Pump | PrecostDesc$ Meteor Strikes | ModeCost$ 2 | ValidTgts$ Creature | NumAtt$ Double | NumDef$ Double | SpellDescription$ Double target creature's power and toughness until end of turn.
+SVar:DBFinalHeaven:DB$ Pump | PrecostDesc$ Final Heaven | ModeCost$ 6 G | ValidTgts$ Creature | NumAtt$ Triple | NumDef$ Triple | SpellDescription$ Triple target creature's power and toughness until end of turn.
+Oracle:Tiered (Choose one additional cost.)\n• Somersault — {0} — Target creature gets +2/+2 until end of turn.\n• Meteor Strikes — {2} — Double target creature's power and toughness until end of turn.\n• Final Heaven — {6}{G} — Triple target creature's power and toughness until end of turn.

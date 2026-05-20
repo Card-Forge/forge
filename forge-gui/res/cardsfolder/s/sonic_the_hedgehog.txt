@@ -1,0 +1,13 @@
+Name:Sonic the Hedgehog
+ManaCost:1 U R W
+Types:Legendary Creature Hedgehog Warrior
+PT:2/4
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ Gotta Go Fast — Whenever CARDNAME attacks, put a +1/+1 counter on each creature you control with flash or haste.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+withFlash,Creature.YouCtrl+withHaste | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ DamageDoneOnce | Execute$ TrigToken | ValidTarget$ Creature.YouCtrl+withFlash,Creature.YouCtrl+withHaste | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control with flash or haste is dealt damage, create a tapped Treasure token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenTapped$ True
+SVar:HasAttackEffect:TRUE
+DeckHints:Ability$Flash|Haste
+DeckHas:Ability$Counters|Token
+Oracle:Haste\nGotta Go Fast — Whenever Sonic the Hedgehog attacks, put a +1/+1 counter on each creature you control with flash or haste.\nWhenever a creature you control with flash or haste is dealt damage, create a tapped Treasure token.

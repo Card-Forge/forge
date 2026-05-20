@@ -1,0 +1,25 @@
+Name:Zenos yae Galvus
+ManaCost:3 B B
+Types:Legendary Creature Human Noble Warrior
+PT:4/4
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ My First Friend — When CARDNAME enters, choose a creature an opponent controls. Until end of turn, creatures other than CARDNAME and the chosen creature get -2/-2.
+SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.OppCtrl | Mandatory$ True | SubAbility$ DBPumpAll
+SVar:DBPumpAll:DB$ PumpAll | NumAtt$ -2 | NumDef$ -2 | ValidCards$ Creature.Other+!ChosenCardStrict | IsCurse$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.ChosenCardStrict | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ When the chosen creature leaves the battlefield, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:My First Friend — When Zenos yae Galvus enters, choose a creature an opponent controls. Until end of turn, creatures other than Zenos yae Galvus and the chosen creature get -2/-2.\nWhen the chosen creature leaves the battlefield, transform Zenos yae Galvus.
+
+ALTERNATE
+
+Name:Shinryu, Transcendent Rival
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Dragon
+PT:8/8
+K:Flying
+R:Event$ Transform | ValidCard$ Card.Self | ReplaceWith$ DBChoose | Description$ As this creature transforms into NICKNAME, choose an opponent.
+SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent
+T:Mode$ LosesGame | ValidPlayer$ Player.Chosen | Execute$ TrigWinGame | TriggerZones$ Battlefield | TriggerDescription$ Burning Chains — When the chosen player loses the game, you win the game.
+SVar:TrigWinGame:DB$ WinsGame | Defined$ You
+Oracle:Flying\nAs this creature transforms into Shinryu, choose an opponent.\nBurning Chains — When the chosen player loses the game, you win the game.

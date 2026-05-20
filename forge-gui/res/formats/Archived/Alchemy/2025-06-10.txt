@@ -1,0 +1,7 @@
+[format]
+Name:Alchemy (FIN)
+Type:Archived
+Subtype:Arena
+Effective:2025-06-10
+Sets:ANA, ANB, WOE, YWOE, LCI, YLCI, MKM, YMKM, OTJ, BIG, YOTJ, BLB, YBLB, DSK, YDSK, FDN, DFT, YDFT, TDM, YTDM, FIN
+Banned:Monstrous Rage

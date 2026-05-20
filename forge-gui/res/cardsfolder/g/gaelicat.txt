@@ -1,0 +1,8 @@
+Name:Gaelicat
+ManaCost:2 W
+Types:Creature Cat
+PT:1/3
+K:Flying
+K:Vigilance
+S:Mode$ Continuous | IsPresent$ Artifact.YouCtrl | PresentCompare$ GE2 | Affected$ Card.Self | AddPower$ 2 | Description$ As long as you control two or more artifacts, this creature gets +2/+0.
+Oracle:Flying, vigilance\nAs long as you control two or more artifacts, this creature gets +2/+0.

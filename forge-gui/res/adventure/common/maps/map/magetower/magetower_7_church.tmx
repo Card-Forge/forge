@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="113">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="138">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -106,36 +106,37 @@
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="87" template="../../obj/enemy.tx" x="278.667" y="203.667">
+  <object id="87" template="../../obj/enemy.tx" x="276.711" y="206.275">
    <properties>
     <property name="enemy" value="Monk"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="88" template="../../obj/exit.tx" x="162.521" y="212.637" width="24.2714" height="6.20943"/>
-  <object id="89" template="../../obj/exit.tx" x="163.046" y="180.468" width="24.2714" height="6.20943"/>
-  <object id="90" template="../../obj/exit.tx" x="114.792" y="180.818" width="24.2714" height="6.20943"/>
-  <object id="91" template="../../obj/exit.tx" x="114.792" y="116.48" width="24.2714" height="6.20943"/>
-  <object id="92" template="../../obj/exit.tx" x="115.142" y="148.299" width="24.2714" height="6.20943"/>
-  <object id="93" template="../../obj/exit.tx" x="162.696" y="117.179" width="24.2714" height="6.20943"/>
-  <object id="94" template="../../obj/exit.tx" x="162.696" y="85.36" width="24.2714" height="6.20943"/>
-  <object id="95" template="../../obj/exit.tx" x="114.792" y="85.36" width="24.2714" height="6.20943"/>
-  <object id="96" template="../../obj/exit.tx" x="162.696" y="149.348" width="24.2714" height="6.20943"/>
-  <object id="97" template="../../obj/exit.tx" x="227.034" y="148.299" width="24.2714" height="6.20943"/>
-  <object id="98" template="../../obj/exit.tx" x="255.357" y="51.7924" width="15.5298" height="6.20943"/>
-  <object id="99" template="../../obj/exit.tx" x="273.714" y="84.6607" width="24.621" height="6.20943"/>
-  <object id="100" template="../../obj/exit.tx" x="274.413" y="117.179" width="24.621" height="6.20943"/>
-  <object id="101" template="../../obj/exit.tx" x="226.16" y="212.288" width="24.621" height="6.20943"/>
-  <object id="102" template="../../obj/exit.tx" x="275.113" y="148.299" width="24.621" height="6.20943"/>
-  <object id="103" template="../../obj/exit.tx" x="227.558" y="180.468" width="24.621" height="6.20943"/>
-  <object id="104" template="../../obj/exit.tx" x="226.16" y="116.83" width="24.621" height="6.20943"/>
-  <object id="105" template="../../obj/exit.tx" x="225.81" y="84.6607" width="24.621" height="6.20943"/>
-  <object id="106" template="../../obj/exit.tx" x="193.291" y="31.5119" width="29.5163" height="35.5811"/>
-  <object id="107" template="../../obj/exit.tx" x="323.016" y="98.6472" width="8.18684" height="24.0422"/>
-  <object id="108" template="../../obj/exit.tx" x="323.191" y="145.677" width="8.18684" height="24.0422"/>
-  <object id="109" template="../../obj/exit.tx" x="98.3579" y="98.8221" width="8.18684" height="24.0422"/>
-  <object id="110" template="../../obj/exit.tx" x="98.0082" y="148.474" width="8.18684" height="24.0422"/>
   <object id="111" template="../../obj/waypoint.tx" x="201.099" y="238.512"/>
   <object id="112" template="../../obj/waypoint.tx" x="201.448" y="105.641"/>
+  <object id="113" template="../../obj/collision.tx" x="226.244" y="149.837" width="24.0078" height="5.4"/>
+  <object id="114" template="../../obj/collision.tx" x="226.196" y="181.7" width="24.0078" height="5.4"/>
+  <object id="115" template="../../obj/collision.tx" x="226.996" y="213.5" width="24.0078" height="5.4"/>
+  <object id="116" template="../../obj/collision.tx" x="275.396" y="181.9" width="24.0078" height="5.4"/>
+  <object id="117" template="../../obj/collision.tx" x="274.596" y="117.3" width="24.0078" height="5.4"/>
+  <object id="118" template="../../obj/collision.tx" x="274.596" y="148.9" width="24.0078" height="5.4"/>
+  <object id="119" template="../../obj/collision.tx" x="226.596" y="116.7" width="24.0078" height="5.4"/>
+  <object id="120" template="../../obj/collision.tx" x="227.196" y="85.7" width="24.0078" height="5.4"/>
+  <object id="121" template="../../obj/collision.tx" x="274.996" y="85.3" width="24.0078" height="5.4"/>
+  <object id="122" template="../../obj/collision.tx" x="324.196" y="99.5" width="7.0078" height="23"/>
+  <object id="123" template="../../obj/collision.tx" x="323.896" y="147.7" width="7.0078" height="23"/>
+  <object id="124" template="../../obj/collision.tx" x="99.0961" y="147.9" width="7.0078" height="23"/>
+  <object id="125" template="../../obj/collision.tx" x="98.4961" y="100.3" width="7.0078" height="23"/>
+  <object id="126" template="../../obj/collision.tx" x="115.896" y="116.9" width="22.6078" height="6.6"/>
+  <object id="127" template="../../obj/collision.tx" x="115.496" y="148.7" width="22.6078" height="6.6"/>
+  <object id="128" template="../../obj/collision.tx" x="115.696" y="180.9" width="22.6078" height="6.6"/>
+  <object id="129" template="../../obj/collision.tx" x="163.296" y="212.9" width="22.6078" height="6.6"/>
+  <object id="130" template="../../obj/collision.tx" x="163.296" y="180.5" width="22.6078" height="6.6"/>
+  <object id="131" template="../../obj/collision.tx" x="163.696" y="148.5" width="22.6078" height="6.6"/>
+  <object id="132" template="../../obj/collision.tx" x="163.496" y="116.3" width="22.6078" height="6.6"/>
+  <object id="133" template="../../obj/collision.tx" x="163.296" y="84.1" width="22.6078" height="6.6"/>
+  <object id="134" template="../../obj/collision.tx" x="115.696" y="84.1" width="22.6078" height="6.6"/>
+  <object id="135" template="../../obj/collision.tx" x="256.296" y="51.1" width="16.2078" height="8.4"/>
+  <object id="136" template="../../obj/collision.tx" x="192.496" y="31.9" width="31.2078" height="36.8"/>
  </objectgroup>
 </map>

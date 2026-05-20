@@ -92,6 +92,14 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
+        if (hasParam("ExcludedOrigins")) {
+            if (ArrayUtils.contains(
+                    getParam("ExcludedOrigins").split(","), runParams.get(AbilityKey.Origin)
+            )) {
+                return false;
+            }
+        }
+
         if (hasParam("ExcludedDestinations")) {
             if (ArrayUtils.contains(
                 getParam("ExcludedDestinations").split(","), runParams.get(AbilityKey.Destination)
@@ -108,9 +116,8 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
+        Card moved = (Card) runParams.get(AbilityKey.Card);
         if (hasParam("ValidCard")) {
-            Card moved = (Card) runParams.get(AbilityKey.Card);
-
             // CR 603.10a leaves battlefield or GY look back in time
             if ("Battlefield".equals(getParam("Origin"))
                     || ("Graveyard".equals(getParam("Origin")) && !"Battlefield".equals(getParam("Destination")))) {
@@ -126,6 +133,17 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
+        if (hasParam("CheckOnTriggeredCard")) {
+            final String[] condition = getParam("CheckOnTriggeredCard").split(" ", 2);
+
+            final String comparator = condition.length < 2 ? "GE1" : condition[1];
+            final int referenceValue = AbilityUtils.calculateAmount(getHostCard(), comparator.substring(2), this);
+            final int actualValue = AbilityUtils.calculateAmount(moved, condition[0], this);
+            if (!Expressions.compare(actualValue, comparator.substring(0, 2), referenceValue)) {
+                return false;
+            }
+        }
+
         if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
             return false;
         }
@@ -136,35 +154,6 @@ public class TriggerChangesZone extends Trigger {
             }
             Boolean val = (Boolean) runParams.get(AbilityKey.Fizzle);
             if ("True".equals(getParam("Fizzle")) != val) {
-                return false;
-            }
-        }
-
-        // Check number of lands ETB this turn on triggered card's controller
-        if (hasParam("CheckOnTriggeredCard")) {
-            final String[] condition = getParam("CheckOnTriggeredCard").split(" ", 2);
-
-            final Card host = hostCard.getGame().getCardState(hostCard);
-            final String comparator = condition.length < 2 ? "GE1" : condition[1];
-            final int referenceValue = AbilityUtils.calculateAmount(host, comparator.substring(2), this);
-            final Card triggered = (Card) runParams.get(AbilityKey.Card);
-            final int actualValue = AbilityUtils.calculateAmount(triggered, condition[0], this);
-            if (!Expressions.compare(actualValue, comparator.substring(0, 2), referenceValue)) {
-                return false;
-            }
-        }
-
-        // Check amount of damage dealt to the triggered card
-        if (hasParam("DamageReceivedCondition")) {
-            final String cond = getParam("DamageReceivedCondition");
-            if (cond.length() < 3) {
-                return false;
-            }
-
-            final Card card = (Card) runParams.get(AbilityKey.CardLKI);
-            final int rightSide = AbilityUtils.calculateAmount(getHostCard(), cond.substring(2), this);
-            final boolean expr = Expressions.compare(card.getAssignedDamage(), cond, rightSide);
-            if (!expr) {
                 return false;
             }
         }

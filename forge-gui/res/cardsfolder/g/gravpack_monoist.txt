@@ -1,0 +1,9 @@
+Name:Gravpack Monoist
+ManaCost:2 B
+Types:Creature Human Scout
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ When this creature dies, create a tapped 2/2 colorless Robot artifact creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_2_2_a_robot | TokenTapped$ True
+DeckHas:Ability$Token
+Oracle:Flying\nWhen this creature dies, create a tapped 2/2 colorless Robot artifact creature token.

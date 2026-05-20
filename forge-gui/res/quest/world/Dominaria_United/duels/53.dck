@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Yemaya
+Title=Yemaya
+Icon=Yemaya.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/Hannuki_Yuya_-_Tribal_Zoo_(Modern,_#1524036).dck
+Deck Type=constructed
+
+[Main]
+1 Fury
+2 Reflector Mage
+3 Scion of Draco
+4 Territorial Kavu
+4 General Ferrous Rokiric
+4 Bloodbraid Elf
+4 Shardless Agent
+2 Lightning Helix
+4 Lightning Bolt
+3 Tribal Flames
+4 Leyline Binding
+1 Wrenn and Six
+2 Teferi, Time Raveler
+1 Savai Triome
+1 Indatha Triome
+1 Plains
+1 Temple Garden
+1 Forest
+1 Breeding Pool
+1 Flooded Strand
+1 Sacred Foundry
+1 Stomping Ground
+2 Steam Vents
+3 Arid Mesa
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Hidetsugu Consumes All
+1 Fury
+1 Orvar, the All-Form
+1 Teferi, Time Raveler
+1 Alpine Moon
+1 Chalice of the Void
+1 Damping Sphere
+2 Blossoming Calm
+2 Hushbringer
+2 Force of Vigor
+2 Rest in Peace

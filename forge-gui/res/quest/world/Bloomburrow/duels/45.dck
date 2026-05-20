@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Bilbo Baggins
+Title=Bilbo Baggins
+Icon=Bilbo Baggins.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/Hori_Masami_-_Mono_Red_(Standard,_#2192231).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Slickshot Show-Off
+4 Emberheart Challenger
+2 Heartfire Hero
+4 Hired Claw
+4 Urabrask's Forge
+4 Shock
+4 Lightning Strike
+4 Monstrous Rage
+4 Witchstalker Frenzy
+15 Mountain
+3 Mishra's Foundry
+4 Rockface Village
+[Sideboard]
+1 Mountain
+2 Abrade
+2 Torpor Orb
+1 Brotherhood's End
+2 Obliterating Bolt
+2 Lithomantic Barrage
+2 Tectonic Hazard
+3 Sunspine Lynx

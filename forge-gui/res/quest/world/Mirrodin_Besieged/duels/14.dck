@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Homer Simpson
+Title=Homer Simpson
+Icon=Homer Simpson.jpg
+Difficulty=Easy
+Description=Mirrodin_Besieged/2011_WWS_Anaheim_Grinders/MorganOrr_-_Bant_Shaman_(Standard,_#13854).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Birds of Paradise
+4 Fauna Shaman
+4 Hedron Crab
+1 Neurok Invisimancer
+1 Obstinate Baloth
+3 Ornithopter
+4 Squadron Hawk
+4 Stoneforge Mystic
+1 Trinket Mage
+4 Vengevine
+2 Bonehoard
+1 Sword of Body and Mind
+1 Sword of Feast and Famine
+3 Jace, the Mind Sculptor
+1 Celestial Colonnade
+3 Forest
+1 Glacial Fortress
+3 Island
+4 Misty Rainforest
+3 Razorverge Thicket
+1 Scalding Tarn
+3 Seachrome Coast
+1 Stirring Wildwood
+1 Sunpetal Grove
+2 Verdant Catacombs
+[Sideboard]
+1 Baneslayer Angel
+4 Flashfreeze
+2 Journey to Nowhere
+2 Kor Firewalker
+1 Linvala, Keeper of Silence
+1 Mirran Crusader
+2 Tumble Magnet
+1 Viridian Corrupter

@@ -1,0 +1,13 @@
+Name:Summon: Primal Odin
+ManaCost:4 B B
+Types:Enchantment Creature Saga Knight
+PT:5/3
+K:Chapter:3:DBDestroy,DBPump,DBDraw
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SpellDescription$ Gungnir — Destroy target creature an opponent controls.
+SVar:DBPump:DB$ Animate | Defined$ Self | Triggers$ CombatTrig | sVars$ OdinMustBeBlocked | Duration$ Permanent | SpellDescription$ Zantetsuken — This creature gains "Whenever this creature deals combat damage to a player, that player loses the game."
+SVar:CombatTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTheyLose | TriggerDescription$ Whenever this creature deals combat damage to a player, that player loses the game.
+SVar:TrigTheyLose:DB$ LosesGame | Defined$ TriggeredTarget
+SVar:OdinMustBeBlocked:SVar:MustBeBlocked:True
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBLoseLife | SpellDescription$ Hall of Sorrow — Draw two cards. Each player loses 2 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Player
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Gungnir — Destroy target creature an opponent controls.\nII — Zantetsuken — This creature gains "Whenever this creature deals combat damage to a player, that player loses the game."\nIII — Hall of Sorrow — Draw two cards. Each player loses 2 life.

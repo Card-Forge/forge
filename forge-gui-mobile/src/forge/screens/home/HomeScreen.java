@@ -6,7 +6,6 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Align;
 
-import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
@@ -28,7 +27,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
-import forge.util.Callback;
 import forge.util.Utils;
 
 public class HomeScreen extends FScreen {
@@ -115,19 +113,16 @@ public class HomeScreen extends FScreen {
         addButton(Forge.getLocalizer().getMessage("lblHelp"), e -> FThreads.invokeInEdtLater(() -> {
             try {
                 if (Forge.getDeviceAdapter().isConnectedToInternet()) {
-                    FOptionPane.showOptionDialog("Join Discord option will open the invite link to join Forge Discord server. Forge Support option will open the Forge Support Channel.", "Choose option", FOptionPane.INFORMATION_ICON, ImmutableList.of("Join Discord", "Forge Support"), -1, new Callback<Integer>() {
-                        @Override
-                        public void run(Integer result) {
-                            switch (result) {
-                                case 0:
-                                    Gdx.net.openURI("https://discord.gg/3v9JCVr");
-                                    break;
-                                case 1:
-                                    Gdx.net.openURI("https://discord.com/channels/267367946135928833/692000787856883752");
-                                    break;
-                                default:
-                                    break;
-                            }
+                    FOptionPane.showOptionDialog("Join Discord option will open the invite link to join Forge Discord server. Forge Support option will open the Forge Support Channel.", "Choose option", FOptionPane.INFORMATION_ICON, List.of("Join Discord", "Forge Support"), -1, result -> {
+                        switch (result) {
+                            case 0:
+                                Gdx.net.openURI("https://discord.gg/3v9JCVr");
+                                break;
+                            case 1:
+                                Gdx.net.openURI("https://discord.com/channels/267367946135928833/692000787856883752");
+                                break;
+                            default:
+                                break;
                         }
                     });
                 } else {

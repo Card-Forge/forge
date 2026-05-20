@@ -1,0 +1,22 @@
+[metadata]
+Name=Metallic Sliver
+[Main]
+4 Tundra|LEA
+4 Adarkar Wastes|ICE
+4 Flooded Strand|ONS
+6 Island|2ED
+6 Plains|2ED
+4 Coat of Arms|EXO
+4 Plated Sliver|LGN
+4 Talon Sliver|TMP
+4 Essence Sliver|LGN
+4 Ward Sliver|LGN
+4 Winged Sliver|TMP
+4 Synapse Sliver|LGN
+4 Crystalline Sliver|STH
+4 Shifting Sliver|LGN
+
+[StartInBattle_Reference]
+1 Metallic Sliver|TMP
+1 Metallic Sliver|TMP
+1 Metallic Sliver|TMP

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Blackbeard
+Title=Blackbeard
+Icon=Blackbeard.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/ccr_grindcast_-_Heliod_(Modern,_#1749331).dck
+Deck Type=constructed
+
+[Main]
+4 Esper Sentinel
+4 Giver of Runes
+1 Haywire Mite
+4 Heliod, Sun-Crowned
+4 Ranger-Captain of Eos
+4 Solitude
+4 Walking Ballista
+3 Agatha's Soul Cauldron
+4 The One Ring
+4 Leyline Binding
+1 Arid Mesa
+4 Flooded Strand
+3 Idyllic Grange
+1 Indatha Triome
+4 Marsh Flats
+1 Raugrin Triome
+5 Snow-Covered Plains
+1 Temple Garden
+4 Windswept Heath
+[Sideboard]
+1 Burrenton Forge-Tender
+1 Giant Killer
+2 Haywire Mite
+3 On Thin Ice
+4 Reprieve
+4 Sanctifier en-Vec

@@ -2,21 +2,15 @@ package forge.game.event;
 
 import forge.card.CardStateName;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.player.Player;
-import forge.util.CardTranslation;
+import forge.game.player.PlayerView;
 import forge.util.Lang;
 
-public class GameEventDoorChanged extends GameEvent {
-    public final Player activatingPlayer;
-    public final Card card;
-    public final CardStateName state;
-    public boolean unlock;
+public record GameEventDoorChanged(PlayerView activatingPlayer, CardView card, CardStateName state, boolean unlock) implements GameEvent {
 
-    public GameEventDoorChanged(Player player, Card c, CardStateName state, boolean unlock) {
-        activatingPlayer = player;
-        card = c;
-        this.state = state;
-        this.unlock = unlock;
+    public GameEventDoorChanged(Player activatingPlayer, Card card, CardStateName state, boolean unlock) {
+        this(PlayerView.get(activatingPlayer), CardView.get(card), state, unlock);
     }
 
     @Override
@@ -26,7 +20,7 @@ public class GameEventDoorChanged extends GameEvent {
 
     @Override
     public String toString() {
-        String doorName = CardTranslation.getTranslatedName(card.getState(state));
+        String doorName = card.getCurrentState().getName();
 
         StringBuilder sb = new StringBuilder();
         sb.append(activatingPlayer);

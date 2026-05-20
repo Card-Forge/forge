@@ -372,9 +372,9 @@ ScryfallCode=BLC
 7 w_1_1_human_soldier @Eric Deschamps
 8 w_1_1_soldier @Jakub Kasper
 9 w_1_1_spirit_flying @Jason A. Engle
-10 u_x_x_illusion @Unknown
 11 u_2_2_bird_flying @Tuan Duong Chu
 12 u_1_1_faerie_flying @Irina Nordsol
+13 u_x_x_illusion @Jason A. Engle
 14 u_8_8_octopus @Craig J Spearing
 15 u_2_2_shapeshifter_changeling @Filip Burburan
 16 u_3_3_shark @Edgar Sánchez Hidalgo
@@ -392,7 +392,7 @@ ScryfallCode=BLC
 30 g_1_1_saproling @Brad Rigney
 31 g_1_2_spider_reach @Sam Rowan
 32 g_2_2_wolf @Jakub Kasper
-33 gw_1_1_citizen @Unknown
+33 gw_1_1_citizen @Maria Poliakova
 34 bg_1_1_pest_lifegain @Ilse Gort
 35 bg_2_2_wolf_garruk @David Gaillet
 36 c_a_blood_draw @Miranda Meeks
@@ -401,6 +401,8 @@ ScryfallCode=BLC
 39 c_1_1_a_thopter_flying @Svetlin Velinov
 
 [other]
-offspring_agate_instigator
-offspring_prosperous_bandit
-offspring_steelburr_champion
+1 copy @David Palumbo
+10 offspring_steelburr_champion @Josiah "Jo" Cameron
+20 offspring_agate_instigator @Quintin Gleim
+23 offspring_prosperous_bandit @Mark Behm
+40 blessing @Yeong-Hao Han

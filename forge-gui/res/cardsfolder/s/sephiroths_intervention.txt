@@ -1,0 +1,6 @@
+Name:Sephiroth's Intervention
+ManaCost:3 B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature. You gain 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+Oracle:Destroy target creature. You gain 2 life.

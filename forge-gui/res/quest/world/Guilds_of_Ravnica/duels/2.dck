@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Sisters of Stone Death
+Title=Sisters of Stone Death
+Icon=Sisters of Stone Death.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Andrew_Taylor_-_Boros_Angels_(Standard,_#764945).dck
+Deck Type=constructed
+
+[Main]
+3 Aurelia, Exemplar of Justice
+4 Knight of Grace
+3 Lyra Dawnbringer
+4 Martyr of Dusk
+4 Rekindling Phoenix
+3 Resplendent Angel
+2 Tajic, Legion's Edge
+1 Justice Strike
+3 Deafening Clarion
+2 Lava Coil
+2 Conclave Tribunal
+4 History of Benalia
+2 Boros Guildgate
+4 Clifftop Retreat
+6 Mountain
+9 Plains
+4 Sacred Foundry
+[Sideboard]
+2 Banefire
+1 Conclave Tribunal
+1 Invoke the Divine
+2 Justice Strike
+3 Karn, Scion of Urza
+1 Lava Coil
+3 Settle the Wreckage
+2 Shivan Fire

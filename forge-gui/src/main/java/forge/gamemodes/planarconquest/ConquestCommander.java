@@ -36,7 +36,7 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
         }
         record = record0;
 
-        //determine origin of commander
+        // Determine origin of commander
         ConquestPlane originPlane0 = null;
         String originRegionName0 = null;
         for (ConquestPlane plane : FModel.getPlanes()) {
@@ -68,8 +68,18 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
         return card.getName();
     }
 
+    @Override
+    public String getDisplayName() {
+        return card.getDisplayName();
+    }
+
+    @Override
+    public boolean hasFlavorName() {
+        return card.hasFlavorName();
+    }
+
     public String getPlayerName() {
-        String name = card.getName();
+        String name = card.getDisplayName();
         int idx = name.indexOf(',');
         if (idx != -1) { //trim everything after the comma
             name = name.substring(0, idx);

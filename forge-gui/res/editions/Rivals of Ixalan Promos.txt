@@ -8,6 +8,7 @@ ScryfallCode=PRIX
 [cards]
 53 U Silvergill Adept @Slawomir Maniak
 94 R Brass's Bounty @Dimitar Marinski
+100★ Etali, Primal Storm @Raymond Swanland
 130 R Ghalta, Primal Hunger @Johann Bodin
 177 R Captain's Hook @Kev Walker
 186 C Evolving Wilds @Daniel Ljunggren

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Chief_Wiggum
+Title=Chief_Wiggum
+Icon=Chief_Wiggum.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Midnight_Hunt/Adam_Bruce_-_Azorius_Tempo_(Standard,_#1218534).dck
+Deck Type=constructed
+
+[Main]
+2 Reidane, God of the Worthy
+2 Legion Angel
+2 Malevolent Hermit
+3 Usher of the Fallen
+3 Brutal Cathar
+4 Luminarch Aspirant
+4 Elite Spellbinder
+4 Intrepid Adversary
+4 Spectral Adversary
+1 The Celestus
+2 Concerted Defense
+2 Jwari Disruption
+4 Fading Hope
+2 Deserted Beach
+3 Cave of the Frost Dragon
+4 Hengegate Pathway
+6 Plains
+9 Island
+[Sideboard]
+1 Devastating Mastery
+1 Brutal Cathar
+1 Alrund's Epiphany
+1 Concerted Defense
+2 Fateful Absence
+2 Loyal Warhound
+2 Malevolent Hermit
+2 Legion Angel
+3 Portable Hole

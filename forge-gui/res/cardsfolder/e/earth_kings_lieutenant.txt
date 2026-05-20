@@ -1,0 +1,12 @@
+Name:Earth King's Lieutenant
+ManaCost:G W
+Types:Creature Human Soldier Ally
+PT:1/1
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When this creature enters, put a +1/+1 counter on each other Ally creature you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.Ally+Other+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Ally you control enters, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Ally
+DeckHints:Type$Ally
+Oracle:Trample\nWhen this creature enters, put a +1/+1 counter on each other Ally creature you control.\nWhenever another Ally you control enters, put a +1/+1 counter on this creature.

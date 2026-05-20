@@ -18,6 +18,7 @@
 package forge.gamemodes.limited;
 
 import forge.card.CardEdition;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.item.PaperCard;
@@ -63,6 +64,8 @@ public class CustomLimited extends DeckBase {
 
     /** The Num packs. */
     private int numPacks = 3;
+
+    private int numPlayers = 8;
 
     private transient ItemPool<PaperCard> cardPool;
 
@@ -115,6 +118,7 @@ public class CustomLimited extends DeckBase {
         cd.landSetCode = data.get("LandSetCode");
         cd.numPacks = data.getInt("NumPacks");
         cd.singleton = data.getBoolean("Singleton");
+        cd.numPlayers = data.getInt("NumPlayers");
         cd.customRankingsFile = data.get("CustomRankings", "rankings_cubecobra.txt");
         final Deck deckCube = cubes.get(data.get("DeckFile"));
         cd.cardPool = deckCube == null ? ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class) : deckCube.getMain();
@@ -142,6 +146,25 @@ public class CustomLimited extends DeckBase {
     }
 
     /**
+     * Gets the num players.
+     * 
+     * @return the numPlayers
+     */
+    public int getNumPlayers() {
+        return this.numPlayers;
+    }
+
+    /**
+     * Sets the num players.
+     * 
+     * @param numPlayersIn
+     *            the numPlayers to set
+     */
+    public void setNumPlayers(final int numPlayersIn) {
+        this.numPlayers = numPlayersIn;
+    }
+
+    /**
      * Gets the land set code.
      * 
      * @return the landSetCode
@@ -158,6 +181,14 @@ public class CustomLimited extends DeckBase {
     public ItemPool<PaperCard> getCardPool() {
         return this.cardPool;
     }
+
+    /**
+     * Sets the card pool.
+     *
+     * @param cardPoolIn
+     *            the cardPool to set
+     */
+    public void setCardPool(CardPool cardPoolIn) { this.cardPool = cardPoolIn; }
 
     /*
      * (non-Javadoc)
@@ -181,8 +212,18 @@ public class CustomLimited extends DeckBase {
         return singleton;
     }
 
+    public void setSingleton(boolean bIn) { this.singleton = bIn; }
+
     public String getCustomRankingsFileName() {
         return customRankingsFile;
+    }
+
+    public void setCustomRankingsFile(String fileName) {
+        if (fileName == null) {
+            // Default to a known fileName if none is specified
+            fileName = "rankings_cubecobra.txt";
+        }
+        this.customRankingsFile = fileName;
     }
 
     @Override

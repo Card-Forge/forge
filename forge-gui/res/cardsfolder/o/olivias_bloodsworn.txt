@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Vampire Soldier
 PT:2/1
 K:Flying
-K:CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 A:AB$ Pump | Cost$ R | ValidTgts$ Vampire | TgtPrompt$ Select target Vampire | KW$ Haste | SpellDescription$ Target Vampire gains haste until end of turn.
 SVar:PlayMain1:ALWAYS
 SVar:BuffedBy:Creature.Vampire

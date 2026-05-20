@@ -5,4 +5,4 @@ PT:4/5
 A:AB$ Effect | Cost$ 2 | StaticAbilities$ MayLookFaceDown | SpellDescription$ Until end of turn, you may look at face-down creatures you don't control any time.
 SVar:MayLookFaceDown:Mode$ Continuous | Affected$ Creature.faceDown+YouDontCtrl | AffectedZone$ Battlefield | MayLookAt$ You | Description$ You may look at face-down creatures you don't control any time.
 K:Disguise:5
-Oracle:{2}: Until end of turn, you may look at face-down creatures you don't control any time.
+Oracle:{2}: Until end of turn, you may look at face-down creatures you don't control any time.\nDisguise {5} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)

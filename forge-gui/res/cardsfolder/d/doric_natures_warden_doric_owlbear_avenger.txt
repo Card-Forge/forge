@@ -1,5 +1,5 @@
 Name:Doric, Nature's Warden
-AltName:Casal, Lurkwood Pathfinder
+Variant:UniversesWithin:FlavorName:Casal, Lurkwood Pathfinder
 ManaCost:3 G
 Types:Legendary Creature Tiefling Druid
 PT:3/3
@@ -15,7 +15,7 @@ Oracle:Vigilance\nWhen Doric, Nature's Warden enters, search your library for a 
 ALTERNATE
 
 Name:Doric, Owlbear Avenger
-AltName:Casal, Pathbreaker Owlbear
+Variant:UniversesWithin:FlavorName:Casal, Pathbreaker Owlbear
 ManaCost:no cost
 Colors:green
 Types:Legendary Creature Bird Bear

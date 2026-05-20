@@ -1,0 +1,9 @@
+Name:Lulu, Stern Guardian
+ManaCost:2 U
+Types:Legendary Creature Human Wizard
+PT:2/3
+T:Mode$ AttackersDeclared | AttackingPlayer$ Player.Opponent | AttackedTarget$ You | TriggerZones$ Battlefield | Execute$ DBPutCounter | TriggerDescription$ Whenever an opponent attacks you, choose target creature attacking you. Put a stun counter on that creature.
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.attackingYou | TgtPrompt$ Select target creature attacking you | CounterType$ STUN | CounterNum$ 1
+A:AB$ Proliferate | Cost$ 3 U | SpellDescription$ Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+DeckHas:Ability$Counters
+Oracle:Whenever an opponent attacks you, choose target creature attacking you. Put a stun counter on that creature.\n{3}{U}: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

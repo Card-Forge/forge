@@ -2,8 +2,8 @@ Name:Rofellos's Gift
 ManaCost:G
 Types:Sorcery
 A:SP$ Reveal | RevealValid$ Card.Green+YouCtrl | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBChangeZone | SpellDescription$ Reveal any number of green cards in your hand. Return an enchantment card from your graveyard to your hand for each card revealed this way.
-SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Card.Enchantment+YouOwn | ChangeNum$ X | Origin$ Graveyard | Destination$ Hand | SubAbility$ Cleanup
-SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Card.Enchantment+YouOwn | ChangeNum$ X | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 AI:RemoveDeck:All
 Oracle:Reveal any number of green cards in your hand. Return an enchantment card from your graveyard to your hand for each card revealed this way.

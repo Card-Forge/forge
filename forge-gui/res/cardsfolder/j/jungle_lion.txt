@@ -2,5 +2,5 @@ Name:Jungle Lion
 ManaCost:G
 Types:Creature Cat
 PT:2/1
-K:CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 Oracle:Jungle Lion can't block.

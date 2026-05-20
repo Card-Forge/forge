@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Crows in the Field
+Title=Crows in the Field
+Icon=Crows in the Field.jpg
+Difficulty=Medium
+Description=./Standard/Edge_of_Eternities/Adrian_Bostian_-_Mono-Red_Aggro_(Standard,_#2675709).dck
+Deck Type=constructed
+
+[Main]
+4 Burnout Bashtronaut
+4 Emberheart Challenger
+4 Hired Claw
+4 Nova Hellkite
+4 Razorkin Needlehead
+4 Screaming Nemesis
+4 Burst Lightning
+3 Witchstalker Frenzy
+2 Lightning Strike
+1 Shock
+2 Obliterating Bolt
+18 Mountain
+4 Rockface Village
+2 Soulstone Sanctuary
+[Sideboard]
+4 Sunspine Lynx
+3 Stingerback Terror
+2 Cut Propulsion
+2 Shock
+2 Soul-Guide Lantern
+2 Vengeful Possession

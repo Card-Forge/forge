@@ -1,0 +1,6 @@
+Name:Louisoix's Sacrifice
+ManaCost:U
+Types:Instant
+K:AlternateAdditionalCost:Sac<1/Creature.Legendary/legendary creature>:2
+A:SP$ Counter | TargetType$ Activated,Triggered,Spell.nonCreature | TgtPrompt$ Select target activated ability, triggered ability, or noncreature spell | ValidTgts$ Card,Emblem | SpellDescription$ Counter target activated ability, triggered ability, or noncreature spell.
+Oracle:As an additional cost to cast this spell, sacrifice a legendary creature or pay {2}.\nCounter target activated ability, triggered ability, or noncreature spell.

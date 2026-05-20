@@ -8,7 +8,7 @@
  <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
  <tileset firstgid="16001" source="../../tileset/FarmFood.tsx"/>
  <tileset firstgid="20097" source="../../tileset/main-nocollide.tsx"/>
- <layer id="27" name="Collission" width="31" height="22">
+ <layer id="27" name="Collision" width="31" height="22">
   <data encoding="base64" compression="zlib">
    eJxjYBgFAwn4BFAxNYAbJ3Y80gAuf9MizPHZRw9AjN208jep7qA3oKW/B5tfkQE94pteQFsTN0YH1PY3zJ7nnAiMy25agdUcCIwLUNPfyOmalnUIITOJsRubvylxK676cyDy+mAuX+gJAOSYFiY=
   </data>
@@ -23,7 +23,7 @@
    eJwz4WNgMKERJgRoZS8xboDJM4oyMDDhwXZi1MXMogi7FwLZIZKoGATeS9IGz6fA7r8i+Pm0tBukfrsEAoP46Goa+RkYmpBwMz/97JYXYGBQQMKKArjtRk9fzFjMo5XdMP8iy+Oy2wqaXmHutBej3G5kvZSm871Au/Yh4f1U8je18xh6fM+jo93o6ZwSfxMqJynJY4QwyLwFPAi8SA8V09LfIPPQ7UPGC5HsnkPl+AYBYu0eSH/TIr4Hi7/dHVDjAdluWzHM+LbGIkYtDCqDiWnzCAtgx/Rob9HKbgBreqTl
   </data>
  </layer>
- <layer id="24" name="CullterBis" width="31" height="22">
+ <layer id="24" name="ClutterBis" width="31" height="22">
   <data encoding="base64" compression="zlib">
    eJxjYBgFpID/ItQ174IwA8NBTggGsfGB+aLUtZsUMJB2kwKa+CEYHyAlzEkBiZIMDEmS1DOPFPAfZK8UYXUjNa3B/D0QdqMDJlEERuZbi2HKI2NmEt1GzXQ+B2j3Iz3KzACBQxIQTCybHIDL31zA/MEtRTwbHRwB+v8oEB8jIxyUJSCYWDY6YNFnYGAFYjZ93Hbg8jel4UkJoDTMiQG4/I0vPPGBdcAwTreHYGQQIki+G0cBZQAA1402TA==
   </data>

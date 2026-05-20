@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import forge.game.GameObject;
 import forge.game.PlanarDice;
@@ -47,6 +48,12 @@ public class ReplaceEffect extends SpellAbilityEffect {
             Map<Player, Integer> m = (Map<Player, Integer>) sa.getReplacingObject(varName);
             for (Player key : AbilityUtils.getDefinedPlayers(card, sa.getParam("VarKey"), sa)) {
                 m.put(key, m.getOrDefault(key, 0) + AbilityUtils.calculateAmount(card, varValue, sa));
+            }
+        } else if ("CardSet".equals(type)) {
+            Set<Card> cards = (Set<Card>) params.get(varName);
+            List<Card> list = AbilityUtils.getDefinedCards(card, varValue, sa);
+            if (!list.isEmpty()) {
+                cards.add(list.get(0));
             }
         } else if (varName != null) {
             params.put(varName, AbilityUtils.calculateAmount(card, varValue, sa));

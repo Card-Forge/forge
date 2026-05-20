@@ -1,0 +1,7 @@
+Name:The Blackjack
+ManaCost:no cost
+Types:Legendary Artifact Vehicle
+PT:3/3
+K:Flying
+K:Crew:2
+Oracle:Flying, crew 2

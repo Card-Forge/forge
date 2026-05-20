@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=En Sabah Nur
+Title=En Sabah Nur
+Icon=En Sabah Nur.jpg
+Difficulty=Medium
+Description=Shadows_over_Innistrad/WMCQ_Odense_Denmark/Anders_Gotfredse..._-_Bant_Company_Humans_(Standard,_#627658).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Duskwatch Recruiter
+3 Eldrazi Displacer
+4 Lambholt Pacifist
+4 Reflector Mage
+4 Thalia's Lieutenant
+3 Thraben Inspector
+4 Tireless Tracker
+4 Collected Company
+4 Dromoka's Command
+1 Ojutai's Command
+3 Canopy Vista
+4 Evolving Wilds
+2 Forest
+4 Fortified Village
+1 Island
+5 Plains
+1 Prairie Stream
+1 Wastes
+4 Yavimaya Coast
+[Sideboard]
+2 Archangel Avacyn
+2 Declaration in Stone
+2 Den Protector
+3 Gideon, Ally of Zendikar
+1 Gryff's Boon
+3 Negate
+2 Tragic Arrogance

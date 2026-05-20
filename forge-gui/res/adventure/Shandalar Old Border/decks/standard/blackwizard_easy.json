@@ -1,0 +1,30 @@
+{
+  "name": "Black bad",
+  "mainDeck": [
+    {
+      "count": 34,
+      "colors": [
+        "Black"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 4,
+      "colors": [
+        "Black"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Swamp|2ED"
+    }
+  ]
+}

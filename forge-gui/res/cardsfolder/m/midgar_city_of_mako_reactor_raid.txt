@@ -1,0 +1,19 @@
+Name:Midgar, City of Mako
+ManaCost:no cost
+Types:Land Town
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+AlternateMode:Adventure
+Oracle:This land enters tapped.\n{T}: Add {B}.
+
+ALTERNATE
+
+Name:Reactor Raid
+ManaCost:2 B
+Types:Sorcery Adventure
+A:SP$ Sacrifice | Defined$ You | SacValid$ Artifact,Creature | Optional$ True | RememberSacrificed$ True | SubAbility$ DBDraw | SpellDescription$ You may sacrifice an artifact or creature. If you do, draw two cards.
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | ConditionDescription$ If they do, | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+Oracle:You may sacrifice an artifact or creature. If you do, draw two cards.

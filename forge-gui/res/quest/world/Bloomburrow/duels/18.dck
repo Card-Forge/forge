@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Marge Simpson
+Title=Marge Simpson
+Icon=Marge Simpson.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/Inoue_Takumi_-_Reanimator_(Standard,_#2171312).dck
+Deck Type=constructed
+
+[Main]
+2 Fallaji Archaeologist
+3 Atraxa, Grand Unifier
+4 Picklock Prankster
+1 Conspiracy Unraveler
+2 Harvester of Misery
+2 Lumra, Bellow of the Woods
+4 Bitter Triumph
+1 Breach the Multiverse
+4 Squirming Emergence
+4 Wail of the Forgotten
+4 Founding the Third Path
+1 One with the Multiverse
+2 Invasion of Tolvada
+2 Spelunking
+2 Jace, the Perfected Mind
+2 Plains
+2 Island
+2 Swamp
+2 Forest
+2 Botanical Sanctum
+2 Llanowar Wastes
+2 Yavimaya Coast
+2 Underground River
+2 Darkslick Shores
+4 Fabled Passage
+3 Restless Reef
+1 Hedge Maze
+3 Undercity Sewers
+1 Underground Mortuary
+[Sideboard]
+2 Negate
+2 Duress
+1 Go for the Throat
+1 Tear Asunder
+2 Nissa, Ascended Animist
+1 Tranquil Frillback
+1 Aclazotz, Deepest Betrayal
+2 Kellan, Inquisitive Prodigy
+2 Bonny Pall, Clearcutter
+1 Harvester of Misery

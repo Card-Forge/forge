@@ -177,9 +177,3 @@ ScryfallCode=5DN
 163 R Vedalken Orrery @John Avon
 164 R Vedalken Shackles @Mark Zug
 165 C Wayfarer's Bauble @Darrell Riche
-
-[tokens]
-kaldra
-c_2_2_pincher
-g_3_3_beast
-g_1_1_insect

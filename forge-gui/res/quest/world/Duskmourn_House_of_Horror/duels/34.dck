@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Hameln
+Title=Hameln
+Icon=Hameln.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/Arkany1_-_Jeskai_Convoke_(Standard,_#2282530).dck
+Deck Type=constructed
+
+[Main]
+4 Imodane's Recruiter
+4 Novice Inspector
+4 Resolute Reinforcements
+4 Knight-Errant of Eos
+4 Spyglass Siren
+2 Clockwork Percussionist
+4 Warden of the Inner Sky
+4 Gleeful Demolition
+4 Sheltered by Ghosts
+4 Case of the Gateway Express
+3 Adarkar Wastes
+4 Battlefield Forge
+2 Shivan Reef
+1 Plains
+4 Seachrome Coast
+4 Inspiring Vantage
+4 Spirebluff Canal
+[Sideboard]
+2 Destroy Evil
+3 Protect the Negotiators
+4 Torch the Tower
+2 Lithomantic Barrage
+2 Soul Partition
+2 Disdainful Stroke

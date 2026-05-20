@@ -1,0 +1,8 @@
+Name:Xande, Dark Mage
+ManaCost:2 U B
+Types:Legendary Creature Human Wizard
+PT:3/3
+K:Menace
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ NICKNAME gets +1/+1 for each noncreature, nonland card in your graveyard.
+SVar:X:Count$ValidGraveyard Card.nonCreature+nonLand+YouOwn
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nXande gets +1/+1 for each noncreature, nonland card in your graveyard.

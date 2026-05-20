@@ -1,0 +1,6 @@
+Name:Frantic Confrontation
+ManaCost:X R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +X | KW$ First Strike & Trample | SpellDescription$ Target creature you control gets +X/+0 and gains first strike and trample until end of turn.
+SVar:X:Count$xPaid
+Oracle:Target creature you control gets +X/+0 and gains first strike and trample until end of turn.

@@ -1,0 +1,11 @@
+Name:Fang, Fearless l'Cie
+ManaCost:2 B
+Types:Legendary Creature Human Warrior
+PT:2/3
+T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | ActivationLimit$ 1 | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever one or more cards leave your graveyard, you draw a card and you lose 1 life. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+DeckHints:Ability$Graveyard & Name$Vanille, Cheerful l'Cie
+MeldPair:Vanille, Cheerful l'Cie
+AlternateMode:Meld
+Oracle:Whenever one or more cards leave your graveyard, you draw a card and you lose 1 life. This ability triggers only once each turn.\n(Melds with Vanille, Cheerful l'Cie.)

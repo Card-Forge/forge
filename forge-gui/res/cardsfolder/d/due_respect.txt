@@ -4,5 +4,5 @@ Types:Instant
 A:SP$ Effect | ReplacementEffects$ RepETB | SubAbility$ DBDraw | AILogic$ BeginningOfOppTurn | SpellDescription$ Permanents enter tapped this turn.
 SVar:RepETB:Event$ Moved | ValidCard$ Permanent | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | Description$ Permanents enter tapped this turn.
 SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 Oracle:Permanents enter tapped this turn.\nDraw a card.

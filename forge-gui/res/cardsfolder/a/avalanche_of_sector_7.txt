@@ -1,0 +1,10 @@
+Name:Avalanche of Sector 7
+ManaCost:2 R
+Types:Legendary Creature Human Rebel
+PT:*/3
+K:Menace
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of artifacts your opponents control.
+T:Mode$ AbilityCast | ValidCard$ Artifact.inZoneBattlefield | ValidSA$ Activated.OppCtrl | ValidSAonCard$ Activated.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever an opponent activates an ability of an artifact they control, CARDNAME deals 1 damage to that player.
+SVar:TrigDmg:DB$ DealDamage | NumDmg$ 1 | Defined$ TriggeredActivator
+SVar:X:Count$Valid Artifact.OppCtrl
+Oracle:Menace\nAvalanche of Sector 7's power is equal to the number of artifacts your opponents control.\nWhenever an opponent activates an ability of an artifact they control, Avalanche of Sector 7 deals 1 damage to that player.

@@ -1,0 +1,113 @@
+rhino.png
+size: 384,86
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar 
+  xy: 352, 32
+  size: 16, 16
+Idle 
+  xy: 4, 5
+  size: 22, 16
+Idle 
+  xy: 36, 5
+  size: 22, 16
+Idle 
+  xy: 68, 5
+  size: 22, 16
+Idle 
+  xy: 100,5
+  size: 22, 16
+Idle 
+  xy: 132, 5
+  size: 22, 16
+Idle 
+  xy: 164, 5
+  size: 22, 16
+Idle 
+  xy: 196, 5
+  size: 22, 16
+Idle 
+  xy: 228, 5
+  size: 22, 16
+Idle 
+  xy: 260, 5
+  size: 22, 16
+Idle 
+  xy: 292, 5
+  size: 22, 16
+Idle 
+  xy: 324, 5
+  size: 22, 16
+Idle 
+  xy: 356, 5
+  size: 22, 16
+Walk
+  xy: 4, 25
+  size: 22, 16
+Walk
+  xy: 36, 25
+  size: 22, 16
+Walk
+  xy: 68, 25
+  size: 22, 16
+Walk
+  xy: 100, 25
+  size: 22, 16
+Walk
+  xy: 132, 25
+  size: 22, 16
+Walk
+  xy: 164, 25
+  size: 22, 16
+Attack
+  xy: 4, 48
+  size: 25, 16
+Attack
+  xy: 36, 48
+  size: 25, 16
+Attack
+  xy: 68, 48
+  size: 25, 16
+Attack
+  xy: 100, 48
+  size: 25, 16
+Attack
+  xy: 132, 48
+  size: 25, 16
+Death
+  xy: 4, 70
+  size: 24, 16
+Death
+  xy: 36, 70
+  size: 24, 16
+Death
+  xy: 68, 70
+  size: 24, 16
+Death
+  xy: 100, 70
+  size: 24, 16
+Death
+  xy: 132, 70
+  size: 24, 16
+Death
+  xy: 164, 70
+  size: 24, 16
+Death
+  xy: 196, 70
+  size: 24, 16
+Death
+  xy: 228, 70
+  size: 24, 16
+Death
+  xy: 260, 70
+  size: 24, 16
+Death
+  xy: 292, 70
+  size: 24, 16
+Death
+  xy: 324, 70
+  size: 24, 16
+Death
+  xy: 356, 70
+  size: 24, 16

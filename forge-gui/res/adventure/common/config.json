@@ -3,7 +3,8 @@
   "screenHeight": 270,
   "skin": "skin/ui_skin.json",
   "playerBaseSpeed": 32,
-  "minDeckSize": 40,         
+  "minDeckSize": 40,
+  "maxNumberOfDecks": 20,
   "colorIds":["W","U","B","R","G"],  
   "colorIdNames":["tr(lblWhite) [+W]","tr(lblBlue) [+U]","tr(lblBlack) [+B]","tr(lblRed) [+R]","tr(lblGreen) [+G]"],
   "restrictedCards": [
@@ -68,7 +69,6 @@
     "Anax and Cymede & Kynaios and Tiro",
     "Call from the Grave",
     "Mise"
-    
   ],
   "restrictedEditions": [
     "HTR",
@@ -86,15 +86,26 @@
     "UND",
     "PUST",
     "DA1",
-    "UST",
     "UNF"
   ],
+  "restrictedEvents": [
+    "LEA",
+    "LEB",
+    "2ED",
+    "30A",
+    "CNS",
+    "CN2",
+    "CMR",
+    "CLB",
+    "CMM"
+  ],
+  "usePriceListPrices": true,
   "difficulties": [
     {
       "name": "Easy",
       "startingLife": 16,
       "startingShards": 5,
-      "staringMoney": 500,
+      "startingMoney": 500,
       "enemyLifeFactor": 0.8,
       "spawnRank": 0,          
       "goldLoss": 0.02,          
@@ -123,6 +134,13 @@
         "R":"decks/starter/pile_red_e.json",
         "G":"decks/starter/pile_green_e.json"
       },
+      "commanderDecks": {
+        "W":"decks/starter/commander/white_01.dck",
+        "B":"decks/starter/commander/black_01.dck",
+        "U":"decks/starter/commander/blue_01.dck",
+        "R":"decks/starter/commander/red_01.dck",
+        "G":"decks/starter/commander/green_01.dck"
+      },
       "startItems": [
         "Manasight Amulet",
         "Leather Boots"
@@ -131,7 +149,7 @@
       "name": "Normal",
       "startingLife": 12,
       "startingShards": 2,
-      "staringMoney": 250,
+      "startingMoney": 250,
       "startingDifficulty": true,
       "enemyLifeFactor": 1.0,
       "rewardMaxFactor" : 1.0,
@@ -161,6 +179,13 @@
         "R":"decks/starter/pile_red_n.json",
         "G":"decks/starter/pile_green_n.json"
       },
+      "commanderDecks": {
+        "W":"decks/starter/commander/white_01.dck",
+        "B":"decks/starter/commander/black_01.dck",
+        "U":"decks/starter/commander/blue_01.dck",
+        "R":"decks/starter/commander/red_01.dck",
+        "G":"decks/starter/commander/green_01.dck"
+      },
       "startItems": [
         "Leather Boots"
       ]
@@ -168,7 +193,7 @@
       "name": "Hard",
       "startingLife": 8,
       "startingShards": 0,
-      "staringMoney": 125,
+      "startingMoney": 125,
       "enemyLifeFactor": 1.5,
       "rewardMaxFactor" : 0.5,
       "spawnRank": 2,         
@@ -196,15 +221,22 @@
         "U":"decks/starter/pile_blue_h.json",
         "R":"decks/starter/pile_red_h.json",
         "G":"decks/starter/pile_green_h.json"
+      },
+      "commanderDecks": {
+        "W":"decks/starter/commander/white_01.dck",
+        "B":"decks/starter/commander/black_01.dck",
+        "U":"decks/starter/commander/blue_01.dck",
+        "R":"decks/starter/commander/red_01.dck",
+        "G":"decks/starter/commander/green_01.dck"
       }
     },{
       "name": "Insane",
       "startingLife": 7,
       "startingShards": 0,
-      "staringMoney": 0,
+      "startingMoney": 0,
       "enemyLifeFactor": 2.5,
       "rewardMaxFactor" : 0.0,
-      "spawnRank": 2,
+      "spawnRank": 3,
       "goldLoss": 0.5,
       "lifeLoss": 0.3,
       "sellFactor": 0.05,
@@ -229,30 +261,39 @@
         "U":"decks/starter/pile_blue_h.json",
         "R":"decks/starter/pile_red_h.json",
         "G":"decks/starter/pile_green_h.json"
+      },
+      "commanderDecks": {
+        "W":"decks/starter/commander/white_01.dck",
+        "B":"decks/starter/commander/black_01.dck",
+        "U":"decks/starter/commander/blue_01.dck",
+        "R":"decks/starter/commander/red_01.dck",
+        "G":"decks/starter/commander/green_01.dck"
       }
     }
   ],
   "starterEditions": [
-	"JMP",
-	"DMU",
-	"BRO",
-	"J22",
-	"ONE",
-	"MOM",
-	"LTR",
-	"J25",
-	"(All)"
+      "JMP",
+      "DMU",
+      "BRO",
+      "J22",
+      "ONE",
+      "MOM",
+      "LTR",
+      "J25",
+      "TLA",
+      "(All)"
   ],
-  "starterEditionNames": [
-	"Jumpstart",
-	"Dominaria United",
-	"Brother's War",
-	"Jumpstart 22",
-	"Phyrexia: ONE",
-	"March of the Machine",
-	"Lord of the Rings",
-	"Jumpstart 25",
-	"(All)"
-	]
+    "starterEditionNames": [
+      "Jumpstart",
+      "Dominaria United",
+      "The Brothers' War",
+      "Jumpstart 22",
+      "Phyrexia: ONE",
+      "March of the Machine",
+      "Lord of the Rings",
+      "Jumpstart 25",
+      "The Last Airbender",
+      "(All)"
+    ]
 }
 

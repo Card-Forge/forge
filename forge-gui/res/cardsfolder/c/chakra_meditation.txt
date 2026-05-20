@@ -1,0 +1,13 @@
+Name:Chakra Meditation
+ManaCost:2 U
+Types:Enchantment
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When this enchantment enters, return up to one target instant or sorcery card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | TgtPrompt$ Select target instant or sorcery card in your graveyard | Origin$ Graveyard | TargetMin$ 0 | TargetMax$ 1 | Destination$ Hand
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell, draw a card. Then discard a card unless there are three or more Lesson cards in your graveyard.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT3
+SVar:X:Count$ValidGraveyard Lesson.YouOwn
+DeckHas:Ability$Graveyard
+DeckHints:Type$Instant|Sorcery
+DeckNeeds:Type$Lesson
+Oracle:When this enchantment enters, return up to one target instant or sorcery card from your graveyard to your hand.\nWhenever you cast an instant or sorcery spell, draw a card. Then discard a card unless there are three or more Lesson cards in your graveyard.

@@ -26,7 +26,7 @@ T:Mode$ DamageDone | ValidSource$ Vehicle.YouCtrl | ValidTarget$ Player | Combat
 SVar:TrigExile:DB$ Dig | Defined$ TriggeredTarget | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBMayPlayLand
 SVar:X:TriggerCount$DamageAmount
 SVar:DBMayPlayLand:DB$ Effect | StaticAbilities$ SMayPlayLand | RememberObjects$ Remembered | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:SMayPlayLand:Mode$ Continuous | MayPlay$ True | Affected$ Land.IsRemembered | AffectedZone$ Exile | Secondary$ True | MayLookAt$ You | Duration$ Permanent | Description$ You may play lands from among those cards for as long as they remain exiled.
+SVar:SMayPlayLand:Mode$ Continuous | MayPlay$ True | Affected$ Land.IsRemembered | AffectedZone$ Exile | Secondary$ True | Duration$ Permanent | Description$ You may play lands from among those cards for as long as they remain exiled.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Crew:1
 DeckHints:Type$Vehicle

@@ -14,7 +14,7 @@ public class ManifestAi extends ManifestBaseAi {
         // (e.g. Grafdigger's Cage)
         Card topCopy = CardCopyService.getLKICopy(card);
         topCopy.turnFaceDownNoUpdate();
-        topCopy.setManifested(true);
+        topCopy.setManifested(sa);
 
         if (ComputerUtil.isETBprevented(topCopy)) {
             return false;

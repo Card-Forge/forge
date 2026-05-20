@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Sorcery
 A:SP$ AnimateAll | ValidCards$ Creature.YouCtrl | Keywords$ Trample | Triggers$ Trig1 | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, creatures you control gain trample and "Whenever this creature deals combat damage to a player, draw a card."
 SVar:Trig1:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Eff1 | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card.
-SVar:Eff1:DB$ Draw | NumCards$ 1
+SVar:Eff1:DB$ Draw
 AlternateMode:Split
 Oracle:Until end of turn, creatures you control gain trample and "Whenever this creature deals combat damage to a player, draw a card."
 

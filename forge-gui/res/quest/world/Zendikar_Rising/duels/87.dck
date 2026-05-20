@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Sideshow Bob
+Title=Sideshow Bob
+Icon=Sideshow Bob.jpg
+Difficulty=Very Hard
+Description=./Modern/Zendikar_Rising/Binolino_-_Lands_(Modern,_#1079313).dck
+Deck Type=constructed
+
+[Main]
+1 Eternal Witness
+1 Ramunap Excavator
+1 Tangled Florahedron
+2 Skyclave Apparition
+4 Primeval Titan
+4 Elvish Reclaimer
+4 Dryad of the Ilysian Grove
+4 Path to Exile
+4 Eladamri's Call
+1 Hour of Promise
+2 Explore
+1 Plains
+1 Radiant Fountain
+1 Selesnya Sanctuary
+1 Ghost Quarter
+1 Snow-Covered Plains
+1 Cavern of Souls
+1 Bojuka Bog
+1 Vesuva
+1 Scattered Groves
+2 Snow-Covered Forest
+2 Temple Garden
+2 Valakut, the Molten Pinnacle
+2 Forest
+2 Field of the Dead
+2 Castle Garenbrig
+3 Wooded Foothills
+4 Windswept Heath
+4 Flagstones of Trokair
+[Sideboard]
+1 Collector Ouphe
+1 Faerie Macabre
+1 Ground Seal
+1 Linvala, Keeper of Silence
+1 Knight of Autumn
+3 Aven Mindcensor
+3 Relic of Progenitus
+4 Celestial Purge

@@ -1,0 +1,11 @@
+Name:Broodguard Elite
+ManaCost:X G G
+Types:Creature Insect Knight
+PT:0/0
+K:etbCounter:P1P1:X
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When this creature leaves the battlefield, put its counters on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy
+K:Warp:X G
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters
+Oracle:This creature enters with X +1/+1 counters on it.\nWhen this creature leaves the battlefield, put its counters on target creature you control.\nWarp {X}{G} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)

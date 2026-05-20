@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Atomic Robo
+Title=Atomic Robo
+Icon=Atomic Robo.jpg
+Difficulty=Hard
+Description=../Modern/Born_of_the_Gods/SCG_States_Dover/Seth_Zulmski_-_Jund_(Modern,_#231676).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Courser of Kruphix
+4 Dark Confidant
+3 Olivia Voldaren
+2 Scavenging Ooze
+4 Tarmogoyf
+3 Thundermaw Hellkite
+1 Batterskull
+3 Abrupt Decay
+4 Lightning Bolt
+3 Terminate
+2 Inquisition of Kozilek
+4 Thoughtseize
+1 Blackcleave Cliffs
+2 Blood Crypt
+1 Copperline Gorge
+1 Forest
+1 Mountain
+2 Overgrown Tomb
+2 Raging Ravine
+2 Stomping Ground
+1 Swamp
+1 Treetop Village
+1 Urborg, Tomb of Yawgmoth
+4 Verdant Catacombs
+4 Wooded Foothills
+1 Woodland Cemetery
+[Sideboard]
+1 Ancient Grudge
+1 Chandra, Pyromaster
+4 Combust
+1 Golgari Charm
+1 Obstinate Baloth
+1 Pyroclasm
+1 Shatterstorm
+1 Sulfur Elemental
+1 Thrun, the Last Troll

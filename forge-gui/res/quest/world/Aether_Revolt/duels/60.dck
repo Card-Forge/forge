@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Ododua
+Title=Ododua
+Icon=Ododua.jpg
+Difficulty=Hard
+Description=../Modern/Aether_Revolt/surfacePymp_-_Deck_(Modern,_#668903).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodghast
+3 Diregraf Ghoul
+3 Falkenrath Aristocrat
+4 Geralf's Messenger
+4 Gravecrawler
+1 Hellspark Elemental
+2 Relentless Dead
+3 Fatal Push
+1 Kolaghan's Command
+4 Lightning Bolt
+1 Terminate
+1 Blightning
+3 Collective Brutality
+2 Inquisition of Kozilek
+2 Thoughtseize
+3 Blackcleave Cliffs
+3 Blood Crypt
+4 Bloodstained Mire
+1 Dragonskull Summit
+4 Marsh Flats
+7 Swamp
+[Sideboard]
+2 Arc Trail
+3 Blood Moon
+2 Engineered Explosives
+2 Hellspark Elemental
+2 Leyline of Sanctity
+3 Rakdos Charm
+1 Terminate

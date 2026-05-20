@@ -1,0 +1,9 @@
+Name:Ultimate Magic: Holy
+ManaCost:2 W
+Types:Instant
+K:Foretell:2 W
+A:SP$ PumpAll | ValidCards$ Permanent.YouCtrl | KW$ Indestructible | SubAbility$ DBEffect | SpellDescription$ Permanents you control gain indestructible until end of turn. If this spell was cast from exile, prevent all damage that would be dealt to you this turn.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPrevent | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You | Description$ Prevent all damage that would be dealt to you this turn.
+SVar:X:Count$wasCastFromExile.1.0
+Oracle:Permanents you control gain indestructible until end of turn. If this spell was cast from exile, prevent all damage that would be dealt to you this turn.\nForetell {2}{W} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

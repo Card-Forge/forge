@@ -1,0 +1,9 @@
+Name:Dragonblood Twins
+ManaCost:1 R
+Types:Creature Human Monk
+PT:2/2
+K:Double team
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, until end of turn, this creature has base power and toughness 4/4 and gains flying.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 4 | Toughness$ 4 | Keywords$ Flying
+SVar:BuffedBy:Card
+Oracle:Double team\nFlurry — Whenever you cast your second spell each turn, until end of turn, this creature has base power and toughness 4/4 and gains flying.

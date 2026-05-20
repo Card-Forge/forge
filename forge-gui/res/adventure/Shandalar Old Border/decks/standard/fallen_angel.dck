@@ -1,0 +1,20 @@
+[metadata]
+Name=Fallen Angel - Aristocrats
+[Main]
+24 Swamp|6ED
+4 Fallen Angel|6ED
+2 Black Market|MMQ
+2 Grave Pact|STH
+4 Sengir Autocrat|HML
+2 Expunge|USG
+2 Dark Offering|PO2
+2 Infernal Genesis|PCY
+2 Tombstone Stairwell|MIR
+4 Rotlung Reanimator|ONS
+4 Doomed Necromancer|ONS
+4 Priest of Gix|USG
+4 Will-o'-the-Wisp|LEA
+
+[StartInBattle_Reference]
+1 Discordant Dirge|USG
+1 Fallen Angel|LEG

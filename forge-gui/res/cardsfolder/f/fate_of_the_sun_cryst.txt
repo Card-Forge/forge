@@ -1,0 +1,7 @@
+Name:Fate of the Sun-Cryst
+ManaCost:4 W
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | ValidTarget$ Creature.tapped | Description$ This spell costs {2} less to cast if it targets a tapped creature.
+A:SP$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SpellDescription$ Destroy target nonland permanent.
+DeckHints:Ability$Counters & Type$Planeswalker
+Oracle:This spell costs {2} less to cast if it targets a tapped creature.\nDestroy target nonland permanent.

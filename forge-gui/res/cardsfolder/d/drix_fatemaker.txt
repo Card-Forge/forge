@@ -1,0 +1,11 @@
+Name:Drix Fatemaker
+ManaCost:3 G
+Types:Creature Drix Wizard
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When this creature enters, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Trample | Description$ Each creature you control with a +1/+1 counter on it has trample.
+K:Warp:1 G
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+Oracle:When this creature enters, put a +1/+1 counter on target creature.\nEach creature you control with a +1/+1 counter on it has trample.\nWarp {1}{G} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)

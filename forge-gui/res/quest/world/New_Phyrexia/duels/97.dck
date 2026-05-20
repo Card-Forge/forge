@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Kraj
+Title=Kraj
+Icon=Kraj.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/Magic-League_Modern_Trial_22-03-2012/citon_-_Affinity_(Modern,_#28639).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Arcbound Ravager
+4 Arcbound Worker
+4 Etched Champion
+3 Frogmite
+2 Master of Etherium
+3 Memnite
+1 Spellskite
+3 Steel Overseer
+3 Vault Skirge
+4 AEther Vial
+4 Cranial Plating
+4 Darksteel Citadel
+4 Mox Opal
+4 Galvanic Blast
+3 Tempered Steel
+4 Blinkmoth Nexus
+2 City of Brass
+2 Glimmervoid
+2 Inkmoth Nexus
+1 Mountain
+1 Plains
+[Sideboard]
+3 Ancient Grudge
+4 Genesis Chamber
+3 Relic of Progenitus
+3 Whipflare

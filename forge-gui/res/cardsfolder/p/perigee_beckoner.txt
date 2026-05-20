@@ -1,0 +1,13 @@
+Name:Perigee Beckoner
+ManaCost:4 B
+Types:Creature Horror
+PT:4/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature enters, until end of turn, another target creature you control gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control."
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | NumAtt$ +2 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Triggers$ PerigeeBeckonerChangeZone | Defined$ ParentTarget
+SVar:PerigeeBeckonerChangeZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ PerigeeBeckonerTrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, return it to the battlefield tapped under its owner's control.
+SVar:PerigeeBeckonerTrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ TriggeredNewCardLKICopy
+K:Warp:1 B
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+Oracle:When this creature enters, until end of turn, another target creature you control gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control."\nWarp {1}{B} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)

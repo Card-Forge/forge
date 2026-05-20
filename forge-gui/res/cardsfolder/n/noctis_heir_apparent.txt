@@ -1,0 +1,14 @@
+Name:Noctis, Heir Apparent
+ManaCost:W U B
+Types:Legendary Creature Human Noble
+PT:2/3
+T:Mode$ ChangesZone | Phase$ BeginCombat->EndCombat | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ EquipmentSelection | OptionalDecider$ You | TriggerDescription$ Whenever a creature you control enters during combat, you may attach target Equipment you control to target creature you control.
+SVar:EquipmentSelection:DB$ Pump | ValidTgts$ Equipment.YouCtrl | TgtPrompt$ Select target equipment you control | SubAbility$ DBAttach | StackDescription$ None
+SVar:DBAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control.
+A:AB$ ChangeZone | PrecostDesc$ Warp-Strike — | Cost$ 3 | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ DelTrig | RememberChanged$ True | SpellDescription$ Exile NICKNAME. Return it to the battlefield under its owner's control tapped and attacking at the beginning of that player's next declare attackers step. It can't be blocked that combat.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | ValidPlayer$ Player.CardOwner | Phase$ Declare Attackers | Execute$ TrigReturn | ConditionDefined$ Remembered | ConditionPresent$ Card | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ Return NICKNAME to the battlefield under its owner's control tapped and attacking at the beginning of that player's next declare attackers step. It can't be blocked that combat.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Battlefield | Tapped$ True | Attacking$ True | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedLKI | StaticAbilities$ STUnblockable | Duration$ UntilEndOfCombat | ExileOnMoved$ Battlefield | SubAbility$ DBCleanup
+SVar:STUnblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this combat.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever a creature you control enters during combat, you may attach target Equipment you control to target creature you control.\nWarp-Strike — {3}: Exile Noctis. Return it to the battlefield under its owner's control tapped and attacking at the beginning of that player's next declare attackers step. It can't be blocked that combat.

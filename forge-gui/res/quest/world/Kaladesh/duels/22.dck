@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=King Kong
+Title=King Kong
+Icon=King Kong.jpg
+Difficulty=Easy
+Description=Kaladesh/Pro_Tour_Honolulu/Steve_Rubin_-_R-B_Aggro_(Standard,_#653270).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bomat Courier
+1 Goblin Dark-Dwellers
+4 Inventor's Apprentice
+4 Pia Nalaar
+4 Scrapheap Scrounger
+2 Fleetwheel Cruiser
+2 Key to the City
+4 Smuggler's Copter
+4 Fiery Temper
+4 Unlicensed Disintegration
+4 Incendiary Flow
+3 Aether Hub
+4 Foreboding Ruins
+10 Mountain
+2 Smoldering Marsh
+4 Swamp
+[Sideboard]
+3 Chandra, Torch of Defiance
+3 Galvanic Bombardment
+2 Goblin Dark-Dwellers
+3 Kalitas, Traitor of Ghet
+1 Lightning Axe
+1 Smoldering Marsh
+2 Transgress the Mind

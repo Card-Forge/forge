@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=C3PO
+Title=C3PO
+Icon=C3PO.jpg
+Difficulty=Medium
+Description=Kaladesh/SCG_Classic_Baltimore/Jaden_Lucas-Reth_-_B-G_Delirium_(Standard,_#652241).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Drana, Liberator of Malakir
+2 Gnarlwood Dryad
+4 Grim Flayer
+1 Ishkanah, Grafwidow
+2 Kalitas, Bloodchief of Ghet
+3 Mindwrack Demon
+1 Noxious Gearhulk
+2 Sylvan Advocate
+1 Verdurous Gearhulk
+3 Grapple with the Past
+4 Grasp of Darkness
+1 Murder
+2 To the Slaughter
+2 Ruinous Path
+3 Traverse the Ulvenwald
+3 Vessel of Nascency
+1 Nissa, Vital Force
+2 Blooming Marsh
+4 Evolving Wilds
+5 Forest
+4 Hissing Quagmire
+8 Swamp
+[Sideboard]
+3 Appetite for the Unnatural
+1 Arborback Stomper
+4 Dead Weight
+1 Emrakul, the Promised End
+1 Ishkanah, Grafwidow
+1 Nissa, Vital Force
+4 Transgress the Mind

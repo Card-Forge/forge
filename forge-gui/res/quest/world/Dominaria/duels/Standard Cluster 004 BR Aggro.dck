@@ -1,0 +1,36 @@
+[metadata]
+Name=BR Aggro
+Deck Type=constructed
+Title=BR Aggro
+Description=BR Aggro
+Difficulty=Easy
+Icon=Cave Troll
+[Main]
+2 Abrade
+4 Ahn-Crop Crasher
+4 Bomat Courier
+4 Dragonskull Summit
+4 Earthshaker Khenra
+4 Fanatical Firebrand
+3 Hazoret the Fervent
+2 Ifnir Deadlands
+4 Lightning Strike
+4 Mountain
+6 Mountain
+2 Mountain
+3 Mountain
+3 Rekindling Phoenix
+4 Scrapheap Scrounger
+2 Shock
+3 Swamp
+2 Unlicensed Disintegration
+[Sideboard]
+1 Abrade
+2 Aethersphere Harvester
+1 Chandra's Defeat
+3 Chandra, Torch of Defiance
+2 Dire Fleet Daredevil
+1 Duress
+1 Glorybringer
+2 Magma Spray
+2 Pia Nalaar

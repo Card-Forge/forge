@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Negoogunogumbar
+Title=Negoogunogumbar
+Icon=Negoogunogumbar.jpg
+Difficulty=Very Hard
+Description=../Modern/Dragons_of_Tarkir/2015_Modern_State_Championships_-_Ohio/Joshua_Miliken_-_RG_Burn_(Modern,_#222190).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Atarka's Command
+4 Flames of the Blood Hand
+4 Lightning Bolt
+4 Searing Blaze
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+8 Mountain
+3 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+4 Destructive Revelry
+2 Dismember
+3 Dragon's Claw
+2 Rending Volley
+2 Searing Blood

@@ -2,7 +2,6 @@
 Code=BOK
 Date=2005-02-04
 Name=Betrayers of Kamigawa
-Code2=BOK
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
@@ -38,7 +37,7 @@ ScryfallCode=BOK
 25 U Tallowisp @Ron Spears
 26 C Terashi's Grasp @Mark Tedin
 27 U Terashi's Verdict @Ron Spears
-28 U Ward of Piety @Tim Hildebrandt
+28 U Ward of Piety @Greg Hildebrandt
 29 C Waxmane Baku @Greg Hildebrandt
 30 R Yomiji, Who Bars the Way @Hideaki Takamura
 31 U Callow Jushi @Tsutomu Kawade
@@ -93,7 +92,7 @@ ScryfallCode=BOK
 80 U Scourge of Numai @Arnie Swekel
 81 R Shirei, Shizo's Caretaker @Wayne Reynolds
 82 R Sickening Shoal @Dan Murayama Scott
-83 C Skullmane Baku @Tim Hildebrandt
+83 C Skullmane Baku @Greg Hildebrandt
 84 C Skullsnatcher @Matt Cavotta
 85 C Stir the Grave @Jim Nelson
 86 C Takenuma Bleeder @Kev Walker
@@ -169,15 +168,10 @@ ScryfallCode=BOK
 156 R Orb of Dreams @Dany Orizio
 157 R Ornate Kanzashi @Heather Hudson
 158 U Ronin Warclub @Pete Venters
-159 U Shuko @Tim Hildebrandt
+159 U Shuko @Greg Hildebrandt
 160 U Shuriken @Matt Cavotta
 161 R Slumbering Tora @Doug Chaffee
 162 R That Which Was Taken @Adam Rex
 163 R Umezawa's Jitte @Christopher Moeller
 164 U Gods' Eye, Gate to the Reikai @John Avon
 165 R Tendo Ice Bridge @Rob Alexander
-
-[tokens]
-c_1_1_spirit
-w_3_3_spirit_flying
-g_1_1_snake

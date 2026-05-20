@@ -1,0 +1,8 @@
+Name:Dark Knight's Greatsword
+ManaCost:2 B
+Types:Artifact Equipment
+K:Job select
+K:Equip:PayLife<3>:::ActivationLimit$ 1:Activate only once each turn:Flavor Chaosbringer
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddType$ Knight | Description$ Equipped creature gets +3/+0 and is a Knight in addition to its other types.
+DeckHas:Ability$Token & Type$Knight
+Oracle:Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)\nEquipped creature gets +3/+0 and is a Knight in addition to its other types.\nChaosbringer — Equip—Pay 3 life. Activate only once each turn.

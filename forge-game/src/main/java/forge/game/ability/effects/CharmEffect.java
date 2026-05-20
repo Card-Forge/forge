@@ -11,11 +11,11 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
-import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
@@ -89,12 +89,13 @@ public class CharmEffect extends SpellAbilityEffect {
         boolean limit = sa.hasParam("ActivationLimit");
         boolean gameLimit = sa.hasParam("GameActivationLimit");
         boolean oppChooses = "Opponent".equals(sa.getParam("Chooser"));
-        boolean spree = sa.hasParam("Spree");
+        boolean spree = source.hasKeyword(Keyword.SPREE);
+        boolean tiered = source.hasKeyword(Keyword.TIERED);
 
         StringBuilder sb = new StringBuilder();
         sb.append(sa.getCostDescription());
 
-        if (!spree) {
+        if (!spree && !tiered) {
             sb.append(oppChooses ? "An opponent chooses " : "Choose ");
             if (isX) {
                 sb.append(sa.hasParam("MinCharmNum") && min == 0 ? "up to " : "").append("X");
@@ -163,7 +164,7 @@ public class CharmEffect extends SpellAbilityEffect {
         if (!includeChosen) {
             sb.append(num == 1 ? " mode." : " modes.");
         } else if (!list.isEmpty()) {
-            if (!spree) {
+            if (!spree && !tiered) {
                 if (!repeat && !additionalDesc && !limit && !gameLimit) {
                     sb.append(" \u2014");
                 }
@@ -171,7 +172,10 @@ public class CharmEffect extends SpellAbilityEffect {
             }
             for (AbilitySub sub : list) {
                 if (spree) {
-                    sb.append("+ " + new Cost(sub.getParam("SpreeCost"), false).toSimpleString() + " \u2014 ");
+                    sb.append("+ " + new Cost(sub.getParam("ModeCost"), false).toSimpleString() + " \u2014 ");
+                } else if (tiered) {
+                    sb.append("\u2022 ").append(sub.getParam("PrecostDesc")).append(" \u2014 ");
+                    sb.append(new Cost(sub.getParam("ModeCost"), false).toSimpleString() + " \u2014 ");
                 } else if (sub.hasParam("Pawprint")) {
                     sb.append(StringUtils.repeat("{P}", Integer.parseInt(sub.getParam("Pawprint"))) + " \u2014 ");
                 } else {
@@ -203,7 +207,7 @@ public class CharmEffect extends SpellAbilityEffect {
             return true;
         }
 
-        //this resets all previous choices
+        // reset all previous choices
         sa.setSubAbility(null);
 
         List<AbilitySub> choices = makePossibleOptions(sa);
@@ -221,8 +225,8 @@ public class CharmEffect extends SpellAbilityEffect {
         int num = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa);
         final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParam("MinCharmNum"), sa) : num;
 
-        // if the amount of choices is smaller than min then they can't be chosen
         if (!canRepeat) {
+            // not enough choices
             if (min > choices.size()) {
                 return false;
             }
@@ -230,7 +234,7 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         boolean isOptional = sa.hasParam("Optional");
-        if (isOptional && !activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeCharm", CardTranslation.getTranslatedName(source.getName())), null)) {
+        if (isOptional && !activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeCharm", source.getTranslatedName()), null)) {
             return false;
         }
 

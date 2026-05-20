@@ -2,5 +2,5 @@ Name:Zhou Yu, Chief Commander
 ManaCost:5 U U
 Types:Legendary Creature Human Soldier
 PT:8/8
-S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
+S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefender$ controlsIsland | Description$ CARDNAME can't attack unless defending player controls an Island.
 Oracle:Zhou Yu, Chief Commander can't attack unless defending player controls an Island.

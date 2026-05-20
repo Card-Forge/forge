@@ -33,12 +33,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import forge.util.IterableUtil;
+
 public class DamageDealAi extends DamageAiBase {
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         final SpellAbility root = sa.getRootAbility();
         final String damage = sa.getParam("NumDmg");
         Card source = sa.getHostCard();
@@ -65,29 +68,33 @@ public class DamageDealAi extends DamageAiBase {
                             continue; // in case the calculation gets messed up somewhere
                         }
                         root.setSVar("EnergyToPay", "Number$" + dmg);
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 }
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             if (sa.getSVar(damage).equals("Count$xPaid")) {
                 // Life Drain
                 if ("XLifeDrain".equals(logic)) {
-                    return doXLifeDrainLogic(ai, sa);
+                    if (doXLifeDrainLogic(ai, sa)) {
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    }
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
 
-                // Set PayX here to maximum value.
-                dmg = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-                sa.setXManaCostPaid(dmg);
+                dmg = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
             } else if (sa.getSVar(damage).equals("Count$CardsInYourHand") && source.isInZone(ZoneType.Hand)) {
                 dmg--; // the card will be spent casting the spell, so actual damage is 1 less
             }
         }
-        return damageTargetAI(ai, sa, dmg, true);
+        if (damageTargetAI(ai, sa, dmg, true)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
     }
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
@@ -95,26 +102,20 @@ public class DamageDealAi extends DamageAiBase {
         final String damage = sa.getParam("NumDmg");
         int dmg = calculateDamageAmount(sa, source, damage);
 
-        if (damage.equals("X") || source.getSVar("X").equals("Count$xPaid")) {
+        if (damage.equals("X") || (dmg == 0 && source.getSVar("X").equals("Count$xPaid"))) {
             if (sa.getSVar("X").equals("Count$xPaid") || sa.getSVar(damage).equals("Count$xPaid")) {
-                dmg = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                dmg = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
 
                 // Try not to waste spells like Blaze or Fireball on early targets, try to do more damage with them if possible
-                if (ai.getController().isAI()) {
-                    AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-                    int holdChance = aic.getIntProperty(AiProps.HOLD_X_DAMAGE_SPELLS_FOR_MORE_DAMAGE_CHANCE);
-                    if (MyRandom.percentTrue(holdChance)) {
-                        int threshold = aic.getIntProperty(AiProps.HOLD_X_DAMAGE_SPELLS_THRESHOLD);
-                        boolean inDanger = ComputerUtil.aiLifeInDanger(ai, false, 0);
-                        boolean isLethal = sa.usesTargeting() && sa.getTargetRestrictions().canTgtPlayer() && dmg >= ai.getWeakestOpponent().getLife() && !ai.getWeakestOpponent().cantLoseForZeroOrLessLife();
-                        if (dmg < threshold && ai.getGame().getPhaseHandler().getTurn() / 2 < threshold && !inDanger && !isLethal) {
-                            return false;
-                        }
+                int holdChance = AiProfileUtil.getIntProperty(ai, AiProps.HOLD_X_DAMAGE_SPELLS_FOR_MORE_DAMAGE_CHANCE);
+                if (MyRandom.percentTrue(holdChance)) {
+                    int threshold = AiProfileUtil.getIntProperty(ai, AiProps.HOLD_X_DAMAGE_SPELLS_THRESHOLD);
+                    boolean inDanger = ComputerUtil.aiLifeInDanger(ai, false, 0);
+                    boolean isLethal = sa.usesTargeting() && sa.getTargetRestrictions().canTgtPlayer() && dmg >= ai.getWeakestOpponent().getLife() && !ai.getWeakestOpponent().cantLoseForZeroOrLessLife();
+                    if (dmg < threshold && ai.getGame().getPhaseHandler().getTurn() / 2 < threshold && !inDanger && !isLethal) {
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
                 }
-
-                // Set PayX here to maximum value. It will be adjusted later depending on the target.
-                sa.setXManaCostPaid(dmg);
             } else if (sa.getSVar(damage).contains("InYourHand") && source.isInZone(ZoneType.Hand)) {
                 dmg -= - 1; // the card will be spent casting the spell, so actual damage is 1 less
             } else if (sa.getSVar(damage).equals("TargetedPlayer$CardsInHand")) {
@@ -134,10 +135,10 @@ public class DamageDealAi extends DamageAiBase {
                         if (shouldTgtP(ai, sa, maxDmg, false)) {
                             sa.resetTargets();
                             sa.getTargets().add(maxDamaged);
-                            return true;
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
                     } else {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     }
                 }
             }
@@ -154,7 +155,7 @@ public class DamageDealAi extends DamageAiBase {
             if (ai.getGame().getPhaseHandler().isPlayerTurn(ai) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 for (Card potentialAtkr : ai.getCreaturesInPlay()) {
                     if (ComputerUtilCard.doesCreatureAttackAI(ai, potentialAtkr)) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
                 }
             }
@@ -175,16 +176,22 @@ public class DamageDealAi extends DamageAiBase {
                      * Mostly used to ping the player with remaining counters. The issue with
                      * stacked effects might appear here.
                      */
-                    return damageTargetAI(ai, sa, n, true);
+                     if (damageTargetAI(ai, sa, n, true)) {
+                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                     }
+                     return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 } else {
                     /*
                      * Only ping when stack is clear to avoid hassle of evaluating stacked effects
                      * like protection/pumps or over-killing target.
                      */
-                    return ai.getGame().getStack().isEmpty() && damageTargetAI(ai, sa, n, false);
+                    if (ai.getGame().getStack().isEmpty() && damageTargetAI(ai, sa, n, false)) {
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    }
+                    return new AiAbilityDecision(0, AiPlayDecision.StackNotEmpty);
                 }
             } else {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         } else if ("NinThePainArtist".equals(logic)) {
             // Make sure not to mana lock ourselves + make the opponent draw cards into an immediate discard
@@ -193,11 +200,14 @@ public class DamageDealAi extends DamageAiBase {
                 if (doTarget) {
                     Card tgt = sa.getTargetCard();
                     if (tgt != null) {
-                        return ai.getGame().getPhaseHandler().getPlayerTurn() == tgt.getController();
+                        if (ai.getGame().getPhaseHandler().getPlayerTurn() == tgt.getController()) {
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                        }
+                        return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
                     }
                 }
             }
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
         }
 
         if (sourceName.equals("Sorin, Grim Nemesis")) {
@@ -209,35 +219,35 @@ public class DamageDealAi extends DamageAiBase {
                         continue;   // in case the calculation gets messed up somewhere
                     }
                     sa.setXManaCostPaid(dmg);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (dmg <= 0) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // temporarily disabled until better AI
         if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 
         if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 
         if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 
         if ("DiscardLands".equals(sa.getParam("AILogic")) && !ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // Try to chain damage/debuff effects
@@ -248,13 +258,13 @@ public class DamageDealAi extends DamageAiBase {
             int extraDmg = chainDmg.getValue();
             boolean willTargetIfChained = damageTargetAI(ai, sa, dmg + extraDmg, false);
             if (!willTargetIfChained) {
-                return false; // won't play it even in chain
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed); // won't play it even in chain
             } else if (willTargetIfChained && chainDmg.getKey().getApi() == ApiType.Pump && sa.getTargets().isTargetingAnyPlayer()) {
                 // we're trying to chain a pump spell to a damage spell targeting a player, that won't work
                 // so run an additional check to ensure that we want to cast the current spell separately
                 sa.resetTargets();
                 if (!damageTargetAI(ai, sa, dmg, false)) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
             } else {
                 // we are about to decide to play this damage spell; if there's something chained to it, reserve mana for
@@ -264,7 +274,7 @@ public class DamageDealAi extends DamageAiBase {
             }
         } else if (!damageTargetAI(ai, sa, dmg, false)) {
             // simple targeting when there is no spell chaining plan
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         if ((damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) ||
@@ -288,10 +298,12 @@ public class DamageDealAi extends DamageAiBase {
 
         if ("DiscardCMCX".equals(sa.getParam("AILogic"))) {
             final int cmc = sa.getXManaCostPaid();
-            return ai.getZone(ZoneType.Hand).contains(CardPredicates.hasCMC(cmc));
+             if (!ai.getZone(ZoneType.Hand).contains(CardPredicates.hasCMC(cmc))) {
+                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+             }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /**
@@ -344,14 +356,7 @@ public class DamageDealAi extends DamageAiBase {
 
         Card targetCard = null;
         if (pl.isOpponentOf(ai) && activator.equals(ai) && !killables.isEmpty()) {
-            if (sa.getTargetRestrictions().canTgtPlaneswalker()) {
-                targetCard = ComputerUtilCard.getBestPlaneswalkerAI(killables);
-            }
-            if (targetCard == null) {
-                targetCard = ComputerUtilCard.getBestCreatureAI(killables);
-            }
-
-            return targetCard;
+            return ComputerUtilCard.getBestRemovalTargetAI(ai, killables);
         }
 
         if (!mandatory) {
@@ -364,12 +369,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if (!hPlay.isEmpty()) {
             if (pl.isOpponentOf(ai) && activator.equals(ai)) {
-                if (sa.getTargetRestrictions().canTgtPlaneswalker()) {
-                    targetCard = ComputerUtilCard.getBestPlaneswalkerAI(controlledByOpps);
-                }
-                if (targetCard == null) {
-                    targetCard = ComputerUtilCard.getBestCreatureAI(controlledByOpps);
-                }
+                targetCard = ComputerUtilCard.getBestRemovalTargetAI(ai, controlledByOpps);
             }
             if (targetCard == null) {
                 targetCard = ComputerUtilCard.getWorstCreatureAI(hPlay);
@@ -504,7 +504,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if ("PowerDmg".equals(logic)) {
             // check if it is better to target the player instead, the original target is already set in PumpAi.pumpTgtAI()
-            if (tgt.canTgtCreatureAndPlayer() && shouldTgtP(ai, sa, dmg, noPrevention)) {
+            if (tgt.canTgtCreature() && tgt.canTgtPlayer() && shouldTgtP(ai, sa, dmg, noPrevention)) {
                 sa.resetTargets();
                 sa.getTargets().add(enemy);
             }
@@ -513,13 +513,11 @@ public class DamageDealAi extends DamageAiBase {
 
         // AssumeAtLeastOneTarget is used for cards with funky targeting implementation like Fight with Fire which would
         // otherwise confuse the AI by returning 0 unexpectedly during SA "AI can play" tests.
-        if (tgt.getMaxTargets(source, sa) <= 0 && !logic.equals("AssumeAtLeastOneTarget")) {
+        if (sa.getMaxTargets() <= 0 && !logic.equals("AssumeAtLeastOneTarget")) {
             return false;
         }
 
         sa.resetTargets();
-
-        // target loop
         TargetChoices tcs = sa.getTargets();
 
         // Do not use if would kill self
@@ -527,19 +525,10 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        if ("ChoiceBurn".equals(logic)) {
-            // do not waste burns on player if other choices are present
-            if (shouldTgtP(ai, sa, dmg, noPrevention)) {
-                tcs.add(enemy);
-                return true;
-            }
-            return false;
-        }
         if ("Polukranos".equals(logic)) {
             int dmgTaken = 0;
-            CardCollection humCreatures = enemy.getCreaturesInPlay();
             Card lastTgt = null;
-            humCreatures = CardLists.getTargetableCards(humCreatures, sa);
+            CardCollection humCreatures = CardLists.getTargetableCards(enemy.getCreaturesInPlay(), sa);
             ComputerUtilCard.sortByEvaluateCreature(humCreatures);
             // try to kill things without dying
             for (Card humanCreature : humCreatures) {
@@ -592,7 +581,10 @@ public class DamageDealAi extends DamageAiBase {
                 // canPlayAI (sa activated by ai)
                 Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
                 sa.setTargetingPlayer(targetingPlayer);
-                return targetingPlayer.getController().chooseTargetsFor(sa);
+                if (CardLists.getTargetableCards(ai.getGame().getCardsIn(sa.getTargetRestrictions().getZone()), sa).isEmpty()) {
+                    return false;
+                }
+                return true;
             }
 
             if (tgt.canTgtPlaneswalker()) {
@@ -613,9 +605,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
 
-            if (tgt.canTgtCreatureAndPlayer()) {
-                Card c = null;
-
+            if (tgt.canTgtCreature() && tgt.canTgtPlayer()) {
                 if (shouldTgtP(ai, sa, dmg, noPrevention)) {
                     tcs.add(enemy);
                     if (divided) {
@@ -629,10 +619,10 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 // look for creature targets; currently also catches planeswalkers that can be killed immediately
-                c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false);
+                Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal
-                    if (sa.isSpell() && !divided && !immediately && tgt.getMaxTargets(source, sa) == 1) {
+                    if (sa.isSpell() && !divided && !immediately && sa.getMaxTargets() == 1) {
                         if (!ComputerUtilCard.useRemovalNow(sa, c, dmg, ZoneType.Graveyard)) {
                             return false;
                         }
@@ -656,34 +646,11 @@ public class DamageDealAi extends DamageAiBase {
 
                 // TODO: add check here if card is about to die from something
                 // on the stack or from taking combat damage
-
-                final Cost abCost = sa.getPayCosts();
-                boolean freePing = immediately || abCost == null || sa.getTargets().size() > 0;
-
-                if (!source.isSpell()) {
-                    if (phase.is(PhaseType.END_OF_TURN) && sa.isAbility() && abCost.isReusuableResource()) {
-                        if (phase.getNextTurn().equals(ai))
-                            freePing = true;
-                    }
-
-                    if (phase.is(PhaseType.MAIN2) && sa.isAbility()) {
-                        if (sa.isPwAbility() || source.hasSVar("EndOfTurnLeavePlay"))
-                            freePing = true;
-                    }
-                }
-
-                if (freePing && sa.canTarget(enemy) && !avoidTargetP(ai, sa)) {
-                    tcs.add(enemy);
-                    if (divided) {
-                        sa.addDividedAllocation(enemy, dmg);
-                        break;
-                    }
-                }
             } else if (tgt.canTgtCreature() || tgt.canTgtPlaneswalker()) {
                 final Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal
-                    if (!immediately && tgt.getMaxTargets(source, sa) == 1 && !divided) {
+                    if (!immediately && sa.getMaxTargets() == 1 && !divided) {
                         if (!ComputerUtilCard.useRemovalNow(sa, c, dmg, ZoneType.Graveyard)) {
                             return false;
                         }
@@ -715,25 +682,36 @@ public class DamageDealAi extends DamageAiBase {
                 return false;
             }
             if (sa.canTarget(enemy) && sa.canAddMoreTarget()) {
-                if ((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
+                boolean freePing = immediately || sa.getTargets().size() > 0;
+                if (sa.isActivatedAbility()) {
+                    if (phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai) && sa.getPayCosts().isReusuableResource()) {
+                        freePing = true;
+                    }
+                    if (phase.is(PhaseType.MAIN2) && source.hasSVar("EndOfTurnLeavePlay")) {
+                        freePing = true;
+                    }
+                    if ("PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai)) {
+                        freePing = true;
+                    }
+                }
+
+                if ((freePing && !avoidTargetP(ai, sa))
+                        || (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
-                        || ("BurnCreatures".equals(logic) && !enemy.getCreaturesInPlay().isEmpty())
-                        || immediately) {
-                    boolean pingAfterAttack = "PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai);
-                    boolean isPWAbility = sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class);
-                    if (isPWAbility || (pingAfterAttack && !avoidTargetP(ai, sa)) || shouldTgtP(ai, sa, dmg, noPrevention)) {
-                        tcs.add(enemy);
-                        if (divided) {
-                            sa.addDividedAllocation(enemy, dmg);
-                            break;
-                        }
+                        || ("BurnCreatures".equals(logic) && !enemy.getCreaturesInPlay().isEmpty()))
+                        && ((sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class))
+                        || shouldTgtP(ai, sa, dmg, noPrevention)))) {
+                    tcs.add(enemy);
+                    if (divided) {
+                        sa.addDividedAllocation(enemy, dmg);
+                        break;
                     }
                 }
             }
         }
 
         // fell through all the choices, no targets left?
-        int minTgts = tgt.getMinTargets(source, sa);
+        int minTgts = sa.getMinTargets();
         if (tcs.size() < minTgts || tcs.size() == 0) {
             if (mandatory) {
                 // Sanity check: if there are any legal non-owned targets after the check (which may happen for complex cards like Rift Bolt),
@@ -932,28 +910,33 @@ public class DamageDealAi extends DamageAiBase {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
         final String damage = sa.getParam("NumDmg");
         int dmg = calculateDamageAmount(sa, source, damage);
 
         // Remove all damage
         if (sa.hasParam("Remove")) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            dmg = ComputerUtilCost.getMaxXValue(sa, ai, true);
-            sa.setXManaCostPaid(dmg);
+            dmg = ComputerUtilCost.setMaxXValue(sa, ai, true);
         }
 
         if (!sa.usesTargeting()) {
             // If it's not mandatory check a few things
-            return mandatory || damageChooseNontargeted(ai, sa, dmg);
+            if (mandatory) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+
+            if (damageChooseNontargeted(ai, sa, dmg)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else {
             if (!damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mandatory, true) && !mandatory) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
             if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid") && !sa.isDividedAsYouChoose()) {
@@ -976,7 +959,7 @@ public class DamageDealAi extends DamageAiBase {
             }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     private static int calculateDamageAmount(SpellAbility sa, Card source, String damage) {
@@ -1055,17 +1038,6 @@ public class DamageDealAi extends DamageAiBase {
             return null;
         }
 
-        Game game = ai.getGame();
-        int chance = ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS);
-
-        if (chance > 0 && (ComputerUtilCombat.lifeInDanger(ai, game.getCombat()) || ComputerUtil.aiLifeInDanger(ai, true, 0))) {
-            chance = 100; // in danger, do it even if normally the chance is low (unless chaining is completely disabled)
-        }
-
-        if (!MyRandom.percentTrue(chance)) {
-            return null;
-        }
-
         if (sa.getSubAbility() != null || sa.getParent() != null) {
             // Doesn't work yet for complex decisions where damage is only a part of the decision process
             return null;
@@ -1073,6 +1045,17 @@ public class DamageDealAi extends DamageAiBase {
 
         // chaining to this could miscalculate
         if (sa.isDividedAsYouChoose()) {
+            return null;
+        }
+
+        Game game = ai.getGame();
+        int chance = AiProfileUtil.getIntProperty(ai, AiProps.CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS);
+
+        if (chance > 0 && (ComputerUtilCombat.lifeInDanger(ai, game.getCombat()) || ComputerUtil.aiLifeInDanger(ai, true, 0))) {
+            chance = 100; // in danger, do it even if normally the chance is low (unless chaining is completely disabled)
+        }
+
+        if (!MyRandom.percentTrue(chance)) {
             return null;
         }
 
@@ -1138,8 +1121,8 @@ public class DamageDealAi extends DamageAiBase {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid,
-            FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid,
+                                     FCollectionView<Player> payers) {
         if (!payer.canLoseLife() || payer.cantLoseForZeroOrLessLife()) {
             return false;
         }
@@ -1158,6 +1141,72 @@ public class DamageDealAi extends DamageAiBase {
             }
         }
 
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T extends GameEntity> T chooseSingleEntity(Player ai, SpellAbility sa, Collection<T> options,
+            boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
+        final Card source = sa.getHostCard();
+        final boolean noPrevention = sa.hasParam("NoPrevention");
+        int dmg = calculateDamageAmount(sa, source, sa.getParam("NumDmg"));
+
+        // Separate options into creatures and players
+        List<Card> oppCreatures = CardLists.filterControlledBy(
+                IterableUtil.filter(options, Card.class), ai.getOpponents());
+        Iterable<Player> optionPlayers = IterableUtil.filter(options, Player.class);
+        List<Player> oppPlayers = ai.getOpponents().filter(p -> IterableUtil.any(optionPlayers, p::equals));
+
+        // First priority: kill opponent creatures
+        if (!oppCreatures.isEmpty()) {
+            CardCollection killables = CardLists.filter(oppCreatures, c ->
+                    (ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention) <= dmg)
+                            && !ComputerUtil.canRegenerate(ai, c)
+                            && !c.hasSVar("SacMe"));
+            if (!killables.isEmpty()) {
+                return (T) ComputerUtilCard.getBestCreatureAI(killables);
+            }
+        }
+
+        // Second priority: target opponent player if beneficial
+        if (!oppPlayers.isEmpty() && shouldTgtP(ai, sa, dmg, noPrevention)) {
+            return (T) oppPlayers.get(0);
+        }
+
+        // Third priority: target any opponent creature (even if we can't kill it)
+        if (!oppCreatures.isEmpty()) {
+            return (T) ComputerUtilCard.getBestCreatureAI(oppCreatures);
+        }
+
+        // Fourth priority: target opponent player
+        if (!oppPlayers.isEmpty()) {
+            return (T) oppPlayers.get(0);
+        }
+
+        // If optional and only own stuff remains, don't choose
+        if (isOptional) {
+            return null;
+        }
+
+        // Mandatory: target teammate's worst creature before own
+        List<Card> alliedCreatures = CardLists.filterControlledBy(
+                IterableUtil.filter(options, Card.class), ai.getAllies());
+        if (!alliedCreatures.isEmpty()) {
+            return (T) ComputerUtilCard.getWorstCreatureAI(alliedCreatures);
+        }
+
+        // Mandatory: target own worst creature
+        List<Card> ownCreatures = CardLists.filterControlledBy(
+                IterableUtil.filter(options, Card.class), ai);
+        if (!ownCreatures.isEmpty()) {
+            return (T) ComputerUtilCard.getWorstCreatureAI(ownCreatures);
+        }
+
+        if (IterableUtil.any(optionPlayers, ai::equals)) {
+            return (T) ai;
+        }
+
+        return null;
     }
 }

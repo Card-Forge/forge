@@ -1,0 +1,7 @@
+Name:Summon: Choco/Mog
+ManaCost:2 W
+Types:Enchantment Creature Saga Bird Moogle
+PT:3/3
+K:Chapter:4:DBStampede,DBStampede,DBStampede,DBStampede
+SVar:DBStampede:DB$ PumpAll | NumAtt$ +1 | ValidCards$ Creature.YouCtrl+Other | SpellDescription$ Stampede! — Other creatures you control get +1/+0 until end of turn.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, II, III, IV — Stampede! — Other creatures you control get +1/+0 until end of turn.

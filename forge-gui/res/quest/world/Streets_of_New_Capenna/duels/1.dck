@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Wally
+Title=Wally
+Icon=Wally.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/Gameologist_-_Izzet_Miller_(Standard,_#1444393).dck
+Deck Type=constructed
+
+[Main]
+4 Ruin Crab
+2 Behold the Multiverse
+2 Big Score
+3 Jwari Disruption
+4 Galvanic Iteration
+4 Fading Hope
+2 Crush the Weak
+4 Tasha's Hideous Laughter
+4 Maddening Cacophony
+4 Expressive Iteration
+4 Strangle
+1 Otawara, Soaring City
+1 Field of Ruin
+3 Mountain
+4 Maestros Theater
+4 Stormcarved Coast
+4 Riverglide Pathway
+6 Island
+[Sideboard]
+1 Crush the Weak
+1 Jwari Disruption
+1 Dual Strike
+1 Spell Pierce
+3 Test of Talents

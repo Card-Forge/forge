@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Dogbert
+Title=Dogbert
+Icon=Dogbert.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/SCG_Invitational_Qualifier_Marietta/Owen_Laufersweiler_-_Bant_Auras_(Standard,_#44497).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avacyn's Pilgrim
+4 Geist of Saint Traft
+4 Invisible Stalker
+4 Silverblade Paladin
+2 Strangleroot Geist
+2 Selesnya Charm
+2 Increasing Savagery
+4 Abundant Growth
+4 Ethereal Armor
+4 Rancor
+4 Spectral Flight
+2 Cavern of Souls
+4 Forest
+1 Glacial Fortress
+4 Hallowed Fountain
+4 Hinterland Harbor
+1 Island
+2 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+3 Centaur Healer
+1 Feeling of Dread
+2 Nearheath Pilgrim
+1 Nevermore
+3 Rest in Peace
+2 Rhox Faithmender
+1 Wolfir Avenger

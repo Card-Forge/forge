@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Luna Lovegood
+Title=Luna Lovegood
+Icon=Luna Lovegood.jpg
+Difficulty=Easy
+Description=Shadows_over_Innistrad/SCG_States_Bay_City/David_Westerman_-_Orzhov_(Standard,_#615303).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Hidden Dragonslayer
+2 Linvala, the Preserver
+1 Anguished Unmaking
+3 Grasp of Darkness
+3 Secure the Wastes
+3 Ultimate Price
+4 Declaration in Stone
+1 Descend upon the Sinful
+4 Languish
+1 Planar Outburst
+3 Read the Bones
+1 Ruinous Path
+2 Transgress the Mind
+3 Gideon, Ally of Zendikar
+1 Ob Nixilis Reignited
+1 Sorin, Grim Nemesis
+4 Caves of Koilos
+2 Forsaken Sanctuary
+7 Plains
+4 Shambling Vent
+7 Swamp
+2 Westvale Abbey
+[Sideboard]
+3 Duress
+2 Hallowed Moonlight
+1 Kalitas, Traitor of Ghet
+1 Quarantine Field
+2 Stasis Snare
+1 Tragic Arrogance

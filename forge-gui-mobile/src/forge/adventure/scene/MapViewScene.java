@@ -4,15 +4,20 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.SnapshotArray;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TypingLabel;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.Forge;
+import forge.adventure.data.AdventureEventData;
 import forge.adventure.data.AdventureQuestData;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.WorldStage;
@@ -37,7 +42,11 @@ public class MapViewScene extends UIScene {
     private int index = -1;
     private float avatarX = 0, avatarY = 0;
     private Set<Vector2> positions;
+    private final List<TypingLabel> details;
+    private final float maxZoom = 1.2f;
+    private final float minZoom = 0.25f;
     private Set<PointOfInterest> bookmark;
+    private int lastOverlayMode = 0; // 0=none, 1=details, 2=events, 3=reputation
 
     public static MapViewScene instance() {
         if (object == null)
@@ -49,7 +58,25 @@ public class MapViewScene extends UIScene {
         super(Forge.isLandscapeMode() ? "ui/map.json" : "ui/map_portrait.json");
         ui.onButtonPress("done", this::done);
         ui.onButtonPress("quest", this::scroll);
-        scroll = ui.findActor("map");
+        //TODO:Add Translations for buttons
+        ui.onButtonPress("details", this::details);
+        ui.onButtonPress("events", this::events);
+        ui.onButtonPress("reputation", this::reputation);
+        ui.onButtonPress("names", this::names);
+        ui.onButtonPress("zoomIn", this::zoomIn);
+        ui.onButtonPress("zoomOut", this::zoomOut);
+        scroll = new ScrollPane(null,Controls.getSkin()) {
+            @Override
+            public void addScrollListener() {
+                return;
+            }
+        };
+        scroll.setName("map");
+        scroll.setActor(Controls.newTextraLabel(""));
+        scroll.setWidth(ui.findActor("map").getWidth());
+        scroll.setHeight(ui.findActor("map").getHeight());
+        ui.addActor(scroll);
+        scroll.setZIndex(1);
         labels = Lists.newArrayList();
         positions = Sets.newHashSet();
         bookmark = Sets.newHashSet();
@@ -60,16 +87,53 @@ public class MapViewScene extends UIScene {
         img.setPosition(0, 0);
         table.addActor(img);
         table.addActor(miniMapPlayer);
+        miniMapPlayer.setZIndex(2);
+        details = Lists.newArrayList();
+        ui.addListener(new InputListener() {
+            public boolean scrolled(InputEvent event, float x, float y, float scrollAmountX, float scrollAmountY) {
+                event.cancel();
+                scroll.setScrollbarsVisible(true);
+                if (scrollAmountY > 0) {
+                    zoomOut();
+                    return true;
+                } else if (scrollAmountY < 0) {
+                    zoomIn();
+                    return true;
+                }
+                return false;
+            }
+        });
+        stage.setScrollFocus(ui);
+
+    }
+
+    public void test() {
+        img.setPosition((scroll.getScrollPercentX()*2334 +233)*0.1f + 0.9f*img.getX(),(2544-scroll.getScrollPercentY()*2544 +128)*0.1f + 0.9f*img.getY());
+        img.setScale(img.getScaleX()*0.9f);
+        miniMapPlayer.setPosition((scroll.getScrollPercentX()*2334 +233)*0.1f + 0.9f*miniMapPlayer.getX(),(2544-scroll.getScrollPercentY()*2544 +128)*0.1f + 0.9f*miniMapPlayer.getY());
+        miniMapPlayer.setScale(miniMapPlayer.getScaleX()*0.9f);
+        for(Actor actor : table.getChildren()) {
+            if (actor instanceof TypingLabel) {
+                actor.setPosition((scroll.getScrollPercentX() * 2334 + 233) * 0.1f + 0.9f * actor.getX(), (2544 - scroll.getScrollPercentY() * 2544 + 128) * 0.1f + 0.9f * actor.getY());
+            }
+        }
     }
 
     public boolean done() {
         GameHUD.getInstance().getTouchpad().setVisible(false);
-        for (Actor a : table.getChildren()) {
-            if (a instanceof TypingLabel)
-                a.remove();
+        SnapshotArray<Actor> allActors = table.getChildren();
+        for (int i = 0; i < allActors.size; i++) {
+            if (allActors.get(i) instanceof TypingLabel) {
+                allActors.get(i).remove();
+                i--;
+            }
         }
         labels.clear();
         positions.clear();
+        details.clear();
+        miniMapPlayer.setScale(1);
+        img.setScale(1);
+        img.setPosition(0,0);
         index = -1;
         Forge.switchToLast();
         return true;
@@ -99,6 +163,127 @@ public class MapViewScene extends UIScene {
             scroll.scrollTo(label.getX(), label.getY(), miniMapPlayer.getWidth(), miniMapPlayer.getHeight(), true, true);
         }
         return true;
+    }
+
+
+    private void setOverlayButtonStates(int mode) {
+        String[] buttons = {"details", "events", "reputation", "names"};
+        // Each mode shows only the *next* button in the cycle
+        // mode 0 (none/names): show "details"
+        // mode 1 (details):    show "events"
+        // mode 2 (events):     show "reputation"
+        // mode 3 (reputation): show "names"
+        int activeIndex = mode; // the button to show (wraps: 0->details, 1->events, 2->reputation, 3->names)
+        for (int i = 0; i < buttons.length; i++) {
+            TextraButton btn = ui.findActor(buttons[i]);
+            if (btn != null) {
+                btn.setVisible(i == activeIndex);
+                btn.setDisabled(i != activeIndex);
+            }
+        }
+    }
+
+    public void details() {
+        lastOverlayMode = 1;
+        setOverlayButtonStates(1);
+        List<PointOfInterest> allPois = Current.world().getAllPointOfInterest();
+        for (PointOfInterest poi : allPois) {
+            for (AdventureEventData data : AdventurePlayer.current().getEvents()) {
+                if (data.sourceID.equals(poi.getID())) {
+                    StringBuilder sb = new StringBuilder();
+
+                    sb.append("[%?BLACKEN]");
+                    if (data.isDraftComplete) {
+                        sb.append("[red]!!![]");
+                    }
+                    sb.append(" ").append(data.getCardBlock());
+
+                    TypingLabel label = Controls.newTypingLabel(sb.toString());
+                    table.addActor(label);
+                    details.add(label);
+                    label.setPosition(img.getScaleX()*(getMapX(poi.getPosition().x) - label.getWidth() / 2) + img.getX(), img.getScaleY()*(getMapY(poi.getPosition().y) - label.getHeight() / 2) + img.getY());
+                    label.skipToTheEnd();
+                }
+            }
+        }
+    }
+
+    public void events() {
+        lastOverlayMode = 2;
+        setOverlayButtonStates(2);
+        for (TypingLabel detail : details) {
+            table.removeActor(detail);
+        }
+        List<PointOfInterest> allPois = Current.world().getAllPointOfInterest();
+        details.clear();
+        for (PointOfInterest poi : allPois) {
+            int rep = WorldSave.getCurrentSave().getPointOfInterestChanges(poi.getID()).getMapReputation();
+            if (rep != 0) {
+                TypingLabel label = Controls.newTypingLabel("[%?BLACKEN] " + rep);
+                table.addActor(label);
+                details.add(label);
+                label.setPosition(img.getScaleX()*(getMapX(poi.getPosition().x) - label.getWidth() / 2) + img.getX(), img.getScaleY()*(getMapY(poi.getPosition().y) - label.getHeight() / 2) + img.getY());
+                label.skipToTheEnd();
+            }
+        }
+    }
+
+    public void reputation() {
+        lastOverlayMode = 3;
+        setOverlayButtonStates(3);
+        for (TypingLabel detail : details) {
+            table.removeActor(detail);
+        }
+        details.clear();
+        List<PointOfInterest> allPois = Current.world().getAllPointOfInterest();
+        for (PointOfInterest poi : allPois) {
+            if (WorldSave.getCurrentSave().getPointOfInterestChanges(poi.getID()).isVisited()) {
+                if ("cave".equalsIgnoreCase(poi.getData().type) || "dungeon".equalsIgnoreCase(poi.getData().type) || "castle".equalsIgnoreCase(poi.getData().type)) {
+                    TypingLabel label = Controls.newTypingLabel("[%?BLACKEN] " + poi.getDisplayName());
+                    table.addActor(label);
+                    details.add(label);
+                    label.setPosition(img.getScaleX()*(getMapX(poi.getPosition().x) - label.getWidth() / 2) + img.getX(), img.getScaleY()*(getMapY(poi.getPosition().y) - label.getHeight() / 2) + img.getY());
+                    label.skipToTheEnd();
+                }
+            }
+        }
+    }
+
+    public void names() {
+        lastOverlayMode = 0;
+        setOverlayButtonStates(0);
+        for (TypingLabel detail : details) {
+            table.removeActor(detail);
+        }
+        details.clear();
+
+    }
+
+    public void zoomOut() {
+        if (img.getScaleX()*0.9f > minZoom) {
+            img.setPosition((scroll.getScrollX() + scroll.getWidth()/2) * 0.1f + 0.9f * img.getX(), (scroll.getMaxY() - scroll.getScrollY() + scroll.getHeight()/2) * 0.1f + 0.9f * img.getY());
+            img.setScale(img.getScaleX() * 0.9f);
+            miniMapPlayer.setPosition((scroll.getScrollX() + scroll.getWidth()/2) * 0.1f + 0.9f * miniMapPlayer.getX(), (scroll.getMaxY() - scroll.getScrollY() + scroll.getHeight()/2) * 0.1f + 0.9f * miniMapPlayer.getY());
+            miniMapPlayer.setScale(miniMapPlayer.getScaleX() * 0.9f);
+            for (Actor actor : table.getChildren()) {
+                if (actor instanceof TypingLabel) {
+                    actor.setPosition((scroll.getScrollX() + scroll.getWidth()/2) * 0.1f + 0.9f * actor.getX(), (scroll.getMaxY() - scroll.getScrollY() + scroll.getHeight()/2) * 0.1f + 0.9f * actor.getY());
+                }
+            }
+        }
+    }
+    public void zoomIn() {
+        if (img.getScaleX()*1.1f < maxZoom) {
+            img.setPosition(-(scroll.getScrollX() + scroll.getWidth()/2) * 0.1f + 1.1f * img.getX(), -(scroll.getMaxY() - scroll.getScrollY() + scroll.getHeight()/2) * 0.1f + 1.1f * img.getY());
+            img.setScale(img.getScaleX() * 1.1f);
+            miniMapPlayer.setPosition(-(scroll.getScrollX() + scroll.getWidth()/2) * 0.1f + 1.1f * miniMapPlayer.getX(), -(scroll.getMaxY() - scroll.getScrollY() + scroll.getHeight()/2) * 0.1f + 1.1f * miniMapPlayer.getY());
+            miniMapPlayer.setScale(miniMapPlayer.getScaleX() * 1.1f);
+            for (Actor actor : table.getChildren()) {
+                if (actor instanceof TypingLabel) {
+                    actor.setPosition(-(scroll.getScrollX() + scroll.getWidth()/2) * 0.1f + 1.1f * actor.getX(), -(scroll.getMaxY() - scroll.getScrollY() + scroll.getHeight()/2) * 0.1f + 1.1f * actor.getY());
+                }
+            }
+        }
     }
 
     @Override
@@ -135,11 +320,28 @@ public class MapViewScene extends UIScene {
             label.setPosition(getMapX(poi.getPosition().x) - label.getWidth() / 2, getMapY(poi.getPosition().y) - label.getHeight() / 2);
             label.skipToTheEnd();
         }
+
+        setOverlayButtonStates(0);
+        TextraButton zoomInButton = ui.findActor("zoomIn");
+        if (zoomInButton != null) {
+            zoomInButton.setVisible(true);
+            zoomInButton.setDisabled(false);
+        }
+        TextraButton zoomOutButton = ui.findActor("zoomOut");
+        if (zoomOutButton != null) {
+            zoomOutButton.setVisible(true);
+            zoomOutButton.setDisabled(false);
+        }
         TextraButton questButton = ui.findActor("quest");
         if (questButton != null) {
             questButton.setDisabled(labels.isEmpty());
             questButton.setVisible(!labels.isEmpty());
         }
+        // Restore last overlay mode
+        if (lastOverlayMode == 1) details();
+        else if (lastOverlayMode == 2) events();
+        else if (lastOverlayMode == 3) reputation();
+
         super.enter();
     }
     float getMapX(float posX) {

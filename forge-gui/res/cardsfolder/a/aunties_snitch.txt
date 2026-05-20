@@ -2,7 +2,7 @@ Name:Auntie's Snitch
 ManaCost:2 B
 Types:Creature Goblin Rogue
 PT:3/1
-K:CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 K:Prowl:1 B
 T:Mode$ DamageDone | ValidSource$ Goblin.YouCtrl,Rogue.YouCtrl | TriggerZones$ Graveyard | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ Whenever a Goblin or Rogue you control deals combat damage to a player, if CARDNAME is in your graveyard, you may return CARDNAME to your hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ Self

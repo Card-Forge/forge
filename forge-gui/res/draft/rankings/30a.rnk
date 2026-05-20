@@ -49,7 +49,7 @@
 #48|Phantom Monster|U|30A
 #49|Red Elemental Blast|C|30A
 #50|Roc of Kher Ridges|R|30A
-#51|Circle of Protection Red|C|30A
+#51|Circle of Protection: Red|C|30A
 #52|Savannah Lions|R|30A
 #53|Clone|U|30A
 #54|Royal Assassin|R|30A
@@ -88,9 +88,9 @@
 #87|Tundra|R|30A
 #88|Underground Sea|R|30A
 #89|Volcanic Island|R|30A
-#90|Circle of Protection Black|C|30A
-#91|Circle of Protection Green|C|30A
-#92|Circle of Protection White|C|30A
+#90|Circle of Protection: Black|C|30A
+#91|Circle of Protection: Green|C|30A
+#92|Circle of Protection: White|C|30A
 #93|Pirate Ship|R|30A
 #94|Power Sink|C|30A
 #95|Sinkhole|C|30A
@@ -109,7 +109,7 @@
 #108|Elvish Archers|R|30A
 #109|Hurricane|U|30A
 #110|Armageddon|R|30A
-#111|Circle of Protection Blue|C|30A
+#111|Circle of Protection: Blue|C|30A
 #112|Disenchant|C|30A
 #113|Red Ward|U|30A
 #114|Resurrection|U|30A

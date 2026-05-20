@@ -1,0 +1,10 @@
+Name:Rikku, Resourceful Guardian
+ManaCost:2 U
+Types:Legendary Creature Human Artificer
+PT:2/3
+T:Mode$ CounterPlayerAddedAll | ValidObject$ Creature.inRealZoneBattlefield | TriggerZones$ Battlefield | ValidSource$ You | Execute$ TrigEffect | TriggerDescription$ Whenever you put one or more counters on a creature, until end of turn, that creature can't be blocked by creatures your opponents control.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredObjectLKICopy | StaticAbilities$ BlockRestrict
+SVar:BlockRestrict:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | ValidBlocker$ Creature.OppCtrl | Description$ That creature can't be blocked by creatures your opponents control.
+A:AB$ Pump | Cost$ 1 T | PrecostDesc$ Steal — | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SubAbility$ DBMove | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ Move a counter from target creature an opponent controls onto target creature you control. Activate only as a sorcery.
+SVar:DBMove:DB$ MoveCounter | Source$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to move counter to | CounterType$ Any | CounterNum$ 1 | StackDescription$ None
+Oracle:Whenever you put one or more counters on a creature, until end of turn, that creature can't be blocked by creatures your opponents control.\nSteal — {1}, {T}: Move a counter from target creature an opponent controls onto target creature you control. Activate only as a sorcery.

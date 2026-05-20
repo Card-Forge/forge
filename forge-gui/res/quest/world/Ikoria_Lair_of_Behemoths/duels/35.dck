@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Waylon Smithers
+Title=Waylon Smithers
+Icon=Waylon Smithers.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/AdamAntMTG_-_4_Color_Winota_(Standard,_#981381).dck
+Deck Type=constructed
+
+[Main]
+2 Alirios, Enraptured
+2 Kenrith, the Returned King
+4 Arboreal Grazer
+4 Charming Prince
+4 Gilded Goose
+4 Hanged Executioner
+4 Legion Warboss
+4 Winota, Joiner of Forces
+4 Agent of Treachery
+4 Neoform
+1 Ketria Triome
+2 Forest
+2 Sacred Foundry
+3 Hallowed Fountain
+4 Breeding Pool
+4 Temple Garden
+4 Stomping Ground
+4 Raugrin Triome
+[Sideboard]
+3 Aether Gust
+3 Dovin's Veto
+3 Fire Prophecy
+3 Knight of Autumn
+3 Mystical Dispute

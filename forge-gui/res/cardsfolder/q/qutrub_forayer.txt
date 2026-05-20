@@ -1,0 +1,9 @@
+Name:Qutrub Forayer
+ManaCost:2 B
+Types:Creature Zombie Horror
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When this creature enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBDestroy,DBExile
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn | SpellDescription$ Destroy target creature that was dealt damage this turn.
+SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 2 | TargetsWithSameController$ True | ValidTgts$ Card | TgtPrompt$ Select up to two target cards from a single graveyard | SpellDescription$ Exile up to two target cards from a single graveyard.
+Oracle:When this creature enters, choose one —\n• Destroy target creature that was dealt damage this turn.\n• Exile up to two target cards from a single graveyard.

@@ -1,0 +1,11 @@
+Name:Fell Gravship
+ManaCost:2 B
+Types:Artifact Spacecraft
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this Spacecraft enters, mill three cards, then return a creature or Spacecraft card from your graveyard to your hand.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn,Spacecraft.YouOwn | Hidden$ True | Mandatory$ True
+K:Station:8
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE8_CHARGE | AddType$ Creature | AddKeyword$ Flying & Lifelink | Description$ STATION 8+ Flying, lifelink
+SVar:X:Count$Valid Artifact.YouCtrl
+Oracle:When this Spacecraft enters, mill three cards, then return a creature or Spacecraft card from your graveyard to your hand.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.)\nSTATION 8+\nFlying, lifelink

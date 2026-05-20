@@ -1,0 +1,6 @@
+Name:Katara, the Fearless
+ManaCost:G W U
+Types:Legendary Creature Human Warrior Ally
+PT:3/3
+S:Mode$ Panharmonicon | ValidCard$ Ally.YouCtrl | Description$ If a triggered ability of an Ally you control triggers, that ability triggers an additional time.
+Oracle:If a triggered ability of an Ally you control triggers, that ability triggers an additional time.

@@ -1,0 +1,11 @@
+Name:Survey Mechan
+ManaCost:4
+Types:Artifact Creature Robot
+PT:1/3
+K:Flying
+K:Hexproof
+A:AB$ DealDamage | Cost$ 10 Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 3 | ReduceCost$ X | SubAbility$ DBDraw | SpellDescription$ It deals 3 damage to any target. Target player draws three cards and gains 3 life. This ability costs {X} less to activate, where X is the number of differently named lands you control.
+SVar:DBDraw:DB$ Draw | NumCards$ 3 | ValidTgts$ Player | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ ParentTarget | LifeAmount$ 3
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
+Oracle:Flying\nHexproof (This creature can't be the target of spells or abilities your opponents control.)\n{10}, Sacrifice this creature: It deals 3 damage to any target. Target player draws three cards and gains 3 life. This ability costs {X} less to activate, where X is the number of differently named lands you control.

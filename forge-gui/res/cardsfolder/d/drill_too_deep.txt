@@ -1,0 +1,7 @@
+Name:Drill Too Deep
+ManaCost:1 R
+Types:Instant
+A:SP$ Charm | Choices$ DBPutCounter,DBDestroy
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Spacecraft.YouCtrl,Planet.YouCtrl | TgtPrompt$ Select target Spacecraft or Planet you control | CounterType$ CHARGE | CounterNum$ 5 | SpellDescription$ Put five charge counters on target Spacecraft or Planet you control.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
+Oracle:Choose one —\n• Put five charge counters on target Spacecraft or Planet you control.\n• Destroy target artifact.

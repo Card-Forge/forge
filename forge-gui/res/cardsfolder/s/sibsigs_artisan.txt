@@ -1,0 +1,8 @@
+Name:Sibsig's Artisan
+ManaCost:1 B
+Types:Creature Human Artificer
+PT:3/2
+A:AB$ PutCounter | PrecostDesc$ Renew — | Cost$ 1 B B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 3 | SorcerySpeed$ True | SubAbility$ DBArtisanAnimate | SpellDescription$ Put three +1/+1 counters on target creature you control. It perpetually gains this ability. Activate only as a sorcery.
+SVar:DBArtisanAnimate:DB$ Animate | Defined$ Targeted | Abilities$ ABArtisanRenew | AddSVar$ DBArtisanAnimate | Duration$ Perpetual
+SVar:ABArtisanRenew:AB$ PutCounter | PrecostDesc$ Renew — | Cost$ 1 B B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 3 | SorcerySpeed$ True | SubAbility$ DBArtisanAnimate | SpellDescription$ Put three +1/+1 counters on target creature you control. It perpetually gains this ability. Activate only as a sorcery.
+Oracle:Renew — {1}{B}{B}, Exile this card from your graveyard: Put three +1/+1 counters on target creature you control. It perpetually gains this ability. Activate only as a sorcery.

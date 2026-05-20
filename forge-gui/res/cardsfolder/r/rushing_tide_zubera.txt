@@ -2,6 +2,7 @@ Name:Rushing-Tide Zubera
 ManaCost:2 U U
 Types:Creature Zubera Spirit
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | DamageReceivedCondition$ GE4 | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, if 4 or more damage was dealt to it this turn, draw three cards.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | CheckOnTriggeredCard$ X GE4 | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, if 4 or more damage was dealt to it this turn, draw three cards.
 SVar:TrigDraw:DB$ Draw | NumCards$ 3
+SVar:X:Count$TotalDamageReceivedThisTurn
 Oracle:When Rushing-Tide Zubera dies, if 4 or more damage was dealt to it this turn, draw three cards.

@@ -6,7 +6,7 @@ SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetM
 SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$GreatestCMC
+SVar:X:Remembered$GreatestCardManaCost
 S:Mode$ ReduceCost | ValidCard$ Legendary | Type$ Spell | Activator$ You | Amount$ Y | Description$ Legendary spells you cast cost {1} less to cast for each card exiled with CARDNAME.
 SVar:Y:Count$ValidExile Card.ExiledWithSource
 DeckHints:Ability$Graveyard

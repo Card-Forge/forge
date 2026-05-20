@@ -1,0 +1,9 @@
+Name:Suki, Kyoshi Captain
+ManaCost:2 W
+Types:Legendary Creature Human Warrior Ally
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.Warrior+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Warriors you control get +1/+1.
+A:AB$ PumpAll | Cost$ 3 W | ValidCards$ Warrior.attacking+YouCtrl | KW$ Double Strike | SpellDescription$ Attacking Warriors you control gain double strike until end of turn.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Warrior
+Oracle:Other Warriors you control get +1/+1.\n{3}{W}: Attacking Warriors you control gain double strike until end of turn.

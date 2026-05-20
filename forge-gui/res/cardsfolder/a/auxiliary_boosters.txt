@@ -1,0 +1,11 @@
+Name:Auxiliary Boosters
+ManaCost:4 W
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this Equipment enters, create a 2/2 colorless Robot artifact creature token and attach this Equipment to it.
+SVar:TrigToken:DB$ Token | TokenScript$ c_2_2_a_robot | RememberTokens$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Defined$ Remembered | Object$ Self | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 2 | AddKeyword$ Flying | Description$ Equipped creature gets +1/+2 and has flying.
+K:Equip:3
+DeckHas:Ability$Token
+Oracle:When this Equipment enters, create a 2/2 colorless Robot artifact creature token and attach this Equipment to it.\nEquipped creature gets +1/+2 and has flying.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

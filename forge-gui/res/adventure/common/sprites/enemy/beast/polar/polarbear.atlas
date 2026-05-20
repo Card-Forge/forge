@@ -1,0 +1,110 @@
+polarbear.png
+size: 604,84
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar 
+  xy: 288, 32
+  size: 16, 16
+Idle 
+  xy: 0, 0
+  size: 25, 19
+Idle 
+  xy: 32, 0
+  size: 25, 19
+Idle 
+  xy: 64, 0
+  size: 25, 19
+Idle 
+  xy: 96,0
+  size: 25, 19
+Idle 
+  xy: 128, 0
+  size: 25, 19
+Idle 
+  xy: 160, 0
+  size: 25, 19
+Idle 
+  xy: 192, 0
+  size: 25, 19
+Idle 
+  xy: 224, 0
+  size: 25, 19
+Idle 
+  xy: 256, 0
+  size: 25, 19
+Idle 
+  xy: 288, 0
+  size: 25, 19
+Idle 
+  xy: 320, 0
+  size: 25, 19
+Idle 
+  xy: 352, 0
+  size: 25, 19
+Idle 
+  xy: 384, 0
+  size: 25, 19
+Idle 
+  xy: 416, 0
+  size: 25, 19
+Idle 
+  xy: 448, 0
+  size: 25, 19
+Idle 
+  xy: 480, 0
+  size: 25, 19
+Idle 
+  xy: 512, 0
+  size: 25, 19
+Idle 
+  xy: 544, 0
+  size: 25, 19
+Idle 
+  xy: 576, 0
+  size: 25, 19
+Walk
+  xy: 3, 22
+  size: 19, 17
+Walk
+  xy: 35, 22
+  size: 19, 17
+Walk
+  xy: 67, 22
+  size: 19, 17
+Walk
+  xy: 99, 22
+  size: 19, 17
+Walk
+  xy: 131, 22
+  size: 19, 17
+Walk
+  xy: 163, 22
+  size: 19, 17
+Attack
+  xy: 2, 44
+  size: 28, 16
+Attack
+  xy: 34, 44
+  size: 28, 16
+Attack
+  xy: 66, 44
+  size: 28, 16
+Attack
+  xy: 98, 44
+  size: 28, 16
+Attack
+  xy: 130, 44
+  size: 28, 16
+Death
+  xy: 352, 63
+  size: 25, 20
+Death
+  xy: 384, 63
+  size: 25, 20
+Death
+  xy: 416, 63
+  size: 25, 20
+Death
+  xy: 448, 63
+  size: 25, 20

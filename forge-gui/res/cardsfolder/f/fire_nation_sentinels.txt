@@ -1,0 +1,7 @@
+Name:Fire Nation Sentinels
+ManaCost:3 B B
+Types:Creature Human Soldier
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.!token+OppCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever a nontoken creature an opponent controls dies, put a +1/+1 counter on each creature you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Whenever a nontoken creature an opponent controls dies, put a +1/+1 counter on each creature you control.

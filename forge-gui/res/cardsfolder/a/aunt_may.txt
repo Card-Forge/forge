@@ -1,0 +1,11 @@
+Name:Aunt May
+Variant:UniversesWithin:FlavorName:Zora, Spider Fancier
+ManaCost:W
+Types:Legendary Creature Human Citizen
+PT:0/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature you control enters, you gain 1 life. If it's a Spider, put a +1/+1 counter on it.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy.Spider | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$LifeGain|Counters
+DeckHints:Type$Spider
+Oracle:Whenever another creature you control enters, you gain 1 life. If it's a Spider, put a +1/+1 counter on it.

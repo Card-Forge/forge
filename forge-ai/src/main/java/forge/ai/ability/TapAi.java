@@ -18,8 +18,9 @@ import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
 
 public class TapAi extends TapAiBase {
+
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final PhaseHandler phase = ai.getGame().getPhaseHandler();
         final Player turn = phase.getPlayerTurn();
 
@@ -30,26 +31,19 @@ public class TapAi extends TapAiBase {
                 // Cast it if it's a sorcery.
             } else if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 // Aggro Brains are willing to use TapEffects aggressively instead of defensively
-                AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-                if (!aic.getBooleanProperty(AiProps.PLAY_AGGRO)) {
-                    return false;
+                if (!AiProfileUtil.getBoolProperty(ai, AiProps.PLAY_AGGRO)) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             } else {
                 // Don't tap down after blockers
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         } else if (!playReusable(ai, sa)) {
             // Generally don't want to tap things with an Instant during Players turn outside of combat
-            return false;
-        }
-
-        // prevent run-away activations - first time will always return true
-        if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         final Card source = sa.getHostCard();
-        final Cost abCost = sa.getPayCosts();
 
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
         if ("GoblinPolkaBand".equals(aiLogic)) {
@@ -58,11 +52,18 @@ public class TapAi extends TapAiBase {
             return SpecialCardAi.Arena.consider(ai, sa);
         }
 
-        if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
-            return false;
-        }
+        if (sa.usesTargeting()) {
+            // X controls the minimum targets
+            if ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid")) {
+                ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
+            }
 
-        if (!sa.usesTargeting()) {
+            sa.resetTargets();
+            if (tapPrefTargeting(ai, source, sa, false)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        } else {
             CardCollection untap;
             if (sa.hasParam("CardChoices")) {
                 untap = CardLists.getValidCards(source.getGame().getCardsIn(ZoneType.Battlefield), sa.getParam("CardChoices"), ai, source, sa);
@@ -70,27 +71,22 @@ public class TapAi extends TapAiBase {
                 untap = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             }
 
-            boolean bFlag = false;
+            int value = 0;
             for (final Card c : untap) {
-                bFlag |= c.isUntapped();
+                if (c.isUntapped()) {
+                    value += ComputerUtilCard.evaluateCreature(c);
+                }
             }
 
-            return bFlag;
-        } else {
-            // X controls the minimum targets
-            if ("X".equals(sa.getTargetRestrictions().getMinTargets()) && sa.getSVar("X").equals("Count$xPaid")) {
-                // Set PayX here to maximum value.
-                // TODO need to set XManaCostPaid for targets, maybe doesn't need PayX anymore?
-                sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()));
+            if (value > 0) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
-
-            sa.resetTargets();
-            return tapPrefTargeting(ai, source, sa, false);
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         // Check for shocklands and similar ETB replacement effects
         if (sa.hasParam("ETB")) {
             final Card source = sa.getHostCard();
@@ -134,6 +130,6 @@ public class TapAi extends TapAiBase {
                 return true;
             }
         }
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

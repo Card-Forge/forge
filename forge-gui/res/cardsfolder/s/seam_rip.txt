@@ -1,0 +1,8 @@
+Name:Seam Rip
+ManaCost:W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this enchantment enters, exile target nonland permanent an opponent controls with mana value 2 or less until this enchantment leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl+cmcLE2 | TgtPrompt$ Select target nonland permanent an opponent controls with mana value 2 or less | Duration$ UntilHostLeavesPlay
+SVar:PlayMain1:TRUE
+SVar:OblivionRing:TRUE
+Oracle:When this enchantment enters, exile target nonland permanent an opponent controls with mana value 2 or less until this enchantment leaves the battlefield.

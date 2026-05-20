@@ -1,0 +1,253 @@
+{
+  "screenWidth": 480,
+  "screenHeight": 270,
+  "skin": "skin/ui_skin.json",
+  "playerBaseSpeed": 32,
+  "minDeckSize": 40,         
+  "colorIds":["W","U","B","R","G"],
+  "colorIdNames":["tr(lblWhite) [+W]","tr(lblBlue) [+U]","tr(lblBlack) [+B]","tr(lblRed) [+R]","tr(lblGreen) [+G]"],
+  "restrictedCards": [
+    "Black Lotus",
+    "Mox Emerald",
+    "Mox Pearl",
+    "Mox Ruby",
+    "Mox Sapphire",
+    "Mox Jet",
+    "Ancestral Recall",
+    "Timetwister",
+    "Time Walk",
+    "Command Tower",
+    "Arcane Signet",
+    "Opal Palace",
+    "Path of Ancestry",
+    "War Room",
+    "Commander's Plate",
+    "Campfire",
+    "Cloudkill",
+    "Command Beacon",
+    "Commander's Insignia",
+    "Forge of Heroes",
+    "Imposing Grandeur",
+    "Jeweled Lotus",
+    "Myth Unbound",
+    "Netherborn Altar",
+    "Sanctum of Eternity",
+    "Stinging Study",
+    "Study Hall",
+    "Witch's Clinic",
+    "Time Vault",
+    "Sol Ring",
+    "Mana Crypt",
+    "Tolarian Academy",
+    "Tinker",
+    "Demonic Tutor",
+    "Vampiric Tutor",
+    "Bazaar of Baghdad",
+    "Library of Alexandria",
+    "Mana Vault",
+    "Fastbond",
+    "Mishra's Workshop",
+    "Yawgmoth's Bargain",
+    "Gaea's Cradle",
+    "Commander's Sphere",
+    "Drake Stone",
+    "Wrenn and One",
+    "Under-Construction Skyscraper",
+    "Temur Elevator",
+    "Slumbering Waterways",
+    "Omenpath to Naya",
+    "The Heron Moon",
+    "Gobland",
+    "Fetching Garden",
+    "Mox Poison",
+    "Wisedrafter's Will",
+    "New Master of Arms",
+    "Halving Season",
+    "Questing Cosplayer",
+    "Teferi, Druid of Argoth",
+    "Anax and Cymede & Kynaios and Tiro",
+    "Call from the Grave",
+    "Mise"
+    
+  ],
+  "restrictedEditions": [
+    "(ALL)"
+  ],
+  "legalCards": {
+    "editions": [
+      "FIN",
+      "FIC",
+      "FCA",
+      "RFIN"
+    ]
+  },
+  "allowedEditions": [
+    "FIN"
+  ],
+  "difficulties": [
+    {
+      "name": "Easy",
+      "startingLife": 16,
+      "startingShards": 5,
+      "startingMoney": 500,
+      "enemyLifeFactor": 0.8,
+      "spawnRank": 0,          
+      "goldLoss": 0.02,          
+      "lifeLoss": 0.1,
+      "rewardMaxFactor" : 1.5,
+      "sellFactor": 0.6,  
+      "shardSellRatio": 0.95,
+      "starterDecks": {
+        "W":"decks/starter/white_e.json",
+        "B":"decks/starter/black_e.json",
+        "U":"decks/starter/blue_e.json",
+        "R":"decks/starter/red_e.json",
+        "G":"decks/starter/green_e.json"
+      },
+      "constructedStarterDecks": {
+        "W":"decks/starter/Adventure - Low White.dck",
+        "B":"decks/starter/Adventure - Low Black.dck",
+        "U":"decks/starter/Adventure - Low Blue.dck",
+        "R":"decks/starter/Adventure - Low Red.dck",
+        "G":"decks/starter/Adventure - Low Green.dck"
+      },
+      "pileDecks": {
+        "W":"decks/starter/pile_white_e.json",
+        "B":"decks/starter/pile_black_e.json",
+        "U":"decks/starter/pile_blue_e.json",
+        "R":"decks/starter/pile_red_e.json",
+        "G":"decks/starter/pile_green_e.json"
+      },
+      "startItems": [
+        "Manasight Amulet",
+        "Leather Boots"
+      ]
+    },{
+      "name": "Normal",
+      "startingLife": 12,
+      "startingShards": 2,
+      "startingMoney": 250,
+      "startingDifficulty": true,
+      "enemyLifeFactor": 1.0,
+      "rewardMaxFactor" : 1.0,
+      "spawnRank": 1,                   
+      "goldLoss": 0.1,             
+      "lifeLoss": 0.2,  
+      "sellFactor": 0.5,      
+      "shardSellRatio": 0.8,
+      "starterDecks": {
+        "W":"decks/starter/white_n.json",
+        "B":"decks/starter/black_n.json",
+        "U":"decks/starter/blue_n.json",
+        "R":"decks/starter/red_n.json",
+        "G":"decks/starter/green_n.json"
+      },
+      "constructedStarterDecks": {
+        "W":"decks/starter/Adventure - Timeless Artifice.dck",
+        "B":"decks/starter/Adventure - Wizard Waltz.dck",
+        "U":"decks/starter/Adventure - Locke or Unlocke.dck",
+        "R":"decks/starter/Adventure - Guardian Gladiolus.dck",
+        "G":"decks/starter/Adventure - Angelo Cannon.dck"
+      },
+      "pileDecks": {
+        "W":"decks/starter/pile_white_n.json",
+        "B":"decks/starter/pile_black_n.json",
+        "U":"decks/starter/pile_blue_n.json",
+        "R":"decks/starter/pile_red_n.json",
+        "G":"decks/starter/pile_green_n.json"
+      },
+      "startItems": [
+        "Leather Boots"
+      ]
+    },{
+      "name": "Hard",
+      "startingLife": 8,
+      "startingShards": 0,
+      "startingMoney": 125,
+      "enemyLifeFactor": 1.5,
+      "rewardMaxFactor" : 0.5,
+      "spawnRank": 2,         
+      "goldLoss": 0.3,
+      "lifeLoss": 0.3,  
+      "sellFactor": 0.25,
+      "shardSellRatio": 0.6,
+      "starterDecks": {
+        "W":"decks/starter/white_h.json",
+        "B":"decks/starter/black_h.json",
+        "U":"decks/starter/blue_h.json",
+        "R":"decks/starter/red_h.json",
+        "G":"decks/starter/green_h.json"
+      },
+      "constructedStarterDecks": {
+        "W":"decks/starter/Adventure - Judge Gabranth.dck",
+        "B":"decks/starter/Adventure - Void Warlock.dck",
+        "U":"decks/starter/Adventure - Tactician Magician.dck",
+        "R":"decks/starter/Adventure - King Giott.dck",
+        "G":"decks/starter/Adventure - Heartless Evolution.dck"
+      },
+      "pileDecks": {
+        "W":"decks/starter/pile_white_h.json",
+        "B":"decks/starter/pile_black_h.json",
+        "U":"decks/starter/pile_blue_h.json",
+        "R":"decks/starter/pile_red_h.json",
+        "G":"decks/starter/pile_green_h.json"
+      }
+    },{
+      "name": "Insane",
+      "startingLife": 7,
+      "startingShards": 0,
+      "startingMoney": 0,
+      "enemyLifeFactor": 2.5,
+      "rewardMaxFactor" : 0.0,
+      "spawnRank": 2,
+      "goldLoss": 0.5,
+      "lifeLoss": 0.3,
+      "sellFactor": 0.05,
+      "shardSellRatio": 0.3,
+      "starterDecks": {
+        "W":"decks/starter/white_h.json",
+        "B":"decks/starter/black_h.json",
+        "U":"decks/starter/blue_h.json",
+        "R":"decks/starter/red_h.json",
+        "G":"decks/starter/green_h.json"
+      },
+      "constructedStarterDecks": {
+        "W":"decks/starter/Adventure - Judge Gabranth.dck",
+        "B":"decks/starter/Adventure - Void Warlock.dck",
+        "U":"decks/starter/Adventure - Tactician Magician.dck",
+        "R":"decks/starter/Adventure - King Giott.dck",
+        "G":"decks/starter/Adventure - Heartless Evolution.dck"
+      },
+      "pileDecks": {
+        "W":"decks/starter/pile_white_h.json",
+        "B":"decks/starter/pile_black_h.json",
+        "U":"decks/starter/pile_blue_h.json",
+        "R":"decks/starter/pile_red_h.json",
+        "G":"decks/starter/pile_green_h.json"
+      }
+    }
+  ],
+  "starterEditions": [
+	"JMP",
+	"DMU",
+	"BRO",
+	"J22",
+	"ONE",
+	"MOM",
+	"LTR",
+	"J25",
+	"(All)"
+  ],
+  "starterEditionNames": [
+	"Jumpstart",
+	"Dominaria United",
+	"The Brothers' War",
+	"Jumpstart 22",
+	"Phyrexia: ONE",
+	"March of the Machine",
+	"Lord of the Rings",
+	"Jumpstart 25",
+	"(All)"
+	]
+}
+

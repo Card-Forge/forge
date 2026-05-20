@@ -1,0 +1,25 @@
+[metadata]
+Name=Márton Stromgald
+[Main]
+20 Mountain|ICE
+4 Gauntlet of Might|LEA
+4 Firecat Blitz|JUD
+4 Goblin Offensive|USG
+4 Siege-Gang Commander|SCG
+2 Mogg Infestation|STH
+2 War Cadence|MMQ
+2 Mercadia's Downfall|MMQ
+2 Márton Stromgald|ICE
+2 Mob Justice|STH
+2 Kyren Negotiations|MMQ
+2 Shivan Harvest|INV
+2 Insurrection|ONS
+4 Avalanche Riders|ULG
+4 Goblin Marshal|UDS
+
+[StartInBattle_Reference]
+1 Márton Stromgald|ICE
+1 Agent of Stromgald|ALL
+1 Stromgald Cabal|ICE
+1 Knight of Stromgald|ICE
+1 Ebony Horse|3ED

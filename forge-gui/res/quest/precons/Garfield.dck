@@ -1,0 +1,43 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Garfield
+Description=Richard Garfield's red-green deck from Deckmasters 2001. Efficient creatures and burn spells in a classic design by Magic's creator.
+Deck Type=constructed
+Set=DKM
+Image=garfield.jpg
+[main]
+4 Forest|ICE|1
+4 Forest|ICE|2
+4 Forest|ICE|3
+4 Mountain|ICE|1
+4 Mountain|ICE|2
+4 Mountain|ICE|3
+1 Karplusan Forest|ICE
+2 Balduvian Bears|ICE
+1 Elvish Bard|ALL
+1 Folk of the Pines|ICE
+2 Fyndhorn Elves|ICE
+2 Giant Trap Door Spider|ICE
+1 Lhurgoyf|ICE
+2 Phyrexian War Beast|ALL
+2 Storm Shaman|ALL
+2 Walking Wall|ICE
+2 Woolly Spider|ICE
+2 Yavimaya Ancients|ALL
+2 Yavimaya Ants|ALL
+1 Bounty of the Hunt|ALL
+2 Death Spark|ALL
+2 Giant Growth|ICE
+2 Incinerate|ICE
+1 Shatter|ICE
+1 Hurricane|ICE
+1 Jokulhaups|ICE
+2 Lava Burst|ICE
+1 Pillage|ALL
+2 Barbed Sextant|ICE
+1 Elkin Bottle|ICE
+[sideboard]

@@ -1,0 +1,74 @@
+raccoon.png
+size: 256,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 240, 112
+  size: 16, 16
+Idle 
+  xy: 4, 16
+  size: 24,16   
+Idle 
+  xy: 36, 16
+  size: 24,16   
+Idle 
+  xy: 68, 16
+  size: 24,16   
+Idle 
+  xy: 100, 16
+  size: 24,16
+Idle 
+  xy: 132, 16
+  size: 24,16   
+Idle 
+  xy: 164, 16
+  size: 24,16   
+Idle 
+  xy: 196, 16
+  size: 24,16   
+Idle 
+  xy: 228, 16
+  size: 24,16 
+Walk 
+  xy: 4, 46
+  size: 24, 18  
+Walk 
+  xy: 36, 46
+  size: 24, 18  
+Walk 
+  xy: 68, 46
+  size: 24, 18  
+Walk 
+  xy: 100, 46
+  size: 24, 18  
+Walk 
+  xy: 132, 46
+  size: 24, 18  
+Walk 
+  xy: 164, 46
+  size: 24, 18 
+Attack 
+  xy: 6, 80
+  size: 24, 16
+Attack 
+  xy: 38, 80
+  size: 24, 16
+Attack 
+  xy: 70, 80
+  size: 24, 16
+Attack 
+  xy: 102, 80
+  size: 24, 16
+Death
+  xy: 0, 112
+  size: 32, 16 
+Death
+  xy: 32, 112
+  size: 32, 16  
+Death
+  xy: 64, 112
+  size: 32, 16 
+Death
+  xy: 96, 112
+  size: 32, 16 

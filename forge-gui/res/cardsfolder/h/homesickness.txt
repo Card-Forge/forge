@@ -1,0 +1,7 @@
+Name:Homesickness
+ManaCost:4 U U
+Types:Instant
+A:SP$ Draw | NumCards$ 2 | ValidTgts$ Player | SubAbility$ DBTap | SpellDescription$ Target player draws two cards. Tap up to two target creatures. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ ParentTarget | CounterType$ Stun | CounterNum$ 1
+Oracle:Target player draws two cards. Tap up to two target creatures. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)

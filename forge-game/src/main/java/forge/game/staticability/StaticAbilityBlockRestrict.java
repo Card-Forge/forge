@@ -7,14 +7,13 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class StaticAbilityBlockRestrict {
-    static String MODE = "BlockRestrict";
 
     static public int blockRestrictNum(Player defender) {
         final Game game = defender.getGame();
         int num = Integer.MAX_VALUE;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.BlockRestrict)) {
                     continue;
                 }
                 if (blockRestrict(stAb, defender)) {

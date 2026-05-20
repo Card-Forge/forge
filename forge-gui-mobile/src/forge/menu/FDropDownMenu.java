@@ -69,6 +69,11 @@ public abstract class FDropDownMenu extends FDropDown {
         }
     }
 
+    public void clearItems() {
+        clear();
+        items.clear();
+    }
+
     @Override
     public boolean tap(float x, float y, int count) {
         super.tap(x, y, count);

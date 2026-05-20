@@ -41,7 +41,6 @@ public class DamageEachEffect extends DamageBaseEffect {
         return sb.toString();
     }
 
-
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */

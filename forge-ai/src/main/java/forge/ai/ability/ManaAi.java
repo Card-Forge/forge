@@ -8,7 +8,6 @@ import forge.card.mana.ManaCost;
 import forge.game.CardTraitPredicates;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
-import forge.game.cost.CostPart;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
@@ -74,8 +73,10 @@ public class ManaAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
         if (logic.startsWith("ManaRitual")) {
              return ph.is(PhaseType.MAIN2, ai) || ph.is(PhaseType.MAIN1, ai);
-        } else if ("AtOppEOT".equals(logic)) {
-            return (!ai.getManaPool().hasBurn() || !ai.canLoseLife() || ai.cantLoseForZeroOrLessLife()) && ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
+        }
+        if ("AtOppEOT".equals(logic)) {
+            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai
+                    && (!ai.getManaPool().hasBurn() || !ai.canLoseLife() || ai.cantLoseForZeroOrLessLife());
         }
         return super.checkPhaseRestrictions(ai, sa, ph, logic);
     }
@@ -87,18 +88,22 @@ public class ManaAi extends SpellAbilityAi {
      * forge.game.spellability.SpellAbility)
      */
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         if (sa.hasParam("AILogic")) {
-            return true; // handled elsewhere, does not meet the standard requirements
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay); // handled elsewhere, does not meet the standard requirements
         }
 
         // TODO check if it would be worth it to keep mana open for opponents turn anyway
         if (ComputerUtil.activateForCost(sa, ai)) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
-        return sa.getPayCosts().hasNoManaCost() && sa.getPayCosts().isReusuableResource()
-                && sa.getSubAbility() == null && (improvesPosition(ai, sa) || ComputerUtil.playImmediately(ai, sa));
+        if (sa.getPayCosts().hasNoManaCost() && sa.getPayCosts().isReusuableResource()
+                && sa.getSubAbility() == null && (improvesPosition(ai, sa) || ComputerUtil.playImmediately(ai, sa))) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /**
@@ -112,13 +117,14 @@ public class ManaAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         final String logic = sa.getParamOrDefault("AILogic", "");
         if (logic.startsWith("ManaRitual")) {
-            return doManaRitualLogic(aiPlayer, sa, true);
+            boolean result = doManaRitualLogic(aiPlayer, sa, true);
+            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
     
     // Dark Ritual and other similar instants/sorceries that add mana to mana pool
@@ -152,13 +158,7 @@ public class ManaAi extends SpellAbilityAi {
         int numCounters = 0;
         int manaSurplus = 0;
         if ("Count$xPaid".equals(host.getSVar("X")) && sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)) {
-            CounterType ctrType = CounterType.get(CounterEnumType.KI); // Petalmane Baku
-            for (CostPart part : sa.getPayCosts().getCostParts()) {
-                if (part instanceof CostRemoveCounter) {
-                    ctrType = ((CostRemoveCounter)part).counter;
-                    break;
-                }
-            }
+            CounterType ctrType = sa.getPayCosts().getCostPartByType(CostRemoveCounter.class).counter;
             numCounters = host.getCounters(ctrType);
             manaReceived = numCounters;
             if (logic.startsWith("ManaRitualBattery.")) {
@@ -173,7 +173,7 @@ public class ManaAi extends SpellAbilityAi {
             String x = host.getSVar("X");
             if ("Count$CardsInYourHand".equals(x) && host.isInZone(ZoneType.Hand)) {
                 searchCMC--; // the spell in hand will be used
-            } else if (x.startsWith("Count$NamedInAllYards") && host.isInZone(ZoneType.Graveyard)) {
+            } else if (x.startsWith("Count$ValidGraveyard Card.named") && host.isInZone(ZoneType.Graveyard)) {
                 searchCMC--; // the spell in graveyard will be used
             }
         }
@@ -262,7 +262,7 @@ public class ManaAi extends SpellAbilityAi {
         Mana test = null;
         if (mp.isEmpty()) {
             // TODO use color from ability
-            test = new Mana((byte) ManaAtom.COLORLESS, source, null);
+            test = new Mana((byte) ManaAtom.COLORLESS, source, null, ai);
             mp.addMana(test, false);
         }
         boolean lose = mp.willManaBeLostAtEndOfPhase();

@@ -7,8 +7,6 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityCantDraw {
 
-    static String MODE = "CantDraw";
-
     public static boolean canDrawThisAmount(final Player player, int startAmount) {
         if (startAmount <= 0) {
             return true;
@@ -22,7 +20,7 @@ public class StaticAbilityCantDraw {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.CantDraw)) {
                     continue;
                 }
                 amount = applyCantDrawAmountAbility(stAb, player, amount);

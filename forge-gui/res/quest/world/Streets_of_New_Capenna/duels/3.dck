@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Genghis Khan
+Title=Genghis Khan
+Icon=Genghis Khan.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/DackF_-_Simic_Ramp_(Standard,_#1398882).dck
+Deck Type=constructed
+
+[Main]
+1 The Reality Chip
+2 Gretchen Titchwillow
+2 Hullbreaker Horror
+3 Topiary Stomper
+3 Titan of Industry
+3 Shigeki, Jukai Visionary
+3 Jacob Hauken, Inspector
+1 The Celestus
+2 Spell Pierce
+4 Jwari Disruption
+4 Fading Hope
+4 Field Trip
+4 Consuming Tide
+1 Wrenn and Seven
+1 Boseiju, Who Endures
+1 Otawara, Soaring City
+2 Hall of Storm Giants
+2 Field of Ruin
+3 Island
+4 Dreamroot Cascade
+4 Barkchannel Pathway
+6 Forest
+[Sideboard]
+1 Containment Breach
+1 Environmental Sciences
+1 Into the Roil
+1 Mascot Exhibition
+1 Saw It Coming
+1 Teachings of the Archaics
+2 Disdainful Stroke
+2 Cyclone Summoner
+2 Test of Talents
+3 Annul

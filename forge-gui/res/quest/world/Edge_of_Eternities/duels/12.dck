@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Kang
+Title=Kang
+Icon=Kang.jpg
+Difficulty=Easy
+Description=./Standard/Edge_of_Eternities/Aidan_Trotter_-_Mono-red_Aggro_(Standard,_#2642596).dck
+Deck Type=constructed
+
+[Main]
+4 Burnout Bashtronaut
+4 Emberheart Challenger
+4 Hired Claw
+3 Nova Hellkite
+4 Razorkin Needlehead
+4 Screaming Nemesis
+2 Sunspine Lynx
+1 Abrade
+4 Burst Lightning
+3 Lightning Strike
+2 Scorching Shot
+19 Mountain
+4 Rockface Village
+2 Soulstone Sanctuary
+[Sideboard]
+1 Abrade
+2 Chandra, Spark Hunter
+2 Fire Magic
+2 Magebane Lizard
+1 Nova Hellkite
+3 Obliterating Bolt
+2 Sunspine Lynx
+2 Vengeful Possession

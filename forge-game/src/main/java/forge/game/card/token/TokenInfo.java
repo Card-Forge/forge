@@ -6,8 +6,10 @@ import com.google.common.collect.Lists;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
+import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -18,13 +20,23 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperToken;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.WeakHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TokenInfo {
+    // Per-game pin so same-type tokens share art. Weak keys GC finished games.
+    private static final Map<Game, Map<String, String>> TOKEN_EDITION_PINS =
+            java.util.Collections.synchronizedMap(new WeakHashMap<>());
+
+    private static Map<String, String> getPinsFor(Game game) {
+        return TOKEN_EDITION_PINS.computeIfAbsent(game, g -> new ConcurrentHashMap<>());
+    }
+
     final String name;
     final String imageName;
     final String manaCost;
@@ -32,14 +44,14 @@ public class TokenInfo {
     final String[] intrinsicKeywords;
     final int basePower;
     final int baseToughness;
-    final String color;
+    final ColorSet color;
 
     public TokenInfo(Card c) {
         // TODO: Figure out how to handle legacy images?
         this.name = c.getName();
         this.imageName = ImageKeys.getTokenImageName(c.getImageKey());
         this.manaCost = c.getManaCost().toString();
-        this.color = MagicColor.toShortString(c.getCurrentState().getColor());
+        this.color = c.getCurrentState().getColor();
         this.types = getCardTypes(c);
 
         List<String> list = Lists.newArrayList();
@@ -60,7 +72,7 @@ public class TokenInfo {
         String[] types = null;
         String[] keywords = null;
         String imageName = null;
-        String color = "";
+        ColorSet color = null;
         for (String info : tokenInfo) {
             int index = info.indexOf(':');
             if (index == -1) {
@@ -80,7 +92,7 @@ public class TokenInfo {
             } else if (info.startsWith("Image:")) {
                 imageName = remainder;
             } else if (info.startsWith("Color:")) {
-                color = remainder;
+                color = ColorSet.fromNames(remainder);
             }
         }
 
@@ -115,7 +127,7 @@ public class TokenInfo {
         c.setName(name);
         c.setImageKey(ImageKeys.getTokenKey(imageName));
 
-        c.setColor(color.isEmpty() ? manaCost : color);
+        c.setColor(color == null ? ColorSet.fromManaCost(new ManaCost(manaCost)) : color);
         c.setGamePieceType(GamePieceType.TOKEN);
 
         for (final String t : types) {
@@ -189,7 +201,7 @@ public class TokenInfo {
                     }
                 }
 
-                result.setColor(color);
+                result.setColor(ColorSet.fromMask(color));
             }
         }
         if (!typeMap.isEmpty()) {
@@ -285,8 +297,15 @@ public class TokenInfo {
         if (sa.getKeyword() != null && sa.getKeyword().getStatic() != null) {
             editionHost = sa.getKeyword().getStatic().getHostCard();
         }
-        String edition = ObjectUtils.firstNonNull(editionHost, host).getSetCode();
+        String edition = Objects.requireNonNullElse(editionHost, host).getSetCode();
+        edition = Objects.requireNonNullElse(StaticData.instance().getCardEdition(edition).getTokenSet(script), edition);
+        Map<String, String> pins = getPinsFor(game);
+        String pinned = pins.get(script);
+        if (pinned != null) edition = pinned;
         PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
+        if (token != null && pinned == null) {
+            pins.put(script, token.getEdition());
+        }
 
         if (token == null) {
             return null;

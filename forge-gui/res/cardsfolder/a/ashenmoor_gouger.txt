@@ -2,5 +2,5 @@ Name:Ashenmoor Gouger
 ManaCost:BR BR BR
 Types:Creature Elemental Warrior
 PT:4/4
-K:CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 Oracle:Ashenmoor Gouger can't block.

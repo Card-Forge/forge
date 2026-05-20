@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=The Court Jester
+Title=The Court Jester
+Icon=The Court Jester.jpg
+Difficulty=Medium
+Description=Aether_Revolt/mtgmaster13_-_BG_Delirium_(Standard,_#668717).dck
+Deck Type=constructed
+
+[Main]
+3 Ishkanah, Grafwidow
+1 Kalitas, Traitor of Ghet
+1 Mindwrack Demon
+1 Noxious Gearhulk
+2 Tireless Tracker
+3 Walking Ballista
+4 Fatal Push
+3 Grapple with the Past
+4 Grasp of Darkness
+1 Murder
+2 Ruinous Path
+4 Traverse the Ulvenwald
+3 Yahenni's Expertise
+4 Liliana, the Last Hope
+4 Blooming Marsh
+3 Evolving Wilds
+5 Forest
+4 Hissing Quagmire
+8 Swamp
+[Sideboard]
+4 Grim Flayer
+1 Kalitas, Traitor of Ghet
+1 Murder
+2 Natural Obsolescence
+1 Nissa, Vital Force
+2 Ruinous Path
+1 To the Slaughter
+3 Transgress the Mind

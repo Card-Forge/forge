@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Agrus
+Title=Agrus
+Icon=Agrus.jpg
+Difficulty=Easy
+Description=Gatecrash/FNM_-_Redcap/William_Hyden_-_Naya_(Standard,_#47679).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Boros Reckoner
+4 Burning-Tree Emissary
+4 Ghor-Clan Rampager
+2 Hellrider
+4 Legion Loyalist
+4 Lightning Mauler
+3 Loxodon Smiter
+2 Silverblade Paladin
+2 Aurelia's Fury
+4 Boros Charm
+3 Searing Spear
+2 Pillar of Flame
+1 Clifftop Retreat
+4 Rootbound Crag
+4 Sacred Foundry
+1 Slayers' Stronghold
+4 Stomping Ground
+4 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+2 Cavern of Souls
+2 Gruul Charm
+1 Mizzium Mortars
+2 Ray of Revelation
+2 Rolling Temblor
+2 Selesnya Charm
+2 Skullcrack

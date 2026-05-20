@@ -1,0 +1,8 @@
+Name:Judgment Bolt
+ManaCost:3 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 5 | DamageMap$ True | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 5 damage to target creature and X damage to that creature's controller, where X is the number of Equipment you control.
+SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ X | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+SVar:X:Count$Valid Equipment.YouCtrl
+Oracle:Judgment Bolt deals 5 damage to target creature and X damage to that creature's controller, where X is the number of Equipment you control.

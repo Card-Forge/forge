@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Savra
+Title=Savra
+Icon=Savra.jpg
+Difficulty=Very Hard
+Description=../Modern/Fate_Reforged/RPTQ_Oath_of_the_Gatewatch_-_Roswell,_Georgia/Philip_Dickman_-_Junk_(Modern,_#336243).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Scavenging Ooze
+4 Siege Rhino
+4 Tarmogoyf
+2 Tasigur, the Golden Fang
+4 Abrupt Decay
+1 Dismember
+1 Murderous Cut
+3 Path to Exile
+2 Zealous Persecution
+3 Inquisition of Kozilek
+4 Lingering Souls
+3 Thoughtseize
+2 Sorin, Solemn Visitor
+1 Forest
+1 Gavony Township
+1 Godless Shrine
+1 Isolated Chapel
+2 Overgrown Tomb
+1 Plains
+2 Stirring Wildwood
+2 Swamp
+2 Temple Garden
+2 Treetop Village
+1 Urborg, Tomb of Yawgmoth
+4 Verdant Catacombs
+4 Windswept Heath
+[Sideboard]
+1 Celestial Purge
+1 Deglamer
+2 Drown in Sorrow
+1 Golgari Charm
+1 Kitchen Finks
+2 Spellskite
+2 Stony Silence
+3 Timely Reinforcements
+1 Wrath of God

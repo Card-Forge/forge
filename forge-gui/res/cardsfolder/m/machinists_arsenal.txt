@@ -1,0 +1,9 @@
+Name:Machinist's Arsenal
+ManaCost:4 W
+Types:Artifact Equipment
+K:Job select
+K:Equip:4:Flavor Machina
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ X | AddPower$ X | AddType$ Artificer | Description$ Equipped creature gets +2/+2 for each artifact you control and is an Artificer in addition to its other types.
+SVar:X:Count$Valid Artifact.YouCtrl/Times.2
+DeckHints:Type$Artifact
+Oracle:Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)\nEquipped creature gets +2/+2 for each artifact you control and is an Artificer in addition to its other types.\nMachina — Equip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)

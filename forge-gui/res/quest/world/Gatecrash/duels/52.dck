@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Ajok
+Title=Ajok
+Icon=Ajok.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/Modern_Tuniers_vom_Samstag_den_17.08.2013/Markus_Kufer_-_Red_Deck_Wins_(Modern,_#56680).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+3 Grim Lavamancer
+4 Hellspark Elemental
+4 Keldon Marauders
+4 Vexing Devil
+4 Lightning Bolt
+4 Magma Jet
+3 Searing Blaze
+2 Shard Volley
+2 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+10 Mountain
+4 Scalding Tarn
+[Sideboard]
+4 Blood Moon
+4 Smash to Smithereens
+2 Torpor Orb
+3 Volcanic Fallout

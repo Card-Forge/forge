@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Galahad
+Title=Galahad
+Icon=Galahad.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/Cedric_Auro_-_Zoo_(Modern,_#787162).dck
+Deck Type=constructed
+
+[Main]
+3 Tarmogoyf
+4 Reckless Bushwhacker
+4 Burning-Tree Emissary
+4 Wild Nacatl
+1 Vexing Devil
+2 Pelt Collector
+2 Thalia, Guardian of Thraben
+3 Narnam Renegade
+4 Kird Ape
+4 Goblin Guide
+3 Path to Exile
+4 Atarka's Command
+4 Lightning Bolt
+1 Forest
+4 Arid Mesa
+1 Mountain
+1 Sacred Foundry
+2 Stomping Ground
+1 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Path to Exile
+1 Torpor Orb
+2 Dromoka's Command
+3 Destructive Revelry
+1 Deflecting Palm
+2 Pyroclasm
+1 Grafdigger's Cage
+1 Selfless Spirit
+1 Kataki, War's Wage
+2 Kor Firewalker

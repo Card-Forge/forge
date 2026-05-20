@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Tarkir: Dragonstorm #03
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/04/latest-2-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Ensure your solution satisfies all possible blocks. Any cards drawn are irrelevant to the puzzle. Good luck
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Sarkhan's Resolve;Lie in Wait;Kishla Trawlers;Caustic Exhale
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0graveyard=Adorned Crocodile;Salt Road Skirmish
+p0battlefield=Kheru Goldkeeper;Attuned Hunter;Island;Swamp;Swamp;Forest;Forest;Forest
+p1life=12
+p1battlefield=Riling Dawnbreaker;Furious Forebear

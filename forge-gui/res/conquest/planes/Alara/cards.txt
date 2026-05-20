@@ -18,14 +18,14 @@ Duskmantle Prowler
 Duty-Bound Dead
 Knight of Glory
 Knight of Infamy
-Nefarox, Overlord of Grixis
+Nefarox, Overlord of Grixis|C16
 Servant of Nefarox
 Cathedral of War
-Meren of Clan Nel Toth
-Jazal Goldmane
-Jhessian Thief
-Rhox Faithmender
+Meren of Clan Nel Toth|C15
+Jazal Goldmane|C14
+Jhessian Thief|ORI
+Rhox Faithmender|M13
 Rhox Pikemaster
-Scourge of Nel Toth
-Breya, Etherium Shaper
-Yidris, Maelstrom Wielder
+Scourge of Nel Toth|C15
+Breya, Etherium Shaper|C16
+Yidris, Maelstrom Wielder|C16

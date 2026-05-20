@@ -8,46 +8,43 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityAttackRestrict {
 
-    static String MODE = "AttackRestrict";
-
-    static public int globalAttackRestrict(Game game) {
-        int max = Integer.MAX_VALUE;
+    static public Integer globalAttackRestrict(Game game) {
+        Integer max = null;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)
+                if (!stAb.checkConditions(StaticAbilityMode.AttackRestrict)
                         || stAb.hasParam("ValidDefender")) {
                     continue;
                 }
                 int stMax = AbilityUtils.calculateAmount(stAb.getHostCard(),
                         stAb.getParamOrDefault("MaxAttackers", "1"), stAb);
-                if (stMax < max) {
+                if (null == max || stMax < max) {
                     max = stMax;
                 }
             }
         }
-        return max < Integer.MAX_VALUE ? max : -1;
+        return max;
     }
 
-    static public int attackRestrictNum(GameEntity defender) {
+    static public Integer attackRestrictNum(GameEntity defender) {
         final Game game = defender.getGame();
-        int num = Integer.MAX_VALUE;
+        Integer num = null;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)
+                if (!stAb.checkConditions(StaticAbilityMode.AttackRestrict)
                         || !stAb.hasParam("ValidDefender")) {
                     continue;
                 }
                 if (attackRestrict(stAb, defender)) {
                     int stNum = AbilityUtils.calculateAmount(stAb.getHostCard(),
                             stAb.getParamOrDefault("MaxAttackers", "1"), stAb);
-                    if (stNum < num) {
+                    if (null == num || stNum < num) {
                         num = stNum;
                     }
                 }
-
             }
         }
-        return num < Integer.MAX_VALUE ? num : -1;
+        return num;
     }
 
     static public boolean attackRestrict(StaticAbility stAb, GameEntity defender) {

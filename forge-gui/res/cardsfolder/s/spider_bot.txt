@@ -1,0 +1,9 @@
+Name:Spider-Bot
+Variant:UniversesWithin:FlavorName:Steelweb Surveyor
+ManaCost:2
+Types:Artifact Creature Spider Robot Scout
+PT:2/1
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may search your library for a basic land card, reveal it, then shuffle and put that card on top.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | ShuffleNonMandatory$ True
+Oracle:Reach\nWhen this creature enters, you may search your library for a basic land card, reveal it, then shuffle and put that card on top.

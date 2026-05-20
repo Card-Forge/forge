@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Sharee
+Title=Sharee
+Icon=Sharee.jpg
+Difficulty=Hard
+Description=./Modern/Avatar_The_Last_Airbender/Adam_Brace_-_Golgari_Yawgmoth_(Modern,_#2704878).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Delighted Halfling
+4 Walking Ballista
+4 Yawgmoth, Thran Physician
+4 Young Wolf
+1 Endurance
+4 Agatha's Soul Cauldron
+1 Chord of Calling
+4 Malevolent Rumble
+3 Green Sun's Zenith
+4 Dredger's Insight
+2 Grist, the Hunger Tide
+1 Dryad Arbor
+4 Verdant Catacombs
+3 Spymaster's Vault
+2 Boseiju, Who Endures
+2 Forest
+2 Misty Rainforest
+2 Overgrown Tomb
+2 Underground Mortuary
+2 Windswept Heath
+1 Swamp
+[Sideboard]
+3 Fatal Push
+3 Thoughtseize
+2 Ashiok, Dream Render
+2 Force of Vigor
+1 Grist, the Hunger Tide
+1 Outland Liberator
+1 Scavenging Ooze
+1 Strategic Betrayal
+1 Vexing Bauble

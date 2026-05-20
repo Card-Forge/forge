@@ -105,6 +105,8 @@ public final class SColumnUtil {
 
     public static Map<ColumnDef, ItemColumnConfig> getDeckEditorDefaultColumns() {
         Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(ColumnDef.DECK_QUANTITY, false);
+        columns.put(ColumnDef.DECK_KEY_CARD, new ItemColumnConfig(ColumnDef.DECK_KEY_CARD));
+        columns.get(ColumnDef.DECK_KEY_CARD).setIndex(columns.size() - 1);
         columns.get(ColumnDef.CMC).setSortPriority(1);
         columns.get(ColumnDef.TYPE).setSortPriority(2);
         columns.get(ColumnDef.NAME).setSortPriority(3);
@@ -144,9 +146,11 @@ public final class SColumnUtil {
     }
 
     public static Map<ColumnDef, ItemColumnConfig> getAdventureCollectionDefaultColumns() {
-        Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(ColumnDef.QUANTITY, false, false, false, true, false);
+        Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(ColumnDef.QUANTITY, true, false, true, true, false);
         columns.get(ColumnDef.NEW).setSortPriority(1);
-        columns.get(ColumnDef.NAME).setSortPriority(2);
+        columns.get(ColumnDef.FAVORITE).setSortPriority(2);
+        columns.get(ColumnDef.NAME).setSortPriority(3);
+        columns.get(ColumnDef.PRICE).setSortPriority(4);
         return columns;
     }
 
@@ -232,6 +236,10 @@ public final class SColumnUtil {
     }
 
     public static Map<ColumnDef, ItemColumnConfig> getDecksDefaultColumns(boolean allowEdit, boolean includeFolder) {
+        return getDecksDefaultColumns(allowEdit, includeFolder, false);
+    }
+
+    public static Map<ColumnDef, ItemColumnConfig> getDecksDefaultColumns(boolean allowEdit, boolean includeFolder, boolean includeBracket) {
         List<ColumnDef> colDefs = new ArrayList<>();
         colDefs.add(ColumnDef.DECK_FAVORITE);
         if (allowEdit) {
@@ -244,6 +252,9 @@ public final class SColumnUtil {
         colDefs.add(ColumnDef.DECK_COLOR);
         colDefs.add(ColumnDef.DECK_FORMAT);
         colDefs.add(ColumnDef.DECK_EDITION);
+        if (includeBracket) {
+            colDefs.add(ColumnDef.DECK_BRACKET);
+        }
         colDefs.add(ColumnDef.DECK_MAIN);
         colDefs.add(ColumnDef.DECK_SIDE);
         colDefs.add(ColumnDef.DECK_AI);

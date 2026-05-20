@@ -1,0 +1,8 @@
+Name:Uthros Psionicist
+ManaCost:2 U
+Types:Creature Jellyfish Scientist
+PT:2/4
+S:Mode$ ReduceCost | ValidCard$ Card | Type$ Spell | Activator$ You | Amount$ 2 | CheckSVar$ YouCastThisTurn | SVarCompare$ EQ1 | Description$ The second spell you cast each turn costs {2} less to cast.
+SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
+SVar:PlayMain1:TRUE
+Oracle:The second spell you cast each turn costs {2} less to cast.

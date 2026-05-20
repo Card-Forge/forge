@@ -7,13 +7,11 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityCantTransform {
 
-    static String MODE = "CantTransform";
-
     static public boolean cantTransform(Card card, CardTraitBase cause) {
         final Game game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.CantTransform)) {
                     continue;
                 }
                 if (applyCantTransformAbility(stAb, card, cause)) {

@@ -5,6 +5,6 @@ K:Enchant:Creature
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted creature.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.AttachedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
-T:Mode$ VisitAttraction | ValidCard$ Attraction.YouCtrl | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigAttach | TriggerDescription$ Whenever you visit an Attraction, you may attach CARDNAME to target tapped creature.
-SVar:TrigAttach:DB$ Attach | Defined$ Self | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature
+T:Mode$ VisitAttraction | TriggerZones$ Battlefield | ValidCard$ Attraction.YouCtrl | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigAttach | TriggerDescription$ Whenever you visit an Attraction, you may attach CARDNAME to target tapped creature.
+SVar:TrigAttach:DB$ Attach | Object$ Self | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature
 Oracle:Enchant creature\nWhen Motion Sickness enters the battlefield, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.\nWhenever you visit an Attraction, you may attach Motion Sickness to target tapped creature.

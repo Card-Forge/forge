@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 
 import forge.adventure.scene.DuelScene;
 import forge.adventure.util.Config;
@@ -17,11 +16,11 @@ import forge.item.IPaperCard;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.GuiMobile;
 import forge.LobbyPlayer;
 import forge.assets.FImage;
 import forge.assets.FSkin;
@@ -40,10 +39,13 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
-import forge.gamemodes.match.AbstractGuiGame;
+import forge.gamemodes.match.YieldMarker;
+import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.match.HostedMatch;
+import forge.interfaces.IGameController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.gui.interfaces.IGuiGame.OrderResult;
 import forge.gui.util.SGuiChoose;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
@@ -67,13 +69,12 @@ import forge.toolbox.FButton;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
+import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
-import forge.util.Localizer;
-import forge.util.MessageUtil;
 import forge.util.WaitCallback;
 import forge.util.collect.FCollectionView;
 
-public class MatchController extends AbstractGuiGame {
+public class MatchController extends NetworkGuiGame {
     private MatchController() { }
     public static final MatchController instance = new MatchController();
 
@@ -145,7 +146,7 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void refreshField() {
-        if(!GuiBase.isNetworkplay())
+        if(!GuiBase.isNetPlay(this))
             return;
         refreshCardDetails(null);
     }
@@ -174,14 +175,17 @@ public class MatchController extends AbstractGuiGame {
             final VPlayerPanel playerPanel = new VPlayerPanel(p, isLocal || noHumans, players.size());
             if (isLocal && !init) {
                 playerPanels.add(0, playerPanel); //ensure local player always first among player panels
+                playerPanel.setBottomPlayer(true);
                 init = true;
             }
             else {
                 playerPanels.add(playerPanel);
+                if (playerPanel.equals(playerPanels.get(0)))
+                    playerPanel.setBottomPlayer(true);
             }
         }
         view = new MatchScreen(playerPanels);
-        if(GuiBase.isNetworkplay())
+        if(GuiBase.isNetPlay(this))
             view.resetFields();
         clearSelectables();  //fix uncleared selection
 
@@ -210,11 +214,16 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void showPromptMessage(final PlayerView player, final String message) {
+        cancelWaitingTimer();
+        view.getPrompt(player).setMessage(message);
+    }
+    public void showPromptMessageNoCancel(final PlayerView player, final String message) {
         view.getPrompt(player).setMessage(message);
     }
 
     @Override
     public void showCardPromptMessage(final PlayerView player, final String message, final CardView card) {
+        cancelWaitingTimer();
         view.getPrompt(player).setMessage(message, card);
     }
 
@@ -250,19 +259,15 @@ public class MatchController extends AbstractGuiGame {
                 final VPhaseIndicator.PhaseLabel phaseLabel = view.getPlayerPanel(lastPlayer).getPhaseIndicator().getLabel(ph);
                 if (phaseLabel != null)
                     phaseLabel.setActive(true);
-                if (GuiBase.isNetworkplay())
-                    getGameView().updateNeedsPhaseRedrawn(lastPlayer, PhaseType.CLEANUP);
             } else if (getGameView().getPlayerTurn() != null) {
                 //set phaselabel
                 final VPhaseIndicator.PhaseLabel phaseLabel = view.getPlayerPanel(getGameView().getPlayerTurn()).getPhaseIndicator().getLabel(ph);
                 if (phaseLabel != null)
                     phaseLabel.setActive(true);
-                if (GuiBase.isNetworkplay())
-                    getGameView().updateNeedsPhaseRedrawn(getGameView().getPlayerTurn(), ph);
             }
         }
 
-        if(GuiBase.isNetworkplay())
+        if(GuiBase.isNetPlay(this))
             checkStack();
 
         if (ph != null && saveState && ph.isMain()) {
@@ -510,16 +515,16 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public void setSelectables(final Iterable<CardView> cards) {
-        super.setSelectables(cards);
+    public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
+        super.setSelectables(cards, min, max);
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 if ( p.getCards(ZoneType.Battlefield) != null ) {
-                    updateCards(p.getCards(ZoneType.Battlefield));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
                 }
                 if ( p.getCards(ZoneType.Hand) != null ) {
-                    updateCards(p.getCards(ZoneType.Hand));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
                 }
             }
         });
@@ -532,10 +537,10 @@ public class MatchController extends AbstractGuiGame {
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 if ( p.getCards(ZoneType.Battlefield) != null ) {
-                    updateCards(p.getCards(ZoneType.Battlefield));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
                 }
                 if ( p.getCards(ZoneType.Hand) != null ) {
-                    updateCards(p.getCards(ZoneType.Hand));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
                 }
             }
         });
@@ -557,69 +562,40 @@ public class MatchController extends AbstractGuiGame {
 
     private static void actuateMatchPreferences() {
         final ForgePreferences prefs = FModel.getPreferences();
+        final List<VPlayerPanel> panels = view.getPlayerPanelsList();
+        final PhaseType[] phases = PhaseType.values();
 
-        for (int i=0; i<view.getPlayerPanelsList().size()-1; ++i){
-            VPhaseIndicator fvAi = view.getPlayerPanelsList().get(i).getPhaseIndicator();
-            fvAi.getLabel(PhaseType.UPKEEP).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_UPKEEP));
-            fvAi.getLabel(PhaseType.DRAW).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_DRAW));
-            fvAi.getLabel(PhaseType.MAIN1).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_MAIN1));
-            fvAi.getLabel(PhaseType.COMBAT_BEGIN).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_BEGINCOMBAT));
-            fvAi.getLabel(PhaseType.COMBAT_DECLARE_ATTACKERS).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_DECLAREATTACKERS));
-            fvAi.getLabel(PhaseType.COMBAT_DECLARE_BLOCKERS).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_DECLAREBLOCKERS));
-            fvAi.getLabel(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_FIRSTSTRIKE));
-            fvAi.getLabel(PhaseType.COMBAT_DAMAGE).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_COMBATDAMAGE));
-            fvAi.getLabel(PhaseType.COMBAT_END).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_ENDCOMBAT));
-            fvAi.getLabel(PhaseType.MAIN2).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_MAIN2));
-            fvAi.getLabel(PhaseType.END_OF_TURN).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_EOT));
-            fvAi.getLabel(PhaseType.CLEANUP).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_AI_CLEANUP));
+        for (final VPlayerPanel panel : panels) {
+            final PlayerView player = panel.getPlayer();
+            final FPref[] keys = instance.isLocalPlayer(player)
+                    ? FPref.PHASES_HUMAN : FPref.PHASES_AI;
+            final VPhaseIndicator pi = panel.getPhaseIndicator();
+            for (int p = 1; p < phases.length; p++) {
+                final PhaseType phase = phases[p];
+                final VPhaseIndicator.PhaseLabel label = pi.getLabel(phase);
+                label.setStopAtPhase(prefs.getPrefBoolean(keys[p - 1]));
+                label.setOnToggled(() -> instance.pushSkipPhaseToControllers(player, phase));
+                label.setOnLongPress(() -> instance.handleYieldMarkerToggle(player, phase,
+                        () -> label.setStopAtPhase(true)));
+            }
         }
 
-        final VPhaseIndicator fvHuman = view.getBottomPlayerPanel().getPhaseIndicator();
-        fvHuman.getLabel(PhaseType.UPKEEP).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_UPKEEP));
-        fvHuman.getLabel(PhaseType.DRAW).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DRAW));
-        fvHuman.getLabel(PhaseType.MAIN1).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_MAIN1));
-        fvHuman.getLabel(PhaseType.COMBAT_BEGIN).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_BEGINCOMBAT));
-        fvHuman.getLabel(PhaseType.COMBAT_DECLARE_ATTACKERS).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREATTACKERS));
-        fvHuman.getLabel(PhaseType.COMBAT_DECLARE_BLOCKERS).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREBLOCKERS));
-        fvHuman.getLabel(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_FIRSTSTRIKE));
-        fvHuman.getLabel(PhaseType.COMBAT_DAMAGE).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_COMBATDAMAGE));
-        fvHuman.getLabel(PhaseType.COMBAT_END).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_ENDCOMBAT));
-        fvHuman.getLabel(PhaseType.MAIN2).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_MAIN2));
-        fvHuman.getLabel(PhaseType.END_OF_TURN).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_EOT));
-        fvHuman.getLabel(PhaseType.CLEANUP).setStopAtPhase(prefs.getPrefBoolean(FPref.PHASE_HUMAN_CLEANUP));
+        instance.seedYieldStateOnHost();
     }
 
     public static void writeMatchPreferences() {
         final ForgePreferences prefs = FModel.getPreferences();
+        final List<VPlayerPanel> panels = view.getPlayerPanelsList();
+        final PhaseType[] phases = PhaseType.values();
 
-        final VPhaseIndicator fvAi = view.getTopPlayerPanel().getPhaseIndicator();
-        prefs.setPref(FPref.PHASE_AI_UPKEEP, String.valueOf(fvAi.getLabel(PhaseType.UPKEEP).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_DRAW, String.valueOf(fvAi.getLabel(PhaseType.DRAW).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_MAIN1, String.valueOf(fvAi.getLabel(PhaseType.MAIN1).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_BEGINCOMBAT, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_BEGIN).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_DECLAREATTACKERS, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_DECLARE_ATTACKERS).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_DECLAREBLOCKERS, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_DECLARE_BLOCKERS).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_FIRSTSTRIKE, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_COMBATDAMAGE, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_DAMAGE).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_ENDCOMBAT, String.valueOf(fvAi.getLabel(PhaseType.COMBAT_END).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_MAIN2, String.valueOf(fvAi.getLabel(PhaseType.MAIN2).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_EOT, String.valueOf(fvAi.getLabel(PhaseType.END_OF_TURN).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_AI_CLEANUP, String.valueOf(fvAi.getLabel(PhaseType.CLEANUP).getStopAtPhase()));
-
-        final VPhaseIndicator fvHuman = view.getBottomPlayerPanel().getPhaseIndicator();
-        prefs.setPref(FPref.PHASE_HUMAN_UPKEEP, String.valueOf(fvHuman.getLabel(PhaseType.UPKEEP).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_DRAW, String.valueOf(fvHuman.getLabel(PhaseType.DRAW).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_MAIN1, String.valueOf(fvHuman.getLabel(PhaseType.MAIN1).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_BEGINCOMBAT, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_BEGIN).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_DECLAREATTACKERS, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_DECLARE_ATTACKERS).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_DECLAREBLOCKERS, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_DECLARE_BLOCKERS).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_FIRSTSTRIKE, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_COMBATDAMAGE, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_DAMAGE).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_ENDCOMBAT, String.valueOf(fvHuman.getLabel(PhaseType.COMBAT_END).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_MAIN2, String.valueOf(fvHuman.getLabel(PhaseType.MAIN2).getStopAtPhase()));
-        prefs.setPref(FPref.PHASE_HUMAN_EOT, fvHuman.getLabel(PhaseType.END_OF_TURN).getStopAtPhase());
-        prefs.setPref(FPref.PHASE_HUMAN_CLEANUP, fvHuman.getLabel(PhaseType.CLEANUP).getStopAtPhase());
-
+        for (final VPlayerPanel panel : panels) {
+            final FPref[] keys = instance.isLocalPlayer(panel.getPlayer())
+                    ? FPref.PHASES_HUMAN : FPref.PHASES_AI;
+            final VPhaseIndicator pi = panel.getPhaseIndicator();
+            for (int p = 1; p < phases.length; p++) {
+                prefs.setPref(keys[p - 1], String.valueOf(pi.getLabel(phases[p]).getStopAtPhase()));
+            }
+        }
         prefs.save();
     }
 
@@ -650,23 +626,17 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final List<String> options) {
-        final List<String> optionsToUse;
-        if (options == null) {
-            optionsToUse = ImmutableList.of(Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"));
-        } else {
-            optionsToUse = options;
-        }
-        return FOptionPane.showCardOptionDialog(c, question, "", SOptionPane.INFORMATION_ICON, optionsToUse, defaultIsYes ? 0 : 1) == 0;
+        return FOptionPane.showCardOptionDialog(c, question, "", SOptionPane.INFORMATION_ICON, options, defaultIsYes ? 0 : 1) == 0;
     }
 
     @Override
-    public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final List<T> selected, final Function<T, String> display) {
+    public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final List<T> selected, final FSerializableFunction<T, String> display) {
         return GuiBase.getInterface().getChoices(message, min, max, choices, selected, display);
     }
 
     @Override
-    public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax, final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
-        return GuiBase.getInterface().order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices);
+    public <T> OrderResult<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax, final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode, final boolean showRememberCheckbox) {
+        return ((GuiMobile) GuiBase.getInterface()).order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, showRememberCheckbox);
     }
 
     @Override
@@ -689,15 +659,11 @@ public class MatchController extends AbstractGuiGame {
             return SGuiChoose.one(title, optionList);
         }
 
-        final Collection<CardView> revealList = delayedReveal.getCards();
-        final String revealListCaption = StringUtils.capitalize(MessageUtil.formatMessage("{player's} " + delayedReveal.getZone().getTranslatedName(), delayedReveal.getOwner(), delayedReveal.getOwner()));
-        final FImage revealListImage = VPlayerPanel.iconFromZone(delayedReveal.getZone());
-
         //use special dialog for choosing card and offering ability to see all revealed cards at the same time
         return new WaitCallback<GameEntityView>() {
             @Override
             public void run() {
-                final GameEntityPicker picker = new GameEntityPicker(title, optionList, revealList, revealListCaption, revealListImage, isOptional, this);
+                final GameEntityPicker picker = new GameEntityPicker(title, optionList, delayedReveal, isOptional, this);
                 picker.show();
             }
         }.invokeAndWait();
@@ -712,8 +678,8 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public List<CardView> manipulateCardList(final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
-	System.err.println("Not implemented yet - should never be called");
-	return null;
+        System.err.println("Not implemented yet - should never be called");
+        return null;
     }
 
     @Override
@@ -728,7 +694,47 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public boolean isUiSetToSkipPhase(final PlayerView playerTurn, final PhaseType phase) {
+        final PlayerView master = playerTurn.getMindSlaveMaster();
+        if (master != null && view.stopAtPhase(master, phase)) {
+            return false;
+        }
         return !view.stopAtPhase(playerTurn, phase);
+    }
+
+    @Override
+    public void refreshYieldUi(final PlayerView player) {
+        FThreads.invokeInEdtNowOrLater(() -> {
+            if (view == null) {
+                return;
+            }
+            // Marker only rendered for the local player's view.
+            PlayerView local = getCurrentPlayer();
+            if (!player.equals(local)) {
+                return;
+            }
+            for (final VPlayerPanel panel : view.getPlayerPanelsList()) {
+                for (VPhaseIndicator.PhaseLabel l : panel.getPhaseIndicator().allLabels()) {
+                    l.setYieldMarked(false);
+                }
+            }
+            IGameController controller = getGameController(local);
+            YieldMarker marker = controller != null ? controller.getYieldController().getAutoPassUntilMarker() : null;
+            if (marker == null) {
+                return;
+            }
+            VPlayerPanel markedPanel = view.getPlayerPanel(marker.getPhaseOwner());
+            if (markedPanel == null) {
+                return;
+            }
+            VPhaseIndicator markedPi = markedPanel.getPhaseIndicator();
+            if (markedPi == null) {
+                return;
+            }
+            VPhaseIndicator.PhaseLabel target = markedPi.getLabel(marker.getPhase());
+            if (target != null) {
+                target.setYieldMarked(true);
+            }
+        });
     }
 
     public static HostedMatch hostMatch() {
@@ -748,10 +754,7 @@ public class MatchController extends AbstractGuiGame {
         FPopupMenu menu = new FPopupMenu() {
             @Override
             protected void buildMenu() {
-                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblFullControl"),
-                        e -> {
-                            FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblFullControlDetails"), "Full Control details");
-                        }));
+                addItem(new FMenuItem("- " + Forge.getLocalizer().getMessage("lblFullControl") + " -", null, false));
                 addItem(getFullControlMenuEntry("lblChooseCostOrder", FullControlFlag.ChooseCostOrder, controlFlags));
                 addItem(getFullControlMenuEntry("lblChooseCostReductionOrder", FullControlFlag.ChooseCostReductionOrderAndVariableAmount, controlFlags));
                 addItem(getFullControlMenuEntry("lblNoPaymentFromManaAbility", FullControlFlag.NoPaymentFromManaAbility, controlFlags));

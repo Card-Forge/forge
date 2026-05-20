@@ -1,0 +1,10 @@
+Name:Stormforged Armor
+ManaCost:1 R R
+Types:Legendary Artifact Equipment
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddTrigger$ ArmorAttack | AddSVar$ ArmorConjure & ArmorSetAtt & ArmorClean | Description$ Equipped creature has "Whenever this creature attacks, conjure a card named Ball Lightning onto the battlefield tapped and attacking."
+SVar:ArmorAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ ArmorConjure | TriggerDescription$ Whenever this creature attacks, conjure a card named Ball Lightning onto the battlefield tapped and attacking.
+SVar:ArmorConjure:DB$ MakeCard | Conjure$ True | Name$ Ball Lightning | Zone$ Battlefield | Tapped$ True | RememberMade$ True | SubAbility$ ArmorSetAtt
+SVar:ArmorSetAtt:DB$ ChangeCombatants | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.YouCtrl | Attacking$ True | SubAbility$ ArmorClean
+SVar:ArmorClean:DB$ Cleanup | ClearRemembered$ True
+K:Equip:PayLife<3>
+Oracle:Equipped creature has "Whenever this creature attacks, conjure a card named Ball Lightning onto the battlefield tapped and attacking."\nEquip—Pay 3 life.

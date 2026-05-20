@@ -1,0 +1,8 @@
+Name:Item Shopkeep
+ManaCost:1 R
+Types:Creature Human Citizen
+PT:2/2
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, target attacking equipped creature gains menace until end of turn. (It can't be blocked except by two or more creatures.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+equipped | TgtPrompt$ Select target attacking creature | KW$ Menace
+SVar:PlayMain1:TRUE
+Oracle:Whenever you attack, target attacking equipped creature gains menace until end of turn. (It can't be blocked except by two or more creatures.)

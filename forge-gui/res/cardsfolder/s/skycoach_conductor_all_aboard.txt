@@ -1,0 +1,21 @@
+Name:Skycoach Conductor
+ManaCost:2 U
+Types:Creature Bird Pilot
+PT:2/3
+K:Flash
+K:Flying
+K:Vigilance
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+AlternateMode:Prepare
+Oracle:Flash\nFlying, vigilance\nThis creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:All Aboard
+ManaCost:U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature.nonPilot+YouCtrl | Origin$ Battlefield | Destination$ Exile | ValidTgtDesc$ non-Pilot creature you control | RememberTargets$ True | SubAbility$ DBReturn | SpellDescription$ Exile target non-Pilot creature you control, then return that card to the battlefield under its owner's control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Exile target non-Pilot creature you control, then return that card to the battlefield under its owner's control.

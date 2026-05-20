@@ -1,0 +1,12 @@
+Name:Ardyn, the Usurper
+ManaCost:5 B B B
+Types:Legendary Creature Elder Human Noble
+PT:4/4
+S:Mode$ Continuous | Affected$ Demon.YouCtrl | AddKeyword$ Menace & Lifelink & Haste | Description$ Demons you control have menace, lifelink, and haste.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Starscourge — At the beginning of combat on your turn, exile up to one target creature card from a graveyard. If you exiled a card this way, create a token that's a copy of that card, except it's a 5/5 black Demon.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | RememberChanged$ True | TgtPrompt$ Select up to one target creature card from a graveyard | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 5 | SetToughness$ 5 | SetColor$ Black | SetCreatureTypes$ Demon | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Demon
+Oracle:Demons you control have menace, lifelink, and haste.\nStarscourge — At the beginning of combat on your turn, exile up to one target creature card from a graveyard. If you exiled a card this way, create a token that's a copy of that card, except it's a 5/5 black Demon.

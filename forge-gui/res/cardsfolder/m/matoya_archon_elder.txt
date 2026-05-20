@@ -1,0 +1,8 @@
+Name:Matoya, Archon Elder
+ManaCost:2 U
+Types:Legendary Creature Human Warlock
+PT:1/4
+T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you scry or surveil, draw a card. (Draw after you scry or surveil.)
+T:Mode$ Surveil | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever you scry or surveil, draw a card. (Draw after you scry or surveil.)
+SVar:TrigDraw:DB$ Draw
+Oracle:Whenever you scry or surveil, draw a card. (Draw after you scry or surveil.)

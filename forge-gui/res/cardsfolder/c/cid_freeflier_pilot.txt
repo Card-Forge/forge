@@ -1,0 +1,9 @@
+Name:Cid, Freeflier Pilot
+ManaCost:1 W
+Types:Legendary Creature Human Warrior Pilot
+PT:2/2
+S:Mode$ ReduceCost | ValidCard$ Equipment,Vehicle | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Equipment and Vehicle spells you cast cost {1} less to cast.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | Condition$ PlayerTurn | Description$ Jump — During your turn, NICKNAME has flying.
+A:AB$ ChangeZone | Cost$ 2 T | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target Equipment or Vehicle card in your graveyard | ValidTgts$ Equipment.YouOwn,Vehicle.YouOwn | SpellDescription$ Return target Equipment or Vehicle card from your graveyard to your hand.
+DeckHints:Type$Instant|Sorcery
+Oracle:Equipment and Vehicle spells you cast cost {1} less to cast.\nJump — During your turn, Cid has flying.\n{2}, {T}: Return target Equipment or Vehicle card from your graveyard to your hand.

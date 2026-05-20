@@ -3,6 +3,6 @@ ManaCost:3
 Types:Artifact
 R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This artifact doesn't untap during your untap step.
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 3 | SpellDescription$ Add {C}{C}{C}.
-A:AB$ Untap | Cost$ 3 | AILogic$ EOT | AIManaPref$ NotSameCard | SpellDescription$ Untap this artifact.
+A:AB$ Untap | Cost$ 3 | AILogic$ AtOppEOT | AIManaPref$ NotSameCard | SpellDescription$ Untap this artifact.
 AI:RemoveDeck:Random
 Oracle:This artifact doesn't untap during your untap step.\n{T}: Add {C}{C}{C}.\n{3}: Untap this artifact.

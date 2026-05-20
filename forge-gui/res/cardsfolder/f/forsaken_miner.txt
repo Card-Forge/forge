@@ -2,7 +2,7 @@ Name:Forsaken Miner
 ManaCost:B
 Types:Creature Skeleton Rogue
 PT:2/2
-K:CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Graveyard | Execute$ TrigChange | TriggerDescription$ Whenever you commit a crime, you may pay {B}. If you do, return CARDNAME from your graveyard to the battlefield. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
 SVar:TrigChange:AB$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Battlefield
 SVar:DiscardMe:2

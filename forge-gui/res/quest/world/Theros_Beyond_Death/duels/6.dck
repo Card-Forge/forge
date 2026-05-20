@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Boba Fett
+Title=Boba Fett
+Icon=Boba Fett.jpg
+Difficulty=Easy
+Description=./Standard/Theros_Beyond_Death/Agustin_Oscar_Porcile_-_Mono-W_Aggro_(Standard,_#948492).dck
+Deck Type=constructed
+
+[Main]
+1 Archon of Sun's Grace
+3 Linden, the Steadfast Queen
+4 Daxos, Blessed by the Sun
+4 Faerie Guidemother
+4 Alseid of Life's Bounty
+4 Ajani's Pridemate
+4 Heliod, Sun-Crowned
+4 Transcendent Envoy
+3 Karametra's Blessing
+4 All That Glitters
+4 Sentinel's Eyes
+2 Idyllic Grange
+3 Castle Ardenvale
+17 Plains
+[Sideboard]
+3 Eidolon of Obstruction
+4 Heliod's Punishment
+4 Devout Decree
+4 Daybreak Chaplain

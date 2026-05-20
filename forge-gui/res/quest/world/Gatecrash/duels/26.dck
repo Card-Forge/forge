@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=BlackPanther
+Title=BlackPanther
+Icon=BlackPanther.jpg
+Difficulty=Easy
+Description=Gatecrash/Magic-League_Standard_Trial_08-02-2013/Metal_slime_-_Boros_(Standard,_#45398).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+4 Boros Reckoner
+4 Hellrider
+4 Lightning Mauler
+4 Rakdos Cackler
+2 Stonewright
+4 Stromkirk Noble
+2 Thundermaw Hellkite
+2 Boros Charm
+4 Searing Spear
+3 Pillar of Flame
+3 Clifftop Retreat
+1 Hellion Crucible
+15 Mountain
+4 Sacred Foundry
+[Sideboard]
+3 Bonfire of the Damned
+2 Nevermore
+3 Rest in Peace
+4 Skullcrack
+2 Skyknight Legionnaire

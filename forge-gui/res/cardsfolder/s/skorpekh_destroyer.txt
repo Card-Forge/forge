@@ -5,6 +5,6 @@ PT:4/2
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Hyperphase Threshers — Whenever an artifact you control enters, CARDNAME gains first strike until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ First Strike
-DeckHas:Keyword$FirstStrike
+DeckHas:Keyword$First Strike
 DeckHints:Type$Artifact
 Oracle:Deathtouch\nHyperphase Threshers — Whenever an artifact you control enters, Skorpekh Destroyer gains first strike until end of turn.

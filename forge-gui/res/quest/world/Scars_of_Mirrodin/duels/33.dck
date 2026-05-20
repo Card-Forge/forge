@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=PresterJohn
+Title=PresterJohn
+Icon=PresterJohn.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/States-Champs_Michigan/Kai_Ruan_-_Valakut_Ramp_(Standard,_#7615).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+3 Oracle of Mul Daya
+4 Overgrown Battlement
+4 Primeval Titan
+2 Terastodon
+4 Harrow
+4 Summoning Trap
+4 Cultivate
+4 Explore
+3 Evolving Wilds
+6 Forest
+11 Mountain
+1 Raging Ravine
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+4 Acidic Slime
+4 Arc Trail
+2 Obstinate Baloth
+4 Pyroclasm
+1 Trusty Machete

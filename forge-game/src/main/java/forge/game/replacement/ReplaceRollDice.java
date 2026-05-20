@@ -26,6 +26,11 @@ public class ReplaceRollDice extends ReplacementEffect {
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
             return false;
         }
+        if (hasParam("ValidSides")) {
+            if (((Integer) runParams.get(AbilityKey.Sides)) != Integer.parseInt(getParam("ValidSides"))) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -37,5 +42,6 @@ public class ReplaceRollDice extends ReplacementEffect {
         sa.setReplacingObject(AbilityKey.Number, runParams.get(AbilityKey.Number));
         sa.setReplacingObject(AbilityKey.Ignore, runParams.get(AbilityKey.Ignore));
         sa.setReplacingObject(AbilityKey.IgnoreChosen, runParams.get(AbilityKey.IgnoreChosen));
+        sa.setReplacingObject(AbilityKey.DicePTExchanges, runParams.get(AbilityKey.DicePTExchanges));
     }
 }

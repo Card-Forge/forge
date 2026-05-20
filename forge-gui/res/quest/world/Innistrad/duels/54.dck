@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Mystique
+Title=Mystique
+Icon=Mystique.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/WPN_Qualifier_Modern_Turniers_vom_13.12.2011/Jonas_Zimmermann_-_Big_Zoo_(Modern,_#23624).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Baneslayer Angel
+2 Geist of Saint Traft
+4 Knight of the Reliquary
+4 Noble Hierarch
+4 Tarmogoyf
+4 Wild Nacatl
+1 Bant Charm
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+1 Elspeth, Knight-Errant
+4 Arid Mesa
+1 Forest
+1 Hallowed Fountain
+4 Misty Rainforest
+1 Moorland Haunt
+2 Plains
+1 Sacred Foundry
+4 Scalding Tarn
+1 Steam Vents
+2 Stirring Wildwood
+2 Stomping Ground
+1 Temple Garden
+[Sideboard]
+2 Ancient Grudge
+1 Kitchen Finks
+4 Mana Leak
+1 Negate
+2 Seal of Primordium
+2 Thrun, the Last Troll
+1 Timely Reinforcements

@@ -1,0 +1,36 @@
+[metadata]
+Name=Arcades Sabboth
+[Main]
+7 Forest|LEA
+7 Plains|LEA
+7 Island|LEA
+1 Karakas|LEG
+1 Pendelhaven|LEG
+1 Tolaria|LEG
+4 Arcades Sabboth|LEG
+2 Rubinia Soulsinger|LEG
+2 Ragnar|LEG
+2 Angus Mackenzie|LEG
+1 Gabriel Angelfire|LEG
+1 Rasputin Dreamweaver|LEG
+2 Mana Drain|LEG
+2 Winter Blast|LEG
+2 Willow Satyr|LEG
+2 Boomerang|LEG
+2 Divine Offering|LEG
+2 D'Avenant Archer|LEG
+2 Ivory Guardians|LEG
+2 Azure Drake|LEG
+2 Elder Land Wurm|LEG
+2 Time Elemental|LEG
+2 Giant Turtle|LEG
+2 Master of the Hunt|LEG
+
+[StartInBattle_Reference]
+1 Island|LEA
+1 Plains|LEA
+1 Forest|LEA
+1 Wall of Vapor|LEG
+1 Wall of Dust|LEG
+1 Wall of Light|LEG
+1 Cathedral of Serra|LEG

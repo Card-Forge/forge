@@ -1,0 +1,9 @@
+Name:Elixir
+ManaCost:1
+Types:Artifact
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This artifact enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ ChangeZoneAll | Cost$ 5 T Exile<1/CARDNAME/this artifact> | ChangeType$ Card.nonLand+YouCtrl | Origin$ Graveyard | Destination$ Library | RememberChanged$ True | SubAbility$ DBGainLife | Shuffle$ True | SpellDescription$ Shuffle all nonland cards from your graveyard into your library. You gain life equal to the number of cards shuffled into your library this way.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ Remembered$Amount | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:This artifact enters tapped.\n{5}, {T}, Exile this artifact: Shuffle all nonland cards from your graveyard into your library. You gain life equal to the number of cards shuffled into your library this way.

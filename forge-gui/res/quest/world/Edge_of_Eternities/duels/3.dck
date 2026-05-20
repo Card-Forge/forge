@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Hagrid
+Title=Hagrid
+Icon=Hagrid.jpg
+Difficulty=Medium
+Description=./Standard/Edge_of_Eternities/Jake_Hill_-_Dimir_Midrange_(Standard,_#2601210).dck
+Deck Type=constructed
+
+[Main]
+4 Deep-Cavern Bat
+4 Floodpits Drowner
+4 Spyglass Siren
+3 Enduring Curiosity
+2 Sunset Saboteur
+2 Tishana's Tidebinder
+1 Cecil, Dark Knight
+3 Shoot the Sheriff
+2 Spell Pierce
+2 Stab
+1 Bitter Triumph
+1 Phantom Interference
+3 Tragic Trajectory
+3 Kaito, Bane of Nightmares
+5 Island
+5 Swamp
+4 Gloomlake Verge
+4 Watery Grave
+3 Restless Reef
+2 Soulstone Sanctuary
+2 Starting Town
+[Sideboard]
+3 Annul
+2 Disdainful Stroke
+2 Duress
+2 Qarsi Revenant
+2 Tishana's Tidebinder
+1 Deathmark
+1 Faebloom Trick
+1 Intimidation Tactics
+1 Preacher of the Schism

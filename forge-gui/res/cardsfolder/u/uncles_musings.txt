@@ -1,0 +1,7 @@
+Name:Uncle's Musings
+ManaCost:2 G G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | ChangeType$ Permanent.YouOwn | ChangeNum$ X | SubAbility$ DBChangeZone | SpellDescription$ Converge — Return up to X permanent cards from your graveyard to your hand, where X is the number of colors of mana spent to cast this spell. Exile CARDNAME.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+SVar:X:Count$Converge
+Oracle:Converge — Return up to X permanent cards from your graveyard to your hand, where X is the number of colors of mana spent to cast this spell.\nExile Uncle's Musings.

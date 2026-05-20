@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Shaitan
+Title=Shaitan
+Icon=Shaitan.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/Nationals_2010_-_Uruguay/Adrian_Garcia_-_Open_The_Vaults_(Standard,_#394).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Filigree Angel
+4 Glassdust Hulk
+3 Pilgrim's Eye
+4 Sphinx of Lost Truths
+4 Wall of Omens
+3 Courier's Capsule
+4 Path to Exile
+3 Day of Judgment
+4 Open the Vaults
+4 Spreading Seas
+10 Island
+3 Marsh Flats
+8 Plains
+3 Terramorphic Expanse
+[Sideboard]
+3 Celestial Purge
+2 Into the Roil
+3 Luminarch Ascension
+4 Negate
+2 Oblivion Ring

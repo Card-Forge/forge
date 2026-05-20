@@ -1,0 +1,36 @@
+[metadata]
+Name=Red Deck Wins
+Deck Type=constructed
+Title=Red Deck Wins
+Description=Red Deck Wins
+Difficulty=Hard
+Icon=Lyzolda
+[Main]
+1 Abrade
+4 Ahn-Crop Crasher
+4 Bomat Courier
+4 Earthshaker Khenra
+4 Fanatical Firebrand
+4 Hazoret the Fervent
+3 Kari Zev, Skyship Raider
+4 Lightning Strike
+1 Magma Spray
+5 Mountain
+4 Mountain
+5 Mountain
+4 Mountain
+2 Pia Nalaar
+3 Rekindling Phoenix
+1 Scavenger Grounds
+3 Shock
+4 Sunscorched Desert
+[Sideboard]
+2 Abrade
+2 Aethersphere Harvester
+2 Chandra's Defeat
+2 Chandra, Torch of Defiance
+2 Glorybringer
+1 Kari Zev's Expertise
+2 Magma Spray
+1 Rekindling Phoenix
+1 Scavenger Grounds

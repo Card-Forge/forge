@@ -1,0 +1,8 @@
+Name:Emet-Selch of the Third Seat
+ManaCost:2 U B
+Types:Legendary Creature Elder Wizard
+PT:3/4
+S:Mode$ ReduceCost | ValidCard$ Card.wasCastFromYourGraveyard | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Spells you cast from your graveyard cost {2} less to cast.
+T:Mode$ LifeLostAll | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPlay | OptionalDecider$ You | ResolvedLimit$ 1 | TriggerDescription$ Whenever one or more opponents lose life, you may cast target instant or sorcery card from your graveyard. If that spell would be put into your graveyard, exile it instead. Do this only once each turn.
+SVar:TrigPlay:DB$ Play | TgtZone$ Graveyard | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | ValidSA$ Spell | TgtPrompt$ Choose target instant or sorcery card from your graveyard | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
+Oracle:Spells you cast from your graveyard cost {2} less to cast.\nWhenever one or more opponents lose life, you may cast target instant or sorcery card from your graveyard. If that spell would be put into your graveyard, exile it instead. Do this only once each turn.

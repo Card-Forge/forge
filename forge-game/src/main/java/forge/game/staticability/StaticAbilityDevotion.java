@@ -7,14 +7,12 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityDevotion {
 
-    static String MODE = "Devotion";
-
     public static int getDevotionMod(final Player player) {
         int i = 0;
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.Devotion)) {
                     continue;
                 }
                 if (!stAb.matchesValidParam("ValidPlayer", player)) {

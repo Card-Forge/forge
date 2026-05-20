@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Crows in the Field
+Title=Crows in the Field
+Icon=Crows in the Field.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/Franz_Frajick_-_Simic_Ramp_(Standard,_#1290578).dck
+Deck Type=constructed
+
+[Main]
+1 Mind Flayer
+2 Iymrith, Desert Doom
+3 Koma, Cosmos Serpent
+4 Rootcoil Creeper
+4 Esika's Chariot
+2 Saw It Coming
+2 Memory Deluge
+3 Fading Hope
+3 Decisive Denial
+2 Storm the Festival
+3 Field Trip
+3 Glorious Sunrise
+3 Wrenn and Seven
+1 Lair of the Hydra
+2 Field of Ruin
+2 Hall of Storm Giants
+4 Dreamroot Cascade
+4 Barkchannel Pathway
+5 Island
+7 Forest
+[Sideboard]
+1 Environmental Sciences
+1 Teachings of the Archaics
+1 Mascot Exhibition
+2 Consuming Tide
+2 Reject
+2 Cyclone Summoner
+2 Test of Talents
+2 Pithing Needle
+2 Disdainful Stroke

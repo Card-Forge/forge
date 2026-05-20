@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Creature Dragon
 PT:3/2
 K:Flying
-K:CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 AlternateMode:Adventure
 Oracle:Flying\nYoung Red Dragon can't block.
 
@@ -13,5 +13,5 @@ Name:Bathe in Gold
 ManaCost:1 R
 Types:Instant Adventure
 A:SP$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token. (Then exile this card. You may cast the creature later from exile.)
-DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+DeckHas:Ability$Token|Sacrifice
 Oracle:Create a Treasure token. (Then exile this card. You may cast the creature later from exile.)

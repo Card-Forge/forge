@@ -1,0 +1,10 @@
+Name:Oasis of Renewal
+ManaCost:B G U
+Types:Legendary Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | ActivationLimit$ 1 | Execute$ TrigSeekLand | TriggerDescription$ When CARDNAME enters and whenever a land card leaves your graveyard, seek a land card. This ability triggers only once each turn.
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Any | ValidCard$ Card.Land+YouOwn | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigSeekLand | Secondary$ True | TriggerDescription$ When CARDNAME enters and whenever a land card leaves your graveyard, seek a land card. This ability triggers only once each turn.
+SVar:TrigSeekLand:DB$ Seek | Type$ Card.Land
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | ActivationLimit$ 1 | Execute$ TrigSeekNonLand | TriggerDescription$ When CARDNAME enters and whenever a nonland card leaves your graveyard, seek a nonland card. This ability triggers only once each turn.
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Any | ValidCard$ Card.nonLand+YouOwn | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigSeekNonLand | Secondary$ True | TriggerDescription$ When CARDNAME enters and whenever a nonland card leaves your graveyard, seek a nonland card. This ability triggers only once each turn.
+SVar:TrigSeekNonLand:DB$ Seek | Type$ Card.nonLand
+Oracle:When Oasis of Renewal enters and whenever a land card leaves your graveyard, seek a land card. This ability triggers only once each turn.\nWhen Oasis of Renewal enters and whenever a nonland card leaves your graveyard, seek a nonland card. This ability triggers only once each turn.

@@ -1,0 +1,9 @@
+Name:Purple Pentapus
+ManaCost:B
+Types:Creature Octopus Starfish
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When this creature enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+A:AB$ ChangeZone | Cost$ 2 B tapXType<1/Creature> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | Tapped$ True | SpellDescription$ Return this card from your graveyard to the battlefield tapped.
+DeckHas:Ability$Surveil|Graveyard
+Oracle:When this creature enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{2}{B}, Tap an untapped creature you control: Return this card from your graveyard to the battlefield tapped.

@@ -1,0 +1,10 @@
+Name:Bartz and Boko
+ManaCost:3 G G
+Types:Legendary Creature Human Bird
+PT:4/3
+K:Affinity:Bird
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, each other Bird you control deals damage equal to its power to target creature an opponent controls.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | SubAbility$ DBEachDamage
+SVar:DBEachDamage:DB$ EachDamage | DefinedDamagers$ Valid Bird.Other+YouCtrl | Defined$ ParentTarget | NumDmg$ Count$CardPower
+DeckHints:Type$Bird
+Oracle:Affinity for Birds (This spell costs {1} less to cast for each Bird you control.)\nWhen Bartz and Boko enters, each other Bird you control deals damage equal to its power to target creature an opponent controls.

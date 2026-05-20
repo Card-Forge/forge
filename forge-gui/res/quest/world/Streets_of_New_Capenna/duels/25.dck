@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Samwise Gamgee
+Title=Samwise Gamgee
+Icon=Samwise Gamgee.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/MSlap_LaBiscia_-_Boros_Aggro_(Standard,_#1418563).dck
+Deck Type=constructed
+
+[Main]
+1 Blade Historian
+4 Kumano Faces Kakkazan
+4 Thundering Raiju
+4 Sunrise Cavalier
+4 Reckless Stormseeker
+4 Luminarch Aspirant
+4 Hopeful Initiate
+4 Bloodthirsty Adversary
+4 Play with Fire
+4 Roil Eruption
+1 Sokenzan, Crucible of Defiance
+1 Eiganjo, Seat of the Empire
+1 Cave of the Frost Dragon
+2 Sundown Pass
+2 Den of the Bugbear
+4 Needleverge Pathway
+6 Mountain
+6 Plains
+[Sideboard]
+2 Thalia, Guardian of Thraben
+2 Elite Spellbinder
+3 Valorous Stance
+4 Angelfire Ignition
+4 Strangle

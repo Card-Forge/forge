@@ -11,8 +11,6 @@ Card Preview | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/de
 Community Cup | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/communitycup.zip
 Current Alchemy Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentalchemymetagame.zip
 Current Alchemy-BO1 Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentalchemybo1metagame.zip
-Current Explorer Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentexplorermetagame.zip
-Current Explorer-BO1 Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentexplorerbo1metagame.zip
 Current Historic Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currenthistoricmetagame.zip
 Current Historic-BO1 Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currenthistoricbo1metagame.zip
 Current Legacy Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentlegacymetagame.zip

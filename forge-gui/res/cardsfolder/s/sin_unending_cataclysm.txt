@@ -1,0 +1,16 @@
+Name:Sin, Unending Cataclysm
+ManaCost:5 G U
+Types:Legendary Creature Leviathan Avatar
+PT:5/5
+K:Flying
+K:Trample
+K:ETBReplacement:Other:DBRemoveCounter
+SVar:DBRemoveCounter:DB$ RemoveCounter | Choices$ Artifact.HasCounters,Creature.HasCounters,Enchantment.HasCounters | ChoiceOptional$ True | CounterType$ All | SubAbility$ DBPutCounters | RememberAmount$ True | SpellDescription$ As NICKNAME enters, remove all counters from any number of artifacts, creatures, and enchantments. NICKNAME enters with X +1/+1 counters on it, where X is twice the number of counters removed this way.
+SVar:DBPutCounters:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When NICKNAME dies, put its counters on target creature you control, then shuffle this card into its owner's library.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | Shuffle$ True
+SVar:X:Count$RememberedNumber/Times.2
+DeckHas:Ability$Counters
+Oracle:Flying, trample\nAs Sin enters, remove all counters from any number of artifacts, creatures, and enchantments. Sin enters with X +1/+1 counters on it, where X is twice the number of counters removed this way.\nWhen Sin dies, put its counters on target creature you control, then shuffle this card into its owner's library.

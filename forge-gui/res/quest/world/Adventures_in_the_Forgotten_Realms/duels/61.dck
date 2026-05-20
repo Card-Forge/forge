@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Sly Cooper
+Title=Sly Cooper
+Icon=Sly Cooper.jpg
+Difficulty=Very Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/zansyed_-_UR_Creativity_(Modern,_#1199766).dck
+Deck Type=constructed
+
+[Main]
+1 Sage of the Falls
+1 The Locust God
+1 Commit // Memory
+2 Unholy Heat
+2 Fire Prophecy
+4 Memory Lapse
+4 Prismari Command
+2 Anger of the Gods
+4 Expressive Iteration
+4 Hard Evidence
+4 Indomitable Creativity
+2 Search for Azcanta
+3 Shark Typhoon
+2 Narset, Parter of Veils
+1 Island
+3 Mountain
+4 Den of the Bugbear
+4 Fabled Passage
+4 Steam Vents
+4 Spirebluff Canal
+4 Riverglide Pathway
+[Sideboard]
+1 Shark Typhoon
+1 Nezahal, Primal Tide
+2 Narset, Parter of Veils
+2 Storm's Wrath
+2 Unholy Heat
+3 Mystical Dispute
+4 Leyline of the Void

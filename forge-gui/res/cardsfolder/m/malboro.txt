@@ -1,0 +1,10 @@
+Name:Malboro
+ManaCost:4 B B
+Types:Creature Plant Horror
+PT:4/4
+K:TypeCycling:Swamp:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Bad Breath — When this creature enters, each opponent discards a card, loses 2 life, and exiles the top three cards of their library.
+SVar:TrigDiscard:DB$ Discard | Defined$ Opponent | Mode$ TgtChoose | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Opponent | SubAbility$ DBExile
+SVar:DBExile:DB$ Dig | Defined$ Player.Opponent | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile
+Oracle:Bad Breath — When this creature enters, each opponent discards a card, loses 2 life, and exiles the top three cards of their library.\nSwampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)

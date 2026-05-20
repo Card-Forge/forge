@@ -1,0 +1,10 @@
+Name:Summon: Ixion
+ManaCost:2 W
+Types:Enchantment Creature Saga Unicorn
+PT:3/3
+K:Chapter:3:DBAerospark,DBPutCounter,DBPutCounter
+SVar:DBAerospark:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | Origin$ Battlefield | Destination$ Exile | Duration$ UntilHostLeavesPlay | SpellDescription$ Aerospark — Exile target creature an opponent controls until this Saga leaves the battlefield.
+SVar:DBPutCounter:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to two target creatures you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBGainLife | SpellDescription$ Put a +1/+1 counter on each of up to two target creatures you control. You gain 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+K:First Strike
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Aerospark — Exile target creature an opponent controls until this Saga leaves the battlefield.\nII, III — Put a +1/+1 counter on each of up to two target creatures you control. You gain 2 life.\nFirst strike

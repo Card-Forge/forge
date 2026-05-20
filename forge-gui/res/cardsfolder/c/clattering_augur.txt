@@ -2,7 +2,7 @@ Name:Clattering Augur
 ManaCost:1 B
 Types:Creature Skeleton Shaman
 PT:1/1
-K:CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, you draw a card and you lose 1 life.
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1

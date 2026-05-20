@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Aragorn
+Title=Aragorn
+Icon=Aragorn.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine_The_Aftermath/Ishikawa_Kenji_-_Domain_Ramp_(Standard,_#1699967).dck
+Deck Type=constructed
+
+[Main]
+2 Topiary Stomper
+2 Archangel of Wrath
+1 Elesh Norn, Mother of Machines
+3 Atraxa, Grand Unifier
+1 The Celestus
+1 Courier's Briefcase
+1 Memory Deluge
+3 Make Disappear
+2 Volcanic Spite
+4 Herd Migration
+3 Sunfall
+4 Leyline Binding
+2 The Cruelty of Gix
+2 Ossification
+4 Invasion of Zendikar
+2 Plains
+2 Island
+2 Swamp
+1 Mountain
+2 Forest
+1 Yavimaya Coast
+1 Boseiju, Who Endures
+4 Jetmir's Garden
+2 Raffine's Tower
+4 Spara's Headquarters
+2 Ziatora's Proving Ground
+2 Mirrex
+[Sideboard]
+3 Disdainful Stroke
+1 Siphon Insight
+2 Void Rend
+1 Elesh Norn, Mother of Machines
+1 Thrun, Breaker of Silence
+2 Tyrranax Rex
+1 Sunfall
+2 Lithomantic Barrage
+2 Tranquil Frillback

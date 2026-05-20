@@ -1,0 +1,68 @@
+armadillo.png
+size: 256,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar      
+  xy: 176, 128
+  size: 16, 16
+Idle 
+  xy: 2, 16
+  size: 28, 16 
+Idle 
+  xy: 34, 16
+  size: 28, 16   
+Idle 
+  xy: 66, 16
+  size: 28, 16 
+Idle 
+  xy: 98, 16
+  size: 28, 16 
+Idle 
+  xy: 130, 16
+  size: 28, 16 
+Idle 
+  xy: 162, 16
+  size: 28, 16 
+Idle 
+  xy: 194, 16
+  size: 28, 16 
+Idle 
+  xy: 226, 16
+  size: 28, 16 
+Walk
+  xy: 2, 48
+  size: 28, 16
+Walk
+  xy: 34, 48
+  size: 28, 16
+Walk
+  xy: 66, 48
+  size: 28, 16
+Walk
+  xy: 98, 48
+  size: 28, 16
+Attack 
+  xy: 0, 76
+  size: 32, 20 
+Attack 
+  xy: 32, 76
+  size: 32, 20 
+Attack 
+  xy: 64, 76
+  size: 32, 20 
+Attack 
+  xy: 96, 76
+  size: 32, 20    
+Attack 
+  xy: 128, 76
+  size: 32, 20 
+Death 
+  xy: 0, 140
+  size: 32, 20     
+Death 
+  xy: 32, 140
+  size: 32, 20 
+Death 
+  xy: 64, 140
+  size: 32, 20

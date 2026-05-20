@@ -1,0 +1,10 @@
+Name:Dragonweave Tapestry
+ManaCost:4
+Types:Artifact
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigConjure | TriggerDescription$ When this artifact enters, conjure CARDNAME's spellbook into your library twice, then shuffle.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Names$ Disruptive Stormbrood,Purging Stormbrood,Runescale Stormbrood,Twinmaw Stormbrood,Whirlwing Stormbrood | Zone$ Library | LibraryPosition$ 0 | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | Names$ Disruptive Stormbrood,Purging Stormbrood,Runescale Stormbrood,Twinmaw Stormbrood,Whirlwing Stormbrood | Zone$ Library
+T:Mode$ SpellCast | ValidCard$ Dragon,Omen | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Dragon or Omen spell, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:When this artifact enters, conjure Dragonweave Tapestry's spellbook into your library twice, then shuffle.\nWhenever you cast a Dragon or Omen spell, draw a card.\n{T}: Add one mana of any color.

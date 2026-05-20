@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Kraj
+Title=Kraj
+Icon=Kraj.jpg
+Difficulty=Hard
+Description=./Modern/Dominaria_United/Abe_hiroyuki_-_BR_Aggro_(Modern,_#1550575).dck
+Deck Type=constructed
+
+[Main]
+1 Kroxa, Titan of Death's Hunger
+2 Tenacious Underdog
+3 Sheoldred, the Apocalypse
+4 Fable of the Mirror-Breaker
+4 Bloodtithe Harvester
+4 Graveyard Trespasser
+4 Bonecrusher Giant
+4 Fatal Push
+3 Dreadbore
+4 Thoughtseize
+3 Liliana of the Veil
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+1 Urborg, Tomb of Yawgmoth
+1 Snow-Covered Mountain
+2 Snow-Covered Swamp
+2 Hive of the Eye Tyrant
+2 Den of the Bugbear
+2 Castle Locthwain
+4 Haunted Ridge
+4 Blightstep Pathway
+4 Blood Crypt
+[Sideboard]
+1 Kolaghan's Command
+1 Skysovereign, Consul Flagship
+1 Abrade
+1 Damping Sphere
+1 Kalitas, Traitor of Ghet
+1 Alpine Moon
+1 Fry
+1 Invoke Despair
+2 Extinction Event
+2 Duress
+3 Go Blank

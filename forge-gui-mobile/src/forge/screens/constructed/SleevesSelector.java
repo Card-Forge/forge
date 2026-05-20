@@ -2,6 +2,7 @@ package forge.screens.constructed;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
@@ -15,7 +16,6 @@ import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
-import forge.util.Callback;
 import forge.util.MyRandom;
 import forge.util.Utils;
 
@@ -28,7 +28,7 @@ public class SleevesSelector  extends FScreen {
         return random;
     }
 
-    public static void show(final String playerName, final int currentIndex0, final List<Integer> usedSleeves0, final Callback<Integer> callback0) {
+    public static void show(final String playerName, final int currentIndex0, final List<Integer> usedSleeves0, final Consumer<Integer> callback0) {
         SleevesSelector selector = new SleevesSelector(playerName, currentIndex0, usedSleeves0, callback0);
         Forge.openScreen(selector);
     }
@@ -38,7 +38,7 @@ public class SleevesSelector  extends FScreen {
 
     private final int currentIndex;
     private final List<Integer> usedSleeves;
-    private final Callback<Integer> callback;
+    private final Consumer<Integer> callback;
     private final FScrollPane scroller = new FScrollPane() {
         @Override
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
@@ -60,7 +60,7 @@ public class SleevesSelector  extends FScreen {
         }
     };
 
-    private SleevesSelector(final String playerName, final int currentIndex0, final List<Integer> usedSleeves0, final Callback<Integer> callback0) {
+    private SleevesSelector(final String playerName, final int currentIndex0, final List<Integer> usedSleeves0, final Consumer<Integer> callback0) {
         super(Forge.getLocalizer().getMessage("lblSelectSleevesFroPlayer", playerName));
 
         currentIndex = currentIndex0;
@@ -91,13 +91,13 @@ public class SleevesSelector  extends FScreen {
 
         if (index == -1) {
             lbl.setCommand(e -> {
-                callback.run(getRandomSleeves(usedSleeves));
+                callback.accept(getRandomSleeves(usedSleeves));
                 Forge.back();
             });
         }
         else {
             lbl.setCommand(e -> {
-                callback.run(index);
+                callback.accept(index);
                 Forge.back();
             });
         }

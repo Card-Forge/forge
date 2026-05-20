@@ -1,0 +1,25 @@
+Name:Jecht, Reluctant Guardian
+ManaCost:3 B
+Types:Legendary Creature Human Warrior
+PT:4/3
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | CombatDamage$ True | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile it, then return it to the battlefield transformed under its owner's control.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+DeckHas:Ability$Sacrifice
+Oracle:Menace\nWhenever Jecht deals combat damage to a player, you may exile it, then return it to the battlefield transformed under its owner's control.
+
+ALTERNATE
+
+Name:Braska's Final Aeon
+Colors:black
+Types:Legendary Enchantment Creature Saga Nightmare
+PT:7/7
+K:Chapter:3:DBJechtBeam,DBJechtBeam,DBUltimateJechtShot
+SVar:DBJechtBeam:DB$ Discard | Defined$ Opponent | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescription$ Jecht Beam — Each opponent discards a card and you draw a card.
+SVar:DBDraw:DB$ Draw
+SVar:DBUltimateJechtShot:DB$ Sacrifice | SacValid$ Creature | Amount$ 2 | Defined$ Player.Opponent | SpellDescription$ Ultimate Jecht Shot — Each opponent sacrifices two creatures of their choice.
+K:Menace
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Jecht Beam — Each opponent discards a card and you draw a card.\nIII — Ultimate Jecht Shot — Each opponent sacrifices two creatures of their choice.\nMenace

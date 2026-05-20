@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Preacher
+Title=Preacher
+Icon=Preacher.jpg
+Difficulty=Medium
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Cooper_Livingston_-_Jund_Midrange_(Standard,_#1186222).dck
+Deck Type=constructed
+
+[Main]
+2 Questing Beast
+3 Kalain, Reclusive Painter
+3 Polukranos, Unchained
+3 Orcus, Prince of Undeath
+4 Goldspan Dragon
+4 Bonecrusher Giant
+4 Prosperous Innkeeper
+2 Esika's Chariot
+3 Baleful Mastery
+2 Shatterskull Smashing
+3 Ranger Class
+1 Vivien, Monsters' Advocate
+2 Tangled Florahedron
+2 Lair of the Hydra
+2 Swamp
+2 Forest
+2 Mountain
+4 Fabled Passage
+4 Cragcrown Pathway
+4 Darkbore Pathway
+4 Blightstep Pathway
+[Sideboard]
+1 Vivien, Monsters' Advocate
+2 Heartless Act
+2 Burning Hands
+2 Toski, Bearer of Secrets
+2 Klothys, God of Destiny
+3 The Akroan War
+3 Go Blank

@@ -90,7 +90,7 @@ public class CardListChooser extends FDialog {
             public void windowClosing(final WindowEvent e) {
                 //CardTranslation.getTranslatedName
                 if (FOptionPane.showConfirmDialog(
-                        Localizer.getInstance().getMessage("lblAreYouSureWantPickCard", CardTranslation.getTranslatedName(jList.getSelectedValue().getName())),
+                        Localizer.getInstance().getMessage("lblAreYouSureWantPickCard", CardTranslation.getTranslatedName(jList.getSelectedValue().getDisplayName())),
                         Localizer.getInstance().getMessage("lblSelectThisCardConfirm"), false)
                     ) {
                     dispose();

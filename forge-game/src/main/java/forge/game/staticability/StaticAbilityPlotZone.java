@@ -6,13 +6,11 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityPlotZone {
 
-    static String MODE = "PlotZone";
-
     public static boolean plotZone(final Card card) {
         final Game game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.PlotZone)) {
                     continue;
                 }
 

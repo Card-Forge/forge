@@ -17,27 +17,27 @@ ScryfallCode=OVNT
 2011 R Time Walk @Chris Rahn
 2012 R Timetwister @Matt Stewart
 2013 R Ancestral Recall @Ryan Pancoast
-2014 M Mox Pearl @Raoul Vitale
-2015 M Mox Emerald @Raoul Vitale
-2016EU M Mox Jet @Raoul Vitale
-2016NA M Mox Sapphire @Raoul Vitale
-2017EU M Mox Ruby @Raoul Vitale
-2017NA M Black Lotus @Steven Belledin
-2018 M Ancestral Recall @Raoul Vitale
-2018A M Timetwister @Ralph Horsley
-2018NA M Time Walk @Chris Seaman
+2014 S Mox Pearl @Raoul Vitale
+2015 S Mox Emerald @Raoul Vitale
+2016EU S Mox Jet @Raoul Vitale
+2016NA S Mox Sapphire @Raoul Vitale
+2017EU S Mox Ruby @Raoul Vitale
+2017NA S Black Lotus @Steven Belledin
+2018 S Ancestral Recall @Raoul Vitale
+2018A S Timetwister @Ralph Horsley
+2018NA S Time Walk @Chris Seaman
 2019 M Mox Pearl @Sidharth Chaturvedi
 2019A M Mox Sapphire @Tyler Walpole
-2019NA M Mox Jet @Filip Burburan
+2019NA S Mox Jet @Filip Burburan
 2020A M Tolarian Academy @Raoul Vitale
 2020B M Library of Alexandria @Volkan Baǵa
 2020C M Mishra's Workshop @Drew Baker
 2021A M Mox Emerald @Eric Wilkerson
 2021B M Timetwister @Chris Seaman
 2021C M Mox Ruby @Jarel Threat
-2022A M Bazaar of Baghdad @Chris Seaman
-2022B M Time Walk @Tyler Walpole
-2022C M Ancestral Recall @Volkan Baǵa
-2023A M Black Lotus @Jarel Threat
-2023EU M Black Lotus @Raoul Vitale
-2023NA M Black Lotus @Scott M. Fischer
+2022A S Bazaar of Baghdad @Chris Seaman
+2022B S Time Walk @Tyler Walpole
+2022C S Ancestral Recall @Volkan Baǵa
+2023A S Black Lotus @Jarel Threat
+2023EU S Black Lotus @Raoul Vitale
+2023NA S Black Lotus @Scott M. Fischer

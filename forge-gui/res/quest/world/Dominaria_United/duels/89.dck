@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Kane
+Title=Kane
+Icon=Kane.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/Creedican_-_Merfolk_(Modern,_#1479403).dck
+Deck Type=constructed
+
+[Main]
+2 Harbinger of the Tides
+4 Vodalian Hexcatcher
+4 Tide Shaper
+4 Svyelun of Sea and Sky
+4 Subtlety
+4 Silvergill Adept
+4 Merfolk Trickster
+4 Master of the Pearl Trident
+4 Lord of Atlantis
+4 Aether Vial
+2 Dismember
+1 Glasspool Mimic
+1 Otawara, Soaring City
+1 Minamo, School at Water's Edge
+2 Waterlogged Grove
+2 Cavern of Souls
+4 Mutavault
+9 Island
+[Sideboard]
+1 Spreading Seas
+1 Brazen Borrower
+2 Kira, Great Glass-Spinner
+2 Hurkyl's Recall
+2 Force of Negation
+2 Dismember
+2 Harbinger of the Tides
+3 Chalice of the Void

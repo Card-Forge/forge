@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Olokun
+Title=Olokun
+Icon=Olokun.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/Niklas_Kärki_-_Blue_Moon_(Modern,_#2386052).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+4 Subtlety
+4 Tishana's Tidebinder
+4 Counterspell
+4 Flame of Anor
+2 Force of Negation
+4 Galvanic Discharge
+4 Lightning Bolt
+2 Sink into Stupor
+3 Spell Snare
+4 Preordain
+1 Blood Moon
+2 Flooded Strand
+1 Hall of Storm Giants
+6 Island
+2 Polluted Delta
+4 Scalding Tarn
+3 Steam Vents
+2 Thundering Falls
+[Sideboard]
+1 Blood Moon
+4 Consign to Memory
+2 Fuel the Flames
+2 Ghost Vacuum
+2 Meltdown
+2 Mystical Dispute
+2 Surgical Extraction

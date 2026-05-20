@@ -1,0 +1,11 @@
+Name:Starting Town
+ManaCost:no cost
+Types:Land Town
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ This land enters tapped unless it's your first, second, or third turn of the game.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GT3
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+SVar:X:Count$Compare Y GE1.Z.4
+SVar:Y:PlayerCountPropertyYou$HasPropertyActive
+SVar:Z:Count$YourTurns
+Oracle:This land enters tapped unless it's your first, second, or third turn of the game.\n{T}: Add {C}.\n{T}, Pay 1 life: Add one mana of any color.

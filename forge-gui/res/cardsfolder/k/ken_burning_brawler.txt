@@ -1,5 +1,5 @@
 Name:Ken, Burning Brawler
-AltName:Aisha of Sparks and Smoke
+Variant:UniversesWithin:FlavorName:Aisha of Sparks and Smoke
 ManaCost:1 R R
 Types:Legendary Creature Human Warrior
 PT:4/2

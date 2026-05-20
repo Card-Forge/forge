@@ -5,12 +5,12 @@ public enum CardStateName {
     Original,
     FaceDown,
     Flipped,
-    Transformed,
+    Backside,
     Meld,
     LeftSplit,
     RightSplit,
     Secondary,
-    Modal,
+    PreparedSpell,
     EmptyRoom,
     SpecializeW,
     SpecializeU,
@@ -42,7 +42,7 @@ public enum CardStateName {
             return CardStateName.Flipped;
         }
         if ("DoubleFaced".equalsIgnoreCase(value)) {
-            return CardStateName.Transformed;
+            return CardStateName.Backside;
         }
 
         throw new IllegalArgumentException("No element named " + value + " in enum CardCharactersticName");

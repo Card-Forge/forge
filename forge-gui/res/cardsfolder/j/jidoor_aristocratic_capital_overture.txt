@@ -1,0 +1,17 @@
+Name:Jidoor, Aristocratic Capital
+ManaCost:no cost
+Types:Land Town
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+AlternateMode:Adventure
+Oracle:This land enters tapped.\n{T}: Add {U}.
+
+ALTERNATE
+
+Name:Overture
+ManaCost:4 U U
+Types:Sorcery Adventure
+A:SP$ Mill | ValidTgts$ Opponent | NumCards$ X | SpellDescription$ Target player mills half their library, rounded down.
+SVar:X:TargetedPlayer$CardsInLibrary/HalfDown
+Oracle:Target opponent mills half their library, rounded down.

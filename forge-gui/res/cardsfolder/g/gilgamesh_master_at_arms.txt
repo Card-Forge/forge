@@ -1,0 +1,13 @@
+Name:Gilgamesh, Master-at-Arms
+ManaCost:4 R R
+Types:Legendary Creature Human Samurai
+PT:6/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Whenever NICKNAME enters or attacks, look at the top six cards of your library. You may put any number of Equipment cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order. When you put one or more Equipment onto the battlefield this way, you may attach one of them to a Samurai you control.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDig | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, look at the top six cards of your library. You may put any number of Equipment cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order. When you put one or more Equipment onto the battlefield this way, you may attach one of them to a Samurai you control.
+SVar:TrigDig:DB$ Dig | DigNum$ 6 | ChangeValid$ Equipment | ForceRevealToController$ True | ChangeNum$ Any | RestRandomOrder$ True | DestinationZone$ Battlefield | RememberChanged$ True | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigChoose | ConditionDefined$ Remembered | ConditionPresent$ Equipment | ConditionCompare$ GE1 | TriggerDescription$ When you put one or more Equipment onto the battlefield this way, you may attach one of them to a Samurai you control.
+SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.Samurai+YouCtrl | ChoiceTitle$ Choose a creature you control to attach an Equipment to | Amount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Equipment | ConditionCompare$ GE1 | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Choices$ Equipment.YouCtrl+IsRemembered | Defined$ ChosenCard | ChoiceTitle$ Choose an equipment to attach to this creature | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Gilgamesh enters or attacks, look at the top six cards of your library. You may put any number of Equipment cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order. When you put one or more Equipment onto the battlefield this way, you may attach one of them to a Samurai you control.

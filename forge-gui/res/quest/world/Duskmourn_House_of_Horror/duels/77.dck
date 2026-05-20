@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=King Arthur
+Title=King Arthur
+Icon=King Arthur.jpg
+Difficulty=Very Hard
+Description=./Modern/Duskmourn_House_of_Horror/Ethan_King_-_Dimir_Unearth_(Modern,_#2225314).dck
+Deck Type=constructed
+
+[Main]
+2 Orcish Bowmasters
+2 Murktide Regent
+4 Psychic Frog
+4 Abhorrent Oculus
+2 Harbinger of the Seas
+4 Thought Scour
+3 Consider
+1 Cling to Dust
+4 Fatal Push
+4 Counterspell
+1 Go for the Throat
+1 Sink into Stupor
+2 Spell Pierce
+2 Spell Snare
+2 Force of Negation
+4 Unearth
+4 Polluted Delta
+3 Scalding Tarn
+3 Watery Grave
+2 Undercity Sewers
+1 Gloomlake Verge
+2 Island
+1 Swamp
+2 Darkslick Shores
+[Sideboard]
+2 Subtlety
+1 The Meathook Massacre
+2 Nihil Spellbomb
+2 Stern Scolding
+3 Phyrexian Crusader
+3 Consign to Memory
+1 Surgical Extraction
+1 Toxic Deluge

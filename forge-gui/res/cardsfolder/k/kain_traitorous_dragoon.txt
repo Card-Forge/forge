@@ -1,0 +1,13 @@
+Name:Kain, Traitorous Dragoon
+ManaCost:2 B
+Types:Legendary Creature Human Knight
+PT:2/4
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | Condition$ PlayerTurn | Description$ Jump — During your turn, NICKNAME has flying.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigControl | TriggerDescription$ Whenever Kain deals combat damage to a player, that player gains control of Kain. If they do, you draw that many cards, create that many tapped Treasure tokens, then lose that much life.
+SVar:TrigControl:DB$ GainControl | Defined$ Self | NewController$ TriggeredTarget | RememberControlled$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ X | TokenTapped$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerCount$DamageAmount
+Oracle:Jump — During your turn, Kain has flying.\nWhenever Kain deals combat damage to a player, that player gains control of Kain. If they do, you draw that many cards, create that many tapped Treasure tokens, then lose that much life.

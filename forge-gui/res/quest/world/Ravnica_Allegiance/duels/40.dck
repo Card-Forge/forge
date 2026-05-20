@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Zatanna
+Title=Zatanna
+Icon=Zatanna.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/Adrian_Throop_-_Dimir_Control_(Standard,_#787249).dck
+Deck Type=constructed
+
+[Main]
+3 Doom Whisperer
+4 Hostage Taker
+4 Thief of Sanity
+3 Cast Down
+2 Moment of Craving
+2 Vraska's Contempt
+1 Cry of the Carnarium
+3 Discovery // Dispersal
+3 Duress
+4 Thought Erasure
+4 Disinformation Campaign
+1 The Eldest Reborn
+1 Karn, Scion of Urza
+6 Island
+10 Swamp
+4 Drowned Catacomb
+1 Field of Ruin
+4 Watery Grave
+[Sideboard]
+1 Sorcerous Spyglass
+1 Murmuring Mystic
+1 The Eldest Reborn
+1 Disdainful Stroke
+1 Fungal Infection
+2 Negate
+1 Spell Pierce
+1 Vraska's Contempt
+1 Karn, Scion of Urza
+1 Cry of the Carnarium
+1 Duress
+1 Ritual of Soot
+1 Field of Ruin

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Silver Surfer
+Title=Silver Surfer
+Icon=Silver Surfer.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/Alexander_Hayne_-_UR_Control_(Standard,_#1157241).dck
+Deck Type=constructed
+
+[Main]
+3 Galazeth Prismari
+3 Brazen Borrower
+4 Goldspan Dragon
+4 Bonecrusher Giant
+1 Fire Prophecy
+1 Behold the Multiverse
+2 Saw It Coming
+2 Mystical Dispute
+3 Magma Opus
+4 Frost Bite
+4 Alrund's Epiphany
+4 Expressive Iteration
+3 Faceless Haven
+4 Fabled Passage
+4 Volatile Fjord
+4 Riverglide Pathway
+5 Snow-Covered Mountain
+5 Snow-Covered Island
+[Sideboard]
+1 Disdainful Stroke
+2 The Akroan War
+2 Test of Talents
+2 Ox of Agonas
+2 Mystical Dispute
+3 Redcap Melee
+3 Fire Prophecy

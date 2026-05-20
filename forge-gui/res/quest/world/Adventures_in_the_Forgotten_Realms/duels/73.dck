@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Osiris
+Title=Osiris
+Icon=Osiris.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/jvidarte_-_Red_Deck_Wins_(Modern,_#1196107).dck
+Deck Type=constructed
+
+[Main]
+3 Bonecrusher Giant
+4 Soul-Scar Mage
+4 Fury
+4 Monastery Swiftspear
+4 Ragavan, Nimble Pilferer
+4 Seasoned Pyromancer
+1 Spikefield Hazard
+4 Lightning Bolt
+4 Lava Dart
+2 Firebolt
+4 Light Up the Stage
+4 Blood Moon
+1 Shinka, the Bloodsoaked Keep
+4 Den of the Bugbear
+13 Mountain
+[Sideboard]
+1 Obosh, the Preypiercer
+2 Kozilek's Return
+4 Shattering Spree
+4 Relic of Progenitus
+4 Void Mirror

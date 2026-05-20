@@ -20,8 +20,10 @@ package forge.itemmanager.views;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
+import java.util.Map;
 
 import javax.swing.JTable;
+import javax.swing.table.TableModel;
 
 import forge.gui.card.CardPreferences;
 import forge.item.IPaperCard;
@@ -35,9 +37,8 @@ import forge.util.Localizer;
 /**
  * Displays favorite icons
  */
-@SuppressWarnings("serial")
 public class StarRenderer extends ItemCellRenderer {
-    private IPaperCard card;
+    private int favorite;
     private SkinImage skinImage;
 
     @Override
@@ -55,42 +56,57 @@ public class StarRenderer extends ItemCellRenderer {
     @Override
     public final Component getTableCellRendererComponent(final JTable table, final Object value,
             final boolean isSelected, final boolean hasFocus, final int row, final int column) {
-        if (value instanceof IPaperCard) {
-            card = (IPaperCard) value;
+        IPaperCard card = getCardFromRow(table.getModel(), row);
+        if (value instanceof Integer) {
+            favorite = (int) value;
         }
         else {
-            card = null;
+            favorite = 0;
         }
-        update();
+        update(card);
         return super.getTableCellRendererComponent(table, "", isSelected, hasFocus, row, column);
     }
 
     @Override
     public <T extends InventoryItem> void processMouseEvent(final MouseEvent e, final ItemListView<T> listView, final Object value, final int row, final int column) {
-        if (e.getID() == MouseEvent.MOUSE_PRESSED && e.getButton() == 1 && value instanceof IPaperCard) {
-            card = (IPaperCard) value;
+        IPaperCard card = getCardFromRow(listView.getTableModel(), row);
+        if (e.getID() == MouseEvent.MOUSE_PRESSED && e.getButton() == 1 && card != null) {
             CardPreferences prefs = CardPreferences.getPrefs(card);
-            prefs.setStarCount((prefs.getStarCount() + 1) % 2); //TODO: consider supporting more than 1 star
+            this.favorite = (prefs.getStarCount() + 1) % 2;
+            prefs.setStarCount(favorite); //TODO: consider supporting more than 1 star
             CardPreferences.save();
-            update();
-            listView.getTable().setRowSelectionInterval(row, row);
-            listView.getTable().repaint();
+            update(card);
+            JTable table = listView.getTable();
+            table.setRowSelectionInterval(row, row);
+            if(table.getModel() instanceof ItemListView<?>.ItemTableModel tableModel)
+                tableModel.fireTableRowsUpdated(row, row);
+            table.repaint();
             e.consume();
         }
     }
+
+    private IPaperCard getCardFromRow(TableModel model, int row) {
+        if(!(model instanceof  ItemListView<?>.ItemTableModel tableModel))
+            return null;
+        Object cardObj = tableModel.rowToItem(row);
+        if(cardObj instanceof Map.Entry<?, ?> entry && entry.getKey() instanceof IPaperCard)
+            return (IPaperCard) entry.getKey();
+        return null;
+    }
     
-    private void update() {
+    private void update(IPaperCard card) {
         final Localizer localizer = Localizer.getInstance();
-        if (card == null) {
+        if(card == null) {
             this.setToolTipText(null);
             skinImage = null;
+            return;
         }
-        else if (CardPreferences.getPrefs(card).getStarCount() == 0) {
-            this.setToolTipText(localizer.getMessage("lblClickToAddTargetToFavorites", CardTranslation.getTranslatedName(card.getName())));
+        if (favorite == 0) {
+            this.setToolTipText(localizer.getMessage("lblClickToAddTargetToFavorites", CardTranslation.getTranslatedName(card.getDisplayName())));
             skinImage = FSkin.getImage(FSkinProp.IMG_STAR_OUTLINE);
         }
         else { //TODO: consider supporting more than 1 star
-            this.setToolTipText(localizer.getMessage("lblClickToRemoveTargetToFavorites", CardTranslation.getTranslatedName(card.getName())));
+            this.setToolTipText(localizer.getMessage("lblClickToRemoveTargetToFavorites", CardTranslation.getTranslatedName(card.getDisplayName())));
             skinImage = FSkin.getImage(FSkinProp.IMG_STAR_FILLED);
         }
     }

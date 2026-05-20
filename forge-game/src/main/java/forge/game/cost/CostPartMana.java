@@ -39,6 +39,8 @@ public class CostPartMana extends CostPart {
     private boolean isEnchantedCreatureCost = false;
     private boolean isCostPayAnyNumberOfTimes = false;
 
+    protected String maxWaterbend;
+
     public int paymentOrder() { return shouldPayLast() ? 200 : 0; }
 
     public boolean shouldPayLast() {
@@ -61,6 +63,13 @@ public class CostPartMana extends CostPart {
         this.xMin = xMin;
         this.isExiledCreatureCost = exiledCreatureCost;
         this.isEnchantedCreatureCost = enchantedCreatureCost;
+    }
+
+    public String getMaxWaterbend() {
+        return maxWaterbend;
+    }
+    public void setMaxWaterbend(String max) {
+        maxWaterbend = max;
     }
 
     /**
@@ -101,14 +110,13 @@ public class CostPartMana extends CostPart {
     public boolean isUndoable() { return true; }
 
     @Override
-    public final String toString() {
+    public String toString() {
         return cost.toString();
     }
 
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
-        // For now, this will always return true. But this should probably be
-        // checked at some point
+        // For now, always return true. But this should probably be checked at some point
         return true;
     }
 

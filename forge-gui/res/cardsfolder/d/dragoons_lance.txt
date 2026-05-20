@@ -1,0 +1,9 @@
+Name:Dragoon's Lance
+ManaCost:1 W
+Types:Artifact Equipment
+K:Job select
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddType$ Knight | Description$ Equipped creature gets +1/+0 and is a Knight in addition to its other types.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying | Condition$ PlayerTurn | Description$ During your turn, equipped creature has flying.
+K:Equip:4:Flavor Gae Bolg
+DeckHas:Ability$Token & Type$Knight
+Oracle:Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)\nEquipped creature gets +1/+0 and is a Knight in addition to its other types.\nDuring your turn, equipped creature has flying.\nGae Bolg — Equip {4}

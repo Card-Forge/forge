@@ -1,0 +1,8 @@
+Name:The Masamune
+ManaCost:3
+Types:Legendary Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy+attacking | AddKeyword$ First Strike & MustBeBlockedBy Creature | Description$ As long as equipped creature is attacking, it has first strike and must be blocked if able.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddStaticAbility$ Masarmonicon | Description$ Equipped creature has "If a creature dying causes a triggered ability of this creature or an emblem you own to trigger, that ability triggers an additional time."
+SVar:Masarmonicon:Mode$ Panharmonicon | ValidMode$ ChangesZone,ChangesZoneAll | ValidCard$ Card.Self,Emblem.YouOwn | ValidZone$ Battlefield,Command | ValidCause$ Creature | Origin$ Battlefield | Destination$ Graveyard | Description$ If a creature dying causes a triggered ability of this creature or an emblem you own to trigger, that ability triggers an additional time.
+Oracle:As long as equipped creature is attacking, it has first strike and must be blocked if able.\nEquipped creature has "If a creature dying causes a triggered ability of this creature or an emblem you own to trigger, that ability triggers an additional time."\nEquip {2}

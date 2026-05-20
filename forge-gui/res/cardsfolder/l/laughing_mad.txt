@@ -1,0 +1,8 @@
+Name:Laughing Mad
+ManaCost:2 R
+Types:Instant
+A:SP$ Draw | Cost$ 2 R Discard<1/Card/card> | NumCards$ 2 | Defined$ You | SpellDescription$ Draw two cards.
+K:Flashback:3 R
+DeckHas:Ability$Discard|Graveyard
+DeckHints:Keyword$Madness & Ability$Delirium
+Oracle:As an additional cost to cast this spell, discard a card.\nDraw two cards.\nFlashback {3}{R} (You may cast this card from your graveyard for its flashback cost and any additional costs. Then exile it.)

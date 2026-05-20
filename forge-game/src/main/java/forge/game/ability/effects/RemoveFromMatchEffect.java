@@ -14,6 +14,7 @@ public class RemoveFromMatchEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         CardCollection toRemove;
+        boolean removeFromInventory = sa.hasParam("RemoveFromInventory");
 
         if (sa.hasParam("RemoveType")) {
             CardCollection cards = (CardCollection) host.getOwner().getGame().getCardsInGame();
@@ -32,6 +33,9 @@ public class RemoveFromMatchEffect extends SpellAbilityEffect {
             tgtC.getGame().getAction().ceaseToExist(tgtC, true);
             PaperCard rem = (PaperCard) tgtC.getPaperCard();
             host.getGame().getMatch().removeCard(rem);
+            if (removeFromInventory) {
+                host.getController().destroyPhysicalCard(tgtC);
+            }
         }
     }
 }

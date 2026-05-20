@@ -8,6 +8,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand THS
 FatPack=9
 FatPackExtraSlots=80 BasicLands THS
 ScryfallCode=BNG
+TokenFallbackCode=THS
 
 [cards]
 1 U Acolyte's Reward @Slawomir Maniak
@@ -188,3 +189,6 @@ ScryfallCode=BNG
 8 g_3_3_e_centaur @Ryan Barger
 9 g_2_2_wolf @Raoul Vitale
 10 c_a_gold_sac @Richard Wright
+
+[other]
+11 emblem_kiora_the_crashing_wave @Scott M. Fischer

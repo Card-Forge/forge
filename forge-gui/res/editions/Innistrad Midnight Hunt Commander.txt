@@ -195,13 +195,6 @@ ScryfallCode=MIC
 187 U Unclaimed Territory @Dimitar Marinski
 
 [tokens]
-0 c_a_clue_draw @Unknown
-0 c_a_treasure_sac @Unknown
-0 g_1_2_spider_reach @Unknown
-0 g_2_2_wolf @Unknown
-0 g_4_4_beast @Unknown
-0 w_1_1_spirit_flying @Unknown
-0 b_2_2_zombie_decayed
 1 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
 2 w_1_1_human_soldier @Deruchenko Alexander
 3 w_2_2_knight_vigilance @Matt Stewart

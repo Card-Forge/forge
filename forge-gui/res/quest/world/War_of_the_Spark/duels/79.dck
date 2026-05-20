@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Abiku
+Title=Abiku
+Icon=Abiku.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/Caupolicon_Lopez_Yapor_-_Azorius_Control_(Modern,_#796345).dck
+Deck Type=constructed
+
+[Main]
+2 Snapcaster Mage
+1 Vendilion Clique
+3 Cryptic Command
+2 Dovin's Veto
+1 Hieroglyphic Illumination
+2 Negate
+4 Opt
+4 Path to Exile
+2 Surgical Extraction
+1 Serum Visions
+1 Supreme Verdict
+4 Terminus
+1 Timely Reinforcements
+1 Detention Sphere
+2 Search for Azcanta
+3 Jace, the Mind Sculptor
+2 Teferi, Hero of Dominaria
+6 Island
+2 Plains
+4 Celestial Colonnade
+4 Field of Ruin
+4 Flooded Strand
+2 Glacial Fortress
+2 Hallowed Fountain
+[Sideboard]
+1 Baneslayer Angel
+2 Rest in Peace
+2 Stony Silence
+1 Celestial Purge
+3 Ceremonious Rejection
+2 Dispel
+1 Negate
+1 Lyra Dawnbringer
+1 Ancestral Vision
+1 Timely Reinforcements

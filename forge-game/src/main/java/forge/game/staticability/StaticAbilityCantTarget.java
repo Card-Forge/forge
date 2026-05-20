@@ -39,36 +39,20 @@ public class StaticAbilityCantTarget {
 
     static String MODE = "CantTarget";
 
-    public static boolean cantTarget(final Card card, final SpellAbility spellAbility)  {
-        final Game game = card.getGame();
+    public static StaticAbility cantTarget(final GameEntity entity, final SpellAbility spellAbility)  {
+        final Game game = entity.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.CantTarget)) {
                     continue;
                 }
 
-                if (applyCantTargetAbility(stAb, card, spellAbility)) {
-                    return true;
+                if (applyCantTargetAbility(stAb, entity, spellAbility)) {
+                    return stAb;
                 }
             }
         }
-        return false;
-    }
-
-    public static boolean cantTarget(final Player player, final SpellAbility spellAbility)  {
-        final Game game = player.getGame();
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
-                    continue;
-                }
-
-                if (applyCantTargetAbility(stAb, player, spellAbility)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return null;
     }
 
     /**
@@ -82,65 +66,35 @@ public class StaticAbilityCantTarget {
      *            the spell/ability
      * @return true, if successful
      */
-    public static boolean applyCantTargetAbility(final StaticAbility stAb, final Card card, final SpellAbility spellAbility) {
-        if (stAb.hasParam("ValidPlayer")) {
-            return false;
-        }
+    public static boolean applyCantTargetAbility(final StaticAbility stAb, final GameEntity entity, final SpellAbility spellAbility) {
+        if (entity instanceof Card card) {
+            if (stAb.hasParam("AffectedZone")) {
+                if (ZoneType.listValueOf(stAb.getParam("AffectedZone")).stream().noneMatch(zt -> card.isInZone(zt))) {
+                    return false;
+                }
+            } else if (!card.isInPlay()) { // default zone is battlefield
+                return false;
+            }
+            Set<ZoneType> zones = stAb.getActiveZone();
 
-        if (stAb.hasParam("AffectedZone")) {
-            boolean inZone = false;
-            for (final ZoneType zt : ZoneType.listValueOf(stAb.getParam("AffectedZone"))) {
-                if (card.isInZone(zt)) {
-                    inZone = true;
-                    break;
+            if (zones != null && zones.contains(ZoneType.Stack)) {
+                // Enthralling Hold: only works if it wasn't already cast
+                if (card.getGame().getStack().getSpellMatchingHost(spellAbility.getHostCard()) != null) {
+                    return false;
                 }
             }
-
-            if (!inZone) {
-                return false;
-            }
-        } else { // default zone is battlefield
-            if (!card.isInPlay()) {
-                return false;
-            }
-        }
-        Set<ZoneType> zones = stAb.getActiveZone();
-
-        if (zones != null && zones.contains(ZoneType.Stack)) {
-            // Enthralling Hold: only works if it wasn't already cast
-            if (card.getGame().getStack().getSpellMatchingHost(spellAbility.getHostCard()) != null) {
-                return false;
-            }
-        }
-
-        if (!stAb.matchesValidParam("ValidCard", card)) {
+        } else if (stAb.hasParam("AffectedZone")) {
             return false;
         }
 
-        return common(stAb, card, spellAbility);
-    }
-
-    public static boolean applyCantTargetAbility(final StaticAbility stAb, final Player player, final SpellAbility spellAbility) {
-        if (stAb.hasParam("ValidCard") || stAb.hasParam("AffectedZone")) {
-            return false;
-        }
-
-        if (!stAb.matchesValidParam("ValidPlayer", player)) {
-            return false;
-        }
-
-        return common(stAb, player, spellAbility);
-    }
-
-    protected static boolean common(final StaticAbility stAb, GameEntity entity, final SpellAbility spellAbility) {
         final Card source = spellAbility.getHostCard();
         final Player activator = spellAbility.getActivatingPlayer();
 
-        if (stAb.isKeyword(Keyword.HEXPROOF) && StaticAbilityIgnoreHexproofShroud.ignore(entity, spellAbility, Keyword.HEXPROOF)) {
+        if ((stAb.isKeyword(Keyword.HEXPROOF) || stAb.isKeyword(Keyword.SHROUD)) && StaticAbilityIgnoreHexproofShroud.ignore(entity, spellAbility, stAb)) {
             return false;
         }
 
-        if (stAb.isKeyword(Keyword.SHROUD) && StaticAbilityIgnoreHexproofShroud.ignore(entity, spellAbility, Keyword.SHROUD)) {
+        if (!stAb.matchesValidParam("ValidTarget", entity)) {
             return false;
         }
 

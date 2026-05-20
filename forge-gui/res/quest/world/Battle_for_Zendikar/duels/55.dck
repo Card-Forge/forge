@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ezio
+Title=Ezio
+Icon=Ezio.jpg
+Difficulty=Very Hard
+Description=../Modern/Battle_for_Zendikar/Standard_Daily_#9286405/gargar70_-_gargar70_(3-1)_(Modern,_#519329).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Hangarback Walker
+2 Kolaghan, the Storm's Fury
+3 Monastery Mentor
+4 Monastery Swiftspear
+4 Fiery Impulse
+2 Secure the Wastes
+4 Wild Slash
+4 Dragon Fodder
+4 Hordeling Outburst
+4 Gideon, Ally of Zendikar
+2 Sorin, Solemn Visitor
+4 Battlefield Forge
+6 Mountain
+4 Nomad Outpost
+2 Plains
+3 Shambling Vent
+2 Smoldering Marsh
+2 Swamp
+[Sideboard]
+3 Harsh Sustenance
+1 Murderous Cut
+3 Rending Volley
+3 Self-Inflicted Wound
+3 Surge of Righteousness
+2 Zulaport Cutthroat

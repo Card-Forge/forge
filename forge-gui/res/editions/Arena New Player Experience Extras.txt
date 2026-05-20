@@ -1,0 +1,28 @@
+[metadata]
+Code=XANA
+Date=2018-07-14
+Name=Arena New Player Experience Extras
+Type=Online
+ScryfallCode=XANA
+
+[cards]
+7 C Loxodon Line Breaker @Jesper Ejsing
+13 C Take Vengeance @Randy Vargas
+14 C Divination @Howard Lyon
+16 M Overflowing Insight @Lucas Graciano
+22 C Waterknot @Wayne Reynolds
+25 U Ambition's Cost @Zezhou Chen
+26 C Cruel Cut @Caio Monteiro
+29 C Miasmic Mummy @E. M. Gist
+31 C Nimble Pilferer @Lie Setiawan
+34 U Rise from the Grave @Kieran Yanner
+35 R Soulhunter Rakshasa @Caio Monteiro
+37 U Doublecast @Even Amundsen
+40 U Goblin Gang Leader @Jakub Kasper
+45 U Volcanic Dragon @Chris Rahn
+47 C Rumbling Baloth @Jesper Ejsing
+51 L Plains @Nils Hamm
+52 L Island @Titus Lunter
+53 L Swamp @Adam Paquette
+54 L Mountain @Richard Wright
+55 L Forest @Jonas De Ro

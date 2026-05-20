@@ -1,0 +1,38 @@
+[metadata]
+Code=YTDM
+Date=2025-04-29
+Name=Alchemy: Tarkir
+Type=Online
+ScryfallCode=YTDM
+
+[cards]
+1 M Lam, Storm Crane Elder @Irina Nordsol
+2 R Thunderbond Vanguard @Carlos Palma Cruchaga
+3 U Waystone's Guidance @Adam Paquette
+4 R Cunning Azurescale @Diego Gisbert
+5 R Pearl Lake Warden @Joshua Cairos
+6 U Ureni's Counsel @Diego Gisbert
+7 U Draconic Fealty @Diana Franco
+8 U Runeblade Raiser @Monztre
+9 R Sibsig's Artisan @Josh Hass
+10 U Dragonblood Twins @Bram Sels
+11 R Dragonsoul Prodigy @Diego Gisbert
+12 R Dragon Typhoon @Zoltan Boros
+13 R Stormforged Armor @Tianxing Xu
+14 U Swiftspear's Teachings @Eli Minaya
+15 U Amber-Plate Ainok @Diana Franco
+16 R Hardened Bonds @Xavier Ribeiro
+17 R Pampered Loamfrill @Diana Franco
+18 R Audacious Knuckleblade @Arif Wijaya
+19 R Call the Crash @Carlos Palma Cruchaga
+20 R Dalkovan Outrider @Filip Burburan
+21 M Hamza, Might of the Yathan @Svetlin Velinov
+22 U Illuminating Lash @Irina Nordsol
+23 M Mardu Thunderkite @Daneen Wilkerson
+24 R Oasis of Renewal @Steven Belledin
+25 U Song of Seasons @Carlos Palma Cruchaga
+26 M Stonehide Ancient @Victor Adame Minguez
+27 U Territorial Strike @Joshua Cairos
+28 M Xho Cai, Flickering Talon @Jake Murray
+29 R Dragonweave Tapestry @Eli Minaya
+30 R Desert Cenote @Chris Ostrowski

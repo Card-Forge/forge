@@ -1,0 +1,7 @@
+Name:Casey Jones, Asphalt Hooligan
+ManaCost:2 R
+Types:Legendary Creature Human Berserker
+PT:2/2
+K:Double Strike
+A:AB$ Pump | Cost$ 4 | NumAtt$ Double | Activator$ Player | SpellDescription$ Double NICKNAME's power until end of turn. Any player may activate this ability.
+Oracle:Double strike (This creature deals both first-strike and regular combat damage.)\n{4}: Double Casey Jones's power until end of turn. Any player may activate this ability.

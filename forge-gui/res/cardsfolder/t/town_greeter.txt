@@ -1,0 +1,12 @@
+Name:Town Greeter
+ManaCost:1 G
+Types:Creature Human Citizen
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature enters, mill four cards. You may put a land card from among them into your hand. If you put a Town card into your hand this way, you gain 2 life. (To mill four cards, a player puts the top four cards of their library into their graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | RememberMilled$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Land.IsRemembered | SelectPrompt$ You may select a land card | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card.Town | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill
+DeckHints:Type$Town
+Oracle:When this creature enters, mill four cards. You may put a land card from among them into your hand. If you put a Town card into your hand this way, you gain 2 life. (To mill four cards, a player puts the top four cards of their library into their graveyard.)

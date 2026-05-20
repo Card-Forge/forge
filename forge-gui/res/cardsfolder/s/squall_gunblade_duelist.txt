@@ -1,0 +1,12 @@
+Name:Squall, Gunblade Duelist
+ManaCost:R W B
+Types:Legendary Creature Human Mercenary
+PT:3/2
+K:First Strike
+K:ETBReplacement:Other:ChooseNumber
+SVar:ChooseNumber:DB$ ChooseNumber | Defined$ You | SpellDescription$ As NICKNAME enters, choose a number.
+T:Mode$ AttackersDeclaredOneTarget | AttackedTarget$ Opponent | ValidAttackers$ Creature.powerEQChosen,Creature.toughnessEQChosen | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever one or more creatures attack one of your opponents, if any of those creatures have power or toughness equal to the chosen number, NICKNAME deals damage equal to its power to defending player.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredAttackedTarget | NumDmg$ X | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1
+SVar:X:Count$CardPower
+SVar:Y:Count$Valid Creature.TriggeredAttackers+powerEQChosen,Creature.TriggeredAttackers+toughnessEQChosen
+Oracle:First strike\nAs Squall enters, choose a number.\nWhenever one or more creatures attack one of your opponents, if any of those creatures have power or toughness equal to the chosen number, Squall deals damage equal to its power to defending player.

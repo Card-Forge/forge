@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="80">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="preventEscape" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../tileset/inn_dungeon_floor.tsx"/>
+ <tileset firstgid="12530" source="../../../tileset/INN_dungen_crawler_tileset.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzTERACAMBMEowiXgApiYANwRCSl+qK7Yer2YOb6qoQn15DvCFFq8vLy8vJJ3hyN0ky8AAA/74tft
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBiZIIOHdpiQvTCQZMDAkAzEKQaY6kiVI8XeaqC+GiCuxWI2qXKk2DsFqG8qEE/DYjapcqTYS00wau/A20tMPhtO9hIjDwP9egwME4B4oh597V0BtG8lEK+is70HgfYdAuLDdLaXVDCY7R2IenAUjIJRMApGweACANNoPCQ=
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlk1OQjEUhasj4wYQfwbqvC0aXYGJA12GLsT3WAUPVsHPKlSmbsCnjtQNiKe2TS7XUigSAvHd5EsLtz13AKc5uRTiDbyCO5CBJijdmjFSenlA29MGm0qIDdDCvgAdMHJrwUjphbQ9fdLrYt8DO1qIC1DT9jMlpRfS9pjyPV8NbVetxa9K7XFtWrHeX6uaW82t5q7O3He8NR/gUy537pY7tz3j+UXNPcS5I3C85LmptWpzH/D/2MP3u8ruF80k7dzlg6bLBGUgR9A8cQKNUxXOG5SSaWdMu+3ygaHl8gLPETRPXGHmtQrnDcqIaRdM22SCgcNkgstAjvCYMzeYeavsftK5ntOh2j95RI3njaG0mHqKvAdDGd7Himr/50rxxCPYx290AO7n8BS9H/MC99ALOMOdc/Asp3uJQ+/HvMA9JMi78yWne4lD78e8wD1UJ/dqM3iJU5/jLQ55YR398Q3YfBPX
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAMkpwZGJKdSZejFDwCmvsYh9n45IgFMjYMDLI2lJlBDpgDtHPuANg7CkbBKBhcwEtroF1AHfApHFgPaDIwpGhS11xPAuFTFMHAUA+0s4HK9o4C+oMUYH2eilanJwD5ic6E1VECXgDNeolm3gMg/6EzYXWjYBSMglEwXAAAb5UZzQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="69" template="../../../../../common/maps/obj/enemy.tx" gid="2147495067" x="208" y="224">
+   <properties>
+    <property name="dialog">[{
+  &quot;text&quot;:&quot;Hello, planeswalker {var=player_name}. Welcome to my abode&quot;,
+  &quot;options&quot;:[
+    {
+	  &quot;name&quot;:&quot;Why am I here?&quot;,      
+	  &quot;condition&quot;:[ { &quot;checkQuestFlag&quot;: &quot;mainQuest&quot; ,&quot;not&quot;:true} ],    
+	  &quot;text&quot;:&quot;You are on a plane called Innistrad, a realm of equal parts horror and joy; darkness and light. Where the shadows cling like a thick morning dew... You are here, because you alone could see through the shadows and found my beacon...&quot;,
+	  &quot;options&quot;:[
+		{      
+		  &quot;name&quot;:&quot;Why does this look like a jail?&quot;,
+		  &quot;text&quot;:&quot;Like you, I am imprisoned here. However, unlike myself, I have the power to grant you free travel to and from my... Home... And the point of my beacon.&quot;,
+		  &quot;options&quot;:[
+			{
+			  &quot;name&quot;:&quot;Continue&quot;,
+				&quot;text&quot;:&quot;Innistrad is in turmoil... Its soul is twisting, and it has forgotten itself... Time and memory are inter-mixed, and the people are forgetting what once was... Find the lost moments in time, bring them back to the fore, and you may find the key to free yourself.&quot;,
+				&quot;options&quot;:[
+				{
+					&quot;name&quot;:&quot;What does that mean?&quot;,
+					&quot;text&quot;:&quot;You will need to discover that for yourself... But first, take this rune. You can use it anytime to return here. Be careful, planeswalker, few gifts on Innistrad come without cost.&quot;,
+					&quot;action&quot;:[{&quot;addItem&quot;:&quot;Colorless rune&quot;}],
+					&quot;options&quot;:[
+					{
+						&quot;name&quot;:&quot;Continue&quot;,
+  						&quot;text&quot;:&quot;I have something else for you, {var=player_name}. Take these coins, but do not spend them with simple merchants.&quot;,
+  						&quot;condition&quot;:[{ &quot;checkCharacterFlag&quot;: &quot;freeChallengeCoins&quot; ,&quot;not&quot;:true} ],    
+  						&quot;options&quot;:[{
+							&quot;action&quot;: [{&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Challenge Coin&quot;}, {&quot;type&quot;:&quot;item&quot;, &quot;count&quot;: 2, &quot;itemName&quot;: &quot;Silver Challenge Coin&quot;}, {&quot;type&quot;:&quot;item&quot;, &quot;count&quot;: 3, &quot;itemName&quot;: &quot;Bronze Challenge Coin&quot;}]}, {&quot;setCharacterFlag&quot;: {&quot;key&quot;:&quot;freeChallengeCoins&quot;, &quot;val&quot;: 1}}],
+							&quot;name&quot;:&quot;What are they, then? What are they for?&quot;,
+							&quot;text&quot;:&quot;These are Challenge Coins. As Innistrad has frayed, points of power have formed. Allowing mages to come together and hold grand tournaments while the energy is strong. These coins will grant you entry to such contests, and the prizes available can help you on your journey.&quot;,
+							&quot;options&quot;:[{&quot;name&quot;:&quot;Where are these contests?&quot;,
+								&quot;text&quot;: &quot;Show the coins to innkeepers. If there is a point of power in the town, the innkeeper will direct you to it and its contest.&quot;,
+								&quot;options&quot;:[{ 
+									&quot;name&quot;:&quot;Thank you.&quot;,
+									&quot;text&quot;:&quot;I will now re-open the portal you came through. So that you may return to Innistrad, where you can seek to find freedom from your imprisonment... Good luck.&quot;,
+									&quot;options&quot;:[
+									{
+										&quot;name&quot;:&quot;(Leave)&quot;,
+										&quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;mainQuest&quot;, &quot;val&quot;: 1}, &quot;activateMapObject&quot;: 78}]
+									}]
+								}]
+							}]
+						}]
+					},
+					{ 
+						&quot;name&quot;:&quot;Thank you.&quot;,
+						&quot;text&quot;:&quot;I will now re-open the portal you came through. Once you return to Innistrad, you can seek freedom from your imprisonment... Good luck.&quot;,
+						&quot;condition&quot;:[{ &quot;checkCharacterFlag&quot;: &quot;freeChallengeCoins&quot;} ],  
+						&quot;options&quot;:[
+						{
+							&quot;name&quot;:&quot;(Leave)&quot;,
+							&quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;mainQuest&quot;, &quot;val&quot;: 1}, &quot;activateMapObject&quot;: 78}]
+						}]
+					}]
+				}]
+			}]
+		} 
+	  ]
+	},
+    { &quot;name&quot;:&quot;Goodbye.&quot; }
+  ]
+},
+{
+  &quot;text&quot;:&quot;I have something else for you, {var=player_name}. Take these coins, but do not spend them with simple merchants.&quot;,
+  &quot;condition&quot;:[ { &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;}, { &quot;checkCharacterFlag&quot;: &quot;freeChallengeCoins&quot; ,&quot;not&quot;:true} ],    
+  &quot;options&quot;:[{
+
+	&quot;action&quot;: [{&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Challenge Coin&quot;}, {&quot;type&quot;:&quot;item&quot;, &quot;count&quot;: 2, &quot;itemName&quot;: &quot;Silver Challenge Coin&quot;}, {&quot;type&quot;:&quot;item&quot;, &quot;count&quot;: 3, &quot;itemName&quot;: &quot;Bronze Challenge Coin&quot;}]}, {&quot;setCharacterFlag&quot;: {&quot;key&quot;:&quot;freeChallengeCoins&quot;, &quot;val&quot;: 1}}],
+
+	&quot;name&quot;:&quot;What are they, then? What are they for?&quot;,
+	&quot;text&quot;:&quot;These are Challenge Coins. As Innistrad has frayed, points of power have formed. Allowing mages to come together and hold grand tournaments while the energy is strong. These coins will grant you entry to such contests, and the prizes available can help you on your journey.&quot;,
+	&quot;options&quot;:[{&quot;name&quot;:&quot;Where are these contests?&quot;,
+		&quot;text&quot;: &quot;Show the coins to innkeepers. If there is a point of power in the town, the innkeeper will direct you to it and its contest.&quot;,
+		&quot;options&quot;:[{&quot;name&quot;:&quot;Thank you. (Leave)&quot;}]
+	}]
+  }]
+}]</property>
+    <property name="enemy" value="Cloaked Old Man"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../../common/maps/obj/entry_down.tx" x="207.5" y="97">
+   <properties>
+    <property name="noExit" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../../common/maps/obj/portal.tx" x="207" y="81">
+   <properties>
+    <property name="activeQuestFlag" value="mainQuest"/>
+    <property name="portalState" value="closed"/>
+    <property name="sprite" value="sprites/portal3.atlas"/>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

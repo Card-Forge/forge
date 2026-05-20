@@ -22,6 +22,7 @@ import forge.adventure.data.AdventureQuestData;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.RewardData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.stage.MapStage;
@@ -91,10 +92,10 @@ public class MapDialog {
                 @Override
                 public void changed(ChangeEvent changeEvent, Actor actor) {
                     if (prebuiltQuestData != null && Integer.parseInt(questAccepted) == prebuiltQuestData.getID()) {
-                        Current.player().addQuest(prebuiltQuestData);
+                        Current.player().addQuest(prebuiltQuestData, false);
                     }
                     else {
-                        Current.player().addQuest(questAccepted);
+                        Current.player().addQuest(questAccepted, false);
                     }
                 }
             };
@@ -332,12 +333,27 @@ public class MapDialog {
                 else Current.player().takeGold(-E.addGold);
             }
             if (E.addShards != 0) { //Gives (positive or negative) mana shards to the player.
-                if (E.addShards > 0) Current.player().giveGold(E.addShards);
-                else Current.player().takeGold(-E.addShards);
+                if (E.addShards > 0) Current.player().addShards(E.addShards);
+                else Current.player().takeShards(-E.addShards);
             }
             if (E.addMapReputation != 0) {
-                if (E.POIReference != null && !E.POIReference.isEmpty() && !E.POIReference.contains("$")) {
-                    WorldSave.getCurrentSave().getPointOfInterestChanges(E.POIReference).addMapReputation(E.addMapReputation);
+                if (E.POIReference != null && !E.POIReference.isEmpty()) {
+                    if(E.POIReference.contains("$")) {
+                        // When this happens, we have a quest with a poi reference that failed to store the target in saved poi tokens
+                        if(TileMapScene.instance().rootPoint == null) {
+                            // This previously caused an exception because the rootPoint reflects the last POI visited.
+                            // If the save file was loaded and the quest is completed, and we don't have the poi token,
+                            // getting the changes assumes the root point as where to apply the reputation. In
+                            // actuality, we should not, so we basically should do nothing because we are going to just
+                            // generate a new poi with the replacement token name if we fix that issue.
+                        } else {
+                            // In this case, we can follow the previous path to grant reputation to the last place
+                            // visited, so the player gets *something* for reputation, however erroneously.
+                            stage.getChanges().addMapReputation(E.addMapReputation);
+                        }
+                    } else {
+                        WorldSave.getCurrentSave().getPointOfInterestChanges(E.POIReference).addMapReputation(E.addMapReputation);
+                    }
                 } else {
                     stage.getChanges().addMapReputation(E.addMapReputation);
                 }
@@ -389,15 +405,14 @@ public class MapDialog {
                 RewardScene.instance().loadRewards(ret, RewardScene.Type.QuestReward, null);
                 Forge.switchScene(RewardScene.instance());
             }
-            //Test code for selectable rewards:
-//            if (E.grantRewards != null && E.grantRewards.length > 0) {
-//                Array<Reward> ret = new Array<Reward>();
-//                for(RewardData rdata:E.grantRewards) {
-//                    ret.addAll(rdata.generate(false, true));
-//                }
-//                RewardScene.instance().loadSelectableRewards(ret, RewardScene.Type.RewardChoice, ret.size > 1? 2: 1);
-//                Forge.switchScene(RewardScene.instance());
-//            }
+               if (E.grantRewardsChoice != null && E.grantRewardsChoice.length > 0) {
+               Array<Reward> ret = new Array<Reward>();
+               for(RewardData rdata:E.grantRewardsChoice) {
+                   ret.addAll(rdata.generate(false, true));
+               }
+               RewardScene.instance().loadSelectableRewards(ret, RewardScene.Type.RewardChoice, 1);
+               Forge.switchScene(RewardScene.instance());
+            }
             if (E.issueQuest != null && (!E.issueQuest.isEmpty())) {
                 questAccepted = E.issueQuest;
                 emitQuestAccepted();

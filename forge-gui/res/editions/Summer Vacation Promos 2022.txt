@@ -4,6 +4,7 @@ Date=2022-08-01
 Name=Summer Vacation Promos 2022
 Type=Promo
 ScryfallCode=PSVC
+CardLang=ja
 
 [cards]
 1 R Ephemerate @Bastien L. Deharme

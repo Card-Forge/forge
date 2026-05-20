@@ -1,0 +1,8 @@
+Name:Poisoner's Apprentice
+ManaCost:2 B
+Types:Creature Orc Warlock
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Infusion — When this creature enters, target creature an opponent controls gets -4/-4 until end of turn if you gained life this turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | ValidTgtDesc$ creature an opponent controls | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | ConditionCheckSVar$ X
+SVar:X:Count$LifeYouGainedThisTurn
+Oracle:Infusion — When this creature enters, target creature an opponent controls gets -4/-4 until end of turn if you gained life this turn.

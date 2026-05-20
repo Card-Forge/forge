@@ -1,0 +1,16 @@
+Name:Araña, Heart of the Spider
+Variant:UniversesWithin:FlavorName:Gloria, the Great Armorer
+ManaCost:1 R W
+Types:Legendary Creature Spider Human Hero
+PT:3/3
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, put a +1/+1 counter on target attacking creature.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature
+T:Mode$ DamageDone | ValidSource$ Creature.modified+YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever a modified creature you control deals combat damage to a player, exile the top card of your library. You may play that card this turn. (Equipment, Auras you control, and counters are modifications.)
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Exile the top card of your library. You may play that card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+DeckHints:Type$Aura|Equipment
+Oracle:Whenever you attack, put a +1/+1 counter on target attacking creature.\nWhenever a modified creature you control deals combat damage to a player, exile the top card of your library. You may play that card this turn. (Equipment, Auras you control, and counters are modifications.)

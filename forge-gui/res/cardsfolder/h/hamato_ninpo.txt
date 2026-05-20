@@ -1,0 +1,5 @@
+Name:Hamato Ninpō
+ManaCost:1 W
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature.attacking,Creature.blocking | ValidTgtsDesc$ attacking or blocking creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target attacking or blocking creature.
+Oracle:Hamato Ninpō deals 4 damage to target attacking or blocking creature.

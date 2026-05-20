@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="118">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <tileset firstgid="13697" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
+  </data>
+ </layer>
+ <layer id="6" name="Floor" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztmGEKwjAMRgs7QHsDEb3oJnoqnVdTEP+NLbFf2oHvQf6F5G20S1hKAAAAAAAAALDEmFOahHHJbf0PRVvvKK63xdf/+n5vc/k9brmvf21fVZ1effHv23fP/vfhE7V1IvD4rz2H2t86l87i83MqmjnnnUsqf1W/R+O5452DT9E5+4fvT8s6EX1Hw53bs78qJwL87TkR4G/PiQB/e44H7/62tnepciL3t9ao9jfPjlf7jyJif7PQ626qwN/GC4hFgbw=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt17EJgEAMQFHBykZuABHXcWf3sHEYOSwsbKyM0fcgXJlfBa5pAADeY+6iCwDyGcrxjiW2AwDu2vrrZLO052SUuR2+YA2+e9H74a++8H+fErdX+mPpj1PvT+13f+I80b8DKAAM+A==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="48" height="48">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmFtLHDEUgANCxYfMTBerqD9jt1W0srJUwV/jra2tl1dF31svba1Cq4It6uKL4J9oSy9YSlX8IZ4wE2bInmTOjtlZLznwsbNJzHw7x5xkt+QxVnI4HA6H447zFDhtAAM5+fcDo20xi5WQZJtkoQx95dp27G/6bqD/gyHGWodunr8amLvAFMI/Gc30txHOn8YGZ+wdgfc89Fonjv/A8/GvN095Pdf74t8RMPbbS+dP5P+LMFYQBNf3OjLwKJq/PWjM+uXR/A/hdT8F7LMKL3VfWR6MKeTk7wfhvZcqIdiex+v0F9e3wd90dsnb33SGovirZ5dm+WNnKJ2/LkTe8vSnjrXh/xH2zc0MbHG7/q98xl4Cz4EXCNM+7j+YsV6XPdxpCu4zjjABjEXXkz4+p3ArIJ/NlCfp3wPtxwS6A7O/DpEX3Rixdx0CVeAgutZR1fh3JdpPWmqR0anx34P2Lwa+BvEYdf+6zpq05V9PqHmw6Y+5O3+zv6g9b3k6K7x2Lpv/P59g/s8EdPUnjcfIPW36VzLWYkEv8FPDkzr9TUHxHwEuNQwbnq0846kUc/Z/5sXnTxnyvS5HSX8R8tzXbH/pQfFPhjz3iaD4z8Oamkkw64f9r5X2OZ/mj3kkx1DWpgyKv4rMR2eA91P9dWNU1qL6+Aapm6tc7/8X2v4j/PNo/ZjbLlIzt3lYX3cMvxMJv6KmLy1HNsJUP0VOdP2idn4HfgDfomsM7JnZjDOY/1zDhRf3qzW00c/Vdqh5uO3+axm/A5pI/n5re27TGraFrI9Zv182G+dP4wp9oGn9
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt10EKgCAQheGBoJZdpDsYHaxa1V06Q4fLCBe1iRaiL/8PhoFQeEgKYwYAANSsw1Wx98TyNUtYn0t+AP8ztmaTr7lNnQQAgHLs1b2UhMyL83OKS53muzN74+eruve91zz/0FX/n9BV8yvf3yf1/EBpVOf3rbvq7RuAfKm+PyjLATrDIjM=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="60" template="../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/entry_down.tx" x="362.625" y="489.625" width="46" height="21.5">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_2.tmx"/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/dialog.tx" x="333.32" y="716.027" width="85.697" height="23.1913" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The halls ahead of you look both incredibly familiar and unsettlingly different. Light reflects strangely, and reality itself seems to subtly shimmer and distort in places. Mirrors line the walls, and you have the distinct sense you're being watched.
+
+Your manasight stone blazes with power, near-blindingly bright.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/entry_down.tx" x="362.833" y="205.583" width="46" height="21.5">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_W.tmx"/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/entry_down.tx" x="89.25" y="395" width="46" height="21.5">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_G.tmx"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/entry_down.tx" x="634.5" y="396.5" width="46" height="21.5">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_U.tmx"/>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/entry_down.tx" x="634" y="620" width="46" height="21.5">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_B.tmx"/>
+   </properties>
+  </object>
+  <object id="112" template="../../../../common/maps/obj/entry_down.tx" x="88.75" y="620.5" width="46" height="21.5">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_R.tmx"/>
+   </properties>
+  </object>
+  <object id="114" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="367.083" y="549.5">
+   <properties>
+    <property name="dialog">[
+    {
+        &quot;text&quot;: &quot;As I said {var=player_name}, this place is my mirror gallery. Here, you can face all the strongest legends of this realm again as many times as you wish, plus more powerful versions of some lesser legends as well.&quot;,
+        &quot;options&quot;: [
+            {
+                &quot;name&quot;: &quot;I've heard this before (end conversation)&quot;
+		},
+          {
+                &quot;name&quot;: &quot;That sounds interesting&quot;,
+                &quot;text&quot;: &quot;Indeed. You need never run out of worthy opponents to duel in this place. Simply leave a room and return and their reflection will be resummoned. They will even give you their rewards again.&quot;,
+                &quot;options&quot;: [
+                    {
+                        &quot;name&quot;: &quot;(Continue)&quot;,
+                        &quot;text&quot;: &quot;This chamber has six mirrors. Five lead to the most powerful foes of each of the five colored biomes, while the center one behind me leads to another chamber like this one where you can reface the strongest legends of the wastes as well as refight the inhabitants of the prisons of the Eldrazi and Ur-Dragon.&quot;,
+                        &quot;options&quot;: [
+                            {
+                                &quot;name&quot;: &quot;(Continue)&quot;,
+                                &quot;text&quot;: &quot;In that next room there are also a few additional challenges in the central chamber as well should you seek them. The final reflection I needed for my collection, Jodah himself, a reflection of you in the form of the ultimate nemesis, and one more...&quot;,
+                                &quot;options&quot;: [
+                                    {
+                                        &quot;name&quot;: &quot;(Continue)&quot;,
+                                        &quot;text&quot;: &quot;If you wish, you can face ME there. You're obviously incredibly powerful given your many victories, but you may find I am stronger still. I could have done what every other legend of this world couldn't and escaped long ago, but why would I? Here in my gallery, I have gathered the essences of the mightiest legends throughout time and space, the ultimate toys for my amusement.&quot;,
+                                        &quot;options&quot;: [
+                                            {
+                                                &quot;name&quot;: &quot;(Continue)&quot;,
+                                                &quot;text&quot;: &quot;Only that old fool Jodah would have even stood the slightest chance of defeating me, but I saw no reason to kill him, even after he sealed away my gallery. After all, he lured new legends and planeswalkers in from time to time - all the more for my collection.&quot;,
+                                                &quot;options&quot;: [
+                                                    {
+                                                        &quot;name&quot;: &quot;(Continue)&quot;,
+                                                        &quot;text&quot;: &quot;And I have to say, he did manage to find interesting ones. I certainly never would have expected you to do as well as you have, {var=player_name}. But I am impressed to finally meet someone who may be my equal. Maybe.&quot;,
+                                                        &quot;options&quot;: [
+                                                            {
+                                                                &quot;name&quot;: &quot;(Continue)&quot;,
+                                                                &quot;text&quot;: &quot;Besides, all he really did by 'sealing' my gallery was give me more privacy. A favor, really. I can leave whenever I wish. But like I said, why would I? Well, perhaps with old Jodah no longer bringing in new blood and you having scoured clean most of the realm's remaining legends, I will see fit to make my way elsewhere eventually. But there's still so many games to play with my precious reflections.&quot;,
+                                                                &quot;options&quot;: [
+                                                                    {
+                                                                        &quot;name&quot;: &quot;(Continue)&quot;,
+                                                                        &quot;text&quot;: &quot;I do hope you join me in my fun here. You're the first I've deemed fit to play with my precious simulacra. It's quite the honor.&quot;,
+                                                                        &quot;options&quot;: [
+                                                                            {
+                                                                                &quot;name&quot;: &quot;(Continue)&quot;,
+                                                                                &quot;text&quot;: &quot;So then, go forth and battle to your heart's content. And when at last you feel up to the challenge of facing me, I'll be waiting in the next chamber. Of course, we're both immortal, so you can return to fight me again and again as well. I'm so very curious to see if you'll be able to best me even once.&quot;,
+                                                                                &quot;options&quot;: [
+                                                                                        {&quot;name&quot;: &quot;(End Conversation)&quot;} ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+           }
+          ]
+        }
+    ]
+}
+]
+}
+]
+        
+</property>
+    <property name="enemy" value="Meloku"/>
+   </properties>
+  </object>
+  <object id="115" template="../../../../common/maps/obj/dialog.tx" x="332.151" y="610.404" width="85.697" height="13.1913" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A moonfolk man dressed in regal robes stands ahead of you, patiently waiting for your approach.
+
+'So, {var=player_name}, you've finally defeated that fool Jodah. Excellent work. Come closer and we can discuss the nature of this place, my mirror gallery. I think you'll quite enjoy it.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="116" template="../../../../common/maps/obj/scroll.tx" x="304.083" y="461.75">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mirror Box&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="117" template="../../../../common/maps/obj/scroll.tx" x="431.75" y="461.75">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mirror Gallery&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Atomic Robo
+Title=Atomic Robo
+Icon=Atomic Robo.jpg
+Difficulty=Hard
+Description=../Modern/Kaladesh/Hashizume_Tomohiro_-_Burn_(Modern,_#667601).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+3 Lightning Helix
+3 Searing Blaze
+1 Shard Volley
+3 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Bloodstained Mire
+2 Inspiring Vantage
+3 Mountain
+2 Sacred Foundry
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+1 Deflecting Palm
+4 Destructive Revelry
+2 Kor Firewalker
+1 Lightning Helix
+1 Molten Rain
+2 Path to Exile
+1 Rest in Peace
+1 Searing Blaze
+1 Skullcrack
+1 Stony Silence

@@ -1,0 +1,11 @@
+Name:Thancred Waters
+ManaCost:4 W
+Types:Legendary Creature Human Warrior
+PT:3/5
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump1 | TriggerDescription$ Royal Guard — When CARDNAME enters, another target legendary permanent you control gains indestructible for as long as you control CARDNAME.
+SVar:TrigPump1:DB$ Pump | ValidTgts$ Permanent.Legendary+Other+YouCtrl | TgtPrompt$ Select another target legendary permanent you control | KW$ Indestructible | Duration$ AsLongAsControl
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump2 | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME gains indestructible until end of turn.
+SVar:TrigPump2:DB$ Pump | KW$ Indestructible | Defined$ Self
+SVar:PlayMain1:TRUE
+Oracle:Flash\nRoyal Guard — When Thancred Waters enters, another target legendary permanent you control gains indestructible for as long as you control Thancred Waters.\nWhenever you cast a noncreature spell, Thancred Waters gains indestructible until end of turn.

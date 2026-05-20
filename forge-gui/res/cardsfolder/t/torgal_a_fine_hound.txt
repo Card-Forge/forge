@@ -1,0 +1,12 @@
+Name:Torgal, A Fine Hound
+ManaCost:1 G
+Types:Legendary Creature Wolf
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Creature.Human | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast your first Human creature spell each turn, that creature enters with an additional +1/+1 counter on it for each Dog and/or Wolf you control.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | SetChosenNumber$ X | ReplacementEffects$ ETBCreat | ExileOnMoved$ Stack
+SVar:ETBCreat:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBPutP1P1 | ReplacementResult$ Updated
+SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ Count$ChosenNumber
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+SVar:X:Count$Valid Dog.YouCtrl,Wolf.YouCtrl
+DeckHints:Type$Human|Dog|Wolf
+Oracle:Whenever you cast your first Human creature spell each turn, that creature enters with an additional +1/+1 counter on it for each Dog and/or Wolf you control.\n{T}: Add one mana of any color.

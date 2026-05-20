@@ -1,0 +1,7 @@
+Name:Feisty Spikeling
+ManaCost:1 RW
+Types:Creature Shapeshifter
+PT:2/1
+K:Changeling
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ During your turn, this creature has first strike.
+Oracle:Changeling (This card is every creature type.)\nDuring your turn, this creature has first strike.

@@ -10,7 +10,7 @@ S:Mode$ Continuous | Affected$ Card.Self+ChosenModeCosplay | AddTrigger$ Cosplay
 S:Mode$ Continuous | Affected$ Card.Self+ChosenModeScience | AddTrigger$ ScienceTrigger | Description$ • Science — Whenever you cast an instant or sorcery spell, CARDNAME deals 2 damage to each opponent.
 SVar:CosplayTrigger:Mode$ SpellCast | ValidCard$ Creature,Planeswalker | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a creature or planeswalker spell, CARDNAME's base power and toughness each become equal to that spell's mana value until end of turn.
 SVar:TrigAnimate:DB$ Animate | Power$ X | Toughness$ X
-SVar:X:TriggeredStackInstance$CardManaCostLKI
+SVar:X:TriggeredSpellAbility$CardManaCostLKI
 SVar:ScienceTrigger:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME deals 2 damage to each opponent.
 SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
 DeckHints:Type$Instant|Sorcery

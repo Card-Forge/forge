@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Peregrin Took
+Title=Peregrin Took
+Icon=Peregrin Took.jpg
+Difficulty=Medium
+Description=./Standard/Duskmourn_House_of_Horror/Capitano_CL_-_Dimir_Reenact_(Standard,_#2212933).dck
+Deck Type=constructed
+
+[Main]
+4 Atraxa, Grand Unifier
+4 Vohar, Vodalian Desecrator
+4 Conspiracy Unraveler
+4 Collector's Vault
+4 Reenact the Crime
+3 Long Goodbye
+1 Terror Tide
+4 Breach the Multiverse
+4 The Cruelty of Gix
+4 The Tale of Tamiyo
+4 Island
+4 Darkslick Shores
+2 Restless Reef
+4 Gloomlake Verge
+2 Swamp
+4 Undercity Sewers
+4 Underground River
+[Sideboard]
+1 Terror Tide
+4 Glistening Deluge
+1 Long Goodbye
+1 Jace, the Perfected Mind
+4 Duress
+1 Harvester of Misery
+3 Negate

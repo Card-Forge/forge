@@ -1,0 +1,16 @@
+Name:My Precious
+ManaCost:3
+Types:Legendary Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Hexproof | Description$ Equipped creature has hexproof and can't be blocked.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy | Secondary$ True | Description$ Equipped creature has hexproof and can't be blocked.
+K:Equip:2 PayLife<2>
+AlternateMode:Adventure
+Oracle:Equipped creature has hexproof and can't be blocked.\nEquip—{2}, Pay 2 life.
+
+ALTERNATE
+
+Name:Allure of Power
+ManaCost:1 B
+Types:Instant Adventure
+A:SP$ Draw | Cost$ 1 B Sac<1/Creature> | NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nDraw two cards.

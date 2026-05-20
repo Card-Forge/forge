@@ -17,7 +17,6 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
 import forge.game.card.token.TokenInfo;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventTokenCreated;
@@ -86,7 +85,7 @@ public class AmassEffect extends TokenEffectBase {
         }
 
         Map<String, Object> params = Maps.newHashMap();
-        params.put("CounterType", CounterType.get(CounterEnumType.P1P1));
+        params.put("CounterType", CounterEnumType.P1P1);
         params.put("Amount", amount);
         Card tgt = activator.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblChooseAnArmy"), false, params);
 
@@ -96,17 +95,17 @@ public class AmassEffect extends TokenEffectBase {
 
         GameEntityCounterTable table = new GameEntityCounterTable();
         tgt.addCounter(CounterEnumType.P1P1, amount, activator, table);
-        table.replaceCounterEffect(game, sa, true);
+        table.replaceCounterEffect(game, sa);
         // 01.44a If it isn’t a [subtype], it becomes a [subtype] in addition to its other types.
         if (!tgt.getType().hasCreatureType(type)) {
-            Card eff = createEffect(sa, activator, "Amass Effect", source.getImageKey());
+            final Card eff = createEffect(sa, activator, "Amass Effect", source.getImageKey());
             eff.setRenderForUI(false);
             eff.addRemembered(tgt);
 
             String s = "Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AddType$ " + type;
             eff.addStaticAbility(s);
 
-            tgt.addLeavesPlayCommand(exileEffectCommand(game, eff));
+            tgt.addLeavesPlayCommand(() -> game.getAction().exileEffect(eff));
             game.getAction().moveToCommand(eff, sa);
         }
     }

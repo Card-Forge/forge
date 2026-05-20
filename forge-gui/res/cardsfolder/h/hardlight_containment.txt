@@ -1,0 +1,11 @@
+Name:Hardlight Containment
+ManaCost:W
+Types:Enchantment Aura
+K:Enchant:Artifact.YouCtrl:artifact you control
+SVar:AttachAILogic:Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this Aura enters, exile target creature an opponent controls until this Aura leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Duration$ UntilHostLeavesPlay
+S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddKeyword$ Ward:1 | Description$ Enchanted permanent has ward {1}.
+SVar:PlayMain1:TRUE
+SVar:NeedsToPlay:Creature.OppCtrl
+Oracle:Enchant artifact you control\nWhen this Aura enters, exile target creature an opponent controls until this Aura leaves the battlefield.\nEnchanted permanent has ward {1}.

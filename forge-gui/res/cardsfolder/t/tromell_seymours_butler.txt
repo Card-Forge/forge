@@ -1,0 +1,9 @@
+Name:Tromell, Seymour's Butler
+ManaCost:2 G
+Types:Legendary Creature Elf Advisor
+PT:2/3
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.Other+!token+YouCtrl
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Each other nontoken creature you control enters with an additional +1/+1 counter on it.
+A:AB$ Proliferate | Cost$ 1 T | Amount$ X | SpellDescription$ Proliferate X times, where X is the number of nontoken creatures you control that entered this turn. (To proliferate, choose any number of permanents and/or players, then give each another counter of each kind already there.)
+SVar:X:Count$Valid Creature.YouCtrl+!token+ThisTurnEntered
+Oracle:Each other nontoken creature you control enters with an additional +1/+1 counter on it.\n{1}, {T}: Proliferate X times, where X is the number of nontoken creatures you control that entered this turn. (To proliferate, choose any number of permanents and/or players, then give each another counter of each kind already there.)

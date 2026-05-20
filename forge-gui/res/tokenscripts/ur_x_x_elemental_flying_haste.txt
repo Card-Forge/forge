@@ -1,0 +1,8 @@
+Name:Elemental Token
+ManaCost:no cost
+Colors:blue,red
+Types:Creature Elemental
+PT:*/*
+K:Flying
+K:Haste
+Oracle:Flying, haste

@@ -1,0 +1,29 @@
+Name:Kefka, Court Mage
+ManaCost:2 U B R
+Types:Legendary Creature Human Wizard
+PT:4/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever NICKNAME enters or attacks, each player discards a card. Then you draw a card for each card type among cards discarded this way.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, each player discards a card. Then you draw a card for each card type among cards discarded this way.
+SVar:TrigDiscard:DB$ Discard | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Sacrifice | Cost$ 8 | SacValid$ Permanent | Defined$ Player.Opponent | SorcerySpeed$ True | SubAbility$ DBTransform | SpellDescription$ Each opponent sacrifices a permanent of their choice. Transform NICKNAME. Activate only as a sorcery.
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:X:Remembered$CardTypes
+AlternateMode:DoubleFaced
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Discard|Sacrifice
+Oracle:Whenever Kefka enters or attacks, each player discards a card. Then you draw a card for each card type among cards discarded this way.\n{8}: Each opponent sacrifices a permanent of their choice. Transform Kefka. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Kefka, Ruler of Ruin
+ManaCost:no cost
+Colors:blue,black,red
+Types:Legendary Creature Avatar Wizard
+PT:5/7
+K:Flying
+T:Mode$ LifeLost | ValidPlayer$ Opponent | PlayerTurn$ True | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent loses life during your turn, you draw that many cards.
+SVar:TrigDraw:DB$ Draw | NumCards$ Y
+SVar:Y:TriggerCount$LifeAmount
+Oracle:Flying\nWhenever an opponent loses life during your turn, you draw that many cards.

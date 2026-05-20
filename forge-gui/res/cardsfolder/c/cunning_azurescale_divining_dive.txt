@@ -1,0 +1,22 @@
+Name:Cunning Azurescale
+ManaCost:5 U
+Types:Creature Dragon
+PT:5/5
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When this creature enters, secretly choose land or nonland. Seek two cards of the chosen kind.
+SVar:TrigChoose:DB$ GenericChoice | Defined$ You | Secretly$ True | Choices$ Land,Nonland
+SVar:Land:DB$ Seek | Num$ 2 | Type$ Card.Land | SpellDescription$ Land
+SVar:Nonland:DB$ Seek | Num$ 2 | Type$ Card.nonLand | SpellDescription$ Nonland
+AlternateMode:Omen
+Oracle:Flash\nFlying\nWhen this creature enters, secretly choose land or nonland. Seek two cards of the chosen kind.
+
+ALTERNATE
+
+Name:Divining Dive
+ManaCost:1 U
+Types:Instant Omen
+A:SP$ GenericChoice | Defined$ You | Secretly$ True | Choices$ LandOne,NonlandOne | SpellDescription$ Secretly choose land or nonland. Seek a card of the chosen kind.
+SVar:LandOne:DB$ Seek | Num$ 1 | Type$ Card.Land | SpellDescription$ Land
+SVar:NonlandOne:DB$ Seek | Num$ 1 | Type$ Card.nonLand | SpellDescription$ Nonland
+Oracle:Secretly choose land or nonland. Seek a card of the chosen kind.

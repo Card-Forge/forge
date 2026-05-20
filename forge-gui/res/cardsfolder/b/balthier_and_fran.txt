@@ -1,0 +1,9 @@
+Name:Balthier and Fran
+ManaCost:1 R G
+Types:Legendary Creature Human Rabbit
+PT:4/3
+K:Reach
+S:Mode$ Continuous | Affected$ Vehicle.YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance & Reach | Description$ Vehicles you control get +1/+1 and have vigilance and reach.
+T:Mode$ Attacks | ValidCard$ Vehicle.CrewedBySourceThisTurn | TriggerZones$ Battlefield | FirstCombat$ True | Execute$ TrigAddCombat | TriggerDescription$ Whenever a Vehicle crewed by CARDNAME this turn attacks, if it's the first combat phase of the turn, you may pay {1}{R}{G}. If you do, after this phase, there is an additional combat phase.
+SVar:TrigAddCombat:AB$ AddPhase | Cost$ 1 R G | ExtraPhase$ Combat | AfterPhase$ EndCombat
+Oracle:Reach\nVehicles you control get +1/+1 and have vigilance and reach.\nWhenever a Vehicle crewed by Balthier and Fran this turn attacks, if it's the first combat phase of the turn, you may pay {1}{R}{G}. If you do, after this phase, there is an additional combat phase.

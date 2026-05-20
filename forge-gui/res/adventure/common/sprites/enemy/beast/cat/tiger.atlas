@@ -1,0 +1,113 @@
+tiger.png
+size: 384,86
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar 
+  xy: 336, 48
+  size: 16, 16
+Idle 
+  xy: 4, 4
+  size: 22, 16
+Idle 
+  xy: 36, 4
+  size: 22, 16
+Idle 
+  xy: 68, 4
+  size: 22, 16
+Idle 
+  xy: 100, 4
+  size: 22, 16
+Idle 
+  xy: 132, 4
+  size: 22, 16
+Idle 
+  xy: 164, 4
+  size: 22, 16
+Idle 
+  xy: 196, 4
+  size: 22, 16
+Idle 
+  xy: 228, 4
+  size: 22, 16
+Idle 
+  xy: 260, 4
+  size: 22, 16
+Idle 
+  xy: 292, 4
+  size: 22, 16
+Idle 
+  xy: 324, 4
+  size: 22, 16
+Idle 
+  xy: 356, 4
+  size: 22, 16
+Walk
+  xy: 4, 28
+  size: 22, 16
+Walk
+  xy: 36, 28
+  size: 22, 16
+Walk
+  xy: 68, 28
+  size: 22, 16
+Walk
+  xy: 100, 28
+  size: 22, 16
+Walk
+  xy: 132, 28
+  size: 22, 16
+Walk
+  xy: 164, 28
+  size: 22, 16
+Attack
+  xy: 2, 50
+  size: 25, 16
+Attack
+  xy: 34, 50
+  size: 25, 16
+Attack
+  xy: 66, 50
+  size: 25, 16
+Attack
+  xy: 98, 50
+  size: 25, 16
+Attack
+  xy: 130, 50
+  size: 25, 16
+Death
+  xy: 0, 68
+  size: 24, 16
+Death
+  xy: 32, 68
+  size: 24, 16
+Death
+  xy: 64, 68
+  size: 24, 16
+Death
+  xy: 96, 68
+  size: 24, 16
+Death
+  xy: 128, 68
+  size: 24, 16
+Death
+  xy: 160, 68
+  size: 24, 16
+Death
+  xy: 192, 68
+  size: 24, 16
+Death
+  xy: 224, 68
+  size: 24, 16
+Death
+  xy: 256, 68
+  size: 24, 16
+Death
+  xy: 288, 68
+  size: 24, 16
+Death
+  xy: 320, 68
+  size: 24, 16
+Death
+  xy: 352, 68
+  size: 24, 16

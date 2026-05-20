@@ -130,7 +130,7 @@ public class VReveal extends FDropDown {
         private RevealEntryDisplay(PaperCard pc, boolean isAltRow) {
             paperCard = pc;
             altRow = isAltRow;
-            text = CardTranslation.getTranslatedName(pc.getName()) + "\n" + formatType();
+            text = CardTranslation.getTranslatedName(pc.getDisplayName()) + "\n" + formatType();
         }
 
         public float getMinHeight(float width) {

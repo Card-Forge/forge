@@ -9,5 +9,5 @@ DeckNeeds:Type$Goblin
 # TODO: The AI generally is able to use this card, but will basically place all of its goblins on top of the library in no specific order, which is not very smart. Might need some improvement before RemoveDeck is removed. Currently adding a restriction to at least only play it if the AI has enough lands out on the battlefield already.
 AI:RemoveDeck:All
 SVar:NeedsToPlayVar:Z GE4
-SVar:Z:Count$Valid Land.YouCtrl+inZoneBattlefield
+SVar:Z:Count$Valid Land.YouCtrl
 Oracle:When Goblin Recruiter enters, search your library for any number of Goblin cards, reveal them, then shuffle and put those cards on top in any order.

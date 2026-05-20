@@ -1,0 +1,9 @@
+Name:Silverquill Charm
+ManaCost:W B
+Types:Instant
+A:SP$ Charm | Choices$ DBPutCounter,DBExile,DBLoseLife
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on target creature.
+SVar:DBExile:DB$ ChangeZone | ValidTgts$ Creature.powerLE2 | ValidTgtDesc$ creature with power 2 or less | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power 2 or less.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 3 life and you gain 3 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+Oracle:Choose one —\n• Put two +1/+1 counters on target creature.\n• Exile target creature with power 2 or less.\n• Each opponent loses 3 life and you gain 3 life.

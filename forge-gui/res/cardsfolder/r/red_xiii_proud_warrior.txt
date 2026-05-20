@@ -1,0 +1,10 @@
+Name:Red XIII, Proud Warrior
+ManaCost:1 R G
+Types:Legendary Creature Beast Warrior
+PT:3/3
+K:Vigilance
+K:Trample
+S:Mode$ Continuous | Affected$ Creature.Other+modified+YouCtrl | AddKeyword$ Vigilance & Trample | Description$ Other modified creatures you control have vigilance and trample. (Equipment, Auras you control, and counters are modifications.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ Cosmo Memory — When NICKNAME enters, return target Aura or Equipment card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Aura.YouCtrl,Equipment.YouCtrl | TgtPrompt$ Select target Aura or Equipment card in your graveyard
+Oracle:Vigilance, trample\nOther modified creatures you control have vigilance and trample. (Equipment, Auras you control, and counters are modifications.)\nCosmo Memory — When Red XIII enters, return target Aura or Equipment card from your graveyard to your hand.

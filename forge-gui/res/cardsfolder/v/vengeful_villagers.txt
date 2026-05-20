@@ -1,0 +1,9 @@
+Name:Vengeful Villagers
+ManaCost:3 W
+Types:Creature Human Citizen
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature attacks, choose target creature an opponent controls. Tap it, then you may sacrifice an artifact or creature. If you do, put a stun counter on the chosen creature. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | UnlessCost$ Sac<1/Artifact;Creature/artifact or creature> | UnlessPayer$ You | UnlessSwitched$ True | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever this creature attacks, choose target creature an opponent controls. Tap it, then you may sacrifice an artifact or creature. If you do, put a stun counter on the chosen creature. (If a permanent with a stun counter would become untapped, remove one from it instead.)

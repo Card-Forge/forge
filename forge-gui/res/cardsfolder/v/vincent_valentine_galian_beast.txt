@@ -1,0 +1,26 @@
+Name:Vincent Valentine
+ManaCost:2 B B
+Types:Legendary Creature Assassin
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature an opponent controls dies, put a number of +1/+1 counters on CARDNAME equal to that creature's power.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may transform it.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:X:TriggeredCard$CardPower
+AlternateMode:DoubleFaced
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+Oracle:Whenever a creature an opponent controls dies, put a number of +1/+1 counters on Vincent Valentine equal to that creature's power.\nWhenever Vincent Valentine attacks, you may transform it.
+
+ALTERNATE
+
+Name:Galian Beast
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Werewolf Beast
+PT:3/2
+K:Trample
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME dies, return it to the battlefield tapped (front face up).
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+Oracle:Trample, lifelink\nWhen Galian Beast dies, return it to the battlefield tapped (front face up).

@@ -2,7 +2,6 @@
 Code=CN2
 Date=2016-08-26
 Name=Conspiracy: Take the Crown
-Code2=CN2
 Type=Draft
 BoosterCovers=3
 Booster=10 Common:!fromSheet("CN2 Draft Matters"), 3 Uncommon:!fromSheet("CN2 Draft Matters"), 1 RareMythic:!fromSheet("CN2 Draft Matters"):fromSheet("CN2 cards"), 1 fromSheet("CN2 Draft Matters")
@@ -276,3 +275,6 @@ Kaya, Ghost Assassin|CN2|2
 10 g_3_3_beast @Jesper Ejsing
 11 g_1_1_insect @Carl Critchlow
 12 c_1_1_a_construct_defender @Victor Adame Minguez
+
+[other]
+1 monarch @Mike Bierek

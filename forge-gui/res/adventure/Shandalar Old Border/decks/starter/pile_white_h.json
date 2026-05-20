@@ -1,0 +1,89 @@
+{
+  "name": "White",
+  "mainDeck": [
+    {
+      "type": "card",
+      "count": 9,
+      "cardName": "Plains|4ED"
+    },
+    {
+      "type": "card",
+      "count": 9,
+      "cardName": "Forest|4ED"
+    },
+    {
+      "type": "card",
+      "count": 9,
+      "cardName": "Island|4ED"
+    },
+    {
+      "count": 9,
+      "colors": [
+        "white"
+      ],
+      "rarity": [
+        "Common"
+      ],
+      "manaCosts": [
+        1,
+        2
+      ]
+    },
+    {
+      "count": 6,
+      "colors": [
+        "green",
+        "blue"
+      ],
+      "rarity": [
+        "Common"
+      ],
+      "manaCosts": [
+        1,
+        2
+      ]
+    },
+    {
+      "count": 6,
+      "colors": [
+        "white"
+      ],
+      "rarity": [
+        "Common"
+      ],
+      "manaCosts": [
+        3,
+        4
+      ]
+    },
+    {
+      "count": 3,
+      "colors": [
+        "green",
+        "blue"
+      ],
+      "rarity": [
+        "Uncommon",
+        "Common"
+      ],
+      "manaCosts": [
+        3,
+        4
+      ]
+    },
+    {
+      "count": 9,
+      "colors": [
+        "white"
+      ],
+      "rarity": [
+        "Uncommon",
+        "Common"
+      ],
+      "manaCosts": [
+        5,
+        6
+      ]
+    }
+  ]
+}

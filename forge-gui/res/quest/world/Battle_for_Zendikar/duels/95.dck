@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Leprechaun
+Title=Leprechaun
+Icon=Leprechaun.jpg
+Difficulty=Hard
+Description=../Modern/Battle_for_Zendikar/Modern_Constructed_League/DrGenial_-_Rogue_(Modern,_#506415).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blight Herder
+4 Oblivion Sower
+2 Spellskite
+1 Ulamog, the Ceaseless Hunger
+4 Wasteland Strangler
+2 Expedition Map
+4 Relic of Progenitus
+4 Path to Exile
+2 Smother
+3 Inquisition of Kozilek
+3 Lingering Souls
+2 Thoughtseize
+1 Bojuka Bog
+4 Eldrazi Temple
+3 Eye of Ugin
+3 Ghost Quarter
+3 Godless Shrine
+3 Marsh Flats
+2 Plains
+2 Swamp
+2 Temple of Silence
+2 Urborg, Tomb of Yawgmoth
+[Sideboard]
+2 Celestial Purge
+2 Damnation
+2 Disenchant
+1 Slaughter Pact
+2 Stony Silence
+2 Surgical Extraction
+3 Timely Reinforcements

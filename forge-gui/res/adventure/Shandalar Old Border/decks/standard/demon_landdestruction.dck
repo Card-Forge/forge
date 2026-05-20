@@ -1,0 +1,35 @@
+[metadata]
+Name=Baal 3
+[Main]
+1 Bone Shredder|ULG
+1 City of Brass|5ED
+1 Dragon Fangs|SCG
+1 Dust Bowl|MMQ
+1 Gamekeeper|UDS
+1 Gemstone Mine|WTH
+1 Plague Spitter|INV
+1 Sulfurous Springs|5ED
+1 Withered Wretch|LGN
+2 Bloodstained Mire|ONS
+2 Karplusan Forest|5ED
+2 Llanowar Wastes|APC
+2 Llanowar Wastes|APC
+2 Mountain|ONS|2
+2 Terminate|PLS
+2 Wooded Foothills|ONS
+3 Duress|7ED
+3 Goblin Bombardment|TMP
+3 Innocent Blood|ODY
+3 Living Wish|JUD
+3 Pernicious Deed|APC
+3 Rampant Growth|6ED
+3 Sylvan Library|4ED
+3 Symbiotic Wurm|ONS
+3 Treetop Village|ULG
+4 Cabal Therapy|JUD
+4 Call of the Herd|ODY
+6 Swamp|ONS|2
+9 Forest|ONS|2
+
+[StartInBattle_Reference]
+1 The Wretched|LEG

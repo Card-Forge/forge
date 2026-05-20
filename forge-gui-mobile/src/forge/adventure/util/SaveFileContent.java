@@ -1,7 +1,7 @@
 package forge.adventure.util;
 
 /**
- * Interface to save the content the the save game file
+ * Interface to save the content of the save game file
  */
 public interface SaveFileContent {
     void load(SaveFileData data);

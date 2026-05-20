@@ -1,8 +1,10 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import forge.ai.ComputerUtil;
+
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
+import forge.ai.AiPlayerPredicates;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -10,23 +12,22 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-import java.util.List;
 import java.util.Map;
 
 public class ChoosePlayerAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        return true;
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        return canPlayAI(ai, sa);
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
+        return canPlay(ai, sa);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        return canPlayAI(ai, sa);
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        return canPlay(ai, sa);
     }
 
     @Override
@@ -36,11 +37,9 @@ public class ChoosePlayerAi extends SpellAbilityAi {
             chosen = new PlayerCollection(choices).min(PlayerPredicates.compareByLife());
         }
         else if ("Curse".equals(sa.getParam("AILogic"))) {
-            for (Player pc : choices) {
-                if (pc.isOpponentOf(ai)) {
-                    chosen = pc;
-                    break;
-                }
+            PlayerCollection curseChoices = new PlayerCollection(choices).filter(PlayerPredicates.isOpponentOf(ai));
+            if (!curseChoices.isEmpty()) {
+                chosen = curseChoices.max(AiPlayerPredicates.compareByBoardPosition);
             }
             if (chosen == null) {
                 chosen = Iterables.getFirst(choices, null);
@@ -51,10 +50,10 @@ public class ChoosePlayerAi extends SpellAbilityAi {
             chosen = Iterables.contains(choices, ai) ? ai : Iterables.getFirst(choices, null);
         }
         else if ("BestAllyBoardPosition".equals(sa.getParam("AILogic"))) {
-            List<Player> prefChoices = Lists.newArrayList(choices);
+            PlayerCollection prefChoices = new PlayerCollection(choices);
             prefChoices.removeAll(ai.getOpponents());
             if (!prefChoices.isEmpty()) {
-                chosen = ComputerUtil.evaluateBoardPosition(prefChoices);
+                chosen = prefChoices.max(AiPlayerPredicates.compareByBoardPosition);
             }
             if (chosen == null) {
                 chosen = Iterables.getFirst(choices, null);

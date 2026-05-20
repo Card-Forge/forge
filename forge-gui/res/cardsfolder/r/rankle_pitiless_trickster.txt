@@ -7,7 +7,7 @@ S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self | AddKeyword$
 SVar:X:PlayerCountOpponents$LowestValid Creature.YouCtrl
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBTrigger | TriggerDescription$ When NICKNAME enters, you may pay 1 life. When you do, each player discards a card and sacrifices a creature.
 SVar:DBTrigger:AB$ ImmediateTrigger | Cost$ PayLife<1> | Execute$ TrigDiscard | TriggerDescription$ When you do, each player discards a card and sacrifices a creature.
-SVar:TrigDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player | SubAbility$ DBSacCreature
+SVar:TrigDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ Player | SubAbility$ DBSacCreature
 SVar:DBSacCreature:DB$ Sacrifice | SacValid$ Creature | Defined$ Player
 T:Mode$ Discarded | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a player discards a card, NICKNAME perpetually gets +1/+0.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | Duration$ Perpetual

@@ -19,8 +19,6 @@ package forge.game;
 
 import java.util.List;
 
-import com.google.common.collect.ImmutableList;
-
 /**
  *  Represents a direction (left or right).
  */
@@ -32,7 +30,7 @@ public enum Direction {
 	private static final String RIGHT = "Right";
 	/** Immutable list of all directions (in order, Left and Right). */
 	private static final List<Direction> listOfDirections =
-			ImmutableList.of(getDefaultDirection(), getDefaultDirection().getOtherDirection());
+			List.of(getDefaultDirection(), getDefaultDirection().getOtherDirection());
 
 	/** @return The default direction. */
 	public static final Direction getDefaultDirection() { return Left; }

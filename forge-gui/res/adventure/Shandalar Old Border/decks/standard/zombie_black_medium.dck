@@ -1,0 +1,24 @@
+[metadata]
+Name=Zombie Lord - Zombie Tribal
+[Main]
+18 Swamp|ONS
+4 Unholy Grotto|ONS
+4 Dark Ritual|USG
+2 Boneknitter|ONS
+4 Sarcomancy|TMP
+4 Carnophage|EXO
+2 Plaguebearer|EXO
+2 Boneknitter|ONS
+4 Noxious Ghoul|LGN
+2 Lord of the Undead|PLS
+2 Zombie Master|LEA
+2 Call to the Grave|SCG
+2 Vengeful Dead|SCG
+4 Undead Warchief|SCG
+3 Shepherd of Rot|ONS
+3 Necromancy|VIS
+2 Stronghold Assassin|STH
+
+[StartInBattle_Reference]
+1 Carrion Feeder|SCG
+1 Zombie Master|LEA

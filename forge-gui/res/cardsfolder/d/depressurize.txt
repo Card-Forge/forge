@@ -1,0 +1,6 @@
+Name:Depressurize
+ManaCost:1 B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -3 | SubAbility$ DBDestroy | SpellDescription$ Target creature gets -3/-0 until end of turn. Then if that creature's power is 0 or less, destroy it.
+SVar:DBDestroy:DB$ Destroy | Defined$ Targeted.powerLE0
+Oracle:Target creature gets -3/-0 until end of turn. Then if that creature's power is 0 or less, destroy it.

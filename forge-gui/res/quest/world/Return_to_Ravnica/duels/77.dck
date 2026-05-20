@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Starfire
+Title=Starfire
+Icon=Starfire.jpg
+Difficulty=Hard
+Description=../Modern/Return_to_Ravnica/PTQ_Dragon┬┤s_Maze_-_Sa,_D├╝sseldorf/Marcel_Kaschapow_-_UW_Midrange_(Modern,_#45383).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Baneslayer Angel
+4 Kitchen Finks
+4 Restoration Angel
+4 Wall of Omens
+4 Cryptic Command
+4 Mana Leak
+4 Path to Exile
+3 Remand
+4 Spell Snare
+2 Supreme Verdict
+4 Celestial Colonnade
+2 Glacial Fortress
+4 Hallowed Fountain
+4 Island
+3 Plains
+4 Seachrome Coast
+4 Tectonic Edge
+[Sideboard]
+4 Aven Mindcensor
+1 Celestial Purge
+2 Dispel
+3 Negate
+4 Rest in Peace

@@ -3,6 +3,6 @@ ManaCost:4 U
 Types:Enchantment Aura
 K:Enchant:Creature
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
-A:AB$ Attach | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Attach CARDNAME to target creature.
+A:AB$ Attach | Cost$ 3 U | ValidTgts$ Creature | SpellDescription$ Attach CARDNAME to target creature.
 AI:RemoveDeck:All
 Oracle:Enchant creature\nEnchanted creature doesn't untap during its controller's untap step.\n{3}{U}: Attach Stasis Cell to target creature.

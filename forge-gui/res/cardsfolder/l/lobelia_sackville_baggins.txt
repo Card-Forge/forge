@@ -1,6 +1,6 @@
 Name:Lobelia Sackville-Baggins
 ManaCost:2 B
-Types:Creature Halfling Citizen
+Types:Legendary Creature Halfling Citizen
 PT:2/3
 K:Flash
 K:Menace
@@ -10,5 +10,5 @@ SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ X | SubAbi
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
 AI:RemoveDeck:All
-DeckHas:Ability$Graveyard|Token & Type$Artifact|Treasure
+DeckHas:Ability$Graveyard|Token
 Oracle:Flash\nMenace\nWhen Lobelia Sackville-Baggins enters, exile target creature card from an opponent's graveyard that was put there from the battlefield this turn, then create X Treasure tokens, where X is the exiled card's power.

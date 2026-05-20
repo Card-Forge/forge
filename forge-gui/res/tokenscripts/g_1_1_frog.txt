@@ -1,0 +1,6 @@
+Name:Frog Token
+ManaCost:no cost
+Colors:green
+Types:Creature Frog
+PT:1/1
+Oracle:

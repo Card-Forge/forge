@@ -1,0 +1,10 @@
+Name:Valkyrie Aerial Unit
+ManaCost:5 U U
+Types:Artifact Creature Construct
+PT:5/4
+K:Affinity:Artifact
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 2
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nFlying\nWhen this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

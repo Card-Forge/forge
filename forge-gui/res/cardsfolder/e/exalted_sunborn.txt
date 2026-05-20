@@ -1,0 +1,10 @@
+Name:Exalted Sunborn
+ManaCost:3 W W
+Types:Creature Angel Wizard
+PT:4/5
+K:Flying
+K:Lifelink
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ DoubleToken | Description$ If one or more tokens would be created under your control, twice that many of those tokens are created instead.
+SVar:DoubleToken:DB$ ReplaceToken | Type$ Amount
+K:Warp:1 W
+Oracle:Flying, lifelink\nIf one or more tokens would be created under your control, twice that many of those tokens are created instead.\nWarp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)

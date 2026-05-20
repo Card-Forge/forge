@@ -55,7 +55,7 @@ ScryfallCode=DDD
 47 U Genju of the Fens @Tsutomu Kawade
 48 R Bad Moon @Gary Leach
 49 C Sign in Blood @Howard Lyon
-50 C Vicious Hunger @Massimilano Frezzato
+50 C Vicious Hunger @Massimiliano Frezzato
 51 C Ichor Slick @Zoltan Boros & Gabor Szikszai
 52 C Hideous End @Zoltan Boros & Gabor Szikszai
 53 C Snuff Out @Steve Argyle
@@ -71,7 +71,6 @@ ScryfallCode=DDD
 63 L Swamp @Richard Wright
 
 [tokens]
-0 b_1_1_bat_flying @Unknown
 T1 g_3_3_beast @John Donahue
 T2 g_4_4_beast @Steve Prescott
 T3 g_3_3_elephant @Arnie Swekel

@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -23,7 +22,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         // Specific details of ordering cards are handled by PlayerControllerAi#orderMoveToZoneList
         final PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
         final Card source = sa.getHostCard();
@@ -33,18 +32,17 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
                     && (sa.getPayCosts().hasTapCost() || sa.getPayCosts().hasManaCost())) {
                 // If it has an associated cost, try to only do this before own turn
                 if (!(ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer)) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
 
             // Do it once per turn, generally (may be improved later)
-            if (AiCardMemory.isRememberedCardByName(aiPlayer, source.getName(), AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
-                return false;
+            if (source.getAbilityActivatedThisTurn().getActivators(sa).contains(aiPlayer)) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
         if (sa.usesTargeting()) {
-            // ability is targeted
             sa.resetTargets();
 
             PlayerCollection targetableOpps = aiPlayer.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
@@ -61,28 +59,28 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             } else if (canTgtHuman) {
                 sa.getTargets().add(opp);
             } else {
-                return false; // could not find a valid target
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi); // could not find a valid target
             }
-
-            if (!canTgtHuman || !canTgtAI) {
-                // can't target another player anyway, remember for no second activation this turn
-                AiCardMemory.rememberCard(aiPlayer, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
-            }
-        } else {
-            // if it's just defined, no big deal
-            AiCardMemory.rememberCard(aiPlayer, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        // Specific details of ordering cards are handled by PlayerControllerAi#orderMoveToZoneList
-        return canPlayAI(ai, sa) || mandatory;
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        AiAbilityDecision decision = canPlay(ai, sa);
+        if (decision.willingToPlay()) {
+            return decision;
+        }
+
+        if (mandatory) {
+            return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
+        }
+
+        return decision;
     }
 
     /* (non-Javadoc)
@@ -102,13 +100,8 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             return false;
         }
 
-        int uncastableCMCThreshold = 2;
-        int minLandsToScryLandsAway = 4;
-        if (player.getController().isAI()) {
-            AiController aic = ((PlayerControllerAi)player.getController()).getAi();
-            minLandsToScryLandsAway = aic.getIntProperty(AiProps.SCRY_NUM_LANDS_TO_NOT_NEED_MORE);
-            uncastableCMCThreshold = aic.getIntProperty(AiProps.SCRY_IMMEDIATELY_UNCASTABLE_CMC_DIFF);
-        }
+        int minLandsToScryLandsAway = AiProfileUtil.getIntProperty(player, AiProps.SCRY_NUM_LANDS_TO_NOT_NEED_MORE);
+        int uncastableCMCThreshold = AiProfileUtil.getIntProperty(player, AiProps.SCRY_IMMEDIATELY_UNCASTABLE_CMC_DIFF);
 
         int landsOTB = CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
         int cmc = top.isSplitCard() ? Math.min(top.getCMC(Card.SplitCMCMode.LeftSplitCMC), top.getCMC(Card.SplitCMCMode.RightSplitCMC))

@@ -1,0 +1,12 @@
+Name:Weapons Vendor
+ManaCost:3 W
+Types:Creature Human Artificer
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | IsPresent$ Equipment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigImmediateTrigger | TriggerDescription$ At the beginning of combat on your turn, if you control an Equipment, you may pay {1}. When you do, attach target Equipment you control to target creature you control.
+SVar:TrigImmediateTrigger:AB$ ImmediateTrigger | Cost$ 1 | Execute$ TrigPump | TriggerDescription$ When you do, attach target Equipment you control to target creature you control.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Equipment.YouCtrl | TgtPrompt$ Select target equipment you control | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+DeckHints:Type$Equipment
+Oracle:When this creature enters, draw a card.\nAt the beginning of combat on your turn, if you control an Equipment, you may pay {1}. When you do, attach target Equipment you control to target creature you control.

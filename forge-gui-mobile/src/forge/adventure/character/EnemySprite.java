@@ -14,11 +14,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
+import forge.StaticData;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.EffectData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.RewardData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.MapDialog;
 import forge.adventure.util.Reward;
@@ -62,6 +64,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public MapDialog defeatDialog; //Dialog to show on defeat. Overrides standard death (can be removed as an action)
     public EffectData effect; //Battle effect for this enemy. Similar to a player's blessing.
     public String nameOverride = ""; //Override name of this enemy in battles.
+    public String bossInsult = ""; //Override the generated insult text when you are defeated.
     public RewardData[] rewards; //Additional rewards for this enemy.
     public DialogData.ConditionData spawnCondition; //Condition to spawn.
     public LinkedList<MovementBehavior> movementBehaviors = new LinkedList<>();
@@ -439,63 +442,89 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
             return data.getName();
         return nameOverride;
     }
-
+    public String getBossInsult(){
+        return data.bossInsult;
+    }
+    public String getBossIntro(){
+        return data.bossIntro;
+    }
     public Array<Reward> getRewards() {
-        Array<Reward> ret=new Array<>();
+        Array<Reward> rewards = new Array<>();
         //Collect custom rewards for chaos battles
-        if (data.copyPlayerDeck && AdventurePlayer.current().isFantasyMode()) {
-            if (Current.latestDeck() != null) {
-                List<PaperCard> paperCardList = Current.latestDeck().getMain().toFlatList().stream()
-                        .filter(paperCard -> !paperCard.isVeryBasicLand() && !paperCard.getName().startsWith("Mox"))
-                        .collect(Collectors.toList());
+
+        if (data.copyPlayerDeck && Current.latestDeck() != null) {
+            List<PaperCard> paperCardList = Current.latestDeck().getMain().toFlatList().stream()
+                    .filter(paperCard -> !paperCard.isVeryBasicLand())
+                    .collect(Collectors.toList());
+
+            int uniqueRules = paperCardList.stream().map(PaperCard::getRules).collect(Collectors.toSet()).size();
+
+            if (uniqueRules < 4 || paperCardList.size() < 10) {
+                // Player trying to cheese doppleganger and farm cards. Sorry, the fun police have arrived
+                // Static rewards of 199 GP, 9 Shards, and 1 Cheese Stands Alone
+                rewards.add(new Reward(199));
+                rewards.add(new Reward(Reward.Type.Shards, 9));
+
+                PaperCard cheese = StaticData.instance().fetchCard("The Cheese Stands Alone");
+                if (cheese != null) {
+                    rewards.add(new Reward(cheese));
+                }
+                return rewards;
+            }
+
+            if (AdventurePlayer.current().isFantasyMode()) {
                 //random uncommons from deck
                 List<PaperCard> uncommonCards = paperCardList.stream()
-                        .filter(paperCard -> CardRarity.Uncommon.equals(paperCard.getRarity()) || CardRarity.Special.equals(paperCard.getRarity()))
+                        .filter(paperCard -> paperCard.getRarity() == CardRarity.Uncommon || paperCard.getRarity() == CardRarity.Special)
                         .collect(Collectors.toList());
                 if (!uncommonCards.isEmpty()) {
-                    ret.add(new Reward(Aggregates.random(uncommonCards)));
-                    ret.add(new Reward(Aggregates.random(uncommonCards)));
+                    rewards.add(new Reward(Aggregates.random(uncommonCards)));
+                    rewards.add(new Reward(Aggregates.random(uncommonCards)));
                 }
                 //random commons from deck
                 List<PaperCard> commmonCards = paperCardList.stream()
-                        .filter(paperCard -> CardRarity.Common.equals(paperCard.getRarity()))
+                        .filter(paperCard -> paperCard.getRarity() == CardRarity.Common)
                         .collect(Collectors.toList());
                 if (!commmonCards.isEmpty()) {
-                    ret.add(new Reward(Aggregates.random(commmonCards)));
-                    ret.add(new Reward(Aggregates.random(commmonCards)));
-                    ret.add(new Reward(Aggregates.random(commmonCards)));
+                    rewards.add(new Reward(Aggregates.random(commmonCards)));
+                    rewards.add(new Reward(Aggregates.random(commmonCards)));
+                    rewards.add(new Reward(Aggregates.random(commmonCards)));
                 }
                 //random rare from deck
                 List<PaperCard> rareCards = paperCardList.stream()
-                        .filter(paperCard -> CardRarity.Rare.equals(paperCard.getRarity()) || CardRarity.MythicRare.equals(paperCard.getRarity()))
+                        .filter(paperCard -> paperCard.getRarity() == CardRarity.Rare || paperCard.getRarity() == CardRarity.MythicRare)
                         .collect(Collectors.toList());
                 if (!rareCards.isEmpty()) {
-                    ret.add(new Reward(Aggregates.random(rareCards)));
-                    ret.add(new Reward(Aggregates.random(rareCards)));
+                    rewards.add(new Reward(Aggregates.random(rareCards)));
+                    rewards.add(new Reward(Aggregates.random(rareCards)));
                 }
-            }
-            int val = ((MyRandom.getRandom().nextInt(2)+1)*100)+(MyRandom.getRandom().nextInt(101));
-            ret.add(new Reward(val));
-            ret.add(new Reward(Reward.Type.Life, 1));
-        } else {
-            if(data.rewards != null) { //Collect standard rewards.
-                Deck enemyDeck = Current.latestDeck();
-                // By popular demand, remove basic lands from the reward pool.
-                CardPool deckNoBasicLands = enemyDeck.getMain().getFilteredPool(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_BASIC_LAND));
 
-                for (RewardData rdata : data.rewards) {
-                    ret.addAll(rdata.generate(false,  enemyDeck == null ? null : deckNoBasicLands.toFlatList(),true ));
-                }
-            }
-            if(rewards != null) { //Collect additional rewards.
-                for(RewardData rdata:rewards) {
-                    //Do not filter in case we want to FORCE basic lands. If it ever becomes a problem just repeat the same as above.
+                int val = ((MyRandom.getRandom().nextInt(2)+1)*100)+(MyRandom.getRandom().nextInt(101));
+                rewards.add(new Reward(val));
+                rewards.add(new Reward(Reward.Type.Life, 1));
 
-                    ret.addAll(rdata.generate(false,(Current.latestDeck() != null ? Current.latestDeck().getMain().toFlatList() : null), true));
-                }
+                return rewards;
             }
         }
-        return ret;
+
+        if(data.rewards != null) { //Collect standard rewards.
+            Deck enemyDeck = Current.latestDeck();
+            // By popular demand, remove basic lands from the reward pool.
+            CardPool deckNoRestrictedEditions = enemyDeck.getMain().getFilteredPool(PaperCardPredicates.onlyPrintedInEditions(Config.instance().getConfigData().restrictedEditions).negate());
+            CardPool deckNoBasicLands = deckNoRestrictedEditions.getFilteredPool(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_BASIC_LAND));
+
+            for (RewardData rdata : data.rewards) {
+                rewards.addAll(rdata.generate(false,  enemyDeck == null ? null : deckNoBasicLands.toFlatList(),true ));
+            }
+        }
+        if(this.rewards != null) { //Collect additional rewards.
+            for(RewardData rdata : this.rewards) {
+                //Do not filter in case we want to FORCE basic lands. If it ever becomes a problem just repeat the same as above.
+
+                rewards.addAll(rdata.generate(false,(Current.latestDeck() != null ? Current.latestDeck().getMain().toFlatList() : null), true));
+            }
+        }
+        return rewards;
     }
 
     private void drawColorHints(Batch batch){

@@ -1,0 +1,10 @@
+Name:Go Ninja Go
+ManaCost:R W
+Types:Sorcery
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBExile,DBDamage
+SVar:DBExile:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | ValidTgtDesc$ creature you control | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile target creature you control, then return it to the battlefield under its owner's control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | ValidTgtDesc$ creature an opponent controls | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the greatest power among creatures you control to target creature an opponent controls.
+SVar:X:Count$Valid Creature.YouCtrl$GreatestCardPower
+Oracle:Choose one or both —\n• Exile target creature you control, then return it to the battlefield under its owner's control.\n• Go Ninja Go deals damage equal to the greatest power among creatures you control to target creature an opponent controls.

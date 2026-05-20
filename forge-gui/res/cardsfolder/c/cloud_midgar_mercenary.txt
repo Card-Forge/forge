@@ -1,0 +1,9 @@
+Name:Cloud, Midgar Mercenary
+ManaCost:W W
+Types:Legendary Creature Human Soldier Mercenary
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When NICKNAME enters, search your library for an Equipment card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Equipment | ChangeNum$ 1
+S:Mode$ Panharmonicon | ValidCard$ Card.Self+equipped,Equipment.Attached | Description$ As long as NICKNAME is equipped, if an ability of NICKNAME or an Equipment attached to it triggers, that ability triggers an additional time.
+DeckHints:Type$Equipment
+Oracle:When Cloud enters, search your library for an Equipment card, reveal it, put it into your hand, then shuffle.\nAs long as Cloud is equipped, if an ability of Cloud or an Equipment attached to it triggers, that ability triggers an additional time.

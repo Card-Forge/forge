@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Morpheus
+Title=Morpheus
+Icon=Morpheus.jpg
+Difficulty=Medium
+Description=Worldwake/PTQ_Amsterdam_2010_-_Cagliari_-_Italy/Elio_Marchetti_-_MWC_(Standard,_#1524).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Baneslayer Angel
+2 Captain of the Watch
+1 Iona, Shield of Emeria
+4 Knight of the White Orchid
+2 Knight-Captain of Eos
+2 Armillary Sphere
+3 Scepter of Dominance
+4 Path to Exile
+4 Day of Judgment
+3 Martial Coup
+2 Journey to Nowhere
+3 Oblivion Ring
+2 Elspeth, Knight-Errant
+1 Dread Statuary
+4 Emeria, the Sky Ruin
+19 Plains
+[Sideboard]
+3 Celestial Purge
+1 Devout Lightcaster
+3 Kor Firewalker
+2 Kor Sanctifiers
+1 Marshal's Anthem
+3 Pithing Needle
+1 Rest for the Weary

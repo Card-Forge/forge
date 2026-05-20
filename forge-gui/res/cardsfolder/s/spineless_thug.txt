@@ -2,5 +2,5 @@ Name:Spineless Thug
 ManaCost:1 B
 Types:Creature Phyrexian Zombie Mercenary
 PT:2/2
-K:CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 Oracle:Spineless Thug can't block.

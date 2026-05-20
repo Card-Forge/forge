@@ -4,4 +4,4 @@ Types:Artifact Vehicle
 PT:*/*
 K:Flying
 K:Crew:2
-Oracle:Flying\nCrew 2
+Oracle:Flying\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This token becomes an artifact creature until end of turn.)

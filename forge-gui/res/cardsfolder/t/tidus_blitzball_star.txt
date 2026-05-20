@@ -1,0 +1,9 @@
+Name:Tidus, Blitzball Star
+ManaCost:1 W U
+Types:Legendary Creature Human Warrior
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | IsPresent$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an artifact you control enters, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever NICKNAME attacks, tap target creature an opponent controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+Oracle:Whenever an artifact you control enters, put a +1/+1 counter on Tidus.\nWhenever Tidus attacks, tap target creature an opponent controls.

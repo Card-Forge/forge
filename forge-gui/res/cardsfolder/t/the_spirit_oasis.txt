@@ -1,0 +1,10 @@
+Name:The Spirit Oasis
+ManaCost:2 U
+Types:Legendary Enchantment Shrine
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw1 | TriggerDescription$ When CARDNAME enters, draw a card for each Shrine you control.
+SVar:TrigDraw1:DB$ Draw | NumCards$ X
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Shrine.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw2 | TriggerDescription$ Whenever another Shrine you control enters, draw a card.
+SVar:TrigDraw2:DB$ Draw
+SVar:X:Count$Valid Shrine.YouCtrl
+DeckHints:Type$Shrine
+Oracle:When The Spirit Oasis enters, draw a card for each Shrine you control.\nWhenever another Shrine you control enters, draw a card.

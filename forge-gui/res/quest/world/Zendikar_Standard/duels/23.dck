@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Kraj
+Title=Kraj
+Icon=Kraj.jpg
+Difficulty=Easy
+Description=Zendikar/Deckmaster_Convention_2009/Grigore_Vlad_-_5_Color_Cascade_(Standard,_#3674).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+4 Enlisted Wurm
+2 Malakir Bloodwitch
+2 Uril, the Miststalker
+4 Bituminous Blast
+4 Lightning Bolt
+4 Captured Sunlight
+4 Maelstrom Pulse
+4 Ajani Vengeant
+2 Arcane Sanctum
+1 Arid Mesa
+1 Crumbling Necropolis
+1 Island
+2 Jungle Shrine
+1 Marsh Flats
+2 Misty Rainforest
+2 Mountain
+1 Plains
+4 Rupture Spire
+4 Savage Lands
+1 Scalding Tarn
+1 Seaside Citadel
+3 Swamp
+1 Verdant Catacombs
+[Sideboard]
+4 Blightning
+2 Caldera Hellion
+2 Esper Charm
+3 Rhox War Monk
+2 Terminate

@@ -1,0 +1,9 @@
+Name:Dancer's Chakrams
+ManaCost:3 W
+Types:Artifact Equipment
+K:Job select
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Lifelink | AddType$ Performer | AddStaticAbility$ StaticPump | Description$ Equipped creature gets +2/+2, has lifelink and "Other commanders you control get +2/+2 and have lifelink," and is a Performer in addition to its other types.
+SVar:StaticPump:Mode$ Continuous | Affected$ Card.Other+IsCommander+YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Lifelink | Description$ Other commanders you control get +2/+2 and have lifelink.
+K:Equip:3:Flavor Krishna
+DeckHas:Ability$Token & Type$Performer
+Oracle:Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)\nEquipped creature gets +2/+2, has lifelink and "Other commanders you control get +2/+2 and have lifelink," and is a Performer in addition to its other types.\nKrishna — Equip {3}

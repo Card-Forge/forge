@@ -15,7 +15,7 @@ ALTERNATE
 Name:Determined
 ManaCost:G U
 Types:Instant
-A:SP$ Effect | ReplacementEffects$ CantbeCountered | SubAbility$ DBDraw | SpellDescription$ Other spells you control can't be countered this turn. Draw a card.
-SVar:CantbeCountered:Event$ Counter | ValidSA$ Spell.YouCtrl | Layer$ CantHappen | Description$ Other spells you control can't be countered this turn.
+A:SP$ Effect | ReplacementEffects$ CantBeCountered | SubAbility$ DBDraw | SpellDescription$ Other spells you control can't be countered this turn. Draw a card.
+SVar:CantBeCountered:Event$ Counter | ValidSA$ Spell.YouCtrl | Layer$ CantHappen | Description$ Other spells you control can't be countered this turn.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Other spells you control can't be countered this turn.\nDraw a card.

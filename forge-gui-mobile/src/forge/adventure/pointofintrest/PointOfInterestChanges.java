@@ -20,6 +20,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
     //private final java.util.Map<Integer, Float> shopModifiers = new HashMap<>();
     private final java.util.Map<Integer, Integer> reputation = new HashMap<>();
     private Boolean isBookmarked;
+    private Boolean isVisited;
 
     public static class Map extends HashMap<String,PointOfInterestChanges> implements SaveFileContent {
         @Override
@@ -67,6 +68,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
             reputation.putAll((java.util.Map<Integer, Integer>) data.readObject("reputation"));
         }
         isBookmarked = (Boolean) data.readObject("isBookmarked");
+        isVisited = (Boolean) data.readObject("isVisited");
     }
 
     @Override
@@ -78,6 +80,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
         data.storeObject("shopSeeds", shopSeeds);
         data.storeObject("reputation", reputation);
         data.storeObject("isBookmarked", isBookmarked);
+        data.storeObject("isVisited", isVisited);
         return data;
     }
 
@@ -147,19 +150,17 @@ public class PointOfInterestChanges implements SaveFileContent  {
 
     public void addObjectReputation(int id, int delta)
     {
-        reputation.put(id, (reputation.getOrDefault(id, 0)) + delta);
+        reputation.merge(id, delta, Integer::sum);
     }
 
-    public int getMapReputation(){
+    public int getMapReputation()
+    {
         return getObjectReputation(0);
     }
 
-    public int getObjectReputation(int id){
-        if (!reputation.containsKey(id))
-        {
-            reputation.put(id, 0);
-        }
-        return reputation.get(id);
+    public int getObjectReputation(int id)
+    {
+        return reputation.getOrDefault(id, 0);
     }
     public boolean hasDeletedObjects() {
         return deletedObjects != null && !deletedObjects.isEmpty();
@@ -176,5 +177,13 @@ public class PointOfInterestChanges implements SaveFileContent  {
     public void clearDeletedObjects() {
         // reset map when assigning as a quest target that needs enemies
         deletedObjects.clear();
+    }
+    public boolean isVisited() {
+        if (isVisited ==null)
+            return false;
+        return isVisited;
+    }
+    public void visit() {
+        isVisited = true;
     }
 }

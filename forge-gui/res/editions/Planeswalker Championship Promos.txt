@@ -43,3 +43,5 @@ ScryfallCode=PWCS
 2024-09 M Jace Reawakened @Hozan Shinomaru
 2025-1 R Get Lost @Oka Yuka
 2025-2 M Nissa, Resurgent Animist @Hitowa
+2025-3 M Delney, Streetwise Lookout @Kei Satsuki
+2025-4 R Inti, Seneschal of the Sun @Hagiya Kaoru

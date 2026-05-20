@@ -1,0 +1,10 @@
+Name:The Sentry, Golden Guardian
+ManaCost:3 W
+Types:Legendary Creature Human Hero
+PT:5/5
+K:Flying
+K:Vigilance
+K:Indestructible
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, target opponent creates The Void, a legendary 5/5 black Horror Villain creature token with flying, indestructible, and "The Void attacks each combat if able."
+SVar:TrigToken:DB$ Token | TokenScript$ the_void | ValidTgts$ Opponent | TokenOwner$ Targeted
+Oracle:Flying, vigilance, indestructible\nWhen The Sentry enters, target opponent creates The Void, a legendary 5/5 black Horror Villain creature token with flying, indestructible, and "The Void attacks each combat if able."

@@ -20,7 +20,13 @@ package forge.gamemodes.limited;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckGroup;
+import forge.deck.DeckSection;
 import forge.item.PaperCard;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * <p>
@@ -33,13 +39,32 @@ import forge.item.PaperCard;
 public interface IBoosterDraft {
     int getRound();
     CardPool nextChoice();
-    boolean setChoice(PaperCard c);
+
+    default boolean setChoice(PaperCard c) {
+        return setChoice(c, DeckSection.Sideboard);
+    }
+
+    boolean setChoice(PaperCard c, DeckSection section);
+    void skipChoice();
     boolean hasNextChoice();
     boolean isRoundOver();
     DraftPack addBooster(CardEdition edition);
-    Deck[] getDecks(); // size 7, all the computers decks
+    Deck[] getComputerDecks(); // size 7, all the computers decks
     LimitedPlayer[] getOpposingPlayers(); // size 7, all the computers
     LimitedPlayer getHumanPlayer();
+    default List<LimitedPlayer> getAllPlayers() {
+        List<LimitedPlayer> out = new ArrayList<>();
+        out.add(getHumanPlayer());
+        out.addAll(Arrays.asList(getOpposingPlayers()));
+        return out;
+    }
+
+    default DeckGroup getDecksAsGroup() {
+        DeckGroup out = new DeckGroup();
+        out.setHumanDeck(getHumanPlayer().deck);
+        out.addAiDecks(Arrays.stream(getOpposingPlayers()).map(LimitedPlayer::getDeck).toArray(Deck[]::new));
+        return out;
+    }
 
     CardEdition[] LAND_SET_CODE = { null };
     String[] CUSTOM_RANKINGS_FILE = { null };
@@ -47,6 +72,8 @@ public interface IBoosterDraft {
 
     void setLogEntry(IDraftLog draftingProcess);
     IDraftLog getDraftLog();
+    boolean shouldShowDraftLog();
+    void addLog(String message);
     void postDraftActions();
     LimitedPlayer getNeighbor(LimitedPlayer p, boolean left);
     LimitedPlayer getPlayer(int i);

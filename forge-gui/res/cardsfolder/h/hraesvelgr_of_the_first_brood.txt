@@ -1,0 +1,14 @@
+Name:Hraesvelgr of the First Brood
+ManaCost:4 U
+Types:Legendary Creature Elder Dragon
+PT:5/5
+K:Flying
+K:Vigilance
+K:Ward:2
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Shiva's Aid — When NICKNAME enters and whenever you cast a noncreature spell, target creature gets +1/+0 until end of turn and can't be blocked this turn.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Shiva's Aid — When NICKNAME enters and whenever you cast a noncreature spell, target creature gets +1/+0 until end of turn and can't be blocked this turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +1 | SubAbility$ DBUnblockable
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+DeckHas:Ability$Token
+Oracle:Flying, vigilance, ward {2}\nShiva's Aid — When Hraesvelgr enters and whenever you cast a noncreature spell, target creature gets +1/+0 until end of turn and can't be blocked this turn.

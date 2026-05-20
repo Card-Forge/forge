@@ -93,7 +93,3 @@ ScryfallCode=ATH
 83 L Mountain @John Avon
 84 L Forest @Tony Roberts
 85 L Forest @Quinton Hoover
-
-[tokens]
-w_1_1_pegasus_flying
-r_1_1_goblin

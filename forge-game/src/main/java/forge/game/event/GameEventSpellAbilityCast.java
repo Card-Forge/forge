@@ -2,21 +2,23 @@ package forge.game.event;
 
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.SpellAbilityView;
+import forge.game.spellability.StackItemView;
+import forge.game.spellability.TargetChoices;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public class GameEventSpellAbilityCast extends GameEvent {
+public record GameEventSpellAbilityCast(SpellAbilityView sa, StackItemView si, int stackIndex, String targetDescription) implements GameEvent {
 
-    public final SpellAbility sa; 
-    public final SpellAbilityStackInstance si;
-    public final int stackIndex;
+    public GameEventSpellAbilityCast(SpellAbility sa, SpellAbilityStackInstance si, int stackIndex) {
+        this(SpellAbilityView.get(sa), StackItemView.get(si), stackIndex, computeTargetDescription(sa));
+    }
 
-    public GameEventSpellAbilityCast(SpellAbility sp, SpellAbilityStackInstance si, int stackIndex) {
-        sa = sp;
-        this.si = si;
-        this.stackIndex = stackIndex;
+    private static String computeTargetDescription(SpellAbility sa) {
+        if (sa.getTargetRestrictions() == null) return null;
+        StringBuilder sb = new StringBuilder();
+        for (TargetChoices ch : sa.getAllTargetChoices()) {
+            if (ch != null) { if (sb.length() > 0) sb.append(" "); sb.append(ch); }
+        }
+        return sb.length() == 0 ? null : sb.toString();
     }
 
     /* (non-Javadoc)
@@ -27,4 +29,11 @@ public class GameEventSpellAbilityCast extends GameEvent {
         return visitor.visit(this);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "" + si.getActivatingPlayer() + (sa.isSpell() ? " cast " : si.isTrigger() ? " triggered " : " activated ") + sa;
+    }
 }

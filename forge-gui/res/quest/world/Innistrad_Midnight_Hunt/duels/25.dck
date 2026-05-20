@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Master Splinter
+Title=Master Splinter
+Icon=Master Splinter.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Midnight_Hunt/Admassu_Williams_-_Selesnya_Humans_(Standard,_#1216944).dck
+Deck Type=constructed
+
+[Main]
+2 Katilda, Dawnhart Prime
+2 Lotus Cobra
+2 Reidane, God of the Worthy
+2 Briarbridge Tracker
+3 Brutal Cathar
+3 Yasharn, Implacable Earth
+4 Prosperous Innkeeper
+4 Esika's Chariot
+3 Storm the Festival
+3 Emeria's Call
+3 Felidar Retreat
+4 Wrenn and Seven
+1 Cave of the Frost Dragon
+2 Field of Ruin
+2 Lair of the Hydra
+3 Plains
+4 Tangled Florahedron
+4 Overgrown Farmland
+4 Branchloft Pathway
+5 Forest
+[Sideboard]
+1 Reidane, God of the Worthy
+1 Felidar Retreat
+2 Fateful Absence
+2 Doomskar
+2 Borrowed Time
+3 Skyclave Apparition
+4 Ranger Class

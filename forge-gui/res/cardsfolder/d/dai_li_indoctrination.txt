@@ -1,0 +1,8 @@
+Name:Dai Li Indoctrination
+ManaCost:1 B
+Types:Sorcery Lesson
+A:SP$ Charm | Choices$ DBDiscard,DBEarthbend
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Permanent.nonLand | NumCards$ 1 | SpellDescription$ Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.
+SVar:DBEarthbend:DB$ Earthbend | Num$ 2 | SpellDescription$ Earthbend 2. (Target land you control becomes a 0/0 creature with haste that's still a land. Put two +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
+DeckHas:Ability$Discard|Counters
+Oracle:Choose one —\n• Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.\n• Earthbend 2. (Target land you control becomes a 0/0 creature with haste that's still a land. Put two +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)

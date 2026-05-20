@@ -1,0 +1,36 @@
+{
+"startPointX": 0.85,
+"startPointY": 0.4,
+"noiseWeight": 0.3,
+"distWeight": 24.0,
+"name": "Moonlight",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "White",
+"terrain": [
+	{
+		"spriteName": "White_1",
+		"max": 0.2,
+		"resolution": 10
+	},
+	{
+		"spriteName": "White_3",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 10
+	}
+],
+"width": 0.7,
+"height": 0.7,
+"color": "efe697",
+"spriteNames": [
+	"DarkGras"
+],
+"enemies": [
+	
+],
+"pointsOfInterest": [
+	"inn_crescentus"
+],
+"structures": [
+]
+}

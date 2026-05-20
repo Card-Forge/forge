@@ -1,6 +1,6 @@
 Name:Five Hundred Year Diary
 ManaCost:3 U
-Types:Legendary Artifact Clue
+Types:Legendary Artifact Book Clue
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ U | Amount$ X | SpellDescription$ Add {U} for each Clue you control.

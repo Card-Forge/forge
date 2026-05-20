@@ -1,10 +1,10 @@
 Name:Ryu, World Warrior
-AltName:Vikya, Scorching Stalwart
+Variant:UniversesWithin:FlavorName:Vikya, Scorching Stalwart
 ManaCost:2 W
 Types:Legendary Creature Human Warrior
 PT:2/4
 K:Training
-A:AB$ DealDamage | PrecostDesc$ Hadoken — | Cost$ 4 R Untap Discard<1/Card> | ValidTgts$ Any | NumDmg$ X | AILogic$ PowerDmg | ExcessSVar$ Excess | ExcessSVarCondition$ Creature | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals damage equal to his power to any target.
+A:AB$ DealDamage | PrecostDesc$ Hadoken — | Cost$ 4 R Q Discard<1/Card> | ValidTgts$ Any | NumDmg$ X | AILogic$ PowerDmg | ExcessSVar$ Excess | ExcessSVarCondition$ Creature | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals damage equal to his power to any target.
 SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ Excess | IfDesc$ True | SpellDescription$ If excess damage was dealt to a creature this way, draw a card. ({Q} is the untap symbol.)
 SVar:X:Count$CardPower
 DeckHas:Ability$Counters|Discard

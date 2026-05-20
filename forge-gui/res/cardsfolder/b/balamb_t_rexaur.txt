@@ -1,0 +1,9 @@
+Name:Balamb T-Rexaur
+ManaCost:4 G G
+Types:Creature Dinosaur
+PT:6/6
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When this creature enters, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+K:TypeCycling:Forest:2
+Oracle:Trample\nWhen this creature enters, you gain 3 life.\nForestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)

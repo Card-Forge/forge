@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Lorwyn Eclipsed #01
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/01/latest-3-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your Fanatical Firebrand is exiled with your Champion of the Weird. Your solution must solve all possible opponent decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=3
+p0hand=Requiting Hex;Blight Rot;Goblin Surprise;Fugitive Codebreaker;Bile-Vial Boggart
+p0battlefield=Champion of the Weird|Id:1;Boggart Mischief;Heirloom Auntie;Swamp;Swamp;Swamp;Mountain;Mountain;Mountain
+p0exile=Fanatical Firebrand|ExiledWith:1
+p1life=21
+p1battlefield=Dockworker Drone|Counters:P1P1=1;Kithkeeper;Kinscaer Sentry;T:gw_1_1_kithkin

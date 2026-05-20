@@ -5,7 +5,7 @@ PT:0/0
 K:Ravenous
 K:Defender
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Spore Chimney — When CARDNAME enters, search your library for up to X basic land cards, put them onto the battlefield tapped, then shuffle.
-SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ X | Tapped$ True
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | ChangeNum$ X | Tapped$ True
 SVar:X:Count$xPaid
 DeckHas:Ability$Counters
 Oracle:Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nDefender\nSpore Chimney — When Sporocyst enters, search your library for up to X basic land cards, put them onto the battlefield tapped, then shuffle.

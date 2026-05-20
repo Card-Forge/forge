@@ -3,7 +3,6 @@ ManaCost:3 W
 Types:Creature Human Knight
 PT:2/2
 K:Vigilance
-Oracle:Vigilance
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 2/2 white and blue Knight creature token with vigilance.
 SVar:TrigToken:DB$ Token | TokenScript$ wu_2_2_knight_vigilance
 DeckHas:Color$Blue & Ability$Token

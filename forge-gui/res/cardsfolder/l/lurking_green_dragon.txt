@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Creature Dragon
 PT:4/4
 K:Flying
-S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Creature.withFlying | Description$ CARDNAME can't attack unless defending player controls a creature with flying.
+S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefender$ controlsCreature.withFlying | Description$ CARDNAME can't attack unless defending player controls a creature with flying.
 AI:RemoveDeck:Random
 Oracle:Flying\nLurking Green Dragon can't attack unless defending player controls a creature with flying.

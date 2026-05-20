@@ -66,10 +66,7 @@ public class CostFlipCoin extends CostPart {
 
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa, final boolean effect) {
-        int m = FlipCoinEffect.getFlipMultiplier(payer);
-        for (int i = 0; i < pd.c; i++) {
-            FlipCoinEffect.flipCoinCall(payer, sa, m);
-        }
+        FlipCoinEffect.flipCoins(payer, sa, pd.c);
         return true;
     }
 

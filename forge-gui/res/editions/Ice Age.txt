@@ -393,6 +393,3 @@ ScryfallCode=ICE
 381 L Forest @Pat Lewis
 382 L Forest @Pat Lewis
 383 L Snow-Covered Forest @Pat Lewis
-
-[tokens]
-w_0_1_caribou

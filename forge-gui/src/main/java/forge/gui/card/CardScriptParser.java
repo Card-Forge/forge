@@ -361,7 +361,7 @@ public final class CardScriptParser {
      * Defined starting strings for cards and spellabilities.
      */
     private static final Set<String> DEFINED_CARDS_STARTSWITH = ImmutableSortedSet
-            .of("Triggered", "Replaced", "ThisTurnEntered");
+            .of("Triggered", "Replaced");
     /**
      * Literal defined strings for players.
      */
@@ -449,8 +449,7 @@ public final class CardScriptParser {
             "AttachedBy", "Attached", "NameNotEnchantingEnchantedPlayer",
             "Enchanted", "CanEnchantRemembered",
             "CanEnchantSource", "CanBeEnchantedBy", "CanBeEnchantedByTargeted",
-            "CanBeEnchantedByAllRemembered", "EquippedBy",
-            "EquippedByTargeted", "EquippedByEnchanted", "FortifiedBy",
+            "EquippedBy", "EquippedByTargeted", "EquippedByEnchanted", "FortifiedBy",
             "CanBeEquippedBy", "Equipped", "Fortified", "HauntedBy",
             "notTributed", "madness", "Paired", "PairedWith",
             "Above", "DirectlyAbove", "TopGraveyardCreature",
@@ -469,35 +468,35 @@ public final class CardScriptParser {
             "gotBlockedThisTurn", "greatestPower", "yardGreatestPower",
             "leastPower", "leastToughness", "greatestCMC",
             "greatestRememberedCMC", "lowestRememberedCMC", "lowestCMC",
-            "enchanted", "unenchanted", "enchanting", "equipped", "unequipped",
-            "equipping", "modified", "token", "nonToken", "hasXCost", "suspended",
-            "delved", "attacking", "attackingYou", "notattacking",
+            "enchanted", "enchanting", "equipped",
+            "equipping", "modified", "token", "hasXCost", "suspended",
+            "delved", "attacking", "attackingYou",
             "attackedBySourceThisCombat", "blocking", "blockingSource",
             "blockingCreatureYouCtrl", "blockingRemembered",
-            "sharesBlockingAssignmentWith", "notblocking", "blocked",
+            "sharesBlockingAssignmentWith", "blocked",
             "blockedBySource", "blockedThisTurn", "blockedByThisTurn",
             "blockedBySourceThisTurn", "isBlockedByRemembered", "blockedRemembered",
             "blockedByRemembered", "unblocked", "attackersBandedWith",
             "kicked", "kicked1", "kicked2", "evoked",
             "HasDevoured", "IsMonstrous",
-            "CostsPhyrexianMana", "IsRemembered", "IsNotRemembered",
-            "IsImprinted", "IsNotImprinted", "hasManaAbility",
+            "CostsPhyrexianMana", "IsRemembered",
+            "IsImprinted", "hasManaAbility",
             "hasNonManaActivatedAbility", "NoAbilities", "HasCounters",
-            "wasNotCast", "ChosenType", "IsNotChosenType", "IsCommander",
+            "ChosenType", "IsNotChosenType", "IsCommander",
             "IsRenowned");
-    private static final Set<String> VALID_EXCLUSIVE_STARTSWITH = ImmutableSortedSet
-            .of("named", "notnamed", "OwnedBy", "ControlledBy",
-                    "ControllerControls", "AttachedTo", "EnchantedBy",
-                    "NotEnchantedBy", "TopGraveyard", "SharesColorWith",
-                    "MostProminentColor", "notSharesColorWith",
-                    "sharesCreatureTypeWith", "sharesCardTypeWith", "sharesLandTypeWith",
-                    "sharesNameWith", "doesNotShareNameWith",
-                    "sharesControllerWith", "sharesOwnerWith",
-                    "ThisTurnEntered", "sharesTypeWith", "hasKeyword", "with",
-                    "greatestPowerControlledBy", "greatestCMCControlledBy",
-                    "power", "toughness", "cmc", "totalPT", "counters", "non",
-                    "RememberMap", "wasCastFrom", "set",
-                    "inZone", "HasSVar", "hasAbility");
+    private static final Set<String> VALID_EXCLUSIVE_STARTSWITH = ImmutableSortedSet.of(
+            "named", "OwnedBy", "ControlledBy",
+            "ControllerControls", "AttachedTo", "EnchantedBy",
+            "TopGraveyard", "SharesColorWith",
+            "MostProminentColor", "notSharesColorWith",
+            "sharesCreatureTypeWith", "sharesCardTypeWith", "sharesLandTypeWith",
+            "sharesNameWith", "doesNotShareNameWith",
+            "sharesControllerWith", "sharesOwnerWith",
+            "ThisTurnEntered", "sharesTypeWith", "hasKeyword", "with",
+            "greatestPowerControlledBy", "greatestCMCControlledBy",
+            "power", "toughness", "cmc", "totalPT", "counters", "non",
+            "RememberMap", "wasCastFrom", "set",
+            "inZone", "HasSVar", "hasAbility");
 
     private static boolean isValidExclusive(String valid) {
         if (valid.charAt(0) == '!') {

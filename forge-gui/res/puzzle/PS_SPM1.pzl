@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Marvel's Spider-Man #01
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/09/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Ensure your solution satisfies all possible blocks. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Rhino, Barreling Brute;Spider-Man India;Daily Bugle Reporters;Become Brutes;Lurking Lizards
+p0battlefield=Scarlet Spider, Ben Reilly;Spider Manifestation;Gene Pollinator;Forest;Forest;Forest;Plains;Plains;Kavaron, Memorial World|Counters:CHARGE=2
+p1life=14
+p1battlefield=Carnage, Crimson Chaos

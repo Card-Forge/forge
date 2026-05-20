@@ -5,7 +5,7 @@ A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBFluxDiscard | Sub
 SVar:DBFluxDiscard:DB$ Discard | Defined$ Player.IsRemembered | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBFluxDraw
 SVar:DBFluxDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | SubAbility$ CleanTheFlux
 SVar:CleanTheFlux:DB$ Cleanup | ClearRemembered$ True
-SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw
 SVar:X:Remembered$Amount
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

@@ -2,8 +2,12 @@ package forge.util;
 
 import com.badlogic.gdx.files.FileHandle;
 import forge.Forge;
+import forge.adventure.data.ConfigData;
+import forge.adventure.util.Config;
 import forge.gui.GuiBase;
+import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
+import io.sentry.Sentry;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,8 +15,25 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class LibGDXImageFetcher extends ImageFetcher {
+    @Override
+    protected boolean shouldTryScryfallSetLookupCandidate(PaperCard requestedCard, PaperCard candidate) {
+        if (!Forge.isMobileAdventureMode) {
+            return true;
+        }
+
+        ConfigData configData = Config.instance().getConfigData();
+        if (configData == null || configData.allowedEditions == null || configData.allowedEditions.length == 0) {
+            return true;
+        }
+
+        return Arrays.asList(configData.allowedEditions).contains(candidate.getEdition());
+    }
+
     @Override
     protected Runnable getDownloadTask(String[] downloadUrls, String destPath, Runnable notifyObservers) {
         return new LibGDXDownloadTask(downloadUrls, destPath, notifyObservers);
@@ -35,14 +56,44 @@ public class LibGDXImageFetcher extends ImageFetcher {
                 return false;
             }
 
+            if (scryfallCooldownTime != null && urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD)) {
+                // Don't try to download card images from scryfall if we've been rate limited
+                if (scryfallCooldownTime.after(new Date())) {
+                    System.err.println("Currently in cooldown period for scryfall downloads. Skipping download attempt for: " + urlToDownload);
+                    return false;
+                } else {
+                    // Cooldown period has expired, reset the cooldown time
+                    scryfallCooldownTime = null;
+                }
+            }
+
             String newdespath = urlToDownload.contains(".fullborder.") || urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD) ?
                     TextUtil.fastReplace(destPath, ".full.", ".fullborder.") : destPath;
-            if (!newdespath.contains(".full") && urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD))
+            if (!newdespath.contains(".full") && urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD) &&
+                    !destPath.startsWith(ForgeConstants.CACHE_TOKEN_PICS_DIR) && !destPath.startsWith(ForgeConstants.CACHE_PLANECHASE_PICS_DIR))
                 newdespath = newdespath.replace(".jpg", ".fullborder.jpg"); //fix planes/phenomenon for round border options
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
-            java.net.URLConnection c = url.openConnection();
+            HttpURLConnection c = (HttpURLConnection) url.openConnection();
+            c.setRequestProperty("Accept", "*/*");
             c.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
+
+            int responseCode = c.getResponseCode();
+            String responseMessage = c.getResponseMessage();
+            System.out.println("HTTP Response: " + responseCode + " " + responseMessage + " for URL: " + urlToDownload);
+            if (responseCode != HttpURLConnection.HTTP_OK) {
+                System.err.println("Failed to fetch image. HTTP code: " + responseCode + " (" + responseMessage + ") for URL: " + urlToDownload);
+                c.disconnect();
+
+                if (responseCode == 429) {
+                    System.err.println("Device has been rate limited. Adding reduction of download attempts for this device.");
+                    Sentry.captureMessage("Device has been rate limited. Adding reduction of download attempts for this device. " + urlToDownload);
+                    // Don't try to download from scryfall for 5 minutes
+                    scryfallCooldownTime = new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5));
+                }
+
+                return false;
+            }
 
             InputStream is = c.getInputStream();
             // First, save to a temporary file so that nothing tries to read
@@ -51,11 +102,17 @@ public class LibGDXImageFetcher extends ImageFetcher {
             System.out.println(newdespath);
             destFile.parent().mkdirs();
             try(OutputStream out = Files.newOutputStream(destFile.file().toPath())) {
-                // Conversion to JPEG will be handled differently depending on the platform
-                Forge.getDeviceAdapter().convertToJPEG(is, out);
+                // Conversion to JPEG/PNG will be handled differently depending on the platform
+                if (newdespath.endsWith(".png")) {
+                    Forge.getDeviceAdapter().convertToPNG(is, out);
+                } else {
+                    Forge.getDeviceAdapter().convertToJPEG(is, out);
+                }
+
                 is.close();
             }
             destFile.moveTo(new FileHandle(newdespath));
+            c.disconnect();
 
             System.out.println("Saved image to " + newdespath);
             GuiBase.getInterface().invokeInEdtLater(notifyObservers);
@@ -83,19 +140,17 @@ public class LibGDXImageFetcher extends ImageFetcher {
         public void run() {
             boolean success = false;
             for (String urlToDownload : downloadUrls) {
-                boolean isPlanechaseBG = urlToDownload.startsWith("https://downloads.cardforge.org/images/planes/");
+                boolean isPlanechaseBG = urlToDownload.startsWith("PLANECHASEBG:");
                 try {
-
-                    success = doFetch(urlToDownload);
-
+                    success = doFetch(urlToDownload.replace("PLANECHASEBG:", ""));
                     if (success) {
                         break;
                     }
                 } catch (IOException e) {
                     if (isPlanechaseBG) {
-                        System.out.println("Failed to download planechase background [" + destPath + "] image: " + e.getMessage());
+                        System.err.println("Failed to download planechase background [" + destPath + "] image: " + e.getMessage());
                     } else {
-                        System.out.println("Failed to download card [" + destPath + "] image: " + e.getMessage());
+                        System.err.println("Failed to download card [" + destPath + "] image: " + e.getMessage());
                         if (urlToDownload.contains("tokens")) {
                             int setIndex = urlToDownload.lastIndexOf('_');
                             int typeIndex = urlToDownload.lastIndexOf('.');
@@ -103,6 +158,11 @@ public class LibGDXImageFetcher extends ImageFetcher {
                             String extension = urlToDownload.substring(typeIndex);
                             urlToDownload = setlessFilename + extension;
                             try {
+                                try {
+                                    TimeUnit.MILLISECONDS.sleep(100);
+                                } catch (InterruptedException ex) {
+                                    throw new RuntimeException(ex);
+                                }
                                 success = doFetch(urlToDownload);
                                 if (success) {
                                     break;
@@ -111,6 +171,12 @@ public class LibGDXImageFetcher extends ImageFetcher {
                                 System.out.println("Failed to download setless token [" + destPath + "]: " + e.getMessage());
                             }
                         }
+                    }
+                } finally {
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(100);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
                     }
                 }
             }

@@ -1,0 +1,13 @@
+Name:Spinneret and Spiderling
+Variant:UniversesWithin:FlavorName:Rizna, the Spider-Crowned
+ManaCost:R
+Types:Legendary Creature Spider Human Hero
+PT:1/2
+T:Mode$ AttackersDeclared | Execute$ TrigPutCounter | ValidAttackers$ Spider | ValidAttackersAmount$ GE2 | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with two or more Spiders, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ DamageDoneOnce | ValidSource$ Card.Self | DamageAmount$ GE4 | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals 4 or more damage, exile the top card of your library. Until the end of your next turn, you may play that card.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | Duration$ UntilTheEndOfYourNextTurn | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever you attack with two or more Spiders, put a +1/+1 counter on Spinneret and Spiderling.\nWhenever Spinneret and Spiderling deals 4 or more damage, exile the top card of your library. Until the end of your next turn, you may play that card.

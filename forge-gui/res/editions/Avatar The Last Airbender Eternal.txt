@@ -1,0 +1,339 @@
+[metadata]
+Code=TLE
+Date=2025-11-21
+Name=Avatar: The Last Airbender Eternal
+Type=Expansion
+ScryfallCode=TLE
+
+[cards]
+1 M Brought Back @Viacom
+2 M Drannith Magistrate @Viacom ${"flavorName": "Mayor Tong of Chin Village"}
+3 M Empty City Ruse @Viacom
+4 M Lita, Mechanical Engineer @Viacom ${"flavorName": "The Mechanist, Tactical Tinkerer"}
+5 M Release to Memory @Viacom
+6 M Scout's Warning @Viacom
+7 M Teferi's Protection @Viacom ${"flavorName": "Aang's Shelter"}
+8 M Three Dreams @Viacom
+9 M Agent of Treachery @Viacom
+10 M Bribery @Viacom
+11 M Clone @Viacom
+12 M Clone Legion @Viacom
+13 M Force of Negation @Viacom
+14 M Imprisoned in the Moon @Viacom
+15 M Intruder Alarm @Viacom
+16 M Mystic Remora @Viacom
+17 M Prosperity @Viacom
+18 M Sakashima of a Thousand Faces @Viacom ${"flavorName": "Joo Dee, Public Servant"}
+19 M Standstill @Viacom
+20 M Training Grounds @Viacom
+21 M Visions of Beyond @Viacom
+22 M Black Sun's Zenith @Viacom
+23 M Bloodchief Ascension @Viacom ${"flavorName": "Bloodbender's Rise"}
+24 M Cruel Tutor @Viacom
+25 M Noxious Gearhulk @Viacom ${"flavorName": "Fire Nation Tank Train"}
+26 M Blasphemous Act @Viacom
+27 M Diaochan, Artful Beauty @Viacom ${"flavorName": "Azula, Flame of Ember Island"}
+28 M Dockside Extortionist @Viacom
+29 M Fervor @Viacom
+30 M Humble Defector @Viacom
+31 M Insurrection @Viacom
+32 M Lightning Bolt @Viacom
+33 M Mirrorwing Dragon @Viacom
+34 M Rending Volley @Viacom
+35 M Searing Blood @Viacom
+36 M Shattering Spree @Viacom
+37 M Volcanic Torrent @Viacom
+38 M Warstorm Surge @Viacom
+39 M Beastmaster Ascension @Viacom
+40 M Elemental Bond @Viacom
+41 M The Great Henge @Viacom ${"flavorName": "The Banyan Tree"}
+42 M Heartbeat of Spring @Viacom
+43 M Heroic Intervention @Viacom
+44 M Return of the Wildspeaker @Viacom ${"flavorName": "Earth Rumble Triumph"}
+45 M Rites of Flourishing @Viacom
+46 M Taunting Challenge @Viacom
+47 M Captain Sisay @Viacom ${"flavorName": "Suki of the Kyoshi Warriors"}
+48 M Eladamri's Call @Viacom ${"flavorName": "Lifelong Friendship"}
+49 M Fevered Visions @Viacom
+50 M Join the Dance @Viacom
+51 M Koma, Cosmos Serpent @Viacom ${"flavorName": "The Monstrous Serpent"}
+52 M Rhys the Redeemed @Viacom ${"flavorName": "Zuko, Redeemed"}
+53 M Cityscape Leveler @Viacom
+54 M Meteorite @Viacom
+55 M Sundial of the Infinite @Viacom
+56 M Dark Depths @Viacom ${"flavorName": "The Boy in the Iceberg"}
+57 M Fabled Passage @Viacom
+58 M Sunbaked Canyon @Viacom
+59 M Tarnished Citadel @Viacom
+60 M Treetop Village @Viacom
+61 M Valakut, the Molten Pinnacle @Viacom ${"flavorName": "Volcano of Roku's Island"}
+
+[borderless]
+62 R Appa, the Vigilant @Fahmi Fauzi
+63 R Katara's Reversal @Fahmi Fauzi
+64 R Fire Nation Turret @Fahmi Fauzi
+65 R Swampbenders @Fahmi Fauzi
+66 R Sokka's Charge @Fahmi Fauzi
+67 R Earthshape @Fahmi Fauzi
+68 R Mai and Zuko @Brian Yuen
+69 R Aang and Katara @Brian Yuen
+70 R Toph, Greatest Earthbender @Brian Yuen
+71 R Sokka and Suki @Brian Yuen
+72 R Momo's Heist @Brian Yuen
+73 R Uncle's Musings @Brian Yuen
+
+[jumpstart]
+74 M Aang, Airbending Master @Tomoyo Asatani
+75 U Air Nomad Student @Tky
+76 U The Duke, Rebel Sentry @Logan Feliciano
+77 C Inspired Insurgent @Thomas Stoop
+78 R Jet, Rebel Leader @Keiuu
+79 C Kindly Customer @Enishi
+80 C Koala-Sheep @Dee Nguyen
+81 R Monk Gyatso @Masateru Ikeda
+82 U Pipsqueak, Rebel Strongarm @Rafater
+83 M Sokka, Swordmaster @Jason Kiantoro
+84 C Sokka's Sword Training @Eduardo Francisco
+85 R Suki, Kyoshi Captain @Shiren
+86 R Tale of Momo @Tetsuko
+87 U That's Rough Buddy @Kazeto
+88 C Toucan-Puffin @Yuhong Ding
+89 R Baboon Spirit @Daniel Romanovsky
+90 R The Blue Spirit @Claudiu-Antoniu Magherusan
+91 R Chakra Meditation @Hori Airi
+92 U Dutiful Knowledge Seeker @TAPIOCA
+93 M Katara, Waterbending Master @Yueko
+94 R Nightmares and Daydreams @AKAGI
+95 U Princess Yue @Masateru Ikeda
+96 R Tui and La, Moon and Ocean @Douzen
+97 C Unagi's Spray @Arthur Yuan
+98 M Wan Shi Tong, All-Knowing @Axel Sauerwald
+99 R Waterbender's Restoration @Phima
+100 U Whirlwind Technique @Robin Olausson
+101 M Azula, Ruthless Firebender @Rose Benjamin
+102 C Dai Li Censor @HAIKEI
+103 R Desperate Plea @Shiyu
+104 M Fire Lord Ozai @Ryuichi Sakuma
+105 R Fire Nation Occupation @Arthur Yuan
+106 R Fire Nation Salvagers @Susumu Kuroi
+107 C Giant Fly @Alfonso Santano
+108 R Lo and Li, Royal Advisors @Kieran Yanner
+109 R Nyla, Shirshu Sleuth @Douzen
+110 U Ruthless Waterbender @Tubaki Halsame
+111 U Scarring Memories @Boell Oyino
+112 M Avatar Roku, Firebender @Toni Infante
+113 R Chong and Lily, Nomads @Phima
+114 C Deer-Dog @Ionomycin
+115 R Fang, Roku's Companion @Douzen
+116 U Founding of Omashu @Dee Nguyen
+117 U Frantic Confrontation @Ven
+118 C Freedom Fighter Recruit @TAPIOCA
+119 R Iroh, Dragon of the West @Hokyoung Kim
+120 U Longshot, Rebel Bowman @Morry Hollowell
+121 R Lost in Memories @Tubaki Halsame
+122 U Moku, Meandering Drummer @ikeda_cpt
+123 R Overwhelming Victory @Joshua Raphael
+124 R Reckless Blaze @Nijimaarc
+125 R Smellerbee, Rebel Fighter @Enishi
+126 R Storm of Memories @Nijimaarc
+127 M Zuko, Firebending Master @Kinota Eishi
+128 U Animal Attendant @Phima
+129 C The Art of Tea @Eilene Cherie
+130 M Avatar Kyoshi, Earthbender @Tetsuko
+131 R Bison Whistle @Brandon L. Hunt
+132 U Bosco, Just a Bear @Airi Yoshihisa
+133 U Bumi's Feast Lecture @Tomoyo Asatani
+134 R The Cabbage Merchant @Patrick Gañas
+135 U Cracked Earth Technique @Ichiko Milk Tei
+136 U Creeping Crystal Coating @Hori Airi
+137 R Crystalline Armor @Susumu Kuroi
+138 U Elephant-Mandrill @Takeuchi Moto
+139 M Hei Bai, Forest Guardian @TAPIOCA
+140 U Kyoshi Warrior Exemplars @Enishi
+141 R Master's Guidance @Yueko
+142 U Solid Ground @Jason Kiantoro
+143 R Tale of Katara and Toph @Ichiko Milk Tei
+144 R Tectonic Split @Mengxuan Li
+145 M Toph, Earthbending Master @Phima
+146 U Aang, A Lot to Learn @Tomoyo Asatani
+147 U Hook Swords @Eliz Roxs
+148 U Katara, Seeking Revenge @Yoshioka
+149 C Stand United @Robin Har
+150 U Zuko, Seeking Honor @Fahmi Fauzi
+151 C Acrobatic Leap @Ionomycin
+152 C Cloudshift @Devin Elle Kurtz
+153 R Duelist's Heritage @Robin Har
+154 U Valorous Stance @Yuhong Ding
+155 C Brainstorm @Arthur Yuan
+156 U Coastal Piracy @Nathaniel Himawan
+157 C Consider @Brian Yuen
+158 C Dramatic Reversal @Maël Ollivier-Henry
+159 C Frantic Search @Alejandro Pacheco
+160 U Bastion of Remembrance @Yuu Fujiki
+161 U Dark Deal @Pisukev
+162 C Diresight @Evan Shipard
+163 U Bolt Bend @Yuhong Ding
+164 C Cathartic Reunion @Awanqi (Angela Wang)
+165 R Fiery Confluence @Salvatorre Zee Yazzie
+166 C Fists of Flame @Jason Kiantoro
+167 R Descendants' Path @Pauline Voss
+168 U Inspiring Call @Alexander Forssberg
+169 C Many Partings @Kazeto
+170 U Suspicious Bookcase @Kotakan
+210 R Aang, Air Nomad @Jinho Bae
+211 C Aang's Defense @Jo Cordisco
+212 C Aardvark Sloth @Ionomycin
+213 R Allied Teamwork @Gemi
+214 U Appa, Aang's Companion @Kieran Yanner
+215 U Katara, Heroic Healer @Pauline Voss
+216 C Kyoshi Warrior Guard @Yunomachi
+217 U Momo, Rambunctious Rascal @Tomoyo Asatani
+218 C Sledding Otter-Penguin @Maojin Lee
+219 U Sokka, Wolf Cove's Protector @Kinota Eishi
+220 C Tundra Wall @Slawek Fedorczuk
+221 C Wolf Cove Villager @Gemi
+222 C Deny Entry @Robin Olausson
+223 C Flying Dolphin-Fish @Daniel Romanovsky
+224 U Lost in the Spirit World @Shahab Alizadeh
+225 R The Terror of Serpent's Pass @Douzen
+226 C Turtle-Seals @Gemi
+227 R Water Whip @Rose Benjamin
+228 C Elephant-Rat @Eduardo Francisco
+229 C Fire Nation Ambushers @Logan Feliciano
+230 R Fire Nation Sentinels @Tition
+231 C Gilacorn @Robin Olausson
+232 R Lion Vulture @Nathaniel Himawan
+233 C Purple Pentapus @Devin Elle Kurtz
+234 C Capital Guard @Nathaniel Himawan
+235 C Dragon Moose @Daniel Romanovsky
+236 C Explosive Shot @Slawek Fedorczuk
+237 R Fire Nation Archers @Shiyu
+238 C Fire Nation Soldier @Boell Oyino
+239 U Fire Nation's Conquest @Eduardo Francisco
+240 U Iroh, Firebending Instructor @Eilene Cherie
+241 C Komodo Rhino @Alexander Forssberg
+242 U Loyal Fire Sage @Norikatsu Miyoshi
+243 U Roku's Mastery @Jo Cordisco
+244 C Warship Scout @Brandon L. Hunt
+245 U Zhao, the Seething Flame @Rafater
+246 R Zuko, Avatar Hunter @Rafater
+247 C Zuko's Offense @Jo Cordisco
+248 R Bumi, Eclectic Earthbender @Olena Richards
+249 U Earthbending Student @Le Vuong
+250 U Eel-Hounds @Miho Midorikawa
+251 C Frog-Squirrels @Daniel Romanovsky
+252 C Hippo-Cows @Brandon L. Hunt
+253 U Match the Odds @Eilene Cherie
+254 R Seismic Tutelage @Florent Lebrun
+255 U Hog-Monkey Rampage @Daniel Romanovsky
+256 C Mechanical Glider @Salvatorre Zee Yazzie
+257 C Feed the Swarm @Kotakan
+258 C Run Amok @Hristo D. Chukov
+259 C Explore @Maojin Lee
+260 C Thriving Bluff @Henry Wong
+261 C Thriving Grove @Robin Har
+262 C Thriving Heath @Dom Lay
+263 C Thriving Isle @Slawek Fedorczuk
+264 C Thriving Moor @Dom Lay
+
+[extended art]
+171 M Aang, Airbending Master @Tomoyo Asatani
+172 R Jet, Rebel Leader @Keiuu
+173 R Monk Gyatso @Masateru Ikeda
+174 M Sokka, Swordmaster @Jason Kiantoro
+175 R Suki, Kyoshi Captain @Shiren
+176 R Tale of Momo @Tetsuko
+177 R Baboon Spirit @Daniel Romanovsky
+178 R The Blue Spirit @Claudiu-Antoniu Magherusan
+179 R Chakra Meditation @Hori Airi
+180 M Katara, Waterbending Master @Yueko
+181 R Tui and La, Moon and Ocean @Douzen
+182 M Wan Shi Tong, All-Knowing @Axel Sauerwald
+183 R Waterbender's Restoration @Phima
+184 M Azula, Ruthless Firebender @Rose Benjamin
+185 R Desperate Plea @Shiyu
+186 M Fire Lord Ozai @Ryuichi Sakuma
+187 R Fire Nation Occupation @Arthur Yuan
+188 R Fire Nation Salvagers @Susumu Kuroi
+189 R Lo and Li, Royal Advisors @Kieran Yanner
+190 R Nyla, Shirshu Sleuth @Douzen
+191 M Avatar Roku, Firebender @Toni Infante
+192 R Chong and Lily, Nomads @Phima
+193 R Fang, Roku's Companion @Douzen
+194 R Iroh, Dragon of the West @Hokyoung Kim
+195 R Lost in Memories @Tubaki Halsame
+196 R Overwhelming Victory @Joshua Raphael
+197 R Reckless Blaze @Nijimaarc
+198 R Smellerbee, Rebel Fighter @Enishi
+199 R Storm of Memories @Nijimaarc
+200 M Zuko, Firebending Master @Kinota Eishi
+201 M Avatar Kyoshi, Earthbender @Tetsuko
+202 R Bison Whistle @Brandon L. Hunt
+203 R The Cabbage Merchant @Patrick Gañas
+204 R Crystalline Armor @Susumu Kuroi
+205 M Hei Bai, Forest Guardian @TAPIOCA
+206 R Master's Guidance @Yueko
+207 R Tale of Katara and Toph @Ichiko Milk Tei
+208 R Tectonic Split @Mengxuan Li
+209 M Toph, Earthbending Master @Phima
+
+[promo]
+265 R Aang, Air Nomad @Jinho Bae
+266 C Aang's Defense @Jo Cordisco
+267 C Aardvark Sloth @Ionomycin
+268 U Appa, Aang's Companion @Kieran Yanner
+269 U Katara, Heroic Healer @Pauline Voss
+270 U Momo, Rambunctious Rascal @Tomoyo Asatani
+271 C Path to Redemption @Hokyoung Kim
+272 C Razor Rings @Norikatsu Miyoshi
+273 C Sledding Otter-Penguin @Maojin Lee
+274 U Sokka, Wolf Cove's Protector @Kinota Eishi
+275 C Tundra Wall @Slawek Fedorczuk
+276 C Wolf Cove Villager @Gemi
+277 C Capital Guard @Nathaniel Himawan
+278 C Dragon Moose @Daniel Romanovsky
+279 C Explosive Shot @Slawek Fedorczuk
+280 C Fire Nation Soldier @Boell Oyino
+281 U Fire Nation's Conquest @Eduardo Francisco
+282 U Iroh, Firebending Instructor @Eilene Cherie
+283 C Komodo Rhino @Alexander Forssberg
+284 C Run Amok @Hristo D. Chukov
+285 C Warship Scout @Brandon L. Hunt
+286 U Zhao, the Seething Flame @Rafater
+287 R Zuko, Avatar Hunter @Rafater
+288 C Zuko's Offense @Jo Cordisco
+289 L Mountain @Salvatorre Zee Yazzie
+290 L Mountain @Salvatorre Zee Yazzie
+291 L Mountain @Salvatorre Zee Yazzie
+292 L Mountain @Salvatorre Zee Yazzie
+293 L Mountain @Salvatorre Zee Yazzie
+294 L Mountain @Salvatorre Zee Yazzie
+295 L Mountain @Salvatorre Zee Yazzie
+296 L Mountain @Salvatorre Zee Yazzie
+297 L Plains @Slawek Fedorczuk
+298 L Plains @Slawek Fedorczuk
+299 L Plains @Slawek Fedorczuk
+300 L Plains @Slawek Fedorczuk
+301 L Plains @Slawek Fedorczuk
+302 L Plains @Slawek Fedorczuk
+303 L Plains @Slawek Fedorczuk
+304 L Plains @Slawek Fedorczuk
+
+[bundle]
+305 R Enlightened Tutor @Brigitte Roka & Clifton Stommel
+306 R Flawless Maneuver @Irina Nordsol
+307 R Fierce Guardianship @Ina Wong
+308 R Mystical Tutor @Shane Beresford
+309 R Deadly Rollick @Irina Nordsol
+310 R Entomb @Shane Beresford
+311 R Deflecting Swat @Patrick Gañas
+312 R Gamble @Irina Nordsol
+313 R Obscuring Haze @Perci Chen
+314 R Worldly Tutor @Shane Beresford
+315 R Arcane Signet @Shane Beresford
+316 R Sol Ring @Barbara Rosiak
+317 R Swiftfoot Boots @Barbara Rosiak
+
+[tokens]
+1 marit_lage @Viacom
+2 r_2_2_soldier @Lius Lasahido

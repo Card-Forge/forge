@@ -1,0 +1,10 @@
+Name:Memorial Vault
+ManaCost:3 R
+Types:Artifact
+A:AB$ Dig | Cost$ T Sac<1/Artifact.Other/another artifact> | Defined$ You | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBMayPlay | SpellDescription$ Exile the top X cards of your library, where X is one plus the mana value of the sacrificed artifact. You may play those cards this turn.
+SVar:DBMayPlay:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlay$ True | Description$ You may play the exiled cards this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Sacrificed$CardManaCost/Plus.1
+DeckHas:Ability$Sacrifice
+Oracle:{T}, Sacrifice another artifact: Exile the top X cards of your library, where X is one plus the mana value of the sacrificed artifact. You may play those cards this turn.

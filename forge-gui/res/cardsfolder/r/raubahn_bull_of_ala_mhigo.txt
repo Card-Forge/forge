@@ -1,0 +1,11 @@
+Name:Raubahn, Bull of Ala Mhigo
+ManaCost:1 R
+Types:Legendary Creature Human Warrior
+PT:2/2
+K:Ward:PayLife<X/life equal to NICKNAME's power>
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, attach up to one target Equipment you control to target attacking creature.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Equipment.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target Equipment you control | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature
+SVar:X:Count$CardPower
+DeckHints:Type$Equipment
+Oracle:Ward—Pay life equal to Raubahn's power.\nWhenever Raubahn attacks, attach up to one target Equipment you control to target attacking creature.

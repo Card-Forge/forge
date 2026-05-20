@@ -1,0 +1,10 @@
+Name:Voidforged Titan
+ManaCost:4 B
+Types:Artifact Creature Robot Warrior
+PT:5/4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigDraw | TriggerDescription$ Void — At the beginning of your end step, if a nonland permanent left the battlefield this turn or a spell was warped this turn, you draw a card and lose 1 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+SVar:X:Count$Void.1.0
+DeckHas:Ability$Counters
+Oracle:Void — At the beginning of your end step, if a nonland permanent left the battlefield this turn or a spell was warped this turn, you draw a card and lose 1 life.

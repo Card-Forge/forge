@@ -1,0 +1,9 @@
+Name:Shantotto, Tactician Magician
+ManaCost:1 U R
+Types:Legendary Creature Dwarf Wizard
+PT:0/4
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a noncreature spell, NICKNAME gets +X/+0 until end of turn, where X is the amount of mana spent to cast that spell. If X is 4 or more, draw a card.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ GE4
+SVar:X:TriggeredCard$CastTotalManaSpent
+Oracle:Whenever you cast a noncreature spell, Shantotto gets +X/+0 until end of turn, where X is the amount of mana spent to cast that spell. If X is 4 or more, draw a card.

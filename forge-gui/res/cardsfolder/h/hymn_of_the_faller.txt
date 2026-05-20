@@ -1,0 +1,10 @@
+Name:Hymn of the Faller
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Surveil | Amount$ 1 | SubAbility$ DBDraw | SpellDescription$ Surveil 1, then you draw a card and lose 1 life. (To surveil 1, look at the top card of your library. You may put it into your graveyard.) Void — If a nonland permanent left the battlefield this turn or a spell was warped this turn, draw another card.
+SVar:DBDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBVoidDraw
+SVar:DBVoidDraw:DB$ Draw | ConditionCheckSVar$ X
+SVar:X:Count$Void.1.0
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Surveil 1, then you draw a card and lose 1 life. (To surveil 1, look at the top card of your library. You may put it into your graveyard.)\nVoid — If a nonland permanent left the battlefield this turn or a spell was warped this turn, draw another card.

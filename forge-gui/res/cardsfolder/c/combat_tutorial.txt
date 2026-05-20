@@ -1,0 +1,7 @@
+Name:Combat Tutorial
+ManaCost:2 U
+Types:Sorcery
+A:SP$ Draw | NumCards$ 2 | ValidTgts$ Player | SubAbility$ DBPutCounter | SpellDescription$ Target player draws two cards. Put a +1/+1 counter on up to one target creature you control.
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to one target creature you control | TargetMin$ 0 | TargetMax$ 1 | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Target player draws two cards. Put a +1/+1 counter on up to one target creature you control.

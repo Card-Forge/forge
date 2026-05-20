@@ -2,12 +2,11 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -20,7 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -33,7 +32,11 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
+
+import java.util.EnumSet;
+
 import forge.Forge;
+import forge.adventure.character.EnemySprite;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.data.AdventureQuestData;
 import forge.adventure.data.ItemData;
@@ -50,15 +53,13 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.util.KeyBinding;
+import forge.adventure.util.NavArrowActor;
 import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 import forge.gui.GuiBase;
-import forge.localinstance.properties.ForgePreferences;
-import forge.model.FModel;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
-import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Stage to handle everything rendered in the HUD
@@ -72,6 +73,8 @@ public class GameHUD extends Stage {
     private final TypingLabel lifePoints;
     private final TypingLabel money;
     private final TypingLabel shards;
+    private final TypingLabel enemyCounterText;
+    private final Image enemyCounterBackground;
     private final TextraLabel notificationText = Controls.newTextraLabel("");
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
     private final InputEvent eventTouchDown, eventTouchUp;
@@ -87,6 +90,9 @@ public class GameHUD extends Stage {
     private boolean dialogOnlyInput;
     private final Array<TextraButton> dialogButtonMap = new Array<>();
     private final Array<TextraButton> abilityButtonMap = new Array<>();
+    private final Array<NavArrowActor> hiddenEnemyChevrons = new Array<>();
+    private final Vector2 chevronStageCoordinates = new Vector2();
+    private final Vector3 playerProjectedCoordinates = new Vector3();
     private String lifepointsTextColor = "";
     private final ScrollPane notificationPane;
     private final Group mapGroup = new Group();
@@ -162,6 +168,14 @@ public class GameHUD extends Stage {
         shards.setText("[%95][+Shards]");
         money.setText("[%95][+Gold]");
         lifePoints.setText("[%95][+Life]");
+        enemyCounterText = Controls.newTypingLabel(Forge.getLocalizer().getMessage("lblRemainingEnemies", String.valueOf(0)));
+        enemyCounterText.setColor(Color.BLACK);
+        enemyCounterText.skipToTheEnd();
+        enemyCounterText.setVisible(false);
+
+        ScrollPaneStyle paperStyle = Controls.getSkin().get("paper", ScrollPaneStyle.class);
+        enemyCounterBackground = new Image(paperStyle.background);
+        enemyCounterBackground.setVisible(false);
         AdventurePlayer.current().onLifeChange(() -> {
             String effect = "{EMERGE}";
             String effectEnd = "{ENDEMERGE}";
@@ -186,6 +200,8 @@ public class GameHUD extends Stage {
         AdventurePlayer.current().onEquipmentChanged(this::updateAbility);
         addActor(ui);
         addActor(miniMapPlayer);
+        addActor(enemyCounterBackground);
+        addActor(enemyCounterText);
         console = new Console();
         console.setBounds(0, GuiBase.isAndroid() ? getHeight() : 0, getWidth(), getHeight() / 2);
         console.setVisible(false);
@@ -279,9 +295,11 @@ public class GameHUD extends Stage {
         //map bounds
         if (Controls.actorContainsVector(miniMap, c)) {
             touchpad.setVisible(false);
-
-            if (debugMap)
+            if (mapGroup.isVisible() && debugMap) {
                 WorldStage.getInstance().getPlayerSprite().setPosition(x * WorldSave.getCurrentSave().getWorld().getWidthInPixels(), y * WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+            } else if (!mapGroup.isVisible()) {
+                return false;
+            }
 
             return true;
         }
@@ -302,12 +320,16 @@ public class GameHUD extends Stage {
             return true;
         }
         if (Controls.actorContainsVector(miniMap, c)) {
-            if (debugMap)
+            if (mapGroup.isVisible() && debugMap) {
                 WorldStage.getInstance().getPlayerSprite().setPosition(x * WorldSave.getCurrentSave().getWorld().getWidthInPixels(), y * WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+            } else if (!mapGroup.isVisible()) {
+                // in this case, we want to send an action to the scene, which happens in the caller
+                return false;
+            }
             return true;
         }
         //auto follow touchpad
-        if (GuiBase.isAndroid() && !MapStage.getInstance().getDialogOnlyInput() && !console.isVisible()) {
+        if (GuiBase.isAndroid() && !MapStage.getInstance().isDialogOnlyInput() && !console.isVisible()) {
             if (!(Controls.actorContainsVector(avatar, touch)) // not inside avatar bounds
                     && !(Controls.actorContainsVector(miniMap, touch)) // not inside map bounds
                     && !(Controls.actorContainsVector(gamehud, touch)) //not inside gamehud bounds
@@ -335,6 +357,7 @@ public class GameHUD extends Stage {
         int yPos = (int) gameStage.player.getY();
         int xPos = (int) gameStage.player.getX();
         act(Gdx.graphics.getDeltaTime()); //act the Hud
+        updateHiddenEnemyChevrons();
         super.draw(); //draw the Hud
         int xPosMini = (int) (((float) xPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getWidthInTiles()) * miniMap.getWidth());
         int yPosMini = (int) (((float) yPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getHeightInTiles()) * miniMap.getHeight());
@@ -344,11 +367,6 @@ public class GameHUD extends Stage {
                 !Controls.actorContainsVector(notificationPane, new Vector2(miniMapPlayer.getX(), miniMapPlayer.getY()))
                 && (!Controls.actorContainsVector(console, new Vector2(miniMapPlayer.getX(), miniMapPlayer.getY()))
                 || !console.isVisible())); // prevent drawing on top of console or notifications
-
-        if (!MapStage.getInstance().isInMap())
-            updateMusic();
-        else
-            SoundSystem.instance.pause();
     }
 
     Texture miniMapTexture;
@@ -401,13 +419,7 @@ public class GameHUD extends Stage {
         } else {
             deckActor.setColor(menuActor.getColor());
         }
-        if (MapStage.getInstance().isInMap()) {
-            SoundSystem.instance.pause();
-            playAudio();
-        } else {
-            unloadAudio();
-            SoundSystem.instance.resume(); // resume World BGM
-        }
+        updateBGM();
         //unequip and reequip abilities
         updateAbility();
         restorePlayerCollision();
@@ -424,6 +436,7 @@ public class GameHUD extends Stage {
         }
         if (MapStage.getInstance().isInMap())
             updateBookmarkActor(MapStage.getInstance().getChanges().isBookmarked());
+        updateEnemyCounter();
         avatarGroup.setZIndex(ui.getChildren().size);
     }
 
@@ -436,6 +449,100 @@ public class GameHUD extends Stage {
         keys += AdventurePlayer.current().hasItem("White Key") ? "[+WhiteKey]\n" : "[+Dot]\n";
         keys += AdventurePlayer.current().hasItem("Strange Key") ? "[+StrangeKey]" : "[+Dot]";
         keyCollection.setText(keys);
+    }
+
+    public void updateEnemyCounter() {
+        if (MapStage.getInstance().isInMap() && AdventureQuestController.instance().hasClearQuestActive()) {
+            int remaining = MapStage.getInstance().getRemainingEnemyCount();
+            enemyCounterText.setText(Forge.getLocalizer().getMessage("lblRemainingEnemies", String.valueOf(remaining)));
+            enemyCounterText.setVisible(true);
+            enemyCounterBackground.setVisible(true);
+
+            float paddingX = 4f;
+            float paddingY = 1.5f;
+            float margin = 2f;
+            float textWidth = enemyCounterText.getPrefWidth();
+            float textHeight = Math.max(enemyCounterText.getPrefHeight(), 12f);
+            float bgWidth = textWidth + paddingX * 2f;
+            float bgHeight = textHeight + paddingY * 2f;
+
+            float bgX = getWidth() - bgWidth - margin;
+            float bgY = margin;
+
+            enemyCounterBackground.setBounds(bgX, bgY, bgWidth, bgHeight);
+            enemyCounterText.setBounds(bgX + paddingX, bgY + paddingY, textWidth, textHeight);
+        } else {
+            enemyCounterText.setVisible(false);
+            enemyCounterBackground.setVisible(false);
+        }
+    }
+
+    private void hideHiddenEnemyChevrons() {
+        for (NavArrowActor chevron : hiddenEnemyChevrons) {
+            chevron.setVisible(false);
+        }
+    }
+
+    private NavArrowActor getChevronActor(int index) {
+        while (hiddenEnemyChevrons.size <= index) {
+            NavArrowActor chevron = new NavArrowActor();
+            chevron.setTouchable(Touchable.disabled);
+            chevron.setVisible(false);
+            hiddenEnemyChevrons.add(chevron);
+            addActor(chevron);
+        }
+        return hiddenEnemyChevrons.get(index);
+    }
+
+    private void positionChevron(NavArrowActor chevron, EnemySprite enemy, int index) {
+        playerProjectedCoordinates.set(MapStage.getInstance().player.getX() + MapStage.getInstance().player.getWidth() * 0.5f,
+                MapStage.getInstance().player.getY() + MapStage.getInstance().player.getHeight() * 0.5f, 0f);
+        MapStage.getInstance().getCamera().project(playerProjectedCoordinates, 0f, 0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        chevronStageCoordinates.set(playerProjectedCoordinates.x, playerProjectedCoordinates.y);
+        screenToStageCoordinates(chevronStageCoordinates);
+
+        Vector2 navDirection = new Vector2(enemy.pos()).sub(MapStage.getInstance().player.pos());
+        if (navDirection.isZero(0.01f)) {
+            navDirection.set(1f, 0f);
+        } else {
+            navDirection.nor();
+        }
+
+        Vector2 side = new Vector2(-navDirection.y, navDirection.x);
+        int lane = index / 2;
+        float spread = (index % 2 == 0 ? 1f : -1f) * lane * 9f;
+        float offsetFromPlayer = 18f;
+        float pointerX = chevronStageCoordinates.x + navDirection.x * offsetFromPlayer + side.x * spread;
+        float pointerY = chevronStageCoordinates.y + navDirection.y * offsetFromPlayer + side.y * spread;
+
+        chevron.navTargetAngle = navDirection.angleDeg();
+        chevron.setPosition(pointerX, pointerY);
+        chevron.setVisible(true);
+    }
+
+    private void updateHiddenEnemyChevrons() {
+        if (!Config.instance().getSettingData().drawChevronsToHiddenEnemiesInClearQuest
+                || hidden
+                || !MapStage.getInstance().isInMap()
+                || !AdventureQuestController.instance().hasClearQuestActive()
+                || MapStage.getInstance().getRemainingEnemyCount() <= 0) {
+            hideHiddenEnemyChevrons();
+            return;
+        }
+
+        int chevronIndex = 0;
+        for (EnemySprite enemy : MapStage.getInstance().enemies) {
+            if (!enemy.hidden || enemy.getStage() == null || enemy.defeatDialog != null) {
+                continue;
+            }
+            NavArrowActor chevron = getChevronActor(chevronIndex);
+            positionChevron(chevron, enemy, chevronIndex);
+            chevronIndex++;
+        }
+
+        while (chevronIndex < hiddenEnemyChevrons.size) {
+            hiddenEnemyChevrons.get(chevronIndex++).setVisible(false);
+        }
     }
 
     void clearAbility() {
@@ -477,130 +584,132 @@ public class GameHUD extends Stage {
                 Current.player().addShards(-data.shardsNeeded);
                 ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
                 AdventureQuestController.instance().updateItemUsed(data);
-            });
-            button.setStyle(Controls.getSkin().get("menu", TextButton.TextButtonStyle.class));
+            }, "menu");
             abilityButtonMap.add(button);
         }
     }
 
-    private Pair<FileHandle, Music> audio = null;
-
-    public void switchAudio() {
+    public void updateBGM() {
         if (MapStage.getInstance().isInMap()) {
-            pauseMusic();
-            playAudio();
+
+            switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
+                case "capital":
+                case "town":
+                    changeBGM(MusicPlaylist.TOWN);
+                    break;
+                case "dungeon":
+                case "cave":
+                    changeBGM(MusicPlaylist.CAVE);
+                    break;
+                case "castle":
+                    changeBGM(MusicPlaylist.CASTLE);
+                    break;
+                default:
+                    break;
+            }
         }
+        else
+            switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
+                case "green":
+                    changeBGM(MusicPlaylist.GREEN);
+                    break;
+                case "red":
+                    changeBGM(MusicPlaylist.RED);
+                    break;
+                case "blue":
+                    changeBGM(MusicPlaylist.BLUE);
+                    break;
+                case "black":
+                    changeBGM(MusicPlaylist.BLACK);
+                    break;
+                case "white":
+                    changeBGM(MusicPlaylist.WHITE);
+                    break;
+                case "waste":
+                    changeBGM(MusicPlaylist.COLORLESS);
+                    break;
+                default:
+                    break;
+            }
     }
 
-    public void playAudio() {
-        switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
-            case "capital":
-            case "town":
-                setAudio(MusicPlaylist.TOWN);
-                break;
-            case "dungeon":
-            case "cave":
-                setAudio(MusicPlaylist.CAVE);
-                break;
-            case "castle":
-                setAudio(MusicPlaylist.CASTLE);
-                break;
-            default:
-                break;
+    private static final EnumSet<MusicPlaylist> PLAYLIST_OVERWORLD = EnumSet.of(MusicPlaylist.WHITE, MusicPlaylist.BLUE, MusicPlaylist.BLACK, MusicPlaylist.RED, MusicPlaylist.GREEN, MusicPlaylist.COLORLESS);
+
+    void changeBGM(MusicPlaylist playlist) {
+        MusicPlaylist currentPlaylist = SoundSystem.instance.getCurrentPlaylist();
+        if (playlist == currentPlaylist) {
+            return;
         }
-        if (audio != null) {
-            audio.getRight().setLooping(true);
-            audio.getRight().play();
-            audio.getRight().setVolume(FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC) / 100f);
+        //If we're going from an interior to an exterior or vice versa, skip the fade out.
+        if(PLAYLIST_OVERWORLD.contains(playlist) != PLAYLIST_OVERWORLD.contains(currentPlaylist)) {
+            if(SoundSystem.instance.getShelvedPlaylist() == playlist)
+                fadeTransition = 0.2f; // Resuming from the middle - do a little bit of fade in to reduce the abruptness.
+            else
+                fadeTransition = 1f; // Playing from the start, no fade needed.
+            SoundSystem.instance.setBackgroundMusic(playlist, true);
+            fadeAudio(fadeTransition * fadeDialog);
+            targetPlaylist = null;
         }
+        else //Otherwise, fade from one to the other.
+            targetPlaylist = playlist;
     }
+
+    //Fade for transitioning between playlists.
+    MusicPlaylist targetPlaylist = null;
+    float fadeTransition = 1f;
+
+    //Fade for dimming background music while a character with dialog is talking.
+    float fadeDialog = 1f;
+    float targetFadeDialog = 1f;
 
     public void fadeAudio(float value) {
-        if (audio != null) {
-            audio.getRight().setVolume((FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_MUSIC) * value) / 100f);
-        }
-    }
-
-    public boolean audioIsPlaying() {
-        if (audio == null)
-            return false;
-        return audio.getRight().isPlaying();
+        SoundSystem.instance.fadeModifier(value);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (fade < targetfade) {
-            fade += (delta / 2);
-            if (fade > targetfade)
-                fade = targetfade;
-            fadeAudio(fade);
-        } else if (fade > targetfade) {
-            fade -= (delta / 2);
-            if (fade < targetfade)
-                fade = targetfade;
-            fadeAudio(fade);
+
+        updateBGM();
+
+        updateAudioFades(delta);
+    }
+
+    private void updateAudioFades(float delta) {
+        boolean fadeChanged = false;
+
+        //If the targetPlaylist is set, we'll fade out the BGM, switch over, and fade back in.
+        if (targetPlaylist != null) {
+            fadeTransition -= delta * 1.5f;
+            if (fadeTransition < -0.3) {
+                SoundSystem.instance.setBackgroundMusic(targetPlaylist, true);
+                targetPlaylist = null;
+            }
+            fadeChanged = true;
+        }
+        else if(fadeTransition < 1f) {
+            fadeTransition = Math.min(1f, Math.max(fadeTransition + delta * 1.5f, 0.2f));
+            fadeChanged = true;
+        }
+
+        if (fadeDialog < targetFadeDialog) {
+            fadeDialog = Math.min(fadeDialog + delta * 0.5f, targetFadeDialog);
+            fadeChanged = true;
+        } else if (fadeDialog > targetFadeDialog) {
+            fadeDialog = Math.max(fadeDialog - delta * 0.5f, targetFadeDialog);
+            fadeChanged = true;
+        }
+        if(fadeChanged) {
+            fadeAudio(Math.max(0f, fadeTransition) * fadeDialog);
         }
     }
 
-    float fade = 1f;
-    float targetfade = 1f;
-
     public void fadeIn() {
-        targetfade = 1f;
+        targetFadeDialog = 1f;
     }
 
     public void fadeOut() {
-        targetfade = 0.1f;
-    }
-
-    public void stopAudio() {
-        if (audio != null) {
-            audio.getRight().stop();
-        }
-    }
-
-    public void pauseMusic() {
-        if (audio != null) {
-            audio.getRight().pause();
-        }
-        SoundSystem.instance.pause();
-    }
-
-    public void unloadAudio() {
-        if (audio != null) {
-            audio.getRight().setOnCompletionListener(null);
-            audio.getRight().stop();
-            Forge.getAssets().manager().unload(audio.getLeft().path());
-        }
-        audio = null;
-        currentAudioPlaylist = null;
-    }
-
-    private MusicPlaylist currentAudioPlaylist = null;
-
-    private void setAudio(MusicPlaylist playlist) {
-        if (playlist.equals(currentAudioPlaylist))
-            return;
-        //System.out.println("Playlist: "+playlist);
-        unloadAudio();
-        //System.out.println("Playlist: "+playlist);
-        audio = getMusic(playlist);
-    }
-
-    private Pair<FileHandle, Music> getMusic(MusicPlaylist playlist) {
-        String filename = playlist.getNewRandomFilename();
-        if (filename == null)
-            return null;
-        FileHandle file = Gdx.files.absolute(filename);
-        Music music = Forge.getAssets().getMusic(file);
-        if (music != null) {
-            currentAudioPlaylist = playlist;
-            return Pair.of(file, music);
-        } else {
-            currentAudioPlaylist = null;
-            return null;
-        }
+        targetFadeDialog = 0.1f;
     }
 
     private void openDeck() {
@@ -681,6 +790,7 @@ public class GameHUD extends Stage {
     }
 
     private void exitDungeonCallback() {
+        MapStage.getInstance().onBeginLeavingDungeon();
         hideDialog(true);
     }
 
@@ -715,12 +825,13 @@ public class GameHUD extends Stage {
     public void showHideMap(boolean visible) {
         transluscent = !visible;
         setAlpha(mapGroup, visible);
+        mapGroup.setVisible(visible);
         setAlpha(hudGroup, visible);
         setAlpha(menuGroup, visible);
         setAlpha(avatarGroup, visible);
 
-        setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), "[%120][+ExitToWorldMap]", "\uFF0F");
-        setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), "[%120][+Bookmark]", "\uFF0F");
+        setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), "[%120][+ExitToWorldMap]", "\u2613");
+        setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), "[%120][+Bookmark]", "\u2613");
 
         for (TextraButton button : abilityButtonMap) {
             setAlpha(button, visible);
@@ -754,8 +865,10 @@ public class GameHUD extends Stage {
         if (hide) {
             hudGroup.addAction(Actions.fadeOut(0.5f));
             menuGroup.addAction(Actions.fadeOut(0.5f));
-            if (!MapStage.getInstance().isInMap())
+            if (!MapStage.getInstance().isInMap()) {
                 mapGroup.addAction(Actions.fadeOut(0.5f));
+                mapGroup.addAction(Actions.visible(false));
+            }
             if (MapStage.getInstance().isInMap())
                 avatarGroup.addAction(Actions.alpha(0.4f, 0.5f));
             hidden = true;
@@ -764,8 +877,10 @@ public class GameHUD extends Stage {
             avatarGroup.addAction(Actions.alpha(alpha, 0.5f));
             hudGroup.addAction(Actions.alpha(alpha, 0.5f));
             menuGroup.addAction(Actions.alpha(alpha, 0.5f));
-            if (!MapStage.getInstance().isInMap())
+            if (!MapStage.getInstance().isInMap()) {
                 mapGroup.addAction(Actions.fadeIn(0.5f));
+                mapGroup.addAction(Actions.visible(true));
+            }
             hidden = false;
         }
     }
@@ -774,6 +889,7 @@ public class GameHUD extends Stage {
         console.toggle();
         if (console.isVisible()) {
             clearAbility();
+            console.setZIndex(ui.getChildren().size);
         } else {
             updateAbility();
         }
@@ -782,6 +898,12 @@ public class GameHUD extends Stage {
     @Override
     public boolean keyUp(int keycode) {
         ui.pressUp(keycode);
+    
+        Button pressedButton = ui.buttonPressed(keycode);
+        if (pressedButton != null) {
+            pressedButton.fire(eventTouchUp);
+        }
+
         return super.keyUp(keycode);
     }
 
@@ -795,16 +917,17 @@ public class GameHUD extends Stage {
             toggleConsole();
             return true;
         }
-        if (keycode == Input.Keys.BACK) {
+        if (KeyBinding.Back.isPressed(keycode)) {
             if (console.isVisible()) {
                 toggleConsole();
+                return true;
             }
         }
         if (console.isVisible())
             return true;
         Button pressedButton = ui.buttonPressed(keycode);
         if (pressedButton != null) {
-            performTouch(pressedButton);
+            pressedButton.fire(eventTouchDown);
         }
         return super.keyDown(keycode);
     }
@@ -863,7 +986,9 @@ public class GameHUD extends Stage {
         dialog.show(this, Actions.show());
         dialog.setPosition((this.getWidth() - dialog.getWidth()) / 2, (this.getHeight() - dialog.getHeight()) / 2);
         dialogOnlyInput = true;
-        if (Forge.hasGamepad() && !dialogButtonMap.isEmpty())
+        gameStage.hudIsShowingDialog(true);
+        MapStage.getInstance().hudIsShowingDialog(true);
+        if (Forge.hasExternalInput() && !dialogButtonMap.isEmpty())
             this.setKeyboardFocus(dialogButtonMap.first());
     }
 
@@ -873,14 +998,17 @@ public class GameHUD extends Stage {
             @Override
             public boolean act(float v) {
                 if (exitDungeon) {
-                    MapStage.getInstance().exitDungeon(false);
-                    setDisabled(exitToWorldMapActor, true, "[%120][+ExitToWorldMap]", "\uFF0F");
-                    setDisabled(bookmarkActor, true, "[%120][+Bookmark]", "\uFF0F");
+                    MapStage.getInstance().exitDungeon(false, false);
+                    setDisabled(exitToWorldMapActor, true, "[%120][+ExitToWorldMap]", "\u2613");
+                    setDisabled(bookmarkActor, true, "[%120][+Bookmark]", "\u2613");
                 }
                 return true;
             }
         }));
+
         dialogOnlyInput = false;
+        gameStage.hudIsShowingDialog(false);
+        MapStage.getInstance().hudIsShowingDialog(false);
     }
 
     private void selectNextDialogButton() {
@@ -939,37 +1067,6 @@ public class GameHUD extends Stage {
             else if (button == 0)
                 setHUDOpacity(!transluscent);
             super.tap(event, x, y, count, button);
-        }
-    }
-
-    public void updateMusic() {
-        switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
-            case "green":
-                changeBGM(MusicPlaylist.GREEN);
-                break;
-            case "red":
-                changeBGM(MusicPlaylist.RED);
-                break;
-            case "blue":
-                changeBGM(MusicPlaylist.BLUE);
-                break;
-            case "black":
-                changeBGM(MusicPlaylist.BLACK);
-                break;
-            case "white":
-                changeBGM(MusicPlaylist.WHITE);
-                break;
-            case "waste":
-                changeBGM(MusicPlaylist.COLORLESS);
-                break;
-            default:
-                break;
-        }
-    }
-
-    void changeBGM(MusicPlaylist playlist) {
-        if (!audioIsPlaying() && !playlist.equals(SoundSystem.instance.getCurrentPlaylist())) {
-            SoundSystem.instance.setBackgroundMusic(playlist);
         }
     }
 

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Sly Cooper
+Title=Sly Cooper
+Icon=Sly Cooper.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/wekys_-_MID_Golgari_Food_(Modern,_#1216417).dck
+Deck Type=constructed
+
+[Main]
+3 Street Wraith
+3 Ravenous Squirrel
+3 Feasting Troll King
+3 Willow Geist
+4 Ovalchase Daredevil
+4 Cauldron Familiar
+4 Asmoranomardicadaistinaculdacar
+1 Shadowspear
+4 The Underworld Cookbook
+4 Witch's Oven
+1 Bone Shards
+1 Life from the Loam
+3 Finale of Devastation
+4 Urza's Saga
+1 Yavimaya, Cradle of Growth
+1 Bloodstained Mire
+1 Swamp
+1 Nurturing Peatland
+1 Forest
+2 Darkbore Pathway
+3 Overgrown Tomb
+4 Verdant Catacombs
+4 Blooming Marsh
+[Sideboard]
+1 Assassin's Trophy
+1 Pithing Needle
+1 Bone Shards
+1 Soul-Guide Lantern
+1 Witherbloom Command
+1 Scavenging Ooze
+2 Trail of Crumbs
+2 Void Mirror
+2 Abrupt Decay
+3 Thoughtseize

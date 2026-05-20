@@ -2,7 +2,6 @@
 Code=DMU
 Date=2022-09-09
 Name=Dominaria United
-Code2=DMU
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:fromsheet("DMU cards"), 3 Uncommon:fromSheet("DMU cards"), 1 RareMythic:fromSheet("DMU cards"), 1 fromSheet("DMU lands")
@@ -462,23 +461,23 @@ ScryfallCode=DMU
 436 M Sheoldred, the Apocalypse @Richard Whitters
 
 [rebalanced]
-A1 M A-Karn, Living Legacy @Chris Rahn
-A138 C A-Meria's Outrider @Lius Lasahido
-A141 R A-Radha's Firebrand @Ângelo Bortolini
-A145 U A-Sprouting Goblin @Uriah Voth
-A169 R A-Llanowar Greenwidow @Jokubas Uogintas
-A170 R A-Llanowar Loamspeaker @Zara Alfonso
-A176 C A-Scout the Wilderness @A. M. Sartor
-A181 C A-Sunbathing Rootwalla @Campbell White
-A207 U A-Nael, Avizoa Aeronaut @Miguel Mercado
-A211 U A-Radha, Coalition Warlord @Randy Vargas
-A217 U A-Rulik Mons, Warren Chief @Tuan Duong Chu
-A220 M A-Soul of Windgrace @Liiga Smilshkalne
-A222 U A-Tatyova, Steward of Tides @Howard Lyon
-A225 U A-Uurg, Spawn of Turg @Nicholas Gregory
-A227 U A-Zar Ojanen, Scion of Efrava @Justine Cruz
-A259 R A-Thran Portal @Sarah Finnigan
-A286 R A-Briar Hydra @Caio Monteiro
+A-1 M A-Karn, Living Legacy @Chris Rahn
+A-138 C A-Meria's Outrider @Lius Lasahido
+A-141 R A-Radha's Firebrand @Ângelo Bortolini
+A-145 U A-Sprouting Goblin @Uriah Voth
+A-169 R A-Llanowar Greenwidow @Jokubas Uogintas
+A-170 R A-Llanowar Loamspeaker @Zara Alfonso
+A-176 C A-Scout the Wilderness @A. M. Sartor
+A-181 C A-Sunbathing Rootwalla @Campbell White
+A-207 U A-Nael, Avizoa Aeronaut @Miguel Mercado
+A-211 U A-Radha, Coalition Warlord @Randy Vargas
+A-217 U A-Rulik Mons, Warren Chief @Tuan Duong Chu
+A-220 M A-Soul of Windgrace @Liiga Smilshkalne
+A-222 U A-Tatyova, Steward of Tides @Howard Lyon
+A-225 U A-Uurg, Spawn of Turg @Nicholas Gregory
+A-227 U A-Zar Ojanen, Scion of Efrava @Justine Cruz
+A-259 R A-Thran Portal @Sarah Finnigan
+A-286 R A-Briar Hydra @Caio Monteiro
 
 [lands]
 2 Plains|DMU|1
@@ -503,15 +502,31 @@ A286 R A-Briar Hydra @Caio Monteiro
 1 Forest|DMU|4
 
 [tokens]
+1 w_4_4_angel_flying_vigilance @Winona Nelson
 2 w_1_1_bird_flying @Allen Douglas
+3 w_2_2_knight_pro_red @Matt Stewart
 4 w_1_1_soldier @Justine Cruz
+5 u_1_1_merfolk @PINDURSKI
 6 b_1_1_bird_flying_noblock @Allen Douglas
+7 b_1_1_insect_flying @Mila Pesic
 8 b_2_2_phyrexian @David Auden Nash
+9 b_2_2_zombie @Antonio José Manzanedo
 10 r_4_4_dragon_flying @Alexander Ostrowski
 11 r_2_1_elemental_trample_haste @Tuan Duong Chu
 12 r_1_1_goblin @Néstor Ossandón Leal
+13 kobolds_of_kher_keep @Paolo Parente
 14 r_1_1_monk_prowess @Irina Nordsol
+15 g_3_3_badger @Tuan Duong Chu
 16 g_3_3_beast @Eric Deschamps
+17 g_2_2_cat_warrior_forestwalk @Michael Sutfin
 18 g_1_1_saproling @Sam White
+19 g_4_4_wurm @Andrew Mar
+20 rgw_1_1_sand_warrior @Piotr Foksowicz
+21 stangg_twin @Randy Vargas
 22 ornithopter @Fariba Khamseh
 23 c_a_powerstone @David Auden Nash
+24 c_a_treasure_sac @Alayna Danner
+
+[other]
+25 emblem_ajani_sleeper_agent @Matt Stewart
+26 emblem_jaya_fiery_negotiator @Marta Nael

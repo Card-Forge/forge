@@ -1,0 +1,8 @@
+Name:Seymour Flux
+ManaCost:4 B
+Types:Legendary Creature Spirit Avatar
+PT:5/5
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, you may pay 1 life. If you do, draw a card and put a +1/+1 counter on CARDNAME.
+SVar:TrigDraw:AB$ Draw | Cost$ PayLife<1> | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:At the beginning of your upkeep, you may pay 1 life. If you do, draw a card and put a +1/+1 counter on Seymour Flux.

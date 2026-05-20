@@ -1,0 +1,10 @@
+Name:Azula, Cunning Usurper
+ManaCost:2 U B B
+Types:Legendary Creature Human Noble Rogue
+PT:4/4
+K:Firebending:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When NICKNAME enters, target opponent exiles a nontoken creature they control, then they exile a nonland card from their graveyard.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Mandatory$ True | ChangeType$ Creature.!token | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | Chooser$ Targeted | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ Targeted | ChangeType$ Card.nonLand | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | Mandatory$ True
+S:Mode$ Continuous | Affected$ Card.ExiledWithSource | Condition$ PlayerTurn | MayPlay$ True | MayPlayWithFlash$ True | MayPlayIgnoreType$ True | EffectZone$ Battlefield | AffectedZone$ Exile | Description$ During your turn, you may cast cards exiled with NICKNAME and you may cast them as though they had flash. Mana of any type can be spent to cast those spells.
+Oracle:Firebending 2 (Whenever this creature attacks, add {R}{R}. This mana lasts until end of combat.)\nWhen Azula enters, target opponent exiles a nontoken creature they control, then they exile a nonland card from their graveyard.\nDuring your turn, you may cast cards exiled with Azula and you may cast them as though they had flash. Mana of any type can be spent to cast those spells.

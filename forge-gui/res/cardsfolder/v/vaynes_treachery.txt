@@ -1,0 +1,8 @@
+Name:Vayne's Treachery
+ManaCost:1 B
+Types:Instant
+K:Kicker:Sac<1/Creature;Artifact/artifact or creature>
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | StackDescription$ REP Target creature_{c:Targeted} | SpellDescription$ Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -6/-6 until end of turn instead.
+SVar:X:Count$Kicked.6.2
+DeckHas:Ability$Sacrifice
+Oracle:Kicker—Sacrifice an artifact or creature. (You may sacrifice an artifact or creature in addition to any other costs as you cast this spell.)\nTarget creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -6/-6 until end of turn instead.

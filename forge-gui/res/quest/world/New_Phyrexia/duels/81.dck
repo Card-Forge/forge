@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Selesnya-precon
+Title=Selesnya-precon
+Icon=Selesnya-precon.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/GP_Lyon_-_LCQ_Winners/Marijn_Lybaert_-_Infect_Aggro_(Modern,_#40169).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+4 Plague Stinger
+2 Apostle's Blessing
+2 Giant Growth
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+4 Rancor
+2 Breeding Pool
+2 Forest
+4 Inkmoth Nexus
+4 Misty Rainforest
+2 Overgrown Tomb
+2 Pendelhaven
+4 Verdant Catacombs
+[Sideboard]
+3 Dismember
+1 Dispel
+1 Hurkyl's Recall
+2 Inquisition of Kozilek
+4 Nature's Claim
+1 Spell Pierce
+3 Thoughtseize

@@ -1,0 +1,41 @@
+falcon.png
+size: 70,48
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 0,0
+  size: 16,16
+Idle 
+  xy: 14,0
+  size: 14,16
+Walk
+  xy: 0,16
+  size: 14,16
+Walk
+  xy: 14,16
+  size: 14,16
+Walk
+  xy: 28,16
+  size: 14,16
+Walk
+  xy: 42,16
+  size: 14,16
+Walk
+  xy: 56,16
+  size: 14,16
+Walk
+  xy: 0,32
+  size: 14,16
+Walk
+  xy: 14,32
+  size: 14,16
+Walk
+  xy: 28,32
+  size: 14,16
+Walk
+  xy: 42,32
+  size: 14,16
+Walk
+  xy: 56,32
+  size: 14,16

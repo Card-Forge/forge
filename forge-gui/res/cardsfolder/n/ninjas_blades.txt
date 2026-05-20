@@ -1,0 +1,14 @@
+Name:Ninja's Blades
+ManaCost:2 B
+Types:Artifact Equipment
+K:Job select
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddType$ Ninja | AddTrigger$ TrigDamageDone | Description$ Equipped creature gets +1/+1, is a Ninja in addition to its other types, and has "Whenever this creature deals combat damage to a player, draw a card, then discard a card. That player loses life equal to the discarded card's mana value."
+SVar:TrigDamageDone:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card, then discard a card. That player loses life equal to the discarded card's mana value.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ TriggeredTarget | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Equip:2:Flavor Mutsunokami
+SVar:X:Remembered$CardManaCost
+DeckHas:Ability$Token & Type$Ninja
+Oracle:Job select\nEquipped creature gets +1/+1, is a Ninja in addition to its other types, and has "Whenever this creature deals combat damage to a player, draw a card, then discard a card. That player loses life equal to the discarded card's mana value."\nMutsunokami — Equip {2}

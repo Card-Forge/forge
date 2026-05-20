@@ -6,17 +6,14 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class StaticAbilityTurnPhaseReversed {
-    static String TURN_MODE = "TurnReversed";
-    static String PHASE_MODE = "PhaseReversed";
-
     public static boolean isTurnReversed(Player player) {
-        return anyTurnPhaseReversed(player, TURN_MODE);
+        return anyTurnPhaseReversed(player, StaticAbilityMode.TurnReversed);
     }
     public static boolean isPhaseReversed(Player player) {
-        return anyTurnPhaseReversed(player, PHASE_MODE);
+        return anyTurnPhaseReversed(player, StaticAbilityMode.PhaseReversed);
     }
 
-    protected static boolean anyTurnPhaseReversed(Player player, final String mode)
+    protected static boolean anyTurnPhaseReversed(Player player, final StaticAbilityMode mode)
     {
         boolean result = false;
         final Game game = player.getGame();

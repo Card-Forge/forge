@@ -1,0 +1,13 @@
+Name:Urianger Augurelt
+ManaCost:W U
+Types:Legendary Creature Elf Advisor
+PT:1/3
+T:Mode$ LandPlayed | Origin$ Exile | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you play a land from exile or cast a spell from exile, you gain 2 life.
+T:Mode$ SpellCast | ValidCard$ Card.wasCastFromExile | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | Secondary$ True | TriggerDescription$ Whenever you play a land from exile or cast a spell from exile, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+A:AB$ Dig | PrecostDesc$ Draw Arcanum | Cost$ T | DigNum$ 1 | DestinationZone$ Exile | DestinationZone2$ Library | LibraryPosition2$ 0 | Optional$ True | ExileFaceDown$ True | WithMayLook$ True | SpellDescription$ Look at the top card of your library. You may exile it face down.
+A:AB$ Effect | PrecostDesc$ Play Arcanum | Cost$ T | StaticAbilities$ SMayPlay,SReduceCost | SpellDescription$ Until end of turn, you may play cards exiled with CARDNAME. Spells you cast this way cost {2} less to cast.
+SVar:SMayPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.ExiledWithEffectSource | AffectedZone$ Exile | Description$ Until end of turn, you may play cards exiled with EFFECTSOURCE. Spells you cast this way cost {2} less to cast.
+SVar:SReduceCost:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Spell.MayPlaySource | Activator$ You | Amount$ 2 | Secondary$ True | Description$ Until end of turn, you may play cards exiled with EFFECTSOURCE. Spells you cast this way cost {2} less to cast.
+DeckHints:Keyword$Cascade
+Oracle:Whenever you play a land from exile or cast a spell from exile, you gain 2 life.\nDraw Arcanum — {T}: Look at the top card of your library. You may exile it face down.\nPlay Arcanum — {T}: Until end of turn, you may play cards exiled with Urianger Augurelt. Spells you cast this way cost {2} less to cast.

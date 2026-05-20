@@ -1,0 +1,11 @@
+Name:Sage's Nouliths
+ManaCost:1 U
+Types:Artifact Equipment
+K:Job select
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddType$ Cleric | AddTrigger$ TrigAttack | AddSVar$ AE | Description$ Equipped creature gets +1/+0, has "Whenever this creature attacks, untap target attacking creature," and is a Cleric in addition to its other types.
+SVar:TrigAttack:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever this creature attacks, untap target attacking creature.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature
+K:Equip:3:Flavor Hagneia
+SVar:AE:SVar:HasAttackEffect:TRUE
+DeckHas:Type$Cleric
+Oracle:Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)\nEquipped creature gets +1/+0, has "Whenever this creature attacks, untap target attacking creature," and is a Cleric in addition to its other types.\nHagneia — Equip {3}

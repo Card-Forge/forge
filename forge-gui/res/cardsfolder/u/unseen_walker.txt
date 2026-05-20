@@ -3,5 +3,5 @@ ManaCost:1 G
 Types:Creature Dryad
 PT:1/1
 K:Landwalk:Forest
-A:AB$ Pump | Cost$ 1 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Landwalk:Forest | SpellDescription$ Target creature gains forestwalk until end of turn.
+A:AB$ Pump | Cost$ 1 G G | ValidTgts$ Creature | KW$ Landwalk:Forest | SpellDescription$ Target creature gains forestwalk until end of turn.
 Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)\n{1}{G}{G}: Target creature gains forestwalk until end of turn.

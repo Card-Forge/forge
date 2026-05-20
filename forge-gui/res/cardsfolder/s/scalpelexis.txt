@@ -8,6 +8,6 @@ SVar:TrigExile:DB$ Repeat | RepeatSubAbility$ DBExileCleanup | RepeatCheckSVar$ 
 SVar:DBExileCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBExile
 SVar:DBExile:DB$ Dig | Defined$ TriggeredTarget | DigNum$ 4 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$DifferentCardNames_Card.IsRemembered
+SVar:X:Remembered$DifferentCardNames
 SVar:Y:Count$RememberedSize
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever Scalpelexis deals combat damage to a player, that player exiles the top four cards of their library. If two or more of those cards have the same name, repeat this process.

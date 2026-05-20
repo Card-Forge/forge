@@ -1,0 +1,9 @@
+Name:Lyse Hext
+ManaCost:1 W U
+Types:Legendary Creature Human Rebel Monk
+PT:2/2
+K:Prowess
+S:Mode$ ReduceCost | ValidCard$ Card.nonCreature | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Noncreature spells you cast cost {1} less to cast.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | CheckSVar$ X | SVarCompare$ GE2 | Description$ As long as you've cast two or more noncreature spells this turn, CARDNAME has double strike.
+SVar:X:Count$ThisTurnCast_Card.nonCreature+YouCtrl
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nNoncreature spells you cast cost {1} less to cast.\nAs long as you've cast two or more noncreature spells this turn, Lyse Hext has double strike.

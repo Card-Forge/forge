@@ -1,0 +1,9 @@
+Name:Invasion Submersible
+ManaCost:2 U
+Types:Artifact Vehicle
+PT:0/0
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this Vehicle enters, return up to one other target nonland permanent to its owner's hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Permanent.nonLand+Other | TgtPrompt$ Select up to one other target nonland permanent
+A:AB$ Animate | Cost$ Waterbend<3> | Defined$ Self | Types$ Artifact,Creature | Exhaust$ True | Duration$ Permanent | SubAbility$ DBPutCounter | SpellDescription$ This Vehicle becomes an artifact creature. Put three +1/+1 counters on it.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3
+Oracle:When this Vehicle enters, return up to one other target nonland permanent to its owner's hand.\nExhaust — Waterbend {3}: This Vehicle becomes an artifact creature. Put three +1/+1 counters on it. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}. Activate each exhaust ability only once.)

@@ -1,0 +1,8 @@
+Name:Magitek Armor
+ManaCost:3 W
+Types:Artifact Vehicle
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this Vehicle enters, create a 1/1 colorless Hero creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_hero
+K:Crew:1
+Oracle:When this Vehicle enters, create a 1/1 colorless Hero creature token.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

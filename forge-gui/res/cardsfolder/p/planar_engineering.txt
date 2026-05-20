@@ -1,0 +1,7 @@
+Name:Planar Engineering
+ManaCost:3 G
+Types:Sorcery
+A:SP$ Sacrifice | Defined$ You | SacValid$ Land | Amount$ 2 | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Sacrifice two lands. Search your library for four basic land cards, put them onto the battlefield tapped, then shuffle.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | ChangeNum$ 4 | Tapped$ True | StackDescription$ None
+SVar:AIPreference:SacCost$Land.Basic+tapped
+Oracle:Sacrifice two lands. Search your library for four basic land cards, put them onto the battlefield tapped, then shuffle.

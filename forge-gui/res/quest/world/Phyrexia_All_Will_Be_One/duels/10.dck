@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Erebos
+Title=Erebos
+Icon=Erebos.jpg
+Difficulty=Medium
+Description=./Standard/Phyrexia_All_Will_Be_One/CptEstruga_-_Monored_Standard_(Standard,_#1589967).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodthirsty Adversary
+3 Feldon, Ronom Excavator
+4 Furnace Punisher
+4 Kumano Faces Kakkazan
+2 Falkenrath Pit Fighter
+2 Phoenix Chick
+4 Thundering Raiju
+4 Monastery Swiftspear
+4 Play with Fire
+4 Lightning Strike
+3 Strangle
+4 Mishra's Foundry
+16 Mountain
+2 Sokenzan, Crucible of Defiance
+[Sideboard]
+1 Strangle
+3 Chandra, Dressed to Kill
+2 Unlicensed Hearse
+3 Rebel Salvo
+3 Jaya, Fiery Negotiator
+3 Obliterating Bolt

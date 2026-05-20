@@ -1,0 +1,8 @@
+Name:Loporrit Scout
+ManaCost:2 G
+Types:Creature Rabbit Scout
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature you control enters, this creature gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
+SVar:BuffedBy:Creature
+Oracle:Whenever another creature you control enters, this creature gets +1/+1 until end of turn.

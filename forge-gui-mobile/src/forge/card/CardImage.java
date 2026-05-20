@@ -34,22 +34,23 @@ public class CardImage implements FImage {
 
     @Override
     public void draw(Graphics g, float x, float y, float w, float h) {
+        CardView cv = CardView.getCardForUi(card);
         if (image == null) { //attempt to retrieve card image if needed
             image = ImageCache.getInstance().getImage(card);
             if (image == null) {
                 if (!Forge.enableUIMask.equals("Off")) //render this if mask is still loading
-                    CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), false, x, y, w, h, CardStackPosition.Top, Forge.enableUIMask.equals("Art"), true);
+                    CardImageRenderer.drawCardImage(g, cv, false, x, y, w, h, CardStackPosition.Top, Forge.enableUIMask.equals("Art"), true);
 
                 return; //can't draw anything if can't be loaded yet
             }
         }
 
         if (image == ImageCache.getInstance().getDefaultImage() || Forge.enableUIMask.equals("Art")) {
-            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), false, x, y, w, h, CardStackPosition.Top, true, true);
+            CardImageRenderer.drawCardImage(g, cv, false, x, y, w, h, CardStackPosition.Top, true, true);
         } else {
             if (Forge.enableUIMask.equals("Full")) {
-                if (image.toString().contains(".fullborder."))
-                    g.drawCardRoundRect(image, null, x, y, w, h, false, false);
+                if (ImageCache.getInstance().isFullBorder(image))
+                    g.drawCardRoundRect(image, null, x, y, w, h, false, false, false);
                 else {
                     float radius = (h - w) / 8;
                     g.drawborderImage(ImageCache.getInstance().borderColor(image), x, y, w, h);

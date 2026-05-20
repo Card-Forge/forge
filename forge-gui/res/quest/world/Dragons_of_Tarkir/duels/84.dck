@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Shaitan
+Title=Shaitan
+Icon=Shaitan.jpg
+Difficulty=Hard
+Description=../Modern/Dragons_of_Tarkir/Modern_Daily_#8482891/Kallio_-_GR_Aggro_(Modern,_#299496).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+4 Experiment One
+3 Ghor-Clan Rampager
+4 Goblin Guide
+4 Kird Ape
+4 Monastery Swiftspear
+4 Wild Nacatl
+2 Relic of Progenitus
+4 Atarka's Command
+4 Lightning Bolt
+4 Path to Exile
+3 Bloodstained Mire
+1 Forest
+1 Mountain
+1 Plains
+1 Sacred Foundry
+3 Stomping Ground
+1 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+4 Destructive Revelry
+4 Leyline of Sanctity
+3 Molten Rain
+3 Rending Volley

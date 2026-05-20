@@ -1,0 +1,12 @@
+Name:Omega, Heartless Evolution
+ManaCost:5 G U
+Types:Legendary Artifact Creature Robot
+PT:8/8
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Wave Cannon — When NICKNAME enters, for each opponent, tap up to one target nonland permanent that opponent controls. Put X stun counters on each of those permanents and you gain X life, where X is the number of nonbasic lands you control. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigTap:DB$ Tap | ValidTgts$ Card.nonLand+OppCtrl | TgtPrompt$ Choose one target nonland permanent that each opponent controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
+SVar:OneEach:PlayerCountOpponents$Amount
+SVar:X:Count$Valid Land.nonBasic+YouCtrl
+SVar:PlayMain1:TRUE
+Oracle:Wave Cannon — When Omega enters, for each opponent, tap up to one target nonland permanent that opponent controls. Put X stun counters on each of those permanents and you gain X life, where X is the number of nonbasic lands you control. (If a permanent with a stun counter would become untapped, remove one from it instead.)

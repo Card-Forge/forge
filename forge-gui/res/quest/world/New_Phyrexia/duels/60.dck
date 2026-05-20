@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Green Lantern
+Title=Green Lantern
+Icon=Green Lantern.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/Modern_Turniers_vom_Dienstag_dem_18.02.2014/Filler_Michael_-_Faeries_(Modern,_#66830).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+4 Spellstutter Sprite
+2 Agony Warp
+4 Cryptic Command
+1 Doom Blade
+3 Mana Leak
+1 Smother
+3 Spell Snare
+2 Inquisition of Kozilek
+2 Thoughtseize
+4 Bitterblossom
+4 Creeping Tar Pit
+4 Darkslick Shores
+4 Island
+4 Mutavault
+4 River of Tears
+4 Secluded Glen
+2 Tectonic Edge
+[Sideboard]
+2 Batterskull
+4 Deathmark
+3 Engineered Explosives
+2 Jace Beleren
+1 Sower of Temptation
+2 Vendilion Clique

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Simic-precon
+Title=Simic-precon
+Icon=Simic-precon.jpg
+Difficulty=Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Devin_Saunders_-_Mono-White_Hammer_(Modern,_#1424482)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Ornithopter
+4 Stoneforge Mystic
+4 Esper Sentinel
+4 Puresteel Paladin
+4 Memnite
+1 Sword of Fire and Ice
+1 Nettlecyst
+1 Cranial Plating
+1 Shadowspear
+1 Paradise Mantle
+2 Springleaf Drum
+4 Colossus Hammer
+3 Steelshaper's Gift
+4 Sigarda's Aid
+4 Urza's Saga
+1 Eiganjo, Seat of the Empire
+3 Inkmoth Nexus
+4 Horizon Canopy
+10 Snow-Covered Plains
+[Sideboard]
+1 Pithing Needle
+1 Relic of Progenitus
+2 On Thin Ice
+2 March of Otherworldly Light
+3 Hushbringer
+3 Drannith Magistrate
+3 Mana Tithe

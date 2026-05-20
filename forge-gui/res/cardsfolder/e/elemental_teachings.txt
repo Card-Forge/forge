@@ -1,0 +1,8 @@
+Name:Elemental Teachings
+ManaCost:4 G
+Types:Instant Lesson
+A:SP$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Land | ChangeNum$ 4 | RememberChanged$ True | Reveal$ True | Shuffle$ False | DifferentNames$ True | StackDescription$ SpellDescription | SubAbility$ DBChangeZone1 | SpellDescription$ Search your library for up to four land cards with different names and reveal them. An opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest onto the battlefield tapped, then shuffle.
+SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Card.IsRemembered | Chooser$ Opponent | ChangeNum$ 2 | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select two cards to be put into the graveyard of CARDNAME's controller | Shuffle$ False | SubAbility$ DBChangeZone2 | StackDescription$ None
+SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Card.IsRemembered | ChangeNum$ 2 | Mandatory$ True | NoLooking$ True | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Search your library for up to four land cards with different names and reveal them. An opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest onto the battlefield tapped, then shuffle.

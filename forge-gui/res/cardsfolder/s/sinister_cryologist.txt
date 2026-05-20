@@ -1,0 +1,8 @@
+Name:Sinister Cryologist
+ManaCost:2 U
+Types:Creature Jellyfish Wizard
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature enters, target creature an opponent controls gets -3/-0 until end of turn.
+SVar:TrigPump:DB$ Pump | NumAtt$ -3 | IsCurse$ True | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+K:Warp:U
+Oracle:When this creature enters, target creature an opponent controls gets -3/-0 until end of turn.\nWarp {U} (You may cast this card from your hand for its warp cost. Exile this enchantment at the beginning of the next end step, then you may cast it from exile on a later turn.)

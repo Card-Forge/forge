@@ -1,0 +1,16 @@
+Name:Wan Shi Tong, Librarian
+ManaCost:X U U
+Types:Legendary Creature Bird Spirit
+PT:1/1
+K:Flash
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter1 | TriggerDescription$ When NICKNAME enters, put X +1/+1 counters on him. Then draw half X cards, rounded down.
+SVar:TrigPutCounter1:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBDraw1
+SVar:DBDraw1:DB$ Draw | NumCards$ Y
+T:Mode$ SearchedLibrary | ValidPlayer$ Player.Opponent | SearchOwnLibrary$ True | Execute$ TrigPutCounter2 | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent searches their library, put a +1/+1 counter on NICKNAME and draw a card.
+SVar:TrigPutCounter2:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw2
+SVar:DBDraw2:DB$ Draw
+SVar:X:Count$xPaid
+SVar:Y:SVar$X/HalfDown
+Oracle:Flash\nFlying, vigilance\nWhen Wan Shi Tong enters, put X +1/+1 counters on him. Then draw half X cards, rounded down.\nWhenever an opponent searches their library, put a +1/+1 counter on Wan Shi Tong and draw a card.

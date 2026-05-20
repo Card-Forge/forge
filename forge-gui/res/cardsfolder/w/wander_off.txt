@@ -1,0 +1,5 @@
+Name:Wander Off
+ManaCost:3 B
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
+Oracle:Exile target creature.

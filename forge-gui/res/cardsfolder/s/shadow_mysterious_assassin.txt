@@ -1,0 +1,10 @@
+Name:Shadow, Mysterious Assassin
+ManaCost:2 B
+Types:Legendary Creature Human Assassin
+PT:3/3
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Throw — Whenever NICKNAME deals combat damage to a player, you may sacrifice another nonland permanent. If you do, draw two cards and each opponent loses life equal to the mana value of the sacrificed permanent.
+SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Permanent.Other+nonLand/another nonland permanent> | NumCards$ 2 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X
+SVar:X:Sacrificed$CardManaCost
+Oracle:Deathtouch\nThrow — Whenever Shadow deals combat damage to a player, you may sacrifice another nonland permanent. If you do, draw two cards and each opponent loses life equal to the mana value of the sacrificed permanent.

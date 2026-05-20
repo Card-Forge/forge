@@ -4,10 +4,12 @@ Types:Legendary Planeswalker Garruk
 Loyalty:4
 A:AB$ ChooseCard | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ChoiceZone$ Hand | Choices$ Card.Creature+YouOwn | ChoiceTitle$ Choose a creature card in your hand | Mandatory$ True | SubAbility$ DBPump | StackDescription$ SpellDescription | SpellDescription$ Choose a creature card in your hand. It perpetually gets +1/+1 and perpetually gains "This spell costs {1} less to cast."
 SVar:DBPump:DB$ Pump | PumpZone$ Hand | Defined$ ChosenCard | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | staticAbilities$ ReduceCost | Duration$ Perpetual | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | staticAbilities$ ReduceCost | Duration$ Perpetual | SubAbility$ DBCleanup1 | StackDescription$ None
 SVar:ReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-A:AB$ Draft | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Spellbook$ Mosscoat Goriak,Sylvan Brushstrider,Murasa Rootgrazer,Dire Wolf Prowler,Ferocious Pup,Pestilent Wolf,Garruk's Uprising,Dawntreader Elk,Nessian Hornbeetle,Territorial Scythecat,Trufflesnout,Wary Okapi,Scurrid Colony,Barkhide Troll,Underdark Basilisk | Zone$ Battlefield | SpellDescription$ Draft a card from CARDNAME's spellbook and put it onto the battlefield.
+SVar:DBCleanup1:DB$ Cleanup | ClearChosenCard$ True
+A:AB$ Draft | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Spellbook$ Mosscoat Goriak,Sylvan Brushstrider,Murasa Rootgrazer,Dire Wolf Prowler,Ferocious Pup,Pestilent Wolf,Garruk's Uprising,Dawntreader Elk,Nessian Hornbeetle,Territorial Scythecat,Trufflesnout,Wary Okapi,Scurrid Colony,Barkhide Troll,Underdark Basilisk | RememberDrafted$ True | SubAbility$ DBPut | StackDescription$ REP Draft_{p:You} drafts & and put_and they put | SpellDescription$ Draft a card from CARDNAME's spellbook and put it onto the battlefield.
+SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ Remembered | SubAbility$ DBCleanup2 | StackDescription$ None
+SVar:DBCleanup2:DB$ Cleanup | ClearRemembered$ True
 A:AB$ PumpAll | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ Until end of turn, creatures you control get +3/+3 and gain trample.
 DeckHas:Type$Troll|Elk|Wolf|Beast|Insect|Squirrel|Boar|Basilisk|Antelope & Ability$Sacrifice|Counters|LifeGain
 Oracle:[+1]: Choose a creature card in your hand. It perpetually gets +1/+1 and perpetually gains "This spell costs {1} less to cast."\n[-1]: Draft a card from Garruk, Wrath of the Wild's spellbook and put it onto the battlefield.\n[-6]: Until end of turn, creatures you control get +3/+3 and gain trample.

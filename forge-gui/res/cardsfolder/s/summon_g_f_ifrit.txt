@@ -1,0 +1,9 @@
+Name:Summon: G.F. Ifrit
+ManaCost:2 R
+Types:Enchantment Creature Saga Demon
+PT:3/2
+K:Chapter:4:DBDiscard,DBDiscard,DBMana,DBMana
+SVar:DBDiscard:AB$ Draw | Cost$ Discard<1/Card> | CostDesc$ | SpellDescription$ You may discard a card. If you do, draw a card.
+SVar:DBMana:DB$ Mana | Produced$ R | SpellDescription$ Add {R}.
+DeckHas:Ability$Discard
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, II — You may discard a card. If you do, draw a card.\nIII, IV — Add {R}.

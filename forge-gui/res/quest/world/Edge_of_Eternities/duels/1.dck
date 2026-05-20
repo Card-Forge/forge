@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Cohen the Barbarian
+Title=Cohen the Barbarian
+Icon=Cohen the Barbarian.jpg
+Difficulty=Easy
+Description=./Standard/Edge_of_Eternities/JoarWikan_-_Esper_Pixie_(Standard,_#2579667).dck
+Deck Type=constructed
+
+[Main]
+4 Nurturing Pixie
+3 Sunpearl Kirin
+2 Cosmogrand Zenith
+2 Fear of Isolation
+1 Spyglass Siren
+3 Cryogen Relic
+4 Tragic Trajectory
+1 Stock Up
+4 Nowhere to Run
+4 Stormchaser's Talent
+3 Sheltered by Ghosts
+2 Authority of the Consuls
+2 Momentum Breaker
+2 Kaito, Bane of Nightmares
+4 Godless Shrine
+4 Watery Grave
+3 Starting Town
+2 Bleachbone Verge
+2 Concealed Courtyard
+2 Floodfarm Verge
+2 Gloomlake Verge
+2 Restless Anchorage
+1 Restless Reef
+1 Swamp
+[Sideboard]
+3 Duress
+3 Rest in Peace
+2 Annul
+2 Exorcise
+2 Long Goodbye
+2 No More Lies
+1 Negate

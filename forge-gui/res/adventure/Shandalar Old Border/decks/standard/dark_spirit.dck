@@ -1,0 +1,19 @@
+[metadata]
+Name=dark_spirit
+[Main]
+2 Lord of the Undead|PLS
+2 Phyrexian Ghoul|BRB
+2 Urborg Skeleton|INV
+2 Vampiric Tutor|6ED
+2 Withered Wretch|LGN
+2 Yawgmoth's Will|USG
+23 Swamp|LEA
+4 Animate Dead|LEA
+4 Black Knight|LEA
+4 Dark Ritual|LEA
+4 Fallen Angel|7ED
+4 Raise Dead|LEA
+4 Spirit of the Night|MIR
+
+[StartInBattle_Reference]
+1 Nether Shadow

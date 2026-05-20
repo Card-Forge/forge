@@ -56,7 +56,7 @@ public abstract class Expressions {
         } else if (comp.contains("GT")) {
             return leftSide > rightSide;
         } else if (comp.contains("NE")) {
-            return leftSide != rightSide; // not equals
+            return leftSide != rightSide;
         } else if (comp.contains("M2")) {
             return (leftSide % 2) == (rightSide % 2); // they are equal modulo 2
         }

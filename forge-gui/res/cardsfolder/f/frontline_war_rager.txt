@@ -1,0 +1,8 @@
+Name:Frontline War-Rager
+ManaCost:2 R
+Types:Creature Kavu Soldier
+PT:2/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Creature.YouCtrl+tapped | PresentCompare$ GE2 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, if you control two or more tapped creatures, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:At the beginning of your end step, if you control two or more tapped creatures, put a +1/+1 counter on this creature.

@@ -6,7 +6,7 @@
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
- <layer id="9" name="Colission" width="30" height="17">
+ <layer id="9" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AU0AosEEXFwx2M+nd4g5Hm3+EKANPVC1E=
   </data>

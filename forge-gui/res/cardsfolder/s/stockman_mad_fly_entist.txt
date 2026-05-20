@@ -1,0 +1,11 @@
+Name:Stockman, Mad Fly-entist
+ManaCost:4 U
+Types:Legendary Creature Insect Mutant Scientist
+PT:3/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When NICKNAME enters, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+K:TypeCycling:Island:2
+DeckHas:Ability$Discard
+Oracle:Flying\nWhen Stockman enters, draw a card, then discard a card.\nIslandcycling {2} ({2}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)

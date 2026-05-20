@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Tombstone
+Title=Tombstone
+Icon=Tombstone.jpg
+Difficulty=Hard
+Description=./Modern/Edge_of_Eternities/Giovanni_Rossi_-_Izzet_Control_(Modern,_#2597994).dck
+Deck Type=constructed
+
+[Main]
+3 Orcish Bowmasters
+2 Snapcaster Mage
+4 Psychic Frog
+4 Tamiyo, Inquisitive Student
+1 Subtlety
+3 Counterspell
+3 Lightning Bolt
+3 Flame of Anor
+3 Fatal Push
+3 Consult the Star Charts
+2 Spell Snare
+2 Stern Scolding
+1 Force of Negation
+1 Cling to Dust
+2 Dreams of Steel and Oil
+1 Strategic Betrayal
+1 Kaito, Bane of Nightmares
+2 Steam Vents
+2 Undercity Sewers
+2 Watery Grave
+4 Scalding Tarn
+4 Polluted Delta
+1 Misty Rainforest
+1 Darkslick Shores
+1 Thundering Falls
+1 Spirebluff Canal
+1 Gloomlake Verge
+1 Island
+1 Swamp
+[Sideboard]
+2 Pyroclasm
+1 Force of Negation
+1 Nihil Spellbomb
+1 Subtlety
+1 Sheoldred's Edict
+1 Meltdown
+1 Kaito, Bane of Nightmares
+3 Thoughtseize
+4 Consign to Memory

@@ -1,0 +1,23 @@
+Name:Balamb Garden, SeeD Academy
+ManaCost:no cost
+Types:Land Town
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ Combo G U | SpellDescription$ Add {G} or {U}.
+A:AB$ SetState | Cost$ 5 G U T | ReduceCost$ X | Defined$ Self | Mode$ Transform | AILogic$ Always | SpellDescription$ Transform this land. This ability costs {1} less to activate for each other Town you control.
+SVar:X:Count$Valid Town.YouCtrl+Other
+AlternateMode:DoubleFaced
+DeckHints:Type$Town
+Oracle:This land enters tapped.\n{T}: Add {G} or {U}.\n{5}{G}{U}, {T}: Transform this land. This ability costs {1} less to activate for each other Town you control.
+
+ALTERNATE
+
+Name:Balamb Garden, Airborne
+ManaCost:no cost
+Types:Legendary Artifact Vehicle
+PT:5/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME attacks, draw a card.
+SVar:TrigDraw:DB$ Draw
+K:Crew:1
+Oracle:Flying\nWhenever Balamb Garden attacks, draw a card.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

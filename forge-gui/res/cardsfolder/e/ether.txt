@@ -1,0 +1,8 @@
+Name:Ether
+ManaCost:3 U
+Types:Artifact
+A:AB$ Mana | Cost$ T Exile<1/CARDNAME> | Produced$ U | SubAbility$ DBTrigger | SpellDescription$ Add {U}.
+SVar:DBTrigger:DB$ DelayedTrigger | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ EffTrigCopy | SpellDescription$ When you next cast an instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+SVar:BuffedBy:Instant,Sorcery
+Oracle:{T}, Exile this artifact: Add {U}. When you next cast an instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.

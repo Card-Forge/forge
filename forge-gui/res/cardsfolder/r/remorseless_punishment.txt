@@ -2,8 +2,9 @@ Name:Remorseless Punishment
 ManaCost:3 B B
 Types:Sorcery
 A:SP$ Repeat | ValidTgts$ Opponent | RepeatSubAbility$ DBChoose | MaxRepeat$ 2 | StackDescription$ SpellDescription | SpellDescription$ Target opponent loses 5 life unless that player discards two cards or sacrifices a creature or planeswalker. Repeat this process once.
-SVar:DBChoose:DB$ GenericChoice | Defined$ ParentTarget | Choices$ Discard,Sacrifice | AILogic$ PayUnlessCost
+SVar:DBChoose:DB$ GenericChoice | Defined$ ParentTarget | Choices$ Discard,Sacrifice | FallbackAbility$ LoseLifeFallback | AILogic$ PayUnlessCost
 SVar:Discard:DB$ LoseLife | LifeAmount$ 5 | Defined$ ParentTarget | UnlessCost$ Discard<2/Card> | UnlessPayer$ ParentTarget | SpellDescription$ you lose 5 life unless you discard two cards.
 SVar:Sacrifice:DB$ LoseLife | LifeAmount$ 5 | Defined$ ParentTarget | UnlessCost$ Sac<1/Creature;Planeswalker/creature or planeswalker> | UnlessPayer$ ParentTarget | SpellDescription$ you lose 5 life unless you sacrifice a creature or planeswalker.
+SVar:LoseLifeFallback:DB$ LoseLife | Defined$ ParentTarget | LifeAmount$ 5
 SVar:AIPreference:SacCost$Creature.token
 Oracle:Target opponent loses 5 life unless that player discards two cards or sacrifices a creature or planeswalker. Repeat this process once.

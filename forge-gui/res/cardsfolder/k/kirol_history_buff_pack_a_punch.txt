@@ -1,0 +1,19 @@
+Name:Kirol, History Buff
+ManaCost:R W
+Types:Legendary Creature Vampire Cleric
+PT:2/3
+T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigPrepare | TriggerDescription$ Whenever one or more cards leave your graveyard, NICKNAME becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+AlternateMode:Prepare
+Oracle:Whenever one or more cards leave your graveyard, Kirol becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Pack a Punch
+ManaCost:1 R W
+Types:Sorcery
+A:SP$ Mill | NumCards$ 1 | Defined$ You | SubAbility$ DBPutCounter | SpellDescription$ Mill a card. Put two +1/+1 counters on target creature. It gains trample until end of turn.
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample
+DeckHas:Ability$Counters
+Oracle:Mill a card. Put two +1/+1 counters on target creature. It gains trample until end of turn.

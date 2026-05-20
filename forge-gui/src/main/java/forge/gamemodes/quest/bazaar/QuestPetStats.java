@@ -8,6 +8,7 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 import forge.card.CardEdition;
 import forge.card.CardRules;
+import forge.item.IPaperCard;
 import forge.item.PaperToken;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
@@ -59,7 +60,7 @@ public class QuestPetStats {
         if (null == petCard) {
             List<String> cardLines = FileUtil.readFile(new File(ForgeConstants.BAZAAR_DIR, cardFile));
             CardRules rules = CardRules.fromScript(cardLines);
-            petCard = new PaperToken(rules, CardEdition.UNKNOWN, picture);
+            petCard = new PaperToken(rules, CardEdition.UNKNOWN, picture, "", IPaperCard.NO_ARTIST_NAME);
         }
         return petCard;
     }

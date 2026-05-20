@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Hercules
+Title=Hercules
+Icon=Hercules.jpg
+Difficulty=Very Hard
+Description=./Modern/Zendikar_Rising/CRYPTIC_C4SSIE_-_Sultai_Reclamation_(Modern,_#1060227).dck
+Deck Type=constructed
+
+[Main]
+4 Uro, Titan of Nature's Wrath
+1 Fact or Fiction
+1 Drown in the Loch
+1 Cling to Dust
+1 Assassin's Trophy
+1 Abrupt Decay
+3 Archmage's Charm
+3 Cryptic Command
+3 Force of Negation
+3 Mana Leak
+4 Fatal Push
+1 Damnation
+1 Bloodchief's Thirst
+2 Thoughtseize
+3 Jace, the Mind Sculptor
+1 Flooded Strand
+1 Zagoth Triome
+1 Creeping Tar Pit
+1 Swamp
+1 Forest
+1 Island
+1 Snow-Covered Forest
+2 Snow-Covered Island
+2 Watery Grave
+2 Field of the Dead
+2 Field of Ruin
+2 Breeding Pool
+3 Mystic Sanctuary
+4 Misty Rainforest
+4 Polluted Delta
+[Sideboard]
+1 Damnation
+1 Bloodchief's Thirst
+1 Abrupt Decay
+1 Elder Gargaroth
+1 Engineered Explosives
+2 Surgical Extraction
+2 Thoughtseize
+2 Veil of Summer
+4 Aether Gust

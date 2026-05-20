@@ -27,18 +27,17 @@ public class Current {
     public static void setLatestDeck(Deck generateDeck) {
         deck=generateDeck;
     }
-    public static String generateDefeatMessage() {;
-        String message = Forge.getLocalizer().getMessage("lblYouDied", player().getName());
-        if (player().isHardorInsaneDifficulty()) {
-            ItemData itemData = player().getRandomEquippedArmor();
-            if (itemData != null) {
-                itemData.isCracked = true;
-                player().equip(itemData); //unequip...
-                InventoryScene.instance().clearItemDescription();
-                message += "\n{GRADIENT=RED;GRAY;1;1}" + itemData.name + " {ENDGRADIENT}" + Forge.getLocalizer().getMessage("lblCracked");
-            }
-        }
-        return message;
-    }
-
+	public static String generateDefeatMessage(boolean hasDied) {
+		String key = hasDied ? "lblYouDied" : "lblYouLostTheLastGame";
+		String message = Forge.getLocalizer().getMessage(key, player().getName());
+		ItemData itemData = player().getRandomEquippedItem();
+		if (itemData != null  && !(Config.instance().getSettingData().disableCrackedItems)){
+			itemData.isCracked = true;
+			player().equip(itemData); // un-equip
+			InventoryScene.instance().clearItemDescription();
+			message += "\n{GRADIENT=RED;GRAY;1;1}" + itemData.name + " {ENDGRADIENT}"
+					+ Forge.getLocalizer().getMessage("lblCracked");
+		}
+		return message;
+	}
 }

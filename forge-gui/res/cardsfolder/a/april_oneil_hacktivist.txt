@@ -1,0 +1,8 @@
+Name:April O'Neil, Hacktivist
+ManaCost:3 U
+Types:Legendary Creature Human Scientist
+PT:1/5
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, draw a card for each card type among spells you've cast this turn.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:Count$ThisTurnCast_Card.YouCtrl$CardTypes
+Oracle:At the beginning of your end step, draw a card for each card type among spells you've cast this turn.

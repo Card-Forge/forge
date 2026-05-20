@@ -1,0 +1,56 @@
+horsearabian.png
+size: 511,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none  
+Avatar        
+  xy: 38, 32
+  size: 16, 16
+Idle 
+  xy: 10,28
+  size: 47, 35  
+Idle 
+  xy: 74, 28
+  size: 47, 35 
+Idle 
+  xy: 138, 28
+  size: 47, 36 
+Idle 
+  xy: 202, 28
+  size: 47, 36 
+Walk
+  xy: 8, 156
+  size: 46, 36
+Walk
+  xy: 72, 156
+  size: 46, 36
+Walk
+  xy: 136, 156
+  size: 46, 36
+Walk
+  xy: 200, 156
+  size: 46, 36
+Walk
+  xy: 264, 156
+  size: 46, 36
+Walk
+  xy: 328, 156
+  size: 46, 36
+Walk
+  xy: 392, 156
+  size: 46, 36
+Walk
+  xy: 456, 156
+  size: 46, 36
+Attack 
+  xy: 8, 192
+  size: 64, 64 
+Attack 
+  xy: 64, 192
+  size: 64, 64 
+Attack 
+  xy: 128, 192
+  size: 64, 64 
+Attack 
+  xy: 192, 192
+  size: 64, 64       

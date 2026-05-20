@@ -1,0 +1,10 @@
+Name:Rumble Arena
+ManaCost:no cost
+Types:Land
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When this land enters, scry 1. (Look at the top card of your library. You may put it on the bottom.)
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHas:Ability$Mana.Colorless
+Oracle:Vigilance\nWhen this land enters, scry 1. (Look at the top card of your library. You may put it on the bottom.)\n{T}: Add {C}.\n{1}, {T}: Add one mana of any color.

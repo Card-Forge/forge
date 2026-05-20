@@ -1,0 +1,10 @@
+Name:Coral Sword
+ManaCost:R
+Types:Artifact Equipment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When this Equipment enters, attach it to target creature you control. That creature gains first strike until end of turn.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ First Strike
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
+K:Equip:1
+Oracle:Flash\nWhen this Equipment enters, attach it to target creature you control. That creature gains first strike until end of turn.\nEquipped creature gets +1/+0.\nEquip {1}

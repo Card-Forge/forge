@@ -1,0 +1,9 @@
+Name:Cat-Owl
+ManaCost:3 WU
+Types:Creature Cat Bird
+PT:3/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever this creature attacks, untap target artifact or creature.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever this creature attacks, untap target artifact or creature.

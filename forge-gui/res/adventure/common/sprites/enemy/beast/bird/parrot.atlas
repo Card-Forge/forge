@@ -1,0 +1,83 @@
+parrot.png
+size: 256,288
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 208, 209
+  size: 16, 16
+Idle 
+  xy: 4, 134
+  size: 22,22
+Idle 
+  xy: 36, 134
+  size: 22,22  
+Idle 
+  xy: 68, 134
+  size: 22,22   
+Idle 
+  xy: 100, 134
+  size: 22,22  
+Idle 
+  xy: 132, 134
+  size: 22,22   
+Walk 
+  xy: 4, 162
+  size: 24, 26  
+Walk 
+  xy: 36, 162
+  size: 24, 26 
+Walk 
+  xy: 68, 162
+  size: 24, 26 
+Walk 
+  xy: 100, 162
+  size: 24, 26 
+Walk 
+  xy: 132, 162
+  size: 24, 26  
+Walk 
+  xy: 164, 162
+  size: 24, 26 
+Walk 
+  xy: 196, 162
+  size: 24, 26 
+Walk 
+  xy: 228, 162
+  size: 24, 26  
+Attack 
+  xy: 4, 78
+  size: 24, 18 
+Attack 
+  xy: 36, 78
+  size: 24, 18 
+Attack 
+  xy: 68, 78
+  size: 24, 18 
+Attack 
+  xy: 100, 78
+  size: 24, 18 
+Attack 
+  xy: 132, 78
+  size: 24, 18 
+Death
+  xy: 0, 112
+  size: 32, 16 
+Death
+  xy: 32, 112
+  size: 32, 16 
+Death
+  xy: 64, 112
+  size: 32, 16  
+Death
+  xy: 96, 112
+  size: 32, 16 
+Death
+  xy: 128, 112
+  size: 32, 16 
+Death
+  xy: 160, 112
+  size: 32, 16 
+Death
+  xy: 192, 112
+  size: 32, 16 

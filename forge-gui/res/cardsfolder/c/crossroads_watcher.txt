@@ -1,0 +1,9 @@
+Name:Crossroads Watcher
+ManaCost:2 G
+Types:Creature Kithkin Ranger
+PT:3/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature you control enters, this creature gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1
+SVar:BuffedBy:Creature
+Oracle:Trample\nWhenever another creature you control enters, this creature gets +1/+0 until end of turn.

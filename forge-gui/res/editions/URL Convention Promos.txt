@@ -7,11 +7,17 @@ ScryfallCode=PURL
 
 [cards]
 1 R Steward of Valeron @Greg Staples
-2 R Kor Skyfisher @Dan Murayama Scott
+2 R Counterspell @Pauline Voss
 3 R Bloodthrone Vampire @Steve Argyle
 4 R Merfolk Mesmerist @Jana Schirmer & Johannes Voss
 5 R Chandra's Fury @Volkan Baǵa
 7 R Stealer of Secrets @Michael C. Hayes
 8 C Aeronaut Tinkerer @Willian Murai
-9 R Relentless Rats @Thomas M. Baxa
+23 R Kor Skyfisher @Dan Murayama Scott
 34★ U Shepherd of the Lost @Kekai Kotaki
+324 R White Orchid Phantom @Richard Kane Ferguson
+445 M Ral, Monsoon Mage @Borja Pindado
+2025-1 M Hylda of the Icy Crown @Yakotakos
+2025-3 R Katara, the Fearless @Yueko
+2025-4 M Behold the Sinister Six! @Jonas De Ro
+2025-5 R Unbreakable Formation @Xavier Ribeiro

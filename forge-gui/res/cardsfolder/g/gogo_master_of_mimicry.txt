@@ -1,0 +1,7 @@
+Name:Gogo, Master of Mimicry
+ManaCost:2 U
+Types:Legendary Creature Wizard
+PT:2/4
+A:AB$ CopySpellAbility | CantCopy$ True | Cost$ XMin1 X X T | ValidTgts$ Card,Emblem | TgtPrompt$ Select target activated or triggered ability you control | TargetType$ Activated.YouCtrl,Triggered.YouCtrl | Amount$ X | MayChooseTarget$ True | SpellDescription$ Copy target activated or triggered ability you control X times. You may choose new targets for the copies. This ability can't be copied and X can't be 0. (Mana abilities can't be targeted.)
+SVar:X:Count$xPaid
+Oracle:{X}{X}, {T}: Copy target activated or triggered ability you control X times. You may choose new targets for the copies. This ability can't be copied and X can't be 0. (Mana abilities can't be targeted.)

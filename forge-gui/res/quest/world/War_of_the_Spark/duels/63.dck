@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Storm
+Title=Storm
+Icon=Storm.jpg
+Difficulty=Very Hard
+Description=./Modern/War_of_the_Spark/AngelofDeath7_-_Esper_Control_(Modern,_#798463).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+1 Nihil Spellbomb
+4 Cryptic Command
+1 Dovin's Veto
+3 Fatal Push
+2 Logic Knot
+1 Mana Leak
+3 Opt
+4 Path to Exile
+1 Surgical Extraction
+1 Collective Brutality
+2 Supreme Verdict
+1 Detention Sphere
+1 Jace, the Mind Sculptor
+1 Kaya, Orzhov Usurper
+2 Narset, Parter of Veils
+2 Teferi, Hero of Dominaria
+2 Teferi, Time Raveler
+2 Celestial Colonnade
+3 Field of Ruin
+4 Flooded Strand
+1 Glacial Fortress
+1 Godless Shrine
+2 Hallowed Fountain
+3 Island
+1 Plains
+4 Polluted Delta
+1 Swamp
+2 Watery Grave
+[Sideboard]
+1 Detention Sphere
+1 Dovin's Veto
+2 Surgical Extraction
+2 Ashiok, Dream Render
+1 Cast Down
+1 Celestial Purge
+1 Dispel
+1 Oath of Kaya
+2 Thoughtseize
+1 Timely Reinforcements
+1 Unmoored Ego
+1 Wrath of God

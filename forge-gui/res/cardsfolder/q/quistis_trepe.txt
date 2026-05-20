@@ -1,0 +1,7 @@
+Name:Quistis Trepe
+ManaCost:2 U
+Types:Legendary Creature Human Wizard
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPlay | TriggerDescription$ Blue Magic — When CARDNAME enters, you may cast target instant or sorcery card from a graveyard, and mana of any type can be spent to cast that spell. If that spell would be put into a graveyard, exile it instead.
+SVar:TrigPlay:DB$ Play | TgtZone$ Graveyard | ValidTgts$ Instant,Sorcery | ValidSA$ Spell | TgtPrompt$ Choose target instant or sorcery card from a graveyard | ManaConversion$ AnyType->AnyType | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
+Oracle:Blue Magic — When Quistis Trepe enters, you may cast target instant or sorcery card from a graveyard, and mana of any type can be spent to cast that spell. If that spell would be put into a graveyard, exile it instead.

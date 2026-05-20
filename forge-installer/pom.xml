@@ -101,7 +101,7 @@
                     <plugin>
                         <groupId>org.codehaus.izpack</groupId>
                         <artifactId>izpack-maven-plugin</artifactId>
-                        <version>5.2.3</version>
+                        <version>5.2.4</version>
                         <executions>
                             <execution>
                                 <phase>post-integration-test</phase>
@@ -166,16 +166,15 @@
                                             <fileset dir="${basedir}/../forge-gui/" includes="forge.profile.properties.example" />
                                             <fileset dir="${basedir}/" includes="sentry.properties" />
                                             <fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="CONTRIBUTORS.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="INSTALLATION.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="GAMEPAD_README.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="ISSUES.txt" />
-                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="CHANGES.txt" />
+                                            <fileset dir="${basedir}/../forge-gui-desktop/target/" includes="CHANGES.txt" />
                                             <fileset dir="${basedir}/../forge-gui/">
                                                 <include name="res/**" />
                                                 <exclude name="res/cardsfolder/**" />
                                             </fileset>
+                                            <fileset dir="${basedir}/../" includes="docs/**" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge-gui-desktop-${project.version}-jar-with-dependencies.jar" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge.exe" />
                                             <fileset dir="${project.build.directory}/../../adventure-editor/tools" includes="gdx-particle-editor.jar" />
@@ -230,6 +229,7 @@
                                                 <include name="adventure-editor.command" />
                                                 <include name="adventure-editor.cmd" />
                                                 <include name="adventure-editor.exe" />
+                                                <exclude name="**/*.xcf" />
                                             </tarfileset>
                                             <tarfileset dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="**" />
@@ -245,6 +245,7 @@
                                                 <exclude name="adventure-editor.command" />
                                                 <exclude name="adventure-editor.cmd" />
                                                 <exclude name="adventure-editor.exe" />
+                                                <exclude name="**/*.xcf" />
                                             </tarfileset>
                                         </tar>
                                     </target>
@@ -291,6 +292,32 @@
                                         </artifact>
                                     </artifacts>
                                 </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>no-flatten</id>
+            <activation>
+                <property>
+                    <name>skip.flatten</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>flatten-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>flatten</id>
+                                <phase>none</phase>
+                            </execution>
+                            <execution>
+                                <id>flatten.clean</id>
+                                <phase>none</phase>
                             </execution>
                         </executions>
                     </plugin>

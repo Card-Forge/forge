@@ -96,5 +96,4 @@ ScryfallCode=DDM
 88 L Forest @Richard Wright
 
 [tokens]
-0 u_2_2_illusion @Unknown
 1 b_1_1_assassin_lose_con @Svetlin Velinov

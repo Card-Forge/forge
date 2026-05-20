@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="123">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;At Knifepoint&quot;, &quot;Generous Plunderer&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="13697" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="8" name="Sub Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1TEKgDAMQNEOLo7i6TyBk/efBHG0g1bEpoX3IHM+GdqUoA/rHF1QZhuiC67yu7XWl9P3zT7V3beMdfe91Xpfy863426ib/vU18ufAQAAAPznAL9MDQc=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1bEJgDAQhWHBSqyiuIurpLF1KKdwFMF1BAs5PKNGCJi7kCd8oATizwnRVkVhA4ztXcg+f0qhTbojlTbepK2NN2rsG8xzp1ba+jZzpelccduIdJfbx2cVc3b0nrk70Rp/1vgve2uL3Tk1B35P3JbYbb7ZaPuekJellG8AP7r6Wr7lq1G6A9K34kwCAACAzO2F7HUO
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJytWFFuEzEQ3c84fwGV26AWxCX6sbTkhzMUSi/CKThBWsotQCico03KjrJPefsy48wmeZLVVOvxPI/Hb2yvS9M006b5/Npvhugb2uOkaValGaDt/v8o7afTT7Ho+rz0nMyG/WCMfXy0PUx2/TyVDe9fky2/dfH7MjfwMh7PZb9voNbn31ns03iaH+NZix9zs3ZdYr/A267Pt87mvOx+V361uIBnbW3bMozbKuDH3O46bn+6v3+dcdH/w9lwvEOBfNBxzMeqDPkxN/Bj7uvZlttY2NjnI+ai66XcLizusyE/9Ld1zfhCnlizsW+n27zJ8Ms0z8743Sb8LMt2vtwyth6XJcXu63TTbzXbNIOtr62ttYyfm+77u7Jp7xMcoYEvgb5gPHCz/uCHfXrTa/qYWMCOOV6In3vRGS+GO5hu9fuaOPyWWHj73Hyq9jBHtnkqQz3n+vHjbNsUbHNVhn6+BL7AzeZ25fDWNQLaXgMf+6bcPH5tP49I/z1fXA88fhFUx83v91dN82lWt7EYXvZ2lwl/85Kvu6fAvvrk9UdeZM4tEe7e5NpYHLq+CsyLNX5M/YmA+B0TOwZrfFbL+HzjYS56tA+qRQv6rbo5pm5F9bSWs97cWtpLyA/GWI5e/yyWjg/khHFE7tZ8erXnXtZAa382d6N80nuBp0uwjWoP69kheZGxA0/zdd+fF9inV3uyHA+pw5EdxzKj83zf0Vrs1WE+k3h7mc9eGg/2CY5ZLfX2phd3vgcfU+cQl1NoqY6bqXOI88sRc6ihVn+iuxl48XvBqeqNctP7Xhbg7uV0hMXIOLOWXZQ4zxl8z8RvzelF4H+ezBXVlyw3zAl10WLvxXwe5IPlQrTX8F35G0euNZFtVjO9+gvO+kbDaBOx9e4c3ryZI9cPPjuyPfYR7ifKAXYeb7VX20ztQQy5L9s/kwZ67ySRTujbWJQbXHu4T63eK6BjeCfJ1Ho+K2d0QudZq/cKPS9hTlHO81jwN/YuBXg++H/v7QpzaivrxvZe/VA9irh5uR3lKrhp/Yk48tyivejZ7hvf20+cC96biI6hcUde6L7x9rW+82ufmtYB+sate1hzFrHfd3ZhrY/uov8BTj8Aww==
+  </data>
+ </layer>
+ <layer id="7" name="Mountain Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmE1OwzAQhQeJLSuStBFEKWsOxhVCxU9bzoC4By1ICDhN4R54FI86tezYsZ3WQnnSUxvJyXwZ28lrJycAE0dnwm+K84BxoVbrvAur2ij1MzlumwH8SP9mu3EhvDqem/Odu4T1S+FX4bk4XuYAK+mn3H5fLmzUH87kyof6kPUq4boAmElfFd335cI4ZXPny4e6kD1ciu8P0H7OLecUEfhchbVqec1a+s7CGMrXRzTHyHXJPNPsLZJtjvnaiyFk/Jb7hTgry/W7ejiNyKZy0rPgM0G+Pkqdz7QGY6+9EOl6eMjeXZ+2/s98z2f7xy/K8ZA6dv+61AivNXyUN0K1ZVnKR9Q7nqHyiD3EvLIQOaoq/Bgpb/FnySbyHPdhXECbbx4t14w5xyhi1GVSLso5mG1uOziH2Ce1JZOivuR8lmwfrJQxDRz/HUK/C2rJiL0krwfonY94Zkw5H5QatjEfuMn0/kiFz5RPRz43mfJzzHdHqFLv4cgXJhNfCmvQ9PxLpYe2/4iOxXcP+1nF5EPPcePIpTLiOa6cTc+xumznY54TdfX5vZv6HpPHldVUy2WMr/8AqamSVA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlztv1EAQx/eSIIEUkHycL4FcHpQRSSREoKeEPpRAKlqg4ZXkLoGCgtcHgIoK6HJHIOGgA3rgGxCa5AsgkQcz7AyeW8b22j6EkPhL/6xvvd79eXZ21zHm39G9KWPugx9MxbeZ299ZJulLxZh18NdKd/ieAtcz8HPBd/Gg9eABW/oK2UaqxiyFxgxXLed6Qd53wPUe/AH8cG/Exj4XGHMefCGw7ZNiOApMY8IN4KyHtrwV2jab/dkZmWXTRHFDLQDLFnBtg3eCzmfmZ+A+uA5uzET1DfB18A3iPVKNyrySc7gp6h+X4U/Z8j0qdz6zDUw74F1kOxux3USuErxjKT+Pxuf6p4gNvRzaeLLmgWkBXAc3wPPENgBcNfAyuK6MtZqDj3NMWrJp88v6tofGBZ5DJcs3SuUw+Emv/lyWPNwKOlnQ3x1fg3YL5EWjx6YFPGvgN1S+BZ/q8+fw5ZsNojxfpLJZiuYOyznBu1QcQZU2l7MUqyaxjDpc/JuvazSPrm4PWhcV54Hkayoc0i7rGPFdFf0e7bNrhmMbl4dJaphofphvSHDVnGsZS753mPJMaqPfxq5N97D/PHlYpTHHRP+Y46HDVaF8D4kH8/8FlczG88DbMM9vlfZCXudSzRQ+Xm8rpc713qLx2a+p/xa13e3R++P5xLaSb5liiGPgGcq6k8In39sVjoEc0zDnJ8AnA729zLm2iCfz8XzMmSgX1zy4fJk/Atcn8Ocgvo1bVxN8HMOBAmfeUMK9S7D3XAZfKSc0UsRsDWP3g4qyjrJI7gUbnmdP2vcq8o0oazCPhhLOdNTMeHQ9nmGsVcq/onxt2i9WnH40lrvjv9exeB/hOcDfbaVfV0nfC3wPS1yzx/bpLHwtmfl6Eu5NxXD35Dg7ssiNoRa/01B3hurl+7L4eidm70wT72PcD86Py+HD6SPtLMmrOCa33v3NDGGXmMKY+jieOHH8Zc5hXam3834edSvu8n+MIjxSvntyXslz2pfZXRN5hPPmniMthYnFc5R3HbM05l/fHSK3Bibg3AdXJrP1lVX8rjUqOSZpfR8HtumJeB6Z0zKHtNhmVVof+A5u3CRbzSR/Q/jMMTPI9/Q5C12lrX1tnD+tOFau78Ycxo31yrkvx3Jj4JP/LzO0TVPSe2P/SXmjzWM346jxpEmOX3Rf85UPl/b99F9/Xz8AiVUALQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="48" template="../../obj/treasure.tx" x="237.083" y="370.25">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;BIG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="264.258" y="118.076">
+   <properties>
+    <property name="enemy" value="Honest Rutstein"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/gold.tx" x="253.75" y="389.25"/>
+  <object id="69" template="../../../../common/maps/obj/gold.tx" x="240" y="352.083"/>
+  <object id="70" template="../../../../common/maps/obj/gold.tx" x="200.333" y="390.333"/>
+  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="40" y="276.167">
+   <properties>
+    <property name="enemy" value="Jolene"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="197" y="336.667">
+   <properties>
+    <property name="enemy" value="Tinybones"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/enemy.tx" x="278.333" y="343.667">
+   <properties>
+    <property name="enemy" value="Vraska"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/enemy.tx" x="248" y="422.667">
+   <properties>
+    <property name="enemy" value="Satoru"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/enemy.tx" x="128" y="458.833">
+   <properties>
+    <property name="enemy" value="Roxanne"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="97,101,102,99,100"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/enemy.tx" x="456.333" y="500.333">
+   <properties>
+    <property name="enemy" value="Obeka"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="103,95,96,95"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/enemy.tx" x="400.333" y="170.667">
+   <properties>
+    <property name="enemy" value="Felix"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/entry_right.tx" x="608" y="311.333">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/waypoint.tx" x="354.5" y="547.5"/>
+  <object id="96" template="../../../../common/maps/obj/waypoint.tx" x="367.5" y="447"/>
+  <object id="97" template="../../../../common/maps/obj/waypoint.tx" x="205" y="527"/>
+  <object id="99" template="../../../../common/maps/obj/waypoint.tx" x="47" y="406"/>
+  <object id="100" template="../../../../common/maps/obj/waypoint.tx" x="207" y="441.333"/>
+  <object id="101" template="../../../../common/maps/obj/waypoint.tx" x="148.667" y="564.667"/>
+  <object id="102" template="../../../../common/maps/obj/waypoint.tx" x="102.667" y="519.333"/>
+  <object id="103" template="../../../../common/maps/obj/waypoint.tx" x="522" y="414"/>
+  <object id="104" template="../../../../common/maps/obj/manashards.tx" x="41.3333" y="500.333"/>
+  <object id="106" template="../../../../common/maps/obj/manashards.tx" x="527.333" y="559.333"/>
+  <object id="108" template="../../../../common/maps/obj/entry_right.tx" x="60.5" y="74.1667" width="21" height="21">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/barbariancamp/Tarnation_2.tmx"/>
+    <property name="teleportObjectId" value="114"/>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/booster.tx" x="15.6667" y="245.167">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;OTJ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;OTJ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;OTJ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="110" template="../../obj/treasure.tx" x="207.212" y="355.455">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;OTP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;OTP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="111" template="../../obj/treasure.tx" x="48.6667" y="156.667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;OTP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;OTP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="112" template="../../../../common/maps/obj/gold.tx" x="293.5" y="64.5"/>
+  <object id="113" template="../../../../common/maps/obj/gold.tx" x="274" y="63.5"/>
+  <object id="114" template="../../../../common/maps/obj/scroll.tx" x="490" y="99.3333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Tarnation Vista&quot;, &quot;editions&quot;: [ &quot;BIG&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="115" template="../../../../common/maps/obj/dialog.tx" x="538.083" y="308.75" width="22.1667" height="22.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The first thing that you notice upon entering this place is miserable heat, stemming both from dry, desert-like air and a large pool of lava in the distance.
+
+Your manasight stone glows brightly, sensing a truly mighty legend in this place.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="116" template="../../../../common/maps/obj/dialog.tx" x="428.75" y="176.167" width="17.5" height="33.75" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A truly bizarre foe blocks your way forward, an ooze with numerous arms and legs wearing a hat and clutching numerous weapons.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="117" template="../../../../common/maps/obj/dialog.tx" x="331.667" y="145.333" width="20.417" height="19.1667" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The smell of smoke and liquor fill the air as you draw closer to the lake of lava. The  crackles of thunder guns interspersed with hooting and hollering aplenty echo from the fortress beyond.
+
+Several outlaws stare at you with greed in their eyes as you continue your approach, chief amongst them a man sitting at the end of a wagon, its interior glowing with sinister magic.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="118" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="96.5" y="70.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;HELLSPUR HEADQUARTERS. 
+TRESPASSERS WILL BE SHOT AND BURNED ALIVE.&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Continue&quot; }
+]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="119" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="497" y="245" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;TARNATION.
+OUTLAWS WELCOME.
+LAWMEN STAY OUT.&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Continue&quot; }
+]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="120" template="../../../../common/maps/obj/shop.tx" x="304" y="500.667">
+   <properties>
+    <property name="commonShopList" value="WanderingMerchantRed"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="121" template="../../../../common/maps/obj/enemy.tx" x="339.333" y="492">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;Hail, {var=player_name}. I see your travels have taken you far. I have been wandering as well, and have acquired some rare spells I am not in need of along the way. Take a look, perhaps they will be of use. Traveling this place does have its costs though, so I cannot simply give you them, but my prices are fair.&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot; }
+		]
+	}
+]</property>
+    <property name="enemy" value="Mysterious Mage"/>
+   </properties>
+  </object>
+  <object id="122" template="../../../../common/maps/obj/collision.tx" x="278.698" y="66.3021" width="46.335" height="29.75"/>
+ </objectgroup>
+</map>

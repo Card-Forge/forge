@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Hameln
+Title=Hameln
+Icon=Hameln.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/ðÜÐÇð░Ðüð¢ð¥ð┐ÐÇðÁÐüð¢ðÁð¢Ðüð║ð¥ð╣/Ivan_Agafonov_in_Regular_Modern,_Club__ðòð┤ð©ð¢ð¥ÐÇð¥ð│__-_Mono_U_Faeries_(Modern,_#34943).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+2 Sower of Temptation
+2 Spellskite
+4 Spellstutter Sprite
+4 Vendilion Clique
+1 Vedalken Shackles
+4 Cryptic Command
+4 Mana Leak
+1 Remand
+4 Rune Snag
+1 Spell Snare
+2 Faerie Conclave
+18 Island
+4 Mutavault
+1 Pendelhaven
+[Sideboard]
+2 Glen Elendra Archmage
+1 Jace Beleren
+2 Relic of Progenitus
+3 Spell Pierce
+2 Teferi, Mage of Zhalfir
+1 Threads of Disloyalty
+1 Trickbind
+1 Wurmcoil Engine

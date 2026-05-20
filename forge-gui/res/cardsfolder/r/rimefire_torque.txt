@@ -1,0 +1,10 @@
+Name:Rimefire Torque
+ManaCost:1 U
+Types:Artifact
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As this artifact enters, choose a creature type.
+T:Mode$ ChangesZone | ValidCard$ Permanent.YouCtrl+ChosenType | Destination$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a permanent you control of the chosen type enters, put a charge counter on this artifact.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 1
+A:AB$ DelayedTrigger | Cost$ T SubCounter<3/CHARGE> | AILogic$ SpellCopy | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ EffTrigCopy | SpellDescription$ When you next cast an instant or sorcery spell this turn, copy it. You may choose new targets for the copy.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+Oracle:As this artifact enters, choose a creature type.\nWhenever a permanent you control of the chosen type enters, put a charge counter on this artifact.\n{T}, Remove three charge counters from this artifact: When you next cast an instant or sorcery spell this turn, copy it. You may choose new targets for the copy.

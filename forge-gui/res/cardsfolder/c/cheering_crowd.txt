@@ -1,0 +1,8 @@
+Name:Cheering Crowd
+ManaCost:1 RG
+Types:Creature Human Citizen
+PT:2/2
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of each player's first main phase, that player may put a +1/+1 counter on this creature. If they do, they add {C} for each counter on it.
+SVar:TrigMana:DB$ Mana | UnlessCost$ AddCounter<1/P1P1/CARDNAME> | UnlessPayer$ TriggeredPlayer | UnlessSwitched$ True | Produced$ C | Amount$ X | Defined$ TriggeredPlayer
+SVar:X:Count$CardCounters.ALL
+Oracle:At the beginning of each player's first main phase, that player may put a +1/+1 counter on this creature. If they do, they add {C} for each counter on it.

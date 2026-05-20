@@ -5,6 +5,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
@@ -131,6 +132,19 @@ public class GameSimulator {
         Card hostCard = (Card) copier.find(origHostCard);
         String desc = sa.getDescription();
         FCollectionView<SpellAbility> candidates = hostCard.getSpellAbilities();
+
+        SpellAbility result = saMatcher(candidates, desc);
+        for (SpellAbility cSa : candidates) {
+            if (result != null) {
+                break;
+            }
+            result = saMatcher(GameActionUtil.getAlternativeCosts(cSa, aiPlayer, true), desc);
+        }
+
+        return result;
+    }
+
+    private SpellAbility saMatcher(Iterable<SpellAbility> candidates, String desc) {
         // first pass for accuracy (spells with alternative costs)
         for (SpellAbility cSa : candidates) {
             if (desc.equals(cSa.getDescription())) {
@@ -156,7 +170,9 @@ public class GameSimulator {
         SpellAbility sa;
         if (origSa.isLandAbility()) {
             Card hostCard = (Card) copier.find(origSa.getHostCard());
-            if (!aiPlayer.playLand(hostCard, false, origSa)) {
+            if (origSa.canPlay()) {
+                aiPlayer.playLand(hostCard, origSa);
+            } else {
                 System.err.println("Simulation: Couldn't play land! " + origSa);
             }
             sa = origSa;
@@ -197,7 +213,7 @@ public class GameSimulator {
             final SpellAbility playingSa = sa;
             // Is this right?
             simGame.copyLastState();
-            boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, simGame, () -> {
+            boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, () -> {
                 if (interceptor != null) {
                     interceptor.announceX(playingSa);
                     interceptor.chooseTargets(playingSa, GameSimulator.this);

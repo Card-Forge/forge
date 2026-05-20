@@ -9,6 +9,6 @@ SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | Affec
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBDamageEffect:DB$ Effect | Pawprint$ 3 | Duration$ UntilTheEndOfYourNextTurn | Triggers$ TrigSpellCast | SpellDescription$ Until the end of your next turn, whenever you cast a spell, CARDNAME deals 2 damage to up to one target creature.
 SVar:TrigSpellCast:Mode$ SpellCast | ValidActivatingPlayer$ You | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast a spell, CARDNAME deals 2 damage to up to one target creature.
-SVar:EffSpellCast:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 2 | DamageSource$ EffectSource
+SVar:EffSpellCast:DB$ DealDamage | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 2 | DamageSource$ EffectSource
 DeckHas:Ability$Token & Type$Treasure|Artifact
 Oracle:Choose up to five {P} worth of modes. You may choose the same mode more than once.\n{P} — Create a tapped Treasure token.\n{P}{P} — Exile the top two cards of your library. Until the end of your next turn, you may play them.\n{P}{P}{P} — Until the end of your next turn, whenever you cast a spell, Season of the Bold deals 2 damage to up to one target creature.

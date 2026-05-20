@@ -1,0 +1,30 @@
+Name:Clive, Ifrit's Dominant
+ManaCost:4 R R
+Types:Legendary Creature Human Noble Warrior
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | OptionalDecider$ You | TriggerDescription$ When NICKNAME enters, you may discard your hand, then draw cards equal to your devotion to red. (Each {R} in the mana costs of permanents you control counts toward your devotion to red.)
+SVar:TrigDiscard:DB$ Discard | Mode$ Hand | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ You
+SVar:X:Count$Devotion.Red
+A:AB$ ChangeZone | Cost$ 4 R R T | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ Exile NICKNAME, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | ForgetOtherRemembered$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Discard
+AlternateMode:DoubleFaced
+Oracle:When Clive enters, you may discard your hand, then draw cards equal to your devotion to red. (Each {R} in the mana costs of permanents you control counts toward your devotion to red.)\n{4}{R}{R}, {T}: Exile Clive, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Ifrit, Warden of Inferno
+ManaCost:no cost
+Colors:red
+Types:Legendary Enchantment Creature Saga Demon
+PT:9/9
+K:Chapter:3:DBFight,DBMana,DBMana
+SVar:DBFight:DB$ Fight | Defined$ Self | ValidTgts$ Creature.Other | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other target creature | SpellDescription$ Lunge — NICKNAME fights up to one other target creature.
+SVar:DBMana:DB$ Mana | Produced$ R | Amount$ 4 | SubAbility$ DBExileSelf | SpellDescription$ Brimstone — Add {R}{R}{R}{R}. If NICKNAME has three or more lore counters on it, exile it, then return it to the battlefield (front face up.)
+SVar:DBExileSelf:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE3 | SubAbility$ DBReturnSelf | RememberChanged$ True
+SVar:DBReturnSelf:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Count$CardCounters.LORE
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI — Lunge — Ifrit fights up to one other target creature.\nII, III — Brimstone — Add {R}{R}{R}{R}. If Ifrit has three or more lore counters on it, exile it, then return it to the battlefield (front face up.)

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Ga-Gorib
+Title=Ga-Gorib
+Icon=Ga-Gorib.jpg
+Difficulty=Hard
+Description=../Modern/Magic_Origins/SCG_Invitational_Qualifier_East_Windsor/Vikrant_Gulati_-_Red_Deck_Wins_(Modern,_#620344).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+3 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+4 Searing Blaze
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+2 Arid Mesa
+4 Bloodstained Mire
+3 Mountain
+3 Sacred Foundry
+2 Scalding Tarn
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+1 Deflecting Palm
+4 Destructive Revelry
+2 Ensnaring Bridge
+2 Exquisite Firecraft
+2 Path to Exile
+1 Rest in Peace
+2 Searing Blood
+1 Vexing Shusher

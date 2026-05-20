@@ -1,0 +1,23 @@
+[metadata]
+Name=lich
+[Main]
+1 Engineered Plague|7ED
+1 Haunting Echoes|ODY
+1 Unmask|MMQ
+1 Visara the Dreadful|ONS
+13 Swamp|6ED|3
+2 Stupor|6ED
+3 Funeral Charm|VIS
+3 Phyrexian Arena|APC
+3 Phyrexian Rager|APC
+3 Ravenous Rats|INV
+3 Smother|ONS
+3 Wasteland|TMP
+4 Cabal Therapy|JUD
+4 Diabolic Edict|BTD
+4 Duress|7ED
+4 Mishra's Factory|4ED
+4 Rishadan Port|MMQ
+
+[StartInBattle_Reference]
+1 Mirror Universe|LEG|1

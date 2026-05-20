@@ -6,5 +6,70 @@ Type=Collector_Edition
 ScryfallCode=FCA
 
 [cards]
-12 M Ancient Copper Dragon @Yoshitaka Amano
-60 R Yuriko, the Tiger's Shadow @Tetsuya Nomura
+1 R Adeline, Resplendent Cathar @Yoshitaka Amano ${"flavorName": "Hero of Light"}
+2 M Ranger-Captain of Eos @Yoshitaka Amano ${"flavorName": "Knights of San d'Oria"}
+3 R Sram, Senior Edificer @Yoshitaka Amano ${"flavorName": "Firion, Swordmaster"}
+4 U Counterspell @Yoshitaka Amano ${"flavorName": "Wild Rose Rebellion"}
+5 M Urza, Lord High Artificer @Yoshitaka Amano ${"flavorName": "Terra Branford"}
+6 R Venser, Shaper Savant @Yoshitaka Amano ${"flavorName": "Master Xande"}
+7 R Bolas's Citadel @Yoshitaka Amano ${"flavorName": "Kefka's Tower"}
+8 R Dark Ritual @Yoshitaka Amano ${"flavorName": "Darkness of Eternity"}
+9 U Fatal Push @Yoshitaka Amano ${"flavorName": "Battle at the Big Bridge"}
+10 U Syr Konrad, the Grim @Yoshitaka Amano ${"flavorName": "Golbez, Clad In Darkness"}
+11 M Yawgmoth, Thran Physician @Yoshitaka Amano ${"flavorName": "The Emperor, Hell Tyrant"}
+12 M Ancient Copper Dragon @Yoshitaka Amano ${"flavorName": "Dragon of Mount Gulg"}
+13 R Godo, Bandit Warlord @Yoshitaka Amano ${"flavorName": "Gilgamesh, Weapon Collector"}
+14 M Purphoros, God of the Forge @Yoshitaka Amano ${"flavorName": "Kefka Palazzo"}
+15 R Azusa, Lost but Seeking @Yoshitaka Amano ${"flavorName": "Princess Sarah"}
+16 M Nyxbloom Ancient @Yoshitaka Amano ${"flavorName": "The Cloudsea Djinn"}
+17 R Jodah, the Unifier @Yoshitaka Amano ${"flavorName": "Warrior of Light"}
+18 R Tymna the Weaver @Yoshitaka Amano ${"flavorName": "Cecil Harvey"}
+19 R Winota, Joiner of Forces @Yoshitaka Amano ${"flavorName": "Bartz Klauser"}
+20 R Traxos, Scourge of Kroog @Yoshitaka Amano ${"flavorName": "Giant of Babil"}
+21 M Akroma's Will @Square Enix ${"flavorName": "Blessing of the Oracle"}
+22 U Danitha Capashen, Paragon @Square Enix ${"flavorName": "Squall Leonhart"}
+23 R Kenrith, the Returned King @Square Enix ${"flavorName": "Noctis Lucis Caelum"}
+24 R Loran of the Third Path @Square Enix ${"flavorName": "Garnet Til Alexandros 17th"}
+25 R Mangara, the Diplomat @Toshitaka Matsuda ${"flavorName": "Minwu, Rebellion Strategist"}
+26 U Stroke of Midnight @Square Enix ${"flavorName": "Memories of Nibelheim"}
+27 U Wall of Omens @ISAMU KAMIKOKURYO ${"flavorName": "The Imperial City of Archades"}
+28 U Brainstorm @Akihiko Yoshida ${"flavorName": "Endwalker"}
+29 R Cryptic Command @Kazuya Takahashi ${"flavorName": "To the Crystal Tower"}
+30 U Laboratory Maniac @Tetsuya Nomura ${"flavorName": "Vana'diel Adventurers"}
+31 M Rhystic Study @Square Enix ${"flavorName": "Stay with Me"}
+32 R Teferi, Mage of Zhalfir @Square Enix ${"flavorName": "Edea Kramer"}
+33 U Deadly Dispute @Airi Yoshioka ${"flavorName": "Baron Rivalry"}
+34 R Diabolic Intent @Fumio Minagawa ${"flavorName": "Shantotto's Coercion"}
+35 M Gix, Yawgmoth Praetor @SUEMI Jun ${"flavorName": "The Shadow Lord"}
+36 R K'rrik, Son of Yawgmoth @Yusuke Mogi ${"flavorName": "Emet-Selch, Ascian"}
+37 R Varragoth, Bloodsky Sire @Square Enix ${"flavorName": "Ardyn Izunia"}
+38 U Captain Lannery Storm @Square Enix ${"flavorName": "Vaan, Aspiring Sky Pirate"}
+39 U Light Up the Stage @Square Enix ${"flavorName": "A Promise Fulfilled"}
+40 U Lightning Bolt @Toshitaka Matsuda ${"flavorName": "Thrum of the Vestige"}
+41 R Mizzix's Mastery @Toshitaka Matsuda ${"flavorName": "Dawn Warriors' Legacy"}
+42 M Najeela, the Blade-Blossom @Tetsuya Nomura ${"flavorName": "Cloud Strife"}
+43 M Ragavan, Nimble Pilferer @SHUKO MURASE ${"flavorName": "Zidane Tribal"}
+44 R Carpet of Flowers @ISAMU KAMIKOKURYO ${"flavorName": "Fal'Cie Paradise"}
+45 U Farseek @Yusuke Mogi ${"flavorName": "Newfound Adventure"}
+46 U Fynn, the Fangbearer @Square Enix ${"flavorName": "Vayne Carudas Solidor"}
+47 U Nature's Claim @Square Enix ${"flavorName": "Search for the Frozen Esper"}
+48 R Primeval Titan @Tomohiro Hasegawa ${"flavorName": "Astral Titan"}
+49 M Atraxa, Grand Unifier @Tetsuya Nomura ${"flavorName": "Sephiroth, the Savior"}
+50 R Bruse Tarl, Boorish Herder @Square Enix ${"flavorName": "Hugo Kupka"}
+51 U Dovin's Veto @Akihiko Yoshida ${"flavorName": "Shadowbringers"}
+52 R Inalla, Archmage Ritualist @Square Enix ${"flavorName": "Kuja, Mage Manufacturer"}
+53 R Ishai, Ojutai Dragonspeaker @Square Enix ${"flavorName": "Benedikta Harman"}
+54 R Isshin, Two Heavens as One @Tetsuya Nomura ${"flavorName": "Lightning, Lone Commando"}
+55 M Kinnan, Bonder Prodigy @Square Enix ${"flavorName": "Seymour Guado"}
+56 R Kraum, Ludevic's Opus @Square Enix ${"flavorName": "Barnabas Tharmr"}
+57 R Muldrotha, the Gravetide @Chikako Nakano ${"flavorName": "Orphan, Cocoon fal'Cie"}
+58 M Thrasios, Triton Hero @Square Enix ${"flavorName": "Tidus, Zanarkand Fayth"}
+59 M Vial Smasher the Fierce @Square Enix ${"flavorName": "Clive Rosfield"}
+60 R Yuriko, the Tiger's Shadow @Tetsuya Nomura ${"flavorName": "Yuffie Kisaragi"}
+61 R Chromatic Lantern @Kiyoshi Arai ${"flavorName": "Crystal of Altar Cave"}
+62 R Smuggler's Copter @Square Enix ${"flavorName": "The Strahl"}
+63 U Strixhaven Stadium @Square Enix ${"flavorName": "Luka Stadium"}
+64 R Command Beacon @Square Enix ${"flavorName": "Balamb Garden"}
+
+[rebalanced]
+A-19 R A-Winota, Joiner of Forces @Yoshitaka Amano ${"flavorName": "Bartz Klauser"}

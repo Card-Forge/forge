@@ -1,0 +1,5 @@
+Name:Commune with Beavers
+ManaCost:G
+Types:Sorcery
+A:SP$ Dig | DigNum$ 3 | ChangeNum$ 1 | ChangeValid$ Artifact,Creature,Land | Optional$ True | SpellDescription$ Look at the top three cards of your library. You may reveal an artifact, creature, or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+Oracle:Look at the top three cards of your library. You may reveal an artifact, creature, or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

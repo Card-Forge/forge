@@ -1,0 +1,9 @@
+Name:Aang's Journey
+ManaCost:2
+Types:Sorcery Lesson
+K:Kicker:2
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBChangeZone | SpellDescription$ Search your library for a basic land card. If this spell was kicked, instead search your library for a basic land card and a Shrine card. Reveal those cards, put them into your hand, then shuffle. You gain 2 life.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ EACH Land.Basic & Shrine | ChangeTypeDesc$ basic land card and a Shrine card | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+SVar:X:Count$TimesKicked
+Oracle:Kicker {2} (You may pay an additional {2} as you cast this spell.)\nSearch your library for a basic land card. If this spell was kicked, instead search your library for a basic land card and a Shrine card. Reveal those cards, put them into your hand, then shuffle.\nYou gain 2 life.

@@ -16,8 +16,8 @@ ALTERNATE
 Name:Expensive Taste
 ManaCost:2 B
 Types:Instant Adventure
-A:SP$ Dig | DigNum$ 2 | ChangeNum$ All | ValidTgts$ Opponent | DestinationZone$ Exile | RememberChanged$ True | ExileFaceDown$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top two cards of target opponent's library face down. You may look at and play those cards for as long as they remain exiled.
+A:SP$ Dig | DigNum$ 2 | ChangeNum$ All | ValidTgts$ Opponent | DestinationZone$ Exile | RememberChanged$ True | ExileFaceDown$ True | WithMayLook$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top two cards of target opponent's library face down. You may look at and play those cards for as long as they remain exiled.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at and play a card as long as it remains exiled.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at and play a card as long as it remains exiled.
 Oracle:Exile the top two cards of target opponent's library face down. You may look at and play those cards for as long as they remain exiled.

@@ -3,5 +3,5 @@ ManaCost:1 W U
 Types:Enchantment Aura
 K:Enchant:Creature
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
-A:AB$ Tap | Cost$ W U Reveal<1/CARDNAME> | TgtPrompt$ Choose target creature | ValidTgts$ Creature | Forecast$ True | SpellDescription$ Tap target creature. (Activate only during your upkeep and only once each turn.)
+A:AB$ Tap | Cost$ W U Reveal<1/CARDNAME> | ValidTgts$ Creature | Forecast$ True | SpellDescription$ Tap target creature. (Activate only during your upkeep and only once each turn.)
 Oracle:Enchant creature\nEnchanted creature doesn't untap during its controller's untap step.\nForecast — {W}{U}, Reveal Plumes of Peace from your hand: Tap target creature. (Activate only during your upkeep and only once each turn.)

@@ -1,6 +1,6 @@
 Name:Wild-Magic Sorcerer
 ManaCost:3 R
-Types:Creature Orc Shaman
+Types:Creature Orc Shaman Sorcerer
 PT:4/3
 S:Mode$ Continuous | Affected$ Card.YouCtrl+wasCastFromExile | AffectedZone$ Stack | AddKeyword$ Cascade | CheckSVar$ Y | SVarCompare$ EQ0 | Description$ The first spell you cast from exile each turn has cascade.
 SVar:Y:Count$ThisTurnCast_Card.YouCtrl+wasCastFromExile

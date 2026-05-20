@@ -1,0 +1,12 @@
+Name:Reaper's Scythe
+ManaCost:2 B
+Types:Artifact Equipment
+K:Job select
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a soul counter on this Equipment for each player who lost life this turn.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SOUL | CounterNum$ X
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ Y | AddToughness$ Y | AddType$ Assassin | Description$ Equipped creature gets +1/+1 for each soul counter on this Equipment and is an Assassin in addition to its other types.
+K:Equip:2:Flavor Death Sickle
+SVar:X:PlayerCountPlayers$HasPropertyLostLifeThisTurn
+SVar:Y:Count$CardCounters.SOUL
+DeckHas:Ability$Token & Type$Assassin
+Oracle:Job select\nAt the beginning of your end step, put a soul counter on this Equipment for each player who lost life this turn.\nEquipped creature gets +1/+1 for each soul counter on this Equipment and is an Assassin in addition to its other types.\nDeath Sickle — Equip {2}

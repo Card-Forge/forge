@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Kyouko Kasodani
+Title=Kyouko Kasodani
+Icon=Kyouko Kasodani.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/Andrè_Paolin_-_Esper_(Standard,_#768194).dck
+Deck Type=constructed
+
+[Main]
+1 Chromium, the Mutable
+3 Cast Down
+4 Chemister's Insight
+1 Disdainful Stroke
+2 Essence Scatter
+3 Moment of Craving
+4 Sinister Sabotage
+3 Syncopate
+3 Vraska's Contempt
+3 Ritual of Soot
+2 Search for Azcanta
+4 Teferi, Hero of Dominaria
+4 Drowned Catacomb
+1 Field of Ruin
+4 Glacial Fortress
+4 Island
+4 Isolated Chapel
+1 Plains
+4 Swamp
+4 Watery Grave
+[Sideboard]
+1 Disdainful Stroke
+2 Duress
+2 Fungal Infection
+2 Invoke the Divine
+1 Moment of Craving
+2 Negate
+1 Settle the Wreckage
+2 Thought Erasure
+2 Vona, Butcher of Magan

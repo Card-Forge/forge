@@ -1,0 +1,9 @@
+Name:Krile Baldesion
+ManaCost:W U
+Types:Legendary Creature Dwarf Wizard
+PT:2/1
+K:Lifelink
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | ResolvedLimit$ 1 | OptionalDecider$ You | TriggerDescription$ Trace Aether — Whenever you cast a noncreature spell, you may return target creature card with mana value equal to that spell's mana value from your graveyard to your hand. Do this only once each turn.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card with mana value equal to the spell's mana value in your graveyard | ValidTgts$ Creature.cmcEQX+YouOwn
+SVar:X:TriggeredSpellAbility$CardManaCostLKI
+Oracle:Lifelink\nTrace Aether — Whenever you cast a noncreature spell, you may return target creature card with mana value equal to that spell's mana value from your graveyard to your hand. Do this only once each turn.

@@ -1,0 +1,6 @@
+Name:Robot Warrior Token
+ManaCost:no cost
+Colors:blue
+Types:Artifact Creature Robot Warrior
+PT:3/3
+Oracle:

@@ -1,0 +1,15 @@
+Name:Kefka, Dancing Mad
+ManaCost:5 B R
+Types:Legendary Creature Human Wizard
+PT:6/6
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | Condition$ PlayerTurn | Description$ During your turn, NICKNAME has indestructible.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigRepeat | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, exile a card at random from each opponent's graveyard. You may cast any number of spells from among cards exiled this way without paying their mana costs. Then each player who owns a spell you cast this way loses life equal to its mana value.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBChooseCard | SubAbility$ DBExile
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ You | Choices$ Card.ControlledBy Remembered | ChoiceZone$ Graveyard | Mandatory$ True | AtRandom$ True | RememberChosen$ True
+SVar:DBExile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.IsRemembered | RememberChanged$ True | SubAbility$ DBPlayThem
+SVar:DBPlayThem:DB$ Play | Valid$ Card.IsRemembered+nonLand | ValidZone$ Exile | ValidSA$ Spell | Controller$ You | WithoutManaCost$ True | Amount$ All | ImprintPlayed$ True | Optional$ True | SubAbility$ DBRepeatTwo
+SVar:DBRepeatTwo:DB$ RepeatEach | RepeatPlayers$ ImprintedOwner | RepeatSubAbility$ DBLoseLife | SubAbility$ DBCleanup
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True | ClearImprinted$ True
+SVar:X:Count$ValidAll Card.IsImprinted+OwnedBy Remembered$CardManaCost
+Oracle:During your turn, Kefka has indestructible.\nAt the beginning of your end step, exile a card at random from each opponent's graveyard. You may cast any number of spells from among cards exiled this way without paying their mana costs. Then each player who owns a spell you cast this way loses life equal to its mana value.

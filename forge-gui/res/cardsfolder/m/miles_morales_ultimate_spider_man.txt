@@ -1,0 +1,26 @@
+Name:Miles Morales
+Variant:UniversesWithin:FlavorName:Cren, Undercity Dreamer
+ManaCost:1 G
+Types:Legendary Creature Human Citizen Hero
+PT:1/2
+AlternateMode:Modal
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters, put a +1/+1 counter on each of up to two target creatures.
+SVar:TrigPutCounters:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures
+A:AB$ SetState | Cost$ 3 R G W | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
+Oracle:When Miles Morales enters, put a +1/+1 counter on each of up to two target creatures.\n{3}{R}{G}{W}: Transform Miles Morales. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Ultimate Spider-Man
+Variant:UniversesWithin:FlavorName:Cren of the Spider Brood
+ManaCost:3 R G W
+Types:Legendary Creature Spider Human Hero
+PT:4/3
+K:First Strike
+K:Haste
+A:AB$ PutCounter | PrecostDesc$ Camouflage — | Cost$ 2 | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on CARDNAME. He gains hexproof and becomes colorless until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Hexproof | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Colors$ Colorless | OverwriteColors$ True
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigDoubleCounters | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, double the number of each kind of counter on each Spider and legendary creature you control.
+SVar:TrigDoubleCounters:DB$ MultiplyCounter | Defined$ Valid Spider.YouCtrl,Creature.Legendary+YouCtrl | Multiplier$ 2
+Oracle:First strike, haste\nCamouflage — {2}: Put a +1/+1 counter on Ultimate Spider-Man. He gains hexproof and becomes colorless until end of turn.\nWhenever you attack, double the number of each kind of counter on each Spider and legendary creature you control.

@@ -32,7 +32,11 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
 
     @Override
     public float getPreferredWidth(float maxWidth, float height) {
-        return Math.min((height - FLabel.BORDER_THICKNESS) * buttons.size() + FLabel.BORDER_THICKNESS, maxWidth);
+        float actualPreferredWidth = (height - FLabel.BORDER_THICKNESS) * buttons.size() + FLabel.BORDER_THICKNESS;
+        if(actualPreferredWidth * 0.8 > maxWidth)
+            //Layout is trying to crush us down too much; tell it we won't fit.
+            return actualPreferredWidth;
+        return Math.min(actualPreferredWidth, maxWidth);
     }
 
     @Override
@@ -89,6 +93,16 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
                 return true;
             }
             return false;
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            if (count == 2 && longPressHandler != null) {
+                setSelected(true);
+                longPressHandler.handleEvent(new FEvent(this, FEventType.LONG_PRESS));
+                return true;
+            }
+            return super.tap(x, y, count);
         }
     }
 }

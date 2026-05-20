@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=JuzamGenie
+Title=JuzamGenie
+Icon=JuzamGenie.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Kajimoto_Atsushi_-_Cascade_Crash_(Modern,_#1750102).dck
+Deck Type=constructed
+
+[Main]
+4 Shardless Agent
+4 Subtlety
+4 Fury
+4 Scion of Draco
+3 Fable of the Mirror-Breaker
+4 Violent Outburst
+4 Fire // Ice
+4 Crashing Footfalls
+4 Lorien Revealed
+4 Leyline Binding
+1 Plains
+1 Island
+1 Forest
+1 Breeding Pool
+1 Sacred Foundry
+1 Steam Vents
+4 Flooded Strand
+4 Windswept Heath
+3 Misty Rainforest
+1 Overgrown Tomb
+1 Temple Garden
+1 Raugrin Triome
+1 Zagoth Triome
+[Sideboard]
+4 Force of Negation
+4 Force of Vigor
+3 Endurance
+4 Up the Beanstalk

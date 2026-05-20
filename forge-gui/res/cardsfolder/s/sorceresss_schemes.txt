@@ -1,0 +1,7 @@
+Name:Sorceress's Schemes
+ManaCost:3 R
+Types:Sorcery
+K:Flashback:4 R
+A:SP$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Hand | TgtPrompt$ Choose target instant or sorcery card in your graveyard or exiled card with flashback you own | ValidTgts$ Instant.inZoneGraveyard+YouCtrl,Sorcery.inZoneGraveyard+YouCtrl,Card.withFlashback+inZoneExile+YouCtrl | SubAbility$ DBMana | SpellDescription$ Return target instant or sorcery card from your graveyard or exiled card with flashback you own to your hand. Add {R}.
+SVar:DBMana:DB$ Mana | Produced$ R | Amount$ 1
+Oracle:Return target instant or sorcery card from your graveyard or exiled card with flashback you own to your hand. Add {R}.\nFlashback {4}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

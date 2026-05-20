@@ -156,6 +156,3 @@ ScryfallCode=TOR
 141 U Tainted Isle @Alan Pollack
 142 U Tainted Peak @Tony Szczudlo
 143 U Tainted Wood @Rob Alexander
-
-[tokens]
-g_1_1_squirrel

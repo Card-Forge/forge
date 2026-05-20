@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Ghost Council
+Title=Ghost Council
+Icon=Ghost Council.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Midnight_Hunt/Aardos_-_Mono_White_Control_(Standard,_#1206854).dck
+Deck Type=constructed
+
+[Main]
+4 Wandering Archaic
+4 The Book of Exalted Deeds
+4 Potion of Healing
+4 Portable Hole
+4 Revitalize
+4 Fateful Absence
+4 Search for Glory
+4 Doomskar
+4 Sigarda's Splendor
+4 Faceless Haven
+20 Snow-Covered Plains
+[Sideboard]
+2 Vanquish the Horde
+2 Dawnbringer Cleric
+3 Divine Smite
+4 Sunset Revelry
+4 Felidar Retreat

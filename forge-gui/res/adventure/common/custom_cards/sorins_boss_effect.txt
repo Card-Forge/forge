@@ -15,4 +15,4 @@ SVar:Y:Count$Compare YourLife GE20.1.0
 SVar:X:Count$Compare YourLife LE40.1.0
 SVar:YourLifeCompare:SVar$X/Plus.Y
 SVar:YourLife:Count$YourLifeTotal
-Oracle:As long as Sorin's life total is 40 or more, Sorin seeks two nonland cards every upkeep and can't lose the game and his opponents can't win the game. \nAs long as Sorin's life total is between 20 and 40, at Sorin's upkeep, conjure a card from Sorin's Spellbook into exile with 2 time counters on it, it gains suspend.\nAs long as Sorin's life total is lower than 20, Sorin's Vampires get +2/+2  and have lifelink.
+Oracle:As long as Sorin's life total is 40 or more, Sorin seeks two nonland cards every upkeep and can't lose the game and his opponents can't win the game. \nAs long as Sorin's life total is between 20 and 40, at Sorin's upkeep, conjure a card from Sorin's Spellbook into exile with 2 time counters on it, it gains suspend.\nAs long as Sorin's life total is lower than 20, Sorin's Vampires get +2/+2 and have lifelink.

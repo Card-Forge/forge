@@ -1,0 +1,8 @@
+Name:Giott, King of the Dwarves
+ManaCost:R W
+Types:Legendary Creature Dwarf Noble
+PT:1/1
+K:Double Strike
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Dwarf.Other+YouCtrl,Equipment.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME or another Dwarf you control enters and whenever an Equipment you control enters, you may discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card> | NumCards$ 1
+Oracle:Double strike\nWhenever Giott or another Dwarf you control enters and whenever an Equipment you control enters, you may discard a card. If you do, draw a card.

@@ -1,0 +1,10 @@
+Name:Sunstar Lightsmith
+ManaCost:3 W
+Types:Creature Human Artificer
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, put a +1/+1 counter on this creature and draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+SVar:BuffedBy:Card
+DeckHas:Ability$Counters
+Oracle:Whenever you cast your second spell each turn, put a +1/+1 counter on this creature and draw a card.

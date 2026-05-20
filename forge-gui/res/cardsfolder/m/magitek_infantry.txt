@@ -1,0 +1,8 @@
+Name:Magitek Infantry
+ManaCost:W
+Types:Artifact Creature Robot Soldier
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | IsPresent$ Artifact.Other+YouCtrl | Description$ This creature gets +1/+0 as long as you control another artifact.
+A:AB$ ChangeZone | Cost$ 2 W | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedMagitek Infantry | ChangeNum$ 1 | Tapped$ True | SpellDescription$ Search your library for a card named Magitek Infantry, put it onto the battlefield tapped, then shuffle.
+DeckNeeds:Name$Magitek Infantry
+Oracle:This creature gets +1/+0 as long as you control another artifact.\n{2}{W}: Search your library for a card named Magitek Infantry, put it onto the battlefield tapped, then shuffle.

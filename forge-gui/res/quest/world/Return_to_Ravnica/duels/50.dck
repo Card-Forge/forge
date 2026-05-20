@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Minerva McGonagall
+Title=Minerva McGonagall
+Icon=Minerva McGonagall.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/SCG_Standard_Open_Cincinnati,_Ohio/Joe_Bernal_-_Rakdos_Aggro_(Standard,_#38477).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blood Artist
+4 Diregraf Ghoul
+4 Falkenrath Aristocrat
+4 Geralf's Messenger
+4 Gravecrawler
+4 Rakdos Cackler
+3 Brimstone Volley
+4 Searing Spear
+4 Bump in the Night
+3 Pillar of Flame
+4 Blood Crypt
+4 Dragonskull Summit
+4 Rakdos Guildgate
+10 Swamp
+[Sideboard]
+3 Dreadbore
+1 Mountain
+3 Rakdos, Lord of Riots
+2 Sever the Bloodline
+2 Tragic Slip
+3 Underworld Connections

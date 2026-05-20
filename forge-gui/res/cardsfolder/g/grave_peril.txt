@@ -3,7 +3,6 @@ ManaCost:1 B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonBlack | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When a nonblack creature enters, sacrifice CARDNAME. If you do, destroy that creature.
 SVar:TrigSac:AB$ Destroy | Defined$ TriggeredCardLKICopy | Cost$ Mandatory Sac<1/CARDNAME>
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 Oracle:When a nonblack creature enters, sacrifice Grave Peril. If you do, destroy that creature.

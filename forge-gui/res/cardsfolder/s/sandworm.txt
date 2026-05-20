@@ -1,0 +1,9 @@
+Name:Sandworm
+ManaCost:4 R
+Types:Creature Worm
+PT:5/4
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this creature enters, destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land | SubAbility$ DBChange | AITgts$ Land.nonBasic | SpellDescription$ Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield, then shuffle.
+SVar:DBChange:DB$ ChangeZone | Optional$ True | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | Tapped$ True | DefinedPlayer$ TargetedController | ShuffleNonMandatory$ True
+Oracle:Haste\nWhen this creature enters, destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.

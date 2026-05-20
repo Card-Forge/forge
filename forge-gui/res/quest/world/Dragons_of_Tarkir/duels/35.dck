@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=House Party
+Title=House Party
+Icon=House Party.jpg
+Difficulty=Easy
+Description=Dragons_of_Tarkir/SCG_Invitational_Qualifier_Columbia/Mark_Kinney_-_Mono-Black_Warriors_(Standard,_#237422).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Blood-Chin Fanatic
+4 Blood-Chin Rager
+4 Bloodsoaked Champion
+4 Mardu Shadowspear
+4 Mardu Strike Leader
+4 Mogis's Marauder
+4 Pain Seer
+3 Tormented Hero
+2 Obelisk of Urd
+3 Bile Blight
+2 Ultimate Price
+24 Swamp
+[Sideboard]
+2 Duress
+1 Foul-Tongue Invocation
+4 Master of the Feast
+1 Murderous Cut
+3 Self-Inflicted Wound
+3 Thoughtseize
+1 Virulent Plague

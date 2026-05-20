@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.util.*;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 import javax.swing.*;
@@ -40,7 +41,7 @@ public class PlayerDetailsPanel extends JPanel {
         this.player = player;
 
         zoneLabels.put(ZoneType.Hand, new DetailLabelZone(ZoneType.Hand, "lblHandNOfMax", PlayerView::getMaxHandString));
-        zoneLabels.put(ZoneType.Graveyard, new DetailLabelZone(ZoneType.Graveyard, "lblGraveyardNCardsNTypes", (PlayerView p) -> p.getZoneTypes(TrackableProperty.Graveyard)));
+        zoneLabels.put(ZoneType.Graveyard, new DetailLabelZone(ZoneType.Graveyard, "lblGraveyardNCardsNTypes", p -> p.getZoneTypes(TrackableProperty.Graveyard)));
         zoneLabels.put(ZoneType.Library, new DetailLabelZone(ZoneType.Library, "lblLibraryNCards"));
         zoneLabels.put(ZoneType.Exile, new DetailLabelZone(ZoneType.Exile, "lblExileNCards"));
         zoneLabels.put(ZoneType.Flashback, new DetailLabelZone(ZoneType.Flashback, "lblFlashbackNCards"));
@@ -69,22 +70,7 @@ public class PlayerDetailsPanel extends JPanel {
     }
 
     public static FSkinProp iconFromZone(ZoneType zoneType) {
-        switch (zoneType) {
-            case Hand: return FSkinProp.IMG_ZONE_HAND;
-            case Library: return FSkinProp.IMG_ZONE_LIBRARY;
-            case Graveyard: return FSkinProp.IMG_ZONE_GRAVEYARD;
-            case Exile: return FSkinProp.IMG_ZONE_EXILE;
-            case Sideboard: return FSkinProp.IMG_ZONE_SIDEBOARD;
-            case Flashback: return FSkinProp.IMG_ZONE_FLASHBACK;
-            case Command: return FSkinProp.IMG_ZONE_COMMAND; //IMG_PLANESWALKER
-            case PlanarDeck: return FSkinProp.IMG_ZONE_PLANAR;
-            case SchemeDeck: return FSkinProp.IMG_ZONE_SCHEME;
-            case AttractionDeck: return FSkinProp.IMG_ZONE_ATTRACTION;
-            case ContraptionDeck: return FSkinProp.IMG_ZONE_CONTRAPTION;
-            case Ante: return FSkinProp.IMG_ZONE_ANTE;
-            case Junkyard: return FSkinProp.IMG_ZONE_JUNKYARD;
-            default: return FSkinProp.IMG_HDZONE_LIBRARY;
-        }
+        return FSkinProp.iconFromZone(zoneType, false);
     }
 
     /** Adds various labels to pool area JPanel container. */
@@ -161,15 +147,24 @@ public class PlayerDetailsPanel extends JPanel {
         }
     }
 
-    public void setupMouseActions(Function<ZoneType, Runnable> zoneActionFactory, Function<Byte, Boolean> manaAction) {
+    public void setupMouseActions(Function<ZoneType, Runnable> zoneActionFactory,
+                                   BiConsumer<ZoneType, MouseEvent> zoneRightClick,
+                                   Function<Byte, Boolean> manaAction) {
 
         // Detail label listeners
         for(Map.Entry<ZoneType, DetailLabelZone> zoneEntry : zoneLabels.entrySet()) {
-            Runnable action = zoneActionFactory.apply(zoneEntry.getKey());
+            final ZoneType zone = zoneEntry.getKey();
+            Runnable action = zoneActionFactory.apply(zone);
             zoneEntry.getValue().addMouseListener(new FMouseAdapter() {
                 @Override
                 public void onLeftClick(MouseEvent e) {
                     action.run();
+                }
+                @Override
+                public void onRightClick(MouseEvent e) {
+                    if (zoneRightClick != null) {
+                        zoneRightClick.accept(zone, e);
+                    }
                 }
             });
         }

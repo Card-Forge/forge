@@ -1,0 +1,8 @@
+Name:Watery Grasp
+ManaCost:U
+Types:Enchantment Aura
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
+A:AB$ ChangeZone | Cost$ Waterbend<5> | Defined$ Enchanted | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Shuffle$ True | SpellDescription$ Enchanted creature's owner shuffles it into their library. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)
+Oracle:Enchant creature\nEnchanted creature doesn't untap during its controller's untap step.\nWaterbend {5}: Enchanted creature's owner shuffles it into their library. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)

@@ -1,0 +1,13 @@
+Name:Ancient Adamantoise
+ManaCost:5 G G G
+Types:Creature Turtle
+PT:8/20
+K:Vigilance
+K:Ward:3
+S:Mode$ NoCleanupDamage | ValidCard$ Card.Self | Description$ Damage isn't removed from this creature during cleanup steps.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You,Permanent.Other+YouCtrl | DamageTarget$ Self | ReplaceWith$ DmgMe | Description$ All damage that would be dealt to you and other permanents you control is dealt to this creature instead.
+SVar:DmgMe:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Self | VarType$ Card
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature dies, exile it and create ten tapped Treasure tokens.
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ 10 | TokenTapped$ True
+Oracle:Vigilance, ward {3}\nDamage isn't removed from this creature during cleanup steps.\nAll damage that would be dealt to you and other permanents you control is dealt to this creature instead.\nWhen this creature dies, exile it and create ten tapped Treasure tokens.

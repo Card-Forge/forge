@@ -1,0 +1,68 @@
+jellyfish.png
+size: 224,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 208, 144
+  size: 16, 16     
+Idle 
+  xy: 10, 9
+  size: 13, 20   
+Idle 
+  xy: 42, 9
+  size: 13, 20   
+Idle 
+  xy: 74, 9
+  size: 13, 20   
+Idle 
+  xy: 106, 9
+  size: 13, 20  
+Idle 
+  xy: 138, 9
+  size: 13, 20    
+Walk
+  xy: 10, 40
+  size: 15, 20   
+Walk
+  xy: 42, 40
+  size: 15, 20  
+Walk
+  xy: 74, 40
+  size: 15, 20       
+Walk
+  xy: 106, 40
+  size: 15, 20  
+Walk
+  xy: 138, 40
+  size: 15, 20       
+Attack
+  xy: 10, 74
+  size: 15, 18     
+Attack
+  xy: 42, 74
+  size: 15, 18   
+Attack
+  xy: 74, 74
+  size: 15, 18        
+Attack
+  xy: 106, 74
+  size: 15, 18   
+Attack
+  xy: 138, 74
+  size: 15, 18      
+Death
+  xy: 0, 100
+  size: 32, 20     
+Death
+  xy: 32, 100
+  size: 32, 20    
+Death
+  xy: 64, 100
+  size: 32, 20        
+Death
+  xy: 96, 100
+  size: 32, 20    
+Death
+  xy: 128, 100
+  size: 32, 20    

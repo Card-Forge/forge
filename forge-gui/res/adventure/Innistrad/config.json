@@ -1,0 +1,186 @@
+{
+  "screenWidth": 480,
+  "screenHeight": 270,
+  "skin": "skin/ui_skin.json",
+  "playerBaseSpeed": 32,
+  "minDeckSize": 40,
+  "colorIds":["W","U","B","R","G"],
+  "colorIdNames":["tr(lblWhite) [+W]","tr(lblBlue) [+U]","tr(lblBlack) [+B]","tr(lblRed) [+R]","tr(lblGreen) [+G]"],
+  "restrictedCards": [
+  ],
+  "restrictedEditions": [
+
+  ],
+  "restrictedEvents": [
+
+  ],
+  "allowedEditions": [
+    "ISD",
+    "DKA",
+    "SOI",
+    "MID",
+    "YMID"
+  ],
+  "allowedJumpstart": [
+    "Innistrad",
+    "Dark Ascension",
+    "Shadows over Innistrad",
+    "Midnight Hunt"
+  ],
+  "difficulties": [
+    {
+      "name": "Easy",
+      "startingLife": 16,
+      "startingShards": 5,
+      "startingMoney": 500,
+      "enemyLifeFactor": 0.8,
+      "spawnRank": 0,
+      "goldLoss": 0.02,
+      "lifeLoss": 0.1,
+      "rewardMaxFactor" : 1.5,
+      "sellFactor": 0.6,
+      "shardSellRatio": 0.95,
+      "starterDecks": {
+        "W":"decks/starter/INN/INNwhite_e.json",
+        "B":"decks/starter/INN/INNblack_e.json",
+        "U":"decks/starter/INN/INNblue_e.json",
+        "R":"decks/starter/INN/INNred_e.json",
+        "G":"decks/starter/INN/INNgreen_e.json"
+      },
+      "constructedStarterDecks": {
+        "W":"decks/starter/INN/Adventure - INN Low White.dck",
+        "B":"decks/starter/INN/Adventure - INN Low Black.dck",
+        "U":"decks/starter/INN/Adventure - INN Low Blue.dck",
+        "R":"decks/starter/INN/Adventure - INN Low Red.dck",
+        "G":"decks/starter/INN/Adventure - INN Low Green.dck"
+      },
+      "pileDecks": {
+        "W":"decks/starter/INN/INNpile_white_e.json",
+        "B":"decks/starter/INN/INNpile_black_e.json",
+        "U":"decks/starter/INN/INNpile_blue_e.json",
+        "R":"decks/starter/INN/INNpile_red_e.json",
+        "G":"decks/starter/INN/INNpile_green_e.json"
+      },
+      "startItems": [
+        "Manasight Amulet",
+        "Leather Boots"
+      ]
+    },{
+      "name": "Normal",
+      "startingLife": 12,
+      "startingShards": 2,
+      "startingMoney": 250,
+      "startingDifficulty": true,
+      "enemyLifeFactor": 1.0,
+      "rewardMaxFactor" : 1.0,
+      "spawnRank": 1,
+      "goldLoss": 0.1,
+      "lifeLoss": 0.2,
+      "sellFactor": 0.5,
+      "shardSellRatio": 0.8,
+      "starterDecks": {
+        "W":"decks/starter/INN/INNwhite_n.json",
+        "B":"decks/starter/INN/INNblack_n.json",
+        "U":"decks/starter/INN/INNblue_n.json",
+        "R":"decks/starter/INN/INNred_n.json",
+        "G":"decks/starter/INN/INNgreen_n.json"
+      },
+      "constructedStarterDecks": {
+        "W":"decks/starter/INN/Adventure - INN Low Humans.dck",
+        "B":"decks/starter/INN/Adventure - INN Low Skaabs.dck",
+        "U":"decks/starter/INN/Adventure - INN Low Spirits.dck",
+        "R":"decks/starter/INN/Adventure - INN Low Vampires.dck",
+        "G":"decks/starter/INN/Adventure - INN Low Werewolves.dck"
+      },
+      "pileDecks": {
+        "W":"decks/starter/INN/INNpile_white_n.json",
+        "B":"decks/starter/INN/INNpile_black_n.json",
+        "U":"decks/starter/INN/INNpile_blue_n.json",
+        "R":"decks/starter/INN/INNpile_red_n.json",
+        "G":"decks/starter/INN/INNpile_green_n.json"
+      },
+      "startItems": [
+        "Leather Boots"
+      ]
+    },{
+      "name": "Hard",
+      "startingLife": 8,
+      "startingShards": 0,
+      "startingMoney": 125,
+      "enemyLifeFactor": 1.5,
+      "rewardMaxFactor" : 0.5,
+      "spawnRank": 2,
+      "goldLoss": 0.3,
+      "lifeLoss": 0.3,
+      "sellFactor": 0.25,
+      "shardSellRatio": 0.6,
+      "starterDecks": {
+        "W":"decks/starter/INN/INNwhite_h.json",
+        "B":"decks/starter/INN/INNblack_h.json",
+        "U":"decks/starter/INN/INNblue_h.json",
+        "R":"decks/starter/INN/INNred_h.json",
+        "G":"decks/starter/INN/INNgreen_h.json"
+      },
+      "constructedStarterDecks": {
+        "W":"decks/starter/INN/Adventure - INN Midnight Transformation.dck",
+        "B":"decks/starter/INN/Adventure - INN Undying Masses.dck",
+        "U":"decks/starter/INN/Adventure - INN Aggressive Urges.dck",
+        "R":"decks/starter/INN/Adventure - INN Witches Coven.dck",
+        "G":"decks/starter/INN/Adventure - INN A Token Investigation.dck"
+      },
+      "pileDecks": {
+        "W":"decks/starter/INN/INNpile_white_h.json",
+        "B":"decks/starter/INN/INNpile_black_h.json",
+        "U":"decks/starter/INN/INNpile_blue_h.json",
+        "R":"decks/starter/INN/INNpile_red_h.json",
+        "G":"decks/starter/INN/INNpile_green_h.json"
+      }
+    },{
+      "name": "Insane",
+      "startingLife": 7,
+      "startingShards": 0,
+      "startingMoney": 0,
+      "enemyLifeFactor": 2.5,
+      "rewardMaxFactor" : 0.0,
+      "spawnRank": 2,
+      "goldLoss": 0.5,
+      "lifeLoss": 0.3,
+      "sellFactor": 0.05,
+      "shardSellRatio": 0.3,
+      "starterDecks": {
+        "W":"decks/starter/INN/INNwhite_h.json",
+        "B":"decks/starter/INN/INNblack_h.json",
+        "U":"decks/starter/INN/INNblue_h.json",
+        "R":"decks/starter/INN/INNred_h.json",
+        "G":"decks/starter/INN/INNgreen_h.json"
+      },
+      "constructedStarterDecks": {
+        "W":"decks/starter/INN/Adventure - INN Midnight Transformation.dck",
+        "B":"decks/starter/INN/Adventure - INN Undying Masses.dck",
+        "U":"decks/starter/INN/Adventure - INN Aggressive Urges.dck",
+        "R":"decks/starter/INN/Adventure - INN Witches Coven.dck",
+        "G":"decks/starter/INN/Adventure - INN A Token Investigation.dck"
+      },
+      "pileDecks": {
+        "W":"decks/starter/INN/INNpile_white_h.json",
+        "B":"decks/starter/INN/INNpile_black_h.json",
+        "U":"decks/starter/INN/INNpile_blue_h.json",
+        "R":"decks/starter/INN/INNpile_red_h.json",
+        "G":"decks/starter/INN/INNpile_green_h.json"
+      }
+    }
+  ],
+  "starterEditions": [
+    "ISD",
+    "DKA",
+    "SOI",
+    "MID"
+  ],
+  "starterEditionNames": [
+    "Innistrad",
+    "Dark Ascension",
+    "Shadows over Innistrad",
+    "Midnight Hunt"
+  ]
+}
+

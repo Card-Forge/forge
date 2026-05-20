@@ -1,7 +1,7 @@
 [metadata]
 Name=Spirit_Dark
 [Main]
-4 Accursed Spirit|MB1|1
+4 Accursed Spirit|PLST|1
 2 Consume Spirit|10E|1
 2 Crypt Ghast|C14|1
 2 Darkling Stalker|TMP|1
@@ -20,7 +20,7 @@ Name=Spirit_Dark
 11 Swamp|CHK|1
 5 Swamp|CHK|3
 7 Swamp|CHK|4
-4 Tormented Soul|PW11|1
+4 Tormented Soul|M12|1
 4 Will-o'-the-Wisp|4ED|1
 2 Yargle, Glutton of Urborg|J22|1
 [Sideboard]

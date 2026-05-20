@@ -1,0 +1,10 @@
+Name:Zack Fair
+ManaCost:W
+Types:Legendary Creature Human Soldier
+PT:0/1
+K:etbCounter:P1P1:1
+A:AB$ Pump | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Indestructible | SubAbility$ DBPutCounter | SpellDescription$ Target creature you control gains indestructible until end of turn. Put CARDNAME's counters on that creature and attach an Equipment that was attached to CARDNAME to that creature.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ EachFromSource | EachFromSource$ Self | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Choices$ Equipment.Attached | ChoiceTitle$ Choose an Equipment you control | Defined$ Targeted
+DeckHas:Ability$Counters
+Oracle:Zack Fair enters with a +1/+1 counter on it.\n{1}, Sacrifice Zack Fair: Target creature you control gains indestructible until end of turn. Put Zack Fair's counters on that creature and attach an Equipment that was attached to Zack Fair to that creature.

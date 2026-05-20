@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Jacob Grimm
+Title=Jacob Grimm
+Icon=Jacob Grimm.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/27TrueRunes_-_Orzhov_Midrange_(Standard,_#1618876).dck
+Deck Type=constructed
+
+[Main]
+4 Ambitious Farmhand
+2 Loran of the Third Path
+2 Phyrexian Fleshgorger
+3 Lay Down Arms
+3 Banishing Slash
+2 White Sun's Twilight
+4 Temporary Lockdown
+4 Wedding Announcement
+4 The Wandering Emperor
+4 The Eternal Wanderer
+2 Vraska, Betrayal's Sting
+2 Kaya, Intangible Slayer
+10 Plains
+4 Shattered Sanctum
+1 Eiganjo, Seat of the Empire
+1 Takenuma, Abandoned Mire
+4 Raffine's Tower
+4 Sunlit Marsh
+[Sideboard]
+2 Cut Down
+3 Path of Peril
+2 Phyrexian Fleshgorger

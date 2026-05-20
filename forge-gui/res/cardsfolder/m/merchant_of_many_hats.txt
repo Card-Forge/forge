@@ -1,0 +1,8 @@
+Name:Merchant of Many Hats
+ManaCost:1 B
+Types:Creature Human Peasant Ally
+PT:2/2
+A:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return this card from your graveyard to your hand.
+SVar:DiscardMe:1
+SVar:SacMe:3
+Oracle:{2}{B}: Return this card from your graveyard to your hand.

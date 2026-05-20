@@ -1,0 +1,12 @@
+Name:Doctor Octopus, Master Planner
+Variant:UniversesWithin:FlavorName:Neach, Pinnacle Pariah
+ManaCost:5 U B
+Types:Legendary Creature Human Scientist Villain
+PT:4/8
+S:Mode$ Continuous | Affected$ Villain.Other+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Other Villains you control get +2/+2.
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ 8 | Description$ Your maximum hand size is eight.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ LT8 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if you have fewer than eight cards in hand, draw cards equal to the difference.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ Difference
+SVar:X:Count$ValidHand Card.YouOwn
+SVar:Difference:Number$8/Minus.X
+Oracle:Other Villains you control get +2/+2.\nYour maximum hand size is eight.\nAt the beginning of your end step, if you have fewer than eight cards in hand, draw cards equal to the difference.

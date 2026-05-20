@@ -8,6 +8,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand THS
 FatPack=9
 FatPackExtraSlots=80 BasicLands THS
 ScryfallCode=JOU
+TokenFallbackCode=BNG
 
 [cards]
 1 R Aegis of the Gods @Yefim Kligerman
@@ -177,13 +178,6 @@ ScryfallCode=JOU
 165 R Temple of Malady @James Paick
 
 [tokens]
-0 c_a_gold_sac @Unknown
-0 rg_2_2_satyr_haste @Unknown
-0 u_2_2_e_bird_flying @Unknown
-0 w_1_1_soldier @Unknown
-0 w_1_1_soldier @Unknown
-0 w_1_1_soldier @Unknown
-0 r_2_3_minotaur_haste @Craig J Spearing
 1 u_4_4_sphinx_flying @Jesper Ejsing
 2 b_x_x_zombie @Zack Stella
 3 r_2_3_minotaur_haste @Craig J Spearing

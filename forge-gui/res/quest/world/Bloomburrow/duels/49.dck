@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Catwoman
+Title=Catwoman
+Icon=Catwoman.jpg
+Difficulty=Easy
+Description=./Standard/Bloomburrow/Alex_Bowman_-_Orzhov_Midrange_(Standard,_#2177496).dck
+Deck Type=constructed
+
+[Main]
+1 Aclazotz, Deepest Betrayal
+2 Beza, the Bounding Spring
+4 Deep-Cavern Bat
+3 Dust Animus
+1 Elesh Norn, Mother of Machines
+3 Gix, Yawgmoth Praetor
+1 Loran of the Third Path
+2 Preacher of the Schism
+3 Zoraline, Cosmos Caller
+1 Destroy Evil
+3 Feed the Cycle
+2 Get Lost
+1 Legions to Ashes
+2 Season of the Burrow
+1 Sunfall
+2 Virtue of Persistence
+2 The Eternal Wanderer
+4 Caves of Koilos
+4 Concealed Courtyard
+4 Fabled Passage
+2 Fountainport
+3 Plains
+2 Restless Fortress
+4 Shadowy Backstreet
+3 Swamp
+[Sideboard]
+2 Anoint with Affliction
+1 Bandit's Talent
+2 Breach the Multiverse
+2 Duress
+1 Karn's Sylex
+1 Kaya, Intangible Slayer
+1 Loran of the Third Path
+2 Lunar Convocation
+3 Temporary Lockdown

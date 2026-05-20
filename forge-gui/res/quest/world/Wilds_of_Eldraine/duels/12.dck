@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Redwall
+Title=Redwall
+Icon=Redwall.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/Inaba_Konan_-_BR_Aggro_(Standard,_#1755080).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodtithe Harvester
+2 Tenacious Underdog
+2 Braids, Arisen Nightmare
+4 Cult Conscript
+1 Razorlash Transmogrant
+2 Archfiend of the Dross
+1 Vraan, Executioner Thane
+4 Voldaren Thrillseeker
+1 Tangled Colony
+3 Urabrask's Forge
+2 Go for the Throat
+2 Cut Down
+2 Sheoldred's Edict
+1 Witchstalker Frenzy
+2 Drown in Ichor
+2 Rankle's Prank
+3 Ob Nixilis, the Adversary
+6 Swamp
+3 Mountain
+4 Sulfurous Springs
+4 Blackcleave Cliffs
+4 Haunted Ridge
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+[Sideboard]
+2 Duress
+1 Graveyard Trespasser
+1 Mukotai Soulripper
+2 Extract the Truth
+3 Unlicensed Hearse
+2 Dreams of Steel and Oil
+2 Glistening Deluge
+2 Sword of Once and Future

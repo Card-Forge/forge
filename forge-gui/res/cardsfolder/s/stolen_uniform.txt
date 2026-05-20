@@ -1,0 +1,10 @@
+Name:Stolen Uniform
+ManaCost:U
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | RememberObjects$ ThisTargetedCard | SubAbility$ DBGainControl | SpellDescription$ Choose target creature you control and target Equipment. Gain control of that Equipment until end of turn. Attach it to the chosen creature. When you lose control of that Equipment this turn, if it's attached to a creature you control, unattach it.
+SVar:DBGainControl:DB$ GainControl | ValidTgts$ Equipment | LoseControl$ EOT | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Object$ ParentTarget | Defined$ Remembered | SubAbility$ DBDelayTrig
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ ChangesController | ValidCard$ Card.IsTriggerRemembered | IsPresent$ Card.IsTriggerRemembered+AttachedTo Creature.YouCtrl | ValidOriginalController$ You | RememberObjects$ ParentTarget | ThisTurn$ True | Execute$ TrigUnattach | SubAbility$ DBCleanup | TriggerDescription$ When you lose control of that Equipment this turn, if it's attached to a creature you control, unattach it.
+SVar:TrigUnattach:DB$ Unattach | Defined$ DelayTriggerRememberedLKI
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Choose target creature you control and target Equipment. Gain control of that Equipment until end of turn. Attach it to the chosen creature. When you lose control of that Equipment this turn, if it's attached to a creature you control, unattach it.

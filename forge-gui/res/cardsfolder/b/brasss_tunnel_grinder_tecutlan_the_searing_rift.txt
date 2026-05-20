@@ -20,5 +20,5 @@ ManaCost:no cost
 Types:Legendary Land Cave
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 T:Mode$ SpellCast | ValidCard$ Permanent | ValidSA$ Spell.ManaFromCard.StrictlySelf | ValidActivatingPlayer$ You | Execute$ TrigDiscover | TriggerDescription$ Whenever you cast a permanent spell using mana produced by CARDNAME, discover X, where X is that spell's mana value.
-SVar:TrigDiscover:DB$ Discover | Num$ TriggeredStackInstance$CardManaCostLKI
+SVar:TrigDiscover:DB$ Discover | Num$ TriggeredSpellAbility$CardManaCostLKI
 Oracle:(Transforms from Brass's Tunnel-Grinder.)\n{T}: Add {R}.\nWhenever you cast a permanent spell using mana produced by Tecutlan, the Searing Rift, discover X, where X is that spell's mana value.

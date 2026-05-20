@@ -1,0 +1,47 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Barrage
+Description=Barrage unleashes a relentless assault. Green creatures and red burn combine for explosive damage.
+Deck Type=constructed
+Set=PLS
+Image=barrage.jpg
+[main]
+4 Mountain|INV|1
+4 Mountain|INV|2
+3 Mountain|INV|3
+4 Forest|INV|1
+4 Forest|INV|2
+4 Forest|INV|3
+2 Alpha Kavu|PLS
+1 Amphibious Kavu|PLS
+1 Caldera Kavu|PLS
+2 Flametongue Kavu|PLS
+1 Gaea's Herald|PLS
+2 Horned Kavu|PLS
+1 Kavu Recluse|PLS
+1 Llanowar Elite|INV
+2 Mogg Jailer|PLS
+1 Mogg Sentry|PLS
+2 Nomadic Elf|INV
+1 Root Greevil|PLS
+1 Serpentine Kavu|INV
+2 Sparkcaster|PLS
+1 Thornscape Apprentice|INV
+3 Thornscape Familiar|PLS
+1 Thunderscape Apprentice|INV
+1 Thunderscape Battlemage|PLS
+1 Thunderscape Familiar|PLS
+2 Fertile Ground|USG
+1 Fires of Yavimaya|INV
+1 Assault // Battery|INV
+1 Explosive Growth|INV
+1 Magma Burst|PLS
+1 Scorching Lava|INV
+1 Simoon|VIS
+1 Singe|PLS
+1 Implode|PLS
+[sideboard]

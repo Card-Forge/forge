@@ -1,0 +1,9 @@
+Name:Harmonious Grovestrider
+ManaCost:3 G G
+Types:Creature Beast
+PT:*/*
+K:Ward:2
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of lands you control.
+SVar:X:Count$Valid Land.YouCtrl
+SVar:BuffedBy:Land
+Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nHarmonious Grovestrider's power and toughness are each equal to the number of lands you control.

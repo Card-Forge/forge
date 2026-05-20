@@ -1,0 +1,10 @@
+Name:Sleep Magic
+ManaCost:U
+Types:Enchantment Aura
+K:Enchant:Creature
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When this Aura enters, tap enchanted creature.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When enchanted creature is dealt damage, sacrifice this Aura.
+SVar:TrigSac:DB$ Sacrifice
+Oracle:Enchant creature\nWhen this Aura enters, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.\nWhen enchanted creature is dealt damage, sacrifice this Aura.

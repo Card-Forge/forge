@@ -1,0 +1,26 @@
+Name:Venat, Heart of Hydaelyn
+ManaCost:1 W W
+Types:Legendary Creature Elder Wizard
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Legendary | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | ActivationLimit$ 1 | TriggerDescription$ Whenever you cast a legendary spell, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+A:AB$ ChangeZone | PrecostDesc$ Hero's Sundering — | Cost$ 7 T | ValidTgts$ Permanent.nonLand | SorcerySpeed$ True | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBTransform | SpellDescription$ Exile target nonland permanent. Transform NICKNAME. Activate only as a sorcery.
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | StackDescription$ None
+AlternateMode:DoubleFaced
+DeckHas:Ability$Counters
+DeckHints:Type$Legendary
+Oracle:Whenever you cast a legendary spell, draw a card. This ability triggers only once each turn.\nHero's Sundering — {7}, {T}: Exile target nonland permanent. Transform Venat. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Hydaelyn, the Mothercrystal
+ManaCost:no cost
+Colors:white
+Types:Legendary Creature God
+PT:4/4
+K:Indestructible
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Blessing of Light — At the beginning of combat on your turn, put a +1/+1 counter on another target creature you control. Until your next turn, it gains indestructible. If that creature is legendary, draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Indestructible | Duration$ UntilYourNextTurn | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Targeted | ConditionPresent$ Legendary
+Oracle:Indestructible\nBlessing of Light — At the beginning of combat on your turn, put a +1/+1 counter on another target creature you control. Until your next turn, it gains indestructible. If that creature is legendary, draw a card.

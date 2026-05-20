@@ -1,0 +1,119 @@
+crocodile_water.png
+size: 416,110
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 224, 45
+  size: 16, 16
+Idle 
+  xy: 11,0
+  size: 16, 16   
+Idle 
+  xy: 43,0
+  size: 16, 16    
+Idle 
+  xy: 75,0
+  size: 16, 16   
+Idle 
+  xy: 107,0
+  size: 16, 16   
+Idle 
+  xy: 139,0
+  size: 16, 16   
+Idle 
+  xy: 171,0
+  size: 16, 16    
+Idle 
+  xy: 203,0
+  size: 16, 16   
+Idle 
+  xy: 235,0
+  size: 16, 16   
+Idle 
+  xy: 267,0
+  size: 16, 16   
+Idle 
+  xy: 299,0
+  size: 16, 16    
+Idle 
+  xy: 331,0
+  size: 16, 16   
+Idle 
+  xy: 363,0
+  size: 16, 16   
+Idle 
+  xy: 395,0
+  size: 16, 16   
+Walk 
+  xy: 11,0
+  size: 16, 16   
+Walk 
+  xy: 43,0
+  size: 16, 16    
+Walk 
+  xy: 75,0
+  size: 16, 16   
+Walk 
+  xy: 107,0
+  size: 16, 16   
+Walk 
+  xy: 139,0
+  size: 16, 16   
+Walk 
+  xy: 171,0
+  size: 16, 16    
+Walk 
+  xy: 203,0
+  size: 16, 16   
+Walk 
+  xy: 235,0
+  size: 16, 16   
+Walk 
+  xy: 267,0
+  size: 16, 16   
+Walk 
+  xy: 299,0
+  size: 16, 16    
+Walk 
+  xy: 331,0
+  size: 16, 16   
+Walk 
+  xy: 363,0
+  size: 16, 16   
+Walk 
+  xy: 395,0
+  size: 16, 16   
+Attack 
+  xy: 2,33
+  size: 26, 18          
+Attack 
+  xy: 34,33
+  size: 26, 18    
+Attack 
+  xy: 66,33
+  size: 26, 18    
+Attack 
+  xy: 98,33
+  size: 26, 18      
+Attack 
+  xy: 130,33
+  size: 26, 18    
+Attack 
+  xy: 162,33
+  size: 26, 18           
+Death 
+  xy: 2, 62
+  size: 24, 18      
+Death 
+  xy: 34, 62
+  size: 24, 18   
+Death 
+  xy: 66, 62
+  size: 24, 18   
+Death 
+  xy: 98, 62
+  size: 24, 18   
+Death 
+  xy: 130, 62
+  size: 24, 18   

@@ -1,0 +1,7 @@
+Name:Deadly Embrace
+ManaCost:3 B B
+Types:Sorcery
+A:SP$ Destroy | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SubAbility$ DBDraw | SpellDescription$ Destroy target creature an opponent controls. Then draw a card for each creature that died this turn.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+Oracle:Destroy target creature an opponent controls. Then draw a card for each creature that died this turn.

@@ -1,0 +1,9 @@
+Name:Maximus, Knight Apparent
+ManaCost:3 R
+Types:Legendary Creature Human Knight
+PT:4/4
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When NICKNAME enters, you may search your library for an Equipment card with mana value 2, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Equipment.cmcEQ2 | ShuffleNonMandatory$ True
+A:AB$ PutCounter | Cost$ 1 Sac<1/Artifact> | Defined$ You | CounterType$ ENERGY | CounterNum$ 2 | SpellDescription$ You get {E}{E} (two energy counters).
+Oracle:Trample\nWhen Maximus enters, you may search your library for an Equipment card with mana value 2, reveal it, put it into your hand, then shuffle.\n{1}, Sacrifice an artifact: You get {E}{E} (two energy counters).

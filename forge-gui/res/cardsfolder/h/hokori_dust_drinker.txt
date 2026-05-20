@@ -3,7 +3,7 @@ ManaCost:2 W W
 Types:Legendary Creature Spirit
 PT:2/2
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Land | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Lands don't untap during their controller's untap steps.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | IsPresent$ Card.Self | Execute$ TrigUntap | TriggerDescription$ At the beginning of each player's upkeep, that player untaps a land they control.
-SVar:TrigUntap:DB$ Untap | UntapExactly$ True | UntapType$ Land.ActivePlayerCtrl+tapped | Amount$ 1 | Defined$ TriggeredPlayer
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of each player's upkeep, that player untaps a land they control.
+SVar:TrigUntap:DB$ Untap | UntapExactly$ True | UntapType$ Land.ActivePlayerCtrl | Amount$ 1 | Defined$ TriggeredPlayer
 AI:RemoveDeck:Random
 Oracle:Lands don't untap during their controllers' untap steps.\nAt the beginning of each player's upkeep, that player untaps a land they control.

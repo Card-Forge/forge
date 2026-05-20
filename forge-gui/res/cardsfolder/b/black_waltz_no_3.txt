@@ -1,0 +1,10 @@
+Name:Black Waltz No. 3
+ManaCost:2 B R
+Types:Legendary Creature Wizard
+PT:2/2
+K:Flying
+K:Deathtouch
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME deals 2 damage to each opponent.
+SVar:TrigDealDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ Player.Opponent
+SVar:BuffedBy:Card.nonLand+nonCreature
+Oracle:Flying, deathtouch\nWhenever you cast a noncreature spell, Black Waltz No. 3 deals 2 damage to each opponent.

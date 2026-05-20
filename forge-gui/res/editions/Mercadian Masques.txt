@@ -95,7 +95,7 @@ FoilAlwaysInCommonSlot=False
 80 U False Demise @Pat Lewis
 81 U Glowing Anemone @Pete Venters
 82 C Gush @Kev Walker
-83 U High Seas @Massimilano Frezzato
+83 U High Seas @Massimiliano Frezzato
 84 C Hoodwink @Arnie Swekel
 85 U Indentured Djinn @Val Mayerik
 86 R Karn's Touch @Alan Pollack
@@ -241,7 +241,7 @@ FoilAlwaysInCommonSlot=False
 226 U Warpath @Paolo Parente
 227 C Wild Jhovall @Daren Bader
 228 U Word of Blasting @Eric Peterson
-229 C Ancestral Mask @Massimilano Frezzato
+229 C Ancestral Mask @Massimiliano Frezzato
 230 R Bifurcate @John Matson
 231 U Boa Constrictor @Carl Critchlow
 232 U Briar Patch @Rebecca Guay
@@ -363,13 +363,3 @@ FoilAlwaysInCommonSlot=False
 348 L Forest @Rob Alexander
 349 L Forest @Rob Alexander
 350 L Forest @Terry Springer
-
-[tokens]
-butterfly
-w_1_1_soldier
-w_1_1_spirit_flying
-b_2_2_zombie
-g_1_1_insect
-g_2_2_monkey
-g_1_1_saproling
-g_1_1_snake

@@ -1,0 +1,36 @@
+{
+  "name": "Wolf",
+  "mainDeck": [
+    {
+      "count": 23,
+      "colors": [
+        "Green"
+      ],
+      "subTypes": [
+        "Wolf"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 15,
+      "colors": [
+        "Green"
+      ],
+      "subTypes": [
+        "Wolf"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Forest|7ED"
+    }
+  ]
+}

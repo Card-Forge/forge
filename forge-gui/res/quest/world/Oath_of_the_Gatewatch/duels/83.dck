@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Hulk
+Title=Hulk
+Icon=Hulk.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/Modern_Daily_#9485737/Tinefol_Ru_-_Colorless_Eldrazi_(Modern,_#607995).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eldrazi Mimic
+4 Endless One
+4 Matter Reshaper
+3 Oblivion Sower
+4 Reality Smasher
+4 Simian Spirit Guide
+4 Thought-Knot Seer
+1 Ulamog, the Ceaseless Hunger
+4 Expedition Map
+4 Dismember
+4 Eldrazi Temple
+4 Eye of Ugin
+2 Urborg, Tomb of Yawgmoth
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+2 Wastes
+[Sideboard]
+3 Chalice of the Void
+3 Oblivion Stone
+4 Relic of Progenitus
+3 Warping Wail

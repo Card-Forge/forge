@@ -1,0 +1,10 @@
+Name:Coliseum Behemoth
+ManaCost:5 G G
+Types:Creature Beast
+PT:7/7
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When this creature enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBDestroy,DBDraw
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:Trample\nWhen this creature enters, choose one —\n• Destroy target artifact or enchantment.\n• Draw a card.

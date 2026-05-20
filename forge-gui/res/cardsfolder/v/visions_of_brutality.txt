@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Devoid
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't block. | Description$ Enchanted creature can't block.
+S:Mode$ CantBlock | ValidCard$ Creature.EnchantedBy | Description$ Enchanted creature can't block.
 T:Mode$ DamageDealtOnce | ValidSource$ Card.AttachedBy | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, its controller loses that much life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredSourceController | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount

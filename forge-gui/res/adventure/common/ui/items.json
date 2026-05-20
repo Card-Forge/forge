@@ -37,10 +37,10 @@
     {
       "type": "TextButton",
       "name": "done",
-      "text": "[+OK]",
+      "text": "Back",
       "width": 48,
       "height": 30,
-      "binding": "Use",
+      "binding": "Back",
       "x": 420,
       "y": 120
     }  ,

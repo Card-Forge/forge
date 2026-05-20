@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Indiana Jones
+Title=Indiana Jones
+Icon=Indiana Jones.jpg
+Difficulty=Medium
+Description=./Standard/Murders_at_Karlov_Manor/Darkvulpine_-_Esper_Midrange_(Standard,_#2001062).dck
+Deck Type=constructed
+
+[Main]
+1 Aclazotz, Deepest Betrayal
+4 Preacher of the Schism
+4 Deep-Cavern Bat
+2 Dennick, Pious Apprentice
+3 Faerie Mastermind
+1 Gix, Yawgmoth Praetor
+4 Raffine, Scheming Seer
+2 Sheoldred, the Apocalypse
+2 Tishana's Tidebinder
+3 Cut Down
+3 Go for the Throat
+3 No More Lies
+2 Virtue of Loyalty
+1 Adarkar Wastes
+4 Darkslick Shores
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+1 Plains
+2 Raffine's Tower
+3 Restless Anchorage
+2 Seachrome Coast
+4 Shattered Sanctum
+1 Shipwreck Marsh
+3 Underground River
+3 Caves of Koilos
+[Sideboard]
+2 Cryptic Coat
+2 Destroy Evil
+2 Duress
+2 Disdainful Stroke
+2 Kutzil's Flanker
+1 Loran of the Third Path
+1 Negate
+1 Shrouded Shepherd
+2 Temporary Lockdown

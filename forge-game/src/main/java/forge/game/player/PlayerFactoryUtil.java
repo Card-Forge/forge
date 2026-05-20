@@ -23,21 +23,21 @@ public class PlayerFactoryUtil {
                 sbValid.append("| ValidSource$ ").append(k[1]);
             }
 
-            String effect = "Mode$ CantTarget | ValidPlayer$ Player.You | Secondary$ True "
+            String effect = "Mode$ CantTarget | ValidTarget$ Player.You | Secondary$ True "
                     + sbValid.toString() + " | Activator$ Opponent | EffectZone$ Command | Description$ "
                     + sbDesc.toString() + " (" + inst.getReminderText() + ")";
 
             final Card card = player.getKeywordCard();
             inst.addStaticAbility(StaticAbility.create(effect, card, card.getCurrentState(), false));
         } else if (keyword.equals("Shroud")) {
-            String effect = "Mode$ CantTarget | ValidPlayer$ Player.You | Secondary$ True "
+            String effect = "Mode$ CantTarget | ValidTarget$ Player.You | Secondary$ True "
                     + "| EffectZone$ Command | Description$ Shroud (" + inst.getReminderText() + ")";
 
             final Card card = player.getKeywordCard();
             inst.addStaticAbility(StaticAbility.create(effect, card, card.getCurrentState(), false));
         } else if (keyword.startsWith("Protection")) {
             String valid = CardFactoryUtil.getProtectionValid(keyword, false);
-            String effect = "Mode$ CantTarget | Protection$ True | ValidPlayer$ Player.You | EffectZone$ Command | Secondary$ True ";
+            String effect = "Mode$ CantTarget | ValidTarget$ Player.You | EffectZone$ Command | Secondary$ True ";
             if (!valid.isEmpty()) {
                 effect += "| ValidSource$ " + valid;
             }
@@ -45,7 +45,7 @@ public class PlayerFactoryUtil {
             inst.addStaticAbility(StaticAbility.create(effect, card, card.getCurrentState(), false));
 
             // Attach
-            effect = "Mode$ CantAttach | Protection$ True | Target$ Player.You | EffectZone$ Command | Secondary$ True ";
+            effect = "Mode$ CantAttach | Target$ Player.You | EffectZone$ Command | Secondary$ True ";
             if (!valid.isEmpty()) {
                 effect += "| ValidCard$ " + valid;
             }

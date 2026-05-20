@@ -16,5 +16,5 @@ ALTERNATE
 Name:Have for Dinner
 ManaCost:1 W
 Types:Instant Adventure
-A:SP$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human,c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a 1/1 white Human creature token and a Food token. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Token | TokenScript$ w_1_1_human,c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a 1/1 white Human creature token and a Food token. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Create a 1/1 white Human creature token and a Food token.

@@ -2,9 +2,16 @@ Name:Kiora's Boss Effect
 ManaCost:no cost
 Colors:green,blue
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Player | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ Each player may play an additional land on each of their turns.
-T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's draw step, that player draws an additional card.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredPlayer
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 blue Tentacle creature token.
 SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ u_1_1_tentacle
-Oracle:At the beginning of each player's draw step, that player draws an additional card.\nEach player may play an additional land on each of their turns.\nAt the beginning of your upkeep, create a 1/1 blue Tentacle creature token.
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | IsPresent$ Tentacle.YouCtrl | PresentCompare$ LE2 | Execute$ TrigDraw | TriggerZones$ Command | TriggerDescription$ At the beginning of your draw step, if you have 2 or less Tentacles, draw an additional card.
+SVar:TrigDraw:DB$ Draw
+S:Mode$ Continuous | Affected$ You | IsPresent$ Tentacle.YouCtrl | PresentCompare$ LE3 | EffectZone$ Command | AdjustLandPlays$ 1 | Description$ As long as you control 3 or less Tentacles, you may play an additional land each turn.
+T:Mode$ Phase | Phase$ End Of Turn | ValidPlayer$ You | TriggerZones$ Command | IsPresent$ Tentacle.YouCtrl | PresentCompare$ GE3 | Execute$ TrigChoose | TriggerDescription$ At the beginning of your and step, if you control 3 or more Tentacles, exile a random creature from your deck into exile with suspend counters on it equal to its mana cost. It perpetually gains "Suspend". 
+SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.YouOwn | ChoiceZone$ Library | AtRandom$ True | Mandatory$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Library | Destination$ Exile | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ ChosenCard | CounterNum$ X | CounterType$ TIME | SubAbility$ GiveSuspend
+SVar:GiveSuspend:DB$ Pump | Defined$ ChosenCard | KW$ Suspend | PumpZone$ Exile | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:X:ChosenCard$CardManaCost
+Oracle:At the beginning of your upkeep, create  a 1/1 blue Tentacle creature token. \nAt the beginning of your draw step, if you have 2 or less Tentacles, draw an additional card.\nAs long as you control 3 or less Tentacles, you may play an additional land each turn.\nAt the beginning of your and step, if you control 3 or more Tentacles, exile a random creature from your deck into exile with suspend counters on it equal to its mana cost. It perpetually gains "Suspend". 

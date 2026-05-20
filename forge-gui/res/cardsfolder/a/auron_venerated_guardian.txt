@@ -1,0 +1,12 @@
+Name:Auron, Venerated Guardian
+ManaCost:3 W
+Types:Legendary Creature Human Spirit Samurai
+PT:2/5
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ Shooting Star — Whenever NICKNAME attacks, put a +1/+1 counter on it. When you do, exile target creature defending player controls with power less than NICKNAME's power until NICKNAME leaves the battlefield.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | RememberAmount$ True | SubAbility$ TrigImmediate
+SVar:TrigImmediate:DB$ ImmediateTrigger | Execute$ TrigExile | TriggerAmount$ Count$RememberedNumber | SubAbility$ DBCleanup | TriggerDescription$ When you do, exile target creature defending player controls with power less than NICKNAME's power until NICKNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.ControlledBy Spawner>TriggeredDefendingPlayer+powerLTX | TgtPrompt$ Select target creature defending player controls with power less than NICKNAME's power | Duration$ UntilHostLeavesPlay
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$CardPower
+Oracle:Vigilance\nShooting Star — Whenever Auron attacks, put a +1/+1 counter on it. When you do, exile target creature defending player controls with power less than Auron's power until Auron leaves the battlefield.

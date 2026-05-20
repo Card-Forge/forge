@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Catwoman
+Title=Catwoman
+Icon=Catwoman.jpg
+Difficulty=Very Hard
+Description=./Modern/Bloomburrow/Chompers203_-_Domain_Aggro_(Modern,_#2165972).dck
+Deck Type=constructed
+
+[Main]
+4 Ragavan, Nimble Pilferer
+4 Orcish Bowmasters
+3 Phlage, Titan of Fire's Fury
+4 Pawpatch Recruit
+4 Territorial Kavu
+4 Scion of Draco
+4 Lightning Bolt
+4 Tribal Flames
+4 Leyline Binding
+4 Leyline of the Guildpact
+1 Lush Portico
+1 Mountain
+1 Arena of Glory
+4 Flooded Strand
+4 Wooded Foothills
+1 Plains
+1 Blood Crypt
+1 Sacred Foundry
+1 Steam Vents
+1 Temple Garden
+4 Arid Mesa
+1 Xander's Lounge
+[Sideboard]
+2 Damping Sphere
+2 Soul-Guide Lantern
+2 Pick Your Poison
+2 Pyroclasm
+4 Stubborn Denial
+1 Jegantha, the Wellspring
+2 Unlicensed Hearse

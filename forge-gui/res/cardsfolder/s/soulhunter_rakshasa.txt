@@ -2,7 +2,7 @@ Name:Soulhunter Rakshasa
 ManaCost:3 B B
 Types:Creature Demon
 PT:5/5
-K:CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.wasCastFromYourHandByYou+Self | Execute$ TrigDmg | TriggerDescription$ When CARDNAME enters, if you cast it from your hand, it deals 1 damage to target opponent for each Swamp you control.
 SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ Count$Valid Swamp.YouCtrl
 Oracle:Soulhunter Rakshasa can't block.\nWhen Soulhunter Rakshasa enters, if you cast it from your hand, it deals 1 damage to target opponent for each Swamp you control.

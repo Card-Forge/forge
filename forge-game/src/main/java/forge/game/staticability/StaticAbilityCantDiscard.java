@@ -8,13 +8,11 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityCantDiscard {
 
-    static String MODE = "CantDiscard";
-
     public static boolean cantDiscard(final Player player, final SpellAbility cause, final boolean effect)  {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.CantDiscard)) {
                     continue;
                 }
 

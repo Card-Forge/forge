@@ -25,6 +25,7 @@ import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import javax.swing.KeyStroke;
 
@@ -59,6 +60,7 @@ import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
+import forge.util.StreamUtil;
 
 /**
  * Child controller for quest deck editor UI.
@@ -148,15 +150,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
 
     // fills number of decks using each card
     private Map<PaperCard, Integer> countDecksForEachCard() {
-        final Map<PaperCard, Integer> result = new HashMap<>();
-        for (final Deck deck : this.questData.getMyDecks()) {
-            for (final Entry<PaperCard, Integer> e : deck.getMain()) {
-                final PaperCard card = e.getKey();
-                final Integer amount = result.get(card);
-                result.put(card, amount == null ? 1 : 1 + amount);
-            }
-        }
-        return result;
+        return questData.getMyDecks().stream().flatMap(deck -> StreamUtil.stream(deck.getMain())).collect(Collectors.groupingBy(e -> e.getKey(), Collectors.summingInt(e -> e.getValue())));
     }
 
     //=========== Overridden from ACEditorBase

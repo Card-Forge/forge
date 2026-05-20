@@ -2,7 +2,7 @@ Name:Hall of Flame
 ManaCost:0
 Colors:red
 Types:Enchantment Saga
-K:Hexproof
+K:Ward:1
 K:Chapter:5:DBConjure,DBDiscount,DBConjureSpell,DBDiscount2,DBConjureSpell2
 SVar:DBConjure:DB$MakeCard | Conjure$ True | Name$ Mountain | Zone$ Battlefield
 SVar:DBDiscount:DB$ Effect | Duration$ UntilYourNextTurn | StaticAbilities$ ReduceCost | SpellDescription$ Spells you cast cost {R} less to cast until your next turn.

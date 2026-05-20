@@ -1,0 +1,9 @@
+Name:Saved by the Shell
+ManaCost:1 G
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Turtle.YouCtrl | Description$ This spell costs {1} less to cast if you control a Turtle.
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature you control. It gains trample, hexproof, and indestructible until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample & Hexproof & Indestructible
+DeckHas:Ability$Counters
+DeckHints:Type$Turtle
+Oracle:This spell costs {1} less to cast if you control a Turtle.\nPut a +1/+1 counter on target creature you control. It gains trample, hexproof, and indestructible until end of turn.

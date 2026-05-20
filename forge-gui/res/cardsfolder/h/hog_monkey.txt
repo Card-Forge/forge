@@ -1,0 +1,9 @@
+Name:Hog-Monkey
+ManaCost:2 B
+Types:Creature Boar Monkey
+PT:3/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control with a +1/+1 counter on it gains menace until end of turn. (It can't be blocked except by two or more creatures.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+counters_GE1_P1P1 | TgtPrompt$ Select target creature you control with a +1/+1 counter on it | KW$ Menace
+A:AB$ PutCounter | Cost$ 5 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | Exhaust$ True | SpellDescription$ Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)
+DeckHas:Ability$Counters
+Oracle:At the beginning of combat on your turn, target creature you control with a +1/+1 counter on it gains menace until end of turn. (It can't be blocked except by two or more creatures.)\nExhaust — {5}: Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)

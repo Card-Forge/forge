@@ -2,7 +2,7 @@ Name:Murasa
 ManaCost:no cost
 Types:Plane Zendikar
 T:Mode$ ChangesZone | ValidCard$ Creature.!token | Origin$ Any | Destination$ Battlefield | TriggerZones$ Command | Execute$ TrigRamp | OptionalDecider$ TriggeredCardController | TriggerDescription$ Whenever a nontoken creature enters, its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.
-SVar:TrigRamp:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | DefinedPlayer$ TriggeredCardController | ShuffleNonMandatory$ True
+SVar:TrigRamp:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | DefinedPlayer$ TriggeredCardController | ShuffleNonMandatory$ True
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, target land becomes a 4/4 creature that's still a land.
 SVar:RolledChaos:DB$ Animate | ValidTgts$ Land | Power$ 4 | Toughness$ 4 | Types$ Creature | Duration$ Permanent
 SVar:AIRollPlanarDieParams:Mode$ Always

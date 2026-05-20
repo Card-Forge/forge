@@ -4,7 +4,7 @@ Types:Enchantment Creature Horror
 PT:1/1
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigCharm | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, ABILITY
-SVar:TrigCharm:DB$ Charm | Choices$ DBPutCounter,DBDraw,DBClone | ChoiceRestriction$ ThisGame | CharmNum$ 1
+SVar:TrigCharm:DB$ Charm | Choices$ DBPutCounter,DBDraw,DBClone | ChoiceRestriction$ ThisGame
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on CARDNAME.
 SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 SVar:DBClone:DB$ Clone | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control to copy | SpellDescription$ CARDNAME becomes a copy of another target creature you control.

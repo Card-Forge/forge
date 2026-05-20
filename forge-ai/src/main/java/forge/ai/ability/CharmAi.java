@@ -9,7 +9,6 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
-import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 
 import java.util.Collections;
@@ -18,7 +17,7 @@ import java.util.Map;
 
 public class CharmAi extends SpellAbilityAi {
     @Override
-    protected boolean checkApiLogic(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
 
@@ -61,7 +60,7 @@ public class CharmAi extends SpellAbilityAi {
              * bonus choice(s) for the AI otherwise it might be too hard to ever fulfil
              * minimum choice requirements with canPlayAi() alone.
              */
-            chosenList = min > 1 ? chooseMultipleOptionsAi(choices, ai, min)
+            chosenList = min > 1 ? chooseMultipleOptionsAi(sa, choices, ai, min)
                     : chooseOptionsAi(sa, choices, ai, timingRight, num, min);
         }
 
@@ -70,10 +69,10 @@ public class CharmAi extends SpellAbilityAi {
                 // Set minimum choices for triggers where chooseMultipleOptionsAi() returns null
                 chosenList = chooseOptionsAi(sa, choices, ai, true, num, min);
                 if (chosenList.isEmpty() && min != 0) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             } else {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
@@ -81,7 +80,7 @@ public class CharmAi extends SpellAbilityAi {
         sa.setChosenList(chosenList);
 
         if (choiceForOpp) {
-            return true;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (sa.isSpell()) {
@@ -89,25 +88,27 @@ public class CharmAi extends SpellAbilityAi {
             CharmEffect.chainAbilities(sa, chosenList);
         }
 
-        // prevent run-away activations - first time will always return true
-        return MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        return super.checkApiLogic(ai, sa);
     }
 
     private List<AbilitySub> chooseOptionsAi(SpellAbility sa, List<AbilitySub> choices, final Player ai, boolean isTrigger, int num, int min) {
-        List<AbilitySub> chosenList = Lists.newArrayList();
+        List<AbilitySub> chosen = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-        boolean allowRepeat = sa.hasParam("CanRepeatModes"); // FIXME: unused for now, the AI doesn't know how to effectively handle repeated choices
+        // TODO unused for now, the AI doesn't know how to effectively handle repeated choices
+        boolean allowRepeat = sa.hasParam("CanRepeatModes");
 
-        // Pawprint
         final int pawprintLimit = sa.hasParam("Pawprint") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Pawprint"), sa) : 0;
         if (pawprintLimit > 0) {
-            Collections.reverse(choices); // try to pay for the more expensive subs first
+            // try to pay for the more expensive subs first
+            Collections.reverse(choices);
         }
         int pawprintAmount = 0;
 
         // First pass using standard canPlayAi() for good choices
         for (AbilitySub sub : choices) {
+            handleDependentModes(sa, chosen, sub);
             sub.setActivatingPlayer(ai);
+            // TODO refactor to obtain the AiAbilityDecision instead, then we can check all to sort by value
             if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                 if (pawprintLimit > 0) {
                     int curPawprintAmount = AbilityUtils.calculateAmount(sub.getHostCard(), sub.getParamOrDefault("Pawprint", "0"), sub);
@@ -116,40 +117,45 @@ public class CharmAi extends SpellAbilityAi {
                     }
                     pawprintAmount += curPawprintAmount;
                 }
-                chosenList.add(sub);
-                if (chosenList.size() == num) {
-                    return chosenList; // maximum choices reached
+                chosen.add(sub);
+                if (chosen.size() == num) {
+                    // maximum choices reached
+                    break;
                 }
             }
         }
-        if (isTrigger && chosenList.size() < min) {
+        if (isTrigger && chosen.size() < min) {
             // Second pass using doTrigger(false) to fulfill minimum choice
-            choices.removeAll(chosenList);
+            choices.removeAll(chosen);
             for (AbilitySub sub : choices) {
+                handleDependentModes(sa, chosen, sub);
                 if (aic.doTrigger(sub, false)) {
-                    chosenList.add(sub);
-                    if (chosenList.size() == min) {
-                        return chosenList;
+                    chosen.add(sub);
+                    if (chosen.size() == min) {
+                        break;
                     }
                 }
             }
             // Third pass using doTrigger(true) to force fill minimum choices
-            if (chosenList.size() < min) {
-                choices.removeAll(chosenList);
+            if (chosen.size() < min) {
+                choices.removeAll(chosen);
                 for (AbilitySub sub : choices) {
+                    handleDependentModes(sa, chosen, sub);
                     if (aic.doTrigger(sub, true)) {
-                        chosenList.add(sub);
-                        if (chosenList.size() == min) {
+                        chosen.add(sub);
+                        if (chosen.size() == min) {
                             break;
                         }
                     }
                 }
             }
         }
-        if (chosenList.size() < min) {
-            chosenList.clear(); // not enough choices
+        if (chosen.size() < min) {
+            // not enough choices
+            chosen.clear();
         }
-        return chosenList;
+        sa.setSubAbility(null);
+        return chosen;
     }
 
     private List<AbilitySub> chooseTriskaidekaphobia(List<AbilitySub> choices, final Player ai) {
@@ -182,12 +188,12 @@ public class CharmAi extends SpellAbilityAi {
         }
         
         if (!ai.canLoseLife() || ai.cantLose()) {
-            // ai cant lose life, or cant lose the game, don't think about others
+            // ai can't lose life, or can't lose the game, don't think about others
             chosenList.add(allyTainted ? gain : lose);
         } else if (oppTainted || ai.getGame().isCardInPlay("Rain of Gore")) {
             // Rain of Gore does negate lifegain, so don't benefit the others
             // same for if a opponent does control Tainted Remedy
-            // but if ai cant gain life, the effects are negated
+            // but if ai can't gain life, the effects are negated
             chosenList.add(ai.canGainLife() ? lose : gain);
         } else if (ai.getGame().isCardInPlay("Sulfuric Vortex")) {
             // no life gain, but extra life loss.
@@ -203,7 +209,7 @@ public class CharmAi extends SpellAbilityAi {
             // critical Life try to gain more
             chosenList.add(gain);
         } else if (!ai.canGainLife() && aiLife == 14) {
-            // ai cant gain life, but try to avoid falling to 13
+            // ai can't gain life, but try to avoid falling to 13
             // but if a opponent does control Tainted Remedy its irrelevant
             chosenList.add(oppTainted ? lose : gain);
         } else if (allyTainted) {
@@ -239,36 +245,43 @@ public class CharmAi extends SpellAbilityAi {
         return chosenList;
     }
 
-    // Choice selection for charms that require multiple choices (eg. Cryptic Command, DTK commands)
-    private List<AbilitySub> chooseMultipleOptionsAi(List<AbilitySub> choices, final Player ai, int min) {
+    // Choice selection for charms that require multiple choices (e.g. Cryptic Command)
+    private List<AbilitySub> chooseMultipleOptionsAi(SpellAbility sa, List<AbilitySub> choices, final Player ai, int min) {
         AbilitySub goodChoice = null;
-        List<AbilitySub> chosenList = Lists.newArrayList();
+        List<AbilitySub> chosen = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         for (AbilitySub sub : choices) {
+            handleDependentModes(sa, chosen, sub);
             sub.setActivatingPlayer(ai);
             // Assign generic good choice to fill up choices if necessary 
             if ("Good".equals(sub.getParam("AILogic")) && aic.doTrigger(sub, false)) {
                 goodChoice = sub;
-            } else {
-                // Standard canPlayAi()
-                sub.setActivatingPlayer(ai);
-                if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
-                    chosenList.add(sub);
-                    if (chosenList.size() == min) {
-                        break; // enough choices
-                    }
+            } else if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
+                chosen.add(sub);
+                if (chosen.size() == min) {
+                    break; // enough choices
                 }
             }
         }
         // Add generic good choice if one more choice is needed
-        if (chosenList.size() == min - 1 && goodChoice != null) {
-            chosenList.add(0, goodChoice);  // hack to make Dromoka's Command fight targets work
+        if (chosen.size() == min - 1 && goodChoice != null) {
+            chosen.add(0, goodChoice);  // hack to make Dromoka's Command fight targets work
         }
-        if (chosenList.size() != min) {
-            chosenList.clear();
+        if (chosen.size() != min) {
+            chosen.clear();
         }
-        return chosenList;
-    } 
+        sa.setSubAbility(null);
+        return chosen;
+    }
+
+    private void handleDependentModes(SpellAbility sa, List<AbilitySub> chosen, AbilitySub sub) {
+        if (sub.hasParam("TargetUnique") && !chosen.isEmpty()) {
+            // support "Each mode must target a different..."
+            sa.setSubAbility(null);
+            CharmEffect.chainAbilities(sa, chosen);
+            sa.appendSubAbility(sub);
+        }
+    }
 
     @Override
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> opponents, Map<String, Object> params) {
@@ -276,10 +289,10 @@ public class CharmAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
+    public AiAbilityDecision chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
         // choices were already targeted
         if (ab.getRootAbility().getChosenList() != null) {
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
         return super.chkDrawbackWithSubs(aiPlayer, ab);
     }

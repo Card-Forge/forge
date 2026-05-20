@@ -1,0 +1,8 @@
+Name:Foot Elite
+ManaCost:2 WB
+Types:Creature Human Ninja
+PT:2/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature attacks, another target creature you control gets +1/+0 and gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | KW$ Indestructible | NumAtt$ +1
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever this creature attacks, another target creature you control gets +1/+0 and gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

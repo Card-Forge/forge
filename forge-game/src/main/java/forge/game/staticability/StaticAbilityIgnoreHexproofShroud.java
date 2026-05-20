@@ -10,17 +10,14 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityIgnoreHexproofShroud {
 
-    static String HEXPROOF_MODE = "IgnoreHexproof";
-    static String SHROUD_MODE = "IgnoreShroud";
-
-    static public boolean ignore(GameEntity entity, final SpellAbility spellAbility, Keyword keyword) {
+    static public boolean ignore(GameEntity entity, final SpellAbility spellAbility, StaticAbility keyword) {
         final Game game = entity.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (keyword.equals(Keyword.HEXPROOF) && !stAb.checkConditions(HEXPROOF_MODE)) {
+                if (keyword.isKeyword(Keyword.HEXPROOF) && !stAb.checkConditions(StaticAbilityMode.IgnoreHexproof)) {
                     continue;
                 }
-                if (keyword.equals(Keyword.SHROUD) && !stAb.checkConditions(SHROUD_MODE)) {
+                if (keyword.isKeyword(Keyword.SHROUD) && !stAb.checkConditions(StaticAbilityMode.IgnoreShroud)) {
                     continue;
                 }
                 if (commonAbility(stAb, entity, spellAbility)) {

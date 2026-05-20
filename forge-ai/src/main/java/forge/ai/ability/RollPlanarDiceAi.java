@@ -1,10 +1,7 @@
 package forge.ai.ability;
 
 
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -18,28 +15,27 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         if (ai.getGame().getActivePlanes() == null) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         
         for (Card c : ai.getGame().getActivePlanes()) {
             if (willRollOnPlane(ai, c)) {
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         }
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     private boolean willRollOnPlane(Player ai, Card plane) {
-        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         boolean decideToRoll = false;
         boolean rollInMain1 = false;
         String modeName = "never";
-        int maxActivations = aic.getIntProperty(AiProps.DEFAULT_MAX_PLANAR_DIE_ROLLS_PER_TURN);
-        int chance = aic.getIntProperty(AiProps.DEFAULT_PLANAR_DIE_ROLL_CHANCE);
-        int hesitationChance = aic.getIntProperty(AiProps.PLANAR_DIE_ROLL_HESITATION_CHANCE);
-        int minTurnToRoll = aic.getIntProperty(AiProps.DEFAULT_MIN_TURN_TO_ROLL_PLANAR_DIE);
+        int maxActivations = AiProfileUtil.getIntProperty(ai, AiProps.DEFAULT_MAX_PLANAR_DIE_ROLLS_PER_TURN);
+        int chance = AiProfileUtil.getIntProperty(ai, AiProps.DEFAULT_PLANAR_DIE_ROLL_CHANCE);
+        int hesitationChance = AiProfileUtil.getIntProperty(ai, AiProps.PLANAR_DIE_ROLL_HESITATION_CHANCE);
+        int minTurnToRoll = AiProfileUtil.getIntProperty(ai, AiProps.DEFAULT_MIN_TURN_TO_ROLL_PLANAR_DIE);
         
         if (plane.hasSVar("AIRollPlanarDieParams")) {
             String[] params = plane.getSVar("AIRollPlanarDieParams").toLowerCase().trim().split("\\|");
@@ -162,9 +158,9 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         // for potential implementation of drawback checks?
-        return canPlayAI(aiPlayer, sa);
+        return canPlay(aiPlayer, sa);
     }
 
     private boolean detectColorInZone(Player p, String paramValue, ZoneType zone, boolean creaturesOnly) {

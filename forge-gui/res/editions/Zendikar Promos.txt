@@ -6,6 +6,8 @@ Type=Promo
 ScryfallCode=PZEN
 
 [cards]
+A5 R Terra Stomper @Goran Josic
 9★ R Day of Judgment @Kev Walker
 178★ M Rampaging Baloths @Eric Deschamps
+221★ R Oran-Rief, the Vastwood @Mike Bierek
 228★ R Valakut, the Molten Pinnacle @James Paick

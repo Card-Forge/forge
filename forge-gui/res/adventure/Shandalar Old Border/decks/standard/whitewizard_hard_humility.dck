@@ -1,0 +1,23 @@
+[metadata]
+Name=Master White Wizard - Mono White Control
+[Main]
+22 Plains|LEA
+2 Pearl Medallion|TMP
+4 Swords to Plowshares|LEA
+4 Mother of Runes|ULG
+4 Exalted Angel|ONS
+2 Balance|LEA
+2 Armageddon|LEA
+2 Worship|USG
+2 Blinding Angel|NMS
+4 Orim's Chant|PLS
+2 Eternal Dragon|SCG
+2 Windborn Muse|LGN
+2 Moat|LEG
+2 Wrath of God|LEA
+2 Purify|ULG
+2 Intrepid Hero|USG
+
+[StartInBattle_Reference]
+1 Mox Pearl|LEA
+1 Wall of Swords|LEA

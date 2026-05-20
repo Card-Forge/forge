@@ -1,0 +1,6 @@
+Name:Angelo
+ManaCost:no cost
+Colors:green,white
+Types:Legendary Creature Dog
+PT:1/1
+Oracle:

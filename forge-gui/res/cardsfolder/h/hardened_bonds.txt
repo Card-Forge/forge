@@ -1,0 +1,9 @@
+Name:Hardened Bonds
+ManaCost:G
+Types:Enchantment
+DeckNeeds:Ability$Counters
+T:Mode$ CounterAdded | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigSeek | ActivationLimit$ 1 | TriggerDescription$ Whenever a +1/+1 counter is put on a creature you control, seek a creature card. That card perpetually gets +1/+1. This ability triggers only once each turn.
+SVar:TrigSeek:DB$ Seek | Type$ Card.Creature | RememberFound$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | PumpZone$ Hand | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever a +1/+1 counter is put on a creature you control, seek a creature card. That card perpetually gets +1/+1. This ability triggers only once each turn.

@@ -1,19 +1,13 @@
 package forge.game.event;
 
 import forge.game.card.Card;
+import forge.game.card.CardView;
 
-public class GameEventSprocketUpdate extends GameEvent {
-
-    public final Card contraption;
-    public final int oldSprocket;
-    public final int sprocket;
+public record GameEventSprocketUpdate(CardView contraption, int oldSprocket, int sprocket) implements GameEvent {
 
     public GameEventSprocketUpdate(Card contraption, int oldSprocket, int sprocket) {
-        this.contraption = contraption;
-        this.oldSprocket = oldSprocket;
-        this.sprocket = sprocket;
+        this(CardView.get(contraption), oldSprocket, sprocket);
     }
-
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

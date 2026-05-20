@@ -1,0 +1,7 @@
+Name:Moogle Token
+ManaCost:no cost
+Colors:white
+Types:Creature Moogle
+PT:1/2
+K:Lifelink
+Oracle:Lifelink

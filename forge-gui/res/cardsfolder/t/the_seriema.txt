@@ -1,0 +1,12 @@
+Name:The Seriema
+ManaCost:1 W W
+Types:Legendary Artifact Spacecraft
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters, search your library for a legendary creature card, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Legendary | ChangeNum$ 1
+K:Station:7
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE7_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddStaticAbility$ DBStatic | Description$ STATION 7+ Flying Other tapped legendary creatures you control have indestructible.
+SVar:DBStatic:Mode$ Continuous | Affected$ Creature.Legendary+YouCtrl+Other+tapped | AddKeyword$ Indestructible | Secondary$ True | Description$ Other tapped legendary creatures you control have indestructible.
+AI:RemoveDeck:Random
+DeckHints:Type$Legendary
+Oracle:When The Seriema enters, search your library for a legendary creature card, reveal it, put it into your hand, then shuffle.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 7+.)\nSTATION 7+\nFlying\nOther tapped legendary creatures you control have indestructible.

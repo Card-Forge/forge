@@ -1,0 +1,20 @@
+[metadata]
+Name=beastmaster
+[Main]
+1 Mountain|ODY
+19 Forest|ODY
+2 Giant Growth|5ED
+2 Rancor|ULG
+3 Kamahl, Fist of Krosa|ONS
+4 Beast Attack|ODY
+4 Frenzied Tilling|INV
+4 Grizzly Bears|5ED
+4 Karplusan Forest|ICE
+4 Krosan Avenger|ODY
+4 Muscle Burst|ODY
+4 Nantuko Disciple|ODY
+4 Squirrel Mob|ODY
+4 Wild Mongrel|ODY
+
+[StartInBattle_Reference]
+1 Dual Nature

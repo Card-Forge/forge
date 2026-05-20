@@ -103,7 +103,3 @@ ScryfallCode=ARN
 76 U Library of Alexandria @Mark Poole
 77 C Mountain @Douglas Shuler
 78 U Oasis @Brian Snõddy
-
-[tokens]
-r_4_4_bird_flying
-c_5_5_a_djinn_flying

@@ -2,7 +2,7 @@ Name:Necromancy
 ManaCost:2 B
 Types:Enchantment
 K:MayFlashSac
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ RaiseDead | TriggerDescription$ When CARDNAME enters, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with CARDNAME." Put target creature card from a graveyard onto the battlefield under your control and attach CARDNAME to it. When CARDNAME leaves the battlefield, that creature's controller sacrifices it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.StrictlySelf | Execute$ RaiseDead | TriggerDescription$ When CARDNAME enters, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with CARDNAME." Put target creature card from a graveyard onto the battlefield under your control and attach CARDNAME to it. When CARDNAME leaves the battlefield, that creature's controller sacrifices it.
 SVar:RaiseDead:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | RememberChanged$ True | TgtPrompt$ Select target creature card in a graveyard | ValidTgts$ Creature | ChangeNum$ 1 | SubAbility$ Aurify
 SVar:Aurify:DB$ Animate | Types$ Aura | Keywords$ Enchant:Creature.IsRemembered:creature put onto the battlefield with CARDNAME | Duration$ Permanent | SubAbility$ NecromAttach
 SVar:DBDelay:DB$ DelayedTrigger | Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Execute$ TrigSacrifice | RememberObjects$ RememberedLKI | TriggerDescription$ When CARDNAME leaves the battlefield, that creature's controller sacrifices it.
