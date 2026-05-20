@@ -80,6 +80,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             removeAbilities = e -> true;
         } else if (sa.hasParam("RemoveNonManaAbilities")) {
             removeAbilities = Predicate.not(CardTraitBase::isManaAbility);
+        } else if (sa.hasParam("RemoveThisAbility")) {
+            removeAbilities = e -> sa.getOriginalAbility().equals(e);
         }
 
         if (sa.hasParam("RememberAnimated")) {
@@ -148,12 +150,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             addLeaveBattlefieldReplacement(c, sa, sa.getParam("LeaveBattlefield"));
         }
 
-        // remove abilities
-        final List<SpellAbility> removedAbilities = Lists.newArrayList();
-        if (sa.hasParam("RemoveThisAbility")) {
-            removedAbilities.add(sa.getOriginalAbility());
-        }
-
         // give abilities
         final List<SpellAbility> addedAbilities = Lists.newArrayList();
         for (final String s : abilities) {
@@ -218,9 +214,9 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         // after unanimate to add RevertCost
         if (removeAbilities != null
-                || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
+                || !addedAbilities.isEmpty() || !addedTriggers.isEmpty()
                 || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
-            ICardTraitChanges changes = c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
+            ICardTraitChanges changes = c.addChangedCardTraits(addedAbilities, addedTriggers, addedReplacements,
                 addedStaticAbilities, removeAbilities, timestamp, 0);
             if (perpetual) {
                 c.addPerpetual(new PerpetualAbilities(timestamp, changes));
