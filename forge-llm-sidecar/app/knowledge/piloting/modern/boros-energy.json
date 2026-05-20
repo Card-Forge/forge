@@ -1,0 +1,139 @@
+{
+  "archetype": "Boros Energy",
+  "format": "modern",
+  "strategy_type": "aggro",
+  "overview": "Despite its name, this deck does not utilize the Energy mechanic. Instead, it is a fast, resilient aggressive strategy that leverages haste, lifelink, and combat tricks to apply relentless pressure. The game plan revolves around deploying efficient threats early, protecting them with targeted removal, and closing games before opponents can stabilize.",
+  "win_conditions": [
+    "Phlage, Titan of Fire's Fury",
+    "Ragavan, Nimble Pilferer",
+    "Ocelot Pride",
+    "Guide of Souls"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with 2-3 lands and at least one 1- or 2-mana creature",
+      "Hands containing early removal or combat tricks",
+      "Hands with Ragavan or Ocelot Pride alongside a cheap spell"
+    ],
+    "mulligan_criteria": [
+      "Hands with 4+ lands or 0-1 lands",
+      "Hands lacking early interaction or threats",
+      "Hands heavy with 4+ mana spells"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Ragavan, Nimble Pilferer",
+          "Lightning Strike",
+          "Mountain",
+          "Plains",
+          "Mountain"
+        ],
+        "decision": "keep",
+        "reason": "Provides turn-one pressure, early removal, and a solid mana base."
+      },
+      {
+        "hand": [
+          "Phlage, Titan of Fire's Fury",
+          "Abrupt Decay",
+          "Mountain",
+          "Mountain",
+          "Mountain",
+          "Mountain",
+          "Plains"
+        ],
+        "decision": "mulligan",
+        "reason": "Too many lands and lacks early-game presence or interaction to apply pressure."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play 1- and 2-mana creatures on curve",
+      "Use cheap removal to clear blockers",
+      "Establish early board presence to force opponent reactions"
+    ],
+    "mid_game": [
+      "Deploy Ragavan and Ocelot Pride to accelerate damage",
+      "Utilize combat tricks and lifelink to stabilize against board wipes",
+      "Sequence removal to protect key threats"
+    ],
+    "late_game": [
+      "Close out with resilient, high-impact threats like Phlage",
+      "Leverage Guide of Souls for recursion and value",
+      "Maintain pressure to prevent opponent from setting up win conditions"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Phlage, Titan of Fire's Fury",
+      "role": "Win condition",
+      "notes": "High toughness and lifelink make it resilient; attacks for significant damage while stabilizing against removal."
+    },
+    {
+      "name": "Ragavan, Nimble Pilferer",
+      "role": "Card advantage & pressure",
+      "notes": "Provides turn-one haste, card draw, and relentless combat damage."
+    },
+    {
+      "name": "Ocelot Pride",
+      "role": "Evasion & pressure",
+      "notes": "Flying and haste bypass blockers; synergizes with combat tricks to close games."
+    },
+    {
+      "name": "Guide of Souls",
+      "role": "Recursion & value",
+      "notes": "Returns creatures from graveyard to hand, enabling repeated pressure and protecting against board wipes."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up removal until you see what the opponent plays",
+    "Attack with Ragavan before casting spells to maximize card advantage",
+    "Use lifelink triggers to stabilize against sweepers",
+    "Sequence combat tricks to maximize damage while maintaining blockers if needed"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply maximum early pressure and use evasion to bypass counterspells. Prioritize protecting your win conditions.",
+      "watch_for": [
+        "Swords to Plowshares",
+        "Teferi's Protection",
+        "Counterspell"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use removal efficiently to clear the path. Hold up interaction for their key threats and race with resilient creatures.",
+      "watch_for": [
+        "Board wipes",
+        "Early aggressive creatures",
+        "Removal spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race with haste threats and use lifelink to stabilize. Sequence removal to protect your board while applying pressure.",
+      "watch_for": [
+        "Targeted removal",
+        "Value engines",
+        "Stabilizing creatures"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Swords to Plowshares",
+    "Abrupt Decay",
+    "Lightning Strike",
+    "Teferi's Protection",
+    "Fatal Push",
+    "Supreme Verdict"
+  ],
+  "metadata": {
+    "source": "build_piloting_guides.py + draftsim",
+    "source_url": "https://draftsim.com/boros-energy/",
+    "generated_at": "2026-05-20T17:18:47+00:00",
+    "model": "local-model",
+    "schema_version": 1
+  }
+}

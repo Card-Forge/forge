@@ -65,3 +65,73 @@ def generate_guide_json(prompt: str, *, system: str | None = None) -> dict:
         return json.loads(content)
     except (json.JSONDecodeError, TypeError) as exc:
         raise BuilderLLMError(f"builder LLM returned non-JSON: {content!r}") from exc
+
+
+_EXTRACT_SYSTEM = (
+    "You are extracting structured piloting guidance from a Magic: The "
+    "Gathering primer article. Ground every field in the supplied text. For "
+    "each text-bearing field, mark it 'explicit' if the article directly "
+    "states it and 'inferred' if you derived it from context. Never invent "
+    "cards: every card name must appear verbatim in the article text or be a "
+    "well-known staple for the format. Respond with a single JSON object and "
+    "nothing else."
+)
+
+
+def _extract_prompt(
+    archetype: str,
+    fmt: str,
+    publisher: str,
+    source_url: str,
+    cleaned_text: str,
+) -> str:
+    return (
+        f"Archetype: {archetype}\n"
+        f"Format: {fmt}\n"
+        f"Source: {publisher} ({source_url})\n\n"
+        "Primer article text:\n"
+        "---\n"
+        f"{cleaned_text}\n"
+        "---\n\n"
+        "Return a single JSON object with these keys (omit a key only if the "
+        "article has zero relevant information for it):\n"
+        '  "strategy_type": one of "aggro","tempo","midrange","control","combo","ramp",\n'
+        '  "overview": short string (2-4 sentences),\n'
+        '  "overview_evidence": {"confidence": 0-1, "kind": "explicit"|"inferred", "evidence_span": short quote},\n'
+        '  "win_conditions": [string],\n'
+        '  "win_conditions_evidence": [{"confidence","kind","evidence_span"}],\n'
+        '  "mulligan": {"keep_criteria":[string], "mulligan_criteria":[string], '
+        '"examples":[{"hand":[string],"decision":"keep"|"mulligan","reason":string}]},\n'
+        '  "game_plan": {"early_game":[string], "mid_game":[string], "late_game":[string]},\n'
+        '  "key_cards": [{"name":string, "role":string, "notes":string}],\n'
+        '  "sequencing_tips": [string],\n'
+        '  "sequencing_tips_evidence": [{"confidence","kind","evidence_span"}],\n'
+        '  "matchups": [{"opponent_archetype":string, "advice":string, "watch_for":[string]}],\n'
+        '  "common_threats": [string],\n'
+        '  "common_threats_evidence": [{"confidence","kind","evidence_span"}].\n'
+        "Mark `kind` as 'explicit' for facts you can quote and 'inferred' "
+        "otherwise; confidence should reflect that distinction "
+        "(0.8-1.0 explicit, 0.3-0.7 inferred)."
+    )
+
+
+def extract_primer_fields(
+    cleaned_text: str,
+    *,
+    archetype: str,
+    fmt: str,
+    publisher: str = "",
+    source_url: str = "",
+) -> dict:
+    """Ask the builder LLM to extract structured fields from a cleaned primer.
+
+    Returns a JSON dict matching the extended ``PilotingGuide`` v2 schema (the
+    caller fills in provenance, metadata, decklist_hash). Raises
+    :class:`BuilderLLMError` on transport, decode, or non-JSON failures.
+    """
+    from app.knowledge.primers.clean_html import truncate_for_prompt
+
+    prompt = _extract_prompt(
+        archetype, fmt, publisher, source_url, truncate_for_prompt(cleaned_text)
+    )
+    return generate_guide_json(prompt, system=_EXTRACT_SYSTEM)

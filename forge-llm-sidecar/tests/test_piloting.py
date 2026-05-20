@@ -17,7 +17,7 @@ def test_schema_accepts_minimal_guide():
     guide = PilotingGuide.model_validate(_minimal_guide())
     assert guide.archetype == "Test Deck"
     assert guide.strategy_type is StrategyType.AGGRO
-    assert guide.metadata.schema_version == 1
+    assert guide.metadata.schema_version == 2
 
 
 def test_schema_rejects_missing_required_field():
@@ -75,4 +75,6 @@ def test_identify_own_archetype_empty_deck():
 def test_available_guides_lists_generic():
     guides = piloting.available_guides()
     assert "generic" in guides
-    assert set(GENERIC_STRATEGIES).issubset(set(guides["generic"]))
+    # v2: shape is {"live": [...], "archive": [...]}
+    assert set(GENERIC_STRATEGIES).issubset(set(guides["generic"]["live"]))
+    assert guides["generic"]["archive"] == []

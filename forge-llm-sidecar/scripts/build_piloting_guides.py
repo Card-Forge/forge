@@ -1,18 +1,21 @@
 #!/usr/bin/env python3
-"""Generate piloting guides for metagame archetypes with an LLM.
+"""Generate piloting guides for metagame archetypes.
 
-Runs OFFLINE — never on the sidecar request path. For each archetype in
-``app/knowledge/metagame_data/<format>.json`` it gathers context (colors,
-signature cards, a representative decklist when reachable), asks the builder LLM
-to write a piloting guide, validates it against :class:`PilotingGuide`, and
-writes ``app/knowledge/piloting/<format>/<slug>.json``.
+Runs OFFLINE — never on the sidecar request path. Walks the
+:mod:`app.knowledge.primers` provider chain (Cards Realm, Hareruya, MTG Arena
+Zone, Moxfield, Draftsim) and uses the builder LLM to extract structured
+fields from cleaned primer HTML. When every editorial source fails, the
+orchestrator falls back to a synthesized default primer marked low-confidence.
 
-    python scripts/build_piloting_guides.py                 # all formats
-    python scripts/build_piloting_guides.py modern          # one format
+    python scripts/build_piloting_guides.py                       # all formats
+    python scripts/build_piloting_guides.py modern                # one format
     python scripts/build_piloting_guides.py modern --archetype "Boros Energy"
-    python scripts/build_piloting_guides.py modern --force  # regenerate existing
+    python scripts/build_piloting_guides.py modern --force        # regenerate existing
+    python scripts/build_piloting_guides.py modern --from-diff    # consume metagame diff
+    python scripts/build_piloting_guides.py modern --rebuild-archived
+    python scripts/build_piloting_guides.py modern --refresh-stale # rerun TTL-expired
 
-Generic fallback guides (``piloting/generic/*.json``) are hand-authored and are
+Generic fallback guides (``piloting/generic/*.json``) are hand-authored and
 NOT touched by this script. Generated files are committed and human-reviewable.
 """
 
@@ -23,15 +26,15 @@ import datetime as dt
 import json
 import logging
 import pathlib
+import shutil
 import sys
 import time
 
 # Allow running as a plain script (no package install needed).
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 
-from app.knowledge import builder_llm, draftsim, scraper  # noqa: E402
+from app.knowledge import primers  # noqa: E402
 from app.knowledge.piloting import slugify  # noqa: E402
-from app.knowledge.piloting_schema import PILOTING_SCHEMA_VERSION, PilotingGuide  # noqa: E402
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
 log = logging.getLogger("build_piloting_guides")
@@ -39,170 +42,230 @@ log = logging.getLogger("build_piloting_guides")
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 METAGAME_DIR = ROOT / "app" / "knowledge" / "metagame_data"
 PILOTING_DIR = ROOT / "app" / "knowledge" / "piloting"
+ARCHIVE_DIR_NAME = "_archive"
 
-_SYSTEM = (
-    "You are an expert Magic: The Gathering coach writing a concise, accurate "
-    "piloting guide for one deck archetype. Answer with a single JSON object "
-    "and nothing else."
-)
-
-
-def _build_prompt(
-    arch: dict,
-    fmt: str,
-    decklist: list[str],
-    primer_text: str = "",
-) -> str:
-    colors = "/".join(arch.get("colors", [])) or "unknown"
-    signature = ", ".join(arch.get("signature_cards", [])) or "(none listed)"
-    deck_note = (
-        f"Representative decklist:\n{', '.join(decklist[:80])}\n\n"
-        if decklist
-        else "No decklist available.\n\n"
-    )
-    primer_block = (
-        "REAL primer text (from Draftsim — preferred source of truth over your "
-        "training data, which may be out of date):\n"
-        f"{primer_text}\n\n"
-        if primer_text
-        else ""
-    )
-    # Guard against models confusing deck-name mechanics with the actual plan.
-    name_warning = (
-        "IMPORTANT: deck names sometimes echo historic mechanics that the "
-        "modern build no longer uses (e.g. \"Boros Energy\" today doesn't "
-        "play Kaladesh energy; it plays Phlage, Ragavan, Guide of Souls, "
-        "Ocelot Pride, etc.). Ground every claim in the decklist and primer "
-        "text above, not in the deck's name. Do NOT recommend cards from "
-        "other formats (no Arcane Signet in Modern, no Sol Ring in non-"
-        "Commander, etc.).\n\n"
-    )
-    return (
-        f"Write a piloting guide for the {fmt} archetype \"{arch.get('name')}\".\n"
-        f"Colors: {colors}. Signature cards: {signature}.\n\n"
-        f"{primer_block}"
-        f"{deck_note}"
-        f"{name_warning}"
-        "Respond with a single JSON object with exactly these keys:\n"
-        '  "archetype": string,\n'
-        f'  "format": "{fmt}",\n'
-        '  "strategy_type": one of "aggro","tempo","midrange","control","combo","ramp",\n'
-        '  "overview": string (2-4 sentences on the game plan),\n'
-        '  "win_conditions": array of strings,\n'
-        '  "mulligan": {"keep_criteria": [string], "mulligan_criteria": [string],\n'
-        '    "examples": [{"hand": [string], "decision": "keep"|"mulligan", "reason": string}]},\n'
-        '  "game_plan": {"early_game": [string], "mid_game": [string], "late_game": [string]},\n'
-        '  "key_cards": [{"name": string, "role": string, "notes": string}],\n'
-        '  "sequencing_tips": array of strings,\n'
-        '  "matchups": [{"opponent_archetype": string, "advice": string, "watch_for": [string]}],\n'
-        '  "common_threats": array of strings.\n'
-        "Be specific and practical. Do not include any text outside the JSON object."
-    )
+# Per-format time-to-live (days). Used by --refresh-stale.
+_TTL_DAYS = {
+    "standard": 30,
+    "historic": 30,
+    "modern": 90,
+    "pioneer": 90,
+    "legacy": 90,
+    "pauper": 90,
+    "vintage": 180,
+    "premodern": 365,
+}
 
 
-def build_one(arch: dict, fmt: str, links: dict[str, str], *, force: bool) -> bool:
+def _archive_path(fmt: str, slug: str) -> pathlib.Path:
+    return PILOTING_DIR / fmt / ARCHIVE_DIR_NAME / f"{slug}.json"
+
+
+def _live_path(fmt: str, slug: str) -> pathlib.Path:
+    return PILOTING_DIR / fmt / f"{slug}.json"
+
+
+def _move_to_archive(fmt: str, slug: str) -> bool:
+    src = _live_path(fmt, slug)
+    if not src.exists():
+        return False
+    dst = _archive_path(fmt, slug)
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    shutil.move(str(src), str(dst))
+    log.info("archived %s/%s -> %s", fmt, slug, dst)
+    return True
+
+
+def _restore_from_archive(fmt: str, slug: str) -> bool:
+    src = _archive_path(fmt, slug)
+    if not src.exists():
+        return False
+    dst = _live_path(fmt, slug)
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    shutil.move(str(src), str(dst))
+    log.info("restored %s/%s from archive", fmt, slug)
+    return True
+
+
+def build_one(arch: dict, fmt: str, *, force: bool) -> bool:
     name = arch.get("name") or ""
     slug = slugify(name)
     if not slug:
         log.warning("skipping archetype with no usable name: %r", arch)
         return False
 
-    out_dir = PILOTING_DIR / fmt
-    out_path = out_dir / f"{slug}.json"
+    out_path = _live_path(fmt, slug)
     if out_path.exists() and not force:
         log.info("skip %s (exists; use --force to regenerate)", out_path)
         return False
 
-    decklist: list[str] = []
-    page_url = links.get(name)
-    if page_url:
-        decklist = scraper.fetch_archetype_decklist(page_url)
-
-    # Draftsim primer text is the primary ground truth — the LLM uses it
-    # verbatim to build the structured guide.
-    primer_url, primer_sections = draftsim.primer_for(name, fmt)
-    primer_text = draftsim.primer_to_prompt_text(primer_sections or {})
-    if primer_text:
-        log.info("primer: using Draftsim %s (%d chars)", primer_url, len(primer_text))
-    else:
-        log.warning(
-            "primer: no Draftsim primer found for %s in %s — falling back to "
-            "LLM general knowledge", name, fmt
-        )
-
-    try:
-        raw = builder_llm.generate_guide_json(
-            _build_prompt(arch, fmt, decklist, primer_text=primer_text),
-            system=_SYSTEM,
-        )
-    except builder_llm.BuilderLLMError as exc:
-        log.error("LLM failed for %s: %s", name, exc)
+    guide = primers.build_primer(
+        name,
+        fmt,
+        signature_cards=arch.get("signature_cards") or [],
+        colors=arch.get("colors") or [],
+    )
+    if guide is None:
+        log.error("failed to build any guide for %s in %s", name, fmt)
         return False
 
-    raw.setdefault("archetype", name)
-    raw.setdefault("format", fmt)
-    source_parts = ["build_piloting_guides.py"]
-    if decklist:
-        source_parts.append("mtggoldfish")
-    if primer_text:
-        source_parts.append("draftsim")
-    raw["metadata"] = {
-        "source": " + ".join(source_parts),
-        "source_url": primer_url or "",
-        "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
-        "model": builder_llm.MODEL_NAME,
-        "schema_version": PILOTING_SCHEMA_VERSION,
-    }
-
-    try:
-        guide = PilotingGuide.model_validate(raw)
-    except Exception as exc:  # noqa: BLE001 - report and move on
-        log.error("guide for %s failed schema validation: %s", name, exc)
-        return False
-
-    out_dir.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(guide.model_dump_json(indent=2) + "\n", encoding="utf-8")
-    log.info("wrote %s", out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(guide.model_dump_json(indent=2, exclude={"stale_flags"}) + "\n", encoding="utf-8")
+    log.info("wrote %s (source: %s)", out_path, guide.metadata.source or "default")
+    # Clear archive duplicate if any.
+    arch_path = _archive_path(fmt, slug)
+    if arch_path.exists():
+        arch_path.unlink()
+        log.info("removed stale archive %s", arch_path)
     return True
 
 
-def build_format(fmt: str, *, archetype: str | None, force: bool) -> int:
+def _load_archetypes(fmt: str) -> list[dict]:
     meta_path = METAGAME_DIR / f"{fmt}.json"
     if not meta_path.exists():
         log.error("no metagame data for '%s' (%s)", fmt, meta_path)
-        return 0
+        return []
+    return json.loads(meta_path.read_text(encoding="utf-8")).get("archetypes", [])
 
-    archetypes = json.loads(meta_path.read_text(encoding="utf-8")).get("archetypes", [])
+
+def _load_diff(fmt: str) -> dict | None:
+    diff_path = METAGAME_DIR / f"{fmt}.diff.json"
+    if not diff_path.exists():
+        return None
+    try:
+        return json.loads(diff_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        log.warning("failed to load diff for %s: %s", fmt, exc)
+        return None
+
+
+def _archetypes_by_name(archetypes: list[dict]) -> dict[str, dict]:
+    return {(a.get("name") or "").lower(): a for a in archetypes}
+
+
+def _is_stale(out_path: pathlib.Path, ttl_days: int) -> bool:
+    if not out_path.exists():
+        return True
+    try:
+        payload = json.loads(out_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return True
+    generated = (payload.get("metadata") or {}).get("generated_at", "")
+    try:
+        generated_dt = dt.datetime.fromisoformat(generated.replace("Z", "+00:00"))
+    except ValueError:
+        return True
+    age = dt.datetime.now(dt.timezone.utc) - generated_dt.astimezone(dt.timezone.utc)
+    return age.days >= ttl_days
+
+
+def build_format(
+    fmt: str,
+    *,
+    archetype: str | None,
+    force: bool,
+    from_diff: bool,
+    rebuild_archived: bool,
+    refresh_stale: bool,
+) -> int:
+    archetypes = _load_archetypes(fmt)
+    if not archetypes:
+        return 0
+    by_name = _archetypes_by_name(archetypes)
+
     if archetype:
-        archetypes = [a for a in archetypes if a.get("name") == archetype]
-        if not archetypes:
+        target = by_name.get(archetype.lower())
+        if not target:
             log.error("archetype %r not found in %s", archetype, fmt)
             return 0
+        return 1 if build_one(target, fmt, force=force) else 0
 
-    links = scraper.archetype_links(fmt)
+    queue: list[dict] = []
+
+    if from_diff:
+        diff = _load_diff(fmt)
+        if diff is None:
+            log.warning("no diff for %s — falling back to full rebuild", fmt)
+        else:
+            for name in diff.get("new_archetypes", []):
+                if name.lower() in by_name:
+                    queue.append(by_name[name.lower()])
+            for name in diff.get("dropped_archetypes", []):
+                _move_to_archive(fmt, slugify(name))
+            for name in diff.get("returned_archetypes", []):
+                _restore_from_archive(fmt, slugify(name))
+            if refresh_stale:
+                ttl = _TTL_DAYS.get(fmt, 90)
+                for arch in archetypes:
+                    slug = slugify(arch.get("name") or "")
+                    if slug and _is_stale(_live_path(fmt, slug), ttl):
+                        queue.append(arch)
+            # de-dup
+            seen: set[str] = set()
+            queue = [a for a in queue if not (slugify(a.get("name") or "") in seen or seen.add(slugify(a.get("name") or "")))]
+    elif rebuild_archived:
+        archive_dir = PILOTING_DIR / fmt / ARCHIVE_DIR_NAME
+        if archive_dir.is_dir():
+            archived_slugs = {f.stem for f in archive_dir.glob("*.json")}
+            for arch in archetypes:
+                slug = slugify(arch.get("name") or "")
+                if slug in archived_slugs:
+                    queue.append(arch)
+                    _restore_from_archive(fmt, slug)
+    elif refresh_stale:
+        ttl = _TTL_DAYS.get(fmt, 90)
+        for arch in archetypes:
+            slug = slugify(arch.get("name") or "")
+            if slug and _is_stale(_live_path(fmt, slug), ttl):
+                queue.append(arch)
+    else:
+        queue = list(archetypes)
+
     ok = 0
-    for i, arch in enumerate(archetypes):
-        if build_one(arch, fmt, links, force=force):
+    for i, arch in enumerate(queue):
+        if build_one(arch, fmt, force=force):
             ok += 1
-        if i < len(archetypes) - 1:
-            time.sleep(2)  # be polite to the LLM server and the source site
+        if i < len(queue) - 1:
+            time.sleep(2)
     return ok
 
 
 def main(argv: list[str]) -> int:
-    parser = argparse.ArgumentParser(description="Generate piloting guides with an LLM.")
+    parser = argparse.ArgumentParser(description="Generate piloting guides.")
     parser.add_argument("formats", nargs="*", help="format slugs (default: all metagame files)")
     parser.add_argument("--archetype", help="only this archetype (use with one format)")
     parser.add_argument("--force", action="store_true", help="regenerate guides that already exist")
+    parser.add_argument(
+        "--from-diff",
+        action="store_true",
+        help="consume metagame_data/<fmt>.diff.json (new -> build, dropped -> archive, returned -> restore)",
+    )
+    parser.add_argument(
+        "--rebuild-archived",
+        action="store_true",
+        help="rebuild every archived guide for the format and restore it to live",
+    )
+    parser.add_argument(
+        "--refresh-stale",
+        action="store_true",
+        help="rebuild guides older than the format TTL (standard/historic 30d, others longer)",
+    )
     args = parser.parse_args(argv[1:])
 
-    formats = args.formats or sorted(p.stem for p in METAGAME_DIR.glob("*.json"))
+    formats = args.formats or sorted(p.stem for p in METAGAME_DIR.glob("*.json") if not p.stem.endswith(".diff"))
     if args.archetype and len(formats) != 1:
         parser.error("--archetype requires exactly one format")
 
     total = 0
     for fmt in formats:
-        total += build_format(fmt, archetype=args.archetype, force=args.force)
+        total += build_format(
+            fmt,
+            archetype=args.archetype,
+            force=args.force,
+            from_diff=args.from_diff,
+            rebuild_archived=args.rebuild_archived,
+            refresh_stale=args.refresh_stale,
+        )
     log.info("done: %d guide(s) written", total)
     return 0 if total else 1
 

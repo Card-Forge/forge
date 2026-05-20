@@ -1,0 +1,131 @@
+{
+  "archetype": "Affinity",
+  "format": "modern",
+  "strategy_type": "aggro",
+  "overview": "Affinity is an aggressive U/R deck that leverages artifact creatures to rapidly reduce the mana cost of its spells. By flooding the board with cheap artifacts, you enable highly efficient removal and finishers while applying relentless pressure. The game plan revolves around maximizing artifact count to trigger affinity reduction and overwhelm opponents before they can stabilize.",
+  "win_conditions": [
+    "Combat damage from a wide board of artifact creatures",
+    "Cheap, affinity-reduced finishers like Weapons Manufacturing",
+    "Token generation to accelerate artifact count and pressure"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with 1-2 mana artifact creatures",
+      "Hands containing Mox Opal or other early ramp",
+      "Hands with Engineered Explosives or early removal",
+      "Hands with a clear path to turn 1 or 2 plays"
+    ],
+    "mulligan_criteria": [
+      "Hands with only high-cost cards",
+      "Hands lacking artifact creatures or ramp",
+      "Hands with multiple removal spells but no threats",
+      "Hands with no turn 1 play"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Mox Opal",
+          "Cheap Artifact Creature",
+          "Engineered Explosives",
+          "Weapons Manufacturing"
+        ],
+        "decision": "keep",
+        "reason": "Provides turn 1 ramp, early creatures to reduce costs, and cheap removal."
+      },
+      {
+        "hand": [
+          "High-Cost Spell",
+          "Direct Damage",
+          "Counterspell",
+          "Late-Game Finisher"
+        ],
+        "decision": "mulligan",
+        "reason": "Lacks artifact creatures and early ramp, making it impossible to trigger affinity reduction or apply early pressure."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Mox Opal on turn 1 for mana acceleration",
+      "Cast 1-2 mana artifact creatures to build affinity",
+      "Use Engineered Explosives to clear early blockers or face-up threats"
+    ],
+    "mid_game": [
+      "Flood the board with artifact creatures and tokens",
+      "Cast affinity-reduced threats and removal to maintain board control",
+      "Push damage consistently while protecting your board"
+    ],
+    "late_game": [
+      "Deploy high-impact finishers like Weapons Manufacturing at reduced cost",
+      "Use token generators to overwhelm opponent's removal",
+      "Close out the game with combat damage or direct damage spells"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Mox Opal",
+      "role": "Mana Accelerator",
+      "notes": "Provides early mana to cast artifact creatures and spells ahead of schedule. Requires an artifact creature in play to activate."
+    },
+    {
+      "name": "Engineered Explosives",
+      "role": "Board Clearer",
+      "notes": "Highly efficient removal that becomes extremely cheap with affinity. Use to clear face-up threats or protect your board."
+    },
+    {
+      "name": "Weapons Manufacturing",
+      "role": "Finisher",
+      "notes": "Generates a large number of artifact creature tokens, rapidly increasing board presence and affinity reduction for subsequent spells."
+    }
+  ],
+  "sequencing_tips": [
+    "Play artifact creatures before activating Mox Opal to enable mana acceleration",
+    "Cast Engineered Explosives before playing your next creature to maximize value and protect threats",
+    "Hold removal until after you see the opponent's response to avoid wasting mana",
+    "Prioritize playing creatures that generate tokens or reduce costs further",
+    "Use affinity reduction to cast finishers earlier than expected, catching opponents off guard"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply maximum early pressure and play around counterspells. Flood the board with tokens to overwhelm removal.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Artifact hate"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them by pushing damage early. Use Engineered Explosives to clear their key threats before they stabilize.",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw engines",
+        "Late-game value creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use cheap removal to clear their early threats and stabilize with artifact creatures. Race with token generation.",
+      "watch_for": [
+        "Fast attackers",
+        "Direct damage",
+        "Early board wipes"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Artifact destruction",
+    "Board wipes",
+    "Counterspells",
+    "Direct damage",
+    "Creature removal"
+  ],
+  "metadata": {
+    "source": "build_piloting_guides.py + draftsim",
+    "source_url": "https://draftsim.com/affinity/",
+    "generated_at": "2026-05-20T17:20:55+00:00",
+    "model": "local-model",
+    "schema_version": 1
+  }
+}

@@ -77,17 +77,52 @@ def _format_observations(observations: list[dict]) -> str:
     return "\n".join(lines)
 
 
+def _format_stale_note(guide: dict) -> str | None:
+    """Deterministic prefix surfacing banlist drift to the model.
+
+    Returns ``None`` when the guide is fresh. Built from ``stale_flags`` so the
+    runtime model knows the guide pre-dates a recent ban/unban.
+    """
+    stale = guide.get("stale_flags") or {}
+    if not stale:
+        return None
+    banned = stale.get("banned_cards_referenced") or []
+    unbanned = stale.get("unbanned_cards_missing") or []
+    out_of_meta = bool(stale.get("out_of_meta"))
+    if not (banned or unbanned or out_of_meta):
+        return None
+    bits: list[str] = []
+    if banned:
+        bits.append(
+            "since-banned cards still referenced: " + ", ".join(banned)
+        )
+    if unbanned:
+        bits.append(
+            "cards unbanned after this primer was written (deck may now play them): "
+            + ", ".join(unbanned)
+        )
+    if out_of_meta:
+        bits.append("this archetype is currently out of the active metagame")
+    age = stale.get("age_days") or 0
+    age_part = f" (~{age} days old)" if age else ""
+    return "NOTE: piloting guide may be stale" + age_part + " — " + "; ".join(bits) + "."
+
+
 def _format_guide(guide: dict | None) -> str:
     """Render the AI's own piloting guide as compact prompt text."""
     if not guide:
         return "(no piloting guide available)"
     gp = guide.get("game_plan", {})
     mull = guide.get("mulligan", {})
-    parts = [
+    parts: list[str] = []
+    stale_note = _format_stale_note(guide)
+    if stale_note:
+        parts.append(stale_note)
+    parts.extend([
         f"Your deck: {guide.get('archetype', '?')} "
         f"(strategy: {guide.get('strategy_type', '?')})",
         f"Overview: {guide.get('overview', '')}",
-    ]
+    ])
     if guide.get("win_conditions"):
         parts.append("Win conditions: " + "; ".join(guide["win_conditions"]))
     if mull.get("keep_criteria"):

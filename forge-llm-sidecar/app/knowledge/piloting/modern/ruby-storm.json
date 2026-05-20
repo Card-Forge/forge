@@ -1,0 +1,131 @@
+{
+  "archetype": "Ruby Storm",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "Ruby Storm is a W/U/R combo deck that accelerates mana with Ruby Medallion and Pyretic Ritual to cast cheap instants and sorceries rapidly. The game plan revolves around building a high storm count and using Ral, Monsoon Mage to replay key spells from the graveyard or resolve a finisher with multiple copies. Success requires protecting early plays from interaction while digging for the exact sequence of accelerants and draw needed to go off turns two through four.",
+  "win_conditions": [
+    "Resolving a storm spell to generate massive value, direct damage, or token generation",
+    "Replaying a lethal finisher or key instant using Ral, Monsoon Mage's enter-the-battlefield ability",
+    "Overwhelming the board with storm copies and pumped creatures to bypass interaction"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two cheap instants or sorceries",
+      "Hands containing Ruby Medallion or Pyretic Ritual",
+      "Hands with Ral, Monsoon Mage and a red/blue instant to replay"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking mana acceleration or storm enablers",
+      "Hands with only high-cost permanents or lands",
+      "Hands without instant-speed interaction or card draw"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Ruby Medallion",
+          "Pyretic Ritual",
+          "Lightning Strike",
+          "Brainstorm",
+          "Cantrip"
+        ],
+        "decision": "keep",
+        "reason": "Provides immediate acceleration, storm count, and card advantage to dig for combo pieces."
+      },
+      {
+        "hand": [
+          "Ral, Monsoon Mage",
+          "Counterspell",
+          "Island",
+          "Mountain",
+          "Plains"
+        ],
+        "decision": "mulligan",
+        "reason": "Lacks cheap instants/sorceries to replay or build storm count, making the combo difficult to assemble."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play mana rocks and cheap instants to establish acceleration and storm count",
+      "Use card draw to dig for combo pieces and finishers",
+      "Hold up instant-speed disruption to protect key plays"
+    ],
+    "mid_game": [
+      "Assemble the storm combo and resolve the finisher",
+      "Use Ral, Monsoon Mage to replay discarded or resolved instants for additional value",
+      "Apply pressure with pumped creatures if the combo is delayed"
+    ],
+    "late_game": [
+      "Stabilize with Ral's recursion and board presence if the combo is countered",
+      "Use life total and card advantage to outlast opponents",
+      "Look for alternate win conditions like token generation or direct damage spells"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Ruby Medallion",
+      "role": "Mana Acceleration & Pump",
+      "notes": "Reduces red spell costs, enables early rituals, and buffs storm creatures or finishers."
+    },
+    {
+      "name": "Pyretic Ritual",
+      "role": "Instant Mana",
+      "notes": "Provides flexible, instant-speed red mana to cast combo pieces or finishers early."
+    },
+    {
+      "name": "Ral, Monsoon Mage",
+      "role": "Recursion & Replay",
+      "notes": "Returns key instants/sorceries from the graveyard to your hand, enabling combo reassembly or lethal replays."
+    }
+  ],
+  "sequencing_tips": [
+    "Play Ruby Medallion before Pyretic Ritual to maximize red discount and pump",
+    "Cast cheap instants before drawing to maximize storm count",
+    "Use Ral's ETB to replay the most impactful instant or sorcery in your graveyard",
+    "Hold up instant-speed interaction to protect combo pieces from counterspells"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Race or go off turn two/three. Use disruption to delay attackers and prioritize acceleration.",
+      "watch_for": [
+        "Early board presence",
+        "Creature sweepers",
+        "Direct damage"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells by splitting mana or using Ral to replay spells. Flood the board with storm copies to overwhelm hand size.",
+      "watch_for": [
+        "Counterspell",
+        "Thoughtseize",
+        "Rest in Peace"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Apply early pressure with pumped creatures and instants. Use card draw to find combo pieces before they stabilize.",
+      "watch_for": [
+        "Removal spells",
+        "Board wipes",
+        "Card draw"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspell",
+    "Thoughtseize",
+    "Inquisition of Kozilek",
+    "Rest in Peace",
+    "Field of the Dead",
+    "Lightning Helix"
+  ],
+  "metadata": {
+    "source": "build_piloting_guides.py",
+    "source_url": "",
+    "generated_at": "2026-05-20T17:22:11+00:00",
+    "model": "local-model",
+    "schema_version": 1
+  }
+}

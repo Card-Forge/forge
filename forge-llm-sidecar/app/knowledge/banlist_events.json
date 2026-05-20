@@ -1,0 +1,61 @@
+{
+  "description": "Hand-curated B&R + format-reset event log. Consumed by the piloting loader to flag stale primers. Add new entries when Wizards announces changes; the build pipeline does not auto-refresh this file.",
+  "events": [
+    {
+      "date": "2026-02-09",
+      "format": "historic",
+      "type": "reset",
+      "banned": [
+        "Eldrazi Temple",
+        "Ajani, Nacatl Pariah",
+        "Crop Rotation",
+        "Scholar of the Lost Trove"
+      ],
+      "unbanned": [
+        "Force of Negation",
+        "Endurance",
+        "Wilderness Reclamation",
+        "Agent of Treachery"
+      ],
+      "note": "Large Historic update."
+    },
+    {
+      "date": "2026-05-18",
+      "format": "pioneer",
+      "type": "br",
+      "banned": ["Cori-Steel Cutter"],
+      "unbanned": [],
+      "note": ""
+    },
+    {
+      "date": "2026-05-18",
+      "format": "modern",
+      "type": "br",
+      "banned": [
+        "Phlage, Titan of Fire's Fury",
+        "Lotus Field"
+      ],
+      "unbanned": [
+        "Violent Outburst",
+        "Umezawa's Jitte"
+      ],
+      "note": ""
+    },
+    {
+      "date": "2026-05-18",
+      "format": "legacy",
+      "type": "br",
+      "banned": ["Undercity Informer"],
+      "unbanned": [],
+      "note": ""
+    },
+    {
+      "date": "2026-05-18",
+      "format": "pauper",
+      "type": "br",
+      "banned": [],
+      "unbanned": ["Bonder's Ornament"],
+      "note": ""
+    }
+  ]
+}
