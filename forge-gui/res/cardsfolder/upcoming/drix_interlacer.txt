@@ -1,0 +1,9 @@
+Name:Drix Interlacer
+ManaCost:1
+Types:Artifact
+K:Starting intensity:0
+T:Mode$ ChangesZone | ValidCard$ Artifact.YouCtrl+Other | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigIntensify | TriggerDescription$ Whenever another artifact you control enters, this artifact intensifies by 1.
+SVar:TrigIntensify:DB$ Intensify
+A:AB$ Draw | Cost$ T Sac<1/CARDNAME> | NumCards$ X | SorcerySpeed$ True | SpellDescription$ Draw X cards, where X is half this artifact's intensity, rounded down. Activate only as a sorcery.
+SVar:X:Count$Intensity/HalfDown
+Oracle:Starting intensity 0\nWhenever another artifact you control enters, this artifact intensifies by 1.\n{T}, Sacrifice this artifact: Draw X cards, where X is half this artifact's intensity, rounded down. Activate only as a sorcery.
