@@ -1,0 +1,13 @@
+Name:Thorna and Twigtooth
+ManaCost:1 R W B
+Types:Legendary Creature Giant Treefolk
+PT:6/7
+K:etbCounter:M1M1:2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever CARDNAME attacks, remove all counters from target creature you control. Each opponent loses X life, you gain X life, and the topmost creature card in your library perpetually gets +X/+X, where X is the number of counters removed this way.
+SVar:TrigRemoveCounter:DB$ RemoveCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ All | CounterNum$ All | RememberAmount$ True | SubAbility$ DBDrain
+SVar:DBDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ ValidLibrary Creature.TopLibrary_Creature+YouCtrl | PumpZone$ Library | NumAtt$ +X | NumDef$ +X | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedNumber
+Oracle:Thorna and Twigtooth enters with two -1/-1 counters on it.\nWhenever Thorna and Twigtooth attacks, remove all counters from target creature you control. Each opponent loses X life, you gain X life, and the topmost creature card in your library perpetually gets +X/+X, where X is the number of counters removed this way.
