@@ -16,6 +16,7 @@ from __future__ import annotations
 import json
 import logging
 
+from app import advice
 from app.config import CONFIG
 from app.knowledge import format_detect, loader, metagame, piloting
 from app.knowledge.piloting_schema import StrategyType
@@ -177,15 +178,23 @@ def _build_recognition_prompt(state: GraphState) -> str:
         "played a W/U dual land, ONLY archetypes that include both W and U "
         "are viable — do NOT pick a R/W archetype even if it is more "
         "popular.\n"
-        "2. CURATED ARCHETYPE MATCH. Prefer a curated archetype from the "
-        "list above when its signature cards / tells / colors match.\n"
-        "3. OFF-META FALLBACK. If the observed plays clearly indicate a "
-        "strategy but no curated archetype is a good fit (the opponent is "
-        "playing a brew not in the metagame list), return one of the "
-        f"Off-meta labels: {', '.join(OFF_META_NAMES)}. Pick the one whose "
-        "computed style score above is highest, weighted by the strategy "
-        "heuristics below. Off-meta labels are first-class outputs, not a "
-        "consolation prize — confidence is NOT capped for them.\n"
+        "2. ALWAYS PREFER A CURATED ARCHETYPE. The list above is the live "
+        "metagame for this format and already covers ~90% of decks. If ANY "
+        "color-consistent curated archetype is even a plausible match for "
+        "the observed plays — same colors and a strategy that isn't directly "
+        "contradicted — pick it. A slightly imperfect curated match is "
+        "almost always better than an off-meta label. Reflect any "
+        "uncertainty about strategy in `confidence`, not by switching to "
+        "off-meta.\n"
+        "3. OFF-META IS A LAST RESORT. Only return an Off-meta label "
+        f"({', '.join(OFF_META_NAMES)}) when EITHER (a) no curated "
+        "archetype is color-consistent with the observed plays, OR (b) the "
+        "observed cards directly contradict every color-consistent curated "
+        "archetype's strategy (e.g. opponent has cast 3+ counterspells and "
+        "the only color-consistent curated decks are pure aggro). A single "
+        "high style score is NOT sufficient on its own — the curated list "
+        "already includes decks for every common strategy. Off-meta "
+        "confidence MUST NOT exceed 0.65.\n"
     )
     if has_shares:
         rules += (
@@ -437,7 +446,66 @@ def _fail_soft(state: GraphState, exc: Exception) -> GraphState:
         "play_alternatives": [],
         "mulligan_advice": "",
         "actions": [],
+        "role": None,
+        "hand_values": [],
+        "opponent_hand": [],
+        "target_priorities": [],
     }
+
+
+def _phase_bucket(turn: int) -> str:
+    if turn <= 3:
+        return "early_game"
+    if turn <= 7:
+        return "mid_game"
+    return "late_game"
+
+
+def _opp_strategy_for(name: str, candidates: list[dict]) -> str | None:
+    n = (name or "").strip().lower()
+    if not n:
+        return None
+    for a in candidates or []:
+        if (a.get("name", "") or "").strip().lower() == n:
+            return (a.get("strategy") or "").strip() or None
+    return None
+
+
+def _opp_record_for(name: str, candidates: list[dict]) -> dict | None:
+    n = (name or "").strip().lower()
+    for a in candidates or []:
+        if (a.get("name", "") or "").strip().lower() == n:
+            return a
+    return None
+
+
+def _merge_actions(
+    base: list[dict],
+    card_specific: list[dict],
+) -> list[dict]:
+    """Combine the static personality-driven base with board-aware additions.
+
+    Behavior:
+    - Card-specific entries other than PLAY_SPELL replace the base entry of
+      the same type (e.g. role-derived ATTACK overrides static ATTACK).
+    - For PLAY_SPELL, we want both: the card-specific entries carry concrete
+      card-name targets for the Java side, while the base entry carries the
+      personality-driven percentage. The base PLAY_SPELL is appended *last*
+      so action-type maps (which keep the last entry) still see the
+      personality value, while iterators that walk all entries also see the
+      targeted picks.
+    """
+    if not card_specific:
+        return base
+    cs_types = {a["action_type"] for a in card_specific if a.get("action_type") != "PLAY_SPELL"}
+    base_non_replaced = [
+        a for a in base if a.get("action_type") not in cs_types and a.get("action_type") != "PLAY_SPELL"
+    ]
+    base_play_spell = [a for a in base if a.get("action_type") == "PLAY_SPELL"]
+    merged: list[dict] = list(base_non_replaced)
+    merged.extend(card_specific)
+    merged.extend(base_play_spell)
+    return merged
 
 
 async def game_advisor_node(state: GraphState) -> GraphState:
@@ -511,9 +579,63 @@ async def game_advisor_node(state: GraphState) -> GraphState:
         play_alternatives = []
     play_alternatives = [str(x) for x in play_alternatives][:3]
 
-    raw_actions = piloting_result.get("actions", [])
-    if not isinstance(raw_actions, list):
-        raw_actions = []
+    base_actions = piloting_result.get("actions", [])
+    if not isinstance(base_actions, list):
+        base_actions = []
+
+    # --- v4 board-aware advice ---------------------------------------------
+    guide_dict = state.get("piloting_guide") or {}
+    ai_strategy = guide_dict.get("strategy_type") if guide_dict else None
+    opp_strategy = _opp_strategy_for(archetype, archetypes)
+    turn = state.get("turn", 0)
+    role = advice.assess_role(state, ai_strategy, opp_strategy)
+    phase_bucket = _phase_bucket(turn)
+    hand_values = advice.score_hand(
+        state.get("hand", []) or [], guide_dict, phase_bucket, role
+    )
+    # On turn 0 the only action should be MULLIGAN; the in-game card-specific
+    # actions and role-derived combat overrides are not yet meaningful.
+    # If opponent state is empty (or only contains land observations) we also
+    # withhold combat overrides so the static personality-driven percentages
+    # can do their job.
+    has_opp_threats = bool(state.get("opponent_board") or [])
+    has_opp_spells = any(
+        (o or {}).get("event") == "spell" for o in (state.get("observations") or [])
+    )
+    has_opp_state = (
+        has_opp_threats
+        or has_opp_spells
+        or bool(state.get("opponent_graveyard") or [])
+    )
+    if turn <= 0:
+        card_actions: list[dict] = []
+    elif not has_opp_state:
+        # Keep card-specific PLAY_LAND/PLAY_SPELL recommendations but drop
+        # the combat overrides since the role signal is speculative without
+        # an opponent on board.
+        card_actions = [
+            a
+            for a in advice.card_specific_actions(hand_values, role, phase_bucket)
+            if a.get("action_type") in ("PLAY_LAND", "PLAY_SPELL")
+        ]
+    else:
+        card_actions = advice.card_specific_actions(hand_values, role, phase_bucket)
+    actions = _merge_actions(base_actions, card_actions)
+    opp_hand = advice.infer_opponent_hand(
+        archetype,
+        archetypes,
+        state.get("observations", []) or [],
+        state.get("opponent_board", []) or [],
+        state.get("opponent_graveyard", []) or [],
+        confidence,
+        state.get("turn", 0),
+    )
+    target_pri = advice.target_priorities(
+        state.get("opponent_board", []) or [],
+        _opp_record_for(archetype, archetypes),
+        guide_dict,
+        role,
+    )
 
     return {
         **state,
@@ -525,5 +647,9 @@ async def game_advisor_node(state: GraphState) -> GraphState:
         "play_reasoning": str(piloting_result.get("play_reasoning", "")).strip(),
         "play_alternatives": play_alternatives,
         "mulligan_advice": str(piloting_result.get("mulligan_advice", "")).strip(),
-        "actions": raw_actions,
+        "actions": actions,
+        "role": role,
+        "hand_values": hand_values,
+        "opponent_hand": opp_hand,
+        "target_priorities": target_pri,
     }

@@ -156,7 +156,15 @@ public enum AiProps { /** */
     SIDECAR_BIAS_BLOCK("50"),                       // max % boost when sidecar recommends blocking
     SIDECAR_BIAS_ABILITY("30"),                     // max % boost when sidecar recommends an ability
     SIDECAR_BIAS_PASS("40"),                        // how much sidecar PASS recommendation affects do-nothing
-    SIDECAR_PERSONALITY_WEIGHT("100");              // 0=no personality effect, 100=full effect
+    SIDECAR_PERSONALITY_WEIGHT("100"),              // 0=no personality effect, 100=full effect
+    // v4 per-feature toggles for board-aware sidecar advice
+    SIDECAR_ROLE_ASSESSMENT_ENABLE("true"),         // honor "Who's the Beatdown?" role in attack/block
+    SIDECAR_HAND_VALUATION_ENABLE("true"),          // use per-card hand value as a discard/eval tiebreaker
+    SIDECAR_OPPONENT_INFERENCE_ENABLE("true"),     // bias combat / play by inferred opponent hand
+    SIDECAR_TARGETING_ENABLE("true"),               // consult sidecar target priority lists
+    SIDECAR_MULLIGAN_ENABLE("true"),                // factor sidecar advice into mulligan decisions
+    SIDECAR_DISCARD_ENABLE("true"),                 // discard lowest-handValue cards first
+    SIDECAR_HAND_VALUE_WEIGHT("30");                // weight applied to handValue in evaluateCard blend
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 

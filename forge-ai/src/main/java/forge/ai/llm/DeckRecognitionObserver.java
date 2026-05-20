@@ -1,6 +1,7 @@
 package forge.ai.llm;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -18,11 +19,14 @@ import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventLandPlayed;
+import forge.game.event.GameEventPlayerLivesChanged;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventTurnBegan;
+import forge.game.event.GameEventZone;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
+import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import org.tinylog.Logger;
 
@@ -140,6 +144,11 @@ public final class DeckRecognitionObserver {
                 // A turn boundary is itself information (e.g. a turn the
                 // opponent passed without acting), so always re-evaluate.
                 requestRecognition();
+            } else if (ev instanceof GameEventPlayerLivesChanged
+                    || ev instanceof GameEventZone) {
+                // Life changes and zone churn (cards entering / leaving a zone)
+                // can flip the role assessment without spell/land traffic.
+                requestRecognition();
             }
         } catch (final RuntimeException ex) {
             // Never let observation bookkeeping disrupt the game.
@@ -192,6 +201,84 @@ public final class DeckRecognitionObserver {
         }
     }
 
+    /** Collect card names in a player's zone. Returns an empty list on failure. */
+    private List<String> zoneNames(final Player p, final ZoneType zone) {
+        try {
+            final List<String> names = new ArrayList<>();
+            for (final Card c : p.getCardsIn(zone)) {
+                if (c != null && c.getName() != null) {
+                    names.add(c.getName());
+                }
+            }
+            return names;
+        } catch (final RuntimeException ex) {
+            return List.of();
+        }
+    }
+
+    /** First opposing player relative to the AI, or {@code null}. */
+    private Player firstOpponent() {
+        try {
+            for (final Player p : game.getPlayers()) {
+                if (p != null && !p.equals(aiPlayer)) {
+                    return p;
+                }
+            }
+        } catch (final RuntimeException ex) {
+            // ignore
+        }
+        return null;
+    }
+
+    /** Life totals keyed "ai"/"human" so the sidecar can read them generically. */
+    private Map<String, Integer> buildLifeTotals(final Player opponent) {
+        final Map<String, Integer> out = new LinkedHashMap<>();
+        try {
+            out.put("ai", aiPlayer.getLife());
+            if (opponent != null) {
+                out.put("human", opponent.getLife());
+            }
+        } catch (final RuntimeException ex) {
+            return Map.of();
+        }
+        return out;
+    }
+
+    /** Current phase name string, or empty when unavailable. */
+    private String currentPhaseName() {
+        try {
+            return game.getPhaseHandler().getPhase().name();
+        } catch (final RuntimeException ex) {
+            return "";
+        }
+    }
+
+    /** Color letters (W/U/B/R/G/C) producible by the AI's untapped lands. */
+    private List<String> availableManaColors() {
+        final Set<String> colors = new LinkedHashSet<>();
+        try {
+            for (final Card land : aiPlayer.getCardsIn(ZoneType.Battlefield)) {
+                if (land == null || !land.isLand() || land.isTapped()) {
+                    continue;
+                }
+                final var cs = land.getRules() != null ? land.getRules().getColorIdentity() : null;
+                if (cs == null) {
+                    colors.add("C");
+                    continue;
+                }
+                if (cs.hasWhite()) { colors.add("W"); }
+                if (cs.hasBlue())  { colors.add("U"); }
+                if (cs.hasBlack()) { colors.add("B"); }
+                if (cs.hasRed())   { colors.add("R"); }
+                if (cs.hasGreen()) { colors.add("G"); }
+                if (cs.isColorless()) { colors.add("C"); }
+            }
+        } catch (final RuntimeException ex) {
+            // fall through with whatever we have
+        }
+        return new ArrayList<>(colors);
+    }
+
     /** Build the personality map from AI profile properties, or empty map. */
     private Map<String, Object> buildPersonality() {
         try {
@@ -205,6 +292,16 @@ public final class DeckRecognitionObserver {
 
     /** Send one request; on completion, post the guess and honor any rerun. */
     private void fireCall() {
+        final List<String> hand = zoneNames(aiPlayer, ZoneType.Hand);
+        final List<String> ownBoard = zoneNames(aiPlayer, ZoneType.Battlefield);
+        final List<String> ownGy = zoneNames(aiPlayer, ZoneType.Graveyard);
+        final Player opponent = firstOpponent();
+        final List<String> oppBoard = opponent == null ? List.of() : zoneNames(opponent, ZoneType.Battlefield);
+        final List<String> oppGy = opponent == null ? List.of() : zoneNames(opponent, ZoneType.Graveyard);
+        final Map<String, Integer> lifeTotals = buildLifeTotals(opponent);
+        final String phase = currentPhaseName();
+        final List<String> availableMana = availableManaColors();
+
         final RecognitionRequest request = new RecognitionRequest(
                 RecognitionRequest.CLIENT,
                 String.valueOf(game.getId()),
@@ -213,6 +310,14 @@ public final class DeckRecognitionObserver {
                 game.getPhaseHandler().getTurn(),
                 new ArrayList<>(observations),
                 deckCards,
+                hand,
+                ownBoard,
+                oppBoard,
+                ownGy,
+                oppGy,
+                lifeTotals,
+                phase,
+                availableMana,
                 buildPersonality());
 
         Logger.info("DeckRecognition: POST /recognize game=" + game.getId()
@@ -252,6 +357,18 @@ public final class DeckRecognitionObserver {
             final String pilotingMsg = result.toPilotingLogMessage();
             if (pilotingMsg != null && !pilotingMsg.isEmpty()) {
                 game.getGameLog().add(GameLogEntryType.INFORMATION, pilotingMsg);
+            }
+            final String roleMsg = result.toRoleLogMessage();
+            if (roleMsg != null && !roleMsg.isEmpty()) {
+                game.getGameLog().add(GameLogEntryType.INFORMATION, roleMsg);
+            }
+            final String handMsg = result.toHandValuesLogMessage();
+            if (handMsg != null && !handMsg.isEmpty()) {
+                game.getGameLog().add(GameLogEntryType.INFORMATION, handMsg);
+            }
+            final String oppHandMsg = result.toOpponentHandLogMessage();
+            if (oppHandMsg != null && !oppHandMsg.isEmpty()) {
+                game.getGameLog().add(GameLogEntryType.INFORMATION, oppHandMsg);
             }
         } catch (final RuntimeException ex) {
             Logger.debug("DeckRecognition: failed to write guess to log: " + ex.getMessage());

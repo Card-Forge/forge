@@ -540,13 +540,101 @@
             `;
           });
         }
+        // --- v4 board-aware panels ------------------------------------------
+        let roleHtml = '';
+        if (p.role) {
+          const r = p.role;
+          const sideColor = r.winning_side === 'ai'
+            ? 'var(--green)'
+            : r.winning_side === 'human' ? 'var(--red)' : 'var(--text-dim)';
+          const sideLabel = r.winning_side === 'ai'
+            ? 'AI ahead' : r.winning_side === 'human' ? 'Human ahead' : 'Even';
+          const flipBadge = r.role_flipped
+            ? '<span style="margin-left:8px;padding:1px 6px;font-size:10px;border-radius:8px;background:var(--yellow);color:#000">role flipped</span>'
+            : '';
+          const marginPct = Math.round((r.margin || 0) * 100);
+          roleHtml = `
+            <div class="piloting-label" style="margin-top:10px">Who's the Beatdown?${flipBadge}</div>
+            <div style="display:flex;gap:16px;font-size:12px;margin-top:4px">
+              <span><b>AI:</b> ${escapeHtml(r.ai_role)}</span>
+              <span><b>Opp:</b> ${escapeHtml(r.opponent_role)}</span>
+              <span style="color:${sideColor}"><b>${escapeHtml(sideLabel)}</b> (${marginPct}%)</span>
+            </div>
+            <div style="height:4px;background:var(--bg);border-radius:2px;overflow:hidden;margin-top:4px">
+              <div style="height:100%;width:${marginPct}%;background:${sideColor};border-radius:2px"></div>
+            </div>
+            ${r.reasoning ? `<div class="reasoning">${escapeHtml(r.reasoning)}</div>` : ''}
+          `;
+        }
+
+        let handValuesHtml = '';
+        if (p.hand_values && p.hand_values.length > 0) {
+          handValuesHtml = '<div class="piloting-label" style="margin-top:10px">Hand Valuation</div>';
+          p.hand_values.slice(0, 10).forEach(hv => {
+            const pct = Math.round(hv.value || 0);
+            const barColor = pct >= 70 ? 'var(--green)' : pct >= 40 ? 'var(--yellow)' : 'var(--red)';
+            handValuesHtml += `
+              <div style="display:flex;align-items:center;gap:6px;padding:2px 0;font-size:12px"
+                   title="${escapeHtml(hv.reasoning || '')}">
+                <span style="min-width:140px">${escapeHtml(hv.card)}</span>
+                <span style="font-family:var(--mono);font-size:10px;text-transform:uppercase;color:var(--text-dim);min-width:64px">${escapeHtml(hv.role || '')}</span>
+                <div style="flex:1;height:4px;background:var(--bg);border-radius:2px;overflow:hidden">
+                  <div style="height:100%;width:${pct}%;background:${barColor};border-radius:2px"></div>
+                </div>
+                <span style="min-width:32px;text-align:right;font-family:var(--mono);color:var(--text-dim)">${pct}</span>
+              </div>
+            `;
+          });
+        }
+
+        let oppHandHtml = '';
+        if (p.opponent_hand && p.opponent_hand.length > 0) {
+          oppHandHtml = '<div class="piloting-label" style="margin-top:10px">Opponent Likely Holds</div>';
+          p.opponent_hand.slice(0, 8).forEach(g => {
+            const pct = Math.round((g.probability || 0) * 100);
+            const barColor = pct >= 60 ? 'var(--red)' : pct >= 30 ? 'var(--yellow)' : 'var(--text-dim)';
+            const examples = (g.example_cards || []).slice(0, 3).join(', ');
+            oppHandHtml += `
+              <div style="padding:3px 0;font-size:12px" title="${escapeHtml(g.reasoning || '')}">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span style="min-width:120px;font-family:var(--mono);font-size:11px;text-transform:uppercase">${escapeHtml(g.category)}</span>
+                  <div style="flex:1;height:4px;background:var(--bg);border-radius:2px;overflow:hidden">
+                    <div style="height:100%;width:${pct}%;background:${barColor};border-radius:2px"></div>
+                  </div>
+                  <span style="min-width:32px;text-align:right;font-family:var(--mono);color:var(--text-dim)">${pct}%</span>
+                </div>
+                ${examples ? `<div style="margin-left:126px;color:var(--text-dim);font-size:11px">e.g. ${escapeHtml(examples)}</div>` : ''}
+              </div>
+            `;
+          });
+        }
+
+        let targetsHtml = '';
+        if (p.target_priorities && p.target_priorities.length > 0) {
+          targetsHtml = '<div class="piloting-label" style="margin-top:10px">Target Priorities</div>';
+          p.target_priorities.forEach(tp => {
+            const label = tp.spell ? `for ${escapeHtml(tp.spell)}` : 'generic';
+            const targets = (tp.targets || []).map(c => `<span class="alt-chip">${escapeHtml(c)}</span>`).join('');
+            targetsHtml += `
+              <div style="font-size:12px;padding:3px 0" title="${escapeHtml(tp.reasoning || '')}">
+                <span style="color:var(--text-dim);font-size:11px;text-transform:uppercase">${label}:</span>
+                <div class="alternatives" style="margin-top:2px">${targets || '<span class="empty-state" style="padding:0">no targets</span>'}</div>
+              </div>
+            `;
+          });
+        }
+
         pilotingHtml = `
           <div class="piloting-section">
             <div class="piloting-label">Piloting Advice</div>
             <div class="piloting-value">${escapeHtml(p.recommended_play || p.mulligan_advice || 'No advice')}</div>
             ${p.reasoning ? `<div class="reasoning">${escapeHtml(p.reasoning)}</div>` : ''}
             <div class="piloting-label" style="margin-top:6px">Own Archetype: ${escapeHtml(p.own_archetype)}</div>
+            ${roleHtml}
             ${actionsHtml}
+            ${handValuesHtml}
+            ${oppHandHtml}
+            ${targetsHtml}
           </div>
         `;
       }

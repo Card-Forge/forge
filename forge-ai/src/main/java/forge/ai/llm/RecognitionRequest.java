@@ -41,6 +41,10 @@ public record RecognitionRequest(
         @SerializedName("opponent_graveyard") List<String> opponentGraveyard,
         /** Player name/seat -> life total. */
         @SerializedName("life_totals") Map<String, Integer> lifeTotals,
+        /** Current game phase string, e.g. "MAIN1". */
+        String phase,
+        /** Mana sources the AI can tap right now, as color strings (W/U/B/R/G/C). */
+        @SerializedName("available_mana") List<String> availableMana,
         /** AI personality traits from the AI profile. */
         Map<String, Object> personality) {
 
@@ -55,17 +59,19 @@ public record RecognitionRequest(
                               final int opponentSeat, final int turn,
                               final List<Observation> observations, final List<String> deckCards) {
         this(client, gameId, format, opponentSeat, turn, observations, deckCards,
-                List.of(), List.of(), List.of(), List.of(), List.of(), Map.of(), Map.of());
+                List.of(), List.of(), List.of(), List.of(), List.of(), Map.of(),
+                "", List.of(), Map.of());
     }
 
     /**
-     * Full constructor including personality.
+     * Convenience constructor including personality but no live-state fields.
      */
     public RecognitionRequest(final String client, final String gameId, final String format,
                               final int opponentSeat, final int turn,
                               final List<Observation> observations, final List<String> deckCards,
                               final Map<String, Object> personality) {
         this(client, gameId, format, opponentSeat, turn, observations, deckCards,
-                List.of(), List.of(), List.of(), List.of(), List.of(), Map.of(), personality);
+                List.of(), List.of(), List.of(), List.of(), List.of(), Map.of(),
+                "", List.of(), personality);
     }
 }

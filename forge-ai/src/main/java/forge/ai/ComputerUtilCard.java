@@ -769,6 +769,34 @@ public class ComputerUtilCard {
     public static int evaluateCreature(final Card c) {
         return creatureEvaluator.evaluateCreature(c);
     }
+
+    /**
+     * Heuristic creature score blended with the sidecar's per-card hand value
+     * for tiebreaking. The static heuristic remains the floor; the sidecar
+     * value contributes a configurable additive bonus. Callers that have an
+     * {@link AiController} on hand can opt in to this variant when picking
+     * one creature out of many otherwise equally-valued options.
+     */
+    public static int evaluateCreatureWithSidecar(final Card c, final AiController ai) {
+        final int base = creatureEvaluator.evaluateCreature(c);
+        if (ai == null || c == null || c.getName() == null) {
+            return base;
+        }
+        if (!ai.getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE)
+                || !ai.getBoolProperty(AiProps.SIDECAR_HAND_VALUATION_ENABLE)) {
+            return base;
+        }
+        final var influence = ai.getSidecarInfluence();
+        if (influence == null || !influence.hasData()) {
+            return base;
+        }
+        final double v = influence.handValue(c.getName()).orElse(0.0);
+        final int weight = ai.getIntProperty(AiProps.SIDECAR_HAND_VALUE_WEIGHT);
+        // weight is 0-100; the bonus tops out at +value*weight/100, which
+        // sits well below typical creature scores (in the hundreds) so it
+        // stays a tiebreaker.
+        return base + (int) Math.round(v * (weight / 100.0));
+    }
     public static int evaluateCreature(final Card c, final boolean considerPT, final boolean considerCMC) {
         return creatureEvaluator.evaluateCreature(c, considerPT, considerCMC);
     }

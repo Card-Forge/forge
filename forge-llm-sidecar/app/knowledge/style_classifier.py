@@ -297,6 +297,6 @@ def top_off_meta_label(scores: dict[str, float]) -> str | None:
     if not scores:
         return None
     best = max(scores.items(), key=lambda kv: kv[1])
-    if best[1] < 0.2:
+    if best[1] < 0.35:
         return None
     return "Off-meta " + best[0].capitalize()

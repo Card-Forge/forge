@@ -17,9 +17,13 @@ from app.llm_client import is_reachable
 from app.nodes import game_advisor
 from app.schema import (
     ActionScore,
+    HandValuation,
+    OpponentHandGuess,
     PilotingAdvice,
     RecognitionRequest,
     RecognitionResponse,
+    RoleAssessment,
+    TargetPriority,
     TrainingExample,
 )
 from app.store import get_store
@@ -249,12 +253,27 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         "your_graveyard": req.your_graveyard,
         "opponent_graveyard": req.opponent_graveyard,
         "life_totals": req.life_totals,
+        "phase": req.phase,
+        "available_mana": req.available_mana,
         "personality": req.personality,
         "alternatives": [],
     }
     final = await graph.ainvoke(initial)
     raw_actions = final.get("actions") or []
     actions = [ActionScore(**a) for a in raw_actions if isinstance(a, dict)]
+    role_raw = final.get("role")
+    role_obj = RoleAssessment(**role_raw) if isinstance(role_raw, dict) else None
+    hand_values = [
+        HandValuation(**hv) for hv in (final.get("hand_values") or []) if isinstance(hv, dict)
+    ]
+    opponent_hand = [
+        OpponentHandGuess(**g) for g in (final.get("opponent_hand") or []) if isinstance(g, dict)
+    ]
+    target_priorities = [
+        TargetPriority(**t)
+        for t in (final.get("target_priorities") or [])
+        if isinstance(t, dict)
+    ]
     piloting_advice = PilotingAdvice(
         own_archetype=final.get("own_archetype") or "Unknown",
         guide_source=final.get("guide_source") or "",
@@ -263,6 +282,10 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         alternatives=final.get("play_alternatives") or [],
         mulligan_advice=final.get("mulligan_advice") or "",
         actions=actions,
+        role=role_obj,
+        hand_values=hand_values,
+        opponent_hand=opponent_hand,
+        target_priorities=target_priorities,
     )
 
     _store = get_store()

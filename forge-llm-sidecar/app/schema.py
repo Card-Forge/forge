@@ -8,7 +8,10 @@ from pydantic import BaseModel, Field
 
 # v2 adds the piloting advice block to the response (see PilotingAdvice).
 # v3 adds structured ActionScore with personality weighting.
-SCHEMA_VERSION = 3
+# v4 adds board-aware advice: RoleAssessment (Who's the Beatdown), hand
+# valuations, opponent-hand inference, target priorities, and richer state on
+# the request (phase, available_mana).
+SCHEMA_VERSION = 4
 
 
 class Observation(BaseModel):
@@ -54,8 +57,62 @@ class RecognitionRequest(BaseModel):
     your_graveyard: list[str] = Field(default_factory=list)
     opponent_graveyard: list[str] = Field(default_factory=list)
     life_totals: dict[str, int] = Field(default_factory=dict)
+    # Current game phase (e.g. "MAIN1", "COMBAT_DECLARE_ATTACKERS"). Optional —
+    # board-aware advice uses it to pick phase-appropriate actions.
+    phase: str = ""
+    # Mana available to the AI right now, in WUBRGC order or as a list of color
+    # strings. Used to filter actions to ones the AI can actually pay for.
+    available_mana: list[str] = Field(default_factory=list)
     # AI personality profile. Sent so the LLM can factor it into action scoring.
     personality: dict[str, str | int | float | bool] = Field(default_factory=dict)
+
+
+class RoleAssessment(BaseModel):
+    """Who's the Beatdown? Mike Flores's role-assignment doctrine.
+
+    Role is matchup- and state-dependent and can flip mid-game; the wrong
+    role assignment is a known losing pattern. The sidecar consults the
+    natural role of each deck's strategy, the current board pressure, card
+    advantage, and clock, and decides who should be the aggressor right now.
+    """
+
+    ai_role: str = "contested"  # "beatdown" | "control" | "contested"
+    opponent_role: str = "contested"
+    winning_side: str = "even"  # "ai" | "human" | "even"
+    margin: float = 0.0  # 0-1, how decisively the winning side is ahead
+    role_flipped: bool = False  # true when current state overrode the deck's natural role
+    reasoning: str = ""  # one or two sentences citing life/board/card-advantage/clock
+
+
+class HandValuation(BaseModel):
+    """Per-card score for cards currently in the AI's hand."""
+
+    card: str
+    value: float = 0.0  # 0-100, higher = more valuable to keep / prioritize playing
+    role: str = "filler"  # "threat" | "answer" | "ramp" | "card_draw" | "win_con" | "land" | "filler"
+    reasoning: str = ""
+
+
+class OpponentHandGuess(BaseModel):
+    """Inferred category of card the human likely still holds, based on
+    observed plays minus what's been seen, weighted by archetype confidence."""
+
+    category: str = ""  # "counterspell" | "removal" | "wrath" | "threat" | "combo_piece" | ...
+    example_cards: list[str] = Field(default_factory=list)
+    probability: float = 0.0  # 0-1
+    reasoning: str = ""
+
+
+class TargetPriority(BaseModel):
+    """Ordered target preference for a spell/ability with selectable targets.
+
+    ``spell`` is the AI's spell whose targets we are ranking; an empty string
+    means generic priority that applies when no spell-specific entry matches.
+    """
+
+    spell: str = ""
+    targets: list[str] = Field(default_factory=list)
+    reasoning: str = ""
 
 
 class PilotingAdvice(BaseModel):
@@ -70,6 +127,11 @@ class PilotingAdvice(BaseModel):
     actions: list[ActionScore] = Field(
         default_factory=list
     )  # structured action recommendations with percentages
+    # Board-aware additions (v4):
+    role: RoleAssessment | None = None
+    hand_values: list[HandValuation] = Field(default_factory=list)
+    opponent_hand: list[OpponentHandGuess] = Field(default_factory=list)
+    target_priorities: list[TargetPriority] = Field(default_factory=list)
 
 
 class TrainingExample(BaseModel):
@@ -119,6 +181,8 @@ class GraphState(TypedDict, total=False):
     your_graveyard: list[str]
     opponent_graveyard: list[str]
     life_totals: dict[str, int]
+    phase: str
+    available_mana: list[str]
     personality: dict[str, str | int | float | bool]
     # resolved by the game_advisor node
     resolved_format: str | None
@@ -137,3 +201,7 @@ class GraphState(TypedDict, total=False):
     mulligan_advice: str | None
     guide_source: str | None
     actions: list[dict]
+    role: dict | None
+    hand_values: list[dict]
+    opponent_hand: list[dict]
+    target_priorities: list[dict]

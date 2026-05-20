@@ -766,17 +766,31 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn)  {
-        // Sidecar influence: check MULLIGAN action
+        // Sidecar influence: explicit MULLIGAN action wins; otherwise consult
+        // the hand-value sum as a tiebreaker against the heuristic.
         if (brains.getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE)
+                && brains.getBoolProperty(AiProps.SIDECAR_MULLIGAN_ENABLE)
                 && brains.getSidecarInfluence().hasData()) {
-            var mullAction = brains.getSidecarInfluence().bestAction("MULLIGAN");
+            var influence = brains.getSidecarInfluence();
+            var mullAction = influence.bestAction("MULLIGAN");
             if (mullAction.isPresent()) {
                 final String target = mullAction.get().target();
                 if ("keep".equalsIgnoreCase(target)) {
-                    return true; // sidecar says keep
+                    return true;
                 } else if ("mulligan".equalsIgnoreCase(target)) {
-                    return false; // sidecar says mulligan
+                    return false;
                 }
+            }
+            // Secondary signal: if the per-card valuations are available, use
+            // their average as a soft tiebreaker. Hands averaging > 50 keep,
+            // < 30 ship; in between defer to the heuristic.
+            var values = influence.getHandValues();
+            if (!values.isEmpty()) {
+                final double avg = values.stream()
+                        .mapToDouble(forge.ai.llm.RecognitionResult.HandValuation::value)
+                        .average().orElse(0.0);
+                if (avg >= 50.0) return true;
+                if (avg <= 30.0) return false;
             }
         }
         return !ComputerUtil.wantMulligan(player, cardsToReturn);
@@ -1366,6 +1380,23 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean chooseTargetsFor(SpellAbility currentAbility) {
+        // Surface the sidecar's target priorities to the ability AI via a
+        // SpellAbility SVar. Ability handlers that opt into it can read
+        // "SidecarTargets" and bias their search toward those names. Today
+        // this is informational only; deeper ability-level wiring is a
+        // follow-up.
+        if (brains.getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE)
+                && brains.getBoolProperty(AiProps.SIDECAR_TARGETING_ENABLE)
+                && brains.getSidecarInfluence().hasData()
+                && currentAbility != null && currentAbility.getHostCard() != null) {
+            final String spellName = currentAbility.getHostCard().getName();
+            final java.util.List<String> pref = brains.getSidecarInfluence().targetPriorityFor(spellName);
+            if (!pref.isEmpty()) {
+                currentAbility.setSVar("SidecarTargets", String.join(";", pref));
+                org.tinylog.Logger.debug("PlayerControllerAi: sidecar target hint for %s -> %s",
+                        spellName, pref);
+            }
+        }
         return brains.doTrigger(currentAbility, true);
     }
 

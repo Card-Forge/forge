@@ -668,7 +668,7 @@ public class AiController {
         // use the evaluation plus a modifier for each new color pip and basic type
         final String sidecarRecommendedLand = getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE)
                 && sidecarInfluence.hasData()
-                ? sidecarInfluence.bestAction("PLAY_LAND").map(a -> a.target()).orElse("")
+                ? sidecarInfluence.bestPlayLandName().orElse("")
                 : "";
         Card toReturn = Aggregates.itemWithMax(IterableUtil.filter(landList, Card::hasPlayableLandFace),
                 (card -> {
@@ -1099,6 +1099,36 @@ public class AiController {
             return validCards; //return all valid cards since they will be discarded without filtering needed
         }
 
+        // Sidecar discard bias: drop the lowest hand-value cards first when
+        // the sidecar has populated valuations for the current hand. Only
+        // honors a clean signal — falls through to the heuristic otherwise.
+        if (getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE)
+                && getBoolProperty(AiProps.SIDECAR_DISCARD_ENABLE)
+                && sidecarInfluence.hasData() && !validCards.isEmpty()) {
+            final java.util.List<Card> ranked = new java.util.ArrayList<>(validCards);
+            ranked.sort((a, b) -> {
+                final double va = sidecarInfluence.handValue(a.getName()).orElse(50.0);
+                final double vb = sidecarInfluence.handValue(b.getName()).orElse(50.0);
+                return Double.compare(va, vb); // ascending → worst first
+            });
+            // Only act when we actually had at least one cached valuation
+            // among the candidates; otherwise the sort is meaningless.
+            final boolean anyKnown = ranked.stream()
+                    .anyMatch(c -> sidecarInfluence.handValue(c.getName()).isPresent());
+            if (anyKnown && min > 0) {
+                final CardCollection picked = new CardCollection();
+                for (Card c : ranked) {
+                    if (c.hasSVar("DoNotDiscardIfAble")) continue;
+                    picked.add(c);
+                    if (picked.size() >= min) break;
+                }
+                if (picked.size() >= min) {
+                    org.tinylog.Logger.debug("AiController: sidecar discard picked %s", picked);
+                    return picked;
+                }
+            }
+        }
+
         Card sourceCard = null;
         final CardCollection discardList = new CardCollection();
         int count = 0;
@@ -1327,6 +1357,23 @@ public class AiController {
             if (blockAction.isPresent()) {
                 double biasPct = getIntProperty(AiProps.SIDECAR_BIAS_BLOCK) / 100.0;
                 double effectivePct = blockAction.get().percentage() * biasPct;
+                // Role modulation: in the beatdown role take more damage to
+                // race; in the control role block more conservatively.
+                if (getBoolProperty(AiProps.SIDECAR_ROLE_ASSESSMENT_ENABLE)) {
+                    if (sidecarInfluence.isAiBeatdown()) {
+                        effectivePct *= 0.65;
+                    } else if (sidecarInfluence.isAiControl()) {
+                        effectivePct *= 1.25;
+                    }
+                }
+                // Combat-trick threat: if the opponent likely holds a pump or
+                // protection spell, blocking becomes more risky.
+                if (getBoolProperty(AiProps.SIDECAR_OPPONENT_INFERENCE_ENABLE)) {
+                    final double trick = sidecarInfluence.opponentHoldsProbability("combat_trick");
+                    if (trick > 0.0) {
+                        effectivePct *= Math.max(0.5, 1.0 - trick * 0.5);
+                    }
+                }
                 if (effectivePct < 20.0 && defender == player) {
                     // Sidecar strongly discourages blocking — don't block
                     return;
@@ -1349,6 +1396,26 @@ public class AiController {
             if (attackAction.isPresent()) {
                 double biasPct = getIntProperty(AiProps.SIDECAR_BIAS_ATTACK) / 100.0;
                 double effectivePct = attackAction.get().percentage() * biasPct;
+                // Role modulation: beatdown role pushes through, control role
+                // holds back. This is the actual "Who's the Beatdown?"
+                // decision applied to combat.
+                if (getBoolProperty(AiProps.SIDECAR_ROLE_ASSESSMENT_ENABLE)) {
+                    if (sidecarInfluence.isAiBeatdown()) {
+                        effectivePct *= 1.3;
+                    } else if (sidecarInfluence.isAiControl()) {
+                        effectivePct *= 0.7;
+                    }
+                }
+                // If the opponent likely holds removal or a wrath, attacking
+                // (and committing more creatures) gets riskier.
+                if (getBoolProperty(AiProps.SIDECAR_OPPONENT_INFERENCE_ENABLE)) {
+                    final double interaction = Math.max(
+                            sidecarInfluence.opponentHoldsProbability("removal"),
+                            sidecarInfluence.opponentHoldsProbability("wrath"));
+                    if (interaction > 0.0) {
+                        effectivePct *= Math.max(0.5, 1.0 - interaction * 0.4);
+                    }
+                }
                 if (effectivePct < 25.0 && !combat.getAttackers().isEmpty()) {
                     // Sidecar discourages attacking — clear attackers
                     combat.clearAttackers();
@@ -1644,24 +1711,23 @@ public class AiController {
         if (!getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE) || !sidecarInfluence.hasData()) {
             return null;
         }
-        // Check PLAY_SPELL recommendations
-        var spellAction = sidecarInfluence.bestAction("PLAY_SPELL");
-        if (spellAction.isPresent()) {
-            final String targetCard = spellAction.get().target();
-            if (targetCard != null && !targetCard.isEmpty()) {
-                for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
-                    if (skipCounter && sa.getApi() == ApiType.Counter) continue;
-                    sa.setActivatingPlayer(player);
-                    final String cardName = sa.getHostCard() != null ? sa.getHostCard().getName() : "";
-                    if (cardName.equalsIgnoreCase(targetCard) || cardName.contains(targetCard)) {
-                        if (canPlayAndPayFor(sa) == AiPlayDecision.WillPlay) {
-                            return sa;
-                        }
+        // PLAY_SPELL: try each recommended card in priority order; pick the
+        // first one we can legally play and pay for.
+        for (final String targetCard : sidecarInfluence.bestPlaySpellNames()) {
+            if (targetCard == null || targetCard.isEmpty()) continue;
+            for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
+                if (skipCounter && sa.getApi() == ApiType.Counter) continue;
+                sa.setActivatingPlayer(player);
+                final String cardName = sa.getHostCard() != null ? sa.getHostCard().getName() : "";
+                if (cardName.equalsIgnoreCase(targetCard) || cardName.contains(targetCard)) {
+                    if (canPlayAndPayFor(sa) == AiPlayDecision.WillPlay) {
+                        return sa;
                     }
                 }
             }
         }
-        // Check ACTIVATE_ABILITY recommendations
+        // ACTIVATE_ABILITY: single best entry (rare, the sidecar usually emits
+        // PLAY_SPELL).
         var abilityAction = sidecarInfluence.bestAction("ACTIVATE_ABILITY");
         if (abilityAction.isPresent()) {
             final String targetCard = abilityAction.get().target();
