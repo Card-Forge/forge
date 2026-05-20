@@ -242,8 +242,18 @@ public final class DeckRecognitionObserver {
                     // type query failed — skip types but still send the card
                 }
                 final boolean isCreature = !types.isEmpty() && types.contains("Creature");
+                final boolean isPlaneswalker = !types.isEmpty() && types.contains("Planeswalker");
                 final Integer power = isCreature ? safeInt(() -> c.getNetPower()) : null;
-                final Integer tough = isCreature ? safeInt(() -> c.getNetToughness()) : null;
+                final Integer tough;
+                if (isCreature) {
+                    tough = safeInt(() -> c.getNetToughness());
+                } else if (isPlaneswalker) {
+                    // Stash loyalty in `toughness` so Python sees it as the
+                    // permanent's "stat" without expanding the wire format.
+                    tough = safeInt(() -> c.getCurrentLoyalty());
+                } else {
+                    tough = null;
+                }
                 final boolean tapped;
                 try { tapped = c.isTapped(); } catch (final RuntimeException ex) {
                     out.add(new BoardCard(c.getName(), power, tough, types, isCreature, false));

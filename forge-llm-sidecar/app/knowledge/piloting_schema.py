@@ -72,6 +72,7 @@ class GuideMetadata(BaseModel):
     """Provenance for a guide (who/what generated it, when)."""
 
     source: str = ""
+    source_url: str = ""
     generated_at: str = ""
     model: str = ""
     schema_version: int = PILOTING_SCHEMA_VERSION

@@ -18,7 +18,13 @@ import logging
 
 from app import advice
 from app.config import CONFIG
-from app.knowledge import format_detect, loader, metagame, piloting
+from app.knowledge import (
+    archetype_signals as arch_signals_lib,
+    format_detect,
+    loader,
+    metagame,
+    piloting,
+)
 from app.knowledge.piloting_schema import StrategyType
 from app.knowledge.style_classifier import (
     OFF_META_NAMES,
@@ -631,6 +637,11 @@ async def game_advisor_node(state: GraphState) -> GraphState:
     turn = state.get("turn", 0)
     phase_bucket = _phase_bucket(turn)
 
+    # Pre-computed strategic signals for the recognized archetype (looked up
+    # once from data — no LLM, no scraping). Used by graveyard scoring, play-
+    # around logic, and the action gates below.
+    arch_signals = arch_signals_lib.signals_for(archetype)
+
     # First pass: assess role with no hand_values (so dimension scores use
     # raw signals only); then infer the opponent's hand; then score our own
     # hand with that inference; finally re-assess role with hand values folded
@@ -639,6 +650,7 @@ async def game_advisor_node(state: GraphState) -> GraphState:
     role = advice.assess_role(
         state, ai_strategy, opp_strategy,
         opp_record=opp_record, archetype_name=archetype,
+        confidence=confidence, arch_signals=arch_signals,
     )
     opp_hand = advice.infer_opponent_hand(
         archetype,
@@ -665,6 +677,7 @@ async def game_advisor_node(state: GraphState) -> GraphState:
         state, ai_strategy, opp_strategy,
         opp_record=opp_record, archetype_name=archetype,
         hand_values=hand_values,
+        confidence=confidence, arch_signals=arch_signals,
     )
     # On turn 0 the only action should be MULLIGAN; the in-game card-specific
     # actions and role-derived combat overrides are not yet meaningful.
@@ -680,6 +693,18 @@ async def game_advisor_node(state: GraphState) -> GraphState:
         or has_opp_spells
         or bool(state.get("opponent_graveyard") or [])
     )
+    # Detect whether the AI's own deck is a token strategy so the wrath-
+    # avoidance gate doesn't suppress its plays (tokens want to flood).
+    ai_own_signals = arch_signals_lib.signals_for(own_name)
+    ai_is_token_deck = bool(ai_own_signals.get("is_token_deck"))
+
+    card_actions_kwargs = dict(
+        opp_hand_inference=opp_hand,
+        opp_board_details=state.get("opponent_board_details") or [],
+        own_board_details=state.get("own_board_details") or [],
+        arch_signals=arch_signals,
+        ai_is_token_deck=ai_is_token_deck,
+    )
     if turn <= 0:
         card_actions: list[dict] = []
     elif not has_opp_state:
@@ -688,11 +713,15 @@ async def game_advisor_node(state: GraphState) -> GraphState:
         # an opponent on board.
         card_actions = [
             a
-            for a in advice.card_specific_actions(hand_values, role, phase_bucket)
+            for a in advice.card_specific_actions(
+                hand_values, role, phase_bucket, **card_actions_kwargs
+            )
             if a.get("action_type") in ("PLAY_LAND", "PLAY_SPELL")
         ]
     else:
-        card_actions = advice.card_specific_actions(hand_values, role, phase_bucket)
+        card_actions = advice.card_specific_actions(
+            hand_values, role, phase_bucket, **card_actions_kwargs
+        )
     actions = _merge_actions(base_actions, card_actions)
     target_pri = advice.target_priorities(
         state.get("opponent_board", []) or [],

@@ -29,7 +29,7 @@ import time
 # Allow running as a plain script (no package install needed).
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 
-from app.knowledge import builder_llm, scraper  # noqa: E402
+from app.knowledge import builder_llm, draftsim, scraper  # noqa: E402
 from app.knowledge.piloting import slugify  # noqa: E402
 from app.knowledge.piloting_schema import PILOTING_SCHEMA_VERSION, PilotingGuide  # noqa: E402
 
@@ -47,18 +47,42 @@ _SYSTEM = (
 )
 
 
-def _build_prompt(arch: dict, fmt: str, decklist: list[str]) -> str:
+def _build_prompt(
+    arch: dict,
+    fmt: str,
+    decklist: list[str],
+    primer_text: str = "",
+) -> str:
     colors = "/".join(arch.get("colors", [])) or "unknown"
     signature = ", ".join(arch.get("signature_cards", [])) or "(none listed)"
     deck_note = (
         f"Representative decklist:\n{', '.join(decklist[:80])}\n\n"
         if decklist
-        else "No decklist available; rely on your knowledge of the archetype.\n\n"
+        else "No decklist available.\n\n"
+    )
+    primer_block = (
+        "REAL primer text (from Draftsim — preferred source of truth over your "
+        "training data, which may be out of date):\n"
+        f"{primer_text}\n\n"
+        if primer_text
+        else ""
+    )
+    # Guard against models confusing deck-name mechanics with the actual plan.
+    name_warning = (
+        "IMPORTANT: deck names sometimes echo historic mechanics that the "
+        "modern build no longer uses (e.g. \"Boros Energy\" today doesn't "
+        "play Kaladesh energy; it plays Phlage, Ragavan, Guide of Souls, "
+        "Ocelot Pride, etc.). Ground every claim in the decklist and primer "
+        "text above, not in the deck's name. Do NOT recommend cards from "
+        "other formats (no Arcane Signet in Modern, no Sol Ring in non-"
+        "Commander, etc.).\n\n"
     )
     return (
         f"Write a piloting guide for the {fmt} archetype \"{arch.get('name')}\".\n"
         f"Colors: {colors}. Signature cards: {signature}.\n\n"
+        f"{primer_block}"
         f"{deck_note}"
+        f"{name_warning}"
         "Respond with a single JSON object with exactly these keys:\n"
         '  "archetype": string,\n'
         f'  "format": "{fmt}",\n'
@@ -94,16 +118,37 @@ def build_one(arch: dict, fmt: str, links: dict[str, str], *, force: bool) -> bo
     if page_url:
         decklist = scraper.fetch_archetype_decklist(page_url)
 
+    # Draftsim primer text is the primary ground truth — the LLM uses it
+    # verbatim to build the structured guide.
+    primer_url, primer_sections = draftsim.primer_for(name, fmt)
+    primer_text = draftsim.primer_to_prompt_text(primer_sections or {})
+    if primer_text:
+        log.info("primer: using Draftsim %s (%d chars)", primer_url, len(primer_text))
+    else:
+        log.warning(
+            "primer: no Draftsim primer found for %s in %s — falling back to "
+            "LLM general knowledge", name, fmt
+        )
+
     try:
-        raw = builder_llm.generate_guide_json(_build_prompt(arch, fmt, decklist), system=_SYSTEM)
+        raw = builder_llm.generate_guide_json(
+            _build_prompt(arch, fmt, decklist, primer_text=primer_text),
+            system=_SYSTEM,
+        )
     except builder_llm.BuilderLLMError as exc:
         log.error("LLM failed for %s: %s", name, exc)
         return False
 
     raw.setdefault("archetype", name)
     raw.setdefault("format", fmt)
+    source_parts = ["build_piloting_guides.py"]
+    if decklist:
+        source_parts.append("mtggoldfish")
+    if primer_text:
+        source_parts.append("draftsim")
     raw["metadata"] = {
-        "source": "build_piloting_guides.py" + (" + mtggoldfish" if decklist else ""),
+        "source": " + ".join(source_parts),
+        "source_url": primer_url or "",
         "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "model": builder_llm.MODEL_NAME,
         "schema_version": PILOTING_SCHEMA_VERSION,

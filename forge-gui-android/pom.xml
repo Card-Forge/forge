@@ -288,7 +288,7 @@
                                 <systemPath>${pom.basedir}/libs/sun-misc.jar</systemPath>
                             </dependency>
                         </dependencies>
-                        <version>4.6.2</version>
+                        <version>4.6.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
@@ -418,7 +418,7 @@
                                 <systemPath>${pom.basedir}/libs/sun-misc.jar</systemPath>
                             </dependency>
                         </dependencies>
-                        <version>4.6.2</version>
+                        <version>4.6.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
@@ -633,7 +633,7 @@
                                 <systemPath>${pom.basedir}/libs/sun-misc.jar</systemPath>
                             </dependency>
                         </dependencies>
-                        <version>4.6.2</version>
+                        <version>4.6.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
@@ -765,7 +765,7 @@
                                 <systemPath>${pom.basedir}/libs/sun-misc.jar</systemPath>
                             </dependency>
                         </dependencies>
-                        <version>4.6.2</version>
+                        <version>4.6.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>

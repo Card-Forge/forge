@@ -321,43 +321,94 @@ def graveyard_utility(
     opponent_graveyard: list[str],
     archetype_name: str | None,
     opp_record: dict | None,
+    *,
+    confidence: float = 1.0,
+    observations: list[dict] | None = None,
+    arch_signals: dict | None = None,
 ) -> tuple[float, list[str]]:
     """Score how much the opponent's graveyard matters to their deck.
+
+    Combines four sources, in order of trust:
+    1. Per-archetype pre-computed graveyard_utility (data file lookup).
+    2. Visible cards in the graveyard with known utility (flashback, escape,
+       dredge, delve fuel, recursion targets).
+    3. Observed signals: opp self-mill or discard of high-MV permanents.
+    4. Substring fallback on the archetype name (legacy heuristic).
+
+    The archetype-level score is scaled by ``confidence`` — until we're fairly
+    sure of their deck, we shouldn't act on it. Observation signals are
+    confidence-independent: a Snapcaster in the yard speaks for itself.
 
     Returns ``(utility, signals)`` where utility is in [0,1] and signals is a
     short list of why we think the graveyard matters.
     """
-    if not opponent_graveyard:
-        return 0.0, []
     signals: list[str] = []
     utility = 0.0
 
-    name_lower = (archetype_name or "").lower()
-    arch_hit = next((kw for kw in _GRAVEYARD_ARCHETYPES if kw in name_lower), None)
-    if arch_hit:
-        utility += 0.5
-        signals.append(f"archetype '{archetype_name}' uses the graveyard")
+    # 1. Archetype-level pre-computed signal (scaled by confidence).
+    if arch_signals is None:
+        from app.knowledge import archetype_signals as _arch_signals  # local import
+        arch_signals = _arch_signals.signals_for(archetype_name)
+    arch_gy = float(arch_signals.get("graveyard_utility", 0.0) or 0.0)
+    if arch_gy > 0:
+        scaled = arch_gy * max(0.2, confidence)
+        utility = max(utility, scaled)
+        if arch_gy >= 0.4:
+            signals.append(
+                f"archetype '{archetype_name}' graveyard utility {int(arch_gy*100)}% "
+                f"(scaled by confidence to {int(scaled*100)}%)"
+            )
 
-    signature = {_norm(s) for s in ((opp_record or {}).get("signature_cards") or [])}
-    active_in_signature = signature & _GRAVEYARD_ACTIVE_CARDS
-    if active_in_signature:
-        utility += 0.2
-        signals.append(
-            f"{len(active_in_signature)} graveyard-active signature card(s)"
-        )
-
-    active_in_gy = [c for c in opponent_graveyard if _norm(c) in _GRAVEYARD_ACTIVE_CARDS]
+    # 2. Visible utility in the graveyard right now.
+    active_in_gy = [c for c in (opponent_graveyard or []) if _norm(c) in _GRAVEYARD_ACTIVE_CARDS]
     if active_in_gy:
-        utility += min(0.4, 0.1 * len(active_in_gy))
+        utility += min(0.4, 0.12 * len(active_in_gy))
         signals.append(
             f"{len(active_in_gy)} card(s) in graveyard with known utility: "
             + ", ".join(active_in_gy[:3])
         )
 
-    # Sheer mass: delve/dredge benefit from a fat graveyard even if individual
-    # cards aren't tagged.
-    if arch_hit and len(opponent_graveyard) >= 5:
-        utility += 0.15
+    # 3. Observation signals: mill events, big-MV permanents in graveyard.
+    if observations:
+        mill_events = sum(
+            1
+            for o in observations
+            if isinstance(o, dict) and o.get("event") in {"mill", "self_mill", "graveyard"}
+        )
+        if mill_events >= 3:
+            utility += 0.2
+            signals.append(f"{mill_events} cards moved to graveyard via mill/discard")
+        # Look for 6+MV permanents in graveyard — likely reanimation target.
+        big_perms = []
+        for o in observations:
+            if not isinstance(o, dict):
+                continue
+            if o.get("event") not in {"graveyard", "discard"}:
+                continue
+            try:
+                cmc = int(o.get("cmc") or 0)
+            except (TypeError, ValueError):
+                cmc = 0
+            types = o.get("types") or []
+            if cmc >= 6 and any(t in types for t in ("Creature", "Planeswalker", "Artifact", "Enchantment")):
+                big_perms.append(o.get("card", "?"))
+        if big_perms:
+            utility += min(0.3, 0.15 * len(big_perms))
+            signals.append(
+                f"{len(big_perms)} 6+MV permanent(s) in graveyard (reanimation target?): "
+                + ", ".join(big_perms[:2])
+            )
+
+    # 4. Legacy keyword fallback (in case data file misses an archetype).
+    name_lower = (archetype_name or "").lower()
+    arch_hit = next((kw for kw in _GRAVEYARD_ARCHETYPES if kw in name_lower), None)
+    if arch_hit and arch_gy < 0.1:
+        utility = max(utility, 0.4 * confidence)
+        signals.append(f"archetype keyword '{arch_hit}' implies graveyard plan")
+
+    # Mass: fat graveyard for delve/dredge/loam-style strategies.
+    if (arch_gy >= 0.5 or arch_hit) and len(opponent_graveyard or []) >= 5:
+        utility += 0.1
         signals.append(f"{len(opponent_graveyard)} cards in graveyard fuels the plan")
 
     return max(0.0, min(1.0, utility)), signals
@@ -378,6 +429,91 @@ def _creatures_from_details(board_details: list[dict]) -> list[dict]:
                 out.append({"name": c.get("name", "?"), "power": p, "toughness": t,
                             "tapped": bool(c.get("tapped"))})
     return out
+
+
+# Curated index of impactful noncreature permanents. Each entry gets a
+# "board-pressure equivalent" weight (~= power) so the dimension score
+# reflects boards built around enchantments, artifacts, and planeswalkers.
+# Most are 2-3 — about the same impact as a mid-curve creature. Keep names
+# normalized lowercase.
+_NONCREATURE_BOARD_WEIGHT: dict[str, float] = {
+    # Modern staples
+    "leyline binding": 2.0,
+    "wrenn and six": 3.0,
+    "the one ring": 4.0,
+    "urza's saga": 3.0,
+    "up the beanstalk": 2.0,
+    "static prison": 2.0,
+    "sheltered by ghosts": 2.0,
+    "stoneforge mystic": 2.0,
+    # Planeswalkers (fallback when loyalty stashed in toughness is missing)
+    "teferi, hero of dominaria": 4.0,
+    "jace, the mind sculptor": 4.0,
+    "liliana of the veil": 3.0,
+    "karn liberated": 4.0,
+    "chandra, torch of defiance": 3.0,
+    "narset, parter of veils": 2.0,
+    # Mana rocks that actually pressure (rare — mostly card-advantage engines)
+    "smuggler's copter": 2.0,
+    "esper sentinel": 2.0,
+}
+
+
+def _noncreature_permanents_pressure(
+    board_details: list[dict],
+    board_names: list[str],
+    archetype_signature: set[str] | None = None,
+) -> float:
+    """Pressure contributed by planeswalkers and high-impact noncreatures.
+
+    Uses three signals:
+    1. Loyalty (delivered by Forge as the planeswalker's "toughness").
+    2. Curated index of board-impacting noncreature names.
+    3. Archetype signature cards — if a noncreature is in the deck's
+       signature list, it's worth at least 2 points (the AI's piloting guide
+       considers it a key card, so it should count on board).
+    """
+    total = 0.0
+    sigs = archetype_signature or set()
+
+    seen_names = set()
+    if board_details:
+        for c in board_details:
+            if not isinstance(c, dict):
+                continue
+            name = _norm(c.get("name") or "")
+            if not name:
+                continue
+            seen_names.add(name)
+            types = c.get("types") or []
+            is_creature = bool(c.get("is_creature")) or "Creature" in types
+            if is_creature or "Land" in types:
+                continue
+            if "Planeswalker" in types:
+                loyalty = c.get("toughness")
+                if isinstance(loyalty, int) and loyalty > 0:
+                    # Walkers with high loyalty are big presences; cap at 4.
+                    total += min(4.0, 1.0 + loyalty * 0.4)
+                else:
+                    total += _NONCREATURE_BOARD_WEIGHT.get(name, 2.5)
+                continue
+            if name in _NONCREATURE_BOARD_WEIGHT:
+                total += _NONCREATURE_BOARD_WEIGHT[name]
+            elif name in sigs:
+                total += 2.0
+    # Detail-less fallback: walk board_names that the details omitted.
+    for raw_name in board_names or []:
+        n = _norm(raw_name)
+        if not n or n in seen_names or _is_land_name(raw_name):
+            continue
+        if n in _NONCREATURE_BOARD_WEIGHT:
+            total += _NONCREATURE_BOARD_WEIGHT[n]
+        elif n in sigs and not _is_likely_noncreature_nonland(raw_name):
+            # Already accounted for as a possible-attacker by count_possible_attackers.
+            continue
+        elif n in sigs:
+            total += 2.0
+    return total
 
 
 def best_damage_through(
@@ -472,6 +608,8 @@ def assess_role(
     opp_record: dict | None = None,
     archetype_name: str | None = None,
     hand_values: list[dict] | None = None,
+    confidence: float = 1.0,
+    arch_signals: dict | None = None,
 ) -> dict:
     """Return a serialized ``RoleAssessment`` (dict) for the current state.
 
@@ -507,13 +645,24 @@ def assess_role(
     )
 
     # ---- Dimension: Board -------------------------------------------------
-    # When we have P/T, use power-sum delta (better signal). Otherwise count.
+    # Power-sum delta when available, count fallback otherwise. Also folds in
+    # noncreature pressure (planeswalkers, key enchantments/artifacts) so
+    # boards built around walkers and engines aren't undervalued.
+    opp_signature = {_norm(s) for s in ((opp_record or {}).get("signature_cards") or [])}
+    ai_nonc = _noncreature_permanents_pressure(
+        state.get("own_board_details") or [], ai_board, archetype_signature=set()
+    )
+    opp_nonc = _noncreature_permanents_pressure(
+        state.get("opponent_board_details") or [], opp_board, archetype_signature=opp_signature
+    )
     if ai_creatures or opp_creatures:
-        ai_power = _power_sum(ai_creatures)
-        opp_power = _power_sum(opp_creatures)
-        board_score = _clamp((ai_power - opp_power) / 6.0)
+        ai_total = _power_sum(ai_creatures) + ai_nonc
+        opp_total = _power_sum(opp_creatures) + opp_nonc
+        board_score = _clamp((ai_total - opp_total) / 6.0)
     else:
-        board_score = _clamp((ai_pressure - opp_pressure) / 4.0)
+        ai_total = ai_pressure + ai_nonc
+        opp_total = opp_pressure + opp_nonc
+        board_score = _clamp((ai_total - opp_total) / 4.0)
 
     # ---- Dimension: Cards (hand size + hand value + graveyard discount) --
     # Compare raw hand counts plus per-card value if we already computed it.
@@ -547,7 +696,14 @@ def assess_role(
     tempo_score = _clamp(0.3 * opp_missed - (0.4 if opp_screwed else 0.0))
 
     # ---- Dimension: Graveyard utility ------------------------------------
-    gy_util, gy_signals = graveyard_utility(opp_gy, archetype_name, opp_record)
+    gy_util, gy_signals = graveyard_utility(
+        opp_gy,
+        archetype_name,
+        opp_record,
+        confidence=confidence,
+        observations=state.get("observations"),
+        arch_signals=arch_signals,
+    )
     # Graveyard score is *negative* for the AI when the opp's graveyard is
     # useful to them, mild positive otherwise.
     graveyard_score = _clamp(0.2 - 1.0 * gy_util)
@@ -829,6 +985,154 @@ def score_hand(
     return results
 
 
+# --- play-around helpers ----------------------------------------------------
+
+# Known counterspell names mapped to their (generic, colored) mana cost. We
+# only need the colored part to check whether the opponent has the right
+# untapped mana; we add a small generic budget for double-faced costs like
+# "1UU" by storing (generic_count, color_list). Names are normalized.
+_COUNTERSPELL_COSTS: dict[str, tuple[int, list[str]]] = {
+    "counterspell": (0, ["U", "U"]),
+    "force of negation": (1, ["U", "U"]),  # also has alt cast for free; conservative
+    "force of will": (1, ["U", "U"]),
+    "no more lies": (1, ["U", "W"]),
+    "mana leak": (1, ["U"]),
+    "remand": (1, ["U"]),
+    "spell pierce": (0, ["U"]),
+    "spell snare": (0, ["U"]),
+    "dispel": (0, ["U"]),
+    "negate": (1, ["U"]),
+    "cryptic command": (1, ["U", "U", "U"]),
+    "make disappear": (1, ["U"]),
+    "subtlety": (2, ["U"]),  # also evoke for free
+    "consider": (0, ["U"]),  # not a counter but cheap; left out
+}
+
+
+def _untapped_lands_colors(opp_board_details: list[dict]) -> dict[str, int]:
+    """Count untapped lands on opp's side, bucketed by color.
+
+    Returns ``{color_letter: count}``. Without explicit land color info we
+    fall back to crude name heuristics — basic land names cover the common
+    case; multi-color lands count as one source of *each* color.
+    """
+    out = {"W": 0, "U": 0, "B": 0, "R": 0, "G": 0, "C": 0}
+    for c in opp_board_details or []:
+        if not isinstance(c, dict):
+            continue
+        types = c.get("types") or []
+        if "Land" not in types:
+            continue
+        if c.get("tapped"):
+            continue
+        name = _norm(c.get("name") or "")
+        # Basic lands.
+        basic_map = {
+            "plains": "W", "island": "U", "swamp": "B",
+            "mountain": "R", "forest": "G",
+        }
+        if name in basic_map:
+            out[basic_map[name]] += 1
+            continue
+        # Common dual lands by name fragment.
+        added = False
+        for kw, colors in (
+            ("steam vents", "UR"), ("hallowed fountain", "WU"),
+            ("breeding pool", "UG"), ("watery grave", "UB"),
+            ("temple garden", "WG"), ("sacred foundry", "WR"),
+            ("godless shrine", "WB"), ("blood crypt", "BR"),
+            ("overgrown tomb", "BG"), ("stomping ground", "RG"),
+            ("flooded strand", "WU"), ("polluted delta", "UB"),
+            ("scalding tarn", "UR"), ("misty rainforest", "UG"),
+            ("verdant catacombs", "BG"), ("bloodstained mire", "BR"),
+            ("wooded foothills", "RG"), ("windswept heath", "WG"),
+            ("marsh flats", "WB"), ("arid mesa", "WR"),
+            ("triome", "?"),  # placeholder
+            ("seachrome coast", "WU"), ("blackcleave cliffs", "BR"),
+            ("razorverge thicket", "WG"), ("copperline gorge", "RG"),
+            ("darkslick shores", "UB"),
+        ):
+            if kw in name:
+                if colors == "?":
+                    # Triomes: name pattern "<land> triome"; treat as colorless
+                    # (we don't know which triome without more data).
+                    out["C"] += 1
+                else:
+                    for ch in colors:
+                        out[ch] += 1
+                added = True
+                break
+        if not added:
+            # Unknown nonbasic — count it as colorless for safety.
+            out["C"] += 1
+    return out
+
+
+def can_pay_cost(
+    cost: tuple[int, list[str]],
+    available_lands: dict[str, int],
+) -> bool:
+    """True if the opponent can pay ``(generic, [colors])`` from available lands.
+
+    Each colored requirement consumes one matching land. Generic can be paid
+    from any unused land including colorless. We don't model rituals, mana
+    rocks, or alt costs — this is a *conservative* check for play-around.
+    """
+    pool = dict(available_lands)
+    generic, colors = cost
+    # Pay colored requirements first.
+    for col in colors:
+        if pool.get(col, 0) > 0:
+            pool[col] -= 1
+        else:
+            return False
+    # Then generic.
+    remaining = sum(pool.values())
+    return remaining >= generic
+
+
+def likely_counterspells_castable(
+    opp_hand_inference: list[dict] | None,
+    opp_board_details: list[dict],
+    threshold: float = 0.35,
+) -> list[tuple[str, float]]:
+    """Counterspell names the opponent could likely cast on our spell.
+
+    Returns ``[(card_name, probability)]`` for entries from opp_hand_inference
+    whose category is ``counterspell``, scoped to specific named counters the
+    opponent has untapped mana for. We use the inference probability as the
+    confidence the card is actually in hand.
+    """
+    if not opp_hand_inference:
+        return []
+    p_counter = 0.0
+    suspect_examples: list[str] = []
+    for entry in opp_hand_inference:
+        if (entry.get("category") or "").lower() != "counterspell":
+            continue
+        prob = float(entry.get("probability") or 0.0)
+        if prob < threshold:
+            continue
+        p_counter = max(p_counter, prob)
+        suspect_examples.extend(entry.get("example_cards") or [])
+
+    if not suspect_examples:
+        return []
+    lands = _untapped_lands_colors(opp_board_details)
+    out: list[tuple[str, float]] = []
+    for raw in suspect_examples:
+        name = _norm(raw)
+        if name not in _COUNTERSPELL_COSTS:
+            continue
+        if can_pay_cost(_COUNTERSPELL_COSTS[name], lands):
+            out.append((raw, round(p_counter, 3)))
+    # Deduplicate keeping highest probability.
+    seen: dict[str, float] = {}
+    for n, p in out:
+        seen[n] = max(seen.get(n, 0.0), p)
+    return sorted(seen.items(), key=lambda kv: -kv[1])
+
+
 # --- card-specific actions ---------------------------------------------------
 
 
@@ -836,6 +1140,12 @@ def card_specific_actions(
     hand_values: list[dict],
     role: dict,
     phase_bucket: str,
+    *,
+    opp_hand_inference: list[dict] | None = None,
+    opp_board_details: list[dict] | None = None,
+    own_board_details: list[dict] | None = None,
+    arch_signals: dict | None = None,
+    ai_is_token_deck: bool = False,
 ) -> list[dict]:
     """Concrete card-name ActionScores that the Java side can match on.
 
@@ -865,16 +1175,89 @@ def card_specific_actions(
             }
         )
 
-    for hv in spells[:3]:
+    # ---- Play-around signals (computed once for the spell loop) ----------
+    # Wrath risk: when high and we already have multiple creatures, dial back
+    # creature plays so we don't get blown out. Token decks ignore this — they
+    # WANT to flood the board and rebuild quickly post-wipe.
+    p_wrath = 0.0
+    for entry in opp_hand_inference or []:
+        if (entry.get("category") or "").lower() == "wrath":
+            p_wrath = max(p_wrath, float(entry.get("probability") or 0.0))
+    own_creature_count = 0
+    for c in own_board_details or []:
+        if isinstance(c, dict) and (c.get("is_creature") or "Creature" in (c.get("types") or [])):
+            own_creature_count += 1
+    wrath_density = float((arch_signals or {}).get("wrath_density", 0.0) or 0.0)
+    # Combined wrath risk: live inference plus baseline deck wrath density.
+    wrath_risk = min(1.0, p_wrath + 0.5 * wrath_density)
+    # Threshold for "wrath risk is real": >=35%.
+    avoid_overcommit = wrath_risk >= 0.35 and own_creature_count >= 3 and not ai_is_token_deck
+
+    # Counterspell threats the opp could actually cast right now.
+    castable_counters = likely_counterspells_castable(
+        opp_hand_inference,
+        opp_board_details or [],
+        threshold=0.35,
+    )
+
+    # Combo conservation: if opp is on a combo plan and has visible pieces,
+    # holding up interaction is more important than tapping out.
+    opp_is_combo = bool((arch_signals or {}).get("is_combo"))
+    combo_pieces_visible = 0
+    if opp_is_combo and opp_board_details:
+        for c in opp_board_details:
+            if not isinstance(c, dict):
+                continue
+            name = _norm(c.get("name") or "")
+            if name in _CATEGORY_BY_NAME and _CATEGORY_BY_NAME[name] == "combo_piece":
+                combo_pieces_visible += 1
+    combo_alert = opp_is_combo and combo_pieces_visible >= 1
+
+    # ---- Spell ranking with play-around adjustments ----------------------
+    annotated: list[dict] = []
+    for hv in spells:
         boost = 10.0 if (is_beatdown and hv.get("role") in ("threat", "win_con")) else 0.0
         boost += 10.0 if (not is_beatdown and hv.get("role") in ("answer", "card_draw")) else 0.0
+        adj = float(hv["value"]) + boost
+        reasons = [f"Hand value {hv['value']:.0f} as {hv.get('role', 'card')}."]
+
+        # Don't overcommit into wraths.
+        is_threat_like = hv.get("role") in ("threat", "win_con") or (
+            categorize(hv.get("card", "")) == "threat"
+        )
+        if avoid_overcommit and is_threat_like:
+            penalty = 25.0 * wrath_risk
+            adj -= penalty
+            reasons.append(
+                f"Wrath risk {int(wrath_risk*100)}% with {own_creature_count} creatures already — "
+                f"-{penalty:.0f}"
+            )
+
+        # Counterspell play-around: discount the *most valuable* spells more
+        # heavily; the AI will then prefer a lower-value spell that's "fine to
+        # get countered".
+        if castable_counters and hv["value"] >= 60.0:
+            top_prob = castable_counters[0][1]
+            penalty = 15.0 * top_prob
+            adj -= penalty
+            counter_names = ", ".join(n for n, _ in castable_counters[:2])
+            reasons.append(
+                f"opp could cast {counter_names} ({int(top_prob*100)}% in hand) — "
+                f"-{penalty:.0f}"
+            )
+
+        annotated.append((adj, hv, reasons))
+
+    # Re-sort by adjusted percentage so the AI sees the *real* top pick.
+    annotated.sort(key=lambda t: -t[0])
+    for adj, hv, reasons in annotated[:3]:
         actions.append(
             {
                 "action_type": "PLAY_SPELL",
                 "target": hv["card"],
                 "targets": None,
-                "percentage": min(95.0, hv["value"] + boost),
-                "reasoning": f"Hand value {hv['value']:.0f} as {hv.get('role', 'card')}.",
+                "percentage": max(0.0, min(95.0, adj)),
+                "reasoning": " ".join(reasons),
             }
         )
 
@@ -950,20 +1333,29 @@ def card_specific_actions(
             }
         )
 
-    if is_beatdown or ai_role == "control":
+    if is_beatdown or ai_role == "control" or combo_alert:
         base = 10.0 if is_beatdown else 45.0
-        adj = max(0.0, min(95.0, base + pass_bias))
+        adj = base + pass_bias
+        reason = (
+            "Beatdown role — pass only when no play exists."
+            if is_beatdown
+            else "Control role — hold up mana for interaction."
+        )
+        if abs(pass_bias) >= 3:
+            reason += f" Pressure bias {pass_bias:+.0f}."
+        if combo_alert:
+            adj += 20.0
+            reason += (
+                f" Opp is on a combo plan and has {combo_pieces_visible} piece(s) visible — "
+                f"hold up interaction. +20."
+            )
         actions.append(
             {
                 "action_type": "PASS",
                 "target": "",
                 "targets": None,
-                "percentage": round(adj, 1),
-                "reasoning": (
-                    "Beatdown role — pass only when no play exists."
-                    if is_beatdown
-                    else "Control role — hold up mana for interaction."
-                ) + (f" Pressure bias {pass_bias:+.0f}." if abs(pass_bias) >= 3 else ""),
+                "percentage": round(max(0.0, min(95.0, adj)), 1),
+                "reasoning": reason,
             }
         )
     return actions
