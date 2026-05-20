@@ -1,0 +1,54 @@
+[duel]
+[metadata]
+Name=Krypto
+Title=Krypto
+Icon=Krypto.jpg
+Difficulty=Medium
+Description=./Standard/Adventures_in_the_Forgotten_Realms/David_Adamus_-_Four-color_Control_(Standard,_#1190569).dck
+Deck Type=constructed
+
+[Main]
+1 Elder Gargaroth
+2 Kroxa, Titan of Death's Hunger
+2 Polukranos, Unchained
+2 Valki, God of Lies
+2 Klothys, God of Destiny
+3 Chevill, Bane of Monsters
+2 Mazemind Tome
+1 Cling to Dust
+1 Saw It Coming
+2 Essence Scatter
+2 Flunk
+2 Disdainful Stroke
+3 Prismari Command
+3 Heartless Act
+4 Power Word Kill
+2 Extinction Event
+3 Crippling Fear
+3 Binding the Old Gods
+4 Omen of the Sea
+1 Ashiok, Nightmare Muse
+1 Forest
+1 Riverglide Pathway
+1 Castle Vantress
+1 The World Tree
+1 Island
+3 Blightstep Pathway
+3 Swamp
+4 Zagoth Triome
+4 Clearwater Pathway
+4 Barkchannel Pathway
+4 Ketria Triome
+4 Fabled Passage
+4 Darkbore Pathway
+[Sideboard]
+1 Lochmere Serpent
+1 Mordenkainen
+1 Professor Onyx
+1 Chainweb Aracnir
+1 Shark Typhoon
+1 Yorion, Sky Nomad
+2 Koma, Cosmos Serpent
+2 Mystical Dispute
+2 Negate
+3 Shadows' Verdict

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Blackbeard
+Title=Blackbeard
+Icon=Blackbeard.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/Dauthi#91530_-_Jeskai_Dragons_(Standard,_#1404192).dck
+Deck Type=constructed
+
+[Main]
+1 Iymrith, Desert Doom
+1 Velomachus Lorehold
+1 Galazeth Prismari
+3 Goldspan Dragon
+1 Prismari Command
+2 Fading Hope
+2 Memory Deluge
+2 Test of Talents
+3 Flame-Blessed Bolt
+4 Jwari Disruption
+4 Big Score
+4 Dragon's Fire
+1 Angelfire Ignition
+1 Igneous Inspiration
+2 Draconic Intervention
+4 Sea Gate Restoration
+4 Expressive Iteration
+1 Otawara, Soaring City
+1 Island
+1 Field of Ruin
+2 Hall of Storm Giants
+2 Hengegate Pathway
+2 Needleverge Pathway
+3 Mountain
+4 Stormcarved Coast
+4 Riverglide Pathway
+[Sideboard]
+1 Start from Scratch
+1 Teachings of the Archaics
+1 Mercurial Transformation
+1 Mascot Exhibition
+1 Introduction to Prophecy
+1 Expanded Anatomy
+1 Environmental Sciences

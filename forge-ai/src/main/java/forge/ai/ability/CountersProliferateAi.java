@@ -91,15 +91,11 @@ public class CountersProliferateAi extends SpellAbilityAi {
                 + (allyExpOrEnergy ? VALUE_AI_EXPERIENCE_OR_ENERGY : 0);
 
         int manaCost = sa.getPayCosts().getTotalMana().getCMC();
-        if (manaCost == 0) {
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
-
         // calculate a rating from 0 to 100 based on value vs mana cost
         // if value >= mana cost, rating is 100
         // if value is half mana cost, rating is 50, etc.
-        int rating = Math.min(100, value / manaCost * 100);
-        if (value >= manaCost) {
+        int rating = manaCost == 0 ? value : Math.min(100, value / manaCost * 100);
+        if (value > 0) {
             return new AiAbilityDecision(rating, AiPlayDecision.WillPlay);
         }
         return new AiAbilityDecision(rating, AiPlayDecision.CantPlayAi);
@@ -137,7 +133,6 @@ public class CountersProliferateAi extends SpellAbilityAi {
     @Override
     public <T extends GameEntity> T chooseSingleEntity(Player ai, SpellAbility sa, Collection<T> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         // Proliferate is always optional for all, no need to select best
-
         final CounterType poison = CounterEnumType.POISON;
 
         boolean aggroAI = AiProfileUtil.getBoolProperty(ai, AiProps.PLAY_AGGRO);
@@ -147,11 +142,9 @@ public class CountersProliferateAi extends SpellAbilityAi {
                 if (p.getCounters(poison) > 0 && p.canReceiveCounters(poison)) {
                     return (T) p;
                 }
-            } else {
+            } else if ((((p.getCounters(poison) <= 5 && aggroAI) || (p.getCounters(poison) == 0)) && p.getCounters(CounterEnumType.EXPERIENCE) + p.getCounters(CounterEnumType.ENERGY) >= 1) || !p.canReceiveCounters(poison)) {
                 // poison is risky, should not proliferate them in most cases
-                if ((((p.getCounters(poison) <= 5 && aggroAI) || (p.getCounters(poison) == 0)) && p.getCounters(CounterEnumType.EXPERIENCE) + p.getCounters(CounterEnumType.ENERGY) >= 1) || !p.canReceiveCounters(poison)) {
-                    return (T) p;
-                }
+                return (T) p;
             }
         }
 

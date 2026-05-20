@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Sauron
+Title=Sauron
+Icon=Sauron.jpg
+Difficulty=Easy
+Description=./Standard/Theros_Beyond_Death/Adam_Hobbs_-_Jund_Sacrifice_(Standard,_#984740).dck
+Deck Type=constructed
+
+[Main]
+2 Korvold, Fae-Cursed King
+4 Cauldron Familiar
+4 Gilded Goose
+4 Mayhem Devil
+4 Priest of Forgotten Gods
+4 Woe Strider
+3 Bolas's Citadel
+4 Witch's Oven
+3 Claim the Firstborn
+4 Trail of Crumbs
+1 Castle Locthwain
+1 Mountain
+3 Swamp
+3 Forest
+4 Stomping Ground
+4 Overgrown Tomb
+4 Fabled Passage
+4 Blood Crypt
+[Sideboard]
+1 Korvold, Fae-Cursed King
+2 Vraska, Golgari Queen
+2 Soul-Guide Lantern
+2 Lava Coil
+4 Cindervines
+4 Duress

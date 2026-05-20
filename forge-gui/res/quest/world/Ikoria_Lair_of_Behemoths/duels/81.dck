@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Severus Snape
+Title=Severus Snape
+Icon=Severus Snape.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Amatox_-_Bant_Ephemerate_(Modern,_#1013410).dck
+Deck Type=constructed
+
+[Main]
+1 Knight of Autumn
+1 Deputy of Detention
+1 Mulldrifter
+1 Luminous Broodmoth
+1 Wall of Blossoms
+2 Uro, Titan of Nature's Wrath
+2 Soulherder
+3 Eternal Witness
+4 Ice-Fang Coatl
+4 Coiling Oracle
+4 Noble Hierarch
+3 Force of Negation
+4 Ephemerate
+4 Path to Exile
+1 Time Warp
+2 Neoform
+1 Teferi, Time Raveler
+1 Breeding Pool
+1 Hallowed Fountain
+1 Temple Garden
+1 Prairie Stream
+1 Canopy Vista
+1 Flooded Strand
+1 Snow-Covered Plains
+2 Snow-Covered Island
+2 Prismatic Vista
+3 Snow-Covered Forest
+3 Windswept Heath
+4 Misty Rainforest
+[Sideboard]
+1 Force of Negation
+1 Stonehorn Dignitary
+1 Thragtusk
+1 Reflector Mage
+1 Teferi, Time Raveler
+2 Ceremonious Rejection
+2 Ashiok, Dream Render
+2 Veil of Summer
+2 Aether Gust
+2 Celestial Purge

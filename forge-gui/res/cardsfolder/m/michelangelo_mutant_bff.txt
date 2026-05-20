@@ -1,0 +1,11 @@
+Name:Michelangelo, Mutant BFF
+ManaCost:2 G G
+Types:Legendary Creature Mutant Ninja Turtle
+PT:4/4
+S:Mode$ MinMaxBlocker | ValidCard$ Creature.YouCtrl+HasCounters | Max$ 1 | Description$ Each creature you control with a counter on it can't be blocked by more than one creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME enters or attacks, create a Mutagen token. (It's an artifact with "{1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.")
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, create a Mutagen token. (It's an artifact with "{1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_mutagen_sac | TokenOwner$ You
+SVar:NonStackingEffect:True
+SVar:PlayMain1:TRUE
+Oracle:Each creature you control with a counter on it can't be blocked by more than one creature.\nWhenever Michelangelo enters or attacks, create a Mutagen token. (It's an artifact with "{1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.")

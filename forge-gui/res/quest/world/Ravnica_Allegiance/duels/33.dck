@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Marge Simpson
+Title=Marge Simpson
+Icon=Marge Simpson.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/ArcaCrema_-_Rakdos_Aggro_(Standard,_#779667).dck
+Deck Type=constructed
+
+[Main]
+4 Electrostatic Field
+4 Fanatical Firebrand
+4 Ghitu Lavarunner
+4 Viashino Pyromancer
+4 Lightning Strike
+3 Risk Factor
+4 Shock
+4 Wizard's Lightning
+4 Light Up the Stage
+4 Skewer the Critics
+1 Experimental Frenzy
+20 Mountain
+[Sideboard]
+1 Banefire
+1 Experimental Frenzy
+2 Fight with Fire
+2 Goblin Chainwhirler
+2 Hijack
+3 Lava Coil
+2 Legion Warboss
+1 Mountain
+1 Risk Factor

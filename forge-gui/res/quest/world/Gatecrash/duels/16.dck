@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Shaitan
+Title=Shaitan
+Icon=Shaitan.jpg
+Difficulty=Easy
+Description=Gatecrash/Liga_de_Levante_de_T2_1x03/Alberto_Garcia_-_Gruul_Aggro_(Standard,_#54796).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Boros Reckoner
+4 Burning-Tree Emissary
+4 Firefist Striker
+4 Flinthoof Boar
+4 Ghor-Clan Rampager
+4 Hellrider
+4 Rakdos Cackler
+4 Stromkirk Noble
+4 Searing Spear
+3 Pillar of Flame
+12 Mountain
+4 Rootbound Crag
+4 Stomping Ground
+1 Temple Garden
+[Sideboard]
+3 Electrickery
+3 Grafdigger's Cage
+2 Mizzium Mortars
+3 Skullcrack
+4 Volcanic Strength

@@ -6,6 +6,6 @@ SVar:TrigChoose:DB$ GenericChoice | Choices$ ChooseCreature,ChooseArtifact,Choos
 SVar:ChooseCreature:DB$ Phases | AllValid$ Creature.!token | SpellDescription$ Creature
 SVar:ChooseArtifact:DB$ Phases | AllValid$ Artifact.!token | SpellDescription$ Artifact
 SVar:ChooseLand:DB$ Phases | AllValid$ Land.!token | SpellDescription$ Land
-SVar:ChooseEnchant:DB$ Phases | AllValid$ Enchantment.nonAura+!token | SpellDescription$ non-Aura Enchantment
+SVar:ChooseEnchant:DB$ Phases | AllValid$ Enchantment.nonAura+!token | SpellDescription$ Non-Aura enchantment
 AI:RemoveDeck:Random
 Oracle:At the beginning of each player's upkeep, that player chooses artifact, creature, land, or non-Aura enchantment. All nontoken permanents of that type phase out. (While they're phased out, they're treated as though they don't exist. Each one phases in before its controller untaps during their next untap step.)

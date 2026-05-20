@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=The Torpor Orb
+Title=The Torpor Orb
+Icon=The Torpor Orb.jpg
+Difficulty=Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/David_Baldur_-_Rakdos_Scam_(Modern,_#1630719).dck
+Deck Type=constructed
+
+[Main]
+4 Seasoned Pyromancer
+4 Dauthi Voidwalker
+4 Grief
+4 Fury
+4 Ragavan, Nimble Pilferer
+2 Terminate
+2 Kolaghan's Command
+3 Fatal Push
+3 Feign Death
+3 Undying Malice
+2 Sheoldred's Edict
+3 Thoughtseize
+2 Blood Moon
+3 Swamp
+1 Marsh Flats
+3 Blackcleave Cliffs
+4 Blood Crypt
+2 Polluted Delta
+4 Bloodstained Mire
+1 Castle Locthwain
+1 Blightstep Pathway
+1 Verdant Catacombs
+[Sideboard]
+1 Blood Moon
+2 Engineered Explosives
+1 Fatal Push
+2 Necromentia
+2 Tourach, Dread Cantor
+2 Hidetsugu Consumes All
+2 Fable of the Mirror-Breaker
+3 Unlicensed Hearse

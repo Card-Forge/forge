@@ -25,7 +25,7 @@ public class ChooseColorEffect extends SpellAbilityEffect {
 
         sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
 
-        sb.append("chooses a color");
+        sb.append(" chooses a color");
         if (sa.hasParam("OrColors")) {
             sb.append(" or colors");
         }

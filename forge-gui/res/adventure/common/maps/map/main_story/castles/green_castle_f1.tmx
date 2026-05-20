@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="56">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="56">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -11,25 +11,25 @@
  <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
+   eJybxsnAMG2QYhhAZsP4tLaTEBgIuwfSzwNlN73tpWXaIuRfWtuNzX5sajgESDcXpIcamBw/DWV7KQ1rZD4pbqLUr+SGwVAIY3LMJdZeXGKkuJ3c8CfVr+hqqBnn1IpXSuKa3DilJD1TKy9RIx8NlvzbKz8w9tIrfkftpY29+NwCSlMwjC/PUdNeEA1LyzB76YWpZS8ASMdfnA==
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJwTFmBgEB7FGFgMiDdiwaI0tlcEiLEBoVF7qYor+BkYSoG4jB9iXwmUX85Pn/QF8zet/UlPe0F5ZgsQb8ZCb4LauwGHPIgmN29hS0NNvNjTFTZxcsMCZm8jMM00kYCb+aljrzyQViABK1IY96P2jto7au+oveTauxdI78OCVXGI76eSvbiAEgH5UXuJw7C2FDYMal+B7C3Bo4YWbS5QWIDsHYj21VC2FwAIdpdw
+   eJwTFmBgEB7Fo3gUj2IKsRgQbwHizVhodIxNnSiZ9ooAMSVAiEJ738kxMLwnAX+Qo469PfIMDL0k4D75UXtH7R21d9TegbFXS4GBQRsNf5aD2PFJDlNOR4E69mIDPWh+wwZG7SUOV/AzMJTiwMj24lJTzk+evYTCAmQvuX4aqfYCADqQ3Pk=
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzqENADAIAEE2YNmG+REsUEGCuTNvPwIAAGBH5fTl7Qd/GsdpAQk=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="30">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztwQEBAAAAgiD/r25IQAEAAPBoDhAAAQ==
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="30">
-  <data encoding="base64" compression="zlib">
-   eJztzbENADAIA0FvAANEGZUwOpHSU9LkT7JcvgTgF2HSuUub7S5/v322CwAAgF4BRR8CBQ==
+   eJxjYBgFo2AUjILhD9qFGBg6hOhvrqowA4OaMPXtpZW5xII6XuLlJ/LR1i2jYBSQA2DpklAeJpTWyQWDPQ+PAtqDmgGMg9H4HwXIAADFxAlr
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -42,7 +42,7 @@
    <properties>
     <property name="defeatDialog">[{
    &quot;condition&quot;: [{&quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;, &quot;not&quot;:true}],
-   &quot;text&quot;: &quot;As you land your final blow against Ghalta, you feel a significant pulse of mana. But with the immediate threat removed, you can now see clearly that the locked room at the north end of the chamber does not hold any prisoners.&quot;,
+   &quot;text&quot;: &quot;As you land your final blow against Ghalta, you feel a significant pulse of mana.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, 
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;Ch1GreenCastleComplete&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}, {&quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}]
@@ -50,7 +50,7 @@
 },
 {
    &quot;condition&quot;: [{&quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}],
-   &quot;text&quot;: &quot;As you land your final blow against Ghalta, you feel a another pulse of mana. But just as before, the locked room behind your fallen foe does not hold any prisoners.&quot;,
+   &quot;text&quot;: &quot;As you land your final blow against Ghalta, you feel another pulse of mana.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, 
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;Ch1GreenCastleComplete&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}, {&quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}]
@@ -60,48 +60,39 @@
  &quot;startBattleWithCard&quot;: [ &quot;Mox Emerald&quot; ]
 }</property>
     <property name="enemy" value="Ghalta"/>
-    <property name="threatRange" type="int" value="50"/>
-   </properties>
-  </object>
-  <object id="54" template="../../../obj/scroll.tx" x="202" y="65.5">
-   <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mox Emerald&quot;, &quot;count&quot;: 1 }, {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Strange Key&quot;} ]"/>
-   </properties>
-  </object>
-  <object id="55" template="../../../obj/gate.tx" x="208" y="160.5">
-   <properties>
-    <property name="dialog">[
-	{
-		&quot;text&quot;: &quot;A big gate is blocking the path, through the bars you can see a Mox Emerald in the room beyond. (You need all five colored keys to open this gate.)&quot;,
-		&quot;options&quot;: [
-			{ &quot;name&quot;: &quot;Leave&quot; },
-			{
-				&quot;name&quot;: &quot;Unlock with the five colored keys&quot;,
-				&quot;condition&quot;: [
-					{ &quot;item&quot;: &quot;Blue Key&quot; },
-					{ &quot;item&quot;: &quot;Green Key&quot; },
-					{ &quot;item&quot;: &quot;Black Key&quot; },
-					{ &quot;item&quot;: &quot;White Key&quot; },
-					{ &quot;item&quot;: &quot;Red Key&quot; }
-				],
-				&quot;text&quot;: &quot;The gate is unlocked.&quot;,
-				&quot;options&quot;: [
-					{
-						&quot;name&quot;: &quot;Continue&quot;,
-						&quot;action&quot;: [
-							{ &quot;deleteMapObject&quot;: -1 },
-							{ &quot;removeItem&quot;: &quot;Blue Key&quot; },
-							{ &quot;removeItem&quot;: &quot;Green Key&quot; },
-							{ &quot;removeItem&quot;: &quot;Black Key&quot; },
-							{ &quot;removeItem&quot;: &quot;White Key&quot; },
-							{ &quot;removeItem&quot;: &quot;Red Key&quot; }
-						]
-					}
-				]
-			}
-		]
-	}
+    <property name="reward">[
+{
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Concordant Boots&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Crown of Growth&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.30,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Raptor Bondband&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;FDN&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;BLB&quot;]
+  }
 ]</property>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
  </objectgroup>

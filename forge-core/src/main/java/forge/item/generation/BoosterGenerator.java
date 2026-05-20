@@ -34,7 +34,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * <p>
@@ -429,12 +432,11 @@ public class BoosterGenerator {
             }
 
             BoosterSlot boosterSlot = boosterSlots.get(slotType);
-            Map<String, Integer> slotReplacementCount = bulkSlotReplacement(boosterSlot, numCards);
 
             List<PaperCard> paperCards = Lists.newArrayList();
-            for(Map.Entry<String, Integer> entry : slotReplacementCount.entrySet()) {
+            for(Map.Entry<String, Long> entry : bulkSlotReplacement(boosterSlot, numCards).entrySet()) {
                 String determineSheet = entry.getKey();
-                int numCardsToGenerate = entry.getValue();
+                int numCardsToGenerate = (int)(long)entry.getValue();
 
                 if (determineSheet == null || determineSheet.isEmpty() || numCardsToGenerate == 0) {
                     continue;
@@ -469,19 +471,8 @@ public class BoosterGenerator {
         return result;
     }
 
-    private static Map<String, Integer> bulkSlotReplacement(BoosterSlot boosterSlot, int numCards) {
-        Map<String, Integer> slotReplacementCount = new HashMap<>();
-
-        for(int i = 0; i < numCards; i++) {
-            String determineSheet = boosterSlot.replaceSlot();
-            if (slotReplacementCount.containsKey(determineSheet)) {
-                slotReplacementCount.put(determineSheet, slotReplacementCount.get(determineSheet) + 1);
-            } else {
-                slotReplacementCount.put(determineSheet, 1);
-            }
-        }
-
-        return slotReplacementCount;
+    private static Map<String, Long> bulkSlotReplacement(BoosterSlot boosterSlot, int numCards) {
+        return Stream.generate(boosterSlot::replaceSlot).limit(numCards).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     private static void ensureGuaranteedCardInBooster(List<PaperCard> result, SealedTemplate template, String boosterMustContain) {

@@ -1,0 +1,5 @@
+Name:Continue?
+ManaCost:1 W
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature.YouOwn+ThisTurnEnteredFrom_Battlefield | TargetMin$ 0 | TargetMax$ 4 | TgtPrompt$ Choose up to four target creature cards in your graveyard that were put there from the battlefield this turn | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Choose up to four target creature cards in your graveyard that were put there from the battlefield this turn. Return them to the battlefield.
+Oracle:Choose up to four target creature cards in your graveyard that were put there from the battlefield this turn. Return them to the battlefield.

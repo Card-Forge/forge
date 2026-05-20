@@ -310,4 +310,18 @@ public class CopyPermanentEffect extends TokenEffectBase {
 
         return copy;
     }
+
+    @Override
+    public void buildSpellAbility(SpellAbility sa) {
+        super.buildSpellAbility(sa);
+        if (sa.hasParam("Populate")) {
+            sa.putParam("Choices", "Creature.token+YouCtrl");
+            sa.putParam("ChoiceTitle", "Choose a creature token to copy");
+            if (!sa.hasParam("SpellDescription")) {
+                StringBuilder sb = new StringBuilder("Populate");
+                sb.append(" (Create a token that's a copy of a creature token you control.)");
+                sa.putParam("SpellDescription", sb.toString());
+            }
+        }
+    }
 }

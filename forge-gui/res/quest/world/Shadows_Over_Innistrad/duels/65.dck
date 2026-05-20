@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Preacher
+Title=Preacher
+Icon=Preacher.jpg
+Difficulty=Very Hard
+Description=../Modern/Shadows_over_Innistrad/Competitive_Modern_Constructed_League/keeps15_-_GW_Auras_(Modern,_#642047).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+3 Kor Spiritdancer
+1 Silhana Ledgewalker
+4 Slippery Bogle
+4 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+1 Gryff's Boon
+3 Hyena Umbra
+4 Rancor
+4 Spider Umbra
+1 Spirit Link
+2 Spirit Mantle
+1 Unflinching Courage
+1 Forest
+3 Horizon Canopy
+1 Misty Rainforest
+1 Plains
+4 Razorverge Thicket
+3 Temple Garden
+4 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+1 Dismember
+1 Gaddock Teeg
+4 Leyline of Sanctity
+1 Natural State
+2 Rest in Peace
+1 Seal of Primordium
+3 Stony Silence
+2 Suppression Field

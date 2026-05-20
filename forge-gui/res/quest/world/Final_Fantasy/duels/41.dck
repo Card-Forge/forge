@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Batman
+Title=Batman
+Icon=Batman.jpg
+Difficulty=Medium
+Description=./Standard/Final_Fantasy/Chikara_Nakajima_-_Boros_Mice_(Standard,_#2534844).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Hired Claw
+4 Manifold Mouse
+4 Screaming Nemesis
+2 Twinmaw Stormbrood
+1 Joshua, Phoenix's Dominant
+4 Burst Lightning
+4 Monstrous Rage
+3 Lightning Helix
+3 Sheltered by Ghosts
+8 Mountain
+4 Battlefield Forge
+4 Inspiring Vantage
+4 Sunbillow Verge
+2 Rockface Village
+1 Restless Bivouac
+[Sideboard]
+3 Destroy Evil
+3 Magebane Lizard
+3 Sunspine Lynx
+2 Case of the Crimson Pulse
+2 Rest in Peace
+1 High Noon
+1 Torch the Tower

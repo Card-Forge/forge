@@ -1,0 +1,9 @@
+Name:Diary of Dreams
+ManaCost:2
+Types:Artifact Book
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a page counter on this artifact.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ PAGE | CounterNum$ 1
+A:AB$ Draw | Cost$ 5 T | NumCards$ 1 | ReduceCost$ X | SpellDescription$ Draw a card. This ability costs {1} less to activate for each page counter on this artifact.
+SVar:X:Count$CardCounters.PAGE
+DeckHas:Ability$Counters
+Oracle:Whenever you cast an instant or sorcery spell, put a page counter on this artifact.\n{5}, {T}: Draw a card. This ability costs {1} less to activate for each page counter on this artifact.

@@ -33,6 +33,7 @@ import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.IHasSVars;
+import forge.game.event.GameEventAddLog;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -72,12 +73,10 @@ public class ReplacementHandler {
             // if it was caused by an replacement effect, use the already calculated RE list
             // otherwise the RIOT card would cause a StackError
             final ReplacementEffect causeRE = (ReplacementEffect) runParams.get(AbilityKey.ReplacementEffect);
-            if (causeRE != null) {
+            if (causeRE != null && !causeRE.getOtherChoices().isEmpty()
+                    && ReplacementType.Moved.equals(causeRE.getMode()) && layer.equals(causeRE.getLayer())) {
                 // only return for same layer
-                if (ReplacementType.Moved.equals(causeRE.getMode()) && layer.equals(causeRE.getLayer())) {
-                    if (!causeRE.getOtherChoices().isEmpty())
-                        return causeRE.getOtherChoices();
-                }
+                return causeRE.getOtherChoices();
             }
 
             // CR 614.12 ETB replacements look at what the card would be on the battlefield
@@ -225,7 +224,7 @@ public class ReplacementHandler {
         // Log there
         String message = chosenRE.getDescription();
         if (!StringUtils.isEmpty(message)) {
-            game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
+            game.fireEvent(new GameEventAddLog(GameLogEntryType.EFFECT_REPLACED, message));
         }
 
         // if its updated, try to call event again
@@ -528,7 +527,7 @@ public class ReplacementHandler {
         if (res != ReplacementResult.NotReplaced) {
             String message = re.getDescription();
             if (!StringUtils.isEmpty(message)) {
-                game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
+                game.fireEvent(new GameEventAddLog(GameLogEntryType.EFFECT_REPLACED, message));
             }
         }
     }
@@ -713,11 +712,7 @@ public class ReplacementHandler {
                 for (Map<AbilityKey, Object> runParams : runParamList) {
                     GameEntity target = (GameEntity) runParams.get(AbilityKey.Affected);
                     Integer damage = (Integer) runParams.get(AbilityKey.DamageAmount);
-                    if (!affected.containsKey(target)) {
-                        affected.put(target, damage);
-                    } else {
-                        affected.put(target, damage + affected.get(target));
-                    }
+                    affected.merge(target, damage, Integer::sum);
                 }
                 shieldMap = decider.getController().divideShield(chosenRE.getHostCard(), affected, shieldAmount);
             }

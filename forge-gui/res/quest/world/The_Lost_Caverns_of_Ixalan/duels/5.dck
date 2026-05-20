@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=DonkeyKong
+Title=DonkeyKong
+Icon=DonkeyKong.jpg
+Difficulty=Medium
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Christoffer_Rosenvik_-_Mono-Red_Aggro_(Standard,_#1980938).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+2 Phoenix Chick
+1 Shivan Devastator
+2 Bloodfeather Phoenix
+2 Charming Scoundrel
+2 Inti, Seneschal of the Sun
+2 Furnace Punisher
+2 Goddric, Cloaked Reveler
+1 Phyrexian Dragon Engine
+3 Reckless Stormseeker
+4 Kumano Faces Kakkazan
+3 Monstrous Rage
+4 Play with Fire
+4 Lightning Strike
+3 Witchstalker Frenzy
+1 Cavern of Souls
+19 Mountain
+1 Sokenzan, Crucible of Defiance
+[Sideboard]
+1 Furnace Punisher
+4 End the Festivities
+4 Lithomantic Barrage
+2 Twisted Fealty
+3 Urabrask's Forge
+1 Witchstalker Frenzy

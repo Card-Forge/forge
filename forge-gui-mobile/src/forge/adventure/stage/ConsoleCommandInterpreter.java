@@ -11,6 +11,8 @@ import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.InnScene;
 import forge.adventure.scene.InventoryScene;
 import forge.adventure.util.AdventureEventController;
+import forge.adventure.util.CardUtil;
+import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.Paths;
 import forge.adventure.world.WorldSave;
@@ -313,6 +315,21 @@ public class ConsoleCommandInterpreter {
                 cards.remove(c);
             }
             return "Removed all no sell flagged cards.";
+        });
+        registerCommand(new String[]{"sanitize", "editions"}, s -> {
+            ConfigData configData = Config.instance().getConfigData();
+            if (configData.allowedEditions == null || configData.allowedEditions.length == 0)
+                return "No allowedEditions configured for this plane.";
+            int replaced = CardUtil.sanitizeCardPool(Current.player().getCards());
+            for (int i = 0; i < Current.player().getDeckCount(); i++) {
+                Deck d = Current.player().getDeck(i);
+                for (java.util.Map.Entry<forge.deck.DeckSection, CardPool> section : d) {
+                    replaced += CardUtil.sanitizeCardPool(section.getValue());
+                }
+            }
+            if (replaced == 0)
+                return "All cards already from allowed editions.";
+            return "Replaced " + replaced + " card(s) with allowed edition printings.";
         });
         registerCommand(new String[]{"give", "item"}, s -> {
             if (s.length < 1) return "Command needs 1 parameter: Item name.";

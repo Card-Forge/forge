@@ -10,7 +10,7 @@ public class Vanishing extends KeywordWithAmount {
         }
         return super.getTitle();
     }
-    
+
     @Override
     protected void parse(String details) {
         if ("".equals(details)) {

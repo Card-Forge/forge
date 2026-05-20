@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Anansi
+Title=Anansi
+Icon=Anansi.jpg
+Difficulty=Hard
+Description=./Modern/The_Brothers_War/Bayesta_93_-_Reanimator_(Modern,_#1512928).dck
+Deck Type=constructed
+
+[Main]
+3 Archon of Cruelty
+4 Primeval Titan
+4 Fable of the Mirror-Breaker
+4 Dryad of the Ilysian Grove
+2 Thrill of Possibility
+4 Lightning Bolt
+4 Persist
+4 Bitter Reunion
+4 Wrenn and Six
+1 Swamp
+1 Scalding Tarn
+1 Forest
+1 Mountain
+1 Wooded Foothills
+1 Boseiju, Who Endures
+2 Bloodstained Mire
+2 Bloodstained Mire
+2 Dwarven Mine
+3 Valakut, the Molten Pinnacle
+3 Stomping Ground
+3 Wooded Foothills
+3 Ziatora's Proving Ground
+3 Blood Crypt
+[Sideboard]
+1 Chalice of the Void
+1 Tear Asunder
+1 Nihil Spellbomb
+1 Damping Sphere
+1 Anger of the Gods
+1 Weather the Storm
+2 Void Mirror
+2 Boseiju, Who Endures
+2 Force of Vigor
+3 Veil of Summer

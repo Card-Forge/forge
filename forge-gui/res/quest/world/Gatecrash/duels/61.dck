@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Han Solo
+Title=Han Solo
+Icon=Han Solo.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/Citadel_Volgograd/Vyacheslav_Serputko_-_Zoo_(Modern,_#83781).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+4 Experiment One
+4 Flinthoof Boar
+4 Ghor-Clan Rampager
+4 Goblin Guide
+2 Hellspark Elemental
+4 Kird Ape
+3 Stormblood Berserker
+4 Lightning Bolt
+3 Mutagenic Growth
+3 Searing Blaze
+4 Rancor
+1 Arid Mesa
+4 Copperline Gorge
+3 Forest
+5 Mountain
+4 Stomping Ground
+[Sideboard]
+1 Magma Spray
+1 Naturalize
+1 Shattering Blow
+2 Skullcrack
+1 Smelt

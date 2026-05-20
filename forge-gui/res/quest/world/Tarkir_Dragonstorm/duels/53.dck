@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=LeChuck
+Title=LeChuck
+Icon=LeChuck.jpg
+Difficulty=Very Hard
+Description=./Modern/Tarkir_Dragonstorm/PesE_-_Dimir_Oculus_(Modern,_#2442769).dck
+Deck Type=constructed
+
+[Main]
+2 Orcish Bowmasters
+4 Psychic Frog
+4 Abhorrent Oculus
+2 Murktide Regent
+2 Force of Negation
+1 Sink into Stupor
+1 Dismember
+3 Rakshasa's Bargain
+2 Thought Scour
+2 Spell Snare
+4 Fatal Push
+4 Counterspell
+2 Consider
+4 Unearth
+2 Thoughtseize
+2 Grist, the Hunger Tide
+1 Darkslick Shores
+1 Hedge Maze
+1 Undercity Sewers
+1 Island
+1 Swamp
+1 Breeding Pool
+4 Polluted Delta
+4 Misty Rainforest
+2 Verdant Catacombs
+3 Watery Grave
+[Sideboard]
+3 Stern Scolding
+4 Consign to Memory
+3 Harbinger of the Seas
+1 Thoughtseize
+2 Nihil Spellbomb
+2 Subtlety

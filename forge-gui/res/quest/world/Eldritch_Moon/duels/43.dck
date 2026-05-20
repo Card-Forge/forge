@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Neo
+Title=Neo
+Icon=Neo.jpg
+Difficulty=Medium
+Description=Eldritch_Moon/Standard_Champs_#10057343/Pasiu_-_Mono_Red_Aggro_(Standard,_#638119).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Abbot of Keral Keep
+4 Falkenrath Gorger
+4 Hanweir Garrison
+3 Lightning Berserker
+4 Reckless Bushwhacker
+3 Zurgo Bellstriker
+4 Fiery Impulse
+2 Collective Defiance
+4 Dragon Fodder
+2 Exquisite Firecraft
+4 Incendiary Flow
+2 Hanweir Battlements
+20 Mountain
+[Sideboard]
+1 Act of Treason
+4 Draconic Roar
+4 Thunderbreak Regent
+3 Weaver of Lightning

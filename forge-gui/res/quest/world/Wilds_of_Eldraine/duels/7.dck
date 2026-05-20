@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Da Vinci
+Title=Da Vinci
+Icon=Da Vinci.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/Jinsu_-_Mono_Red_Goddric_(Standard,_#1744267).dck
+Deck Type=constructed
+
+[Main]
+4 Charming Scoundrel
+3 Goddric, Cloaked Reveler
+2 Squee, Dubious Monarch
+4 Monastery Swiftspear
+3 Raging Battle Mouse
+4 Kumano Faces Kakkazan
+3 Thundering Raiju
+4 Monstrous Rage
+4 Lightning Strike
+4 Play with Fire
+2 Witchstalker Frenzy
+21 Mountain
+1 Sokenzan, Crucible of Defiance
+1 Mishra's Foundry
+[Sideboard]

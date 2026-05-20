@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=R2-D2
+Title=R2-D2
+Icon=R2-D2.jpg
+Difficulty=Very Hard
+Description=./Modern/Duskmourn_House_of_Horror/Kukutza_-_Yawgmoth_(Modern,_#2286763).dck
+Deck Type=constructed
+
+[Main]
+4 Young Wolf
+1 Blood Artist
+4 Wall of Roots
+1 Plague Engineer
+4 Yawgmoth, Thran Physician
+1 Endurance
+1 Haywire Mite
+1 Walking Ballista
+4 Delighted Halfling
+3 Orcish Bowmasters
+1 Overlord of the Balemurk
+3 Agatha's Soul Cauldron
+4 Chord of Calling
+4 Malevolent Rumble
+3 Grist, the Hunger Tide
+2 Forest
+1 Swamp
+1 Misty Rainforest
+4 Verdant Catacombs
+1 Dryad Arbor
+2 Wooded Foothills
+1 Overgrown Tomb
+1 Takenuma, Abandoned Mire
+2 Boseiju, Who Endures
+2 Underground Mortuary
+2 Blooming Marsh
+2 Shifting Woodland
+[Sideboard]
+1 Scavenging Ooze
+2 Fulminator Mage
+2 Fatal Push
+1 Damping Sphere
+2 Culling Ritual
+1 Endurance
+1 Force of Vigor
+1 The Meathook Massacre
+1 Haywire Mite
+1 Soulless Jailer
+2 Abrupt Decay

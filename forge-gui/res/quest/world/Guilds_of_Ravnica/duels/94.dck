@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Hugo Drax
+Title=Hugo Drax
+Icon=Hugo Drax.jpg
+Difficulty=Very Hard
+Description=./Modern/Guilds_of_Ravnica/Alakhai_-_Abzan_(Modern,_#791673).dck
+Deck Type=constructed
+
+[Main]
+4 Dark Confidant
+2 Kalitas, Traitor of Ghet
+4 Scavenging Ooze
+4 Tarmogoyf
+4 Assassin's Trophy
+4 Fatal Push
+4 Inquisition of Kozilek
+2 Thoughtseize
+4 Bitterblossom
+2 Liliana of the Veil
+2 Liliana, the Last Hope
+4 Blooming Marsh
+4 Field of Ruin
+2 Forest
+2 Hissing Quagmire
+2 Overgrown Tomb
+4 Swamp
+2 Treetop Village
+4 Verdant Catacombs
+[Sideboard]
+2 Thoughtseize
+3 Collective Brutality
+2 Creeping Corrosion
+2 Fulminator Mage
+2 Languish
+4 Leyline of the Void

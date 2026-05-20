@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Raven
+Title=Raven
+Icon=Raven.jpg
+Difficulty=Medium
+Description=Gatecrash/SCG_Standard_Open_Edison/Clayton_Gereffi_-_Red_Deck_Wins_(Standard,_#45173).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+4 Boros Reckoner
+4 Hellrider
+3 Lightning Mauler
+1 Pyreheart Wolf
+4 Rakdos Cackler
+1 Stonewright
+4 Stromkirk Noble
+2 Zealous Conscripts
+2 Boros Charm
+4 Searing Spear
+3 Pillar of Flame
+4 Clifftop Retreat
+15 Mountain
+4 Sacred Foundry
+1 Slayers' Stronghold
+[Sideboard]
+3 Mizzium Mortars
+4 Reckless Waif
+3 Volcanic Strength

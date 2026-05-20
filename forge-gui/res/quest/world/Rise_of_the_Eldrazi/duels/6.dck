@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Mr Slate
+Title=Mr Slate
+Icon=Mr Slate.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Texas_-_USA/Michael_Ferri_-_Open_the_Vaults_(Standard,_#1767).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Filigree Angel
+4 Glassdust Hulk
+3 Pilgrim's Eye
+4 Sphinx of Lost Truths
+4 Wall of Omens
+3 Courier's Capsule
+3 Fieldmist Borderpost
+2 Mistvein Borderpost
+4 Path to Exile
+3 Day of Judgment
+4 Open the Vaults
+4 Spreading Seas
+10 Island
+3 Marsh Flats
+6 Plains
+[Sideboard]
+2 Into the Roil
+4 Kor Firewalker
+4 Negate
+3 Pithing Needle
+1 Sanguine Bond

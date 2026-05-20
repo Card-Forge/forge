@@ -7,7 +7,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescri
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDealDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks, blocks, or becomes the target of a spell, it deals damage equal to its power to each opponent.
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Spell | TriggerZones$ Battlefield | Execute$ TrigDealDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks, blocks, or becomes the target of a spell, it deals damage equal to its power to each opponent.
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ X
-K:Monstrosity:5:5
+A:AB$ PutCounter | Cost$ 5 | Monstrosity$ 5
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
 SVar:HasBlockEffect:TRUE

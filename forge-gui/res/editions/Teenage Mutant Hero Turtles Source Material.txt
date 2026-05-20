@@ -5,4 +5,23 @@ Name=Teenage Mutant Hero Turtles Source Material
 Type=Collector_Edition
 
 [cards]
+1 M Path to Exile @Kevin Eastman
+2 M Teleportation Circle @Michael Dooney
+3 M Trouble in Pairs @Kevin Eastman & Peter Laird
+4 M Brainstorm @Mateus Santolouco & Ronda Pattison
+5 M Cytoplast Manipulator @Peter Laird & Ryan Brown
+6 M Ashcoat of the Shadow Swarm @Michael Dooney ${"flavorName": "Splinter of the Shadows"}
+7 M Plague of Vermin @Peter Laird & Jim Lawson
+8 M All Will Be One @Esau Escorza & Isaac Escorza
+9 M Silverclad Ferocidons @Peter Laird
+10 M Underworld Breach @Dan Berger & Eric Talbot
 11 M Doubling Season @Kevin Eastman
+12 M Rhythm of the Wild @Steve Bissette & Jim Lawson
+13 M Waves of Aggression @Kevin Eastman & Peter Laird
+14 M Arcbound Ravager @Peter Laird
+15 M Conqueror's Flail @Esau Escorza & Isaac Escorza ${"flavorName": "Ronin's Arsenal"}
+16 M Metallic Mimic @Michael Dooney
+17 M Shadowspear @David Petersen ${"flavorName": "Donnie's Bō"}
+18 M Sword of Sinew and Steel @Peter Laird ${"flavorName": "Leo's Katana"}
+19 M Umezawa's Jitte @Peter Laird ${"flavorName": "Raph's Jitte"}
+20 M Undercity Sewers @Kevin Eastman & Peter Laird

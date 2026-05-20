@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Wonder Twins
+Title=Wonder Twins
+Icon=Wonder Twins.jpg
+Difficulty=Hard
+Description=./Modern/Streets_of_New_Capenna/Audy_Murphy_-_Azorius_Affinity_(Modern,_#1417557)_[!].dck
+Deck Type=constructed
+
+[Main]
+3 Urza, Lord High Artificer
+4 Thought Monitor
+4 Memnite
+4 Ingenious Smith
+4 Esper Sentinel
+1 Aether Spellbomb
+1 Relic of Progenitus
+1 Shadowspear
+1 Unlicensed Hearse
+3 Springleaf Drum
+4 Portable Hole
+3 Metallic Rebuke
+3 Thoughtcast
+4 Urza's Saga
+2 Teferi, Time Raveler
+1 Razortide Bridge
+1 Otawara, Soaring City
+2 Island
+2 Plains
+2 Flooded Strand
+3 Hallowed Fountain
+3 Darksteel Citadel
+4 Seachrome Coast
+[Sideboard]
+1 Grafdigger's Cage
+1 Relic of Progenitus
+1 Pithing Needle
+1 Teferi, Time Raveler
+2 Void Mirror
+2 Spell Pierce
+2 Meddling Mage
+2 March of Otherworldly Light
+3 Dispatch

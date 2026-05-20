@@ -1,0 +1,14 @@
+Name:Magmablood Archaic
+ManaCost:2R 2R 2R
+Types:Creature Avatar
+PT:2/2
+K:Trample
+K:Reach
+K:etbCounter:P1P1:X:no Condition:Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever you cast an instant or sorcery spell, creatures you control get +1/+0 until end of turn for each color of mana spent to cast that spell.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +Y
+SVar:X:Count$Converge
+SVar:Y:TriggeredCard$Converge
+DeckHas:Ability$Counters
+DeckHints:Type$Instant|Sorcery
+Oracle:Trample, reach\nConverge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.\nWhenever you cast an instant or sorcery spell, creatures you control get +1/+0 until end of turn for each color of mana spent to cast that spell.

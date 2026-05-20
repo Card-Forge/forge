@@ -1,6 +1,7 @@
 package forge.game.mulligan;
 
 import forge.game.GameLogEntryType;
+import forge.game.event.GameEventAddLog;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.player.Player;
@@ -61,6 +62,6 @@ public abstract class AbstractMulligan {
     }
 
     public void afterMulligan() {
-        player.getGame().getGameLog().add(GameLogEntryType.MULLIGAN, Localizer.getInstance().getMessage("lblPlayerKeepNCardsHand", player.getName(), String.valueOf(player.getZone(ZoneType.Hand).size())));
+        player.getGame().fireEvent(new GameEventAddLog(GameLogEntryType.MULLIGAN, Localizer.getInstance().getMessage("lblPlayerKeepNCardsHand", player.getName(), String.valueOf(player.getZone(ZoneType.Hand).size()))));
     }
 }

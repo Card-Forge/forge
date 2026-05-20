@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Tweedledum
+Title=Tweedledum
+Icon=Tweedledum.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/Silver_TCQ_-_Standish,_ME/David_Coenen_-_Bant_(Modern,_#53815).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Birds of Paradise
+3 Cephalid Constable
+4 Geist of Saint Traft
+3 Kira, Great Glass-Spinner
+4 Noble Hierarch
+3 Rafiq of the Many
+4 Spellskite
+3 Mana Leak
+2 Path to Exile
+4 Serum Visions
+2 Spirit Mantle
+4 Steel of the Godhead
+4 Breeding Pool
+1 Forest
+3 Ghost Quarter
+1 Hinterland Harbor
+3 Horizon Canopy
+1 Island
+4 Misty Rainforest
+1 Plains
+3 Temple Garden
+[Sideboard]
+2 Blind Obedience
+3 Krosan Grip
+3 Leyline of Sanctity
+2 Lingering Souls
+3 Rest in Peace
+2 Vexing Shusher

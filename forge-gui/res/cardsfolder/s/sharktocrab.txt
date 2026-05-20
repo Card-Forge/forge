@@ -2,7 +2,7 @@ Name:Sharktocrab
 ManaCost:2 G U
 Types:Creature Shark Octopus Crab
 PT:4/4
-K:Adapt:1:2 G U
+A:AB$ PutCounter | Cost$ 2 G U | Adapt$ 1
 T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigTap | TriggerDescription$ Whenever one or more +1/+1 counters are put on CARDNAME, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls. | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent

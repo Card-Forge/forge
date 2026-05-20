@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Totoro
+Title=Totoro
+Icon=Totoro.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Tobias_Frey_-_Urza_ThopterSword_(Modern,_#1978194)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Urza, Lord High Artificer
+4 Esper Sentinel
+4 Stoneforge Mystic
+1 Ingenious Smith
+4 Portable Hole
+3 Thopter Foundry
+3 Talisman of Progress
+2 The One Ring
+1 Kaldra Compleat
+1 Nettlecyst
+1 Shadowspear
+1 Sword of the Meek
+1 Springleaf Drum
+1 Aether Spellbomb
+1 Relic of Progenitus
+1 Pithing Needle
+3 Metallic Rebuke
+4 Urza's Saga
+1 Teferi, Time Raveler
+2 Plains
+1 Island
+4 Flooded Strand
+4 Seachrome Coast
+2 Hallowed Fountain
+1 Razortide Bridge
+1 Eiganjo, Seat of the Empire
+1 Cavern of Souls
+1 Sacred Foundry
+1 Darksteel Citadel
+1 Otawara, Soaring City
+[Sideboard]
+3 Damping Sphere
+2 Stern Scolding
+2 Supreme Verdict
+2 Solitude
+1 Patrician's Scorn
+1 Flusterstorm
+1 Wear // Tear
+2 Tishana's Tidebinder
+1 Stone of Erech

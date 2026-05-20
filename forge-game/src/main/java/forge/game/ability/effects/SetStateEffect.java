@@ -2,12 +2,12 @@ package forge.game.ability.effects;
 
 import forge.card.CardStateName;
 import forge.game.Game;
-import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
+import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
@@ -75,8 +75,6 @@ public class SetStateEffect extends SpellAbilityEffect {
         } else {
             cardsToTransform = getTargetCards(sa);
         }
-
-        GameEntityCounterTable table = new GameEntityCounterTable();
 
         for (final Card tgtCard : cardsToTransform) {
             // check if the object is still in game or if it was moved
@@ -184,27 +182,24 @@ public class SetStateEffect extends SpellAbilityEffect {
             if (hasTransformed) {
                 if (sa.isMorphUp()) {
                     String sb = p + " has unmorphed " + gameCard.getDisplayName();
-                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, sb));
                 } else if (sa.isManifestUp()) {
                     String sb = p + " has unmanifested " + gameCard.getDisplayName();
-                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, sb));
                 } else if (sa.isDisguiseUp()) {
                     String sb = p + " has undisguised " + gameCard.getDisplayName();
-                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, sb));
                 } else if (sa.isCloakUp()) {
                     String sb = p + " has uncloaked " + gameCard.getDisplayName();
-                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, sb));
                 } else if (sa.isKeyword(Keyword.DOUBLE_AGENDA)) {
                     String sb = p + " has revealed " + gameCard.getDisplayName() + " with the chosen names: " + gameCard.getNamedCards();
-                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, sb));
                 } else if (sa.isKeyword(Keyword.HIDDEN_AGENDA)) {
                     String sb = p + " has revealed " + gameCard.getDisplayName() + " with the chosen name " + gameCard.getNamedCard();
-                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, sb));
                 }
                 game.fireEvent(new GameEventCardStatsChanged(gameCard));
-                if (sa.hasParam("Mega")) { // TODO move Megamorph into an Replacement Effect
-                    gameCard.addCounter(CounterEnumType.P1P1, 1, p, table);
-                }
                 if (remChanged) {
                     host.addRemembered(gameCard);
                 }
@@ -223,7 +218,6 @@ public class SetStateEffect extends SpellAbilityEffect {
                 }
             }
         }
-        table.replaceCounterEffect(game, sa, true);
         if (!transformedCards.isEmpty()) {
             game.getAction().reveal(transformedCards, p, true, "Transformed cards in ");
         }

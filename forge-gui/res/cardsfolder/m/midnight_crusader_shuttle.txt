@@ -10,6 +10,6 @@ SVar:DBTap:DB$ Tap | Defined$ Remembered | ConditionDefined$ Remembered | Condit
 SVar:DBSetAttacking:DB$ ChangeCombatants | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.YouCtrl | Attacking$ RememberedPlayer | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Crew:2
-SVar:HasAttackEffect:True
+SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Sacrifice
 Oracle:Midnight Entity — Whenever Midnight Crusader Shuttle attacks, defending player faces a villainous choice — That player sacrifices a creature, or you gain control of a creature of your choice that player controls until end of turn. If you gain control of a creature this way, tap it, and it's attacking that player.\nCrew 2

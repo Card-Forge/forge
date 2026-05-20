@@ -254,7 +254,7 @@ public class DrawAi extends SpellAbilityAi {
                 if (drawback && root.getXManaCostPaid() != null) {
                     numCards = root.getXManaCostPaid();
                 } else {
-                    numCards = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                    numCards = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
                     // try not to overdraw
                     int safeDraw = Math.abs(Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3));
                     if (source.isInstant() || source.isSorcery()) { safeDraw++; } // card will be spent
@@ -289,7 +289,6 @@ public class DrawAi extends SpellAbilityAi {
         // TODO: if xPaid and one of the below reasons would fail, instead of
         // bailing reduce toPay amount to acceptable level
         if (sa.usesTargeting()) {
-            // ability is targeted
             sa.resetTargets();
 
             // if it wouldn't draw anything and its not mandatory, skip it
@@ -297,15 +296,12 @@ public class DrawAi extends SpellAbilityAi {
                 return false;
             }
 
-            // filter player that can be targeted
             PlayerCollection players = game.getPlayers().filter(PlayerPredicates.isTargetableBy(sa));
 
-            // no targets skip it
             if (players.isEmpty()) {
                 return false;
             }
 
-            // filter opponents
             PlayerCollection opps = players.filter(PlayerPredicates.isOpponentOf(ai));
 
             for (Player oppA : opps) {
@@ -530,7 +526,7 @@ public class DrawAi extends SpellAbilityAi {
             }
         }
         return true;
-    } // drawTargetAI()
+    }
 
     @Override
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {

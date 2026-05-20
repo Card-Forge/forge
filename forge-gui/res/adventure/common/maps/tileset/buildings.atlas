@@ -102,6 +102,9 @@ OrzhovShop
 IzzetShop
   xy: 336, 752
   size: 16, 16
+FunnyShop
+  xy: 320, 960
+  size: 16, 16
 GolgariShop
   xy: 352, 752
   size: 16, 16    

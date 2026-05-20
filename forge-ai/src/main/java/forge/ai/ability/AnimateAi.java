@@ -158,9 +158,8 @@ public class AnimateAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
         }
 
-        if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer, sa.isTrigger());
-            sa.setXManaCostPaid(xPay);
+        if (sa.costHasManaX()) {
+            ComputerUtilCost.setMaxXValue(sa, aiPlayer, sa.isTrigger());
         }
 
         if (sa.usesTargeting()) {
@@ -283,8 +282,7 @@ public class AnimateAi extends SpellAbilityAi {
         final String logic = sa.getParamOrDefault("AILogic", "");
         final boolean alwaysActivatePWAbility = sa.isPwAbility()
                 && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class)
-                && sa.usesTargeting()
-                && sa.getTargetRestrictions().getMinTargets(sa.getHostCard(), sa) == 0;
+                && sa.usesTargeting() && sa.getMinTargets() == 0;
 
         final CardType types = new CardType(true);
         if (sa.hasParam("Types")) {

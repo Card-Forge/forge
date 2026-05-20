@@ -17,10 +17,10 @@
  */
 package forge.game.staticability;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import forge.GameCommand;
 import forge.card.*;
 import forge.game.CardTraitBase;
@@ -31,7 +31,6 @@ import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -633,12 +632,12 @@ public final class StaticAbilityContinuous {
                     }
                 }
                 if (stAb.hasParam("Incorporate")) {
-                    final ManaCost manaCost = new ManaCost(new ManaCostParser(stAb.getParam("Incorporate")));
+                    final ManaCost manaCost = new ManaCost(stAb.getParam("Incorporate"));
                     affectedCard.addChangedManaCost(manaCost, true, se.getTimestamp(), stAb.getId());
                     affectedCard.addColorByText(ColorSet.fromMask(manaCost.getColorProfile()), true, se.getTimestamp(), stAb);
                 }
                 if (stAb.hasParam("ManaCost")) {
-                    final ManaCost manaCost = new ManaCost(new ManaCostParser(stAb.getParam("ManaCost")));
+                    final ManaCost manaCost = new ManaCost(stAb.getParam("ManaCost"));
                     affectedCard.addChangedManaCost(manaCost, false, se.getTimestamp(), stAb.getId());
                 }
 
@@ -713,11 +712,13 @@ public final class StaticAbilityContinuous {
                     newKeywords.removeIf(input -> {
                         // replace one Keyword with list of keywords
                         if (input.contains("CardColors") || input.contains("cardColors")) {
-                            for (MagicColor.Color color : affectedCard.getColor()) {
-                                extraKeywords.add(
-                                    input.replaceAll("CardColors", StringUtils.capitalize(color.getName()))
-                                        .replaceAll("cardColors", color.getName())
+                            if (!(affectedCard.getColor().isColorless())) {
+                                for (MagicColor.Color color : affectedCard.getColor()) {
+                                    extraKeywords.add(
+                                            input.replaceAll("CardColors", StringUtils.capitalize(color.getName()))
+                                                    .replaceAll("cardColors", color.getName())
                                     );
+                                }
                             }
                             return true;
                         }
@@ -967,7 +968,7 @@ public final class StaticAbilityContinuous {
         addIgnore.setIntrinsic(false);
         addIgnore.setApi(ApiType.InternalIgnoreEffect);
         addIgnore.setDescription(cost + " Ignore the effect until end of turn.");
-        sourceCard.addChangedCardTraits(ImmutableList.of(addIgnore), null, null, null, null, null, sourceCard.getLayerTimestamp(), stAb.getId());
+        sourceCard.addChangedCardTraits(List.of(addIgnore), null, null, null, null, null, sourceCard.getLayerTimestamp(), stAb.getId());
 
         final GameCommand removeIgnore = new GameCommand() {
             private static final long serialVersionUID = -5415775215053216360L;
@@ -991,7 +992,7 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("GainsAbilitiesOfZones")) {
                 validZones = ZoneType.listValueOf(params.get("GainsAbilitiesOfZones"));
             } else {
-                validZones = ImmutableList.of(ZoneType.Battlefield);
+                validZones = List.of(ZoneType.Battlefield);
             }
             cards.addAll(CardLists.getValidCards(game.getCardsIn(validZones), valids, hostCard.getController(), hostCard, stAb));
         }

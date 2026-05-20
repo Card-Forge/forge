@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=RasAlGhul
+Title=RasAlGhul
+Icon=RasAlGhul.jpg
+Difficulty=Hard
+Description=../Modern/Shadows_over_Innistrad/GPT_Lille_Trial_Copa_Fan/Lucas_Miguel_Tejedor_-_Eldrazi_(Modern,_#631327).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Blight Herder
+3 Eldrazi Displacer
+2 Reality Smasher
+4 Thought-Knot Seer
+4 Tidehollow Sculler
+3 Wasteland Strangler
+4 Relic of Progenitus
+2 Dismember
+3 Path to Exile
+2 Inquisition of Kozilek
+4 Lingering Souls
+2 Thoughtseize
+2 Sorin, Solemn Visitor
+4 Caves of Koilos
+4 Eldrazi Temple
+3 Ghost Quarter
+4 Godless Shrine
+2 Plains
+1 Sea Gate Wreckage
+2 Shambling Vent
+3 Swamp
+[Sideboard]
+1 Anguished Unmaking
+2 Disenchant
+1 Grafdigger's Cage
+1 Hallowed Moonlight
+1 Memoricide
+2 Pithing Needle
+2 Ratchet Bomb
+2 Stony Silence
+2 Timely Reinforcements
+1 Warping Wail

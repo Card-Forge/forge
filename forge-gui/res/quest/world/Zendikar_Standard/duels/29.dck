@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Tenga
+Title=Tenga
+Icon=Tenga.jpg
+Difficulty=Easy
+Description=Zendikar/US_States_2009_-_North_Dakota/Corey_Baumeister_-_Jacerator_(Standard,_#3247).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Font of Mythos
+4 Howling Mine
+4 Angelsong
+2 Archive Trap
+4 Flashfreeze
+4 Safe Passage
+3 Day of Judgment
+4 Time Warp
+3 Sunspring Expedition
+4 Jace Beleren
+4 Glacial Fortress
+10 Island
+4 Kabira Crossroads
+6 Plains
+[Sideboard]
+4 Baneslayer Angel
+2 Cancel
+4 Negate
+1 Pithing Needle
+2 Quest for Ancient Secrets
+1 Relic of Progenitus
+1 Tezzeret the Seeker

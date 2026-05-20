@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Piper
+Title=Piper
+Icon=Piper.jpg
+Difficulty=Very Hard
+Description=../Modern/Dark_Ascension/Sacramento,_California/Paul_F._in_PTQ_Barcelona_-_Zoo_(Modern,_#28527).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Grim Lavamancer
+4 Kird Ape
+4 Loam Lion
+3 Plated Geopede
+4 Steppe Lynx
+4 Thalia, Guardian of Thraben
+4 Lightning Bolt
+3 Lightning Helix
+4 Path to Exile
+4 Arid Mesa
+1 Horizon Canopy
+4 Marsh Flats
+2 Misty Rainforest
+2 Mountain
+1 Plains
+2 Sacred Foundry
+4 Scalding Tarn
+1 Stomping Ground
+1 Temple Garden
+[Sideboard]
+3 Ancient Grudge
+3 Molten Rain
+2 Oblivion Ring
+3 Relic of Progenitus
+2 Sulfur Elemental
+2 Torpor Orb

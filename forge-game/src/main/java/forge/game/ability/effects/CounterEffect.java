@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
+import forge.game.event.GameEventAddLog;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -22,6 +23,7 @@ import java.util.Map;
 public class CounterEffect extends SpellAbilityEffect {
     @Override
     public void buildSpellAbility(SpellAbility sa) {
+        super.buildSpellAbility(sa);
         if (sa.usesTargeting()) {
             sa.getTargetRestrictions().setZone(ZoneType.Stack);
         }
@@ -295,11 +297,11 @@ public class CounterEffect extends SpellAbilityEffect {
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
         runParams.put(AbilityKey.Cause, srcSA);
-        runParams.put(AbilityKey.CounteredSA, tgtSA);
+        runParams.put(AbilityKey.SpellAbility, tgtSA);
         game.getTriggerHandler().runTrigger(TriggerType.Countered, runParams, false);
 
         if (!tgtSA.isAbility()) {
-            game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, "Send countered spell to " + destination);
+            game.fireEvent(new GameEventAddLog(GameLogEntryType.ZONE_CHANGE, "Send countered spell to " + destination));
         }
 
         return true;

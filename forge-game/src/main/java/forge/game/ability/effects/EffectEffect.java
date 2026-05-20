@@ -121,7 +121,11 @@ public class EffectEffect extends SpellAbilityEffect {
 
         String name = sa.getParam("Name");
         if (name == null) {
-            name = hostCard + (sa.hasParam("Boon") ? "'s Boon" : "'s Effect");
+            if (sa.hasParam("Adventure")) {
+                name = hostCard + "'s Adventure";
+            } else {
+                name = hostCard + (sa.hasParam("Boon") ? "'s Boon" : "'s Effect");
+            }
         }
 
         PlayerCollection effectOwner = sa.hasParam("EffectOwner") ?
@@ -156,6 +160,8 @@ public class EffectEffect extends SpellAbilityEffect {
             }
         } else if (sa.hasParam("Image")) {
             image = ImageKeys.getTokenKey(sa.getParam("Image"));
+        } else if (sa.hasParam("Adventure")) {
+            image = StaticData.instance().getOtherImageKey(ImageKeys.ADVENTURE_IMAGE, hostCard.getSetCode());
         } else { // use host image
             image = hostCard.getImageKey();
         }
@@ -310,7 +316,7 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             if (duration == null || !duration.equals("Permanent")) {
-                addUntilCommand(sa, exileEffectCommand(game, eff), controller);
+                addUntilCommand(sa, () -> game.getAction().exileEffect(eff), controller);
             }
 
             if (sa.hasParam("ImprintOnHost")) {

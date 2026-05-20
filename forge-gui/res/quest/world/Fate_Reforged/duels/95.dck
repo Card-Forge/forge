@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Silver Surfer
+Title=Silver Surfer
+Icon=Silver Surfer.jpg
+Difficulty=Very Hard
+Description=../Modern/Fate_Reforged/States_West_Jordan/Justin_Slone_-_Dredgevine_(Modern,_#335615).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Golgari Grave-Troll
+4 Gravecrawler
+4 Gurmag Angler
+4 Hedron Crab
+4 Lotleth Troll
+1 Rotting Rats
+4 Satyr Wayfinder
+1 Stinkweed Imp
+4 Vengevine
+3 Abrupt Decay
+1 Darkblast
+2 Murderous Cut
+2 Stubborn Denial
+4 Tracker's Instincts
+2 Breeding Pool
+1 Darkslick Shores
+1 Forest
+2 Misty Rainforest
+3 Overgrown Tomb
+4 Polluted Delta
+1 Stomping Ground
+2 Swamp
+4 Verdant Catacombs
+1 Watery Grave
+[Sideboard]
+4 Ancient Grudge
+3 Gnaw to the Bone
+1 Maelstrom Pulse
+2 Memory's Journey
+3 Thoughtseize

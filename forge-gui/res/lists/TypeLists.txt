@@ -109,6 +109,7 @@ Elephant:Elephants
 Elf:Elves
 Elk:Elks
 Employee:Employees
+Eternal:Eternals
 Eye:Eyes
 Faerie:Faeries
 Ferret:Ferrets
@@ -124,6 +125,7 @@ Gamma:Gammas
 Gargoyle:Gargoyles
 Germ:Germs
 Giant:Giants
+Giraffe:Giraffes
 Gith:Gith
 Glimmer:Glimmers
 Gnoll:Gnolls
@@ -213,6 +215,7 @@ Noggle:Noggles
 Nomad:Nomads
 Nymph:Nymphs
 Octopus:Octopi
+Officer:Officers
 Ogre:Ogres
 Ooze:Oozes
 Orb:Orbs
@@ -367,6 +370,7 @@ Shard
 Attraction
 Blood
 Bobblehead:Bobbleheads
+Book:Books
 Clue:Clues
 Contraption:Contraptions
 Equipment
@@ -385,6 +389,7 @@ Spacecraft:Spacecraft
 Stone:Stones
 Treasure:Treasures
 Vehicle:Vehicles
+Vibranium
 [WalkerTypes]
 Ajani
 Aminatou
@@ -403,6 +408,7 @@ Dakkon
 Daretti
 Davriel
 Deb
+Dellian
 Dihada
 Domri
 Dovin
@@ -433,6 +439,7 @@ Liliana
 Lolth
 Lukka
 Minsc
+Monopoly
 Mordenkainen
 Nahiri
 Narset

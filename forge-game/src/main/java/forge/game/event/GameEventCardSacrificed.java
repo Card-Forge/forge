@@ -1,8 +1,8 @@
 package forge.game.event;
 
-import forge.game.card.Card;
+import forge.game.card.CardView;
 
-public record GameEventCardSacrificed(Card card) implements GameEvent {
+public record GameEventCardSacrificed(CardView card) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=He-Man
+Title=He-Man
+Icon=He-Man.jpg
+Difficulty=Easy
+Description=Oath_of_the_Gatewatch/Grand_Prix_Houston_2016_-_Undefeated_Day_1/Cory_Lingelbach_-_Grixis_Dragons_(Standard,_#604255).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bearer of Silence
+4 Eldrazi Skyspawner
+4 Hangarback Walker
+4 Kolaghan, the Storm's Fury
+4 Thopter Engineer
+4 Thunderbreak Regent
+2 Ghostfire Blade
+1 Dispel
+4 Draconic Roar
+3 Murderous Cut
+4 Bloodstained Mire
+2 Haven of the Spirit Dragon
+3 Mountain
+4 Polluted Delta
+4 Shivan Reef
+3 Smoldering Marsh
+2 Sunken Hollow
+1 Swamp
+3 Wooded Foothills
+[Sideboard]
+1 Disdainful Stroke
+1 Seismic Rupture
+3 Self-Inflicted Wound
+2 Silumgar, the Drifting Death
+4 Transgress the Mind

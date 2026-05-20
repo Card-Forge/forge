@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=BaronCimitiere
+Title=BaronCimitiere
+Icon=BaronCimitiere.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/Chikada_Yutaro_-_Merfolk_(Modern,_#2794961).dck
+Deck Type=constructed
+
+[Main]
+3 Silvergill Adept
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+2 Svyelun of Sea and Sky
+4 Tide Shaper
+3 Vodalian Hexcatcher
+2 Tishana's Tidebinder
+2 Harbinger of the Seas
+2 Floodpits Drowner
+4 Silvergill Mentor
+4 Aether Vial
+3 Force of Negation
+2 Flare of Denial
+4 Sink into Stupor
+7 Island
+3 Cavern of Souls
+3 Mutavault
+1 Fiery Islet
+1 Waterlogged Grove
+2 Otawara, Soaring City
+[Sideboard]
+2 Chalice of the Void
+2 Surgical Extraction
+2 Relic of Progenitus
+1 Force of Negation
+3 Subtlety
+2 Stern Scolding
+3 Consign to Memory

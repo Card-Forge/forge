@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Green Hornet
+Title=Green Hornet
+Icon=Green Hornet.jpg
+Difficulty=Hard
+Description=./Modern/Murders_at_Karlov_Manor/Akshay_Karthik_-_Domain_Zoo_(Modern,_#2002092).dck
+Deck Type=constructed
+
+[Main]
+4 Ragavan, Nimble Pilferer
+4 Scion of Draco
+4 Territorial Kavu
+2 Subtlety
+3 Counterspell
+4 Force of Negation
+4 Lightning Bolt
+3 Expressive Iteration
+4 Preordain
+4 Leyline Binding
+4 Leyline of the Guildpact
+1 Breeding Pool
+4 Flooded Strand
+1 Hallowed Fountain
+1 Island
+1 Sacred Foundry
+4 Scalding Tarn
+1 Steam Vents
+1 Temple Garden
+1 Thundering Falls
+4 Wooded Foothills
+1 Zagoth Triome
+[Sideboard]
+2 Obsidian Charmaw
+1 Murktide Regent
+2 Rest in Peace
+2 Fable of the Mirror-Breaker
+3 Stern Scolding
+2 Prismatic Ending
+3 Pick Your Poison

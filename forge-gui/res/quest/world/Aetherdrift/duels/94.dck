@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Tenga
+Title=Tenga
+Icon=Tenga.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/DejoyOfGaming_-_Esper_Reanimator_(Modern,_#2385835).dck
+Deck Type=constructed
+
+[Main]
+3 Ketramose, the New Dawn
+4 Solitude
+4 Atraxa, Grand Unifier
+4 Psychic Frog
+3 Emperor of Bones
+2 Griselbrand
+2 Force of Negation
+4 Goryo's Vengeance
+2 Faithful Mending
+3 Ephemerate
+4 Tainted Indulgence
+3 Leyline Binding
+2 Teferi, Time Raveler
+1 Watery Grave
+1 Plains
+3 Marsh Flats
+1 Meticulous Archive
+1 Swamp
+1 Hallowed Fountain
+1 Ketria Triome
+1 Godless Shrine
+1 Island
+4 Polluted Delta
+4 Flooded Strand
+1 Shadowy Backstreet
+[Sideboard]
+1 Force of Negation
+3 Consign to Memory
+3 Nihil Spellbomb
+2 Wrath of the Skies
+2 Toxic Deluge
+2 Stock Up
+1 Ketramose, the New Dawn
+1 Teferi, Time Raveler

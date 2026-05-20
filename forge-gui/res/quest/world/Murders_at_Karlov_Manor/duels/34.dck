@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Doctor John Zoidberg
+Title=Doctor John Zoidberg
+Icon=Doctor John Zoidberg.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/Kardenis_-_Boros_Convoke_(Standard,_#1992180).dck
+Deck Type=constructed
+
+[Main]
+1 Charming Scoundrel
+4 Imodane's Recruiter
+4 Knight-Errant of Eos
+4 Novice Inspector
+4 Resolute Reinforcements
+4 Voldaren Epicure
+4 Warden of the Inner Sky
+1 Yotian Frontliner
+2 Sanguine Evangelist
+4 Gleeful Demolition
+4 Case of the Gateway Express
+2 Warleader's Call
+4 Battlefield Forge
+3 Mountain
+2 Eiganjo, Seat of the Empire
+3 Plains
+2 Sokenzan, Crucible of Defiance
+2 Mirrex
+2 Cavern of Souls
+4 Sundown Pass
+[Sideboard]
+4 Destroy Evil
+4 End the Festivities
+2 Lantern Flare
+2 Urabrask's Forge
+3 Surge of Salvation

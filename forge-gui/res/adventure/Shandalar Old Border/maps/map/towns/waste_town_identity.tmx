@@ -3,9 +3,9 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJzt1LEKACAIBND2fti5L291iLxAU+qG29SnBElvTRiGCc1QQWp0rdXnsdMulV10FmJluFn3VnAR+zXXsrPeN8KP/h883VWfNdPj1pN9boQuXbr/uhNtp9Ws
@@ -30,26 +30,26 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="204" y="368" width="56" height="16"/>
-  <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="256" y="208">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="204" y="368" width="56" height="16"/>
+  <object id="41" template="../../../../common/maps/obj/shop.tx" x="256" y="208">
    <properties>
     <property name="commonShopList" value="Artifact"/>
    </properties>
   </object>
-  <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="304" y="208">
+  <object id="42" template="../../../../common/maps/obj/shop.tx" x="304" y="208">
    <properties>
     <property name="commonShopList" value="Random"/>
    </properties>
   </object>
-  <object id="63" template="../../../../../../common/maps/obj/shop.tx" x="104" y="272">
+  <object id="63" template="../../../../common/maps/obj/shop.tx" x="104" y="272">
    <properties>
     <property name="commonShopList" value="WasteEquipment"/>
     <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="150" y="273"/>
-  <object id="61" template="../../../../../../common/maps/obj/shardtrader.tx" x="400" y="288"/>
-  <object id="62" template="../../../../../../common/maps/obj/quest.tx" x="159" y="209" width="34" height="16">
+  <object id="47" template="../../../../common/maps/obj/inn.tx" x="150" y="273"/>
+  <object id="61" template="../../../../common/maps/obj/shardtrader.tx" x="400" y="288"/>
+  <object id="62" template="../../../../common/maps/obj/quest.tx" x="159" y="209" width="34" height="16">
    <properties>
     <property name="questtype" value="waste_town_identity"/>
    </properties>

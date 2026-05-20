@@ -210,7 +210,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 }
 
                 while (itr.hasNext()) {
-                    final Card c = itr.next();
+                    Card c = itr.next();
 
                     if (optionalFound &&
                             !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()), null)) {
@@ -259,7 +259,11 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     } else if (sa.hasParam("NoMoveFound")) {
                         //Don't do anything
                     } else {
-                        moved.add(game.getAction().moveTo(foundDest, c, foundLibPos, sa, moveParams));
+                        c = game.getAction().moveTo(foundDest, c, foundLibPos, sa, moveParams);
+                        moved.add(c);
+                        if (foundDest == ZoneType.Exile) {
+                            handleExiledWith(c, sa);
+                        }
                     }
 
                     if (sequential) {
@@ -299,7 +303,10 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 AbilityKey.addCardZoneTableParams(moveParams, table);
 
                 for (Card c : revealed) {
-                    game.getAction().moveTo(finalDest, c, finalPos, sa, moveParams);
+                    c = game.getAction().moveTo(finalDest, c, finalPos, sa, moveParams);
+                    if (finalDest == ZoneType.Exile) {
+                        handleExiledWith(c, sa);
+                    }
                 }
             }
 

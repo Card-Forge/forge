@@ -5,7 +5,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenScript$ g_x_x_treefolk | TokenPower$ X | TokenToughness$ X
 SVar:X:Count$xPaid
 T:Mode$ AttackersDeclared | ValidAttackers$ Creature.Elf+YouCtrl | Execute$ TrigPopulate | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack with one or more Elves, populate. (Create a token that's a copy of a creature token you control.)
-SVar:TrigPopulate:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | Populate$ True
+SVar:TrigPopulate:DB$ CopyPermanent | Populate$ True
 DeckHas:Ability$Token & Type$Treefolk
 DeckHints:Type$Elf
 Oracle:When Arboreal Alliance enters, create an X/X green Treefolk creature token.\nWhenever you attack with one or more Elves, populate. (Create a token that's a copy of a creature token you control.)

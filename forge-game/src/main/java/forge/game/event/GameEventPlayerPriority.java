@@ -1,10 +1,10 @@
 package forge.game.event;
 
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.util.TextUtil;
 
-public record GameEventPlayerPriority(Player turn, PhaseType phase, Player priority) implements GameEvent {
+public record GameEventPlayerPriority(PlayerView turn, PhaseType phase, PlayerView priority) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
@@ -16,6 +16,6 @@ public record GameEventPlayerPriority(Player turn, PhaseType phase, Player prior
      */
     @Override
     public String toString() {
-        return TextUtil.concatWithSpace("Priority -", priority.getName());
+        return TextUtil.concatWithSpace("Priority -", priority.toString());
     }
 }

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Reverend Lovejoy
+Title=Reverend Lovejoy
+Icon=Reverend Lovejoy.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Ishida_Ryoya_-_Zoo_(Modern,_#1753458).dck
+Deck Type=constructed
+
+[Main]
+4 Striped Riverwinder
+4 Soulflayer
+2 Mantis Rider
+2 Questing Beast
+4 Fury
+4 Territorial Kavu
+4 Scion of Draco
+2 Samut, Vizier of Naktamun
+2 Oliphaunt
+4 Lightning Bolt
+4 Leyline Binding
+4 Up the Beanstalk
+1 Snow-Covered Forest
+1 Blood Crypt
+1 Breeding Pool
+1 Sacred Foundry
+1 Stomping Ground
+1 Steam Vents
+4 Windswept Heath
+4 Wooded Foothills
+2 Scalding Tarn
+1 Overgrown Tomb
+1 Temple Garden
+1 Savai Triome
+1 Zagoth Triome
+[Sideboard]
+3 Stubborn Denial
+2 Murderous Cut
+2 Chalice of the Void
+2 Force of Vigor
+2 Endurance
+2 Boseiju, Who Endures
+2 Tear Asunder

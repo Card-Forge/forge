@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Da Vinci
+Title=Da Vinci
+Icon=Da Vinci.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Brian_Bachman_-_Merfolk_(Standard,_#795245).dck
+Deck Type=constructed
+
+[Main]
+4 Benthic Biomancer
+4 Deeproot Elite
+4 Kumena's Speaker
+4 Merfolk Mistbinder
+4 Merfolk Skydiver
+3 Merfolk Trickster
+4 Silvergill Adept
+4 Kumena, Tyrant of Orazca
+3 Incubation // Incongruity
+4 Deeproot Waters
+5 Forest
+5 Island
+4 Breeding Pool
+4 Hinterland Harbor
+4 Unclaimed Territory
+[Sideboard]
+4 Kraul Harpooner
+1 Merfolk Trickster
+1 Crushing Canopy
+2 Disdainful Stroke
+1 Dive Down
+4 Negate
+2 Sleep

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="36" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="74">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="36" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="74">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -35,7 +35,7 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../../obj/treasure.tx" x="324.941" y="186.435"/>
+  <object id="48" template="../../obj/treasure.tx" x="323.178" y="176.741"/>
   <object id="50" template="../../obj/enemy.tx" x="467.189" y="380.766">
    <properties>
     <property name="enemy" value="Mummy"/>
@@ -67,10 +67,11 @@
    </properties>
   </object>
   <object id="56" template="../../obj/gold.tx" x="459.28" y="273.299"/>
-  <object id="57" template="../../obj/enemy.tx" x="275.803" y="202.417">
+  <object id="57" template="../../obj/enemy.tx" x="276.684" y="204.18">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Wall of Forgotten Pharaohs&quot; ] }"/>
     <property name="enemy" value="Pharaoh"/>
+    <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
@@ -121,12 +122,12 @@
    </properties>
   </object>
   <object id="72" template="../../obj/treasure.tx" x="550.333" y="305"/>
-  <object id="73" template="../../obj/enemy.tx" x="509" y="301">
+  <object id="73" template="../../obj/enemy.tx" x="535.438" y="303.644">
    <properties>
     <property name="enemy" value="Greater Sandwurm"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="speedModifier" type="float" value="40"/>
-    <property name="threatRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
  </objectgroup>

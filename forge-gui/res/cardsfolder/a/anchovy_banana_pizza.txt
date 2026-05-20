@@ -1,0 +1,7 @@
+Name:Anchovy & Banana Pizza
+ManaCost:2 B B
+Types:Artifact Food
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this artifact enters, destroy target creature.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature
+A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this artifact> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+Oracle:When this artifact enters, destroy target creature.\n{2}, {T}, Sacrifice this artifact: You gain 3 life.

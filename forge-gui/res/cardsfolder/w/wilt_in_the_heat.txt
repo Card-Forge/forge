@@ -1,0 +1,7 @@
+Name:Wilt in the Heat
+ManaCost:2 R W
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | Description$ This spell costs {2} less to cast if one or more cards left your graveyard this turn.
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 5 | ReplaceDyingDefined$ Targeted | SpellDescription$ CARDNAME deals 5 damage to target creature. If that creature would die this turn, exile it instead.
+SVar:X:Count$LeftGraveyardThisTurn Card.YouOwn
+Oracle:This spell costs {2} less to cast if one or more cards left your graveyard this turn.\nWilt in the Heat deals 5 damage to target creature. If that creature would die this turn, exile it instead.

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Szadek
+Title=Szadek
+Icon=Szadek.jpg
+Difficulty=Medium
+Description=./Standard/Theros_Beyond_Death/1-3drop#20497_-_Rakdos_Aristocrats_(Standard,_#940044).dck
+Deck Type=constructed
+
+[Main]
+1 Woe Strider
+3 Gutterbones
+4 Cauldron Familiar
+4 Kroxa, Titan of Death's Hunger
+4 Mayhem Devil
+4 Mire Triton
+4 Priest of Forgotten Gods
+4 Witch's Oven
+4 Claim the Firstborn
+4 Tymaret Calls the Dead
+1 Castle Locthwain
+2 Temple of Malice
+4 Blood Crypt
+4 Fabled Passage
+5 Mountain
+8 Swamp
+[Sideboard]
+2 Redcap Melee
+2 Noxious Grasp
+2 Act of Treason
+3 Agonizing Remorse
+3 Embereth Shieldbreaker
+3 Scorching Dragonfire

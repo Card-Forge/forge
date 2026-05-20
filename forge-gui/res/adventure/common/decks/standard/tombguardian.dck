@@ -5,7 +5,7 @@ Difficulty=medium
 Description=BRG Bloodthirst deck with Honden of Infinite Rage, Kyren Sniper and Rumbling Slum
 Icon=Krypto.jpg
 Deck Type=constructed
-[main]
+[Main]
 4 Skarrgan Pit-Skulk
 1 Smash to Smithereens
 2 First Volley
@@ -37,4 +37,4 @@ Deck Type=constructed
 2 Overgrown Tomb
 2 Stomping Ground
 2 Savage Lands
-[sideboard]
+[Sideboard]

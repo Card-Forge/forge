@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="184">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Ferocity of the Wilds&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" name="Animated Tiles" tilewidth="16" tileheight="16" tilecount="16384" columns="128">
+  <image source="../../../../common/maps/tileset/dungeon/animatedtiles.png" width="2048" height="2048"/>
+ </tileset>
+ <layer id="8" name="Collision" width="50" height="35">
+  <data encoding="base64" compression="zlib">
+   eJzt1E0KgzAQhmG3UheC1I3iUVwVz9WjeEyXMogQQ2wGO3F+zAsupCLfg6RFIbeu4l5AkxXHYMABhqnkXvFfu0Gzo3MM2RHu09K85/uKP6PBAbtilpRng9Lxy5L6fFM7QpY7/qNSODh6mmN+b9fZvRUHZMUBSXdILzty1uur46Uhd6u/n9vR1Ljf/K13OJYR9xzsxDhCW7m/B9boJtFxpac5pIdxpO7KefCLObRkxQFp3R1KgoPinOT0tgK2XS7b
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="50" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6Bq2lv/vupgCiChl1RVVVVVVVV9DxM+6T0=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="50" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztmE1ugzAQha1KSY7SdpMS6KIF0stUvVevURtlV+VatQGLkTvYY2CoifqkJ5AcwnyMf8YWIqyyEKLSrgvCjxmljp3RttNvN6euTT71Vx2/0m56jsvz+LvsMz5Vmf4mGT3+Nk4PgysbX53HvYP038fObUyaoZnAQZH9jm+aoWHgmKsQh9Ixn7WrfGD463Hg6kLIhRm/Mu94LEOTIEeIxYxfOB8twaBy3Gem/moZ3florqoCt2RiofS7KRrjKBlZOOTjiGWhzrccCnG0ZuKA67BvvaaIwqGQdoyBwsGVM1XgjuGIqUPmcJQZfu+TjMwHRTG8aEwZfh98joHDpyk1KVVypN9NUbDuiqhJXxKrY6bqnyMtbZkDrpWGY8ssULfEAf26Ua6b5dDj58upaUM1Lsc5TaxcDiwnGAfcy611TuOr51EOJye+fKRyToNxuDkZ47AMKXAYhTgkcoYCGZLmAH3Lni9B10V6HEa+nIQ4KHuQ+50QD8CPu/VYluT41nF/HgZfE+KI2Q+uyWEEGUIcMXvB970Qd4fBH3ue+K0wDtnHrsB1qbPYH/+ixyE=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="35">
+  <data encoding="base64" compression="zlib">
+   eJzVmH1S4zAMxfMfy2WYoe0MbD9yP27BLUrdhLNhLRG8vkqW0ybQfTOatrGn1s+yZDtNc7vaLsrtT8umeR7slnR8OP1d4tjntufVbXKg2uxn53Awwxwc/UPcR5UecwyydY+nz5Vha/hnMRxW8/ta0jr7tFmcrh9ksDgwJ5Th8AvrCnMgZX+PtH62wFDD8XcEQzuMx9YPxs9rtc4+bMjfOTnkvzfLc9sNxs9rlXLfY7bO4ej+Ew4W5obF8C/HR3BwHv8ER8QgujbH5+BIlFOlGiXientJnZqDw+pX4rg0L3BtCcdxeW79YPx8bg6JxZj8Ro4zPxb291pNHQ9Zp7vAjy35LLGST1mzb5V2oDE8DrdOrcocshdFLMyhDFwDI0MWiwMZcN/nWHgcEYtySBw0BmMZrHMpn9MteedCrlXKUWJRDomDNTdjrHYdqtUwMIey8Hmpm5DjGivtGcyhZzc0rCG/xRHte2lGDhn7bTmNKYPevaz7F7NcwiGqnT/0xfPJ69cP/bx7b6rk2Mv8rGwOZVHt8pjtMK6eDxL4gnonFq8fMnh7Zqrg+GJBq7wfl3wTaV2sZfA4lIXPS945WvUUtNfsE6h1sCfzfXHs/3uKOLqKcVrwnfexlvaA0n2RmfA3t/E9K+KI1NL8456s6wjXeImB/fY4rHdO13Awg3Ioi84/cnjr3GPQecd2fOek7VqLpxLuATr/Xs2JGDwO652T1uKplAyOqOZEa5/ZrHdOooilJtfxPxNwRPWSJQwWB8rjEF0TF8vf5DC83jXNS2EfUmkMrLpscSB7KefXTtvYOReO+8XnJwrjwHnO8SnFQ8QxsfKf74Jj103759tQvVNjrffq1rtMjhvG5OwOSGeFkzZjvGiv1vYPqKnEhQ==
+  </data>
+ </layer>
+ <layer id="7" name="Clutter" width="50" height="35">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmVkOgjAQhucAnsQXtxdUSryC3kMT12v57IJ30hM4jdTU2pYWWijKlzQ4iDh/Z5hOA0B5SA8g6eWfP48ALsK4jr5/NxHuFWU2GeD9Bg4cVpDi/9wkOlTn/5mxxziYQPqYC33196b+nSrUIeY1JUUNN42OKv0Lgemf6eWJsjw4zmp14w3N16ite42h7pqsgz3XJj42oeYV8XGdAGxw7BP3/lQJrVMHQcMW7V12Li/G9xjgEb8+07xgdpFa46onZDHhdbEYy9ZtyppgPIna9oGPHviOPj+I2m75bYquG6H1ak1YN2wIbX5b6iVvz2t7nSmu+8q8PS9/3RRH7EiLi/pg4w8fhwserw5jUhYbf0zjxRN51Cqriy7yxLbeyjSW3S9XkSc+ekhVj9win2/dfIl56PNZKsq8C7Do1u2FGbq5XqKGFadD9S4jNDrDT5vFgx1DeGehqjO6OsviIcalaTwBrZFRwQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="68" template="../../../../common/maps/obj/gold.tx" x="116.167" y="223.167"/>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="108.104" y="197.482">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Mephitic Draught|LCI&quot;, &quot;Hopeless Nightmare|WOE&quot;]}"/>
+    <property name="enemy" value="Korvold"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="342.602" y="269.3">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Faerie Conclave|WOC&quot;, &quot;Cloudseeder|TSR&quot;]}"/>
+    <property name="enemy" value="Talion"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/collision.tx" x="-2.0975" y="-15.5" width="803.195" height="16"/>
+  <object id="109" template="../../../../common/maps/obj/collision.tx" x="-2.0975" y="559.5" width="803.195" height="16"/>
+  <object id="110" template="../../../../common/maps/obj/collision.tx" x="801.5" y="-13.729" width="16" height="589.458"/>
+  <object id="111" template="../../../../common/maps/obj/collision.tx" x="-16" y="-14.729" width="16" height="589.458"/>
+  <object id="112" template="../../../../common/maps/obj/enemy.tx" x="540" y="312.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Tegwyll"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="138,136"/>
+   </properties>
+  </object>
+  <object id="113" template="../../../../common/maps/obj/enemy.tx" x="248.5" y="108">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Grumgully"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="115" template="../../../../common/maps/obj/collision.tx" x="-1" y="227.271" width="26.5" height="115.458"/>
+  <object id="116" template="../../../../common/maps/obj/collision.tx" x="71.75" y="302.271" width="89.5" height="93.458"/>
+  <object id="117" template="../../../../common/maps/obj/collision.tx" x="44.25" y="283.771" width="26.5" height="95.958"/>
+  <object id="118" template="../../../../common/maps/obj/collision.tx" x="23.25" y="270.271" width="26.5" height="91.458"/>
+  <object id="119" template="../../../../common/maps/obj/collision.tx" x="66.25" y="15.771" width="29.5" height="92.458"/>
+  <object id="120" template="../../../../common/maps/obj/collision.tx" x="0.75" y="16.521" width="64.5" height="109.958"/>
+  <object id="121" template="../../../../common/maps/obj/collision.tx" x="276.25" y="112.771" width="153" height="92.458"/>
+  <object id="122" template="../../../../common/maps/obj/collision.tx" x="430.5" y="1.771" width="96.5" height="12.958"/>
+  <object id="123" template="../../../../common/maps/obj/collision.tx" x="162" y="113.271" width="76" height="92.458"/>
+  <object id="124" template="../../../../common/maps/obj/collision.tx" x="144" y="0.271" width="49" height="30.458"/>
+  <object id="131" template="../../../../common/maps/obj/collision.tx" x="190.25" y="432.438" width="50.5" height="126.625"/>
+  <object id="132" template="../../../../common/maps/obj/collision.tx" x="434.75" y="379.771" width="140.5" height="177.958"/>
+  <object id="133" template="../../../../common/maps/obj/collision.tx" x="494.25" y="46.271" width="51" height="80.458"/>
+  <object id="134" template="../../../../common/maps/obj/collision.tx" x="434.25" y="336.271" width="144" height="41.458"/>
+  <object id="135" template="../../../../common/maps/obj/collision.tx" x="481.5" y="175.271" width="112" height="80.458"/>
+  <object id="136" template="../../../../common/maps/obj/waypoint.tx" x="652" y="315"/>
+  <object id="137" template="../../../../common/maps/obj/waypoint.tx" x="769.5" y="34"/>
+  <object id="138" template="../../../../common/maps/obj/waypoint.tx" x="426.833" y="307.833"/>
+  <object id="139" template="../../../../common/maps/obj/waypoint.tx" x="710.667" y="288"/>
+  <object id="140" template="../../../../common/maps/obj/enemy.tx" x="728.667" y="170">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Rankle"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="137,139"/>
+   </properties>
+  </object>
+  <object id="141" template="../../../../common/maps/obj/enemy.tx" x="470.5" y="142">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Beluna"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="142" template="../../../../common/maps/obj/enemy.tx" x="290" y="337.333">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Alela"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="146,147"/>
+   </properties>
+  </object>
+  <object id="143" template="../../../../common/maps/obj/enemy.tx" x="736.334" y="480.167">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Emry"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="144" template="../../../../common/maps/obj/enemy.tx" x="83.3333" y="493.333">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Golden Egg|ELD&quot;, &quot;Gilded Goose|ELD&quot;]}"/>
+    <property name="enemy" value="The Goose Mother"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="146" template="../../../../common/maps/obj/waypoint.tx" x="379.333" y="312"/>
+  <object id="147" template="../../../../common/maps/obj/waypoint.tx" x="204.667" y="358"/>
+  <object id="148" template="../../../../common/maps/obj/gold.tx" x="95.5" y="224"/>
+  <object id="149" template="../../../../common/maps/obj/gold.tx" x="80" y="223"/>
+  <object id="150" template="../../../../common/maps/obj/gold.tx" x="115" y="241.5">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="151" template="../../../../common/maps/obj/gold.tx" x="81.5" y="241.5">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="152" template="../../../../common/maps/obj/dialog.tx" x="213.44" y="482.055" width="245.365" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The wilds up ahead are lit by a serene twilight, giving them an almost dreamlike quality. Faeries fli about and strange creatures can be seen in the distance. A place of both wonder and danger, it seems.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="153" template="../../../../common/maps/obj/entry_up.tx" x="335.787" y="555.501" width="81.5566" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="154" template="../../../../common/maps/obj/dialog.tx" x="303.756" y="287.402" width="90.6983" height="35.8333" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A regal faerie floats before you, lingering on a throne made entirely from shimmering faerie dust.
+
+'I am Talion, the Kindly Lord, First and Greatest of the High Fae, Sovereign of the Court, the Liege of Laughter, Finder of the First Yew, and the One True Lord of Eldraine. You amuse me. Let us test your skills.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="156" template="../../../../common/maps/obj/dialog.tx" x="430.592" y="105.82" width="63.223" height="21.3333" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A giant lounges ahead of you, standing to attention at your approach, greed in her eyes.
+
+'You look like quite a worthy addition to my collection! Come, little one, let's get you into a case...'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="157" template="../../../../common/maps/obj/dialog.tx" x="94.6547" y="113.044" width="66.198" height="18" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A dragon stands ahead of you, fittingly atop a pile of gold.
+
+'Been a while since fresh meat come through. Come, serve yourself up to your true king.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="158" template="../../../../common/maps/obj/dialog.tx" x="157.418" y="430.179" width="35.032" height="29.1667" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;An overlapping chorus of honks rings out as a many-headed goose sits up from a clutch of eggs.
+
+'HONK HONK HONK HONK HONK HONK HONK HONK HONK HONK HONK HONK!!!!!!!!!!!'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="159" template="../../../../common/maps/obj/dialog.tx" x="738.957" y="459.986" width="39.699" height="23.5" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;An enchanting, otherworldly song can be heard from the pool of water up ahead. In its center, a sword gleams inside a stone, and you see the flash of eyes as something - or someone - swims just below the surface.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="160" template="../../../../common/maps/obj/scroll.tx" x="45.25" y="535.25">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Gilded Goose&quot;, &quot;editions&quot;: [ &quot;ELD&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="162" template="../../../../common/maps/obj/scroll.tx" x="719.667" y="479.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;The Irencrag&quot;, &quot;editions&quot;: [ &quot;WOE&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="163" template="../../../../common/maps/obj/scroll.tx" x="780.667" y="59.3333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Rankle's Prank&quot;, &quot;editions&quot;: [ &quot;WOE&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="164" template="../../../../common/maps/obj/gold.tx" x="558.667" y="103.667">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="165" template="../../../../common/maps/obj/gold.tx" x="558.667" y="45.3333">
+   <properties>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="167" template="../../../../common/maps/obj/booster.tx" x="53" y="513.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="168" template="../../../../common/maps/obj/booster.tx" x="344.25" y="243">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="169" template="../../../../common/maps/obj/booster.tx" x="344.75" y="224.75">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="170" template="../../../../common/maps/obj/booster.tx" x="558.667" y="64">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;WOE&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="171" template="../../../../common/maps/obj/scroll.tx" x="558.333" y="83.6667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Collector's Vault&quot;, &quot;editions&quot;: [ &quot;WOE&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="172" template="../../../../common/maps/obj/collision.tx" x="374.045" y="204.862" width="22.6364" height="46.458"/>
+  <object id="173" template="../../../../common/maps/obj/collision.tx" x="309.773" y="204.044" width="22.6364" height="47.1853"/>
+  <object id="174" template="../../../../common/maps/obj/collision.tx" x="178.682" y="210.407" width="11.1364" height="22.1853"/>
+  <object id="175" template="../../../../common/maps/obj/collision.tx" x="178.932" y="371.407" width="11.1364" height="22.1853"/>
+  <object id="176" template="../../../../common/maps/obj/collision.tx" x="642.932" y="161.907" width="11.1364" height="22.1853"/>
+  <object id="177" template="../../../../common/maps/obj/collision.tx" x="674.432" y="34.4074" width="11.1364" height="22.1853"/>
+  <object id="178" template="../../../../common/maps/obj/collision.tx" x="786.932" y="144.907" width="11.1364" height="22.1853"/>
+  <object id="179" template="../../../../common/maps/obj/collision.tx" x="754.932" y="274.907" width="11.1364" height="22.1853"/>
+  <object id="180" template="../../../../common/maps/obj/collision.tx" x="466" y="17.271" width="30.5" height="29.458"/>
+  <object id="181" template="../../../../common/maps/obj/collision.tx" x="385.75" y="54.271" width="30.5" height="20.958"/>
+  <object id="182" template="../../../../common/maps/obj/scroll.tx" x="29.25" y="518.75">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;A Golden Opportunity&quot;, &quot;editions&quot;: [ &quot;YWOE&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="183" template="../../../../common/maps/obj/enemy.tx" x="246" y="446.5">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Hey! I could use some help here!'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;This part of the wild now stands quiet.&quot;,
+					&quot;text&quot;: &quot;'And may my brother's soul be able to rest as well.''&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ruby, Daring Tracker&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;colors&quot;: [ &quot;Blue&quot;], &quot;rarity&quot;: [&quot;Rare&quot;], &quot;count&quot;: 5 },
+{ &quot;type&quot;: &quot;randomCard&quot;, &quot;colors&quot;: [ &quot;Green&quot;], &quot;rarity&quot;: [&quot;Rare&quot;], &quot;count&quot;: 5 },
+{ &quot;type&quot;: &quot;randomCard&quot;, &quot;colors&quot;: [ &quot;Red&quot;], &quot;rarity&quot;: [&quot;Rare&quot;], &quot;count&quot;: 5 }              
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 9
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What's wrong, girl?&quot;,
+					&quot;text&quot;: &quot;'Name's Ruby. My brother got dragged off by the fae here and served as a feast! They all deserve to die for their gruesome crimes. I'm just not strong enough to kill them all on my own. If you can manage taking out all nine fiends that lurk here, I'll give you a stock of spells I found when I went on a wild goose chase looking for my brother before coming here.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;Don't trust you. You could be a fae in disguise.&quot;,
+					&quot;text&quot;: &quot;'I'm not, but that IS what a fae would say. Can't fault you for being cautious.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Ruby"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

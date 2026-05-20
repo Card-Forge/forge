@@ -14,11 +14,8 @@ import forge.assets.FSkinImageInterface;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.player.PlayerView;
-import forge.gamemodes.match.input.Input;
-import forge.gamemodes.match.input.InputPayMana;
+import forge.interfaces.IGameController;
 import forge.localinstance.skin.FSkinProp;
-import forge.player.GamePlayerUtil;
-import forge.player.PlayerControllerHuman;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
 
@@ -114,26 +111,28 @@ public class VManaPool extends VDisplayArea {
         }
 
         public void activate() {
-            if (!(MatchController.instance.getGameController() instanceof PlayerControllerHuman))
+            IGameController controller = MatchController.instance.getGameController(player);
+            // not a local human
+            if (controller == null) {
                 return;
-            PlayerControllerHuman controller = (PlayerControllerHuman) MatchController.instance.getGameController();
-            final Input ipm = controller.getInputQueue().getInput();
-            if (ipm instanceof InputPayMana && ipm.getOwner().equals(player))
-                controller.useMana(colorCode);
+            }
+            controller.useMana(colorCode);
         }
 
         @Override
         public boolean flick(float x, float y) {
-            if (player.isLobbyPlayer(GamePlayerUtil.getGuiPlayer())) {
-                //on two finger tap, keep using mana until it runs out or no longer can be put towards the cost
-                int oldMana, newMana = player.getMana(colorCode);
-                do {
-                    oldMana = newMana;
-                    MatchController.instance.getGameController().useMana(colorCode);
-                    newMana = player.getMana(colorCode);
-                }
-                while (oldMana != newMana);
+            IGameController controller = MatchController.instance.getGameController(player);
+            if (controller == null) {
+                return false;
             }
+            //on two finger tap, keep using mana until it runs out or no longer can be put towards the cost
+            int oldMana, newMana = player.getMana(colorCode);
+            do {
+                oldMana = newMana;
+                controller.useMana(colorCode);
+                newMana = player.getMana(colorCode);
+            }
+            while (oldMana != newMana);
             return true;
         }
 

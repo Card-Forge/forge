@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="83">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -12,55 +12,33 @@
  <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
+   eJztmM0KhDAMhD26N99gfeG9+ryLB6EubTeJ+YUR5qDY5JtpCuLxWpYDgiAIgqASWre7tGtasVpeFuwR/Jb7yuk9078a3vlz+Xu1rOan9WDJb8E9ksX8VOKPyl/CSRX4Y/k9fGTl/l0/quuRv8SrtEYWH9Ec4Ke9O3s+Okvtulk/bo7c7Dl9JWdLMgsaszPjt56bqvyaPbTmORu/h6ryW89/Ffao/LXziGYAf0xfzTOQ+VswG1fEdxJ0z/NJpjvhnc871sNO1Hm19xyPa2cdh5/iT/ofg1rn6R5osPf29JwfSQbS3lrc170Xv4bnnn8P/i/vjOFp
   </data>
  </layer>
  <layer id="6" name="Floor" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJztmEEOwjAMBPOD5AdVBR9tq/Ir4Gtw4YbAbtdxDjNSbpZ3VCWy1VIAAAAAAAAA4BtLLWUVnq329Z+att8s7vePj//+/m6Pdvzcaq7/2VxVn6xc/HNz8c/NVftb59JV7H9pmjnnnUsqf1XevfPc8c7Bp+iejXr/e+eO7L8Y3tzI/qqaCPC310SAv70mAvztNR68+9uvvUtVE7m/9Ua1v3l2vLP/KCL2NwtZb1MF/jZe3r59Qg==
+   eJztlkEOwjAMBH3k2BckOROeCgg+2iL6AegNIQp2u3GCuiP5ZnlHappYhBBCCCGEEEIIIZ/og8gArFvw9T9GkROwzpH+S/zvz++e0/IaQ13/KXfXzVc2zPEiA3Nr+CNz6V83F+2vfZeuYP9LxLxz1nsd5Y/K2yffe9v6jhzSurz33NbOv3duy/694p9r2X/qSd3vHvrbob9+Tgm24o/oKUGr/tb97dveheopub95F2p/09Scw5qZqP1Nw6vzP0J/HQ94HxS2
   </data>
  </layer>
  <layer id="2" name="Ground" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt2LEJgDAARNG4gY1gIWLh4K5g5XpyoNgb8Dz9D1LnVwdJKQAAAO+xtu4CAMgzHNs5sqEAgCBLd51E6f0yN+6CelvvLrhH3edJRH899/+H+37gr77wfp+C24V+L/p9tD/qZ398nujfAV7BEUs=
+   eJzt1LEJgDAQRuG4gKQRLEQbR3BNd3AFQXA9OUQsbMQTfw7fB1eluEcgSQkAAAAA/mUor3PnDAAAvGeqzokoer/pC3WB31qrC56x7mMiot9vzrrdZhHvHzvtfi/6tSL3N3nvb8Vv0CPy/Rv6tejX4f/R+6J/A0AdGgM=
   </data>
  </layer>
  <layer id="3" name="Foreground" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztmN0NwjAMhDMBVBUgBulo/I0FCIn1aB8iwslOHDdpQNjSvVAUf2p78aXDyrnBZDKZTCaTyfR32nXO3YTadu15UZuRSVq98RfXZe3cEXQadSB+P6/b86Komp5JzzyXVpw5Pr2Pun6Zp3Pe85xayhPGb/wxXz7AVw/wV21+3B+Qh/N6iqtfiF+yPvWstPzUfJJomm0l+S+ReRnOTFxf+95y61BzHGc5N7/9vNT03YFXwgq9xflI0pf7j19fMi/vTN+QBzMDXqP4JX39f9C/czzJ8T/3b0n4NT2X4J/qF/nDqs3PeT6155Xml+7F2vMD1bMk/5wMEe5/Odkh932Q8Pv9cCrMENw5IdZf0rMkv4TF+D+v4R7gvY6e5HJIa35uvZx+c/hj+S12z3Due6/5nHElrlE5JGSLfYuJ7Z2p/FYr+6fubYpNmt+oe1ayUr1r5LcWVTL/tCht/tGcD7Xnyxr5R5OVvvFbs/GX0wucCQDT
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="48" height="48">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmG8OwiAMxTmBWxZdPMiO5r9j6b54PUMcERtK3xgwzdrkfRppf2FAHww7YwaVSqVSqVSqgupbYx6gbKBjD20d/v3ElTs65d8E/60x5gzo0ry5TuD4a1N/LyP/qda8boUfPT/Hif+u56fyK39xfmlfuv1Vmh85H0J7XeLqKvEj+UP/KpUf7a9cf87Ff5tycjyuv9P8qeuWy8P5E5+N8xo2p8TD1e3J+vSDfkuZhxiby297ptQvR6auz9ORMfRbiB+p68bQ/btkT3L8z+NHCH9KzRr8Nv6R34/S/HPvJKX4S991QjVz8i/xEKG+bUPyDnPXA8Lfk/rIPSFWH6mZkx9hUf7vb/QM4N4fOB+yNj+Xb069Jfwx/xabM67vS/d36kN8ttB57thiZ6fk30p5f2luJTbUv4XmLGdItUv4tzUip/9ZI1L9T8r9MPV+ufZb76++fyp/Xr0AEEL8qA==
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="48" height="48">
-  <data encoding="base64" compression="zlib">
-   eJzt17EJACAQA8Bs8Buro+sC1o94B+lTBZIAAAD8bVQyT1Z1NwEAAABu/Hegi/3hBRuEwwT/
+   eJzt11EKgCAMgOHdwJeeu0B3rM4W1LnqsUCpiXMa/we+COpAp1MEAAAA+KfBO4APtkjfWD0KwN7hHQCAhxI5uRutEXsbLcaU1EPNAX+ck75N3gHAVa385Zzl0+7RWx3TIu96pxVzEFmutob8OXrcf+ho79PU34W8w12J+wewdgLo1Q2J
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="47" template="../../../obj/gold.tx" x="427.667" y="460">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;type&quot;: &quot;gold&quot;,
-    &quot;count&quot;: 180,
-    &quot;addMaxCount&quot;: 40
- }
-]</property>
-   </properties>
-  </object>
-  <object id="49" template="../../../obj/gold.tx" x="308.667" y="463.667">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;type&quot;: &quot;gold&quot;,
-    &quot;count&quot;: 180,
-    &quot;addMaxCount&quot;: 40
- }
-]</property>
-   </properties>
-  </object>
   <object id="54" template="../../../obj/enemy.tx" x="172.506" y="501.224">
    <properties>
     <property name="enemy" value="Master Green Wizard"/>
@@ -101,7 +79,7 @@
 				},
 				{
                 	&quot;name&quot;: &quot;Ghalta, I've done as you asked! It's time to end this!&quot;,
-                	&quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 } ],
+                	&quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 },{ &quot;deleteMapObject&quot;: 72 } ],
                 	&quot;condition&quot;: [
                 		{
                 			&quot;getMapFlag&quot;: {
@@ -145,6 +123,7 @@
   </object>
   <object id="66" template="../../../obj/enemy.tx" x="79.3333" y="603">
    <properties>
+    <property name="deckOverride" value="decks/standard/greensquirrel.dck"/>
     <property name="defeatDialog">[
    {
    &quot;action&quot;: [
@@ -153,12 +132,44 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Toski, Bearer of Secrets &quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Squirrel"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Concordant Boots&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Crown of Growth&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;BLB&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;FDN&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="67" template="../../../obj/enemy.tx" x="658.333" y="600">
    <properties>
+    <property name="deckOverride" value="decks/standard/greenape.dck"/>
     <property name="defeatDialog">[
    {
    &quot;action&quot;: [
@@ -167,7 +178,38 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Hidden Gibbons&quot;, &quot;Gorilla Warrior&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Gorilla"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Concordant Boots&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Crown of Growth&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;BLB&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;FDN&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -181,11 +223,42 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Wolfcaller's Howl&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Wolf"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Concordant Boots&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Crown of Growth&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;BLB&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;FDN&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="69" template="../../../obj/enemy.tx" x="363.833" y="223.874">
+  <object id="69" template="../../../obj/enemy.tx" x="381.309" y="250.411">
    <properties>
     <property name="defeatDialog">[
    {
@@ -195,7 +268,38 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Forest&quot;, &quot;Quest for the Gemblades&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Forest Giant"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Concordant Boots&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Crown of Growth&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;BLB&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;FDN&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -209,7 +313,38 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Elephant"/>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Lumberknot&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
+    <property name="enemy" value="Treefolk Elite"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Concordant Boots&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Crown of Growth&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;FDN&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;BLB&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -223,27 +358,68 @@
   <object id="72" template="../../../obj/enemy.tx" x="398.667" y="648.667">
    <properties>
     <property name="dialog">[
-  {
-    &quot;text&quot;: &quot;Welcome, {var=player_name}. Queen Ghalta has been waiting eagerly for this moment.&quot;,
-    &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Is that so? I guess you wouldn't mind opening that gate in front of me?&quot;,
-        &quot;text&quot;: &quot;I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Ghalta, queen of Dinosaurs.&quot;,
-        &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;What do I need to do to get passed though this gate?&quot;,
-            &quot;text&quot;: &quot;You must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master, who holds dominion over this realm of dinosaurs.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.&quot;,
-            &quot;options&quot;: [
-              {
-                &quot;name&quot;: &quot;I'll show my worth, just make sure to open the gate when I do defeat your challengers.&quot;,
-                &quot;text&quot;: &quot;Leave&quot;
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+	{
+		&quot;text&quot;: &quot;Welcome, {var=player_name}. Queen Ghalta has been waiting eagerly for this moment.&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;Is that so? I guess you wouldn't mind opening that gate in front of me?&quot;,
+				&quot;text&quot;: &quot;I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Ghalta, queen of Dinosaurs.&quot;,
+				&quot;options&quot;: [
+					{
+						&quot;name&quot;: &quot;What do I need to do to get passed though this gate?&quot;,
+						&quot;text&quot;: &quot;You must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master, who holds dominion over this realm of dinosaurs.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.&quot;,
+						&quot;options&quot;: [
+							{
+								&quot;name&quot;: &quot;I'll show my worth, just make sure to open the gate when I do defeat your challengers.&quot;,
+								&quot;text&quot;: &quot;Leave&quot;,
+								&quot;action&quot;: [
+									{
+										&quot;setMapFlag&quot;: {
+											&quot;key&quot;: &quot;TalkToDoorGreeter&quot;,
+											&quot;val&quot;: 1
+										}
+									}
+
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	{
+		&quot;text&quot;: &quot;The challengers are still alive, you shall not pass beyond this gate.&quot;,
+		&quot;condition&quot;: [
+			{ &quot;checkMapFlag&quot;: &quot;TalkToDoorGreeter&quot; }
+				],
+			&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot;
+				}
+		]
+
+	},
+	{
+		&quot;text&quot;: &quot;I am impressed, you are welcome to meet my master upstairs, though I can't guarantee you will be able to survive that encounter. Goodbye Adventurer&quot;,
+		&quot;condition&quot;: [
+			{
+				&quot;getMapFlag&quot;: {
+					&quot;key&quot;: &quot;enemiesDefeated&quot;,
+					&quot;op&quot;: &quot;&gt;=&quot;,
+					&quot;val&quot;: 4
+				}
+			}
+		],
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot;,
+				&quot;action&quot;: [
+					{ &quot;deleteMapObject&quot;: -1 }
+				]
+			}
+		]
+	}
 ]</property>
     <property name="enemy" value="Dinosaur"/>
    </properties>
@@ -258,5 +434,99 @@
   <object id="80" template="../../../obj/waypoint.tx" x="50" y="710"/>
   <object id="81" template="../../../obj/waypoint.tx" x="223.333" y="499.333"/>
   <object id="82" template="../../../obj/waypoint.tx" x="508.667" y="500.667"/>
+  <object id="83" template="../../../obj/treasure.tx" x="425" y="459.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;shards&quot;,
+    &quot;count&quot;: 10,
+    &quot;addMaxCount&quot;: 20
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 6,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;green&quot; ]
+},
+{
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Concordant Boots&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Crown of Growth&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;FDN&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;BLB&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 200,
+    &quot;addMaxCount&quot;: 100
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="84" template="../../../obj/treasure.tx" x="310.5" y="462.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;shards&quot;,
+    &quot;count&quot;: 10,
+    &quot;addMaxCount&quot;: 20
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 6,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;green&quot; ]
+},
+{
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Concordant Boots&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Crown of Growth&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;FDN&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;BLB&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 200,
+    &quot;addMaxCount&quot;: 100
+ }
+]</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

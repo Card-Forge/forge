@@ -1,0 +1,8 @@
+Name:Mouser Mark III
+ManaCost:1 UR
+Types:Artifact Creature Robot
+PT:2/3
+S:Mode$ CantAttack | ValidCard$ Card.Self | IsPresent$ Artifact.YouCtrl+Other | PresentCompare$ EQ0 | Description$ This creature can't attack unless you control another artifact.
+SVar:BuffedBy:Artifact
+DeckHints:Type$Artifact
+Oracle:This creature can't attack unless you control another artifact.

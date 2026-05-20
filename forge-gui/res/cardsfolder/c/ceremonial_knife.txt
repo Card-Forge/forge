@@ -2,7 +2,7 @@ Name:Ceremonial Knife
 ManaCost:1
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddTrigger$ TrigDamageDone | Description$ Equipped creature gets +1/+0 and has "Whenever this creature deals combat damage, create a Blood token." (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
-SVar:TrigDamageDone:Mode$ DamageDone | CombatDamage$ True | ValidSource$ Card.Self | Execute$ TrigBlood | TriggerDescription$ Whenever this creature deals combat damage, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+SVar:TrigDamageDone:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Card.Self | Execute$ TrigBlood | TriggerDescription$ Whenever this creature deals combat damage, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
 SVar:TrigBlood:DB$ Token | TokenScript$ c_a_blood_draw | TokenOwner$ You
 K:Equip:2
 DeckHas:Ability$Token|Sacrifice & Type$Blood

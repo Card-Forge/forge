@@ -116,7 +116,7 @@ public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Pla
     public boolean addsKeywordsType() {
         return this.manaAbility != null && manaAbility.getAddsKeywordsType() != null;
     }
-    
+
     public boolean addsKeywordsUntil() {
         return this.manaAbility != null && manaAbility.getAddsKeywordsUntil() != null;
     }
@@ -141,7 +141,7 @@ public record Mana(byte color, Card sourceCard, AbilityManaPart manaAbility, Pla
         return this.manaAbility;
     }
 
-    public final Player getPlayer() {
+    public Player getPlayer() {
         return this.player;
     }
 

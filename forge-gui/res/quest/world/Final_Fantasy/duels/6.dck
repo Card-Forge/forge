@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Radiant
+Title=Radiant
+Icon=Radiant.jpg
+Difficulty=Medium
+Description=./Standard/Final_Fantasy/Chihiro_Houjo_-_Naya_(Standard,_#2534686).dck
+Deck Type=constructed
+
+[Main]
+4 Overlord of the Boilerbilges
+4 Overlord of the Hauntwoods
+4 Yuna, Hope of Spira
+2 Joshua, Phoenix's Dominant
+2 Summon: Knights of Round
+1 Summon: Bahamut
+4 Lightning Helix
+3 Get Lost
+3 Authority of the Consuls
+3 Temporary Lockdown
+3 Up the Beanstalk
+2 Leyline Binding
+4 Commercial District
+4 Hushwood Verge
+4 Lush Portico
+4 Sunbillow Verge
+3 Plains
+2 Cavern of Souls
+2 Forest
+1 Fountainport
+1 Mountain
+[Sideboard]
+3 High Noon
+3 Overlord of the Mistmoors
+3 Urabrask's Forge
+2 Ghost Vacuum
+2 The Stone Brain
+1 Sunfall
+1 Ultima

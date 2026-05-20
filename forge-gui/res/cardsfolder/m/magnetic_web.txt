@@ -1,7 +1,7 @@
 Name:Magnetic Web
 ManaCost:2
 Types:Artifact
-K:If a creature with a magnet counter on it attacks, all creatures with magnet counters on them attack if able.
+S:Mode$ AttackRequirement | ValidCard$ Card.counters_GE1_MAGNET | ValidAttacker$ Card.counters_GE1_MAGNET | Description$ If a creature with a magnet counter on it attacks, all creatures with magnet counters on them attack if able.
 T:Mode$ Attacks | ValidCard$ Creature.counters_GE1_MAGNET | TriggerZones$ Battlefield | Execute$ TrigLure | TriggerDescription$ Whenever a creature with a magnet counter on it attacks, all creatures with magnet counters on them block that creature if able.
 SVar:TrigLure:DB$ MustBlock | Defined$ Valid Creature.counters_GE1_MAGNET | DefinedAttacker$ TriggeredAttackerLKICopy
 A:AB$ PutCounter | Cost$ 1 T | ValidTgts$ Creature | CounterType$ MAGNET | CounterNum$ 1 | SpellDescription$ Put a magnet counter on target creature.

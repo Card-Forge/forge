@@ -1,5 +1,7 @@
 package forge.card;
 
+import java.util.Locale;
+
 import com.google.common.collect.ImmutableList;
 
 import forge.util.ITranslatable;
@@ -178,13 +180,17 @@ public final class MagicColor {
             };
         }
         public static Color fromName(final String color) {
-            return switch (color) {
+            if (color == null) {
+                return null;
+            }
+            return switch (color.toLowerCase(Locale.ROOT)) {
                 case MagicColor.Constant.WHITE -> WHITE;
                 case MagicColor.Constant.BLUE -> BLUE;
                 case MagicColor.Constant.BLACK -> BLACK;
                 case MagicColor.Constant.RED -> RED;
                 case MagicColor.Constant.GREEN -> GREEN;
-                default -> COLORLESS;
+                case MagicColor.Constant.COLORLESS -> COLORLESS;
+                default -> null;
             };
         }
 

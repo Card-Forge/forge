@@ -1578,14 +1578,6 @@
 		]
 	},
 	{
-		"name": "DEBUGZONE",
-		"type": "dungeon",
-		"spriteAtlas": "sprites/buildings.atlas",
-		"sprite": "WurmPond",
-		"map": "../Shandalar Old Border/maps/map/debug_map.tmx",
-		"radiusFactor": 5
-	},
-	{
 		"name": "DjinnPalace",
 		"displayName": "Djinn's Palace",
 		"type": "dungeon",
@@ -1910,16 +1902,6 @@
 			"Sidequest",
 			"QuestSource"
 		]
-	},
-	{
-		"name": "Fort",
-		"displayName": "The Frozen Ruins",
-		"type": "dungeon",
-		"count": 1,
-		"spriteAtlas": "sprites/buildings.atlas",
-		"sprite": "Fort",
-		"map": "../Shandalar Old Border/maps/map/fort/fort_colorless_1_snow.tmx",
-		"radiusFactor": 0.8
 	},
 	{
 		"name": "Fort1",
@@ -2722,11 +2704,11 @@
 		"map": "../Shandalar Old Border/maps/map/magetower/magetower_6_infernalgenesis.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
+			"BiomeColorless",
 			"MageTower",
 			"Dungeon",
 			"Hostile",
-			null,
-			null
+			"Sidequest"
 		]
 	},
 	{
@@ -2739,11 +2721,11 @@
 		"map": "../Shandalar Old Border/maps/map/magetower/magetower_7_church.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
+			"BiomeColorless",
 			"MageTower",
 			"Dungeon",
 			"Hostile",
-			null,
-			null
+			"Sidequest"
 		]
 	},
 	{
@@ -2894,8 +2876,8 @@
 			"MageTower",
 			"Hostile",
 			"Dungeon",
-			null,
-			null
+			"BiomeBlue",
+			"Sidequest"
 		]
 	},
 	{
@@ -3920,14 +3902,6 @@
 		]
 	},
 	{
-		"name": "Test",
-		"count": 100,
-		"spriteAtlas": "sprites/buildings.atlas",
-		"sprite": "Test",
-		"map": "../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_4.tmx",
-		"radiusFactor": 0.8
-	},
-	{
 		"name": "Tibalts Fortress",
 		"displayName": "Specter's Fortress",
 		"type": "dungeon",
@@ -4215,19 +4189,6 @@
 			"OccupiedTown",
 			"BiomeBlack",
 			"Sidequest"
-		]
-	},
-	{
-		"name": "Debug Map",
-		"displayName": "Boss Testing Arena",
-		"type": "town",
-		"count": 1,
-		"spriteAtlas": "sprites/buildings.atlas",
-		"sprite": "Spawn",
-		"map": "../Shandalar Old Border/maps/map/debug_map.tmx",
-		"questTags": [
-			"Debug",
-			"Testing"
 		]
 	},
 	{

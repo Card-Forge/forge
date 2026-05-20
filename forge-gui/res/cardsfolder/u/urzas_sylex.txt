@@ -1,7 +1,7 @@
 Name:Urza's Sylex
 ManaCost:3
 Types:Legendary Artifact
-A:AB$ ChooseCard | Cost$ 2 W W T Exile<1/CARDNAME> | DefinedPlayer$ Player | Choices$ Land | ControlledByPlayer$ Chooser | ChoiceTitle$ Choose six lands you control | Amount$ 6 | Mandatory$ True | SorcerySpeed$ True | SubAbility$ DestroyAll | SpellDescription$ Each player chooses six lands they control.
+A:AB$ ChooseCard | Cost$ 2 W W T Exile<1/CARDNAME> | Defined$ Player | Choices$ Land | ControlledByPlayer$ Chooser | ChoiceTitle$ Choose six lands you control | Amount$ 6 | Mandatory$ True | SorcerySpeed$ True | SubAbility$ DestroyAll | SpellDescription$ Each player chooses six lands they control.
 SVar:DestroyAll:DB$ DestroyAll | ValidCards$ Permanent.!ChosenCard | SubAbility$ DBCleanup | SpellDescription$ Destroy all other permanents.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | SpellDescription$ Activate only as a sorcery.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Exile | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSearch | TriggerDescription$ When CARDNAME is put into exile from the battlefield, you may pay {2}. If you do, search your library for a planeswalker card, reveal it, put it into your hand, then shuffle.

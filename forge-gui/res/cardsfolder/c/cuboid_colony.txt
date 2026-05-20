@@ -1,0 +1,9 @@
+Name:Cuboid Colony
+ManaCost:G U
+Types:Creature Insect
+PT:1/1
+K:Flash
+K:Flying
+K:Trample
+K:Increment
+Oracle:Flash\nFlying, trample\nIncrement (Whenever you cast a spell, if the amount of mana you spent is greater than this creature's power or toughness, put a +1/+1 counter on this creature.)

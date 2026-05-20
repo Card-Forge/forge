@@ -26,4 +26,11 @@ public class LangJapanese extends Lang {
         return name;
     }
 
+    @Override
+    public String getFontFile() {
+        return "SourceHanSansJP";
+    }
+    public char canDisplayCheck() {
+        return '鍮';
+    }
 }

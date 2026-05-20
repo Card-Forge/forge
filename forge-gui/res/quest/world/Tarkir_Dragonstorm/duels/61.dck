@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Dream
+Title=Dream
+Icon=Dream.jpg
+Difficulty=Very Hard
+Description=./Modern/Tarkir_Dragonstorm/Tanaka_akira_-_Green_Tron_(Modern,_#2449751).dck
+Deck Type=constructed
+
+[Main]
+2 Ulamog, the Ceaseless Hunger
+3 Thought-Knot Seer
+4 Devourer of Destiny
+4 Sowing Mycospawn
+1 Sire of Seven Deaths
+3 Expedition Map
+2 Chalice of the Void
+4 Talisman of Impulse
+2 Dismember
+4 Kozilek's Command
+3 All Is Dust
+4 Karn, the Great Creator
+2 Ugin, Eye of the Storms
+1 Forest
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+4 Eldrazi Temple
+1 Boseiju, Who Endures
+4 Ugin's Labyrinth
+[Sideboard]
+1 Walking Ballista
+1 Tormod's Crypt
+1 Sundering Titan
+1 Trinisphere
+1 Ensnaring Bridge
+1 Pithing Needle
+1 Torpor Orb
+1 Kozilek, Butcher of Truth
+1 Liquimetal Coating
+1 Haywire Mite
+1 Cityscape Leveler
+2 The Stone Brain
+1 Soulless Jailer
+1 Disruptor Flute

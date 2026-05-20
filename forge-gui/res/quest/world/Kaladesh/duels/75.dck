@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Tom Bombadil
+Title=Tom Bombadil
+Icon=Tom Bombadil.jpg
+Difficulty=Very Hard
+Description=../Modern/Kaladesh/Competitive_Modern_Constructed_League/hitum_-_Faeries_(Modern,_#643511).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Mistbind Clique
+4 Spellstutter Sprite
+3 Vendilion Clique
+4 Smuggler's Copter
+2 Cryptic Command
+2 Dismember
+1 Murderous Cut
+2 Smother
+3 Spell Snare
+3 Collective Brutality
+3 Inquisition of Kozilek
+2 Thoughtseize
+4 Bitterblossom
+3 Creeping Tar Pit
+3 Darkslick Shores
+4 Island
+4 Mutavault
+4 Polluted Delta
+4 Secluded Glen
+1 Swamp
+1 Watery Grave
+[Sideboard]
+1 Collective Brutality
+3 Countersquall
+2 Damnation
+3 Disfigure
+2 Kalitas, Traitor of Ghet
+4 Leyline of the Void

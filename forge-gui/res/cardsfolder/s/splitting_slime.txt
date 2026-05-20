@@ -2,7 +2,7 @@ Name:Splitting Slime
 ManaCost:3 G G
 Types:Creature Ooze
 PT:3/3
-K:Monstrosity:3:4 G G
+A:AB$ PutCounter | Cost$ 4 G G | Monstrosity$ 3
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ When CARDNAME becomes monstrous, create a token that's a copy of CARDNAME. (The token has no counters and isn't monstrous.)
 SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self
 DeckHas:Ability$Counters|Token

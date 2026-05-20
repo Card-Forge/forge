@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=StAnastacia
+Title=StAnastacia
+Icon=StAnastacia.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Hirose_Yoshiyuki_-_Wrenn_and_Omnath_(Modern,_#1656417).dck
+Deck Type=constructed
+
+[Main]
+3 Ice-Fang Coatl
+4 Omnath, Locus of Creation
+4 Solitude
+2 Fury
+2 Elesh Norn, Mother of Machines
+2 Nissa, Resurgent Animist
+3 Ephemerate
+4 Expressive Iteration
+2 Prismatic Ending
+4 Leyline Binding
+3 Teferi, Time Raveler
+4 Wrenn and Six
+1 Snow-Covered Plains
+1 Snow-Covered Island
+1 Snow-Covered Forest
+1 Breeding Pool
+1 Hallowed Fountain
+1 Sacred Foundry
+1 Stomping Ground
+1 Steam Vents
+4 Flooded Strand
+4 Windswept Heath
+3 Misty Rainforest
+1 Temple Garden
+1 Raugrin Triome
+1 Zagoth Triome
+1 Boseiju, Who Endures
+[Sideboard]
+2 Chalice of the Void
+1 Alpine Moon
+1 Knight of Autumn
+3 Force of Negation
+2 Force of Vigor
+2 Veil of Summer
+2 Endurance
+2 Boseiju, Who Endures

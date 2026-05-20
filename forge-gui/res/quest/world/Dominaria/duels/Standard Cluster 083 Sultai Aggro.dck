@@ -1,0 +1,38 @@
+[metadata]
+Name=Sultai Aggro
+Deck Type=constructed
+Title=Sultai Aggro
+Description=Sultai Aggro
+Difficulty=Hard
+Icon=Ikenga
+[Main]
+4 Aether Hub
+2 Aethersphere Harvester
+4 Blooming Marsh
+4 Botanical Sanctum
+3 Bristling Hydra
+1 Drowned Catacomb
+4 Fatal Push
+4 Fetid Pools
+1 Forest
+2 Forest
+1 Forest
+1 Forest
+4 Glint-Sleeve Siphoner
+4 Jadelight Ranger
+4 Merfolk Branchwalker
+2 Nissa, Steward of Elements
+2 Ravenous Chupacabra
+4 Servant of the Conduit
+1 Swamp
+1 Swamp
+4 The Scarab God
+3 Vraska's Contempt
+[Sideboard]
+3 Deathgorge Scavenger
+3 Duress
+1 Essence Scatter
+2 Lifecrafter's Bestiary
+2 Moment of Craving
+3 Negate
+1 Vraska, Relic Seeker

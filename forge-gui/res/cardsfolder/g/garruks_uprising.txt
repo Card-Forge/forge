@@ -2,7 +2,7 @@ Name:Garruk's Uprising
 ManaCost:2 G
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Creature.YouCtrl+powerGE4 | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, if you control a creature with power 4 or greater, draw a card.
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Trample | Description$ creatures you control have trample.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Trample | Description$ Creatures you control have trample.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerGE4+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control with power 4 or greater enters, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You
 Oracle:When Garruk's Uprising enters, if you control a creature with power 4 or greater, draw a card.\nCreatures you control have trample. (They can deal excess combat damage to the player or planeswalker they're attacking.)\nWhenever a creature you control with power 4 or greater enters, draw a card.

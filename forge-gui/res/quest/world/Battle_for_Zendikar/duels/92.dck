@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Mystique
+Title=Mystique
+Icon=Mystique.jpg
+Difficulty=Hard
+Description=../Modern/Battle_for_Zendikar/SCG_Invitational_Qualifier_Minneapolis/Daniel_Schaefer_-_UW_Control_(Modern,_#602822).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Kitchen Finks
+4 Restoration Angel
+1 Vendilion Clique
+4 Wall of Omens
+3 Cryptic Command
+4 Path to Exile
+2 Remand
+3 Spell Snare
+3 Supreme Verdict
+2 Detention Sphere
+4 Spreading Seas
+4 Celestial Colonnade
+4 Flooded Strand
+4 Ghost Quarter
+1 Glacial Fortress
+2 Hallowed Fountain
+3 Island
+3 Plains
+2 Polluted Delta
+1 Prairie Stream
+2 Seachrome Coast
+[Sideboard]
+2 Aven Mindcensor
+1 Crucible of Worlds
+2 Dispel
+1 Glen Elendra Archmage
+2 Relic of Progenitus
+1 Rule of Law
+1 Spellskite
+3 Stony Silence
+1 Teferi, Mage of Zhalfir
+1 Wrath of God

@@ -1,6 +1,6 @@
 Name:The Book of Vile Darkness
 ManaCost:B B B
-Types:Legendary Artifact
+Types:Legendary Artifact Book
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | CheckSVar$ X | SVarCompare$ GE2 | TriggerDescription$ At the beginning of your end step, if you lost 2 or more life this turn, create a 2/2 black Zombie creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie
 SVar:X:PlayerCountPropertyYou$LifeLostThisTurn

@@ -29,7 +29,6 @@ import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventCombatUpdate;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
-import forge.game.player.PlayerView;
 import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.zone.ZoneType;
 import forge.gui.events.UiEventAttackerDeclared;
@@ -194,23 +193,21 @@ public class InputAttack extends InputSyncronizedBase {
                 else if (activeBand.getAttackers().contains(card)) {
                     activateBand(null);
                 }
-                else { // Join a band by selecting a non-active band member after activating a band
-                    if (activeBand.canJoinBand(card)) {
-                        declareAttacker(card);
-                        if (otherCardsToSelect != null) {
-                            for (Card c : otherCardsToSelect) {
-                                if (activeBand.canJoinBand(c)) {
-                                    declareAttacker(c);
-                                }
+                else if (activeBand.canJoinBand(card)) {
+                    // Join a band by selecting a non-active band member after activating a band
+                    declareAttacker(card);
+                    if (otherCardsToSelect != null) {
+                        for (Card c : otherCardsToSelect) {
+                            if (activeBand.canJoinBand(c)) {
+                                declareAttacker(c);
                             }
                         }
                     }
-                    else {
-                        validAction = false;
-                    }
                 }
-            }
-            else {
+                else {
+                    validAction = false;
+                }
+            } else {
                 //if banding not possible, just undeclare attacker
                 undeclareAttacker(card);
                 if (otherCardsToSelect != null) {
@@ -281,32 +278,29 @@ public class InputAttack extends InputSyncronizedBase {
         combat.addAttacker(card, currentDefender, activeBand);
         activateBand(activeBand);
 
-        card.getGame().getMatch().fireEvent(new UiEventAttackerDeclared(
-                CardView.get(card),
-                GameEntityView.get(currentDefender)));
+        card.getGame().getMatch().fireEvent(new UiEventAttackerDeclared(CardView.get(card), GameEntityView.get(currentDefender)));
     }
 
     private boolean undeclareAttacker(final Card card) {
         combat.removeFromCombat(card);
-        getController().getGui().setUsedToPay(CardView.get(card), false);
+        getController().getGui().setHighlighted(List.of(CardView.get(card)), false);
         // When removing an attacker clear the attacking band
         activateBand(null);
 
-        card.getGame().getMatch().fireEvent(new UiEventAttackerDeclared(
-                CardView.get(card), null));
+        card.getGame().getMatch().fireEvent(new UiEventAttackerDeclared(CardView.get(card), null));
         return true;
     }
 
     private void setCurrentDefender(final GameEntity def) {
         currentDefender = def;
+        // Partition into off/on and emit false-batch first so the to-be-highlighted defender isn't briefly cleared.
+        final List<GameEntityView> off = new ArrayList<>(defenders.size());
+        final List<GameEntityView> on  = new ArrayList<>(1);
         for (final GameEntity ge : defenders) {
-            if (ge instanceof Card) {
-                getController().getGui().setUsedToPay(CardView.get((Card) ge), ge == def);
-            }
-            else if (ge instanceof Player) {
-                getController().getGui().setHighlighted(PlayerView.get((Player) ge), ge == def);
-            }
+            (ge == def ? on : off).add(GameEntityView.get(ge));
         }
+        getController().getGui().setHighlighted(off, false);
+        getController().getGui().setHighlighted(on,  true);
         if (def != null) {
             potentialBanding = isBandingPossible();
         }
@@ -316,16 +310,16 @@ public class InputAttack extends InputSyncronizedBase {
 
     private void activateBand(final AttackingBand band) {
         if (activeBand != null) {
-            for (final Card card : activeBand.getAttackers()) {
-                getController().getGui().setUsedToPay(CardView.get(card), false);
-            }
+            final List<GameEntityView> cards = new ArrayList<>();
+            for (final Card card : activeBand.getAttackers()) cards.add(CardView.get(card));
+            getController().getGui().setHighlighted(cards, false);
         }
         activeBand = band;
 
         if (activeBand != null) {
-            for (final Card card : activeBand.getAttackers()) {
-                getController().getGui().setUsedToPay(CardView.get(card), true);
-            }
+            final List<GameEntityView> cards = new ArrayList<>();
+            for (final Card card : activeBand.getAttackers()) cards.add(CardView.get(card));
+            getController().getGui().setHighlighted(cards, true);
         }
     }
 
@@ -352,7 +346,7 @@ public class InputAttack extends InputSyncronizedBase {
         updatePrompt();
 
         if (combat != null)
-            getController().getGame().fireEvent(new GameEventCombatUpdate(combat.getAttackers(), combat.getAllBlockers()));
+            getController().getGame().fireEvent(GameEventCombatUpdate.fromCards(combat.getAttackers(), combat.getAllBlockers()));
 
         getController().getGui().showCombat(); // redraw sword icons
     }

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Ododua
+Title=Ododua
+Icon=Ododua.jpg
+Difficulty=Hard
+Description=../Modern/Aether_Revolt/Lord_Cuddles_-_Deck_(Modern,_#662731).dck
+Deck Type=constructed
+
+[Main]
+3 Mistbind Clique
+4 Spellstutter Sprite
+3 Vendilion Clique
+1 Batterskull
+2 Cryptic Command
+4 Fatal Push
+2 Mana Leak
+1 Murderous Cut
+2 Spell Snare
+3 Ancestral Vision
+4 Inquisition of Kozilek
+2 Thoughtseize
+4 Bitterblossom
+3 Creeping Tar Pit
+4 Darkslick Shores
+3 Island
+4 Mutavault
+4 Polluted Delta
+1 River of Tears
+4 Secluded Glen
+1 Swamp
+1 Watery Grave
+[Sideboard]
+1 Damnation
+1 Engineered Explosives
+2 Flashfreeze
+2 Kalitas, Traitor of Ghet
+3 Leyline of the Void
+2 Negate
+1 Slaughter Pact
+1 Sword of Feast and Famine
+1 Sword of War and Peace
+1 Thoughtseize

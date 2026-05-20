@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Frodo
+Title=Frodo
+Icon=Frodo.jpg
+Difficulty=Very Hard
+Description=./Modern/Avatar_The_Last_Airbender/Devon_Moan_-_Golgari_Broodscale_(Modern,_#2713629).dck
+Deck Type=constructed
+
+[Main]
+4 Basking Broodscale
+4 Delighted Halfling
+4 Walking Ballista
+2 Long Feng, Grand Secretariat
+2 Young Wolf
+1 Badgermole Cub
+1 Haywire Mite
+1 Yawgmoth, Thran Physician
+4 Agatha's Soul Cauldron
+3 Blade of the Bloodchief
+1 Vexing Bauble
+4 Malevolent Rumble
+4 Urza's Saga
+3 Dredger's Insight
+4 Grist, the Hunger Tide
+4 Verdant Catacombs
+3 Overgrown Tomb
+2 Boseiju, Who Endures
+2 Forest
+2 Spymaster's Vault
+1 Shifting Woodland
+1 Swamp
+1 Underground Mortuary
+1 Windswept Heath
+1 Wooded Foothills
+[Sideboard]
+3 Fatal Push
+3 Fulminator Mage
+3 Thoughtseize
+2 Pick Your Poison
+1 Ashiok, Dream Render
+1 Disruptive Stormbrood
+1 Pithing Needle
+1 Soul-Guide Lantern

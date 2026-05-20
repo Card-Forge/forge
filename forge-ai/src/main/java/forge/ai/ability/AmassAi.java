@@ -30,10 +30,9 @@ public class AmassAi extends SpellAbilityAi {
             if (aiArmies.anyMatch(CardPredicates.canReceiveCounters(CounterEnumType.P1P1))) {
                 // If AI has an Army that can receive counters, play the ability
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                // AI has Armies but none can receive counters, so don't play
-                return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactGame);
             }
+            // AI has Armies but none can receive counters, so don't play
+            return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactGame);
         }
         final String type = sa.getParam("Type");
         final String tokenScript = "b_0_0_" + sa.getOriginalParam("Type").toLowerCase() + "_army";
@@ -71,9 +70,8 @@ public class AmassAi extends SpellAbilityAi {
 
         if (result) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override

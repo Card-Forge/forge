@@ -6,4 +6,5 @@ Type=Funny
 ScryfallCode=PH23
 
 [cards]
+1 M Mr. Monopoly, On the Go @Kevin Sidharta
 2 M Ormacar, Relic Wraith @Anna Podedworna

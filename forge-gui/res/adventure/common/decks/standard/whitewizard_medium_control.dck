@@ -1,6 +1,6 @@
 [metadata]
 Name=Colossus 2
-[main]
+[Main]
 21 Plains|ISD
 1 Kjeldoran Outpost
 1 Flagstones of Trokair
@@ -32,4 +32,4 @@ Name=Colossus 2
 1 Windborn Muse
 1 Oversoul of Dusk
 1 Serra Angel
-[sideboard]
+[Sideboard]

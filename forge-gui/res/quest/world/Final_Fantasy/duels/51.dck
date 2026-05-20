@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Dr Watson
+Title=Dr Watson
+Icon=Dr Watson.jpg
+Difficulty=Hard
+Description=./Modern/Final_Fantasy/Gods_Shadow_-_Grixis_Control_(Modern,_#2528011).dck
+Deck Type=constructed
+
+[Main]
+2 Tishana's Tidebinder
+2 Tamiyo, Inquisitive Student
+2 Boggart Trawler
+4 Thundertrap Trainer
+2 Emet-Selch, Unsundered
+4 Snapcaster Mage
+3 Flame of Anor
+2 Flare of Denial
+4 Lightning Bolt
+2 Spell Snare
+3 Kolaghan's Command
+4 Fatal Push
+4 Counterspell
+2 Force of Negation
+1 Thundering Falls
+1 Undercity Sewers
+1 Creeping Tar Pit
+2 Watery Grave
+4 Polluted Delta
+4 Scalding Tarn
+2 Steam Vents
+1 Blood Crypt
+1 Snow-Covered Island
+1 Snow-Covered Swamp
+1 Snow-Covered Mountain
+1 Riptide Laboratory
+[Sideboard]
+2 Consign to Memory
+2 Nihil Spellbomb
+1 Surgical Extraction
+2 Thoughtseize
+1 Flusterstorm
+4 Cleansing Wildfire
+3 Hidetsugu Consumes All

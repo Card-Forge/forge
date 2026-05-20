@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Sakpata
+Title=Sakpata
+Icon=Sakpata.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/Moriya_Chihiro_-_WBG_Midrange_(Standard,_#2445575).dck
+Deck Type=constructed
+
+[Main]
+2 Mosswood Dreadknight
+4 Preacher of the Schism
+4 Nurturing Pixie
+4 Sunpearl Kirin
+4 Skirmish Rhino
+2 Yathan Roadwatcher
+2 Debris Beetle
+2 Go for the Throat
+1 Gix's Command
+4 Hopeless Nightmare
+4 Nowhere to Run
+2 Momentum Breaker
+1 Plains
+1 Swamp
+4 Blooming Marsh
+4 Concealed Courtyard
+4 Caves of Koilos
+3 Llanowar Wastes
+3 Brushland
+3 Razorverge Thicket
+1 Soulstone Sanctuary
+1 Wastewood Verge
+[Sideboard]
+4 Duress
+2 Cut Down
+2 Loran of the Third Path
+2 Malicious Eclipse
+3 Unholy Annex // Ritual Chamber
+2 Ghost Vacuum

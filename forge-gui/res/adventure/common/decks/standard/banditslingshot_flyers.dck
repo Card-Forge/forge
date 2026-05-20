@@ -1,6 +1,6 @@
 [metadata]
 Name=Abraham Lincoln 2
-[main]
+[Main]
 1 Plateau
 1 Flooded Strand
 2 Arid Mesa
@@ -44,4 +44,4 @@ Name=Abraham Lincoln 2
 1 Gravitational Shift
 1 Thunder Dragon
 1 Volcanic Spray
-[sideboard]
+[Sideboard]

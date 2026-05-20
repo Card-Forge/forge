@@ -6,7 +6,7 @@ SVar:DBLoot:DB$ Discard | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescriptio
 SVar:DBDraw:DB$ Draw
 SVar:DBReveal:DB$ Reveal | NumCards$ 5 | Optional$ True | RevealValid$ Card.nonLand+YouOwn | RememberRevealed$ True | SubAbility$ DBRepeat | SpellDescription$ Reveal up to five nonland cards from your hand. For each of those cards that has the same mana value as another card revealed this way, create a Treasure token.
 SVar:DBRepeat:DB$ RepeatEach | Zone$ Hand | UseImprinted$ True | RepeatCards$ Card.IsRemembered | RepeatSubAbility$ DBTally | SubAbility$ DBTreasure
-SVar:DBTally:DB$ StoreSVar | ConditionDefined$ Remembered | ConditionPresent$ Card.IsNotImprinted+SharesCMCWith Imprinted | ConditionZone$ Hand | SVar$ TreasureNum | Type$ CountSVar | Expression$ TreasureNum/Plus.1
+SVar:DBTally:DB$ StoreSVar | ConditionDefined$ Remembered | ConditionPresent$ Card.!IsImprinted+SharesCMCWith Imprinted | ConditionZone$ Hand | SVar$ TreasureNum | Type$ CountSVar | Expression$ TreasureNum/Plus.1
 SVar:DBTreasure:DB$ Token | TokenAmount$ TreasureNum | TokenScript$ c_a_treasure_sac | SubAbility$ DBReset
 SVar:DBReset:DB$ StoreSVar | SVar$ TreasureNum | Type$ Number | Expression$ 0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

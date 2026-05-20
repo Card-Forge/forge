@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Jengu
+Title=Jengu
+Icon=Jengu.jpg
+Difficulty=Very Hard
+Description=./Modern/Bloomburrow/Evan_Buxton_-_Izzet_Wizards_(Modern,_#2176224).dck
+Deck Type=constructed
+
+[Main]
+3 Kitsa, Otterball Elite
+2 Mockingbird
+3 Snapcaster Mage
+4 Tamiyo, Inquisitive Student
+4 Thundertrap Trainer
+4 Counterspell
+2 Fire // Ice
+4 Flame of Anor
+4 Flare of Denial
+4 Lightning Bolt
+2 Sink into Stupor
+3 Spell Snare
+4 Preordain
+3 Flooded Strand
+3 Island
+1 Otawara, Soaring City
+1 Polluted Delta
+4 Spirebluff Canal
+4 Steam Vents
+1 Thundering Falls
+[Sideboard]
+3 Obsidian Charmaw
+2 Narset, Parter of Veils
+2 Unlicensed Hearse
+2 Stern Scolding
+3 Pyroclasm
+3 Consign to Memory

@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Bart Simpson
+Title=Bart Simpson
+Icon=Bart Simpson.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Topao_Nicolò_-_Bant_Control_(Modern,_#1754695)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Solitude
+2 Subtlety
+2 Chalice of the Void
+4 Counterspell
+4 Fire // Ice
+2 Force of Negation
+3 Lorien Revealed
+3 Terminus
+4 Leyline Binding
+4 Up the Beanstalk
+1 Jace, the Mind Sculptor
+1 Teferi, Hero of Dominaria
+4 Teferi, Time Raveler
+1 Breeding Pool
+4 Flooded Strand
+1 Hall of Storm Giants
+2 Hallowed Fountain
+4 Island
+1 Mystic Gate
+1 Otawara, Soaring City
+2 Plains
+2 Polluted Delta
+1 Raugrin Triome
+1 Steam Vents
+1 Windswept Heath
+1 Zagoth Triome
+[Sideboard]
+1 Kaheera, the Orphanguard
+3 Crumble to Dust
+1 Dovin's Veto
+2 Dress Down
+1 Hallowed Moonlight
+1 Pithing Needle
+1 Relic of Progenitus
+2 Stern Scolding
+1 Stony Silence
+2 Veil of Summer

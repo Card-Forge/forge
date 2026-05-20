@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Ra
+Title=Ra
+Icon=Ra.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/Allene_Shin_-_Selesnya_(Standard,_#767959).dck
+Deck Type=constructed
+
+[Main]
+4 Emmara, Soul of the Accord
+4 Knight of Grace
+2 Shanna, Sisay's Legacy
+2 Trostani Discordant
+3 Venerated Loxodon
+4 March of the Multitudes
+4 Flower // Flourish
+4 Saproling Migration
+4 Conclave Tribunal
+1 Divine Visitation
+4 History of Benalia
+4 Legion's Landing
+5 Forest
+7 Plains
+4 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+1 Arch of Orazca
+2 Carnage Tyrant
+2 Knight of Autumn
+2 Lyra Dawnbringer
+2 Settle the Wreckage
+2 Shalai, Voice of Plenty
+2 Tocatli Honor Guard
+2 Vivien Reid

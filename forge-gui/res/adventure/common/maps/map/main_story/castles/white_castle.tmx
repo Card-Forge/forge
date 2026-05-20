@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="87">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -10,19 +10,21 @@
  </properties>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../Innistrad/maps/tileset/INN_dungen_crawler_tileset.tsx"/>
+ <tileset firstgid="24193" source="../../../tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="1" name="Background" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt2CEOwCAQAEFsXU19X43uU0lVP3DlDjJiHIENkJDQj9Y6AADAxu6z1jww03tvo2T1V5pHv379ces+12fF/tX3P6t/9ruT9c5V3X/9+qv0R43Rr1+/fv3/90f+K0SreEaV6d+/fwCiAV10
+   eJztzqERgDAQAMEvAYMPDUI/r1JqJgr5MgxZsfbm8o5IAACAH2vHtzoAQEQ/X6tfAAAAKs+1/mHX//nuvzYAdZJDDw==
   </data>
  </layer>
  <layer id="6" name="Floor" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJztmEEOwjAMBPOD5AdVBR9tq/Ir4Gtw4YbAbtdxDjNSbpZ3VCWy1VIAAAAAAAAA4BtLLWUVnq329Z+att8s7vePj//+/m6Pdvzcaq7/2VxVn6xc/HNz8c/NVftb59JV7H9pmjnnnUsqf1XevfPc8c7Bp+iejXr/e+eO7L8Y3tzI/qqaCPC310SAv70mAvztNR68+9uvvUtVE7m/9Ua1v3l2vLP/KCL2NwtZb1MF/jZe3r59Qg==
+   eJztlkEKwjAQRecA6hmSHrBKvahKex9XQpFSJvYnE+E9mN2Q/xZJZswAAAAAAAAAYItHMnsK65Wa6tuYza7CuuUY/zmZnYffa0mx/kdzVedE5eIfm4t/bK7a3zuX7mL/KWvmXOlcUvmr8k6N507pHLwMx/K+c3u7/61ze/b//AV7b65nf1VPDfD399QAf39PDfD395RQur/t7V2qnpr7W+tS7W+eWueqzlTtbx7W/v8I/j7eHe3f4g==
   </data>
  </layer>
  <layer id="2" name="Ground" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt1zEKgDAMQFG9gHRxE3Hw4N7K60hxEJycjLHvQenYP4Wm6wAAvmMfogsA8pnKec8ltgMAnrr/+zPuAdt4nazWProA2hU996Lfh1b9YX9fErdX+mPpj1PnT+03f+K80X8AnvgJTA==
+   eJztmEEOwiAQRfECphsXamNi4vmk12m7kFt5HSGaqFhJscPA4H/JpGXR8AjMFFAKAAAAAKAcruvcBnRczrkNPjEPpxLdQhhCX2ljB2AObXN/Hpq8HpS4vEe+gppwa7rXSg0RMeo0Lr/m1razYZ12NvZetFPvHa33N9x45uwVeuszRMTI5P+v+Pt+iecAs3mGVE4rvr7wXy+fpecuzHEcuete7v5BHH5+TeUb5d0JFxKdl1LD+V0f39sl1n9/bb22ff/QdyUS8qcmxdxy+qdAsr+rP86/pvojDQ7/G3gtRno=
   </data>
  </layer>
  <layer id="3" name="Foreground" width="48" height="48">
@@ -30,37 +32,15 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmEkOgzAMRbkAXfcgLFDhpB24Rg9SqeU4bVRQqRXHPyEDEo70V4nsp0z+SXOoqkalUqlUKpUqofqPXqBMQ8d2mfhPE1fs1ir/LviHuqougK71l+sMjr/V+c8ysk655nUv/Oj9OU78T3C83p/Kr/zpzmWXiR+5H2xnXeJqM/Ej8W1rFcqP1leuPsfiH6aYHM9c32n80H3LxeH8yZKN8xompsTD5V3u246MoX0h8+Bim+ObminVy5HJu+RpyRjaZ+NH8s5j6PldcyY5/vvxJ4Q/JKfyb4Pf902Sij/1W8eWMyb/Gg9hq9umSd7Bdz8g/D3Jj7wTXPmRnDH5ERbl/++jdwD3/8D5kNL8XDyffGv4Xf7NNWdc3Zfe7w+PtVz6N9fdKfm3VN5fmluJDfVv1LvFblLuFP6tRIvpf0q0UP8T8j4MfV+W/uvd6v+n8sfVG+B1QxQ=
+   eJztmEsOgkAMhklYuMK1B2FBhGt4OR9cw4OYKMfRiRAnzXTaeUNsk3/F2H4ZmfYf2n1VtSKRSCQSiUQJNXz0YkoFd22fif84c8WObkP8db1tflPk4h+bqrowdG2+XGfm+luT/yxz/qdc+/ov/Nz+Oc38T+b6Uv3ztAs7t8vvpf8If0l+6lz2mfg5/cF01imuLhM/zM/1Gr783PmKzWcqv41F1zjnxHiW+Q7z+763WB7Mn+hsmNdQOSkerK7+3vZgDXzmsw82tiW/mpnUvJyQujpPB9bAZyZ+Tt1lDTy/IWcS478ffuLw+9QU/nXwu95JUvCrPp/6rmPas5j7H+IhTHNbBeUdXN8HDv8A6nPuCbb6nJox+TksW+GH/icVP+wB2PcHzIdQdVLzY/lc6oXw2/ybbc+wuU/d3x8O/6Xu32y9k/Jv6rnJj8cKqnaof4PeLXZQtVP4txIR0/+UCF//43M/9L1flv7Wu9bvn8IfV2/bT0Pq
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt17EJACAQA8Bs8Buro+sC1o94B+lTBZIAAAD8bVQyT1Z1NwEAAABu/Hegi/3hBRuEwwT/
+   eJzt18EJgDAMBdBMYDdW53QadQCLChpC34Neeuoh/9NEAADk2qZ7dwBfmVvEcpy1Zb/kmauu1KHwr8zMyTvV9GbWPAMj8X+Adyru72fmevu7TEINFfuH8ewqjhGv
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="47" template="../../../obj/gold.tx" x="422.333" y="462">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;type&quot;: &quot;gold&quot;,
-    &quot;count&quot;: 180,
-    &quot;addMaxCount&quot;: 40
- }
-]</property>
-   </properties>
-  </object>
-  <object id="49" template="../../../obj/gold.tx" x="314" y="468.333">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;type&quot;: &quot;gold&quot;,
-    &quot;count&quot;: 180,
-    &quot;addMaxCount&quot;: 40
- }
-]</property>
-   </properties>
-  </object>
   <object id="54" template="../../../obj/enemy.tx" x="532.667" y="497.167" width="16.6667" height="16">
    <properties>
     <property name="enemy" value="Master White Wizard"/>
@@ -154,8 +134,45 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Brawler's Plate&quot;, &quot;Godsend&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Dwarf Warlord"/>
     <property name="pursueRange" type="int" value="30"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Angelic Armaments&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.05,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Robes of Omniscience&quot;
+ },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.05,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Angelic Greaves&quot;
+ },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;JOU&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;RIX&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -169,7 +186,44 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Paladin Class&quot; , &quot;Ashes of the Abhorrent&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Holy Paladin"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Angelic Armaments&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.05,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Robes of Omniscience&quot;
+ },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.05,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Angelic Greaves&quot;
+ },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;JOU&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;RIX&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -183,8 +237,44 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Plains&quot;, &quot;Opal Titan&quot; ]
+}</property>
     <property name="enemy" value="Sun Giant"/>
     <property name="pursueRange" type="int" value="30"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Angelic Armaments&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.05,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Robes of Omniscience&quot;
+ },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.05,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Angelic Greaves&quot;
+ },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;JOU&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;RIX&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -199,6 +289,39 @@
    }
 ]</property>
     <property name="enemy" value="Holy Apparition"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Angelic Armaments&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.05,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Robes of Omniscience&quot;
+ },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.05,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Angelic Greaves&quot;
+ },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;JOU&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;RIX&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -212,7 +335,44 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Royal Trooper&quot;, &quot;Royal Trooper&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Royal King"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Angelic Armaments&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.05,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Robes of Omniscience&quot;
+ },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.05,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Angelic Greaves&quot;
+ },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;JOU&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;RIX&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
@@ -226,27 +386,67 @@
   <object id="74" template="../../../obj/enemy.tx" x="400" y="647">
    <properties>
     <property name="dialog">[
-  {
-    &quot;text&quot;: &quot;Welcome, {var=player_name}. Akroma has been waiting eagerly for this moment.&quot;,
-    &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Is that so? I guess you wouldn't mind opening that gate in front of me?&quot;,
-        &quot;text&quot;: &quot;I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Akroma, ruler of Angels.&quot;,
-        &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;What do I need to do to get passed though this gate?&quot;,
-            &quot;text&quot;: &quot;You must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master, who holds dominion over this realm of the holy.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.&quot;,
-            &quot;options&quot;: [
-              {
-                &quot;name&quot;: &quot;I'll show my worth, just make sure to open the gate when I do defeat your challengers.&quot;,
-                &quot;text&quot;: &quot;Leave&quot;
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+	{
+		&quot;text&quot;: &quot;Welcome, {var=player_name}. Akroma has been waiting eagerly for this moment.&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;Is that so? I guess you wouldn't mind opening that gate in front of me?&quot;,
+				&quot;text&quot;: &quot;I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Akroma, ruler of Angels..&quot;,
+				&quot;options&quot;: [
+					{
+						&quot;name&quot;: &quot;What do I need to do to get passed though this gate?&quot;,
+						&quot;text&quot;: &quot;You must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.&quot;,
+						&quot;options&quot;: [
+							{
+								&quot;name&quot;: &quot;I'll show my worth, just make sure to open the gate when I do defeat your challengers.&quot;,
+								&quot;text&quot;: &quot;Leave&quot;,
+								&quot;action&quot;: [
+									{
+										&quot;setMapFlag&quot;: {
+											&quot;key&quot;: &quot;TalkToDoorGreeter&quot;,
+											&quot;val&quot;: 1
+										}
+									}
+
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	{
+		&quot;text&quot;: &quot;The challengers are still alive, you shall not pass beyond this gate.&quot;,
+		&quot;condition&quot;: [
+			{ &quot;checkMapFlag&quot;: &quot;TalkToDoorGreeter&quot; }
+				],
+			&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot;
+				}
+		]
+	},
+	{
+		&quot;text&quot;: &quot;Indeed, I am impressed, you are welcome to meet my master upstairs, though I can't guarantee you will be able to survive that encounter.&quot;,
+		&quot;condition&quot;: [
+			{
+				&quot;getMapFlag&quot;: {
+					&quot;key&quot;: &quot;enemiesDefeated&quot;,
+					&quot;op&quot;: &quot;&gt;=&quot;,
+					&quot;val&quot;: 4
+				}
+			}
+		],
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot;,
+				&quot;action&quot;: [
+					{ &quot;deleteMapObject&quot;: -1 }
+				]
+			}
+		]
+	}
 ]</property>
     <property name="enemy" value="Angel Warrior"/>
    </properties>
@@ -261,5 +461,99 @@
   <object id="82" template="../../../obj/waypoint.tx" x="688.667" y="498"/>
   <object id="83" template="../../../obj/waypoint.tx" x="220.667" y="496.667"/>
   <object id="84" template="../../../obj/waypoint.tx" x="47.3333" y="500"/>
+  <object id="85" template="../../../obj/treasure.tx" x="426.453" y="471.329">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;shards&quot;,
+    &quot;count&quot;: 10,
+    &quot;addMaxCount&quot;: 20
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;probability&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;white&quot; ]
+},
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Angelic Armaments&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Robes of Omniscience&quot;
+ },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;M10&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;M11&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 200,
+    &quot;addMaxCount&quot;: 100
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="86" template="../../../obj/treasure.tx" x="309.385" y="471.329">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;shards&quot;,
+    &quot;count&quot;: 10,
+    &quot;addMaxCount&quot;: 20
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;probability&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;white&quot; ]
+},
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Angelic Armaments&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Robes of Omniscience&quot;
+ },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;M10&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;M11&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 200,
+    &quot;addMaxCount&quot;: 100
+ }
+]</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

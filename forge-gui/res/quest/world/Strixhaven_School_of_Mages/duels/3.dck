@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Kang
+Title=Kang
+Icon=Kang.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/Austin_Clark_-_Mono-White_Aggro_❄️_(Standard,_#1171161).dck
+Deck Type=constructed
+
+[Main]
+2 Legion Angel
+2 Reidane, God of the Worthy
+2 Archon of Emeria
+3 Alseid of Life's Bounty
+3 Drannith Magistrate
+4 Elite Spellbinder
+4 Giant Killer
+4 Luminarch Aspirant
+4 Seasoned Hallowblade
+4 Selfless Savior
+4 Skyclave Apparition
+4 Faceless Haven
+20 Snow-Covered Plains
+[Sideboard]
+1 Elspeth, Sun's Nemesis
+1 Reidane, God of the Worthy
+1 Shadowspear
+1 Maul of the Skyclaves
+2 Lurrus of the Dream-Den
+2 Banishing Light
+2 Baneslayer Angel
+2 Legion Angel
+3 Glass Casket

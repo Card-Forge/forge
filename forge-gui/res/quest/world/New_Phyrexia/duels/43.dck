@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Agrus
+Title=Agrus
+Icon=Agrus.jpg
+Difficulty=Medium
+Description=New_Phyrexia/Gameday_M12/Francisco_T._Soares_-_Mono_Black_(Standard,_#18717).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Gatekeeper of Malakir
+2 Phyrexian Crusader
+3 Phyrexian Obliterator
+4 Vampire Nighthawk
+4 Vault Skirge
+2 Wurmcoil Engine
+3 Lashwrithe
+2 Dismember
+2 Doom Blade
+2 Despise
+1 Duress
+3 Inquisition of Kozilek
+3 Sign in Blood
+1 Liliana Vess
+24 Swamp
+[Sideboard]
+3 Act of Treason
+2 Black Sun's Zenith
+2 Go for the Throat
+2 Ratchet Bomb
+2 Spellskite
+2 Surgical Extraction

@@ -1,0 +1,6 @@
+Name:Tempestra, Dame of Games
+ManaCost:1 R
+Types:Legendary Creature Elemental Illusion
+PT:1/3
+A:AB$ CopyPermanent | Cost$ 2 R T Sac<1/Artifact> | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | NonLegendary$ True | PumpKeywords$ Haste | AtEOT$ Sacrifice | SpellDescription$ Create a token that's a copy of another target creature you control, except it isn't legendary. It gains haste. Sacrifice it at the beginning of the next end step.
+Oracle:{2}{R}, {T}, Sacrifice an artifact: Create a token that's a copy of another target creature you control, except it isn't legendary. It gains haste. Sacrifice it at the beginning of the next end step.

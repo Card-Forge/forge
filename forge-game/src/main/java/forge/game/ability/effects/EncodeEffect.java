@@ -4,6 +4,7 @@ import java.util.Map;
 
 import forge.game.Game;
 import forge.game.GameLogEntryType;
+import forge.game.event.GameEventAddLog;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -65,7 +66,7 @@ public class EncodeEffect extends SpellAbilityEffect {
 
         StringBuilder codeLog = new StringBuilder();
         codeLog.append("Encoding ").append(host).append(" to ").append(choice);
-        game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, codeLog.toString());
+        game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, codeLog.toString()));
 
         // store hostcard in encoded array
         choice.addEncodedCard(moved);

@@ -1,0 +1,9 @@
+Name:Karai, Future of the Foot
+ManaCost:1 W B
+Types:Legendary Creature Human Ninja
+PT:3/3
+K:Sneak:2 W B
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, return target creature card from your graveyard to your hand. If her sneak cost was paid this turn, instead return that card to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature card in your graveyard | ConditionDefined$ Self | ConditionPresent$ Card.ThisTurnEntered+sneaked | ConditionCompare$ EQ0 | SubAbility$ DBRevive
+SVar:DBRevive:DB$ ChangeZone | Defined$ Targeted | Origin$ Graveyard | Destination$ Battlefield | ConditionDefined$ Self | ConditionPresent$ Card.ThisTurnEntered+sneaked
+Oracle:Sneak {2}{W}{B} (You may cast this spell for {2}{W}{B} if you also return an unblocked attacker you control to hand during the declare blockers step. She enters tapped and attacking.)\nWhenever Karai deals combat damage to a player, return target creature card from your graveyard to your hand. If her sneak cost was paid this turn, instead return that card to the battlefield.

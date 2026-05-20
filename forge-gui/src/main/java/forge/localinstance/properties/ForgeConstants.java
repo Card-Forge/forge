@@ -31,16 +31,17 @@ public final class ForgeConstants {
     public static final String GITHUB_RELEASES_ATOM             = GITHUB_FORGE_URL + "releases.atom";
     public static final String GITHUB_COMMITS_ATOM              = GITHUB_FORGE_URL + "commits/master.atom";
     public static final String GITHUB_SNAPSHOT_URL              = GITHUB_FORGE_URL + "releases/download/daily-snapshots/";
+    public static final String NETWORK_PLAY_WIKI_URL            = GITHUB_FORGE_URL + "wiki/network-play";
     public static final String RELEASE_URL                      = "https://releases.cardforge.org/";
     public static final String PATH_SEPARATOR                   = File.separator;
     public static final String ASSETS_DIR                       = GuiBase.getInterface().getAssetsDir();
     public static final String PROFILE_FILE                     = ASSETS_DIR + "forge.profile.properties";
     public static final String PROFILE_TEMPLATE_FILE            = PROFILE_FILE + ".example";
-    public static final Integer DEFAULT_SERVER_CONNECTION_PORT  = 36743;
 
     public static final String RES_DIR                      = ASSETS_DIR + "res" + PATH_SEPARATOR;
     public static final String ADVENTURE_DIR                = RES_DIR + "adventure" + PATH_SEPARATOR;
     public static final String ADVENTURE_COMMON_DIR         = ADVENTURE_DIR + "common" + PATH_SEPARATOR;
+    public static final String ADVENTURE_COMMON_LIST_DIR   = ADVENTURE_COMMON_DIR  + "list" + PATH_SEPARATOR;
     public static final String LISTS_DIR                    = RES_DIR + "lists" + PATH_SEPARATOR;
     public static final String SETLOOKUP_DIR                = RES_DIR + "setlookup" + PATH_SEPARATOR;
     public static final String KEYWORD_LIST_FILE                     = LISTS_DIR + "NonStackingKWList.txt";
@@ -73,7 +74,12 @@ public final class ForgeConstants {
     public static final String NET_ARCHIVE_LEGACY_DECKS_LIST_FILE    = LISTS_DIR + "net-decks-archive-legacy.txt";
     public static final String NET_ARCHIVE_VINTAGE_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-vintage.txt";
     public static final String NET_ARCHIVE_BLOCK_DECKS_LIST_FILE     = LISTS_DIR + "net-decks-archive-block.txt";
-
+    public static final String COMMANDER_BRACKET_COMBOS_FILE         = LISTS_DIR + "commander-bracket-combos.txt";
+    public static final String COMMANDER_BRACKET_GAMECHANGERS_FILE   = LISTS_DIR + "gamechangers.txt";
+    public static final String COMMANDER_BRACKET_MASS_LAND_DENIAL_FILE = LISTS_DIR + "mass-land-denial.txt";
+    public static final String COMMANDER_BRACKET_EXTRA_TURNS_FILE    = LISTS_DIR + "extra-turns.txt";
+    public static final String COMMANDER_BRACKET_CHAINED_EXTRA_TURNS_FILE = LISTS_DIR + "chained-extra-turns.txt";
+    public static final String ADVENTURE_BOOSTER_PRICE_FILE 		 = ADVENTURE_COMMON_LIST_DIR + "adventure-booster-price.txt";
 
     public static final String CHANGES_FILE                 = ASSETS_DIR + "README.txt";
     public static final String CHANGES_FILE_NO_RELEASE      = ASSETS_DIR + "CHANGES.txt";
@@ -241,6 +247,7 @@ public final class ForgeConstants {
     public static final String USER_GAMES_DIR             = USER_DIR + "games" + PATH_SEPARATOR;
     public static final String USER_PUZZLE_DIR            = USER_DIR + "puzzle" + PATH_SEPARATOR;
     public static final String LOG_FILE                   = USER_DIR + "forge.log";
+    public static final String NETWORK_LOGS_DIR           = USER_DIR + "networklogs" + PATH_SEPARATOR;
     public static final String ACHIEVEMENTS_DIR           = USER_DIR + "achievements" + PATH_SEPARATOR;
     public static final String USER_CUSTOM_DIR            = USER_DIR + "custom" + PATH_SEPARATOR;
     public static final String USER_CUSTOM_EDITIONS_DIR   = USER_CUSTOM_DIR + "editions" + PATH_SEPARATOR;
@@ -272,6 +279,7 @@ public final class ForgeConstants {
     public static final String ITEM_VIEW_PREFS_FILE       = USER_PREFS_DIR + "item_view.preferences";
     public static final String CLOSE_CONN_COMMAND         = "<<_EM_ESOLC_<<";
     public static final String INVALID_HOST_COMMAND       = "<<_TSOH_DILAVNI_<<";
+    public static final String CONN_ERROR_PREFIX          = "<<_CONN_ERROR_>>:";
 
     // data that has defaults in the program dir but overrides/additions in the user dir
     private static final String _DEFAULTS_DIR = RES_DIR + "defaults" + PATH_SEPARATOR;
@@ -328,7 +336,7 @@ public final class ForgeConstants {
 
     // URLs
     public static final String URL_CARDFORGE = "https://downloads.cardforge.org";
-    private static final String GITHUB_ASSETS_BASE = "https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/";
+    public static final String GITHUB_ASSETS_BASE = "https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/";
 
     public static final String URL_PIC_DOWNLOAD = URL_CARDFORGE + "/images/cards/";
     public static final String URL_TOKEN_DOWNLOAD = URL_CARDFORGE + "/images/tokens/";
@@ -343,9 +351,11 @@ public final class ForgeConstants {
     public static final String DISP_CURRENT_COLORS_MULTI_OR_CHANGED = "Multi+Changed";
     public static final String DISP_CURRENT_COLORS_NEVER = "Never";
 
-    // Constants for Auto-Yield Mode
-    public static final String AUTO_YIELD_PER_CARD = "Per Card (Each Game)";
-    public static final String AUTO_YIELD_PER_ABILITY = "Per Ability (Each Match)";
+    // Constants for Auto-Decision Mode (auto-yield + auto-trigger persistence scope)
+    public static final String AUTO_DECISION_PER_CARD = "Per Card (Each Game)";
+    public static final String AUTO_DECISION_PER_ABILITY = "Per Ability (Each Match)";
+    public static final String AUTO_DECISION_PER_ABILITY_SESSION = "Per Ability (Each Session)";
+    public static final String AUTO_DECISION_PER_ABILITY_INSTALL = "Per Ability (Each Install)";
 
     // Constants for Graveyard Ordering
     public static final String GRAVEYARD_ORDERING_NEVER = "Never";

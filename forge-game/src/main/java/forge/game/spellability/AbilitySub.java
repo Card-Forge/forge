@@ -80,13 +80,13 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
 
         api = api0;
         if (params0 != null) {
-            originalMapParams.putAll(params0);
             mapParams.putAll(params0);
         }
 
         effect = api.getSpellEffect();
 
         effect.buildSpellAbility(this);
+        originalMapParams.putAll(mapParams);
     }
 
     @Override

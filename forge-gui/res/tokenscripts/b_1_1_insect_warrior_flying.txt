@@ -1,0 +1,7 @@
+Name:Insect Warrior Token
+ManaCost:no cost
+Colors:black
+Types:Creature Insect Warrior
+PT:1/1
+K:Flying
+Oracle:Flying

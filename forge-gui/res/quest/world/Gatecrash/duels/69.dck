@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Tweedledum
+Title=Tweedledum
+Icon=Tweedledum.jpg
+Difficulty=Hard
+Description=../Modern/Gatecrash/Rosenheim_20.10.2013/Florian_Reiter_in_Modernturnier_-_Red_Deck_Wins_(Modern,_#59936).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dark Confidant
+2 Deathrite Shaman
+4 Goblin Guide
+3 Grim Lavamancer
+4 Vexing Devil
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+4 Searing Blaze
+4 Bump in the Night
+4 Lava Spike
+4 Arid Mesa
+2 Blackcleave Cliffs
+1 Blood Crypt
+1 Godless Shrine
+1 Marsh Flats
+2 Mountain
+3 Sacred Foundry
+4 Scalding Tarn
+1 Stomping Ground
+[Sideboard]
+2 Arc Trail
+1 Forked Bolt
+3 Rakdos Charm
+4 Skullcrack
+3 Smash to Smithereens
+2 Timely Reinforcements

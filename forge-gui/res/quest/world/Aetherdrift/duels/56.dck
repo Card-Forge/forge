@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Hobbes
+Title=Hobbes
+Icon=Hobbes.jpg
+Difficulty=Hard
+Description=./Modern/Aetherdrift/Mormegil__-_Dimir_Murktide_(Modern,_#2385206).dck
+Deck Type=constructed
+
+[Main]
+2 Orcish Bowmasters
+2 Harbinger of the Seas
+4 Psychic Frog
+4 Murktide Regent
+2 Subtlety
+2 Stern Scolding
+1 Shoot the Sheriff
+1 Sink into Stupor
+3 Spell Snare
+4 Counterspell
+3 Force of Negation
+4 Fatal Push
+2 Consider
+2 Stock Up
+2 Thoughtseize
+4 Preordain
+2 Undercity Sewers
+1 Gloomlake Verge
+2 Island
+1 Swamp
+2 Scalding Tarn
+1 Misty Rainforest
+4 Polluted Delta
+2 Bloodstained Mire
+3 Watery Grave
+[Sideboard]
+1 Stern Scolding
+1 Orcish Bowmasters
+1 Toxic Deluge
+4 Consign to Memory
+1 Harbinger of the Seas
+2 Nihil Spellbomb
+3 Mystical Dispute
+2 Engineered Explosives

@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Hameln
+Title=Hameln
+Icon=Hameln.jpg
+Difficulty=Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Evan_Wooden_-_Azorius_Hammer_(Modern,_#1555557)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Esper Sentinel
+4 Stoneforge Mystic
+4 Puresteel Paladin
+1 Gingerbrute
+4 Ornithopter
+2 Giver of Runes
+3 Springleaf Drum
+4 Colossus Hammer
+1 Kaldra Compleat
+1 Nettlecyst
+1 Shadowspear
+3 Spell Pierce
+1 Blacksmith's Skill
+4 Sigarda's Aid
+4 Urza's Saga
+1 Nahiri, the Unforgiving
+3 Inkmoth Nexus
+3 Plains
+2 Flooded Strand
+2 Windswept Heath
+2 Arid Mesa
+1 Marsh Flats
+1 Seachrome Coast
+2 Hallowed Fountain
+1 Sacred Foundry
+1 Sunbaked Canyon
+[Sideboard]
+1 Nahiri, the Unforgiving
+2 Blacksmith's Skill
+2 Path to Exile
+2 Lavinia, Azorius Renegade
+1 Spell Pierce
+1 Stubborn Denial
+3 Sanctifier en-Vec
+1 Pithing Needle
+2 March of Otherworldly Light

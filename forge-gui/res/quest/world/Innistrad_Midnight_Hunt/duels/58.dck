@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Hulk
+Title=Hulk
+Icon=Hulk.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Tiemuuu_-_Izzet_Spells_(Modern,_#1228327).dck
+Deck Type=constructed
+
+[Main]
+1 Brazen Borrower
+3 Thing in the Ice
+4 Snapcaster Mage
+1 Spell Snare
+1 Flusterstorm
+1 Electrolyze
+1 Cryptic Command
+1 Consider
+1 Abrade
+4 Archmage's Charm
+4 Counterspell
+4 Lightning Bolt
+4 Opt
+1 Flame Slash
+2 Blood Moon
+3 Dress Down
+1 Ral, Izzet Viceroy
+1 Hall of Storm Giants
+1 Scalding Tarn
+1 Misty Rainforest
+3 Steam Vents
+3 Spirebluff Canal
+3 Polluted Delta
+3 Flooded Strand
+8 Island
+[Sideboard]
+1 Anger of the Gods
+1 Flame Blitz
+2 Flusterstorm
+2 Mystical Dispute
+2 Engineered Explosives
+3 Spreading Seas
+4 Relic of Progenitus

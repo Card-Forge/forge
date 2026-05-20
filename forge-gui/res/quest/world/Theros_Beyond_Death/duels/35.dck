@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Oreius
+Title=Oreius
+Icon=Oreius.jpg
+Difficulty=Medium
+Description=./Standard/Theros_Beyond_Death/Andres_Dextre_-_Mono-W_Angels_(Standard,_#947420).dck
+Deck Type=constructed
+
+[Main]
+1 Daybreak Chaplain
+2 Yoked Ox
+2 Angel of Vitality
+2 Serra's Guardian
+3 Shepherd of the Flock
+3 Fencing Ace
+3 Ajani's Pridemate
+3 Youthful Knight
+3 Impassioned Orator
+4 Healer's Hawk
+2 Phalanx Tactics
+3 Moment of Heroism
+3 Defiant Strike
+1 Wanderer's Strike
+1 Commanding Presence
+2 Dawn of Hope
+4 Pacifism
+24 Plains
+[Sideboard]

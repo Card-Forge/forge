@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Green
+Title=Dungeon Crawling Green
+Icon=Dungeon Crawling Green.jpg
+Difficulty=Very Hard
+Description=./Modern/Murders_at_Karlov_Manor/Linise_-_Dimir_Reanimator_(Modern,_#1965107).dck
+Deck Type=constructed
+
+[Main]
+1 Sire of Insanity
+2 Murktide Regent
+4 Archon of Cruelty
+4 Fallaji Archaeologist
+3 Troll of Khazad-dûm
+1 Spell Pierce
+4 Counterspell
+2 Fatal Push
+4 Consider
+4 Tainted Indulgence
+1 Sheoldred's Edict
+2 Force of Negation
+1 Unburial Rites
+3 Connive // Concoct
+1 Bone Shards
+4 Persist
+1 Unmarked Grave
+2 Island
+4 Watery Grave
+4 Polluted Delta
+1 Hallowed Fountain
+1 Marsh Flats
+1 Otawara, Soaring City
+1 Meticulous Archive
+1 Shadowy Backstreet
+2 Undercity Sewers
+1 Swamp
+[Sideboard]
+1 Annul
+2 Chalice of the Void
+3 Leyline of the Void
+1 Commandeer
+1 Damnation
+2 Surgical Extraction
+1 Flusterstorm
+2 Engineered Explosives
+2 Void Mirror

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Green Hornet
+Title=Green Hornet
+Icon=Green Hornet.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/Ritak13_-_Selesnya_Ritual_(Modern,_#2385209).dck
+Deck Type=constructed
+
+[Main]
+1 Haywire Mite
+4 Ocelot Pride
+1 Recruiter of the Guard
+4 Guide of Souls
+1 Springheart Nantuko
+2 Witch Enchanter
+3 Brightglass Gearhulk
+4 Voice of Resurgence
+1 Eternal Witness
+3 Ranger-Captain of Eos
+1 Skyclave Apparition
+4 Solitude
+4 Ephemerate
+3 Static Prison
+4 Birthing Ritual
+3 Lush Portico
+3 Flooded Strand
+4 Windswept Heath
+2 Forest
+4 Temple Garden
+4 Plains
+[Sideboard]
+1 Haywire Mite
+4 White Orchid Phantom
+2 Wrath of the Skies
+1 Kataki, War's Wage
+2 Damping Sphere
+1 Collector Ouphe
+1 Deafening Silence
+1 Tormod's Crypt
+1 Skyclave Apparition
+1 Endurance

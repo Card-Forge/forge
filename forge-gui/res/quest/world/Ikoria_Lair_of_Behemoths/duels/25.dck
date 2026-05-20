@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Marge Simpson
+Title=Marge Simpson
+Icon=Marge Simpson.jpg
+Difficulty=Medium
+Description=./Standard/Ikoria_Lair_of_Behemoths/3ubbLbrEAck4_-_Esper_Yorion_(Standard,_#970233).dck
+Deck Type=constructed
+
+[Main]
+1 Cloudkin Seer
+1 Elite Guardmage
+1 Yorion, Sky Nomad
+3 Agent of Treachery
+3 Fblthp, the Lost
+4 Charming Prince
+4 Atris, Oracle of Half-Truths
+4 Alirios, Enraptured
+3 Omen of the Dead
+3 Oath of Kaya
+4 Elspeth Conquers Death
+4 Omen of the Sun
+4 Omen of the Sea
+4 Teferi, Time Raveler
+1 Castle Ardenvale
+2 Castle Vantress
+4 Watery Grave
+4 Temple of Enlightenment
+4 Swamp
+4 Hallowed Fountain
+4 Godless Shrine
+4 Fabled Passage
+5 Island
+5 Plains
+[Sideboard]
+1 Yorion, Sky Nomad
+1 Thought Distortion
+2 Negate
+2 Grafdigger's Cage
+3 Despark
+3 Dovin's Veto
+3 Glass Casket

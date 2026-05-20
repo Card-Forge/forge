@@ -1,0 +1,14 @@
+Name:Big Mother Mouser
+ManaCost:4
+Types:Artifact Creature Robot
+PT:0/0
+K:etbCounter:P1P1:2
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDoubleCounters | TriggerDescription$ Whenever this creature attacks, double the number of +1/+1 counters on it.
+SVar:TrigDoubleCounters:DB$ MultiplyCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature dies, create a number of 1/1 colorless Robot artifact creature tokens equal to the number of +1/+1 counters on this creature.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_1_1_a_robot | TokenOwner$ You
+SVar:X:TriggeredCard$CardCounters.P1P1
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+DeckHints:Ability$Counters
+Oracle:This creature enters with two +1/+1 counters on it.\nWhenever this creature attacks, double the number of +1/+1 counters on it.\nWhen this creature dies, create a number of 1/1 colorless Robot artifact creature tokens equal to the number of +1/+1 counters on this creature.

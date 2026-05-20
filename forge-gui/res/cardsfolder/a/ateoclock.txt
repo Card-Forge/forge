@@ -2,7 +2,7 @@ Name:Ate-o'-Clock
 ManaCost:2 G
 Types:Instant
 K:Replicate:2 G
-A:SP$ CopyPermanent | Choices$ Creature.token+YouCtrl | Populate$ True | SubAbility$ DBProlif | SpellDescription$ Populate. Proliferate. Investigate. Regenerate target creature.
+A:SP$ CopyPermanent | Populate$ True | SubAbility$ DBProlif | SpellDescription$ Populate. Proliferate. Investigate. Regenerate target creature.
 SVar:DBProlif:DB$ Proliferate | SubAbility$ DBInvestigate
 SVar:DBInvestigate:DB$ Investigate | SubAbility$ DBRegen
 SVar:DBRegen:DB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature

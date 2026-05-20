@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Rogue
+Title=Rogue
+Icon=Rogue.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/Ottersthal,_France/Steve_Hatto_in_PTQ_Barcelona_-_Red_Deck_Wins_(Modern,_#26510).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Ball Lightning
+4 Goblin Guide
+3 Hellspark Elemental
+3 Keldon Marauders
+3 Flame Javelin
+4 Incinerate
+4 Lightning Bolt
+4 Searing Blaze
+4 Shard Volley
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+15 Mountain
+2 Scalding Tarn
+[Sideboard]
+3 Blood Moon
+4 Combust
+3 Grafdigger's Cage
+3 Shattering Spree
+2 Smash to Smithereens

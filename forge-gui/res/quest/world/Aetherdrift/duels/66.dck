@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Ajok
+Title=Ajok
+Icon=Ajok.jpg
+Difficulty=Hard
+Description=./Modern/Aetherdrift/Kamada_Ikuya_-_Eldrazi_Tron_(Modern,_#2380563).dck
+Deck Type=constructed
+
+[Main]
+2 Ulamog, the Ceaseless Hunger
+4 Devourer of Destiny
+4 Sowing Mycospawn
+4 Sire of Seven Deaths
+4 Expedition Map
+3 Chalice of the Void
+1 Talisman of Impulse
+1 Talisman of Unity
+1 Talisman of Curiosity
+2 Talisman of Resilience
+4 Kozilek's Command
+2 All Is Dust
+2 Ugin, the Spirit Dragon
+4 Karn, the Great Creator
+2 Forest
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+1 Bojuka Bog
+4 Eldrazi Temple
+4 Ugin's Labyrinth
+[Sideboard]
+1 Tormod's Crypt
+1 Ensnaring Bridge
+1 Engineered Explosives
+1 Elixir of Immortality
+2 Dismember
+1 Torpor Orb
+1 Liquimetal Coating
+1 Haywire Mite
+1 Cityscape Leveler
+4 The Stone Brain
+1 The Aetherspark

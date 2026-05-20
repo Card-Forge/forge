@@ -3,7 +3,7 @@ Name:MTG Puzzles #01 - Gaining Experience
 URL:https://mtgpuzzles.com/puzzle/1
 Goal:Win
 Turns:1
-Difficulty:Medium
+Difficulty:Uncommon
 Description:Defeat your opponent before their next turn. You currently have 0 experience counters. Your opponent flashed in a Nebelgast Herald on your upkeep step, tapping your Mizzix of the Izmagnus. Can you find 4 damage to win?
 [state]
 turn=1

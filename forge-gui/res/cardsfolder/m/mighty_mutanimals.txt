@@ -1,0 +1,9 @@
+Name:Mighty Mutanimals
+ManaCost:2 W W
+Types:Creature Mutant Rebel
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 2/2 red Mutant creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ r_2_2_mutant | TokenOwner$ You
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Alliance — Whenever another creature you control enters, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1
+Oracle:When this creature enters, create a 2/2 red Mutant creature token.\nAlliance — Whenever another creature you control enters, put a +1/+1 counter on target creature you control.

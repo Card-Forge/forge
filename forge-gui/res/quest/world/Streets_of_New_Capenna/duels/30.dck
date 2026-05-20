@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Aigamuxa
+Title=Aigamuxa
+Icon=Aigamuxa.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/Akira_Shibata_(5th)_-_Grixis_Control_(Standard,_#1361743).dck
+Deck Type=constructed
+
+[Main]
+1 Lier, Disciple of the Drowned
+2 The Celestus
+1 Fading Hope
+1 Negate
+3 Galvanic Iteration
+4 Invoke Calamity
+4 Big Score
+4 Maestros Charm
+1 Hostile Takeover
+1 Duress
+3 Strangle
+4 Expressive Iteration
+4 Invoke Despair
+1 The Meathook Massacre
+1 Swamp
+1 Mountain
+3 Riverglide Pathway
+3 Stormcarved Coast
+3 Shipwreck Marsh
+3 Clearwater Pathway
+4 Haunted Ridge
+4 Xander's Lounge
+4 Blightstep Pathway
+[Sideboard]
+1 The Meathook Massacre
+1 Hostile Takeover
+1 Seismic Wave
+1 Disdainful Stroke
+1 Negate
+1 Ray of Enfeeblement
+2 Behold the Multiverse
+2 Evelyn, the Covetous
+2 Smoldering Egg
+3 Duress

@@ -5,9 +5,8 @@
   - [SteamDeck/Bazzite](Steam-Deck-and-Bazzite-Install.md)
   - [AI](ai.md)
   - [Network Play](network-play.md)
-    - [Network FAQ](Network-FAQ.md)
-    - [Network Extra](Networking-Extras.md)
   - [Advanced search](Advanced-Search.md)
+  - [Advanced Yield Options](advanced-yield-options.md)
 
 - Adventure Mode
 
@@ -51,6 +50,8 @@
   - [Dev Mode](Development/DevMode.md)
   - [Ownership](Development/ownership.md)
   - [Docker Container](docker-setup.md)
+  - [Network Testing](Development/Network-Testing.md)
+  - [UI Guidelines](Development/UI-Guidelines.md)
 
 - Customization & Themes
   - [Skins](Skins.md)

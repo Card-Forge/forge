@@ -45,6 +45,8 @@ import forge.game.zone.ZoneType;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -200,33 +202,44 @@ public class AiAttackController {
         return choosePreferredDefenderPlayer(ai, false);
     }
     public static Player choosePreferredDefenderPlayer(Player ai, boolean forCombatDmg) {
-        Player defender = ai.getWeakestOpponent(); //Concentrate on opponent within easy kill range
+        PlayerCollection opponents = ai.getOpponents();
+        if (opponents.size() == 1) {
+            return opponents.get(0);
+        }
 
-        // TODO for multiplayer combat avoid players with cantLose or (if not playing infect) cantLoseForZeroOrLessLife and !canLoseLife
-
-        if (defender.getLife() > 8) {
-            // TODO connect with evaluateBoardPosition and only fall back to random when no player is the biggest threat by a fair margin
-
-            List<Player> opps = Lists.newArrayList(ai.getOpponents());
+        Player bestDefender = ai.getWeakestOpponent();
+        int bestScore = Integer.MIN_VALUE;
+        for (Player opp : opponents) {
+            final int life = opp.getLife();
+            int score = ComputerUtil.evaluateBoardPosition(ai, opp);
+            // round away slightly so a single land drop doesn't mean players with earlier turn order are predictably attacked
+            score = (int) Math.ceil(score / 10) * 10;
+            int lowLifeThreshold = Math.min(20, opp.getStartingLife());
+            if (life > 0 && life < lowLifeThreshold) {
+                // TODO commander damage
+                int lifeDeficit = lowLifeThreshold - life;
+                score += lifeDeficit * lifeDeficit;
+            }
             if (forCombatDmg) {
-                for (Player p : ai.getOpponents()) {
-                    if (p.isMonarch() && ai.canBecomeMonarch()) {
-                        // just increase the odds for now instead of being fully predictable
-                        // as it could lead to other too complex factors giving this reasoning negative impact
-                        opps.add(p);
-                    }
-                    if (p.hasInitiative()) {
-                        opps.add(p);
-                    }
+                if (opp.isMonarch() && ai.canBecomeMonarch()) {
+                    score += 80;
+                }
+                if (opp.hasInitiative()) {
+                    score += 80;
+                }
+                if (!opp.canLoseLife()) {
+                    score -= 100;
+                }
+                if (opp.cantLoseForZeroOrLessLife()) {
+                    score -= 50;
                 }
             }
-
-            // TODO should we cache the random for each turn? some functions like shouldPumpCard base their decisions on the assumption who will be attacked
-
-            //Otherwise choose a random opponent to ensure no ganging up on players
-            return Aggregates.random(opps);
+            if (score > bestScore || (score == bestScore && MyRandom.percentTrue(50))) {
+                bestScore = score;
+                bestDefender = opp;
+            }
         }
-        return defender;
+        return bestDefender;
     }
 
     /**
@@ -503,8 +516,8 @@ public class AiAttackController {
 
         // respect global attack constraints
         GlobalAttackRestrictions restrict = combat.getAttackConstraints().getGlobalRestrictions();
-        int attackMax = restrict.getMax();
-        if (attackMax >= attackers.size()) {
+        Integer attackMax = restrict.getMax();
+        if (attackMax != null && attackMax >= attackers.size()) {
             return;
         }
 
@@ -557,11 +570,11 @@ public class AiAttackController {
 
                 if (bestBand != null) {
                     GameEntity defender = combat.getDefenderByAttacker(bestBand);
-                    if (attackMax == -1) {
-                        attackMax = restrict.getDefenderMax().getOrDefault(defender, -1);
-                    }
 
-                    if (attackMax == -1 || attackMax > combat.getAttackers().size()) {
+                    Integer bandingMax = ObjectUtils.firstNonNull(attackMax, restrict.getDefenderMax().get(defender));
+
+                    if ((attackMax == null || attackMax > combat.getAttackers().size()) &&
+                            (bandingMax == null || bandingMax > combat.getAttackersOf(defender).size())) {
                         if (CombatUtil.canAttack(c, defender)) {
                             combat.addAttacker(c, defender, combat.getBandOfAttacker(bestBand));
                         }
@@ -836,12 +849,10 @@ public class AiAttackController {
         }
 
         GlobalAttackRestrictions restrict = combat.getAttackConstraints().getGlobalRestrictions();
-        int attackMax = restrict.getMax();
-        if (attackMax == -1) {
-            // check with the local limitations vs. the chosen defender
-            attackMax = restrict.getDefenderMax().getOrDefault(defender, -1);
-        }
-        if (attackMax == 0) {
+        // check with the local limitations vs. the chosen defender
+        // could still be null
+        Integer attackMax = ObjectUtils.firstNonNull(restrict.getMax(), restrict.getDefenderMax().get(defender));
+        if (attackMax != null && attackMax == 0) {
             // can't attack anymore
             return aiAggression;
         }
@@ -973,7 +984,7 @@ public class AiAttackController {
             List<Card> left = new ArrayList<>(attackersLeft);
             CardLists.sortByPowerDesc(left);
             for (Card attacker : left) {
-                if (attackMax != -1 && combat.getAttackers().size() >= attackMax)
+                if (attackMax != null && combat.getAttackers().size() >= attackMax)
                     return aiAggression;
 
                 // TODO if lifeInDanger use chance to hold back some (especially in multiplayer)
@@ -1026,7 +1037,7 @@ public class AiAttackController {
             }
         }
 
-        if (attackMax != -1) {
+        if (attackMax != null) {
             // should attack with only max if able.
             CardLists.sortByPowerDesc(this.attackers);
             aiAggression = 6;
@@ -1726,7 +1737,7 @@ public class AiAttackController {
         attackersLeft.removeAll(attUnsafe);
     }
 
-    private boolean doRevengeOfRavensAttackLogic(final GameEntity defender, final Queue<Card> attackersLeft, int numForcedAttackers, int maxAttack) {
+    private boolean doRevengeOfRavensAttackLogic(final GameEntity defender, final Queue<Card> attackersLeft, int numForcedAttackers, Integer maxAttack) {
         // TODO: detect Revenge of Ravens by the trigger instead of by name
         boolean revengeOfRavens = false;
         if (defender instanceof Player player) {
@@ -1742,7 +1753,7 @@ public class AiAttackController {
         }
 
         int life = ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife() ? ai.getLife() : Integer.MAX_VALUE;
-        maxAttack = maxAttack < 0 ? Integer.MAX_VALUE - 1 : maxAttack;
+        maxAttack = Objects.requireNonNullElse(maxAttack, Integer.MAX_VALUE - 1);
         if (Math.min(maxAttack, numForcedAttackers) >= life) {
             return false;
         }

@@ -1,0 +1,9 @@
+Name:Action News Crew
+ManaCost:1 W
+Types:Creature Human Citizen
+PT:2/2
+K:Vigilance
+A:AB$ PutCounterAll | ActivationZone$ Hand | PrecostDesc$ Channel — | Cost$ 6 Discard<1/CARDNAME/this card> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw | SpellDescription$ Put a +1/+1 counter on each creature you control. Draw a card.
+SVar:DBDraw:DB$ Draw
+DeckHas:Ability$Discard|Counters
+Oracle:Vigilance\nChannel — {6}, Discard this card: Put a +1/+1 counter on each creature you control. Draw a card.

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Harry Potter
+Title=Harry Potter
+Icon=Harry Potter.jpg
+Difficulty=Easy
+Description=Dark_Ascension/SCG_Invitational_Qualifier_-_Knoxville,_Tennessee/Benoit_Dupuis_-_Tokens_(Standard,_#30048).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Champion of the Parish
+4 Doomed Traveler
+3 Mirran Crusader
+1 Sword of Body and Mind
+1 Sword of War and Peace
+4 Midnight Haunting
+4 Gather the Townsfolk
+4 Lingering Souls
+3 Honor of the Pure
+4 Intangible Virtue
+4 Oblivion Ring
+1 Elspeth Tirel
+4 Isolated Chapel
+14 Plains
+4 Swamp
+2 Vault of the Archangel
+[Sideboard]
+3 Celestial Purge
+3 Day of Judgment
+1 Dismember
+2 Nihil Spellbomb
+2 Ratchet Bomb
+1 Sorin, Lord of Innistrad
+2 Surgical Extraction
+1 White Sun's Zenith

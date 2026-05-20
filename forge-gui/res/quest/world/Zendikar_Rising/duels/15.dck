@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=KingKong
+Title=KingKong
+Icon=KingKong.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Abe_Hiroaki_-_UBR_Control_(Standard,_#1056640).dck
+Deck Type=constructed
+
+[Main]
+2 Rankle, Master of Pranks
+2 Brazen Borrower
+4 Kroxa, Titan of Death's Hunger
+4 Bonecrusher Giant
+2 Mazemind Tome
+2 Eliminate
+2 Essence Scatter
+2 Negate
+2 Heartless Act
+2 Spikefield Hazard
+2 Hagra Mauling
+1 Bloodchief's Thirst
+2 Extinction Event
+3 Shark Typhoon
+1 Jace, Mirror Mage
+3 Ashiok, Nightmare Muse
+1 Temple of Epiphany
+1 Ketria Triome
+1 Temple of Deceit
+2 Temple of Malice
+3 Clearwater Pathway
+3 Riverglide Pathway
+3 Island
+3 Mountain
+3 Swamp
+4 Fabled Passage
+[Sideboard]
+2 Scorching Dragonfire
+2 Extinction Event
+3 Mystical Dispute
+4 Shredded Sails
+4 Agonizing Remorse

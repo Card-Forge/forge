@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Anakin Skywalker
+Title=Anakin Skywalker
+Icon=Anakin Skywalker.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Ammi_Obejas_-_Esper_Superfriends_(Standard,_#800066).dck
+Deck Type=constructed
+
+[Main]
+1 Cast Down
+1 Urza's Ruinous Blast
+2 The Elderspell
+2 Cry of the Carnarium
+3 Kaya's Wrath
+4 Thought Erasure
+1 Search for Azcanta
+3 Oath of Kaya
+1 Ugin, the Ineffable
+1 Vraska, Swarm's Eminence
+1 Karn, Scion of Urza
+1 Kasmina, Enigmatic Mentor
+1 Kaya, Orzhov Usurper
+1 Liliana, Dreadhorde General
+3 Teferi, Hero of Dominaria
+4 Teferi, Time Raveler
+4 Narset, Parter of Veils
+1 Mobilized District
+1 Swamp
+4 Isolated Chapel
+4 Godless Shrine
+4 Watery Grave
+4 Drowned Catacomb
+4 Glacial Fortress
+4 Hallowed Fountain
+[Sideboard]
+2 Despark
+2 Dovin's Veto
+2 Enter the God-Eternals
+1 Gideon Blackblade
+1 Unmoored Ego
+1 Vraska's Contempt
+2 Command the Dreadhorde
+1 Kaya, Orzhov Usurper
+1 Urza's Ruinous Blast
+2 The Elderspell

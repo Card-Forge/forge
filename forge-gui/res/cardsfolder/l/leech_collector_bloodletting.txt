@@ -1,0 +1,16 @@
+Name:Leech Collector
+ManaCost:1 B
+Types:Creature Human Warlock
+PT:2/2
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | FirstTime$ True | Execute$ TrigPrepare | TriggerDescription$ Whenever you gain life for the first time each turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+AlternateMode:Prepare
+Oracle:Whenever you gain life for the first time each turn, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Bloodletting
+ManaCost:B
+Types:Sorcery
+A:SP$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SpellDescription$ Each opponent loses 2 life.
+Oracle:Each opponent loses 2 life.

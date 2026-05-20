@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Grumpy
+Title=Grumpy
+Icon=Grumpy.jpg
+Difficulty=Medium
+Description=./Standard/Duskmourn_House_of_Horror/Hamuda_-_Dimir_Midrange_(Standard,_#2285745).dck
+Deck Type=constructed
+
+[Main]
+4 Deep-Cavern Bat
+4 Spyglass Siren
+3 Enduring Curiosity
+4 Faerie Mastermind
+2 Unstoppable Slasher
+3 Floodpits Drowner
+1 Mockingbird
+1 Sheoldred, the Apocalypse
+2 Preacher of the Schism
+2 Anoint with Affliction
+3 Cut Down
+2 Phantom Interference
+3 Go for the Throat
+2 Kaito, Bane of Nightmares
+4 Darkslick Shores
+2 Fountainport
+4 Gloomlake Verge
+3 Island
+3 Restless Reef
+4 Swamp
+1 Undercity Sewers
+3 Underground River
+[Sideboard]
+2 Duress
+2 Negate
+1 Malicious Eclipse
+2 Gix's Command
+1 Kaito, Bane of Nightmares
+1 Anoint with Affliction
+2 Sheoldred, the Apocalypse
+1 Ghost Vacuum
+2 Tishana's Tidebinder
+1 Three Steps Ahead

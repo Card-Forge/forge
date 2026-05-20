@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Borborygmos
+Title=Borborygmos
+Icon=Borborygmos.jpg
+Difficulty=Easy
+Description=Scars_of_Mirrodin/States-Champs_Michigan/Stephen_Boggemes_-_Valakut_Ramp_(Standard,_#7616).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Avenger of Zendikar
+1 Inferno Titan
+3 Oracle of Mul Daya
+4 Primeval Titan
+1 Wurmcoil Engine
+3 Harrow
+4 Lightning Bolt
+3 Summoning Trap
+4 Cultivate
+4 Explore
+4 Khalni Heart Expedition
+2 Evolving Wilds
+5 Forest
+11 Mountain
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+1 Verdant Catacombs
+[Sideboard]
+3 Acidic Slime
+3 Obstinate Baloth
+4 Pyroclasm
+3 Ricochet Trap
+1 Terastodon

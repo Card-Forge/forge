@@ -87,6 +87,42 @@ public class AutoPaymentTest extends SimulationTest {
     }
 
     @Test
+    public void payWithCreaturesOverSacrificeLands() {
+        // Do not sacrifice debris. It can be tapped for Blue or Plains tapped for white. Tap elf instead.
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card elf = addCard("Llanowar Elves",  p);
+        addCard("Seafloor Debris", p);
+        addCard("Plains", p);
+        addCard("Fervor", p);
+
+        String griz = "Grizzly Bears";
+        Card bears = addCardToZone(griz, p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(bears.getFirstSpellAbility()).value;
+
+        AssertJUnit.assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        // Grizzly cast, Seafloor not sacrificed, Elf tapped
+        Card grizBF = findCardWithName(simGame, griz);
+        AssertJUnit.assertNotNull(grizBF);
+        AssertJUnit.assertEquals(ZoneType.Battlefield, grizBF.getZone().getZoneType());
+
+        Card debrisCopy = findCardWithName(simGame, "Seafloor Debris");
+        AssertJUnit.assertNotNull(debrisCopy);
+
+        Card elfCopy = findCardWithName(simGame, "Llanowar Elves");
+        AssertJUnit.assertNotNull(elfCopy);
+        AssertJUnit.assertTrue(elfCopy.isTapped());
+    }
+
+    @Test
     public void testKeepColorsOpen() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Pebbles Flintstone
+Title=Pebbles Flintstone
+Icon=Pebbles Flintstone.jpg
+Difficulty=Easy
+Description=./Standard/The_Brothers_War/LucasG1ggs_-_Mono_Black_(Standard,_#1514023).dck
+Deck Type=constructed
+
+[Main]
+2 Phyrexian Fleshgorger
+3 Graveyard Trespasser
+3 Misery's Shadow
+3 Tenacious Underdog
+3 Gix, Yawgmoth Praetor
+3 Sheoldred, the Apocalypse
+4 Evolved Sleeper
+3 Reckoner Bankbuster
+2 Infernal Grasp
+3 Go for the Throat
+3 Cut Down
+4 Invoke Despair
+1 Takenuma, Abandoned Mire
+2 Swamp
+3 Mishra's Foundry
+18 Swamp
+[Sideboard]
+1 Reckoner Bankbuster
+1 Soul Transfer
+1 Cut Down
+2 Liliana of the Veil
+2 Unlicensed Hearse
+2 Sorin the Mirthless
+3 Malicious Malfunction
+3 Duress

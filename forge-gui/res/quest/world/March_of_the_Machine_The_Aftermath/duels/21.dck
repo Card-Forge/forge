@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Preacher
+Title=Preacher
+Icon=Preacher.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine_The_Aftermath/ErJuanRa_-_Golgari_Midrange_(Standard,_#1689894).dck
+Deck Type=constructed
+
+[Main]
+3 Graveyard Trespasser
+3 Briarbridge Tracker
+1 Tenacious Underdog
+4 Sheoldred, the Apocalypse
+2 Cankerbloom
+3 Glissa Sunslayer
+1 Tranquil Frillback
+2 Sheoldred
+4 Deeproot Wayfinder
+3 Cut Down
+1 Tear Asunder
+4 Go for the Throat
+1 Blot Out
+1 Vraska, Betrayal's Sting
+1 Nissa, Ascended Animist
+3 Llanowar Wastes
+5 Forest
+4 Deathcap Glade
+1 Boseiju, Who Endures
+1 Takenuma, Abandoned Mire
+6 Swamp
+4 Riveteers Overlook
+2 Mirrex
+[Sideboard]
+1 Phyrexian Arena
+3 Duress
+2 Path of Peril
+1 Unlicensed Hearse
+1 Cut Down
+2 Fade from History
+3 Tranquil Frillback
+2 Breach the Multiverse

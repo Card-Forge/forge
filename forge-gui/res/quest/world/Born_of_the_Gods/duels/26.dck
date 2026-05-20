@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Electro
+Title=Electro
+Icon=Electro.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/SCG_Invitational_Qualifier_-_Colorado_Springs,_CO/Keane_Frady_-_Mono_Black_(Standard,_#79917).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Desecration Demon
+4 Gray Merchant of Asphodel
+4 Nightveil Specter
+4 Pack Rat
+1 Whip of Erebos
+1 Bile Blight
+4 Devour Flesh
+4 Hero's Downfall
+1 Ultimate Price
+4 Thoughtseize
+4 Underworld Connections
+4 Mutavault
+21 Swamp
+[Sideboard]
+1 Dark Betrayal
+3 Doom Blade
+2 Drown in Sorrow
+3 Duress
+2 Erebos, God of the Dead
+3 Lifebane Zombie

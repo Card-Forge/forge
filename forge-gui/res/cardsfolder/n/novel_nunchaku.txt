@@ -1,0 +1,11 @@
+Name:Novel Nunchaku
+ManaCost:2 G
+Types:Artifact Equipment
+K:Equip:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When this Equipment enters, attach it to target creature you control. When you do, equipped creature fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.)
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | RememberAttached$ True | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | RememberObjects$ Targeted | Execute$ TrigFight | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup | TriggerDescription$ When you do, equipped creature fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.)
+SVar:TrigFight:DB$ Fight | Defined$ DelayTriggerRemembered | ValidTgts$ Creature.OppCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up go one target creature an opponent controls
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Trample | Description$ Equipped creature gets +1/+1 and has trample.
+Oracle:When this Equipment enters, attach it to target creature you control. When you do, equipped creature fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.)\nEquipped creature gets +1/+1 and has trample.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

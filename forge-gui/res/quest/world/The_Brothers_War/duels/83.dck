@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Horus
+Title=Horus
+Icon=Horus.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Brothers_War/Ben_Wienburg_-_Jund_Combo_(Modern,_#1519583).dck
+Deck Type=constructed
+
+[Main]
+4 Fable of the Mirror-Breaker
+4 Archon of Cruelty
+2 Fatal Push
+4 Lightning Bolt
+2 Inquisition of Kozilek
+4 Thoughtseize
+4 Persist
+4 Indomitable Creativity
+4 Bitter Reunion
+4 Wrenn and Six
+1 Bloodstained Mire
+1 Boseiju, Who Endures
+1 Ziatora's Proving Ground
+2 Mountain
+2 Stomping Ground
+3 Arid Mesa
+3 Wooded Foothills
+3 Blood Crypt
+4 Scalding Tarn
+4 Dwarven Mine
+[Sideboard]
+1 Sundering Titan
+1 Grave Titan
+2 Nature's Claim
+2 Hidetsugu Consumes All
+2 Boseiju, Who Endures
+3 Terminate
+4 Veil of Summer

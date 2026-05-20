@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Fin Fang Foom
+Title=Fin Fang Foom
+Icon=Fin Fang Foom.jpg
+Difficulty=Very Hard
+Description=../Modern/Eldritch_Moon/SCG_Invitational_Qualifier_-_Chatham,_NJ/Erik_Higbie_-_Burn_(Modern,_#635425).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Bedlam Reveler
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Atarka's Command
+2 Gut Shot
+4 Lightning Bolt
+2 Searing Blaze
+1 Shard Volley
+4 Bump in the Night
+2 Forked Bolt
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+2 Blood Crypt
+3 Bloodstained Mire
+4 Mountain
+4 Scalding Tarn
+2 Stomping Ground
+[Sideboard]
+4 Destructive Revelry
+2 Exquisite Firecraft
+2 Grim Lavamancer
+2 Self-Inflicted Wound
+3 Skullcrack

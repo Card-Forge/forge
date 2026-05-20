@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=King Arthur
+Title=King Arthur
+Icon=King Arthur.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/masatomo_nakanishi_-_BR_Evoke_(Modern,_#1631753).dck
+Deck Type=constructed
+
+[Main]
+4 Seasoned Pyromancer
+1 Kroxa, Titan of Death's Hunger
+4 Dauthi Voidwalker
+4 Grief
+4 Fury
+4 Ragavan, Nimble Pilferer
+2 Fable of the Mirror-Breaker
+3 Terminate
+2 Lightning Bolt
+4 Feign Death
+4 Undying Malice
+2 Thoughtseize
+2 Blood Moon
+3 Swamp
+1 Shizo, Death's Storehouse
+1 Sulfurous Springs
+3 Blood Crypt
+4 Bloodstained Mire
+2 Polluted Delta
+1 Marsh Flats
+1 Verdant Catacombs
+4 Blackcleave Cliffs
+[Sideboard]
+1 Fatal Push
+2 Abrade
+1 Blood Moon
+3 Engineered Explosives
+2 Tourach, Dread Cantor
+1 Path of Peril
+2 Hidetsugu Consumes All
+2 Unlicensed Hearse
+1 Sheoldred

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Swan
+Title=Swan
+Icon=Swan.jpg
+Difficulty=Easy
+Description=Shadows_over_Innistrad/WMCQ_#1_-_Japan/Yuuki_Ichikawa_-_Bant_(Standard,_#629472).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Duskwatch Recruiter
+3 Eldrazi Displacer
+4 Jace, Vryn's Prodigy
+2 Nissa, Vastwood Seer
+4 Reflector Mage
+4 Sylvan Advocate
+4 Tireless Tracker
+4 Collected Company
+4 Dromoka's Command
+1 Ojutai's Command
+3 Canopy Vista
+4 Evolving Wilds
+4 Forest
+1 Island
+2 Lumbering Falls
+3 Plains
+4 Prairie Stream
+1 Wastes
+4 Yavimaya Coast
+[Sideboard]
+2 Declaration in Stone
+4 Lambholt Pacifist
+3 Negate
+3 Tragic Arrogance

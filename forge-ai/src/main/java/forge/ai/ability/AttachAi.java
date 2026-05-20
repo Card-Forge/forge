@@ -48,8 +48,7 @@ public class AttachAi extends SpellAbilityAi {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
 
-        // TODO: improve this so that the AI can use a flash aura buff as a means of killing opposing creatures
-        // and gaining card advantage
+        // TODO: improve this so that the AI can use a flash aura buff as a means of killing opposing creatures and gaining card advantage
         if (source.hasKeyword("MayFlashSac") && !ai.canCastSorcery()) {
             return new AiAbilityDecision(0, AiPlayDecision.TimingRestrictions);
         }
@@ -80,11 +79,10 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         if (abCost.getTotalMana().countX() > 0 && sa.getSVar("X").equals("Count$xPaid")) {
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+            final int xPay = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
             if (xPay == 0) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }
-            sa.setXManaCostPaid(xPay);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -928,7 +926,7 @@ public class AttachAi extends SpellAbilityAi {
     @Override
     protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card card = sa.getHostCard();
-        List<GameObject> targets = new ArrayList<>();
+        List<GameObject> targets;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
             targets = AbilityUtils.getDefinedObjects(card, sa.getParam("Defined"), sa);
@@ -968,9 +966,8 @@ public class AttachAi extends SpellAbilityAi {
             }
             if (sa.isTargetNumberValid()) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         } else if ("Remembered".equals(sa.getParam("Defined")) && sa.getParent() != null
             && sa.getParent().getApi() == ApiType.Token && sa.getParent().hasParam("RememberTokens")) {
             // Living Weapon or similar
@@ -1619,13 +1616,6 @@ public class AttachAi extends SpellAbilityAi {
             return card.getNetCombatDamage() >= 1 && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.endsWith("CARDNAME can't block.")) {
             return CombatUtil.canBlock(card, true);
-        } else if (keyword.endsWith("CARDNAME's activated abilities can't be activated.")) {
-            for (SpellAbility ability : card.getSpellAbilities()) {
-                if (ability.isAbility()) {
-                    return true;
-                }
-            }
-            return false;
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt by CARDNAME.")) {
             return card.getNetCombatDamage() >= 1 && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")

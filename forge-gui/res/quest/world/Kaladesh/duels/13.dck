@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Bilbo Baggins
+Title=Bilbo Baggins
+Icon=Bilbo Baggins.jpg
+Difficulty=Easy
+Description=Kaladesh/SCG_Classic_Milwaukee/Travis_Oninski_-_Mardu_Vehicles_(Standard,_#652391).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Depala, Pilot Exemplar
+2 Pia Nalaar
+4 Scrapheap Scrounger
+4 Thraben Inspector
+4 Toolcraft Exemplar
+4 Veteran Motorist
+3 Fleetwheel Cruiser
+4 Smuggler's Copter
+4 Unlicensed Disintegration
+2 Declaration in Stone
+2 Gideon, Ally of Zendikar
+4 Aether Hub
+4 Concealed Courtyard
+4 Inspiring Vantage
+4 Mountain
+4 Needle Spires
+2 Plains
+2 Shambling Vent
+[Sideboard]
+2 Archangel Avacyn
+1 Chandra, Flamecaller
+2 Gideon, Ally of Zendikar
+1 Kambal, Consul of Allocation
+1 Painful Truths
+2 Shambling Vent
+1 Skysovereign, Consul Flagship
+1 Sorin, Grim Nemesis
+2 Stasis Snare
+2 Transgress the Mind

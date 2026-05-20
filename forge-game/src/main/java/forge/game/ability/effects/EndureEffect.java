@@ -84,7 +84,7 @@ public class EndureEffect extends TokenEffectBase {
                 tokenTable.put(pl, result, 1);
             }
         }
-        table.replaceCounterEffect(game, sa, true);
+        table.replaceCounterEffect(game, sa);
 
         if (!tokenTable.isEmpty()) {
             CardZoneTable triggerList = new CardZoneTable();

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Trostani
+Title=Trostani
+Icon=Trostani.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/Ben_Meine_-_GW_Taxes_(Modern,_#936585).dck
+Deck Type=constructed
+
+[Main]
+2 Birds of Paradise
+2 Ramunap Excavator
+2 Knight of the Reliquary
+3 Tireless Tracker
+4 Giver of Runes
+4 Noble Hierarch
+4 Leonin Arbiter
+4 Stoneforge Mystic
+4 Aven Mindcensor
+1 Sword of Feast and Famine
+1 Batterskull
+4 Path to Exile
+1 Nissa, Who Shakes the World
+1 Dryad Arbor
+1 Wooded Foothills
+2 Field of Ruin
+2 Horizon Canopy
+3 Temple Garden
+3 Plains
+4 Ghost Quarter
+4 Windswept Heath
+4 Forest
+[Sideboard]
+1 Tireless Tracker
+1 Thalia, Heretic Cathar
+1 Shadowspear
+1 Sword of Sinew and Steel
+1 Nissa, Voice of Zendikar
+2 Qasali Pridemage
+2 Gideon of the Trials
+3 Rest in Peace
+3 Veil of Summer

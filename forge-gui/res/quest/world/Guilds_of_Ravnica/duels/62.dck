@@ -1,0 +1,57 @@
+[duel]
+[metadata]
+Name=Montgomery Burns
+Title=Montgomery Burns
+Icon=Montgomery Burns.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/DemonHunter9_-_UW_Control_(Modern,_#784654).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+1 Absorb
+3 Cryptic Command
+1 Esper Charm
+4 Fatal Push
+1 Hieroglyphic Illumination
+2 Logic Knot
+2 Mana Leak
+1 Negate
+2 Opt
+3 Path to Exile
+1 Settle the Wreckage
+1 Spell Snare
+1 Surgical Extraction
+1 Supreme Verdict
+2 Terminus
+2 Search for Azcanta
+2 Jace, the Mind Sculptor
+2 Teferi, Hero of Dominaria
+2 Celestial Colonnade
+1 Drowned Catacomb
+2 Field of Ruin
+4 Flooded Strand
+1 Glacial Fortress
+2 Hallowed Fountain
+3 Island
+1 Plains
+4 Polluted Delta
+1 Shambling Vent
+1 Swamp
+2 Watery Grave
+[Sideboard]
+1 Surgical Extraction
+1 Celestial Purge
+1 Ceremonious Rejection
+1 Dispel
+1 Duress
+1 Engineered Explosives
+1 Lyra Dawnbringer
+1 Relic of Progenitus
+1 Rest in Peace
+1 Runed Halo
+1 Stony Silence
+1 Thoughtseize
+1 Timely Reinforcements
+1 Unmoored Ego
+1 Vendilion Clique

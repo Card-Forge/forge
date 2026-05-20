@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Grampa Simpson
+Title=Grampa Simpson
+Icon=Grampa Simpson.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/Abe_Kenichi_-_WU_Aggro_(Standard,_#2186080).dck
+Deck Type=constructed
+
+[Main]
+4 Steel Seraph
+4 Regal Bunnicorn
+4 Warden of the Inner Sky
+4 Spyglass Siren
+4 Novice Inspector
+4 Mockingbird
+3 Subterranean Schooner
+2 Get Lost
+4 Zoetic Glyph
+3 Case of the Gateway Express
+1 Case of the Filched Falcon
+5 Plains
+5 Island
+4 Adarkar Wastes
+4 Seachrome Coast
+2 Mirrex
+3 Restless Anchorage
+[Sideboard]
+2 Negate
+2 Disdainful Stroke
+2 Destroy Evil
+2 Loran of the Third Path
+2 Elspeth's Smite
+2 Werefox Bodyguard
+3 Tishana's Tidebinder

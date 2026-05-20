@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=BrotherVoodoo
+Title=BrotherVoodoo
+Icon=BrotherVoodoo.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Felix_Diehlmann_-_Mono-White_Humans_(Modern,_#1458023).dck
+Deck Type=constructed
+
+[Main]
+2 Hanweir Militia Captain
+2 Adeline, Resplendent Cathar
+2 Kytheon, Hero of Akros
+3 Thalia, Guardian of Thraben
+3 Chaplain of Alms
+3 Extraction Specialist
+4 Champion of the Parish
+4 Grand Abolisher
+4 Thalia's Lieutenant
+4 Knight of the White Orchid
+4 Esper Sentinel
+4 Aether Vial
+3 Paladin Class
+2 Silent Clearing
+2 Castle Ardenvale
+14 Plains
+[Sideboard]
+2 Return to the Ranks
+2 Cathar Commando
+2 Deafening Silence
+2 Unlicensed Hearse
+3 Sanctifier en-Vec
+4 March of Otherworldly Light

@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Waterlord
+Title=Waterlord
+Icon=Waterlord.jpg
+Difficulty=Medium
+Description=./Standard/Phyrexia_All_Will_Be_One/Dimas352#50367_-_Mono_blue_tempo_(Standard,_#1576795).dck
+Deck Type=constructed
+
+[Main]
+4 Haughty Djinn
+4 Tolarian Terror
+1 Reckoner Bankbuster
+4 Ertai's Scorn
+4 Impulse
+3 Negate
+4 Syncopate
+1 Essence Scatter
+3 Thirst for Discovery
+4 Fading Hope
+4 Consider
+4 Make Disappear
+1 Blue Sun's Twilight
+19 Island
+1 The Surgical Bay
+[Sideboard]

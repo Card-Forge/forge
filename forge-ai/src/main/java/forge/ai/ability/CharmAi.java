@@ -60,7 +60,7 @@ public class CharmAi extends SpellAbilityAi {
              * bonus choice(s) for the AI otherwise it might be too hard to ever fulfil
              * minimum choice requirements with canPlayAi() alone.
              */
-            chosenList = min > 1 ? chooseMultipleOptionsAi(choices, ai, min)
+            chosenList = min > 1 ? chooseMultipleOptionsAi(sa, choices, ai, min)
                     : chooseOptionsAi(sa, choices, ai, timingRight, num, min);
         }
 
@@ -92,12 +92,11 @@ public class CharmAi extends SpellAbilityAi {
     }
 
     private List<AbilitySub> chooseOptionsAi(SpellAbility sa, List<AbilitySub> choices, final Player ai, boolean isTrigger, int num, int min) {
-        List<AbilitySub> chosenList = Lists.newArrayList();
+        List<AbilitySub> chosen = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         // TODO unused for now, the AI doesn't know how to effectively handle repeated choices
         boolean allowRepeat = sa.hasParam("CanRepeatModes");
 
-        // Pawprint
         final int pawprintLimit = sa.hasParam("Pawprint") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Pawprint"), sa) : 0;
         if (pawprintLimit > 0) {
             // try to pay for the more expensive subs first
@@ -107,6 +106,7 @@ public class CharmAi extends SpellAbilityAi {
 
         // First pass using standard canPlayAi() for good choices
         for (AbilitySub sub : choices) {
+            handleDependentModes(sa, chosen, sub);
             sub.setActivatingPlayer(ai);
             // TODO refactor to obtain the AiAbilityDecision instead, then we can check all to sort by value
             if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
@@ -117,42 +117,45 @@ public class CharmAi extends SpellAbilityAi {
                     }
                     pawprintAmount += curPawprintAmount;
                 }
-                chosenList.add(sub);
-                if (chosenList.size() == num) {
+                chosen.add(sub);
+                if (chosen.size() == num) {
                     // maximum choices reached
-                    return chosenList;
+                    break;
                 }
             }
         }
-        if (isTrigger && chosenList.size() < min) {
+        if (isTrigger && chosen.size() < min) {
             // Second pass using doTrigger(false) to fulfill minimum choice
-            choices.removeAll(chosenList);
+            choices.removeAll(chosen);
             for (AbilitySub sub : choices) {
+                handleDependentModes(sa, chosen, sub);
                 if (aic.doTrigger(sub, false)) {
-                    chosenList.add(sub);
-                    if (chosenList.size() == min) {
-                        return chosenList;
+                    chosen.add(sub);
+                    if (chosen.size() == min) {
+                        break;
                     }
                 }
             }
             // Third pass using doTrigger(true) to force fill minimum choices
-            if (chosenList.size() < min) {
-                choices.removeAll(chosenList);
+            if (chosen.size() < min) {
+                choices.removeAll(chosen);
                 for (AbilitySub sub : choices) {
+                    handleDependentModes(sa, chosen, sub);
                     if (aic.doTrigger(sub, true)) {
-                        chosenList.add(sub);
-                        if (chosenList.size() == min) {
+                        chosen.add(sub);
+                        if (chosen.size() == min) {
                             break;
                         }
                     }
                 }
             }
         }
-        if (chosenList.size() < min) {
+        if (chosen.size() < min) {
             // not enough choices
-            chosenList.clear();
+            chosen.clear();
         }
-        return chosenList;
+        sa.setSubAbility(null);
+        return chosen;
     }
 
     private List<AbilitySub> chooseTriskaidekaphobia(List<AbilitySub> choices, final Player ai) {
@@ -242,36 +245,43 @@ public class CharmAi extends SpellAbilityAi {
         return chosenList;
     }
 
-    // Choice selection for charms that require multiple choices (eg. Cryptic Command, DTK commands)
-    private List<AbilitySub> chooseMultipleOptionsAi(List<AbilitySub> choices, final Player ai, int min) {
+    // Choice selection for charms that require multiple choices (e.g. Cryptic Command)
+    private List<AbilitySub> chooseMultipleOptionsAi(SpellAbility sa, List<AbilitySub> choices, final Player ai, int min) {
         AbilitySub goodChoice = null;
-        List<AbilitySub> chosenList = Lists.newArrayList();
+        List<AbilitySub> chosen = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         for (AbilitySub sub : choices) {
+            handleDependentModes(sa, chosen, sub);
             sub.setActivatingPlayer(ai);
             // Assign generic good choice to fill up choices if necessary 
             if ("Good".equals(sub.getParam("AILogic")) && aic.doTrigger(sub, false)) {
                 goodChoice = sub;
-            } else {
-                // Standard canPlayAi()
-                sub.setActivatingPlayer(ai);
-                if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
-                    chosenList.add(sub);
-                    if (chosenList.size() == min) {
-                        break; // enough choices
-                    }
+            } else if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
+                chosen.add(sub);
+                if (chosen.size() == min) {
+                    break; // enough choices
                 }
             }
         }
         // Add generic good choice if one more choice is needed
-        if (chosenList.size() == min - 1 && goodChoice != null) {
-            chosenList.add(0, goodChoice);  // hack to make Dromoka's Command fight targets work
+        if (chosen.size() == min - 1 && goodChoice != null) {
+            chosen.add(0, goodChoice);  // hack to make Dromoka's Command fight targets work
         }
-        if (chosenList.size() != min) {
-            chosenList.clear();
+        if (chosen.size() != min) {
+            chosen.clear();
         }
-        return chosenList;
-    } 
+        sa.setSubAbility(null);
+        return chosen;
+    }
+
+    private void handleDependentModes(SpellAbility sa, List<AbilitySub> chosen, AbilitySub sub) {
+        if (sub.hasParam("TargetUnique") && !chosen.isEmpty()) {
+            // support "Each mode must target a different..."
+            sa.setSubAbility(null);
+            CharmEffect.chainAbilities(sa, chosen);
+            sa.appendSubAbility(sub);
+        }
+    }
 
     @Override
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> opponents, Map<String, Object> params) {

@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=The Backlash Machine
+Title=The Backlash Machine
+Icon=The Backlash Machine.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/BlueLips_-_Bant_Midramp_(Modern,_#1016339).dck
+Deck Type=constructed
+
+[Main]
+2 Primeval Titan
+3 Uro, Titan of Nature's Wrath
+1 Mana Leak
+1 Spell Snare
+2 Cryptic Command
+3 Remand
+4 Force of Negation
+4 Growth Spiral
+4 Path to Exile
+1 Supreme Verdict
+2 Jace, the Mind Sculptor
+2 Teferi, Hero of Dominaria
+3 Teferi, Time Raveler
+1 Temple Garden
+1 Windswept Heath
+1 Prairie Stream
+1 Plains
+1 Forest
+1 Snow-Covered Forest
+2 Snow-Covered Island
+2 Mystic Sanctuary
+2 Island
+2 Breeding Pool
+2 Field of Ruin
+2 Field of the Dead
+2 Hallowed Fountain
+4 Flooded Strand
+4 Misty Rainforest
+[Sideboard]
+1 Supreme Verdict
+1 Ashiok, Dream Render
+1 Baneslayer Angel
+1 Dovin's Veto
+1 Ravenous Trap
+2 Ceremonious Rejection
+2 Timely Reinforcements
+2 Veil of Summer
+4 Aether Gust

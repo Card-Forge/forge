@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=BlackTalon
+Title=BlackTalon
+Icon=BlackTalon.jpg
+Difficulty=Very Hard
+Description=./Modern/War_of_the_Spark/Gods_Shadow_-_Esper_Control_(Modern,_#798791).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+4 Cryptic Command
+2 Dovin's Veto
+4 Esper Charm
+4 Fatal Push
+2 Logic Knot
+4 Opt
+4 Path to Exile
+2 Bitterblossom
+2 Search for Azcanta
+2 Kaya, Orzhov Usurper
+1 Narset, Parter of Veils
+2 Teferi, Time Raveler
+2 Celestial Colonnade
+2 Creeping Tar Pit
+4 Flooded Strand
+1 Godless Shrine
+2 Hallowed Fountain
+3 Island
+1 Plains
+4 Polluted Delta
+2 Swamp
+2 Watery Grave
+[Sideboard]
+2 Dovin's Veto
+2 Ashiok, Dream Render
+2 Collective Brutality
+2 Damnation
+2 Gideon of the Trials
+1 Lyra Dawnbringer
+2 Pact of Negation
+2 Surgical Extraction

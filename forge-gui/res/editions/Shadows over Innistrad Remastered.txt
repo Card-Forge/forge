@@ -26,7 +26,7 @@ ScryfallCode=SIR
 14 U Blessed Alliance @Johann Bodin
 15 C Borrowed Grace @Volkan Baǵa
 16 C Bound by Moonsilver @Joseph Meehan
-17a R Bruna, the Fading Light @Clint Cearley
+17 R Bruna, the Fading Light @Clint Cearley
 18 R Bygone Bishop @Jason A. Engle
 19 R Collective Effort @Eric Deschamps
 20 U Courageous Outrider @Ryan Alexander Lee
@@ -124,7 +124,7 @@ ScryfallCode=SIR
 112 C Ghoulcaller's Accomplice @Dave Kendall
 113 C Gisa's Bidding @Jason Felix
 114 U Graf Harvest @Lake Hurwitz
-115a C Graf Rats @Jason Felix
+115 C Graf Rats @Jason Felix
 116 C Grotesque Mutation @Dan Murayama Scott
 117 U Haunted Dead @Lake Hurwitz
 118 U Indulgent Aristocrat @Anna Steinbauer
@@ -170,7 +170,7 @@ ScryfallCode=SIR
 158 C Gatstaf Arsonists @Greg Staples
 159 U Geier Reach Bandit @Slawomir Maniak
 160 M Goldnight Castigator @Zack Stella
-161a R Hanweir Garrison @Vincent Proce
+161 R Hanweir Garrison @Vincent Proce
 162 C Howlpack Wolf @Svetlin Velinov
 163 C Incendiary Flow @Raymond Swanland
 164 C Insatiable Gorgers @Nils Hamm

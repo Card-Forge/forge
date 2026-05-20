@@ -1,0 +1,10 @@
+Name:Rocksteady, Crash Courser
+ManaCost:4 G G
+Types:Legendary Creature Rhino Mutant
+PT:7/7
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ NICKNAME can't be blocked by more than one creature.
+S:Mode$ MinMaxBlocker | ValidCard$ Boar.YouCtrl | Max$ 1 | Description$ Boars you control can't be blocked by more than one creature.
+K:TypeCycling:Forest:2
+SVar:PlayMain1:TRUE
+DeckHints:Type$Boar
+Oracle:Rocksteady can't be blocked by more than one creature.\nBoars you control can't be blocked by more than one creature.\nForestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)

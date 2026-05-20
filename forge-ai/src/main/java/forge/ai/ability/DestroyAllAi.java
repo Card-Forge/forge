@@ -63,10 +63,7 @@ public class DestroyAllAi extends SpellAbilityAi {
         String valid = sa.getParamOrDefault("ValidCards", "");
 
         if (valid.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-            sa.setXManaCostPaid(xPay);
-            valid = valid.replace("X", Integer.toString(xPay));
+            ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
         }
 
         // TODO should probably sort results when targeted to use on biggest threat instead of first match

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Hugo Drax
+Title=Hugo Drax
+Icon=Hugo Drax.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Elias_Watsfeldt_-_Mono-Green_Infect_(Modern,_#1437316).dck
+Deck Type=constructed
+
+[Main]
+2 Patchwork Automaton
+3 Arcbound Worker
+4 Arcbound Ravager
+4 Hangarback Walker
+4 Walking Ballista
+4 Zabaz, the Glimmerwasp
+3 The Ozolith
+4 Welding Jar
+4 Ancient Stirrings
+4 Hardened Scales
+4 Urza's Saga
+1 Llanowar Reborn
+1 Pendelhaven
+1 Roadside Reliquary
+2 Boseiju, Who Endures
+3 Forest
+4 Grove of the Burnwillows
+4 Cragcrown Pathway
+4 Inkmoth Nexus
+[Sideboard]
+1 Pithing Needle
+1 Void Mirror
+1 Animation Module
+1 Grafdigger's Cage
+1 Chalice of the Void
+2 Tamiyo's Safekeeping
+2 Unlicensed Hearse
+2 Nature's Claim
+2 Gemrazer
+2 Dismember

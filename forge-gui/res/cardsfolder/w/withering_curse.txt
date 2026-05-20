@@ -1,0 +1,8 @@
+Name:Withering Curse
+ManaCost:1 B B
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SubAbility$ DBDestroyAll | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SpellDescription$ All creatures get -2/-2 until end of turn.
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature | SubAbility$ DBPutCounter | ConditionCheckSVar$ X | SpellDescription$ Infusion — If you gained life this turn, destroy all creatures instead.
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHints:Ability$LifeGain
+Oracle:All creatures get -2/-2 until end of turn.\nInfusion — If you gained life this turn, destroy all creatures instead.

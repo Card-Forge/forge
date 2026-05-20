@@ -10,6 +10,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
@@ -25,6 +26,7 @@ import java.util.Map;
 public class CopySpellAbilityEffect extends SpellAbilityEffect {
     @Override
     public void buildSpellAbility(SpellAbility sa) {
+        super.buildSpellAbility(sa);
         if (sa.usesTargeting()) {
             sa.getTargetRestrictions().setZone(ZoneType.Stack);
         }
@@ -161,14 +163,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
 
                         // extra case for Epic to remove the keyword and the last part of the SpellAbility
                         if (sa.hasParam("Epic")) {
-                            copy.getHostCard().removeIntrinsicKeyword("Epic");
-                            SpellAbility sub = copy;
-                            while (sub.getSubAbility() != null && !sub.hasParam("Epic")) {
-                                sub = sub.getSubAbility();
-                            }
-                            if (sub != null) {
-                                sub.getParent().setSubAbility(sub.getSubAbility());
-                            }
+                            copy.getHostCard().removeIntrinsicKeyword(Keyword.EPIC);
                         }
 
                         copies.add(copy);

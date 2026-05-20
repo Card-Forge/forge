@@ -170,7 +170,9 @@ public class GameSimulator {
         SpellAbility sa;
         if (origSa.isLandAbility()) {
             Card hostCard = (Card) copier.find(origSa.getHostCard());
-            if (!aiPlayer.playLand(hostCard, false, origSa)) {
+            if (origSa.canPlay()) {
+                aiPlayer.playLand(hostCard, origSa);
+            } else {
                 System.err.println("Simulation: Couldn't play land! " + origSa);
             }
             sa = origSa;
@@ -211,7 +213,7 @@ public class GameSimulator {
             final SpellAbility playingSa = sa;
             // Is this right?
             simGame.copyLastState();
-            boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, simGame, () -> {
+            boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, () -> {
                 if (interceptor != null) {
                     interceptor.announceX(playingSa);
                     interceptor.chooseTargets(playingSa, GameSimulator.this);

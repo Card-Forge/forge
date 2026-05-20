@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzbwM7AsIHG2JiVgeEKEHdyIjBI3IiVtvZeR7MTZu8FEuwFub2EDROb4DHjIlDODIt/SbELPbxg+DIB94DstkDCxNhXyobdLmIwyD34woKYtEAuvkqCvdjSArm4mED808KvpIQ3Nf1KSngPlL3Y8hu90hcsv1HLflOgOWtIKOMo9TvIPiF2TDsJlXHE+N0UrSxCxrj8CMtfpNgPwpZIbiClXIDlU1LjHVv4k6IPW9lAqrs3spOmD9lOAPPDPGo=
@@ -29,28 +29,28 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="256" y="271"/>
-  <object id="41" template="../../../../../../common/maps/obj/shop.tx" x="304" y="98">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="256" y="271"/>
+  <object id="41" template="../../../../common/maps/obj/shop.tx" x="304" y="98">
    <properties>
     <property name="commonShopList" value="Blue1,Blue2"/>
    </properties>
   </object>
-  <object id="42" template="../../../../../../common/maps/obj/shop.tx" x="368" y="162">
+  <object id="42" template="../../../../common/maps/obj/shop.tx" x="368" y="162">
    <properties>
     <property name="commonShopList" value="ColorRandomBlue"/>
    </properties>
   </object>
-  <object id="47" template="../../../../../../common/maps/obj/inn.tx" x="215" y="82"/>
-  <object id="48" template="../../../../../../common/maps/obj/shop.tx" x="173.75" y="209.75" width="20.75" height="18.75">
+  <object id="47" template="../../../../common/maps/obj/inn.tx" x="215" y="82"/>
+  <object id="48" template="../../../../common/maps/obj/shop.tx" x="173.75" y="209.75" width="20.75" height="18.75">
    <properties>
     <property name="commonShopList" value="Island"/>
    </properties>
   </object>
-  <object id="52" template="../../../../../../common/maps/obj/quest.tx" x="159" y="146" width="34" height="16">
+  <object id="52" template="../../../../common/maps/obj/quest.tx" x="159" y="146" width="34" height="16">
    <properties>
     <property name="questtype" value="island_town_identity"/>
    </properties>
   </object>
-  <object id="53" template="../../../../../../common/maps/obj/shardtrader.tx" x="398" y="178"/>
+  <object id="53" template="../../../../common/maps/obj/shardtrader.tx" x="398" y="178"/>
  </objectgroup>
 </map>

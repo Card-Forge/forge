@@ -4,14 +4,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
 import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import forge.gui.GuiBase;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.GameLogEntry;
@@ -135,9 +134,8 @@ public class ViewWinLose implements IWinLoseView<FButton> {
 
         final FLabel btnCopyLog = new FLabel.ButtonBuilder().text(localizer.getMessage("btnCopyToClipboard")).build();
         btnCopyLog.setCommand((UiCommand) () -> {
-            final StringSelection ss = new StringSelection(txtLog.getText());
             try {
-                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+                GuiBase.getInterface().copyToClipboard(txtLog.getText());
             } catch (final IllegalStateException ex) {
                 // ignore; may be unavailable on some platforms
             }
@@ -254,13 +252,13 @@ public class ViewWinLose implements IWinLoseView<FButton> {
 
     private void showGameOutcomeSummary() {
         for (final GameLogEntry o : game.getGameLog().getLogEntriesExact(GameLogEntryType.GAME_OUTCOME)) {
-            pnlOutcomes.add(new FLabel.Builder().text(o.message).fontSize(14).build(), "h 20!");
+            pnlOutcomes.add(new FLabel.Builder().text(o.message()).fontSize(14).build(), "h 20!");
         }
     }
 
     private void showPlayerScores() {
         for (final GameLogEntry o : game.getGameLog().getLogEntriesExact(GameLogEntryType.MATCH_RESULTS)) {
-            lblStats.setText(removePlayerTypeFromLogMessage(o.message));
+            lblStats.setText(removePlayerTypeFromLogMessage(o.message()));
         }
     }
 

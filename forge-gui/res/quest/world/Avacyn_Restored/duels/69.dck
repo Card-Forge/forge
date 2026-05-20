@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Boris Karloff
+Title=Boris Karloff
+Icon=Boris Karloff.jpg
+Difficulty=Hard
+Description=../Modern/Avacyn_Restored/Arcore_(MI)_-_9┬¬_Tappa_PMC_2012_(AGM23)/Sala_Michele_-_Boros_(Modern,_#33430).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Chandra's Phoenix
+4 Goblin Guide
+4 Grim Lavamancer
+4 Plated Geopede
+1 Spikeshot Elder
+4 Steppe Lynx
+2 Lightning Helix
+4 Path to Exile
+4 Searing Blaze
+1 Bonfire of the Damned
+2 Elspeth, Knight-Errant
+4 Arid Mesa
+2 Boros Garrison
+2 Marsh Flats
+5 Mountain
+4 Plains
+4 Scalding Tarn
+1 Slayers' Stronghold
+[Sideboard]
+4 Combust
+2 Pithing Needle
+2 Pyroclasm
+2 Relic of Progenitus
+2 Shattering Spree
+2 Torpor Orb
+1 Volcanic Fallout

@@ -196,31 +196,6 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
         return getImageKey(true);
     }
 
-    @Override
-    public String getCardWSpecImageKey() {
-        return getImageKey(false);
-    }
-
-    @Override
-    public String getCardUSpecImageKey() {
-        return getImageKey(false);
-    }
-
-    @Override
-    public String getCardBSpecImageKey() {
-        return getImageKey(false);
-    }
-
-    @Override
-    public String getCardRSpecImageKey() {
-        return getImageKey(false);
-    }
-
-    @Override
-    public String getCardGSpecImageKey() {
-        return getImageKey(false);
-    }
-
     // InventoryItem
     @Override
     public String getImageKey(boolean altState) {

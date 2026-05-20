@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Peregrin Took
+Title=Peregrin Took
+Icon=Peregrin Took.jpg
+Difficulty=Easy
+Description=New_Phyrexia/Enschede_-_Netherlands/Jasper_Boelens_in_PTQ_Philadelphia_-_Red_Deck_Wins_(Standard,_#15284).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ember Hauler
+4 Goblin Guide
+3 Manic Vandal
+4 Shrine of Burning Rage
+4 Burst Lightning
+4 Lightning Bolt
+4 Searing Blaze
+4 Staggershock
+4 Koth of the Hammer
+4 Arid Mesa
+14 Mountain
+4 Scalding Tarn
+3 Tectonic Edge
+[Sideboard]
+2 Act of Aggression
+3 Arc Trail
+3 Combust
+2 Crush
+2 Dismember
+2 Obsidian Fireheart
+1 Shatter

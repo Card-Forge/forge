@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Cipher
+Title=Cipher
+Icon=Cipher.jpg
+Difficulty=Medium
+Description=./Standard/Edge_of_Eternities/Aaron_Back_-_Temur_Battlecrier_(Standard,_#2653687).dck
+Deck Type=constructed
+
+[Main]
+4 Doc Aurlock, Grizzled Genius
+4 Llanowar Elves
+4 Outcaster Trailblazer
+2 Quantum Riddler
+4 Railway Brawler
+4 Temur Battlecrier
+4 Esper Origins
+2 Abrade
+3 Into the Flood Maw
+4 Devastating Onslaught
+2 Winternight Stories
+4 Botanical Sanctum
+4 Breeding Pool
+2 Forest
+4 Starting Town
+4 Stomping Ground
+2 Thornspire Verge
+3 Willowrush Verge
+[Sideboard]
+3 Annul
+1 Broadside Barrage
+2 Dissection Tools
+2 Fire Magic
+1 Heritage Reclamation
+3 Spectral Denial
+2 Surrak, Elusive Hunter
+1 Torch the Tower

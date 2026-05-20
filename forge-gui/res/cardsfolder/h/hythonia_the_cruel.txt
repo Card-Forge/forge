@@ -3,7 +3,7 @@ ManaCost:4 B B
 Types:Legendary Creature Gorgon
 PT:4/6
 K:Deathtouch
-K:Monstrosity:3:6 B B
+A:AB$ PutCounter | Cost$ 6 B B | Monstrosity$ 3
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME becomes monstrous, destroy all non-Gorgon creatures.
 SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Creature.nonGorgon
 DeckHas:Ability$Counters

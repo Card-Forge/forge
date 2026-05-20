@@ -319,7 +319,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                     // try to remove P1P1 from undying or evolve
                     if (cType != null && cType.is(CounterEnumType.P1P1)) {
                         if (card.hasKeyword(Keyword.UNDYING) || card.hasKeyword(Keyword.EVOLVE)
-                                || card.hasKeyword(Keyword.ADAPT)) {
+                                || card.getNonManaAbilities().anyMatch(ab -> ab.hasParam("Adapt"))) {
                             return true;
                         }
                     }

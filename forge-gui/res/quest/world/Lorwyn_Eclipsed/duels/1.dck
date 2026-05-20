@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Iceman
+Title=Iceman
+Icon=Iceman.jpg
+Difficulty=Easy
+Description=./Standard/Lorwyn_Eclipsed/Gareth_Antle_-_Sultai_Reanimator_(Standard,_#2784345).dck
+Deck Type=constructed
+
+[Main]
+4 Bringer of the Last Gift
+4 Deceit
+4 Formidable Speaker
+4 Oblivious Bookworm
+4 Superior Spider-Man
+4 Wistfulness
+3 Ardyn, the Usurper
+3 Overlord of the Balemurk
+1 Harvester of Misery
+3 Requiting Hex
+2 Bitter Triumph
+4 Cavern of Souls
+4 Overgrown Tomb
+4 Watery Grave
+3 Wastewood Verge
+2 Breeding Pool
+2 Gloomlake Verge
+2 Undercity Sewers
+2 Willowrush Verge
+1 Underground Mortuary
+[Sideboard]
+4 Deep-Cavern Bat
+2 Glarb, Calamity's Augur
+2 Intimidation Tactics
+2 Spell Snare
+2 Urgent Necropsy
+1 Ghost Vacuum
+1 Negate
+1 Soul-Guide Lantern

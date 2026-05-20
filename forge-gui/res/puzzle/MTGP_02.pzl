@@ -3,7 +3,7 @@ Name:MTG Puzzles #02 - It's a Trap!
 URL:https://mtgpuzzles.com/puzzle/2
 Goal:Survive
 Turns:1
-Difficulty:Easy
+Difficulty:Common
 Description:Survive until your next turn. It's your opponents turn and they have attacked with 5 Construct tokens! It's their declare blockers step, can you find a way to survive this turn? Don't forget about Throne of the God-Pharaoh!
 [state]
 turn=1

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Buffy
+Title=Buffy
+Icon=Buffy.jpg
+Difficulty=Very Hard
+Description=./Modern/Edge_of_Eternities/Joseph_Cruz_-_Esper_Control_(Modern,_#2665823).dck
+Deck Type=constructed
+
+[Main]
+4 Psychic Frog
+4 Quantum Riddler
+4 Subtlety
+3 Tamiyo, Inquisitive Student
+1 Orcish Bowmasters
+4 Counterspell
+4 Fatal Push
+2 Force of Negation
+2 Sink into Stupor
+2 Spell Snare
+2 Stern Scolding
+1 Cling to Dust
+1 Drown in the Loch
+4 Thoughtseize
+1 Teferi, Time Raveler
+4 Polluted Delta
+3 Flooded Strand
+2 Darkslick Shores
+2 Hallowed Fountain
+2 Island
+2 Marsh Flats
+2 Undercity Sewers
+2 Watery Grave
+1 Meticulous Archive
+1 Swamp
+[Sideboard]
+4 Consign to Memory
+4 Pest Control
+2 Harbinger of the Seas
+2 Mystical Dispute
+1 Force of Negation
+1 Kaito, Bane of Nightmares
+1 Nihil Spellbomb

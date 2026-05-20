@@ -2,7 +2,7 @@ Name:Skatewing Spy
 ManaCost:3 U
 Types:Creature Vedalken Rogue Mutant
 PT:2/3
-K:Adapt:2:5 U
+A:AB$ PutCounter | Cost$ 5 U | Adapt$ 2
 DeckHas:Ability$Counters
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Flying | Description$ Each creature you control with a +1/+1 counter on it has flying.
 DeckHints:Ability$Counters

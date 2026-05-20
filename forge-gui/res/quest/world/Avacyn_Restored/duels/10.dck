@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=WitchDoctor
+Title=WitchDoctor
+Icon=WitchDoctor.jpg
+Difficulty=Medium
+Description=Avacyn_Restored/Standard_Silver_TCQ_-_Manitowoc,_WI_-_4-26-12/DannyWeinstock_-_Monoblack_Infect_(Standard,_#31661).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Phyrexian Crusader
+4 Plague Stinger
+3 Skithiryx, the Blight Dragon
+4 Whispering Specter
+4 Lashwrithe
+4 Doom Blade
+2 Go for the Throat
+4 Tragic Slip
+4 Dark Favor
+4 Predator's Gambit
+4 Inkmoth Nexus
+19 Swamp
+[Sideboard]
+4 Black Sun's Zenith
+4 Nihil Spellbomb
+4 Spellskite
+3 Surgical Extraction

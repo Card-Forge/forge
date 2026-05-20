@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Jack Sparrow
+Title=Jack Sparrow
+Icon=Jack Sparrow.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/IzzetABCannon_-_Dimir_Tempo_(Standard,_#1271248).dck
+Deck Type=constructed
+
+[Main]
+3 Lier, Disciple of the Drowned
+4 Sedgemoor Witch
+1 The Celestus
+1 Test of Talents
+2 Jwari Disruption
+2 Siphon Insight
+2 Behold the Multiverse
+3 Infernal Grasp
+4 Divide by Zero
+4 Consider
+4 Fading Hope
+2 Bloodchief's Thirst
+4 Duress
+1 Sorin the Mirthless
+1 Hive of the Eye Tyrant
+2 Field of Ruin
+2 Hall of Storm Giants
+4 Clearwater Pathway
+4 Shipwreck Marsh
+5 Island
+5 Swamp
+[Sideboard]
+1 Test of Talents
+1 Environmental Sciences
+1 Iymrith, Desert Doom
+1 Mascot Exhibition
+1 Soul Shatter
+1 Teachings of the Archaics
+2 The Meathook Massacre
+2 Malevolent Hermit
+2 Ray of Enfeeblement
+3 Go Blank

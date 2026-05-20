@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Riddler
+Title=Riddler
+Icon=Riddler.jpg
+Difficulty=Medium
+Description=./Standard/Ikoria_Lair_of_Behemoths/1-3drop_-_Rakdos_Sacrifice_(Standard,_#969020).dck
+Deck Type=constructed
+
+[Main]
+4 Cauldron Familiar
+4 Gutterbones
+4 Judith, the Scourge Diva
+4 Knight of the Ebon Legion
+4 Serrated Scorpion
+4 Woe Strider
+4 Heraldic Banner
+4 Witch's Oven
+4 Claim the Firstborn
+2 Temple of Malice
+4 Blood Crypt
+6 Mountain
+12 Swamp
+[Sideboard]
+1 Pharika's Libation
+1 Obosh, the Preypiercer
+1 Duress
+1 Blazing Volley
+1 Act of Treason
+2 Murderous Rider
+4 Drill Bit
+4 Rotting Regisaur

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Black Flame
+Title=Black Flame
+Icon=Black Flame.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/Magic-League_Modern_Trial/abzanasshole_-_Naya_Burn_(Modern,_#320291).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+2 Searing Blaze
+2 Exquisite Firecraft
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+3 Bloodstained Mire
+1 Copperline Gorge
+2 Mountain
+2 Sacred Foundry
+3 Scalding Tarn
+2 Stomping Ground
+3 Wooded Foothills
+[Sideboard]
+3 Destructive Revelry
+3 Lightning Helix
+2 Path to Exile
+1 Relic of Progenitus
+1 Rending Volley
+3 Skullcrack

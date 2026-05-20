@@ -62,6 +62,25 @@ public class AITest {
         return resetGame();
     }
 
+    protected Game initAndCreateThreePlayerGame() {
+        initAndCreateGame();
+
+        List<RegisteredPlayer> players = Lists.newArrayList();
+        Deck d1 = new Deck();
+        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("opponent", null)));
+        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("ai", null)));
+        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("ally", null)));
+
+        GameRules rules = new GameRules(GameType.Constructed);
+        Match match = new Match(rules, players, "Test");
+        Game game = new Game(players, rules, match);
+        Player ai = game.getPlayers().get(1);
+        game.setAge(GameStage.Play);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
+        game.getPhaseHandler().onStackResolved();
+        return game;
+    }
+
     protected void gameLoopUntilNextPhase(Game game) {
         int maxIterations = 100;
         int iterations = 0;
@@ -98,11 +117,9 @@ public class AITest {
         return null;
     }
 
-
     protected SpellAbility findSAWithPrefix(Card c, String prefix) {
         return findSAWithPrefix(c.getSpellAbilities(), prefix);
     }
-
     protected SpellAbility findSAWithPrefix(Iterable<SpellAbility> abilities, String prefix) {
         for (SpellAbility sa : abilities) {
             if (sa.getDescription().startsWith(prefix)) {

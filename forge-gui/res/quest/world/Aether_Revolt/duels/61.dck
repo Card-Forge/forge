@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=RasAlGhul
+Title=RasAlGhul
+Icon=RasAlGhul.jpg
+Difficulty=Hard
+Description=../Modern/Aether_Revolt/dargent4_-_Deck_(Modern,_#663867).dck
+Deck Type=constructed
+
+[Main]
+1 Arashi, the Sky Asunder
+3 Birds of Paradise
+4 Dauntless Dourbark
+2 Doran, the Siege Tower
+4 Dungrove Elder
+2 Fulminator Mage
+2 Heartwood Storyteller
+4 Leaf-Crowned Elder
+4 Sakura-Tribe Elder
+1 Timber Protector
+3 Treefolk Harbinger
+3 Abrupt Decay
+4 Fatal Push
+3 Cavern of Souls
+7 Forest
+3 Misty Rainforest
+4 Murmuring Bosk
+4 Overgrown Tomb
+2 Wooded Foothills
+[Sideboard]
+2 Collective Brutality
+1 Fulminator Mage
+1 Maelstrom Pulse
+1 Relic of Progenitus
+1 Rest in Peace
+2 Stony Silence
+2 Surgical Extraction
+3 Thorn of Amethyst
+2 Torpor Orb
