@@ -1,0 +1,9 @@
+Name:Bolshack Dragon
+ManaCost:5 R
+Types:Creature Dragon
+PT:6/6
+# Note: For convenience, it was determined that "Armored" wasn't striked through on the type line of this card due to an editing lapse. The striked-through parts of the card text were excised from the script for lack of a consistent way to display them in-game. These may be added back on at some point once the game engine deals well with them.
+K:Double Strike
+S:Mode$ Continuous | Affected$ Card.Self+attacking | AddPower$ X | Description$ As long as this creature is attacking, it gets +1/+0 for each red card in your graveyard.
+SVar:X:Count$ValidGraveyard Card.Red+YouOwn
+Oracle:Double strike\nWhile attacking, this creature gets +1 power for each red card in your graveyard.
