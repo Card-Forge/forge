@@ -282,11 +282,16 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private void evaluateYieldInterruptForSpellCast(GameEventSpellAbilityCast event) {
         if (humanController == null) return;
         YieldController yc = humanController.getYieldController();
-        if (!yc.isYieldActive()) return;
+        // isYieldActive() only covers explicit yields; APINA-with-respects-interrupts
+        // also wants to be told about casts so it can set autoPassInterrupted.
+        if (!yc.shouldEvaluateInterrupts()) return;
         GameView gv = matchController.getGameView();
         if (gv == null || gv.getGame() == null) return;
         // Look up the actual SpellAbilityStackInstance by id (host-side; client gv.getGame() is null).
+        // event.si() can be null on reconnect-time event replays.
+        if (event.si() == null) return;
         int targetId = event.si().getId();
+        if (targetId < 0) return;
         for (SpellAbilityStackInstance candidate : gv.getGame().getStack()) {
             if (candidate.getId() == targetId) {
                 yc.onSpellAbilityCast(candidate);
@@ -375,7 +380,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventAttackersDeclared event) {
         if (humanController != null) {
             YieldController yc = humanController.getYieldController();
-            if (yc.isYieldActive()) {
+            // APINA-with-respects-interrupts wants the attackers signal too, not just explicit yields.
+            if (yc.shouldEvaluateInterrupts()) {
                 GameView gv = matchController.getGameView();
                 if (gv != null && gv.getCombat() != null) yc.onAttackersDeclared(gv.getCombat());
             }

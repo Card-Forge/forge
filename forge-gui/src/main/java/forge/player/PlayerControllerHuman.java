@@ -957,6 +957,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             message += " " + localizer.getMessage("lblPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         }
         final String fm = MessageUtil.formatMessage(message, getLocalPlayerView(), owner);
+        // While yielding with the reveal interrupt off, skip the modal the auto-pass would just
+        // plow through. Consistent with a normal reveal, nothing is logged.
+        if (shouldSuppressRevealModal()) {
+            return;
+        }
         if (cards.isEmpty()) {
             getGui().message(MessageUtil.formatMessage(localizer.getMessage("lblThereNoCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase()),
                     getLocalPlayerView(), owner), fm);
@@ -1890,17 +1895,35 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final String message = MessageUtil.formatNotificationMessage(sa, player, realtedTarget, value);
         if (sa != null && sa.isManaAbility()) {
             getGame().fireEvent(new GameEventAddLog(GameLogEntryType.LAND, message));
-        } else if (sa != null && sa.getHostCard() != null && getGui().isLibgdxPort()) {
-            CardView cardView;
-            IPaperCard iPaperCard = sa.getHostCard().getPaperCard();
-            if (iPaperCard != null)
-                cardView = CardView.getCardForUi(iPaperCard);
-            else
-                cardView = sa.getHostCard().getView();
-            getGui().confirm(cardView, message, true, ImmutableList.of(localizer.getMessage("lblOK")));
-        } else {
-            getGui().message(message, sa == null || sa.getHostCard() == null ? "" : CardView.get(sa.getHostCard()).toString());
+        } else if (!shouldSuppressRevealModal()) {
+            // While yielding with the reveal interrupt off the modal is skipped entirely; like a
+            // normal reveal, nothing is logged.
+            if (sa != null && sa.getHostCard() != null && getGui().isLibgdxPort()) {
+                CardView cardView;
+                IPaperCard iPaperCard = sa.getHostCard().getPaperCard();
+                if (iPaperCard != null)
+                    cardView = CardView.getCardForUi(iPaperCard);
+                else
+                    cardView = sa.getHostCard().getView();
+                getGui().confirm(cardView, message, true, ImmutableList.of(localizer.getMessage("lblOK")));
+            } else {
+                getGui().message(message, sa == null || sa.getHostCard() == null ? "" : CardView.get(sa.getHostCard()).toString());
+            }
         }
+    }
+
+    /**
+     * True when a reveal/notifyOfValue modal should be skipped while yielding:
+     * INTERRUPT_ON_REVEAL is off (if it were on, the reveal just interrupted, so
+     * the modal is meaningful) and {@link #mayAutoPass} confirms we'd auto-pass
+     * past it anyway (i.e. an explicit yield is active or APINA would fire — both
+     * of which already filter for autoPassInterrupted). Skipping is inherent to
+     * having the reveal interrupt off; there's no separate pref. Want the reveals?
+     * Turn on the reveal interrupt (with APINA-respects-interrupts).
+     */
+    private boolean shouldSuppressRevealModal() {
+        if (yieldController.getBoolPref(FPref.YIELD_INTERRUPT_ON_REVEAL)) return false;
+        return mayAutoPass();
     }
 
     /*

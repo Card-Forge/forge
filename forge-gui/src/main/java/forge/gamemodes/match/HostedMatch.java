@@ -218,6 +218,8 @@ public class HostedMatch {
             p.updateSleeve();
 
             if (p.getController() instanceof PlayerControllerHuman humanController) {
+                // Per-tick yield flags survive clearAutoYields between games; wipe them so game N+1 starts clean.
+                humanController.getYieldController().resetForNewGame();
                 final IGuiGame gui = guis.get(p.getRegisteredPlayer());
                 humanController.setGui(gui);
                 gui.setGameView(null); //clear out game view first so we don't copy into old game view

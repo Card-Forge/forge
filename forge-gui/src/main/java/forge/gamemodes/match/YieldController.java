@@ -5,6 +5,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
+import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.StackItemView;
@@ -140,6 +141,11 @@ public class YieldController {
         this.autoPassUntilEOT = active;
     }
     public synchronized void setMarker(PlayerView phaseOwner, PhaseType phase, boolean atOrPastAtClick) {
+        if (phaseOwner == null || phase == null) {
+            // Wire envelopes from an unhealthy client can land here; treat as a clear rather than store a junk marker.
+            clearMarker();
+            return;
+        }
         autoPassUntilEOT = false;
         autoPassUntilStackEmpty = false;
         stackYieldRespectsInterrupts = false;
@@ -261,6 +267,22 @@ public class YieldController {
             return;
         }
         activeStore().onGameEnd(owner.getGame() == null || owner.getGame().getView().isMatchOver());
+    }
+
+    /** Reset per-game transient state between games of a match. {@link #clearAutoYields} drops
+     *  stored yields but per-tick flags (lastSeenStackNonEmpty, wasAutoPassingLastTick, the
+     *  yield-just-ended edge, autoPassInterrupted) would otherwise bleed into game 2 and
+     *  mis-fire suggestions at its first prompt. */
+    public synchronized void resetForNewGame() {
+        autoPassUntilEOT = false;
+        autoPassUntilStackEmpty = false;
+        stackYieldRespectsInterrupts = false;
+        clearMarker();
+        declinedSuggestionTurn.clear();
+        lastSeenStackNonEmpty = false;
+        wasAutoPassingLastTick = false;
+        yieldJustEndedFlag = false;
+        autoPassInterrupted = false;
     }
 
     public boolean getDisableAutoYields() {
@@ -470,7 +492,9 @@ public class YieldController {
         if (!shouldEvaluateInterrupts()) return;
         PlayerView local = owner.getLocalPlayerView();
         if (local == null) return;
-        boolean isOpponent = !si.getActivatingPlayer().getView().equals(local);
+        // Triggered abilities and emblem-sourced spells can land here with a null activator.
+        Player activator = si.getActivatingPlayer();
+        boolean isOpponent = activator != null && !activator.getView().equals(local);
 
         if (isOpponent && getBoolPref(FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL)) {
             applyInterrupt();
@@ -501,7 +525,10 @@ public class YieldController {
         }
     }
 
-    private boolean shouldEvaluateInterrupts() {
+    /** True when an event-driven interrupt should be considered: either an interruptible
+     *  yield is active, or APINA + RESPECTS_INTERRUPTS are both on (so the next priority
+     *  window's auto-pass can be blocked by autoPassInterrupted). */
+    public boolean shouldEvaluateInterrupts() {
         if (isInterruptibleYieldActive()) return true;
         return getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS) && getBoolPref(FPref.YIELD_AUTO_PASS_RESPECTS_INTERRUPTS);
     }
