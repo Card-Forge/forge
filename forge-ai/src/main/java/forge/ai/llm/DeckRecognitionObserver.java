@@ -177,9 +177,20 @@ public final class DeckRecognitionObserver {
                 deckCards,
                 buildPersonality());
 
+        Logger.info("DeckRecognition: POST /recognize game=" + game.getId()
+                + " turn=" + game.getPhaseHandler().getTurn()
+                + " observations=" + observations.size()
+                + " cards=" + observations.stream().map(Observation::card).toList());
+
         client.recognizeAsync(request).whenComplete((result, err) -> {
-            if (err == null && result != null && result.isPresent()) {
+            if (err != null) {
+                Logger.info("DeckRecognition: /recognize failed: " + err.getMessage());
+            } else if (result == null || result.isEmpty()) {
+                Logger.info("DeckRecognition: /recognize returned no result (transport or schema error)");
+            } else {
                 final RecognitionResult recResult = result.get();
+                Logger.info("DeckRecognition: opponent guess='" + recResult.archetype()
+                        + "' confidence=" + recResult.confidence());
                 postGuess(recResult);
                 // Store sidecar influence data for AI decision-making
                 aiController.onSidecarResult(recResult);

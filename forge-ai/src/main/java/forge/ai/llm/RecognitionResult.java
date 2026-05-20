@@ -41,7 +41,7 @@ public record RecognitionResult(
 
     /** Human-readable one-liner suitable for the game log. */
     public String toLogMessage() {
-        return String.format("LLM deck guess: opponent is playing '%s' (confidence %.0f%%)",
+        return String.format("LLM opponent-deck guess: human opponent is playing '%s' (confidence %.0f%%)",
                 archetype, confidence * 100.0);
     }
 
@@ -58,7 +58,8 @@ public record RecognitionResult(
         final String advice = hasMulligan ? piloting.mulliganAdvice() : piloting.recommendedPlay();
         final StringBuilder sb = new StringBuilder();
         if (advice != null && !advice.isEmpty()) {
-            sb.append(String.format("LLM piloting advice (%s): %s", piloting.ownArchetype(), advice));
+            sb.append(String.format("LLM piloting advice for AI's own deck ('%s'): %s",
+                    piloting.ownArchetype(), advice));
         }
         // Append structured action scores
         if (piloting.actions() != null && !piloting.actions().isEmpty()) {

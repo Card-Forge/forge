@@ -33,29 +33,42 @@ public final class DeckRecognitionManager {
      */
     public static void attach(final AiController ai, final Player player, final Game game) {
         try {
-            if (!player.isAI() || !DeckRecognitionFeature.isEnabled(ai)) {
+            final boolean isAi = player.isAI();
+            final boolean enabled = DeckRecognitionFeature.isEnabled(ai);
+            final String sysProp = System.getProperty(DeckRecognitionFeature.SYS_PROP, "<unset>");
+            Logger.info("DeckRecognition.attach: player='" + player + "' isAI=" + isAi
+                    + " enabled=" + enabled + " sysprop=" + sysProp
+                    + " game=" + game.getId() + " playerId=" + player.getId());
+            if (!isAi) {
+                Logger.info("DeckRecognition.attach: skipped (player.isAI() == false)");
+                return;
+            }
+            if (!enabled) {
+                Logger.info("DeckRecognition.attach: skipped (feature disabled — sysprop="
+                        + sysProp + ")");
                 return;
             }
             final String key = game.getId() + ":" + player.getId();
             if (!ATTACHED_PLAYERS.add(key)) {
+                Logger.info("DeckRecognition.attach: skipped (key already attached: " + key + ")");
                 return;
             }
             final String url = DeckRecognitionFeature.sidecarUrl(ai);
             final DeckRecognitionClient client = new DeckRecognitionClient(url);
-            if (!client.isSidecarHealthy()) {
-                Logger.debug("DeckRecognition: sidecar at " + url
-                        + " is unavailable; feature disabled for this game.");
-                ATTACHED_PLAYERS.remove(key);
-                client.shutdown();
-                return;
+            final boolean healthy = client.isSidecarHealthy();
+            if (!healthy) {
+                Logger.info("DeckRecognition: sidecar at " + url
+                        + " did not respond to /health; attaching observer anyway "
+                        + "(individual /recognize calls will fail-soft).");
             }
             final DeckRecognitionObserver observer = new DeckRecognitionObserver(player, game, client, ai);
             game.subscribeToEvents(observer);
-            Logger.info("DeckRecognition: enabled for AI player '" + player + "' via " + url);
+            Logger.info("DeckRecognition: enabled for AI player '" + player
+                    + "' via " + url + " (health=" + healthy + ")");
         } catch (final RuntimeException | LinkageError ex) {
             // Any failure here must not break AI construction.
             ATTACHED_PLAYERS.remove(game.getId() + ":" + player.getId());
-            Logger.debug("DeckRecognition: failed to attach: " + ex.getMessage());
+            Logger.info("DeckRecognition.attach: failed: " + ex);
         }
     }
 }

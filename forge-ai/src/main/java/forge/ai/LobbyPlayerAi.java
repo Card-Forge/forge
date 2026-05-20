@@ -3,6 +3,7 @@ package forge.ai;
 import java.util.Set;
 
 import forge.LobbyPlayer;
+import forge.ai.llm.DeckRecognitionManager;
 import forge.game.Game;
 import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
@@ -48,7 +49,14 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
     @Override
     public Player createIngamePlayer(Game game, final int id) {
         Player ai = new Player(getName(), game, id);
-        ai.setFirstController(createControllerFor(ai));
+        PlayerControllerAi controller = createControllerFor(ai);
+        ai.setFirstController(controller);
+
+        // Now that the controller is installed (player.isAI() == true), attach
+        // the optional LLM deck-recognition observer. This is the unique path
+        // for *real* in-game AI players — temporary AiControllers built by
+        // AvailableActions / InputPayMana / GameSimulator never get here.
+        DeckRecognitionManager.attach(controller.getAi(), ai, game);
 
         if (rotateProfileEachGame) {
             setAiProfile(AiProfileUtil.getRandomProfile());

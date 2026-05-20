@@ -556,6 +556,53 @@
         altHtml = `<div class="alternatives">${entry.alternatives.slice(0, 5).map(a => `<span class="alt-chip">${escapeHtml(a)}</span>`).join('')}</div>`;
       }
 
+      let opponentHtml = '';
+      const obs = entry.observations || [];
+      const oppBoard = entry.opponent_board || [];
+      const oppGy = entry.opponent_graveyard || [];
+      if (obs.length > 0 || oppBoard.length > 0 || oppGy.length > 0) {
+        const eventBadge = {
+          spell: 'var(--accent)',
+          land: 'var(--green)',
+          permanent: 'var(--blue)',
+          graveyard: 'var(--text-dim)',
+        };
+        const obsRows = obs.slice(-12).reverse().map(o => {
+          const color = eventBadge[o.event] || 'var(--text-dim)';
+          const colors = (o.colors && o.colors.length) ? colorPips(o.colors) : '';
+          return `
+            <div style="display:flex;align-items:center;gap:8px;padding:3px 0;font-size:12px">
+              <span style="font-family:var(--mono);color:var(--text-dim);min-width:32px">T${o.turn}</span>
+              <span style="font-family:var(--mono);font-size:10px;text-transform:uppercase;color:${color};min-width:64px">${escapeHtml(o.event)}</span>
+              <span style="flex:1">${escapeHtml(o.card)}</span>
+              ${o.cmc ? `<span style="font-family:var(--mono);color:var(--text-dim)">${o.cmc}</span>` : ''}
+              ${colors}
+            </div>
+          `;
+        }).join('');
+
+        const obsSection = obs.length > 0
+          ? `<div class="piloting-label" style="margin-top:6px">Opponent Actions (${obs.length})</div>${obsRows}`
+          : '<div class="piloting-label" style="margin-top:6px">Opponent Actions</div><div class="empty-state" style="padding:10px 0">No observations yet</div>';
+
+        const boardChips = oppBoard.length > 0
+          ? `<div class="piloting-label" style="margin-top:8px">Opponent Board (${oppBoard.length})</div>
+             <div class="alternatives">${oppBoard.slice(0, 20).map(c => `<span class="alt-chip">${escapeHtml(c)}</span>`).join('')}</div>`
+          : '';
+        const gyChips = oppGy.length > 0
+          ? `<div class="piloting-label" style="margin-top:8px">Opponent Graveyard (${oppGy.length})</div>
+             <div class="alternatives">${oppGy.slice(0, 20).map(c => `<span class="alt-chip">${escapeHtml(c)}</span>`).join('')}</div>`
+          : '';
+
+        opponentHtml = `
+          <div class="piloting-section">
+            ${obsSection}
+            ${boardChips}
+            ${gyChips}
+          </div>
+        `;
+      }
+
       el.innerHTML = `
         <div class="archetype-main">
           <span class="archetype-name">${escapeHtml(entry.archetype)}</span>
@@ -566,6 +613,7 @@
         </div>
         ${entry.reasoning ? `<div class="reasoning">${escapeHtml(entry.reasoning)}</div>` : ''}
         ${altHtml}
+        ${opponentHtml}
         ${pilotingHtml}
         <div class="last-update">Turn ${entry.turn} &middot; Game ${escapeHtml(entry.game_id)} &middot; ${timeAgo(entry.timestamp)}</div>
       `;
@@ -643,7 +691,7 @@
       el.innerHTML = `
         <table>
           <thead>
-            <tr><th>Time</th><th>Turn</th><th>Archetype</th><th>Conf</th><th>Format</th><th>Game ID</th></tr>
+            <tr><th>Time</th><th>Turn</th><th>Archetype</th><th>Conf</th><th>Obs</th><th>Format</th><th>Game ID</th></tr>
           </thead>
           <tbody>
             ${reversed.map(e => `
@@ -652,6 +700,7 @@
                 <td>${e.turn}</td>
                 <td>${escapeHtml(e.archetype)}</td>
                 <td class="${confClass(e.confidence)}">${Math.round(e.confidence * 100)}%</td>
+                <td>${(e.observations || []).length}</td>
                 <td>${escapeHtml(e.format)}</td>
                 <td>${escapeHtml(e.game_id)}</td>
               </tr>

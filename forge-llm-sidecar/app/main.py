@@ -5,7 +5,7 @@ from __future__ import annotations
 import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
@@ -38,6 +38,33 @@ async def _lifespan(_: FastAPI):
 
 app = FastAPI(title="Forge LLM Sidecar", version="0.1.0", lifespan=_lifespan)
 
+
+@app.middleware("http")
+async def _log_every_request(request: Request, call_next):
+    # Record every HTTP hit so the dashboard reflects connection attempts even
+    # when validation fails (422) or the request never reaches /recognize.
+    response = await call_next(request)
+    path = request.url.path
+    if path not in ("/api/stats", "/dashboard") and not path.startswith("/static"):
+        client_host = request.client.host if request.client else "?"
+        log.info(
+            "HTTP %s %s -> %d (from %s)",
+            request.method,
+            path,
+            response.status_code,
+            client_host,
+        )
+        get_store().record_hit(
+            {
+                "method": request.method,
+                "path": path,
+                "status": response.status_code,
+                "client": client_host,
+            }
+        )
+    return response
+
+
 app.mount("/static", StaticFiles(directory=str(_static_dir)), name="static")
 
 
@@ -66,6 +93,8 @@ async def api_stats() -> dict:
         "uptime_seconds": round(store.uptime_seconds, 1),
         "total_requests": store.total_requests,
         "history": store.history,
+        "raw_hits_total": store.raw_hits_total,
+        "raw_hits": store.raw_hits,
     }
 
 
@@ -151,6 +180,9 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
             "alternatives": final.get("alternatives") or [],
             "piloting": piloting_advice.model_dump(),
             "actions": [a.model_dump() for a in actions],
+            "observations": [o.model_dump() for o in req.observations],
+            "opponent_board": req.opponent_board,
+            "opponent_graveyard": req.opponent_graveyard,
         }
     )
 

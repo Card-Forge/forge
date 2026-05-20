@@ -23,7 +23,6 @@ import com.google.common.collect.Sets;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
-import forge.ai.llm.DeckRecognitionManager;
 import forge.ai.llm.RecognitionResult;
 import forge.ai.llm.SidecarInfluence;
 import forge.ai.simulation.GameStateEvaluator;
@@ -111,8 +110,10 @@ public class AiController {
         memory = new AiCardMemory();
         simPicker = new SpellAbilityPicker(game, player);
         sidecarInfluence = new SidecarInfluence(this);
-        // Optional LLM deck-recognition feature; off by default and fail-soft.
-        DeckRecognitionManager.attach(this, player, game);
+        // The optional LLM deck-recognition observer is attached from
+        // LobbyPlayerAi.createIngamePlayer *after* setFirstController() has
+        // installed this controller — otherwise player.isAI() returns false
+        // and the observer wouldn't gate on the AI-player check correctly.
     }
 
     public boolean usesSimulation() {

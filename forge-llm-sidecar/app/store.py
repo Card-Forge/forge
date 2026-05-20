@@ -17,6 +17,8 @@ class RequestStore:
         self._start_time = time.time()
         self._total_requests: int = 0
         self._history: list[dict[str, Any]] = []
+        self._raw_hits: list[dict[str, Any]] = []
+        self._raw_hits_total: int = 0
 
     @property
     def uptime_seconds(self) -> float:
@@ -49,6 +51,24 @@ class RequestStore:
     def last_entry(self) -> dict[str, Any] | None:
         with self._lock:
             return self._history[-1] if self._history else None
+
+    def record_hit(self, hit: dict[str, Any]) -> None:
+        """Record any incoming HTTP request (success or failure) for diagnostics."""
+        with self._lock:
+            self._raw_hits_total += 1
+            self._raw_hits.append({"timestamp": time.time(), **hit})
+            if len(self._raw_hits) > _MAX_HISTORY:
+                self._raw_hits.pop(0)
+
+    @property
+    def raw_hits(self) -> list[dict[str, Any]]:
+        with self._lock:
+            return list(self._raw_hits)
+
+    @property
+    def raw_hits_total(self) -> int:
+        with self._lock:
+            return self._raw_hits_total
 
 
 _store = RequestStore()
