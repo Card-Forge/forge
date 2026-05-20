@@ -1563,7 +1563,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      *  "playable mana ability" predicate; non-payment reuses {@link #cachedActionableCards}.
      *  Gated on {@link FPref#UI_SHOW_ACTIONABLE_HIGHLIGHTS}. */
     public void pushActionableCards(boolean paymentMode) {
-        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
+        if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
             getGui().clearWeaklySelectable();
             return;
         }
@@ -1604,7 +1604,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      *  Gated on {@link FPref#UI_SHOW_ACTIONABLE_HIGHLIGHTS}. */
     public void pushAttackerCandidates(final Player attackingPlayer,
             final forge.game.combat.Combat combat) {
-        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
+        if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
             getGui().clearWeaklySelectable();
             return;
         }
@@ -1622,7 +1622,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      *  Gated on {@link FPref#UI_SHOW_ACTIONABLE_HIGHLIGHTS}. */
     public void pushBlockerCandidates(final Player defendingPlayer,
             final forge.game.combat.Combat combat) {
-        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
+        if (!yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
             getGui().clearWeaklySelectable();
             return;
         }
@@ -1657,7 +1657,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         // Skip when already yielding — yield proceeds regardless of available-actions.
         // Compute the actionable set when APINA / suggestions / highlights need it.
-        boolean highlightsEnabled = FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS);
+        boolean highlightsEnabled = yieldController.getBoolPref(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS);
         if (!yieldController.isYieldActive() && (needsAvailableActions() || highlightsEnabled)) {
             long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
             if (highlightsEnabled) {
