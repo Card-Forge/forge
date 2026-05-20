@@ -232,7 +232,19 @@ public final class DeckRecognitionObserver {
 
     private static List<String> colorsOf(final Card card) {
         final List<String> colors = new ArrayList<>(5);
-        final var cs = card.getColor();
+        // Combine the card's intrinsic color with its color identity. The intrinsic
+        // color is empty for most lands (Hallowed Fountain is a colorless card),
+        // but the color identity captures the colors a land taps for / a card
+        // represents in deck-building (Hallowed Fountain -> W,U).
+        var cs = card.getColor();
+        try {
+            final var identity = card.getRules() != null ? card.getRules().getColorIdentity() : null;
+            if (identity != null) {
+                cs = forge.card.ColorSet.fromMask(cs.getColor() | identity.getColor());
+            }
+        } catch (final RuntimeException ignored) {
+            // Fall back to intrinsic color only.
+        }
         if (cs.hasWhite()) { colors.add("W"); }
         if (cs.hasBlue())  { colors.add("U"); }
         if (cs.hasBlack()) { colors.add("B"); }

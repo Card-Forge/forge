@@ -19,6 +19,10 @@ import logging
 from app.config import CONFIG
 from app.knowledge import format_detect, loader, metagame, piloting
 from app.knowledge.piloting_schema import StrategyType
+from app.knowledge.style_classifier import (
+    OFF_META_NAMES,
+    classify_style,
+)
 from app.llm_client import LLMError, generate_json
 from app.schema import GraphState
 
@@ -120,32 +124,106 @@ def _build_recognition_prompt(state: GraphState) -> str:
     archetypes = state.get("candidate_archetypes", [])
     names = [a.get("name", "?") for a in archetypes]
     has_shares = any(a.get("meta_share") for a in archetypes)
-    meta_note = (
-        "The percentages show each archetype's share of the CURRENT metagame; "
-        "all else being equal, prefer more popular archetypes.\n"
-        if has_shares
-        else ""
-    )
     fmt = state.get("resolved_format") or state.get("format", "Unknown")
+    observations = state.get("observations", [])
+
+    # Aggregate the colors observed so far. The Forge adapter sends a card's
+    # color identity (so dual lands like Hallowed Fountain contribute W/U).
+    observed_colors: set[str] = set()
+    for o in observations:
+        for c in o.get("colors", []) or []:
+            observed_colors.add(c)
+    color_summary = (
+        "Observed colors so far: " + "/".join(sorted(observed_colors))
+        if observed_colors
+        else "Observed colors so far: (none yet)"
+    )
+
+    # Deterministic off-meta style scores from a fixed heuristic.
+    style_scores = classify_style(observations)
+    style_summary = "Computed style scores (deterministic heuristic, 0-1): " + ", ".join(
+        f"{k}={v:.2f}" for k, v in style_scores.items()
+    )
+
+    heuristics = (
+        "STRATEGY HEURISTICS for off-meta classification:\n"
+        "- Aggro: cheap (CMC<=2) creatures on turns 1-2, fast clock, "
+        "rarely casts spells with CMC>=4. Red is commonly aggressive.\n"
+        "- Control: counterspells, board wipes (Wrath of God, Damnation, "
+        "Supreme Verdict, Sunfall, Farewell, Toxic Deluge, Sweltering Suns, "
+        "Anger of the Gods, ...), big card-draw (Sphinx's Revelation, Memory "
+        "Deluge, ...), passes early turns with mana up (esp. blue), late "
+        "first spell. Blue is commonly controlling.\n"
+        "- Combo: known combo pieces (Goryo's Vengeance, Splinter Twin, "
+        "Through the Breach, Scapeshift, Grapeshot/Storm pieces, Goblin "
+        "Charbelcher, Amulet of Vigor + Primeval Titan, Living End + "
+        "cascade, Devoted Druid + Vizier, ...), heavy cheap card selection "
+        "(Brainstorm/Ponder/Preordain/Manamorphose), few or no creatures.\n"
+        "- Midrange: planeswalkers, mid-CMC threats (3-5 CMC), targeted "
+        "removal that produces 2-for-1s (Lightning Bolt + creature trade, "
+        "Fatal Push, Path to Exile, etc.). Black/Green is the classic "
+        "midrange color pair.\n"
+        "- Tempo: cheap creatures plus interaction (counterspells, bounce, "
+        "cheap removal); U/R Delver-like is canonical tempo. Distinguished "
+        "from aggro by having interaction, from control by having a clock.\n"
+    )
+
+    rules = (
+        "RANKING RULES (in priority order):\n"
+        "1. COLOR CONSISTENCY IS DOMINANT. The observed colors (from lands "
+        "and spells) are conclusive evidence of the opponent's color "
+        "identity. Reject any archetype whose listed colors do not include "
+        "every color the opponent has played. Example: if the opponent has "
+        "played a W/U dual land, ONLY archetypes that include both W and U "
+        "are viable — do NOT pick a R/W archetype even if it is more "
+        "popular.\n"
+        "2. CURATED ARCHETYPE MATCH. Prefer a curated archetype from the "
+        "list above when its signature cards / tells / colors match.\n"
+        "3. OFF-META FALLBACK. If the observed plays clearly indicate a "
+        "strategy but no curated archetype is a good fit (the opponent is "
+        "playing a brew not in the metagame list), return one of the "
+        f"Off-meta labels: {', '.join(OFF_META_NAMES)}. Pick the one whose "
+        "computed style score above is highest, weighted by the strategy "
+        "heuristics below. Off-meta labels are first-class outputs, not a "
+        "consolation prize — confidence is NOT capped for them.\n"
+    )
+    if has_shares:
+        rules += (
+            "4. METAGAME POPULARITY IS A TIEBREAKER ONLY. Use the metagame "
+            "percentages to choose between curated archetypes that are "
+            "equally color/card consistent. Never use popularity to "
+            "override color or card evidence.\n"
+        )
+    rules += (
+        "5. EARLY-GAME CONFIDENCE. With only 1-2 observed cards, confidence "
+        "should rarely exceed 0.6 unless a unique signature card was played "
+        "or a strong style score (>=0.5) clearly points to one strategy.\n"
+    )
+
+    valid_names = names + list(OFF_META_NAMES)
 
     return (
         f"Game format: {fmt}\n"
         f"Current turn: {state.get('turn', 0)}\n\n"
         f"Archetypes in the current metagame:\n{_format_archetypes(archetypes)}\n\n"
-        f"{meta_note}"
         f"Human opponent's observed plays so far (chronological):\n"
-        f"{_format_observations(state.get('observations', []))}\n\n"
+        f"{_format_observations(observations)}\n"
+        f"{color_summary}\n"
+        f"{style_summary}\n\n"
+        f"{rules}\n"
+        f"{heuristics}\n"
         "Identify the human opponent's most likely archetype. Use only the "
         "observed plays above as evidence. Do not infer from turn player, AI "
         "deck identity, AI guidance, AI hand, AI battlefield, or AI graveyard.\n"
         "Respond with exactly these keys:\n"
-        '  "archetype": string (the human opponent deck name),\n'
+        '  "archetype": string (a curated archetype name OR one of the '
+        '"Off-meta <Strategy>" labels),\n'
         '  "confidence": number between 0 and 1,\n'
-        '  "reasoning": string (one or two sentences based only on observed plays),\n'
-        '  "alternatives": array of up to 3 other plausible human opponent archetype names.\n'
-        "Prefer an opponent archetype name from the list above; only invent a name "
-        "if none fit, and lower confidence if you do.\n"
-        f"Valid human opponent archetype names: {json.dumps(names)}"
+        '  "reasoning": string (one or two sentences; cite the colors, '
+        "cards, and/or style score that drove the choice),\n"
+        '  "alternatives": array of up to 3 other plausible names '
+        "(color-consistent with the observed evidence).\n"
+        f"Valid archetype names: {json.dumps(valid_names)}"
     )
 
 
@@ -310,6 +388,43 @@ def _resolve_own_archetype(state: GraphState, slug: str) -> tuple[str | None, St
     return result
 
 
+def _trim_to_meta_coverage(
+    archetypes: list[dict],
+    target_share: float = 90.0,
+    min_keep: int = 15,
+    max_keep: int = 40,
+) -> list[dict]:
+    """Keep the smallest set of archetypes (sorted by meta_share desc) whose
+    cumulative share covers ``target_share`` percent, bounded by [min_keep,
+    max_keep]. Used to drop the long tail before sending to the LLM so the
+    prompt stays focused without losing 90%+ coverage.
+
+    Archetypes without a numeric ``meta_share`` are treated as 0; they keep
+    their original order beyond the cumulative cut and are included only if
+    we haven't yet hit ``min_keep``.
+    """
+    if not archetypes:
+        return []
+    # Stable sort: shared archetypes first (by share desc), then the rest in
+    # their original order. This way curated entries without a share still
+    # ride along when we need to satisfy min_keep.
+    shared = [a for a in archetypes if a.get("meta_share")]
+    unshared = [a for a in archetypes if not a.get("meta_share")]
+    shared.sort(key=lambda a: -float(a.get("meta_share", 0) or 0))
+    ordered = shared + unshared
+
+    kept: list[dict] = []
+    cumulative = 0.0
+    for a in ordered:
+        kept.append(a)
+        cumulative += float(a.get("meta_share", 0) or 0)
+        if len(kept) >= max_keep:
+            break
+        if len(kept) >= min_keep and cumulative >= target_share:
+            break
+    return kept
+
+
 def _fail_soft(state: GraphState, exc: Exception) -> GraphState:
     return {
         **state,
@@ -338,6 +453,10 @@ async def game_advisor_node(state: GraphState) -> GraphState:
     curated = loader.get_archetypes(slug) or loader.get_archetypes(state.get("format", ""))
     live = metagame.get_metagame(slug) if CONFIG.metagame_enable else []
     archetypes = loader.merge_with_curated(live, curated) if live else curated
+    # Trim the long tail before prompting: keep the smallest set covering 90%
+    # of the meta (with sane floor/ceiling). Cuts modern from 60 to ~26, etc.
+    # Commander has no usable share data so the floor/ceiling keep it sensible.
+    archetypes = _trim_to_meta_coverage(archetypes)
     state["candidate_archetypes"] = archetypes
     known_names = {a.get("name", "") for a in archetypes}
 
@@ -372,8 +491,10 @@ async def game_advisor_node(state: GraphState) -> GraphState:
     confidence = max(0.0, min(1.0, confidence))
 
     # An archetype outside the curated KB is kept but its confidence is capped,
-    # since the model is guessing beyond what we can corroborate.
-    if archetype not in known_names and archetype != "Unknown":
+    # since the model is guessing beyond what we can corroborate. The Off-meta
+    # <Strategy> labels are first-class — they're our intentional fallback for
+    # brews, so they aren't capped.
+    if archetype not in known_names and archetype not in OFF_META_NAMES and archetype != "Unknown":
         confidence = min(confidence, 0.4)
 
     alternatives = result.get("alternatives", [])

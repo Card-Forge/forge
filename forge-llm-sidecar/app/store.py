@@ -70,6 +70,14 @@ class RequestStore:
         with self._lock:
             return self._raw_hits_total
 
+    def reset(self) -> None:
+        """Clear history and counters. Uptime is preserved."""
+        with self._lock:
+            self._total_requests = 0
+            self._history.clear()
+            self._raw_hits_total = 0
+            self._raw_hits.clear()
+
 
 _store = RequestStore()
 

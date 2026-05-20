@@ -85,6 +85,13 @@ async def health() -> dict:
     }
 
 
+@app.post("/api/stats/reset")
+async def api_stats_reset() -> dict:
+    """Clear request history and counters (uptime preserved)."""
+    get_store().reset()
+    return {"status": "ok", "cleared": True}
+
+
 @app.get("/api/stats")
 async def api_stats() -> dict:
     """Dashboard stats: uptime, request counts, and recognition history."""
