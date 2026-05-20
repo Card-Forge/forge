@@ -14,6 +14,7 @@ from app.config import CONFIG
 from app.graph import get_graph
 from app.knowledge import metagame, piloting
 from app.llm_client import is_reachable
+from app.nodes import game_advisor
 from app.schema import (
     ActionScore,
     PilotingAdvice,
@@ -140,6 +141,95 @@ async def get_piloting(format: str = "modern", archetype: str = "") -> dict:
         "archetype": archetype,
         "guide": guide.model_dump() if guide else None,
     }
+
+
+class IdentifyOwnArchetypeRequest(BaseModel):
+    """Pre-game heuristic lookup of the AI's own archetype from its decklist."""
+
+    game_id: str = ""
+    format: str = "Constructed"
+    deck_cards: list[str] = Field(default_factory=list)
+
+
+class IdentifyOwnArchetypeResponse(BaseModel):
+    """Result of the deterministic decklist -> archetype match."""
+
+    own_archetype: str = "Unknown"
+    strategy_type: str = ""
+    guide_source: str = ""
+    resolved_format: str = ""
+
+
+@app.post("/identify-own-archetype", response_model=IdentifyOwnArchetypeResponse)
+async def identify_own_archetype(
+    req: IdentifyOwnArchetypeRequest,
+) -> IdentifyOwnArchetypeResponse:
+    """Heuristic, no-LLM identification of the AI's own archetype.
+
+    Forge calls this once at game start so the dashboard knows the AI's archetype
+    before any opponent action triggers ``/recognize``. The result is cached in
+    the game_advisor per-game maps so the first ``/recognize`` call reuses it.
+    """
+    slug = metagame.resolve_meta_format(req.format) or CONFIG.default_meta_format
+    name, strategy = piloting.identify_own_archetype(req.deck_cards, slug)
+
+    if req.game_id:
+        game_advisor._resolved_format[req.game_id] = slug
+        game_advisor._own_archetype[req.game_id] = (name, strategy)
+
+    guide = piloting.get_piloting_guide(name or "", slug, strategy)
+    guide_source = ""
+    if guide:
+        is_specific = name and piloting.slugify(guide.archetype) == piloting.slugify(name)
+        guide_source = (
+            f"{slug}/{piloting.slugify(name)}"
+            if is_specific
+            else f"generic/{guide.strategy_type.value}"
+        )
+
+    own_name = name or "Unknown"
+    log.info(
+        "identify-own-archetype: game=%s format=%s -> %s (%s)",
+        req.game_id,
+        slug,
+        own_name,
+        guide_source or "no-guide",
+    )
+
+    # Drop a dashboard entry so "Own Archetype" no longer reads Unknown
+    # before the first /recognize call.
+    piloting_advice = PilotingAdvice(
+        own_archetype=own_name,
+        guide_source=guide_source,
+        recommended_play="",
+        reasoning="",
+        alternatives=[],
+        mulligan_advice="",
+        actions=[],
+    )
+    get_store().record(
+        {
+            "game_id": req.game_id,
+            "format": req.format,
+            "turn": 0,
+            "archetype": "Unknown",
+            "confidence": 0.0,
+            "reasoning": "Pre-game: own archetype identified from decklist.",
+            "alternatives": [],
+            "piloting": piloting_advice.model_dump(),
+            "actions": [],
+            "observations": [],
+            "opponent_board": [],
+            "opponent_graveyard": [],
+        }
+    )
+
+    return IdentifyOwnArchetypeResponse(
+        own_archetype=own_name,
+        strategy_type=strategy.value if strategy else "",
+        guide_source=guide_source,
+        resolved_format=slug,
+    )
 
 
 @app.post("/recognize", response_model=RecognitionResponse)

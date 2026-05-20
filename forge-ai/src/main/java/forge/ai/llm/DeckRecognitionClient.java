@@ -34,6 +34,7 @@ public final class DeckRecognitionClient {
     private static final int CONNECT_TIMEOUT_MS = 3_000;
     private static final int HEALTH_TIMEOUT_MS = 2_000;
     private static final int RECOGNIZE_TIMEOUT_MS = 90_000;
+    private static final int IDENTIFY_TIMEOUT_MS = 5_000;
 
     private final String baseUrl;
     private final Gson gson = new GsonBuilder().create();
@@ -73,6 +74,44 @@ public final class DeckRecognitionClient {
      */
     public CompletableFuture<Optional<RecognitionResult>> recognizeAsync(final RecognitionRequest request) {
         return CompletableFuture.supplyAsync(() -> doRecognize(request), executor);
+    }
+
+    /**
+     * Asynchronously POST a heuristic own-archetype request. The sidecar runs a
+     * deterministic decklist -> archetype match (no LLM), so this is fast.
+     * Never completes exceptionally — failures resolve to an empty {@link Optional}.
+     */
+    public CompletableFuture<Optional<OwnArchetypeResult>> identifyOwnArchetypeAsync(
+            final OwnArchetypeRequest request) {
+        return CompletableFuture.supplyAsync(() -> doIdentifyOwnArchetype(request), executor);
+    }
+
+    private Optional<OwnArchetypeResult> doIdentifyOwnArchetype(final OwnArchetypeRequest request) {
+        HttpURLConnection conn = null;
+        try {
+            conn = open("/identify-own-archetype", "POST", IDENTIFY_TIMEOUT_MS);
+            conn.setDoOutput(true);
+            conn.setRequestProperty("Content-Type", "application/json");
+            final byte[] body = gson.toJson(request).getBytes(StandardCharsets.UTF_8);
+            try (OutputStream os = conn.getOutputStream()) {
+                os.write(body);
+            }
+            final int status = conn.getResponseCode();
+            if (status != 200) {
+                Logger.debug("DeckRecognition: /identify-own-archetype returned HTTP " + status);
+                return Optional.empty();
+            }
+            try (InputStream is = conn.getInputStream();
+                 BufferedReader reader = new BufferedReader(
+                         new InputStreamReader(is, StandardCharsets.UTF_8))) {
+                return Optional.ofNullable(gson.fromJson(reader, OwnArchetypeResult.class));
+            }
+        } catch (final IOException | RuntimeException ex) {
+            Logger.debug("DeckRecognition: /identify-own-archetype failed: " + ex.getMessage());
+            return Optional.empty();
+        } finally {
+            disconnect(conn);
+        }
     }
 
     private Optional<RecognitionResult> doRecognize(final RecognitionRequest request) {

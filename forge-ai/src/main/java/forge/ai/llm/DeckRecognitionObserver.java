@@ -70,6 +70,44 @@ public final class DeckRecognitionObserver {
         this.client = client;
         this.aiController = aiController;
         this.deckCards = extractDeckCards(aiPlayer);
+        identifyOwnArchetypeUpFront();
+    }
+
+    /**
+     * Heuristically identify the AI's own archetype <em>before the game
+     * begins</em>, using the sidecar's deterministic decklist matcher (no LLM
+     * call). The result is posted to the game log and primes the sidecar's
+     * per-game cache so the first {@code /recognize} call reuses it.
+     */
+    private void identifyOwnArchetypeUpFront() {
+        if (deckCards.isEmpty()) {
+            return;
+        }
+        final OwnArchetypeRequest request = new OwnArchetypeRequest(
+                String.valueOf(game.getId()),
+                game.getRules().getGameType().name(),
+                deckCards);
+        client.identifyOwnArchetypeAsync(request).whenComplete((result, err) -> {
+            try {
+                if (err != null || result == null || result.isEmpty()) {
+                    Logger.debug("DeckRecognition: pre-game own-archetype lookup failed");
+                    return;
+                }
+                final OwnArchetypeResult own = result.get();
+                Logger.info("DeckRecognition: own archetype (heuristic) = '"
+                        + own.ownArchetype() + "' guide=" + own.guideSource());
+                final String label = own.isKnown() ? own.ownArchetype() : "Unknown";
+                final String msg = "AI is piloting: " + label
+                        + (own.guideSource() == null || own.guideSource().isEmpty()
+                                ? "" : " (" + own.guideSource() + ")");
+                if (!msg.equals(lastPostedMessage)) {
+                    lastPostedMessage = msg;
+                    game.getGameLog().add(GameLogEntryType.INFORMATION, msg);
+                }
+            } catch (final RuntimeException ex) {
+                Logger.debug("DeckRecognition: pre-game lookup post failed: " + ex.getMessage());
+            }
+        });
     }
 
     /** Read the AI's own decklist (main deck card names) once, up front. */
