@@ -257,6 +257,13 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         "available_mana": req.available_mana,
         "personality": req.personality,
         "alternatives": [],
+        "ai_hand_size": req.ai_hand_size,
+        "opp_hand_size": req.opp_hand_size,
+        "ai_library_size": req.ai_library_size,
+        "opp_library_size": req.opp_library_size,
+        "own_board_details": [bc.model_dump() for bc in req.own_board_details],
+        "opponent_board_details": [bc.model_dump() for bc in req.opponent_board_details],
+        "opponent_mana_colors_seen": req.opponent_mana_colors_seen,
     }
     final = await graph.ainvoke(initial)
     raw_actions = final.get("actions") or []

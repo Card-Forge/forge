@@ -216,6 +216,99 @@ public final class DeckRecognitionObserver {
         }
     }
 
+    /**
+     * Detailed view of a player's battlefield: name, P/T, types, tapped state.
+     * Returns an empty list on failure or when the player has no permanents.
+     */
+    private List<BoardCard> boardDetails(final Player p) {
+        if (p == null) {
+            return List.of();
+        }
+        try {
+            final List<BoardCard> out = new ArrayList<>();
+            for (final Card c : p.getCardsIn(ZoneType.Battlefield)) {
+                if (c == null || c.getName() == null) {
+                    continue;
+                }
+                final List<String> types = new ArrayList<>();
+                try {
+                    if (c.isCreature())      { types.add("Creature"); }
+                    if (c.isArtifact())      { types.add("Artifact"); }
+                    if (c.isEnchantment())   { types.add("Enchantment"); }
+                    if (c.isLand())          { types.add("Land"); }
+                    if (c.isPlaneswalker())  { types.add("Planeswalker"); }
+                    if (c.isBattle())        { types.add("Battle"); }
+                } catch (final RuntimeException ignored) {
+                    // type query failed — skip types but still send the card
+                }
+                final boolean isCreature = !types.isEmpty() && types.contains("Creature");
+                final Integer power = isCreature ? safeInt(() -> c.getNetPower()) : null;
+                final Integer tough = isCreature ? safeInt(() -> c.getNetToughness()) : null;
+                final boolean tapped;
+                try { tapped = c.isTapped(); } catch (final RuntimeException ex) {
+                    out.add(new BoardCard(c.getName(), power, tough, types, isCreature, false));
+                    continue;
+                }
+                out.add(new BoardCard(c.getName(), power, tough, types, isCreature, tapped));
+            }
+            return out;
+        } catch (final RuntimeException ex) {
+            return List.of();
+        }
+    }
+
+    /** Suppress exceptions from a P/T getter and return null on failure. */
+    private static Integer safeInt(final java.util.function.IntSupplier f) {
+        try {
+            return f.getAsInt();
+        } catch (final RuntimeException ex) {
+            return null;
+        }
+    }
+
+    /** Number of cards in a player's zone; -1 if unknown. */
+    private int zoneSize(final Player p, final ZoneType zone) {
+        if (p == null) {
+            return 0;
+        }
+        try {
+            return p.getCardsIn(zone).size();
+        } catch (final RuntimeException ex) {
+            return 0;
+        }
+    }
+
+    /** Color letters seen across an opponent's lands (whether tapped or not).
+     *  This tracks which colors the opponent has access to, used for color-screw
+     *  detection on the sidecar side. */
+    private List<String> opponentLandColors(final Player opp) {
+        final Set<String> colors = new LinkedHashSet<>();
+        if (opp == null) {
+            return List.of();
+        }
+        try {
+            for (final Card land : opp.getCardsIn(ZoneType.Battlefield)) {
+                if (land == null || !land.isLand()) {
+                    continue;
+                }
+                final var cs = land.getRules() != null ? land.getRules().getColorIdentity() : null;
+                if (cs == null) {
+                    colors.add("C");
+                    continue;
+                }
+                if (cs.hasWhite()) { colors.add("W"); }
+                if (cs.hasBlue())  { colors.add("U"); }
+                if (cs.hasBlack()) { colors.add("B"); }
+                if (cs.hasRed())   { colors.add("R"); }
+                if (cs.hasGreen()) { colors.add("G"); }
+                if (cs.isColorless()) { colors.add("C"); }
+            }
+        } catch (final RuntimeException ex) {
+            // fall through
+        }
+        return new ArrayList<>(colors);
+    }
+
     /** First opposing player relative to the AI, or {@code null}. */
     private Player firstOpponent() {
         try {
@@ -301,6 +394,13 @@ public final class DeckRecognitionObserver {
         final Map<String, Integer> lifeTotals = buildLifeTotals(opponent);
         final String phase = currentPhaseName();
         final List<String> availableMana = availableManaColors();
+        final int aiHandSize = zoneSize(aiPlayer, ZoneType.Hand);
+        final int oppHandSize = zoneSize(opponent, ZoneType.Hand);
+        final int aiLibSize = zoneSize(aiPlayer, ZoneType.Library);
+        final int oppLibSize = zoneSize(opponent, ZoneType.Library);
+        final List<BoardCard> ownBoardDetails = boardDetails(aiPlayer);
+        final List<BoardCard> oppBoardDetails = boardDetails(opponent);
+        final List<String> oppManaColors = opponentLandColors(opponent);
 
         final RecognitionRequest request = new RecognitionRequest(
                 RecognitionRequest.CLIENT,
@@ -318,7 +418,14 @@ public final class DeckRecognitionObserver {
                 lifeTotals,
                 phase,
                 availableMana,
-                buildPersonality());
+                buildPersonality(),
+                aiHandSize,
+                oppHandSize,
+                aiLibSize,
+                oppLibSize,
+                ownBoardDetails,
+                oppBoardDetails,
+                oppManaColors);
 
         Logger.info("DeckRecognition: POST /recognize game=" + game.getId()
                 + " turn=" + game.getPhaseHandler().getTurn()

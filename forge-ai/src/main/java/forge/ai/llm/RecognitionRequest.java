@@ -46,7 +46,22 @@ public record RecognitionRequest(
         /** Mana sources the AI can tap right now, as color strings (W/U/B/R/G/C). */
         @SerializedName("available_mana") List<String> availableMana,
         /** AI personality traits from the AI profile. */
-        Map<String, Object> personality) {
+        Map<String, Object> personality,
+        /** Number of cards in the AI's hand (public info, redundant with hand.size()). */
+        @SerializedName("ai_hand_size") int aiHandSize,
+        /** Number of cards in the opponent's hand. Public info in MTG. */
+        @SerializedName("opp_hand_size") int oppHandSize,
+        /** Number of cards in the AI's library. */
+        @SerializedName("ai_library_size") int aiLibrarySize,
+        /** Number of cards in the opponent's library. */
+        @SerializedName("opp_library_size") int oppLibrarySize,
+        /** Detailed view of the AI's battlefield (P/T, types, tapped). */
+        @SerializedName("own_board_details") List<BoardCard> ownBoardDetails,
+        /** Detailed view of the opponent's battlefield (P/T, types, tapped). */
+        @SerializedName("opponent_board_details") List<BoardCard> opponentBoardDetails,
+        /** Colors of mana the OPPONENT has produced from lands so far — used to
+         *  detect color screw. Letter codes (W/U/B/R/G/C). */
+        @SerializedName("opponent_mana_colors_seen") List<String> opponentManaColorsSeen) {
 
     /** Identifier this (Forge) adapter sends as the {@code client} field. */
     public static final String CLIENT = "forge";
@@ -60,7 +75,8 @@ public record RecognitionRequest(
                               final List<Observation> observations, final List<String> deckCards) {
         this(client, gameId, format, opponentSeat, turn, observations, deckCards,
                 List.of(), List.of(), List.of(), List.of(), List.of(), Map.of(),
-                "", List.of(), Map.of());
+                "", List.of(), Map.of(),
+                0, 0, 0, 0, List.of(), List.of(), List.of());
     }
 
     /**
@@ -72,6 +88,7 @@ public record RecognitionRequest(
                               final Map<String, Object> personality) {
         this(client, gameId, format, opponentSeat, turn, observations, deckCards,
                 List.of(), List.of(), List.of(), List.of(), List.of(), Map.of(),
-                "", List.of(), personality);
+                "", List.of(), personality,
+                0, 0, 0, 0, List.of(), List.of(), List.of());
     }
 }

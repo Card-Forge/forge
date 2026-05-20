@@ -623,13 +623,33 @@ async def game_advisor_node(state: GraphState) -> GraphState:
     if not isinstance(base_actions, list):
         base_actions = []
 
-    # --- v4 board-aware advice ---------------------------------------------
+    # --- v4/v5 board-aware advice -----------------------------------------
     guide_dict = state.get("piloting_guide") or {}
     ai_strategy = guide_dict.get("strategy_type") if guide_dict else None
     opp_strategy = _opp_strategy_for(archetype, archetypes)
+    opp_record = _opp_record_for(archetype, archetypes)
     turn = state.get("turn", 0)
-    role = advice.assess_role(state, ai_strategy, opp_strategy)
     phase_bucket = _phase_bucket(turn)
+
+    # First pass: assess role with no hand_values (so dimension scores use
+    # raw signals only); then infer the opponent's hand; then score our own
+    # hand with that inference; finally re-assess role with hand values folded
+    # into the cards dimension. This keeps the dependency one-way and avoids
+    # an extra LLM call.
+    role = advice.assess_role(
+        state, ai_strategy, opp_strategy,
+        opp_record=opp_record, archetype_name=archetype,
+    )
+    opp_hand = advice.infer_opponent_hand(
+        archetype,
+        archetypes,
+        state.get("observations", []) or [],
+        state.get("opponent_board", []) or [],
+        state.get("opponent_graveyard", []) or [],
+        confidence,
+        state.get("turn", 0),
+        opp_hand_size=role.get("opp_hand_size") if isinstance(role, dict) else None,
+    )
     hand_values = advice.score_hand(
         state.get("hand", []) or [],
         guide_dict,
@@ -638,6 +658,13 @@ async def game_advisor_node(state: GraphState) -> GraphState:
         opp_strategy=opp_strategy,
         opp_board=state.get("opponent_board", []) or [],
         own_board=state.get("own_board", []) or [],
+        opp_hand_inference=opp_hand,
+    )
+    # Second pass: fold hand_values into cards_score for a sharper picture.
+    role = advice.assess_role(
+        state, ai_strategy, opp_strategy,
+        opp_record=opp_record, archetype_name=archetype,
+        hand_values=hand_values,
     )
     # On turn 0 the only action should be MULLIGAN; the in-game card-specific
     # actions and role-derived combat overrides are not yet meaningful.
@@ -667,16 +694,6 @@ async def game_advisor_node(state: GraphState) -> GraphState:
     else:
         card_actions = advice.card_specific_actions(hand_values, role, phase_bucket)
     actions = _merge_actions(base_actions, card_actions)
-    opp_hand = advice.infer_opponent_hand(
-        archetype,
-        archetypes,
-        state.get("observations", []) or [],
-        state.get("opponent_board", []) or [],
-        state.get("opponent_graveyard", []) or [],
-        confidence,
-        state.get("turn", 0),
-        opp_hand_size=role.get("opp_hand_size") if isinstance(role, dict) else None,
-    )
     target_pri = advice.target_priorities(
         state.get("opponent_board", []) or [],
         _opp_record_for(archetype, archetypes),

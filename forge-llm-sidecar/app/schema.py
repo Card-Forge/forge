@@ -11,7 +11,10 @@ from pydantic import BaseModel, Field
 # v4 adds board-aware advice: RoleAssessment (Who's the Beatdown), hand
 # valuations, opponent-hand inference, target priorities, and richer state on
 # the request (phase, available_mana).
-SCHEMA_VERSION = 4
+# v5 adds real hand/library sizes, per-card P/T on the battlefield, opp mana
+# color tracking, dimension scores (Board/Cards/Clock/Tempo/Graveyard),
+# threat-aware hand valuation, and a graveyard-utility metric.
+SCHEMA_VERSION = 5
 
 
 class Observation(BaseModel):
@@ -23,6 +26,21 @@ class Observation(BaseModel):
     cmc: int = 0
     colors: list[str] = Field(default_factory=list)
     types: list[str] = Field(default_factory=list)
+
+
+class BoardCard(BaseModel):
+    """Detailed view of one permanent on a battlefield zone.
+
+    Power/toughness are sent only for creatures (and are still optional on
+    older clients). Tapped state is public information.
+    """
+
+    name: str
+    power: int | None = None
+    toughness: int | None = None
+    types: list[str] = Field(default_factory=list)
+    is_creature: bool = False
+    tapped: bool = False
 
 
 class ActionScore(BaseModel):
@@ -65,6 +83,16 @@ class RecognitionRequest(BaseModel):
     available_mana: list[str] = Field(default_factory=list)
     # AI personality profile. Sent so the LLM can factor it into action scoring.
     personality: dict[str, str | int | float | bool] = Field(default_factory=dict)
+    # v5: explicit hand/library sizes — sidecar prefers these over heuristics.
+    ai_hand_size: int = 0
+    opp_hand_size: int = 0
+    ai_library_size: int = 0
+    opp_library_size: int = 0
+    # v5: richer board state with P/T and types.
+    own_board_details: list[BoardCard] = Field(default_factory=list)
+    opponent_board_details: list[BoardCard] = Field(default_factory=list)
+    # v5: colors of mana the opponent has access to (from their lands).
+    opponent_mana_colors_seen: list[str] = Field(default_factory=list)
 
 
 class RoleAssessment(BaseModel):
@@ -81,9 +109,21 @@ class RoleAssessment(BaseModel):
     winning_side: str = "even"  # "ai" | "human" | "even"
     margin: float = 0.0  # 0-1, how decisively the winning side is ahead
     role_flipped: bool = False  # true when current state overrode the deck's natural role
-    opp_hand_size: int = 0  # estimated cards in human opponent's hand
+    opp_hand_size: int = 0  # cards in human opponent's hand (real value from Forge, fallback heuristic otherwise)
     ai_attackers: int = 0  # creatures the AI could attack with right now
     opp_attackers: int = 0  # creatures the opponent could attack with right now
+    # v5: per-axis strategic scores (-1..+1, AI's perspective). Combined into
+    # winning_side but also surfaced so the dashboard can show all axes.
+    board_score: float = 0.0  # board presence (creatures, P/T)
+    cards_score: float = 0.0  # hand size + hand value vs opp
+    clock_score: float = 0.0  # turns until lethal (positive = AI's clock is faster)
+    tempo_score: float = 0.0  # land drops, mana usage, color screw
+    graveyard_score: float = 0.0  # graveyard utility (opp deck uses graveyard?)
+    # v5: tempo / mana signals on the opponent.
+    opp_lands_dropped: int = 0
+    opp_missed_drops: int = 0
+    opp_color_screwed: bool = False
+    opp_graveyard_utility: float = 0.0  # 0-1, how useful opp's graveyard is to their deck
     reasoning: str = ""  # one or two sentences citing life/board/card-advantage/clock
 
 
@@ -194,6 +234,14 @@ class GraphState(TypedDict, total=False):
     phase: str
     available_mana: list[str]
     personality: dict[str, str | int | float | bool]
+    # v5 additions
+    ai_hand_size: int
+    opp_hand_size: int
+    ai_library_size: int
+    opp_library_size: int
+    own_board_details: list[dict]
+    opponent_board_details: list[dict]
+    opponent_mana_colors_seen: list[str]
     # resolved by the game_advisor node
     resolved_format: str | None
     candidate_archetypes: list[dict]

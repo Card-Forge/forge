@@ -563,6 +563,41 @@
             ? `<span style="color:var(--text-dim)">Opp hand ~<b>${r.opp_hand_size}</b></span>` : '';
           const attackChip = (typeof r.ai_attackers === 'number')
             ? `<span style="color:var(--text-dim)">Attackers <b>${r.ai_attackers}</b> vs <b>${r.opp_attackers || 0}</b></span>` : '';
+          // Per-dimension scores (-1..+1). Render each as a centered bar.
+          function dimensionBar(label, score) {
+            if (typeof score !== 'number') return '';
+            const v = Math.max(-1, Math.min(1, score));
+            const isPositive = v >= 0;
+            const pct = Math.round(Math.abs(v) * 100);
+            const color = isPositive ? 'var(--green)' : 'var(--red)';
+            return `
+              <div style="display:flex;align-items:center;gap:6px;padding:2px 0;font-size:12px">
+                <span style="min-width:78px;color:var(--text-dim)">${label}</span>
+                <div style="flex:1;height:6px;background:var(--bg);border-radius:2px;position:relative;overflow:hidden">
+                  <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--border)"></div>
+                  <div style="position:absolute;top:0;bottom:0;${isPositive?'left':'right'}:50%;width:${pct/2}%;background:${color};border-radius:1px"></div>
+                </div>
+                <span style="min-width:44px;text-align:right;font-family:var(--mono);font-size:11px;color:${color}">${(v>=0?'+':'')}${v.toFixed(2)}</span>
+              </div>
+            `;
+          }
+          const dimsHtml = [
+            dimensionBar('Board', r.board_score),
+            dimensionBar('Cards', r.cards_score),
+            dimensionBar('Clock', r.clock_score),
+            dimensionBar('Tempo', r.tempo_score),
+            dimensionBar('Graveyard', r.graveyard_score),
+          ].join('');
+
+          // Tempo / mana signals.
+          const tempoSignals = [];
+          if (r.opp_missed_drops > 0) tempoSignals.push(`opp missed ${r.opp_missed_drops} land drop${r.opp_missed_drops>1?'s':''}`);
+          if (r.opp_color_screwed) tempoSignals.push('opp color-screwed');
+          if (r.opp_graveyard_utility > 0.2) tempoSignals.push(`opp gy utility ${Math.round(r.opp_graveyard_utility*100)}%`);
+          const tempoChip = tempoSignals.length
+            ? `<div style="margin-top:4px;font-size:11px;color:var(--yellow)">${escapeHtml(tempoSignals.join(' · '))}</div>`
+            : '';
+
           roleHtml = `
             <div class="piloting-label" style="margin-top:10px">Who's the Beatdown?${flipBadge}</div>
             <div style="display:flex;gap:16px;font-size:12px;margin-top:4px;flex-wrap:wrap">
@@ -576,6 +611,9 @@
               <div style="height:100%;width:${marginPct}%;background:${sideColor};border-radius:2px"></div>
             </div>
             ${r.reasoning ? `<div class="reasoning">${escapeHtml(r.reasoning)}</div>` : ''}
+            <div class="piloting-label" style="margin-top:8px">Strategic Position</div>
+            ${dimsHtml}
+            ${tempoChip}
           `;
         }
 
