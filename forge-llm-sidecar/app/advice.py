@@ -89,6 +89,56 @@ def _norm(name: str) -> str:
     return (name or "").strip().lower()
 
 
+# Common non-creature permanent types we can identify by name fragments.
+# Used so ATTACK isn't recommended when own_board only has lands, planeswalkers
+# or artifacts/enchantments. We bias toward false-negative (assume creature)
+# because we'd rather under-attack than over-attack.
+_PLANESWALKER_NAME_PREFIXES = (
+    "jace,", "liliana,", "chandra,", "garruk,", "nissa,", "teferi,", "ajani,",
+    "elspeth,", "sorin,", "vraska,", "narset,", "kaya,", "tamiyo,", "kasmina,",
+    "ugin,", "karn,", "domri,", "ral,", "saheeli,", "wrenn", "the wandering",
+    "oko,", "tibalt,", "ashiok,", "tezzeret,", "venser,", "kiora,", "samut,",
+)
+
+
+def _is_likely_noncreature_nonland(card_name: str) -> bool:
+    """Best-effort: return True for permanents that are clearly NOT creatures.
+
+    We only catch obvious cases (planeswalkers by ", <profession>" pattern,
+    Sol Ring / Mana Vault style mana rocks). Anything we can't classify is
+    assumed creature so the AI doesn't pass when it could swing.
+    """
+    n = _norm(card_name)
+    if not n:
+        return True
+    for p in _PLANESWALKER_NAME_PREFIXES:
+        if n.startswith(p):
+            return True
+    # Mana rocks / signets / talismans / commonly-seen non-creature artifacts.
+    noncreature_substrings = (
+        "signet", "talisman of", "sol ring", "arcane signet", "fellwar stone",
+        "mind stone", "thought vessel", "chromatic ", "wayfarer's bauble",
+    )
+    return any(s in n for s in noncreature_substrings)
+
+
+def count_possible_attackers(board: list[str]) -> int:
+    """Count permanents that might be creatures we could attack with.
+
+    Lands and obvious non-creatures are excluded; everything else is assumed
+    creature-shaped. This is a heuristic — without card-type data from Forge we
+    cannot tell creature from artifact-creature etc. — so we err toward false
+    negatives (assume creature) for unknown names.
+    """
+    if not board:
+        return 0
+    return sum(
+        1
+        for c in board
+        if c and not _is_land_name(c) and not _is_likely_noncreature_nonland(c)
+    )
+
+
 def categorize(card_name: str, archetype_signature: set[str] | None = None) -> str:
     """Map a card name to a coarse category (counterspell/removal/wrath/etc.).
 
@@ -156,6 +206,28 @@ def _board_pressure(board: list[str]) -> float:
     return float(sum(1 for c in board if c and not _is_land_name(c)))
 
 
+def estimate_opponent_hand_size(state: dict) -> int:
+    """Estimate how many cards the human opponent has in hand right now.
+
+    Heuristic: 7 starting + 1 per turn drawn (we don't know if they're on the
+    play or draw, so we assume `turn` draws — slight overestimate offset by
+    plays observed), minus cards they've visibly committed (spells / lands /
+    permanents in our observation log). The opponent_graveyard catches cards
+    that ended up in the graveyard via discard, draw effects, etc.; we don't
+    re-subtract it.
+    """
+    turn = int(state.get("turn") or 0)
+    observations = state.get("observations") or []
+    plays_seen = sum(
+        1
+        for o in observations
+        if isinstance(o, dict) and (o.get("event") in ("spell", "land", "permanent"))
+    )
+    # Conservative: starting 7 + draws so far - cards committed.
+    estimate = 7 + max(0, turn) - plays_seen
+    return max(0, min(15, estimate))
+
+
 def _card_advantage(hand: list[str], board: list[str], graveyard: list[str]) -> float:
     """A coarse card-advantage proxy: live cards minus expended ones."""
     return float(len(hand or []) + len(board or [])) - 0.25 * float(len(graveyard or []))
@@ -184,11 +256,12 @@ def assess_role(
 
     ai_pressure = _board_pressure(ai_board)
     opp_pressure = _board_pressure(opp_board)
-    # AI sees its own hand exactly; we don't see opponent's hand. Treat
-    # opponent hand size as unknown (default 4 mid-game) for the proxy.
-    opp_hand_size_proxy = max(0, 7 - state.get("turn", 0))
+    # AI sees its own hand exactly; we don't see opponent's. Derive hand
+    # size from observations rather than a flat turn-based proxy so the
+    # number is meaningful by mid-game.
+    opp_hand_size = estimate_opponent_hand_size(state)
     ai_ca = _card_advantage(ai_hand, ai_board, ai_gy)
-    opp_ca = _card_advantage([""] * opp_hand_size_proxy, opp_board, opp_gy)
+    opp_ca = _card_advantage([""] * opp_hand_size, opp_board, opp_gy)
 
     pressure_delta = ai_pressure - opp_pressure  # +ve means AI ahead on board
     ca_delta = ai_ca - opp_ca                    # +ve means AI ahead on cards
@@ -236,7 +309,7 @@ def assess_role(
         f"AI {ai_role} (natural {ai_natural}{', flipped' if role_flipped else ''})",
         f"life {ai_life}-{human_life}",
         f"board {int(ai_pressure)}-{int(opp_pressure)}",
-        f"hand {len(ai_hand)} vs ~{opp_hand_size_proxy}",
+        f"hand {len(ai_hand)} vs ~{opp_hand_size}",
     ]
     return {
         "ai_role": ai_role,
@@ -244,6 +317,9 @@ def assess_role(
         "winning_side": winning_side,
         "margin": round(margin, 3),
         "role_flipped": role_flipped,
+        "opp_hand_size": opp_hand_size,
+        "ai_attackers": count_possible_attackers(ai_board),
+        "opp_attackers": count_possible_attackers(opp_board),
         "reasoning": "; ".join(parts),
     }
 
@@ -279,23 +355,42 @@ def score_hand(
     guide: dict,
     phase_bucket: str,
     role: dict,
+    *,
+    opp_strategy: str | None = None,
+    opp_board: list[str] | None = None,
+    own_board: list[str] | None = None,
 ) -> list[dict]:
     """Per-card value scores for cards currently in the AI's hand.
 
     Values are 0-100. The piloting guide's ``key_cards`` provide role tags;
     cards not in the guide get a "filler" tag and a modest baseline value.
-    Role-flipped scoring inverts the threat/answer preference.
+    Role-flipped scoring inverts the threat/answer preference. Matchup
+    context is applied on top so the same card is valued differently
+    depending on what the opponent is doing.
     """
     if not hand:
         return []
     ai_role = (role or {}).get("ai_role", "contested")
     is_beatdown = ai_role == "beatdown"
+    opp_strat = (opp_strategy or "").strip().lower()
+    opp_board = opp_board or []
+    own_board = own_board or []
+    opp_creature_count = count_possible_attackers(opp_board)
+    own_creature_count = count_possible_attackers(own_board)
+
+    # Matchup signals that modulate categories.
+    opp_is_aggro = opp_strat in {"aggro", "burn", "tempo"}
+    opp_is_control = opp_strat in {"control"}
+    opp_is_combo = opp_strat in {"combo"}
+    opp_has_wide_board = opp_creature_count >= 3
+    opp_has_one_big_threat = opp_creature_count == 1
 
     results: list[dict] = []
     for card in hand:
         if not card:
             continue
         guide_role = _role_for_card_in_guide(card, guide)
+        category = categorize(card)  # counterspell/removal/wrath/card_draw/...
         if _is_land_name(card):
             tag = "land"
             base = 55.0
@@ -305,22 +400,67 @@ def score_hand(
             base = 80.0
             reason = f"key card in the piloting guide ({guide_role})"
         else:
-            tag = "filler"
-            base = 35.0
-            reason = "not a key card in the guide"
+            tag = category if category != "filler" else "filler"
+            base = 50.0 if category != "filler" else 35.0
+            reason = (
+                f"recognized as {category}"
+                if category != "filler"
+                else "not a key card in the guide"
+            )
 
-        # Role modulation. Beatdown wants threats / win_cons; control wants
-        # answers / card_draw.
+        # Role modulation (Who's the Beatdown).
         if tag in ("threat", "win_con") and is_beatdown:
             base += 12.0
             reason += "; boosted by beatdown role"
-        elif tag in ("answer", "card_draw") and not is_beatdown:
+        elif tag in ("answer", "card_draw", "removal", "counterspell", "wrath") and not is_beatdown:
             base += 12.0
             reason += "; boosted by control role"
         elif tag in ("threat", "win_con") and not is_beatdown:
             base -= 5.0
         elif tag in ("answer", "card_draw") and is_beatdown:
             base -= 5.0
+
+        # Matchup modulation.
+        if category == "wrath":
+            if opp_has_wide_board:
+                base += 25.0
+                reason += f"; opp has {opp_creature_count} creatures — wrath shines"
+            elif opp_creature_count == 0:
+                base -= 20.0
+                reason += "; opp has no board — wrath is dead"
+            elif opp_is_combo or opp_is_control:
+                base -= 10.0
+                reason += "; opp deck has few creatures"
+        elif category == "removal":
+            if opp_has_one_big_threat:
+                base += 10.0
+                reason += "; one priority threat on opp board"
+            elif opp_creature_count == 0:
+                base -= 15.0
+                reason += "; nothing relevant to point removal at"
+            elif opp_is_control or opp_is_combo:
+                base -= 8.0
+                reason += "; opp deck plays few creatures"
+        elif category == "counterspell":
+            if opp_is_combo:
+                base += 18.0
+                reason += "; counters are gold vs combo"
+            elif opp_is_control:
+                base += 8.0
+                reason += "; counter wars vs control"
+            elif opp_is_aggro and phase_bucket == "early_game":
+                base -= 10.0
+                reason += "; aggro empties hand fast — counters need targets"
+        elif category == "card_draw":
+            if opp_is_aggro and own_creature_count == 0 and phase_bucket == "early_game":
+                base -= 15.0
+                reason += "; can't tap out for draw against an early aggro clock"
+            elif phase_bucket == "late_game":
+                base += 8.0
+                reason += "; card draw seals attrition matches"
+        elif category == "combo_piece":
+            base += 10.0
+            reason += "; combo piece — protect and assemble"
 
         # Phase modulation — win_cons rise as the game goes long; ramp loses
         # value late.
@@ -393,60 +533,79 @@ def card_specific_actions(
         )
 
     # Role-derived combat / pass percentages override the static baselines.
-    if is_beatdown:
+    # Gate them on actual board state — attacking with no creatures is
+    # impossible and shouldn't be the highest-scored action just because the
+    # deck is naturally beatdown. Same for BLOCK without incoming attackers.
+    ai_attackers = (role or {}).get("ai_attackers", 0)
+    opp_attackers = (role or {}).get("opp_attackers", 0)
+
+    # The hard-board gate always fires (zero attackers = ATTACK must be 0).
+    # The role-derived combat *bias* only fires when role is decisive; in
+    # contested matchups we leave combat to the personality-driven base so
+    # personality preferences come through.
+    if ai_attackers <= 0:
+        actions.append(
+            {
+                "action_type": "ATTACK",
+                "target": "",
+                "targets": None,
+                "percentage": 0.0,
+                "reasoning": "No creatures on the AI's battlefield — cannot attack.",
+            }
+        )
+    elif is_beatdown or ai_role == "control":
         actions.append(
             {
                 "action_type": "ATTACK",
                 "target": "all_available",
                 "targets": None,
-                "percentage": 75.0,
-                "reasoning": "Beatdown role — race the opponent.",
+                "percentage": 75.0 if is_beatdown else 25.0,
+                "reasoning": (
+                    f"Beatdown role — race with {ai_attackers} attacker(s)."
+                    if is_beatdown
+                    else f"Control role — only swing if {ai_attackers} attacker(s) chips safely."
+                ),
             }
         )
+    # else: role is contested with attackers available — leave ATTACK to base.
+
+    if opp_attackers <= 0:
         actions.append(
             {
                 "action_type": "BLOCK",
                 "target": "",
                 "targets": None,
-                "percentage": 15.0,
-                "reasoning": "Beatdown role — take damage to push for lethal.",
+                "percentage": 0.0,
+                "reasoning": "Opponent has no attackers — nothing to block.",
             }
         )
-        actions.append(
-            {
-                "action_type": "PASS",
-                "target": "",
-                "targets": None,
-                "percentage": 10.0,
-                "reasoning": "Beatdown role — pass only when no play exists.",
-            }
-        )
-    elif ai_role == "control":
-        actions.append(
-            {
-                "action_type": "ATTACK",
-                "target": "",
-                "targets": None,
-                "percentage": 25.0,
-                "reasoning": "Control role — attack only with safe damage.",
-            }
-        )
+    elif is_beatdown or ai_role == "control":
         actions.append(
             {
                 "action_type": "BLOCK",
                 "target": "",
                 "targets": None,
-                "percentage": 65.0,
-                "reasoning": "Control role — protect life total.",
+                "percentage": 15.0 if is_beatdown else 65.0,
+                "reasoning": (
+                    "Beatdown role — take damage to keep pressing."
+                    if is_beatdown
+                    else "Control role — protect life total."
+                ),
             }
         )
+
+    if is_beatdown or ai_role == "control":
         actions.append(
             {
                 "action_type": "PASS",
                 "target": "",
                 "targets": None,
-                "percentage": 45.0,
-                "reasoning": "Control role — hold up mana for interaction.",
+                "percentage": 10.0 if is_beatdown else 45.0,
+                "reasoning": (
+                    "Beatdown role — pass only when no play exists."
+                    if is_beatdown
+                    else "Control role — hold up mana for interaction."
+                ),
             }
         )
     return actions
@@ -463,8 +622,17 @@ def infer_opponent_hand(
     opponent_graveyard: list[str],
     confidence: float,
     turn: int,
+    *,
+    opp_hand_size: int | None = None,
 ) -> list[dict]:
-    """Bucketed guesses about what the human still has in hand."""
+    """Bucketed guesses about what the human still has in hand.
+
+    Probability is a product of:
+    - archetype confidence (how sure we are about their deck),
+    - share of unseen signatures still possibly in deck,
+    - hand-size factor (more cards in hand = more likely to be holding one),
+    - category share (more cards in a category = more likely category).
+    """
     if not archetype_name:
         return []
     record = None
@@ -495,25 +663,40 @@ def infer_opponent_hand(
         cat = categorize(card, archetype_signature=signature_set)
         by_cat.setdefault(cat, []).append(card)
 
-    # Probability heuristic: archetype confidence × share of signatures unseen
-    # × turn-decay (the later the turn the more likely they've drawn copies).
+    # Probability heuristic blends multiple signals. Hand-size factor is
+    # the new piece: with 7 cards in hand it's almost certain they have at
+    # least one signature card; with 0 cards there's nothing to infer.
     total = max(1, len(signatures))
     unseen_share = len(unseen) / total
     turn_factor = max(0.4, 1.0 - 0.05 * max(0, turn))
+    if opp_hand_size is None:
+        hand_size_factor = max(0.3, 1.0 - 0.07 * max(0, turn))  # rough fallback
+        hand_descr = f"~ unknown cards on turn {turn}"
+    else:
+        # 0 cards -> 0; 1-2 cards -> small; 4 cards -> 0.7; 7 cards -> 1.0.
+        hand_size_factor = max(0.0, min(1.0, opp_hand_size / 7.0))
+        hand_descr = f"{opp_hand_size} cards in hand"
 
     out: list[dict] = []
     for cat, cards in by_cat.items():
         cat_share = len(cards) / total
-        prob = confidence * (0.5 * unseen_share + 0.5 * cat_share) * turn_factor
-        prob = max(0.0, min(1.0, prob + 0.1))  # small floor so non-zero
+        prob = (
+            confidence
+            * (0.5 * unseen_share + 0.5 * cat_share)
+            * turn_factor
+            * (0.4 + 0.6 * hand_size_factor)
+        )
+        # Floor only when the opponent actually has cards in hand.
+        floor = 0.05 if (opp_hand_size or 1) > 0 else 0.0
+        prob = max(0.0, min(1.0, prob + floor))
         out.append(
             {
                 "category": cat,
                 "example_cards": cards[:4],
                 "probability": round(prob, 3),
                 "reasoning": (
-                    f"{len(cards)} of {total} signature cards in this category "
-                    f"unseen on turn {turn}."
+                    f"{len(cards)} of {total} signature cards unseen, "
+                    f"{hand_descr} (turn {turn})."
                 ),
             }
         )

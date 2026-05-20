@@ -399,23 +399,18 @@ class TestActionsInGraphOutput:
     @pytest.mark.asyncio
     async def test_personality_influences_aggro_action_percentages(self, monkeypatch):
         """Aggro personality should boost ATTACK and PLAY_SPELL percentages."""
+        # No opponent board / observations / graveyard so the role-derived
+        # combat overrides are withheld (`has_opp_state == False`) and the
+        # personality-driven base percentages drive ATTACK/BLOCK/PASS.
         aggro_state = {
             "game_id": "aggro-test",
             "format": "Constructed",
             "turn": 5,
-            "observations": [
-                {
-                    "turn": 1,
-                    "event": "land",
-                    "card": "Mountain",
-                    "cmc": 0,
-                    "colors": ["R"],
-                    "types": ["Land"],
-                }
-            ],
+            "observations": [],
             "deck_cards": ["Ragavan, Nimble Pilferer", "Lightning Bolt", "Mountain"],
             "hand": ["Lightning Bolt"],
-            "own_board": ["Mountain", "Mountain"],
+            "own_board": ["Mountain", "Mountain", "Ragavan, Nimble Pilferer"],
+            "opponent_board": [],
             "alternatives": [],
             "personality": {"play_aggro": True},
         }
@@ -423,19 +418,11 @@ class TestActionsInGraphOutput:
             "game_id": "control-test",
             "format": "Constructed",
             "turn": 5,
-            "observations": [
-                {
-                    "turn": 1,
-                    "event": "land",
-                    "card": "Island",
-                    "cmc": 0,
-                    "colors": ["U"],
-                    "types": ["Land"],
-                }
-            ],
+            "observations": [],
             "deck_cards": ["Counterspell", "Dig Through Time", "Island"],
             "hand": ["Counterspell"],
-            "own_board": ["Island", "Island"],
+            "own_board": ["Island", "Island", "Snapcaster Mage"],
+            "opponent_board": [],
             "alternatives": [],
             "personality": {},
         }

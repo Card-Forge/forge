@@ -526,16 +526,22 @@
         if (p.actions && p.actions.length > 0) {
           const sorted = [...p.actions].sort((a, b) => b.percentage - a.percentage);
           actionsHtml = '<div class="piloting-label" style="margin-top:6px">Action Scores</div>';
-          sorted.slice(0, 6).forEach(a => {
+          sorted.slice(0, 8).forEach(a => {
             const pct = Math.round(a.percentage);
             const barColor = pct >= 60 ? 'var(--green)' : pct >= 30 ? 'var(--yellow)' : 'var(--red)';
+            const target = a.target ? ` <span style="color:var(--text-dim);font-size:11px">→ ${escapeHtml(a.target)}</span>` : '';
+            const reason = a.reasoning ? `<div style="margin-left:108px;color:var(--text-dim);font-size:11px;font-style:italic">${escapeHtml(a.reasoning)}</div>` : '';
             actionsHtml += `
-              <div style="display:flex;align-items:center;gap:6px;padding:2px 0;font-size:12px">
-                <span style="min-width:100px;font-family:var(--mono);font-weight:500">${escapeHtml(a.action_type)}</span>
-                <div style="flex:1;height:4px;background:var(--bg);border-radius:2px;overflow:hidden">
-                  <div style="height:100%;width:${pct}%;background:${barColor};border-radius:2px;transition:width 0.3s"></div>
+              <div style="padding:2px 0;font-size:12px">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span style="min-width:100px;font-family:var(--mono);font-weight:500">${escapeHtml(a.action_type)}</span>
+                  <div style="flex:1;height:4px;background:var(--bg);border-radius:2px;overflow:hidden">
+                    <div style="height:100%;width:${pct}%;background:${barColor};border-radius:2px;transition:width 0.3s"></div>
+                  </div>
+                  <span style="min-width:32px;text-align:right;font-family:var(--mono);color:var(--text-dim)">${pct}%</span>
                 </div>
-                <span style="min-width:32px;text-align:right;font-family:var(--mono);color:var(--text-dim)">${pct}%</span>
+                ${target ? `<div style="margin-left:108px;font-size:11px">${target}</div>` : ''}
+                ${reason}
               </div>
             `;
           });
@@ -553,12 +559,18 @@
             ? '<span style="margin-left:8px;padding:1px 6px;font-size:10px;border-radius:8px;background:var(--yellow);color:#000">role flipped</span>'
             : '';
           const marginPct = Math.round((r.margin || 0) * 100);
+          const handChip = (typeof r.opp_hand_size === 'number')
+            ? `<span style="color:var(--text-dim)">Opp hand ~<b>${r.opp_hand_size}</b></span>` : '';
+          const attackChip = (typeof r.ai_attackers === 'number')
+            ? `<span style="color:var(--text-dim)">Attackers <b>${r.ai_attackers}</b> vs <b>${r.opp_attackers || 0}</b></span>` : '';
           roleHtml = `
             <div class="piloting-label" style="margin-top:10px">Who's the Beatdown?${flipBadge}</div>
-            <div style="display:flex;gap:16px;font-size:12px;margin-top:4px">
+            <div style="display:flex;gap:16px;font-size:12px;margin-top:4px;flex-wrap:wrap">
               <span><b>AI:</b> ${escapeHtml(r.ai_role)}</span>
               <span><b>Opp:</b> ${escapeHtml(r.opponent_role)}</span>
               <span style="color:${sideColor}"><b>${escapeHtml(sideLabel)}</b> (${marginPct}%)</span>
+              ${handChip}
+              ${attackChip}
             </div>
             <div style="height:4px;background:var(--bg);border-radius:2px;overflow:hidden;margin-top:4px">
               <div style="height:100%;width:${marginPct}%;background:${sideColor};border-radius:2px"></div>
@@ -570,18 +582,21 @@
         let handValuesHtml = '';
         if (p.hand_values && p.hand_values.length > 0) {
           handValuesHtml = '<div class="piloting-label" style="margin-top:10px">Hand Valuation</div>';
-          p.hand_values.slice(0, 10).forEach(hv => {
+          p.hand_values.slice(0, 12).forEach(hv => {
             const pct = Math.round(hv.value || 0);
             const barColor = pct >= 70 ? 'var(--green)' : pct >= 40 ? 'var(--yellow)' : 'var(--red)';
+            const reason = hv.reasoning ? `<div style="font-size:11px;color:var(--text-dim);margin-left:148px;margin-top:1px">${escapeHtml(hv.reasoning)}</div>` : '';
             handValuesHtml += `
-              <div style="display:flex;align-items:center;gap:6px;padding:2px 0;font-size:12px"
-                   title="${escapeHtml(hv.reasoning || '')}">
-                <span style="min-width:140px">${escapeHtml(hv.card)}</span>
-                <span style="font-family:var(--mono);font-size:10px;text-transform:uppercase;color:var(--text-dim);min-width:64px">${escapeHtml(hv.role || '')}</span>
-                <div style="flex:1;height:4px;background:var(--bg);border-radius:2px;overflow:hidden">
-                  <div style="height:100%;width:${pct}%;background:${barColor};border-radius:2px"></div>
+              <div style="padding:3px 0;font-size:12px">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span style="min-width:140px">${escapeHtml(hv.card)}</span>
+                  <span style="font-family:var(--mono);font-size:10px;text-transform:uppercase;color:var(--text-dim);min-width:64px">${escapeHtml(hv.role || '')}</span>
+                  <div style="flex:1;height:4px;background:var(--bg);border-radius:2px;overflow:hidden">
+                    <div style="height:100%;width:${pct}%;background:${barColor};border-radius:2px"></div>
+                  </div>
+                  <span style="min-width:32px;text-align:right;font-family:var(--mono);color:var(--text-dim)">${pct}</span>
                 </div>
-                <span style="min-width:32px;text-align:right;font-family:var(--mono);color:var(--text-dim)">${pct}</span>
+                ${reason}
               </div>
             `;
           });
@@ -589,13 +604,16 @@
 
         let oppHandHtml = '';
         if (p.opponent_hand && p.opponent_hand.length > 0) {
-          oppHandHtml = '<div class="piloting-label" style="margin-top:10px">Opponent Likely Holds</div>';
+          const oppHandHdr = (p.role && typeof p.role.opp_hand_size === 'number')
+            ? `Opponent Likely Holds <span style="color:var(--text-dim);font-size:11px">(~${p.role.opp_hand_size} cards in hand)</span>`
+            : 'Opponent Likely Holds';
+          oppHandHtml = `<div class="piloting-label" style="margin-top:10px">${oppHandHdr}</div>`;
           p.opponent_hand.slice(0, 8).forEach(g => {
             const pct = Math.round((g.probability || 0) * 100);
             const barColor = pct >= 60 ? 'var(--red)' : pct >= 30 ? 'var(--yellow)' : 'var(--text-dim)';
             const examples = (g.example_cards || []).slice(0, 3).join(', ');
             oppHandHtml += `
-              <div style="padding:3px 0;font-size:12px" title="${escapeHtml(g.reasoning || '')}">
+              <div style="padding:3px 0;font-size:12px">
                 <div style="display:flex;align-items:center;gap:6px">
                   <span style="min-width:120px;font-family:var(--mono);font-size:11px;text-transform:uppercase">${escapeHtml(g.category)}</span>
                   <div style="flex:1;height:4px;background:var(--bg);border-radius:2px;overflow:hidden">
@@ -604,9 +622,50 @@
                   <span style="min-width:32px;text-align:right;font-family:var(--mono);color:var(--text-dim)">${pct}%</span>
                 </div>
                 ${examples ? `<div style="margin-left:126px;color:var(--text-dim);font-size:11px">e.g. ${escapeHtml(examples)}</div>` : ''}
+                ${g.reasoning ? `<div style="margin-left:126px;color:var(--text-dim);font-size:11px;font-style:italic">${escapeHtml(g.reasoning)}</div>` : ''}
               </div>
             `;
           });
+        }
+
+        // Guide-derived plan: overview, current-phase steps, key cards, sequencing tips,
+        // and matchup advice if the recognized opponent has one in the guide.
+        let guidePlanHtml = '';
+        const hasGuide = (p.guide_overview && p.guide_overview.length)
+          || (p.phase_plan && p.phase_plan.length)
+          || (p.key_cards && p.key_cards.length)
+          || (p.sequencing_tips && p.sequencing_tips.length)
+          || (p.matchup_advice && p.matchup_advice.length);
+        if (hasGuide) {
+          guidePlanHtml = '<div class="piloting-label" style="margin-top:10px">Game Plan</div>';
+          if (p.guide_overview) {
+            guidePlanHtml += `<div class="reasoning">${escapeHtml(p.guide_overview)}</div>`;
+          }
+          if (p.phase_plan && p.phase_plan.length) {
+            guidePlanHtml += '<div style="margin-top:6px;font-size:12px"><b>This phase:</b><ul style="margin:2px 0 2px 18px;padding:0">';
+            p.phase_plan.forEach(step => {
+              guidePlanHtml += `<li style="margin:1px 0">${escapeHtml(step)}</li>`;
+            });
+            guidePlanHtml += '</ul></div>';
+          }
+          if (p.key_cards && p.key_cards.length) {
+            guidePlanHtml += '<div style="margin-top:6px;font-size:12px"><b>Key cards:</b></div>';
+            p.key_cards.slice(0, 6).forEach(k => {
+              const role = k.role ? ` <span style="font-family:var(--mono);font-size:10px;text-transform:uppercase;color:var(--text-dim)">${escapeHtml(k.role)}</span>` : '';
+              const notes = k.notes ? `<div style="margin-left:14px;color:var(--text-dim);font-size:11px">${escapeHtml(k.notes)}</div>` : '';
+              guidePlanHtml += `<div style="padding:2px 0;font-size:12px">• ${escapeHtml(k.name)}${role}${notes}</div>`;
+            });
+          }
+          if (p.matchup_advice) {
+            guidePlanHtml += `<div style="margin-top:6px;font-size:12px"><b>Vs ${escapeHtml(entry.archetype || 'opponent')}:</b> ${escapeHtml(p.matchup_advice)}</div>`;
+          }
+          if (p.sequencing_tips && p.sequencing_tips.length) {
+            guidePlanHtml += '<div style="margin-top:6px;font-size:12px"><b>Sequencing tips:</b><ul style="margin:2px 0 2px 18px;padding:0">';
+            p.sequencing_tips.slice(0, 5).forEach(t => {
+              guidePlanHtml += `<li style="margin:1px 0">${escapeHtml(t)}</li>`;
+            });
+            guidePlanHtml += '</ul></div>';
+          }
         }
 
         let targetsHtml = '';
@@ -624,13 +683,15 @@
           });
         }
 
+        const guideSrc = p.guide_source ? ` <span style="color:var(--text-dim);font-size:11px">(guide: ${escapeHtml(p.guide_source)})</span>` : '';
         pilotingHtml = `
           <div class="piloting-section">
             <div class="piloting-label">Piloting Advice</div>
             <div class="piloting-value">${escapeHtml(p.recommended_play || p.mulligan_advice || 'No advice')}</div>
             ${p.reasoning ? `<div class="reasoning">${escapeHtml(p.reasoning)}</div>` : ''}
-            <div class="piloting-label" style="margin-top:6px">Own Archetype: ${escapeHtml(p.own_archetype)}</div>
+            <div class="piloting-label" style="margin-top:6px">Own Archetype: ${escapeHtml(p.own_archetype)}${guideSrc}</div>
             ${roleHtml}
+            ${guidePlanHtml}
             ${actionsHtml}
             ${handValuesHtml}
             ${oppHandHtml}

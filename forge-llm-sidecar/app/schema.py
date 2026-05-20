@@ -81,6 +81,9 @@ class RoleAssessment(BaseModel):
     winning_side: str = "even"  # "ai" | "human" | "even"
     margin: float = 0.0  # 0-1, how decisively the winning side is ahead
     role_flipped: bool = False  # true when current state overrode the deck's natural role
+    opp_hand_size: int = 0  # estimated cards in human opponent's hand
+    ai_attackers: int = 0  # creatures the AI could attack with right now
+    opp_attackers: int = 0  # creatures the opponent could attack with right now
     reasoning: str = ""  # one or two sentences citing life/board/card-advantage/clock
 
 
@@ -132,6 +135,13 @@ class PilotingAdvice(BaseModel):
     hand_values: list[HandValuation] = Field(default_factory=list)
     opponent_hand: list[OpponentHandGuess] = Field(default_factory=list)
     target_priorities: list[TargetPriority] = Field(default_factory=list)
+    # Surfaced from the resolved piloting guide so the dashboard / Forge UI
+    # can show a more precise plan rather than just a slug.
+    guide_overview: str = ""
+    phase_plan: list[str] = Field(default_factory=list)  # plan steps for the current phase
+    key_cards: list[dict] = Field(default_factory=list)  # [{name, role, notes}]
+    sequencing_tips: list[str] = Field(default_factory=list)
+    matchup_advice: str = ""  # specific advice vs the identified opponent archetype
 
 
 class TrainingExample(BaseModel):

@@ -250,6 +250,11 @@ def _local_piloting_advice(state: GraphState) -> dict:
     key_cards = guide.get("key_cards", [])
     strategy = guide.get("strategy_type", "").lower()
 
+    own_board = state.get("own_board") or []
+    opp_board = state.get("opponent_board") or []
+    ai_attackers = advice.count_possible_attackers(own_board)
+    opp_attackers = advice.count_possible_attackers(opp_board)
+
     # Determine if the AI is aggressive based on personality or strategy.
     is_aggro = personality.get("play_aggro") in (True, "true", "True") or strategy == "aggro"
     # Base action percentages derived from guide strategy & personality.
@@ -285,39 +290,65 @@ def _local_piloting_advice(state: GraphState) -> dict:
         if names:
             key = " Prioritize " + ", ".join(names[:2]) + " when the board state supports it."
 
+    hand = state.get("hand") or []
+    spells_in_hand = [
+        c for c in hand if c and not advice._is_land_name(c)
+    ]
+    lands_in_hand = [c for c in hand if c and advice._is_land_name(c)]
+
     # Build structured actions.
-    # PLAY_SPELL: always a primary action, boosted by aggro.
-    spell_pct = 65.0 if is_aggro else 50.0
+    # PLAY_SPELL: gated on actually having a non-land card in hand.
+    if not spells_in_hand:
+        spell_pct = 0.0
+        spell_reason = "No non-land cards in hand to cast."
+    else:
+        spell_pct = 65.0 if is_aggro else 50.0
+        spell_reason = f"{phase} priority from piloting guide."
     base_actions.append(
         {
             "action_type": "PLAY_SPELL",
             "target": plan.split(";")[0].strip() if ";" in plan else plan.strip(),
             "targets": None,
             "percentage": spell_pct,
-            "reasoning": f"{phase} priority from piloting guide.",
+            "reasoning": spell_reason,
         }
     )
 
-    # ATTACK: higher priority for aggro/tempo strategies.
-    attack_pct = 50.0 if is_aggro else 25.0
+    # ATTACK: gated on having actual creatures. Without attackers this MUST
+    # be zero — recommending an attack the AI can't make is a bug.
+    if ai_attackers <= 0:
+        attack_pct = 0.0
+        attack_reason = "No creatures on the battlefield — cannot attack."
+        attack_target = ""
+    else:
+        attack_pct = 50.0 if is_aggro else 25.0
+        attack_reason = f"{ai_attackers} attacker(s) available; weighted by deck strategy."
+        attack_target = "all_available"
     base_actions.append(
         {
             "action_type": "ATTACK",
-            "target": "all_available",
+            "target": attack_target,
             "targets": None,
             "percentage": attack_pct,
-            "reasoning": "Based on deck strategy and board state.",
+            "reasoning": attack_reason,
         }
     )
 
-    # PLAY_LAND: present but medium priority.
+    # PLAY_LAND: gated on having a land in hand.
+    if not lands_in_hand:
+        land_pct = 0.0
+        land_reason = "No land in hand."
+    else:
+        # Lands are top priority early; less so late.
+        land_pct = {"early_game": 65.0, "mid_game": 45.0, "late_game": 20.0}.get(phase, 40.0)
+        land_reason = "Advance mana development."
     base_actions.append(
         {
             "action_type": "PLAY_LAND",
             "target": "",
             "targets": None,
-            "percentage": 40.0,
-            "reasoning": "Advance mana development.",
+            "percentage": land_pct,
+            "reasoning": land_reason,
         }
     )
 
@@ -333,15 +364,24 @@ def _local_piloting_advice(state: GraphState) -> dict:
         }
     )
 
-    # BLOCK: lower for aggro, moderate otherwise.
-    block_pct = 15.0 if is_aggro else 35.0
+    # BLOCK: needs incoming attackers — and own creatures to block with.
+    if opp_attackers <= 0 or ai_attackers <= 0:
+        block_pct = 0.0
+        block_reason = (
+            "No incoming attackers — nothing to block."
+            if opp_attackers <= 0
+            else "No creatures to block with."
+        )
+    else:
+        block_pct = 15.0 if is_aggro else 35.0
+        block_reason = "Defensive consideration; weighted by deck strategy."
     base_actions.append(
         {
             "action_type": "BLOCK",
             "target": "",
             "targets": None,
             "percentage": block_pct,
-            "reasoning": "Defensive consideration.",
+            "reasoning": block_reason,
         }
     )
 
@@ -591,7 +631,13 @@ async def game_advisor_node(state: GraphState) -> GraphState:
     role = advice.assess_role(state, ai_strategy, opp_strategy)
     phase_bucket = _phase_bucket(turn)
     hand_values = advice.score_hand(
-        state.get("hand", []) or [], guide_dict, phase_bucket, role
+        state.get("hand", []) or [],
+        guide_dict,
+        phase_bucket,
+        role,
+        opp_strategy=opp_strategy,
+        opp_board=state.get("opponent_board", []) or [],
+        own_board=state.get("own_board", []) or [],
     )
     # On turn 0 the only action should be MULLIGAN; the in-game card-specific
     # actions and role-derived combat overrides are not yet meaningful.
@@ -629,6 +675,7 @@ async def game_advisor_node(state: GraphState) -> GraphState:
         state.get("opponent_graveyard", []) or [],
         confidence,
         state.get("turn", 0),
+        opp_hand_size=role.get("opp_hand_size") if isinstance(role, dict) else None,
     )
     target_pri = advice.target_priorities(
         state.get("opponent_board", []) or [],

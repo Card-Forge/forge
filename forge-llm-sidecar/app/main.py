@@ -274,6 +274,22 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         for t in (final.get("target_priorities") or [])
         if isinstance(t, dict)
     ]
+    guide = final.get("piloting_guide") or {}
+    phase_bucket = (
+        "early_game" if req.turn <= 3 else "mid_game" if req.turn <= 7 else "late_game"
+    )
+    phase_plan = (guide.get("game_plan") or {}).get(phase_bucket, []) if guide else []
+    key_cards = guide.get("key_cards") or [] if guide else []
+    sequencing_tips = guide.get("sequencing_tips") or [] if guide else []
+    matchup_advice = ""
+    if guide and final.get("archetype"):
+        target = (final.get("archetype") or "").strip().lower()
+        for m in guide.get("matchups") or []:
+            ma = (m.get("opponent_archetype") or "").strip().lower()
+            if ma and (ma in target or target in ma):
+                matchup_advice = m.get("advice") or ""
+                break
+
     piloting_advice = PilotingAdvice(
         own_archetype=final.get("own_archetype") or "Unknown",
         guide_source=final.get("guide_source") or "",
@@ -286,6 +302,15 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         hand_values=hand_values,
         opponent_hand=opponent_hand,
         target_priorities=target_priorities,
+        guide_overview=(guide.get("overview") or "") if guide else "",
+        phase_plan=[str(s) for s in phase_plan if s],
+        key_cards=[
+            {"name": k.get("name", ""), "role": k.get("role", ""), "notes": k.get("notes", "")}
+            for k in key_cards
+            if isinstance(k, dict)
+        ],
+        sequencing_tips=[str(s) for s in sequencing_tips if s],
+        matchup_advice=matchup_advice,
     )
 
     _store = get_store()
