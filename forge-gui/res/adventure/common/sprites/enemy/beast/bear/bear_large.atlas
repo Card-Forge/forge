@@ -1,0 +1,128 @@
+bear_large.png
+size: 1024,832
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 157,31
+  size: 16, 16
+Wake 
+  xy: 0, 0
+  size: 64, 64    
+Wake 
+  xy: 64, 0
+  size: 64, 64         
+Wake 
+  xy: 128, 0
+  size: 64, 64      
+Wake 
+  xy: 192, 0
+  size: 64, 64    
+Wake 
+  xy: 256, 0
+  size: 64, 64          
+Wake 
+  xy: 320, 0
+  size: 64, 64        
+Wake 
+  xy: 384, 0
+  size: 64, 64      
+Idle 
+  xy: 0, 96
+  size: 64, 64    
+Idle 
+  xy: 64, 96
+  size: 64, 64        
+Idle 
+  xy: 128, 96
+  size: 64, 64       
+Idle 
+  xy: 192, 96
+  size: 64, 64     
+Idle 
+  xy: 256, 96
+  size: 64, 64            
+Idle 
+  xy: 320, 96
+  size: 64, 64         
+Idle 
+  xy: 384, 96
+  size: 64, 64         
+Idle 
+  xy: 448, 96
+  size: 64, 64   
+Walk 
+  xy: 0, 480
+  size: 64, 64    
+Walk 
+  xy: 64, 480
+  size: 64, 64        
+Walk 
+  xy: 128, 480
+  size: 64, 64       
+Walk 
+  xy: 192, 480
+  size: 64, 64     
+Walk 
+  xy: 256, 480
+  size: 64, 64            
+Walk 
+  xy: 320, 480
+  size: 64, 64         
+Walk 
+  xy: 384, 480
+  size: 64, 64         
+Attack 
+  xy: 00, 384
+  size: 64, 64
+Attack 
+  xy: 64, 384
+  size: 64, 64
+Attack 
+  xy: 128, 384
+  size: 64, 64
+Attack 
+  xy: 192, 384
+  size: 64, 64
+Attack 
+  xy: 256, 384
+  size: 64, 64
+Attack 
+  xy: 320, 384
+  size: 64, 64
+Attack 
+  xy: 384, 384
+  size: 64, 64
+Death
+  xy: 00, 768
+  size: 64, 64
+Death
+  xy: 64, 768
+  size: 64, 64
+Death
+  xy: 128, 768
+  size: 64, 64
+Death
+  xy: 192, 768
+  size: 64, 64
+Death
+  xy: 256, 768
+  size: 64, 64
+Death
+  xy: 320, 768
+  size: 64, 64
+Death
+  xy: 384, 768
+  size: 64, 64
+Death
+  xy: 448, 768
+  size: 64, 64
+Death
+  xy: 512, 768
+  size: 64, 64
+Death
+  xy: 576, 768
+  size: 64, 64
+Death
+  xy: 640, 768
+  size: 64, 64

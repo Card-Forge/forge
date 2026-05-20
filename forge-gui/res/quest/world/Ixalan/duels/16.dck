@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Robot16
+Title=Robot16
+Icon=Erebos.jpg
+Difficulty=Easy
+Description=BG Constrictor 
+Deck Type=constructed
+
+[Main]
+2 Bristling Hydra
+4 Glint-Sleeve Siphoner
+2 Hostage Taker
+3 Longtusk Cub
+1 Rhonas the Indomitable
+4 Rogue Refiner
+2 The Scarab God
+1 Vizier of Many Faces
+3 Walking Ballista
+3 Winding Constrictor
+2 Blossoming Defense
+2 Essence Scatter
+4 Fatal Push
+2 Vraska's Contempt
+4 Attune with Aether
+4 Aether Hub
+4 Blooming Marsh
+4 Botanical Sanctum
+2 Fetid Pools
+4 Forest
+1 Island
+2 Swamp
+[Sideboard]
+1 Carnage Tyrant
+2 Cartouche of Ambition
+2 Deathgorge Scavenger
+3 Duress
+1 Lost Legacy
+2 Negate
+1 River's Rebuke
+1 Spell Pierce
+1 Vraska's Contempt
+1 Vraska, Relic Seeker

@@ -1,0 +1,8 @@
+Name:Clive's Hideaway
+ManaCost:no cost
+Types:Land Town
+K:Hideaway:4
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Play | Cost$ 2 T | Defined$ ExiledWith | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE4 | SpellDescription$ You may play the exiled card without paying its mana cost if you control four or more legendary creatures.
+SVar:X:Count$Valid Creature.Legendary+YouCtrl
+Oracle:Hideaway 4 (When this land enters, look at the top four cards of your library, exile one face down, then put the rest on the bottom in a random order.)\n{T}: Add {C}.\n{2}, {T}: You may play the exiled card without paying its mana cost if you control four or more legendary creatures.

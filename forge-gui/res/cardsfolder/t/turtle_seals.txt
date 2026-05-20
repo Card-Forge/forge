@@ -1,0 +1,6 @@
+Name:Turtle-Seals
+ManaCost:3 U
+Types:Creature Turtle Seal
+PT:2/4
+K:Vigilance
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)

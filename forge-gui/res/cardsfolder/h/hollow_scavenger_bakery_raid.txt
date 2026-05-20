@@ -13,5 +13,5 @@ ALTERNATE
 Name:Bakery Raid
 ManaCost:G
 Types:Sorcery Adventure
-A:SP$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Create a Food token. (Then exile this card. You may cast the creature later from exile.)

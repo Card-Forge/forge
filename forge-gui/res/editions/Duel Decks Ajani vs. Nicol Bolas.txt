@@ -67,7 +67,7 @@ ScryfallCode=DDH
 59 U Countersquall @Anthony Francisco
 60 C Obelisk of Grixis @Nils Hamm
 61 C Recoil @Alan Pollack
-62 R Undermine @Massimilano Frezzato
+62 R Undermine @Massimiliano Frezzato
 63 U Grixis Charm @Lars Grant-West
 64 U Icy Manipulator @Matt Cavotta
 65 U Deep Analysis @Jesper Ejsing

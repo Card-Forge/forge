@@ -1,0 +1,9 @@
+Name:Snort
+ManaCost:3 R
+Types:Sorcery
+A:SP$ Discard | Mode$ Hand | Defined$ Player | Optional$ True | RememberDiscardingPlayers$ True | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Each player may discard their hand and draw five cards. Then CARDNAME deals 5 damage to each opponent who discarded their hand this way.
+SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ 5 | SubAbility$ DBDmg
+SVar:DBDmg:DB$ DamageAll | ValidPlayers$ Opponent.IsRemembered | NumDmg$ 5 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Flashback:5 R
+Oracle:Each player may discard their hand and draw five cards. Then Snort deals 5 damage to each opponent who discarded their hand this way.\nFlashback {5}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

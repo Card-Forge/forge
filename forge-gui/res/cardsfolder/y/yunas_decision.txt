@@ -1,0 +1,10 @@
+Name:Yuna's Decision
+ManaCost:3 G
+Types:Sorcery
+A:SP$ Charm | Choices$ DBSacrifice,DBReturn
+SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBDraw | SpellDescription$ Continue the Pilgrimage — Sacrifice a creature. If you do, draw a card, then you may put a creature card and/or a land card from your hand onto the battlefield.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | SubAbility$ DBChangeZone | StackDescription$ None
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ EACH Creature & Land | ChangeTypeDesc$ creature and/or land card | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | Optional$ True | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | StackDescription$ None
+SVar:DBReturn:DB$ ChangeZone | TargetMin$ 1 | TargetMax$ 2 | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select one or two target permanent cards in your graveyard | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Find Another Way — Return one or two target permanent cards from your graveyard to your hand.
+Oracle:Choose one —\n• Continue the Pilgrimage — Sacrifice a creature. If you do, draw a card, then you may put a creature card and/or a land card from your hand onto the battlefield.\n• Find Another Way — Return one or two target permanent cards from your graveyard to your hand.

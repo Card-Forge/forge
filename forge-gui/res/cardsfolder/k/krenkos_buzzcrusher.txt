@@ -8,6 +8,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:DBForEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ DBDestroy
 SVar:DBChoose:DB$ ChooseCard | ChoiceZone$ Battlefield | Amount$ 1 | Choices$ Land.nonBasic+RememberedPlayerCtrl | Optional$ True | ImprintChosen$ True | ChoiceTitle$ Choose up to one nonbasic land this player controls
 SVar:DBDestroy:DB$ Destroy | Defined$ Imprinted | RememberDestroyed$ True | SubAbility$ DBSearch
-SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | DefinedPlayer$ RememberedController | Optional$ True | SubAbility$ DBCleanup
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | DefinedPlayer$ RememberedController | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 Oracle:Flying, trample\nWhen Krenko's Buzzcrusher enters, for each player, destroy up to one nonbasic land that player controls. For each land destroyed this way, its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.

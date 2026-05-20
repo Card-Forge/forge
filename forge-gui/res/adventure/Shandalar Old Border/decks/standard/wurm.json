@@ -1,0 +1,36 @@
+{
+  "name": "Wurm",
+  "mainDeck": [
+    {
+      "count": 27,
+      "colors": [
+        "Green"
+      ],
+      "subTypes": [
+        "Wurm"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 11,
+      "colors": [
+        "Green"
+      ],
+      "subTypes": [
+        "Wurm"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Forest|PALP"
+    }
+  ]
+}

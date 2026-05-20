@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Eldrazi
+Title=Eldrazi
+Icon=Eldrazi.jpg
+Difficulty=Easy
+Description=./Standard/War_of_the_Spark/Aaron_Higgins_-_Abzan_Midrange_(Standard,_#795755).dck
+Deck Type=constructed
+
+[Main]
+4 Hero of Precinct One
+2 Imperious Oligarch
+3 Midnight Reaper
+4 Seraph of the Scales
+4 Tithe Taker
+2 Trostani Discordant
+2 Assassin's Trophy
+3 Mortify
+3 Oath of Kaya
+1 Kaya, Orzhov Usurper
+2 Sorin, Vengeful Bloodlord
+2 Vivien Reid
+3 Vraska, Golgari Queen
+1 Forest
+1 Plains
+1 Swamp
+4 Godless Shrine
+3 Isolated Chapel
+2 Memorial to Folly
+4 Overgrown Tomb
+4 Sunpetal Grove
+4 Temple Garden
+1 Woodland Cemetery
+[Sideboard]
+2 Knight of Autumn
+2 Despark
+3 Moment of Craving
+1 Kaya, Orzhov Usurper
+1 Liliana, Dreadhorde General
+1 Vivien Reid
+4 Duress
+1 Find // Finality

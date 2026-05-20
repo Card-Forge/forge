@@ -1,0 +1,12 @@
+Name:Dawnhand Eulogist
+ManaCost:3 B
+Types:Creature Elf Warlock
+PT:3/3
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature enters, mill three cards. Then if there is an Elf card in your graveyard, each opponent loses 2 life and you gain 2 life. (To mill three cards, put the top three cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 3 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | ConditionCheckSVar$ X
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | ConditionCheckSVar$ X
+SVar:X:Count$ValidGraveyard Elf.YouOwn
+DeckHas:Ability$Mill|LifeGain|Graveyard
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen this creature enters, mill three cards. Then if there is an Elf card in your graveyard, each opponent loses 2 life and you gain 2 life. (To mill three cards, put the top three cards of your library into your graveyard.)

@@ -19,6 +19,7 @@ package forge.ai;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import forge.ai.ability.AnimateAi;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -44,6 +45,8 @@ import forge.game.zone.ZoneType;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -145,13 +148,15 @@ public class AiAttackController {
                 sa.setActivatingPlayer(defender);
                 if (sa.isCrew() && !ComputerUtilCost.checkTapTypeCost(defender, sa.getPayCosts(), c, sa, tappedDefenders)) {
                     continue;
-                } else if (!ComputerUtilCost.canPayCost(sa, defender, false) || !sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
+                }
+                if (!ComputerUtilCost.canPayCost(sa, defender, false) || !sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
                     continue;
                 }
                 Card animatedCopy = AnimateAi.becomeAnimated(c, sa);
                 if (animatedCopy.isCreature()) {
+                    // TODO imprecise, only works 100% for colorless mana
                     int saCMC = sa.getPayCosts() != null && sa.getPayCosts().hasManaCost() ?
-                            sa.getPayCosts().getTotalMana().getCMC() : 0; // FIXME: imprecise, only works 100% for colorless mana
+                            sa.getPayCosts().getTotalMana().getCMC() : 0;
                     if (totalMana - manaReserved >= saCMC) {
                         manaReserved += saCMC;
                         defenders.add(animatedCopy);
@@ -185,9 +190,8 @@ public class AiAttackController {
     private boolean canAttackWrapper(final Card attacker, final GameEntity defender) {
         if (nextTurn) {
             return CombatUtil.canAttackNextTurn(attacker, defender);
-        } else {
-            return CombatUtil.canAttack(attacker, defender);
         }
+        return CombatUtil.canAttack(attacker, defender);
     }
 
     /**
@@ -198,33 +202,44 @@ public class AiAttackController {
         return choosePreferredDefenderPlayer(ai, false);
     }
     public static Player choosePreferredDefenderPlayer(Player ai, boolean forCombatDmg) {
-        Player defender = ai.getWeakestOpponent(); //Concentrate on opponent within easy kill range
+        PlayerCollection opponents = ai.getOpponents();
+        if (opponents.size() == 1) {
+            return opponents.get(0);
+        }
 
-        // TODO for multiplayer combat avoid players with cantLose or (if not playing infect) cantLoseForZeroOrLessLife and !canLoseLife
-
-        if (defender.getLife() > 8) {
-            // TODO connect with evaluateBoardPosition and only fall back to random when no player is the biggest threat by a fair margin
-
-            List<Player> opps = Lists.newArrayList(ai.getOpponents());
+        Player bestDefender = ai.getWeakestOpponent();
+        int bestScore = Integer.MIN_VALUE;
+        for (Player opp : opponents) {
+            final int life = opp.getLife();
+            int score = ComputerUtil.evaluateBoardPosition(ai, opp);
+            // round away slightly so a single land drop doesn't mean players with earlier turn order are predictably attacked
+            score = (int) Math.ceil(score / 10) * 10;
+            int lowLifeThreshold = Math.min(20, opp.getStartingLife());
+            if (life > 0 && life < lowLifeThreshold) {
+                // TODO commander damage
+                int lifeDeficit = lowLifeThreshold - life;
+                score += lifeDeficit * lifeDeficit;
+            }
             if (forCombatDmg) {
-                for (Player p : ai.getOpponents()) {
-                    if (p.isMonarch() && ai.canBecomeMonarch()) {
-                        // just increase the odds for now instead of being fully predictable
-                        // as it could lead to other too complex factors giving this reasoning negative impact
-                        opps.add(p);
-                    }
-                    if (p.hasInitiative()) {
-                        opps.add(p);
-                    }
+                if (opp.isMonarch() && ai.canBecomeMonarch()) {
+                    score += 80;
+                }
+                if (opp.hasInitiative()) {
+                    score += 80;
+                }
+                if (!opp.canLoseLife()) {
+                    score -= 100;
+                }
+                if (opp.cantLoseForZeroOrLessLife()) {
+                    score -= 50;
                 }
             }
-
-            // TODO should we cache the random for each turn? some functions like shouldPumpCard base their decisions on the assumption who will be attacked
-
-            //Otherwise choose a random opponent to ensure no ganging up on players
-            return Aggregates.random(opps);
+            if (score > bestScore || (score == bestScore && MyRandom.percentTrue(50))) {
+                bestScore = score;
+                bestDefender = opp;
+            }
         }
-        return defender;
+        return bestDefender;
     }
 
     /**
@@ -234,25 +249,25 @@ public class AiAttackController {
      *
      */
     public final static List<Card> sortAttackers(final List<Card> in) {
-        final List<Card> list = new ArrayList<>();
+        final List<Card> result = new ArrayList<>();
 
         // Cards with triggers should come first (for Battle Cry)
         for (final Card attacker : in) {
             for (final Trigger trigger : attacker.getTriggers()) {
                 if (trigger.getMode() == TriggerType.Attacks) {
-                    list.add(attacker);
+                    result.add(attacker);
                     break;
                 }
             }
         }
 
         for (final Card attacker : in) {
-            if (!list.contains(attacker)) {
-                list.add(attacker);
+            if (!result.contains(attacker)) {
+                result.add(attacker);
             }
         }
 
-        return list;
+        return result;
     }
 
     // Is there any reward for attacking? (for 0/1 creatures there is not)
@@ -273,27 +288,6 @@ public class AiAttackController {
             return false;
         }
 
-        // the attacker will die to a triggered ability (e.g. Sarkhan the Masterless)
-        for (Card c : ai.getOpponents().getCardsIn(ZoneType.Battlefield)) {
-            for (Trigger t : c.getTriggers()) {
-                if (t.getMode() == TriggerType.Attacks) {
-                    SpellAbility sa = t.ensureAbility();
-                    if (sa == null) {
-                        continue;
-                    }
-
-                    if (sa.getApi() == ApiType.EachDamage && "TriggeredAttacker".equals(sa.getParam("Defined"))) {
-                        List<Card> valid = CardLists.getValidCards(c.getController().getCreaturesInPlay(), sa.getParam("ValidCards"), c.getController(), c, sa);
-                        // TODO: this assumes that 1 damage is dealt per creature. Improve this to check the parameter/X to determine
-                        // how much damage is dealt by each of the creatures in the valid list.
-                        if (attacker.getNetToughness() <= valid.size()) {
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-
         if ("TRUE".equals(attacker.getSVar("HasAttackEffect"))) {
             return true;
         }
@@ -302,8 +296,8 @@ public class AiAttackController {
         final int dmgIfUnblocked = ComputerUtilCombat.damageIfUnblocked(attacker, defender, combat, true);
         if (dmgIfUnblocked > 0) {
             boolean onlyIfExalted = false;
-            if (combat.getAttackers().isEmpty() && ai.countExaltedBonus() > 0
-                    && dmgIfUnblocked - ai.countExaltedBonus() == 0) {
+            if (combat.getAttackers().isEmpty() && countExaltedBonus(ai) > 0
+                    && dmgIfUnblocked - countExaltedBonus(ai) == 0) {
                 // Make sure we're not counting on the Exalted bonus when the AI is planning to attack with more than one creature
                 onlyIfExalted = true;
             }
@@ -319,7 +313,7 @@ public class AiAttackController {
         }
 
         // TODO check if that makes sense
-        int exalted = ai.countExaltedBonus();
+        int exalted = countExaltedBonus(ai);
         if (this.attackers.size() == 1 && exalted > 0
                 && ComputerUtilCombat.predictDamageTo(defender, exalted, attacker, true) > 0) {
             return true;
@@ -359,7 +353,7 @@ public class AiAttackController {
 
     // this checks to make sure that the computer player doesn't lose when the human player attacks
     public final List<Card> notNeededAsBlockers(final List<Card> currentAttackers, final List<Card> potentialAttackers) {
-        //check for time walks
+        // check for time walks
         if (ai.getGame().getPhaseHandler().getNextTurn().equals(ai)) {
             return potentialAttackers;
         }
@@ -412,7 +406,7 @@ public class AiAttackController {
             if (ai.getController().isAI()) {
                 PlayerControllerAi aic = ((PlayerControllerAi) ai.getController());
                 pilotsNonAggroDeck = aic.pilotsNonAggroDeck();
-                playAggro = !pilotsNonAggroDeck || aic.getAi().getBooleanProperty(AiProps.PLAY_AGGRO);
+                playAggro = !pilotsNonAggroDeck || aic.getAi().getBoolProperty(AiProps.PLAY_AGGRO);
             }
             // TODO make switchable via AI property
             int thresholdMod = 0;
@@ -480,7 +474,7 @@ public class AiAttackController {
         // (human will get an extra first attack with a creature that untaps)
         // In addition, if the computer guesses it needs no blockers, make sure
         // that it won't be surprised by Exalted
-        final int humanExaltedBonus = defendingOpponent.countExaltedBonus();
+        final int humanExaltedBonus = countExaltedBonus(defendingOpponent);
         int blockersNeeded = potentialAttackers.size() - notNeededAsBlockers.size();
 
         if (humanExaltedBonus > 0) {
@@ -520,6 +514,13 @@ public class AiAttackController {
             return;
         }
 
+        // respect global attack constraints
+        GlobalAttackRestrictions restrict = combat.getAttackConstraints().getGlobalRestrictions();
+        Integer attackMax = restrict.getMax();
+        if (attackMax != null && attackMax >= attackers.size()) {
+            return;
+        }
+
         List<Card> bandingCreatures = null;
         if (test == null) {
             bandingCreatures = CardLists.filter(myList, card -> card.hasKeyword(Keyword.BANDING) || card.hasKeyword(Keyword.BANDSWITH));
@@ -528,18 +529,9 @@ public class AiAttackController {
             bandingCreatures = CardLists.filter(bandingCreatures, card -> !combat.isAttacking(card) && CombatUtil.canAttack(card));
 
             bandingCreatures = notNeededAsBlockers(attackers, bandingCreatures);
-        } else {
+        } else if (test.hasKeyword(Keyword.BANDING) || test.hasKeyword(Keyword.BANDSWITH)) {
             // Test a specific creature for Banding
-            if (test.hasKeyword(Keyword.BANDING) || test.hasKeyword(Keyword.BANDSWITH)) {
-                bandingCreatures = new CardCollection(test);
-            }
-        }
-
-        // respect global attack constraints
-        GlobalAttackRestrictions restrict = GlobalAttackRestrictions.getGlobalRestrictions(ai, combat.getDefenders());
-        int attackMax = restrict.getMax();
-        if (attackMax >= attackers.size()) {
-            return;
+            bandingCreatures = new CardCollection(test);
         }
 
         if (bandingCreatures != null) {
@@ -578,12 +570,11 @@ public class AiAttackController {
 
                 if (bestBand != null) {
                     GameEntity defender = combat.getDefenderByAttacker(bestBand);
-                    if (attackMax == -1) {
-                        // check with the local limitations vs. the chosen defender
-                        attackMax = restrict.getDefenderMax().get(defender) == null ? -1 : restrict.getDefenderMax().get(defender);
-                    }
 
-                    if (attackMax == -1 || attackMax > combat.getAttackers().size()) {
+                    Integer bandingMax = ObjectUtils.firstNonNull(attackMax, restrict.getDefenderMax().get(defender));
+
+                    if ((attackMax == null || attackMax > combat.getAttackers().size()) &&
+                            (bandingMax == null || bandingMax > combat.getAttackersOf(defender).size())) {
                         if (CombatUtil.canAttack(c, defender)) {
                             combat.addAttacker(c, defender, combat.getBandOfAttacker(bestBand));
                         }
@@ -594,6 +585,10 @@ public class AiAttackController {
     }
 
     private boolean doAssault() {
+        if (ai.cantWin()) {
+            return false;
+        }
+
         if (ai.isCardInPlay("Beastmaster Ascension") && this.attackers.size() > 1) {
             final CardCollectionView beastions = ai.getCardsIn(ZoneType.Battlefield, "Beastmaster Ascension");
             int minCreatures = 7;
@@ -614,10 +609,10 @@ public class AiAttackController {
 
         CardLists.sortByPowerDesc(this.attackers);
 
-        CardCollection unblockedAttackers = new CardCollection();
+        final CardCollection unblockedAttackers = new CardCollection();
+        final CardCollection blockedAttackers = new CardCollection();
         final CardCollection remainingAttackers = new CardCollection(this.attackers);
         final CardCollection remainingBlockers = new CardCollection(this.blockers);
-        final CardCollection blockedAttackers = new CardCollection();
 
         int maxBlockersAfterCrew = remainingBlockers.size();
         if (defendingOpponent.isCardInPlay("Peacewalker Colossus")) {
@@ -633,37 +628,64 @@ public class AiAttackController {
 
         // if true, the AI will attempt to identify which blockers will already be taken,
         // thus attempting to predict how many creatures with evasion can actively block
-        boolean predictEvasion = false;
-        if (ai.getController().isAI()) {
-            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-            if (aic.getBooleanProperty(AiProps.COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION)) {
-                predictEvasion = true;
-            }
-        }
-
-        CardCollection accountedBlockers = new CardCollection(this.blockers);
-        CardCollection categorizedAttackers = new CardCollection();
-
+        boolean predictEvasion = AiProfileUtil.getBoolProperty(ai, AiProps.COMBAT_ASSAULT_ATTACK_EVASION_PREDICTION);
+        List<Card> categorizedAttackers;
         if (predictEvasion) {
             // split categorizedAttackers such that the ones with evasion come first and
             // can be properly accounted for. Note that at this point the attackers need
             // to be sorted by power already (see the Collections.sort call above).
-            categorizedAttackers.addAll(ComputerUtilCombat.categorizeAttackersByEvasion(this.attackers));
+            categorizedAttackers = ComputerUtilCombat.categorizeAttackersByEvasion(this.attackers);
         } else {
-            categorizedAttackers.addAll(this.attackers);
+            categorizedAttackers = Lists.newArrayList(this.attackers);
         }
 
+        Map<Card, Integer> attackCosts = Maps.newHashMap();
         for (Card attacker : categorizedAttackers) {
-            if (!CombatUtil.canBeBlocked(attacker, accountedBlockers, null)
-                    || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
-                unblockedAttackers.add(attacker);
-            } else if (predictEvasion) {
-                List<Card> potentialBestBlockers = CombatUtil.getPotentialBestBlockers(attacker, accountedBlockers, null);
-                accountedBlockers.removeAll(potentialBestBlockers);
+            Cost tax = CombatUtil.getAttackCost(ai.getGame(), attacker, defendingOpponent);
+            if (tax != null && tax.getCostMana().getMana().getCMC() > 0) {
+                // TODO might sort by quotient of dmg/cost for best combination
+                attackCosts.put(attacker, tax.getCostMana().getMana().getCMC());
+            }
+        }
+        int myFreeMana = 0;
+        if (!attackCosts.isEmpty()) {
+            // TODO might want to factor in isManaSourceReserved
+            myFreeMana = ComputerUtilMana.getAvailableManaEstimate(ai, !nextTurn);
+            if (Aggregates.sum(attackCosts.values()) <= myFreeMana) {
+                // can afford everything
+                attackCosts.clear();
             }
         }
 
+        // when an attacker gets taxed the best priority to pay for damage is usually: 1. unblockable 2. trample 3. normal
+        CardCollection accountedBlockers = new CardCollection(this.blockers);
+        while (!categorizedAttackers.isEmpty()) {
+            Card attacker = categorizedAttackers.get(0);
+            int cost = attackCosts.getOrDefault(attacker, 0);
+            if (cost > myFreeMana) {
+                // skip attackers exceeding the attack tax that's payable
+                // (this prevents the AI from only making a partial attack that could backfire)
+                remainingAttackers.remove(attacker);
+                categorizedAttackers.remove(attacker);
+                attackCosts.remove(attacker);
+                continue;
+            }
+            if (!CombatUtil.canBeBlocked(attacker, accountedBlockers, null)
+                    || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
+                unblockedAttackers.add(attacker);
+            } else if (cost > 0 && !attacker.hasKeyword(Keyword.TRAMPLE) && attackCosts.keySet().stream().anyMatch(c -> c.hasKeyword(Keyword.TRAMPLE))) {
+                // still another trampler that can be checked first
+                categorizedAttackers.add(categorizedAttackers.remove(0));
+                continue;
+            } else if (predictEvasion) {
+                accountedBlockers.removeAll(CombatUtil.getPotentialBestBlockers(attacker, accountedBlockers, null));
+            }
+            myFreeMana -= cost;
+            categorizedAttackers.remove(attacker);
+            attackCosts.remove(attacker);
+        }
         remainingAttackers.removeAll(unblockedAttackers);
+        // TODO need to sort attackers AI shouldn't pay for to the end
 
         for (Card blocker : this.blockers) {
             if (blocker.canBlockAny()) {
@@ -697,100 +719,58 @@ public class AiAttackController {
         }
         unblockedAttackers.addAll(remainingAttackers);
 
-        int totalCombatDamage = 0;
-
-        // TODO might want to only calculate that if it's needed
-        // TODO might want to factor in isManaSourceReserved
-        int myFreeMana = ComputerUtilMana.getAvailableManaEstimate(ai, !nextTurn);
-        // skip attackers exceeding the attack tax that's payable
-        // (this prevents the AI from only making a partial attack that could backfire)
-        final Pair<Integer, Integer> tramplerFirst = getDamageFromBlockingTramplers(blockedAttackers, remainingBlockers, myFreeMana);
-        int trampleDamage = tramplerFirst.getLeft();
-        int tramplerTaxPaid = tramplerFirst.getRight();
-
-        // see how far we can get if paying for the unblockable first instead
-        if (tramplerTaxPaid > 0) {
-            int unblockableAttackTax = 0;
-            final CardCollection unblockableWithPaying = new CardCollection();
-            final CardCollection unblockableCantPayFor = new CardCollection();
-            final CardCollection unblockableWithoutCost = new CardCollection();
-            // TODO also check poison
-            for (Card attacker : unblockedAttackers) {
-                Cost tax = CombatUtil.getAttackCost(ai.getGame(), attacker, defendingOpponent);
-                if (tax == null) {
-                    unblockableWithoutCost.add(attacker);
-                } else {
-                    int taxCMC = tax.getCostMana().getMana().getCMC();
-                    if (myFreeMana < unblockableAttackTax + taxCMC) {
-                        unblockableCantPayFor.add(attacker);
-                        continue;
-                    }
-                    unblockableAttackTax += taxCMC;
-                    unblockableWithPaying.add(attacker);
+        Map<Card, Integer> trampleDmg = Maps.newHashMap();
+        CardCollection tramplers = CardLists.getKeyword(blockedAttackers, Keyword.TRAMPLE);
+        CardCollection infecterTramplers = tramplers.filter(c -> c.isInfectDamage(defendingOpponent));
+        tramplers.removeAll(infecterTramplers);
+        // in most cases avoiding more poison would come first
+        for (Card attacker : Iterables.concat(infecterTramplers, tramplers)) {
+            int dmg = ComputerUtilCombat.getAttack(attacker);
+            for (Card blocker : remainingBlockers.threadSafeIterable()) {
+                if (dmg < 1) {
+                    break;
+                }
+                if (CombatUtil.canBlock(attacker, blocker)) {
+                    dmg -= ComputerUtilCombat.shieldDamage(attacker, blocker);
+                    remainingBlockers.remove(blocker);
                 }
             }
-            int dmgUnblockableAfterPaying = ComputerUtilCombat.sumDamageIfUnblocked(unblockableWithPaying, defendingOpponent);
-            unblockedAttackers = unblockableWithoutCost;
-            if (dmgUnblockableAfterPaying > trampleDamage) {
-                myFreeMana -= unblockableAttackTax;
-                totalCombatDamage = dmgUnblockableAfterPaying;
-                // recalculate the trampler damage with the reduced mana available now
-                trampleDamage = getDamageFromBlockingTramplers(blockedAttackers, remainingBlockers, myFreeMana).getLeft();
-            } else {
-                myFreeMana -= tramplerTaxPaid;
-                // find out if we can still pay for some left
-                for (Card attacker : unblockableWithPaying) {
-                    Cost tax = CombatUtil.getAttackCost(ai.getGame(), attacker, defendingOpponent);
-                    int taxCMC = tax.getCostMana().getMana().getCMC();
-                    if (myFreeMana < unblockableAttackTax + taxCMC) {
-                        continue;
-                    }
-                    unblockableAttackTax += taxCMC;
-                    unblockedAttackers.add(attacker);
-                }
+            if (dmg > 0) {
+                trampleDmg.put(attacker, dmg);
             }
         }
 
-        totalCombatDamage += ComputerUtilCombat.sumDamageIfUnblocked(unblockedAttackers, defendingOpponent) + trampleDamage;
-        if (totalCombatDamage + ComputerUtil.possibleNonCombatDamage(ai, defendingOpponent) >= defendingOpponent.getLife()
-                && !((defendingOpponent.cantLoseForZeroOrLessLife() || ai.cantWin()) && defendingOpponent.getLife() < 1)) {
-            return true;
+        if (defendingOpponent.getLife() > 0 && !defendingOpponent.cantLoseForZeroOrLessLife()) {
+            int totalCombatDamage = tramplers.stream().map(c -> trampleDmg.getOrDefault(c, 0)).reduce(0, Integer::sum);
+            if (totalCombatDamage >= defendingOpponent.getLife()) {
+                return true;
+            }
+            totalCombatDamage += ComputerUtilCombat.sumDamageIfUnblocked(unblockedAttackers, defendingOpponent);
+            if (totalCombatDamage >= defendingOpponent.getLife()) {
+                return true;
+            }
+            totalCombatDamage += ComputerUtil.possibleNonCombatDamage(ai, defendingOpponent);
+            if (totalCombatDamage >= defendingOpponent.getLife()) {
+                return true;
+            }
         }
 
-        // TODO tramplers
         int totalPoisonDamage = ComputerUtilCombat.sumPoisonIfUnblocked(unblockedAttackers, defendingOpponent);
         if (totalPoisonDamage >= 10 - defendingOpponent.getPoisonCounters()) {
             return true;
         }
-
-        return false;
-    }
-
-    private Pair<Integer, Integer> getDamageFromBlockingTramplers(final List<Card> blockedAttackers, final List<Card> blockers, final int myFreeMana) {
-        int currentAttackTax = 0;
-        int trampleDamage = 0;
-        CardCollection remainingBlockers = new CardCollection(blockers);
-        for (Card attacker : CardLists.getKeyword(blockedAttackers, Keyword.TRAMPLE)) {
-            // TODO might sort by quotient of dmg/cost for best combination
-            Cost tax = CombatUtil.getAttackCost(ai.getGame(), attacker, defendingOpponent);
-            int taxCMC = tax != null ? tax.getCostMana().getMana().getCMC() : 0;
-            if (myFreeMana < currentAttackTax + taxCMC) {
-                continue;
+        for (Card trampler : trampleDmg.keySet()) {
+            int dmg = trampleDmg.get(trampler);
+            if (infecterTramplers.contains(trampler)) {
+                totalPoisonDamage += dmg;
             }
-            currentAttackTax += taxCMC;
-
-            int damage = ComputerUtilCombat.getAttack(attacker);
-            for (Card blocker : remainingBlockers.threadSafeIterable()) {
-                if (CombatUtil.canBlock(attacker, blocker) && damage > 0) {
-                    damage -= ComputerUtilCombat.shieldDamage(attacker, blocker);
-                    remainingBlockers.remove(blocker);
-                }
-            }
-            if (damage > 0) {
-                trampleDamage += damage;
+            totalPoisonDamage += ComputerUtilCombat.predictExtraPoisonWithDamage(trampler, defendingOpponent, dmg);
+            if (totalPoisonDamage >= 10 - defendingOpponent.getPoisonCounters()) {
+                return true;
             }
         }
-        return Pair.of(trampleDamage, currentAttackTax);
+
+        return false;
     }
 
     private GameEntity chooseDefender(final Combat c, final boolean bAssault) {
@@ -843,6 +823,7 @@ public class AiAttackController {
             refreshCombatants(defendingOpponent);
         }
 
+        // TODO ideally requirements and attackMax are calculated first. so AI knows which attackers can't contribute
         final boolean bAssault = doAssault();
 
         // Determine who will be attacked
@@ -867,6 +848,15 @@ public class AiAttackController {
             return aiAggression;
         }
 
+        GlobalAttackRestrictions restrict = combat.getAttackConstraints().getGlobalRestrictions();
+        // check with the local limitations vs. the chosen defender
+        // could still be null
+        Integer attackMax = ObjectUtils.firstNonNull(restrict.getMax(), restrict.getDefenderMax().get(defender));
+        if (attackMax != null && attackMax == 0) {
+            // can't attack anymore
+            return aiAggression;
+        }
+
         // Aggro options
         boolean playAggro = false;
         int chanceToAttackToTrade = 0;
@@ -879,12 +869,12 @@ public class AiAttackController {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
             simAI = aic.usesSimulation();
             if (!simAI) {
-                playAggro = aic.getBooleanProperty(AiProps.PLAY_AGGRO);
+                playAggro = aic.getBoolProperty(AiProps.PLAY_AGGRO);
                 chanceToAttackToTrade = aic.getIntProperty(AiProps.CHANCE_TO_ATTACK_INTO_TRADE);
-                tradeIfTappedOut = aic.getBooleanProperty(AiProps.ATTACK_INTO_TRADE_WHEN_TAPPED_OUT);
+                tradeIfTappedOut = aic.getBoolProperty(AiProps.ATTACK_INTO_TRADE_WHEN_TAPPED_OUT);
                 extraChanceIfOppHasMana = aic.getIntProperty(AiProps.CHANCE_TO_ATKTRADE_WHEN_OPP_HAS_MANA);
-                tradeIfLowerLifePressure = aic.getBooleanProperty(AiProps.RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE);
-                predictEvasion = aic.getBooleanProperty(AiProps.COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION);
+                tradeIfLowerLifePressure = aic.getBoolProperty(AiProps.RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE);
+                predictEvasion = aic.getBoolProperty(AiProps.COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION);
             }
         }
 
@@ -894,19 +884,6 @@ public class AiAttackController {
         final boolean seasonOfTheWitch = ai.getGame().isCardInPlay("Season of the Witch");
 
         final Queue<Card> attackersLeft = new ConcurrentLinkedQueue<>(this.attackers);
-
-        // TODO probably use AttackConstraints instead of only GlobalAttackRestrictions?
-        GlobalAttackRestrictions restrict = GlobalAttackRestrictions.getGlobalRestrictions(ai, combat.getDefenders());
-        int attackMax = restrict.getMax();
-        if (attackMax == -1) {
-            // check with the local limitations vs. the chosen defender
-            attackMax = restrict.getDefenderMax().get(defender) == null ? -1 : restrict.getDefenderMax().get(defender);
-        }
-
-        if (attackMax == 0) {
-            // can't attack anymore
-            return aiAggression;
-        }
 
         // Attackers that don't really have a choice
         final AtomicInteger numForcedAttackers = new AtomicInteger(0);
@@ -993,17 +970,24 @@ public class AiAttackController {
             return aiAggression;
         }
 
+        // Only do decisive attacks against token-generating players
+        if (!bAssault && defender instanceof Player opp &&
+                CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Rabble Rousing"))
+                        - CardLists.count(opp.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Darien, King of Kjeldor"))
+                        - CardLists.count(opp.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Kazuul, Tyrant of the Cliffs")) < 0) {
+            return aiAggression;
+        }
+
         if (bAssault && defender == defendingOpponent) { // in case we are forced to attack someone else
             if (LOG_AI_ATTACKS)
                 System.out.println("Assault");
             List<Card> left = new ArrayList<>(attackersLeft);
             CardLists.sortByPowerDesc(left);
             for (Card attacker : left) {
-                // reached max, breakup
-                if (attackMax != -1 && combat.getAttackers().size() >= attackMax)
+                if (attackMax != null && combat.getAttackers().size() >= attackMax)
                     return aiAggression;
 
-                // TODO if lifeInDanger use chance to hold back some
+                // TODO if lifeInDanger use chance to hold back some (especially in multiplayer)
                 if (canAttackWrapper(attacker, defender) && isEffectiveAttacker(ai, attacker, combat, defender)) {
                     combat.addAttacker(attacker, defender);
                 }
@@ -1025,7 +1009,7 @@ public class AiAttackController {
 
         // Exalted
         if (combat.getAttackers().isEmpty()) {
-            boolean exalted = ai.countExaltedBonus() > 2;
+            boolean exalted = countExaltedBonus(ai) > 2;
 
             if (!exalted) {
                 for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
@@ -1053,7 +1037,7 @@ public class AiAttackController {
             }
         }
 
-        if (attackMax != -1) {
+        if (attackMax != null) {
             // should attack with only max if able.
             CardLists.sortByPowerDesc(this.attackers);
             aiAggression = 6;
@@ -1100,7 +1084,8 @@ public class AiAttackController {
         for (final Card pCard : myList) {
             // if the creature can attack then it's a potential attacker this
             // turn, assume summoning sickness creatures will be able to
-            if (ComputerUtilCombat.canAttackNextTurn(pCard) && pCard.getNetCombatDamage() > 0) {
+            // TODO: Account for triggered power boosts.
+            if (ComputerUtilCombat.canAttackNextTurn(pCard) && (pCard.getNetCombatDamage() > 0 || "TRUE".equals(pCard.getSVar("HasAttackEffect")))) {
                 candidateAttackers.add(pCard);
                 candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, defendingOpponent, null, false);
                 computerForces++;
@@ -1431,7 +1416,7 @@ public class AiAttackController {
                         // Check if maybe we are too reckless in adding this attacker
                         if (canKillAllDangerous) {
                             boolean avoidAttackingIntoBlock = ai.getController().isAI()
-                                    && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK);
+                                    && ((PlayerControllerAi) ai.getController()).getAi().getBoolProperty(AiProps.TRY_TO_AVOID_ATTACKING_INTO_CERTAIN_BLOCK);
                             boolean attackerWillDie = defPower >= attacker.getNetToughness();
                             boolean uselessAttack = !hasCombatEffect && !hasAttackEffect;
                             boolean noContributionToAttack = attackers.size() <= defenders.size() || attacker.getNetPower() <= 0;
@@ -1752,7 +1737,7 @@ public class AiAttackController {
         attackersLeft.removeAll(attUnsafe);
     }
 
-    private boolean doRevengeOfRavensAttackLogic(final GameEntity defender, final Queue<Card> attackersLeft, int numForcedAttackers, int maxAttack) {
+    private boolean doRevengeOfRavensAttackLogic(final GameEntity defender, final Queue<Card> attackersLeft, int numForcedAttackers, Integer maxAttack) {
         // TODO: detect Revenge of Ravens by the trigger instead of by name
         boolean revengeOfRavens = false;
         if (defender instanceof Player player) {
@@ -1768,7 +1753,7 @@ public class AiAttackController {
         }
 
         int life = ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife() ? ai.getLife() : Integer.MAX_VALUE;
-        maxAttack = maxAttack < 0 ? Integer.MAX_VALUE - 1 : maxAttack;
+        maxAttack = Objects.requireNonNullElse(maxAttack, Integer.MAX_VALUE - 1);
         if (Math.min(maxAttack, numForcedAttackers) >= life) {
             return false;
         }
@@ -1787,6 +1772,10 @@ public class AiAttackController {
         }
 
         return true;
+    }
+
+    public final static int countExaltedBonus(Player p) {
+        return CardLists.getAmountOfKeyword(p.getCardsIn(ZoneType.Battlefield), Keyword.EXALTED);
     }
 
 }

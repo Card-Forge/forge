@@ -4,5 +4,5 @@ Types:Creature Elemental
 PT:8/5
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 K:Haste
-S:Mode$ CantTarget | ValidCard$ Card.Self | ValidSource$ Card.nonGreen | Description$ CARDNAME can't be the target of nongreen spells or abilities from nongreen sources.
+S:Mode$ CantTarget | ValidTarget$ Card.Self | ValidSource$ Card.nonGreen | Description$ CARDNAME can't be the target of nongreen spells or abilities from nongreen sources.
 Oracle:This spell can't be countered.\nHaste\nGaea's Revenge can't be the target of nongreen spells or abilities from nongreen sources.

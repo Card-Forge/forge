@@ -1,0 +1,219 @@
+[metadata]
+Code=EOC
+Date=2025-08-01
+Name=Edge of Eternities Commander
+Type=Commander
+ScryfallCode=EOC
+
+[cards]
+1 M Hearthhull, the Worldseed @Daniel Ljunggren
+2 M Inspirit, Flagship Vessel @Titus Lunter
+3 M Kilo, Apogee Mind @Tuan Duong Chu
+4 M Szarel, Genesis Shepherd @Matt Stewart
+5 R Patrolling Peacemaker @Michal Ivan
+6 R Insight Engine @Gaboleps
+7 R Uthros Research Craft @Piotr Dura
+8 R Eumidian Wastewaker @Mathias Kollros
+9 R Depthshaker Titan @PINDURSKI
+10 R Evendo Brushrazer @Igor Grechanyi
+11 R Long-Range Sensor @Artur Treffner
+12 R Planetary Annihilation @Cristi Balanescu
+13 R Baloth Prime @Joshua Raphael
+14 R Exploration Broodship @Borja Pindado
+15 R Horizon Explorer @Filip Burburan
+16 R Scouring Swarm @Diana Franco
+17 R Moxite Refinery @Nadia Hurianova
+18 R Solar Array @Sergey Glushakov
+19 R Surge Conductor @Alexandr Leskinen
+20 R Eumidian Hatchery @Valera Lutfullina
+21 R Festering Thicket @Jakob Eirich
+22 R Glittering Massif @Cristi Balanescu
+23 R Radiant Summit @Marco Gorlei
+24 R Vernal Fen @Titus Lunter
+25 R Patrolling Peacemaker @Michal Ivan
+26 R Insight Engine @Gaboleps
+27 R Uthros Research Craft @Piotr Dura
+28 R Eumidian Wastewaker @Mathias Kollros
+29 R Depthshaker Titan @PINDURSKI
+30 R Evendo Brushrazer @Igor Grechanyi
+31 R Long-Range Sensor @Artur Treffner
+32 R Planetary Annihilation @Cristi Balanescu
+33 R Baloth Prime @Joshua Raphael
+34 R Exploration Broodship @Borja Pindado
+35 R Horizon Explorer @Filip Burburan
+36 R Scouring Swarm @Diana Franco
+37 R Moxite Refinery @Nadia Hurianova
+38 R Solar Array @Sergey Glushakov
+39 R Surge Conductor @Alexandr Leskinen
+40 R Eumidian Hatchery @Valera Lutfullina
+41 R Festering Thicket @Jakob Eirich
+42 R Glittering Massif @Cristi Balanescu
+43 R Radiant Summit @Marco Gorlei
+44 R Vernal Fen @Titus Lunter
+45 U Swords to Plowshares @Nadia Hurianova
+46 R Swan Song @Lorenzo Mastroianni
+47 U Tezzeret's Gambit @Bryan Sola
+48 U Thirst for Knowledge @Andrea Piparo
+49 R Chaos Warp @Olivier Bernard
+50 C Farseek @Julian Kok Joon Wen
+51 C Springbloom Druid @Andrey Kuzinskiy
+52 U Binding the Old Gods @Daniel Ljunggren
+53 C Arcane Signet @Constantin Marin
+54 R Cloud Key @Matt Stewart
+55 R Gavel of the Righteous @David Palumbo
+56 U Pentad Prism @Lindsey Look
+57 U Sol Ring @Steven Belledin
+58 R Battlefield Forge @Manuel Castañón
+59 C Command Tower @Constantin Marin
+60 R Fabled Passage @Rob Rey
+61 U Mountain Valley @Tim Brumley
+62 C Terramorphic Expanse @Allen Panakal
+63 R Angel of the Ruins @Viko Menezes
+64 U Dispatch @Erica Yang
+65 R Fumigate @Svetlin Velinov
+66 R Organic Extinction @Cristi Balanescu
+67 R Resourceful Defense @Francis Tneh
+68 R Chrome Host Seedshark @Donato Giancola
+69 R Cyberdrive Awakener @Zezhou Chen
+70 R Deepglow Skate @Jason Kang
+71 R Emry, Lurker of the Loch @Livia Prima
+72 C Etherium Sculptor @Steven Belledin
+73 C Experimental Augury @Donato Giancola
+74 R Kappa Cannoneer @Jesper Ejsing
+75 R Phyrexian Metamorph @Jana Schirmer & Johannes Voss
+76 R Pull from Tomorrow @Sara Winters
+77 R Ripples of Potential @Sam Hogg
+78 M Tekuthal, Inquiry Dominus @Martin de Diego Sádaba
+79 R Thought Monitor @Martina Pilcerova
+80 U Thrummingbird @José Parodi
+81 R Universal Surveillance @Aaron J. Riley
+82 R Braids, Arisen Nightmare @Heonhwa Choe
+83 M God-Eternal Bontu @Lius Lasahido
+84 U Infernal Grasp @Naomi Baker
+85 C Night's Whisper @Carlos Palma Cruchaga
+86 R Blasphemous Act @Daarken
+87 R Chain Reaction @Trevor Claxton
+88 R Hammer of Purphoros @Yeong-Hao Han
+89 M Moraug, Fury of Akoum @Rudy Siswanto
+90 U Sprouting Goblin @Uriah Voth
+91 U Aftermath Analyst @Danny Schwartz
+92 R Augur of Autumn @Billy Christian
+93 U Beast Within @Dave Allsop
+94 R Centaur Vinecrasher @Robbie Trevino
+95 C Cultivate @Anthony Palumbo
+96 R Formless Genesis @Mark Poole
+97 U Groundskeeper @Anthony Palumbo
+98 C Harrow @Rob Alexander
+99 R Loamcrafter Faun @Mark Zug
+100 M Multani, Yavimaya's Avatar @Ryan Yee
+101 U Nature's Lore @Julie Dillon
+102 R Oracle of Mul Daya @Vance Kovacs
+103 R Pest Infestation @Brian Valeza
+104 R Rampaging Baloths @Steve Prescott
+105 U Roiling Regrowth @Jonas De Ro
+106 C Satyr Wayfinder @Steve Prescott
+107 C Skyshroud Claim @Anna Steinbauer
+108 R Splendid Reclamation @Uriah Voth
+109 U Tear Asunder @Dave Kendall
+110 R Tireless Tracker @Eric Deschamps
+111 M Titania, Protector of Argoth @Magali Villeneuve
+112 M World Breaker @Jaime Jones
+113 M Alibou, Ancient Witness @Matt Stewart
+114 U Enthusiastic Mechanaut @Anna Steinbauer
+115 R Escape to the Wilds @Chris Ostrowski
+116 R Gaze of Granite @Nils Hamm
+117 M The Gitrog Monster @Jason Kang
+118 R Jhoira, Weatherlight Captain @Brad Rigney
+119 U Juri, Master of the Revue @Dmitry Burmak
+120 M Korvold, Fae-Cursed King @Wisnu Tan
+121 U Mayhem Devil @Dmitry Burmak
+122 R Mazirek, Kraul Death Priest @Mathias Kollros
+123 M Omnath, Locus of Rage @Brad Rigney
+124 U Putrefy @Clint Cearley
+125 U Rakdos Charm @Zoltan Boros
+126 M Soul of Windgrace @Liiga Smilshkalne
+127 U Uurg, Spawn of Turg @Nicholas Gregory
+128 R Wake the Past @Yeong-Hao Han
+129 R Windgrace's Judgment @Grzegorz Rutkowski
+130 R Worldsoul's Rage @Lius Lasahido
+131 R Astral Cornucopia @Aleksi Briclot
+132 U Coretapper @Dany Orizio
+133 R Crystalline Crawler @Jason Felix
+134 R Darksteel Reactor @Kev Walker
+135 R Empowered Autogenerator @Piotr Dura
+136 U Etched Oracle @Matt Cavotta
+137 U Everflowing Chalice @Steve Argyle
+138 C Golem Foundry @Nic Klein
+139 R Hangarback Walker @Daarken
+140 R Lux Artillery @Jason Kang
+141 R Lux Cannon @Martina Pilcerova
+142 U Mindless Automaton @Chris Seaman
+143 U Soul-Guide Lantern @Iris Compiet
+144 R Steel Overseer @Chris Rahn
+145 R Threefold Thunderhulk @Xavier Ribeiro
+146 R Titan Forge @Svetlin Velinov
+147 R Adarkar Wastes @Piotr Dura
+148 C Ancient Den @Rob Alexander
+149 C Bojuka Bog @Howard Lyon
+150 U Buried Ruin @Franz Vohwinkel
+151 C Cabaretti Courtyard @Kasia 'Kafis' Zielińska
+152 R Canyon Slough @Titus Lunter
+153 R Cascade Bluffs @Brandon Kitkouski
+154 R Cinder Glade @Adam Paquette
+155 R Clifftop Retreat @Christine Choi
+156 U Dakmor Salvage @John Avon
+157 C Escape Tunnel @Carlos Palma Cruchaga
+158 C Evolving Wilds @Andreas Rocha
+159 R Exotic Orchard @Steven Belledin
+160 R Glacial Fortress @James Paick
+161 C Great Furnace @Rob Alexander
+162 R Irrigated Farmland @Jonas De Ro
+163 R Karn's Bastion @Adam Paquette
+164 R Karplusan Forest @Sam Burley
+165 R Llanowar Wastes @Lucas Graciano
+166 C Lonely Sandbar @Heather Hudson
+167 C Maestros Theater @Jokubas Uogintas
+168 R The Mycosynth Gardens @Andrew Mar
+169 U Myriad Landscape @Richard Wright
+170 U Mystic Monastery @Leon Tukker
+171 C Razortide Bridge @Rob Alexander
+172 C Riveteers Overlook @Lucas Staniec
+173 U Rocky Tar Pit @Jeff Miracola
+174 R Rugged Prairie @Fred Fields
+175 C Rustvale Bridge @Craig J Spearing
+176 C Seat of the Synod @John Avon
+177 C Secluded Steppe @Heather Hudson
+178 R Sheltered Thicket @Sung Choi
+179 R Shivan Reef @Andrew Mar
+180 C Silverbluff Bridge @Joseph Meehan
+181 R Skycloud Expanse @Rob Alexander
+182 R Smoldering Marsh @Adam Paquette
+183 R Spire of Industry @John Avon
+184 R Sulfur Falls @Cliff Childs
+185 R Sulfurous Springs @Bruce Brenneise
+186 R Temple of Enlightenment @Piotr Dura
+187 R Temple of Epiphany @Adam Paquette
+188 R Temple of Triumph @Piotr Dura
+189 R Twilight Mire @Rob Alexander
+190 R Viridescent Bog @Piotr Dura
+191 C Wastes @Raymond Swanland
+
+[tokens]
+2 c_x_x_shapeshifter_changeling_deathtouch @Carlos Palma Cruchaga
+3 u_2_2_bird_flying @Alessandra Pisano
+4 b_1_1_insect_flying @Deruchenko Alexander
+5 g_3_3_beast @Dave Allsop
+6 g_4_4_beast @Xabi Gaztelua
+7 g_5_3_elemental @Nils Hamm
+8 rg_5_5_elemental @Brad Rigney
+9 bg_1_1_pest_lifegain @Ilse Gort
+10 c_a_clue_draw @John Avon
+11 c_1_1_a_gnome @Racrufi
+12 c_3_3_a_golem @Nic Klein
+13 c_3_3_e_a_golem @Yeong-Hao Han
+14 c_9_9_a_golem @Svetlin Velinov
+15 incubator_c_0_0_a_phyrexian @Johann Bodin
+16 c_1_1_a_thopter_flying @Svetlin Velinov
+
+[other]
+1 copy @Martin de Diego Sádaba

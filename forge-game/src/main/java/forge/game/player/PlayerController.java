@@ -15,9 +15,7 @@ import forge.game.GameOutcome.AnteResult;
 import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
-import forge.game.cost.Cost;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPartMana;
+import forge.game.cost.*;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
@@ -41,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * A prototype for player controller class
@@ -63,7 +62,7 @@ public abstract class PlayerController {
     public enum FullControlFlag {
         ChooseCostOrder,
         ChooseCostReductionOrderAndVariableAmount,
-        //ChooseManaPoolShard, // select shard with special properties
+        ChooseManaPoolShard, // select shard with special properties //TODO: UI option to enable this one
         NoPaymentFromManaAbility,
         NoFreeCombatCostHandling,
         AllowPaymentStartWithMissingResources,
@@ -99,6 +98,7 @@ public abstract class PlayerController {
     public abstract SpellAbility getAbilityToPlay(Card hostCard, List<SpellAbility> abilities, ITriggerEvent triggerEvent);
 
     public abstract void playSpellAbilityNoStack(SpellAbility effectSA, boolean mayChoseNewTargets);
+    public abstract List<SpellAbility> orderSimultaneousSa(List<SpellAbility> activePlayerSAs);
     public abstract void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs);
     public abstract boolean playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory);
     public abstract boolean playSaFromPlayEffect(SpellAbility tgtSA);
@@ -113,7 +113,7 @@ public abstract class PlayerController {
     public abstract CardCollectionView choosePermanentsToSacrifice(SpellAbility sa, int min, int max, CardCollectionView validTargets, String message);
     public abstract CardCollectionView choosePermanentsToDestroy(SpellAbility sa, int min, int max, CardCollectionView validTargets, String message);
 
-    public abstract Integer announceRequirements(SpellAbility ability, String announce);
+    public abstract Integer announceRequirements(SpellAbility ability, int min, int max, String announce);
     public abstract TargetChoices chooseNewTargetsFor(SpellAbility ability, Predicate<GameObject> filter, boolean optional);
     public abstract boolean chooseTargetsFor(SpellAbility currentAbility); // this is bad a function for it assigns targets to sa inside its body
 
@@ -178,6 +178,11 @@ public abstract class PlayerController {
     public final void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix) {
         reveal(cards, zone, owner, null, true);
     }
+    public final void reveal(DelayedReveal delayedReveal) {
+        for (ZoneType zt : delayedReveal.getZone()) {
+            reveal(delayedReveal.getCards().stream().filter(c -> c.getZone() == zt).collect(Collectors.toList()), zt, delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+        }
+    }
     public abstract void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix, boolean addMsgSuffix);
 
     /** Shows message to player to reveal chosen cardName, creatureType, number etc. AI must analyze API to understand what that is */
@@ -196,13 +201,19 @@ public abstract class PlayerController {
      */
     public abstract CardCollectionView orderMoveToZoneList(CardCollectionView cards, ZoneType destinationZone, SpellAbility source);
 
-    /** p = target player, validCards - possible discards, min cards to discard */
-    public abstract CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max);
-    public abstract CardCollectionView chooseCardsToDiscardUnlessType(int min, CardCollectionView hand, String param, SpellAbility sa);
+    /** p = target player, validCards - possible discards, min cards to discard. */
+    public CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max) {
+        return chooseCardsToDiscardFrom(playerDiscard, sa, validCards, min, max, validCards);
+    }
+
+    /** visibleToChooser - all cards the chooser is allowed to see during the choice (a superset of validCards
+     *  when an effect has revealed extra cards, e.g. Reveal/Look modes). */
+    public abstract CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max, CardCollectionView visibleToChooser);
+    public abstract CardCollectionView chooseCardsToDiscardUnlessType(int min, CardCollectionView hand, String[] unlessTypes, SpellAbility sa);
     public abstract CardCollection chooseCardsToDiscardToMaximumHandSize(int numDiscard);
 
     public abstract CardCollectionView chooseCardsToDelve(int genericAmount, CardCollection grave);
-    public abstract Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCards, boolean improvise);
+    public abstract Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCards, boolean artifacts, boolean creatures, Integer maxReduction);
     public abstract List<Card> chooseCardsForSplice(SpellAbility sa, List<Card> cards);
 
     public abstract CardCollectionView chooseCardsToRevealFromHand(int min, int max, CardCollectionView valid);
@@ -224,9 +235,9 @@ public abstract class PlayerController {
 
     public abstract List<Card> chooseContraptionsToCrank(List<Card> contraptions);
 
-    public abstract int chooseSprocket(Card assignee, boolean forceDifferent);
+    public abstract int chooseSprocket(Card assignee, List<Integer> sprockets);
     public final int chooseSprocket(Card assignee) {
-        return chooseSprocket(assignee, false);
+        return chooseSprocket(assignee, List.of(1, 2, 3));
     }
 
     public abstract PlanarDice choosePDRollToIgnore(List<PlanarDice> rolls);
@@ -239,8 +250,7 @@ public abstract class PlayerController {
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer, boolean optional);
 
     public abstract boolean mulliganKeepHand(Player player, int cardsToReturn);
-    public abstract CardCollectionView londonMulliganReturnCards(Player mulliganingPlayer, int cardsToReturn);
-    public abstract boolean confirmMulliganScry(final Player p);
+    public abstract CardCollectionView tuckCardsViaMulligan(CardCollectionView hand, int cardsToReturn);
 
     public abstract List<SpellAbility> chooseSpellAbilityToPlay();
     public abstract boolean playChosenSpellAbility(SpellAbility sa);
@@ -263,11 +273,11 @@ public abstract class PlayerController {
     public abstract boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Boolean defaultChoice);
     public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Map<String, Object> params)  { return chooseBinary(sa, question, kindOfChoice); }
 
-    public abstract boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean[] results, boolean call);
+    public abstract boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean call);
 
     public abstract byte chooseColor(String message, SpellAbility sa, ColorSet colors);
     public abstract byte chooseColorAllowColorless(String message, Card c, ColorSet colors);
-    public abstract List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options);
+    public abstract ColorSet chooseColors(String message, SpellAbility sa, int min, int max, ColorSet options);
 
     public abstract ICardFace chooseSingleCardFace(SpellAbility sa, String message, Predicate<ICardFace> cpp, String name);
     public abstract ICardFace chooseSingleCardFace(SpellAbility sa, List<ICardFace> faces, String message);
@@ -281,24 +291,28 @@ public abstract class PlayerController {
 
     public abstract boolean confirmPayment(CostPart costPart, String string, SpellAbility sa);
     public abstract ReplacementEffect chooseSingleReplacementEffect(List<ReplacementEffect> possibleReplacers);
-    public abstract StaticAbility chooseSingleStaticAbility(String prompt, List<StaticAbility> possibleReplacers);
-    public abstract String chooseProtectionType(String string, SpellAbility sa, List<String> choices);
+    public abstract StaticAbility chooseSingleStaticAbility(List<StaticAbility> possibleReplacers);
+    public abstract String chooseProtectionType(SpellAbility sa, List<String> choices);
 
     public abstract void revealAnte(String message, Multimap<Player, PaperCard> removedAnteCards);
     public abstract void revealAISkipCards(String message, Map<Player, Map<DeckSection, List<? extends PaperCard>>> deckCards);
+
+    public abstract void revealUnsupported(Map<Player, List<PaperCard>> unsupported);
 
     // These 2 are for AI
     public CardCollectionView cheatShuffle(CardCollectionView list) { return list; }
     public Map<DeckSection, List<? extends PaperCard>> complainCardsCantPlayWell(Deck myDeck) { return null; }
 
-    public abstract void resetAtEndOfTurn(); // currently used by the AI to perform card memory cleanup
+    public void resetAtEndOfTurn() {
+        // currently used by the AI to perform card memory cleanup
+    }
 
     public abstract List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen, List<OptionalCostValue> optionalCostValues);
 
     public abstract List<CostPart> orderCosts(List<CostPart> costs);
 
     public abstract boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers);
-    public abstract boolean payCostDuringRoll(Cost cost, SpellAbility sa, FCollectionView<Player> allPayers);
+    public abstract boolean payCostDuringRoll(Cost cost, SpellAbility sa);
 
     public abstract boolean payCombatCost(Card card, Cost cost, SpellAbility sa, String prompt);
 
@@ -306,11 +320,17 @@ public abstract class PlayerController {
         return payManaCost(costPartMana.getManaCostFor(sa), costPartMana, sa, prompt, matrix, effect);
     }
     public abstract boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt, ManaConversionMatrix matrix, boolean effect);
+    public abstract boolean applyManaToCost(ManaCostBeingPaid toPay, SpellAbility ability, String prompt, ManaConversionMatrix matrix, boolean effect);
+    public abstract CardCollectionView chooseCardsForCost(CardCollectionView optionList, SpellAbility sa, CostPartWithList cpl, int amount, boolean isOptional, String prompt);
+
+    public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect) {
+        return this.getCostDecisionMaker(player, ability, effect, null);
+    }
+    public abstract CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect, String prompt);
 
     public abstract String chooseCardName(SpellAbility sa, Predicate<ICardFace> cpp, String valid, String message);
     public abstract String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message);
 
-    public abstract Card chooseDungeon(Player player, List<PaperCard> dungeonCards, String message);
     // better to have this odd method than those if playerType comparison in ChangeZone
     public abstract Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal, String selectPrompt, boolean isOptional, Player decider);
     public abstract List<Card> chooseCardsForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, int min, int max, DelayedReveal delayedReveal, String selectPrompt, Player decider);
@@ -326,10 +346,6 @@ public abstract class PlayerController {
 
     public abstract void awaitNextInput();
     public abstract void cancelAwaitNextInput();
-
-    public void resetInputs() {
-        // Do nothing unless overridden by a subclass
-    }
 
     public boolean isGuiPlayer() {
         return false;

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Terminator
+Title=Terminator
+Icon=Terminator.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/SCG_Invitational_Qualifier_Burnsville/Mark_Stoltz_-_Red_Deck_Wins_(Modern,_#630464).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+1 Lightning Helix
+3 Searing Blaze
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+1 Bloodstained Mire
+4 Mountain
+2 Sacred Foundry
+2 Scalding Tarn
+3 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+3 Deflecting Palm
+4 Destructive Revelry
+2 Exquisite Firecraft
+2 Searing Blood
+2 Skullcrack

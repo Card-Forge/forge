@@ -1,0 +1,6 @@
+Name:Grounded for Life
+ManaCost:4 W
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | EffectZone$ All | ValidTarget$ Creature.tapped | Description$ This spell costs {3} less to cast if it targets a tapped creature.
+A:SP$ Destroy | ValidTgts$ Creature | SpellDescription$ Destroy target creature.
+Oracle:This spell costs {3} less to cast if it targets a tapped creature.\nDestroy target creature.

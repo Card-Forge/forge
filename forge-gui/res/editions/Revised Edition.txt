@@ -318,7 +318,3 @@ ScryfallCode=3ED
 304 L Forest @Christopher Rush
 305 L Forest @Christopher Rush
 306 L Forest @Christopher Rush
-
-[tokens]
-wasp
-c_5_5_a_djinn_flying

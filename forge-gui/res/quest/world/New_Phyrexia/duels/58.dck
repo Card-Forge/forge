@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Gix
+Title=Gix
+Icon=Gix.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/SCG_Invitational_Qualifier_Dundas/Tim_Walma_-_Infect_(Modern,_#88052).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Blight Mamba
+4 Glistener Elf
+3 Ichorclaw Myr
+4 Llanowar Augur
+2 Apostle's Blessing
+4 Groundswell
+3 Might of Old Krosa
+4 Mutagenic Growth
+4 Nature's Claim
+4 Vines of Vastwood
+3 Rancor
+18 Forest
+2 Inkmoth Nexus
+2 Pendelhaven
+[Sideboard]
+1 Creeping Corrosion
+2 Cystbearer
+3 Giant Growth

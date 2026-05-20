@@ -1,0 +1,15 @@
+Name:Edgar, Master Machinist
+ManaCost:2 R W
+Types:Legendary Creature Human Artificer Noble
+PT:2/4
+S:Mode$ Continuous | Affected$ Artifact.nonLand+YouOwn | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ Once during each of your turns, you may cast an artifact spell from your graveyard. If you cast a spell this way, that artifact enters tapped.
+T:Mode$ SpellCast | ValidCard$ Card.CastSa Spell.MayPlaySource | Execute$ TrigEffect | Static$ True | TriggerZones$ Battlefield
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ ReMoved | RememberObjects$ TriggeredCard
+SVar:ReMoved:Event$ Moved | Origin$ Stack | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped
+SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard | SubAbility$ RemoveSelf
+SVar:RemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Tools — Whenever NICKNAME attacks, it gets +X/+0 until end of turn, where X is the greatest mana value among artifacts you control.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X
+SVar:X:Count$Valid Artifact.YouCtrl$GreatestCardManaCost
+DeckHints:Type$Artifact
+Oracle:Once during each of your turns, you may cast an artifact spell from your graveyard. If you cast a spell this way, that artifact enters tapped.\nTools — Whenever Edgar attacks, it gets +X/+0 until end of turn, where X is the greatest mana value among artifacts you control.

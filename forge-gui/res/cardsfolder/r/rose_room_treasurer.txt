@@ -10,5 +10,5 @@ SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ Y
 SVar:Resolved:Count$ResolvedThisTurn
 SVar:X:Count$ChosenNumber
 SVar:Y:Count$TriggerRememberAmount
-DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+DeckHas:Ability$Token|Sacrifice
 Oracle:Alliance — Whenever another creature you control enters, create a Treasure token if this is the first or second time this ability has resolved this turn. Otherwise, you may pay {X}. When you do, Rose Room Treasurer deals X damage to any target.

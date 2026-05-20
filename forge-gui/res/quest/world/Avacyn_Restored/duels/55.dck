@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Bart Simpson
+Title=Bart Simpson
+Icon=Bart Simpson.jpg
+Difficulty=Hard
+Description=../Modern/Avacyn_Restored/GP_Trial_Moscow_-_Bari_(Italy)/Lucio_De_Cesare_-_Faeries_(Modern,_#37781).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Mistbind Clique
+3 Scion of Oona
+2 Spellskite
+4 Spellstutter Sprite
+3 Vendilion Clique
+2 Vedalken Shackles
+4 Cryptic Command
+4 Lightning Bolt
+4 Mana Leak
+4 Remand
+3 Spell Snare
+10 Island
+1 Mountain
+4 Mutavault
+4 Scalding Tarn
+4 Steam Vents
+2 Tectonic Edge
+[Sideboard]
+3 Blood Moon
+2 Bonfire of the Damned
+1 Bribery
+1 Engineered Explosives
+2 Ghost Quarter
+2 Hurkyl's Recall
+2 Relic of Progenitus

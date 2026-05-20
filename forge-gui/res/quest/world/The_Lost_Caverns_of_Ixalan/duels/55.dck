@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Dilbert
+Title=Dilbert
+Icon=Dilbert.jpg
+Difficulty=Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Aimbot_-_Rakdos_Evoke_(Modern,_#2000793).dck
+Deck Type=constructed
+
+[Main]
+1 Sheoldred, the Apocalypse
+4 Dauthi Voidwalker
+4 Grief
+4 Ragavan, Nimble Pilferer
+4 Orcish Bowmasters
+1 Kroxa, Titan of Death's Hunger
+4 Fable of the Mirror-Breaker
+4 Not Dead After All
+1 Kolaghan's Command
+2 Fatal Push
+2 Lightning Bolt
+2 Sheoldred's Edict
+1 Angrath's Rampage
+4 Thoughtseize
+2 Molten Collapse
+4 Blood Crypt
+3 Blackcleave Cliffs
+3 Swamp
+2 Verdant Catacombs
+2 Marsh Flats
+1 Takenuma, Abandoned Mire
+2 Polluted Delta
+3 Bloodstained Mire
+[Sideboard]
+2 Chalice of the Void
+1 Sheoldred's Edict
+2 Legion's End
+1 Blood Moon
+2 Magus of the Moon
+3 Leyline of the Void
+1 Engineered Explosives
+1 Molten Collapse
+1 Undying Evil
+1 Fatal Push

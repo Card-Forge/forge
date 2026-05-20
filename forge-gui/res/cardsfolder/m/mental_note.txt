@@ -2,6 +2,6 @@ Name:Mental Note
 ManaCost:U
 Types:Instant
 A:SP$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ DBDraw | SpellDescription$ Mill two cards. Draw a card.
-SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw
 AI:RemoveDeck:Random
 Oracle:Mill two cards.\nDraw a card.

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=King Goldemar
+Title=King Goldemar
+Icon=King Goldemar.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/Clay0301_-_Mardu_Midrange_(Standard,_#1334201).dck
+Deck Type=constructed
+
+[Main]
+4 Circuit Mender
+4 Greasefang, Okiba Boss
+4 High-Speed Hoverbike
+4 Mechtitan Core
+4 Surgehacker Mech
+4 Reckoner Bankbuster
+2 Vanishing Verse
+3 Rite of Oblivion
+4 Thrilling Discovery
+3 Showdown of the Skalds
+1 Plains
+1 Swamp
+1 Mountain
+2 Mech Hangar
+2 Sundown Pass
+2 Haunted Ridge
+3 Shattered Sanctum
+4 Needleverge Pathway
+4 Blightstep Pathway
+4 Brightclimb Pathway
+[Sideboard]
+1 The Meathook Massacre
+1 Cinderclasm
+1 Vanishing Verse
+1 Duress
+3 Go Blank
+4 Ray of Enfeeblement
+4 Rip Apart

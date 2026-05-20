@@ -1,0 +1,92 @@
+camel.png
+size: 512,68
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 304, 32
+  size: 16, 16
+Idle 
+  xy: 8, 3
+  size: 18, 16   
+Idle 
+  xy: 40, 3
+  size: 18, 16
+Idle 
+  xy: 72, 3
+  size: 18, 16
+Idle 
+  xy: 104, 3
+  size: 18, 16
+Idle 
+  xy: 136, 3
+  size: 18, 16   
+Idle 
+  xy: 168, 3
+  size: 18, 16   
+Idle 
+  xy: 200, 3
+  size: 18, 16
+Idle 
+  xy: 232, 3
+  size: 18, 16
+Idle 
+  xy: 264, 3
+  size: 18, 16
+Idle 
+  xy: 296, 3
+  size: 18, 16   
+Idle 
+  xy: 328, 3
+  size: 18, 16
+Idle 
+  xy: 360, 3
+  size: 18, 16
+Idle 
+  xy: 392, 3
+  size: 18, 16
+Idle 
+  xy: 424, 3
+  size: 18, 16   
+Idle 
+  xy: 456, 3
+  size: 18, 16
+Idle 
+  xy: 488, 3
+  size: 18, 16
+Walk 
+  xy: 7, 28
+  size: 18, 16  
+Walk 
+  xy: 39, 28
+  size: 18, 16
+Walk 
+  xy: 71, 28
+  size: 18, 16
+Walk 
+  xy: 103, 28
+  size: 18, 16
+Walk 
+  xy: 135, 28
+  size: 18, 16 
+Walk 
+  xy: 167, 28
+  size: 18, 16
+Death 
+  xy: 3, 49
+  size: 23, 16
+Death 
+  xy: 35, 49
+  size: 23, 16
+Death 
+  xy: 67, 49
+  size: 23, 16
+Death 
+  xy: 99, 49
+  size: 23, 16
+Death 
+  xy: 131, 49
+  size: 23, 16
+Death 
+  xy: 163, 49
+  size: 23, 16

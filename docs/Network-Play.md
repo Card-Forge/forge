@@ -1,0 +1,298 @@
+# Chapters
+- [Status & Support](#status--support)
+- [Requirements](#requirements)
+- [Quick Start](#quick-start)
+- [Disconnect/Reconnect Support](#disconnectreconnect-support)
+- [AFK Timer](#afk-timer)
+- [Network Configuration](#network-configuration)
+  - [Local Network Setup](#local-network-setup)
+  - [Remote Network Setup](#remote-network-setup)
+  - [VPN / Software-Defined Networks](#vpn--software-defined-networks)
+- [Known Limitations](#known-limitations)
+- [Network Logs](#network-logs)
+---
+
+# Status & Support
+
+> [!CAUTION]
+> **Network play is a work-in-progress.** You will encounter bugs. When they appear, they will likely be mid-game and require restarting both the client and host. Please report bugs and issues to help improve stability.
+
+> [!TIP]
+> The **[Forge Discord](https://discord.gg/nsAhGwD)** has a dedicated network play channel. You can use it to find opponents and folks there will be happy to help you with any issues!
+
+---
+
+# Requirements
+
+| Requirement | Details |
+|---|---|
+| **Platforms** | Desktop and Mobile. **Cross-platform play is supported** — any platform can host or join. |
+| **Players** | Up to **8 players** per game (1 host + up to 7 remote players) |
+| **Roles** | **Host** runs Forge as the server; **Client** connects to it |
+| **Game Types** | **Constructed** formats only (no Draft or Sealed). Supported variants: Commander, Oathbreaker, Tiny Leaders, Brawl, Archenemy, Planechase, Vanguard. |
+| **Network** | Local (same Wi-Fi, Wi-Fi Direct, Ethernet) or Remote (IPv4 internet) |
+| **Port** | Default: **36743** (TCP). Can be changed in Forge's network preferences. |
+| **Firewall** | Host must allow Forge or the server port through its firewall. Do **not** disable the firewall entirely. |
+| **Port Forward** | Required for remote play — forward the server port on the host's router, or use UPnP (see below) |
+| **IP Version** | IPv4 required. IPv6 with full Dual Stack works; Dual Stack Lite does **not**. |
+
+---
+
+# Quick Start
+
+> [!TIP]
+> **There is no built-in matchmaking.** Network play is designed for playing against people you know and manually sharing connection details.
+
+1. **Configure network** — Host must configure network settings to enable external connections (see [Network Configuration](#network-configuration) below).
+2. **Verify versions** — Confirm all devices are running the same Forge version (see [Version Compatibility](#version-compatibility) below).
+3. **Launch Forge** on all devices and navigate to the online play screen.
+     - Mobile: Choose "Classic Mode", then "Play Online"
+     - Desktop: "Online Multiplayer" > "Lobby"
+4. **Host** clicks **"Host a Game"** to start the server.
+     - On first host, Forge will ask whether to **automatically open the port via UPnP** (see [UPnP](#upnp-automatic-port-forwarding) below). If your router supports UPnP, choosing "Just Once" or "Always" can skip manual port forwarding entirely.
+5. **Host** determines address to share with clients:
+     - **Local play:** Use the **Copy Local URL** button in the lobby — this copies the address in the correct format. Forge displays the host's IP (typically `192.168.x.x`). Verify against the device's network settings. Ignore any suggestion to use `localhost`.
+     - **Remote play:** Use the **Copy External URL** button in the lobby — if necessary verify the external IP at [canyouseeme.org](http://canyouseeme.org).
+6. **Client** clicks **"Join a Game"** and enters the host's address.
+     - The address format is **`IP:port`** — for example: `192.168.1.50:36743` (local) or `203.0.113.45:36743` (remote).
+     - If the port is omitted, Forge defaults to 36743 (=FORGE on older phone keypads).
+7. **Configure the match:**
+     - Host selects match type, teams, and game settings.
+     - All players select decks, sleeves, and avatars.
+     - Each player toggles their **Ready** switch.
+8. **Host starts the match** once all players are ready.
+
+---
+
+# Disconnect/Reconnect Support
+
+> [!IMPORTANT]
+> **The host's device is the server.** If the host disconnects or closes Forge, the game ends immediately for all players — there is no host migration or disconnect support for server crashes. Choose the most stable device/connection as the host.
+
+If a client player disconnects during an active game, the server enters **reconnection mode** instead of immediately ending the match.
+
+## Disconnect Detection
+Forge uses a **heartbeat** mechanism to detect silent disconnects (client crashes, network loss, or force-closes). Each client sends a lightweight heartbeat to the server every **15 seconds** of inactivity. If the server receives no data from a client — no heartbeats, game events, or chat messages — for **45 seconds**, it closes the connection and announces the timeout in chat.
+
+This means disconnects are typically detected within about 45 seconds, even when the client cannot send a clean shutdown signal.
+
+## What happens on Disconnect
+- The game **pauses** for the disconnected player — all other players see a notification.
+- A **5-minute countdown** begins, with status messages broadcast every 30 seconds.
+- The disconnected player can rejoin by reconnecting to the same server with the **same username**.
+- On successful reconnect, the full game state is re-sent to the player and the game resumes normally.
+
+## If the Player doesn't Reconnect
+When the 5-minute timeout expires, the disconnected player is **replaced by an AI** and the game continues.
+
+## Host Commands
+The host can type these commands in the lobby chat during the reconnection window. These commands are **host-only** — clients cannot use them.
+
+| Command | Effect |
+|---|---|
+| `/skipreconnect [player]` | Immediately replace the disconnected player with AI (skip the countdown). Player name can be omitted if only one player is disconnected. |
+| `/skiptimeout [player]` | Cancel the countdown timer and wait **indefinitely** for the player to reconnect. |
+
+# AFK Timer
+The host can configure an **Away-From-Keyboard (AFK) timer** so that one idle player cannot stall the whole game. 
+
+This is a single host-side preference. Whatever the host has set applies uniformly to every player at the table, including the host themselves.
+
+## Configuring
+Set the value under **Preferences > Server Preferences > AFK Timeout**. The host's current value is read at each priority pass, so changes take effect immediately — including for an active match.
+
+The AFK timer is **enabled by default.**
+
+| Value | Behavior |
+|---|---|
+| `0` | Disabled. Priority prompts wait indefinitely. |
+| `1`–`60` | Auto-pass after this many minutes of inactivity on a priority decision. **Default: 5 minutes.** |
+
+## How it works
+**30 seconds before** the timer expires, a warning is broadcast in chat:
+> *PlayerName* will auto-pass in 30 seconds due to inactivity (AFK timeout: 5:00).
+
+If the player still hasn't acted, priority is auto-passed and a follow-up is broadcast:
+> *PlayerName* auto-passed due to inactivity (AFK timeout: 5:00, will now auto-pass after 10s each priority until active).
+
+Once a player has been flagged as AFK, the timer shortens to **10 seconds** for subsequent priority passes — so the table doesn't wait through the full timeout on every pass after the first. As soon as that player takes any action, the full timer resets.
+
+> [!NOTE]
+> This feature currently only governs **priority** prompts (a player's normal pass-priority window). Other in-game prompts — combat damage assignment, choice dialogs, target selection — currently wait indefinitely regardless of the host's AFK setting.
+
+---
+
+# Network Configuration
+
+## Local Network Setup
+
+> [!TIP]
+> Follow these instructions to play with people **on the same network** - e.g. all players are connected to your Wifi network. 
+> You will also need to complete this step for remote play.
+
+### 1. Configure the Host Firewall
+
+| Platform | Action |
+|---|---|
+| **Android** | No configuration needed. |
+| **Windows** | Allow Forge (or port 36743) through Windows Defender Firewall. |
+| **macOS** | Allow incoming connections for Forge in System Settings > Firewall. |
+| **Linux** | Allow port 36743 through your firewall (e.g., `ufw allow 36743/tcp`). |
+
+### 2. Validate the Port is Open
+The simplest test is to connect with Forge from another device on the same network. 
+
+If the client connects to the lobby, the port is open and you can skip ahead. 
+
+If the connection fails, use the tools below to confirm whether the port is reachable. For these tests you will need your **local IP address** and the **port number** used by Forge. 
+
+You can get your **local IP address**:
+- In the Forge app from the Server URL dialog that appears immediately after hosting a server.
+- In **Windows PowerShell** by using the `ipconfig` command and copying the `IPv4 Address` result.
+- In **macOS / Linux terminal** by using the `ifconfig` command and copying the `inet` result.
+
+Now validate that the port is open by using one of the following tests:
+- **Windows (PowerShell):** Open PowerShell and run:
+  ```powershell
+  Test-NetConnection [INSERT HOST IP ADDRESS] -Port [INSERT PORT NUMBER]
+  ```
+  For example: 
+  ```powershell
+  Test-NetConnection 192.168.20.2 -Port 36743
+  ```
+  Success: `TcpTestSucceeded : True`. Failure: `TcpTestSucceeded : False`.
+
+- **macOS / Linux:** Open Terminal and use netcat:
+  ```bash
+  nc -vz [INSERT HOST IP ADDRESS] [INSERT PORT NUMBER]
+  ```
+  For example:
+  ```bash
+  nc -vz 192.168.20.2 36743
+  ```
+  Success: "Connection to ... succeeded". Failure: "Connection refused" or timeout.
+
+- **Android:** Use [PortDroid](https://play.google.com/store/apps/details?id=com.stealthcopter.portdroid) — scan the host's internal IP for port 36743.
+
+Once validated, provide the host's internal IP and port to the client (e.g., `192.168.1.50:36743`).
+
+## Remote Network Setup
+
+> [!TIP]
+> Follow these instructions to play with people **on different networks** - e.g. players you meet on the Forge Discord.
+
+> [!IMPORTANT]
+> Complete the **[Local Network Setup](#local-network-setup)** first. Remote setup builds on a working local configuration.
+
+### UPnP (Automatic Port Forwarding)
+Forge has built-in **UPnP** support that can automatically configure your router's port forwarding. When you host a server, Forge will prompt:
+
+> "Attempt to open port 36743 automatically?"
+
+| Option | Behavior |
+|---|---|
+| **Just Once** | Attempt UPnP for this session only. You will be prompted again next time. |
+| **Always** | Always attempt UPnP when hosting. Saved as a preference. |
+| **Not Now** | Skip UPnP this time. You will be prompted again next time. |
+| **Never** | Never attempt UPnP. Saved as a preference. You will need to configure port forwarding manually. |
+
+**If UPnP succeeds**, Forge will display a confirmation in the lobby chat:
+> UPnP: Port 36743 forwarded successfully. Remote players should be able to connect using your external IP.
+
+No manual router configuration is needed — skip to [Validate External Access](#2-validate-external-access) below.
+
+**If UPnP fails**, Forge will display a notification in the lobby chat after a few seconds:
+> UPnP: Automatic port forwarding failed for port 36743. You may need to set up manual port forwarding for remote play.
+
+You will need to configure port forwarding manually using the steps below. Common reasons for failure: UPnP is disabled on the router, the router doesn't support UPnP, or a firewall is blocking UPnP discovery.
+
+### 1. Manual Port Forwarding on the Router
+
+[See this guide](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide) on how to set up port forwarding. You will need login access to your router.
+
+You will need to create a port forwarding rule like below (your router may not have exactly the same fields):
+
+| Field | Value |
+|---|---|
+| External/Remote IP | Blank or "Any" |
+| External Port | 36743 |
+| Internal IP | Host machine's local IP |
+| Internal Port | 36743 |
+
+### 2. Validate External Access
+
+- Go to [canyouseeme.org](http://canyouseeme.org) **from the host machine** while Forge is hosting.
+- Enter port **36743** and click "Check Port".
+- A **Success** message confirms the configuration is correct.
+
+Share the external IP shown on that page with the client. Remember the client needs to enter it as **`IP:36743`** (e.g., `203.0.113.45:36743`).
+
+Here's how a typical network topology might look, when playing through Firewall and Port Forwarding:
+![netplay](netplay.png)
+
+If after this you **still** can't reach your device through its external IP, you may wish to try one of the options below.
+
+## VPN / Software-Defined Networks
+
+If you cannot configure port forwarding — for example on a cellular connection, public Wi-Fi hotspot, or a network you don't control — you can use a **Virtual Private Network (VPN)** or **Software-Defined Network (SDN)** to create a private network between players.
+
+> [!CAUTION]
+> Forge cannot provide support for third-party VPN or SDN software. Refer to each provider's documentation for setup help.
+
+### How It Works
+
+A VPN or SDN creates a virtual local network between devices over the internet. Once connected, all players appear to be on the same LAN — so you can follow the **[Local Network Setup](#local-network-setup)** steps instead of dealing with port forwarding.
+
+### Recommended Options
+
+| Tool | Type | Cost | Notes |
+|---|---|---|---|
+| [ZeroTier](https://www.zerotier.com/download/) | SDN | Free (personal use) | Easiest setup. Create a network, share the network ID, approve joiners. No server needed. |
+| [RadminVPN](https://www.radmin-vpn.com/) | VPN | Free | Simple LAN-style VPN. Install on both devices and join the same network. |
+| [Hamachi](https://www.vpn.net/) | VPN | Free (up to 5 devices) | Established option, but requires a LogMeIn account. |
+
+For self-hosted options (e.g. OpenVPN on your own server or router), you will need control of a network or a rented server with a public IP. Both players install the VPN client and connect to that server. This adds complexity but gives full control.
+
+### Quick Setup (ZeroTier Example)
+
+1. All players install [ZeroTier](https://www.zerotier.com/download/).
+2. One player creates a network at [my.zerotier.com](https://my.zerotier.com) and shares the **Network ID**.
+3. All other players join using that Network ID.
+4. The network creator approves each device in the ZeroTier web console.
+5. Once connected, follow the **[Local Network Setup](#local-network-setup)** — use the ZeroTier-assigned IP addresses instead of your normal LAN IP.
+
+### Security Note
+Any player on a shared private network can see other devices on that network. Only share access with people you trust, and disconnect when you're not playing.
+
+---
+
+# Known limitations
+
+## "Disconnected From Lobby"
+A common cause for this is that the client and server resource (res) folder content differs. This can be verified by checking the game log and looking for an IOException referring to a "Card ... not found".
+
+## Version Compatibility
+Forge automatically warns in the lobby chat when a client's version differs from the host's but **does not block the connection**. While network play between different versions of Forge can be possible, mismatched versions may cause desync or crashes mid-game. If possible always use the same version on all devices to avoid network compatibility issues.
+
+## Lag / High Bandwidth
+Network play currently lacks traffic optimization. A single game can transfer hundreds of megabytes. Slow connections will experience significant lag.
+
+---
+
+# Network Logs
+Forge writes detailed network logs during online multiplayer games. These are separate from the normal game log and are specifically used for troubleshooting network issues.
+
+**Please provide your logs when reporting bugs.** Logs are stored in the `networklogs/` folder inside your Forge data directory:
+
+| Platform | Path |
+|---|---|
+| **Windows** | `%APPDATA%/Forge/networklogs/` |
+| **macOS** | `~/Library/Application Support/Forge/networklogs/` |
+| **Linux** | `~/.forge/networklogs/` |
+| **Android** | `Android/data/forge.app/files/Forge/networklogs/` (typically not browsable without a file manager — use the in-app export below) |
+
+On **Desktop**, you can open this folder directly from the Forge game menu: **Online > Open Network Logs**.
+
+On **Mobile**, you can export logs in .zip file to your Downloads folder from **Settings > Files > Data Management > Export Network Logs**.
+
+By default, logs from the last 10 games are kept; older logs are automatically removed. 

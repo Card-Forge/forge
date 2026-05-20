@@ -15,7 +15,7 @@ ManaCost:no cost
 Colors:green
 Types:Creature Werewolf
 PT:4/4
-A:AB$ Fight | Cost$ R T | Defined$ Self | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ CARDNAME fights target creature. (Each deals damage equal to its power to the other.)
+A:AB$ Fight | Cost$ R T | Defined$ Self | ValidTgts$ Creature | SpellDescription$ CARDNAME fights target creature. (Each deals damage equal to its power to the other.)
 T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 Oracle:{R}, {T}: Nightfall Predator fights target creature. (Each deals damage equal to its power to the other.)\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Nightfall Predator.

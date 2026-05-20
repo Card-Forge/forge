@@ -2,6 +2,6 @@ Name:Frostboil Snarl
 ManaCost:no cost
 Types:Land
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBTap | ReplacementResult$ Updated | Description$ As CARDNAME enters, you may reveal an Island or Mountain card from your hand. If you don't, CARDNAME enters tapped.
-SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Island,Mountain/Island or Mountain> | UnlessPayer$ You | StackDescription$ enters tapped.
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Island;Mountain/Island or Mountain> | UnlessPayer$ You | StackDescription$ enters tapped.
 A:AB$ Mana | Cost$ T | Produced$ Combo U R | SpellDescription$ Add {U} or {R}.
 Oracle:As Frostboil Snarl enters, you may reveal an Island or Mountain card from your hand. If you don't, Frostboil Snarl enters tapped.\n{T}: Add {U} or {R}.

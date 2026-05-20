@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Carnage
+Title=Carnage
+Icon=Carnage.jpg
+Difficulty=Very Hard
+Description=../Modern/Aether_Revolt/SlimJimothy_-_GW_Aggro_(Modern,_#664168).dck
+Deck Type=constructed
+
+[Main]
+4 Avatar of the Resolute
+3 Greenwheel Liberator
+4 Noble Hierarch
+2 Rishkar, Peema Renegade
+4 Scavenging Ooze
+4 Servant of the Scale
+4 Dromoka's Command
+4 Inspiring Call
+2 Overwhelming Stampede
+4 Oath of Ajani
+2 Ajani, Mentor of Heroes
+3 Nissa, Voice of Zendikar
+3 Forest
+4 Oran-Rief, the Vastwood
+1 Plains
+4 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Choke
+2 Gaddock Teeg
+2 Leyline of Sanctity
+3 Naturalize
+3 Path to Exile
+3 Surgical Extraction

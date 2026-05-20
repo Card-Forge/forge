@@ -1,0 +1,7 @@
+Name:Mikey & Leo, Chaos & Order
+ManaCost:GW GW
+Types:Legendary Creature Mutant Ninja Turtle
+PT:2/2
+T:Mode$ CounterAdded | ValidCard$ Creature.YouCtrl | ValidSource$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | ActivationLimit$ 1 | TriggerDescription$ Whenever you put a counter on a creature you control, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+Oracle:Whenever you put a counter on a creature you control, draw a card. This ability triggers only once each turn.

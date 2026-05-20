@@ -1,21 +1,21 @@
 //Rank|Name|Rarity|Set
-#1|Witch-King of Angmar|M|LTR
+#1|Witch-king of Angmar|M|LTR
 #2|Horn of Gondor|R|LTR
 #3|Faramir, Prince of Ithilien|R|LTR
-#4|Anduril, Flame of the West|M|LTR
+#4|Andúril, Flame of the West|M|LTR
 #5|Spiteful Banditry|M|LTR
 #6|Orcish Bowmasters|R|LTR
 #7|Sauron, the Dark Lord|M|LTR
 #8|Arwen, Mortal Queen|M|LTR
-#9|Eomer, Marshal of Rohan|R|LTR
+#9|Éomer, Marshal of Rohan|R|LTR
 #10|Rangers of Ithilien|R|LTR
 #11|Aragorn, the Uniter|M|LTR
 #12|Shelob, Child of Ungoliant|R|LTR
 #13|Boromir, Warden of the Tower|R|LTR
 #14|Gandalf the Grey|R|LTR
 #15|Frodo, Sauron's Bane|R|LTR
-#16|Eowyn, Fearless Knight|R|LTR
-#17|Nazgul|U|LTR
+#16|Éowyn, Fearless Knight|R|LTR
+#17|Nazgûl|U|LTR
 #18|Samwise Gamgee|R|LTR
 #19|Call of the Ring|R|LTR
 #20|King of the Oathbreakers|R|LTR
@@ -32,17 +32,17 @@
 #31|Bitter Downfall|U|LTR
 #32|Fear, Fire, Foes!|U|LTR
 #33|Flowering of the White Tree|R|LTR
-#34|Theoden, King of Rohan|U|LTR
+#34|Théoden, King of Rohan|U|LTR
 #35|Gandalf's Sanction|U|LTR
 #36|Sauron's Ransom|R|LTR
 #37|Rosie Cotton of South Lane|U|LTR
-#38|Mauhur, Uruk-hai Captain|U|LTR
+#38|Mauhúr, Uruk-hai Captain|U|LTR
 #39|Bilbo, Retired Burglar|U|LTR
 #40|Fiery Inscription|U|LTR
 #41|The Mouth of Sauron|U|LTR
-#42|Smeagol, Helpful Guide|R|LTR
+#42|Sméagol, Helpful Guide|R|LTR
 #43|Denethor, Ruling Steward|U|LTR
-#44|Eomer of the Riddermark|U|LTR
+#44|Éomer of the Riddermark|U|LTR
 #45|Saruman of Many Colors|M|LTR
 #46|Gothmog, Morgul Lieutenant|U|LTR
 #47|Pippin, Guard of the Citadel|R|LTR
@@ -52,7 +52,7 @@
 #51|Shadowfax, Lord of Horses|U|LTR
 #52|Book of Mazarbul|U|LTR
 #53|March from the Black Gate|U|LTR
-#54|Palantir of Orthanc|M|LTR
+#54|Palantír of Orthanc|M|LTR
 #55|Shadow Summoning|U|LTR
 #56|Old Man Willow|U|LTR
 #57|Rally at the Hornburg|C|LTR
@@ -60,7 +60,7 @@
 #59|Aragorn, Company Leader|R|LTR
 #60|Ranger's Firebrand|U|LTR
 #61|The Torment of Gollum|C|LTR
-#62|Grishnakh, Brash Instigator|U|LTR
+#62|Grishnákh, Brash Instigator|U|LTR
 #63|Prince Imrahil the Fair|U|LTR
 #64|Smite the Deathless|C|LTR
 #65|Dunland Crebain|C|LTR
@@ -75,7 +75,7 @@
 #74|Generous Ent|C|LTR
 #75|Many Partings|C|LTR
 #76|Minas Tirith|R|LTR
-#77|Barad-dur|R|LTR
+#77|Barad-dûr|R|LTR
 #78|Goblin Fireleaper|U|LTR
 #79|Swarming of Moria|C|LTR
 #80|Saruman's Trickery|U|LTR
@@ -84,21 +84,21 @@
 #83|Merry, Esquire of Rohan|R|LTR
 #84|Delighted Halfling|R|LTR
 #85|Stern Scolding|U|LTR
-#86|Eowyn, Lady of Rohan|U|LTR
+#86|Éowyn, Lady of Rohan|U|LTR
 #87|Scroll of Isildur|R|LTR
 #88|Shire Shirriff|U|LTR
 #89|Erkenbrand, Lord of Westfold|U|LTR
 #90|Horses of the Bruinen|U|LTR
 #91|Birthday Escape|C|LTR
-#92|Soothing of Smeagol|C|LTR
+#92|Soothing of Sméagol|C|LTR
 #93|Glorious Gale|C|LTR
 #94|Haunt of the Dead Marshes|C|LTR
 #95|Mordor Muster|C|LTR
 #96|Improvised Club|C|LTR
 #97|Stew the Coneys|U|LTR
 #98|Wose Pathfinder|C|LTR
-#99|Gloin, Dwarf Emissary|R|LTR
-#100|Troll of Khazad-dum|C|LTR
+#99|Glóin, Dwarf Emissary|R|LTR
+#100|Troll of Khazad-dûm|C|LTR
 #101|Phial of Galadriel|R|LTR
 #102|Battle-Scarred Goblin|C|LTR
 #103|Fall of Cair Andros|R|LTR
@@ -129,11 +129,11 @@
 #128|Took Reaper|C|LTR
 #129|The Battle of Bywater|R|LTR
 #130|Warbeast of Gorgoroth|C|LTR
-#131|Arwen Undomiel|U|LTR
+#131|Arwen Undómiel|U|LTR
 #132|Eagles of the North|C|LTR
 #133|Lembas|C|LTR
 #134|Pelargir Survivor|C|LTR
-#135|Lorien Revealed|C|LTR
+#135|Lórien Revealed|C|LTR
 #136|Isolation at Orthanc|C|LTR
 #137|Deceive the Messenger|C|LTR
 #138|Haradrim Spearmaster|C|LTR
@@ -142,13 +142,13 @@
 #141|Westfold Rider|C|LTR
 #142|Legolas, Master Archer|R|LTR
 #143|Quickbeam, Upstart Ent|U|LTR
-#144|Grima Wormtongue|U|LTR
+#144|Gríma Wormtongue|U|LTR
 #145|Mirrormere Guardian|C|LTR
 #146|Doors of Durin|R|LTR
 #147|Mordor Trebuchet|C|LTR
 #148|Eastfarthing Farmer|C|LTR
-#149|Dunedain Blade|C|LTR
-#150|Ugluk of the White Hand|U|LTR
+#149|Dúnedain Blade|C|LTR
+#150|Uglúk of the White Hand|U|LTR
 #151|Shire Terrace|C|LTR
 #152|Treason of Isengard|C|LTR
 #153|Lobelia Sackville-Baggins|R|LTR
@@ -157,13 +157,13 @@
 #156|Moria Marauder|R|LTR
 #157|Grond, the Gatebreaker|U|LTR
 #158|Legolas, Counter of Kills|U|LTR
-#159|Rise of the Witch-King|U|LTR
+#159|Rise of the Witch-king|U|LTR
 #160|Barrow-Blade|U|LTR
 #161|Meneldor, Swift Savior|U|LTR
 #162|Shagrat, Loot Bearer|R|LTR
 #163|Elrond, Lord of Rivendell|U|LTR
 #164|Lost to Legend|U|LTR
-#165|Dunedain Rangers|U|LTR
+#165|Dúnedain Rangers|U|LTR
 #166|Celeborn the Wise|U|LTR
 #167|Elrond, Master of Healing|R|LTR
 #168|Glamdring|M|LTR
@@ -188,7 +188,7 @@
 #187|Nasty End|C|LTR
 #188|Bombadil's Song|C|LTR
 #189|Wizard's Rockets|C|LTR
-#190|Tale of Tinuviel|U|LTR
+#190|Tale of Tinúviel|U|LTR
 #191|Morgul-Knife Wound|C|LTR
 #192|Gwaihir the Windlord|U|LTR
 #193|Gimli's Fury|C|LTR
@@ -196,7 +196,7 @@
 #195|Slip On the Ring|C|LTR
 #196|Surrounded by Orcs|C|LTR
 #197|Breaking of the Fellowship|C|LTR
-#198|Galadriel of Lothlorien|R|LTR
+#198|Galadriel of Lothlórien|R|LTR
 #199|Lash of the Balrog|C|LTR
 #200|Stalwarts of Osgiliath|C|LTR
 #201|Soldier of the Grey Host|C|LTR
@@ -245,7 +245,7 @@
 #244|The Grey Havens|U|LTR
 #245|Captain of Umbar|C|LTR
 #246|Elven Farsight|C|LTR
-#247|Lothlorien Lookout|C|LTR
+#247|Lothlórien Lookout|C|LTR
 #248|Forge Anew|R|LTR
 #249|Long List of the Ents|U|LTR
 #250|You Cannot Pass!|U|LTR

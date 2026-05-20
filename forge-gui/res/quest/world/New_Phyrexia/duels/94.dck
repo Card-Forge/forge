@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Lex Luthor
+Title=Lex Luthor
+Icon=Lex Luthor.jpg
+Difficulty=Very Hard
+Description=../Modern/New_Phyrexia/Primer_Modern_Ateneo_Comics/Jose_Antonio_Perez_-_Naya_(Modern,_#22116).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Birds of Paradise
+4 Bloodbraid Elf
+4 Boggart Ram-Gang
+3 Knight of the Reliquary
+4 Noble Hierarch
+4 Tarmogoyf
+1 Dismember
+4 Lightning Bolt
+2 Boom // Bust
+4 Molten Rain
+4 Stone Rain
+3 Blood Moon
+4 Arid Mesa
+2 Forest
+3 Misty Rainforest
+3 Mountain
+1 Plains
+3 Sacred Foundry
+1 Scalding Tarn
+2 Stomping Ground
+[Sideboard]
+2 Ancient Grudge
+3 Burning-Tree Shaman
+2 Ethersworn Canonist
+1 Gaddock Teeg
+1 Kataki, War's Wage
+3 Kitchen Finks
+3 Relic of Progenitus

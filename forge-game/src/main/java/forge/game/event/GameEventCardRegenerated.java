@@ -1,15 +1,15 @@
 package forge.game.event;
 
 import forge.game.card.Card;
+import forge.game.card.CardView;
 
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 
-public class GameEventCardRegenerated extends GameEvent {
+public record GameEventCardRegenerated(Collection<CardView> cards) implements GameEvent {
 
-    public final Collection<Card> cards;
     public GameEventCardRegenerated(Card affected) {
-        cards = Arrays.asList(affected);
+        this(Collections.singletonList(CardView.get(affected)));
     }
 
     @Override

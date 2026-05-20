@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Totoro
+Title=Totoro
+Icon=Totoro.jpg
+Difficulty=Medium
+Description=Battle_for_Zendikar/2015_TCGplayer.com_$50k_Championship/Joe_Bernal_-_Abzan_Aggro_(Standard,_#414668).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Deathmist Raptor
+4 Den Protector
+3 Hangarback Walker
+2 Nissa, Vastwood Seer
+4 Siege Rhino
+4 Warden of the First Tree
+2 Wingmate Roc
+4 Abzan Charm
+2 Murderous Cut
+4 Silkwrap
+3 Gideon, Ally of Zendikar
+1 Canopy Vista
+4 Flooded Strand
+4 Forest
+2 Llanowar Wastes
+2 Plains
+4 Shambling Vent
+1 Smoldering Marsh
+1 Sunken Hollow
+2 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+3 Anafenza, the Foremost
+4 Duress
+4 Surge of Righteousness
+3 Transgress the Mind
+1 Utter End

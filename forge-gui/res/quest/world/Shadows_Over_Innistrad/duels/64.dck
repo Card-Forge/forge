@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Abiku
+Title=Abiku
+Icon=Abiku.jpg
+Difficulty=Hard
+Description=../Modern/Shadows_over_Innistrad/SCG_Super_IQ_West_Hartford/Brendan_Lyga_-_Eldrazi_(Modern,_#627214).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Blight Herder
+1 Eldrazi Displacer
+2 Reality Smasher
+4 Thought-Knot Seer
+4 Tidehollow Sculler
+4 Wasteland Strangler
+4 Relic of Progenitus
+3 Dismember
+4 Path to Exile
+4 Inquisition of Kozilek
+4 Lingering Souls
+1 Sorin, Solemn Visitor
+4 Caves of Koilos
+4 Eldrazi Temple
+2 Ghost Quarter
+4 Godless Shrine
+2 Plains
+4 Shambling Vent
+2 Swamp
+1 Urborg, Tomb of Yawgmoth
+[Sideboard]
+2 Anguished Unmaking
+2 Hallowed Moonlight
+2 Lone Missionary
+2 Memoricide
+2 Pithing Needle
+2 Stony Silence
+3 Timely Reinforcements

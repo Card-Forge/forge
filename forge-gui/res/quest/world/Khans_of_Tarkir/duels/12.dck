@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Finn the Human
+Title=Finn the Human
+Icon=Finn the Human.jpg
+Difficulty=Medium
+Description=Khans_of_Tarkir/Standard_Daily_#8124801/525009163_-_Abzan_Aggro_(Standard,_#220840).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+2 Courser of Kruphix
+4 Fleecemane Lion
+4 Rakshasa Deathdealer
+4 Siege Rhino
+4 Wingmate Roc
+3 Abzan Charm
+4 Bile Blight
+4 Hero's Downfall
+1 Murderous Cut
+1 Sorin, Solemn Visitor
+3 Caves of Koilos
+1 Forest
+3 Llanowar Wastes
+2 Plains
+4 Sandsteppe Citadel
+3 Temple of Malady
+3 Temple of Silence
+2 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+2 Back to Nature
+3 Drown in Sorrow
+2 Elspeth, Sun's Champion
+1 Glare of Heresy
+2 Nissa, Worldwaker
+4 Thoughtseize

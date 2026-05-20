@@ -1,0 +1,12 @@
+Name:Random Encounter
+ManaCost:4 R R
+Types:Sorcery
+A:SP$ Shuffle | Defined$ You | SubAbility$ DBMill | SpellDescription$ Shuffle your library, then mill four cards. Put each creature card milled this way onto the battlefield. They gain haste.
+SVar:DBMill:DB$ Mill | NumCards$ 4 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZoneAll
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Graveyard,Exile | Destination$ Battlefield | ChangeType$ Creature.IsRemembered | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | KW$ Haste | Defined$ Remembered | Duration$ Permanent | SubAbility$ DBDelTrig
+SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Remembered | Execute$ TrigReturn | SubAbility$ DBCleanup | SpellDescription$ At the beginning of the next end step, return those creatures to their owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Flashback:6 R R
+Oracle:Shuffle your library, then mill four cards. Put each creature card milled this way onto the battlefield. They gain haste. At the beginning of the next end step, return those creatures to their owner's hand.\nFlashback {6}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

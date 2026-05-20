@@ -6,6 +6,7 @@ import forge.ai.AIOption;
 import forge.ai.LobbyPlayerAi;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.CardType;
 import forge.game.*;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.Card;
@@ -97,7 +98,6 @@ public class GameCopier {
             newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
             newPlayer.setSpeed(origPlayer.getSpeed());
             newPlayer.setBlessing(origPlayer.hasBlessing(), null);
-            newPlayer.setRevolt(origPlayer.hasRevolt());
             newPlayer.setDescended(origPlayer.getDescended());
             newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
             newPlayer.setSpellsCastLastTurn(origPlayer.getSpellsCastLastTurn());
@@ -316,7 +316,7 @@ public class GameCopier {
         newCard.setOwner(newOwner);
         newCard.setName(c.getName());
         newCard.setCommander(c.isCommander());
-        newCard.addType(c.getType());
+        newCard.setType(new CardType(c.getType()));
         for (StaticAbility stAb : c.getStaticAbilities()) {
             newCard.addStaticAbility(stAb.copy(newCard, true));
         }
@@ -365,7 +365,7 @@ public class GameCopier {
             for (Table.Cell<Long, Long, List<String>> kw : c.getHiddenExtrinsicKeywordsTable().cellSet()) {
                 newCard.addHiddenExtrinsicKeywords(kw.getRowKey(), kw.getColumnKey(), kw.getValue());
             }
-            newCard.updateKeywordsCache(newCard.getCurrentState());
+            newCard.updateKeywordsCache();
 
             if (c.isTapped()) {
                 newCard.setTapped(true);

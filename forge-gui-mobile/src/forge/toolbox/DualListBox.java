@@ -3,6 +3,7 @@ package forge.toolbox;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Align;
@@ -10,7 +11,6 @@ import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
-import forge.util.Callback;
 
 // An input box for handling the order of choices.
 // Left box has the original choices
@@ -32,15 +32,16 @@ public class DualListBox<T> extends FDialog {
 
     private final FLabel orderedLabel;
     private final FLabel selectOrder;
+    private final FCheckBox rememberDecisionCheckBox;
 
     private final int targetRemainingSourcesMin;
     private final int targetRemainingSourcesMax;
 
-    public DualListBox(String title, int remainingSources, List<T> sourceElements, List<T> destElements, final Callback<List<T>> callback) {
+    public DualListBox(String title, int remainingSources, List<T> sourceElements, List<T> destElements, final Consumer<List<T>> callback) {
         this(title, remainingSources, remainingSources, sourceElements, destElements, callback);
     }
     
-    public DualListBox(String title, int remainingSourcesMin, int remainingSourcesMax, List<T> sourceElements, List<T> destElements, final Callback<List<T>> callback) {
+    public DualListBox(String title, int remainingSourcesMin, int remainingSourcesMax, List<T> sourceElements, List<T> destElements, final Consumer<List<T>> callback) {
         super(title, 2);
         targetRemainingSourcesMin = remainingSourcesMin;
         targetRemainingSourcesMax = remainingSourcesMax;
@@ -58,6 +59,8 @@ public class DualListBox<T> extends FDialog {
                     destList.addItem(item);
                 }
                 sourceList.cleanUpSelections();
+                sourceList.revalidate(true);
+                destList.revalidate(true);
                 setButtonState();
             }
         };
@@ -75,6 +78,8 @@ public class DualListBox<T> extends FDialog {
                     sourceList.addItem(item);
                 }
                 destList.cleanUpSelections();
+                destList.revalidate(true);
+                sourceList.revalidate(true);
                 setButtonState();
             }
         };
@@ -97,7 +102,7 @@ public class DualListBox<T> extends FDialog {
         
         final FEventHandler onAccept = e -> {
             hide();
-            callback.run(destList.extractListData());
+            callback.accept(destList.extractListData());
         };
 
         // Dual List Complete Buttons
@@ -110,6 +115,10 @@ public class DualListBox<T> extends FDialog {
         selectOrder = add(new FLabel.Builder().align(Align.center).text(Forge.getLocalizer().getMessage("lblSelectOrder")).build());
         orderedLabel = add(new FLabel.Builder().align(Align.center).build());
 
+        rememberDecisionCheckBox = add(new FCheckBox(Forge.getLocalizer().getMessage("lblAlwaysUseThisOrder"), true));
+        rememberDecisionCheckBox.setToolTipText(Forge.getLocalizer().getMessage("lblAlwaysUseThisOrderTooltip"));
+        rememberDecisionCheckBox.setVisible(false);
+
         setButtonState();
     }
 
@@ -121,7 +130,8 @@ public class DualListBox<T> extends FDialog {
 
         float gapBetweenButtons = FOptionPane.PADDING / 2;
         float labelHeight = selectOrder.getAutoSizeBounds().height;
-        float listHeight = (maxHeight - 2 * labelHeight - 2 * FOptionPane.PADDING) / 2;
+        float checkboxBand = rememberDecisionCheckBox.isVisible() ? labelHeight + FOptionPane.PADDING / 2 : 0;
+        float listHeight = (maxHeight - 2 * labelHeight - 2 * FOptionPane.PADDING - checkboxBand) / 2;
         float addButtonWidth = addAllButton.getAutoSizeBounds().width * 1.2f;
         float addButtonHeight = listHeight / 2 - gapBetweenButtons;
         float listWidth = width - addButtonWidth - gapBetweenButtons;
@@ -141,11 +151,25 @@ public class DualListBox<T> extends FDialog {
         removeAllButton.setBounds(x, y + addButtonHeight + gapBetweenButtons, addButtonWidth, addButtonHeight);
         destList.setBounds(x + width - listWidth, y, listWidth, listHeight);
 
+        if (rememberDecisionCheckBox.isVisible()) {
+            float checkboxHeight = labelHeight;
+            float checkboxY = maxHeight - checkboxHeight - FOptionPane.PADDING / 2;
+            rememberDecisionCheckBox.setBounds(FOptionPane.PADDING, checkboxY, width, checkboxHeight);
+        }
+
         return maxHeight;
     }
 
     public void setSecondColumnLabelText(String label) {
         orderedLabel.setText(label);
+    }
+
+    public void setRememberDecisionVisible(boolean visible) {
+        rememberDecisionCheckBox.setVisible(visible);
+    }
+
+    public boolean isRememberDecisionSelected() {
+        return rememberDecisionCheckBox.isSelected();
     }
 
     public List<T> getRemainingSourceList() {

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Indiana Jones
+Title=Indiana Jones
+Icon=Indiana Jones.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/Bavan_Schimper_-_Boros_Burn_(Modern,_#772399).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+2 Risk Factor
+4 Searing Blaze
+4 Skullcrack
+4 Lava Spike
+3 Rift Bolt
+4 Arid Mesa
+2 Bloodstained Mire
+3 Inspiring Vantage
+3 Mountain
+3 Sacred Foundry
+4 Wooded Foothills
+[Sideboard]
+2 Alpine Moon
+1 Chained to the Rocks
+1 Deflecting Palm
+3 Ensnaring Bridge
+2 Path to Exile
+2 Rest in Peace
+2 Searing Blood
+2 Wear // Tear

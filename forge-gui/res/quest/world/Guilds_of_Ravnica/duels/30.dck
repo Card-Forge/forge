@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Scotty
+Title=Scotty
+Icon=Scotty.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Alain_Bardini_-_Golgari_Midrange_(Standard,_#767635).dck
+Deck Type=constructed
+
+[Main]
+1 District Guide
+4 Doom Whisperer
+2 Golgari Findbroker
+4 Jadelight Ranger
+4 Llanowar Elves
+4 Merfolk Branchwalker
+3 Ravenous Chupacabra
+3 Seekers' Squire
+2 Wildgrowth Walker
+2 Assassin's Trophy
+3 Find // Finality
+2 Vraska, Golgari Queen
+3 Vraska, Relic Seeker
+8 Forest
+4 Overgrown Tomb
+7 Swamp
+4 Woodland Cemetery
+[Sideboard]
+3 Carnage Tyrant
+3 Cast Down
+3 Duress
+2 The Eldest Reborn
+1 Vivien Reid
+2 Vraska's Contempt
+1 Wildgrowth Walker

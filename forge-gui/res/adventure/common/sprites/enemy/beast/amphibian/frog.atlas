@@ -1,0 +1,38 @@
+frog.png
+size: 192,96
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 176, 0
+  size: 16, 16
+Idle 
+  xy: 6, 50
+  size: 20, 16   
+Idle 
+  xy: 38, 50
+  size: 20, 16
+Idle 
+  xy: 70, 50
+  size: 20, 16
+Idle 
+  xy: 102, 50
+  size: 20, 16
+Idle 
+  xy: 134, 50
+  size: 20, 16 
+Idle 
+  xy: 166, 50
+  size: 20, 16
+Walk
+  xy: 6, 80
+  size: 20, 16    
+Walk 
+  xy: 38, 80
+  size: 20, 16
+Walk 
+  xy: 70, 80
+  size: 20, 16
+Walk 
+  xy: 102, 80
+  size: 20, 16

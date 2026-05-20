@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=James Bond
+Title=James Bond
+Icon=James Bond.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/Cris_Smith_-_Orzhov_Blink_(Yorion)_(Standard,_#1183779).dck
+Deck Type=constructed
+
+[Main]
+2 Acquisitions Expert
+3 Yorion, Sky Nomad
+4 Elite Spellbinder
+4 Charming Prince
+4 Elderfang Disciple
+4 Skyclave Apparition
+3 Glass Casket
+2 Hagra Mauling
+3 Heartless Act
+2 Doomskar
+2 Bloodchief's Thirst
+2 Emeria's Call
+2 Elspeth's Nightmare
+3 Elspeth Conquers Death
+4 Doom Foretold
+4 Treacherous Blessing
+1 Indatha Triome
+1 Savai Triome
+1 Castle Ardenvale
+2 Field of Ruin
+2 Castle Locthwain
+3 Fabled Passage
+4 Brightclimb Pathway
+4 Temple of Silence
+6 Plains
+8 Swamp
+[Sideboard]
+1 Glass Casket
+1 Yorion, Sky Nomad
+1 Elspeth's Nightmare
+1 Soul-Guide Lantern
+2 Reidane, God of the Worthy
+2 Omen of the Sun
+2 Agonizing Remorse
+2 Shatter the Sky
+3 Duress

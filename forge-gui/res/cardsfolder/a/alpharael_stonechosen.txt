@@ -1,0 +1,10 @@
+Name:Alpharael, Stonechosen
+ManaCost:3 B B
+Types:Legendary Creature Human Cleric
+PT:3/3
+K:Ward:Discard<1/Random>
+T:Mode$ Attacks | ValidCard$ Card.Self | CheckSVar$ X | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Void — Whenever NICKNAME attacks, if a nonland permanent left the battlefield this turn or a spell was warped this turn, defending player loses half their life, rounded up.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ Y
+SVar:X:Count$Void.1.0
+SVar:Y:TriggeredDefendingPlayer$LifeTotal/HalfUp
+Oracle:Ward—Discard a card at random.\nVoid — Whenever Alpharael attacks, if a nonland permanent left the battlefield this turn or a spell was warped this turn, defending player loses half their life, rounded up.

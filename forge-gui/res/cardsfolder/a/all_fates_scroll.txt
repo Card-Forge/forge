@@ -1,0 +1,7 @@
+Name:All-Fates Scroll
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Draw | Cost$ 7 T Sac<1/CARDNAME> | NumCards$ X | SpellDescription$ Draw X cards, where X is the number of differently named lands you control.
+SVar:X:Count$Valid Land.YouCtrl$DifferentCardNames
+Oracle:{T}: Add one mana of any color.\n{7}, {T}, Sacrifice this artifact: Draw X cards, where X is the number of differently named lands you control.

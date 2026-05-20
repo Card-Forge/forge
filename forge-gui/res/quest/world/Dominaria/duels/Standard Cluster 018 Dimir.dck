@@ -1,0 +1,41 @@
+[metadata]
+Name=Dimir
+Deck Type=constructed
+Title=Dimir
+Description=Dimir
+Difficulty=Easy
+Icon=Wonder Twins
+[Main]
+4 Censor
+1 Commit // Memory
+3 Disallow
+4 Drowned Catacomb
+3 Essence Scatter
+2 Evolving Wilds
+4 Fatal Push
+4 Fetid Pools
+3 Field of Ruin
+2 Glimmer of Genius
+3 Hieroglyphic Illumination
+3 Island
+4 Island
+3 Moment of Craving
+2 Search for Azcanta
+1 Supreme Will
+2 Swamp
+3 Swamp
+1 Swamp
+2 The Scarab God
+3 Torrential Gearhulk
+3 Vraska's Contempt
+[Sideboard]
+1 Bontu's Last Reckoning
+1 Crook of Condemnation
+2 Duress
+2 Gifted Aetherborn
+2 Glint-Sleeve Siphoner
+1 Golden Demise
+1 Moment of Craving
+2 Negate
+1 Nezahal, Primal Tide
+1 Vraska's Contempt

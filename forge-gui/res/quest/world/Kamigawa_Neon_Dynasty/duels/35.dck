@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Cipher
+Title=Cipher
+Icon=Cipher.jpg
+Difficulty=Medium
+Description=./Standard/Kamigawa_Neon_Dynasty/Ailien02_-_Boros_Aggro_(Standard,_#1414800).dck
+Deck Type=constructed
+
+[Main]
+3 Bloodthirsty Adversary
+4 Kumano Faces Kakkazan
+4 Thundering Raiju
+4 Reckless Stormseeker
+4 Luminarch Aspirant
+4 Hopeful Initiate
+4 Brutal Cathar
+1 Valorous Stance
+4 Play with Fire
+1 Angelfire Ignition
+4 Roil Eruption
+1 Sokenzan, Crucible of Defiance
+1 Eiganjo, Seat of the Empire
+1 Cave of the Frost Dragon
+2 Den of the Bugbear
+3 Sundown Pass
+4 Needleverge Pathway
+5 Mountain
+6 Plains
+[Sideboard]
+1 Valorous Stance
+1 Angelfire Ignition
+2 Showdown of the Skalds
+3 Thalia, Guardian of Thraben
+4 Elite Spellbinder
+4 Kami's Flare

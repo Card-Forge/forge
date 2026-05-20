@@ -1,0 +1,13 @@
+Name:Hearthhull, the Worldseed
+ManaCost:1 B R G
+Types:Legendary Artifact Spacecraft
+PT:6/7
+K:Station:8
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE2_CHARGE | AddAbility$ HearthhullDraw | Description$ STATION 2+ {1}, {T}, Sacrifice a land: Draw two cards. You may play an additional land this turn.
+SVar:HearthhullDraw:AB$ Draw | Cost$ 1 T Sac<1/Land> | NumCards$ 2 | SubAbility$ DBEffect | SpellDescription$ Draw two cards. You may play an additional land this turn.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ Exploration
+SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land this turn.
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE8_CHARGE | AddType$ Creature | AddKeyword$ Flying & Vigilance & Haste | AddTrigger$ SacrificeTrig | Description$ STATION 8+ Flying, vigilance, haste,,,Whenever you sacrifice a land, each opponent loses 2 life.
+SVar:SacrificeTrig:Mode$ Sacrificed | ValidCard$ Land | ValidPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a land, each opponent loses 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2
+Oracle:Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.)\nSTATION 2+\n{1}, {T}, Sacrifice a land: Draw two cards. You may play an additional land this turn.\nSTATION 8+\nFlying, vigilance, haste\nWhenever you sacrifice a land, each opponent loses 2 life.

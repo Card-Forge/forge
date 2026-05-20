@@ -1,0 +1,8 @@
+Name:That's Rough Buddy
+ManaCost:1 W
+Types:Instant Lesson
+A:SP$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBDraw | SpellDescription$ Put a +1/+1 counter on target creature. Put two +1/+1 counters on that creature instead if a creature left the battlefield under your control this turn. Draw a card.
+SVar:DBDraw:DB$ Draw
+SVar:X:Count$Compare Y GE1.2.1
+SVar:Y:Count$LeftBattlefieldThisTurn Creature.YouCtrl
+Oracle:Put a +1/+1 counter on target creature. Put two +1/+1 counters on that creature instead if a creature left the battlefield under your control this turn.\nDraw a card.

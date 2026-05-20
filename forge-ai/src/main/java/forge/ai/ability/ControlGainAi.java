@@ -41,20 +41,6 @@ import forge.util.collect.FCollectionView;
 import java.util.List;
 import java.util.Map;
 
-
-//AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx
-
-//GainControl specific sa:
-//  LoseControl - the lose control conditions (as a comma separated list)
-//  -Untap - source card becomes untapped
-//  -LoseControl - you lose control of source card
-//  -LeavesPlay - source card leaves the battlefield
-//  -PowerGT - (not implemented yet for Old Man of the Sea)
-//  AddKWs - Keywords to add to the controlled card
-//            (as a "&"-separated list; like Haste, Sacrifice CARDNAME at EOT, any standard keyword)
-//  OppChoice - set to True if opponent chooses creature (for Preacher) - not implemented yet
-//  Untap - set to True if target card should untap when control is taken
-
 /**
  * <p>
  * AbilityFactory_GainControl class.
@@ -65,7 +51,7 @@ import java.util.Map;
  */
 public class ControlGainAi extends SpellAbilityAi {
     @Override
-    protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision canPlay(final Player ai, final SpellAbility sa) {
         final List<String> lose = Lists.newArrayList();
 
         if (sa.hasParam("LoseControl")) {
@@ -81,22 +67,30 @@ public class ControlGainAi extends SpellAbilityAi {
             if (sa.hasParam("AllValid")) {
                 CardCollectionView tgtCards = opponents.getCardsIn(ZoneType.Battlefield);
                 tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
-                return !tgtCards.isEmpty();
+
+                if (tgtCards.isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
+                }
             }
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else {
             sa.resetTargets();
             if (sa.hasParam("TargetingPlayer")) {
                 Player targetingPlayer = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("TargetingPlayer"), sa).get(0);
                 sa.setTargetingPlayer(targetingPlayer);
-                return targetingPlayer.getController().chooseTargetsFor(sa);
+                // TODO these blocks should continue checking with the worst
+                // and if targetingPlayer is AI set the target directly (instead of using the Runnable)
+                if (CardLists.getTargetableCards(ai.getGame().getCardsIn(sa.getTargetRestrictions().getZone()), sa).isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+                }
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
             if (tgt.canOnlyTgtOpponent()) {
                 List<Player> oppList = opponents.filter(PlayerPredicates.isTargetableBy(sa));
 
                 if (oppList.isEmpty()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
 
                 if (tgt.isRandomTarget()) {
@@ -111,12 +105,12 @@ public class ControlGainAi extends SpellAbilityAi {
         if (lose.contains("EOT")
                 && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && !sa.isTrigger()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (sa.hasParam("Defined")) {
             // no need to target, we'll pick up the target from Defined
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         CardCollection list = opponents.getCardsIn(ZoneType.Battlefield);
@@ -165,7 +159,7 @@ public class ControlGainAi extends SpellAbilityAi {
         });
 
         if (list.isEmpty()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         int creatures = 0, artifacts = 0, planeswalkers = 0, lands = 0, enchantments = 0;
@@ -192,9 +186,9 @@ public class ControlGainAi extends SpellAbilityAi {
             Card t = null;
 
             if (list.isEmpty()) {
-                if ((sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) || (sa.getTargets().size() == 0)) {
+                if (sa.getTargets().size() < sa.getMinTargets() || sa.getTargets().size() == 0) {
                     sa.resetTargets();
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 } else {
                     // TODO is this good enough? for up to amounts?
                     break;
@@ -257,44 +251,46 @@ public class ControlGainAi extends SpellAbilityAi {
             }
         }
 
-        return true;
+        return new AiAbilityDecision(
+                sa.isTargetNumberValid() ? 100 : 0,
+                sa.isTargetNumberValid() ? AiPlayDecision.WillPlay : AiPlayDecision.TargetingFailed);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (!sa.usesTargeting()) {
             if (mandatory) {
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         } else {
-            if (sa.hasParam("TargetingPlayer") || (!this.canPlayAI(ai, sa) && mandatory)) {
+            if (sa.hasParam("TargetingPlayer") || (mandatory && !this.canPlay(ai, sa).willingToPlay())) {
                 if (sa.getTargetRestrictions().canOnlyTgtOpponent()) {
                     List<Player> oppList = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
                     if (oppList.isEmpty()) {
-                        return false;
+                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     }
                     sa.getTargets().add(Aggregates.random(oppList));
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
 
                 List<Card> list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
                 if (list.isEmpty()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
                 sa.getTargets().add(ComputerUtilCard.getWorstAI(list));
             }
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, final Player ai) {
+    public AiAbilityDecision chkDrawback(final Player ai, SpellAbility sa) {
         final Game game = ai.getGame();
 
         // Special card logic that is processed elsewhere
         if (sa.hasParam("AILogic")) {
-            if (("DonateTargetPerm").equals(sa.getParam("AILogic"))) {
+            if ("DonateTargetPerm".equals(sa.getParam("AILogic"))) {
                 // Donate step 2 - target a donatable permanent.
                 return SpecialCardAi.Donate.considerDonatingPermanent(ai, sa);
             }
@@ -305,7 +301,7 @@ public class ControlGainAi extends SpellAbilityAi {
                 CardCollectionView tgtCards = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
                 tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
                 if (tgtCards.isEmpty()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
                 }
             }
             final List<String> lose = Lists.newArrayList();
@@ -314,10 +310,14 @@ public class ControlGainAi extends SpellAbilityAi {
                 lose.addAll(Lists.newArrayList(sa.getParam("LoseControl").split(",")));
             }
 
-            return !lose.contains("EOT")
-                    || !game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS);
+            if (lose.contains("EOT")
+                    && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
+            } else {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
         } else {
-            return this.canPlayAI(ai, sa);
+            return this.canPlay(ai, sa);
         }
     }
 
@@ -332,7 +332,7 @@ public class ControlGainAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         // Pay to gain Control
         if (sa.hasParam("UnlessSwitched")) {
             final Card host = sa.getHostCard();
@@ -346,6 +346,6 @@ public class ControlGainAi extends SpellAbilityAi {
             }
         }
 
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

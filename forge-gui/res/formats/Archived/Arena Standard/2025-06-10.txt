@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (FIN)
+Type:Archived
+Subtype:Standard
+Effective:2025-06-10
+Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT, TDM, FIN
+Banned:Leyline of Resonance

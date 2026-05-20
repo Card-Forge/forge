@@ -1,0 +1,6 @@
+Name:Turtle Power!
+ManaCost:2 G
+Types:Enchantment
+K:Flash
+S:Mode$ Continuous | Affected$ Turtle.YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Turtles you control get +2/+2.
+Oracle:Flash\nTurtles you control get +2/+2.

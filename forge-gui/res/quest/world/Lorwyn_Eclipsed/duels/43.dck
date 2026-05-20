@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Galadriel
+Title=Galadriel
+Icon=Galadriel.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/Les_Bakker_-_Sultai_Reanimator_(Standard,_#2822357).dck
+Deck Type=constructed
+
+[Main]
+4 Bringer of the Last Gift
+4 Deceit
+4 Formidable Speaker
+4 Oblivious Bookworm
+4 Superior Spider-Man
+4 Wistfulness
+3 Overlord of the Balemurk
+2 Ardyn, the Usurper
+1 Harvester of Misery
+1 Town Greeter
+4 Bitter Triumph
+4 Blooming Marsh
+4 Cavern of Souls
+4 Watery Grave
+2 Breeding Pool
+2 Overgrown Tomb
+2 Undercity Sewers
+2 Underground Mortuary
+2 Willowrush Verge
+1 Gloomlake Verge
+1 Swamp
+1 Wastewood Verge
+[Sideboard]
+4 Intimidation Tactics
+2 Requiting Hex
+2 Spell Snare
+2 Spider-Sense
+2 Tishana's Tidebinder
+1 Disruptive Stormbrood
+1 Harvester of Misery
+1 Urgent Necropsy

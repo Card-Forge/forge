@@ -2,7 +2,7 @@ Name:Arnjlot's Ascent
 ManaCost:1 U U
 Types:Enchantment
 K:Cumulative upkeep:U
-A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
+A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
 SVar:NonStackingEffect:True
 SVar:NeedsToPlay:Creature.YouCtrl+withoutFlying
 AI:RemoveDeck:Random

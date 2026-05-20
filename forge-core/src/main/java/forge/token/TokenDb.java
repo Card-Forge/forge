@@ -1,6 +1,7 @@
 package forge.token;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
@@ -34,14 +35,34 @@ public class TokenDb implements ITokenDatabase {
     private final CardEdition.Collection editions;
     private final Map<String, CardRules> rulesByName;
 
+    // null preserves first-alphabetical match; adventure pushes a filter here.
+    private Predicate<CardEdition> defaultEditionFilter = null;
+    // Blocklist of "{EDITION_CODE}/{tokenScript}" pairs; skipped in fallback.
+    private Set<String> restrictedTokenEntries = Collections.emptySet();
+    // When true and a host-card date is known, pick the legal edition whose
+    // release date is closest to the host's, so eras match (e.g. a 1999 card
+    // gets a 1998 Unglued token rather than a 2002 Player Rewards print).
+    private boolean preferEraMatchedArt = false;
+
     public TokenDb(Map<String, CardRules> rules, CardEdition.Collection editions) {
         this.rulesByName = rules;
         this.editions = editions;
     }
 
+    public void setDefaultEditionFilter(Predicate<CardEdition> filter) {
+        this.defaultEditionFilter = filter;
+    }
+
+    public void setRestrictedTokenEntries(Set<String> entries) {
+        this.restrictedTokenEntries = entries != null ? entries : Collections.emptySet();
+    }
+
+    public void setPreferEraMatchedArt(boolean flag) {
+        this.preferEraMatchedArt = flag;
+    }
+
     public boolean containsRule(String rule) {
         return this.rulesByName.containsKey(rule);
-
     }
 
     public void preloadTokens() {
@@ -83,15 +104,53 @@ public class TokenDb implements ITokenDatabase {
         return new PaperToken(rules, edition, name, t.collectorNumber(), t.artistName());
     }
 
-    // try all editions to find token
-    protected PaperToken fallbackToken(String name) {
-        for (CardEdition edition : this.editions) {
-            String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
-            if (loadTokenFromSet(edition, name)) {
-                return Aggregates.random(allTokenByName.get(fullName));
+    // Null filter: historical first-alphabetical match. Non-null: random among
+    // editions that register the token and pass the filter, or null if none.
+    // When preferEraMatchedArt is on and hostDate != null, instead picks the
+    // legal edition whose release date is closest to hostDate.
+    public PaperToken getTokenFromEditions(String tokenName, Predicate<CardEdition> editionFilter, Date hostDate) {
+        if (editionFilter == null) {
+            for (CardEdition edition : this.editions) {
+                if (restrictedTokenEntries.contains(edition.getCode() + "/" + tokenName)) continue;
+                String fullName = String.format("%s_%s", tokenName, edition.getCode().toLowerCase());
+                if (loadTokenFromSet(edition, tokenName)) {
+                    return Aggregates.random(allTokenByName.get(fullName));
+                }
             }
+            return null;
         }
-        return null;
+        List<CardEdition> legal = new ArrayList<>();
+        for (CardEdition edition : this.editions) {
+            if (!loadTokenFromSet(edition, tokenName)) continue;
+            if (restrictedTokenEntries.contains(edition.getCode() + "/" + tokenName)) continue;
+            if (editionFilter.test(edition)) legal.add(edition);
+        }
+        if (legal.isEmpty()) return null;
+        CardEdition pick;
+        if (preferEraMatchedArt && hostDate != null) {
+            pick = legal.get(0);
+            long best = Math.abs(pick.getDate().getTime() - hostDate.getTime());
+            for (int i = 1; i < legal.size(); i++) {
+                long delta = Math.abs(legal.get(i).getDate().getTime() - hostDate.getTime());
+                if (delta < best) {
+                    best = delta;
+                    pick = legal.get(i);
+                }
+            }
+        } else {
+            pick = Aggregates.random(legal);
+        }
+        String fullName = String.format("%s_%s", tokenName, pick.getCode().toLowerCase());
+        return Aggregates.random(allTokenByName.get(fullName));
+    }
+
+    protected PaperToken fallbackToken(String name, String hostEditionCode) {
+        Date hostDate = null;
+        if (hostEditionCode != null) {
+            CardEdition host = this.editions.get(hostEditionCode);
+            if (host != null) hostDate = host.getDate();
+        }
+        return getTokenFromEditions(name, defaultEditionFilter, hostDate);
     }
 
     @Override
@@ -101,21 +160,33 @@ public class TokenDb implements ITokenDatabase {
 
     @Override
     public PaperToken getToken(String tokenName, String edition) {
+        return getToken(tokenName, edition, -1);
+    }
+
+    @Override
+    public PaperToken getToken(String tokenName, String edition, int artIndex) {
         CardEdition realEdition = editions.getEditionByCodeOrThrow(edition);
         String fullName = String.format("%s_%s", tokenName, realEdition.getCode().toLowerCase());
 
-        // token exist in Set, return one at random
+        // Token exists in edition, return token at artIndex or a random one.
         if (loadTokenFromSet(realEdition, tokenName)) {
-            return Aggregates.random(allTokenByName.get(fullName));
+            Collection<PaperToken> collection = allTokenByName.get(fullName);
+
+            if (artIndex < 1 || artIndex > collection.size()) {
+                return Aggregates.random(collection);
+            }
+
+            return Iterables.get(collection, artIndex - 1);
         }
-        PaperToken fallback = this.fallbackToken(tokenName);
+        PaperToken fallback = this.fallbackToken(tokenName, edition);
         if (fallback != null) {
             return fallback;
         }
 
-        if (!extraTokensByName.containsKey(fullName)) {
+        CardRules cr = rulesByName.get(tokenName);
+        if (!extraTokensByName.containsKey(fullName) && cr != null) {
             try {
-                PaperToken pt = new PaperToken(rulesByName.get(tokenName), realEdition, tokenName, "", IPaperCard.NO_ARTIST_NAME);
+                PaperToken pt = new PaperToken(cr, realEdition, tokenName, "", IPaperCard.NO_ARTIST_NAME);
                 extraTokensByName.put(fullName, pt);
                 return pt;
             } catch(Exception e) {
@@ -124,11 +195,6 @@ public class TokenDb implements ITokenDatabase {
         }
 
         return extraTokensByName.get(fullName);
-    }
-
-    @Override
-    public PaperToken getToken(String tokenName, String edition, int artIndex) {
-        return null;
     }
 
     @Override
@@ -195,4 +261,6 @@ public class TokenDb implements ITokenDatabase {
     public Iterator<PaperToken> iterator() {
         return allTokenByName.values().iterator();
     }
+
+    public Map<String, CardRules> getRules() { return this.rulesByName;}
 }

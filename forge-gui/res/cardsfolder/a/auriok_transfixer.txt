@@ -2,6 +2,6 @@ Name:Auriok Transfixer
 ManaCost:W
 Types:Creature Human Scout
 PT:1/1
-A:AB$ Tap | Cost$ W T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Tap target artifact.
+A:AB$ Tap | Cost$ W T | ValidTgts$ Artifact | SpellDescription$ Tap target artifact.
 AI:RemoveDeck:All
 Oracle:{W}, {T}: Tap target artifact.

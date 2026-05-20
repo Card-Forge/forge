@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -18,31 +20,23 @@ import java.util.Map;
 public class CloneAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
 
         boolean useAbility = true;
-
-//        if (card.getController().isComputer()) {
-//            final List<Card> creatures = AllZoneUtil.getCreaturesInPlay();
-//            if (!creatures.isEmpty()) {
-//                cardToCopy = CardFactoryUtil.getBestCreatureAI(creatures);
-//            }
-//        }
 
         // TODO - add some kind of check to answer
         // "Am I going to attack with this?"
         // TODO - add some kind of check for during human turn to answer
         // "Can I use this to block something?"
 
-        if (!checkPhaseRestrictions(ai, sa, game.getPhaseHandler())) {
-            return false;
-        }
-
         PhaseHandler phase = game.getPhaseHandler();
 
-        if (!sa.usesTargeting()) {
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
+            useAbility &= cloneTgtAI(sa, false);
+        } else {
             final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             boolean bFlag = false;
@@ -66,36 +60,39 @@ public class CloneAi extends SpellAbilityAi {
             }
 
             if (!bFlag) { // All of the defined stuff is cloned, not very useful
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
-        } else {
-            sa.resetTargets();
-            useAbility &= cloneTgtAI(sa);
         }
 
-        return useAbility;
-    } // end cloneCanPlayAI()
+        return useAbility ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+    }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         // AI should only activate this during Human's turn
         boolean chance = true;
 
         if (sa.usesTargeting()) {
-            chance = cloneTgtAI(sa);
+            chance = cloneTgtAI(sa, false);
         }
 
-        return chance;
+        return chance ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         Card host = sa.getHostCard();
         boolean chance = true;
 
         if (sa.usesTargeting()) {
-            chance = cloneTgtAI(sa);
+            chance = cloneTgtAI(sa, mandatory);
         } else {
+            if (sa.isReplacementAbility() && host.isCloned()) {
+                // prevent StackOverflow from infinite loop copying another ETB RE
+                return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
+            }
             if (sa.hasParam("Choices")) {
                 CardCollectionView choices = CardLists.getValidCards(host.getGame().getCardsIn(ZoneType.Battlefield),
                         sa.getParam("Choices"), host.getController(), host, sa);
@@ -111,7 +108,11 @@ public class CloneAi extends SpellAbilityAi {
         // Eventually, we can call the trigger of ETB abilities with
         // not mandatory as part of the checks to cast something
 
-        return chance || mandatory;
+        if (mandatory || chance) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /**
@@ -123,15 +124,15 @@ public class CloneAi extends SpellAbilityAi {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean cloneTgtAI(final SpellAbility sa) {
+    private boolean cloneTgtAI(final SpellAbility sa, boolean mandatory) {
         // Specific logic for cards
-        if ("CloneAttacker".equals(sa.getParam("AILogic"))) {
-            CardCollection valid = CardLists.getValidCards(sa.getHostCard().getController().getCardsIn(ZoneType.Battlefield), sa.getParam("ValidTgts"), sa.getHostCard().getController(), sa.getHostCard(), sa);
-            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(valid));
-            return true;
-        } else if ("CloneBestCreature".equals(sa.getParam("AILogic"))) {
-            CardCollection valid = CardLists.getValidCards(sa.getHostCard().getController().getGame().getCardsIn(ZoneType.Battlefield), sa.getParam("ValidTgts"), sa.getHostCard().getController(), sa.getHostCard(), sa);
-            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(valid));
+        List<Card> targets = CardUtil.getValidCardsToTarget(sa);
+        if (mandatory && targets.isEmpty()) {
+            return false;
+        }
+
+        if (mandatory || "CloneBestCreature".equals(sa.getParam("AILogic"))) {
+            sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(targets));
             return true;
         }
 
@@ -184,7 +185,7 @@ public class CloneAi extends SpellAbilityAi {
         final boolean canCloneLegendary = "True".equalsIgnoreCase(sa.getParam("NonLegendary"));
 
         String filter = !isVesuva ? "Permanent.YouDontCtrl,Permanent.nonLegendary"
-                : "Permanent.YouDontCtrl+notnamed" + name + ",Permanent.nonLegendary+notnamed" + name;
+                : "Permanent.YouDontCtrl+!named" + name + ",Permanent.nonLegendary+!named" + name;
 
         // TODO: rewrite this block so that this is done somehow more elegantly
         if (canCloneLegendary) {

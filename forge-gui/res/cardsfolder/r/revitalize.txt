@@ -2,6 +2,6 @@ Name:Revitalize
 ManaCost:1 W
 Types:Instant
 A:SP$ GainLife | Defined$ You | LifeAmount$ 3 | SubAbility$ DBDraw | SpellDescription$ You gain 3 life.
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | Defined$ You | SpellDescription$ Draw a card.
 DeckHas:Ability$LifeGain
 Oracle:You gain 3 life.\nDraw a card.

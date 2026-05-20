@@ -1,0 +1,29 @@
+[metadata]
+Name=Pharaoh - Arabian Nights
+[Main]
+4 Desert|ARN
+4 Karplusan Forest|5ED
+4 Shivan Oasis|INV
+4 Mountain|ARN
+4 City of Brass|ARN
+4 Brass Man|ARN
+4 Erhnam Djinn|ARN
+4 Desert Twister|ARN
+4 Sandstorm|ARN
+4 Ifh-Bíff Efreet|ARN
+4 Ali from Cairo|ARN
+2 Bottle of Suleiman|ARN
+1 Aladdin's Lamp|ARN
+1 Aladdin's Ring|ARN
+4 Rukh Egg|ARN
+4 Bird Maiden|ARN
+4 Dancing Scimitar|ARN
+
+[StartInBattle_Reference]
+1 City of Brass|ARN
+1 Cyclopean Mummy|LEG
+1 Desert|ARN
+1 Diamond Valley|ARN
+1 Library of Alexandria|ARN
+1 Oasis|ARN
+1 Pyramids|ARN

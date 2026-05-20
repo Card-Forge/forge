@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | DamageMap$ True | AILogic$ SelfDamage | SubAbility$ DB1 | SpellDescription$ CARDNAME deals 2 damage to any target and 3 damage to you. Draw a card.
 SVar:DB1:DB$ DealDamage | NumDmg$ 3 | Defined$ You | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve | SubAbility$ DB2
-SVar:DB2:DB$ Draw | NumCards$ 1
+SVar:DB2:DB$ Draw
 SVar:SelfDamageAmount:3
 AI:RemoveDeck:Random
 Oracle:Orcish Cannonade deals 2 damage to any target and 3 damage to you.\nDraw a card.

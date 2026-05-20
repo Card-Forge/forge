@@ -1,9 +1,9 @@
 Name:Path of the Animist
 ManaCost:3 G
 Types:Sorcery
-A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 2 | Tapped$ True | SubAbility$ DBSpace | ChangeTypeDesc$ basic land | SpellDescription$ Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | ChangeNum$ 2 | Tapped$ True | SubAbility$ DBSpace | SpellDescription$ Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
 SVar:DBSpace:DB$ BlankLine | SubAbility$ DBVote | SpellDescription$ ,,,,,,
-SVar:DBVote:DB$ Vote | Defined$ Player | VoteType$ Planeswalk,Chaos | VotePlaneswalk$ DBPlaneswalk | VoteChaos$ DBChaos | Tied$ DBChaos | StackDescription$ SpellDescription | SpellDescription$ Will of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues.
-SVar:DBPlaneswalk:DB$ Planeswalk
-SVar:DBChaos:DB$ ChaosEnsues
+SVar:DBVote:DB$ Vote | Defined$ Player | Choices$ DBPlaneswalk,DBChaos | VoteTiedAbility$ DBChaos | StackDescription$ SpellDescription | SpellDescription$ Will of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues.
+SVar:DBPlaneswalk:DB$ Planeswalk | SpellDescription$ Planeswalk
+SVar:DBChaos:DB$ ChaosEnsues | SpellDescription$ Chaos
 Oracle:Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.\nWill of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues.

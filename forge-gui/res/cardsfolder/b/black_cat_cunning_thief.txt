@@ -1,0 +1,12 @@
+Name:Black Cat, Cunning Thief
+Variant:UniversesWithin:FlavorName:Wrench, Speedway Saboteur
+ManaCost:3 B B
+Types:Legendary Creature Human Rogue Villain
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When NICKNAME enters, look at the top nine cards of target opponent's library, exile two of them face down, then put the rest on the bottom of their library in a random order. You may play the exiled cards for as long as they remain exiled. Mana of any type can be spent to cast spells this way.
+SVar:TrigDig:DB$ Dig | ValidTgts$ Opponent | DigNum$ 9 | ChangeNum$ 2 | DestinationZone$ Exile | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | ExileFaceDown$ True | WithMayLook$ True | ChangeValid$ Card | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled cards for as long as they remain exiled. Mana of any type can be spent to cast spells this way.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
+Oracle:When Black Cat enters, look at the top nine cards of target opponent's library, exile two of them face down, then put the rest on the bottom of their library in a random order. You may play the exiled cards for as long as they remain exiled. Mana of any type can be spent to cast spells this way.

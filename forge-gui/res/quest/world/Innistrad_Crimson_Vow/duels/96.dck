@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Sherlock Holmes
+Title=Sherlock Holmes
+Icon=Sherlock Holmes.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/Andrew_Wolthuis_-_Dimir_Affinity_(Modern,_#1253799)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+4 Thought Monitor
+4 Sojourner's Companion
+4 Signal Pest
+4 Ornithopter
+4 Memnite
+4 Frogmite
+1 Shadowspear
+1 Welding Jar
+3 Blood Fountain
+4 Springleaf Drum
+4 Cranial Plating
+4 Thoughtcast
+4 Urza's Saga
+3 Glimmervoid
+3 Mistvault Bridge
+4 Treasure Vault
+4 Darksteel Citadel
+[Sideboard]
+1 Pithing Needle
+1 Jegantha, the Wellspring
+2 Thoughtseize
+2 Relic of Progenitus
+2 Hurkyl's Recall
+3 Fatal Push
+4 Metallic Rebuke

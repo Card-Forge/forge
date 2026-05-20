@@ -3,9 +3,9 @@ ManaCost:5 W
 Types:Creature Giant Soldier
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigVote | TriggerDescription$ Will of the Council — When CARDNAME enters, starting with you, each player votes for blue, black, red, or green. CARDNAME gains protection from each color with the most votes or tied for most votes.
-SVar:TrigVote:DB$ Vote | Defined$ Player | VoteRed$ PumpRed | VoteGreen$ PumpGreen | VoteBlack$ PumpBlack | VoteBlue$ PumpBlue | VoteType$ Blue,Black,Red,Green | AILogic$ Protection
-SVar:PumpRed:DB$ Pump | KW$ Protection from red | Duration$ Permanent | Defined$ Self
-SVar:PumpGreen:DB$ Pump | KW$ Protection from green | Duration$ Permanent | Defined$ Self
-SVar:PumpBlack:DB$ Pump | KW$ Protection from black | Duration$ Permanent | Defined$ Self
-SVar:PumpBlue:DB$ Pump | KW$ Protection from blue | Duration$ Permanent | Defined$ Self
+SVar:TrigVote:DB$ Vote | Defined$ Player | Choices$ PumpU,PumpB,PumpR,PumpG | AILogic$ Protection
+SVar:PumpU:DB$ Pump | KW$ Protection from blue | Duration$ Permanent | Defined$ Self | SpellDescription$ Blue
+SVar:PumpB:DB$ Pump | KW$ Protection from black | Duration$ Permanent | Defined$ Self | SpellDescription$ Black
+SVar:PumpR:DB$ Pump | KW$ Protection from red | Duration$ Permanent | Defined$ Self | SpellDescription$ Red
+SVar:PumpG:DB$ Pump | KW$ Protection from green | Duration$ Permanent | Defined$ Self | SpellDescription$ Green
 Oracle:Will of the council — When Council Guardian enters, starting with you, each player votes for blue, black, red, or green. Council Guardian gains protection from each color with the most votes or tied for most votes.

@@ -1,0 +1,9 @@
+Name:Spider-Man No More
+Variant:UniversesWithin:FlavorName:Hide in Mundanity
+ManaCost:1 U
+Types:Enchantment Aura
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 1 | SetToughness$ 1 | AddType$ Citizen | RemoveCreatureTypes$ True | RemoveAllAbilities$ True | AddKeyword$ Defender | Description$ Enchanted creature is a Citizen with base power and toughness 1/1. It has defender and loses all other abilities. (It also loses all other creature types.)
+SVar:NonStackingAttachEffect:True
+Oracle:Enchant creature\nEnchanted creature is a Citizen with base power and toughness 1/1. It has defender and loses all other abilities. (It also loses all other creature types.)

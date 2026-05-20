@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Robot23
+Title=Robot23
+Icon=Iron Man.jpg
+Difficulty=Hard
+Description=Esper God-Pharaoh's Gift 
+Deck Type=constructed
+
+[Main]
+4 Angel of Invention
+4 Champion of Wits
+3 Hostage Taker
+2 Kitesail Freebooter
+4 Minister of Inquiries
+4 Seekers' Squire
+1 The Scarab God
+3 Trophy Mage
+1 Vona, Butcher of Magan
+4 Walking Ballista
+4 Gate to the Afterlife
+2 God-Pharaoh's Gift
+4 Aether Hub
+4 Concealed Courtyard
+4 Drowned Catacomb
+1 Glacial Fortress
+3 Ipnu Rivulet
+5 Island
+3 Swamp
+[Sideboard]
+3 Dreamstealer
+2 Duress
+4 Fourth Bridge Prowler
+3 Negate
+1 Sorcerous Spyglass
+2 Vraska's Contempt

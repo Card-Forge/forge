@@ -1,0 +1,8 @@
+Name:Samurai's Katana
+ManaCost:2 R
+Types:Artifact Equipment
+K:Job select
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample & Haste | AddType$ Samurai | Description$ Equipped creature gets +2/+2, has trample and haste, and is a Samurai in addition to its other types.
+K:Equip:5:Flavor Murasame
+DeckHas:Ability$Token & Type$Samurai
+Oracle:Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)\nEquipped creature gets +2/+2, has trample and haste, and is a Samurai in addition to its other types.\nMurasame — Equip {5}

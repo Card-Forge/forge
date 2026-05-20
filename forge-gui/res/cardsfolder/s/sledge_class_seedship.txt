@@ -1,0 +1,10 @@
+Name:Sledge-Class Seedship
+ManaCost:2 G
+Types:Artifact Spacecraft
+PT:4/5
+K:Station:7
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE7_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddTrigger$ AttackTrig | Description$ STATION 7+ Flying,,,Whenever this Spacecraft attacks, you may put a creature card from your hand onto the battlefield.
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ Whenever this Spacecraft attacks, you may put a creature card from your hand onto the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1
+SVar:HasAttackEffect:TRUE
+Oracle:Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 7+.)\nSTATION 7+\nFlying\nWhenever this Spacecraft attacks, you may put a creature card from your hand onto the battlefield.

@@ -85,6 +85,11 @@ public class StaticAbilityAlternativeCost {
                 }
                 newSA.setDescription(sb.toString());
 
+                // Support for custom cards alternative costs targeting
+                if (stAb.hasParam("Named")) {
+                    newSA.setName(stAb.getParam("Named"));
+                }
+
                 result.add(newSA);
             }
         }

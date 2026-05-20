@@ -1,6 +1,6 @@
 [metadata]
 Name=Hellboy 2
-[main]
+[Main]
 5 Swamp
 7 Mountain
 3 Blackcleave Cliffs
@@ -27,4 +27,4 @@ Name=Hellboy 2
 1 Stolen Grain
 2 Curse of Bloodletting
 1 Fire Servant
-[sideboard]
+[Sideboard]

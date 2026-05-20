@@ -1,0 +1,5 @@
+Name:Rig for War
+ManaCost:1 R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +3 | KW$ First Strike & Reach | SpellDescription$ Target creature gets +3/+0 and gains first strike and reach until end of turn.
+Oracle:Target creature gets +3/+0 and gains first strike and reach until end of turn.

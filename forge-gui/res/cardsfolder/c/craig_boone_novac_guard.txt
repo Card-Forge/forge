@@ -10,4 +10,5 @@ SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | Co
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ X | UnlessCost$ DamageYou<X> | UnlessPayer$ TargetedController
 SVar:X:Count$CardCounters.QUEST
 DeckHas:Ability$LifeGain|Counters
+SVar:AICounterOverrideQUEST:Positive
 Oracle:Reach, lifelink\nOne for My Baby — Whenever you attack with two or more creatures, put two quest counters on Craig Boone, Novac Guard. When you do, Craig Boone deals damage equal to the number of quest counters on it to up to one target creature unless that creature's controller has Craig Boone deal that much damage to them.

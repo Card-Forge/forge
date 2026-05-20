@@ -1,0 +1,7 @@
+Name:Chaos Spewer
+ManaCost:2 BR
+Types:Creature Goblin Warlock
+PT:5/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBlight | TriggerDescription$ When this creature enters, you may pay {2}. If you don't, blight 2. (To blight 2, put two -1/-1 counters on a creature you control.)
+SVar:TrigBlight:DB$ Blight | Defined$ You | Num$ 2 | UnlessCost$ 2 | UnlessPayer$ You
+Oracle:When this creature enters, you may pay {2}. If you don't, blight 2. (To blight 2, put two -1/-1 counters on a creature you control.)

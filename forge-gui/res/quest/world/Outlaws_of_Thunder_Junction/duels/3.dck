@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Batman
+Title=Batman
+Icon=Batman.jpg
+Difficulty=Easy
+Description=./Standard/Outlaws_of_Thunder_Junction/Alexander_Lim_-_Mono-Red_Midrange_(Standard,_#2070781).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodthirsty Adversary
+4 Charming Scoundrel
+2 Feldon, Ronom Excavator
+1 Goddric, Cloaked Reveler
+4 Kumano Faces Kakkazan
+4 Monastery Swiftspear
+4 Urabrask's Forge
+3 Lightning Strike
+3 Play with Fire
+2 Witchstalker Frenzy
+3 Obliterating Bolt
+3 Scorching Shot
+1 Mirrex
+4 Mishra's Foundry
+17 Mountain
+1 Sokenzan, Crucible of Defiance
+[Sideboard]
+4 Cemetery Gatekeeper
+2 End the Festivities
+3 Koth, Fire of Resistance
+2 Lithomantic Barrage
+2 The Elder Dragon War
+2 Unlicensed Hearse

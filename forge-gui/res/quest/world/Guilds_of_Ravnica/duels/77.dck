@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Higgins
+Title=Higgins
+Icon=Higgins.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/Burt_Lancaster_-_Sultai_Midrange_(Modern,_#779717).dck
+Deck Type=constructed
+
+[Main]
+2 Grim Flayer
+2 Scavenging Ooze
+3 Snapcaster Mage
+4 Tarmogoyf
+1 Tasigur, the Golden Fang
+1 Tireless Tracker
+2 Nihil Spellbomb
+1 Abrupt Decay
+3 Assassin's Trophy
+4 Fatal Push
+2 Chart a Course
+1 Collective Brutality
+3 Inquisition of Kozilek
+1 Maelstrom Pulse
+3 Thoughtseize
+1 Jace, the Mind Sculptor
+2 Liliana of the Veil
+1 Liliana, the Last Hope
+2 Blooming Marsh
+1 Breeding Pool
+3 Creeping Tar Pit
+2 Field of Ruin
+2 Forest
+1 Island
+1 Overgrown Tomb
+4 Polluted Delta
+2 Swamp
+4 Verdant Catacombs
+1 Watery Grave
+[Sideboard]
+2 Collective Brutality
+2 Countersquall
+1 Damnation
+2 Disdainful Stroke
+3 Extirpate
+1 Flaying Tendrils
+1 Liliana, the Last Hope
+1 Thrun, the Last Troll
+2 Unmoored Ego

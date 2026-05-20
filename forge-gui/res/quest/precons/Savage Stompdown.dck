@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Savage Stompdown
+Description=Savage Stompdown crushes opponents. Green creatures and red burn in harmony.
+Deck Type=constructed
+Set=VIS
+Image=savage_stompdown.jpg
+[main]
+4 Forest|MIR|1
+4 Forest|MIR|2
+4 Forest|MIR|3
+4 Mountain|MIR|1
+4 Mountain|MIR|2
+4 Mountain|MIR|3
+1 Bull Elephant|VIS
+1 Crash of Rhinos|MIR
+3 Ekundu Cyclops|MIR
+2 Giant Caterpillar|VIS
+1 Granger Guildmage|MIR
+2 Hulking Cyclops|VIS
+2 Jungle Troll|MIR
+1 King Cheetah|VIS
+2 Kyscu Drake|VIS
+1 Locust Swarm|MIR
+2 Quirion Elves|MIR
+3 Raging Gorilla|VIS
+2 Spitting Drake|VIS
+1 Viashivan Dragon|VIS
+1 Emerald Charm|VIS
+3 Feral Instinct|VIS
+1 Hearth Charm|VIS
+2 Rock Slide|VIS
+1 Volcanic Geyser|MIR
+1 Creeping Mold|VIS
+1 Natural Order|VIS
+2 Unyaro Bee Sting|MIR
+[sideboard]

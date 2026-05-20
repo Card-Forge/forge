@@ -1,0 +1,6 @@
+Name:Kirol, Attentive First-Year
+ManaCost:1 RW RW
+Types:Legendary Creature Vampire Cleric
+PT:3/3
+A:AB$ CopySpellAbility | Cost$ tapXType<2/Creature> | TargetType$ Triggered.YouCtrl | ValidTgts$ Card,Emblem | TgtPrompt$ Choose target triggered ability you control | MayChooseTarget$ True | ActivationLimit$ 1 | SpellDescription$ Copy target triggered ability you control. You may choose new targets for the copy. Activate only once each turn.
+Oracle:Tap two untapped creatures you control: Copy target triggered ability you control. You may choose new targets for the copy. Activate only once each turn.

@@ -1,0 +1,10 @@
+Name:Kithkeeper
+ManaCost:6 W
+Types:Creature Elemental
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Vivid — When this creature enters, create X 1/1 green and white Kithkin creature tokens, where X is the number of colors among permanents you control.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ gw_1_1_kithkin
+A:AB$ Pump | Cost$ tapXType<3/Creature> | Defined$ Self | NumAtt$ +3 | KW$ Flying | SpellDescription$ This creature gets +3/+0 and gains flying until end of turn.
+SVar:X:Count$Valid Permanent.YouCtrl$Colors
+DeckHints:Type$Kithkin
+Oracle:Vivid — When this creature enters, create X 1/1 green and white Kithkin creature tokens, where X is the number of colors among permanents you control.\nTap three untapped creatures you control: This creature gets +3/+0 and gains flying until end of turn.

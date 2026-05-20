@@ -1,0 +1,49 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Dismissal
+Description=Dismissal bounces and destroys threats while evasive creatures deal damage. Classic blue-black control.
+Deck Type=constructed
+Set=INV
+Image=dismissal.jpg
+[main]
+4 Island|INV|1
+4 Island|INV|2
+3 Island|INV|3
+3 Swamp|INV|1
+3 Swamp|INV|2
+3 Swamp|INV|3
+2 Salt Marsh|INV
+1 Sulfur Vent|INV
+2 Dream Thrush|INV
+1 Duskwalker|INV
+2 Faerie Squadron|INV
+1 Hate Weaver|INV
+1 Metathran Zombie|INV
+1 Nightscape Apprentice|INV
+1 Phyrexian Infiltrator|INV
+3 Ravenous Rats|INV
+1 Slinking Serpent|INV
+1 Stalking Assassin|INV
+1 Tidal Visionary|INV
+2 Urborg Drake|INV
+1 Urborg Emissary|INV
+1 Vodalian Hypnotist|INV
+2 Vodalian Serpent|INV
+1 Vodalian Zombie|INV
+1 Cursed Flesh|INV
+1 Seer's Vision|INV
+1 Agonizing Demise|INV
+1 Disrupt|INV
+1 Opt|INV
+1 Prohibit|INV
+3 Recoil|INV
+1 Repulse|INV
+1 Spite // Malice|INV
+1 Lobotomy|INV
+2 Probe|INV
+1 Drake-Skull Cameo|INV
+[sideboard]

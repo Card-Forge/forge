@@ -24,7 +24,7 @@ public enum GameEndReason {
     /** The All opponents lost. */
     AllOpponentsLost,
 
-    /** Noone won */
+    /** No one won */
     Draw,
 
     /** Special conditions, they force one player to win and thus end the game */

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Neo
+Title=Neo
+Icon=Neo.jpg
+Difficulty=Very Hard
+Description=../Modern/Journey_into_Nyx/2014_Modern_State_Championships_-_Maine/Slater_Claudei_-_GW_Auras_(Modern,_#82263).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Gladecover Scout
+2 Silhana Ledgewalker
+4 Slippery Bogle
+2 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Hyena Umbra
+1 Keen Sense
+4 Rancor
+4 Spider Umbra
+1 Spirit Link
+3 Spirit Mantle
+4 Suppression Field
+4 Brushland
+4 Horizon Canopy
+1 Mana Confluence
+4 Razorverge Thicket
+4 Temple Garden
+2 Verdant Catacombs
+[Sideboard]
+1 Choke
+1 Gaddock Teeg
+1 Grafdigger's Cage
+4 Leyline of Sanctity
+2 Nature's Claim
+2 Stony Silence
+2 Torpor Orb

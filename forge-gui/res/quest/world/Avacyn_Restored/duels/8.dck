@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=R2-D2
+Title=R2-D2
+Icon=R2-D2.jpg
+Difficulty=Easy
+Description=Avacyn_Restored/WMCQ'12_(Lodz,_Poland)/Adam_Bubacz_-_Zombie_Pod_(Standard,_#31561).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blood Artist
+4 Diregraf Ghoul
+1 Falkenrath Aristocrat
+2 Fume Spitter
+4 Geralf's Messenger
+4 Gravecrawler
+4 Highborn Ghoul
+1 Manic Vandal
+2 Phyrexian Metamorph
+1 Phyrexian Obliterator
+1 Zealous Conscripts
+4 Birthing Pod
+2 Go for the Throat
+4 Tragic Slip
+4 Blackcleave Cliffs
+4 Dragonskull Summit
+10 Swamp
+4 Woodland Cemetery
+[Sideboard]
+2 Act of Aggression
+1 Doom Blade
+3 Liliana of the Veil
+3 Nihil Spellbomb
+2 Ratchet Bomb

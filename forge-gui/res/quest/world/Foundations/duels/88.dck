@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Kojak
+Title=Kojak
+Icon=Kojak.jpg
+Difficulty=Very Hard
+Description=./Modern/Foundations/summon_legend_-_Karn's_Omniscience_(Modern,_#2280804).dck
+Deck Type=constructed
+
+[Main]
+4 Fallaji Archaeologist
+1 Griselbrand
+4 Kiora, the Rising Tide
+4 Oracle of Tragedy
+4 Flare of Denial
+4 Spell Snare
+4 Lórien Revealed
+4 Malevolent Rumble
+4 Traverse the Ulvenwald
+4 Omniscience
+4 Karn, the Great Creator
+1 Forest
+4 Breeding Pool
+2 Hedge Maze
+1 Boseiju, Who Endures
+4 Misty Rainforest
+2 Wooded Foothills
+4 Shifting Woodland
+1 Island
+[Sideboard]
+1 Aetherflux Reservoir
+1 Ancestral Statue
+1 Clock of Omens
+4 Consign to Memory
+1 Essence Reliquary
+3 Haywire Mite
+1 Pithing Needle
+1 The One Ring
+1 Cityscape Leveler
+1 Tormod's Crypt

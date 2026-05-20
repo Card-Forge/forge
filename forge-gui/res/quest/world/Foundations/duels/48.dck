@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Mr Smith
+Title=Mr Smith
+Icon=Mr Smith.jpg
+Difficulty=Easy
+Description=./Standard/Foundations/CrazyGambler_-_Azorius_Tempo_(Standard,_#2274229).dck
+Deck Type=constructed
+
+[Main]
+2 Kiora, the Rising Tide
+4 Picklock Prankster
+4 Haughty Djinn
+4 Abhorrent Oculus
+2 Get Lost
+2 Into the Flood Maw
+4 Moment of Truth
+1 Unsummon
+1 Negate
+4 Helping Hand
+4 Chart a Course
+3 Recommission
+4 Founding the Third Path
+5 Island
+4 Floodfarm Verge
+4 Meticulous Archive
+2 Adarkar Wastes
+2 Plains
+4 Seachrome Coast
+[Sideboard]
+2 Disdainful Stroke
+3 Negate
+1 Cathar Commando
+4 Elspeth's Smite
+2 Exorcise
+1 Monastery Mentor
+2 Split Up

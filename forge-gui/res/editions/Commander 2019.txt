@@ -2,7 +2,6 @@
 Code=C19
 Date=2019-08-23
 Name=Commander 2019
-Code2=C19
 Type=Commander
 ScryfallCode=C19
 
@@ -336,5 +335,8 @@ ScryfallCode=C19
 26 c_10_10_eldrazi @Jack Wang
 
 [other]
-embalm_angel_of_sanctions
-embalm_heart-piercer_manticore
+6 embalm_angel_of_sanctions @Min Yum
+7 embalm_heart-piercer_manticore @Cristi Balanescu
+27 morph @Raymond Swanland
+28 manifest @Raymond Swanland
+29 emblem_ob_nixilis_reignited @Chris Rahn

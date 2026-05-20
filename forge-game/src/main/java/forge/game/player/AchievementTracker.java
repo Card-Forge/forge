@@ -27,7 +27,7 @@ public class AchievementTracker {
                 activatedNonPWUltimates.add(card.getName());
             }
         }
-        if (card.getColor().equals(ColorSet.ALL_COLORS)) {
+        if (card.getColor().equals(ColorSet.WUBRG)) {
             challengesCompleted.add("Chromatic");
         }
     }

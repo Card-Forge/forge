@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Robin
+Title=Robin
+Icon=Robin.jpg
+Difficulty=Easy
+Description=Journey_into_Nyx/SCG_Invitational_Qualifier_Danbury/Steven_Bendrick_-_Mono_Black_(Standard,_#81402).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Brain Maggot
+4 Desecration Demon
+4 Gray Merchant of Asphodel
+4 Lifebane Zombie
+3 Scavenging Ooze
+3 Abrupt Decay
+2 Bile Blight
+4 Hero's Downfall
+1 Ultimate Price
+4 Thoughtseize
+4 Underworld Connections
+3 Llanowar Wastes
+1 Mana Confluence
+4 Overgrown Tomb
+12 Swamp
+4 Temple of Malady
+[Sideboard]
+2 Devour Flesh
+1 Doom Blade
+2 Drown in Sorrow
+3 Duress
+2 Erebos, God of the Dead
+2 Golgari Charm
+3 Mistcutter Hydra

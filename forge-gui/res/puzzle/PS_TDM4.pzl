@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Tarkir: Dragonstorm #04
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/04/latest-3-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Ensure your solution satisfies all possible blocks. Any cards drawn are irrelevant to the puzzle. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Caustic Exhale;Hollowmurk Siege;Stalwart Successor;Armament Dragon;Reputable Merchant
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Warden of the Grove|Counters:P1P1=1;Surrak and Goreclaw;Swamp;Swamp;Swamp;Sandsteppe Citadel;Sandsteppe Citadel;Sandsteppe Citadel
+p1life=16
+p1battlefield=Inspirited Vanguard
+p1precast=Inspirited Vanguard:CustomScript:DB$ Endure|Num$ 2;Inspirited Vanguard:CustomScript:DB$ Endure|Num$ 2
+removesummoningsickness=true

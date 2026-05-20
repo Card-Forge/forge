@@ -1,0 +1,8 @@
+Name:Sabotender
+ManaCost:1 R
+Types:Creature Plant
+PT:2/1
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Landfall — Whenever a land you control enters, this creature deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+Oracle:Reach\nLandfall — Whenever a land you control enters, this creature deals 1 damage to each opponent.

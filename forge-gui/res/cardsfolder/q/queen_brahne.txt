@@ -1,0 +1,10 @@
+Name:Queen Brahne
+ManaCost:2 R
+Types:Legendary Creature Human Noble
+PT:2/1
+K:Prowess
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
+SVar:TrigToken:DB$ Token | TokenScript$ b_0_1_wizard_snipe
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhenever Queen Brahne attacks, create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."

@@ -17,26 +17,21 @@
  */
 package forge.game.ability.effects;
 
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.google.common.collect.Lists;
-
 import forge.GameCommand;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.RemoveType;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
-import forge.game.cost.Cost;
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardTraitChanges;
+import forge.game.card.ICardTraitChanges;
+import forge.game.card.perpetual.*;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.Keyword;
 import forge.game.replacement.ReplacementEffect;
@@ -46,6 +41,11 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
+
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
 
 public abstract class AnimateEffectBase extends SpellAbilityEffect {
     public static void doAnimate(final Card c, final SpellAbility sa, final Integer power, final Integer toughness,
@@ -75,72 +75,57 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         if (sa.hasParam("RemoveEnchantmentTypes"))
             remove.add(RemoveType.EnchantmentTypes);
 
-        boolean removeNonManaAbilities = sa.hasParam("RemoveNonManaAbilities");
-        boolean removeAll = sa.hasParam("RemoveAllAbilities");
+        Predicate<CardTraitBase> removeAbilities = null;
+        if (sa.hasParam("RemoveAllAbilities")) {
+            removeAbilities = e -> true;
+        } else if (sa.hasParam("RemoveNonManaAbilities")) {
+            removeAbilities = Predicate.not(CardTraitBase::isManaAbility);
+        }
 
         if (sa.hasParam("RememberAnimated")) {
             source.addRemembered(c);
         }
 
+        final boolean wasCreature = c.isCreature();
+
         // Alchemy "incorporate" cost
-        ColorSet incColors = null;
         if (sa.hasParam("Incorporate")) {
-            final String incorporate = sa.getParam("Incorporate");
-
-            Map <String, Object> params = new HashMap<>();
-            params.put("Incorporate", incorporate);
-            params.put("Timestamp", timestamp);
-            params.put("Category", "Incorporate");
-            c.addPerpetual(params);
-
-            final ManaCost incMCost = new ManaCost(new ManaCostParser(incorporate));
-            incColors = ColorSet.fromMask(incMCost.getColorProfile());
-            final ManaCost newCost = ManaCost.combine(c.getManaCost(), incMCost);
-            c.addChangedManaCost(newCost, timestamp, 0);
-            c.updateManaCostForView();
-
-            if (c.getFirstSpellAbility() != null) {
-                c.getFirstSpellAbility().getPayCosts().add(new Cost(incorporate, false));
+            final ManaCost incMCost = new ManaCost(sa.getParam("Incorporate"));
+            PerpetualIncorporate p = new PerpetualIncorporate(timestamp, incMCost);
+            c.addPerpetual(p);
+            p.applyEffect(c);
+        }
+        if (sa.hasParam("ManaCost")) {
+            final ManaCost manaCost = new ManaCost(sa.getParam("ManaCost"));
+            if (perpetual) {
+                PerpetualManaCost p = new PerpetualManaCost(timestamp, manaCost);
+                c.addPerpetual(p);
+                p.applyEffect(c);
             }
         }
         
         if (!addType.isEmpty() || !removeType.isEmpty() || addAllCreatureTypes || !remove.isEmpty()) {
             if (perpetual) {
-                Map <String, Object> params = new HashMap<>();
-                params.put("AddTypes", addType);
-                params.put("RemoveTypes", removeType);
-                params.put("RemoveXTypes", remove);
-                params.put("Timestamp", timestamp);
-                params.put("Category", "Types");
-                c.addPerpetual(params);
+                c.addPerpetual(new PerpetualTypes(timestamp, addType, removeType, remove));
             }
             c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, 0, true, false);
         }
 
-        if (!keywords.isEmpty() || !removeKeywords.isEmpty() || removeAll) {
+        if (!keywords.isEmpty() || !removeKeywords.isEmpty() || removeAbilities != null) {
             if (perpetual) {
-                Map <String, Object> params = new HashMap<>();
-                params.put("AddKeywords", keywords);
-                params.put("RemoveKeywords", removeKeywords);
-                params.put("RemoveAll", removeAll);
-                params.put("Timestamp", timestamp);
-                params.put("Category", "Keywords");
-                c.addPerpetual(params);
+                c.addPerpetual(new PerpetualKeywords(timestamp, keywords, removeKeywords, removeAbilities != null));
             }
-            c.addChangedCardKeywords(keywords, removeKeywords, removeAll, timestamp, null);
+            c.addChangedCardKeywords(keywords, removeKeywords, removeAbilities != null, timestamp, null);
         }
 
         // do this after changing types in case it wasn't a creature before
         if (power != null || toughness != null) {
             if (perpetual) {
-                Map <String, Object> params = new HashMap<>();
-                params.put("Power", power);
-                params.put("Toughness", toughness);
-                params.put("Timestamp", timestamp);
-                params.put("Category", "NewPT");
-                c.addPerpetual(params);
+                c.addPerpetual(new PerpetualNewPT(timestamp, power, toughness));
             }
             c.addNewPT(power, toughness, timestamp, 0);
+        } else if (!wasCreature && c.isCreature()) {
+            c.updatePTforView();
         }
 
         if (sa.hasParam("CantHaveKeyword")) {
@@ -153,10 +138,10 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         if (colors != null) {
             final boolean overwrite = sa.hasParam("OverwriteColors");
-            handleColors(c, colors, timestamp, overwrite, perpetual);
-        }
-        if (incColors != null) {
-            handleColors(c, incColors, timestamp, false, perpetual);
+            if (perpetual) {
+                c.addPerpetual(new PerpetualColors(timestamp, colors, overwrite));
+            }
+            c.addColor(colors, !overwrite, timestamp, null);
         }
 
         if (sa.hasParam("LeaveBattlefield")) {
@@ -183,8 +168,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         // Grant triggers
         final List<Trigger> addedTriggers = Lists.newArrayList();
         for (final String s : triggers) {
-            final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), c, false, sa);
-            addedTriggers.add(parsedTrigger);
+            addedTriggers.add(TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), c, false, sa));
         }
 
         // give replacement effects
@@ -210,13 +194,14 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 c.removeChangedSVars(timestamp, 0);
                 c.removeChangedName(timestamp, 0);
                 c.updateStateForView();
+                c.updatePTforView();
 
                 game.fireEvent(new GameEventCardStatsChanged(c));
             }
         };
 
         if (sa.hasParam("RevertCost")) {
-            final ManaCost cost = new ManaCost(new ManaCostParser(sa.getParam("RevertCost")));
+            final ManaCost cost = new ManaCost(sa.getParam("RevertCost"));
             final String desc = sa.getStackDescription();
             final SpellAbility revertSA = new AbilityStatic(c, cost) {
                 @Override
@@ -232,16 +217,16 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         }
 
         // after unanimate to add RevertCost
-        if (removeAll || removeNonManaAbilities
+        if (removeAbilities != null
                 || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
                 || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
-            c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
-                addedStaticAbilities, removeAll, removeNonManaAbilities, timestamp, 0);
+            ICardTraitChanges changes = c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
+                addedStaticAbilities, removeAbilities, timestamp, 0);
             if (perpetual) {
-                Map <String, Object> params = new HashMap<>();
-                params.put("Timestamp", timestamp);
-                params.put("Category", "Abilities");
-                c.addPerpetual(params);
+                c.addPerpetual(new PerpetualAbilities(timestamp, changes));
+                if (changes instanceof CardTraitChanges ctc && ctc.containsCostChange()) {
+                    c.calculatePerpetualAdjustedManaCost();
+                }
             }
         }
 
@@ -285,18 +270,4 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         c.removeHiddenExtrinsicKeywords(timestamp, 0);
     }
-
-    static void handleColors(final Card c, final ColorSet colors, final long timestamp, final boolean overwrite, 
-                                final boolean perpetual) {
-        if (perpetual) {
-            Map <String, Object> params = new HashMap<>();
-            params.put("Colors", colors);
-            params.put("Overwrite", overwrite);
-            params.put("Timestamp", timestamp);
-            params.put("Category", "Colors");
-            c.addPerpetual(params);
-        }
-        c.addColor(colors, !overwrite, timestamp, 0, false);
-    }
-
 }

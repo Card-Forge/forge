@@ -1,0 +1,104 @@
+gorilla.png
+size: 768,640
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar          
+  xy: 26, 30
+  size: 16, 16
+Idle 
+  xy: 0,0
+  size: 64,64 
+Idle 
+  xy: 64,0
+  size: 64,64
+Idle 
+  xy: 128,0
+  size: 64,64  
+Idle 
+  xy: 192,0
+  size: 64,64 
+Idle 
+  xy: 0,256
+  size: 64,64
+Idle 
+  xy: 64,256
+  size: 64,64
+Idle 
+  xy: 128,256
+  size: 64,64  
+Idle 
+  xy: 192,256
+  size: 64,64 
+Idle 
+  xy: 256,256
+  size: 64,64
+Idle 
+  xy: 320,256
+  size: 64,64  
+Idle 
+  xy: 384,256
+  size: 64,64 
+Walk
+  xy: 0, 89
+  size: 64, 39
+Walk
+  xy: 64, 89
+  size: 64, 39
+Walk
+  xy: 128, 89
+  size: 64, 39
+Walk
+  xy: 192, 89
+  size: 64, 39  
+Attack 
+  xy: 0, 320
+  size: 64, 64 
+Attack 
+  xy: 64, 320
+  size: 64, 64 
+Attack 
+  xy: 128, 320
+  size: 64, 64 
+Attack 
+  xy: 192, 320
+  size: 64, 64 
+Attack 
+  xy: 256,320
+  size: 64, 64 
+Attack 
+  xy: 320, 320
+  size: 64, 64 
+Attack 
+  xy: 384, 320
+  size: 64, 64 
+Attack 
+  xy: 448, 320
+  size: 64, 64 
+Attack 
+  xy: 512, 320
+  size: 64, 64 
+Attack 
+  xy: 576, 320
+  size: 64, 64 
+Attack 
+  xy: 640, 320
+  size: 64, 64 
+Attack 
+  xy: 704, 320
+  size: 64, 64      
+Death 
+  xy: 0,512
+  size: 64, 64
+Death 
+  xy: 64, 512
+  size: 64, 64
+Death 
+  xy: 128, 512
+  size: 64, 64
+Death 
+  xy: 192, 512
+  size: 64, 64
+Death 
+  xy: 256, 512
+  size: 64, 64

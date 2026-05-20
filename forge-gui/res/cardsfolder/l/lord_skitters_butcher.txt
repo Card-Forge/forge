@@ -4,7 +4,7 @@ Types:Creature Rat Peasant
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBScry,DBPumpAll
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_rat_noblock | SpellDescription$ Create a 1/1 black Rat creature token with "This creature can't block."
+SVar:DBToken:DB$ Token | TokenScript$ b_1_1_rat_noblock | SpellDescription$ Create a 1/1 black Rat creature token with "This creature can't block."
 SVar:DBScry:DB$ Scry | UnlessCost$ Sac<1/Creature.Other/another creature> | UnlessPayer$ You | UnlessSwitched$ True | ScryNum$ 2 | UnlessResolveSubs$ WhenPaid | SubAbility$ DBDraw | SpellDescription$ You may sacrifice another creature. If you do, scry 2, then draw a card.
 SVar:DBDraw:DB$ Draw
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Menace | SpellDescription$ Creatures you control gain menace until end of turn.

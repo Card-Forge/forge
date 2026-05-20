@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Shrek
+Title=Shrek
+Icon=Shrek.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/Hidaka_Takuya_-_Yawgmoth's_Hospital_(Modern,_#2828286).dck
+Deck Type=constructed
+
+[Main]
+3 Walking Ballista
+1 Strangleroot Geist
+4 Young Wolf
+4 Yawgmoth, Thran Physician
+1 Endurance
+1 Ignoble Hierarch
+4 Delighted Halfling
+1 Sephiroth, Fabled SOLDIER
+4 Badgermole Cub
+2 Formidable Speaker
+4 Agatha's Soul Cauldron
+3 Green Sun's Zenith
+4 Malevolent Rumble
+3 Dredger's Insight
+1 Grist, the Hunger Tide
+1 Swamp
+2 Forest
+1 Dryad Arbor
+3 Windswept Heath
+1 Misty Rainforest
+4 Verdant Catacombs
+3 Overgrown Tomb
+2 Boseiju, Who Endures
+1 Underground Mortuary
+2 Spymaster's Vault
+[Sideboard]
+3 Fatal Push
+1 Damping Sphere
+2 Thoughtseize
+1 Scavenging Ooze
+1 Abrupt Decay
+1 Fulminator Mage
+2 Force of Vigor
+1 Culling Ritual
+1 Outland Liberator
+1 Soulless Jailer
+1 Vexing Bauble

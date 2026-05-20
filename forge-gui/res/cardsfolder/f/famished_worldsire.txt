@@ -1,0 +1,11 @@
+Name:Famished Worldsire
+ManaCost:5 G G G
+Types:Creature Leviathan
+PT:0/0
+K:Ward:3
+K:Devour:3:Land
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When this creature enters, look at the top X cards of your library, where X is this creature's power. Put any number of land cards from among them onto the battlefield tapped, then shuffle.
+SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ Any | ChangeValid$ Land | DestinationZone$ Battlefield | Tapped$ True | SkipReorder$ True | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ Shuffle | Defined$ You
+SVar:X:Count$CardPower
+Oracle:Ward {3}\nDevour land 3 (As this creature enters, you may sacrifice any number of lands. It enters with three times that many +1/+1 counters on it.)\nWhen this creature enters, look at the top X cards of your library, where X is this creature's power. Put any number of land cards from among them onto the battlefield tapped, then shuffle.

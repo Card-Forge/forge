@@ -1,0 +1,11 @@
+Name:Rayblade Trooper
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When this creature enters, put a +1/+1 counter on target creature you control.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.!token+YouCtrl+counters_GE1_P1P1 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature you control with a +1/+1 counter on it dies, create a 1/1 white Human Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_human_soldier
+K:Warp:1 W
+DeckHas:Ability$Counters|Tokens
+Oracle:When this creature enters, put a +1/+1 counter on target creature you control.\nWhenever a nontoken creature you control with a +1/+1 counter on it dies, create a 1/1 white Human Soldier creature token.\nWarp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)

@@ -1,0 +1,15 @@
+Name:Carnage, Crimson Chaos
+Variant:UniversesWithin:FlavorName:Desecrex, Gift of Servitude
+ManaCost:2 B R
+Types:Legendary Creature Symbiote Villain
+PT:4/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When NICKNAME enters, return target creature card with mana value 3 or less from your graveyard to the battlefield. It gains "This creature attacks each combat if able" and "When this creature deals combat damage to a player, sacrifice it."
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcLE3 | TgtPrompt$ Select target creature card in your graveyard with mana value 3 or less | RememberChanged$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Duration$ Permanent | staticAbilities$ CarnageMustAttack | Triggers$ CarnageDamage | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:CarnageMustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This creature attacks each combat if able.
+SVar:CarnageDamage:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSac | TriggerDescription$ When this creature deals combat damage to a player, sacrifice it.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
+K:Mayhem:B R
+Oracle:Trample\nWhen Carnage enters, return target creature card with mana value 3 or less from your graveyard to the battlefield. It gains "This creature attacks each combat if able" and "When this creature deals combat damage to a player, sacrifice it."\nMayhem {B}{R}

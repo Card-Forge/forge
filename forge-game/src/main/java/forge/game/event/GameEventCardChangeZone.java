@@ -1,19 +1,17 @@
 package forge.game.event;
 
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.zone.Zone;
+import forge.game.zone.ZoneView;
 import forge.util.TextUtil;
 
-public class GameEventCardChangeZone extends GameEvent {
-    
-    public final Card card;
-    public final Zone from;
-    public final Zone to;
+public record GameEventCardChangeZone(CardView card, ZoneView from, ZoneView to) implements GameEvent {
 
-    public GameEventCardChangeZone(Card c, Zone zoneFrom, Zone zoneTo) {
-        card = c;
-        from = zoneFrom;
-        to = zoneTo;
+    public GameEventCardChangeZone(Card card, Zone zoneFrom, Zone zoneTo) {
+        this(CardView.get(card),
+             zoneFrom == null ? null : zoneFrom.getView(),
+             zoneTo == null ? null : zoneTo.getView());
     }
 
     @Override
@@ -26,7 +24,8 @@ public class GameEventCardChangeZone extends GameEvent {
      */
     @Override
     public String toString() {
-        return TextUtil.concatWithSpace(card.toString(),":", TextUtil.enclosedBracket(from.toString()),"->", TextUtil.enclosedBracket(to.toString()));
+        final String fromStr = from != null ? "" + from.zoneType() : "null";
+        final String toStr = to != null ? "" + to.zoneType() : "null";
+        return TextUtil.concatWithSpace("" + card, ":", TextUtil.enclosedBracket(fromStr), "->", TextUtil.enclosedBracket(toStr));
     }
 }
-

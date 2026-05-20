@@ -1,0 +1,6 @@
+Name:Pipsqueak, Rebel Strongarm
+ManaCost:2 W
+Types:Legendary Creature Human Rebel Ally
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.Self+counters_EQ0_P1P1 | AddHiddenKeyword$ CARDNAME can't attack alone. | Description$ NICKNAME can't attack alone unless he has a +1/+1 counter on him.
+Oracle:Pipsqueak can't attack alone unless he has a +1/+1 counter on him.

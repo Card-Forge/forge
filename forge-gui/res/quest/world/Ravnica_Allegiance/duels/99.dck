@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Aurelia
+Title=Aurelia
+Icon=Aurelia.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/David_Kring_-_Sultai_Reclamation_(Modern,_#786837).dck
+Deck Type=constructed
+
+[Main]
+3 Snapcaster Mage
+1 Blue Sun's Zenith
+1 Nexus of Fate
+4 Cryptic Command
+3 Remand
+1 Abrupt Decay
+4 Growth Spiral
+1 Assassin's Trophy
+1 Cast Down
+1 Consume the Meek
+1 Pulse of Murasa
+4 Hieroglyphic Illumination
+3 Mystical Teachings
+3 Fatal Push
+4 Wilderness Reclamation
+1 Swamp
+2 Hinterland Harbor
+1 Forest
+3 Drowned Catacomb
+2 Breeding Pool
+4 Polluted Delta
+2 Misty Rainforest
+1 Field of Ruin
+4 Island
+3 Creeping Tar Pit
+2 Watery Grave
+[Sideboard]
+1 Ceremonious Rejection
+1 Dispel
+1 Negate
+1 Surgical Extraction
+1 Torrential Gearhulk
+2 Life Goes On
+3 Ravenous Trap
+1 Repeal
+1 Assassin's Trophy
+1 Cast Down
+1 Consume the Meek
+1 Fatal Push

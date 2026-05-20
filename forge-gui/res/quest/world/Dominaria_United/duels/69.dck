@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Peregrin Took
+Title=Peregrin Took
+Icon=Peregrin Took.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/Marlee_Shafer_-_Ub_Mill_(Modern,_#1520912).dck
+Deck Type=constructed
+
+[Main]
+4 Hedron Crab
+4 Ruin Crab
+1 Ensnaring Bridge
+1 Crypt Incursion
+2 Fatal Push
+4 Archive Trap
+4 Surgical Extraction
+4 Visions of Beyond
+4 Drown in the Loch
+1 Maddening Cacophony
+2 Glimpse the Unthinkable
+4 Fractured Sanity
+4 Tasha's Hideous Laughter
+1 Founding the Third Path
+1 Oboro, Palace in the Clouds
+1 Scalding Tarn
+1 Flooded Strand
+1 Otawara, Soaring City
+1 Snow-Covered Swamp
+2 Watery Grave
+3 Darkslick Shores
+3 Polluted Delta
+4 Field of Ruin
+4 Island
+[Sideboard]
+1 Crypt Incursion
+1 Go for the Throat
+1 Hurkyl's Recall
+1 Engineered Explosives
+1 Tormod's Crypt
+1 Nihil Spellbomb
+1 Damnation
+1 Mystical Dispute
+1 Swan Song
+2 Extirpate
+2 Ashiok, Dream Render
+2 Test of Talents

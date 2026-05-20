@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Wilma Flintstone
+Title=Wilma Flintstone
+Icon=Wilma Flintstone.jpg
+Difficulty=Medium
+Description=./Standard/Duskmourn_House_of_Horror/Attarax_-_Elves_(Standard,_#2275333).dck
+Deck Type=constructed
+
+[Main]
+4 Citanul Stalwart
+4 Dwynen's Elite
+4 Elvish Archdruid
+2 Glissa Sunslayer
+4 Imperious Perfect
+4 Leaf-Crowned Visionary
+4 Llanowar Elves
+2 Llanowar Loamspeaker
+2 Surrak and Goreclaw
+1 Tyvar the Bellicose
+2 Tyvar, the Pummeler
+2 Go for the Throat
+3 Genesis Wave
+4 Blooming Marsh
+4 Cavern of Souls
+5 Forest
+4 Llanowar Wastes
+3 Secluded Courtyard
+2 Three Tree City
+[Sideboard]
+3 Cut Down
+4 Duress
+2 Dwynen, Gilt-Leaf Daen
+1 Glissa Sunslayer
+2 Reclamation Sage
+1 Scavenging Ooze
+2 Vivien Reid

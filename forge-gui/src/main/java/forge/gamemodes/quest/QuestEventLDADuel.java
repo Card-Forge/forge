@@ -31,17 +31,16 @@ import forge.game.GameFormat;
  */
 public class QuestEventLDADuel extends QuestEventDuel {
 
-    private Archetype archetype;
-    private GameFormat baseFormat;
-
     /**
      * Instantiates a new quest duel.
      */
     public QuestEventLDADuel(Archetype archetype, GameFormat baseFormat) {
         super();
-        this.baseFormat = baseFormat;
-        this.archetype = archetype;
         this.eventDeck = DeckgenUtil.buildLDACArchetypeDeck(archetype, baseFormat,true);
+        this.setDescription("Randomly generated "+archetype.getName()+" archetype deck.");
+        this.setName(archetype.getName());
+        this.setTitle(archetype.getName());
+        this.setOpponentName(archetype.getName());
     }
 
 }

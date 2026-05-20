@@ -19,7 +19,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 
@@ -79,7 +78,7 @@ public class DiscoverEffect extends SpellAbilityEffect {
             params.put("Card", found);
             if (found != null) {
                 String prompt = Localizer.getInstance().getMessage("lblDiscoverChoice",
-                        CardTranslation.getTranslatedName(found.getName()));
+                        found.getTranslatedName());
                 final Zone origin = found.getZone();
                 List<String> options =
                         Arrays.asList(StringUtils.capitalize(Localizer.getInstance().getMessage("lblCast")),

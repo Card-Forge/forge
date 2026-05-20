@@ -2,7 +2,6 @@
 Code=GTC
 Date=2013-02-01
 Name=Gatecrash
-Code2=GTC
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand RTR
@@ -269,7 +268,7 @@ TokenFallbackCode=RTR
 3 g_3_3_frog_lizard @Jack Wang
 4 wb_1_1_cleric_deathpact @Jason Chan
 5 ub_1_1_horror_flying @Adam Paquette
-6 rw_1_1_soldier_haste @David Palumbo
+6 rw_1_1_soldier @David Palumbo
 7 wb_1_1_spirit_flying @Cliff Childs
 
 [other]

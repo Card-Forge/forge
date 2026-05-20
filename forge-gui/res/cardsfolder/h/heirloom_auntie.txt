@@ -1,0 +1,9 @@
+Name:Heirloom Auntie
+ManaCost:2 B
+Types:Creature Goblin Warlock
+PT:4/4
+K:etbCounter:M1M1:2
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ Whenever another creature you control dies, surveil 1, then remove a -1/-1 counter from this creature. (To surveil 1, look at the top card of your library. You may put it into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1 | SubAbility$ DBRemoveCounter
+SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ M1M1 | CounterNum$ 1
+Oracle:This creature enters with two -1/-1 counters on it.\nWhenever another creature you control dies, surveil 1, then remove a -1/-1 counter from this creature. (To surveil 1, look at the top card of your library. You may put it into your graveyard.)

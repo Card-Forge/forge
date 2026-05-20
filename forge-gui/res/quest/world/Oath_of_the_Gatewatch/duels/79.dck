@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=IsaBere
+Title=IsaBere
+Icon=IsaBere.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/SCG_Invitational_Qualifier_Orlando/Nick_Mele_-_Goblins_(Modern,_#615048).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Foundry Street Denizen
+1 Frenzied Goblin
+4 Goblin Bushwhacker
+2 Goblin Chieftain
+4 Goblin Guide
+3 Goblin Piledriver
+4 Legion Loyalist
+3 Mogg Fanatic
+4 Mogg War Marshal
+4 Reckless Bushwhacker
+4 Lightning Bolt
+4 Goblin Grenade
+19 Mountain
+[Sideboard]
+2 Blood Moon
+2 Grafdigger's Cage
+2 Magmatic Chasm
+1 Shattering Spree
+4 Smash to Smithereens

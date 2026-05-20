@@ -11,7 +11,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 
@@ -41,6 +40,7 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
             tapper = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Tapper"), sa).getFirst();
         }
         PlayerController pc = tapper.getController();
+        boolean toggle = sa.hasParam("Toggle");
 
         CardCollection tapped = new CardCollection();
         final Map<Player, CardCollection> untapMap = Maps.newHashMap();
@@ -61,8 +61,14 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
                 continue;
             }
             // If the effected card is controlled by the same controller of the SA, default to untap.
-            boolean tap = pc.chooseBinary(sa, Localizer.getInstance().getMessage("lblTapOrUntapTarget", CardTranslation.getTranslatedName(gameCard.getName())), PlayerController.BinaryChoiceType.TapOrUntap,
-                    !gameCard.getController().equals(tapper));
+            boolean tap;
+            if (toggle) {
+                tap = !gameCard.isTapped();
+            } else {
+                // all cards using this are optional, so don't need to worry about impossible choice
+                tap = pc.chooseBinary(sa, Localizer.getInstance().getMessage("lblTapOrUntapTarget", gameCard.getTranslatedName()), PlayerController.BinaryChoiceType.TapOrUntap,
+                        !gameCard.getController().equals(tapper));
+            }
             if (tap) {
                 if (gameCard.tap(true, sa, tapper)) tapped.add(gameCard);
             } else if (gameCard.untap()) {

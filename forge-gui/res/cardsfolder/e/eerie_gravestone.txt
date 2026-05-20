@@ -1,0 +1,10 @@
+Name:Eerie Gravestone
+ManaCost:2
+Types:Artifact
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When this artifact enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+A:AB$ Mill | Cost$ 1 B Sac<1/CARDNAME> | NumCards$ 4 | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill four cards. You may put a creature card from among them into your hand. (To mill four cards, put the top four cards of your library into your graveyard.)
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Creature.IsRemembered | SelectPrompt$ You may select a creature card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill
+Oracle:When this artifact enters, draw a card.\n{1}{B}, Sacrifice this artifact: Mill four cards. You may put a creature card from among them into your hand. (To mill four cards, put the top four cards of your library into your graveyard.)

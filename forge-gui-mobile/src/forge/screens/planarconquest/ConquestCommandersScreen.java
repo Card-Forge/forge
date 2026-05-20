@@ -1,6 +1,7 @@
 package forge.screens.planarconquest;
 
 import java.util.Map.Entry;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import com.badlogic.gdx.utils.Align;
@@ -38,7 +39,6 @@ import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
-import forge.util.Callback;
 
 public class ConquestCommandersScreen extends FScreen {
     private static final float PADDING = FDeckChooser.PADDING;
@@ -83,24 +83,19 @@ public class ConquestCommandersScreen extends FScreen {
     }
 
     @Override
-    public void onClose(final Callback<Boolean> canCloseCallback) {
+    public void onClose(final Consumer<Boolean> canCloseCallback) {
         if (canCloseCallback == null) { return; }
 
         final ConquestCommander commander = lstCommanders.getSelectedItem();
         if (commander == null) {
-            canCloseCallback.run(true); //shouldn't happen, but don't block closing screen if no commanders
+            canCloseCallback.accept(true); //shouldn't happen, but don't block closing screen if no commanders
             return;
         }
 
         String problem = DeckFormat.PlanarConquest.getDeckConformanceProblem(commander.getDeck());
         if (problem != null) {
             //prevent selecting a commander with an invalid deck
-            FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblCantSelectDeckBecause", commander.getName(), problem), Forge.getLocalizer().getMessage("lblInvalidDeck"), FOptionPane.INFORMATION_ICON, new Callback<Integer>() {
-                @Override
-                public void run(Integer result) {
-                    canCloseCallback.run(false);
-                }
-            });
+            FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblCantSelectDeckBecause", commander.getName(), problem), Forge.getLocalizer().getMessage("lblInvalidDeck"), FOptionPane.INFORMATION_ICON, result -> canCloseCallback.accept(false));
             return;
         }
 
@@ -109,7 +104,7 @@ public class ConquestCommandersScreen extends FScreen {
             model.setSelectedCommander(commander);
             model.saveData();
         }
-        canCloseCallback.run(true);
+        canCloseCallback.accept(true);
     }
 
     private void refreshCommanders() {
@@ -207,7 +202,7 @@ public class ConquestCommandersScreen extends FScreen {
                     float imageSize = CardRenderer.MANA_SYMBOL_SIZE;
                     ColorSet cardColor = card.getRules().getColorIdentity();
                     float availableWidth = w - cardArtWidth - CardFaceSymbols.getWidth(cardColor, imageSize) - FList.PADDING;
-                    g.drawText(card.getName(), font, foreColor, x, y, availableWidth, imageSize, false, Align.left, true);
+                    g.drawText(card.getDisplayName(), font, foreColor, x, y, availableWidth, imageSize, false, Align.left, true);
                     CardFaceSymbols.drawColorSet(g, cardColor, x + availableWidth + FList.PADDING, y, imageSize);
 
                     if (compactModeHandler.isCompactMode()) {
@@ -239,7 +234,7 @@ public class ConquestCommandersScreen extends FScreen {
         }
     }
 
-    private static class CommanderColorFilter extends StatTypeFilter<ConquestCommander> {
+    public static class CommanderColorFilter extends StatTypeFilter<ConquestCommander> {
         public CommanderColorFilter(ItemManager<? super ConquestCommander> itemManager0) {
             super(itemManager0);
         }
@@ -273,7 +268,7 @@ public class ConquestCommandersScreen extends FScreen {
         }
     }
 
-    private static class CommanderOriginFilter extends ComboBoxFilter<ConquestCommander, ConquestPlane> {
+    public static class CommanderOriginFilter extends ComboBoxFilter<ConquestCommander, ConquestPlane> {
         public CommanderOriginFilter(ItemManager<? super ConquestCommander> itemManager0) {
             super(Forge.getLocalizer().getMessage("lblAllPlanes"), FModel.getPlanes(), itemManager0);
         }

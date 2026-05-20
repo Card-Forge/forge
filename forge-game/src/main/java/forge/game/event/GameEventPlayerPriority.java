@@ -1,24 +1,10 @@
 package forge.game.event;
 
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.util.TextUtil;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public class GameEventPlayerPriority extends GameEvent {
-
-    public final Player turn;
-    public final PhaseType phase;
-    public final Player priority;
-
-    public GameEventPlayerPriority(Player playerTurn, PhaseType phase, Player priorityPlayer) {
-        turn = playerTurn;
-        this.phase = phase;
-        priority = priorityPlayer;
-    }
+public record GameEventPlayerPriority(PlayerView turn, PhaseType phase, PlayerView priority) implements GameEvent {
 
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
@@ -30,6 +16,6 @@ public class GameEventPlayerPriority extends GameEvent {
      */
     @Override
     public String toString() {
-        return TextUtil.concatWithSpace("Priority -", priority.getName());
+        return TextUtil.concatWithSpace("Priority -", priority.toString());
     }
 }

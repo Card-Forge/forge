@@ -1,0 +1,8 @@
+Name:Dissection Practice
+ManaCost:B
+Types:Instant
+A:SP$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 1 life and you gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBPumpPlus
+SVar:DBPumpPlus:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | ValidTgtDesc$ creature (+1/+1) | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBPumpMinus | SpellDescription$ Up to one target creature gets +1/+1 until end of turn.
+SVar:DBPumpMinus:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | ValidTgtDesc$ creature (-1/-1) | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Up to one target creature gets -1/-1 until end of turn.
+Oracle:Target opponent loses 1 life and you gain 1 life.\nUp to one target creature gets +1/+1 until end of turn.\nUp to one target creature gets -1/-1 until end of turn.

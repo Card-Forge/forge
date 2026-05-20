@@ -1,0 +1,9 @@
+Name:Larval Scoutlander
+ManaCost:2 G
+Types:Artifact Spacecraft
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this Spacecraft enters, you may sacrifice a land or Lander. If you do, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ Sac<1/Land;Lander/land or Lander> | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | ChangeNum$ 2 | Tapped$ True
+K:Station:7
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE7_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 7+ Flying
+Oracle:When this Spacecraft enters, you may sacrifice a land or Lander. If you do, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 7+.)\nSTATION 7+\nFlying

@@ -1,0 +1,9 @@
+Name:Owlin Spiralmancer
+ManaCost:3 U
+Types:Creature Bird Wizard
+PT:3/4
+K:Flying
+K:Vigilance
+T:Mode$ SpellCast | ValidCard$ Card.hasXCost | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | Execute$ TrigCopy | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast your first spell with {X} in its mana cost each turn, you may copy it. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | AILogic$ Always | MayChooseTarget$ True
+Oracle:Flying, vigilance\nWhenever you cast your first spell with {X} in its mana cost each turn, you may copy it. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)

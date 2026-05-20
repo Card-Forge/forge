@@ -25,7 +25,7 @@ ScryfallCode=SCH
 17 M Moonshaker Cavalry @Awanqi (Angela Wang)
 18 R Cauldron Familiar @Edgar Sánchez Hidalgo
 19 R Dark Petition @Julia Metzger
-20 R Lier, Disciple of the Drowned @Heonhwa Choe
+20 R Lier, Disciple of the Drowned @Heonhwa
 21 R Mortify @Andreia Ugrai
 22 R Angel of Despair @Andreia Ugrai
 23e R Dauthi Voidwalker @Andreia Ugrai
@@ -42,8 +42,17 @@ ScryfallCode=SCH
 34 R Preacher of the Schism @Zara Alfonso
 35 M Virtue of Persistence @Lorenzo Lanfranconi
 36 R Gleeful Demolition @Vincent Proce
-37 R Charming Scoundrel @Fabira Khamesh
+37 R Charming Scoundrel @Fariba Khamseh
 38 R Goddric, Cloaked Reveler @Irvin Rodriguez
-39 R Preordain @Toshiaki Takayama
-40 R Death's Shadow @Nottsuo
-41 R City of Brass @Yo Shimizu
+39 R Preordain @Toshiaki Takayama ${"flavorName": "Prophetic Beginning"}
+40 R Death's Shadow @Nottsuo ${"flavorName": "Diabolos, Guardian Force"}
+41 R City of Brass @Yo Shimizu ${"flavorName": "Bhujerba, Floating City"}
+42 R Bitter Triumph @Aaron J. Riley
+43 R Slickshot Show-Off @Wayne Reynolds
+44 R Fable of the Mirror-Breaker @Warren Mahy
+45 R Goblin Bombardment @Jeff Laubenstein
+46 R Guide of Souls @Alexandr Leskinen
+47 R Ocelot Pride @Rhonda Libbey
+48 R Unearth @Ron Spencer
+49 R Psychic Frog @Gaboleps
+50 R Abhorrent Oculus @Diana Franco

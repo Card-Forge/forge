@@ -2,7 +2,6 @@
 Code=ZNR
 Date=2020-09-25
 Name=Zendikar Rising
-Code2=ZNR
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!dfc:fromSheet("ZNR cards"), 3 Uncommon:!dfc:fromSheet("ZNR cards"), 1 RareMythic:!dfc:fromSheet("ZNR cards"), 1 BasicLand
@@ -419,23 +418,21 @@ ScryfallCode=ZNR
 391 U Kargan Warleader @Colin Boyer
 
 [rebalanced]
-A24 R A-Luminarch Aspirant @Mads Ahm
-A68 R A-Master of Winds @Yigit Koroglu
-A105 C A-Hagra Constrictor @Simon Dominic
-A126 U A-Skyclave Shadowcat @Simon Dominic
-A141 U A-Goma Fada Vanguard @Sean Sevestre
-A145 R A-Kargan Intimidator @Kieran Yanner
-A154 U A-Rockslide Sorcerer @Daarken
-A185 C A-Gnarlid Colony @Izzy
-A187 U A-Iridescent Hornbeetle @Simon Dominic
-A198 R A-Oran-Rief Ooze @Daarken
-A224 U A-Kargan Warleader @Colin Boyer
-A228 U A-Moss-Pit Skeleton @Bryan Sola
-A230 M A-Nahiri, Heir of the Ancients @Anna Steinbauer
-A232 M A-Omnath, Locus of Creation @Chris Rahn
-A234 R A-Phylath, World Sculptor @Victor Adame Minguez
-A238 U A-Umara Mystic @Bryan Sola
-A257 U A-Base Camp @Jokubas Uogintas
+A-68 R A-Master of Winds @Yigit Koroglu
+A-105 C A-Hagra Constrictor @Simon Dominic
+A-126 U A-Skyclave Shadowcat @Simon Dominic
+A-141 U A-Goma Fada Vanguard @Sean Sevestre
+A-145 R A-Kargan Intimidator @Kieran Yanner
+A-154 U A-Rockslide Sorcerer @Daarken
+A-185 C A-Gnarlid Colony @Izzy
+A-187 U A-Iridescent Hornbeetle @Simon Dominic
+A-198 R A-Oran-Rief Ooze @Daarken
+A-224 U A-Kargan Warleader @Colin Boyer
+A-228 U A-Moss-Pit Skeleton @Bryan Sola
+A-230 M A-Nahiri, Heir of the Ancients @Anna Steinbauer
+A-234 R A-Phylath, World Sculptor @Victor Adame Minguez
+A-238 U A-Umara Mystic @Bryan Sola
+A-257 U A-Base Camp @Jokubas Uogintas
 
 [ModalDoubleFaceCards]
 1 Agadeem's Awakening|ZNR
@@ -487,3 +484,6 @@ A257 U A-Base Camp @Jokubas Uogintas
 9 bg_x_x_hydra @Filip Burburan
 10 c_1_1_a_construct @Jokubas Uogintas
 11 c_0_1_a_goblin_construct_noblock_ping @Johan Grenier
+
+[other]
+12 copy @Jason Rainville

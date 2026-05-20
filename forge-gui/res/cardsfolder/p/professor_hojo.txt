@@ -1,0 +1,9 @@
+Name:Professor Hojo
+ManaCost:1 G
+Types:Legendary Creature Human Scientist
+PT:2/2
+S:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Activated.YouCtrl | ValidTarget$ Creature.YouCtrl+inZoneBattlefield | Type$ Ability | Activator$ You.Active | Amount$ 2 | CheckSVar$ X | SVarCompare$ LE1 | Description$ The first activated ability you activate during your turn that targets a creature you control costs {2} less to activate.
+SVar:X:Count$ThisTurnActivated_Activated.YouCtrl+IsTargeting Valid Creature.YouCtrl~inZoneBattlefield
+T:Mode$ BecomesTargetOnce | ValidTarget$ Creature.YouCtrl+inZoneBattlefield | ValidSource$ Activated | TriggerZones$ Battlefield | Execute$ TrigDraw | ActivationLimit$ 1 | TriggerDescription$ Whenever one or more creatures you control become the target of an activated ability, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:The first activated ability you activate during your turn that targets a creature you control costs {2} less to activate.\nWhenever one or more creatures you control become the target of an activated ability, draw a card. This ability triggers only once each turn.

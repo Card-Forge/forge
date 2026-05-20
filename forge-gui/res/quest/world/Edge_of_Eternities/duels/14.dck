@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Pointy Haired Boss
+Title=Pointy Haired Boss
+Icon=Pointy Haired Boss.jpg
+Difficulty=Medium
+Description=./Standard/Edge_of_Eternities/DAP1_-_Roid_Rock-GB_Midrange_(Standard,_#2588676).dck
+Deck Type=constructed
+
+[Main]
+4 Demon Wall
+2 Cecil, Dark Knight
+4 Sentinel of the Nameless City
+4 Llanowar Elves
+3 Mosswood Dreadknight
+2 Ouroboroid
+2 The Aetherspark
+4 Shoot the Sheriff
+2 Archenemy's Charm
+4 Maelstrom Pulse
+1 Virtue of Persistence
+3 Unholy Annex
+10 Forest
+8 Swamp
+3 Restless Cottage
+4 Wastewood Verge
+[Sideboard]
+4 Duress
+2 Ghost Vacuum
+3 Poison the Waters
+1 Strategic Betrayal
+3 Cease
+1 Vivien Reid
+1 Unholy Annex

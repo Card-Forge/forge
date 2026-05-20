@@ -230,13 +230,17 @@ public enum CardZoomer {
             return 0;
         }
         if (thisCard.getCard().isSplitCard()) {
-            String cardName = thisCard.getCard().getName();
-            if (cardName.isEmpty()) { cardName = thisCard.getCard().getAlternateState().getName(); }
+            String cardName = thisCard.getCard().getOracleName();
+            if (cardName.isEmpty()) { cardName = thisCard.getCard().getAlternateState().getOracleName(); }
             
             PaperCard pc = StaticData.instance().getCommonCards().getCard(cardName);
             boolean isAftermath = pc != null && Card.getCardForUi(pc).hasKeyword(Keyword.AFTERMATH);
 
             return thisCard.getCard().isFaceDown() || isSplitRotated ? 0 : isAftermath ? 270 : 90; // rotate Aftermath splits the other way to correctly show the right split (graveyard) half
+        }
+
+        if (thisCard.getCard().isFlipped()) {
+            return 180;
         }
 
         return thisCard.getType().isPlane() || thisCard.getType().isPhenomenon() ? 90 : 0;

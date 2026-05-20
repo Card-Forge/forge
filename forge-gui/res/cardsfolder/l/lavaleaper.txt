@@ -1,0 +1,8 @@
+Name:Lavaleaper
+ManaCost:3 R
+Types:Creature Elemental
+PT:4/4
+S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Haste | Description$ All creatures have haste.
+T:Mode$ TapsForMana | ValidCard$ Land.Basic | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a player taps a basic land for mana, that player adds one mana of any type that land produced.
+SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ TriggeredActivator
+Oracle:All creatures have haste.\nWhenever a player taps a basic land for mana, that player adds one mana of any type that land produced.

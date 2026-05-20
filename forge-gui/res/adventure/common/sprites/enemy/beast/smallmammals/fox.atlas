@@ -1,0 +1,125 @@
+fox.png
+size: 448, 224
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Avatar
+  xy: 192, 16
+  size: 16, 16
+Idle
+  xy: 2, 16
+  size: 30, 16
+Idle
+  xy: 34, 16
+  size: 30, 16
+Idle
+  xy: 66, 16
+  size: 30, 16
+Idle
+  xy: 98, 16
+  size: 30, 16
+Idle
+  xy: 2, 16
+  size: 30, 16
+Idle
+  xy: 34, 48
+  size: 30, 16
+Idle
+  xy: 66, 48
+  size: 30, 16
+Idle
+  xy: 98, 48
+  size: 30, 16
+Idle
+  xy: 130, 48
+  size: 30, 16
+Idle
+  xy: 162, 48
+  size: 30, 16
+Idle
+  xy: 194, 48
+  size: 30, 16
+Idle
+  xy: 226, 48
+  size: 30, 16
+Idle
+  xy: 258, 48
+  size: 30, 16
+Idle
+  xy: 290, 48
+  size: 30, 16
+Idle
+  xy: 322, 48
+  size: 30, 16
+Idle
+  xy: 354, 48
+  size: 30, 16
+Idle
+  xy: 386, 48
+  size: 30, 16
+Idle
+  xy: 418, 48
+  size: 30, 16
+Idle
+  xy: 386, 48
+  size: 30, 16
+Walk
+  xy: 2, 78
+  size: 30, 18
+Walk
+  xy: 34, 78
+  size: 30, 18
+Walk
+  xy: 66, 78
+  size: 30, 18
+Walk
+  xy: 98, 78
+  size: 30, 18
+Walk
+  xy: 130, 78
+  size: 30, 18
+Walk
+  xy: 162, 78
+  size: 30, 18
+Walk
+  xy: 194, 78
+  size: 30, 18
+Walk
+  xy: 226, 78
+  size: 30, 18
+Attack
+  xy: 2, 140
+  size: 30, 20
+Attack
+  xy: 34, 140
+  size: 30, 20
+Attack
+  xy: 66, 140
+  size: 30, 20
+Attack
+  xy: 98, 140
+  size: 30, 20
+Attack
+  xy: 130, 140
+  size: 30, 20
+Death
+  xy: 2, 204
+  size: 30, 20
+Death
+  xy: 34, 204
+  size: 30, 20
+Death
+  xy: 66, 204
+  size: 30, 20
+Death
+  xy: 98, 204
+  size: 30, 20
+Death
+  xy: 130, 204
+  size: 30, 20
+Death
+  xy: 162, 204
+  size: 30, 20
+Death
+  xy: 194, 204
+  size: 30, 20

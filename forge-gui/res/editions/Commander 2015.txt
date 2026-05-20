@@ -357,7 +357,7 @@ ScryfallCode=C15
 4 w_2_2_knight_first_strike @Matt Stewart
 5 w_2_2_knight_vigilance @Matt Stewart
 6 u_2_2_drake_flying @Svetlin Velinov
-7 b_0_0_phyrexian_germ @Igor Kieryluk
+7 b_0_0_germ @Igor Kieryluk
 8 b_2_2_zombie @Lucas Graciano
 9 r_5_5_dragon_flying @Jim Pavelec
 10 r_3_1_elemental_shaman_haste @Jim Pavelec

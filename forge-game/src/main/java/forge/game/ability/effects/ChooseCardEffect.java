@@ -6,7 +6,6 @@ import com.google.common.collect.Lists;
 import forge.game.Direction;
 import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
-import forge.util.CardTranslation;
 
 import forge.card.CardType;
 import forge.game.Game;
@@ -131,8 +130,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 }
             } else if (sa.hasParam("ChooseEach")) {
                 final String s = sa.getParam("ChooseEach");
-                final String[] types = s.equals("Party") ? new String[]{"Cleric","Rogue","Warrior","Wizard"}
-                     : s.split(" & ");
+                final Collection<String> types = s.equals("Party") ? CardType.Constant.PARTY_TYPES : Arrays.asList(s.split(" & "));
                 for (final String type : types) {
                     CardCollection valids = CardLists.filter(pChoices, CardPredicates.isType(type));
                     if (!valids.isEmpty()) {
@@ -257,7 +255,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     CardCollectionView shown = !p.hasKeyword("LimitSearchLibrary")
                             ? searched.getCardsIn(ZoneType.Library) : searched.getCardsIn(ZoneType.Library, fetchNum);
                     DelayedReveal delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(searched),
-                            CardTranslation.getTranslatedName(host.getName()) + " - " +
+                            host.getTranslatedName() + " - " +
                                     Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
                     Card choice = p.getController().chooseSingleEntityForEffect(pChoices, delayedReveal, sa, title,
                             !sa.hasParam("Mandatory"), p, null);

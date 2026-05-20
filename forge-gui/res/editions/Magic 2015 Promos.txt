@@ -4,14 +4,20 @@ Date=2014-07-17
 Name=Magic 2015 Promos
 Type=Promo
 ScryfallCode=PM15
+TokenFallbackCode=M15
 
 [cards]
 28 R Resolute Archangel @Winona Nelson
+46p R Chasm Skulker @Jack Wang
 47 R Chief Engineer @Ryan Barger
 68 R Mercurial Pretender @Karla Ortiz
 100 R In Garruk's Wake @Brad Rigney
+100p R In Garruk's Wake @Brad Rigney
 101 R Indulgent Tormentor @Karl Kopinski
+110p R Ob Nixilis, Unshackled @Karl Kopinski
 145 R Goblin Rabblemaster @Zoltan Boros
 162 R Siege Dragon @Steve Prescott
+176★ R Genesis Hydra @Peter Mohrbacher
 191 R Phytotitan @Marco Nelor
 194 U Reclamation Sage @Clint Cearley
+231p M Soul of New Phyrexia @Daarken

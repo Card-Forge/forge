@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Fat Albert
+Title=Fat Albert
+Icon=Fat Albert.jpg
+Difficulty=Very Hard
+Description=../Modern/New_Phyrexia/Fantasy_Fieber_Modern_-_Br├╝hl/Michael_Hoss_-_Infect_(Modern,_#48116).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+4 Plague Stinger
+2 Apostle's Blessing
+2 Giant Growth
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+4 Rancor
+2 Breeding Pool
+2 Forest
+4 Inkmoth Nexus
+4 Misty Rainforest
+2 Overgrown Tomb
+2 Pendelhaven
+4 Verdant Catacombs
+[Sideboard]
+2 Dismember
+2 Dispel
+3 Duress
+3 Nature's Claim
+3 Spellskite

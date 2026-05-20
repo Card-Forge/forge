@@ -1,0 +1,9 @@
+Name:Stegron the Dinosaur Man
+Variant:UniversesWithin:FlavorName:Kephon, Rage Incubator
+ManaCost:4 R
+Types:Legendary Creature Dinosaur Villain
+PT:5/4
+K:Menace
+A:AB$ Pump | Cost$ 1 R Discard<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | PrecostDesc$ Dinosaur Formula — | NumAtt$ +3 | NumDef$ +1 | ActivationZone$ Hand | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature you control gets +3/+1 and becomes a Dinosaur in addition to its other types.
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Dinosaur
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nDinosaur Formula — {1}{R}, Discard this card: Until end of turn, target creature you control gets +3/+1 and becomes a Dinosaur in addition to its other types.

@@ -1,7 +1,7 @@
 Name:Three Bowls of Porridge
 ManaCost:2
 Types:Artifact Food
-A:AB$ Charm | Cost$ 2 T | Choices$ DBDamage,DBTap,DBSac | ChoiceRestriction$ ThisGame | CharmNum$ 1
+A:AB$ Charm | Cost$ 2 T | Choices$ DBDamage,DBTap,DBSac | ChoiceRestriction$ ThisGame
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
 SVar:DBTap:DB$ Tap | ValidTgts$ Creature | SpellDescription$ Tap target creature.
 SVar:DBSac:DB$ Sacrifice | SacValid$ Self | SubAbility$ DBGainLife | SpellDescription$ Sacrifice CARDNAME. You gain 3 life.

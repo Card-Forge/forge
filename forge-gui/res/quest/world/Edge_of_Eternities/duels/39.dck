@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=BlackTalon
+Title=BlackTalon
+Icon=BlackTalon.jpg
+Difficulty=Medium
+Description=./Standard/Edge_of_Eternities/Jacob_Tano_-_UR_Soul_Cauldron_(Standard,_#2598756).dck
+Deck Type=constructed
+
+[Main]
+4 Fear of Missing Out
+4 Marauding Mako
+4 Steamcore Scholar
+2 Tersa Lightshatter
+1 Twinmaw Stormbrood
+4 Vivi Ornitier
+4 Agatha's Soul Cauldron
+2 Abrade
+3 Into the Flood Maw
+1 Torch the Tower
+4 Winternight Stories
+4 Proft's Eidetic Memory
+1 Roaring Furnace
+5 Island
+4 Mountain
+4 Riverpyre Verge
+1 Soulstone Sanctuary
+4 Spirebluff Canal
+2 Starting Town
+2 Thundering Falls
+[Sideboard]
+1 Abrade
+2 Annul
+2 Disdainful Stroke
+2 Fire Magic
+1 Pyroclasm
+2 Quantum Riddler
+2 Spell Pierce
+2 Torch the Tower
+1 Torch the Witness

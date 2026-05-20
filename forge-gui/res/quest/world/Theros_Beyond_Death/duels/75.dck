@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Genghis Khan
+Title=Genghis Khan
+Icon=Genghis Khan.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/DaniMRebel_-_Death_and_Taxes_(Modern,_#1004916).dck
+Deck Type=constructed
+
+[Main]
+2 Charming Prince
+3 Scavenging Ooze
+3 Voice of Resurgence
+3 Renegade Rallier
+4 Flickerwisp
+4 Leonin Arbiter
+4 Noble Hierarch
+4 Restoration Angel
+4 Thalia, Guardian of Thraben
+4 Aether Vial
+4 Path to Exile
+1 Field of Ruin
+1 Plains
+1 Stirring Wildwood
+1 Windswept Heath
+2 Forest
+3 Temple Garden
+4 Razorverge Thicket
+4 Horizon Canopy
+4 Ghost Quarter
+[Sideboard]
+2 Dromoka's Command
+2 Damping Sphere
+2 Gaddock Teeg
+2 Knight of Autumn
+2 Phyrexian Revoker
+2 Winds of Abandon
+3 Soul-Guide Lantern

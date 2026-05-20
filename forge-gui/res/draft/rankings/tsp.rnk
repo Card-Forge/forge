@@ -60,7 +60,7 @@
 #59|Fiery Temper|SR|TSP
 #60|Dragon Whelp|SR|TSP
 #61|Teferi's Moat|SR|TSP
-#62|Deep Sea Kraken|R|TSP
+#62|Deep-Sea Kraken|R|TSP
 #63|Mangara of Corondor|R|TSP
 #64|Ancestral Vision|R|TSP
 #65|Faceless Butcher|SR|TSP
@@ -75,11 +75,11 @@
 #74|Brine Elemental|U|TSP
 #75|Careful Consideration|U|TSP
 #76|Temporal Isolation|C|TSP
-#77|Looter il Kor|C|TSP
+#77|Looter il-Kor|C|TSP
 #78|Twisted Abomination|SR|TSP
 #79|Prodigal Sorcerer|SR|TSP
 #80|Nightshade Assassin|U|TSP
-#81|Outrider en Kor|U|TSP
+#81|Outrider en-Kor|U|TSP
 #82|Celestial Crusader|U|TSP
 #83|Fathom Seer|C|TSP
 #84|Castle Raptors|C|TSP
@@ -96,7 +96,7 @@
 #95|Tribal Flames|SR|TSP
 #96|Crookclaw Transmuter|C|TSP
 #97|Psionic Sliver|R|TSP
-#98|Vhati il Dal|SR|TSP
+#98|Vhati il-Dal|SR|TSP
 #99|Spiketail Drakeling|C|TSP
 #100|Dark Withering|C|TSP
 #101|Weatherseed Totem|U|TSP
@@ -157,14 +157,14 @@
 #156|Fiery Justice|SR|TSP
 #157|Ib Halfheart, Goblin Tactician|R|TSP
 #158|Undertaker|SR|TSP
-#159|Lim Dul the Necromancer|R|TSP
+#159|Lim-Dûl the Necromancer|R|TSP
 #160|Giant Oyster|SR|TSP
-#161|Urborg Syphon Mage|C|TSP
+#161|Urborg Syphon-Mage|C|TSP
 #162|Uthden Troll|SR|TSP
 #163|Candles of Leng|R|TSP
 #164|Cloudchaser Kestrel|C|TSP
-#165|Thick Skinned Goblin|U|TSP
-#166|Trespasser il Vec|C|TSP
+#165|Thick-Skinned Goblin|U|TSP
+#166|Trespasser il-Vec|C|TSP
 #167|Zhalfirin Commander|SR|TSP
 #168|Desert|SR|TSP
 #169|Sol'kanar the Swamp King|SR|TSP
@@ -226,10 +226,10 @@
 #225|Nether Traitor|R|TSP
 #226|Feebleness|C|TSP
 #227|Unstable Mutation|SR|TSP
-#228|Zealot il Vec|C|TSP
+#228|Zealot il-Vec|C|TSP
 #229|Greenseeker|C|TSP
 #230|Pendelhaven|SR|TSP
-#231|Thallid Shell Dweller|C|TSP
+#231|Thallid Shell-Dweller|C|TSP
 #232|Flamecore Elemental|C|TSP
 #233|Dodecapod|SR|TSP
 #234|Flickering Spirit|C|TSP
@@ -273,14 +273,14 @@
 #272|Spitting Slug|SR|TSP
 #273|Savage Thallid|C|TSP
 #274|Viashino Bladescout|C|TSP
-#275|Mwonvuli Acid Moss|C|TSP
+#275|Mwonvuli Acid-Moss|C|TSP
 #276|Saltcrusted Steppe|U|TSP
 #277|D'Avenant Healer|C|TSP
 #278|Jedit's Dragoons|C|TSP
 #279|Evil Eye of Urborg|U|TSP
 #280|Venser's Sliver|C|TSP
 #281|Mirari|SR|TSP
-#282|Two Headed Sliver|C|TSP
+#282|Two-Headed Sliver|C|TSP
 #283|Viscid Lemures|C|TSP
 #284|Sidewinder Sliver|C|TSP
 #285|Smallpox|U|TSP
@@ -296,10 +296,10 @@
 #295|Vesuva|R|TSP
 #296|Cyclopean Giant|C|TSP
 #297|Tectonic Fiend|U|TSP
-#298|Assembly Worker|U|TSP
+#298|Assembly-Worker|U|TSP
 #299|Drudge Reavers|C|TSP
 #300|Aetherflame Wall|C|TSP
-#301|Drifter il Dal|C|TSP
+#301|Drifter il-Dal|C|TSP
 #302|Sage of Epityr|C|TSP
 #303|Spell Burst|U|TSP
 #304|Pentarch Ward|C|TSP
@@ -317,7 +317,7 @@
 #316|Gaze of Justice|C|TSP
 #317|Gustcloak Cavalier|U|TSP
 #318|Gaea's Blessing|SR|TSP
-#319|Evil Eye of Orms by Gore|SR|TSP
+#319|Evil Eye of Orms-by-Gore|SR|TSP
 #320|Gemstone Caverns|R|TSP
 #321|Paradise Plume|U|TSP
 #322|Screeching Sliver|C|TSP
@@ -349,7 +349,7 @@
 #348|Orcish Librarian|SR|TSP
 #349|Gaea's Liege|SR|TSP
 #350|Academy Ruins|R|TSP
-#351|Dandan|SR|TSP
+#351|Dandân|SR|TSP
 #352|Harmonic Sliver|U|TSP
 #353|Krosan Grip|U|TSP
 #354|Traitor's Clutch|C|TSP
@@ -393,7 +393,7 @@
 #392|Volcanic Awakening|U|TSP
 #393|Living End|R|TSP
 #394|Consecrate Land|SR|TSP
-#395|Scion of the Ur Dragon|R|TSP
+#395|Scion of the Ur-Dragon|R|TSP
 #396|Aspect of Mongoose|U|TSP
 #397|Restore Balance|R|TSP
 #398|Paradox Haze|U|TSP

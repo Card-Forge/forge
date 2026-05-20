@@ -31,6 +31,9 @@ public final class ImageKeys {
     public static final String MONARCH_IMAGE         = "monarch";
     public static final String THE_RING_IMAGE        = "the_ring";
     public static final String RADIATION_IMAGE       = "radiation";
+    public static final String SPEED_IMAGE           = "speed";
+    public static final String MAX_SPEED_IMAGE       = "max_speed";
+    public static final String ADVENTURE_IMAGE       = "adventure";
 
     public static final String BACKFACE_POSTFIX  = "$alt";
     public static final String SPECFACE_W = "$wspec";

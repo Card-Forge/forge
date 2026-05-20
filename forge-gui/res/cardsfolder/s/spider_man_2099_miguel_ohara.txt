@@ -1,0 +1,9 @@
+Name:Spider-Man 2099, Miguel O'Hara
+ManaCost:4 U
+Types:Legendary Creature Spider Human Hero
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When NICKNAME enters, return up to one target creature to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select up to one target creature
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigDraw | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:When Spider-Man 2099 enters, return up to one target creature to its owner's hand.\nWhenever one or more creatures you control deal combat damage to a player, draw a card.

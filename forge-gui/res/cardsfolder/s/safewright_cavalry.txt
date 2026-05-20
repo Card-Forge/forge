@@ -1,0 +1,9 @@
+Name:Safewright Cavalry
+ManaCost:3 G
+Types:Creature Elf Warrior
+PT:4/4
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
+A:AB$ Pump | Cost$ 5 | ValidTgts$ Elf.YouCtrl | NumAtt$ +2 | NumDef$ +2 | TgtPrompt$ Select target Elf you control | SpellDescription$ Target Elf you control gets +2/+2 until end of turn.
+DeckHints:Type$Elf
+SVar:PlayMain1:TRUE
+Oracle:This creature can't be blocked by more than one creature.\n{5}: Target Elf you control gets +2/+2 until end of turn.

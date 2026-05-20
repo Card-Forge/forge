@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Tenga
+Title=Tenga
+Icon=Tenga.jpg
+Difficulty=Very Hard
+Description=../Modern/Journey_into_Nyx/2015_Modern_State_Championships_-_Montana/Ben_Miller_-_Monored_Devotion_(Modern,_#222347).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Ash Zealot
+2 Ashenmoor Gouger
+1 Blood Knight
+4 Boros Reckoner
+4 Chandra's Phoenix
+3 Cryptborn Horror
+4 Eidolon of the Great Revel
+2 Fanatic of Mogis
+4 Goblin Guide
+4 Goblin Wardriver
+2 Hellrider
+4 Lightning Bolt
+1 Blasphemous Act
+22 Mountain
+[Sideboard]
+1 Blood Moon
+3 Boil
+4 Molten Rain
+2 Relic of Progenitus
+3 Shattering Spree
+2 Smash to Smithereens

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Robot29
+Title=Robot29
+Icon=Reactor Meltdown.jpg
+Difficulty=Hard
+Description=Ramunap Red 
+Deck Type=constructed
+
+[Main]
+4 Ahn-Crop Crasher
+4 Bomat Courier
+4 Earthshaker Khenra
+4 Hazoret the Fervent
+3 Kari Zev, Skyship Raider
+2 Rigging Runner
+4 Soul-Scar Mage
+2 Abrade
+4 Lightning Strike
+4 Shock
+1 Chandra, Torch of Defiance
+16 Mountain
+4 Ramunap Ruins
+4 Sunscorched Desert
+[Sideboard]
+1 Abrade
+2 Chandra's Defeat
+2 Chandra, Torch of Defiance
+2 Glorybringer
+2 Harsh Mentor
+4 Magma Spray
+2 Pia Nalaar

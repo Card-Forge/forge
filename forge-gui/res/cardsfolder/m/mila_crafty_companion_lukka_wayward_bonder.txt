@@ -5,7 +5,7 @@ PT:2/3
 T:Mode$ AttackersDeclared | AttackedTarget$ Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigWalkerPump | TriggerDescription$ Whenever an opponent attacks one or more planeswalkers you control, put a loyalty counter on each planeswalker you control.
 SVar:TrigWalkerPump:DB$ PutCounterAll | ValidCards$ Planeswalker.YouCtrl | CounterType$ LOYALTY | CounterNum$ 1
 T:Mode$ BecomesTarget | ValidSource$ SpellAbility.OppCtrl | ValidTarget$ Permanent.YouCtrl+inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+SVar:TrigDraw:DB$ Draw | Defined$ You
 AlternateMode:Modal
 Oracle:Whenever an opponent attacks one or more planeswalkers you control, put a loyalty counter on each planeswalker you control.\nWhenever a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
 
@@ -16,7 +16,7 @@ ManaCost:4 R R
 Types:Legendary Planeswalker Lukka
 Loyalty:5
 A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 1 | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ You may discard a card. If you do, draw a card. If a creature card was discarded this way, draw two cards instead.
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.nonCreature | ConditionCompare$ GE1 | SubAbility$ DBDraw2
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card.nonCreature | ConditionCompare$ GE1 | SubAbility$ DBDraw2
 SVar:DBDraw2:DB$ Draw | NumCards$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ GE1 | StackDescription$ None | SubAbility$ DBCleanup
 A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | GainControl$ True | SubAbility$ DBPump | RememberChanged$ True | AILogic$ BeforeCombat | SpellDescription$ Return target creature card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of your next upkeep.
 SVar:DBPump:DB$ Animate | Keywords$ Haste | Defined$ Remembered | Duration$ Permanent | AtEOT$ Exile | SubAbility$ DBCleanup

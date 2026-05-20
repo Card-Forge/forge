@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Blood Oath
+Title=Blood Oath
+Icon=Blood Oath.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/Ailien02_-_Orzhov_Midrange_(Standard,_#1410426).dck
+Deck Type=constructed
+
+[Main]
+1 Edgar, Charmed Groom
+1 Legion Angel
+2 Henrika Domnathi
+4 Luminarch Aspirant
+4 Extraction Specialist
+4 Acquisitions Expert
+2 Reckoner Bankbuster
+1 Hagra Mauling
+2 Infernal Grasp
+3 Vanishing Verse
+2 Rite of Oblivion
+2 Dread Fugue
+2 Emeria's Call
+2 Pelakka Predation
+2 The Meathook Massacre
+4 Wedding Announcement
+2 Lolth, Spider Queen
+1 Takenuma, Abandoned Mire
+1 Field of Ruin
+1 Eiganjo, Seat of the Empire
+1 Cave of the Frost Dragon
+2 Swamp
+3 Hive of the Eye Tyrant
+3 Plains
+4 Brightclimb Pathway
+4 Shattered Sanctum
+[Sideboard]
+1 Soul Shatter
+1 Doomskar
+1 Reckoner Bankbuster
+1 Farewell
+1 Power Word Kill
+2 Archon of Emeria
+2 Go Blank
+3 Ray of Enfeeblement
+3 Legion Angel

@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Isperia
+Title=Isperia
+Icon=Isperia.jpg
+Difficulty=Hard
+Description=./Modern/Final_Fantasy/Yoneyama_Yuji_-_Scale_Affinity_(Modern,_#2527459).dck
+Deck Type=constructed
+
+[Main]
+4 Walking Ballista
+4 Arcbound Ravager
+3 Zabaz, the Glimmerwasp
+1 Haywire Mite
+1 Skrelv, Defector Mite
+2 Marketback Walker
+3 Aerith Gainsborough
+1 Tormod's Crypt
+1 Pithing Needle
+1 Welding Jar
+3 Mox Opal
+1 The Ozolith
+3 Agatha's Soul Cauldron
+1 Vexing Bauble
+2 Ancient Stirrings
+4 Malevolent Rumble
+4 Hardened Scales
+4 Urza's Saga
+2 Forest
+1 Brushland
+2 Darksteel Citadel
+3 Windswept Heath
+1 Verdant Catacombs
+4 Inkmoth Nexus
+1 Temple Garden
+2 Boseiju, Who Endures
+1 Lush Portico
+[Sideboard]
+1 Damping Sphere
+1 Grafdigger's Cage
+2 Nature's Claim
+1 Torpor Orb
+2 Orim's Chant
+1 Gemstone Caverns
+2 Veil of Summer
+1 Tamiyo's Safekeeping
+2 Surge of Salvation
+1 Syr Ginger, the Meal Ender
+1 Get Lost

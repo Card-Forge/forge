@@ -37,6 +37,7 @@ public final class CDev implements ICDoc {
         view.getLblCardToHand().addMouseListener(onClick(this::addCardToHand));
         view.getLblExileFromHand().addMouseListener(onClick(this::exileCardsFromHand));
         view.getLblCardToBattlefield().addMouseListener(onClick(this::addCardToBattlefield));
+        view.getLblTokenToBattlefield().addMouseListener(onClick(this::addTokenToBattlefield));
         view.getLblCardToLibrary().addMouseListener(onClick(this::addCardToLibrary));
         view.getLblCardToGraveyard().addMouseListener(onClick(this::addCardToGraveyard));
         view.getLblCardToExile().addMouseListener(onClick(this::addCardToExile));
@@ -142,6 +143,9 @@ public final class CDev implements ICDoc {
     }
     public void addCardToBattlefield() {
         getController().cheat().addCardToBattlefield();
+    }
+    public void addTokenToBattlefield() {
+        getController().cheat().addTokenToBattlefield();
     }
     public void exileCardsFromPlay() {
         getController().cheat().exileCardsFromBattlefield();

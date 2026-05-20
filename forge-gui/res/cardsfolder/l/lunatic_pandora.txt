@@ -1,0 +1,7 @@
+Name:Lunatic Pandora
+ManaCost:1
+Types:Legendary Artifact
+A:AB$ Surveil | Cost$ 2 T | Amount$ 1 | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+A:AB$ Destroy | Cost$ 6 T Sac<1/CARDNAME> | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SpellDescription$ Destroy target nonland permanent.
+DeckHints:Ability$Graveyard
+Oracle:{2}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{6}, {T}, Sacrifice Lunatic Pandora: Destroy target nonland permanent.

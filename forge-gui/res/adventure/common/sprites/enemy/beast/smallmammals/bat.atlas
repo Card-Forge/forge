@@ -1,0 +1,53 @@
+bat.png
+size: 96,72
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none  
+Avatar        
+  xy: 80, 0
+  size: 16, 16
+Idle
+  xy: 0, 0
+  size: 16, 16  
+Idle
+  xy: 16, 0
+  size: 16, 16  
+Idle
+  xy: 32, 0
+  size: 16, 16  
+Idle
+  xy: 48, 0
+  size: 16, 16  
+Idle
+  xy: 64, 0
+  size: 16, 16   
+Walk
+  xy: 0, 24
+  size: 16, 16  
+Walk
+  xy: 16, 24
+  size: 16, 16  
+Walk
+  xy: 32, 24
+  size: 16, 16  
+Walk
+  xy: 48, 24
+  size: 16, 16  
+Walk
+  xy: 64, 24
+  size: 16, 16  
+Death 
+  xy: 0, 50
+  size: 16, 20    
+Death 
+  xy: 16, 50
+  size: 16, 20   
+Death 
+  xy: 32, 50
+  size: 16, 20    
+Death 
+  xy: 48, 50
+  size: 16, 20    
+Death 
+  xy: 62, 50
+  size: 16, 20  

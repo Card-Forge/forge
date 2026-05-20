@@ -1,0 +1,8 @@
+Name:Glider Kids
+ManaCost:2 W
+Types:Creature Human Pilot Ally
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBScry | TriggerDescription$ When this creature enters, scry 1. (Look at the top card of your library. You may put it on the bottom.)
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+Oracle:Flying\nWhen this creature enters, scry 1. (Look at the top card of your library. You may put it on the bottom.)

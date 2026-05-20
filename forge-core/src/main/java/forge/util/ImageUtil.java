@@ -3,11 +3,18 @@ package forge.util;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardDb;
+import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
+import forge.card.MagicColor;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import java.util.regex.Pattern;
+import forge.item.PaperToken;
+import forge.token.TokenDb;
 import org.apache.commons.lang3.StringUtils;
+
+import java.net.URLEncoder;
 
 public class ImageUtil {
     public static float getNearestHQSize(float baseSize, float actualSize) {
@@ -43,6 +50,43 @@ public class ImageUtil {
         // return cp regardless if it's null
         return cp;
     }
+
+    public static PaperToken getPaperTokenFromImageKey(final String imageKey) {
+        String key;
+        if (imageKey == null ||
+            !imageKey.startsWith(ImageKeys.TOKEN_PREFIX)) {
+            return null;
+        }
+
+        key = imageKey.substring(ImageKeys.TOKEN_PREFIX.length());
+            
+        if (key.isEmpty()) {
+            return null;
+        }
+
+        TokenDb db = StaticData.instance().getAllTokens();
+        if (db == null) {
+            return null;
+        }
+        
+        String[] split = key.split("\\|");
+        if (!db.containsRule(split[0])) {
+            return null;
+        }
+        
+        PaperToken pt = switch (split.length) {
+            case 1 -> db.getToken(split[0]);
+            case 2, 3 -> db.getToken(split[0], split[1]);
+            default -> db.getToken(split[0], split[1], Integer.parseInt(split[3]));
+        };
+
+        if (pt == null) {
+            System.err.println("Can't find PaperToken from key: " + key);
+        }
+            
+        return pt;
+    }
+
     public static String transformKey(String imageKey) {
         String key;
         String edition= imageKey.substring(0, imageKey.indexOf("/"));
@@ -54,7 +98,7 @@ public class ImageUtil {
         return key;
     }
 
-    public static String getImageRelativePath(PaperCard cp, String face, boolean includeSet, boolean isDownloadUrl) {
+    public static String getImageRelativePath(IPaperCard cp, String face, boolean includeSet, boolean isDownloadUrl) {
         final String nameToUse = cp == null ? null : getNameToUse(cp, face);
         if (nameToUse == null) {
             return null;
@@ -62,7 +106,9 @@ public class ImageUtil {
         StringBuilder s = new StringBuilder();
 
         CardRules card = cp.getRules();
-        String edition = cp.getEdition();
+        String edition = cp.getEdition().equals(CardEdition.UNKNOWN_CODE)
+                ? CardEdition.UNKNOWN_SET_NAME
+                : cp.getEdition();
         s.append(toMWSFilename(nameToUse));
 
         final int cntPictures;
@@ -100,7 +146,7 @@ public class ImageUtil {
 
         if (includeSet) {
             String editionAliased = isDownloadUrl ? StaticData.instance().getEditions().getCode2ByCode(edition) : ImageKeys.getSetFolder(edition);
-            if (editionAliased == "") //FIXME: Custom Cards Workaround
+            if (editionAliased.isEmpty()) //FIXME: Custom Cards Workaround
                 editionAliased = edition;
             return TextUtil.concatNoSpace(editionAliased, "/", fname);
         } else {
@@ -108,7 +154,7 @@ public class ImageUtil {
         }
     }
 
-    public static String getNameToUse(PaperCard cp, String face) {
+    public static String getNameToUse(IPaperCard cp, String face) {
         final CardRules card = cp.getRules();
         if (face.equals("back")) {
             if (cp.hasBackFace())
@@ -116,7 +162,7 @@ public class ImageUtil {
                     return card.getOtherPart().getName();
                 } else if (!card.getMeldWith().isEmpty()) {
                     final CardDb db = StaticData.instance().getCommonCards();
-                    return db.getRules(card.getMeldWith()).getOtherPart().getName();
+                    return db.getRulesOrElseUnsupported(card.getMeldWith()).getOtherPart().getName();
                 } else {
                     return null;
                 }
@@ -144,13 +190,15 @@ public class ImageUtil {
             }
         } else if (CardSplitType.Split == cp.getRules().getSplitType()) {
             return card.getMainPart().getName() + card.getOtherPart().getName();
+        } else if (cp.hasFlavorName()) {
+            return cp.getDisplayName();
         } else if (!IPaperCard.NO_FUNCTIONAL_VARIANT.equals(cp.getFunctionalVariant())) {
             return cp.getName() + " " + cp.getFunctionalVariant();
         }
         return cp.getName();
     }
 
-    public static String getImageKey(PaperCard cp, String face, boolean includeSet) {
+    public static String getImageKey(IPaperCard cp, String face, boolean includeSet) {
         return getImageRelativePath(cp, face, includeSet, false);
     }
 
@@ -159,18 +207,13 @@ public class ImageUtil {
     }
 
     public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop){
-        return getScryfallDownloadUrl(cp, face, setCode, langCode, useArtCrop, false);
-    }
-
-    public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop, boolean hyphenateAlchemy){
+        final Pattern funnyCardCollectorNumberPattern = Pattern.compile("^F\\d+");
         String editionCode;
-        if ((setCode != null) && (setCode.length() > 0))
+        if (setCode != null && !setCode.isEmpty())
             editionCode = setCode;
         else
             editionCode = cp.getEdition().toLowerCase();
         String cardCollectorNumber = cp.getCollectorNumber();
-        // Hack to account for variations in Arabian Nights
-        cardCollectorNumber = cardCollectorNumber.replace("+", "†");
         // override old planechase sets from their modified id since scryfall move the planechase cards outside their original setcode
         if (cardCollectorNumber.startsWith("OHOP")) {
             editionCode = "ohop";
@@ -181,19 +224,40 @@ public class ImageUtil {
         } else if (cardCollectorNumber.startsWith("OPC2")) {
             editionCode = "opc2";
             cardCollectorNumber = cardCollectorNumber.substring("OPC2".length());
-        } else if (hyphenateAlchemy) {
-            if (!cardCollectorNumber.startsWith("A")) {
-                return null;
-            }
-
-            cardCollectorNumber = cardCollectorNumber.replace("A", "A-");
         }
+        
+        if (funnyCardCollectorNumberPattern.matcher(cardCollectorNumber).matches()) {
+            cardCollectorNumber = cardCollectorNumber.substring(1);
+        }
+
         String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
-        if (cp.getRules().getOtherPart() != null) {
-            faceParam = (face.equals("back") ? "&face=back" : "&face=front");
+
+        if (cp.getRules().getSplitType() == CardSplitType.Meld) {
+            if (face.equals("back")) {
+                cardCollectorNumber = cp.getMeldBaseCard().getCollectorNumber().replaceAll("(\\d+)([sp]?)", "$1b$2");
+            }
+
+            faceParam = "&face=front";
+        } else if (cp.getRules().getOtherPart() != null) {
+            faceParam = (face.equals("back") && cp.getRules().getSplitType() != CardSplitType.Flip
+                    ? "&face=back"
+                    : "&face=front");
+        } else if (cp.getRules().getSplitType() == CardSplitType.Specialize) {
+            // Specialize faces have their own Scryfall entries with collector
+            // number = base number + color letter (e.g. "2w", "2u", "2b", "2r", "2g")
+            String colorSuffix = specFaceToCollectorSuffix(face);
+            if (colorSuffix != null) {
+                cardCollectorNumber += colorSuffix;
+            }
         }
-        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumber,
+
+        if (cardCollectorNumber.endsWith("☇")) {
+            faceParam = "&face=back";
+            cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
+        }
+
+        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, encodeUtf8(cardCollectorNumber),
                 langCode, versionParam, faceParam);
     }
 
@@ -202,8 +266,28 @@ public class ImageUtil {
         if (!faceParam.isEmpty()) {
             faceParam = (faceParam.equals("back") ? "&face=back" : "&face=front");
         }
-        return String.format("%s/%s/%s?format=image&version=%s%s", setCode, collectorNumber,
+        if (collectorNumber.endsWith("☇")) {
+            faceParam = "&face=back";
+            collectorNumber = collectorNumber.substring(0, collectorNumber.length() - 1);
+        }
+        return String.format("%s/%s/%s?format=image&version=%s%s", setCode, encodeUtf8(collectorNumber),
                 langCode, versionParam, faceParam);
+    }
+
+    private static String specFaceToCollectorSuffix(String face) {
+        MagicColor.Color color = MagicColor.Color.fromName(face);
+        if (color == null) return null;
+        return color.getShortName().toLowerCase();
+    }
+
+    private static String encodeUtf8(String s) {
+        try {
+            return URLEncoder.encode(s, "UTF-8");
+        } catch (Exception e) {
+            // Unlikely, for the possibility that "UTF-8" is not supported.
+            System.err.println("UTF-8 encoding not supported on this device.");
+            return s;
+        }
     }
 
     public static String toMWSFilename(String in) {
@@ -212,8 +296,7 @@ public class ImageUtil {
         char c;
         for (int i = 0; i < in.length(); i++) {
             c = in.charAt(i);
-            if ((c == '"') || (c == '/') || (c == ':') || (c == '?')) {
-            } else {
+            if ((c != '"') && (c != '/') && (c != ':') && (c != '?')) {
                 out.append(c);
             }
         }

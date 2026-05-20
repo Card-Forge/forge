@@ -1,0 +1,9 @@
+Name:The Darkness Crystal
+ManaCost:2 B B
+Types:Legendary Artifact
+S:Mode$ ReduceCost | ValidCard$ Card.Black | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Black spells you cast cost {1} less to cast.
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Creature+!token+OppCtrl | ReplaceWith$ Exile | Description$ If a nontoken creature an opponent controls would die, instead exile it and you gain 2 life.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+A:AB$ ChangeZone | Cost$ 4 B B T | ValidTgts$ Creature.ExiledWithSource | TgtZone$ Exile | TgtPrompt$ Select target creature card exiled with CARDNAME | Tapped$ True | WithCountersType$ P1P1 | WithCountersAmount$ 2 | GainControl$ True | Origin$ Exile | Destination$ Battlefield | SpellDescription$ Put target creature card exiled with CARDNAME onto the battlefield tapped under your control with two additional +1/+1 counters on it.
+Oracle:Black spells you cast cost {1} less to cast.\nIf a nontoken creature an opponent controls would die, instead exile it and you gain 2 life.\n{4}{B}{B}, {T}: Put target creature card exiled with The Darkness Crystal onto the battlefield tapped under your control with two additional +1/+1 counters on it.

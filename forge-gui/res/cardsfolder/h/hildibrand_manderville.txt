@@ -1,0 +1,19 @@
+Name:Hildibrand Manderville
+ManaCost:1 W
+Types:Legendary Creature Human Detective
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creature tokens you control get +1/+1.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME dies, you may cast it from your graveyard as an Adventure until the end of your next turn.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Graveyard | RememberObjects$ Self | Duration$ UntilTheEndOfYourNextTurn
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered+Adventure | AffectedZone$ Graveyard | Description$ You may cast EFFECTSOURCE from your graveyard as an Adventure until the end of your next turn.
+DeckHas:Ability$Graveyard
+AlternateMode:Adventure
+Oracle:Creature tokens you control get +1/+1.\nWhen Hildibrand Manderville dies, you may cast it from your graveyard as an Adventure until the end of your next turn.
+
+ALTERNATE
+
+Name:Gentleman's Rise
+ManaCost:2 B
+Types:Instant Adventure
+A:SP$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create a 2/2 black Zombie creature token. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Create a 2/2 black Zombie creature token. (Then exile this card. You may cast the creature later from exile.)

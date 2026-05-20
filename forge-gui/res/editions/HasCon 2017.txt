@@ -1,0 +1,16 @@
+[metadata]
+Code=H17
+Date=2017-09-20
+Name=HasCon 2017
+Type=Funny
+ScryfallCode=H17
+TokensCode=H17
+Border=Silver
+
+[cards]
+1 R Grimlock, Dinobot Leader @Tyler Jacobson
+2 M Nerf War @Victor Adame Minguez
+3 M Sword of Dungeons & Dragons @Chris Rahn
+
+[tokens]
+4 c_4_4_dragon_flying @Autumn Rain Turkel

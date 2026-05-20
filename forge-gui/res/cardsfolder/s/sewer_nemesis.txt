@@ -7,7 +7,7 @@ SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player | AILogic$ Curse 
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in the chosen player's graveyard.
 SVar:X:Count$ValidGraveyard Card.ChosenCtrl
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player.Chosen | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever the chosen player casts a spell, that player mills a card.
-SVar:TrigMill:DB$ Mill | Defined$ TriggeredPlayer | NumCards$ 1
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredActivator | NumCards$ 1
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$ValidGraveyard Card.OppCtrl
 Oracle:As Sewer Nemesis enters, choose a player.\nSewer Nemesis's power and toughness are each equal to the number of cards in the chosen player's graveyard.\nWhenever the chosen player casts a spell, that player mills a card.

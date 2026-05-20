@@ -1,0 +1,11 @@
+Name:Champions of the Perfect
+ManaCost:3 G
+Types:Creature Elf Warrior
+PT:6/6
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Activator$ You | Type$ Spell | Cost$ BeholdExile<1/Elf> | EffectZone$ All | Description$ As an additional cost to cast this spell, behold an Elf and exile it. (Exile an Elf you control or an Elf card from your hand.)
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, draw a card.
+SVar:TrigDraw:DB$ Draw
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature leaves the battlefield, return the exiled card to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Hand
+DeckHints:Type$Elf
+Oracle:As an additional cost to cast this spell, behold an Elf and exile it. (Exile an Elf you control or an Elf card from your hand.)\nWhenever you cast a creature spell, draw a card.\nWhen this creature leaves the battlefield, return the exiled card to its owner's hand.

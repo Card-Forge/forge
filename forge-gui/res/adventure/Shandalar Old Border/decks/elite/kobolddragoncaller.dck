@@ -1,0 +1,22 @@
+[metadata]
+Name=kobolddragoncaller
+[Main]
+22 Mountain|ONS
+4 Crimson Kobolds|LEG
+4 Crookshank Kobolds|LEG
+4 Kobolds of Kher Keep|LEG
+3 Kobold Overlord|LEG
+4 Kobold Taskmaster|LEG
+3 Kobold Drill Sergeant|LEG
+4 Dragonspeaker Shaman|SCG
+2 Rathi Dragon|TMP
+2 Lightning Dragon|USG
+2 Dragon Whelp|LEA
+2 Shivan Dragon|LEA
+4 Incinerate|MIR
+
+[StartInBattle_Reference]
+1 Crimson Kobolds|LEG
+1 Crookshank Kobolds|LEG
+1 Ghitu War Cry|ULG
+1 Kobolds of Kher Keep|LEG

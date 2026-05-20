@@ -1,0 +1,23 @@
+[metadata]
+Name=swamptroll
+[Main]
+1 Spawning Pool|ULG
+12 Swamp|USG|3
+2 Choking Sands|MIR
+2 Fallow Earth|6ED
+2 Haunting Misery|WTH
+2 Squirrel Nest|ODY
+4 Albino Troll|USG
+4 Carnophage|EXO
+4 Gravedigger|TMP
+4 Llanowar Elves|7ED
+4 Llanowar Wastes|APC
+4 Plague Beetle|ULG
+4 Plague Rats|2ED
+4 Priest of Titania|USG
+4 Sarcomancy|TMP
+8 Forest|USG|3
+
+[StartInBattle_Reference]
+1 Dense Foliage|WTH
+1 Treetop Village|ULG

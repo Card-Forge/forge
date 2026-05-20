@@ -1,0 +1,11 @@
+Name:Singularity Rupture
+ManaCost:3 U B B
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Creature | SubAbility$ DBPump | SpellDescription$ Destroy all creatures, then any number of target players each mill half their library, rounded down.
+SVar:DBPump:DB$ Pump | ValidTgts$ Player | TargetMin$ 0 | TargetMax$ MaxTgt | TgtPrompt$ Select any number of target players | SubAbility$ DBRepeat
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Targeted | RepeatSubAbility$ DBMill
+SVar:DBMill:DB$ Mill | Defined$ Remembered | NumCards$ X
+SVar:X:Count$ValidLibrary Card.RememberedPlayerOwn/HalfDown
+SVar:MaxTgt:PlayerCountPlayers$Amount
+DeckHas:Ability$Mill
+Oracle:Destroy all creatures, then any number of target players each mill half their library, rounded down.

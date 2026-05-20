@@ -1,0 +1,12 @@
+Name:Molten Man, Inferno Incarnate
+Variant:UniversesWithin:FlavorName:The Infernus
+ManaCost:2 R
+Types:Legendary Creature Elemental Villain
+PT:0/0
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When NICKNAME enters, search your library for a basic Mountain card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Mountain.Basic
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ NICKNAME gets +1/+1 for each Mountain you control.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When NICKNAME leaves the battlefield, sacrifice a land.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Land | Defined$ You
+SVar:X:Count$Valid Mountain.YouCtrl
+Oracle:When Molten Man enters, search your library for a basic Mountain card, put it onto the battlefield tapped, then shuffle.\nMolten Man gets +1/+1 for each Mountain you control.\nWhen Molten Man leaves the battlefield, sacrifice a land.

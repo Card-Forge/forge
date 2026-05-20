@@ -65,9 +65,9 @@
   <object id="66" name="Ward" type="dialog" gid="11912" x="196.5" y="129.361" width="39.5656" height="16">
    <properties>
     <property name="dialog">[{
-    &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient Evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
+    &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;Leave.&quot; } 
+    { &quot;name&quot;:&quot;Leave&quot; } 
     ]
 }]</property>
    </properties>
@@ -78,15 +78,15 @@
   {
     &quot;text&quot;: &quot;You see a coffin lying at the center of the crypt. This relic of vampiric history, once a vessel for the undying, now stood as a time-worn testament to the passage of ages, a silent witness to the secrets and shadows that had unfolded within its confines. The ancient coffin, a repository of centuries, exuded an aura of both menace and melancholy, a silent sentinel to the mysteries of the nocturnal realm.&quot;,
     &quot;options&quot;: [
-      { &quot;name&quot;: &quot;Walk away&quot; },
+      { &quot;name&quot;: &quot;Leave&quot; },
       {
         &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
         &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
         &quot;options&quot;: [
-          { &quot;name&quot;: &quot;Walk away&quot; },
+          { &quot;name&quot;: &quot;Leave&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;text&quot;: &quot;As you open the coffin, an ancient figure awakes in the gloom. It cries out in an ancient voice: YOU DARE WAKE ME, PUNY MORTAL?&quot;,
+            &quot;text&quot;: &quot;As you open the coffin, a powerful figure awakes in the gloom. It cries out in an ancient voice: YOU DARE WAKE ME, PUNY MORTAL?&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Prepare yourself!&quot;,

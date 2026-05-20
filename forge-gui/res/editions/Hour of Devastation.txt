@@ -2,7 +2,6 @@
 Code=HOU
 Date=2017-07-14
 Name=Hour of Devastation
-Code2=HOU
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common:fromSheet("HOU cards"), 3 Uncommon:fromSheet("HOU cards"), 1 RareMythic:fromSheet("HOU cards"), 1 BasicLand

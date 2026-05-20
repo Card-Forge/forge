@@ -1,0 +1,10 @@
+Name:Il Mheg Pixie
+ManaCost:1 U
+Types:Creature Faerie
+PT:2/1
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature attacks, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Flying\nWhenever this creature attacks, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)

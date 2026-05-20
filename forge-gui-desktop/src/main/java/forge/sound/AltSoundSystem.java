@@ -10,9 +10,13 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
+import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 
 /**
  *
@@ -22,17 +26,13 @@ class AsyncSoundRegistry {
     static Map<String, Integer> soundsPlayed = new HashMap<>();
 
     public synchronized static void registerSound(String soundName) {
-        if (soundsPlayed.containsKey(soundName)) {
-            soundsPlayed.put(soundName, soundsPlayed.get(soundName) + 1);
-        } else {
-            soundsPlayed.put(soundName, 1);
-        }
+        soundsPlayed.merge(soundName, 1, Integer::sum);
         //System.out.println("Register: Count for " + soundName + " = " + soundsPlayed.get(soundName));
     }
 
     public synchronized static void unregisterSound(String soundName) {
         if (soundsPlayed.containsKey(soundName) && soundsPlayed.get(soundName) > 1) {
-            soundsPlayed.put(soundName, soundsPlayed.get(soundName) - 1);
+            soundsPlayed.merge(soundName, -1, Integer::sum);
         } else {
             soundsPlayed.remove(soundName);
         }
@@ -111,6 +111,15 @@ public class AltSoundSystem extends Thread {
             audioLine.open(format);
         } catch (Exception e) {
             return;
+        }
+
+        if (audioLine.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+            float vol = FModel.getPreferences().getPrefInt(FPref.UI_VOL_SOUNDS) / 100f;
+            FloatControl gain = (FloatControl) audioLine.getControl(FloatControl.Type.MASTER_GAIN);
+            float dB = (float) (20.0 * Math.log10(Math.max(vol, 0.0001)));
+            dB = Math.max(dB, gain.getMinimum());
+            dB = Math.min(dB, gain.getMaximum());
+            gain.setValue(dB);
         }
 
         audioLine.start();

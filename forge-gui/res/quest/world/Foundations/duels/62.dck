@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Doc Holiday
+Title=Doc Holiday
+Icon=Doc Holiday.jpg
+Difficulty=Very Hard
+Description=./Modern/Foundations/Bryan_Graham_-_Dimir_Murktide_(Modern,_#2275716).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+4 Archon of Cruelty
+3 Kiora, the Rising Tide
+4 Psychic Frog
+1 Cling to Dust
+4 Counterspell
+4 Fatal Push
+3 Force of Negation
+2 Sink into Stupor
+2 Spell Snare
+4 Thought Scour
+4 Persist
+3 Unearth
+2 Gloomlake Verge
+2 Island
+2 Marsh Flats
+1 Misty Rainforest
+4 Polluted Delta
+1 Scalding Tarn
+1 Swamp
+2 Undercity Sewers
+3 Watery Grave
+[Sideboard]
+4 Consign to Memory
+3 Harbinger of the Seas
+1 Massacre Wurm
+1 Mystical Dispute
+2 Nihil Spellbomb
+2 Thoughtseize
+2 Toxic Deluge

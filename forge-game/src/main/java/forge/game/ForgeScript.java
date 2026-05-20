@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class ForgeScript {
@@ -35,7 +36,7 @@ public class ForgeScript {
         boolean withSource = property.endsWith("Source");
         final ColorSet colors;
         if (withSource && StaticAbilityColorlessDamageSource.colorlessDamageSource(cardState)) {
-            colors = ColorSet.getNullColor();
+            colors = ColorSet.C;
         } else {
             colors = cardState.getCard().getColor(cardState);
         }
@@ -93,6 +94,8 @@ public class ForgeScript {
             }
         } else if (property.equals("Outlaw")) {
             return type.isOutlaw();
+        } else if (property.equals("Party")) {
+            return type.isParty();
         } else if (property.startsWith("non")) {
             // ... Other Card types
             return !type.hasStringType(property.substring(3));
@@ -111,8 +114,6 @@ public class ForgeScript {
             return !type.hasStringType(source.getChosenType());
         } else if (property.equals("ChosenType2")) {
             return type.hasStringType(source.getChosenType2());
-        } else if (property.equals("IsNotChosenType2")) {
-            return !type.hasStringType(source.getChosenType2());
         } else if (property.equals("NotedType")) {
             boolean found = false;
             for (String s : source.getNotedTypes()) {
@@ -166,8 +167,6 @@ public class ForgeScript {
             Card source, CardTraitBase spellAbility) {
         if (property.equals("ManaAbility")) {
             return sa.isManaAbility();
-        } else if (property.equals("nonManaAbility")) {
-            return !sa.isManaAbility();
         } else if (property.equals("withoutXCost")) {
             return !sa.costHasManaX();
         } else if (property.startsWith("XCost")) {
@@ -193,6 +192,8 @@ public class ForgeScript {
             return sa.isCrew();
         } else if (property.equals("Saddle")) {
             return sa.isKeyword(Keyword.SADDLE);
+        } else if (property.equals("Station")) {
+            return sa.isKeyword(Keyword.STATION);
         } else if (property.equals("Cycling")) {
             return sa.isCycling();
         } else if (property.equals("Dash")) {
@@ -235,10 +236,14 @@ public class ForgeScript {
             return sa.isBoast();
         } else if (property.equals("Exhaust")) {
             return sa.isExhaust();
+        } else if (property.equals("Mayhem")) {
+            return sa.isMayhem();
         } else if (property.equals("Mutate")) {
             return sa.isMutate();
         } else if (property.equals("Ninjutsu")) {
             return sa.isNinjutsu();
+        } else if (property.equals("Sneak")) {
+            return sa.isSneak();
         } else if (property.equals("Foretelling")) {
             return sa.isForetelling();
         } else if (property.equals("Foretold")) {
@@ -255,10 +260,17 @@ public class ForgeScript {
             return sa.isKeyword(Keyword.DAYBOUND);
         } else if (property.equals("Nightbound")) {
             return sa.isKeyword(Keyword.NIGHTBOUND);
+        } else if (property.equals("Warp")) {
+            return sa.isWarp();
         } else if (property.equals("Ward")) {
             return sa.isKeyword(Keyword.WARD);
         } else if (property.equals("CumulativeUpkeep")) {
             return sa.isCumulativeUpkeep();
+        } else if (property.equals("SameKeyword")) {
+            if (sa.getKeyword() == null || spellAbility == null) {
+                return false;
+            }
+            return Objects.equals(sa.getKeyword(), spellAbility.getKeyword());
         } else if (property.equals("ChapterNotLore")) {
             if (!sa.isChapter()) {
                 return false;
@@ -406,6 +418,8 @@ public class ForgeScript {
                 return !sa.isPwAbility() && !sa.getRestrictions().isSorcerySpeed();
             }
             return true;
+        } else if (property.startsWith("NamedAbility")) {
+            return sa.getName().equals(property.substring(12));
         } else if (sa.getHostCard() != null) {
             return sa.getHostCard().hasProperty(property, sourceController, source, spellAbility);
         }

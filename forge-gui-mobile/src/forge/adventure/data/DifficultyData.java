@@ -11,7 +11,7 @@ public class DifficultyData {
     public String name="";
     public int startingLife=10;
     public int startingShards=1;
-    public int staringMoney=10;
+    public int startingMoney=10;
     public float enemyLifeFactor=1;
     public boolean startingDifficulty;
     public int spawnRank = 1; //0 for "easy", 1 for "normal", 2 for "hard". To filter map spawns based on this.
@@ -25,5 +25,6 @@ public class DifficultyData {
     public ObjectMap<String,String> starterDecks = null;
     public ObjectMap<String,String> constructedStarterDecks= null;
     public ObjectMap<String,String> pileDecks= null;
+    public ObjectMap<String,String> commanderDecks = null;
 
 }

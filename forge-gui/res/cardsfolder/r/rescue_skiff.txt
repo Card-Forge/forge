@@ -1,0 +1,9 @@
+Name:Rescue Skiff
+ManaCost:5 W
+Types:Artifact Spacecraft
+PT:5/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this Spacecraft enters, return target creature or enchantment card from your graveyard to the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn,Enchantment.YouOwn | TgtPrompt$ Select target creature or enchantment card in your graveyard
+K:Station:10
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE10_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 10+ Flying
+Oracle:When this Spacecraft enters, return target creature or enchantment card from your graveyard to the battlefield.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 10+.)\nSTATION 10+\nFlying

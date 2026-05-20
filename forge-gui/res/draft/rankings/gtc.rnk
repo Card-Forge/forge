@@ -1,9 +1,9 @@
 //Rank|Name|Rarity|Set
-#1|Gideon Champion of Justice|M|GTC
-#2|Aurelias Fury|M|GTC
+#1|Gideon, Champion of Justice|M|GTC
+#2|Aurelia's Fury|M|GTC
 #3|Domri Rade|M|GTC
-#4|Obzedat Ghost Council|M|GTC
-#5|Aurelia the Warleader|M|GTC
+#4|Obzedat, Ghost Council|M|GTC
+#5|Aurelia, the Warleader|M|GTC
 #6|Master Biomancer|M|GTC
 #7|Deathpact Angel|M|GTC
 #8|Duskmantle Seer|M|GTC
@@ -11,7 +11,7 @@
 #10|Prime Speaker Zegana|M|GTC
 #11|Giant Adephage|M|GTC
 #12|Lord of the Void|M|GTC
-#13|Lazav Dimir Mastermind|M|GTC
+#13|Lazav, Dimir Mastermind|M|GTC
 #14|Borborygmos Enraged|M|GTC
 #15|Boros Reckoner|R|GTC
 #16|Angelic Skirmisher|R|GTC
@@ -73,7 +73,7 @@
 #72|Cinder Elemental|U|GTC
 #73|Godless Shrine|R|GTC
 #74|Zameck Guildmage|U|GTC
-#75|Kingpins Pet|C|GTC
+#75|Kingpin's Pet|C|GTC
 #76|Syndic of Tithes|C|GTC
 #77|Stomping Ground|R|GTC
 #78|Sacred Foundry|R|GTC
@@ -121,10 +121,10 @@
 #120|Vizkopa Confessor|U|GTC
 #121|Ordruun Veteran|U|GTC
 #122|Simic Fluxmage|U|GTC
-#123|Five Alarm Fire|R|GTC
+#123|Five-Alarm Fire|R|GTC
 #124|Boros Guildgate|C|GTC
 #125|Orzhov Guildgate|C|GTC
-#126|Executioners Swing|C|GTC
+#126|Executioner's Swing|C|GTC
 #127|Warmind Infantry|C|GTC
 #128|Miming Slime|U|GTC
 #129|Balustrade Spy|C|GTC
@@ -159,16 +159,16 @@
 #158|Act of Treason|C|GTC
 #159|Gridlock|U|GTC
 #160|Hellraiser Goblin|U|GTC
-#161|Deaths Approach|C|GTC
+#161|Death's Approach|C|GTC
 #162|Gateway Shade|U|GTC
 #163|Massive Raid|C|GTC
 #164|Psychic Strike|C|GTC
-#165|Sages Row Denizen|C|GTC
+#165|Sage's Row Denizen|C|GTC
 #166|Ruination Wurm|C|GTC
 #167|Verdant Haven|C|GTC
 #168|Keymaster Rogue|C|GTC
 #169|Smog Elemental|U|GTC
-#170|Debtors Pulpit|U|GTC
+#170|Debtor's Pulpit|U|GTC
 #171|Orzhov Keyrune|U|GTC
 #172|Dutiful Thrull|C|GTC
 #173|Beckon Apparition|C|GTC
@@ -227,12 +227,12 @@
 #226|Scatter Arc|C|GTC
 #227|Furious Resistance|C|GTC
 #228|Voidwalk|U|GTC
-#229|Thespians Stage|R|GTC
+#229|Thespian's Stage|R|GTC
 #230|Guildscorn Ward|C|GTC
 #231|Skyblinder Staff|C|GTC
 #232|Contaminated Ground|C|GTC
 #233|Alpha Authority|U|GTC
-#234|Predators Rapport|C|GTC
+#234|Predator's Rapport|C|GTC
 #235|Skygames|C|GTC
 #236|Structural Collapse|C|GTC
 #237|Tin Street Market|C|GTC
@@ -243,7 +243,7 @@
 #242|Crackling Perimeter|U|GTC
 #243|Hindervines|U|GTC
 #244|Mental Vapors|U|GTC
-#245|Illusionists Bracers|R|GTC
+#245|Illusionist's Bracers|R|GTC
 #246|Illness in the Ranks|U|GTC
 #247|Dying Wish|U|GTC
 #248|Serene Remembrance|U|GTC

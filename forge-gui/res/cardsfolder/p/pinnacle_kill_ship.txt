@@ -1,0 +1,9 @@
+Name:Pinnacle Kill-Ship
+ManaCost:7
+Types:Artifact Spacecraft
+PT:7/7
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When this Spacecraft enters, it deals 10 damage to up to one target creature.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 10
+K:Station:7
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE7_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 7+ Flying
+Oracle:When this Spacecraft enters, it deals 10 damage to up to one target creature.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 7+.)\nSTATION 7+\nFlying

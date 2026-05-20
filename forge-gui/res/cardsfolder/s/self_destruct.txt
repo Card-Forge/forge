@@ -1,0 +1,9 @@
+Name:Self-Destruct
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ PowerDmg | NumDmg$ X | DamageMap$ True | SubAbility$ DBDealDamage2 | DamageSource$ ThisTargetedCard | SpellDescription$ Target creature you control deals X damage to any other target and X damage to itself, where X is its power.
+SVar:DBDealDamage2:DB$ DealDamage | ValidTgts$ Any | TargetUnique$ True | NumDmg$ Y | SubAbility$ DBDamageResolve | DamageSource$ ParentTarget
+SVar:DBDamageResolve:DB$ DamageResolve
+SVar:X:Targeted$CardPower
+SVar:Y:ParentTargeted$CardPower
+Oracle:Target creature you control deals X damage to any other target and X damage to itself, where X is its power.

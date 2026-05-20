@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Aqueduct
+Title=Aqueduct
+Icon=Aqueduct.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/Jakub_Tóth_-_WUB_Junk_(Standard,_#1485975).dck
+Deck Type=constructed
+
+[Main]
+1 Anointed Peacekeeper
+1 Ertai Resurrected
+2 Ludevic, Necrogenius
+3 Sheoldred, the Apocalypse
+3 Tenacious Underdog
+3 Ao, the Dawn Sky
+3 Dennick, Pious Apprentice
+4 Raffine, Scheming Seer
+1 Void Rend
+1 Make Disappear
+2 Destroy Evil
+3 Infernal Grasp
+4 Wedding Announcement
+3 The Wandering Emperor
+1 Deserted Beach
+1 Island
+1 Takenuma, Abandoned Mire
+1 Otawara, Soaring City
+1 Eiganjo, Seat of the Empire
+3 Plaza of Heroes
+3 Adarkar Wastes
+3 Caves of Koilos
+4 Raffine's Tower
+4 Shattered Sanctum
+4 Shipwreck Marsh
+[Sideboard]
+1 Ertai Resurrected
+1 Sanctuary Warden
+2 Negate
+2 Disdainful Stroke
+2 Farewell
+2 Kaito Shizuki
+2 Depopulate
+3 Cut Down

@@ -1,0 +1,24 @@
+[metadata]
+Name=Chimera
+[Main]
+4 Crystal Vein|MIR
+1 Sheltered Valley|ALL
+3 Winding Canyons|WTH
+4 Quicksand|VIS
+4 Scorched Ruins|WTH
+4 Deserted Temple|ODY
+3 Sisay's Ring|VIS
+3 Thran Dynamo|UDS
+2 Grim Monolith|ULG
+4 Brass-Talon Chimera|VIS
+4 Tin-Wing Chimera|VIS
+4 Lead-Belly Chimera|VIS
+4 Iron-Heart Chimera|VIS
+4 Triangle of War|VIS
+4 Chimeric Staff|USG
+4 Chimeric Sphere|WTH
+2 Urza's Miter|ATQ
+2 Horn of Plenty|MMQ
+
+[StartInBattle_Reference]
+1 Thran Dynamo|UDS

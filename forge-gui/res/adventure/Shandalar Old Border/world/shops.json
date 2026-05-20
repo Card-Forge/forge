@@ -1,0 +1,5598 @@
+[
+  {
+    "name": "Black1",
+    "description": "Certain Death",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "RotatingShop",
+    "overlaySprite": "Overlay6Black",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.005,
+        "count": 1,
+        "colors": [
+          "black"
+        ],
+        "cardText": "(destroy|exile) target|sacrifice"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1607,
+        "count": 1,
+        "colors": [
+          "black"
+        ],
+        "cardText": "(destroy|exile) target|sacrifice"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8035,
+        "count": 1,
+        "colors": [
+          "black"
+        ],
+        "cardText": "(destroy|exile) target|sacrifice"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "black"
+        ],
+        "cardText": "(destroy|exile) target|sacrifice"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "black"
+        ],
+        "cardText": "(destroy|exile) target|sacrifice"
+      }
+    ]
+  },
+  {
+    "name": "Black2",
+    "description": "March of the Returned",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "RotatingShop",
+    "overlaySprite": "Overlay6Black",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.0044,
+        "count": 1,
+        "colors": [
+          "black"
+        ],
+        "cardText": "destroyed|dies|return.*(hand|battlefield|library|to play)|put.*battlefield from"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.106,
+        "count": 1,
+        "colors": [
+          "black"
+        ],
+        "cardText": "destroyed|dies|return.*(hand|battlefield|library|to play)|put.*battlefield from"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.7066,
+        "count": 1,
+        "colors": [
+          "black"
+        ],
+        "cardText": "destroyed|dies|return.*(hand|battlefield|library|to play)|put.*battlefield from"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "black"
+        ],
+        "cardText": "destroyed|dies|return.*(hand|battlefield|library|to play)|put.*battlefield from"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "colors": [
+          "black"
+        ],
+        "cardText": "destroyed|dies|return.*(hand|battlefield|library|to play)|put.*battlefield from"
+      }
+    ]
+  },
+  {
+    "name": "Blue1",
+    "description": "Control Magic",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "RotatingShop",
+    "overlaySprite": "Overlay6Blue",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.01,
+        "count": 1,
+        "colors": [
+          "blue"
+        ],
+        "cardText": "return.*to.*(hand|top of.*library)|gain(s)? control of|put.*top.*library|tap |untap|counter target"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1606,
+        "count": 1,
+        "colors": [
+          "blue"
+        ],
+        "cardText": "return.*to.*(hand|top of.*library)|gain(s)? control of|put.*top.*library|tap |untap|counter target"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.803,
+        "count": 1,
+        "colors": [
+          "blue"
+        ],
+        "cardText": "return.*to.*(hand|top of.*library)|gain(s)? control of|put.*top.*library|tap |untap|counter target"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "blue"
+        ],
+        "cardText": "return.*to.*(hand|top of.*library)|gain(s)? control of|put.*top.*library|tap |untap|counter target"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "blue"
+        ],
+        "cardText": "return.*to.*(hand|top of.*library)|gain(s)? control of|put.*top.*library|tap |untap|counter target"
+      }
+    ]
+  },
+  {
+    "name": "Blue5",
+    "description": "Library of Lat-Nam",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "RotatingShop",
+    "overlaySprite": "Overlay6Blue",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.015,
+        "count": 1,
+        "colors": [
+          "blue"
+        ],
+        "cardText": "draw(s)?|(exile|reveal|look|search).*library"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1605,
+        "count": 1,
+        "colors": [
+          "blue"
+        ],
+        "cardText": "draw(s)?|(exile|reveal|look|search).*library"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8025,
+        "count": 1,
+        "colors": [
+          "blue"
+        ],
+        "cardText": "draw(s)?|(exile|reveal|look|search).*library"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "blue"
+        ],
+        "cardText": "draw(s)?|(exile|reveal|look|search).*library"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "blue"
+        ],
+        "cardText": "draw(s)?|(exile|reveal|look|search).*library"
+      }
+    ]
+  },
+  {
+    "name": "Green1",
+    "description": "Explosive Growth",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "RotatingShop",
+    "overlaySprite": "Overlay6Green",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0611,
+        "count": 1,
+        "colors": [
+          "green"
+        ],
+        "cardText": "counter.*on |counter.*distribute|distribute.*counter|creature(s)? from|([+-])\\d?/([+-])\\d?"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8142,
+        "count": 1,
+        "colors": [
+          "green"
+        ],
+        "cardText": "counter.*on |counter.*distribute|distribute.*counter|creature(s)? from|([+-])\\d?/([+-])\\d?"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "green"
+        ],
+        "cardText": "counter.*on |counter.*distribute|distribute.*counter|creature(s)? from|([+-])\\d?/([+-])\\d?"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "green"
+        ],
+        "cardText": "counter.*on |counter.*distribute|distribute.*counter|creature(s)? from|([+-])\\d?/([+-])\\d?"
+      }
+    ]
+  },
+  {
+    "name": "Green2",
+    "description": "Jungle Expeditions",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "RotatingShop",
+    "overlaySprite": "Overlay6Green",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.0038,
+        "count": 1,
+        "colors": [
+          "green"
+        ],
+        "cardText": "still a land|(exile|reveal|look|search).*library|additional land|land from.*(graveyard|hand)|put.*land(s)?from"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1205,
+        "count": 1,
+        "colors": [
+          "green"
+        ],
+        "cardText": "still a land|(exile|reveal|look|search).*library|additional land|land from.*(graveyard|hand)|put.*land(s)?from"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.6026,
+        "count": 1,
+        "colors": [
+          "green"
+        ],
+        "cardText": "still a land|(exile|reveal|look|search).*library|additional land|land from.*(graveyard|hand)|put.*land(s)?from"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "green"
+        ],
+        "cardText": "still a land|(exile|reveal|look|search).*library|additional land|land from.*(graveyard|hand)|put.*land(s)?from"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "colors": [
+          "green"
+        ],
+        "cardText": "still a land|(exile|reveal|look|search).*library|additional land|land from.*(graveyard|hand)|put.*land(s)?from"
+      }
+    ]
+  },
+  {
+    "name": "Red1",
+    "description": "Burn Baby Burn",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "RotatingShop",
+    "overlaySprite": "Overlay6Red",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1608,
+        "count": 1,
+        "colors": [
+          "red"
+        ],
+        "cardText": "deal.*damage|destroy"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.804,
+        "count": 1,
+        "colors": [
+          "red"
+        ],
+        "cardText": "deal.*damage|destroy"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "red"
+        ],
+        "cardText": "deal.*damage|destroy"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "red"
+        ],
+        "cardText": "deal.*damage|destroy"
+      }
+    ]
+  },
+  {
+    "name": "Red2",
+    "description": "Weaponize the Monsters",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "RotatingShop",
+    "overlaySprite": "Overlay6Red",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0153,
+        "count": 1,
+        "colors": [
+          "red"
+        ],
+        "cardText": "haste|(first |double )strike |return .* to hand at end of turn|At the beginning of (your|the) end step, (sacrifice|return .* to (your|its owner).*hand)"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.6138,
+        "count": 1,
+        "colors": [
+          "red"
+        ],
+        "cardText": "haste|(first |double )strike |return .* to hand at end of turn|At the beginning of (your|the) end step, (sacrifice|return .* to (your|its owner).*hand)"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "red"
+        ],
+        "cardText": "haste|(first |double )strike |return .* to hand at end of turn|At the beginning of (your|the) end step, (sacrifice|return .* to (your|its owner).*hand)"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "colors": [
+          "red"
+        ],
+        "cardText": "haste|(first |double )strike |return .* to hand at end of turn|At the beginning of (your|the) end step, (sacrifice|return .* to (your|its owner).*hand)"
+      }
+    ]
+  },
+  {
+    "name": "White2",
+    "description": "Pound of Cure",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "RotatingShop",
+    "overlaySprite": "Overlay6White",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0357,
+        "count": 1,
+        "colors": [
+          "white"
+        ],
+        "cardText": "gain.*life|life total"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.7143,
+        "count": 1,
+        "colors": [
+          "white"
+        ],
+        "cardText": "gain.*life|life total"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "white"
+        ],
+        "cardText": "gain.*life|life total"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "colors": [
+          "white"
+        ],
+        "cardText": "gain.*life|life total"
+      }
+    ]
+  },
+  {
+    "name": "White3",
+    "description": "Swords, Plowshares, and Beyond",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "RotatingShop",
+    "overlaySprite": "Overlay6White",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0131,
+        "count": 1,
+        "colors": [
+          "white"
+        ],
+        "cardText": "(Destroy|exile).*(attacking|defending|tapped|with)"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.3937,
+        "count": 1,
+        "colors": [
+          "white"
+        ],
+        "cardText": "(Destroy|exile).*(attacking|defending|tapped|with)"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "white"
+        ],
+        "cardText": "(Destroy|exile).*(attacking|defending|tapped|with)"
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "colors": [
+          "white"
+        ],
+        "cardText": "(Destroy|exile).*(attacking|defending|tapped|with)"
+      }
+    ]
+  },
+  {
+    "name": "WhiteItems",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ItemShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "White rune"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "White Staff"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Hero's Sword"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Crown of the Chosen"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Fortified Shield"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Belbe's Boots"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Riding Boots"
+      },
+      {
+        "type": "life",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "RedItems",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ItemShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Red rune"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Red Staff"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Raging Dagger"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Dwarven Shield"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Flowstone Boots"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Sandals of Speed"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Dragon Mask"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Goblin Kites"
+      },
+      {
+        "type": "life",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "BlueItems",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ItemShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Blue rune"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Blue Staff"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Rootwater Trident"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Dream Chisel"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Whalebone Glider"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Amulet of Telepathy"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Cloak of Dreams"
+      },
+      {
+        "type": "life",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "BlackItems",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ItemShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Black rune"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Black Staff"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Scathe Scythe"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Life Chisel"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Feverbringer's Blade"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Haunted Robes"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Splicer's Charm"
+      },
+      {
+        "type": "life",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "GreenItems",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ItemShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Green rune"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Green Staff"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Defiant Bow"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Wooden Shield"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Slung Medicine Bag"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Chariot Rider's Boots"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Lotus Petal"
+      },
+      {
+        "type": "life",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "name": "WasteEquipment",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "EquipmentShop",
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Glider Gloves"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Steel Shield"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Steel Armor"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Steel Boots"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Sentry's Shield"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Steel Helm"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Braidwood Leathers"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Aeolipile"
+      }
+    ]
+  },
+  {
+    "name": "ColorlessEquipment",
+    "spriteAtlas": "sprites/buildings.atlas",
+    "sprite": "BattleShop",
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Horrible Halberd"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Sage's Robes"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Soulcatcher Cloak"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Noble's Silks"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Elixir of Vitality"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Clockwork Lance"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Onulet Shield"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Ring of Unmaking"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Aegis of the Meek"
+      }
+    ]
+  },
+  {
+    "name": "Swamp",
+    "description": "The Cartographer's Guild",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "LandShop",
+    "restockPrice": 1,
+    "rewards": [
+      {
+        "count": 4,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_Black.dck"
+          }
+        ]
+      },
+      {
+        "count": 2,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_Black_U.dck"
+          }
+        ]
+      },
+      {
+        "count": 1,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_Black_R.dck"
+          }
+        ]
+      },
+      {
+        "count": 1,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_Black_S.dck"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Forest",
+    "description": "The Cartographer's Guild",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "LandShop",
+    "restockPrice": 1,
+    "rewards": [
+      {
+        "count": 4,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_Green.dck"
+          }
+        ]
+      },
+      {
+        "count": 2,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_Green_U.dck"
+          }
+        ]
+      },
+      {
+        "count": 1,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_Green_R.dck"
+          }
+        ]
+      },
+      {
+        "count": 1,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_Green_S.dck"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Mountain",
+    "description": "The Cartographer's Guild",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "LandShop",
+    "restockPrice": 1,
+    "rewards": [
+      {
+        "count": 4,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_Red.dck"
+          }
+        ]
+      },
+      {
+        "count": 2,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_Red_U.dck"
+          }
+        ]
+      },
+      {
+        "count": 1,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_Red_R.dck"
+          }
+        ]
+      },
+      {
+        "count": 1,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_Red_S.dck"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Island",
+    "description": "The Cartographer's Guild",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "LandShop",
+    "restockPrice": 1,
+    "rewards": [
+      {
+        "count": 4,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_Blue.dck"
+          }
+        ]
+      },
+      {
+        "count": 2,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_Blue_U.dck"
+          }
+        ]
+      },
+      {
+        "count": 1,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_Blue_R.dck"
+          }
+        ]
+      },
+      {
+        "count": 1,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_Blue_S.dck"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Plains",
+    "description": "The Cartographer's Guild",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "LandShop",
+    "restockPrice": 1,
+    "rewards": [
+      {
+        "count": 4,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_White.dck"
+          }
+        ]
+      },
+      {
+        "count": 2,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_White_U.dck"
+          }
+        ]
+      },
+      {
+        "count": 1,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_White_R.dck"
+          }
+        ]
+      },
+      {
+        "count": 1,
+        "type": "Union",
+        "cardUnion": [
+          {
+            "sourceDeck": "decks/shops/landShop_White_S.dck"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Goblin",
+    "description": "Squee's Sundries",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "GoblinShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1407,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Goblin"
+            ]
+          },
+          {
+            "cardText": "Goblin"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.7035,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Goblin"
+            ]
+          },
+          {
+            "cardText": "Goblin"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Goblin"
+            ]
+          },
+          {
+            "cardText": "Goblin"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Goblin"
+            ]
+          },
+          {
+            "cardText": "Goblin"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Elf",
+    "description": "Elf Checkout",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ElfShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0886,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Elf"
+            ]
+          },
+          {
+            "cardText": "\\bElf\\b|\\bElves\\b"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.7089,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Elf"
+            ]
+          },
+          {
+            "cardText": "\\bElf\\b|\\bElves\\b"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Elf"
+            ]
+          },
+          {
+            "cardText": "\\bElf\\b|\\bElves\\b"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Elf"
+            ]
+          },
+          {
+            "cardText": "\\bElf\\b|\\bElves\\b"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Merfolk",
+    "description": "Catch O' The Day",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MerfolkShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.6154,
+        "count": 1,
+        "subTypes": [
+          "Merfolk",
+          "Serpent",
+          "Leviathan",
+          "Kraken",
+          "Fish",
+          "Crab",
+          "Octopus"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Merfolk",
+          "Serpent",
+          "Leviathan",
+          "Kraken",
+          "Fish",
+          "Crab",
+          "Octopus"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "subTypes": [
+          "Merfolk",
+          "Serpent",
+          "Leviathan",
+          "Kraken",
+          "Fish",
+          "Crab",
+          "Octopus"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Zombie",
+    "description": "Zom-Buy",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ZombieShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0357,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Zombie"
+            ]
+          },
+          {
+            "cardText": "Zombie"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.7143,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Zombie"
+            ]
+          },
+          {
+            "cardText": "Zombie"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Zombie"
+            ]
+          },
+          {
+            "cardText": "Zombie"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Zombie"
+            ]
+          },
+          {
+            "cardText": "Zombie"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Angel",
+    "description": "Halos 'R' Us",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "AngelShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0262,
+        "count": 1,
+        "subTypes": [
+          "Angel"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.3927,
+        "count": 1,
+        "subTypes": [
+          "Angel"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Angel"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "subTypes": [
+          "Angel"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Golem",
+    "description": "Karn's Workshop",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "GolemShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0397,
+        "count": 1,
+        "subTypes": [
+          "Construct",
+          "Golem",
+          "Juggernaut",
+          "Thopter"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.3307,
+        "count": 1,
+        "subTypes": [
+          "Construct",
+          "Golem",
+          "Juggernaut",
+          "Thopter"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Construct",
+          "Golem",
+          "Juggernaut",
+          "Thopter"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "subTypes": [
+          "Construct",
+          "Golem",
+          "Juggernaut",
+          "Thopter"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Wall",
+    "description": "Wall Mart",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "WallShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.5455,
+        "count": 1,
+        "subTypes": [
+          "Wall"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Wall"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "subTypes": [
+          "Wall"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sliver",
+    "description": "Sliver Hive",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "SliverShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.0041,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Sliver"
+            ]
+          },
+          {
+            "cardText": "Sliver"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0164,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Sliver"
+            ]
+          },
+          {
+            "cardText": "Sliver"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.6557,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Sliver"
+            ]
+          },
+          {
+            "cardText": "Sliver"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Sliver"
+            ]
+          },
+          {
+            "cardText": "Sliver"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Sliver"
+            ]
+          },
+          {
+            "cardText": "Sliver"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Assassin",
+    "description": "Criminally Good Deals",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "AssassinShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0153,
+        "count": 1,
+        "subTypes": [
+          "Assassin",
+          "Rogue",
+          "Pirate",
+          "Mercenary"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.6138,
+        "count": 1,
+        "subTypes": [
+          "Assassin",
+          "Rogue",
+          "Pirate",
+          "Mercenary"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Assassin",
+          "Rogue",
+          "Pirate",
+          "Mercenary"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "subTypes": [
+          "Assassin",
+          "Rogue",
+          "Pirate",
+          "Mercenary"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Land",
+    "description": "Exotic Lands",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "NonbasicLandShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.04,
+        "count": 1,
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.16,
+        "count": 1,
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8,
+        "count": 1,
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "cardTypes": [
+          "Land"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Artifact",
+    "description": "Antiquities",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ArtifactShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.04,
+        "count": 1,
+        "cardTypes": [
+          "Artifact"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.16,
+        "count": 1,
+        "cardTypes": [
+          "Artifact"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8,
+        "count": 1,
+        "cardTypes": [
+          "Artifact"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardTypes": [
+          "Artifact"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "cardTypes": [
+          "Artifact"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Dragon",
+    "description": "Here There Be Dragons",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "DragonShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0306,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Dragon",
+              "Drake"
+            ]
+          },
+          {
+            "cardText": "Dragon"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.6122,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Dragon",
+              "Drake"
+            ]
+          },
+          {
+            "cardText": "Dragon"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Dragon",
+              "Drake"
+            ]
+          },
+          {
+            "cardText": "Dragon"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Dragon",
+              "Drake"
+            ]
+          },
+          {
+            "cardText": "Dragon"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Minotaur",
+    "description": "Brutish Bargains",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "MinotaurShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.1389,
+        "count": 1,
+        "subTypes": [
+          "Ogre",
+          "Minotaur",
+          "Lizard",
+          "Orc"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Ogre",
+          "Minotaur",
+          "Lizard",
+          "Orc"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "subTypes": [
+          "Ogre",
+          "Minotaur",
+          "Lizard",
+          "Orc"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Dwarf",
+    "description": "Take Your Pick",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "DwarfShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.3947,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Dwarf"
+            ]
+          },
+          {
+            "cardText": "Dwarf|Dwarves"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Dwarf"
+            ]
+          },
+          {
+            "cardText": "Dwarf|Dwarves"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Dwarf"
+            ]
+          },
+          {
+            "cardText": "Dwarf|Dwarves"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Soldier",
+    "description": "The Garrison",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "SoldierShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1013,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Soldier"
+            ]
+          },
+          {
+            "cardText": "Soldier"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8101,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Soldier"
+            ]
+          },
+          {
+            "cardText": "Soldier"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Soldier"
+            ]
+          },
+          {
+            "cardText": "Soldier"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Soldier"
+            ]
+          },
+          {
+            "cardText": "Soldier"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Demon",
+    "description": "We Sell Hell",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "DemonShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.1644,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Demon",
+              "Imp"
+            ]
+          },
+          {
+            "cardText": "Demon"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Demon",
+              "Imp"
+            ]
+          },
+          {
+            "cardText": "Demon"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Demon",
+              "Imp"
+            ]
+          },
+          {
+            "cardText": "Demon"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Druid",
+    "description": "Druid Deals",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "DruidShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0609,
+        "count": 1,
+        "subTypes": [
+          "Druid",
+          "Shaman"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.6091,
+        "count": 1,
+        "subTypes": [
+          "Druid",
+          "Shaman"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Druid",
+          "Shaman"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "subTypes": [
+          "Druid",
+          "Shaman"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Bird",
+    "description": "Birds Of A Feather",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "BirdShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0153,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Bird"
+            ]
+          },
+          {
+            "cardText": "Bird"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.6138,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Bird"
+            ]
+          },
+          {
+            "cardText": "Bird"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Bird"
+            ]
+          },
+          {
+            "cardText": "Bird"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Bird"
+            ]
+          },
+          {
+            "cardText": "Bird"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Giant",
+    "description": "Gigantic Discounts",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "GiantShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Giant"
+            ]
+          },
+          {
+            "cardText": "Giant"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Giant"
+            ]
+          },
+          {
+            "cardText": "Giant"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Knight",
+    "description": "Knight Riders",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "KnightShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.2466,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Knight"
+            ]
+          },
+          {
+            "cardText": "Knight"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Knight"
+            ]
+          },
+          {
+            "cardText": "Knight"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Knight"
+            ]
+          },
+          {
+            "cardText": "Knight"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Random",
+    "description": "Random Selection",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ColorlessShop",
+    "restockPrice": 2,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.04,
+        "count": 1
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.16,
+        "count": 1
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8,
+        "count": 1
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5
+      }
+    ]
+  },
+  {
+    "name": "ColorRandomWhite",
+    "description": "White Card Selection",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "WhiteShop",
+    "restockPrice": 2,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.01,
+        "count": 1,
+        "colors": [
+          "white"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1606,
+        "count": 1,
+        "colors": [
+          "white"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.803,
+        "count": 1,
+        "colors": [
+          "white"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "white"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "white"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ColorRandomBlue",
+    "description": "Blue Card Selection",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "BlueShop",
+    "restockPrice": 2,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.025,
+        "count": 1,
+        "colors": [
+          "blue"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1603,
+        "count": 1,
+        "colors": [
+          "blue"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8015,
+        "count": 1,
+        "colors": [
+          "blue"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "blue"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "blue"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ColorRandomBlack",
+    "description": "Black Card Selection",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "BlackShop",
+    "restockPrice": 2,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.04,
+        "count": 1,
+        "colors": [
+          "black"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.16,
+        "count": 1,
+        "colors": [
+          "black"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8,
+        "count": 1,
+        "colors": [
+          "black"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "black"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "black"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ColorRandomRed",
+    "description": "Red Card Selection",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "RedShop",
+    "restockPrice": 2,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.005,
+        "count": 1,
+        "colors": [
+          "red"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1607,
+        "count": 1,
+        "colors": [
+          "red"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8035,
+        "count": 1,
+        "colors": [
+          "red"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "red"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "red"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ColorRandomGreen",
+    "description": "Green Card Selection",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "GreenShop",
+    "restockPrice": 2,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.015,
+        "count": 1,
+        "colors": [
+          "green"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1605,
+        "count": 1,
+        "colors": [
+          "green"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8025,
+        "count": 1,
+        "colors": [
+          "green"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "green"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "green"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityCreatureWhite",
+    "description": "White Creatures",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "CreatureShop",
+    "overlaySprite": "Overlay6White",
+    "restockPrice": 4,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1212,
+        "count": 1,
+        "colors": [
+          "white"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8081,
+        "count": 1,
+        "colors": [
+          "white"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "white"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "white"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityCreatureBlue",
+    "description": "Blue Creatures",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "CreatureShop",
+    "overlaySprite": "Overlay6Blue",
+    "restockPrice": 4,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0812,
+        "count": 1,
+        "colors": [
+          "blue"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8122,
+        "count": 1,
+        "colors": [
+          "blue"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "blue"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "blue"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityCreatureBlack",
+    "description": "Black Creatures",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "CreatureShop",
+    "overlaySprite": "Overlay6Black",
+    "restockPrice": 4,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0812,
+        "count": 1,
+        "colors": [
+          "black"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8122,
+        "count": 1,
+        "colors": [
+          "black"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "black"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "black"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityCreatureRed",
+    "description": "Red Creatures",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "CreatureShop",
+    "overlaySprite": "Overlay6Red",
+    "restockPrice": 4,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1608,
+        "count": 1,
+        "colors": [
+          "red"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.804,
+        "count": 1,
+        "colors": [
+          "red"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "red"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "red"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityCreatureGreen",
+    "description": "Green Creatures",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "CreatureShop",
+    "overlaySprite": "Overlay6Green",
+    "restockPrice": 4,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1608,
+        "count": 1,
+        "colors": [
+          "green"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.804,
+        "count": 1,
+        "colors": [
+          "green"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "green"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "green"
+        ],
+        "cardTypes": [
+          "Creature"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityEnchantmentWhite",
+    "description": "White Enchantments",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "EnchantmentShop",
+    "overlaySprite": "Overlay6White",
+    "restockPrice": 4,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.0051,
+        "count": 1,
+        "colors": [
+          "white"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1012,
+        "count": 1,
+        "colors": [
+          "white"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8096,
+        "count": 1,
+        "colors": [
+          "white"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "white"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "white"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityEnchantmentBlue",
+    "description": "Blue Enchantments",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "EnchantmentShop",
+    "overlaySprite": "Overlay6Blue",
+    "restockPrice": 4,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1608,
+        "count": 1,
+        "colors": [
+          "blue"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.804,
+        "count": 1,
+        "colors": [
+          "blue"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "blue"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "blue"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityEnchantmentBlack",
+    "description": "Black Enchantments",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "EnchantmentShop",
+    "overlaySprite": "Overlay6Black",
+    "restockPrice": 4,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.0175,
+        "count": 1,
+        "colors": [
+          "black"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1404,
+        "count": 1,
+        "colors": [
+          "black"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.7018,
+        "count": 1,
+        "colors": [
+          "black"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "black"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "colors": [
+          "black"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityEnchantmentRed",
+    "description": "Red Enchantments",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "EnchantmentShop",
+    "overlaySprite": "Overlay6Red",
+    "restockPrice": 4,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0711,
+        "count": 1,
+        "colors": [
+          "red"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.7107,
+        "count": 1,
+        "colors": [
+          "red"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "red"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "colors": [
+          "red"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityEnchantmentGreen",
+    "description": "Green Enchantments",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "EnchantmentShop",
+    "overlaySprite": "Overlay6Green",
+    "restockPrice": 4,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.0088,
+        "count": 1,
+        "colors": [
+          "green"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1405,
+        "count": 1,
+        "colors": [
+          "green"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.7026,
+        "count": 1,
+        "colors": [
+          "green"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "green"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "colors": [
+          "green"
+        ],
+        "cardTypes": [
+          "Enchantment"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CitySpellWhite",
+    "description": "White Spells",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "InstantShop",
+    "overlaySprite": "Overlay6White",
+    "restockPrice": 4,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.005,
+        "count": 1,
+        "colors": [
+          "white"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1607,
+        "count": 1,
+        "colors": [
+          "white"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8035,
+        "count": 1,
+        "colors": [
+          "white"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "white"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "white"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CitySpellBlue",
+    "description": "Blue Spells",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "InstantShop",
+    "overlaySprite": "Overlay6Blue",
+    "restockPrice": 4,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.025,
+        "count": 1,
+        "colors": [
+          "blue"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1603,
+        "count": 1,
+        "colors": [
+          "blue"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8015,
+        "count": 1,
+        "colors": [
+          "blue"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "blue"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "blue"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CitySpellBlack",
+    "description": "Black Spells",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "InstantShop",
+    "overlaySprite": "Overlay6Black",
+    "restockPrice": 4,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.025,
+        "count": 1,
+        "colors": [
+          "black"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1603,
+        "count": 1,
+        "colors": [
+          "black"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8015,
+        "count": 1,
+        "colors": [
+          "black"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "black"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "black"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CitySpellRed",
+    "description": "Red Spells",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "InstantShop",
+    "overlaySprite": "Overlay6Red",
+    "restockPrice": 4,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.005,
+        "count": 1,
+        "colors": [
+          "red"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1607,
+        "count": 1,
+        "colors": [
+          "red"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8035,
+        "count": 1,
+        "colors": [
+          "red"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "red"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "red"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CitySpellGreen",
+    "description": "Green Spells",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "InstantShop",
+    "overlaySprite": "Overlay6Green",
+    "restockPrice": 4,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.005,
+        "count": 1,
+        "colors": [
+          "green"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1607,
+        "count": 1,
+        "colors": [
+          "green"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.8035,
+        "count": 1,
+        "colors": [
+          "green"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "colors": [
+          "green"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 5,
+        "colors": [
+          "green"
+        ],
+        "cardTypes": [
+          "Instant",
+          "Sorcery"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityLandWhite",
+    "description": "White Lands",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "NonbasicLandShop",
+    "overlaySprite": "Overlay6White",
+    "restockPrice": 7,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.0158,
+        "count": 1,
+        "cardText": "\\Q{\\EW\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0506,
+        "count": 1,
+        "cardText": "\\Q{\\EW\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.506,
+        "count": 1,
+        "cardText": "\\Q{\\EW\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardText": "\\Q{\\EW\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "cardText": "\\Q{\\EW\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityLandBlue",
+    "description": "Blue Lands",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "NonbasicLandShop",
+    "overlaySprite": "Overlay6Blue",
+    "restockPrice": 7,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.0171,
+        "count": 1,
+        "cardText": "\\Q{\\EU\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.041,
+        "count": 1,
+        "cardText": "\\Q{\\EU\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.5472,
+        "count": 1,
+        "cardText": "\\Q{\\EU\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardText": "\\Q{\\EU\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "cardText": "\\Q{\\EU\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityLandBlack",
+    "description": "Black Lands",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "NonbasicLandShop",
+    "overlaySprite": "Overlay6Black",
+    "restockPrice": 7,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.0147,
+        "count": 1,
+        "cardText": "\\Q{\\EB\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.1028,
+        "count": 1,
+        "cardText": "\\Q{\\EB\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.5874,
+        "count": 1,
+        "cardText": "\\Q{\\EB\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardText": "\\Q{\\EB\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "cardText": "\\Q{\\EB\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityLandRed",
+    "description": "Red Lands",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "NonbasicLandShop",
+    "overlaySprite": "Overlay6Red",
+    "restockPrice": 7,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.0137,
+        "count": 1,
+        "cardText": "\\Q{\\ER\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0411,
+        "count": 1,
+        "cardText": "\\Q{\\ER\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.5476,
+        "count": 1,
+        "cardText": "\\Q{\\ER\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardText": "\\Q{\\ER\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "cardText": "\\Q{\\ER\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityLandGreen",
+    "description": "Green Lands",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "NonbasicLandShop",
+    "overlaySprite": "Overlay6Green",
+    "restockPrice": 7,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.0159,
+        "count": 1,
+        "cardText": "\\Q{\\EG\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.038,
+        "count": 1,
+        "cardText": "\\Q{\\EG\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.5073,
+        "count": 1,
+        "cardText": "\\Q{\\EG\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardText": "\\Q{\\EG\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "cardText": "\\Q{\\EG\\Q}\\E",
+        "cardTypes": [
+          "Land"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityArtifactWhite",
+    "description": "White Artifacts",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ArtifactShop",
+    "overlaySprite": "Overlay6White",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.0958,
+        "count": 1,
+        "cardText": "\\Q{\\EW\\Q}\\E",
+        "cardTypes": [
+          "Artifact"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 1,
+        "cardText": "\\Q{\\EW\\Q}\\E",
+        "cardTypes": [
+          "Artifact"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "cardText": "\\Q{\\EW\\Q}\\E",
+        "cardTypes": [
+          "Artifact"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityArtifactBlue",
+    "description": "Blue Artifacts",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ArtifactShop",
+    "overlaySprite": "Overlay6Blue",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.0889,
+        "count": 1,
+        "cardText": "\\Q{\\EU\\Q}\\E",
+        "cardTypes": [
+          "Artifact"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardText": "\\Q{\\EU\\Q}\\E",
+        "cardTypes": [
+          "Artifact"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardText": "\\Q{\\EU\\Q}\\E",
+        "cardTypes": [
+          "Artifact"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityArtifactBlack",
+    "description": "Black Artifacts",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ArtifactShop",
+    "overlaySprite": "Overlay6Black",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.0889,
+        "count": 1,
+        "cardText": "\\Q{\\EB\\Q}\\E",
+        "cardTypes": [
+          "Artifact"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardText": "\\Q{\\EB\\Q}\\E",
+        "cardTypes": [
+          "Artifact"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardText": "\\Q{\\EB\\Q}\\E",
+        "cardTypes": [
+          "Artifact"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityArtifactRed",
+    "description": "Red Artifacts",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ArtifactShop",
+    "overlaySprite": "Overlay6Red",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-S.dck",
+        "probability": 0.0047,
+        "count": 1,
+        "cardText": "\\Q{\\ER\\Q}\\E",
+        "cardTypes": [
+          "Artifact"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.1869,
+        "count": 1,
+        "cardText": "\\Q{\\ER\\Q}\\E",
+        "cardTypes": [
+          "Artifact"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 1,
+        "cardText": "\\Q{\\ER\\Q}\\E",
+        "cardTypes": [
+          "Artifact"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "cardText": "\\Q{\\ER\\Q}\\E",
+        "cardTypes": [
+          "Artifact"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CityArtifactGreen",
+    "description": "Green Artifacts",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ArtifactShop",
+    "overlaySprite": "Overlay6Green",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardText": "\\Q{\\EG\\Q}\\E",
+        "cardTypes": [
+          "Artifact"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardText": "\\Q{\\EG\\Q}\\E",
+        "cardTypes": [
+          "Artifact"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Shapeshifter",
+    "description": "The Shape Shop",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ShapeshifterShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.3333,
+        "count": 1,
+        "subTypes": [
+          "Shapeshifter",
+          "Spellshaper"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Shapeshifter",
+          "Spellshaper"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "subTypes": [
+          "Shapeshifter",
+          "Spellshaper"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Insects",
+    "description": "Exotic Bugs and Creepers",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "InsectShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.4,
+        "count": 1,
+        "subTypes": [
+          "Insect",
+          "Spider"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Insect",
+          "Spider"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "subTypes": [
+          "Insect",
+          "Spider"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Horrors",
+    "description": "Horrific Bargains",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "HorrorShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.6154,
+        "count": 1,
+        "subTypes": [
+          "Horror",
+          "Nightmare"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Horror",
+          "Nightmare"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "subTypes": [
+          "Horror",
+          "Nightmare"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Wizard",
+    "description": "Tim's Prestidigitation",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "WizardShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0711,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Wizard"
+            ]
+          },
+          {
+            "cardText": "Wizard"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.7107,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Wizard"
+            ]
+          },
+          {
+            "cardText": "Wizard"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Wizard"
+            ]
+          },
+          {
+            "cardText": "Wizard"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Wizard"
+            ]
+          },
+          {
+            "cardText": "Wizard"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Cleric",
+    "description": "Indulgences for Sale",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "GodMinigodShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0711,
+        "count": 1,
+        "subTypes": [
+          "Cleric"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.7107,
+        "count": 1,
+        "subTypes": [
+          "Cleric"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Cleric"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "subTypes": [
+          "Cleric"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Undead",
+    "description": "Assorted Afterlives",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "SkeletonShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0179,
+        "count": 1,
+        "subTypes": [
+          "Skeleton",
+          "Spirit",
+          "Vampire",
+          "Specter",
+          "Wraith",
+          "Shade"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.7161,
+        "count": 1,
+        "subTypes": [
+          "Skeleton",
+          "Spirit",
+          "Vampire",
+          "Specter",
+          "Wraith",
+          "Shade"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Skeleton",
+          "Spirit",
+          "Vampire",
+          "Specter",
+          "Wraith",
+          "Shade"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "subTypes": [
+          "Skeleton",
+          "Spirit",
+          "Vampire",
+          "Specter",
+          "Wraith",
+          "Shade"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Animals",
+    "description": "Pet Superstore",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "CatShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.7179,
+        "count": 1,
+        "subTypes": [
+          "Cat",
+          "Dog",
+          "Wolf",
+          "Boar",
+          "Bat",
+          "Frog",
+          "Monkey",
+          "Horse",
+          "Rat",
+          "Squirrel",
+          "Snake"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Cat",
+          "Dog",
+          "Wolf",
+          "Boar",
+          "Bat",
+          "Frog",
+          "Monkey",
+          "Horse",
+          "Rat",
+          "Squirrel",
+          "Snake"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "subTypes": [
+          "Cat",
+          "Dog",
+          "Wolf",
+          "Boar",
+          "Bat",
+          "Frog",
+          "Monkey",
+          "Horse",
+          "Rat",
+          "Squirrel",
+          "Snake"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Elementals",
+    "description": "Elemental Deals",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "SimicShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.6154,
+        "count": 1,
+        "subTypes": [
+          "Elemental",
+          "Avatar",
+          "Incarnation"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Elemental",
+          "Avatar",
+          "Incarnation"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "subTypes": [
+          "Elemental",
+          "Avatar",
+          "Incarnation"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Barbarian",
+    "description": "Axed Prices",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "GiantShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0458,
+        "count": 1,
+        "subTypes": [
+          "Warrior",
+          "Barbarian",
+          "Berserker"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.6107,
+        "count": 1,
+        "subTypes": [
+          "Warrior",
+          "Barbarian",
+          "Berserker"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Warrior",
+          "Barbarian",
+          "Berserker"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "subTypes": [
+          "Warrior",
+          "Barbarian",
+          "Berserker"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Scout",
+    "description": "Scout Out a Deal",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "HumanShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0162,
+        "count": 1,
+        "subTypes": [
+          "Archer",
+          "Ranger",
+          "Scout",
+          "Nomad"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.3235,
+        "count": 1,
+        "subTypes": [
+          "Archer",
+          "Ranger",
+          "Scout",
+          "Nomad"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Archer",
+          "Ranger",
+          "Scout",
+          "Nomad"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "subTypes": [
+          "Archer",
+          "Ranger",
+          "Scout",
+          "Nomad"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Plant",
+    "description": "The Nursery",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "GreenShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.5128,
+        "count": 1,
+        "subTypes": [
+          "Treefolk",
+          "Plant",
+          "Fungus"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Treefolk",
+          "Plant",
+          "Fungus"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "subTypes": [
+          "Treefolk",
+          "Plant",
+          "Fungus"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Rebel",
+    "description": "Shop Without a Cause",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "HumanShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.0735,
+        "count": 1,
+        "subTypes": [
+          "Rebel"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Rebel"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "subTypes": [
+          "Rebel"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Bear",
+    "description": "Oversized Animals",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "CreatureShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.3947,
+        "count": 1,
+        "subTypes": [
+          "Elephant",
+          "Bear",
+          "Ape",
+          "Elk"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Elephant",
+          "Bear",
+          "Ape",
+          "Elk"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "subTypes": [
+          "Elephant",
+          "Bear",
+          "Ape",
+          "Elk"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Beast",
+    "description": "Beastly Bargains",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "DinosaurShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0189,
+        "count": 1,
+        "subTypes": [
+          "Beast"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.3774,
+        "count": 1,
+        "subTypes": [
+          "Beast"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Beast"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "subTypes": [
+          "Beast"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Kavu",
+    "description": "Dominaria Discounts",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "DinosaurShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0133,
+        "count": 1,
+        "subTypes": [
+          "Kavu",
+          "Lhurgoyf",
+          "Atog",
+          "Phelddagrif"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.3324,
+        "count": 1,
+        "subTypes": [
+          "Kavu",
+          "Lhurgoyf",
+          "Atog",
+          "Phelddagrif"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Kavu",
+          "Lhurgoyf",
+          "Atog",
+          "Phelddagrif"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "subTypes": [
+          "Kavu",
+          "Lhurgoyf",
+          "Atog",
+          "Phelddagrif"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Wurm",
+    "description": "Wurm Food",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "DinosaurShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.2055,
+        "count": 1,
+        "subTypes": [
+          "Wurm",
+          "Worm"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Wurm",
+          "Worm"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "subTypes": [
+          "Wurm",
+          "Worm"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Djinn",
+    "description": "You Wished for Deals",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "RogueShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0121,
+        "count": 1,
+        "subTypes": [
+          "Djinn",
+          "Efreet"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.3021,
+        "count": 1,
+        "subTypes": [
+          "Djinn",
+          "Efreet"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 0.9063,
+        "count": 1,
+        "subTypes": [
+          "Djinn",
+          "Efreet"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "subTypes": [
+          "Djinn",
+          "Efreet"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Shadow",
+    "description": "Shadow Sales",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "NecronShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.0563,
+        "count": 1,
+        "subTypes": [
+          "Soltari",
+          "Dauthi",
+          "Thalakos"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 1,
+        "subTypes": [
+          "Soltari",
+          "Dauthi",
+          "Thalakos"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "subTypes": [
+          "Soltari",
+          "Dauthi",
+          "Thalakos"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Thrull",
+    "description": "Wicked Bargains",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "DemonShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.3947,
+        "count": 1,
+        "subTypes": [
+          "Thrull",
+          "Minion"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Thrull",
+          "Minion"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "subTypes": [
+          "Thrull",
+          "Minion"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Griffin",
+    "description": "Winged Things",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "BirdShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.1389,
+        "count": 1,
+        "subTypes": [
+          "Griffin",
+          "Faerie",
+          "Pegasus",
+          "Phoenix"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "subTypes": [
+          "Griffin",
+          "Faerie",
+          "Pegasus",
+          "Phoenix"
+        ]
+      },
+      {
+        "type": "card",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 3,
+        "subTypes": [
+          "Griffin",
+          "Faerie",
+          "Pegasus",
+          "Phoenix"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Phyrexian",
+    "description": "All Will Be On Sale",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "PhyrexianShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0458,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Phyrexian"
+            ]
+          },
+          {
+            "cardText": "Phyrexian"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.6107,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Phyrexian"
+            ]
+          },
+          {
+            "cardText": "Phyrexian"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 2,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Phyrexian"
+            ]
+          },
+          {
+            "cardText": "Phyrexian"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Phyrexian"
+            ]
+          },
+          {
+            "cardText": "Phyrexian"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Illusion",
+    "description": "Unreal Deals",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "ShapeshifterShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-A.dck",
+        "probability": 0.0153,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Illusion"
+            ]
+          },
+          {
+            "cardText": "Illusion"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-B.dck",
+        "probability": 0.3067,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Illusion"
+            ]
+          },
+          {
+            "cardText": "Illusion"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-C.dck",
+        "probability": 1.0,
+        "count": 1,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Illusion"
+            ]
+          },
+          {
+            "cardText": "Illusion"
+          }
+        ]
+      },
+      {
+        "type": "Union",
+        "sourceDeck": "decks/rewards/tier-D.dck",
+        "probability": 1.0,
+        "count": 4,
+        "cardUnion": [
+          {
+            "subTypes": [
+              "Illusion"
+            ]
+          },
+          {
+            "cardText": "Illusion"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ColorlessBoosterPackShop",
+    "description": "Pack from the Past",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "overlaySprite": "Overlay4Colorless",
+    "sprite": "BoosterShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "cardPackShop",
+        "count": 8,
+        "startDate": 1996,
+        "endDate": 2003
+      }
+    ]
+  },
+  {
+    "name": "AlphaBoosterPackShop",
+    "description": "Ancient Archives (94-95)",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "BoosterShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "cardPackShop",
+        "count": 8,
+        "startDate": 1994,
+        "endDate": 1995
+      }
+    ]
+  },
+  {
+    "name": "BetaBoosterPackShop",
+    "description": "The Planar Cache (96-98)",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "BoosterShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "cardPackShop",
+        "count": 8,
+        "startDate": 1996,
+        "endDate": 1998
+      }
+    ]
+  },
+  {
+    "name": "GammaBoosterPackShop",
+    "description": "Urza's Era Packs (98-00)",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "BoosterShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "cardPackShop",
+        "count": 8,
+        "startDate": 1998,
+        "endDate": 2000
+      }
+    ]
+  },
+  {
+    "name": "DeltaBoosterPackShop",
+    "description": "Invasion Era Packs (00-03)",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "BoosterShop",
+    "restockPrice": 5,
+    "rewards": [
+      {
+        "type": "cardPackShop",
+        "count": 8,
+        "startDate": 2000,
+        "endDate": 2003
+      }
+    ]
+  },
+  {
+    "name": "BookStore",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "LegendShop",
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Ana Spellbook"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Ceta Spellbook"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Dega Spellbook"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Necra Spellbook"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Raka Spellbook"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Jalum Robes"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Jayemdae Robes"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Fool's Outfit"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Envoy's Satchel"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Fugitive Spellbook"
+      }
+    ]
+  },
+  {
+    "name": "SketchbookShop",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "LegendShop",
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Revised Edition"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Fifth Edition"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Sixth Edition"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Ice Age"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Mirage"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Tempest"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Urza's Saga"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Mercadian Masques"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Odyssey"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Onslaught"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Portal"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Portal Second Age"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Portal Three Kingdoms"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Starter 1999"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Starter 2000"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Battle Royale"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Landscape Sketchbook - Beatdown Box Set"
+      }
+    ]
+  },
+  {
+    "name": "ArtificerBazaar",
+    "description": "The Artificer's Bazaar",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "LegendShop",
+    "restockPrice": 10,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Aeolipile"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Serrated Quiver"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Elixir of Vitality"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Hivecaller's Staff"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Dragon Mask"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Coral Helm"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Urza's Armor"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Whalebone Glider"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Amulet of Kroog"
+      }
+    ]
+  },
+  {
+    "name": "ArtificerBazaar2",
+    "description": "The Artificer's Bazaar",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "LegendShop",
+    "restockPrice": 10,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Rod of Ruin"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Triangle of War"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Shield of the Ages"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Roc Egg"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Jester's Cap"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Crown of the Ages"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Fool's Outfit"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Sandals of Speed"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Catalyst Stone"
+      }
+    ]
+  },
+  {
+    "name": "ArtificerBazaar3",
+    "description": "The Artificer's Bazaar",
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "LegendShop",
+    "restockPrice": 10,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Gauntlets of Chaos"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Scythe of Yawgmoth"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Claws of Gix"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Life Chisel"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Splicer's Charm"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Torturer's Hood"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Yawgmoth's Armor"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Joven's Boots"
+      }
+    ]
+  }
+]

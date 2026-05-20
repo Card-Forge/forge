@@ -2,7 +2,7 @@ Name:Segovian Sword
 ManaCost:3
 Types:Artifact Equipment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ For Segovia! (When this Equipment enters the battlefield, create a -1/-1 blue Squid creature token, then attach this to it. Yes, it's a -1/-1 creature.)
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_m1_m1_squid | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBAttach
+SVar:TrigToken:DB$ Token | TokenScript$ u_m1_m1_squid | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token & Type$Squid

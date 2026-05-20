@@ -1,5 +1,4 @@
-# Forge server port. Values under 1024 won't work on Mac OSX or on the various
-# *nixes.
+# Forge server port. Values under 1024 won't work on Mac OSX or on the various *nixes.
 NET_PORT=36743
 #This determines if Forge should attempt to open a port automatically, on supported routers, using UPnP
 UPnP=ASK # ASK, ALWAYS, NEVER

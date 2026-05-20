@@ -1,0 +1,9 @@
+Name:Moonlit Meditation
+ManaCost:2 U
+Types:Enchantment Aura
+K:Enchant:Creature.YouCtrl,Artifact.YouCtrl:artifact or creature you control
+DeckHints:Type$Creature|Artifact
+R:Event$ CreateToken | ActiveZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ0 | ValidPlayer$ You | Optional$ True | Layer$ Copy | ReplaceWith$ DBCopy | Description$ The first time you would create one or more tokens each turn, you may instead create that many tokens that are copies of enchanted permanent.
+SVar:DBCopy:DB$ ReplaceToken | Type$ ReplaceToken | ValidChoices$ Card.EnchantedBy | TokenScript$ Chosen
+SVar:X:Count$ThisTurnEntered_Battlefield_Card.tokenCreated+YouOwn
+Oracle:Enchant artifact or creature you control\nThe first time you would create one or more tokens each turn, you may instead create that many tokens that are copies of enchanted permanent.

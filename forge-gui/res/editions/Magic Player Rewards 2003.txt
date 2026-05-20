@@ -4,13 +4,15 @@ Date=2003-01-01
 Name=Magic Player Rewards 2003
 Type=Promo
 ScryfallCode=P03
+TokensCode=P03
 
 [cards]
 1 R Voidmage Prodigy @Christopher Moeller
 
 [tokens]
-g_1_1_insect
-c_1_1_sliver
-g_2_2_bear
-r_1_1_goblin
-b_x_x_demon_flying
+2 g_1_1_insect @Anthony S. Waters
+3 c_1_1_sliver @Tony Szczudlo
+4 g_2_2_bear @Glen Angus
+5 r_1_1_goblin @Darrell Riche
+6 b_x_x_demon_flying @Pete Venters
+7 r_4_4_bird_flying @Edward P. Beard, Jr.

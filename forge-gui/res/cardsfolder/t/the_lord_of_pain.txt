@@ -6,5 +6,5 @@ K:Menace
 S:Mode$ CantGainLife | ValidPlayer$ Player.Opponent | Description$ Your opponents can't gain life.
 T:Mode$ SpellCast | ValidActivatingPlayer$ Player | ActivatorThisTurnCast$ EQ1 | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts their first spell each turn, choose another target player. CARDNAME deals damage equal to that spell's mana value to the chosen player.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player.!TriggeredActivator | NumDmg$ X
-SVar:X:TriggeredStackInstance$CardManaCostLKI
+SVar:X:TriggeredSpellAbility$CardManaCostLKI
 Oracle:Menace\nYour opponents can't gain life.\nWhenever a player casts their first spell each turn, choose another target player. The Lord of Pain deals damage equal to that spell's mana value to the chosen player.

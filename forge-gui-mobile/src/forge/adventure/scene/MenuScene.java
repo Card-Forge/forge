@@ -157,7 +157,7 @@ public class MenuScene extends UIScene {
                         loadDialog(option);
 
                         if (option.callback != null) {
-                            option.callback.run(true);
+                            option.callback.accept(true);
                         }
                     });
                     B.getTextraLabel().setWrap(true); //We want this to wrap in case it's a wordy choice.
@@ -308,7 +308,7 @@ public class MenuScene extends UIScene {
         }
         dialog.show(stage, Actions.show());
         dialog.setPosition((stage.getWidth() - dialog.getWidth()) / 2, (stage.getHeight() - dialog.getHeight()) / 2);
-        if (Forge.hasGamepad() && !dialogButtonMap.isEmpty())
+        if (Forge.hasExternalInput() && !dialogButtonMap.isEmpty())
             stage.setKeyboardFocus(dialogButtonMap.first());
     }
 

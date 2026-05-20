@@ -1,0 +1,7 @@
+Name:Memorial Team Leader
+ManaCost:3 R
+Types:Creature Kavu Soldier
+PT:4/3
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | Condition$ PlayerTurn | Description$ During your turn, other creatures you control get +1/+0.
+K:Warp:1 R
+Oracle:During your turn, other creatures you control get +1/+0.\nWarp {1}{R} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)

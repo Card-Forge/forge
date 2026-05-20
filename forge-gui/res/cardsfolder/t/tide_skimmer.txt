@@ -4,5 +4,5 @@ Types:Creature Drake
 PT:2/3
 K:Flying
 T:Mode$ AttackersDeclared | Execute$ TrigDraw | ValidAttackers$ Creature.withFlying | ValidAttackersAmount$ GE2 | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with two or more creatures with flying, draw a card.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:TrigDraw:DB$ Draw
 Oracle:Flying\nWhenever you attack with two or more creatures with flying, draw a card.

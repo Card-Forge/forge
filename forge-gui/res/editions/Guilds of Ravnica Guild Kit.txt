@@ -2,7 +2,6 @@
 Code=GK1
 Date=2018-11-02
 Name=Guilds of Ravnica Guild Kit
-Code2=GK1
 Type=Boxed_Set
 ScryfallCode=GK1
 TokenFallbackCode=GRN
@@ -137,12 +136,15 @@ TokenFallbackCode=GRN
 127 L Forest @Alayna Danner
 
 [tokens]
-2 ub_1_1_horror_flying @Adam Paquette
+# Should be 2
+1☇ ub_1_1_horror_flying @Adam Paquette
 3 u_3_3_weird_defender_flying @Hideaki Takamura
-4 r_1_1_goblin @Karl Kopinski
+# Should be 4
+3☇ r_1_1_goblin @Karl Kopinski
 5 g_1_1_saproling @Raoul Vitale
-6 rw_1_1_soldier_haste @David Palumbo
-7 g_3_3_centaur @Slawomir Maniak
+6 rw_1_1_soldier @David Palumbo
+# Should be 7
+10☇ g_3_3_centaur @Slawomir Maniak
 8 g_1_1_saproling @Brad Rigney
 9 g_5_5_wurm_trample @Anthony Palumbo
 10 gw_8_8_elemental_vigilance @Yeong-Hao Han

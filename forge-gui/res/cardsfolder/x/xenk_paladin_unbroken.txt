@@ -1,5 +1,5 @@
 Name:Xenk, Paladin Unbroken
-AltName:Rashel, Fist of Torm
+Variant:UniversesWithin:FlavorName:Rashel, Fist of Torm
 ManaCost:2 W W
 Types:Legendary Creature Human Knight
 PT:2/4

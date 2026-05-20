@@ -1,13 +1,23 @@
 package forge.game.keyword;
 
 public class KeywordWithAmount extends KeywordInstance<KeywordWithAmount> {
-    private int amount;
-    private boolean withX;
+    protected int amount;
+    protected boolean withX;
     private String extra = "";
 
     @Override
     public int getAmount() {
         return amount;
+    }
+    @Override
+    public String getAmountString() {
+        return withX ? "X" : String.valueOf(amount);
+    }
+
+    public String getTitle() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getKeyword()).append(" ").append(getAmountString());
+        return sb.toString();
     }
 
     @Override

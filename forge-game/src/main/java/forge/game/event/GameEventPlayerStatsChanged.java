@@ -2,26 +2,29 @@ package forge.game.event;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
+import forge.game.card.CardView;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
 /**
  * This means card's characteristics have changed on server, clients must re-request them
  */
-public class GameEventPlayerStatsChanged extends GameEvent {
+public record GameEventPlayerStatsChanged(Collection<PlayerView> players, boolean updateCards, Collection<CardView> allCards) implements GameEvent {
 
-    public final Collection<Player> players;
-    public final boolean updateCards;
-    public GameEventPlayerStatsChanged(Player affected, boolean updateCards) {
-        players = Arrays.asList(affected);
-        this.updateCards = updateCards;
+    public GameEventPlayerStatsChanged(Collection<Player> players, boolean updateCards) {
+        this(PlayerView.getCollection(players), updateCards,
+             updateCards ? players.stream().flatMap(p -> StreamSupport.stream(p.getAllCards().spliterator(), false))
+                     .map(CardView::get).collect(Collectors.toList()) : Collections.emptyList());
     }
 
-    public GameEventPlayerStatsChanged(Collection<Player> affected, boolean updateCards) {
-        players = affected;
-        this.updateCards = updateCards;
+    public GameEventPlayerStatsChanged(Player affected, boolean updateCards) {
+        this(Arrays.asList(affected), updateCards);
     }
 
     /* (non-Javadoc)
@@ -29,7 +32,6 @@ public class GameEventPlayerStatsChanged extends GameEvent {
      */
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
-        // TODO Auto-generated method stub
         return visitor.visit(this);
     }
 

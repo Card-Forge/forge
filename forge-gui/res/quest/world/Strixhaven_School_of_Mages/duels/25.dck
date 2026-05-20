@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Alouroua
+Title=Alouroua
+Icon=Alouroua.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/Casey_Miller_-_Mono-Blue_Combo_(Standard,_#1143529).dck
+Deck Type=constructed
+
+[Main]
+3 Alirios, Enraptured
+4 Glasspool Mimic
+4 Corridor Monitor
+4 Barrin, Tolarian Archmage
+4 Gadwick, the Wizened
+4 Manifestation Sage
+4 Thassa, Deep-Dwelling
+4 Thassa's Oracle
+4 Nyx Lotus
+4 Omen of the Sea
+2 Castle Vantress
+19 Island
+[Sideboard]
+2 Disdainful Stroke
+2 Test of Talents
+3 Aegis Turtle
+4 Mystical Dispute
+4 Bubble Snare

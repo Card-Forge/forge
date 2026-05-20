@@ -16,7 +16,9 @@ Image=radiants_revenge.jpg
 1 Drifting Meadow|USG
 1 Erase|ULG
 1 Fog Bank|USG
-12 Island|USG
+4 Island|USG|1
+4 Island|USG|2
+4 Island|USG|3
 2 Miscalculation|ULG
 1 Mobile Fort|USG
 1 Mother of Runes|ULG
@@ -24,7 +26,9 @@ Image=radiants_revenge.jpg
 2 Opportunity|ULG
 1 Pacifism|USG
 2 Path of Peace|USG
-11 Plains|USG
+4 Plains|USG|1
+4 Plains|USG|2
+3 Plains|USG|3
 1 Power Sink|USG
 1 Radiant's Dragoons|ULG
 3 Radiant's Judgment|ULG

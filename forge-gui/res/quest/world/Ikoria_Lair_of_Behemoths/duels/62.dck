@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=BlackPanther
+Title=BlackPanther
+Icon=BlackPanther.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Albert_Chyn_-_Jeskai_Tempo_(Modern,_#969517).dck
+Deck Type=constructed
+
+[Main]
+1 Grim Lavamancer
+2 Young Pyromancer
+2 Monastery Swiftspear
+4 Delver of Secrets
+4 Snapcaster Mage
+1 Abrade
+1 Logic Knot
+1 Unsubstantiate
+1 Surgical Extraction
+1 Vapor Snag
+1 Remand
+1 Spell Snare
+1 Spell Pierce
+2 Force of Negation
+3 Lightning Helix
+4 Opt
+4 Lightning Bolt
+4 Path to Exile
+1 Sleight of Hand
+2 Serum Visions
+1 Spirebluff Canal
+1 Sacred Foundry
+1 Fiery Islet
+1 Plains
+1 Mountain
+2 Island
+2 Steam Vents
+2 Hallowed Fountain
+4 Flooded Strand
+4 Scalding Tarn
+[Sideboard]
+1 Dovin's Veto
+1 Dusk // Dawn
+1 Lurrus of the Dream-Den
+1 Gideon, Ally of Zendikar
+1 Vendilion Clique
+1 Abrade
+1 Izzet Staticaster
+2 Geist of Saint Traft
+2 Ancestral Vision
+2 Damping Sphere
+2 Surgical Extraction

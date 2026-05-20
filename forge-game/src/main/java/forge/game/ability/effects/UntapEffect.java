@@ -105,10 +105,7 @@ public class UntapEffect extends SpellAbilityEffect {
 
             CardCollectionView list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield),
                     valid, sa.getActivatingPlayer(), sa.getHostCard(), sa);
-            // the few mandatory are handled differently
-            if (!mandatory) {
-                list = CardLists.filter(list, CardPredicates.TAPPED);
-            }
+            list = CardLists.filter(list, c -> c.canUntap(null, false));
 
             CardCollection untapped = new CardCollection();
             final CardCollectionView selected = p.getController().chooseCardsForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectCardToUntap"), mandatory ? num : 0, num, !mandatory, null);
@@ -124,8 +121,7 @@ public class UntapEffect extends SpellAbilityEffect {
         if (!map.isEmpty()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Map, map);
-            sa.getActivatingPlayer().getGame().getTriggerHandler()
-                    .runTrigger(TriggerType.UntapAll, runParams, false);
+            sa.getActivatingPlayer().getGame().getTriggerHandler().runTrigger(TriggerType.UntapAll, runParams, false);
         }
     }
 

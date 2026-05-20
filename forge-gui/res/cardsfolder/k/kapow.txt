@@ -1,0 +1,7 @@
+Name:Kapow!
+Variant:UniversesWithin:FlavorName:Perilous Lunge
+ManaCost:2 G
+Types:Sorcery
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBFight | SpellDescription$ Put a +1/+1 counter on target creature you control. It fights target creature an opponent controls. (Each deals damage equal to its power to the other.)
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+Oracle:Put a +1/+1 counter on target creature you control. It fights target creature an opponent controls. (Each deals damage equal to its power to the other.)

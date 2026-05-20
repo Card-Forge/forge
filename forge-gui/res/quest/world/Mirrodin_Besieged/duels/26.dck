@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Rocky
+Title=Rocky
+Icon=Rocky.jpg
+Difficulty=Medium
+Description=Mirrodin_Besieged/Nationals_2011_-_New_Zealand/Paul_Carson-Wenmoth_-_Valakut_Ramp_(Standard,_#17928).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Oracle of Mul Daya
+4 Primeval Titan
+4 Solemn Simulacrum
+2 Wurmcoil Engine
+2 Harrow
+4 Summoning Trap
+2 Cultivate
+4 Explore
+4 Rampant Growth
+4 Khalni Heart Expedition
+2 Evolving Wilds
+5 Forest
+10 Mountain
+4 Raging Ravine
+1 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+2 Verdant Catacombs
+[Sideboard]
+3 Creeping Corrosion
+4 Nature's Claim
+4 Obstinate Baloth
+4 Pyroclasm

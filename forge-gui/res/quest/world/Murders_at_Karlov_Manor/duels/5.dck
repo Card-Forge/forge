@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Joker
+Title=Joker
+Icon=Joker.jpg
+Difficulty=Medium
+Description=./Standard/Murders_at_Karlov_Manor/Abe_Kenichi_-_WR_Blitz_(Standard,_#1980993).dck
+Deck Type=constructed
+
+[Main]
+4 Voldaren Epicure
+4 Resolute Reinforcements
+2 Yotian Frontliner
+4 Knight-Errant of Eos
+4 Imodane's Recruiter
+4 Warden of the Inner Sky
+4 Novice Inspector
+2 Witchstalker Frenzy
+4 Gleeful Demolition
+4 Case of the Gateway Express
+2 Warleader's Call
+4 Plains
+4 Mountain
+4 Battlefield Forge
+3 Cavern of Souls
+3 Sundown Pass
+2 Eiganjo, Seat of the Empire
+2 Sokenzan, Crucible of Defiance
+[Sideboard]
+2 Soul-Guide Lantern
+3 Knockout Blow
+2 Destroy Evil
+1 Invasion of Gobakhan
+3 Surge of Salvation
+1 Witchstalker Frenzy
+3 Kutzil's Flanker

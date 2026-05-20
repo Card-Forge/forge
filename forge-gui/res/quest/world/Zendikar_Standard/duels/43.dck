@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Lazav
+Title=Lazav
+Icon=Lazav.jpg
+Difficulty=Easy
+Description=Zendikar/Zendikar_Game_Day_-_Cyborg_One_-_USA/Ben_Rowles_-_Vampires_(Standard,_#3527).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodghast
+4 Gatekeeper of Malakir
+4 Malakir Bloodwitch
+4 Vampire Hexmage
+4 Vampire Nighthawk
+4 Vampire Nocturnus
+4 Tendrils of Corruption
+4 Feast of Blood
+2 Mind Sludge
+4 Sign in Blood
+4 Marsh Flats
+14 Swamp
+4 Verdant Catacombs
+[Sideboard]
+4 Deathmark
+4 Doom Blade
+4 Duress
+3 Infest

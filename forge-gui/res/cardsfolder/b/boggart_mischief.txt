@@ -1,0 +1,10 @@
+Name:Boggart Mischief
+ManaCost:2 B
+Types:Kindred Enchantment Goblin
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, you may blight 1. If you do, create two 1/1 black and red Goblin creature tokens. (To blight 1, put a -1/-1 counter on a creature you control.)
+SVar:TrigToken:AB$ Token | Cost$ Blight<1> | TokenAmount$ 2 | TokenScript$ br_1_1_goblin | TokenOwner$ You
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Goblin+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a Goblin creature you control dies, each opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+AI:RemoveDeck:Random
+Oracle:When this enchantment enters, you may blight 1. If you do, create two 1/1 black and red Goblin creature tokens. (To blight 1, put a -1/-1 counter on a creature you control.)\nWhenever a Goblin creature you control dies, each opponent loses 1 life and you gain 1 life.

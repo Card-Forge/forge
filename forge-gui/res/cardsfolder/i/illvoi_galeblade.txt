@@ -1,0 +1,8 @@
+Name:Illvoi Galeblade
+ManaCost:U
+Types:Creature Jellyfish Warrior
+PT:1/1
+K:Flash
+K:Flying
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+Oracle:Flash\nFlying\n{2}, Sacrifice this creature: Draw a card.

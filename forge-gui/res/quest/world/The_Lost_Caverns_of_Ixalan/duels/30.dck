@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Magneto
+Title=Magneto
+Icon=Magneto.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/ARCll_-_Domain_Ramp_(Standard,_#1975303).dck
+Deck Type=constructed
+
+[Main]
+4 Archangel of Wrath
+1 Imodane's Recruiter
+4 Topiary Stomper
+3 Atraxa, Grand Unifier
+4 Herd Migration
+1 Depopulate
+4 Sunfall
+4 Leyline Binding
+1 Spelunking
+4 Up the Beanstalk
+1 Temporary Lockdown
+3 Invasion of Zendikar
+4 Cavern of Souls
+4 Jetmir's Garden
+4 Plains
+4 Spara's Headquarters
+1 Boseiju, Who Endures
+4 Ziatora's Proving Ground
+1 Island
+1 Swamp
+3 Forest
+[Sideboard]
+2 Destroy Evil
+1 Chrome Host Seedshark
+2 Kutzil's Flanker
+3 Temporary Lockdown
+2 Tranquil Frillback
+1 The Wandering Emperor
+1 The Stone Brain
+3 Negate

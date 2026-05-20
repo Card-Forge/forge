@@ -21,6 +21,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JLayeredPane;
@@ -34,6 +35,8 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
 import forge.gui.framework.ICDoc;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
@@ -61,7 +64,6 @@ public class CHand implements ICDoc {
         v0.getHandArea().addCardPanelMouseListener(new CardPanelMouseAdapter() {
             @Override
             public void mouseDragEnd(final CardPanel dragPanel, final MouseEvent evt) {
-                //update index of dragged card in hand zone to match new index within hand area
                 final int index = CHand.this.view.getHandArea().getCardPanels().indexOf(dragPanel);
                 synchronized (ordering) {
                     ordering.remove(dragPanel.getCard());
@@ -85,23 +87,6 @@ public class CHand implements ICDoc {
 
         final HandArea p = view.getHandArea();
 
-        final VField vf = matchUI.getFieldViewFor(player);
-        if (vf == null) {
-            return;
-        }
-        final Rectangle rctLibraryLabel = vf.getDetailsPanel().getLblLibrary().getBounds();
-
-        // Animation starts from the library label and runs to the hand panel.
-        // This check prevents animation running if label hasn't been realized yet.
-        if (rctLibraryLabel.isEmpty()) {
-            return;
-        }
-
-        // Don't perform animations if the user's in another tab.
-        if (!matchUI.isCurrentScreen()) {
-            return;
-        }
-
         //update card panels in hand area
         final List<CardView> cards;
         if (player.getHand() == null) {
@@ -115,6 +100,16 @@ public class CHand implements ICDoc {
         synchronized (ordering) {
             ordering.clear();
             ordering.addAll(cards);
+
+            // Sort hand by CMC/color at the UI layer. This duplicates the game-layer sort in
+            // PlayerZone.onChanged(), but is necessary because network clients only have CardViews
+            // (no access to the game model), and because toggling the preference mid-game needs
+            // to take effect immediately without waiting for a zone change event.
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_ORDER_HAND)) {
+                ordering.sort(Comparator.comparingInt((CardView cv) -> cv.getCurrentState().getManaCost().getCMC())
+                        .thenComparing(cv -> cv.getCurrentState().getColors().getOrderWeight())
+                        .thenComparing(cv -> cv.getCurrentState().getName()));
+            }
         }
 
         final List<CardPanel> placeholders = new ArrayList<>();
@@ -122,18 +117,38 @@ public class CHand implements ICDoc {
 
         for (final CardView card : ordering) {
             CardPanel cardPanel = p.getCardPanel(card.getId());
-            if (cardPanel == null) { //create placeholders for new cards
+            if (cardPanel == null) {
                 cardPanel = new CardPanel(matchUI, card);
                 cardPanel.setDisplayEnabled(false);
                 placeholders.add(cardPanel);
-            }
-            else {
+            } else {
                 cardPanel.setCard(card); //ensure card view is updated
             }
             cardPanels.add(cardPanel);
         }
 
         p.setCardPanels(cardPanels);
+        view.updateTabLabel(ordering.size());
+
+        final VField vf = matchUI.getFieldViewFor(player);
+        if (vf == null) {
+            revealPlaceholders(placeholders);
+            return;
+        }
+        final Rectangle rctLibraryLabel = vf.getDetailsPanel().getLblLibrary().getBounds();
+
+        // Animation starts from the library label and runs to the hand panel.
+        // If that label has not been realized yet, the hand should still update.
+        if (rctLibraryLabel.isEmpty()) {
+            revealPlaceholders(placeholders);
+            return;
+        }
+
+        // Don't perform animations if the user's in another tab.
+        if (!matchUI.isCurrentScreen()) {
+            revealPlaceholders(placeholders);
+            return;
+        }
 
         //animate new cards into positions defined by placeholders
         final JLayeredPane layeredPane = Singletons.getView().getFrame().getLayeredPane();
@@ -164,6 +179,12 @@ public class CHand implements ICDoc {
             else {
                 Animation.moveCard(placeholder);
             }
+        }
+    }
+
+    private void revealPlaceholders(final List<CardPanel> placeholders) {
+        for (final CardPanel placeholder : placeholders) {
+            Animation.moveCard(placeholder);
         }
     }
 

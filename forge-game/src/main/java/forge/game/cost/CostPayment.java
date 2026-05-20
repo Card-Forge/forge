@@ -123,8 +123,10 @@ public class CostPayment extends ManaConversionMatrix {
     public final void refundPayment() {
         Card sourceCard = this.ability.getHostCard();
         for (final CostPart part : this.paidCostParts) {
-            if (part.isUndoable()) {
-                part.refund(sourceCard);
+            part.refund(sourceCard);
+            // Clear lists to prevent accumulation across multiple cancelled activations
+            if (part instanceof CostPartWithList) {
+                ((CostPartWithList) part).resetLists();
             }
         }
 
@@ -161,10 +163,10 @@ public class CostPayment extends ManaConversionMatrix {
             game.costPaymentStack.pop(); // cost is resolved
         }
 
-        // this clears lists used for undo. 
-        for (final CostPart part1 : this.paidCostParts) {
-            if (part1 instanceof CostPartWithList) {
-                ((CostPartWithList) part1).resetLists();
+        // clear lists used for undo
+        for (final CostPart part : this.paidCostParts) {
+            if (part instanceof CostPartWithList listCost) {
+                listCost.resetLists();
             }
         }
 
@@ -270,11 +272,6 @@ public class CostPayment extends ManaConversionMatrix {
             return manaChoices.get(0);
         }
 
-        // if we are simulating mana payment for the human controller, use the first mana available (and avoid prompting the human player)
-        if (!player.getController().isAI()) {
-            return manaChoices.get(0);
-        }
-
         // Let them choose then
         return player.getController().chooseManaFromPool(manaChoices);
     }
@@ -282,7 +279,7 @@ public class CostPayment extends ManaConversionMatrix {
     private static List<Pair<Mana, Integer>> selectManaToPayFor(final ManaPool manapool, final ManaCostShard shard,
             final SpellAbility saBeingPaidFor, final byte colorsPaid, Map<String, Integer> xManaCostPaidByColor) {
         final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<>();
-        for (final Mana thisMana : manapool) {
+        for (final Mana thisMana : Lists.newArrayList(manapool)) {
             if (shard == ManaCostShard.COLORED_X && !ManaCostBeingPaid.canColoredXShardBePaidByColor(MagicColor.toShortString(thisMana.getColor()), xManaCostPaidByColor)) {
                 continue;
             }

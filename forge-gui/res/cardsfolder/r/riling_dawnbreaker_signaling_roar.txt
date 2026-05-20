@@ -14,5 +14,5 @@ ALTERNATE
 Name:Signaling Roar
 ManaCost:1 W
 Types:Sorcery Omen
-A:SP$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_soldier | TokenOwner$ You | SpellDescription$ Create a 2/2 white Soldier creature token. (Then shuffle this card into its owner's library.)
+A:SP$ Token | TokenScript$ w_2_2_soldier | TokenOwner$ You | SpellDescription$ Create a 2/2 white Soldier creature token. (Then shuffle this card into its owner's library.)
 Oracle:Create a 2/2 white Soldier creature token. (Then shuffle this card into its owner's library.)

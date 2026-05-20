@@ -1,0 +1,30 @@
+{
+  "name": "Green bad",
+  "mainDeck": [
+    {
+      "count": 34,
+      "colors": [
+        "Green"
+      ],
+      "rarity": [
+        "Common",
+        "Uncommon"
+      ]
+    },
+    {
+      "count": 4,
+      "colors": [
+        "Green"
+      ],
+      "rarity": [
+        "Rare",
+        "Mythic Rare"
+      ]
+    },
+    {
+      "type": "card",
+      "count": 22,
+      "cardName": "Forest|7ED"
+    }
+  ]
+}

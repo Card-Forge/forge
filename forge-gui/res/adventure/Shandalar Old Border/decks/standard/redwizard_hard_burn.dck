@@ -1,0 +1,21 @@
+[metadata]
+Name=Master Red Wizard - Mono Red Burn
+[Main]
+22 Mountain|LEA
+2 Blood Moon|DRK
+4 Lightning Bolt|LEA
+4 Chain Lightning|LEG
+2 Wheel of Fortune|LEA
+2 Price of Progress|EXO
+4 Ball Lightning|DRK
+2 Fork|LEA
+2 Pyroclasm|ICE
+4 Flametongue Kavu|PLS
+4 Blistering Firecat|ONS
+2 Sulfuric Vortex|SCG
+2 Smoke|LEA
+4 Rolling Earthquake|PTK
+
+[StartInBattle_Reference]
+1 Mox Ruby|LEA
+1 Wall of Fire|LEA

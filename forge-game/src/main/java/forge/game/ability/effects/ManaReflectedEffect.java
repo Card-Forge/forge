@@ -17,6 +17,15 @@ import forge.util.Localizer;
 
 public class ManaReflectedEffect extends SpellAbilityEffect {
 
+    @Override
+    public void buildSpellAbility(SpellAbility sa) {
+        super.buildSpellAbility(sa);
+        sa.setManaPart(new AbilityManaPart(sa, sa.getMapParams()));
+        if (sa.getParent() == null) {
+            sa.setUndoable(true); // will try at least
+        }
+    }
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -95,12 +104,10 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
                     return "0";
                 } else if (colors.size() == 1) {
                     baseMana = MagicColor.toShortString(colors.iterator().next());
+                } else if (colors.contains("colorless")) {
+                    baseMana = MagicColor.toShortString(player.getController().chooseColorAllowColorless(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa.getHostCard(), ColorSet.fromNames(colors)));
                 } else {
-                    if (colors.contains("colorless")) {
-                        baseMana = MagicColor.toShortString(player.getController().chooseColorAllowColorless(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa.getHostCard(), ColorSet.fromNames(colors)));
-                    } else {
-                        baseMana = MagicColor.toShortString(player.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, ColorSet.fromNames(colors)));
-                    }
+                    baseMana = MagicColor.toShortString(player.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa, ColorSet.fromNames(colors)));
                 }
             } else {
                 colorMenu = ColorSet.fromMask(mask);
@@ -114,19 +121,16 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
 
         if (amount == 0) {
             sb.append("0");
+        } else if (StringUtils.isNumeric(baseMana)) {
+            // if baseMana is an integer(colorless), just multiply amount and baseMana
+            final int base = Integer.parseInt(baseMana);
+            sb.append(base * amount);
         } else {
-            if (StringUtils.isNumeric(baseMana)) {
-                // if baseMana is an integer(colorless), just multiply amount
-                // and baseMana
-                final int base = Integer.parseInt(baseMana);
-                sb.append(base * amount);
-            } else {
-                for (int i = 0; i < amount; i++) {
-                    if (i != 0) {
-                        sb.append(" ");
-                    }
-                    sb.append(baseMana);
+            for (int i = 0; i < amount; i++) {
+                if (i != 0) {
+                    sb.append(" ");
                 }
+                sb.append(baseMana);
             }
         }
         return sb.toString();

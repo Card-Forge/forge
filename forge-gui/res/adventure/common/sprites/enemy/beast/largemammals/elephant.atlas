@@ -1,0 +1,98 @@
+elephant.png
+size: 381,81
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar 
+  xy: 256, 32
+  size: 16, 16
+Idle 
+  xy: 0, 1
+  size: 28, 18
+Idle 
+  xy: 32, 1
+  size: 28, 18
+Idle 
+  xy: 64, 1
+  size: 28, 18
+Idle 
+  xy: 96, 1
+  size: 28, 18
+Idle 
+  xy: 128, 1
+  size: 28, 18
+Idle 
+  xy: 160, 1
+  size: 28, 18
+  Idle 
+  xy: 192, 1
+  size: 28, 18
+Idle 
+  xy: 224, 1
+  size: 28, 18
+Idle 
+  xy: 256, 1
+  size: 28, 18
+Idle 
+  xy: 288, 1
+  size: 28, 18
+Idle 
+  xy: 320, 1
+  size: 28, 18
+Idle 
+  xy: 352, 1
+  size: 28, 18
+Walk
+  xy: 6, 32
+  size: 26, 18
+Walk
+  xy: 38, 32
+  size: 26, 18
+Walk
+  xy: 70, 32
+  size: 26, 18
+Walk
+  xy: 102, 32
+  size: 26, 18
+Walk
+  xy: 134, 32
+  size: 26, 18
+Walk
+  xy: 166, 32
+  size: 26, 18
+Death
+  xy: 4, 63
+  size: 24, 16
+Death
+  xy: 36, 63
+  size: 24, 16
+Death
+  xy: 68, 63
+  size: 24, 16
+Death
+  xy: 100, 63
+  size: 24, 16
+Death
+  xy: 132, 63
+  size: 24, 16
+Death
+  xy: 164, 63
+  size: 24, 16
+Death
+  xy: 196, 63
+  size: 24, 16
+Death
+  xy: 228, 63
+  size: 24, 16
+Death
+  xy: 260, 63
+  size: 24, 16
+Death
+  xy: 292, 63
+  size: 24, 16
+Death
+  xy: 324, 63
+  size: 24, 16
+Death
+  xy: 356, 63
+  size: 24, 16

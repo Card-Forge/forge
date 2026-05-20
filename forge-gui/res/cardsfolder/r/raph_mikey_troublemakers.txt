@@ -1,0 +1,9 @@
+Name:Raph & Mikey, Troublemakers
+ManaCost:5 RG RG
+Types:Legendary Creature Mutant Ninja Turtle
+PT:7/7
+K:Trample
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDigUntil | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attack, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield tapped and attacking and the rest on the bottom of your library in a random order.
+SVar:TrigDigUntil:DB$ DigUntil | Valid$ Creature | ValidDescription$ Creature | FoundDestination$ Battlefield | Tapped$ True | Attacking$ True | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True
+Oracle:Trample, haste\nWhenever Raph & Mikey attack, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield tapped and attacking and the rest on the bottom of your library in a random order.

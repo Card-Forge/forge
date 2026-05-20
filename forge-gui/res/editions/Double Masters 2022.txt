@@ -960,3 +960,7 @@ ScryfallCode=2X2
 20 bg_1_1_worm @Chuck Lukacs
 21 c_3_3_a_phyrexian_golem @Volkan Baǵa
 22 c_a_treasure_sac @Alayna Danner
+
+[other]
+23 emblem_liliana_the_last_hope @Jaime Jones
+24 emblem_wrenn_and_six @Chase Stone

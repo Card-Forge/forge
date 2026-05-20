@@ -22,9 +22,6 @@ import forge.util.Localizer;
 import forge.util.MyRandom;
 
 public class FlipCoinEffect extends SpellAbilityEffect {
-
-    public static boolean[] BOTH_CHOICES = new boolean[] {false, true};
-
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -170,18 +167,19 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         return flipCoins(flipper, sa, amount, "");
     }
     public static int flipCoins(final Player flipper, final SpellAbility sa, final int amount, final String info) {
-        int multiplier = getFlipMultiplier(flipper);
+        int multiplier = StaticAbilityFlipCoinMod.getFlipMultiplier(flipper);
         int result = 0;
         boolean won = false;
         do {
             Boolean fixedResult = StaticAbilityFlipCoinMod.fixedResult(flipper);
             for (int i = 0; i < amount; i++) {
-                won = flipCoin(flipper, sa, multiplier, fixedResult, info);
+                String iterationInfo = amount > 1 ? " " + (i+1) + "/"  + amount : "";
+                won = flipCoin(flipper, sa, multiplier, fixedResult, info + iterationInfo);
                 if (won) {
                     result++;
                 }
             }
-            // until is sequential
+            // CR 705.3 relevant: until is sequential
         }
         while (sa.hasParam("FlipUntilYouLose") && won);
         return result;
@@ -206,7 +204,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         } else {
             // no reason to ask if result is fixed anyway
             if (!noCall) {
-                choice = flipper.getController().chooseBinary(sa, sa.getHostCard().getName() + " - " + Localizer.getInstance().getMessage("lblCallCoinFlip") + info, PlayerController.BinaryChoiceType.HeadsOrTails);
+                choice = flipper.getController().chooseBinary(sa, sa.getHostCard().getDisplayName() + " - " + Localizer.getInstance().getMessage("lblCallCoinFlip") + info, PlayerController.BinaryChoiceType.HeadsOrTails);
             }
 
             for (int i = 0; i < multiplier; i++) {
@@ -214,7 +212,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             }
         }
 
-        boolean result = flipResults.size() == 1 ? flipResults.iterator().next() : flipper.getController().chooseFlipResult(sa, flipper, BOTH_CHOICES, true);
+        boolean result = flipResults.size() == 1 ? flipResults.iterator().next() : flipper.getController().chooseFlipResult(sa, flipper, !noCall);
         boolean wonOrHeads = result == choice;
 
         String outcome;
@@ -223,7 +221,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         } else {
             outcome = wonOrHeads ? Localizer.getInstance().getMessage("lblWin") : Localizer.getInstance().getMessage("lblLose");
         }
-        // Play the Flip A Coin sound
+
         flipper.getGame().fireEvent(new GameEventFlipCoin());
         flipper.getGame().getAction().notifyOfValue(sa, flipper, outcome, null);
 
@@ -238,8 +236,4 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         return wonOrHeads;
     }
 
-    public static int getFlipMultiplier(final Player flipper) {
-        String str = "If you would flip a coin, instead flip two coins and ignore one.";
-        return 1 << flipper.getAmountOfKeyword(str);
-    }
 }

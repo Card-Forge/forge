@@ -18,7 +18,6 @@ public enum AbilityKey {
     Affected("Affected"),
     AllVotes("AllVotes"),
     Amount("Amount"),
-    Attach("Attach"),
     AttachSource("AttachSource"),
     AttachTarget("AttachTarget"),
     Attacked("Attacked"),
@@ -40,7 +39,6 @@ public enum AbilityKey {
     ClassLevel("ClassLevel"),
     CostStack("CostStack"),
     CounterAmount("CounterAmount"),
-    CounteredSA("CounteredSA"),
     CounterNum("CounterNum"),
     CounterMap("CounterMap"),
     CounterTable("CounterTable"),
@@ -93,7 +91,6 @@ public enum AbilityKey {
     Mana("Mana"),
     MergedCards("MergedCards"),
     Mode("Mode"),
-    MonstrosityAmount("MonstrosityAmount"),
     NaturalResult("NaturalResult"),
     NewCard("NewCard"),
     NewCounterAmount("NewCounterAmount"),
@@ -130,7 +127,6 @@ public enum AbilityKey {
     SourceSA("SourceSA"),
     SpellAbility("SpellAbility"),
     SpellAbilityTargets("SpellAbilityTargets"),
-    StackInstance("StackInstance"),
     StackSa("StackSa"),
     SurveilNum("SurveilNum"),
     Target("Target"),
@@ -140,7 +136,7 @@ public enum AbilityKey {
     Valiant("Valiant"),
     Won("Won"),
 
-    // below used across different Replacements, don't reuse
+    // below shared across different Replacements, don't reuse
     InternalTriggerTable("InternalTriggerTable"),
     SimultaneousETB("SimultaneousETB"); // for CR 614.13c
 

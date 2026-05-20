@@ -1,0 +1,10 @@
+Name:Momo, Friendly Flier
+ManaCost:W
+Types:Legendary Creature Lemur Bat Ally
+PT:1/1
+K:Flying
+S:Mode$ ReduceCost | ValidCard$ Creature.nonLemur+withFlying+YouCtrl | Type$ Spell | Activator$ You | Amount$ 1 | Condition$ PlayerTurn | CheckSVar$ X | SVarCompare$ EQ0 | Description$ The first non-Lemur creature spell with flying you cast during each of your turns costs {1} less to cast.
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl+withFlying | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever another creature you control with flying enters, NICKNAME gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
+SVar:X:Count$ThisTurnCast_Creature.nonLemur+withFlying+YouCtrl
+Oracle:Flying\nThe first non-Lemur creature spell with flying you cast during each of your turns costs {1} less to cast.\nWhenever another creature you control with flying enters, Momo gets +1/+1 until end of turn.

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Joker
+Title=Joker
+Icon=Joker.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/Jonathan_Kracht_-_Death_And_Taxes_(Modern,_#1174352).dck
+Deck Type=constructed
+
+[Main]
+2 Thalia, Heretic Cathar
+3 Charming Prince
+4 Thalia, Guardian of Thraben
+4 Leonin Arbiter
+4 Skyclave Apparition
+4 Flickerwisp
+4 Elite Spellbinder
+4 Giver of Runes
+4 Aether Vial
+4 Path to Exile
+1 Silent Clearing
+1 Horizon Canopy
+2 Sunbaked Canyon
+2 Shefet Dunes
+4 Field of Ruin
+4 Ghost Quarter
+9 Plains
+[Sideboard]
+1 Worship
+1 Gideon, Ally of Zendikar
+1 Settle the Wreckage
+1 Esper Sentinel
+2 Rest in Peace
+3 Hushbringer
+3 Phyrexian Revoker
+3 Kor Firewalker

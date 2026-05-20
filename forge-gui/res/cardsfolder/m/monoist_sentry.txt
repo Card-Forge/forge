@@ -1,0 +1,6 @@
+Name:Monoist Sentry
+ManaCost:B
+Types:Artifact Creature Robot
+PT:4/1
+K:Defender
+Oracle:Defender

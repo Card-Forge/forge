@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=AidoHwedo
+Title=AidoHwedo
+Icon=AidoHwedo.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/Allison_Warfield_-_Mono-Red_Aggro_(Standard,_#766650).dck
+Deck Type=constructed
+
+[Main]
+4 Fanatical Firebrand
+4 Ghitu Lavarunner
+4 Goblin Chainwhirler
+1 Rekindling Phoenix
+4 Runaway Steam-Kin
+4 Viashino Pyromancer
+4 Lightning Strike
+2 Risk Factor
+4 Shock
+4 Wizard's Lightning
+3 Experimental Frenzy
+22 Mountain
+[Sideboard]
+1 Banefire
+2 Fiery Cannonade
+3 Fight with Fire
+3 Lava Coil
+2 Legion Warboss
+1 Mountain
+2 Rekindling Phoenix
+1 Risk Factor

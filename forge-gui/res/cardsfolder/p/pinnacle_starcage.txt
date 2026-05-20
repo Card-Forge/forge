@@ -1,0 +1,12 @@
+Name:Pinnacle Starcage
+ManaCost:1 W W
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this artifact enters, exile all artifacts and creatures with mana value 2 or less until this artifact leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZoneAll | ChangeType$ Artifact.cmcLE2,Creature.cmcLE2 | Duration$ UntilHostLeavesPlay | Origin$ Battlefield | Destination$ Exile
+A:AB$ ChangeZoneAll | Cost$ 6 W W | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Graveyard | RememberChanged$ True | SubAbility$ DBToken | SpellDescription$ Put each card exiled with this artifact into its owner's graveyard, then create a 2/2 colorless Robot artifact creature token for each card put into a graveyard this way. Sacrifice this artifact.
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_2_2_a_robot | TokenOwner$ You | SubAbility$ DBSac
+SVar:DBSac:DB$ Sacrifice | SacValid$ Self | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Card.inZoneGraveyard
+SVar:OblivionRing:TRUE
+Oracle:When this artifact enters, exile all artifacts and creatures with mana value 2 or less until this artifact leaves the battlefield.\n{6}{W}{W}: Put each card exiled with this artifact into its owner's graveyard, then create a 2/2 colorless Robot artifact creature token for each card put into a graveyard this way. Sacrifice this artifact.

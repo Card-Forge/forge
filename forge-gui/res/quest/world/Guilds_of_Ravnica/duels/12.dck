@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Diablo
+Title=Diablo
+Icon=Diablo.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/Alessandro_Danesi_-_Azorius_(Standard,_#769034).dck
+Deck Type=constructed
+
+[Main]
+1 Fountain of Renewal
+2 Blink of an Eye
+2 Devious Cover-Up
+3 Essence Scatter
+3 Settle the Wreckage
+4 Sinister Sabotage
+3 Syncopate
+3 Cleansing Nova
+2 Ixalan's Binding
+4 Seal Away
+3 Search for Azcanta
+3 Teferi, Hero of Dominaria
+1 Arch of Orazca
+3 Field of Ruin
+4 Glacial Fortress
+7 Island
+4 Meandering River
+1 Memorial to Genius
+7 Plains
+[Sideboard]
+1 Disdainful Stroke
+4 History of Benalia
+1 Ixalan's Binding
+3 Knight of Grace
+2 Lyra Dawnbringer
+3 Negate
+1 Nezahal, Primal Tide

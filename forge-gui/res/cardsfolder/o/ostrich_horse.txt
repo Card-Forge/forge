@@ -1,0 +1,11 @@
+Name:Ostrich-Horse
+ManaCost:2 G
+Types:Creature Bird Horse
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature enters, mill three cards. You may put a land card from among them into your hand. If you don't, put a +1/+1 counter on this creature. (To mill three cards, put the top three cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Land.IsRemembered | SelectPrompt$ You may select a land card | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | CounterType$ P1P1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill|Counters
+Oracle:When this creature enters, mill three cards. You may put a land card from among them into your hand. If you don't, put a +1/+1 counter on this creature. (To mill three cards, put the top three cards of your library into your graveyard.)

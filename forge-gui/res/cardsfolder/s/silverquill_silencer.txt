@@ -6,5 +6,5 @@ K:ETBReplacement:Other:DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDescription$ nonland | SpellDescription$ As CARDNAME enters, choose a nonland card name.
 T:Mode$ SpellCast | ValidCard$ Card.NamedCard | ValidActivatingPlayer$ Opponent | Execute$ TrigDrain | TriggerDescription$ Whenever an opponent casts a spell with the chosen name, they lose 3 life and you draw a card.
 SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredActivator | LifeAmount$ 3 | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+SVar:DBDraw:DB$ Draw | Defined$ You
 Oracle:As Silverquill Silencer enters, choose a nonland card name.\nWhenever an opponent casts a spell with the chosen name, they lose 3 life and you draw a card.

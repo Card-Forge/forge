@@ -15,19 +15,19 @@ public class ExploreAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         // Explore with a target (e.g. Enter the Unknown)
         if (sa.usesTargeting()) {
             Card bestCreature = ComputerUtilCard.getBestCreatureAI(aiPlayer.getCardsIn(ZoneType.Battlefield));
             if (bestCreature == null) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             sa.resetTargets();
             sa.getTargets().add(bestCreature);
         }
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     public static boolean shouldPutInGraveyard(Card topCard, Player ai) {
@@ -37,14 +37,8 @@ public class ExploreAi extends SpellAbilityAi {
         CardCollection landsOTB = CardLists.filter(cardsOTB, CardPredicates.LANDS_PRODUCING_MANA);
         CardCollection landsInHand = CardLists.filter(cardsInHand, CardPredicates.LANDS_PRODUCING_MANA);
 
-        int maxCMCDiff = 1;
-        int numLandsToStillNeedMore = 2;
-
-        if (ai.getController().isAI()) {
-            AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-            maxCMCDiff = aic.getIntProperty(AiProps.EXPLORE_MAX_CMC_DIFF_TO_PUT_IN_GRAVEYARD);
-            numLandsToStillNeedMore = aic.getIntProperty(AiProps.EXPLORE_NUM_LANDS_TO_STILL_NEED_MORE);
-        }
+        int maxCMCDiff = AiProfileUtil.getIntProperty(ai, AiProps.EXPLORE_MAX_CMC_DIFF_TO_PUT_IN_GRAVEYARD);
+        int numLandsToStillNeedMore = AiProfileUtil.getIntProperty(ai, AiProps.EXPLORE_NUM_LANDS_TO_STILL_NEED_MORE);
 
         if (landsInHand.isEmpty() && landsOTB.size() <= numLandsToStillNeedMore) {
             // We need more lands to improve our mana base, explore away the non-lands
@@ -64,19 +58,23 @@ public class ExploreAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (sa.usesTargeting()) {
             CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield),
                     sa.getTargetRestrictions().getValidTgts(), aiPlayer, sa.getHostCard(), sa);
 
             if (!list.isEmpty()) {
                 sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(list));
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
-        return canPlayAI(aiPlayer, sa) || mandatory;
+        if (mandatory) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return canPlay(aiPlayer, sa);
     }
 }

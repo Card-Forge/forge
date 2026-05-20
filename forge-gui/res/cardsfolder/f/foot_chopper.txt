@@ -1,0 +1,14 @@
+Name:Foot Chopper
+ManaCost:1 B
+Types:Artifact Equipment
+K:Equip:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this Equipment enters, create a 1/1 black Ninja creature token, then attach this Equipment to it.
+SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_ninja | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying | Description$ Equipped creature has flying.
+T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you may sacrifice it. If you do, draw cards equal to its power.
+SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Card.AttachedBy/equipped creature> | NumCards$ X
+SVar:X:Sacrificed$CardPower
+DeckHas:Ability$Token
+Oracle:When this Equipment enters, create a 1/1 black Ninja creature token, then attach this Equipment to it.\nEquipped creature has flying.\nWhenever equipped creature deals combat damage to a player, you may sacrifice it. If you do, draw cards equal to its power.\nEquip {2}

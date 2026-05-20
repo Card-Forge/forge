@@ -1,0 +1,12 @@
+Name:Appa, the Vigilant
+ManaCost:5 W W
+Types:Legendary Creature Bison Ally
+PT:6/6
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Ally.Other+YouCtrl | Execute$ TrigPumpAll | TriggerDescription$ Whenever NICKNAME or another Ally you control enters, creatures you control get +1/+1 and gain flying and vigilance until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Flying & Vigilance
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Ally
+AI:RemoveDeck:Random
+Oracle:Flying, vigilance\nWhenever Appa or another Ally you control enters, creatures you control get +1/+1 and gain flying and vigilance until end of turn.

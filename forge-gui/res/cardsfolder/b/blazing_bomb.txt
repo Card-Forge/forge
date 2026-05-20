@@ -1,0 +1,9 @@
+Name:Blazing Bomb
+ManaCost:R
+Types:Creature Elemental
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | ValidSAonCard$ Spell.ManaSpent GE4 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a noncreature spell, if at least four mana was spent to cast it, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ DealDamage | PrecostDesc$ Blow Up — | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature | NumDmg$ X | SorcerySpeed$ True | SpellDescription$ It deals damage equal to its power to target creature. Activate only as a sorcery.
+SVar:X:Sacrificed$CardPower
+Oracle:Whenever you cast a noncreature spell, if at least four mana was spent to cast it, put a +1/+1 counter on this creature.\nBlow Up — {T}, Sacrifice this creature: It deals damage equal to its power to target creature. Activate only as a sorcery.

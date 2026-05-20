@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Teysa
+Title=Teysa
+Icon=Teysa.jpg
+Difficulty=Medium
+Description=Avacyn_Restored/SCG_Invitational_Qualifier_-_Concord,_California/Kenyon_Collins_-_Rogue_(Standard,_#32791).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Elesh Norn, Grand Cenobite
+1 Grave Titan
+1 Massacre Wurm
+3 Primeval Titan
+2 Viridian Emissary
+4 Sphere of the Suns
+4 Day of Judgment
+4 Lingering Souls
+4 Rampant Growth
+2 Terminus
+1 Curse of Death's Hold
+2 Oblivion Ring
+2 Garruk Relentless
+3 Sorin, Lord of Innistrad
+4 Forest
+2 Gavony Township
+1 Ghost Quarter
+3 Isolated Chapel
+3 Razorverge Thicket
+1 Sunpetal Grove
+1 Vault of the Archangel
+3 Woodland Cemetery
+[Sideboard]
+1 Batterskull
+3 Divine Offering
+2 Karn Liberated
+2 Surgical Extraction
+1 Thrun, the Last Troll
+3 Timely Reinforcements
+1 Wurmcoil Engine

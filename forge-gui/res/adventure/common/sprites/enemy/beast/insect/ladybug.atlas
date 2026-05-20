@@ -1,0 +1,68 @@
+ladybug.png
+size: 256,192
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 176,144
+  size: 16, 16
+Idle 
+  xy: 9, 6
+  size: 16, 16    
+Idle 
+  xy: 41, 6
+  size: 16, 16     
+Idle 
+  xy: 73, 6
+  size: 16, 16    
+Idle 
+  xy: 105, 6
+  size: 16, 16   
+Idle 
+  xy: 137, 6
+  size: 16, 16    
+Idle 
+  xy: 169, 6
+  size: 16, 16   
+Idle 
+  xy: 201, 6
+  size: 16, 16    
+Idle 
+  xy: 233, 6
+  size: 16, 16   
+Walk 
+  xy: 4,103
+  size: 24, 20   
+Walk 
+  xy: 36,103
+  size: 24, 20     
+Walk 
+  xy: 68,103
+  size: 24, 20      
+Walk 
+  xy: 100,103
+  size: 24, 20  
+Walk 
+  xy: 132,103
+  size: 24, 20   
+Walk 
+  xy: 164,103
+  size: 24, 20     
+Walk 
+  xy: 196, 103
+  size: 24, 20     
+Walk 
+  xy: 228, 103
+  size: 24, 20    
+Death
+  xy: 0, 130
+  size: 32, 24
+Death
+  xy: 32, 130
+  size: 32, 24
+Death
+   xy: 64, 130
+  size: 32, 24
+Death
+  xy: 96, 130
+  size: 32, 24

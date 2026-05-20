@@ -1,0 +1,9 @@
+Name:Ghost-Spider, Gwen Stacy
+ManaCost:3 R R
+Types:Legendary Creature Spider Human Hero
+PT:4/4
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever NICKNAME attacks, she deals X damage to defending player, where X is the number of attacking creatures.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredDefendingPlayer | NumDmg$ X
+SVar:X:Count$Valid Creature.attacking
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever Ghost-Spider attacks, she deals X damage to defending player, where X is the number of attacking creatures.

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Kraj
+Title=Kraj
+Icon=Kraj.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/Aidan_Conley_-_Azorius_Control_(Modern,_#795991).dck
+Deck Type=constructed
+
+[Main]
+3 Snapcaster Mage
+1 Vendilion Clique
+1 Condemn
+3 Cryptic Command
+1 Dovin's Veto
+2 Hieroglyphic Illumination
+1 Logic Knot
+1 Mana Leak
+4 Opt
+4 Path to Exile
+1 Supreme Verdict
+4 Terminus
+2 Detention Sphere
+2 Search for Azcanta
+3 Jace, the Mind Sculptor
+2 Teferi, Hero of Dominaria
+6 Island
+3 Plains
+4 Celestial Colonnade
+4 Field of Ruin
+4 Flooded Strand
+2 Glacial Fortress
+2 Hallowed Fountain
+[Sideboard]
+1 Baneslayer Angel
+3 Rest in Peace
+2 Celestial Purge
+1 Disdainful Stroke
+2 Dispel
+1 Dovin's Veto
+1 Settle the Wreckage
+1 Lyra Dawnbringer
+1 Vendilion Clique
+2 Timely Reinforcements

@@ -1,0 +1,6 @@
+Name:Restoration Seminar
+ManaCost:5 W W
+Types:Sorcery Lesson
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.nonLand+YouOwn | ValidTgtDesc$ nonland permanent card in your graveyard | SpellDescription$ Return target nonland permanent card from your graveyard to the battlefield.
+K:Paradigm
+Oracle:Return target nonland permanent card from your graveyard to the battlefield.\nParadigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)

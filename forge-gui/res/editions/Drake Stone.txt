@@ -6,8 +6,10 @@ Code2=DS0
 Type=Funny
 
 [cards]
-1 U Illusory Thoughts
-2 U Concentrate
-3 U Distract
-4 U Enthrall
-5 M Drake Stone
+1 U Illusory Thoughts @Kevin Smith
+3 U Distract @Kevin Smith
+4 U Enthrall @Kevin Smith
+5 M Drake Stone @Kevin Smith
+
+[eternal]
+2 U Concentrate @Kevin Smith

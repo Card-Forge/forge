@@ -1,10 +1,11 @@
 [metadata]
-Code=PHJ
+Code=JP1
+Code2=PHJ
 Date=2002-07-01
 Name=Hobby Japan Promos
 Type=Promo
 CardLang=ja
-ScryfallCode=PHJ
+ScryfallCode=JP1
 
 [cards]
 1 R Goblin Mutant @Daniel Gelon

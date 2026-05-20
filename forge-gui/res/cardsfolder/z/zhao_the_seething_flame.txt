@@ -1,0 +1,6 @@
+Name:Zhao, the Seething Flame
+ManaCost:4 R
+Types:Legendary Creature Human Soldier
+PT:5/5
+K:Menace
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)

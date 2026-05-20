@@ -21,35 +21,35 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
      * forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final Game game = ai.getGame();
 
         if ("Tree of Redemption".equals(sourceName)) {
             if (!ai.canGainLife())
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
 
             // someone controls "Rain of Gore" or "Sulfuric Vortex", lifegain is bad in that case
             if (game.isCardInPlay("Rain of Gore") || game.isCardInPlay("Sulfuric Vortex"))
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
 
             // an opponent controls "Tainted Remedy", lifegain is bad in that case
             for (Player op : ai.getOpponents()) {
                 if (op.isCardInPlay("Tainted Remedy"))
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             if (ComputerUtil.waitForBlocking(sa) || ai.getLife() + 1 >= source.getNetToughness()
                 || (ai.getLife() > 5 && !ComputerUtilCombat.lifeInSeriousDanger(ai, ai.getGame().getCombat()))) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
         else if ("Tree of Perdition".equals(sourceName)) {
             boolean shouldDo = false;
 
             if (ComputerUtil.waitForBlocking(sa))
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
 
             for (Player op : ai.getOpponents()) {
                 // if oppoent can't be targeted, or it can't lose life, try another one
@@ -80,7 +80,7 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
                 }
             }
 
-            return shouldDo;
+            return shouldDo ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         else if ("Evra, Halcyon Witness".equals(sourceName)) {
             int aiLife = ai.getLife();
@@ -92,15 +92,15 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
                 Player def = game.getCombat().getDefenderPlayerByAttacker(source);
                 if (game.getCombat().isUnblocked(source) && def.canLoseLife() && aiLife >= def.getLife() && source.getNetPower() < def.getLife()) {
                     // Unblocked Evra which can deal lethal damage
-                    return true;
-                } else if (ai.getController().isAI() && aiLife > source.getNetPower() && source.hasKeyword(Keyword.LIFELINK)) {
-                    int dangerMin = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
-                    int dangerMax = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_MAX_THRESHOLD));
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                } else if (aiLife > source.getNetPower() && source.hasKeyword(Keyword.LIFELINK)) {
+                    int dangerMin = AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_THRESHOLD);
+                    int dangerMax = AiProfileUtil.getIntProperty(ai, AiProps.AI_IN_DANGER_MAX_THRESHOLD);
                     int dangerDiff = dangerMax - dangerMin;
                     int lifeInDanger = dangerDiff <= 0 ? dangerMin : MyRandom.getRandom().nextInt(dangerDiff) + dangerMin;
                     if (source.getNetPower() >= lifeInDanger && ai.canGainLife() && ComputerUtil.lifegainPositive(ai, source)) {
                         // Blocked or unblocked Evra which will get bigger *and* we're getting our life back through Lifelink
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 }
             }
@@ -109,10 +109,10 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
             if (source.getNetPower() > aiLife) {
                 // Only makes sense if the AI can actually gain life from this
                 if (!ai.canGainLife())
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
 
                 if (ComputerUtilCombat.lifeInSeriousDanger(ai, game.getCombat())) {
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
 
                 // check the top of stack
@@ -120,13 +120,13 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
                 if (!stack.isEmpty()) {
                     SpellAbility saTop = stack.peekAbility();
                     if (ComputerUtil.predictDamageFromSpell(saTop, ai) >= aiLife) {
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 }
             }
 
         }
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /**
@@ -143,17 +143,17 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (sa.canTarget(opp) && (mandatory || ai.getLife() < opp.getLife())) {
                 sa.getTargets().add(opp);
             } else {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
 }

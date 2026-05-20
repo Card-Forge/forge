@@ -53,9 +53,6 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
             validCards = CardLists.filterControlledBy(validCards, getTargetPlayers(sa));
         }
 
-        // Default to tapping for AI
-        boolean toTap = true;
-
         StringBuilder sb = new StringBuilder(Localizer.getInstance().getMessage("lblTapOrUntapTarget") + " ");
         if (sa.hasParam("ValidMessage")) {
             sb.append(sa.getParam("ValidMessage"));
@@ -64,7 +61,7 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
         }
         sb.append("?");
 
-        toTap = sa.getActivatingPlayer().getController().chooseBinary(sa, sb.toString(), PlayerController.BinaryChoiceType.TapOrUntap);
+        boolean toTap = activator.getController().chooseBinary(sa, sb.toString(), PlayerController.BinaryChoiceType.TapOrUntap);
 
         CardCollection tapped = new CardCollection();
         CardCollection untapped = new CardCollection();

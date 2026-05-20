@@ -1,0 +1,113 @@
+lion.png
+size: 383,80
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar 
+  xy: 352, 32
+  size: 16, 16
+Idle 
+  xy: 3, 4
+  size: 20, 16
+Idle 
+  xy: 35, 4
+  size: 20, 16
+Idle 
+  xy: 67, 4
+  size: 20, 16
+Idle 
+  xy: 99, 4
+  size: 20, 16
+Idle 
+  xy: 131, 4
+  size: 20, 16
+Idle 
+  xy: 163, 4
+  size: 20, 16
+Idle 
+  xy: 195, 4
+  size: 20, 16
+Idle 
+  xy: 227, 4
+  size: 20, 16
+Idle 
+  xy: 259, 4
+  size: 20, 16
+Idle 
+  xy: 291, 4
+  size: 20, 16
+Idle 
+  xy: 323, 4
+  size: 20, 16
+Idle 
+  xy: 355, 4
+  size: 20, 16
+Walk
+  xy: 2, 25
+  size: 20, 13
+Walk
+  xy: 34, 25
+  size: 20, 13
+Walk
+  xy: 66, 25
+  size: 20, 13
+Walk
+  xy: 98, 25
+  size: 20, 13
+Walk
+  xy: 130, 25
+  size: 20, 13
+Walk
+  xy: 162, 25
+  size: 20, 13
+Attack
+  xy: 2, 42
+  size: 25, 16
+Attack
+  xy: 34, 42
+  size: 25, 16
+Attack
+  xy: 66, 42
+  size: 25, 16
+Attack
+  xy: 98, 42
+  size: 25, 16
+Attack
+  xy: 130, 42
+  size: 25, 16
+Death
+  xy: 4, 62
+  size: 24, 16
+Death
+  xy: 36, 62
+  size: 24, 16
+Death
+  xy: 68, 62
+  size: 24, 16
+Death
+  xy: 100, 62
+  size: 24, 16
+Death
+  xy: 132, 62
+  size: 24, 16
+Death
+  xy: 164, 62
+  size: 24, 16
+Death
+  xy: 196, 62
+  size: 24, 16
+Death
+  xy: 228, 62
+  size: 24, 16
+Death
+  xy: 260, 62
+  size: 24, 16
+Death
+  xy: 292, 62
+  size: 24, 16
+Death
+  xy: 324, 62
+  size: 24, 16
+Death
+  xy: 356, 62
+  size: 24, 16

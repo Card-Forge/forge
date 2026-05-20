@@ -1,0 +1,1487 @@
+[
+	{
+		"name": "Avacynian Preacher",
+		"sprite": "sprites/enemy/humanoid/human/cleric/cleric.atlas",
+		"deck": [
+			"decks/standard/INN/inn_cleric_easy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.5,
+		"difficulty": 0.1,
+		"speed": 24,
+		"life": 10,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 0.75,
+				"count": 2,
+				"rarity": [
+					"Common"
+				],
+				"addMaxCount": 2
+			},
+			{
+				"type": "deckCard",
+				"probability": 0.35,
+				"count": 1,
+				"rarity": [
+					"Uncommon"
+				],
+				"addMaxCount": 2
+			},
+			{
+				"type": "deckCard",
+				"probability": 0.1,
+				"count": 1,
+				"rarity": [
+					"rare"
+				],
+				"addMaxCount": 1
+			},
+			{
+				"type": "gold",
+				"probability": 0.3,
+				"count": 10,
+				"addMaxCount": 80
+			},
+			{
+				"type": "card",
+				"count": 1,
+				"colors": [
+					"White"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD"
+				]
+			}
+		],
+		"colors": "W",
+		"questTags": [
+			"Human",
+			"Religious",
+			"Holy",
+			"IdentityWhite",
+			"BiomeColorless"
+		]
+	},
+	{
+		"name": "Bog Hermit",
+		"sprite": "sprites/enemy/humanoid/human/peasant/inn_hermit.atlas",
+		"deck": [
+			"decks/standard/INN/inn_bog_hermit.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.33,
+		"difficulty": 0.1,
+		"speed": 24,
+		"life": 10,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 0.75,
+				"count": 2,
+				"rarity": [
+					"Common"
+				],
+				"addMaxCount": 2
+			},
+			{
+				"type": "deckCard",
+				"probability": 0.35,
+				"count": 1,
+				"rarity": [
+					"Uncommon"
+				],
+				"addMaxCount": 2
+			},
+			{
+				"type": "deckCard",
+				"probability": 0.15,
+				"count": 1,
+				"rarity": [
+					"rare"
+				],
+				"addMaxCount": 1
+			},
+			{
+				"type": "gold",
+				"probability": 0.3,
+				"count": 10,
+				"addMaxCount": 40
+			},
+			{
+				"type": "card",
+				"probability": 0.55,
+				"count": 1,
+				"colors": [
+					"Black"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"MID"
+				]
+			},
+			{
+				"type": "card",
+				"probability": 0.55,
+				"count": 1,
+				"colors": [
+					"Green"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"MID"
+				]
+			}
+		],
+		"colors": "BG",
+		"questTags": [
+			"Human",
+			"Religious",
+			"Unholy",
+			"IdentityGreen",
+			"IdentityBlack",
+			"BiomeColorless"
+		]
+	},
+	{
+		"name": "Borderland Ranger",
+		"sprite": "sprites/enemy/humanoid/human/rogue/pirate.atlas",
+		"deck": [
+			"decks/standard/INN/inn_green_scout.dck",
+			"decks/standard/INN/inn_green_scout2.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.4,
+		"difficulty": 0.1,
+		"speed": 24,
+		"life": 14,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 3,
+				"addMaxCount": 2
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 40,
+				"addMaxCount": 50
+			},
+			{
+				"type": "card",
+				"count": 1,
+				"colors": [
+					"Green"
+				],
+				"rarity": [
+					"Uncommon",
+					"Rare"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"MID"
+				]
+			},
+			{
+				"type": "card",
+				"count": 1,
+				"colors": [
+					"Red"
+				],
+				"rarity": [
+					"Uncommon",
+					"Rare"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"MID"
+				]
+			}
+		],
+		"colors": "G",
+		"questTags": [
+			"Scout",
+			"Humanoid",
+			"IdentityGreen",
+			"BiomeColorless",
+			"BiomeWhite",
+			"BiomeGreen"
+		]
+	},
+	{
+		"name": "Cloaked Old Man",
+		"sprite": "sprites/enemy/humanoid/human/wizard/black_wiz2.atlas",
+		"deck": [
+			"decks/standard/blackwizard_medium_demonicpact.dck",
+			"decks/standard/blackwizard_medium_fear.dck",
+			"decks/standard/blackwizard_medium_goblins.dck",
+			"decks/standard/blackwizard_easy_artifact.dck",
+			"decks/standard/blackwizard_easy_badmoon.dck",
+			"decks/standard/blackwizard_easy_mill.dck"
+		],
+		"ai": "",
+		"randomizeDeck": true,
+		"spawnRate": 0.75,
+		"difficulty": 0.1,
+		"speed": 24,
+		"life": 15,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 6,
+				"rarity": [
+					"Common",
+					"Uncommon"
+				]
+			},
+			{
+				"type": "gold",
+				"probability": 1,
+				"count": 20,
+				"addMaxCount": 70
+			},
+			{
+				"type": "card",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 4,
+				"colors": [
+					"Black"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"colorType": "MonoColor"
+			},
+			{
+				"type": "deckCard",
+				"probability": 0.5,
+				"count": 1,
+				"addMaxCount": 3,
+				"rarity": [
+					"Rare",
+					"Mythic Rare"
+				]
+			}
+		],
+		"colors": "B",
+		"questTags": [
+			"Wizard",
+			"Necromancer",
+			"IdentityBlack",
+			"BiomeMoonlight",
+			"BiomeBlack"
+		]
+	},
+	{
+		"name": "Escaped Skaab",
+		"sprite": "sprites/enemy/undead/zombie.atlas",
+		"deck": [
+			"decks/standard/INN/inn_skaab_easy.dck",
+			"decks/standard/INN/inn_skaab_easy3.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.7,
+		"difficulty": 0.1,
+		"speed": 21,
+		"life": 8,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 1,
+				"addMaxCount": 3
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 20,
+				"addMaxCount": 50
+			},
+			{
+				"type": "card",
+				"count": 1,
+				"colors": [
+					"Blue"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD"
+				]
+			}
+		],
+		"colors": "U",
+		"questTags": [
+			"Undead",
+			"Skaab",
+			"Humanoid",
+			"IdentityBlue",
+			"BiomeBlue"
+		]
+	},
+	{
+		"name": "Falkenrath Neonate",
+		"sprite": "sprites/enemy/undead/vampire_4.atlas",
+		"deck": [
+			"decks/standard/INN/inn_falkenrath_easy.dck",
+			"decks/standard/INN/inn_falkenrath_easy2.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.7,
+		"difficulty": 0.1,
+		"speed": 28,
+		"life": 11,
+		"scale": 0.6,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 1,
+				"addMaxCount": 3
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 25,
+				"addMaxCount": 50
+			},
+			{
+				"type": "card",
+				"count": 1,
+				"colors": [
+					"Red"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD"
+				]
+			}
+		],
+		"colors": "R",
+		"questTags": [
+			"Undead",
+			"Vampire",
+			"Falkenrath",
+			"Humanoid",
+			"IdentityRed",
+			"BiomeBlack",
+			"BiomeRed"
+		]
+	},
+	{
+		"name": "Falkenrath Tormentor",
+		"sprite": "sprites/enemy/undead/vampire_2.atlas",
+		"deck": [
+			"decks/standard/INN/inn_falkenrath_medium.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.7,
+		"difficulty": 0.1,
+		"speed": 30,
+		"life": 16,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 3
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 40,
+				"addMaxCount": 50
+			},
+			{
+				"type": "card",
+				"count": 1,
+				"colors": [
+					"Red"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon",
+					"Rare"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD"
+				]
+			}
+		],
+		"colors": "R",
+		"questTags": [
+			"Undead",
+			"Vampire",
+			"Falkenrath",
+			"Outcast",
+			"Humanoid",
+			"IdentityRed",
+			"BiomeBlack",
+			"BiomeRed"
+		]
+	},
+	{
+		"name": "Gavony Farmhand",
+		"sprite": "sprites/enemy/humanoid/human/peasant/farmer.atlas",
+		"deck": [
+			"decks/standard/INN/inn_peasant_easy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.7,
+		"difficulty": 0.1,
+		"speed": 25,
+		"life": 17,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 3
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 70,
+				"addMaxCount": 80
+			},
+			{
+				"type": "card",
+				"count": 3,
+				"colors": [
+					"White",
+					"Green"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"AVR",
+					"MID"
+				]
+			}
+		],
+		"colors": "W",
+		"questTags": [
+			"Human",
+			"Humanoid",
+			"Peasant",
+			"IdentityWhite",
+			"BiomeWhite"
+		]
+	},
+	{
+		"name": "The Gitrog Monster",
+		"sprite": "sprites/enemy/undead/zombie.atlas",
+		"deck": [
+			"decks/standard/INN/inn_gitrog_monster.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.7,
+		"difficulty": 0.1,
+		"speed": 25,
+		"life": 25,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 0.8,
+				"count": 3,
+				"addMaxCount": 3
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 200,
+				"addMaxCount": 150
+			},
+			{
+				"type": "card",
+				"probability": 0.3,
+				"count": 1,
+				"addMaxCount": 2,
+				"colors": [
+					"Green",
+					"Black"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"EMN"
+				]
+			},
+			{
+				"type": "card",
+				"count": 2,
+				"addMaxCount": 3,
+				"colors": [
+					"Green",
+					"Black"
+				],
+				"rarity": [
+					"Rare",
+					"Mythic Rare"
+				],
+				"editions":[
+					"SOI",
+					"AVR"
+				]
+			}
+		],
+		"colors": "BG",
+		"questTags": [
+			"Gitrog"
+		]
+	},
+	{
+		"name": "Hobbling Zombie",
+		"sprite": "sprites/enemy/undead/zombie_2.atlas",
+		"deck": [
+			"decks/standard/INN/inn_zombie_easy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.7,
+		"difficulty": 0.1,
+		"speed": 18,
+		"life": 10,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 3
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 50,
+				"addMaxCount": 80
+			},
+			{
+				"type": "card",
+				"count": 2,
+				"colors": [
+					"Blue",
+					"Black"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"AVR"
+				]
+			}
+		],
+		"colors": "B",
+		"questTags": [
+			"Undead",
+			"Zombie",
+			"Humanoid",
+			"IdentityBlack",
+			"BiomeColorless"
+		]
+	},
+	{
+	"name": "Howlpack Exile",
+	"sprite": "sprites/enemy/humanoid/werewolf/werewolf.atlas",
+	"deck": [
+		"decks/standard/INN/inn_werewolf_easy.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.4,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 15,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 3,
+			"addMaxCount": 2
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 60,
+			"addMaxCount": 50
+		},
+		{
+			"type": "card",
+			"count": 1,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Uncommon",
+				"Rare"
+			],
+			"editions":[
+				"SOI",
+				"DKA",
+				"ISD",
+				"MID"
+			]
+		},
+		{
+			"type": "card",
+			"count": 1,
+			"colors": [
+				"Red"
+			],
+			"rarity": [
+				"Uncommon",
+				"Rare"
+			],
+			"editions":[
+				"SOI",
+				"DKA",
+				"ISD",
+				"MID"
+			]
+		}
+	],
+	"colors": "GR",
+	"questTags": [
+		"Werewolf",
+		"Exile",
+		"Humanoid",
+		"IdentityRed",
+		"IdentityGreen",
+		"BiomeColorless",
+		"BiomeGreen"
+	]
+	},
+	{
+		"name": "Hulking Skaab",
+		"sprite": "sprites/enemy/undead/ghoullarge.atlas",
+		"deck": [
+			"decks/standard/INN/inn_skaab_medium.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.7,
+		"difficulty": 0.1,
+		"speed": 21,
+		"life": 15,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 3
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 50,
+				"addMaxCount": 80
+			},
+			{
+				"type": "card",
+				"count": 2,
+				"colors": [
+					"Blue",
+					"Black"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"AVR"
+				]
+			}
+		],
+		"colors": "UB",
+		"questTags": [
+			"Undead",
+			"Skaab",
+			"Humanoid",
+			"IdentityBlue",
+			"IdentityBlack",
+			"BiomeBlue"
+		]
+	},
+	{
+		"name": "Immerwolf",
+		"sprite": "sprites/enemy/beast/wolf.atlas",
+		"deck": [
+			"decks/standard/INN/inn_immerwolf_easy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.1,
+		"difficulty": 0.1,
+		"speed": 45,
+		"life": 15,
+		"scale": 0.5,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 2,
+				"count": 2,
+				"addMaxCount": 2
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 5,
+				"addMaxCount": 85
+			},
+			{
+				"type": "card",
+				"count": 0,
+				"addMaxCount": 2,
+				"colors": [
+					"Red",
+					"Green"
+				],
+				"rarity": [
+					"Uncommon",
+					"Rare"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"MID"
+				]
+			}
+		],
+		"colors": "GR",
+		"questTags": [
+			"Wolf",
+			"Howlpack",
+			"BiomeGreen",
+			"IdentityGreen",
+			"IdentityRed"
+		]
+	},
+	{
+		"name": "Laboratory Assistant",
+		"sprite": "sprites/enemy/humanoid/human/wizard/archivist.atlas",
+		"deck": [
+			"decks/standard/INN/inn_labman_easy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.7,
+		"difficulty": 0.1,
+		"speed": 25,
+		"life": 8,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 2,
+				"count": 1,
+				"addMaxCount": 4
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 25,
+				"addMaxCount": 85
+			},
+			{
+				"type": "card",
+				"count": 1,
+				"colors": [
+					"Blue"
+				],
+				"rarity": [
+					"Uncommon",
+					"Rare"
+				],
+				"editions":[
+					"AVR",
+					"DKA",
+					"ISD",
+					"AVR"
+				]
+			}
+		],
+		"colors": "U",
+		"questTags": [
+			"Assistant",
+			"Laboratory",
+			"Humanoid",
+			"IdentityBlue",
+			"BiomeBlue"
+		]
+	},
+	{
+		"name": "Loam Dryad",
+		"sprite": "sprites/enemy/plant/plant.atlas",
+		"deck": [
+			"decks/standard/INN/inn_dryad_easy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.3,
+		"difficulty": 0.1,
+		"speed": 26,
+		"life": 8,
+		"flying": true,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 0.75,
+				"count": 2,
+				"rarity": [
+					"Common"
+				],
+				"addMaxCount": 2
+			},
+			{
+				"type": "deckCard",
+				"probability": 0.35,
+				"count": 1,
+				"rarity": [
+					"Uncommon"
+				],
+				"addMaxCount": 2
+			},
+			{
+				"type": "deckCard",
+				"probability": 0.1,
+				"count": 1,
+				"rarity": [
+					"rare"
+				],
+				"addMaxCount": 1
+			},
+			{
+				"type": "gold",
+				"probability": 0.3,
+				"count": 10,
+				"addMaxCount": 40
+			},
+			{
+				"type": "card",
+				"count": 1,
+				"colors": [
+					"Green"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"MID"
+				]
+			}
+		],
+		"colors": "G",
+		"questTags": [
+			"Spirit",
+			"Nature",
+			"IdentityGreen",
+			"BiomeColorless",
+			"BiomeGreen"
+		]
+	},
+	{
+		"name": "Missionary of Saint Traft",
+		"sprite": "sprites/enemy/humanoid/human/cleric/priest.atlas",
+		"deck": [
+			"decks/standard/INN/inn_cleric_traft_easy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.65,
+		"difficulty": 0.1,
+		"speed": 24,
+		"life": 12,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 0.75,
+				"count": 2,
+				"rarity": [
+					"Common"
+				],
+				"addMaxCount": 2
+			},
+			{
+				"type": "deckCard",
+				"probability": 0.35,
+				"count": 1,
+				"rarity": [
+					"Uncommon"
+				],
+				"addMaxCount": 2
+			},
+			{
+				"type": "deckCard",
+				"probability": 0.1,
+				"count": 1,
+				"rarity": [
+					"rare"
+				],
+				"addMaxCount": 1
+			},
+			{
+				"type": "gold",
+				"probability": 0.3,
+				"count": 15,
+				"addMaxCount": 80
+			},
+			{
+				"type": "card",
+				"count": 1,
+				"colors": [
+					"White"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD"
+				]
+			}
+		],
+		"colors": "WU",
+		"questTags": [
+			"Human",
+			"Religious",
+			"Holy",
+			"IdentityWhite",
+			"IdentityBlue",
+			"BiomeColorless",
+			"BiomeWhite"
+		]
+	},
+	{
+		"name": "Obsessed Stitcher",
+		"sprite": "sprites/enemy/humanoid/human/wizard/geistmage.atlas",
+		"deck": [
+			"decks/standard/INN/inn_labman_medium.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.7,
+		"difficulty": 0.1,
+		"speed": 25,
+		"life": 25,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 3,
+				"addMaxCount": 2
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 150,
+				"addMaxCount": 50
+			},
+			{
+				"type": "card",
+				"count": 2,
+				"colors": [
+					"Blue",
+					"Red"
+				],
+				"rarity": [
+					"Rare",
+					"Mythic"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"AVR"
+				]
+			}
+		],
+		"colors": "UR",
+		"questTags": [
+			"Undead",
+			"Laboratory",
+			"Humanoid",
+			"IdentityBlue",
+			"IdentityRed",
+			"BiomeBlue"
+		]
+	},
+	{
+		"name": "Scarecrow",
+		"sprite": "sprites/enemy/construct/scarecrow.atlas",
+		"deck": [
+			"decks/standard/INN/inn_scarecrow_easy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.45,
+		"difficulty": 0.1,
+		"speed": 10,
+		"life": 20,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 0.75,
+				"count": 3,
+				"rarity": [
+					"Common"
+				],
+				"addMaxCount": 2
+			},
+			{
+				"type": "deckCard",
+				"probability": 0.55,
+				"count": 1,
+				"addMaxCount": 2
+			},
+			{
+				"type": "gold",
+				"probability": 0.3,
+				"count": 13,
+				"addMaxCount": 80
+			},
+			{
+				"type": "card",
+				"count": 1,
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"MID"
+				]
+			}
+		],
+		"questTags": [
+			"Artifact",
+			"BiomeColorless",
+			"BiomeGreen",
+			"BiomeWhite"
+		]
+	},
+	{
+		"name": "Sigardian Priest",
+		"sprite": "sprites/enemy/humanoid/human/cleric/monk.atlas",
+		"deck": [
+			"decks/standard/INN/inn_cleric_sigarda_easy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.45,
+		"difficulty": 0.1,
+		"speed": 24,
+		"life": 11,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 0.75,
+				"count": 2,
+				"rarity": [
+					"Common"
+				],
+				"addMaxCount": 2
+			},
+			{
+				"type": "deckCard",
+				"probability": 0.35,
+				"count": 1,
+				"rarity": [
+					"Uncommon"
+				],
+				"addMaxCount": 2
+			},
+			{
+				"type": "deckCard",
+				"probability": 0.1,
+				"count": 1,
+				"rarity": [
+					"rare"
+				],
+				"addMaxCount": 1
+			},
+			{
+				"type": "gold",
+				"probability": 0.3,
+				"count": 13,
+				"addMaxCount": 80
+			},
+			{
+				"type": "card",
+				"count": 1,
+				"colors": [
+					"White"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"MID"
+				]
+			}
+		],
+		"colors": "WG",
+		"questTags": [
+			"Human",
+			"Religious",
+			"Holy",
+			"IdentityWhite",
+			"IdentityGreen",
+			"BiomeColorless",
+			"BiomeGreen",
+			"BiomeWhite"
+		]
+	},
+	{
+		"name": "Shrieking Skaab",
+		"sprite": "sprites/enemy/undead/ghoul.atlas",
+		"deck": [
+			"decks/standard/INN/inn_skaab_easy2.dck",
+			"decks/standard/INN/inn_skaab_easy3.dck",
+			"decks/standard/INN/inn_skaab_shrieking.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.7,
+		"difficulty": 0.1,
+		"speed": 30,
+		"life": 9,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 1,
+				"addMaxCount": 4
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 28,
+				"addMaxCount": 55
+			},
+			{
+				"type": "card",
+				"count": 1,
+				"colors": [
+					"Blue"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD"
+				]
+			}
+		],
+		"colors": "U",
+		"questTags": [
+			"Undead",
+			"Skaab",
+			"Humanoid",
+			"IdentityBlue",
+			"BiomeBlue"
+		]
+	},
+	{
+		"name": "Skaab",
+		"sprite": "sprites/enemy/undead/zombie_2.atlas",
+		"deck": [
+			"decks/standard/INN/inn_skaab_easy.dck",
+			"decks/standard/INN/inn_skaab_easy2.dck",
+			"decks/standard/INN/inn_skaab_easy3.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.7,
+		"difficulty": 0.1,
+		"speed": 18,
+		"life": 10,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 1,
+				"addMaxCount": 3
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 23,
+				"addMaxCount": 50
+			},
+			{
+				"type": "card",
+				"count": 1,
+				"colors": [
+					"Blue"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD"
+				]
+			}
+		],
+		"colors": "U",
+		"questTags": [
+			"Undead",
+			"Skaab",
+			"Humanoid",
+			"IdentityBlue",
+			"BiomeBlue"
+		]
+	},
+	{
+		"name": "Wandering Geist",
+		"sprite": "sprites/enemy/undead/ghost_2.atlas",
+		"deck": [
+			"decks/standard/INN/inn_geist_easy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.4,
+		"difficulty": 0.1,
+		"speed": 23,
+		"life": 9,
+		"flying": true,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 1,
+				"addMaxCount": 3
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 15,
+				"addMaxCount": 50
+			},
+			{
+				"type": "card",
+				"probability": 0.7,
+				"count": 1,
+				"colors": [
+					"White"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD"
+				]
+			},
+			{
+				"type": "card",
+				"probability": 0.6,
+				"count": 1,
+				"colors": [
+					"Blue"
+				],
+				"rarity": [
+					"Common",
+					"Uncommon"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD"
+				]
+			}
+		],
+		"colors": "UW",
+		"questTags": [
+			"Undead",
+			"Spirit",
+			"Exile",
+			"IdentityWhite",
+			"IdentityBlue",
+			"BiomeWhite",
+			"BiomeColorless"
+		]
+	},
+	{
+		"name": "Watcher in the Web",
+		"sprite": "sprites/enemy/beast/spider_black.atlas",
+		"deck": [
+			"decks/standard/INN/inn_spider_easy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.3,
+		"difficulty": 0.1,
+		"speed": 30,
+		"life": 13,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 2,
+				"count": 2,
+				"addMaxCount": 2
+			},
+			{
+				"type": "gold",
+				"probability": 0.3,
+				"count": 5,
+				"addMaxCount": 85
+			},
+			{
+				"type": "card",
+				"probability": 0.45,
+				"count": 1,
+				"addMaxCount": 2,
+				"colors": [
+					"Green"
+				],
+				"rarity": [
+					"Uncommon",
+					"Common"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"MID",
+					"VOW"
+				]
+			},
+			{
+				"type": "card",
+				"count": 0,
+				"addMaxCount": 1,
+				"colors": [
+					"Green"
+				],
+				"rarity": [
+					"Uncommon",
+					"Rare"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"MID"
+				]
+			}
+		],
+		"colors": "G",
+		"questTags": [
+			"Spider",
+			"BiomeGreen",
+			"IdentityGreen",
+			"abandoned"
+		]
+	},
+	{
+		"name": "Wolfkin Outcast",
+		"sprite": "sprites/enemy/humanoid/human/bandit/banditslingshot.atlas",
+		"deck": [
+			"decks/standard/INN/inn_wolfkin_easy.dck",
+			"decks/standard/INN/inn_wolfkin_easy2.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.7,
+		"difficulty": 0.1,
+		"speed": 24,
+		"life": 12,
+		"scale": 0.6,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 1,
+				"count": 2,
+				"addMaxCount": 3
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 10,
+				"addMaxCount": 50
+			},
+			{
+				"type": "card",
+				"count": 2,
+				"colors": [
+					"G"
+				],
+				"rarity": [
+					"Uncommon",
+					"Rare"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"MID"
+				]
+			}
+		],
+		"colors": "G",
+		"questTags": [
+			"Outcast",
+			"Wolf",
+			"Humanoid",
+			"IdentityBlue",
+			"BiomeColorless"
+		]
+	}
+]

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Dr No
+Title=Dr No
+Icon=Dr No.jpg
+Difficulty=Easy
+Description=New_Phyrexia/SCG_Invitational_Qualifier_-_Petawawa,_Canada/David_Henderson_-_Valakut_(Standard,_#17315).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Inferno Titan
+2 Oracle of Mul Daya
+4 Overgrown Battlement
+4 Primeval Titan
+2 Urabrask the Hidden
+4 Harrow
+2 Summoning Trap
+4 Explore
+3 Green Sun's Zenith
+3 Pyroclasm
+1 Slagstorm
+3 Khalni Heart Expedition
+6 Forest
+12 Mountain
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+3 Act of Aggression
+3 Beast Within
+1 Kozilek, Butcher of Truth
+2 Nature's Claim
+2 Tumble Magnet

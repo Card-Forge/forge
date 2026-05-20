@@ -1,0 +1,8 @@
+Name:Gran Pulse Ochu
+ManaCost:G
+Types:Creature Plant Beast
+PT:1/1
+K:Deathtouch
+A:AB$ Pump | Cost$ 8 | Defined$ Self | NumAtt$ +X | NumDef$ +X | SpellDescription$ Until end of turn, this creature gets +1/+1 for each permanent card in your graveyard.
+SVar:X:Count$ValidGraveyard Permanent.YouOwn
+Oracle:Deathtouch\n{8}: Until end of turn, this creature gets +1/+1 for each permanent card in your graveyard.

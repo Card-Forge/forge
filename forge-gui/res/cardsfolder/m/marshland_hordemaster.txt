@@ -1,7 +1,7 @@
 Name:Marshland Hordemaster
-ManaCost:1 B R
+ManaCost:B R
 Types:Creature Lizard Warlock
-PT:2/4
+PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Lizard.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigBattleCry | TriggerDescription$ Whenever CARDNAME or another Lizard you control enters, CARDNAME perpetually gains battle cry.
 SVar:TrigBattleCry:DB$ Pump | Defined$ Self | KW$ Battle cry | Duration$ Perpetual
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Lizard.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME or another Lizard you control dies, target opponent loses 1 life and you gain 1 life.

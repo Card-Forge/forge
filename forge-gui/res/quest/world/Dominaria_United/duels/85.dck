@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Saruman
+Title=Saruman
+Icon=Saruman.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/Callenutg1_-_Merfolk_(Modern,_#1495173).dck
+Deck Type=constructed
+
+[Main]
+1 Svyelun of Sea and Sky
+2 Subtlety
+2 Lord of Atlantis
+2 Phantasmal Image
+2 Lord of Atlantis
+3 Svyelun of Sea and Sky
+4 Merfolk Trickster
+4 Tide Shaper
+4 Vodalian Hexcatcher
+4 Silvergill Adept
+4 Master of the Pearl Trident
+4 Aether Vial
+2 Force of Negation
+2 Dismember
+1 Island
+1 Island
+1 Island
+1 Glasspool Mimic
+2 Otawara, Soaring City
+2 Island
+2 Island
+2 Waterlogged Grove
+4 Island
+4 Mutavault
+[Sideboard]
+1 Mystical Dispute
+2 Grafdigger's Cage
+2 Counterspell
+2 Harbinger of the Tides
+2 Chalice of the Void
+2 Spreading Seas
+2 Hurkyl's Recall
+2 Gut Shot

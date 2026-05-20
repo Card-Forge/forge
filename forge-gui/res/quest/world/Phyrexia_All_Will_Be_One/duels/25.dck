@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Totoro
+Title=Totoro
+Icon=Totoro.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/Cody_Blair_-_Domain_Control_(Standard,_#1616075).dck
+Deck Type=constructed
+
+[Main]
+4 Fable of the Mirror-Breaker
+2 The Kami War
+2 Atraxa, Grand Unifier
+1 Contagious Vorrac
+1 The Celestus
+3 Reckoner Bankbuster
+3 Courier's Briefcase
+2 Farewell
+3 Drag to the Bottom
+2 Herd Migration
+4 Lay Down Arms
+4 Leyline Binding
+3 The Wandering Emperor
+1 Forest
+2 Plains
+1 Island
+1 Swamp
+1 Mountain
+1 Haunted Ridge
+1 Rockfall Vale
+1 Deathcap Glade
+1 Shattered Sanctum
+4 Jetmir's Garden
+4 Raffine's Tower
+4 Spara's Headquarters
+4 Ziatora's Proving Ground
+[Sideboard]
+2 Cut Down
+2 Negate
+2 Memory Deluge
+2 Glissa Sunslayer
+2 Knockout Blow
+1 Void Rend
+1 Farewell
+1 Drag to the Bottom
+1 Nissa, Ascended Animist
+1 Kaya, Intangible Slayer

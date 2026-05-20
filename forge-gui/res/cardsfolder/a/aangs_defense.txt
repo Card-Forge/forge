@@ -1,0 +1,6 @@
+Name:Aang's Defense
+ManaCost:W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.blocking+YouCtrl | NumAtt$ +2 | NumDef$ +2 | TgtPrompt$ Select target blocking creature you control | SubAbility$ DBDraw | SpellDescription$ Target blocking creature you control gets +2/+2 until end of turn. Draw a card.
+SVar:DBDraw:DB$ Draw
+Oracle:Target blocking creature you control gets +2/+2 until end of turn.\nDraw a card.

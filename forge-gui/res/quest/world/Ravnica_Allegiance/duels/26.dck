@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Luna Lovegood
+Title=Luna Lovegood
+Icon=Luna Lovegood.jpg
+Difficulty=Medium
+Description=./Standard/Ravnica_Allegiance/3HaLeX1_-_Sultai_Midrange_(Standard,_#779169).dck
+Deck Type=constructed
+
+[Main]
+3 Hostage Taker
+4 Hydroid Krasis
+4 Incubation Druid
+4 Jadelight Ranger
+4 Llanowar Elves
+4 Merfolk Branchwalker
+3 Wildgrowth Walker
+2 Cast Down
+2 Vraska's Contempt
+3 Find // Finality
+3 Vivien Reid
+4 Breeding Pool
+4 Forest
+4 Hinterland Harbor
+4 Overgrown Tomb
+2 Swamp
+2 Watery Grave
+4 Woodland Cemetery
+[Sideboard]
+1 Cast Down
+1 Cry of the Carnarium
+2 Disdainful Stroke
+3 Duress
+1 Moment of Craving
+3 Negate
+1 Vraska's Contempt
+2 Vraska, Relic Seeker
+1 Wildgrowth Walker

@@ -1,0 +1,6 @@
+Name:Plasma Bolt
+ManaCost:R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals 2 damage to any target. Void — CARDNAME deals 3 damage instead if a nonland permanent left the battlefield this turn or a spell was warped this turn.
+SVar:X:Count$Void.3.2
+Oracle:Plasma Bolt deals 2 damage to any target.\nVoid — Plasma Bolt deals 3 damage instead if a nonland permanent left the battlefield this turn or a spell was warped this turn.

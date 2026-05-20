@@ -1,0 +1,12 @@
+Name:Electric Seaweed
+ManaCost:2 R R
+Types:Creature Plant Wall
+PT:0/4
+K:Defender
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When this creature enters, until end of turn, whenever another creature dies, this creature deals 1 damage to each non-Wall creature.
+SVar:TrigEffect:DB$ Effect | Triggers$ DieTrigger | RememberObjects$ Self
+SVar:DieTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.!IsRemembered | Execute$ TrigDamage | TriggerDescription$ Until end of turn, whenever another creature dies, this creature deals 1 damage to each non-Wall creature.
+SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature.nonWall | NumDmg$ 1 | DamageSource$ EffectSource | ValidDescription$ each non-Wall creature.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ This creature deals 1 damage to any target.
+Oracle:Defender, haste\nWhen this creature enters, until end of turn, whenever another creature dies, this creature deals 1 damage to each non-Wall creature.\n{T}: This creature deals 1 damage to any target.

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Cable
+Title=Cable
+Icon=Cable.jpg
+Difficulty=Easy
+Description=./Standard/Marvels_Spider_Man/Joseph_Peo_-_Grixis_Reanimator_(Standard,_#2653685).dck
+Deck Type=constructed
+
+[Main]
+4 Kefka, Court Mage
+3 Marang River Regent
+3 Summon: Primal Odin
+2 Tishana's Tidebinder
+3 Trumpeting Carnosaur
+2 Abrade
+4 Bitter Triumph
+2 Consult the Star Charts
+4 Live or Die
+1 The End
+4 Three Steps Ahead
+2 Ill-Timed Explosion
+4 Blazemire Verge
+4 Gloomlake Verge
+3 Island
+1 Multiversal Passage
+2 Oscorp Industries
+2 Raucous Theater
+2 Riverpyre Verge
+2 Swamp
+2 Thundering Falls
+4 Watery Grave
+[Sideboard]
+1 Abrade
+1 Aclazotz, Deepest Betrayal
+2 Annul
+2 Caelorna, Coral Tyrant
+2 Magmatic Hellkite
+2 Riverchurn Monument
+2 Strategic Betrayal
+2 Tishana's Tidebinder
+1 Virtue of Persistence

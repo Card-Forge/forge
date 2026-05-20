@@ -258,6 +258,10 @@ public class CardTranslation {
         return translations;
     }
 
+    public static String getLanguageSelected() {
+        return languageSelected;
+    }
+
     private static boolean needsTranslation() {
         return !languageSelected.equals("en-US");
     }

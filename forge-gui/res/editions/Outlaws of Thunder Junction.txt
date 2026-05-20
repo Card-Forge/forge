@@ -481,3 +481,7 @@ Base=Land:fromSheet("OTJ cards")
 16 c_a_clue_draw @Clint Lockwood
 17 meteorite @Ina Wong
 18 c_a_treasure_sac @Monztre
+
+[other]
+1 copy @Brian Valeza
+20 plot @Olena Richards

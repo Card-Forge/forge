@@ -1,24 +1,24 @@
 //Rank|Name|Rarity|Set
-#1|Sarkhan the Dragonspeaker|M|KTK
+#1|Sarkhan, the Dragonspeaker|M|KTK
 #2|Wingmate Roc|M|KTK
-#3|Sorin Solemn Visitor|M|KTK
+#3|Sorin, Solemn Visitor|M|KTK
 #4|Ashcloud Phoenix|M|KTK
 #5|Hooded Hydra|M|KTK
 #6|Zurgo Helmsmasher|M|KTK
 #7|Surrak Dragonclaw|M|KTK
-#8|Anafenza the Foremost|M|KTK
+#8|Anafenza, the Foremost|M|KTK
 #9|Clever Impersonator|M|KTK
 #10|Pearl Lake Ancient|M|KTK
-#11|Sidisi Brood Tyrant|M|KTK
+#11|Sidisi, Brood Tyrant|M|KTK
 #12|See the Unwritten|M|KTK
-#13|Narset Enlightened Master|M|KTK
+#13|Narset, Enlightened Master|M|KTK
 #14|High Sentinels of Arashin|R|KTK
 #15|Sagu Mauler|R|KTK
 #16|Empty the Pits|M|KTK
 #17|Siege Rhino|R|KTK
 #18|Herald of Anafenza|R|KTK
 #19|Crater's Claws|R|KTK
-#20|Dragon Style Twins|R|KTK
+#20|Dragon-Style Twins|R|KTK
 #21|End Hostilities|R|KTK
 #22|Master of Pearls|R|KTK
 #23|Utter End|R|KTK
@@ -52,7 +52,7 @@
 #51|Mardu Ascendancy|R|KTK
 #52|Bellowing Saddlebrute|U|KTK
 #53|Trail of Mystery|R|KTK
-#54|Mardu Heart Piercer|U|KTK
+#54|Mardu Heart-Piercer|U|KTK
 #55|Heir of the Wilds|U|KTK
 #56|Windswept Heath|R|KTK
 #57|Icefeather Aven|U|KTK
@@ -72,7 +72,7 @@
 #71|Mistfire Weaver|U|KTK
 #72|Tuskguard Captain|U|KTK
 #73|Meandering Towershell|R|KTK
-#74|Mer Ek Nightblade|U|KTK
+#74|Mer-Ek Nightblade|U|KTK
 #75|Ruthless Ripper|U|KTK
 #76|Deflecting Palm|R|KTK
 #77|Mardu Charm|U|KTK
@@ -85,7 +85,7 @@
 #84|Hordeling Outburst|U|KTK
 #85|Riverwheel Aerialists|U|KTK
 #86|Winterflame|U|KTK
-#87|War Name Aspirant|U|KTK
+#87|War-Name Aspirant|U|KTK
 #88|Incremental Growth|U|KTK
 #89|Watcher of the Roost|U|KTK
 #90|Jeskai Charm|U|KTK
@@ -94,7 +94,7 @@
 #93|Rakshasa Vizier|R|KTK
 #94|Sandsteppe Citadel|U|KTK
 #95|Sultai Charm|U|KTK
-#96|Kin Tree Invocation|U|KTK
+#96|Kin-Tree Invocation|U|KTK
 #97|Nomad Outpost|U|KTK
 #98|Bear's Companion|U|KTK
 #99|Monastery Swiftspear|U|KTK
@@ -103,7 +103,7 @@
 #102|Mystic Monastery|U|KTK
 #103|Frontier Bivouac|U|KTK
 #104|Temur Charm|U|KTK
-#105|Ainok Bond Kin|C|KTK
+#105|Ainok Bond-Kin|C|KTK
 #106|Swarm of Bloodflies|U|KTK
 #107|Sultai Ascendancy|R|KTK
 #108|Jeskai Elder|U|KTK
@@ -141,7 +141,7 @@
 #140|Bring Low|C|KTK
 #141|Hooting Mandrills|C|KTK
 #142|Gurmag Swiftwing|U|KTK
-#143|Wind Scarred Crag|C|KTK
+#143|Wind-Scarred Crag|C|KTK
 #144|Alpine Grizzly|C|KTK
 #145|Force Away|C|KTK
 #146|Ponyback Brigade|C|KTK
@@ -174,7 +174,7 @@
 #173|Despise|U|KTK
 #174|Tranquil Cove|C|KTK
 #175|Rite of the Serpent|C|KTK
-#176|Krumar Bond Kin|C|KTK
+#176|Krumar Bond-Kin|C|KTK
 #177|Rugged Highlands|C|KTK
 #178|Salt Road Patrol|C|KTK
 #179|Rush of Battle|C|KTK
@@ -186,7 +186,7 @@
 #185|Summit Prowler|C|KTK
 #186|Bitter Revelation|C|KTK
 #187|Monastery Flock|C|KTK
-#188|Sage Eye Harrier|C|KTK
+#188|Sage-Eye Harrier|C|KTK
 #189|Smoke Teller|C|KTK
 #190|Trumpet Blast|C|KTK
 #191|Canyon Lurkers|C|KTK
@@ -195,7 +195,7 @@
 #194|Sidisi's Pet|C|KTK
 #195|Act of Treason|C|KTK
 #196|Roar of Challenge|U|KTK
-#197|Kin Tree Warden|C|KTK
+#197|Kin-Tree Warden|C|KTK
 #198|Scaldkin|C|KTK
 #199|Shambling Attendants|C|KTK
 #200|War Behemoth|C|KTK
@@ -244,7 +244,7 @@
 #243|Lens of Clarity|C|KTK
 #244|Briber's Purse|U|KTK
 #245|Altar of the Brood|R|KTK
-#246|Heart Piercer Bow|U|KTK
+#246|Heart-Piercer Bow|U|KTK
 #247|Tomb of the Spirit Dragon|U|KTK
 #248|Cranial Archive|U|KTK
 #249|Ugin's Nexus|M|KTK

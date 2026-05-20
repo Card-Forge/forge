@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Luna Lovegood
+Title=Luna Lovegood
+Icon=Luna Lovegood.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/Ookubo_Takumi_-_WUB_Control_(Standard,_#1750136).dck
+Deck Type=constructed
+
+[Main]
+1 Negate
+2 Dissipate
+2 Go for the Throat
+3 Memory Deluge
+2 Siphon Insight
+2 March of Otherworldly Light
+1 March of Wretched Sorrow
+3 Make Disappear
+2 Void Rend
+3 Cut Down
+3 Sheoldred's Edict
+3 Quick Study
+1 Sunset Revelry
+1 Farewell
+1 Sunfall
+4 The Wandering Emperor
+2 Plains
+1 Island
+1 Swamp
+1 Caves of Koilos
+1 Underground River
+1 Darkslick Shores
+3 Seachrome Coast
+3 Deserted Beach
+4 Shipwreck Marsh
+1 Shattered Sanctum
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+4 Raffine's Tower
+2 Mirrex
+[Sideboard]
+2 Negate
+2 Disdainful Stroke
+2 Sunset Revelry
+1 Farewell
+1 March of Wretched Sorrow
+1 Void Rend
+1 The Eternal Wanderer
+1 Elspeth's Smite
+2 Chrome Host Seedshark
+2 Glistening Deluge

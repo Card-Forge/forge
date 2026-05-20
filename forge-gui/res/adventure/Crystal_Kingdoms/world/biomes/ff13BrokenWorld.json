@@ -1,0 +1,229 @@
+{
+	"startPointX": 0.5,
+	"startPointY": 0.5,
+	"noiseWeight": 0.3,
+	"distWeight": 1,
+	"name": "FF13 A Broken World",
+	"tilesetAtlas": "world/tilesets/terrain.atlas",
+	"tilesetName": "Colorless",
+	"terrain": [
+		{
+			"spriteName": "Colorless_1",
+			"max": 0.2,
+			"resolution": 5
+		},
+		{
+			"spriteName": "Colorless_2",
+			"min": 0.8,
+			"max": 1,
+			"resolution": 5
+		}
+	],
+	"width": 0.85,
+	"height": 0.85,
+	"color": "aeaeae",
+	"spriteNames": [
+		"Stone"
+	],
+	"enemies": [
+		"Adept Black Wizard",
+		"Adept Blue Wizard",
+		"Adept Green Wizard",
+		"Adept Red Wizard",
+		"Angelic Page",
+		"Minor Demon",
+		"Ancient Demon",
+		"Adept White Wizard",
+		"Apprentice Black Wizard",
+		"Apprentice Blue Wizard",
+		"Human Looter",
+		"Apprentice Green Wizard",
+		"Apprentice Red Wizard",
+		"Apprentice White Wizard",
+		"Bandit",
+		"Boar",
+		"Caracal",
+		"Challenger 20",
+		"Challenger 21",
+		"Challenger 22",
+		"Clay Golem",
+		"Construct",
+		"Corrupted Cleric",
+		"Corrupted Green Wizard",
+		"Corrupted Red Wizard",
+		"Corrupted Blue Wizard",
+		"Dog",
+		"Doppelganger",
+		"Eldrazi",
+		"Falcon",
+		"Fox",
+		"Gargoyle",
+		"Gargoyle 2",
+		"Geonid Death-Cap",
+		"Golem",
+		"Maelstrom Angel",
+		"Mummy",
+		"Ooze",
+		"Pirate",
+		"Raven",
+		"Sliver",
+		"Wandering Giant",
+		"Wild Rat"
+	],
+	"pointsOfInterest": [
+		"Spawn",
+		"Waste Town Generic",
+		"Waste Town Identity",
+		"Waste Town Tribal",
+		"Fort1",
+		"Fort2",
+		"Fort3",
+		"Fort4",
+		"Fort5",
+		"Fort6",
+		"Aerie",
+		"Factory",
+		"Factory1",
+		"Factory2",
+		"Factory3",
+		"MageTowerX",
+		"MageTowerU",
+		"MageTowerU1",
+		"MageTowerU2",
+		"MageTowerU3",
+		"MageTowerU4",
+		"MageTowerU5",
+		"MageTowerU7",
+		"MageTower7Church",
+		"MageTowerRats",
+		"MageTowerUD",
+		"CaveC",
+		"CaveC1",
+		"CaveC2",
+		"CaveKobold",
+		"CaveZombie",
+		"CaveReptile",
+		"CaveTroll",
+		"CaveC3",
+		"CaveC4",
+		"CaveC5",
+		"CaveC6",
+		"CaveC7",
+		"CaveC8",
+		"CaveC9",
+		"CaveCA",
+		"CaveCB",
+		"CaveCE",
+		"FortMultilevel",
+		"CaveCerodon",
+		"CaveEldrazi",
+		"CaveAmphin",
+		"CaveRat",
+		"Slime Cave",
+		"Slobads Factory",
+		"Xiras Hive",
+		"Emrakul",
+		"Quest_APortalToNowhere",
+		"Quest_DigSite",
+		"Quest_PrimalJungle",
+		"Quest_BanditCave"
+	],
+	"structures": [
+		{
+			"N": 2,
+			"x": 0.5,
+			"y": 0.5,
+			"structureAtlasPath": "world/structures/colorless_structures.atlas",
+			"sourcePath": "world/structures/models/colorless.png",
+			"maskPath": "world/structures/masks/circle.png",
+			"height": 0.25,
+			"width": 0.25,
+			"symmetry": 8,
+			"mappingInfo": [
+				{
+					"name": "crater",
+					"color": "808080",
+					"collision": true
+				},
+				{
+					"name": "tree",
+					"color": "ff0000",
+					"collision": true
+				},
+				{
+					"name": "tree2",
+					"color": "00ff00",
+					"collision": true
+				},
+				{
+					"name": "tree3",
+					"color": "0000ff",
+					"collision": true
+				},
+				{
+					"name": "tree4",
+					"color": "00ffff",
+					"collision": true
+				},
+				{
+					"name": "rock",
+					"color": "ff00ff",
+					"collision": true
+				},
+				{
+					"name": "mountain",
+					"color": "000000",
+					"collision": true
+				}
+			]
+		},
+		{
+			"N": 2,
+			"x": 0.5,
+			"y": 0.5,
+			"structureAtlasPath": "world/structures/colorless_structures.atlas",
+			"sourcePath": "world/structures/models/colorless.png",
+			"maskPath": "world/structures/masks/ring.png",
+			"height": 0.5,
+			"width": 0.5,
+			"symmetry": 8,
+			"mappingInfo": [
+				{
+					"name": "hole",
+					"color": "808080",
+					"collision": true
+				},
+				{
+					"name": "tree",
+					"color": "ff0000",
+					"collision": true
+				},
+				{
+					"name": "tree2",
+					"color": "00ff00",
+					"collision": true
+				},
+				{
+					"name": "tree3",
+					"color": "0000ff",
+					"collision": true
+				},
+				{
+					"name": "tree4",
+					"color": "00ffff",
+					"collision": true
+				},
+				{
+					"name": "rock",
+					"color": "ff00ff",
+					"collision": true
+				},
+				{
+					"name": "mountain",
+					"color": "000000",
+					"collision": true
+				}
+			]
+		}
+	]
+}

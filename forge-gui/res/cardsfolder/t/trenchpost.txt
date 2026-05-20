@@ -2,7 +2,7 @@ Name:Trenchpost
 ManaCost:no cost
 Types:Land Locus
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Mill | Cost$ 3 T | NumCards$ X | ValidTgts$ Player | AILogic$ EndOfOppTurn | SpellDescription$ Target player mills a card for each Locus you control.
+A:AB$ Mill | Cost$ 3 T | NumCards$ X | ValidTgts$ Player | AILogic$ AtOppEOT | SpellDescription$ Target player mills a card for each Locus you control.
 SVar:X:Count$Valid Locus.YouCtrl
 DeckHas:Ability$Mill
 DeckNeeds:Type$Locus

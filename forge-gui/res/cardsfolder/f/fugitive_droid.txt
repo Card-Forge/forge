@@ -1,0 +1,9 @@
+Name:Fugitive Droid
+ManaCost:U
+Types:Artifact Creature Robot Scientist
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | CheckSVar$ X | Description$ This creature can't be blocked if an artifact entered the battlefield under your control this turn.
+A:AB$ Counter | Cost$ U Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Artifact.YouCtrl+inRealZoneBattlefield,Creature.YouCtrl+inRealZoneBattlefield | SpellDescription$ Counter target spell that targets an artifact or creature you control.
+SVar:X:Count$ThisTurnEntered_Battlefield_Artifact.YouCtrl
+DeckHints:Type$Artifact
+Oracle:This creature can't be blocked if an artifact entered the battlefield under your control this turn.\n{U}, Sacrifice this creature: Counter target spell that targets an artifact or creature you control.

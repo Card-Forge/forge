@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Luna Lovegood
+Title=Luna Lovegood
+Icon=Luna Lovegood.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/Tournament_Modern_Rome_2013/Tribali_Nipole_-_Zoo_(Modern,_#53454).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Geist of Saint Traft
+4 Kird Ape
+4 Loam Lion
+4 Steppe Lynx
+3 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+4 Might of Alara
+4 Tribal Flames
+4 Rancor
+4 Arid Mesa
+1 Blood Crypt
+1 Hallowed Fountain
+4 Marsh Flats
+3 Misty Rainforest
+1 Mountain
+1 Plains
+1 Sacred Foundry
+1 Scalding Tarn
+1 Steam Vents
+2 Stomping Ground
+1 Temple Garden
+[Sideboard]
+1 Aven Mindcensor
+4 Back to Nature
+4 Kor Firewalker
+2 Rain of Gore
+2 Rest in Peace
+2 Stony Silence

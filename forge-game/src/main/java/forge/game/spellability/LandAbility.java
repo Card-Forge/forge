@@ -21,18 +21,20 @@ import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
+import forge.game.card.CardState;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Objects;
 
 public class LandAbility extends AbilityStatic {
 
-    public LandAbility(Card sourceCard) {
-        super(sourceCard, ManaCost.NO_COST);
+    public LandAbility(Card sourceCard, CardState state) {
+        super(sourceCard, ManaCost.NO_COST, state);
 
         getRestrictions().setZone(ZoneType.Hand);
     }
@@ -53,7 +55,7 @@ public class LandAbility extends AbilityStatic {
             return false;
         }
  
-        land = ObjectUtils.firstNonNull(getAlternateHost(land), land);
+        land = Objects.requireNonNullElse(getAlternateHost(land), land);
 
         return p.canPlayLand(land, false, this);
     }
@@ -61,7 +63,7 @@ public class LandAbility extends AbilityStatic {
     @Override
     public void resolve() {
         getHostCard().setSplitStateToPlayAbility(this);
-        final Card result = getActivatingPlayer().playLandNoCheck(getHostCard(), this);
+        final Card result = getActivatingPlayer().playLand(getHostCard(), this);
 
         // increase mayplay used
         if (getMayPlay() != null) {
@@ -79,7 +81,7 @@ public class LandAbility extends AbilityStatic {
         StringBuilder sb = new StringBuilder(StringUtils.capitalize(localizer.getMessage("lblPlayLand")));
 
         if (getHostCard().isModal()) {
-            sb.append(" (").append(CardTranslation.getTranslatedName(getHostCard().getName(ObjectUtils.firstNonNull(getCardStateName(), CardStateName.Original)))).append(")");
+            sb.append(" (").append(CardTranslation.getTranslatedName(getCardState().getName())).append(")");
         }
 
         StaticAbility sta = getMayPlay();

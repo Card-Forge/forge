@@ -396,7 +396,7 @@ public class TextUtil {
             simpleDate = new SimpleDateFormat("E, MMM dd, yyyy - hh:mm:ss a");
         return simpleDate;
     }
-    //format changelog
+
     public static String getFormattedChangelog(File changelog, String defaultLog) {
         if (!changelog.exists())
             return defaultLog;

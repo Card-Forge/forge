@@ -1,0 +1,9 @@
+Name:Origin of Metalbending
+ManaCost:1 G
+Types:Instant Lesson
+A:SP$ Charm | Choices$ DBDestroy,DBPutCounter
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | TgtPrompt$ Select target creature you control | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature you control. It gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Indestructible
+DeckHas:Ability$Counters
+Oracle:Choose one —\n• Destroy target artifact or enchantment.\n• Put a +1/+1 counter on target creature you control. It gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

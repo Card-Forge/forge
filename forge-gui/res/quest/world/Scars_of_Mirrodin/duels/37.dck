@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Milhouse_van_Houten
+Title=Milhouse_van_Houten
+Icon=Milhouse_van_Houten.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/States-Champs_Michigan/Ronnie_Ritner_-_Valakut_Ramp_(Standard,_#7942).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+4 Primeval Titan
+2 Wurmcoil Engine
+3 Harrow
+4 Lightning Bolt
+3 Summoning Trap
+4 Cultivate
+4 Explore
+2 Pyroclasm
+4 Khalni Heart Expedition
+3 Evolving Wilds
+6 Forest
+11 Mountain
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Back to Nature
+2 Brittle Effigy
+4 Burst Lightning
+1 Comet Storm
+4 Obstinate Baloth

@@ -7,7 +7,7 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:DBChooseCard:DB$ ChooseCard | Choices$ Creature.OppCtrl | ChoiceZone$ Graveyard | AILogic$ WorstCard | Mandatory$ True | Defined$ You | RememberChosen$ True | SubAbility$ DBChoosePlayer
 SVar:DBChoosePlayer:DB$ ChoosePlayer | Choices$ Player.Opponent | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | AILogic$ LeastCreatures | SubAbility$ DBChoosePlayer2
 # Needed to set ChosenPlayer to be ChosenCardController
-SVar:DBChoosePlayer2:DB$ ChoosePlayer | Choices$ ChosenCardController | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | AILogic$ LeastCreatures | SubAbility$ DBChooseCard2
+SVar:DBChoosePlayer2:DB$ ChoosePlayer | Choices$ ChosenCardController | Defined$ You | ConditionCheckSVar$ X | AILogic$ LeastCreatures | SubAbility$ DBChooseCard2
 SVar:DBChooseCard2:DB$ ChooseCard | Choices$ Creature.YouCtrl | ChoiceZone$ Graveyard | Defined$ ChosenPlayer | AILogic$ WorstCard | Mandatory$ True | RememberChosen$ True | SubAbility$ DBReturn
 # Add AILogic for Optional
 SVar:DBReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Battlefield | Optional$ True | OptionQuestion$ Return TARGETS from graveyard to battlefield under their owners' control? | SubAbility$ DBCleanup

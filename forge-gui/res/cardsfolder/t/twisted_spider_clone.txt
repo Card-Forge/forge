@@ -1,0 +1,10 @@
+Name:Twisted Spider-Clone
+ManaCost:3 G
+Types:Creature Spider Human
+PT:4/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ When this creature enters, put a +1/+1 counter on each creature you control with a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+counters_GE1_P1P1 | CounterType$ P1P1 | CounterNum$ 1
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:When this creature enters, put a +1/+1 counter on each creature you control with a +1/+1 counter on it.

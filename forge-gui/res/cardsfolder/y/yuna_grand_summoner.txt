@@ -1,0 +1,15 @@
+Name:Yuna, Grand Summoner
+ManaCost:1 G W U
+Types:Legendary Creature Human Cleric
+PT:1/5
+A:AB$ Mana | Cost$ T | Produced$ Any | PrecostDesc$ Grand Summon — | SubAbility$ DBEffectAddCounter | SpellDescription$ Add one mana of any color. When you next cast a creature spell this turn, that creature enters with two additional +1/+1 counters on it.
+SVar:DBEffectAddCounter:DB$ Effect | Triggers$ SpellCast
+SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Command | OneOff$ True | Execute$ ReplEffAddCounter | TriggerDescription$ When you next cast a creature spell this turn, that creature enters with two additional +1/+1 counters on it.
+SVar:ReplEffAddCounter:DB$ Effect | ReplacementEffects$ ETBAddCounter | RememberObjects$ TriggeredCard
+SVar:ETBAddCounter:Event$ Moved | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ ETBAddExtraCounter | ReplacementResult$ Updated
+SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBRemoveSelf
+SVar:DBRemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Permanent.YouCtrl+Other+HasCounters | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever another permanent you control is put into a graveyard from the battlefield, if it had one or more counters on it, you may put that number of +1/+1 counters on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggeredCard$CardCounters.ALL
+Oracle:Grand Summon — {T}: Add one mana of any color. When you next cast a creature spell this turn, that creature enters with two additional +1/+1 counters on it.\nWhenever another permanent you control is put into a graveyard from the battlefield, if it had one or more counters on it, you may put that number of +1/+1 counters on target creature.

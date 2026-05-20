@@ -551,8 +551,8 @@ Replace=.04 Mythic:fromSheet("INR cards")
 7 b_1_1_vampire @Volkan Baǵa
 8 b_2_2_vampire_flying @Svetlin Velinov
 9 b_1_1_wolf_deathtouch @Daniel Ljunggren
-11 b_2_2_zombie @Sam White
-12 b_2_2_zombie_decayed @Sam White
+10 b_2_2_zombie @Sam White
+11 b_2_2_zombie_decayed @Sam White
 12 b_x_x_zombie @Daarken
 13 r_x_x_elemental_trample_grave_exile @Deruchenko Alexander
 14 r_1_1_human @Kieran Yanner

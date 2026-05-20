@@ -1,0 +1,11 @@
+Name:Spider-Man, Peter Parker
+ManaCost:3 W W
+Types:Legendary Creature Spider Human Hero
+PT:4/4
+K:Flying
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on target creature you control. It gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Indestructible
+DeckHas:Ability$Counters
+DeckHints:Ability$LifeGain
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever you gain life, put a +1/+1 counter on target creature you control. It gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

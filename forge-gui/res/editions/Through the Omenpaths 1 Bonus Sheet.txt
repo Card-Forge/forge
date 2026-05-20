@@ -1,0 +1,48 @@
+[metadata]
+Code=OMB
+Date=2025-09-23
+Name=Through the Omenpaths 1 Bonus Sheet
+Type=Online
+ScryfallCode=OMB
+
+[cards]
+1 R Comeuppance @Igor Krstic
+2 R Leyline Binding @Cristi Balanescu
+3 R Nine Lives @Paul Scott Canavan
+4 R Path to Exile @Todd Lockwood
+5 U Reprieve @Mariah Tekulve
+6 R Rest in Peace @Jarel Threat
+7 M Wedding Ring @Olena Richards
+8 M Clever Impersonator @Slawomir Maniak
+9 R Counterspell @Gao Yan
+10 M Lorthos, the Tidemaker @Kekai Kotaki
+11 M Mindbreak Trap @Christopher Moeller
+12 R Mystic Confluence @Kieran Yanner
+13 C Ponder @Ernanda Souza
+14 R Rite of Replication @Matt Cavotta
+15 R Traumatize @Greg Staples
+16 C Feed the Swarm @Nino Is
+17 R Hex @Michael Sutfin
+18 U Infernal Grasp @Naomi Baker
+19 M Opposition Agent @Scott Murphy
+20 R Reanimate @Johann Bodin
+21 R Saw in Half @Alexander Mokhov
+22 M Skithiryx, the Blight Dragon @Chippy
+23 R Goblin Bombardment @Dave Kendall
+24 M Najeela, the Blade-Blossom @Matt Stewart
+25 R Relentless Assault @Greg Hildebrandt
+26 M Savage Beating @Matt Thompson
+27 C Shock @Jon Foster
+28 C Thrill of Possibility @Izzy
+29 C Unexpected Windfall @Lorenzo Mastroianni
+30 U Winds of Change @Adam Rex
+31 R Arachnogenesis @Johannes Voss
+32 R Arasta of the Endless Web @Sam Rowan
+33 U Beast Within @Jesper Ejsing
+34 R Heroic Intervention @James Ryman
+35 U Hunter's Insight @Jim Murray
+36 M Parallel Lives @Steve Prescott
+37 R Silkguard @Dan Murayama Scott
+38 U Tangle @Néstor Ossandón Leal
+39 M Alibou, Ancient Witness @Matt Stewart
+40 U Terminate @Wayne Reynolds

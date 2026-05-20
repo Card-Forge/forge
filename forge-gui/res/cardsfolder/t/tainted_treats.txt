@@ -1,0 +1,7 @@
+Name:Tainted Treats
+ManaCost:1 B G
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Artifact,Creature | ValidTgtsDesc$ artifact or creature | SubAbility$ DBToken | SpellDescription$ Destroy target artifact or creature. If its mana value was 4 or less, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+SVar:DBToken:DB$ Token | TokenScript$ c_a_food_sac | ConditionDefined$ Targeted | ConditionPresent$ Card.cmcLE4 | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Destroy target artifact or creature. If its mana value was 4 or less, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")

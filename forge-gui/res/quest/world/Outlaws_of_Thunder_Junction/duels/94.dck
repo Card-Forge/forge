@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Superman
+Title=Superman
+Icon=Superman.jpg
+Difficulty=Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/ETBJezus_-_Hammer_Time_(Modern,_#2044543).dck
+Deck Type=constructed
+
+[Main]
+4 Ornithopter
+1 Haywire Mite
+4 Puresteel Paladin
+4 Stoneforge Mystic
+4 Esper Sentinel
+4 Colossus Hammer
+1 Lavaspur Boots
+1 Shadowspear
+1 Cryptic Coat
+1 Assimilation Aegis
+3 Springleaf Drum
+2 Surge of Salvation
+1 Steelshaper's Gift
+4 Sigarda's Aid
+4 Urza's Saga
+2 Forge Anew
+3 Inkmoth Nexus
+2 Hallowed Fountain
+1 Fomori Vault
+4 Plains
+4 Marsh Flats
+2 Arid Mesa
+1 Flooded Strand
+2 Temple Garden
+[Sideboard]
+2 Surge of Salvation
+1 Spell Pierce
+3 Pick Your Poison
+1 Soul-Guide Lantern
+2 Cursed Totem
+1 Pithing Needle
+3 Drannith Magistrate
+2 Prismatic Ending

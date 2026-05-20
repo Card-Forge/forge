@@ -1,0 +1,14 @@
+Name:Choco, Seeker of Paradise
+ManaCost:1 G W U
+Types:Legendary Creature Bird
+PT:3/5
+T:Mode$ AttackersDeclared | ValidAttackers$ Bird.YouCtrl | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more Birds you control attack, look at that many cards from the top of your library. You may put one of them into your hand. Then put any number of land cards from among them onto the battlefield tapped and the rest into your graveyard.
+SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ 1 | Optional$ True | ChangeValid$ Card | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition2$ 0 | SkipReorder$ True | RememberChanged$ True | SubAbility$ DBDig
+SVar:DBDig:DB$ Dig | DigNum$ Y | ChangeNum$ Any | ChangeValid$ Land | Tapped$ True | DestinationZone$ Battlefield | DestinationZone2$ Graveyard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land you control enters, NICKNAME gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1
+SVar:X:TriggerObjectsAttackers$Amount
+SVar:Y:SVar$X/Minus.Z
+SVar:Z:Remembered$Amount
+Oracle:Whenever one or more Birds you control attack, look at that many cards from the top of your library. You may put one of them into your hand. Then put any number of land cards from among them onto the battlefield tapped and the rest into your graveyard.\nLandfall — Whenever a land you control enters, Choco gets +1/+0 until end of turn.

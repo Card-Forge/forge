@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Nagini
+Title=Nagini
+Icon=Nagini.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/Machida_Akira_-_WG_Aggro_(Standard,_#1531281).dck
+Deck Type=constructed
+
+[Main]
+1 Myrel, Shield of Argive
+2 Sigarda, Champion of Light
+3 King Darien XLVIII
+3 Guardian of New Benalia
+3 Sungold Sentinel
+4 Resolute Reinforcements
+4 Recruitment Officer
+4 Siege Veteran
+4 Hopeful Initiate
+4 Brutal Cathar
+4 Thalia, Guardian of Thraben
+1 Mishra's Foundry
+1 Crystal Grotto
+2 Boseiju, Who Endures
+3 Eiganjo, Seat of the Empire
+3 Forest
+4 Overgrown Farmland
+4 Brushland
+6 Plains
+[Sideboard]
+1 The Wandering Emperor
+2 Destroy Evil
+2 Fateful Absence
+2 Adeline, Resplendent Cathar
+2 Valorous Stance
+3 Wedding Announcement
+3 Cathar Commando

@@ -1,0 +1,10 @@
+Name:Tundra Tank
+ManaCost:2 B
+Types:Artifact Vehicle
+PT:4/4
+K:Firebending:1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this Vehicle enters, target creature you control gains indestructible until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Indestructible
+K:Crew:1
+SVar:PlayMain1:TRUE
+Oracle:Firebending 1 (Whenever this creature attacks, add {R}. This mana lasts until end of combat.)\nWhen this Vehicle enters, target creature you control gains indestructible until end of turn.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

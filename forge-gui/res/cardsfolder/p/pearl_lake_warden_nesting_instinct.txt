@@ -1,0 +1,18 @@
+Name:Pearl Lake Warden
+ManaCost:3 U
+Types:Creature Dragon
+PT:4/5
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self+TopLibrary | AffectedZone$ Library | EffectZone$ All | MayPlay$ True | MayLookAt$ You | Description$ As long as this card is the top card of your library, you may look at it any time and you may cast it.
+AlternateMode:Omen
+Oracle:As long as this card is the top card of your library, you may look at it any time and you may cast it.\nFlying
+
+ALTERNATE
+
+Name:Nesting Instinct
+ManaCost:2 G
+Types:Sorcery Omen
+A:SP$ Seek | Type$ Land | RememberFound$ True | SubAbility$ DBPut | SpellDescription$ Seek a land card and put it onto the battlefield.
+SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ Remembered | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Seek a land card and put it onto the battlefield.

@@ -1,6 +1,6 @@
 Name:Monster Manual
 ManaCost:3 G
-Types:Artifact
+Types:Artifact Book
 A:AB$ ChangeZone | Cost$ 1 G T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ You may put a creature card from your hand onto the battlefield.
 AlternateMode:Adventure
 Oracle:{1}{G}, {T}: You may put a creature card from your hand onto the battlefield.

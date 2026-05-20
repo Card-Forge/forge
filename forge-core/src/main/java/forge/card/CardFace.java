@@ -1,10 +1,12 @@
 package forge.card;
 
 import forge.card.mana.ManaCost;
+import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collectors;
 
 //
@@ -17,20 +19,12 @@ import java.util.stream.Collectors;
  * <i>Do not use reference to class except for card parsing.<br>Always use reference to interface type outside of package.</i>
  */
 final class CardFace implements ICardFace, Cloneable {
-
-    public enum FaceSelectionMethod { // 
-        USE_ACTIVE_FACE,
-        USE_PRIMARY_FACE,
-        COMBINE
-    }
-
-    
     private final static List<String> emptyList = Collections.unmodifiableList(new ArrayList<>());
     private final static Map<String, String> emptyMap = Collections.unmodifiableMap(new TreeMap<>());
     private final static Set<Integer> emptySet = Collections.unmodifiableSet(new HashSet<>());
 
     private String name;
-    private String altName = null;
+    private String flavorName = null;
     private CardType type = null;
     private ManaCost manaCost = null;
     private ColorSet color = null;
@@ -85,7 +79,7 @@ final class CardFace implements ICardFace, Cloneable {
         return variables.entrySet();
     }
 
-    @Override public String getAltName()              { return this.altName; }
+    @Override public String getFlavorName()              { return this.flavorName; }
 
     public CardFace(String name0) {
         this.name = name0; 
@@ -94,7 +88,7 @@ final class CardFace implements ICardFace, Cloneable {
     }
     // Here come setters to allow parser supply values
     void setName(String name)                { this.name = name; }
-    void setAltName(String name)             { this.altName = name; }
+    void setFlavorName(String name)          { this.flavorName = name; }
     void setType(CardType type0)             { this.type = type0; }
     void setManaCost(ManaCost manaCost0)     { this.manaCost = manaCost0; }
     void setColor(ColorSet color0)           { this.color = color0; }
@@ -187,49 +181,70 @@ final class CardFace implements ICardFace, Cloneable {
         if(this.functionalVariants != null) {
             //Copy fields to undefined ones in functional variants
             for (CardFace variant : this.functionalVariants.values()) {
-                if(variant.oracleText == null) variant.oracleText = this.oracleText;
-                if(variant.manaCost == null) variant.manaCost = this.manaCost;
-                if(variant.color == null) variant.color = ColorSet.fromManaCost(variant.manaCost);
-
-                if(variant.type == null) variant.type = this.type;
-
-                if(variant.power == null) {
-                    variant.power = this.power;
-                    variant.iPower = this.iPower;
-                }
-                if(variant.toughness == null) {
-                    variant.toughness = this.toughness;
-                    variant.iToughness = this.iToughness;
-                }
-
-                if("".equals(variant.initialLoyalty)) variant.initialLoyalty = this.initialLoyalty;
-                if("".equals(variant.defense)) variant.defense = this.defense;
-
-                //variant.assignMissingFields();
-                if(variant.keywords == null) variant.keywords = this.keywords;
-                else variant.keywords.addAll(0, this.keywords);
-
-                if(variant.abilities == null) variant.abilities = this.abilities;
-                else variant.abilities.addAll(0, this.abilities);
-
-                if(variant.staticAbilities == null) variant.staticAbilities = this.staticAbilities;
-                else variant.staticAbilities.addAll(0, this.staticAbilities);
-
-                if(variant.triggers == null) variant.triggers = this.triggers;
-                else variant.triggers.addAll(0, this.triggers);
-
-                if(variant.replacements == null) variant.replacements = this.replacements;
-                else variant.replacements.addAll(0, this.replacements);
-
-                if(variant.variables == null) variant.variables = this.variables;
-                else this.variables.forEach((k, v) -> variant.variables.putIfAbsent(k, v));
-
-                if(variant.nonAbilityText == null) variant.nonAbilityText = this.nonAbilityText;
-                if(variant.draftActions == null) variant.draftActions = this.draftActions;
-                if(variant.attractionLights == null) variant.attractionLights = this.attractionLights;
-                if(variant.altName == null) variant.altName = this.altName;
+                assignMissingFieldsToVariant(variant);
             }
         }
+    }
+
+    void assignMissingFieldsToVariant(CardFace variant) {
+        if(variant.oracleText == null) {
+            if(variant.flavorName != null && this.oracleText != null) {
+                try {
+                    Lang lang = Lang.getInstance();
+                    //Rudimentary name replacement. Can't do pronouns, ability words, or flavored keywords. Need to define variant text manually for that.
+                    //Regex here checks for the name following either a word boundary or a literal "\n" string, since those haven't yet been converted to line breaks.
+                    String flavoredText = this.oracleText.replaceAll("(?<=\\b|\\\\n)" + this.name + "\\b", variant.flavorName);
+                    flavoredText = flavoredText.replaceAll("(?<=\\b|\\\\n)" + lang.getNickName(this.name) + "\\b", lang.getNickName(variant.flavorName));
+                    variant.oracleText = flavoredText;
+                }
+                catch (PatternSyntaxException ignored) {
+                    // Old versions of Android are weird about patterns sometimes. I don't *think* this is such a case but
+                    // the documentation is unreliable. May be worth removing this once we're sure it's not a problem.
+                    variant.oracleText = this.oracleText;
+                }
+            }
+            else
+                variant.oracleText = this.oracleText;
+        }
+        if(variant.manaCost == null) variant.manaCost = this.manaCost;
+        if(variant.color == null) variant.color = ColorSet.fromManaCost(variant.manaCost);
+
+        if(variant.type == null) variant.type = this.type;
+
+        if(variant.power == null) {
+            variant.power = this.power;
+            variant.iPower = this.iPower;
+        }
+        if(variant.toughness == null) {
+            variant.toughness = this.toughness;
+            variant.iToughness = this.iToughness;
+        }
+
+        if("".equals(variant.initialLoyalty)) variant.initialLoyalty = this.initialLoyalty;
+        if("".equals(variant.defense)) variant.defense = this.defense;
+
+        if(variant.keywords == null) variant.keywords = this.keywords;
+        else variant.keywords.addAll(0, this.keywords);
+
+        if(variant.abilities == null) variant.abilities = this.abilities;
+        else variant.abilities.addAll(0, this.abilities);
+
+        if(variant.staticAbilities == null) variant.staticAbilities = this.staticAbilities;
+        else variant.staticAbilities.addAll(0, this.staticAbilities);
+
+        if(variant.triggers == null) variant.triggers = this.triggers;
+        else variant.triggers.addAll(0, this.triggers);
+
+        if(variant.replacements == null) variant.replacements = this.replacements;
+        else variant.replacements.addAll(0, this.replacements);
+
+        if(variant.variables == null) variant.variables = this.variables;
+        else this.variables.forEach((k, v) -> variant.variables.putIfAbsent(k, v));
+
+        if(variant.nonAbilityText == null) variant.nonAbilityText = this.nonAbilityText;
+        if(variant.draftActions == null) variant.draftActions = this.draftActions;
+        if(variant.attractionLights == null) variant.attractionLights = this.attractionLights;
+        //if(variant.flavorName == null) variant.flavorName = this.flavorName; //Probably shouldn't be setting this on the main variant to begin with?
     }
 
 

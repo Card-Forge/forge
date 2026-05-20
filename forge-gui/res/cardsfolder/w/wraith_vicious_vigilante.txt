@@ -1,0 +1,8 @@
+Name:Wraith, Vicious Vigilante
+Variant:UniversesWithin:FlavorName:Margot, On the Case
+ManaCost:1 W U
+Types:Legendary Creature Human Detective Hero
+PT:1/1
+K:Double Strike
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ Fear Gas — NICKNAME can't be blocked.
+Oracle:Double strike\nFear Gas — Wraith can't be blocked.

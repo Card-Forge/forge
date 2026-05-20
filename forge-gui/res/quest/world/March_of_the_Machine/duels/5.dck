@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Robin
+Title=Robin
+Icon=Robin.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Mas_Acc_-_Grixis_Control_(Standard,_#1631985).dck
+Deck Type=constructed
+
+[Main]
+3 Fable of the Mirror-Breaker
+1 Ertai Resurrected
+2 Sheoldred, the Apocalypse
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+2 Reckoner Bankbuster
+1 Cut Down
+1 Negate
+1 Scatter Ray
+2 Sheoldred's Edict
+2 Make Disappear
+3 Abrade
+3 Go for the Throat
+1 Brotherhood's End
+3 Invoke Despair
+1 Chandra, Hope's Beacon
+1 Kaito, Dancing Shadow
+1 Darkslick Shores
+1 Takenuma, Abandoned Mire
+1 Otawara, Soaring City
+1 Underground River
+1 Sokenzan, Crucible of Defiance
+2 Haunted Ridge
+2 Sulfurous Springs
+2 Stormcarved Coast
+2 Blackcleave Cliffs
+3 Xander's Lounge
+4 Shipwreck Marsh
+5 Swamp
+[Sideboard]
+1 The Stone Brain
+1 Blue Sun's Twilight
+1 Syncopate
+2 Torch Breath
+2 Lithomantic Barrage
+2 Duress
+1 Soulless Jailer
+1 Cut Down
+2 Negate
+1 Brotherhood's End
+1 Ertai Resurrected

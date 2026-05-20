@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Galahad
+Title=Galahad
+Icon=Galahad.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/Jacob_Gonzalez_-_Bant_Control_(Modern,_#1462684).dck
+Deck Type=constructed
+
+[Main]
+2 Endurance
+2 Wall of Blossoms
+3 Aether Channeler
+3 Eternal Witness
+3 Solitude
+4 Soulherder
+4 Ice-Fang Coatl
+4 Noble Hierarch
+4 Wall of Omens
+4 Ephemerate
+4 Collected Company
+2 Time Warp
+1 Snow-Covered Plains
+1 Spara's Headquarters
+1 Temple Garden
+1 Breeding Pool
+2 Snow-Covered Forest
+2 Snow-Covered Island
+2 Hallowed Fountain
+2 Glasspool Mimic
+3 Windswept Heath
+3 Flooded Strand
+4 Misty Rainforest
+[Sideboard]
+1 Time Warp
+1 Solitude
+1 Deputy of Detention
+1 Endurance
+2 Burrenton Forge-Tender
+2 Venser, Shaper Savant
+2 Silence
+2 Knight of Autumn
+3 Meddling Mage

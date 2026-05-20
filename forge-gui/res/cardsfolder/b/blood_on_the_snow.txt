@@ -1,7 +1,7 @@
 Name:Blood on the Snow
 ManaCost:4 B B
 Types:Snow Sorcery
-A:SP$ Charm | Choices$ DestroyCtrs,DestroyPWs | CharmNum$ 1 | SubAbility$ NoopDesc
+A:SP$ Charm | Choices$ DestroyCtrs,DestroyPWs | SubAbility$ NoopDesc
 SVar:DestroyCtrs:DB$ DestroyAll | ValidCards$ Creature | SubAbility$ DBReturn | SpellDescription$ Destroy all creatures.
 SVar:DestroyPWs:DB$ DestroyAll | ValidCards$ Planeswalker | SubAbility$ DBReturn | SpellDescription$ Destroy all planeswalkers.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouOwn+cmcLEX,Planeswalker.YouOwn+cmcLEX | ChangeTypeDesc$ creature or planeswalker card with mana value X or less

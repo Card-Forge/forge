@@ -6,5 +6,6 @@ Type=Promo
 ScryfallCode=PARB
 
 [cards]
+A4 R Retaliator Griffin @Jesper Ejsing
 53★ M Dragon Broodmother @Jean-Sébastien Rossbach
 70★ R Knight of New Alara @David Palumbo

@@ -226,7 +226,7 @@ public class GameFormat implements Comparable<GameFormat> {
         for (String setCode : allowedSetCodes_ro) {
             CardEdition edition = StaticData.instance().getEditions().get(setCode);
             if (edition != null) {
-                for (EditionEntry card : edition.getAllCardsInSet()) {
+                for (EditionEntry card : edition.getObtainableCards()) {
                     if (!bannedCardNames_ro.contains(card.name())) {
                         PaperCard pc = commonCards.getCard(card.name(), setCode, card.collectorNumber());
                         if (pc != null) {
@@ -271,7 +271,7 @@ public class GameFormat implements Comparable<GameFormat> {
             if (erroneousCI.size() > 0) {
                 final StringBuilder sb = new StringBuilder("contains the following illegal cards:\n");
                 for (final PaperCard cp : erroneousCI) {
-                    sb.append("\n").append(cp.getName());
+                    sb.append("\n").append(cp.getDisplayName());
                 }
                 return sb.toString();
             }
@@ -290,7 +290,7 @@ public class GameFormat implements Comparable<GameFormat> {
             if (erroneousRestricted.size() > 0) {
                 final StringBuilder sb = new StringBuilder("contains more than one copy of the following restricted cards:\n");
                 for (final PaperCard cp : erroneousRestricted) {
-                    sb.append("\n").append(cp.getName());
+                    sb.append("\n").append(cp.getDisplayName());
                 }
                 return sb.toString();
             }

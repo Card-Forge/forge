@@ -1,0 +1,14 @@
+Name:Green Goblin, Revenant
+Variant:UniversesWithin:FlavorName:Nu and Sumi, Career Criminals
+ManaCost:3 B R
+Types:Legendary Creature Goblin Human Villain
+PT:3/3
+K:Flying
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever NICKNAME attacks, discard a card. Then draw a card for each card you've discarded this turn.
+SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | StackDescription$ None
+SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
+DeckHas:Ability$Discard
+DeckHints:Ability$Discard
+Oracle:Flying, deathtouch\nWhenever Green Goblin attacks, discard a card. Then draw a card for each card you've discarded this turn.

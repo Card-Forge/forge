@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpecialAiLogic;
 import forge.ai.SpecialCardAi;
@@ -21,16 +23,18 @@ public class BranchAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
         if ("GrislySigil".equals(aiLogic)) {
-            return SpecialCardAi.GrislySigil.consider(aiPlayer, sa);
+            boolean result = SpecialCardAi.GrislySigil.consider(aiPlayer, sa);
+            return new AiAbilityDecision(result ? 100 : 0, result ? AiPlayDecision.WillPlay : AiPlayDecision.CantPlayAi);
         } else if ("BranchCounter".equals(aiLogic)) {
-            return SpecialAiLogic.doBranchCounterspellLogic(aiPlayer, sa); // Bring the Ending, Anticognition (hacky implementation)
+            boolean result = SpecialAiLogic.doBranchCounterspellLogic(aiPlayer, sa);
+            return new AiAbilityDecision(result ? 100 : 0, result ? AiPlayDecision.WillPlay : AiPlayDecision.CantPlayAi);
         } else if ("TgtAttacker".equals(aiLogic)) {
             final Combat combat = aiPlayer.getGame().getCombat();
             if (combat == null || combat.getAttackingPlayer() != aiPlayer) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             final CardCollection attackers = combat.getAttackers();
@@ -45,16 +49,20 @@ public class BranchAi extends SpellAbilityAi {
                 sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(attackers));
             }
 
-            return sa.isTargetNumberValid();
+            return new AiAbilityDecision(sa.isTargetNumberValid() ? 100 : 0, sa.isTargetNumberValid() ? AiPlayDecision.WillPlay : AiPlayDecision.CantPlayAi);
         }
 
         // TODO: expand for other cases where the AI is needed to make a decision on a branch
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        return canPlayAI(aiPlayer, sa) || mandatory;
+    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        AiAbilityDecision decision = canPlay(aiPlayer, sa);
+        if (decision.willingToPlay() || mandatory) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override

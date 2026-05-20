@@ -6,7 +6,7 @@ K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigAnimate | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may have the base power and toughness of another target creature you control become X/X until end of turn, where X is CARDNAME's power.
 SVar:TrigAnimate:DB$ Animate | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | Power$ X | Toughness$ X
 SVar:X:Count$CardPower
-K:Adapt:3:3 G U
+A:AB$ PutCounter | Cost$ 3 G U | Adapt$ 3
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Counters
 Oracle:Trample\nWhenever Unruly Krasis attacks, you may have the base power and toughness of another target creature you control become X/X until end of turn, where X is Unruly Krasis's power.\n{3}{G}{U}: Adapt 3. (If this creature has no +1/+1 counters on it, put three +1/+1 counters on it.)

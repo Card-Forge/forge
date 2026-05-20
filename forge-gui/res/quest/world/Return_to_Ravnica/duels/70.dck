@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Bela Lugosi
+Title=Bela Lugosi
+Icon=Bela Lugosi.jpg
+Difficulty=Hard
+Description=../Modern/Return_to_Ravnica/Silver_TCQ_-_Standish,_ME/Cody_Chagnon_-_GW_Aggro_(Modern,_#53819).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+4 Kor Spiritdancer
+4 Slippery Bogle
+3 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+2 Fists of Ironwood
+4 Hyena Umbra
+4 Rancor
+3 Spider Umbra
+4 Spirit Mantle
+1 Forest
+3 Horizon Canopy
+3 Misty Rainforest
+4 Razorverge Thicket
+4 Temple Garden
+4 Verdant Catacombs
+[Sideboard]
+3 Beast Within
+2 Dismember
+4 Leyline of Sanctity
+2 Nature's Claim
+2 Rest in Peace
+2 Suppression Field

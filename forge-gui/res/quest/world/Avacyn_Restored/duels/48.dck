@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Aquaman
+Title=Aquaman
+Icon=Aquaman.jpg
+Difficulty=Medium
+Description=Avacyn_Restored/PTQ_Seattle_-_Hamburg,_Germany/Max_Schultze_-_Rogue_(Standard,_#32730).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Elesh Norn, Grand Cenobite
+3 Grave Titan
+1 Massacre Wurm
+2 Primeval Titan
+4 Solemn Simulacrum
+4 Sphere of the Suns
+2 Go for the Throat
+3 Day of Judgment
+4 Lingering Souls
+4 Rampant Growth
+2 Oblivion Ring
+1 Elspeth Tirel
+2 Sorin, Lord of Innistrad
+2 Cavern of Souls
+1 Gavony Township
+1 Ghost Quarter
+4 Isolated Chapel
+2 Plains
+3 Razorverge Thicket
+1 Sunpetal Grove
+3 Swamp
+1 Vault of the Archangel
+4 Woodland Cemetery
+[Sideboard]
+1 Celestial Purge
+2 Karn Liberated
+2 Liliana of the Veil
+2 Naturalize
+2 Terminus
+2 Timely Reinforcements
+1 Tragic Slip

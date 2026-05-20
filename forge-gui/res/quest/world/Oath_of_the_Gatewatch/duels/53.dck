@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=The Torpor Orb
+Title=The Torpor Orb
+Icon=The Torpor Orb.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/Modern_MOCS_#9485602/asd_-_UR_Eldrazi_(Modern,_#608323).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Drowner of Hope
+4 Eldrazi Mimic
+3 Eldrazi Obligator
+4 Eldrazi Skyspawner
+4 Endless One
+4 Reality Smasher
+2 Ruination Guide
+4 Thought-Knot Seer
+4 Vile Aggregate
+3 Dismember
+4 Cavern of Souls
+4 Eldrazi Temple
+4 Eye of Ugin
+4 Flooded Strand
+2 Island
+4 Shivan Reef
+2 Steam Vents
+[Sideboard]
+4 Chalice of the Void
+2 Echoing Truth
+3 Hurkyl's Recall
+3 Pyroclasm
+3 Relic of Progenitus

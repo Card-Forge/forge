@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Batman
+Title=Batman
+Icon=Batman.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/GARY_NOVAK_-_Mono-White_Humans_(Standard,_#1979177).dck
+Deck Type=constructed
+
+[Main]
+4 Adeline, Resplendent Cathar
+4 Brutal Cathar
+4 Coppercoat Vanguard
+3 Hopeful Initiate
+2 Kellan, Daring Traveler
+4 Recruitment Officer
+2 Skrelv, Defector Mite
+3 Spellbook Vendor
+4 Thalia, Guardian of Thraben
+4 Get Lost
+2 Virtue of Loyalty
+2 The Wandering Emperor
+3 Cavern of Souls
+1 Eiganjo, Seat of the Empire
+2 Mirrex
+3 Mishra's Foundry
+13 Plains
+[Sideboard]
+2 Extraction Specialist
+2 Knight-Errant of Eos
+2 Depopulate
+3 Invasion of Gobakhan
+3 Lay Down Arms
+1 Hopeful Initiate
+2 Wedding Announcement

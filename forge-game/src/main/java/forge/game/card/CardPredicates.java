@@ -202,10 +202,6 @@ public final class CardPredicates {
         return c -> c.getCMC() % 2 == 1;
     }
 
-    public static Predicate<Card> hasSuspend() {
-        return Card::hasSuspend;
-    }
-
     public static Predicate<Card> hasCounters() {
         return GameEntity::hasCounters;
     }
@@ -213,15 +209,9 @@ public final class CardPredicates {
     public static Predicate<Card> hasCounter(final CounterType type) {
         return hasCounter(type, 1);
     }
-    public static Predicate<Card> hasCounter(final CounterEnumType type) {
-        return hasCounter(type, 1);
-    }
 
     public static Predicate<Card> hasCounter(final CounterType type, final int n) {
         return c -> c.getCounters(type) >= n;
-    }
-    public static Predicate<Card> hasCounter(final CounterEnumType type, final int n) {
-        return hasCounter(CounterType.get(type), n);
     }
 
     public static Predicate<Card> hasLessCounter(final CounterType type, final int n) {
@@ -230,15 +220,9 @@ public final class CardPredicates {
             return x > 0 && x <= n;
         };
     }
-    public static Predicate<Card> hasLessCounter(final CounterEnumType type, final int n) {
-        return hasLessCounter(CounterType.get(type), n);
-    }
 
     public static Predicate<Card> canReceiveCounters(final CounterType counter) {
         return c -> c.canReceiveCounters(counter);
-    }
-    public static Predicate<Card> canReceiveCounters(final CounterEnumType counter) {
-        return canReceiveCounters(CounterType.get(counter));
     }
 
     public static Predicate<Card> hasGreaterPowerThan(final int minPower) {
@@ -247,9 +231,6 @@ public final class CardPredicates {
 
     public static Comparator<Card> compareByCounterType(final CounterType type) {
         return Comparator.comparingInt(arg0 -> arg0.getCounters(type));
-    }
-    public static Comparator<Card> compareByCounterType(final CounterEnumType type) {
-        return compareByCounterType(CounterType.get(type));
     }
 
     public static Predicate<Card> hasSVar(final String name) {
@@ -311,19 +292,13 @@ public final class CardPredicates {
     }
 
     public static final Predicate<Card> TAPPED = Card::isTapped;
-    public static final Predicate<Card> FACE_DOWN = Card::isFaceDown;
     public static final Predicate<Card> UNTAPPED = Card::isUntapped;
     public static final Predicate<Card> CAN_TAP = Card::canTap;
     public static final Predicate<Card> CAN_CREW = Card::canCrew;
     public static final Predicate<Card> CREATURES = Card::isCreature;
     public static final Predicate<Card> NON_CREATURES = c -> !c.isCreature();
     public static final Predicate<Card> ENCHANTMENTS = Card::isEnchantment;
-    public static final Predicate<Card> AURA = Card::isAura;
-    public static final Predicate<Card> EQUIPMENT = Card::isEquipment;
     public static final Predicate<Card> FORTIFICATION = Card::isFortification;
-    public static final Predicate<Card> CURSE = Card::isCurse;
-    public static final Predicate<Card> UNENCHANTED = c -> !c.isEnchanted();
-    public static final Predicate<Card> ENCHANTED = GameEntity::isEnchanted;
     public static final Predicate<Card> NON_TOKEN = c -> !(c.isToken() || c.isTokenCard());
     public static final Predicate<Card> TOKEN = c -> c.isToken() || c.isTokenCard();
     public static final Predicate<Card> BASIC_LANDS = c -> {
@@ -342,10 +317,6 @@ public final class CardPredicates {
     public static final Predicate<Card> NONLAND_PERMANENTS = c -> c.isPermanent() && !c.isLand();
     public static final Predicate<Card> hasFirstStrike = c -> c.isCreature() && (c.hasFirstStrike() || c.hasDoubleStrike());
     public static final Predicate<Card> hasSecondStrike = c -> c.isCreature() && (!c.hasFirstStrike() || c.hasDoubleStrike());
-    public static final Predicate<Card> SNOW_LANDS = c -> c.isLand() && c.isSnow();
     public static final Predicate<Card> PLANESWALKERS = Card::isPlaneswalker;
     public static final Predicate<Card> BATTLES = Card::isBattle;
-    public static final Predicate<Card> CAN_BE_DESTROYED = Card::canBeDestroyed;
-    public static final Predicate<Card> ATTRACTIONS = Card::isAttraction;
-    public static final Predicate<Card> CONTRAPTIONS = Card::isContraption;
 }

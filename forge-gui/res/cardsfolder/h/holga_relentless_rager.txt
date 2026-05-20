@@ -1,5 +1,5 @@
 Name:Holga, Relentless Rager
-AltName:Jurin, Leading the Charge
+Variant:UniversesWithin:FlavorName:Jurin, Leading the Charge
 ManaCost:4 R R
 Types:Legendary Creature Human Barbarian
 PT:4/6

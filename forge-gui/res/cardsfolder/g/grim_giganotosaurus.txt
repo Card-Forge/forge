@@ -2,7 +2,7 @@ Name:Grim Giganotosaurus
 ManaCost:5 B G
 Types:Creature Dinosaur
 PT:10/10
-K:Monstrosity:10:10 B G:X:creature with power 4 or greater your opponents control
+A:AB$ PutCounter | Cost$ 10 B G | Monstrosity$ 10 | ReduceCost$ X | SpellDescription$ Monstrosity 10. This ability costs {1} less to activate for each creature with power 4 or greater your opponents control.
 SVar:X:Count$Valid Creature.OppCtrl+powerGE4
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME becomes monstrous, destroy all artifacts and creatures other than CARDNAME.
 SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Creature.Other,Artifact

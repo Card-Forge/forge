@@ -151,9 +151,3 @@ ScryfallCode=UNH
 139 L Mountain @John Avon
 140 L Forest @John Avon
 141 R Super Secret Tech @Dan Frazier
-
-[tokens]
-r_1_1_goblin
-g_1_1_ape
-g_3_3_ape
-g_1_1_squirrel

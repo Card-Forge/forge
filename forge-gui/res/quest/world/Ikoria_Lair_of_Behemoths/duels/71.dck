@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Demon
+Title=Demon
+Icon=Demon.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Bobsmyth18_-_Naya_Winota_(Modern,_#1096210).dck
+Deck Type=constructed
+
+[Main]
+1 Seasoned Pyromancer
+2 Pia and Kiran Nalaar
+3 Voice of Resurgence
+3 Angrath's Marauders
+4 Strangleroot Geist
+4 Llanowar Elves
+4 Geist-Honored Monk
+4 Birds of Paradise
+4 Winota, Joiner of Forces
+2 Smuggler's Copter
+2 Lightning Bolt
+4 Eldritch Evolution
+1 Plains
+1 Razorverge Thicket
+1 Sacred Foundry
+1 Mountain
+2 Stomping Ground
+2 Temple Garden
+2 Forest
+2 Cavern of Souls
+3 Copperline Gorge
+4 Wooded Foothills
+4 Windswept Heath
+[Sideboard]
+1 Collector Ouphe
+1 Eidolon of Rhetoric
+1 Gaddock Teeg
+1 Magus of the Moon
+1 Shalai, Voice of Plenty
+2 Rest in Peace
+2 Avalanche Riders
+2 Path to Exile
+2 Knight of Autumn
+2 Thalia, Guardian of Thraben

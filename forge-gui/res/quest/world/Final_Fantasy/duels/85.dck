@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Horus
+Title=Horus
+Icon=Horus.jpg
+Difficulty=Hard
+Description=./Modern/Final_Fantasy/Itakura_Toshiyuki_-_Goryo_shoot_(Modern,_#2519625).dck
+Deck Type=constructed
+
+[Main]
+4 Emrakul, the Aeons Torn
+4 Cragganwick Cremator
+4 Yargle and Multani
+1 Mox Opal
+1 Nihil Spellbomb
+3 The Underworld Cookbook
+4 Fatal Push
+3 Lightning Bolt
+4 Goryo's Vengeance
+4 Thoughtseize
+2 Profane Tutor
+3 Highway Robbery
+4 Urza's Saga
+2 Swamp
+2 Blood Crypt
+4 Bloodstained Mire
+4 Polluted Delta
+1 Marsh Flats
+3 Blackcleave Cliffs
+1 Mount Doom
+2 Raucous Theater
+[Sideboard]
+2 Blood Moon
+1 Pithing Needle
+1 Surgical Extraction
+2 Dauthi Voidwalker
+4 Ragavan, Nimble Pilferer
+1 Disruptor Flute
+2 Untimely Malfunction
+2 Fire Magic

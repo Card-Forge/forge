@@ -149,6 +149,10 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
                     if (mana.getManaAbility() != null && mana.getManaAbility().isPersistentMana()) {
                         pMana.add(mana);
                     }
+                    if (mana.getManaAbility() != null && mana.getManaAbility().isCombatMana() &&
+                            !owner.getGame().getPhaseHandler().is(PhaseType.COMBAT_END)) {
+                        pMana.add(mana);
+                    }
                 }
             }
             cm.removeAll(pMana);
@@ -171,7 +175,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         List<Mana> convert = Lists.newArrayList();
         Collection<Mana> cm = floatingMana.get(originalColor);
         for (Mana m : cm) {
-            convert.add(new Mana(toColor, m.getSourceCard(), m.getManaAbility()));
+            convert.add(new Mana(toColor, m.getSourceCard(), m.getManaAbility(), m.getPlayer()));
         }
         cm.clear();
         floatingMana.putAll(toColor, convert);

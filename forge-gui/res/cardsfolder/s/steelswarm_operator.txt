@@ -1,0 +1,8 @@
+Name:Steelswarm Operator
+ManaCost:1 U
+Types:Artifact Creature Robot Soldier
+PT:1/1
+K:Flying
+A:AB$ Mana | Cost$ T | Produced$ U | RestrictValid$ Spell.Artifact | SpellDescription$ Add {U}. Spend this mana only to cast an artifact spell.
+A:AB$ Mana | Cost$ T | Produced$ U U | RestrictValid$ Activated.Artifact | SpellDescription$ Add {U}{U}. Spend this mana only to activate abilities of artifact sources.
+Oracle:Flying\n{T}: Add {U}. Spend this mana only to cast an artifact spell.\n{T}: Add {U}{U}. Spend this mana only to activate abilities of artifact sources.

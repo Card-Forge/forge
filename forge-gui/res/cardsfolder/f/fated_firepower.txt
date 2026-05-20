@@ -1,0 +1,10 @@
+Name:Fated Firepower
+ManaCost:X R R R
+Types:Enchantment
+K:Flash
+K:etbCounter:FIRE:X
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Opponent,Permanent.OppCtrl | ReplaceWith$ DmgPlus | Description$ If a source you control would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus an amount of damage equal to the number of fire counters on this enchantment instead.
+SVar:DmgPlus:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ ReplaceCount$DamageAmount/Plus.Y
+SVar:X:Count$xPaid
+SVar:Y:Count$CardCounters.FIRE
+Oracle:Flash\nThis enchantment enters with X fire counters on it.\nIf a source you control would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus an amount of damage equal to the number of fire counters on this enchantment instead.

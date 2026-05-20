@@ -1,0 +1,10 @@
+Name:Iroh, Grand Lotus
+ManaCost:3 G U R
+Types:Legendary Creature Human Noble Ally
+PT:5/5
+K:Firebending:2
+S:Mode$ Continuous | Affected$ Instant.nonLesson+YouOwn,Sorcery.nonLesson+YouOwn | AffectedZone$ Graveyard | AddKeyword$ Flashback | Condition$ PlayerTurn | Description$ During your turn, each non-Lesson instant and sorcery card in your graveyard has flashback. The flashback cost is equal to that card's mana cost. (You may cast a card from your graveyard for its flashback cost. Then exile it.)
+S:Mode$ Continuous | Affected$ Lesson.YouOwn | AffectedZone$ Graveyard | AddKeyword$ Flashback:1 | Condition$ PlayerTurn | Description$ During your turn, each Lesson card in your graveyard has flashback {1}.
+DeckHas:Ability$Graveyard
+DeckHints:Type$Instant|Sorcery
+Oracle:Firebending 2\nDuring your turn, each non-Lesson instant and sorcery card in your graveyard has flashback. The flashback cost is equal to that card's mana cost. (You may cast a card from your graveyard for its flashback cost. Then exile it.)\nDuring your turn, each Lesson card in your graveyard has flashback {1}.

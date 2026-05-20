@@ -171,7 +171,7 @@ public class SpecialAiLogic {
                 final boolean isInfect = source.hasKeyword(Keyword.INFECT); // Flesh-Eater Imp
                 int lethalDmg = isInfect ? 10 - defPlayer.getPoisonCounters() : defPlayer.getLife();
 
-                if (isInfect && !combat.getDefenderByAttacker(source).canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
+                if (isInfect && !combat.getDefenderByAttacker(source).canReceiveCounters(CounterEnumType.POISON)) {
                     lethalDmg = Integer.MAX_VALUE; // won't be able to deal poison damage to kill the opponent
                 }
 
@@ -214,7 +214,7 @@ public class SpecialAiLogic {
     }
 
     // A logic for cards that say "Sacrifice a creature: put X +1/+1 counters on CARDNAME" (e.g. Falkenrath Aristocrat)
-    public static boolean doAristocratWithCountersLogic(final Player ai, final SpellAbility sa) {
+    public static AiAbilityDecision doAristocratWithCountersLogic(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final String logic = sa.getParam("AILogic"); // should not even get here unless there's an Aristocrats logic applied
         final boolean isDeclareBlockers = ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS);
@@ -222,14 +222,14 @@ public class SpecialAiLogic {
         final int numOtherCreats = Math.max(0, ai.getCreaturesInPlay().size() - 1);
         if (numOtherCreats == 0) {
             // Cut short if there's nothing to sac at all
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
         }
 
         // Check if the standard Aristocrats logic applies first (if in the right conditions for it)
         final boolean isThreatened = ComputerUtil.predictThreatenedObjects(ai, null, true).contains(source);
         if (isDeclareBlockers || isThreatened) {
             if (doAristocratLogic(ai, sa)) {
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
         }
 
@@ -247,7 +247,7 @@ public class SpecialAiLogic {
         if (countersSa == null) {
             // Shouldn't get here if there is no PutCounter subability (wrong AI logic specified?)
             System.err.println("Warning: AILogic AristocratCounters was specified on " + source + ", but there was no PutCounter SA in chain!");
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlaySa);
         }
 
         final Game game = ai.getGame();
@@ -263,7 +263,7 @@ public class SpecialAiLogic {
         relevantCreats.remove(source);
         if (relevantCreats.isEmpty()) {
             // No relevant creatures to sac
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
         }
 
         int numCtrs = AbilityUtils.calculateAmount(source, countersSa.getParam("CounterNum"), countersSa);
@@ -277,7 +277,7 @@ public class SpecialAiLogic {
                 final boolean isInfect = source.hasKeyword(Keyword.INFECT);
                 int lethalDmg = isInfect ? 10 - defPlayer.getPoisonCounters() : defPlayer.getLife();
 
-                if (isInfect && !combat.getDefenderByAttacker(source).canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
+                if (isInfect && !combat.getDefenderByAttacker(source).canReceiveCounters(CounterEnumType.POISON)) {
                     lethalDmg = Integer.MAX_VALUE; // won't be able to deal poison damage to kill the opponent
                 }
 
@@ -287,16 +287,20 @@ public class SpecialAiLogic {
                                 || (combat.isAttacking(card) && combat.isBlocked(card) && ComputerUtilCombat.combatantWouldBeDestroyed(ai, card, combat))
                 );
                 if (!forcedSacTgts.isEmpty()) {
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
 
                 final int numCreatsToSac = Math.max(0, (lethalDmg - source.getNetCombatDamage()) / numCtrs);
 
                 if (defTappedOut || numCreatsToSac < relevantCreats.size() / 2) {
-                    return source.getNetCombatDamage() < lethalDmg
-                            && source.getNetCombatDamage() + relevantCreats.size() * numCtrs >= lethalDmg;
+                    if (source.getNetCombatDamage() < lethalDmg
+                            && source.getNetCombatDamage() + relevantCreats.size() * numCtrs >= lethalDmg) {
+                        return new AiAbilityDecision(100, AiPlayDecision.ImpactCombat);
+                    }
+
+                    return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactCombat);
                 } else {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             } else {
                 // We have already attacked. Thus, see if we have a creature to sac that is worse to lose
@@ -309,7 +313,7 @@ public class SpecialAiLogic {
                 );
 
                 if (sacTgts.isEmpty()) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
 
                 final boolean sourceCantDie = ComputerUtilCombat.combatantCantBeDestroyed(ai, source);
@@ -317,7 +321,10 @@ public class SpecialAiLogic {
                 final int DefP = sourceCantDie ? 0 : Aggregates.sum(combat.getBlockers(source), Card::getNetPower);
 
                 // Make sure we don't over-sacrifice, only sac until we can survive and kill a creature
-                return source.getNetToughness() - source.getDamage() <= DefP || source.getNetCombatDamage() < minDefT;
+                if (source.getNetToughness() - source.getDamage() <= DefP || source.getNetCombatDamage() < minDefT) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         } else {
             // We can't deal lethal, check if there's any sac fodder than can be used for other circumstances
@@ -329,7 +336,11 @@ public class SpecialAiLogic {
                             || ComputerUtil.predictThreatenedObjects(ai, null, true).contains(card)
             );
 
-            return !sacFodder.isEmpty();
+            if (sacFodder.isEmpty()) {
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
+            }
+
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
     }
 
@@ -360,10 +371,10 @@ public class SpecialAiLogic {
             // FIXME: We're emulating the UnlessCost on the SA to run the proper checks.
             // This is hacky, but it works. Perhaps a cleaner way exists?
             sa.getMapParams().put("UnlessCost", falseSub.getParam("UnlessCost"));
-            willPlay = SpellApiToAi.Converter.get(ApiType.Counter).canPlayAIWithSubs(ai, sa);
+            willPlay = SpellApiToAi.Converter.get(ApiType.Counter).canPlayWithSubs(ai, sa).willingToPlay();
             sa.getMapParams().remove("UnlessCost");
         } else {
-            willPlay = SpellApiToAi.Converter.get(ApiType.Counter).canPlayAIWithSubs(ai, sa);
+            willPlay = SpellApiToAi.Converter.get(ApiType.Counter).canPlayWithSubs(ai, sa).willingToPlay();
         }
         return willPlay;
     }

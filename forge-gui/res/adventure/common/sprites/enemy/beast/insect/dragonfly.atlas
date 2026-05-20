@@ -1,0 +1,65 @@
+dragonfly.png
+size: 224,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 176, 16
+  size: 16, 16
+Idle 
+  xy: 7,8
+  size: 22, 20   
+Idle 
+  xy: 39,8
+  size: 22, 20 
+Idle
+  xy: 71, 8
+  size: 22, 20      
+Idle 
+  xy: 103, 8
+  size: 22, 20
+Walk 
+  xy: 7,40
+  size: 22, 20   
+Walk 
+  xy: 39,40
+  size: 22, 20 
+Walk
+  xy: 71, 40
+  size: 22, 20      
+Walk 
+  xy: 103, 40
+  size: 22, 20
+Attack 
+  xy: 7,72
+  size: 22, 20   
+Attack 
+  xy: 39,72
+  size: 22, 20 
+Attack
+  xy: 71, 72
+  size: 22, 20      
+Attack 
+  xy: 103, 72
+  size: 22, 20
+Death 
+  xy: 7,104
+  size: 22, 20   
+Death 
+  xy: 39,104
+  size: 22, 20 
+Death
+  xy: 71, 104
+  size: 22, 20      
+Death 
+  xy: 103, 104
+  size: 22, 20
+Death 
+  xy: 135,104
+  size: 22, 20 
+Death
+  xy: 167, 104
+  size: 22, 20      
+Death 
+  xy: 199, 104
+  size: 22, 20

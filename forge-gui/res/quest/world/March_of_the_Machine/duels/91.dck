@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Captain America
+Title=Captain America
+Icon=Captain America.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine/NuBlkAu_-_Domain_Aggro_(Modern,_#1628799).dck
+Deck Type=constructed
+
+[Main]
+4 Wild Nacatl
+4 Scion of Draco
+4 Ragavan, Nimble Pilferer
+4 Territorial Kavu
+4 Lightning Bolt
+4 Stubborn Denial
+2 Tribal Flames
+2 Tribal Flames
+4 Leyline Binding
+4 Invasion of Tarkir
+3 Invasion of Azgol
+3 Windswept Heath
+1 Sacred Foundry
+1 Temple Garden
+1 Overgrown Tomb
+1 Breeding Pool
+4 Flooded Strand
+4 Wooded Foothills
+1 Windswept Heath
+1 Plains
+1 Forest
+1 Steam Vents
+1 Savai Triome
+1 Zagoth Triome
+[Sideboard]
+2 Rest in Peace
+4 Wear // Tear
+2 Flusterstorm
+1 Teferi, Time Raveler
+2 Teferi, Time Raveler
+1 Jegantha, the Wellspring
+1 Omnath, Locus of Creation
+2 Hidetsugu Consumes All

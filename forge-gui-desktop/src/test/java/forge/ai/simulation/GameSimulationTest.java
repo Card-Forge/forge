@@ -15,12 +15,15 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.StreamUtil;
+
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class GameSimulationTest extends SimulationTest {
 
@@ -324,7 +327,7 @@ public class GameSimulationTest extends SimulationTest {
         Card manifestedCreature = findCardWithName(simGame, "");
         AssertJUnit.assertNotNull(manifestedCreature);
 
-        SpellAbility unmanifestSA = findSAWithPrefix(manifestedCreature.getAllPossibleAbilities(p, false),
+        SpellAbility unmanifestSA = findSAWithPrefix(manifestedCreature.getAllPossibleAbilities(simGame.getPlayers().get(1), false),
                 "Unmanifest");
         AssertJUnit.assertNotNull(unmanifestSA);
         AssertJUnit.assertEquals(2, manifestedCreature.getNetPower());
@@ -1755,7 +1758,7 @@ public class GameSimulationTest extends SimulationTest {
 
         AssertJUnit.assertFalse(outlaw.isCloned());
         AssertJUnit.assertTrue(outlaw.isTransformable());
-        AssertJUnit.assertTrue(outlaw.hasState(CardStateName.Transformed));
+        AssertJUnit.assertTrue(outlaw.hasState(CardStateName.Backside));
         AssertJUnit.assertTrue(outlaw.canTransform(null));
         AssertJUnit.assertFalse(outlaw.isBackSide());
 
@@ -1788,7 +1791,7 @@ public class GameSimulationTest extends SimulationTest {
 
         AssertJUnit.assertTrue(clonedOutLaw.isCloned());
         AssertJUnit.assertTrue(clonedOutLaw.isTransformable());
-        AssertJUnit.assertTrue(clonedOutLaw.hasState(CardStateName.Transformed));
+        AssertJUnit.assertTrue(clonedOutLaw.hasState(CardStateName.Backside));
         AssertJUnit.assertTrue(clonedOutLaw.canTransform(null));
         AssertJUnit.assertFalse(clonedOutLaw.isBackSide());
 
@@ -1807,7 +1810,7 @@ public class GameSimulationTest extends SimulationTest {
 
         AssertJUnit.assertTrue(transformOutLaw.isCloned());
         AssertJUnit.assertTrue(transformOutLaw.isTransformable());
-        AssertJUnit.assertTrue(transformOutLaw.hasState(CardStateName.Transformed));
+        AssertJUnit.assertTrue(transformOutLaw.hasState(CardStateName.Backside));
         AssertJUnit.assertTrue(transformOutLaw.canTransform(null));
         AssertJUnit.assertTrue(transformOutLaw.isBackSide());
 
@@ -1822,7 +1825,7 @@ public class GameSimulationTest extends SimulationTest {
 
         AssertJUnit.assertFalse(transformOutLaw.isCloned());
         AssertJUnit.assertTrue(transformOutLaw.isTransformable());
-        AssertJUnit.assertTrue(transformOutLaw.hasState(CardStateName.Transformed));
+        AssertJUnit.assertTrue(transformOutLaw.hasState(CardStateName.Backside));
         AssertJUnit.assertTrue(transformOutLaw.canTransform(null));
         AssertJUnit.assertTrue(transformOutLaw.isBackSide());
 
@@ -2610,6 +2613,35 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertTrue(nonBasicForest.getType().hasSubtype("Mountain"));
     }
 
+    @Test
+    public void testHenzie() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        addCard("Henzie \"Toolbox\" Torre", p);
+        addCardToZone("Wastes", p, ZoneType.Library);
+        addCards("Plains", 5, p);
+        Card spell = addCardToZone("Serra Angel", p, ZoneType.Hand);
+
+        game.getAction().checkStaticAbilities();
+        List<SpellAbility> sas = spell.getAllPossibleAbilities(p, true);
+        SpellAbility blitz = sas.get(1);
+
+        GameSimulator sim = createSimulator(game, p);
+        game = sim.getSimulatedGameState();
+        sim.simulateSpellAbility(blitz);
+        spell = findCardWithName(game, "Serra Angel");
+
+        AssertJUnit.assertEquals(1, spell.getAmountOfKeyword(Keyword.BLITZ));
+        AssertJUnit.assertTrue(spell.hasKeyword(Keyword.HASTE));
+
+        playUntilNextTurn(game);
+
+        AssertJUnit.assertEquals(1, game.getPlayers().get(0).getCardsIn(ZoneType.Hand).size());
+        AssertJUnit.assertTrue(spell.isInZone(ZoneType.Graveyard));
+    }
+
     /**
      * Test for "Volo's Journal" usage by the AI. This test checks if the AI correctly
      * adds the correct types to the "Volo's Journal" when casting the spells in order
@@ -2670,14 +2702,11 @@ public class GameSimulationTest extends SimulationTest {
      */
     protected boolean areWordsInIterable(List<String> words, Iterable<String> iterable) {
         // Create a frequency map for the words in the iterable
-        Map<String, Integer> frequencyMap = new HashMap<>();
-        for (String item : iterable) {
-            frequencyMap.put(item, frequencyMap.getOrDefault(item, 0) + 1);
-        }
+        Map<String, Long> frequencyMap = StreamUtil.stream(iterable).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         // Check if each word in the list appears exactly once
         for (String word : words) {
-            if (frequencyMap.getOrDefault(word, 0) != 1) {
+            if (frequencyMap.getOrDefault(word, 0l) != 1) {
                 return false;  // If the word doesn't appear exactly once, return false
             }
         }

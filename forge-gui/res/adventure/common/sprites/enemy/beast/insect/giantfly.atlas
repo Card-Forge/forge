@@ -1,0 +1,62 @@
+giantfly.png
+size: 192,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none    
+Avatar      
+  xy: 144, 32
+  size: 16, 16
+Idle 
+  xy: 4, 7
+  size: 23, 18  
+Idle 
+  xy: 36, 7
+  size: 23, 18  
+Idle 
+  xy: 68, 7
+  size: 23, 18  
+Idle 
+  xy: 100, 7
+  size: 23, 18  
+Walk
+  xy: 2, 36
+  size: 24, 26
+Walk
+  xy: 34, 36
+  size: 24, 26
+Walk
+  xy: 66, 36
+  size: 24, 26 
+Walk
+  xy: 98, 36
+  size: 24, 26   
+Attack 
+  xy: 0, 64
+  size: 32, 32 
+Attack 
+  xy: 32, 64
+  size: 32, 32 
+Attack 
+  xy: 64, 64
+  size: 32, 32 
+Attack 
+  xy: 96, 64
+  size: 32, 32       
+Death 
+  xy: 0, 96
+  size: 32, 32      
+Death 
+  xy: 32, 96
+  size: 32, 32 
+Death 
+  xy: 64, 96
+  size: 32, 32 
+Death 
+  xy: 96, 96
+  size: 32, 32
+Death 
+  xy: 128, 96
+  size: 32, 32
+Death 
+  xy: 160, 96
+  size: 32, 32

@@ -3,7 +3,7 @@ ManaCost:3 W W
 Types:Sorcery
 A:SP$ Charm | Choices$ DBDestroyAll,DBConditionEffect
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Artifact,Creature | SpellDescription$ Let the World Burn — Destroy all artifacts and creatures.
-SVar:DBConditionEffect:DB$ Effect | RememberObjects$ Targeted,Self | ReplacementEffects$ ETBCreat | ExileOnMoved$ Graveyard,Stack | SubAbility$ DBChangeZone
+SVar:DBConditionEffect:DB$ Effect | RememberObjects$ Targeted & Self | ReplacementEffects$ ETBCreat | ExileOnMoved$ Graveyard,Stack | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.Historic+YouOwn | TgtPrompt$ Select target historic permanent card | SpellDescription$ Release Juno — Return target historic permanent card from your graveyard to the battlefield. It enters with two additional +1/+1 counters on it if it's a creature. (Artifacts, legendaries, and Sagas are historic.)
 SVar:ETBCreat:Event$ Moved | ValidCard$ Creature.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBPutP1P1 | ReplacementResult$ Updated | Description$ It enters with two additional +1/+1 counters on it if it's a creature.
 SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ 2

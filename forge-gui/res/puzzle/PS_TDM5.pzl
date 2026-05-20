@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Tarkir: Dragonstorm #05
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/05/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Ensure your solution satisfies all possible blocks. Any cards drawn are irrelevant to the puzzle. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Hotshot Investigators;Naga Fleshcrafter;Bestow Greatness;Goldvein Hydra;Carnelian Orb of Dragonkind
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Temur Battlecrier;Stormscale Scion;Ainok Wayfarer;Three Tree Mascot;Island;Island;Frontier Bivouac;Frontier Bivouac;Frontier Bivouac
+p1life=18
+p1battlefield=Scavenger Regent;Armament Dragon|Counters:P1P1=2;Reputable Merchant|Counters:P1P1=4

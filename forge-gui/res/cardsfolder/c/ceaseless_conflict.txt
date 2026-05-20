@@ -1,0 +1,8 @@
+Name:Ceaseless Conflict
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBToken | SpellDescription$ Destroy all creatures. Then create a 3/2 red and white Spirit creature token for each nontoken creature you controlled that was destroyed this way.
+SVar:DBToken:DB$ Token | TokenScript$ rw_3_2_spirit | TokenAmount$ X | TokenOwner$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Card.!token+YouCtrl
+Oracle:Destroy all creatures. Then create a 3/2 red and white Spirit creature token for each nontoken creature you controlled that was destroyed this way.

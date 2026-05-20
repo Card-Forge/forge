@@ -1,0 +1,19 @@
+[metadata]
+Name=Ghoulcaller Ghoul
+[Main]
+20 Swamp|2ED
+4 Carnophage|EXO
+4 Sarcomancy|TMP
+4 Undead Warchief|SCG
+4 Zombie Master|LEA
+4 Lord of the Undead|PLS
+4 Noxious Ghoul|LGN
+4 Vengeful Dead|SCG
+4 Shepherd of Rot|ONS
+2 Cover of Darkness|ONS
+4 Call to the Grave|SCG
+2 Severed Legion|ONS
+
+[StartInBattle_Reference]
+2 Swamp|2ED
+1 Lord of the Undead|PLS

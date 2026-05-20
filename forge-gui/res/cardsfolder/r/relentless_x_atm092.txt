@@ -1,0 +1,7 @@
+Name:Relentless X-ATM092
+ManaCost:6
+Types:Artifact Creature Robot Spider
+PT:6/5
+S:Mode$ MinMaxBlocker | ValidCard$ Creature.Self | Min$ 3 | Description$ This creature can't be blocked except by three or more creatures.
+A:AB$ ChangeZone | Cost$ 8 | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | WithCountersType$ FINALITY | ActivationZone$ Graveyard | SpellDescription$ Return this card from your graveyard to the battlefield tapped with a finality counter on it. (If a creature with a finality counter on it would die, exile it instead.)
+Oracle:This creature can't be blocked except by three or more creatures.\n{8}: Return this card from your graveyard to the battlefield tapped with a finality counter on it. (If a creature with a finality counter on it would die, exile it instead.)

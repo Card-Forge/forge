@@ -1,0 +1,10 @@
+Name:Uthros Scanship
+ManaCost:3 U
+Types:Artifact Spacecraft
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this Spacecraft enters, draw two cards, then discard a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ TrigDiscard
+SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+K:Station:8
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE8_CHARGE | AddType$ Creature | AddKeyword$ Flying | Description$ STATION 8+ Flying
+Oracle:When this Spacecraft enters, draw two cards, then discard a card.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.)\nSTATION 8+\nFlying

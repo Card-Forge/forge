@@ -1,0 +1,44 @@
+[metadata]
+Name=Dinosaurs
+Deck Type=constructed
+Title=Dinosaurs
+Description=Dinosaurs
+Difficulty=Easy
+Icon=Golgari-precon
+[Main]
+4 Abrade
+1 Arch of Orazca
+3 Carnage Tyrant
+2 Forest
+1 Forest
+2 Forest
+3 Gift of Paradise
+3 Hashep Oasis
+2 Hour of Devastation
+3 Hour of Promise
+1 Mountain
+2 Mountain
+1 Plains
+1 Ranging Raptors
+3 Ripjaw Raptor
+4 Rootbound Crag
+1 Sandwurm Convergence
+2 Scavenger Grounds
+2 Shefet Dunes
+4 Sheltered Thicket
+2 Spring // Mind
+2 Sunbird's Invocation
+2 Sweltering Suns
+4 Thunderherd Migration
+2 Treasure Map
+3 Zacama, Primal Calamity
+[Sideboard]
+2 Arborback Stomper
+1 Carnage Tyrant
+1 Chandra's Defeat
+2 Chandra, Torch of Defiance
+1 Cut // Ribbons
+2 Deathgorge Scavenger
+2 Magma Spray
+2 Naturalize
+2 Sweltering Suns

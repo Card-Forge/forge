@@ -1,0 +1,6 @@
+Name:World Map
+ManaCost:1
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 1 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+A:AB$ ChangeZone | Cost$ 3 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ Search your library for a land card, reveal it, put it into your hand, then shuffle.
+Oracle:{1}, {T}, Sacrifice this artifact: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.\n{3}, {T}, Sacrifice this artifact: Search your library for a land card, reveal it, put it into your hand, then shuffle.

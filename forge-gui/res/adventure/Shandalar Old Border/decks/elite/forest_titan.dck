@@ -1,0 +1,21 @@
+[metadata]
+Name=forest_titan
+[Main]
+12 Forest|TMP
+4 Three Visits|PTK
+4 Nature's Lore|PO2
+4 Wood Elves|7ED
+4 Skyshroud Claim|NMS
+4 Child of Gaea|USG
+4 Silverglade Elemental|MMQ
+4 Blanchwood Armor|7ED
+4 Heartwood Giant|TMP
+4 Coiling Woodworm|NMS
+4 Aspect of Wolf|3ED
+4 Uktabi Wildcats|6ED
+2 Natural Affinity|MMQ
+2 Plow Under|UDS
+
+[StartInBattle_Reference]
+4 Forest|TMP
+1 Treefolk Seedlings|USG

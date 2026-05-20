@@ -1,0 +1,9 @@
+Name:Tractor Beam
+ManaCost:2 U U
+Types:Enchantment Aura
+K:Enchant:Creature,Spacecraft:creature or Spacecraft
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When this Aura enters, tap enchanted permanent.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted
+S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted permanent doesn't untap during its controller's untap step.
+Oracle:Enchant creature or Spacecraft\nWhen this Aura enters, tap enchanted permanent.\nYou control enchanted permanent.\nEnchanted permanent doesn't untap during its controller's untap step.

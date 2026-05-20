@@ -1,9 +1,16 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
+import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -16,7 +23,7 @@ import java.util.Map;
 public class AlterAttributeAi extends SpellAbilityAi {
 
     @Override
-    protected boolean checkApiLogic(Player aiPlayer, SpellAbility sa) {
+    protected AiAbilityDecision checkApiLogic(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getHostCard();
         boolean activate = Boolean.parseBoolean(sa.getParamOrDefault("Activate", "true"));
         String[] attributes = sa.getParam("Attributes").split(",");
@@ -24,7 +31,45 @@ public class AlterAttributeAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             // TODO add targeting logic
             // needed for Suspected
-            return false;
+            for (String attr : attributes) {
+                switch (attr.trim()) {
+                    case "Suspect":
+                    case "Suspected":
+                        // below, Suspected is treated as better, so target own beefy stuff to give it Menace if possible
+                        // first, check our own and our teammates' cards
+                        CardCollection targetableCards = CardLists.getTargetableCards(aiPlayer.getCreaturesInPlay(), sa);
+                        if (targetableCards.isEmpty()) {
+                            // look for allied stuff if we have nothing
+                            targetableCards = CardLists.getTargetableCards(aiPlayer.getAllies().getCreaturesInPlay(), sa);
+                        }
+                        if (!targetableCards.isEmpty()) {
+                            Card bestTgt = ComputerUtilCard.getBestAI(CardLists.filter(targetableCards,
+                                    CardPredicates.hasKeyword(Keyword.MENACE).negate()));
+                            if (bestTgt == null) {
+                                bestTgt = ComputerUtilCard.getBestAI(targetableCards);
+                            }
+                            sa.resetTargets();
+                            sa.getTargets().add(bestTgt);
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                        }
+                        // still no target, so look at the opposing stuff, try to target things that have Defender, Vigilance, or are weak
+                        // in general, target worst stuff here, hopefully chump blockers and the like
+                        targetableCards = CardLists.getTargetableCards(aiPlayer.getOpponents().getCreaturesInPlay(), sa);
+                        if (!targetableCards.isEmpty()) {
+                            Card bestTgt = ComputerUtilCard.getWorstAI(CardLists.filter(targetableCards,
+                                    CardPredicates.hasKeyword(Keyword.VIGILANCE).or(CardPredicates.hasKeyword(Keyword.DEFENDER))));
+                            if (bestTgt == null) {
+                                bestTgt = ComputerUtilCard.getWorstAI(targetableCards);
+                            }
+                            sa.resetTargets();
+                            sa.getTargets().add(bestTgt);
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                        }
+                        // still no target, so bail, because nothing is targetable at this point
+                        break;
+                }
+            }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
@@ -36,7 +81,7 @@ public class AlterAttributeAi extends SpellAbilityAi {
                     case "Solved":
                         // there is currently no effect that would un-solve something
                         if (!c.isSolved() && activate) {
-                            return true;
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
                         break;
                     case "Suspect":
@@ -44,21 +89,28 @@ public class AlterAttributeAi extends SpellAbilityAi {
                         // is Suspected good or bad?
                         // currently Suspected is better
                         if (!activate) {
-                            return false;
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
 
                     case "Saddle":
                     case "Saddled":
                         // AI should not try to Saddle again?
                         if (c.isSaddled()) {
-                            return false;
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
-                        return true;
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    case "Prepare":
+                    case "Prepared":
+                        // AI should not try to Prepare creatures that are already Prepared
+                        if (c.isPrepared()) {
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                        }
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
         }
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override

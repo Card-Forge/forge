@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Sharee
+Title=Sharee
+Icon=Sharee.jpg
+Difficulty=Easy
+Description=./Standard/War_of_the_Spark/Allison_Coleman_-_Ur_Phoenix_(Standard,_#797402).dck
+Deck Type=constructed
+
+[Main]
+4 Arclight Phoenix
+3 Crackling Drake
+3 Goblin Electromancer
+1 Augur of Bolas
+4 Opt
+3 Lightning Strike
+4 Shock
+2 Radical Idea
+4 Chart a Course
+3 Finale of Promise
+3 Tormenting Voice
+2 Lava Coil
+1 Beacon Bolt
+2 Saheeli, Sublime Artificer
+7 Island
+6 Mountain
+4 Steam Vents
+4 Sulfur Falls
+[Sideboard]
+1 Augur of Bolas
+2 Lava Coil
+4 Narset, Parter of Veils
+2 Fiery Cannonade
+2 Negate
+2 Spell Pierce
+1 Niv-Mizzet, Parun
+1 Ral, Izzet Viceroy

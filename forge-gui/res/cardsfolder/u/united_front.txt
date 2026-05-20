@@ -1,0 +1,7 @@
+Name:United Front
+ManaCost:X W W
+Types:Sorcery
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_1_1_ally | TokenOwner$ You | SubAbility$ DBPutCounterAll | SpellDescription$ Create X 1/1 white Ally creature tokens, then put a +1/+1 counter on each creature you control.
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | StackDescription$ None
+SVar:X:Count$xPaid
+Oracle:Create X 1/1 white Ally creature tokens, then put a +1/+1 counter on each creature you control.

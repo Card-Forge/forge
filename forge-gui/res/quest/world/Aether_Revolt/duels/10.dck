@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Abiku
+Title=Abiku
+Icon=Abiku.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Koukawa_Tsunao_-_WU_Aggro_(Standard,_#664555).dck
+Deck Type=constructed
+
+[Main]
+4 Hanweir Garrison
+4 Inventor's Apprentice
+3 Kari Zev, Skyship Raider
+4 Metallic Mimic
+2 Pia Nalaar
+4 Thalia's Lieutenant
+4 Thraben Inspector
+4 Town Gossipmonger
+4 Outnumber
+3 Declaration in Stone
+2 Gideon, Ally of Zendikar
+2 Aether Hub
+1 Hanweir Battlements
+4 Inspiring Vantage
+6 Mountain
+3 Needle Spires
+6 Plains
+[Sideboard]
+2 Authority of the Consuls
+2 Destructive Tampering
+2 Fragmentize
+1 Fumigate
+4 Galvanic Bombardment
+2 Gideon, Ally of Zendikar
+1 Repel the Abominable
+1 Thalia, Heretic Cathar

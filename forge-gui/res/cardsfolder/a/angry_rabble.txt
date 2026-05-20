@@ -1,0 +1,12 @@
+Name:Angry Rabble
+Variant:UniversesWithin:FlavorName:Galvanized Workforce
+ManaCost:1 R
+Types:Creature Human Citizen
+PT:2/2
+K:Trample
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE4 | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with mana value 4 or greater, this creature deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+A:AB$ PutCounter | Cost$ 5 R | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SorcerySpeed$ True | SpellDescription$ Put two +1/+1 counters on this creature. Activate only as a sorcery.
+SVar:BuffedBy:Card.cmcGE4
+DeckHas:Ability$Counters
+Oracle:Trample\nWhenever you cast a spell with mana value 4 or greater, this creature deals 1 damage to each opponent.\n{5}{R}: Put two +1/+1 counters on this creature. Activate only as a sorcery.

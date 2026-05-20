@@ -1,15 +1,15 @@
 //Rank|Name|Rarity|Set
-#1|Tamiyo the Moon Sage|M|AVR
+#1|Tamiyo, the Moon Sage|M|AVR
 #2|Bonfire of the Damned|M|AVR
 #3|Entreat the Angels|M|AVR
-#4|Sigarda Host of Herons|M|AVR
-#5|Gisela Blade of Goldnight|M|AVR
-#6|Avacyn Angel of Hope|M|AVR
-#7|Bruna Light of Alabaster|M|AVR
+#4|Sigarda, Host of Herons|M|AVR
+#5|Gisela, Blade of Goldnight|M|AVR
+#6|Avacyn, Angel of Hope|M|AVR
+#7|Bruna, Light of Alabaster|M|AVR
 #8|Griselbrand|M|AVR
 #9|Craterhoof Behemoth|M|AVR
 #10|Temporal Mastery|M|AVR
-#11|Tibalt the Fiend Blooded|M|AVR
+#11|Tibalt, the Fiend-Blooded|M|AVR
 #12|Misthollow Griffin|M|AVR
 #13|Malignus|M|AVR
 #14|Wolfir Silverheart|R|AVR
@@ -30,11 +30,11 @@
 #29|Deadeye Navigator|R|AVR
 #30|Riders of Gavony|R|AVR
 #31|Dark Impostor|R|AVR
-#32|Angel of Glorys Rise|R|AVR
-#33|Cathars Crusade|R|AVR
+#32|Angel of Glory's Rise|R|AVR
+#33|Cathars' Crusade|R|AVR
 #34|Demonlord of Ashmouth|R|AVR
 #35|Archwing Dragon|R|AVR
-#36|Druids Familiar|U|AVR
+#36|Druid's Familiar|U|AVR
 #37|Spirit Away|R|AVR
 #38|Wolfir Avenger|U|AVR
 #39|Lone Revenant|R|AVR
@@ -75,7 +75,7 @@
 #74|Demonic Taskmaster|U|AVR
 #75|Gloomwidow|U|AVR
 #76|Trusted Forcemage|C|AVR
-#77|Slayers Stronghold|R|AVR
+#77|Slayers' Stronghold|R|AVR
 #78|Nephalia Smuggler|U|AVR
 #79|Archangel|U|AVR
 #80|Pillar of Flame|C|AVR
@@ -90,7 +90,7 @@
 #89|Gloom Surgeon|R|AVR
 #90|Angelic Armaments|U|AVR
 #91|Wild Defiance|R|AVR
-#92|Angels Tomb|U|AVR
+#92|Angel's Tomb|U|AVR
 #93|Maalfeld Twins|U|AVR
 #94|Stern Mentor|U|AVR
 #95|Holy Justiciar|U|AVR
@@ -102,7 +102,7 @@
 #101|Righteous Blow|C|AVR
 #102|Nightshade Peddler|C|AVR
 #103|Riot Ringleader|C|AVR
-#104|Conjurers Closet|R|AVR
+#104|Conjurer's Closet|R|AVR
 #105|Yew Spirit|U|AVR
 #106|Scrapskin Drake|C|AVR
 #107|Marrow Bats|U|AVR
@@ -116,18 +116,18 @@
 #115|Gallows at Willow Hill|R|AVR
 #116|Desolate Lighthouse|R|AVR
 #117|Bone Splinters|C|AVR
-#118|Alchemists Refuge|R|AVR
+#118|Alchemist's Refuge|R|AVR
 #119|Vessel of Endless Rest|U|AVR
 #120|Gang of Devils|U|AVR
 #121|Heirs of Stromkirk|C|AVR
 #122|Elgaud Shieldmate|C|AVR
-#123|Tormentors Trident|U|AVR
+#123|Tormentor's Trident|U|AVR
 #124|Peel from Reality|C|AVR
-#125|Treacherous Pit Dweller|R|AVR
+#125|Treacherous Pit-Dweller|R|AVR
 #126|Butcher Ghoul|C|AVR
 #127|Undead Executioner|C|AVR
 #128|Nettle Swine|C|AVR
-#129|Descendants Path|R|AVR
+#129|Descendants' Path|R|AVR
 #130|Moonlight Geist|C|AVR
 #131|Joint Assault|C|AVR
 #132|Amass the Components|C|AVR
@@ -137,13 +137,13 @@
 #136|Abundant Growth|C|AVR
 #137|Lunar Mystic|R|AVR
 #138|Crippling Chill|C|AVR
-#139|Druids Repository|R|AVR
+#139|Druids' Repository|R|AVR
 #140|Corpse Traders|U|AVR
 #141|Primal Surge|M|AVR
 #142|Pathbreaker Wurm|C|AVR
 #143|Geist Trappers|C|AVR
 #144|Defang|C|AVR
-#145|Alchemists Apprentice|C|AVR
+#145|Alchemist's Apprentice|C|AVR
 #146|Devout Chaplain|U|AVR
 #147|Searchlight Geist|C|AVR
 #148|Farbog Explorer|C|AVR
@@ -189,7 +189,7 @@
 #188|Narstad Scrapper|C|AVR
 #189|Natural End|C|AVR
 #190|Essence Harvest|C|AVR
-#191|Predators Gambit|C|AVR
+#191|Predator's Gambit|C|AVR
 #192|Mental Agony|C|AVR
 #193|Lair Delve|C|AVR
 #194|Uncanny Speed|C|AVR
@@ -203,12 +203,12 @@
 #202|Cursebreak|C|AVR
 #203|Leap of Faith|C|AVR
 #204|Hunted Ghoul|C|AVR
-#205|Commanders Authority|U|AVR
+#205|Commander's Authority|U|AVR
 #206|Appetite for Brains|U|AVR
 #207|Raging Poltergeist|C|AVR
 #208|Dreadwaters|C|AVR
 #209|Demolish|C|AVR
-#210|Vanguards Shield|C|AVR
+#210|Vanguard's Shield|C|AVR
 #211|Banners Raised|C|AVR
 #212|Descent into Madness|M|AVR
 #213|Seraph Sanctuary|C|AVR
@@ -216,14 +216,14 @@
 #215|Scroll of Griselbrand|C|AVR
 #216|Ghostly Touch|U|AVR
 #217|Outwit|C|AVR
-#218|Angels Mercy|C|AVR
+#218|Angel's Mercy|C|AVR
 #219|Grounded|C|AVR
 #220|Battle Hymn|C|AVR
 #221|Malicious Intent|C|AVR
 #222|Triumph of Cruelty|U|AVR
 #223|Rain of Thorns|U|AVR
 #224|Otherworld Atlas|R|AVR
-#225|Builders Blessing|U|AVR
+#225|Builder's Blessing|U|AVR
 #226|Bower Passage|U|AVR
 #227|Rite of Ruin|R|AVR
 #228|Second Guess|U|AVR

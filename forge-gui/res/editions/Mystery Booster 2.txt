@@ -272,124 +272,124 @@ ScryfallCode=MB2
 264 U Forsaken Crossroads @Kasia 'Kafis' Zielińska
 
 [cards]
-F265 C Indicate @Drew Moss
-F266 C Kozilek, Compleated @Will Liu
-F267 C Marchesa's Surprise Party @Maru Ferreira
-F268 C Omnipresent Impostor @Francois Dery
-F269 C Rule with an Even Hand @Stephanie Bouchard
-F270 C Who's That Praetor? @Thomas Ricci
-F271 C Abbot of the Sacred Meeple @Jair Medina
-F272 C Arcanum Things @Kevin Soler
-F273 C Avacyn's Collar, the Symbol of Her Church @Olga Tereshenko
-F274 C Brigid, Who's Seen Some Stuff @Alina Marica
-F275 C Champion of the Hareish @Sara Pitre-Dorocher
-F276 C Defender of the Queue @Marika Lord
-F277 C Essence of Ajani @Lucas Firmino
-F278 C Friarball @Marc-André Dupont
-F279 C A Girl and Her Dogs @Sara Pitre-Dorocher
-F280 C Intangible Vibes @Marisa Oh
-F281 C Jeskai Baller @Oscar Camacho
-F282 C Knight of Lost Causes @Sandy Lee
-F283 C Muraganda Eldrazi @Jair Medina
-F284 C New Master of Arms @Florin Petre Bostan
-F285 C Noble Ox @Marianne Martin
-F286 C Plain Walker @Marika Lord
-F287 C Sliver of Hope @Carol Azevedo
-F288 C Tax Taker @Marc-André Dupont
-F289 C Alberix, the Trade Planet @Thomas Ricci
-F290 C Blurry Visionary @Sergei Ryzhov
-F291 C Can't Quite Recall @David Borba
-F292 C Catch of the Day @Nadezhda Tikhomirova
-F293 C Duelists' Convocation International @Pedro Maia
-F294 C Heart of a Duelist @Drew Moss
-F295 C Map to Lorthos's Temple @Francois Dery
-F296 C Night of the Flying Merfolk @Ashlea Kelly
-F297 C No-Regrets Egret @Marco Wulfr
-F298 C Panglacial Shinobi @David Giraud
-F299 C Search Elemental @Gonçalo Pereira
-F300 C Subgoyf @Nadezhda Tikhomirova
-F301 C There // They're // Their @Marika Lord
-F302 C Two by Four @Sam Denmark
-F303 C Wisedrafter's Will @Ashlea Kelly
-F304 C Your Wish Is My Command @Christine Couture
-F305 C Call from the Grave @Alex Tarca
-F306 C Cleaver Blow @Drew Moss
-F307 C Common Black Removal @Michelle Esposito
-F308 C Creepy Crawler @Marika Lord
-F309 C Halving Season @Drew Moss
-F310 C Lich's Duel Mastery @David Giraud
-F311 C Lifening Elemental @Andréa Blouin
-F312 C Liliana's Other Contract @Barbara Witkowska
-F313 C Magus of the Chains @Will Liu
-F314 C The Many Deeds of Belzenlok @Maru Ferreira
-F315 C Oddric, Lunar Marquis @Carol Azevedo
-F316 C Pinchy McStingbutt @Drew Moss
-F317 C TL;DR @Sergei Ryzhov
-F318 C Toofer, Keeper of the Full Grip @Oscar Camacho
-F319 C Yawgmoth's Day Planner @Tiago Sousa
-F320 C You Compleat Me @Jean-Christophe Drolet
-F321 C All-Star Kicker @Marika Lord
-F322 C Bolshack Dragon @Marco Espinosa
-F323 C Boltfire @Marika Lord
-F324 C Boulder Jockey @Marika Lord
-F325 C Dwarven Confluencer @Marika Lord
-F326 C Flanking Licid @Nikolai Maslakov
-F327 C Immersturm Battlefield @Thomas Ricci
-F328 C Planeswalkerificate @Guga Baraldi
-F329 C Pyromancy 101 @Marika Lord
-F330 C Snap Judgment @Will Liu
-F331 C Toddler's Rage @Mélanie Bourgeois
-F332 C Vuzzle Spaceship @Hélio Frazão
-F333 C Wormhole Warp @Sam Denmark
-F334 C Zone of Flame @Will Liu
-F335 C Built Bear @Bogdan Marica
-F336 C The Colossal Dreadmaw @Marika Lord
-F337 C Dairy Cow @Andréa Blouin
-F338 C Flavor Disaster @Drew Moss
-F339 C Keeper of the Crown @Elliot Stevens
-F340 C Meandered Towershell @Hung Nguy
-F341 C Naturalize 2 @Marika Lord
-F342 C Penumbra Umbra @Bogdan Marica
-F343 C Phyrexian Seedling @Drew Moss
-F344 C Plant a Sapling @Lucas Firmino
-F345 C Questing Cosplayer @Gabriela Birchal
-F346 C Spuzzem Strategist @Alex Tarca
-F347 C Starting Town NPC @Pedro Maia
-F348 C Teferi, Druid of Argoth @Mélanie Bourgeois
-F349 C Werewhat @Marco Espinosa
-F350 C Anax and Cymede & Kynaios and Tiro @Marika Lord
-F351 C Chatzuk, Mighty Guitarist @Marco Wulfr
-F352 C Chea, Friend to Maybe Too Many @Stephanie Bouchard
-F353 C Don't Worry About It @Jean-Christophe Drolet
-F354 C Fludge, Gunk Guardian @Sara Leal
-F355 C Glimpse, the Unthinkable @Lena Zykova
-F356 C Hish of the Snake Cult @Marco Dotti
-F357 C Jund 'Em Out @Drew Moss
-F358 C Lutri, Pauper Otter @Will Liu
-F359 C Mothers Yamazaki @Marika Lord
-F360 C Narod, the Beige Flower @Drew Moss
-F361 C Pokey, the Scallywagg @David Borba
-F362 C Rin and Seri, Inseparabler @Giacomo Galloni
-F363 C Stone Drake @Raluca Marinescu
-F364 C Terry Pin, Turboturtle @Harpreet Rattan
-F365 C Wowzer, the Aspirational @Tiago Sousa
-F366 C Wrath of Leknif @Marion Kivits
-F367 C Luxior, Ignited @Alexandre Breton
-F368 C Microscope @Alina Marica
-F369 C Mox Poison @Dan Frazier
-F370 C Orb of Origin @Drew Moss
-F371 C Runed Terror @Kevin Dubell
-F372 C Fetching Garden @Sophie Rochon
-F373 C Glade of the Pump Spells @Christine Couture
-F374 C Gobland @Anik Sikder
-F375 C The Heron Moon @Kevin Dubell
-F376 C Lazotep Archway @Will Liu
-F377 C Madlands @Véronique Chabot
-F378 C Maestros' Totally Safe Hideout @Gonçalo Pereira
-F379 C Omenpath to Naya @Sandy Lee
-F380 C Processing Plant @Thomas Ricci
-F381 C Slumbering Waterways @Kevin Dubell
-F382 C Temur Elevator @Marika Lord
-F383 C Under-Construction Skyscraper @Kevin Dubell
-F384 C Value Town @Hélio Frazão
-F385 C Wrenn and One @Marianne Martin
+F501 C Indicate @Drew Moss
+F502 C Kozilek, Compleated @Will Liu
+F503 C Marchesa's Surprise Party @Maru Ferreira
+F504 C Omnipresent Impostor @Francois Dery
+F505 C Rule with an Even Hand @Stephanie Bouchard
+F506 C Who's That Praetor? @Thomas Ricci
+F507 C Abbot of the Sacred Meeple @Jair Medina
+F508 C Arcanum Things @Kevin Soler
+F509 C Avacyn's Collar, the Symbol of Her Church @Olga Tereshenko
+F510 C Brigid, Who's Seen Some Stuff @Alina Marica
+F511 C Champion of the Hareish @Sara Pitre-Dorocher
+F512 C Defender of the Queue @Marika Lord
+F513 C Essence of Ajani @Lucas Firmino
+F514 C Friarball @Marc-André Dupont
+F514 C A Girl and Her Dogs @Sara Pitre-Dorocher
+F516 C Intangible Vibes @Marisa Oh
+F517 C Jeskai Baller @Oscar Camacho
+F518 C Knight of Lost Causes @Sandy Lee
+F519 C Muraganda Eldrazi @Jair Medina
+F520 C New Master of Arms @Florin Petre Bostan
+F521 C Noble Ox @Marianne Martin
+F522 C Plain Walker @Marika Lord
+F523 C Sliver of Hope @Carol Azevedo
+F524 C Tax Taker @Marc-André Dupont
+F525 C Alberix, the Trade Planet @Thomas Ricci
+F526 C Blurry Visionary @Sergei Ryzhov
+F527 C Can't Quite Recall @David Borba
+F528 C Catch of the Day @Nadezhda Tikhomirova
+F529 C Duelists' Convocation International @Pedro Maia
+F530 C Heart of a Duelist @Drew Moss
+F531 C Map to Lorthos's Temple @Francois Dery
+F532 C Night of the Flying Merfolk @Ashlea Kelly
+F533 C No-Regrets Egret @Marco Wulfr
+F534 C Panglacial Shinobi @David Giraud
+F535 C Search Elemental @Gonçalo Pereira
+F536 C Subgoyf @Nadezhda Tikhomirova
+F537 C There // They're // Their @Marika Lord
+F538 C Two by Four @Sam Denmark
+F539 C Wisedrafter's Will @Ashlea Kelly
+F540 C Your Wish Is My Command @Christine Couture
+F541 C Call from the Grave @Alex Tarca
+F542 C Cleaver Blow @Drew Moss
+F543 C Common Black Removal @Michelle Esposito
+F544 C Creepy Crawler @Marika Lord
+F545 C Halving Season @Drew Moss
+F546 C Lich's Duel Mastery @David Giraud
+F547 C Lifening Elemental @Andréa Blouin
+F548 C Liliana's Other Contract @Barbara Witkowska
+F549 C Magus of the Chains @Will Liu
+F550 C The Many Deeds of Belzenlok @Maru Ferreira
+F551 C Oddric, Lunar Marquis @Carol Azevedo
+F552 C Pinchy McStingbutt @Drew Moss
+F553 C TL;DR @Sergei Ryzhov
+F554 C Toofer, Keeper of the Full Grip @Oscar Camacho
+F555 C Yawgmoth's Day Planner @Tiago Sousa
+F556 C You Compleat Me @Jean-Christophe Drolet
+F557 C All-Star Kicker @Marika Lord
+F558 C Bolshack Dragon @Marco Espinosa
+F559 C Boltfire @Marika Lord
+F563 C Boulder Jockey @Marika Lord
+F561 C Dwarven Confluencer @Marika Lord
+F562 C Flanking Licid @Nikolai Maslakov
+F563 C Gobland @Anik Sikder
+F564 C Immersturm Battlefield @Thomas Ricci
+F564 C Planeswalkerificate @Guga Baraldi
+F566 C Pyromancy 101 @Marika Lord
+F567 C Snap Judgment @Will Liu
+F568 C Toddler's Rage @Mélanie Bourgeois
+F569 C Vuzzle Spaceship @Hélio Frazão
+F570 C Wormhole Warp @Sam Denmark
+F571 C Zone of Flame @Will Liu
+F572 C Built Bear @Bogdan Marica
+F573 C The Colossal Dreadmaw @Marika Lord
+F574 C Dairy Cow @Andréa Blouin
+F575 C Flavor Disaster @Drew Moss
+F576 C Glade of the Pump Spells @Christine Couture
+F577 C Keeper of the Crown @Elliot Stevens
+F578 C Meandered Towershell @Hung Nguy
+F579 C Naturalize 2 @Marika Lord
+F580 C Penumbra Umbra @Bogdan Marica
+F581 C Phyrexian Seedling @Drew Moss
+F582 C Plant a Sapling @Lucas Firmino
+F583 C Questing Cosplayer @Gabriela Birchal
+F584 C Spuzzem Strategist @Alex Tarca
+F585 C Starting Town NPC @Pedro Maia
+F586 C Teferi, Druid of Argoth @Mélanie Bourgeois
+F587 C Werewhat @Marco Espinosa
+F588 C Wrenn and One @Marianne Martin
+F589 C Anax and Cymede & Kynaios and Tiro @Marika Lord
+F590 C Chatzuk, Mighty Guitarist @Marco Wulfr
+F591 C Chea, Friend to Maybe Too Many @Stephanie Bouchard
+F592 C Don't Worry About It @Jean-Christophe Drolet
+F593 C Fludge, Gunk Guardian @Sara Leal
+F594 C Glimpse, the Unthinkable @Lena Zykova
+F595 C Hish of the Snake Cult @Marco Dotti
+F596 C Jund 'Em Out @Drew Moss
+F597 C Lutri, Pauper Otter @Will Liu
+F598 C Mothers Yamazaki @Marika Lord
+F599 C Narod, the Beige Flower @Drew Moss
+F600 C Pokey, the Scallywagg @David Borba
+F601 C Rin and Seri, Inseparabler @Giacomo Galloni
+F602 C Stone Drake @Raluca Marinescu
+F603 C Terry Pin, Turboturtle @Harpreet Rattan
+F604 C Wowzer, the Aspirational @Tiago Sousa
+F605 C Wrath of Leknif @Marion Kivits
+F606 C Luxior, Ignited @Alexandre Breton
+F607 C Microscope @Alina Marica
+F608 C Mox Poison @Dan Frazier
+F609 C Orb of Origin @Drew Moss
+F610 C Runed Terror @Kevin Dubell
+F611 C Fetching Garden @Sophie Rochon
+F612 C The Heron Moon @Kevin Dubell
+F613 C Lazotep Archway @Will Liu
+F614 C Madlands @Véronique Chabot
+F615 C Maestros' Totally Safe Hideout @Gonçalo Pereira
+F616 C Omenpath to Naya @Sandy Lee
+F617 C Processing Plant @Thomas Ricci
+F618 C Slumbering Waterways @Kevin Dubell
+F619 C Temur Elevator @Marika Lord
+F620 C Under-Construction Skyscraper @Kevin Dubell
+F621 C Value Town @Hélio Frazão

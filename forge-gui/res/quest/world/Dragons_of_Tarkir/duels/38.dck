@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Surtr
+Title=Surtr
+Icon=Surtr.jpg
+Difficulty=Easy
+Description=Dragons_of_Tarkir/Standard_Daily_#8245718/terrordactyl_-_Naya_Midrange_(Standard,_#235779).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Deathmist Raptor
+4 Den Protector
+4 Elvish Mystic
+4 Fleecemane Lion
+2 Genesis Hydra
+4 Sylvan Caryatid
+4 Whisperwood Elemental
+4 Mastery of the Unseen
+1 Elspeth, Sun's Champion
+1 Ugin, the Spirit Dragon
+10 Forest
+1 Mana Confluence
+3 Nykthos, Shrine to Nyx
+2 Plains
+4 Temple of Plenty
+4 Windswept Heath
+[Sideboard]
+2 Ainok Survivalist
+3 Arashin Cleric
+2 Dromoka's Command
+2 Glare of Heresy
+2 Hornet Nest
+2 Valorous Stance
+2 Windstorm

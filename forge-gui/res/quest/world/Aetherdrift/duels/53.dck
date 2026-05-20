@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Joker
+Title=Joker
+Icon=Joker.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/musasabi_-_Orzhov_Blink_(Modern,_#2382143).dck
+Deck Type=constructed
+
+[Main]
+4 Solitude
+1 Boggart Trawler
+3 Emperor of Bones
+4 Ketramose, the New Dawn
+3 Flickerwisp
+4 Overlord of the Balemurk
+4 Phelia, Exuberant Shepherd
+1 Skyclave Apparition
+4 Witch Enchanter
+3 Relic of Progenitus
+4 Ephemerate
+4 Fatal Push
+3 Dreams of Steel and Oil
+2 Concealed Courtyard
+4 Marsh Flats
+2 Godless Shrine
+1 Flooded Strand
+1 Swamp
+2 Shadowy Backstreet
+2 Arid Mesa
+3 Plains
+1 Takenuma, Abandoned Mire
+[Sideboard]
+2 Drannith Magistrate
+1 Skyclave Apparition
+2 Aven Interrupter
+3 Thoughtseize
+4 White Orchid Phantom
+3 Wrath of the Skies

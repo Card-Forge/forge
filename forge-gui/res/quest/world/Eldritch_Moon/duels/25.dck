@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Zapp Brannigan
+Title=Zapp Brannigan
+Icon=Zapp Brannigan.jpg
+Difficulty=Easy
+Description=Eldritch_Moon/Competitive_Standard_Constructed_League/kogamo_-_4c_Emerge_(Standard,_#636872).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Elder Deep-Fiend
+4 Haunted Dead
+4 Jace, Vryn's Prodigy
+1 Nissa, Vastwood Seer
+3 Noose Constrictor
+4 Prized Amalgam
+1 Stitchwing Skaab
+4 Grapple with the Past
+4 Kozilek's Return
+4 Gather the Pack
+4 Traverse the Ulvenwald
+4 Evolving Wilds
+3 Forest
+2 Island
+4 Llanowar Wastes
+2 Lumbering Falls
+1 Mountain
+3 Sunken Hollow
+1 Swamp
+3 Yavimaya Coast
+[Sideboard]
+3 Distended Mindbender
+2 Dragonlord Silumgar
+3 Duress
+2 Languish
+3 Ultimate Price

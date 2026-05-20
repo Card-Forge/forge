@@ -40,8 +40,12 @@ public class PlayerSprite extends CharacterSprite {
     }
 
     public void storePos() {
-        AdventurePlayer.current().setWorldPosX(getX());
-        AdventurePlayer.current().setWorldPosY(getY());
+        storePos(getX(), getY());
+    }
+
+    public void storePos(final float x, final float y) {
+        AdventurePlayer.current().setWorldPosX(x);
+        AdventurePlayer.current().setWorldPosY(y);
     }
 
     public Vector2 getMovementDirection() {

@@ -1,0 +1,8 @@
+Name:Sinister Gnarlbark
+ManaCost:2 B
+Types:Creature Treefolk Warlock
+PT:0/4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, draw a card and blight 1. (Put a -1/-1 counter on a creature you control.)
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You | SubAbility$ DBBlight
+SVar:DBBlight:DB$ Blight | Num$ 1 | Defined$ You
+Oracle:At the beginning of your end step, draw a card and blight 1. (Put a -1/-1 counter on a creature you control.)

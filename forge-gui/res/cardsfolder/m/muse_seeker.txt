@@ -1,0 +1,10 @@
+Name:Muse Seeker
+ManaCost:1 U
+Types:Creature Elf Wizard
+PT:1/2
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Opus — Whenever you cast an instant or sorcery spell, draw a card. Then discard a card unless five or more mana was spent to cast that spell.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT5
+SVar:X:TriggeredCard$CastTotalManaSpent
+DeckHints:Type$Instant|Sorcery
+Oracle:Opus — Whenever you cast an instant or sorcery spell, draw a card. Then discard a card unless five or more mana was spent to cast that spell.

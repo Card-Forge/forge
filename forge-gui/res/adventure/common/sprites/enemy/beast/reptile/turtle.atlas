@@ -1,0 +1,80 @@
+turtle.png
+size: 384,192
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 320, 112
+  size: 16, 16     
+Idle 
+  xy: 4, 114
+  size: 26, 14   
+Idle 
+  xy: 36, 114
+  size: 26, 14   
+Idle 
+  xy: 68, 114
+  size: 26, 14  
+Idle 
+  xy: 100, 114
+  size: 26, 14   
+Idle 
+  xy: 132, 114
+  size: 26, 14  
+Idle 
+  xy: 164, 114
+  size: 26, 14   
+Walk
+  xy: 4, 82
+  size: 26, 14
+Walk
+  xy: 36, 82
+  size: 26, 14
+Walk
+  xy: 68, 82
+  size: 26, 14
+Walk
+  xy: 100, 82
+  size: 26, 14      
+Attack 
+  xy: 4, 18
+  size: 26, 14 
+Attack 
+  xy: 36, 18
+  size: 26, 14  
+Attack 
+  xy: 68, 18
+  size: 26, 14  
+Attack 
+  xy: 100, 18
+  size: 26, 14  
+Attack 
+  xy: 132, 18
+  size: 26, 14  
+Attack 
+  xy: 164, 18
+  size: 26, 14  
+Attack 
+  xy: 196, 18
+  size: 26, 14  
+Attack 
+  xy: 228, 18
+  size: 26, 14  
+Attack 
+  xy: 260, 18
+  size: 26, 14  
+Attack 
+  xy: 292, 18
+  size: 26, 14   
+Death 
+  xy: 4, 178
+  size: 26, 14  
+Death 
+  xy: 36, 178
+  size: 26, 14  
+Death 
+  xy: 68, 178
+  size: 26, 14  
+Death 
+  xy: 100, 178
+  size: 26, 14   

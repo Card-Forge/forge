@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Olokun
+Title=Olokun
+Icon=Olokun.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/Minezaki_Yuya_-_Rogue_(Standard,_#1750153).dck
+Deck Type=constructed
+
+[Main]
+2 Adeline, Resplendent Cathar
+3 Dennick, Pious Apprentice
+4 Light-Paws, Emperor's Voice
+2 Michiko's Reign of Truth
+1 The Restoration of Eiganjo
+2 Inspiring Overseer
+1 Stenn, Paranoid Partisan
+1 Steel Seraph
+1 Harbin, Vanguard Aviator
+4 Skrelv, Defector Mite
+1 Raffine's Guidance
+1 Security Bypass
+4 Combat Research
+4 Ossification
+2 The Wandering Emperor
+1 Elspeth Resplendent
+3 Archangel Elspeth
+8 Plains
+5 Island
+4 Adarkar Wastes
+4 Seachrome Coast
+1 Deserted Beach
+1 Eiganjo, Seat of the Empire
+[Sideboard]
+2 Negate
+2 Spell Pierce
+2 Disdainful Stroke
+1 Destroy Evil
+2 Loran of the Third Path
+2 Annex Sentry
+1 Sunfall
+2 Surge of Salvation
+1 Expel the Interlopers

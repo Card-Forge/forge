@@ -1,0 +1,12 @@
+Name:Haliya, Ascendant Cadet
+ManaCost:2 G W W
+Types:Legendary Creature Human Soldier
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever NICKNAME enters or attacks, put a +1/+1 counter on target creature you control.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl+counters_GE1_P1P1 | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever one or more creatures you control with +1/+1 counters on them deal combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+Oracle:Whenever Haliya enters or attacks, put a +1/+1 counter on target creature you control.\nWhenever one or more creatures you control with +1/+1 counters on them deal combat damage to a player, draw a card.

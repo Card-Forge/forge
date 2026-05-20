@@ -1,0 +1,12 @@
+Name:Golbez, Crystal Collector
+ManaCost:U B
+Types:Legendary Creature Human Wizard
+PT:1/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ Whenever an artifact you control enters, surveil 1.
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE4 | Execute$ TrigReturn | TriggerDescription$ At the beginning of your end step, if you control four or more artifacts, return target creature card from your graveyard to your hand. Then if you control eight or more artifacts, each opponent loses life equal to that card's power.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card in your graveyard | RememberChanged$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | ConditionCheckSVar$ X | ConditionSVarCompare$ GE8 | LifeAmount$ Remembered$CardPower | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Artifact.YouCtrl
+Oracle:Whenever an artifact you control enters, surveil 1.\nAt the beginning of your end step, if you control four or more artifacts, return target creature card from your graveyard to your hand. Then if you control eight or more artifacts, each opponent loses life equal to that card's power.

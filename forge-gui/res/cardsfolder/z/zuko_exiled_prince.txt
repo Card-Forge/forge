@@ -1,0 +1,10 @@
+Name:Zuko, Exiled Prince
+ManaCost:3 R
+Types:Legendary Creature Human Noble
+PT:4/3
+K:Firebending:3
+A:AB$ Dig | Cost$ 3 | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | Defined$ You | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. You may play that card this turn.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ EffSModeContinuous | ExileOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:EffSModeContinuous:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ You may play it this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Firebending 3 (Whenever this creature attacks, add {R}{R}{R}. This mana lasts until end of combat.)\n{3}: Exile the top card of your library. You may play that card this turn.

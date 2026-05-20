@@ -1,0 +1,6 @@
+Name:Sozin's Comet
+ManaCost:3 R R
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Firebending:5 | SpellDescription$ Each creature you control gains firebending 5 until end of turn. (Whenever it attacks, add {R}{R}{R}{R}{R}. This mana lasts until end of combat.)
+K:Foretell:2 R
+Oracle:Each creature you control gains firebending 5 until end of turn. (Whenever it attacks, add {R}{R}{R}{R}{R}. This mana lasts until end of combat.)\nForetell {2}{R} (During your turn, you may pay {2} and exile this card from your hand face down, Cast it on a later turn for its foretell cost.)

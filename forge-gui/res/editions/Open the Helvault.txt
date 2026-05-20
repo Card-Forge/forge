@@ -4,6 +4,7 @@ Date=2012-04-28
 Name=Open the Helvault
 Type=Promo
 ScryfallCode=PHEL
+TokensCode=PHEL
 
 [cards]
 6 M Avacyn, Angel of Hope @Jason Chan
@@ -13,5 +14,5 @@ ScryfallCode=PHEL
 210 M Sigarda, Host of Herons @Chris Rahn
 
 [tokens]
-w_4_4_angel_flying
-b_5_5_demon_flying
+1★ w_4_4_angel_flying @James Ryman
+1★☇ b_5_5_demon_flying @Karl Kopinski

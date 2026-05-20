@@ -1,7 +1,6 @@
 Name:Permission Denied
 ManaCost:W U
 Types:Instant
-Oracle:
 A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | SubAbility$ DBEffect | SpellDescription$ Counter target noncreature spell.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ CantBeCast | SpellDescription$ Your opponents can't cast noncreature spells this turn.
 SVar:CantBeCast:Mode$ CantBeCast | ValidCard$ Card.nonCreature | Caster$ Opponent | Description$ Your opponents can't cast noncreature spells this turn.

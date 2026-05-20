@@ -513,8 +513,8 @@ ScryfallCode=MOM
 8 g_1_1_phyrexian_saproling @Maxime Minard
 9 ur_1_1_elemental @Ryan Valle
 10 wu_2_2_knight_vigilance @Ernanda Souza
-11 gw_3_3_phyrexian_hydra_lifelink @Néstor Ossandón Leal
-12 gw_3_3_phyrexian_hydra_reach @Néstor Ossandón Leal
+11 gw_3_3_phyrexian_hydra_reach @Néstor Ossandón Leal
+12 gw_3_3_phyrexian_hydra_lifelink @Néstor Ossandón Leal
 13 rw_3_2_spirit @Michael Walsh
 14 wb_1_1_spirit_flying @Bruno Biazotto
 15 rw_3_2_warrior_symbiotic_attack @Viko Menezes

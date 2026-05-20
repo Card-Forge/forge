@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Chewbacca
+Title=Chewbacca
+Icon=Chewbacca.jpg
+Difficulty=Easy
+Description=./Standard/Edge_of_Eternities/Capitano_CL_-_Mono_Red_Dragons_(Standard,_#2582485).dck
+Deck Type=constructed
+
+[Main]
+4 Sunspine Lynx
+4 Nova Hellkite
+4 Sarkhan, Dragon Ascendant
+4 Screaming Nemesis
+3 Taurean Mauler
+3 Twinmaw Stormbrood
+4 Hired Claw
+2 Magda, the Hoardmaster
+1 Lightning Strike
+4 Burst Lightning
+2 Plasma Bolt
+4 Soulstone Sanctuary
+18 Mountain
+3 Maelstrom of the Spirit Dragon
+[Sideboard]
+2 Fire Magic
+2 Ghost Vacuum
+4 Magebane Lizard
+3 Suplex
+1 Vengeful Possession
+3 Chandra, Spark Hunter

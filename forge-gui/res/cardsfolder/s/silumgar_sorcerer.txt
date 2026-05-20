@@ -1,6 +1,6 @@
 Name:Silumgar Sorcerer
 ManaCost:1 U U
-Types:Creature Human Wizard
+Types:Creature Human Wizard Sorcerer
 PT:2/1
 K:Flash
 K:Flying

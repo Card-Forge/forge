@@ -2,7 +2,7 @@ Name:Tinybones, Trinket Thief
 ManaCost:1 B
 Types:Legendary Creature Skeleton Rogue
 PT:1/2
-T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigDraw | TriggerDescription$ At the beginning of each end step, if an opponent discarded a card this turn, you draw a card and you lose 1 life.
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigDraw | TriggerDescription$ At the beginning of each end step, if an opponent discarded a card this turn, you draw a card and you lose 1 life.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
 SVar:X:PlayerCountOpponents$CardsDiscardedThisTurn

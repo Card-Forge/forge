@@ -1,0 +1,9 @@
+Name:Seifer Almasy
+ManaCost:3 R
+Types:Legendary Creature Human Knight
+PT:3/4
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks alone, it gains double strike until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Double Strike
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigCast | OptionalDecider$ You | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may cast target instant or sorcery card with mana value 3 or less from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead.
+SVar:TrigCast:DB$ Play | ValidTgts$ Instant.YouOwn+cmcLE3,Sorcery.YouOwn+cmcLE3 | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card with mana value 3 or less from your graveyard | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
+Oracle:Whenever a creature you control attacks alone, it gains double strike until end of turn.\nFire Cross — Whenever Seifer Almasy deals combat damage to a player, you may cast target instant or sorcery card with mana value 3 or less from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead.

@@ -1,0 +1,74 @@
+owl.png
+size: 352,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 304, 32
+  size: 16, 16
+Idle 
+  xy: 10, 145
+  size: 15, 13    
+Idle 
+  xy: 42, 145
+  size: 15, 13    
+Idle 
+  xy: 74, 145
+  size: 15, 13    
+Idle 
+  xy: 106, 145
+  size: 15, 13    
+Idle 
+  xy: 138, 145
+  size: 15, 13    
+Idle 
+  xy: 170, 145
+  size: 15, 13    
+Idle 
+  xy: 202, 145
+  size: 15, 13    
+Idle 
+  xy: 234, 145
+  size: 15, 13    
+Idle 
+  xy: 266, 145
+  size: 15, 13    
+Idle 
+  xy: 298, 145
+  size: 15, 13 
+Idle 
+  xy: 330, 145
+  size: 15, 13 
+Walk 
+  xy: 6, 38
+  size: 25, 24  
+Walk 
+  xy: 38, 38
+  size: 25, 24
+Walk 
+  xy: 70, 38
+  size: 25, 24
+Walk 
+  xy: 102, 38
+  size: 25, 24
+Walk 
+  xy: 134, 38
+  size: 25, 24 
+Death
+  xy: 0, 106
+  size: 26, 19 
+Death
+  xy: 32, 106
+  size: 26, 19 
+Death
+  xy: 64, 106
+  size: 26, 19 
+Death
+  xy: 96, 106
+  size: 26, 19 
+Death
+  xy: 128, 106
+  size: 26, 19 
+Death
+  xy: 160, 106
+  size: 26, 19 

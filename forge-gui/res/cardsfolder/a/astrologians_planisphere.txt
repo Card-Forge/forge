@@ -1,0 +1,11 @@
+Name:Astrologian's Planisphere
+ManaCost:1 U
+Types:Artifact Equipment
+K:Job select
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddType$ Wizard | AddTrigger$ TrigSpellCast & TrigDrawn | Description$ Equipped creature is a Wizard in addition to its other types and has "Whenever you cast a noncreature spell and whenever you draw your third card each turn, put a +1/+1 counter on this creature."
+SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell and whenever you draw your third card each turn, put a +1/+1 counter on this creature.
+SVar:TrigDrawn:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 3 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever you cast a noncreature spell and whenever you draw your third card each turn, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+K:Equip:2:Flavor Diana
+DeckHas:Ability$Token & Type$Wizard
+Oracle:Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)\nEquipped creature is a Wizard in addition to its other types and has "Whenever you cast a noncreature spell and whenever you draw your third card each turn, put a +1/+1 counter on this creature."\nDiana — Equip {2}

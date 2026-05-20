@@ -1,0 +1,8 @@
+Name:Ahriman
+ManaCost:2 B
+Types:Creature Eye Horror
+PT:2/2
+K:Flying
+K:Deathtouch
+A:AB$ Draw | Cost$ 3 Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | SpellDescription$ Draw a card.
+Oracle:Flying, deathtouch\n{3}, Sacrifice another creature or artifact: Draw a card.

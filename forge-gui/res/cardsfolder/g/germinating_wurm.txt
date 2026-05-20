@@ -1,0 +1,9 @@
+Name:Germinating Wurm
+ManaCost:4 G
+Types:Creature Plant Wurm
+PT:5/5
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ When this creature enters, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+K:Warp:1 G
+DeckHas:Ability$LifeGain
+Oracle:When this creature enters, you gain 2 life.\nWarp {1}{G} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)

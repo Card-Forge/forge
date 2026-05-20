@@ -4,7 +4,7 @@ Types:Legendary Artifact Equipment
 K:Equip:4:::ReduceCost$ Monarch:This ability costs {3} less to activate if you're the monarch
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each creature you control.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Legendary+YouCtrl | TriggerZones$ Battlefield | CheckSVar$ NoMonarch | SVarCompare$ EQ0 | Execute$ TrigMonarch | TriggerDescription$ When a legendary creature you control enters, if there is no monarch, you become the monarch.
-SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+SVar:TrigMonarch:DB$ BecomeMonarch
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Monarch:Count$Monarch.3.0
 SVar:NoMonarch:PlayerCountPlayers$HasPropertyisMonarch

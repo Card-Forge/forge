@@ -1,0 +1,13 @@
+Name:Blue Mage's Cane
+ManaCost:2 U
+Types:Artifact Equipment
+K:Job select
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 2 | AddType$ Wizard | AddTrigger$ TrigAttack | AddSVar$ AE | Description$ Equipped creature gets +0/+2, is a Wizard in addition to its other types, and has "Whenever this creature attacks, exile up to one target instant or sorcery card from defending player's graveyard. If you do, copy it. You may cast the copy by paying {3} rather than paying its mana cost."
+SVar:TrigAttack:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever this creature attacks, exile up to one target instant or sorcery card from defending player's graveyard. If you do, copy it. You may cast the copy by paying {3} rather than paying its mana cost.
+SVar:TrigExile:DB$ ChangeZone | DefinedPlayer$ You | TargetMin$ 0 | TargetMax$ 1 | Destination$ Exile | ChangeNum$ 1 | ValidTgts$ Instant,Sorcery | TargetsWithDefinedController$ TriggeredDefendingPlayer | TgtPrompt$ Select target instant or sorcery card from the defending player's graveyard | Origin$ Graveyard | RememberChanged$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Remembered | Controller$ You | CopyCard$ True | ValidSA$ Spell | Optional$ True | PlayCost$ 3 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Equip:2:Flavor Spirit of the Whalaqee
+SVar:AE:SVar:HasAttackEffect:TRUE
+DeckHas:Type$Wizard
+Oracle:Job select\nEquipped creature gets +0/+2, is a Wizard in addition to its other types, and has "Whenever this creature attacks, exile up to one target instant or sorcery card from defending player's graveyard. If you do, copy it. You may cast the copy by paying {3} rather than paying its mana cost."\nSpirit of the Whalaqee — Equip {2}

@@ -1,0 +1,8 @@
+Name:Insight Engine
+ManaCost:2 U
+Types:Artifact
+A:AB$ PutCounter | Cost$ 2 T | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | SubAbility$ DBDraw | SpellDescription$ Put a charge counter on this artifact, then draw a card for each charge counter on it.
+SVar:DBDraw:DB$ Draw | NumCards$ X
+SVar:X:Count$CardCounters.CHARGE
+DeckHas:Ability$Counters
+Oracle:{2}, {T}: Put a charge counter on this artifact, then draw a card for each charge counter on it.

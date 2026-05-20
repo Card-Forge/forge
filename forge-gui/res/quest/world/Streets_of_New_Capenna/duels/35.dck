@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Comic Book Guy
+Title=Comic Book Guy
+Icon=Comic Book Guy.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/Frogmanfue_-_Rakdos_Aggro_(Standard,_#1410268).dck
+Deck Type=constructed
+
+[Main]
+1 Valki, God of Lies
+3 Reckless Stormseeker
+3 Skyclave Shade
+4 Tenacious Underdog
+4 Graveyard Trespasser
+4 Rabbit Battery
+4 Bloodtithe Harvester
+4 Kumano Faces Kakkazan
+4 Fable of the Mirror-Breaker
+3 Play with Fire
+3 Roil Eruption
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+2 Den of the Bugbear
+2 Hive of the Eye Tyrant
+4 Swamp
+4 Haunted Ridge
+4 Blightstep Pathway
+5 Mountain
+[Sideboard]
+1 Sorin the Mirthless
+2 The Meathook Massacre
+2 Infernal Grasp
+3 Ray of Enfeeblement
+3 Go Blank
+4 Duress

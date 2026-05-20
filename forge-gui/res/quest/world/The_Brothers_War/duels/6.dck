@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Shanna
+Title=Shanna
+Icon=Shanna.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/Lasteryn_-_Mono_Blue_Tempo_(Standard,_#1549278).dck
+Deck Type=constructed
+
+[Main]
+4 Tolarian Terror
+4 Haughty Djinn
+4 Delver of Secrets
+1 Flow of Knowledge
+2 Negate
+2 Slip Out the Back
+2 Make Disappear
+2 Spell Pierce
+2 Essence Scatter
+4 Impulse
+4 Thirst for Discovery
+4 Fading Hope
+4 Consider
+21 Island
+[Sideboard]
+1 Flow of Knowledge
+1 Shore Up
+1 Invoke the Winds
+2 Witness Protection
+2 Invoke the Winds
+2 Suspicious Stowaway
+2 Pithing Needle
+2 Negate
+2 Essence Scatter

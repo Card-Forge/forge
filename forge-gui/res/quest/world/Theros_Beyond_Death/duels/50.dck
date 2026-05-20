@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Oreius
+Title=Oreius
+Icon=Oreius.jpg
+Difficulty=Medium
+Description=./Standard/Theros_Beyond_Death/Adrian_Trueba_-_Esper_Control_(Standard,_#948728).dck
+Deck Type=constructed
+
+[Main]
+2 Gray Merchant of Asphodel
+2 Cavalier of Dawn
+2 Shepherd of the Flock
+3 Elite Guardmage
+2 Bolas's Citadel
+3 Mortify
+2 Shatter the Sky
+2 Elspeth Conquers Death
+2 Banishing Light
+2 Omen of the Sun
+3 Oath of Kaya
+4 Omen of the Sea
+4 Doom Foretold
+3 Teferi, Time Raveler
+1 Hallowed Fountain
+1 Temple of Silence
+1 Castle Ardenvale
+1 Island
+2 Temple of Enlightenment
+2 Watery Grave
+3 Godless Shrine
+4 Plains
+4 Fabled Passage
+5 Swamp
+[Sideboard]
+1 Hushbringer
+1 Legion's End
+3 Witch's Oven
+3 Agonizing Remorse
+3 Mystical Dispute
+4 Cauldron Familiar

@@ -1,0 +1,32 @@
+[metadata]
+Name=Tsabo Tavoc
+[Main]
+4 Badlands|LEA
+4 Bloodstained Mire|ONS
+6 Swamp|LEA
+6 Mountain|LEA
+2 Plague Spores|INV
+2 Reckless Spite|TMP
+2 Do or Die|INV
+2 Annihilate|INV
+2 Tsabo's Decree|INV
+2 Tsabo Tavoc|INV
+2 Raging River|LEA
+4 Reanimate|TMP
+4 Blazing Salvo|ODY
+2 Ruination|STH
+2 Bend or Break|INV
+4 Browbeat|JUD
+2 Molten Influence|ODY
+2 Skullscorch|TOR
+2 Lava Blister|ODY
+4 Phyrexian Scuta|PLS
+
+[StartInBattle_Reference]
+1 Tsabo's Web|INV
+1 Tsabo's Assassin|INV
+1 Metathran Zombie|INV
+1 Vodalian Zombie|INV
+1 Phyrexian Slayer|INV
+1 Antagonism|USG
+1 Phyrexian Lens|INV

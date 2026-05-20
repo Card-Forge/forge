@@ -38,6 +38,7 @@ ScryfallCode=ANB
 30 R Overflowing Insight @Lucas Graciano
 31 R Riddlemaster Sphinx @Ryan Yee
 32 C River's Favor @Lie Setiawan
+32a C Shorecomber Crab @Chris Seaman
 33 U Sleep @Chris Rahn
 34 R Soulblade Djinn @Viktor Titov
 35 C Sworn Guardian @Sara Winters
@@ -62,6 +63,7 @@ ScryfallCode=ANB
 54 R Nightmare @Vance Kovacs
 55 C Nimble Pilferer @Lie Setiawan
 56 C Raise Dead @Carl Critchlow
+56b U Rise from the Grave @Kieran Yanner
 57 C Sanitarium Skeleton @Kev Walker
 58 C Savage Gorger @Antonio José Manzanedo
 59 C Scathe Zombies @Kev Walker
@@ -117,10 +119,10 @@ ScryfallCode=ANB
 109 C Woodland Mystic @Uriah Voth
 110 R World Shaper @Raymond Swanland
 111 C Evolving Wilds @Steven Belledin
-112 C Forest @Jonas De Ro
-113 C Island @Titus Lunter
-114 C Mountain @Richard Wright
-115 C Plains @Nils Hamm
-116 C Swamp @Adam Paquette
+112 L Forest @Jonas De Ro
+113 L Island @Titus Lunter
+114 L Mountain @Richard Wright
+115 L Plains @Nils Hamm
+116 L Swamp @Adam Paquette
 117 C Arcane Signet @Dan Murayama Scott
 118 C Command Tower @Evan Shipard

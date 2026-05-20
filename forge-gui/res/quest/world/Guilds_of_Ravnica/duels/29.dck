@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Mystique
+Title=Mystique
+Icon=Mystique.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Alexandre_Morlet_-_Ur_Wizards_Keld_(Standard,_#766778).dck
+Deck Type=constructed
+
+[Main]
+4 Adeliz, the Cinder Wind
+3 Ghitu Lavarunner
+4 Viashino Pyromancer
+4 Lightning Strike
+4 Opt
+2 Radical Idea
+4 Risk Factor
+4 Shock
+4 Sonic Assault
+4 Wizard's Lightning
+4 The Flame of Keld
+4 Island
+8 Mountain
+4 Steam Vents
+4 Sulfur Falls
+[Sideboard]
+3 Fiery Cannonade
+2 Ionize
+2 Lava Coil
+2 Niv-Mizzet, Parun
+2 Ral, Izzet Viceroy
+2 Sentinel Totem
+2 Wizard's Retort

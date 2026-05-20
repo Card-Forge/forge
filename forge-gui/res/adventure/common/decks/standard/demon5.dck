@@ -5,7 +5,7 @@ Icon=MindStealer.jpg
 Difficulty=hard
 Description=UB deck with tough fliers and creature stealing.
 Deck Type=constructed
-[main]
+[Main]
 1 Air Elemental|LEB
 4 Animate Dead|LEB
 4 Control Magic|LEB
@@ -24,4 +24,4 @@ Deck Type=constructed
 4 Underground Sea|LEB
 4 Unholy Strength|4ED
 3 Will-o'-the-Wisp|LEB
-[sideboard]
+[Sideboard]

@@ -111,7 +111,8 @@ public class CardCollections {
     public IStorage<Deck> getCommander() {
         if (commander == null) {
             commander = new StorageImmediatelySerialized<>("Commander decks",
-                    new DeckStorage(new File(ForgeConstants.DECK_COMMANDER_DIR), ForgeConstants.DECK_BASE_DIR));
+                    new DeckStorage(new File(ForgeConstants.DECK_COMMANDER_DIR), ForgeConstants.DECK_BASE_DIR),
+                    true);
         }
         return commander;
     }

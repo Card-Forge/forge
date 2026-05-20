@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=The Spectre
+Title=The Spectre
+Icon=The Spectre.jpg
+Difficulty=Medium
+Description=Journey_into_Nyx/SCG_Invitational_Qualifier_-_Vacaville,_CA/John_Ashley_-_Red_Deck_Wins_(Standard,_#79929).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Chandra's Phoenix
+4 Eidolon of the Great Revel
+4 Boros Charm
+4 Lightning Strike
+4 Magma Jet
+4 Searing Blood
+3 Shock
+4 Skullcrack
+4 Warleader's Helix
+2 Chained to the Rocks
+2 Mana Confluence
+9 Mountain
+4 Mutavault
+4 Sacred Foundry
+4 Temple of Triumph
+[Sideboard]
+2 Deicide
+2 Firedrinker Satyr
+2 Glare of Heresy
+2 Mizzium Mortars
+3 Satyr Firedancer
+2 Wear // Tear

@@ -1,0 +1,59 @@
+porcupine.png
+size: 160,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 144, 144
+  size: 16, 16
+Idle 
+  xy: 0, 0
+  size: 32,32  
+Idle 
+  xy: 32, 0
+  size: 32,32  
+Idle 
+  xy: 64, 0
+  size: 32,32    
+Idle 
+  xy: 96, 0
+  size: 32,32   
+Idle 
+  xy: 128, 0
+  size: 32,32      
+Walk 
+  xy: 0, 32
+  size: 32,32  
+Walk 
+  xy: 32, 32
+  size: 32,32  
+Walk 
+  xy: 64, 32
+  size: 32,32  
+Walk 
+  xy: 96, 32
+  size: 32,32    
+Walk 
+  xy: 128, 32
+  size: 32,32   
+Attack 
+  xy: 0, 96
+  size: 32, 32
+Attack 
+  xy: 32, 96
+  size: 32, 32
+Attack 
+  xy: 64, 96
+  size: 32, 32
+Attack 
+  xy: 96, 96
+  size: 32, 32
+Attack 
+  xy: 128, 96
+  size: 32, 32
+Death
+  xy: 0, 128
+  size: 32, 32 
+Death
+  xy: 32, 128
+  size: 32, 32 

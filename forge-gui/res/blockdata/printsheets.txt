@@ -7444,8 +7444,8 @@ Gandalf the White|LTR
 1 Reckless Amplimancer|J25
 1 Defend the Celestus|J25
 1 Snakeskin Veil|J25
-1 Cultivate|J25
-1 Declare Dominance|J25
+1 Cultivate|J22
+1 Declare Dominance|J22
 1 Audacity|J25
 1 Warbriar Blessing|J25
 1 Wolfrider's Saddle|J25
@@ -7847,3 +7847,1830 @@ Gandalf the White|LTR
 2 Forest|J25
 1 Ash Barrens|J25
 1 Terramorphic Expanse|J25
+
+[TLA Aang]
+1 Aang, Airbending Master|TLE
+1 Appa, Loyal Sky Bison|TLA
+1 Invasion Reinforcements|TLA
+1 Kindly Customer|TLE
+1 Koala-Sheep|TLE
+1 Kyoshi Warriors|TLA
+1 Momo, Rambunctious Rascal|TLE
+1 Water Tribe Captain|TLA
+1 Airbending Lesson|TLA
+1 Cloudshift|TLE
+1 Enter the Avatar State|TLA
+1 Path to Redemption|TLA
+1 Thriving Heath|TLE
+7 Plains|TLA
+
+[TLA Swordmaster]
+1 Aardvark Sloth|TLE
+1 Earth Kingdom Protectors|TLA
+1 Glider Kids|TLA
+1 Inspired Insurgent|TLE
+1 Master Piandao|TLA
+1 Sokka, Swordmaster|TLE
+1 Kyoshi Battle Fan|TLA
+1 Meteor Sword|TLA
+1 Trusty Boomerang|TLA
+1 Razor Rings|TLA
+1 Sokka's Sword Training|TLE
+1 Duelist's Heritage|TLE
+1 Thriving Heath|TLE
+7 Plains|TLA
+
+[TLA Airbending]
+1 Aang, the Last Airbender|TLA
+1 Appa, Loyal Sky Bison|TLA
+1 Glider Kids|TLA
+1 Invasion Reinforcements|TLA
+1 Jeong Jeong's Deserters|TLA
+1 Koala-Sheep|TLE
+1 Monk Gyatso|TLE
+1 Rabaroo Troop|TLA
+1 Airbender's Reversal|TLA
+1 Airbending Lesson|TLA
+1 Airbender Ascension|TLA
+1 Path to Redemption|TLA
+1 Thriving Heath|TLE
+7 Plains|TLA
+
+[TLA Freedom Fighters]
+1 The Duke, Rebel Sentry|TLE
+1 Inspired Insurgent|TLE
+1 Jeong Jeong's Deserters|TLA
+1 Jet, Rebel Leader|TLE
+1 Pipsqueak, Rebel Strongarm|TLE
+1 Rabaroo Troop|TLA
+1 Toucan-Puffin|TLE
+1 Wandering Musicians|TLA
+1 Acrobatic Leap|TLE
+1 Valorous Stance|TLE
+1 Path to Redemption|TLA
+1 Hook Swords|TLA
+1 Thriving Heath|TLE
+7 Plains|TLA
+
+[TLA Warriors]
+1 Invasion Reinforcements|TLA
+1 Kyoshi Warrior Guard|TLE
+1 Kyoshi Warriors|TLA
+1 Rabaroo Troop|TLA
+1 Sokka, Lateral Strategist|TLA
+1 Suki, Kyoshi Captain|TLE
+1 Toucan-Puffin|TLE
+1 Sokka's Sword Training|TLE
+1 Valorous Stance|TLE
+1 Path to Redemption|TLA
+1 Team Avatar|TLA
+1 Kyoshi Battle Fan|TLA
+1 Thriving Heath|TLE
+7 Plains|TLA
+
+[TLA Alliance 1]
+1 The Duke, Rebel Sentry|TLE
+1 Glider Kids|TLA
+1 Jet, Freedom Fighter|TLE
+1 Kyoshi Warrior Guard|TLE
+1 Kyoshi Warriors|TLA
+1 Sokka, Lateral Strategist|TLA
+1 South Pole Voyager|TLA
+1 Suki, Kyoshi Warrior|TLA
+1 Fancy Footwork|TLA
+1 Sokka's Sword Training|TLE
+1 Path to Redemption|TLA
+1 Mechanical Glider|TLE
+1 Thriving Heath|TLE
+7 Plains|TLA
+
+[TLA Alliance 2]
+1 The Duke, Rebel Sentry|TLE
+1 Glider Kids|TLA
+1 Inspired Insurgent|TLE
+1 Jet, Rebel Leader|TLE
+1 Kyoshi Warriors|TLA
+1 Sokka, Lateral Strategist|TLA
+1 South Pole Voyager|TLA
+1 Suki, Kyoshi Warrior|TLA
+1 Acrobatic Leap|TLE
+1 Fancy Footwork|TLA
+1 Razor Rings|TLA
+1 Mechanical Glider|TLE
+1 Thriving Heath|TLE
+7 Plains|TLA
+
+[TLA Gliding 1]
+1 Aang, the Last Airbender|TLA
+1 Air Nomad Student|TLE
+1 Appa, Loyal Sky Bison|TLA
+1 Kindly Customer|TLE
+1 Koala-Sheep|TLE
+1 Momo, Friendly Flier|TLA
+1 Rabaroo Troop|TLA
+1 Toucan-Puffin|TLE
+1 Airbending Lesson|TLA
+1 Yip Yip!|TLA
+1 Path to Redemption|TLA
+1 Glider Staff|TLA
+1 Thriving Heath|TLE
+7 Plains|TLA
+
+[TLA Gliding 2]
+1 Aang, the Last Airbender|TLA
+1 Air Nomad Student|TLE
+1 Appa, Loyal Sky Bison|TLA
+1 Glider Kids|TLA
+1 Inspired Insurgent|TLE
+1 Jeong Jeong's Deserters|TLA
+1 Momo, Friendly Flier|TLA
+1 Water Tribe Captain|TLA
+1 Yip Yip!|TLA
+1 Tale of Momo|TLE
+1 Path to Redemption|TLA
+1 Glider Staff|TLA
+1 Thriving Heath|TLE
+7 Plains|TLA
+
+[TLA Hei Bai 1]
+1 Aang, A Lot to Learn|TLE
+1 Hei Bai, Spirit of Balance|TLA
+1 Invasion Reinforcements|TLA
+1 Koala-Sheep|TLE
+1 Pretending Poxbearers|TLA
+1 Rabaroo Troop|TLA
+1 Suki, Courageous Rescuer|TLA
+1 Vengeful Villagers|TLA
+1 Acrobatic Leap|TLE
+1 Sandbenders' Storm|TLA
+1 That's Rough Buddy|TLE
+1 Path to Redemption|TLA
+1 Thriving Heath|TLE
+7 Plains|TLA
+
+[TLA Hei Bai 2]
+1 Aardvark Sloth|TLE
+1 Aang, A Lot to Learn|TLE
+1 Curious Farm Animals|TLA
+1 Hei Bai, Spirit of Balance|TLA
+1 Jeong Jeong's Deserters|TLA
+1 Pretending Poxbearers|TLA
+1 Rabaroo Troop|TLA
+1 Suki, Courageous Rescuer|TLA
+1 Sokka's Sword Training|TLE
+1 That's Rough Buddy|TLE
+1 Destined Confrontation|TLA
+1 Path to Redemption|TLA
+1 Thriving Heath|TLE
+7 Plains|TLA
+
+[TLA Insurgent 1]
+1 Aang, the Last Airbender|TLA
+1 Appa, Loyal Sky Bison|TLA
+1 Glider Kids|TLA
+1 Inspired Insurgent|TLE
+1 Invasion Reinforcements|TLA
+1 Jeong Jeong's Deserters|TLA
+1 Kyoshi Warriors|TLA
+1 Momo, Rambunctious Rascal|TLE
+1 Airbender's Reversal|TLA
+1 Razor Rings|TLA
+1 Stand United|TLE
+1 Tale of Momo|TLE
+1 Thriving Heath|TLE
+7 Plains|TLA
+
+[TLA Insurgent 2]
+1 Appa, Loyal Sky Bison|TLA
+1 Hakoda, Selfless Commander|TLA
+1 Glider Kids|TLA
+1 Inspired Insurgent|TLE
+1 Kyoshi Warrior Guard|TLE
+1 Kyoshi Warriors|TLA
+1 Momo, Rambunctious Rascal|TLE
+1 Sokka, Lateral Strategist|TLA
+1 Duelist's Heritage|TLE
+1 Path to Redemption|TLA
+1 Stand United|TLE
+1 That's Rough Buddy|TLE
+1 Thriving Heath|TLE
+7 Plains|TLA
+
+[TLA Katara]
+1 Geyser Leaper|TLA
+1 Gran-Gran|TLA
+1 Katara, Waterbending Master|TLE
+1 Master Pakku|TLA
+1 Rowdy Snowballers|TLA
+1 Sokka, Lateral Strategist|TLA
+1 Turtle-Seals|TLE
+1 Consider|TLE
+1 It'll Quench Ya!|TLA
+1 Octopus Form|TLA
+1 Sokka's Haiku|TLA
+1 Watery Grasp|TLA
+1 Thriving Isle|TLE
+7 Island|TLA
+
+[TLA Librarian]
+1 Dutiful Knowledge Seeker|TLE
+1 Giant Koi|TLA
+1 Knowledge Seeker|TLA
+1 Professor Zei, Anthropologist|TLA
+1 Suspicious Bookcase|TLE
+1 Wan Shi Tong, All-Knowing|TLE
+1 Accumulate Wisdom|TLA
+1 Brainstorm|DSC
+1 Octopus Form|TLA
+1 Zuko's Exile|TLA
+1 Lost in the Spirit World|TLE
+1 Waterbending Lesson|TLA
+1 Thriving Isle|TLE
+7 Island|TLA
+
+[TLA Adaptive]
+1 The Blue Spirit|TLE
+1 Giant Koi|TLA
+1 Glider Kids|TLA
+1 Katara, Bending Prodigy|TLA
+1 Princess Yue|TLE
+1 Rowdy Snowballers|TLA
+1 Teo, Spirited Glider|TLA
+1 Frantic Search|TLE
+1 Boomerang Basics|TLA
+1 Lost in the Spirit World|TLE
+1 Waterbending Lesson|TLA
+1 Kyoshi Battle Fan|TLA
+1 Thriving Isle|TLE
+7 Island|TLA
+
+[TLA Spirit]
+1 Baboon Spirit|TLE
+1 Benevolent River Spirit|TLA
+1 Dutiful Knowledge Seeker|TLE
+1 Flexible Waterbender|TLA
+1 Flying Dolphin-Fish|TLE
+1 Giant Koi|TLA
+1 Knowledge Seeker|TLA
+1 Dramatic Reversal|TLE
+1 It'll Quench Ya!|TLA
+1 Octopus Form|TLA
+1 Lost in the Spirit World|TLE
+1 The Spirit Oasis|TLA
+1 Thriving Isle|TLE
+7 Island|TLA
+
+[TLA Underwater]
+1 Flying Dolphin-Fish|TLE
+1 Giant Koi|TLA
+1 Rowdy Snowballers|TLA
+1 Serpent of the Pass|TLA
+1 Tui and La, Moon and Ocean|TLE
+1 Turtle-Seals|TLE
+1 Octopus Form|TLA
+1 Unagi's Spray|TLE
+1 Honest Work|TLA
+1 Invasion Submersible|TLA
+1 Thriving Isle|TLE
+1 White Lotus Hideout|TLA
+7 Island|TLA
+
+[TLA Adept 1]
+1 Forecasting Fortune Teller|TLA
+1 Giant Koi|TLA
+1 Iguana Parrot|TLA
+1 Katara, Bending Prodigy|TLA
+1 Professor Zei, Anthropologist|TLA
+1 Serpent of the Pass|TLA
+1 Turtle-Seals|TLE
+1 Dramatic Reversal|TLE
+1 Unagi's Spray|TLE
+1 Crashing Wave|TLA
+1 Waterbending Lesson|TLA
+1 Nightmares and Daydreams|TLE
+1 Thriving Isle|TLE
+7 Island|TLA
+
+[TLA Adept 2]
+1 Geyser Leaper|TLA
+1 Iguana Parrot|TLA
+1 Master Pakku|TLA
+1 Katara, Bending Prodigy|TLA
+1 Professor Zei, Anthropologist|TLA
+1 Serpent of the Pass|TLA
+1 Teo, Spirited Glider|TLA
+1 Consider|TLE
+1 Lost Days|TLA
+1 Octopus Form|TLA
+1 Waterbending Lesson|TLA
+1 Nightmares and Daydreams|TLE
+1 Thriving Isle|TLE
+7 Island|TLA
+
+[TLA Lessons 1]
+1 Giant Koi|TLA
+1 Glider Kids|TLA
+1 Gran-Gran|TLA
+1 Iguana Parrot|TLA
+1 Katara, Seeking Revenge|TLE
+1 Platypus-Bear|TLA
+1 Accumulate Wisdom|TLA
+1 It'll Quench Ya!|TLA
+1 Octopus Form|TLA
+1 Whirlwind Technique|TLE
+1 Boomerang Basics|TLA
+1 Chakra Meditation|TLE
+1 Thriving Isle|TLE
+7 Island|TLA
+
+[TLA Lessons 2]
+1 Geyser Leaper|TLA
+1 Gran-Gran|TLA
+1 Iguana Parrot|TLA
+1 Katara, Seeking Revenge|TLE
+1 Master Pakku|TLA
+1 Platypus-Bear|TLA
+1 Accumulate Wisdom|TLA
+1 Octopus Form|TLA
+1 Lost Days|TLA
+1 Whirlwind Technique|TLE
+1 Waterbending Lesson|TLA
+1 Chakra Meditation|TLE
+1 Thriving Isle|TLE
+7 Island|TLA
+
+[JTLE Soaring 1]
+1 Cat-Owl|TLA
+1 Flying Dolphin-Fish|TLE
+1 Forecasting Fortune Teller|TLA
+1 Giant Koi|TLA
+1 Messenger Hawk|TLA
+1 The Mechanist, Aerial Artisan|TLA
+1 Sokka, Lateral Strategist|TLA
+1 Teo, Spirited Glider|TLA
+1 Sokka's Haiku|TLA
+1 Boomerang Basics|TLA
+1 Watery Grasp|TLA
+1 Mechanical Glider|TLE
+1 Thriving Isle|TLE
+7 Island|TLA
+
+[TLA Soaring 2]
+1 Benevolent River Spirit|TLA
+1 Cat-Owl|TLA
+1 Flying Dolphin-Fish|TLE
+1 Giant Koi|TLA
+1 Messenger Hawk|TLA
+1 Sokka, Lateral Strategist|TLA
+1 Teo, Spirited Glider|TLA
+1 Yue, the Moon Spirit|TLA
+1 Frantic Search|TLE
+1 Octopus Form|TLA
+1 Boomerang Basics|TLA
+1 Watery Grasp|TLA
+1 Thriving Isle|TLE
+7 Island|TLA
+
+[TLA Wise 1]
+1 Forecasting Fortune Teller|TLA
+1 Gran-Gran|TLA
+1 Katara, Bending Prodigy|TLA
+1 Messenger Hawk|TLA
+1 Otter-Penguin|TLA
+1 Rowdy Snowballers|TLA
+1 Turtle-Seals|TLE
+1 Consider|TLE
+1 Waterbender's Restoration|TLE
+1 Whirlwind Technique|TLE
+1 Waterbending Lesson|TLA
+1 Coastal Piracy|TLE
+1 Thriving Isle|TLE
+7 Island|TLA
+
+[TLA Wise 2]
+1 The Blue Spirit|TLE
+1 Knowledge Seeker|TLA
+1 Messenger Hawk|TLA
+1 Otter-Penguin|TLA
+1 Rowdy Snowballers|TLA
+1 Sokka, Lateral Strategist|TLA
+1 Tiger-Seal|TLA
+1 Turtle-Seals|TLE
+1 Consider|TLE
+1 It'll Quench Ya!|TLA
+1 Sokka's Haiku|TLA
+1 Whirlwind Technique|TLE
+1 Thriving Isle|TLE
+7 Island|TLA
+
+[JLTA Azula]
+1 Azula, Ruthless Firebender|TLE
+1 Canyon Crawler|TLA
+1 Corrupt Court Official|TLA
+1 Dai Li Censor|TLE
+1 Fire Nation Ambushers|TLE
+1 Fire Navy Trebuchet|TLA
+1 Lo and Li, Twin Tutors|TLA
+1 Azula Always Lies|TLA
+1 Sold Out|TLA
+1 Dai Li Indoctrination|TLA
+1 Dark Deal|TLE
+1 Epic Downfall|TLA
+1 Thriving Moor|TLE
+7 Swamp|TLA
+
+[TLA Ozai]
+1 Beetle-Headed Merchants|TLA
+1 Callous Inspector|TLA
+1 Canyon Crawler|TLA
+1 Corrupt Court Official|TLA
+1 Fire Lord Ozai|TLE
+1 Fire Nation Ambushers|TLE
+1 Fire Navy Trebuchet|TLA
+1 Zhao, Ruthless Admiral|TLA
+1 Heartless Act|TLA
+1 Deadly Precision|TLA
+1 Ozai's Cruelty|TLA
+1 Scarring Memories|TLE
+1 Thriving Moor|TLE
+7 Swamp|TLA
+
+[TLA Bad Advice]
+1 Corrupt Court Official|TLA
+1 Dai Li Censor|TLE
+1 Fire Nation Ambushers|TLE
+1 Gilacorn|TLE
+1 Hama, the Bloodbender|TLA
+1 Joo Dee, One of Many|TLA
+1 Lo and Li, Royal Advisors|TLE
+1 Long Feng, Grand Secretariat|TLA
+1 Sold Out|TLA
+1 Dai Li Indoctrination|TLA
+1 Deadly Precision|TLA
+1 Ozai's Cruelty|TLA
+1 Thriving Moor|TLE
+7 Swamp|TLA
+
+[TLA Nightmares]
+1 Azula, On the Hunt|TLA
+1 Canyon Crawler|TLA
+1 Hei Bai, Spirit of Balance|TLA
+1 Joo Dee, One of Many|TLA
+1 Koh, the Face Stealer|TLA
+1 Pirate Peddlers|TLA
+1 Pretending Poxbearers|TLA
+1 Purple Pentapus|TLE
+1 Zuko's Conviction|TLA
+1 Deadly Precision|TLA
+1 Desperate Plea|TLE
+1 Ruinous Waterbending|TLA
+1 Thriving Moor|TLE
+7 Swamp|TLA
+
+[TLA Siege Engines]
+1 Beetle-Headed Merchants|TLA
+1 Callous Inspector|TLA
+1 Canyon Crawler|TLA
+1 Fire Nation Engineer|TLA
+1 Fire Navy Trebuchet|TLA
+1 Merchant of Many Hats|TLA
+1 Pretending Poxbearers|TLA
+1 Heartless Act|TLA
+1 Deadly Precision|TLA
+1 The Fire Nation Drill|TLA
+1 Fire Nation Warship|TLA
+1 Tundra Tank|TLA
+1 Thriving Moor|TLE
+7 Swamp|TLA
+
+[TLA Bounty Hunter 1]
+1 Azula, On the Hunt|TLA
+1 Beetle-Headed Merchants|TLA
+1 Giant Fly|TLE
+1 June, Bounty Hunter|TLA
+1 Nyla, Shirshu Sleuth|TLE
+1 Pirate Peddlers|TLA
+1 Pretending Poxbearers|TLA
+1 Purple Pentapus|TLE
+1 Sold Out|TLA
+1 Zuko's Conviction|TLA
+1 Deadly Precision|TLA
+1 Bastion of Remembrance|TLE
+1 Thriving Moor|TLE
+7 Swamp|TLA
+
+[TLA Bounty Hunter 2]
+1 Azula, On the Hunt|TLA
+1 Callous Inspector|TLA
+1 Fire Navy Trebuchet|TLA
+1 June, Bounty Hunter|TLA
+1 Nyla, Shirshu Sleuth|TLE
+1 Pirate Peddlers|TLA
+1 Pretending Poxbearers|TLA
+1 Zhao, Ruthless Admiral|TLA
+1 Sold Out|TLA
+1 Deadly Precision|TLA
+1 Bastion of Remembrance|TLE
+1 Obsessive Pursuit|TLA
+1 Thriving Moor|TLE
+7 Swamp|TLA
+
+[TLA Hunting 1]
+1 Beetle-Headed Merchants|TLA
+1 Elephant-Rat|TLE
+1 Foggy Swamp Hunters|TLA
+1 June, Bounty Hunter|TLA
+1 Katara, Seeking Revenge|TLE
+1 Messenger Hawk|TLA
+1 Purple Pentapus|TLE
+1 Raven Eagle|TLA
+1 Deadly Precision|TLA
+1 Desperate Plea|TLE
+1 Diresight|TLE
+1 Epic Downfall|TLA
+1 Thriving Moor|TLE
+7 Swamp|TLA
+
+[TLA Hunting 2]
+1 Beetle-Headed Merchants|TLA
+1 Foggy Swamp Hunters|TLA
+1 Gilacorn|TLE
+1 June, Bounty Hunter|TLA
+1 Katara, Seeking Revenge|TLE
+1 Messenger Hawk|TLA
+1 Raven Eagle|TLA
+1 Ruthless Waterbender|TLE
+1 Azula Always Lies|TLA
+1 Deadly Precision|TLA
+1 Diresight|TLE
+1 Swampsnare Trap|TLA
+1 Thriving Moor|TLE
+7 Swamp|TLA
+
+[TLA Reinforced 1]
+1 Beetle-Headed Merchants|TLA
+1 Buzzard-Wasp Colony|TLA
+1 Callous Inspector|TLA
+1 Elephant-Rat|TLE
+1 Fire Nation Salvagers|TLE
+1 Hog-Monkey|TLA
+1 Long Feng, Grand Secretariat|TLA
+1 Zuko, Seeking Honor|TLE
+1 Azula Always Lies|TLA
+1 Dai Li Indoctrination|TLA
+1 Epic Downfall|TLA
+1 Feed the Swarm|TLE
+1 Thriving Moor|TLE
+7 Swamp|TLA
+
+[TLA Reinforced 2]
+1 Buzzard-Wasp Colony|TLA
+1 Earth Village Ruffians|TLA
+1 Elephant-Rat|TLE
+1 Fire Nation Salvagers|TLE
+1 Gilacorn|TLE
+1 Hog-Monkey|TLA
+1 Long Feng, Grand Secretariat|TLA
+1 Zuko, Seeking Honor|TLE
+1 Fatal Fissure|TLA
+1 Heartless Act|TLA
+1 Dai Li Indoctrination|TLA
+1 Deadly Precision|TLA
+1 Thriving Moor|TLE
+7 Swamp|TLA
+
+[TLA Relentless 1]
+1 Azula, On the Hunt|TLA
+1 Buzzard-Wasp Colony|TLA
+1 Canyon Crawler|TLA
+1 Fire Nation Ambushers|TLE
+1 Merchant of Many Hats|TLA
+1 Pirate Peddlers|TLA
+1 Purple Pentapus|TLE
+1 Ruthless Waterbender|TLE
+1 Azula Always Lies|TLA
+1 Heartless Act|TLA
+1 Sold Out|TLA
+1 Fire Nation Occupation|TLE
+1 Thriving Moor|TLE
+7 Swamp|TLA
+
+[TLA Relentless 2]
+1 Azula, On the Hunt|TLA
+1 Beetle-Headed Merchants|TLA
+1 Callous Inspector|TLA
+1 Canyon Crawler|TLA
+1 Fire Nation Ambushers|TLE
+1 Joo Dee, One of Many|TLA
+1 Merchant of Many Hats|TLA
+1 Zhao, Ruthless Admiral|TLA
+1 Azula Always Lies|TLA
+1 Heartless Act|TLA
+1 Deadly Precision|TLA
+1 Fire Nation Occupation|TLE
+1 Thriving Moor|TLE
+7 Swamp|TLA
+
+[TLA Roku]
+1 Avatar Roku, Firebender|TLE
+1 Boar-q-pine|TLA
+1 Fang, Roku's Companion|TLE
+1 Fire Sages|TLA
+1 Jeong Jeong, the Deserter|TLA
+1 Loyal Fire Sage|TLE
+1 Yuyan Archers|TLA
+1 Firebending Lesson|TLA
+1 Frantic Confrontation|TLE
+1 Roku's Mastery|TLE
+1 Crescent Island Temple|TLA
+1 Thriving Bluff|TLE
+1 White Lotus Hideout|TLA
+7 Mountain|TLA
+
+[TLA Zuko]
+1 Dragon Moose|TLE
+1 Mai, Jaded Edge|TLA
+1 Mongoose Lizard|TLA
+1 Yuyan Archers|TLA
+1 Zuko, Firebending Master|TLE
+1 Firebending Lesson|TLA
+1 Fire Nation Attacks|TLA
+1 Fists of Flame|TLE
+1 Frantic Confrontation|TLE
+1 Lightning Strike|TLA
+1 Lost in Memories|TLE
+1 War Balloon|TLA
+1 Thriving Bluff|TLE
+7 Mountain|TLA
+
+[TLA Fire Nation]
+1 Firebending Student|TLA
+1 Longshot, Rebel Bowman|TLE
+1 Mai, Jaded Edge|TLA
+1 Ty Lee, Artful Acrobat|TLA
+1 Zuko, Seeking Honor|TLE
+1 Cunning Maneuver|TLA
+1 Fire Nation Attacks|TLA
+1 Firebending Lesson|TLA
+1 Fists of Flame|TLE
+1 How to Start a Riot|TLA
+1 Lightning Strike|TLA
+1 Storm of Memories|TLE
+1 Thriving Bluff|TLE
+7 Mountain|TLA
+
+[TLA Iroh]
+1 Boar-q-pine|TLA
+1 Deserter's Disciple|TLA
+1 Jeong Jeong, the Deserter|TLA
+1 Iroh, Dragon of the West|TLE
+1 Mongoose Lizard|TLA
+1 Tiger-Dillo|TLA
+1 Zuko, Seeking Honor|TLE
+1 Bolt Bend|TLE
+1 Firebending Lesson|TLA
+1 Cathartic Reunion|TLE
+1 Fiery Confluence|TLE
+1 Iroh's Demonstration|TLA
+1 Thriving Bluff|TLE
+7 Mountain|TLA
+
+[TLA Musicians]
+1 Chong and Lily, Nomads|TLE
+1 Freedom Fighter Recruit|TLE
+1 Moku, Meandering Drummer|TLE
+1 Mongoose Lizard|TLA
+1 Rough Rhino Cavalry|TLA
+1 Ty Lee, Artful Acrobat|TLA
+1 Wandering Musicians|TLA
+1 Cunning Maneuver|TLA
+1 Bumi Bash|TLA
+1 Explosive Shot|TLE
+1 The Cave of Two Lovers|TLA
+1 Founding of Omashu|TLE
+1 War Balloon|TLA
+1 Secret Tunnel|TLA
+1 Thriving Bluff|TLE
+7 Mountain|TLA
+
+[TLA Firebending 1]
+1 Dragon Moose|TLE
+1 Fire Nation Cadets|TLA
+1 Fire Sages|TLA
+1 Jeong Jeong, the Deserter|TLA
+1 Loyal Fire Sage|TLE
+1 Zuko, Exiled Prince|TLA
+1 Cunning Maneuver|TLA
+1 Firebending Lesson|TLA
+1 Lightning Strike|TLA
+1 Roku's Mastery|TLE
+1 Reckless Blaze|TLE
+1 Firebender Ascension|TLA
+1 Thriving Bluff|TLE
+7 Mountain|TLA
+
+[TLA Firebending 2]
+1 Fire Nation Cadets|TLA
+1 Jeong Jeong, the Deserter|TLA
+1 Loyal Fire Sage|TLE
+1 Moku, Meandering Drummer|TLE
+1 Rough Rhino Cavalry|TLA
+1 Yuyan Archers|TLA
+1 Zuko, Exiled Prince|TLA
+1 Combustion Technique|TLA
+1 Cunning Maneuver|TLA
+1 Firebending Lesson|TLA
+1 Fire Nation Attacks|TLA
+1 Reckless Blaze|TLE
+1 Thriving Bluff|TLE
+7 Mountain|TLA
+
+[TLA Powerful 1]
+1 Deserter's Disciple|TLA
+1 Earth Rumble Wrestlers|TLA
+1 Fang, Roku's Companion|TLE
+1 Fire Nation Raider|TLA
+1 Mongoose Lizard|TLA
+1 Rough Rhino Cavalry|TLA
+1 Tiger-Dillo|TLA
+1 Uncle Iroh|TLA
+1 Firebending Lesson|TLA
+1 Cathartic Reunion|TLE
+1 Iroh's Demonstration|TLA
+1 Twin Blades|TLA
+1 Thriving Bluff|TLE
+7 Mountain|TLA
+
+[TLA Powerful 2]
+1 Combustion Man|TLA
+1 Fang, Roku's Companion|TLE
+1 Fire Nation Raider|TLA
+1 Freedom Fighter Recruit|TLE
+1 Komodo Rhino|TLE
+1 Mongoose Lizard|TLA
+1 Tiger-Dillo|TLA
+1 Uncle Iroh|TLA
+1 Firebending Lesson|TLA
+1 Hog-Monkey Rampage|TLE
+1 How to Start a Riot|TLA
+1 Cathartic Reunion|TLE
+1 Thriving Bluff|TLE
+7 Mountain|TLA
+
+[TLA Rebelling 1]
+1 Freedom Fighter Recruit|TLE
+1 Jet, Freedom Fighter|TLA
+1 Longshot, Rebel Bowman|TLE
+1 Smellerbee, Rebel Fighter|TLE
+1 Treetop Freedom Fighters|TLA
+1 Yuyan Archers|TLA
+1 Zuko, Seeking Honor|TLE
+1 Cunning Maneuver|TLA
+1 Fire Nation Attacks|TLA
+1 How to Start a Riot|TLA
+1 Bumi Bash|TLA
+1 Explosive Shot|TLE
+1 Thriving Bluff|TLE
+7 Mountain|TLA
+
+[TLA Rebelling 2]
+1 Deserter's Disciple|TLA
+1 Freedom Fighter Recruit|TLE
+1 Jet, Freedom Fighter|TLA
+1 Longshot, Rebel Bowman|TLE
+1 Smellerbee, Rebel Fighter|TLE
+1 Treetop Freedom Fighters|TLA
+1 Zuko, Seeking Honor|TLE
+1 How to Start a Riot|TLA
+1 Overwhelming Victory|TLE
+1 Run Amok|TLE
+1 Explosive Shot|TLE
+1 Hook Swords|TLE
+1 Thriving Bluff|TLE
+7 Mountain|TLA
+
+[TLA Sparky Sparky 1]
+1 Combustion Man|TLA
+1 Deer-Dog|TLE
+1 Earth Rumble Wrestlers|TLA
+1 Fire Nation Cadets|TLA
+1 Fire Sages|TLA
+1 Ran and Shaw|TLA
+1 Zuko, Exiled Prince|TLA
+1 Combustion Technique|TLA
+1 How to Start a Riot|TLA
+1 Bumi Bash|TLA
+1 Iroh's Demonstration|TLA
+1 War Balloon|TLA
+1 Thriving Bluff|TLE
+7 Mountain|TLA
+
+[TLA Sparky Sparky 2]
+1 Combustion Man|TLA
+1 Deer-Dog|TLE
+1 Dragon Moose|TLE
+1 Fire Nation Cadets|TLA
+1 Ran and Shaw|TLA
+1 Yuyan Archers|TLA
+1 Zuko, Exiled Prince|TLA
+1 Combustion Technique|TLA
+1 Firebending Lesson|TLA
+1 Overwhelming Victory|TLE
+1 Price of Freedom|TLA
+1 War Balloon|TLA
+1 Thriving Bluff|TLE
+7 Mountain|TLA
+
+[TLA Kyoshi]
+1 Avatar Kyoshi, Earthbender|TLE
+1 Earth Kingdom Soldier|TLA
+1 Elephant-Mandrill|TLE
+1 Kyoshi Warrior Exemplars|TLE
+1 Raucous Audience|TLA
+1 Suki, Kyoshi Warrior|TLA
+1 Allies at Last|TLA
+1 Cycle of Renewal|TLA
+1 Rocky Rebuke|TLA
+1 Cracked Earth Technique|TLE
+1 Tectonic Split|TLE
+1 Kyoshi Battle Fan|TLA
+1 Thriving Grove|TLE
+7 Forest|TLA
+
+[TLA Toph]
+1 Badgermole|TLA
+1 Earth Kingdom General|TLA
+1 Earth Kingdom Soldier|TLA
+1 Frog-Squirrels|TLE
+1 Kyoshi Warrior Exemplars|TLE
+1 Rebellious Captives|TLA
+1 Saber-Tooth Moose-Lion|TLA
+1 Toph, Earthbending Master|TLE
+1 Origin of Metalbending|TLA
+1 Rocky Rebuke|TLA
+1 Solid Ground|TLE
+1 Tale of Katara and Toph|TLE
+1 Thriving Grove|TLE
+7 Forest|TLA
+
+[TLA At the Zoo]
+1 Animal Attendant|TLE
+1 Diligent Zookeeper|TLA
+1 Eel-Hounds|TLE
+1 Elephant-Mandrill|TLE
+1 Frog-Squirrels|TLE
+1 Ostrich-Horse|TLA
+1 Saber-Tooth Moose-Lion|TLA
+1 Turtle-Duck|TLA
+1 Hog-Monkey Rampage|TLE
+1 Origin of Metalbending|TLA
+1 Pillar Launch|TLA
+1 Bison Whistle|TLE
+1 Thriving Grove|TLE
+7 Forest|TLA
+
+[TLA Bumi]
+1 Aang, A Lot to Learn|TLE
+1 Badgermole|TLA
+1 Bumi, King of Three Trials|TLA
+1 Flopsie, Bumi's Buddy|TLA
+1 Raucous Audience|TLA
+1 Walltop Sentries|TLA
+1 Origin of Metalbending|TLA
+1 Rocky Rebuke|TLA
+1 Bumi's Feast Lecture|TLE
+1 Earthbending Lesson|TLA
+1 Creeping Crystal Coating|TLE
+1 Crystalline Armor|TLE
+1 Thriving Grove|TLE
+7 Forest|TLA
+
+[TLA Cabbages]
+1 Bosco, Just a Bear|TLE
+1 The Cabbage Merchant|TLE
+1 Elephant-Mandrill|TLE
+1 Foggy Swamp Vinebender|TLA
+1 Hippo-Cows|TLE
+1 Saber-Tooth Moose-Lion|TLA
+1 Unlucky Cabbage Merchant|TLA
+1 The Art of Tea|TLE
+1 Rocky Rebuke|TLA
+1 Bumi's Feast Lecture|TLE
+1 Many Partings|TLE
+1 Leaves from the Vine|TLA
+1 Thriving Grove|TLE
+7 Forest|TLA
+
+[TLA Earthbending 1]
+1 Earth Kingdom General|TLA
+1 Earth Kingdom Soldier|TLA
+1 Hippo-Cows|TLE
+1 Rebellious Captives|TLA
+1 Toph, the Blind Bandit|TLA
+1 Turtle-Duck|TLA
+1 Inspiring Call|TLE
+1 Rocky Rebuke|TLA
+1 Earthbending Lesson|TLA
+1 Explore|TLE
+1 Earthbender Ascension|TLA
+1 Rumble Arena|TLA
+1 Thriving Grove|TLE
+7 Forest|TLA
+
+[TLA Earthbending 2]
+1 Badgermole|TLA
+1 Earth Kingdom General|TLA
+1 Earth Kingdom Soldier|TLA
+1 Frog-Squirrels|TLE
+1 Rebellious Captives|TLA
+1 Toph, the Blind Bandit|TLA
+1 Rocky Rebuke|TLA
+1 Earthbending Lesson|TLA
+1 Explore|TLE
+1 Solid Ground|TLE
+1 Tale of Katara and Toph|TLE
+1 Rumble Arena|TLA
+1 Thriving Grove|TLE
+7 Forest|TLA
+
+[TLA Earth Kingdom 1]
+1 Earth Kingdom Soldier|TLA
+1 Foggy Swamp Vinebender|TLA
+1 Hippo-Cows|TLE
+1 Haru, Hidden Talent|TLA
+1 Suki, Kyoshi Warrior|TLA
+1 Toph, the Blind Bandit|TLA
+1 Allies at Last|TLA
+1 Stand United|TLE
+1 Match the Odds|TLE
+1 Descendants' Path|TLE
+1 Mechanical Glider|TLE
+1 Kyoshi Battle Fan|TLA
+1 Thriving Grove|TLE
+7 Forest|TLA
+
+[TLA Earth Kingdom 2]
+1 Earth Kingdom General|TLA
+1 Earth Kingdom Soldier|TLA
+1 Great Divide Guide|TLA
+1 Haru, Hidden Talent|TLA
+1 Hippo-Cows|TLE
+1 Suki, Kyoshi Warrior|TLA
+1 Toph, the Blind Bandit|TLA
+1 Walltop Sentries|TLA
+1 Allies at Last|TLA
+1 Origin of Metalbending|TLA
+1 Descendants' Path|TLE
+1 Mechanical Glider|TLE
+1 Thriving Grove|TLE
+7 Forest|TLA
+
+[TLA Earth Rumble 1]
+1 The Boulder, Ready to Rumble|TLA
+1 Earth Rumble Wrestlers|TLA
+1 Hippo-Cows|TLE
+1 Raucous Audience|TLA
+1 Rebellious Captives|TLA
+1 Toph, the Blind Bandit|TLA
+1 Uncle Iroh|TLA
+1 Hog-Monkey Rampage|TLE
+1 Pillar Launch|TLA
+1 Earth Rumble|TLA
+1 Master's Guidance|TLE
+1 Kyoshi Battle Fan|TLA
+1 Thriving Grove|TLE
+7 Forest|TLA
+
+[TLA Earth Rumble 2]
+1 Bosco, Just a Bear|TLE
+1 The Boulder, Ready to Rumble|TLA
+1 The Earth King|TLA
+1 Earth Rumble Wrestlers|TLA
+1 Frog-Squirrels|TLE
+1 Raucous Audience|TLA
+1 Uncle Iroh|TLA
+1 Allies at Last|TLA
+1 Hog-Monkey Rampage|TLE
+1 Origin of Metalbending|TLA
+1 Master's Guidance|TLE
+1 Kyoshi Battle Fan|TLA
+1 Thriving Grove|TLE
+7 Forest|TLA
+
+[TLA Learning 1]
+1 Aang, A Lot to Learn|TLE
+1 Guru Pathik|TLA
+1 Rebellious Captives|TLA
+1 Saber-Tooth Moose-Lion|TLA
+1 Sparring Dummy|TLA
+1 Walltop Sentries|TLA
+1 Origin of Metalbending|TLA
+1 Rocky Rebuke|TLA
+1 Zuko's Exile|TLA
+1 Cracked Earth Technique|TLE
+1 Shared Roots|TLA
+1 Crystalline Armor|TLE
+1 Thriving Grove|TLE
+7 Forest|TLA
+
+[TLA Learning 2]
+1 Aang, A Lot to Learn|TLE
+1 Platypus-Bear|TLA
+1 Saber-Tooth Moose-Lion|TLA
+1 Sparring Dummy|TLA
+1 Uncle Iroh|TLA
+1 Walltop Sentries|TLA
+1 The Art of Tea|TLE
+1 Rocky Rebuke|TLA
+1 Zuko's Exile|TLA
+1 Cracked Earth Technique|TLE
+1 True Ancestry|TLA
+1 Master's Guidance|TLE
+1 Thriving Grove|TLE
+7 Forest|TLA
+
+[TLA Shrines]
+1 Guru Pathik|TLA
+1 Hei Bai, Forest Guardian|TLE
+1 Raucous Audience|TLA
+1 Saber-Tooth Moose-Lion|TLA
+1 Walltop Sentries|TLA
+1 Aang's Journey|TLA
+1 Crescent Island Temple|TLA
+1 Kyoshi Island Plaza|TLA
+1 Northern Air Temple|TLA
+1 Southern Air Temple|TLA
+1 The Spirit Oasis|TLA
+1 Barrels of Blasting Jelly|TLA
+1 Thriving Grove|TLE
+1 White Lotus Hideout|TLA
+1 Plains|TLA
+1 Island|TLA
+1 Swamp|TLA
+1 Mountain|TLA
+2 Forest|TLA
+
+#----------------------SHEN CUSTOM JUMPSTART PACKS START HERE---------------------------------#
+
+[ISD Dearly Departed 1]
+1 Dearly Departed|ISD
+1 Doomed Traveler|ISD
+1 Unruly Mob|ISD
+1 Avacynian Priest|ISD
+1 Mausoleum Guard|ISD
+1 Elder Cathar|ISD
+1 Slayer of the Wicked|ISD
+1 Sharpened Pitchfork|ISD
+1 Blazing Torch|ISD
+1 Bonds of Faith|ISD
+1 Moment of Heroism|ISD
+8 Plains|ISD
+
+[ISD Dearly Departed 2]
+1 Dearly Departed|ISD
+1 Doomed Traveler|ISD
+1 Unruly Mob|ISD
+1 Avacynian Priest|ISD
+1 Mausoleum Guard|ISD
+1 Selfless Cathar|ISD
+1 Fiend Hunter|ISD
+1 Mask of Avacyn|ISD
+1 Blazing Torch|ISD
+1 Bonds of Faith|ISD
+1 Moment of Heroism|ISD
+8 Plains|ISD
+
+[ISD Fraying Sanity 1]
+1 Undead Alchemist|ISD
+1 Deranged Assistant|ISD
+1 Armored Skaab|ISD
+1 Makeshift Mauler|ISD
+1 Cobbled Wings|ISD
+1 Cellar Door|ISD
+1 Selhoff Occultist|ISD
+1 Murder of Crows|ISD
+1 Ghoulcaller's Bell|ISD
+1 Stitched Drake|ISD
+1 Skaab Goliath|ISD
+8 Island|ISD
+
+[ISD Fraying Sanity 2]
+1 Undead Alchemist|ISD
+1 Deranged Assistant|ISD
+1 Delver of Secrets|ISD
+1 Makeshift Mauler|ISD
+1 Cobbled Wings|ISD
+1 Cellar Door|ISD
+1 Curse of the Bloody Tome|ISD
+1 Murder of Crows|ISD
+1 Trepanation Blade|ISD
+1 Stitched Drake|ISD
+1 Skaab Goliath|ISD
+8 Island|ISD
+
+[ISD Undead Horde 1]
+1 Unbreathing Horde|ISD
+1 Diregraf Ghoul|ISD
+1 Ghoulraiser|ISD
+1 Moan of the Unhallowed|ISD
+1 Graveyard Shovel|ISD
+1 Walking Corpse|ISD
+1 Ghoulcaller's Chant|ISD
+1 Cellar Door|ISD
+1 Tribute to Hunger|ISD
+1 Dead Weight|ISD
+1 Manor Skeleton|ISD
+8 Swamp|ISD
+
+[ISD Undead Horde 2]
+1 Unbreathing Horde|ISD
+1 Diregraf Ghoul|ISD
+1 Ghoulraiser|ISD
+1 Moan of the Unhallowed|ISD
+1 Demonmail Hauberk|ISD
+1 Rotting Fensnake|ISD
+1 Ghoulcaller's Chant|ISD
+1 Cellar Door|ISD
+1 Tribute to Hunger|ISD
+1 Gruesome Deformity|ISD
+1 Manor Skeleton|ISD
+8 Swamp|ISD
+
+[ISD Bloody Marauders 1]
+1 Falkenrath Marauders|ISD
+1 Bloodcrazed Neonate|ISD
+1 Rakish Heir|ISD
+1 Inquisitor's Flail|ISD
+1 Night Revelers|ISD
+1 Vampiric Fury|ISD
+1 Crossway Vampire|ISD
+1 Rage Thrower|ISD
+1 Rolling Temblor|ISD
+1 Furor of the Bitten|ISD
+1 Nightbird's Clutches|ISD
+8 Mountain|ISD
+
+[ISD Bloody Marauders 2]
+1 Falkenrath Marauders|ISD
+1 Bloodcrazed Neonate|ISD
+1 Rakish Heir|ISD
+1 Demonmail Hauberk|ISD
+1 Night Revelers|ISD
+1 Vampiric Fury|ISD
+1 Crossway Vampire|ISD
+1 Rage Thrower|ISD
+1 Rolling Temblor|ISD
+1 Curse of the Pierced Heart|ISD
+1 Harvest Pyre|ISD
+8 Mountain|ISD
+
+[ISD Transformations 1]
+1 Villagers of Estwald|ISD
+1 Ulvenwald Mystics|ISD
+1 Mayor of Avabruck|ISD
+1 Gatstaf Shepherd|ISD
+1 Ambush Viper|ISD
+1 Grizzled Outcasts|ISD
+1 Lumberknot|ISD
+1 Moonmist|ISD
+1 Full Moon's Rise|ISD
+1 Somberwald Spider|ISD
+1 Prey Upon|ISD
+8 Forest|ISD
+
+[ISD Transformations 2]
+1 Villagers of Estwald|ISD
+1 Ulvenwald Mystics|ISD
+1 Mayor of Avabruck|ISD
+1 Gatstaf Shepherd|ISD
+1 Darkthicket Wolf|ISD
+1 Grizzled Outcasts|ISD
+1 Boneyard Wurm|ISD
+1 Moonmist|ISD
+1 Full Moon's Rise|ISD
+1 Woodland Sleuth|ISD
+1 Prey Upon|ISD
+8 Forest|ISD
+
+[ISD Black Inserts]
+Skirsdag High Priest|ISD
+Endless Ranks of the Dead|ISD
+Heartless Summoning|ISD
+Bloodline Keeper|ISD
+Bloodgift Demon|ISD
+Curse of Death's Hold|ISD
+Army of the Damned|ISD
+Grimoire of the Dead|ISD
+
+[ISD Blue Inserts]
+Back from the Brink|ISD
+Laboratory Maniac|ISD
+Rooftop Storm|ISD
+Snapcaster Mage|ISD
+Sturmgeist|ISD
+Runechanter's Pike|ISD
+Skaab Ruinator|ISD
+Mirror-Mad Phantasm|ISD
+
+[ISD Green Inserts]
+Kessig Cagebreakers|ISD
+Moldgraf Monstrosity|ISD
+Gutter Grime|ISD
+Elder of Laurels|ISD
+Creeping Renaissance|ISD
+Splinterfright|ISD
+Essence of the Wild|ISD
+Tree of Redemption|ISD
+
+[ISD Red Inserts]
+Blasphemous Act|ISD
+Curse of Stalked Prey|ISD
+Instigator Gang|ISD
+Kruin Outlaw|ISD
+Charmbreaker Devils|ISD
+Devil's Play|ISD
+Past in Flames|ISD
+Balefire Dragon|ISD
+
+[ISD White Inserts]
+Angel of Flight Alabaster|ISD
+Champion of the Parish|ISD
+Divine Reckoning|ISD
+Mentor of the Meek|ISD
+Geist-Honored Monk|ISD
+Witchbane Orb|ISD
+Mikaeus, the Lunarch|ISD
+Angelic Overseer|ISD
+
+[DKA Fateful Hour 1]
+1 Thraben Doomsayer|DKA
+1 Midnight Guard|DKA
+1 Elgaud Inquisitor|DKA
+1 Gavony Ironwright|DKA
+1 Sanctuary Cat|DKA
+1 Elder Cathar|ISD
+1 Thraben Heretic|DKA
+1 Avacyn's Collar|DKA
+1 Blazing Torch|ISD
+1 Break of Day|DKA
+1 Gather the Townsfolk|DKA
+8 Plains|ISD
+
+[DKA Fateful Hour 2]
+1 Thraben Doomsayer|DKA
+1 Midnight Guard|DKA
+1 Elgaud Inquisitor|DKA
+1 Gavony Ironwright|DKA
+1 Sanctuary Cat|DKA
+1 Unruly Mob|ISD
+1 Thraben Heretic|DKA
+1 Avacyn's Collar|DKA
+1 Mask of Avacyn|ISD
+1 Break of Day|DKA
+1 Gather the Townsfolk|DKA
+8 Plains|ISD
+
+[DKA Undying Gifts 1]
+1 Havengul Runebinder|DKA
+1 Stormbound Geist|DKA
+1 Shriekgeist|DKA
+1 Nephalia Seakite|DKA
+1 Executioner's Hood|DKA
+1 Relentless Skaabs|DKA
+1 Selhoff Occultist|ISD
+1 Soul Seizer|DKA
+1 Ghoulcaller's Bell|ISD
+1 Screeching Skaab|DKA
+1 Chant of the Skifsang|DKA
+8 Island|ISD
+
+[DKA Undying Gifts 2]
+1 Havengul Runebinder|DKA
+1 Stormbound Geist|DKA
+1 Shriekgeist|DKA
+1 Nephalia Seakite|DKA
+1 Executioner's Hood|DKA
+1 Relentless Skaabs|DKA
+1 Delver of Secrets|ISD
+1 Soul Seizer|DKA
+1 Curse of the Bloody Tome|ISD
+1 Screeching Skaab|DKA
+1 Chant of the Skifsang|DKA
+8 Island|ISD
+
+[DKA Death Unrelenting 1]
+1 Gravecrawler|DKA
+1 Wakedancer|DKA
+1 Ghoulraiser|ISD
+1 Highborn Ghoul|DKA
+1 Farbog Boneflinger|DKA
+1 Walking Corpse|ISD
+1 Black Cat|DKA
+1 Chalice of Life|DKA
+1 Skirsdag Flayer|DKA
+1 Gravepurge|DKA
+1 Sightless Ghoul|DKA
+8 Swamp|ISD
+
+[DKA Death Unrelenting 2]
+1 Gravecrawler|DKA
+1 Wakedancer|DKA
+1 Undying Evil|DKA
+1 Highborn Ghoul|DKA
+1 Farbog Boneflinger|DKA
+1 Tragic Slip|DKA
+1 Black Cat|DKA
+1 Chalice of Life|DKA
+1 Skirsdag Flayer|DKA
+1 Gravepurge|DKA
+1 Sightless Ghoul|DKA
+8 Swamp|ISD
+
+[DKA Devilish Mockery 1]
+1 Hellrider|DKA
+1 Forge Devil|DKA
+1 Heckling Fiends|DKA
+1 Afflicted Deserter|DKA
+1 Pitchburn Devils|ISD
+1 Torch Fiend|DKA
+1 Wrack with Madness|DKA
+1 Pyreheart Wolf|DKA
+1 Skirsdag Cultist|ISD
+1 Fling|DKA
+1 Talons of Falkenrath|DKA
+8 Mountain|ISD
+
+[DKA Devilish Mockery 2]
+1 Hellrider|DKA
+1 Forge Devil|DKA
+1 Heckling Fiends|DKA
+1 Afflicted Deserter|DKA
+1 Riot Devils|ISD
+1 Torch Fiend|DKA
+1 Wrack with Madness|DKA
+1 Pyreheart Wolf|DKA
+1 Scourge of Geier Reach|ISD
+1 Fling|DKA
+1 Talons of Falkenrath|DKA
+8 Mountain|ISD
+
+[DKA Beastly Killers 1]
+1 Young Wolf|DKA
+1 Briarpack Alpha|DKA
+1 Predator Ooze|DKA
+1 Strangleroot Geist|DKA
+1 Ambush Viper|ISD
+1 Kessig Recluse|DKA
+1 Ulvenwald Bear|DKA
+1 Dawntreader Elk|DKA
+1 Gravetiller Wurm|DKA
+1 Somberwald Spider|ISD
+1 Hunger of the Howlpack|DKA
+8 Forest|ISD
+
+[DKA Beastly Killers 2]
+1 Young Wolf|DKA
+1 Briarpack Alpha|DKA
+1 Predator Ooze|DKA
+1 Strangleroot Geist|DKA
+1 Festerhide Boar|ISD
+1 Kessig Recluse|DKA
+1 Ulvenwald Bear|DKA
+1 Dawntreader Elk|DKA
+1 Gravetiller Wurm|DKA
+1 Darkthicket Wolf|ISD
+1 Hunger of the Howlpack|DKA
+8 Forest|ISD
+
+[DKA Black Inserts]
+Curse of Misfortunes|DKA
+Fiend of the Shadows|DKA
+Geralf's Messenger|DKA
+Increasing Ambition|DKA
+Ravenous Demon|DKA
+Zombie Apocalypse|DKA
+Mikaeus, the Unhallowed|DKA
+Elbrus, the Binding Blade|DKA
+
+[DKA Blue Inserts]
+Increasing Confusion|DKA
+Geralf's Mindcrusher|DKA
+Dungeon Geists|DKA
+Curse of Echoes|DKA
+Counterlash|DKA
+Call to the Kindred|DKA
+Jar of Eyeballs|DKA
+Beguiler of Wills|DKA
+
+[DKA Green Inserts]
+Wolfbitten Captive|DKA
+Lost in the Woods|DKA
+Increasing Savagery|DKA
+Ghoultree|DKA
+Feed the Pack|DKA
+Deranged Outcast|DKA
+Vorapede|DKA
+Jar of Eyeballs|DKA
+
+[DKA Red Inserts]
+Mondronen Shaman|DKA
+Markov Blademaster|DKA
+Increasing Vengeance|DKA
+Flayer of the Hatebound|DKA
+Curse of Bloodletting|DKA
+Alpha Brawl|DKA
+Helvault|DKA
+Moonveil Dragon|DKA
+
+[DKA White Inserts]
+Requiem Angel|DKA
+Seance|DKA
+Thalia, Guardian of Thraben|DKA
+Sudden Disappearance|DKA
+Increasing Devotion|DKA
+Helvault|DKA
+Grafdigger's Cage|DKA
+Archangel's Light|DKA
+
+[SOI Spiritual Clues 1]
+1 Bygone Bishop|SOI
+1 Topplegeist|SOI
+1 Magnifying Glass|SOI
+1 Nearheath Chaplain|SOI
+1 Thraben Inspector|SOI
+1 Expose Evil|SOI
+1 Apothecary Geist|SOI
+1 Moorland Drifter|SOI
+1 Emissary of the Sleepless|SOI
+1 Puncturing Light|SOI
+1 Survive the Night|SOI
+8 Plains|SOI
+
+[SOI Spiritual Clues 2]
+1 Bygone Bishop|SOI
+1 Topplegeist|SOI
+1 Magnifying Glass|SOI
+1 Nearheath Chaplain|SOI
+1 Dauntless Cathar|SOI
+1 Expose Evil|SOI
+1 Apothecary Geist|SOI
+1 Vessel of Ephemera|SOI
+1 Emissary of the Sleepless|SOI
+1 Strength of Arms|SOI
+1 Survive the Night|SOI
+8 Plains|SOI
+
+[SOI Skulking Horrors 1]
+1 Forgotten Creation|SOI
+1 Aberrant Researcher|SOI
+1 Stitchwing Skaab|SOI
+1 Uninvited Geist|SOI
+1 Deny Existence|SOI
+1 Lamplighter of Selhoff|SOI
+1 Furtive Homunculus|SOI
+1 Press for Answers|SOI
+1 Jace's Scrutiny|SOI
+1 Pieces of the Puzzle|SOI
+1 Seagraf Skaab|SOI
+8 Island|SOI
+
+[SOI Skulking Horrors 2]
+1 Forgotten Creation|SOI
+1 Aberrant Researcher|SOI
+1 Stitchwing Skaab|SOI
+1 Uninvited Geist|SOI
+1 Deny Existence|SOI
+1 Stitched Mangler|SOI
+1 Furtive Homunculus|SOI
+1 Press for Answers|SOI
+1 Just the Wind|SOI
+1 Pieces of the Puzzle|SOI
+1 Wicker Witch|SOI
+8 Island|SOI
+
+[SOI Splitting Headache 1]
+1 Markov Dreadknight|SOI
+1 Call the Bloodline|SOI
+1 Gisa's Bidding|SOI
+1 Pick the Brain|SOI
+1 Ghoulcaller's Accomplice|SOI
+1 Murderous Compulsion|SOI
+1 Sanitarium Skeleton|SOI
+1 Rottenheart Ghoul|SOI
+1 Twins of Maurer Estate|SOI
+1 Shamble Back|SOI
+1 Macabre Waltz|SOI
+8 Swamp|SOI
+
+[SOI Splitting Headache 2]
+1 Markov Dreadknight|SOI
+1 Call the Bloodline|SOI
+1 Gisa's Bidding|SOI
+1 Creeping Dread|SOI
+1 Ghoulcaller's Accomplice|SOI
+1 Murderous Compulsion|SOI
+1 Sanitarium Skeleton|SOI
+1 Farbog Revenant|SOI
+1 Twins of Maurer Estate|SOI
+1 Alms of the Vein|SOI
+1 Macabre Waltz|SOI
+8 Swamp|SOI
+
+[SOI Bloody Insanity 1]
+1 Falkenrath Gorger|SOI
+1 Incorrigible Youths|SOI
+1 Mad Prophet|SOI
+1 Ravenous Bloodseeker|SOI
+1 Bloodmad Vampire|SOI
+1 Insolent Neonate|SOI
+1 Reduce to Ashes|SOI
+1 Voldaren Duelist|SOI
+1 Uncaged Fury|SOI
+1 Fiery Temper|SOI
+1 Senseless Rage|SOI
+8 Mountain|SOI
+
+[SOI Bloody Insanity 2]
+1 Falkenrath Gorger|SOI
+1 Incorrigible Youths|SOI
+1 Stensia Masquerade|SOI
+1 Ravenous Bloodseeker|SOI
+1 Bloodmad Vampire|SOI
+1 Insolent Neonate|SOI
+1 Reduce to Ashes|SOI
+1 Sanguinary Mage|SOI
+1 Uncaged Fury|SOI
+1 Fiery Temper|SOI
+1 Rush of Adrenaline|SOI
+8 Mountain|SOI
+
+[SOI Howlpack Forces 1]
+1 Silverfur Partisan|SOI
+1 Howlpack Resurgence|SOI
+1 Cult of the Waxing Moon|SOI
+1 Hermit of the Natterknolls|SOI
+1 Hinterland Logger|SOI
+1 Solitary Hunter|SOI
+1 Loam Dryad|SOI
+1 Quilled Wolf|SOI
+1 True-Faith Censer|SOI
+1 Equestrian Skill|SOI
+1 Aim High|SOI
+8 Forest|SOI
+
+[SOI Howlpack Forces 2]
+1 Silverfur Partisan|SOI
+1 Howlpack Resurgence|SOI
+1 Cult of the Waxing Moon|SOI
+1 Hermit of the Natterknolls|SOI
+1 Hinterland Logger|SOI
+1 Solitary Hunter|SOI
+1 Fork in the Road|SOI
+1 Quilled Wolf|SOI
+1 True-Faith Censer|SOI
+1 Equestrian Skill|SOI
+1 Stoic Builder|SOI
+8 Forest|SOI
+
+[SOI Black Inserts]
+To the Slaughter|SOI
+From Under the Floorboards|SOI
+Ever After|SOI
+Diregraf Colossus|SOI
+Asylum Visitor|SOI
+Corrupted Grafstone|SOI
+Relentless Dead|SOI
+Mindwrack Demon|SOI
+
+[SOI Blue Inserts]
+Confirm Suspicions|SOI
+Rattlechains|SOI
+Thing in the Ice|SOI
+Tamiyo's Journal|SOI
+Nephalia Moondrakes|SOI
+Engulf the Shore|SOI
+Startled Awake|SOI
+Geralf's Masterpiece|SOI
+
+[SOI Green Inserts]
+Tireless Tracker|SOI
+Traverse the Ulvenwald|SOI
+Soul Swallower|SOI
+Sage of Ancient Lore|SOI
+Inexorable Blob|SOI
+Cryptolith Rite|SOI
+Ulvenwald Hydra|SOI
+Seasons Past|SOI
+
+[SOI Red Inserts]
+Avacyn's Judgment|SOI
+Burn from Within|SOI
+Geier Reach Bandit|SOI
+Flameblade Angel|SOI
+Harness the Storm|SOI
+Scourge Wolf|SOI
+Wolf of Devil's Breach|SOI
+Goldnight Castigator|SOI
+
+[SOI White Inserts]
+Always Watching|SOI
+Angel of Deliverance|SOI
+Declaration in Stone|SOI
+Drogskol Cavalry|SOI
+Eerie Interlude|SOI
+Hanweir Militia Captain|SOI
+Thalia's Lieutenant|SOI
+Descend upon the Sinful|SOI
+
+[MID Coven of Hope 1]
+1 Adeline, Resplendent Cathar|MID
+1 Ambitious Farmhand|MID
+1 Bereaved Survivor|MID
+1 Duelcraft Trainer|MID
+1 Candlegrove Witch|MID
+1 Gavony Silversmith|MID
+1 Ritual Guardian|MID
+1 Unruly Mob|MID
+1 Homestead Courage|MID
+1 Hedgewitch's Mask|MID
+1 Flare of Faith|MID
+8 Plains|MID
+
+[MID Coven of Hope 2]
+1 Adeline, Resplendent Cathar|MID
+1 Ambitious Farmhand|MID
+1 Bereaved Survivor|MID
+1 Duelcraft Trainer|MID
+1 Candlegrove Witch|MID
+1 Lunarch Veteran|MID
+1 Ritual Guardian|MID
+1 Unruly Mob|MID
+1 Homestead Courage|MID
+1 Mourning Patrol|MID
+1 Clarion Cathars|MID
+8 Plains|MID
+
+[MID Disturbing Thoughts 1]
+1 Patrician Geist|MID
+1 Covetous Castaway|MID
+1 Overwhelmed Archivist|MID
+1 Baithook Angler|MID
+1 Galedrifter|MID
+1 Otherworldly Gaze|MID
+1 Shipwreck Sifters|MID
+1 Unblinking Observer|MID
+1 Secrets of the Key|MID
+1 Stormrider Spirit|MID
+1 Consider|MID
+8 Island|MID
+
+[MID Disturbing Thoughts 2]
+1 Patrician Geist|MID
+1 Phantom Carriage|MID
+1 Overwhelmed Archivist|MID
+1 Baithook Angler|MID
+1 Galedrifter|MID
+1 Otherworldly Gaze|MID
+1 Shipwreck Sifters|MID
+1 Unblinking Observer|MID
+1 Secrets of the Key|MID
+1 Component Collector|MID
+1 Startle|MID
+8 Island|MID
+
+
+[MID Morbid Decay 1]
+1 Jadar, Ghoulcaller of Nephalia|MID
+1 Ghoulish Procession|MID
+1 Morbid Opportunist|MID
+1 Necrosynthesis|MID
+1 Diregraf Horde|MID
+1 Hobbling Zombie|MID
+1 Siege Zombie|MID
+1 Blood Pact|MID
+1 Rotten Reunion|MID
+1 No Way Out|MID
+1 Crawl from the Cellar|MID
+8 Swamp|MID
+
+[MID Morbid Decay 2]
+1 Jadar, Ghoulcaller of Nephalia|MID
+1 Ghoulish Procession|MID
+1 Morbid Opportunist|MID
+1 Vengeful Strangler|MID
+1 Morkrut Behemoth|MID
+1 Hobbling Zombie|MID
+1 Siege Zombie|MID
+1 Defenestrate|MID
+1 Rotten Reunion|MID
+1 No Way Out|MID
+1 Crawl from the Cellar|MID
+8 Swamp|MID
+
+[MID Playing with Fire 1]
+1 Smoldering Egg|MID
+1 Thermo-Alchemist|MID
+1 Seize the Storm|MID
+1 Play with Fire|MID
+1 Brimstone Vandal|MID
+1 Ardent Elementalist|MID
+1 Falkenrath Perforator|MID
+1 Festival Crasher|MID
+1 Moonrager's Slash|MID
+1 Pack's Betrayal|MID
+1 Raze the Effigy|MID
+8 Mountain|MID
+
+[MID Playing with Fire 2]
+1 Smoldering Egg|MID
+1 Thermo-Alchemist|MID
+1 Seize the Storm|MID
+1 Play with Fire|MID
+1 Brimstone Vandal|MID
+1 Ardent Elementalist|MID
+1 Falkenrath Perforator|MID
+1 Voldaren Stinger|MID
+1 Moonrager's Slash|MID
+1 Stolen Vitality|MID
+1 Neonate's Rush|MID
+8 Mountain|MID
+
+[MID Token Aggression 1]
+1 Tovolar's Huntmaster|MID
+1 Brood Weaver|MID
+1 Dawnhart Mentor|MID
+1 Hound Tamer|MID
+1 Bounding Wolf|MID
+1 Howl of the Hunt|MID
+1 Pestilent Wolf|MID
+1 Snarling Wolf|MID
+1 Tireless Hauler|MID
+1 Shadowbeast Sighting|MID
+1 Duel for Dominance|MID
+8 Forest|MID
+
+[MID Token Aggression 2]
+1 Tovolar's Huntmaster|MID
+1 Brood Weaver|MID
+1 Dawnhart Mentor|MID
+1 Hound Tamer|MID
+1 Bounding Wolf|MID
+1 Bramble Armor|MID
+1 Pestilent Wolf|MID
+1 Snarling Wolf|MID
+1 Bird Admirer|MID
+1 Candlelit Cavalry|MID
+1 Duel for Dominance|MID
+8 Forest|MID
+
+[MID Black Inserts]
+Slaughter Specialist|MID
+Mask of Griselbrand|MID
+Graveyard Trespasser|MID
+Gisa, Glorious Resurrector|MID
+Champion of the Perished|MID
+Bloodline Culling|MID
+Tainted Adversary|MID
+The Meathook Massacre|MID
+
+[MID Blue Inserts]
+Triskaidekaphile|MID
+Sludge Monster|MID
+Memory Deluge|MID
+Malevolent Hermit|MID
+Curse of Surveillance|MID
+Grafted Identity|MID
+Spectral Adversary|MID
+Lier, Disciple of the Drowned|MID
+
+[MID Green Inserts]
+Willow Geist|MID
+Unnatural Growth|MID
+Storm the Festival|MID
+Saryth, the Viper's Fang|MID
+Briarbridge Tracker|MID
+Augur of Autumn|MID
+Primal Adversary|MID
+Consuming Blob|MID
+
+[MID Red Inserts]
+Reckless Stormseeker|MID
+Light Up the Night|MID
+Geistflame Reservoir|MID
+Falkenrath Pit Fighter|MID
+Curse of Shaken Faith|MID
+Burn Down the House|MID
+Bloodthirsty Adversary|MID
+Moonveil Regent|MID
+
+[MID White Inserts]
+Vanquish the Horde|MID
+Sungold Sentinel|MID
+Sigarda's Splendor|MID
+Fateful Absence|MID
+The Celestus|MID
+Curse of Silence|MID
+Intrepid Adversary|MID
+Enduring Angel|MID
+
+#--------------------------------------END OF SHENS INNISTRAD SHEETS------------------------#

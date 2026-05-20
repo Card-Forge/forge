@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Hagrid
+Title=Hagrid
+Icon=Hagrid.jpg
+Difficulty=Very Hard
+Description=./Modern/Theros_Beyond_Death/Asoen_-_Rakdos_Dreadhorde_(Modern,_#922987).dck
+Deck Type=constructed
+
+[Main]
+2 Kroxa, Titan of Death's Hunger
+3 Dreadhorde Arcanist
+4 Seasoned Pyromancer
+4 Lightning Skelemental
+2 Kolaghan's Command
+3 Fatal Push
+4 Lightning Bolt
+1 Dreadbore
+3 Inquisition of Kozilek
+4 Ransack the Lab
+4 Thoughtseize
+4 Unearth
+2 Liliana of the Veil
+1 Castle Embereth
+1 Castle Locthwain
+2 Mountain
+2 Swamp
+3 Blood Crypt
+3 Marsh Flats
+4 Bloodstained Mire
+4 Blackcleave Cliffs
+[Sideboard]
+1 Liliana, the Last Hope
+1 Kalitas, Traitor of Ghet
+1 Engineered Explosives
+2 Ashiok, Dream Render
+2 Plague Engineer
+2 Surgical Extraction
+3 Fulminator Mage
+3 Collective Brutality

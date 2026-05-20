@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=The Pied Piper
+Title=The Pied Piper
+Icon=The Pied Piper.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Ishikawa_Kousuke_-_Faerie_Ninjas_(Modern,_#1000870).dck
+Deck Type=constructed
+
+[Main]
+1 Sea-Dasher Octopus
+2 Vendilion Clique
+3 Brazen Borrower
+3 Ninja of the Deep Hours
+3 Changeling Outcast
+4 Ingenious Infiltrator
+4 Spellstutter Sprite
+4 Faerie Seer
+4 Delver of Secrets
+2 Spell Snare
+3 Mana Leak
+4 Drown in the Loch
+4 Remand
+1 Snow-Covered Swamp
+3 Polluted Delta
+3 Watery Grave
+4 Flooded Strand
+4 Snow-Covered Island
+4 Secluded Glen
+[Sideboard]
+1 Fatal Push
+2 Sword of Sinew and Steel
+2 Dismember
+2 Mistbind Clique
+4 Disrupting Shoal
+4 Bitterblossom

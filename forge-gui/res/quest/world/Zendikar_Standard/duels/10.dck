@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Trostani
+Title=Trostani
+Icon=Trostani.jpg
+Difficulty=Easy
+Description=Zendikar/Worldwake_Game_Day_-_Dima_Game_-_Argentina/Miguel_Angel_Caruso_-_Jund_(Standard,_#2108).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+2 Borderland Ranger
+3 Broodmate Dragon
+1 Dragon Broodmother
+3 Goblin Guide
+4 Sprouting Thrinax
+3 Bituminous Blast
+3 Lightning Bolt
+4 Terminate
+3 Blightning
+3 Maelstrom Pulse
+3 Garruk Wildspeaker
+3 Dragonskull Summit
+2 Forest
+3 Mountain
+2 Oran-Rief, the Vastwood
+4 Rootbound Crag
+4 Savage Lands
+2 Swamp
+4 Verdant Catacombs
+[Sideboard]
+4 Great Sable Stag
+3 Infest
+3 Jund Charm

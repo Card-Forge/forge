@@ -1,0 +1,7 @@
+Name:Scour for Scrap
+ManaCost:3 U
+Types:Instant
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBSearch,DBReturn
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Artifact | ChangeNum$ 1 | SpellDescription$ Search your library for an artifact card, reveal it, put it into your hand, then shuffle.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Artifact.YouOwn | TgtPrompt$ Select target artifact card in your graveyard | SpellDescription$ Return target artifact card from your graveyard to your hand.
+Oracle:Choose one or both —\n• Search your library for an artifact card, reveal it, put it into your hand, then shuffle.\n• Return target artifact card from your graveyard to your hand.

@@ -1,0 +1,10 @@
+Name:Lurking Lizards
+ManaCost:1 G
+Types:Creature Lizard Villain
+PT:1/3
+K:Trample
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE4 | ValidActivatingPlayer$ You | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with mana value 4 or greater, put a +1/+1 counter on this creature.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Permanent.cmcGE4
+DeckHas:Ability$Counters
+Oracle:Trample\nWhenever you cast a spell with mana value 4 or greater, put a +1/+1 counter on this creature.

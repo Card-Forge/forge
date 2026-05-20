@@ -11,7 +11,9 @@ Set=UDS
 Image=assassin.jpg
 [main]
 1 Mantis Engine|UDS
-16 Swamp|6ED
+6 Swamp|6ED|1
+5 Swamp|6ED|2
+5 Swamp|6ED|3
 1 Body Snatcher|UDS
 1 Bone Shredder|ULG
 2 Disease Carriers|UDS

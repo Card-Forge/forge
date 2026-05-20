@@ -1,0 +1,7 @@
+Name:Drone Token
+ManaCost:no cost
+Types:Artifact Creature Drone
+PT:1/1
+K:Flying
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ This token can block only creatures with flying.
+Oracle:Flying\nThis token can block only creatures with flying.

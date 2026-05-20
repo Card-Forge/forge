@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Dead and Alive
+Description=Dead and Alive blurs the line. Black reanimation and graveyard themes.
+Deck Type=constructed
+Set=WTH
+Image=dead_and_alive.jpg
+[main]
+8 Swamp|MIR|1
+8 Swamp|MIR|2
+8 Swamp|MIR|3
+1 Barrow Ghoul|WTH
+1 Circling Vultures|WTH
+3 Crypt Rats|VIS
+2 Fallen Askari|VIS
+2 Fledgling Djinn|WTH
+1 Hidden Horror|WTH
+1 Mischievous Poltergeist|WTH
+1 Morinfen|WTH
+3 Necratog|WTH
+2 Nekrataal|VIS
+2 Sewer Rats|MIR
+2 Shadow Rider|WTH
+1 Skulking Ghost|MIR
+1 Zombie Scavengers|WTH
+1 Infernal Tribute|WTH
+2 Necromancy|VIS
+1 Strands of Night|WTH
+1 Shattered Crypt|WTH
+2 Spinning Darkness|WTH
+2 Buried Alive|WTH
+2 Dark Banishing|MIR
+2 Drain Life|MIR
+[sideboard]

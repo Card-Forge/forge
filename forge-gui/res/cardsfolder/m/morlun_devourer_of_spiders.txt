@@ -1,0 +1,11 @@
+Name:Morlun, Devourer of Spiders
+Variant:UniversesWithin:FlavorName:Luis, Pompous Pillager
+ManaCost:X B B
+Types:Legendary Creature Vampire Villain
+PT:2/1
+K:Lifelink
+K:etbCounter:P1P1:X:no Condition:NICKNAME enters with X +1/+1 counters on him.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When NICKNAME enters, he deals X damage to target opponent.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ X
+SVar:X:Count$xPaid
+Oracle:Lifelink\nMorlun enters with X +1/+1 counters on him.\nWhen Morlun enters, he deals X damage to target opponent.

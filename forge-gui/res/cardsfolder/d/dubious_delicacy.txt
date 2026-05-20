@@ -1,0 +1,10 @@
+Name:Dubious Delicacy
+ManaCost:2 B
+Types:Artifact Food
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDebuff | TriggerDescription$ When this artifact enters, up to one target creature gets -3/-3 until end of turn.
+SVar:TrigDebuff:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True
+A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+A:AB$ LoseLife | Cost$ 2 T Sac<1/CARDNAME> | ValidTgts$ Opponent | LifeAmount$ 3 | SpellDescription$ Target opponent loses 3 life.
+DeckHas:Ability$LifeGain|Food
+Oracle:Flash\nWhen this artifact enters, up to one target creature gets -3/-3 until end of turn.\n{2}, {T}, Sacrifice this artifact: You gain 3 life.\n{2}, {T}, Sacrifice this artifact: Target opponent loses 3 life.

@@ -1,0 +1,10 @@
+Name:Exploration Broodship
+ManaCost:G
+Types:Artifact Spacecraft
+PT:4/4
+K:Station:8
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE3_CHARGE | AddStaticAbility$ ExplorationStatic | Description$ STATION 3+ You may play an additional land on each of your turns.
+SVar:ExplorationStatic:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE8_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddStaticAbility$ BroodshipStatic | Description$ STATION 8+ Flying,,,Once during each of your turns, you may cast a permanent spell from your graveyard by sacrificing a land in addition to paying its other costs.
+SVar:BroodshipStatic:Mode$ Continuous | Affected$ Permanent.nonLand+YouOwn | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | RaiseCost$ Sac<1/Land> | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ Once during each of your turns, you may cast a permanent spell from your graveyard by sacrificing a land in addition to paying its other costs.
+Oracle:Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.)\nSTATION 3+\nYou may play an additional land on each of your turns.\nSTATION 8+\nFlying\nOnce during each of your turns, you may cast a permanent spell from your graveyard by sacrificing a land in addition to paying its other costs.

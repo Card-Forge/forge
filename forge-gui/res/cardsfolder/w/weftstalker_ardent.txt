@@ -1,0 +1,8 @@
+Name:Weftstalker Ardent
+ManaCost:2 R
+Types:Creature Drix Artificer
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl,Artifact.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever another creature or artifact you control enters, this creature deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+K:Warp:R
+Oracle:Whenever another creature or artifact you control enters, this creature deals 1 damage to each opponent.\nWarp {R} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)

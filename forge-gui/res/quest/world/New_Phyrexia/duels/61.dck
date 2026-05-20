@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Aigamuxa
+Title=Aigamuxa
+Icon=Aigamuxa.jpg
+Difficulty=Very Hard
+Description=../Modern/New_Phyrexia/Eagle_Nest_Modern_Tournament/Mike_Fernando_-_Modern_Gobs_(Modern,_#19617).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Boggart Ram-Gang
+2 Goblin Bushwhacker
+4 Goblin Chieftain
+4 Goblin Guide
+3 Goblin Wardriver
+3 Mogg War Marshal
+1 Sensation Gorger
+2 Siege-Gang Commander
+3 Tattermunge Maniac
+3 Warren Instigator
+1 Wort, Boggart Auntie
+4 AEther Vial
+1 Dismember
+4 Lightning Bolt
+2 Goblin Grenade
+4 Arid Mesa
+4 Blood Crypt
+11 Mountain
+[Sideboard]
+3 Combust
+2 Earwig Squad
+1 Goblin King
+2 Guttural Response
+1 Murderous Redcap
+2 Shattering Spree
+2 Vexing Shusher

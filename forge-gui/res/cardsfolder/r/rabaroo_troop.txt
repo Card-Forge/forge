@@ -1,0 +1,9 @@
+Name:Rabaroo Troop
+ManaCost:3 W W
+Types:Creature Rabbit Kangaroo
+PT:3/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigFlying | TriggerDescription$ Landfall — Whenever a land you control enters, this creature gains flying until end of turn and you gain 1 life.
+SVar:TrigFlying:DB$ Pump | Defined$ Self | KW$ Flying | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+K:TypeCycling:Plains:2
+Oracle:Landfall — Whenever a land you control enters, this creature gains flying until end of turn and you gain 1 life.\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)

@@ -4,7 +4,7 @@ Types:Artifact Creature Goat
 PT:2/2
 K:Flash
 K:Vigilance
-K:Devour artifact:1
+K:Devour:1:Artifact
 DeckHas:Ability$Counters
 DeckNeeds:Type$Artifact
 Oracle:Flash\nVigilance\nDevour artifact 1 (As this enters, you may sacrifice any number of artifacts. This creature enters with that many +1/+1 counters on it.)

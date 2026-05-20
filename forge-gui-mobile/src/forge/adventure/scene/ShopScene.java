@@ -10,7 +10,7 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FOptionPane;
-import forge.util.Callback;
+import forge.util.ItemPool;
 
 /**
  * DeckEditScene
@@ -49,7 +49,7 @@ public class ShopScene extends ForgeScene {
 
     @Override
     public FScreen getScreen() {
-        return screen == null ? screen = new AdventureDeckEditor(true, null) : screen;
+        return screen == null ? screen = new AdventureDeckEditor(true) : screen;
     }
 
     private void processAutoSell() {
@@ -64,12 +64,9 @@ public class ShopScene extends ForgeScene {
                 return;
             FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblSellAllConfirm", cards, profit),
                 Forge.getLocalizer().getMessage("lblAutoSellable"), Forge.getLocalizer().getMessage("lblSell"),
-                Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<Boolean>() {
-                    @Override
-                    public void run(Boolean result) {
-                        if (result) {
-                            doAutosell();
-                        }
+                Forge.getLocalizer().getMessage("lblCancel"), false, result -> {
+                    if (result) {
+                        doAutosell();
                     }
                 }
             );
@@ -79,7 +76,9 @@ public class ShopScene extends ForgeScene {
     }
 
     private void doAutosell() {
-        AdventurePlayer.current().doAutosell();
+        ItemPool<PaperCard> autoSellCards = AdventurePlayer.current().autoSellCards;
+        AdventurePlayer.current().doBulkSell(autoSellCards);
+        autoSellCards.clear();
         if (screen != null)
             screen.refresh();
     }

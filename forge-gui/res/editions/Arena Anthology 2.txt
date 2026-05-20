@@ -1,0 +1,33 @@
+[metadata]
+Code=AA2
+Date=2025-08-19
+Name=Arena Anthology 2
+Type=Online
+ScryfallCode=AA2
+
+[cards]
+1 U Mother of Runes @Scott M. Fischer
+2 U Oust @Mike Bierek
+3 U Control Magic @Clint Cearley
+4 C Mana Leak @Christopher Rush
+5 C Thought Scour @David Rapoza
+6 C Trinket Mage @Mark A. Nelson
+7 R Barrowgoyf @Igor Kieryluk
+8 R Damn @Lucas Graciano
+9 C Empty the Warrens @Johan Grenier
+10 R Fiery Confluence @Kieran Yanner
+11 C Flame Slash @Raymond Swanland
+12 R Pyrogoyf @Xabi Gaztelua
+13 U Eternal Witness @Chris Rahn
+14 R Ignoble Hierarch @Mark Zug
+15 R Rofellos, Llanowar Emissary @Michael Sutfin
+16 M Grist, the Hunger Tide @Yongjae Choi
+17 U Life // Death @Anthony S. Waters & Scott Murphy
+18 M Wrenn and Six @Chase Stone
+19 R Currency Converter @Sean Murray
+20 M Mox Opal @Volkan Baǵa
+21 C Pyrite Spellbomb @Jim Nelson
+22 R Triplicate Titan @Andrew Mar
+23 C Ancient Den @Rob Alexander
+24 C Great Furnace @Rob Alexander
+25 C Tree of Tales @John Avon

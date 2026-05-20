@@ -1,0 +1,11 @@
+Name:Ambrosia Whiteheart
+ManaCost:1 W
+Types:Legendary Creature Bird
+PT:2/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may return another permanent you control to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | AILogic$ BounceOwnTrigger | Mandatory$ True | ChangeType$ Permanent.Other+YouCtrl
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land you control enters, CARDNAME gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1
+SVar:BuffedBy:Land
+Oracle:Flash\nWhen Ambrosia Whiteheart enters, you may return another permanent you control to its owner's hand.\nLandfall — Whenever a land you control enters, Ambrosia Whiteheart gets +1/+0 until end of turn.

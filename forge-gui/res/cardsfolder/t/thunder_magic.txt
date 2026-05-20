@@ -1,0 +1,9 @@
+Name:Thunder Magic
+ManaCost:R
+Types:Instant
+K:Tiered
+A:SP$ Charm | Choices$ DBThunder,DBThundara,DBThundaga
+SVar:DBThunder:DB$ DealDamage | PrecostDesc$ Thunder | ModeCost$ 0 | ValidTgts$ Creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
+SVar:DBThundara:DB$ DealDamage | PrecostDesc$ Thundara | ModeCost$ 3 | ValidTgts$ Creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+SVar:DBThundaga:DB$ DealDamage | PrecostDesc$ Thundaga | ModeCost$ 5 R | ValidTgts$ Creature | NumDmg$ 8 | SpellDescription$ CARDNAME deals 8 damage to target creature.
+Oracle:Tiered (Choose one additional cost.)\n• Thunder — {0} — Thunder Magic deals 2 damage to target creature.\n• Thundara — {3} — Thunder Magic deals 4 damage to target creature.\n• Thundaga — {5}{R} — Thunder Magic deals 8 damage to target creature.

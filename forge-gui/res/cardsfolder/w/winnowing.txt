@@ -1,0 +1,13 @@
+Name:Winnowing
+ManaCost:4 W W
+Types:Sorcery
+K:Convoke
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ YouChoose | SubAbility$ DBRepeatEach | StackDescription$ SpellDescription | SpellDescription$ For each player, you choose a creature that player controls. Then each player sacrifices all other creatures they control that don't share a creature type with the chosen creature they control.
+SVar:YouChoose:DB$ ChooseCard | Defined$ You | Choices$ Creature | ControlledByPlayer$ Remembered | RememberChosen$ True | Mandatory$ True | Reveal$ True
+SVar:DBRepeatEach:DB$ RepeatEach | DefinedCards$ Remembered | ClearRemembered$ True | RepeatSubAbility$ DBPump | SubAbility$ SacAllOthers
+SVar:DBPump:DB$ Pump | ImprintCards$ Valid Creature.!IsRemembered+ControlledBy RememberedController+!sharesCreatureTypeWith Remembered
+SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Creature.IsImprinted | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFor each player, you choose a creature that player controls. Then each player sacrifices all other creatures they control that don't share a creature type with the chosen creature they control.

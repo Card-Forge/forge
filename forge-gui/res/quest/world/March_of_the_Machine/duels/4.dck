@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Air-Walker
+Title=Air-Walker
+Icon=Air-Walker.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Christopher_Iaali_-_Mono_Blue_Tempo_(Standard,_#1636235).dck
+Deck Type=constructed
+
+[Main]
+4 Haughty Djinn
+2 Tolarian Terror
+2 Assimilate Essence
+3 Impulse
+3 Make Disappear
+4 Thirst for Discovery
+4 Fading Hope
+2 See Double
+2 Scatter Ray
+3 Flow of Knowledge
+1 Spell Pierce
+4 Consider
+3 Negate
+23 Island
+[Sideboard]
+4 Witness Protection
+1 Invoke the Winds
+1 Negate
+2 Shore Up
+1 Spell Pierce
+3 Faerie Mastermind
+2 Ephara's Dispersal
+1 Pithing Needle

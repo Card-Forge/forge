@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Impundulu
+Title=Impundulu
+Icon=Impundulu.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/1-3drop_-_Jeskai_Fires_(Standard,_#954886).dck
+Deck Type=constructed
+
+[Main]
+1 Brazen Borrower
+3 Kenrith, the Returned King
+4 Sphinx of Foresight
+4 Cavalier of Flame
+4 Bonecrusher Giant
+1 Mystical Dispute
+3 Deafening Clarion
+1 Elspeth Conquers Death
+4 Fires of Invention
+2 Narset of the Ancient Way
+4 Teferi, Time Raveler
+1 Plains
+2 Savai Triome
+2 Castle Vantress
+2 Temple of Epiphany
+2 Island
+2 Mountain
+3 Sacred Foundry
+3 Fabled Passage
+4 Steam Vents
+4 Hallowed Fountain
+4 Raugrin Triome
+[Sideboard]
+1 Keruga, the Macrosage
+1 Elspeth Conquers Death
+1 Deafening Clarion
+2 Flame Sweep
+3 Leyline of the Void
+3 Mystical Dispute
+4 Legion Warboss

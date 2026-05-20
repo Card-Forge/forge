@@ -2,7 +2,7 @@ Name:Yannik, Scavenging Sentinel
 ManaCost:2 G W
 Types:Legendary Creature Hyena Beast
 PT:3/3
-K:Partner:Nikara, Lair Scavenger:Nikara
+K:Partner with:Nikara, Lair Scavenger:Nikara
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, exile another creature you control until NICKNAME leaves the battlefield. When you do, distribute +1/+1 counters among any number of target creatures, where X is the exiled creature's power.
 SVar:TrigExile:DB$ ChangeZone | Hidden$ True | ChangeType$ Creature.YouCtrl+Other | Mandatory$ True | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | Duration$ UntilHostLeavesPlay | SubAbility$ DBImmediateTrigger

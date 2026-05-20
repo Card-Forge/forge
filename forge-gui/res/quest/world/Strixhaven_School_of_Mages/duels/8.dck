@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/Dan_Cato_-_Five-Color_Niv_Mizzet_(Yorion)_(Standard,_#1140364).dck
+Deck Type=constructed
+
+[Main]
+2 Brazen Borrower
+4 Bonecrusher Giant
+4 Goldspan Dragon
+4 Galazeth Prismari
+1 Creative Outburst
+2 Prismari Command
+4 Saw It Coming
+3 Seize the Spoils
+3 Draconic Intervention
+4 Expressive Iteration
+4 Alrund's Epiphany
+4 Temple of Epiphany
+4 Frostboil Snarl
+4 Riverglide Pathway
+6 Island
+7 Mountain
+[Sideboard]
+1 Scorching Dragonfire
+1 Draconic Intervention
+2 Essence Scatter
+2 Disdainful Stroke
+3 Mystical Dispute
+3 Redcap Melee
+3 Fire Prophecy

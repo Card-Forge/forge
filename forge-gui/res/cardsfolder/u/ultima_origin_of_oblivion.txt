@@ -1,0 +1,14 @@
+Name:Ultima, Origin of Oblivion
+ManaCost:5
+Types:Legendary Creature God
+PT:4/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever NICKNAME attacks, put a blight counter on target land. For as long as that land has a blight counter on it, it loses all land types and abilities and has "{T}: Add {C}."
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Land | CounterType$ BLIGHT | CounterNum$ 1 | AITgts$ Land.Basic+YouCtrl+!canProduceManaColor Colorless | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ BlightStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ BLIGHT | Duration$ Permanent
+SVar:BlightStatic:Mode$ Continuous | Affected$ Card.IsRemembered | RemoveLandTypes$ True | RemoveAllAbilities$ True | AddAbility$ ColorlessMana | Description$ For as long as that land has a blight counter on it, it loses all land types and abilities and has "{T}: Add {C}."
+SVar:ColorlessMana:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+T:Mode$ TapsForMana | ValidCard$ Land | Activator$ You | Produced$ C | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap a land for {C}, add an additional {C}.
+SVar:TrigMana:DB$ Mana | Produced$ C
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Ultima attacks, put a blight counter on target land. For as long as that land has a blight counter on it, it loses all land types and abilities and has "{T}: Add {C}."\nWhenever you tap a land for {C}, add an additional {C}.

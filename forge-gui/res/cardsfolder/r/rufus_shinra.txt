@@ -1,0 +1,9 @@
+Name:Rufus Shinra
+ManaCost:1 W B
+Types:Legendary Creature Human Noble
+PT:2/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+namedDarkstar | PresentCompare$ EQ0 | TriggerDescription$ Whenever CARDNAME attacks, if you don't control a creature named Darkstar, create Darkstar, a legendary 2/2 white and black Dog creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ darkstar
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token & Type$Dog
+Oracle:Whenever Rufus Shinra attacks, if you don't control a creature named Darkstar, create Darkstar, a legendary 2/2 white and black Dog creature token.

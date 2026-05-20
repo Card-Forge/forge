@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Ghost Council
+Title=Ghost Council
+Icon=Ghost Council.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Seshita_Yasuo_-_BR_Evoke_(Modern,_#1654287).dck
+Deck Type=constructed
+
+[Main]
+1 Seasoned Pyromancer
+4 Dauthi Voidwalker
+4 Grief
+4 Fury
+4 Ragavan, Nimble Pilferer
+3 Fable of the Mirror-Breaker
+2 Nissa, Resurgent Animist
+2 Fatal Push
+1 Lightning Bolt
+3 Feign Death
+3 Undying Malice
+2 Sheoldred's Edict
+3 Thoughtseize
+3 Wrenn and Six
+2 Swamp
+3 Blood Crypt
+4 Bloodstained Mire
+3 Polluted Delta
+4 Verdant Catacombs
+1 Overgrown Tomb
+2 Blackcleave Cliffs
+1 Nurturing Peatland
+1 Ziatora's Proving Ground
+[Sideboard]
+1 Fatal Push
+1 Forest
+2 Engineered Explosives
+2 Chalice of the Void
+2 Alpine Moon
+1 Nihil Spellbomb
+2 Orvar, the All-Form
+1 Foundation Breaker
+2 Hidetsugu Consumes All
+1 Boseiju, Who Endures

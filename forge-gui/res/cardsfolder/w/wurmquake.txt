@@ -1,7 +1,7 @@
 Name:Wurmquake
 ManaCost:4 G G
 Types:Sorcery
-A:SP$ Token | TokenScript$ g_x_x_phyrexian_wurm_trample_toxic | TokenAmount$ 1 | TokenPower$ X | TokenToughness$ X | SubAbility$ DBToken | SpellDescription$ Corrupted — Create an X/X green Phyrexian Wurm creature token with trample and toxic 1, where X is the amount of mana spent to cast this spell.
+A:SP$ Token | TokenScript$ g_x_x_phyrexian_wurm_trample_toxic | TokenPower$ X | TokenToughness$ X | SubAbility$ DBToken | SpellDescription$ Corrupted — Create an X/X green Phyrexian Wurm creature token with trample and toxic 1, where X is the amount of mana spent to cast this spell.
 SVar:DBToken:DB$ Token | TokenScript$ g_x_x_phyrexian_wurm_trample_toxic | TokenPower$ X | TokenToughness$ X | TokenAmount$ Y | SpellDescription$ Then for each opponent with three or more poison counters, you create another one of those tokens.
 SVar:X:Count$CastTotalManaSpent
 SVar:Y:PlayerCountOpponents$HasPropertyIsCorrupted

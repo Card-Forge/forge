@@ -1,0 +1,12 @@
+Name:Hei Bai, Spirit of Balance
+ManaCost:2 WB WB
+Types:Legendary Creature Bear Spirit
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter1 | TriggerDescription$ Whenever NICKNAME enters or attacks, you may sacrifice another creature or artifact. If you do, put two +1/+1 counters on NICKNAME.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter1 | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, you may sacrifice another creature or artifact. If you do, put two +1/+1 counters on NICKNAME.
+SVar:TrigPutCounter1:AB$ PutCounter | Cost$ Sac<1/Artifact.Other;Creature.Other/another creature or artifact> | CounterType$ P1P1 | CounterNum$ 2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigPutCounter2 | TriggerDescription$ When NICKNAME leaves the battlefield, put its counters on target creature you control.
+SVar:TrigPutCounter2:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters|Sacrifice
+Oracle:Whenever Hei Bai enters or attacks, you may sacrifice another creature or artifact. If you do, put two +1/+1 counters on Hei Bai.\nWhen Hei Bai leaves the battlefield, put its counters on target creature you control.

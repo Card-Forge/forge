@@ -1,0 +1,36 @@
+[metadata]
+Name=Nicol Bolas
+[Main]
+7 Swamp|LEA
+7 Island|LEA
+7 Mountain|LEA
+1 Urborg|LEG
+1 Tolaria|LEG
+1 Hammerheim|LEG
+4 Nicol Bolas|LEG
+2 Sol'kanar the Swamp King|LEG
+2 Tetsuo Umezawa|LEG
+2 Gwendlyn Di Corci|LEG
+1 Ur-Drago|LEG
+1 Axelrod Gunnarson|LEG
+2 Pyrotechnics|LEG
+2 Mana Drain|LEG
+2 Boomerang|LEG
+2 Chain Lightning|LEG
+2 Hellfire|LEG
+2 Demonic Torment|LEG
+2 Psionic Entity|LEG
+2 Firestorm Phoenix|LEG
+2 The Wretched|LEG
+2 Azure Drake|LEG
+2 Carrion Ants|LEG
+2 Beasts of Bogardan|LEG
+
+[StartInBattle_Reference]
+1 Mountain|LEA
+1 Swamp|LEA
+1 Island|LEA
+1 Unholy Citadel|LEG
+1 Wall of Shadows|LEG
+1 Wall of Dust|LEG
+1 Wall of Vapor|LEG

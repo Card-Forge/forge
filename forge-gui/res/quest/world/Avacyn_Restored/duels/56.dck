@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Blackbeard
+Title=Blackbeard
+Icon=Blackbeard.jpg
+Difficulty=Hard
+Description=../Modern/Avacyn_Restored/EvoModern_III/Hector_Sanz_-_Infect_(Modern,_#40905).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Glistener Elf
+4 Ichorclaw Myr
+4 Noble Hierarch
+4 Apostle's Blessing
+4 Giant Growth
+4 Groundswell
+4 Mutagenic Growth
+4 Vines of Vastwood
+4 Rancor
+4 Wild Defiance
+14 Forest
+4 Inkmoth Nexus
+2 Pendelhaven
+[Sideboard]
+3 Creeping Corrosion
+4 Dismember
+2 Pithing Needle
+3 Relic of Progenitus
+3 Spellskite

@@ -21,6 +21,7 @@ import java.io.Serializable;
 
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.PreferencesStore;
+import forge.model.FModel;
 
 @SuppressWarnings("serial")
 public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQPref> implements Serializable {
@@ -74,7 +75,7 @@ public class ConquestPreferences extends PreferencesStore<ConquestPreferences.CQ
     @Override
     public void save() {
         super.save();
-        ConquestUtil.updateRarityFilterOdds();
+        ConquestUtil.updateRarityFilterOdds(FModel.getConquestPreferences());
     }
 
     protected CQPref[] getEnumValues() {

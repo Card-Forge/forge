@@ -4,5 +4,5 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy | ValidBlocker$ Creature.withoutFlying+withoutReach | Description$ Enchanted creature can't be blocked except by creatures with flying or reach.
-S:Mode$ CantTarget | ValidCard$ Card.EnchantedBy | Activator$ Opponent | Description$ Enchanted creature can't be the target of spells or abilities your opponents control.
+S:Mode$ CantTarget | ValidTarget$ Card.EnchantedBy | Activator$ Opponent | Description$ Enchanted creature can't be the target of spells or abilities your opponents control.
 Oracle:Enchant creature\nEnchanted creature can't be blocked except by creatures with flying or reach.\nEnchanted creature can't be the target of spells or abilities your opponents control.

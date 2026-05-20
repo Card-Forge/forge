@@ -2,13 +2,14 @@ package forge.gui.util;
 
 import com.google.common.collect.Iterables;
 import forge.gui.GuiBase;
+import forge.util.FSerializableFunction;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.function.Function;
 
 public class SGuiChoose {
 
@@ -29,25 +30,29 @@ public class SGuiChoose {
     public static <T> T oneOrNone(final String message, final T[] choices) {
         return oneOrNone(message, choices, null, null);
     }
-    public static <T> T oneOrNone(final String message, final T[] choices, T selected, Function<T, String> display) {
+    public static <T> T oneOrNone(final String message, final T[] choices, T selected, FSerializableFunction<T, String> display) {
         if ((choices == null) || (choices.length == 0)) {
             return null;
         }
-        final List<T> choice = SGuiChoose.getChoices(message, 0, 1, choices, selected, display);
+        final List<T> choice = getChoices(message, 0, 1, choices, selected, display);
         return choice.isEmpty() ? null : choice.get(0);
     }
     public static <T> T oneOrNone(final String message, final Collection<T> choices) {
         return oneOrNone(message, choices, null, null);
     }
-    public static <T> T oneOrNone(final String message, final Collection<T> choices, T selected, Function<T, String> display) {
+    public static <T> T oneOrNone(final String message, final Collection<T> choices, T selected, FSerializableFunction<T, String> display) {
         if ((choices == null) || choices.isEmpty()) {
             return null;
         }
-        final List<T> choice = SGuiChoose.getChoices(message, 0, 1, choices, selected == null ? null : List.of(selected), display);
+        final List<T> choice = getChoices(message, 0, 1, choices, selected == null ? null : List.of(selected), display);
         return choice.isEmpty() ? null : choice.get(0);
     }
 
     public static <T> T one(final String message, final Collection<T> choices) {
+        return one(message, choices, null, null);
+    }
+
+    public static <T> T one(final String message, final Collection<T> choices, T selected, FSerializableFunction<T, String> display) {
         if (choices == null || choices.isEmpty()) {
             return null;
         }
@@ -55,14 +60,14 @@ public class SGuiChoose {
             return Iterables.getFirst(choices, null);
         }
 
-        final List<T> choice = SGuiChoose.getChoices(message, 1, 1, choices);
+        final List<T> choice = getChoices(message, 1, 1, choices, selected == null ? null : List.of(selected), display);
         assert choice.size() == 1;
         return choice.get(0);
     }
 
     // Nothing to choose here. Code uses this to just reveal one or more items
     public static <T> void reveal(final String message, final Collection<T> items) {
-        SGuiChoose.getChoices(message, -1, -1, items);
+        getChoices(message, -1, -1, items);
     }
 
     // Get Integer in range
@@ -93,7 +98,7 @@ public class SGuiChoose {
                 choices[i] = i + min;
             }
         }
-        return SGuiChoose.oneOrNone(message, choices);
+        return oneOrNone(message, choices);
     }
 
     public static Integer getInteger(final String message, final int min, final int max, final int cutoff) {
@@ -109,7 +114,7 @@ public class SGuiChoose {
         }
         choices.add("...");
 
-        final Object choice = SGuiChoose.oneOrNone(message, choices);
+        final Object choice = oneOrNone(message, choices);
         if (choice instanceof Integer || choice == null) {
             return (Integer)choice;
         }
@@ -146,13 +151,13 @@ public class SGuiChoose {
     public static <T> List<T> getChoices(final String message, final int min, final int max, final T[] choices) {
         return getChoices(message, min, max, Arrays.asList(choices), null, null);
     }
-    public static <T> List<T> getChoices(final String message, final int min, final int max, final T[] choices, final T selected, final Function<T, String> display) {
+    public static <T> List<T> getChoices(final String message, final int min, final int max, final T[] choices, final T selected, final FSerializableFunction<T, String> display) {
         return getChoices(message, min, max, Arrays.asList(choices), selected == null ? null : List.of(selected), display);
     }
     public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices) {
         return getChoices(message, min, max, choices, null, null);
     }
-    public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final Collection<T> selected, final Function<T, String> display) {
+    public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final Collection<T> selected, final FSerializableFunction<T, String> display) {
         return GuiBase.getInterface().getChoices(message, min, max, choices, selected, display);
     }
 

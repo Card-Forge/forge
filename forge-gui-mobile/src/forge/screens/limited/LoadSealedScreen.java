@@ -12,7 +12,6 @@ import forge.deck.DeckGroup;
 import forge.deck.DeckProxy;
 import forge.deck.FDeckChooser;
 import forge.deck.FDeckEditor;
-import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
@@ -20,6 +19,7 @@ import forge.gamemodes.match.HostedMatch;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
+import forge.util.GuiPrefBinders;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
@@ -32,6 +32,7 @@ import forge.screens.home.LoadGameMenu;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
+import forge.util.Utils;
 
 public class LoadSealedScreen extends LaunchScreen {
     private final DeckManager lstDecks = add(new DeckManager(GameType.Draft));
@@ -44,6 +45,12 @@ public class LoadSealedScreen extends LaunchScreen {
     private final FLabel lblMode = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblMode")).font(GAME_MODE_FONT).build());
     private final FComboBox<String> cbMode = add(new FComboBox<>());
 
+    // Max games in a match frame and variables
+    private final FLabel lblGamesInMatch = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblMatch") + ":").font(GAME_MODE_FONT).build());
+    private final FComboBox<String> cbGamesInMatch = add(new FComboBox<>());
+    private final GuiPrefBinders.ComboBox cbGamesInMatchBinder = new GuiPrefBinders.ComboBox(
+        FPref.UI_MATCHES_PER_GAME, cbGamesInMatch);
+
     public LoadSealedScreen() {
         super(null, LoadGameMenu.getMenu());
 
@@ -53,12 +60,18 @@ public class LoadSealedScreen extends LaunchScreen {
 
         lstDecks.setup(ItemManagerConfig.SEALED_DECKS);
         lstDecks.setItemActivateHandler(event -> editSelectedDeck());
+
+        cbGamesInMatch.setFont(GAME_MODE_FONT);
+        cbGamesInMatch.addItem("1");
+        cbGamesInMatch.addItem("3");
+        cbGamesInMatch.addItem("5");
     }
 
     @Override
     public void onActivate() {
         lstDecks.setPool(DeckProxy.getAllSealedDecks());
         lstDecks.setSelectedString(DeckPreferences.getSealedDeck());
+        cbGamesInMatchBinder.load();
     }
 
     private void editSelectedDeck() {
@@ -66,7 +79,7 @@ public class LoadSealedScreen extends LaunchScreen {
         if (deck == null) { return; }
 
         DeckPreferences.setSealedDeck(deck.getName());
-        Forge.openScreen(new FDeckEditor(EditorType.Sealed, deck, true));
+        Forge.openScreen(new FDeckEditor(FDeckEditor.EditorConfigSealed, deck));
     }
 
     @Override
@@ -78,8 +91,16 @@ public class LoadSealedScreen extends LaunchScreen {
         float listHeight = height - labelHeight - y - FDeckChooser.PADDING;
         float comboBoxHeight = cbMode.getHeight();
 
-        lblMode.setBounds(x, y, lblMode.getAutoSizeBounds().width + FDeckChooser.PADDING / 2, comboBoxHeight);
-        cbMode.setBounds(x + lblMode.getWidth(), y, w - lblMode.getWidth(), comboBoxHeight);
+        float x2 = x;
+        float w1 = lblMode.getAutoSizeBounds().width;
+        float w2 = lblGamesInMatch.getAutoSizeBounds().width;
+        lblMode.setBounds(x2, y, w1 + FDeckChooser.PADDING / 2, comboBoxHeight);
+        x2 += lblMode.getWidth();
+        cbMode.setBounds(x2, y, w - x2 - w2 - Utils.AVG_FINGER_WIDTH, comboBoxHeight);
+        x2 += cbMode.getWidth();
+        lblGamesInMatch.setBounds(x2, y, w2 + FDeckChooser.PADDING / 2, comboBoxHeight);
+        x2 += lblGamesInMatch.getWidth();
+        cbGamesInMatch.setBounds(x2, y, Utils.AVG_FINGER_WIDTH, comboBoxHeight);
         y += comboBoxHeight + FDeckChooser.PADDING;
         lstDecks.setBounds(x, y, w, listHeight);
         y += listHeight + FDeckChooser.PADDING;
@@ -91,7 +112,9 @@ public class LoadSealedScreen extends LaunchScreen {
         FThreads.invokeInBackgroundThread(() -> {
             final DeckProxy humanDeck = lstDecks.getSelectedItem();
             if (humanDeck == null) {
-                FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblYouMustSelectExistingSealedPool"), Forge.getLocalizer().getMessage("lblNoDeck"));
+                FThreads.invokeInEdtLater(() ->
+                    FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblYouMustSelectExistingSealedPool"), Forge.getLocalizer().getMessage("lblNoDeck"))
+                );
                 return;
             }
 

@@ -2,7 +2,6 @@
 Code=DMR
 Date=2023-01-13
 Name=Dominaria Remastered
-Code2=DMR
 Type=Reprint
 BoosterCovers=3
 Booster=9 Common:fromsheet("DMR cards"), 3 Uncommon:fromSheet("DMR cards"), 1 RareMythic:fromSheet("DMR cards"), 1 BasicLand:fromSheet("DMR retro frame"), 1 !BasicLand:fromSheet("DMR retro frame")

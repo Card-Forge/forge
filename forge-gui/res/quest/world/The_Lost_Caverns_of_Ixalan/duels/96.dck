@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Oberon
+Title=Oberon
+Icon=Oberon.jpg
+Difficulty=Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Pedro_Henrique_Ribeiro_-_Grixis_Midrange_(Modern,_#1987850).dck
+Deck Type=constructed
+
+[Main]
+4 Sleep-Cursed Faerie
+4 Ragavan, Nimble Pilferer
+3 Snapcaster Mage
+4 Orcish Bowmasters
+3 Spellstutter Sprite
+1 Brazen Borrower
+3 Tishana's Tidebinder
+2 Spell Pierce
+4 Lightning Bolt
+1 Stern Scolding
+3 Counterspell
+4 Flame of Anor
+1 Force of Negation
+3 Preordain
+2 Steam Vents
+4 Spirebluff Canal
+4 Polluted Delta
+2 Island
+2 Scalding Tarn
+2 Darkslick Shores
+1 Otawara, Soaring City
+1 Swamp
+1 Creeping Tar Pit
+1 Watery Grave
+[Sideboard]
+2 Engineered Explosives
+3 Thoughtseize
+2 Stone of Erech
+1 Molten Collapse
+2 Brotherhood's End
+1 Force of Negation
+1 Tishana's Tidebinder
+3 Subtlety

@@ -3,6 +3,7 @@ package forge.screens.constructed;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import org.apache.commons.lang3.StringUtils;
@@ -41,7 +42,6 @@ import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
 import forge.toolbox.FToggleSwitch;
-import forge.util.Callback;
 import forge.util.Lang;
 import forge.util.NameGenerator;
 import forge.util.TextUtil;
@@ -204,7 +204,7 @@ public class PlayerPanel extends FContainer {
         });
         lstVanguardAvatars = new FVanguardChooser(isAi, e -> {
             btnVanguardAvatar.setText(Forge.getLocalizer().getMessage("lblVanguard")
-                    + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((CardManager)e.getSource()).getSelectedItem().getName());
+                    + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((CardManager)e.getSource()).getSelectedItem().getDisplayName());
             if (allowNetworking && btnVanguardAvatar.isEnabled() && humanAiSwitch.isToggled()) {
                 screen.updateMyDeck(index);
             }
@@ -465,8 +465,31 @@ public class PlayerPanel extends FContainer {
         public void handleEvent(FEvent e) {
             boolean toggled = humanAiSwitch.isToggled();
             if (allowNetworking) {
-                setIsReady(toggled);
-                screen.setReady(index, toggled);
+                if (isOpenAiSlotToggle()) {
+                    LobbySlotType newType = toggled ? LobbySlotType.AI : LobbySlotType.OPEN;
+                    boolean wasAi = isAi();
+                    type = newType;
+
+                    LobbySlot slot = screen.getLobby().getSlot(index);
+                    slot.setType(newType);
+
+                    if (newType == LobbySlotType.AI && getPlayerName().isEmpty()) {
+                        setPlayerName(NameGenerator.getRandomName("Any", "Any", screen.getPlayerNames()));
+                    }
+
+                    screen.update(index, newType);
+
+                    if (isAi() != wasAi) {
+                        onIsAiChanged(isAi());
+                    }
+
+                    setMayEdit(screen.getLobby().mayEdit(index));
+                    refreshSlotToggle();
+                    screen.firePlayerChangeListener(index);
+                } else {
+                    setIsReady(toggled);
+                    screen.setReady(index, toggled);
+                }
             }
             else {
                 type = toggled ? LobbySlotType.AI : LobbySlotType.LOCAL;
@@ -484,6 +507,27 @@ public class PlayerPanel extends FContainer {
             }
         }
     };
+
+    private boolean isOpenAiSlotToggle() {
+        return allowNetworking && index > 0 && mayControl
+                && (type == LobbySlotType.OPEN || type == LobbySlotType.AI);
+    }
+
+    private void refreshSlotToggle() {
+        if (isOpenAiSlotToggle()) {
+            humanAiSwitch.setOffText(Forge.getLocalizer().getMessage("lblOpen"));
+            humanAiSwitch.setOnText(Forge.getLocalizer().getMessage("lblAI"));
+            humanAiSwitch.setEnabled(mayControl);
+        } else if (allowNetworking) {
+            humanAiSwitch.setOffText(Forge.getLocalizer().getMessage("lblNotReady"));
+            humanAiSwitch.setOnText(Forge.getLocalizer().getMessage("lblReady"));
+            humanAiSwitch.setEnabled(mayEdit);
+        } else {
+            humanAiSwitch.setOffText(Forge.getLocalizer().getMessage("lblHuman"));
+            humanAiSwitch.setOnText(Forge.getLocalizer().getMessage("lblAI"));
+            humanAiSwitch.setEnabled(mayEdit);
+        }
+    }
 
     private final FEventHandler devModeSwitched = new FEventHandler() {
         @Override
@@ -534,18 +578,15 @@ public class PlayerPanel extends FContainer {
     private FEventHandler avatarCommand = new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            AvatarSelector.show(getPlayerName(), avatarIndex, screen.getUsedAvatars(), new Callback<Integer>() {
-                @Override
-                public void run(Integer result) {
-                    setAvatarIndex(result);
+            AvatarSelector.show(getPlayerName(), avatarIndex, screen.getUsedAvatars(), result -> {
+                setAvatarIndex(result);
 
-                    if (index < 2) {
-                        screen.updateAvatar(index, result);
-                        screen.updateAvatarPrefs();
-                    }
-                    if (allowNetworking) {
-                        screen.firePlayerChangeListener(index);
-                    }
+                if (index < 2) {
+                    screen.updateAvatar(index, result);
+                    screen.updateAvatarPrefs();
+                }
+                if (allowNetworking) {
+                    screen.firePlayerChangeListener(index);
                 }
             });
         }
@@ -554,18 +595,15 @@ public class PlayerPanel extends FContainer {
     private FEventHandler sleeveCommand = new FEventHandler() {
         @Override
         public void handleEvent(FEvent e) {
-            SleevesSelector.show(getPlayerName(), sleeveIndex, screen.getUsedSleeves(), new Callback<Integer>() {
-                @Override
-                public void run(Integer result) {
-                    setSleeveIndex(result);
+            SleevesSelector.show(getPlayerName(), sleeveIndex, screen.getUsedSleeves(), result -> {
+                setSleeveIndex(result);
 
-                    if (index < 2) {
-                        screen.updateSleeve(index, result);
-                        screen.updateSleevePrefs();
-                    }
-                    if (allowNetworking) {
-                        screen.firePlayerChangeListener(index);
-                    }
+                if (index < 2) {
+                    screen.updateSleeve(index, result);
+                    screen.updateSleevePrefs();
+                }
+                if (allowNetworking) {
+                    screen.firePlayerChangeListener(index);
                 }
             });
         }
@@ -804,21 +842,18 @@ public class PlayerPanel extends FContainer {
     private FLabel createNameRandomizer() {
         final FLabel newNameBtn = new FLabel.Builder().iconInBackground(false)
                 .icon(Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT).opaque(false).build();
-        newNameBtn.setCommand(e -> getNewName(new Callback<String>() {
-            @Override
-            public void run(String newName) {
-                if (newName == null) { return; }
+        newNameBtn.setCommand(e -> getNewName(newName -> {
+            if (newName == null) { return; }
 
-                txtPlayerName.setText(newName);
+            txtPlayerName.setText(newName);
 
-                if (index == 0) {
-                    prefs.setPref(FPref.PLAYER_NAME, newName);
-                    prefs.save();
-                    screen.getLobby().applyToSlot(index, UpdateLobbyPlayerEvent.nameUpdate(newName));
-                }
-                if (allowNetworking) {
-                    screen.firePlayerChangeListener(index);
-                }
+            if (index == 0) {
+                prefs.setPref(FPref.PLAYER_NAME, newName);
+                prefs.save();
+                screen.getLobby().applyToSlot(index, UpdateLobbyPlayerEvent.nameUpdate(newName));
+            }
+            if (allowNetworking) {
+                screen.firePlayerChangeListener(index);
             }
         }));
         return newNameBtn;
@@ -925,6 +960,8 @@ public class PlayerPanel extends FContainer {
             break;
         }
 
+        refreshSlotToggle();
+
         boolean isAi = isAi();
         if (isAi != wasAi && deckChooser != null) {
             onIsAiChanged(isAi);
@@ -963,7 +1000,9 @@ public class PlayerPanel extends FContainer {
     public void setIsReady(boolean isReady0) {
         if (isReady == isReady0) { return; }
         isReady = isReady0;
-        if (allowNetworking) {
+        // humanAiSwitch doubles as the Open/AI selector for host-controlled opponent slots;
+        // only drive it from the ready field when the switch is actually showing Ready/NotReady.
+        if (allowNetworking && !isOpenAiSlotToggle()) {
             humanAiSwitch.setToggled(isReady);
         }
     }
@@ -975,7 +1014,7 @@ public class PlayerPanel extends FContainer {
         sleeveLabel.setEnabled(mayEdit);
         txtPlayerName.setEnabled(mayEdit);
         nameRandomiser.setEnabled(mayEdit);
-        humanAiSwitch.setEnabled(mayEdit);
+        refreshSlotToggle();
         cbTeam.setEnabled(mayEdit);
         if (devModeSwitch != null) {
             devModeSwitch.setEnabled(mayEdit);
@@ -1001,6 +1040,7 @@ public class PlayerPanel extends FContainer {
     public void setMayControl(boolean mayControl0) {
         if (mayControl == mayControl0) { return; }
         mayControl = mayControl0;
+        refreshSlotToggle();
     }
 
     public void setMayRemove(boolean mayRemove0) {
@@ -1063,48 +1103,39 @@ public class PlayerPanel extends FContainer {
         return new FLabel.Builder().text(title).font(LABEL_FONT).align(Align.right).build();
     }
     
-    private static final ImmutableList<String> genderOptions = ImmutableList.of(Forge.getLocalizer().getInstance().getMessage("lblMale"), Forge.getLocalizer().getInstance().getMessage("lblFemale"), Forge.getLocalizer().getInstance().getMessage("lblAny"));
-    private static final ImmutableList<String> typeOptions   = ImmutableList.of(Forge.getLocalizer().getInstance().getMessage("lblFantasy"), Forge.getLocalizer().getInstance().getMessage("lblGeneric"), Forge.getLocalizer().getInstance().getMessage("lblAny"));
-    private void getNewName(final Callback<String> callback) {
+    private static final ImmutableList<String> genderOptions = ImmutableList.of(Forge.getLocalizer().getMessage("lblMale"), Forge.getLocalizer().getMessage("lblFemale"), Forge.getLocalizer().getMessage("lblAny"));
+    private static final ImmutableList<String> typeOptions   = ImmutableList.of(Forge.getLocalizer().getMessage("lblFantasy"), Forge.getLocalizer().getMessage("lblGeneric"), Forge.getLocalizer().getMessage("lblAny"));
+    private void getNewName(final Consumer<String> callback) {
         final String title = Forge.getLocalizer().getMessage("lblGetNewRandomName");
         final String message = Forge.getLocalizer().getMessage("lbltypeofName");
         final FSkinImage icon = FOptionPane.QUESTION_ICON;
 
-        FOptionPane.showOptionDialog(message, title, icon, genderOptions, 2, new Callback<Integer>() {
-            @Override
-            public void run(final Integer genderIndex) {
-                if (genderIndex == null || genderIndex < 0) {
-                    callback.run(null);
+        FOptionPane.showOptionDialog(message, title, icon, genderOptions, 2, genderIndex -> {
+            if (genderIndex == null || genderIndex < 0) {
+                callback.accept(null);
+                return;
+            }
+
+            FOptionPane.showOptionDialog(message, title, icon, typeOptions, 2, typeIndex -> {
+                if (typeIndex == null || typeIndex < 0) {
+                    callback.accept(null);
                     return;
                 }
-                
-                FOptionPane.showOptionDialog(message, title, icon, typeOptions, 2, new Callback<Integer>() {
-                    @Override
-                    public void run(final Integer typeIndex) {
-                        if (typeIndex == null || typeIndex < 0) {
-                            callback.run(null);
-                            return;
-                        }
 
-                        generateRandomName(genderOptions.get(genderIndex), typeOptions.get(typeIndex), screen.getPlayerNames(), title, callback);
-                    }
-                });
-            }
+                generateRandomName(genderOptions.get(genderIndex), typeOptions.get(typeIndex), screen.getPlayerNames(), title, callback);
+            });
         });
     }
 
-    private void generateRandomName(final String gender, final String type, final List<String> usedNames, final String title, final Callback<String> callback) {
+    private void generateRandomName(final String gender, final String type, final List<String> usedNames, final String title, final Consumer<String> callback) {
         final String newName = NameGenerator.getRandomName(gender, type, usedNames);
         String confirmMsg = Forge.getLocalizer().getMessage("lblconfirmName").replace("%s", newName);
-        FOptionPane.showConfirmDialog(confirmMsg, title, Forge.getLocalizer().getMessage("lblUseThisName"), Forge.getLocalizer().getMessage("lblTryAgain"), true, new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    callback.run(newName);
-                }
-                else {
-                    generateRandomName(gender, type, usedNames, title, callback);
-                }
+        FOptionPane.showConfirmDialog(confirmMsg, title, Forge.getLocalizer().getMessage("lblUseThisName"), Forge.getLocalizer().getMessage("lblTryAgain"), true, result -> {
+            if (result) {
+                callback.accept(newName);
+            }
+            else {
+                generateRandomName(gender, type, usedNames, title, callback);
             }
         });
     }

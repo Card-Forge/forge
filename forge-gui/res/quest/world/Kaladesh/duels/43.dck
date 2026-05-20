@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Oshun
+Title=Oshun
+Icon=Oshun.jpg
+Difficulty=Medium
+Description=Kaladesh/Competitive_Standard_Constructed_League/NumbaOneCombo_-_Azorius_Flash_(Standard,_#654356).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Archangel Avacyn
+4 Reflector Mage
+4 Selfless Spirit
+4 Spell Queller
+4 Thraben Inspector
+4 Smuggler's Copter
+2 Revolutionary Rebuff
+1 Declaration in Stone
+4 Stasis Snare
+4 Gideon, Ally of Zendikar
+6 Island
+10 Plains
+4 Port Town
+4 Prairie Stream
+1 Westvale Abbey
+[Sideboard]
+2 Blessed Alliance
+2 Declaration in Stone
+2 Fragmentize
+2 Jace, Unraveler of Secrets
+2 Linvala, the Preserver
+1 Negate
+2 Spell Shrivel
+2 Void Shatter

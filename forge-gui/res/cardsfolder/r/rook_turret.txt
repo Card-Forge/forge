@@ -1,0 +1,8 @@
+Name:Rook Turret
+ManaCost:3 U
+Types:Artifact Creature Construct
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoot | TriggerDescription$ Whenever another artifact you control enters, you may draw a card. If you do, discard a card.
+SVar:TrigLoot:AB$ Discard | Defined$ You | Mode$ TgtChoose | Cost$ Draw<1/You>
+Oracle:Flying\nWhenever another artifact you control enters, you may draw a card. If you do, discard a card.

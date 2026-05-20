@@ -1,0 +1,12 @@
+Name:Stuck in Summoner's Sanctum
+ManaCost:2 U
+Types:Enchantment Aura
+K:Flash
+K:Enchant:Artifact,Creature:artifact or creature
+SVar:AttachAITgts:Artifact,Creature
+SVar:AttachAILogic:Curse
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When this Aura enters, tap enchanted creature.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Permanent.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.
+S:Mode$ CantBeActivated | ValidCard$ Permanent.EnchantedBy | Secondary$ True | Description$ Enchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.
+Oracle:Flash\nEnchant artifact or creature\nWhen this Aura enters, tap enchanted permanent.\nEnchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.

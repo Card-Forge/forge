@@ -1,0 +1,7 @@
+Name:Kyoshi Warrior Exemplars
+ManaCost:3 G
+Types:Creature Human Warrior Ally
+PT:4/3
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Land.YouCtrl | PresentCompare$ GE8 | Execute$ TrigPumpAll | TriggerDescription$ Whenever this creature attacks, if you control eight or more lands, creatures you control get +2/+2 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2
+Oracle:Whenever this creature attacks, if you control eight or more lands, creatures you control get +2/+2 until end of turn.

@@ -1,0 +1,6 @@
+Name:Lessons from Life
+ManaCost:2 G U
+Types:Sorcery
+A:SP$ Draw | Defined$ You | NumCards$ 3 | SubAbility$ DBChangeZone | SpellDescription$ Draw three cards. You may put a land card from your hand onto the battlefield tapped.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.YouOwn
+Oracle:Draw three cards. You may put a land card from your hand onto the battlefield tapped.

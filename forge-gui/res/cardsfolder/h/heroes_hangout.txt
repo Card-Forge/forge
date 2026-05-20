@@ -1,0 +1,12 @@
+Name:Heroes' Hangout
+Variant:UniversesWithin:FlavorName:Fire-Brained Scheme
+ManaCost:R
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDateNight,DBPatrolNight
+SVar:DBDateNight:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Date Night — Exile the top two cards of your library. Choose one of them. Until the end of your next turn, you may play that card.
+SVar:DBChoose:DB$ ChooseCard | Defined$ You | Amount$ 1 | Mandatory$ True | Choices$ Card.IsRemembered | ChoiceZone$ Exile | ChoiceTitle$ Choose one of the exiled cards | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | RememberObjects$ ChosenCard | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the chosen card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:DBPatrolNight:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select one or two target creatures | TargetMin$ 1 | TargetMax$ 2 | NumAtt$ +1 | KW$ First Strike | SpellDescription$ Patrol Night — One or two target creatures each get +1/+0 and gain first strike until end of turn.
+Oracle:Choose one —\n• Date Night — Exile the top two cards of your library. Choose one of them. Until the end of your next turn, you may play that card.\n• Patrol Night — One or two target creatures each get +1/+0 and gain first strike until end of turn.

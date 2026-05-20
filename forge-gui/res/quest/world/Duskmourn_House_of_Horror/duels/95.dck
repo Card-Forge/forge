@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Orunmila
+Title=Orunmila
+Icon=Orunmila.jpg
+Difficulty=Hard
+Description=./Modern/Duskmourn_House_of_Horror/Adriano_Yakuwa_-_Golgari_Yawgmoth_(Modern,_#2251236).dck
+Deck Type=constructed
+
+[Main]
+1 Haywire Mite
+4 Orcish Bowmasters
+4 Delighted Halfling
+1 Endurance
+4 Young Wolf
+4 Yawgmoth, Thran Physician
+1 Walking Ballista
+3 Wall of Roots
+1 Hapatra, Vizier of Poisons
+2 Overlord of the Balemurk
+1 Zulaport Cutthroat
+3 Agatha's Soul Cauldron
+4 Chord of Calling
+3 Malevolent Rumble
+4 Grist, the Hunger Tide
+2 Underground Mortuary
+2 Windswept Heath
+1 Wooded Foothills
+1 Dryad Arbor
+1 Pendelhaven
+2 Forest
+1 Swamp
+2 Overgrown Tomb
+2 Blooming Marsh
+2 Verdant Catacombs
+2 Boseiju, Who Endures
+1 Takenuma, Abandoned Mire
+1 Shifting Woodland
+1 Misty Rainforest
+[Sideboard]
+1 Soulless Jailer
+1 Endurance
+2 Fulminator Mage
+2 Surgical Extraction
+3 Thoughtseize
+2 Fatal Push
+1 Force of Vigor
+1 Abrupt Decay
+2 The Meathook Massacre

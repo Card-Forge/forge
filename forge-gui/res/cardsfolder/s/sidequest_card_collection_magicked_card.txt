@@ -1,0 +1,22 @@
+Name:Sidequest: Card Collection
+ManaCost:3 U
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this enchantment enters, draw three cards, then discard two cards.
+SVar:TrigDraw:DB$ Draw | NumCards$ 3 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | NumCards$ 2 | Mode$ TgtChoose | Defined$ You
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE8 | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your end step, if eight or more cards are in your graveyard, transform this enchantment.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:X:Count$ValidGraveyard Card.YouOwn
+AlternateMode:DoubleFaced
+Oracle:When this enchantment enters, draw three cards, then discard two cards.\nAt the beginning of your end step, if eight or more cards are in your graveyard, transform this enchantment.
+
+ALTERNATE
+
+Name:Magicked Card
+ManaCost:no cost
+Colors:blue
+Types:Artifact Vehicle
+PT:4/4
+K:Flying
+K:Crew:1
+Oracle:Flying\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

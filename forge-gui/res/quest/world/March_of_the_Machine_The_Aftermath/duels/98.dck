@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Iwasaki_Hayato_-_Human_Aggro_(Modern,_#1659370).dck
+Deck Type=constructed
+
+[Main]
+4 Meddling Mage
+3 Thalia, Guardian of Thraben
+4 Champion of the Parish
+4 Reflector Mage
+4 Thalia's Lieutenant
+2 Unsettled Mariner
+4 Esper Sentinel
+3 Adeline, Resplendent Cathar
+4 Coppercoat Vanguard
+2 Jirina, Dauntless General
+4 Aether Vial
+2 Force of Virtue
+4 Plains
+4 Unclaimed Territory
+4 Cavern of Souls
+3 Silent Clearing
+1 Eiganjo, Seat of the Empire
+4 Secluded Courtyard
+[Sideboard]
+2 Magus of the Moon
+2 Chalice of the Void
+2 Dismember
+1 Emrakul, the Aeons Torn
+2 Orvar, the All-Form
+3 Sanctifier en-Vec
+1 Solitude
+2 Outland Liberator

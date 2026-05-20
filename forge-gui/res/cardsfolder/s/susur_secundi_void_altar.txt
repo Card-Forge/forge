@@ -1,0 +1,11 @@
+Name:Susur Secundi, Void Altar
+ManaCost:no cost
+Types:Land Planet
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+K:Station:12
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE12_CHARGE | AddAbility$ SusurDraw | Description$ STATION 12+ {1}{B}, {T}, Pay 2 life, Sacrifice a creature: Draw cards equal to the sacrificed creature's power. Activate only as a sorcery.
+SVar:SusurDraw:AB$ Draw | Cost$ 1 B T PayLife<2> Sac<1/Creature> | SorcerySpeed$ True | NumCards$ X | SpellDescription$ Draw cards equal to the sacrificed creature's power. Activate only as a sorcery.
+SVar:X:Sacrificed$CardPower
+Oracle:This land enters tapped.\n{T}: Add {B}.\nStation (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.)\nSTATION 12+\n{1}{B}, {T}, Pay 2 life, Sacrifice a creature: Draw cards equal to the sacrificed creature's power. Activate only as a sorcery.

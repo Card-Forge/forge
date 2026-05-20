@@ -1,0 +1,56 @@
+crab.png
+size: 144,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 128, 0
+  size: 16, 16
+Idle 
+  xy: 5,16
+  size: 20, 16   
+Idle 
+  xy: 37,16
+  size: 20, 16   
+Idle 
+  xy: 69,16
+  size: 20, 16   
+Idle 
+  xy: 101,16
+  size: 20, 16   
+Walk
+  xy: 5,48
+  size: 21, 16      
+Walk 
+  xy: 37,48
+  size: 21, 16  
+Walk 
+  xy: 69,48
+  size: 21, 16  
+Walk 
+  xy: 101,48
+  size: 21, 16  
+Attack 
+  xy: 6,112
+  size: 20, 16      
+Attack 
+  xy: 38,112
+  size: 20, 16 
+Attack 
+  xy: 70,112
+  size: 20, 16 
+Attack 
+  xy: 102,112
+  size: 20, 16            
+Death 
+  xy: 5, 80
+  size: 21, 16      
+Death 
+  xy: 37, 80
+  size: 21, 16 
+Death 
+  xy: 69, 80
+  size: 21, 16 
+Death 
+  xy: 102, 80
+  size: 21, 16

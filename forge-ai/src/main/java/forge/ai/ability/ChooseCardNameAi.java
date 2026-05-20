@@ -22,16 +22,19 @@ import java.util.Map;
 public class ChooseCardNameAi extends SpellAbilityAi {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
         if (sa.hasParam("AILogic")) {
             // Don't tap creatures that may be able to block
             if (ComputerUtil.waitForBlocking(sa)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.WaitForCombat);
             }
 
             String logic = sa.getParam("AILogic");
             if (logic.equals("CursedScroll")) {
-                return SpecialCardAi.CursedScroll.consider(ai, sa);
+                if (SpecialCardAi.CursedScroll.consider(ai, sa)) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -43,32 +46,39 @@ public class ChooseCardNameAi extends SpellAbilityAi {
                     sa.getTargets().add(ai);
                 }
             }
-            return true;
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
-        return false;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
         if ("PithingNeedle".equals(aiLogic)) {
-            // Make sure theres something in play worth Needlings.
+            // Make sure there's something in play worth Needlings.
             // Planeswalker or equipment or something
 
             CardCollection oppPerms = CardLists.getValidCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), "Card.OppCtrl+hasNonManaActivatedAbility", ai, sa.getHostCard(), sa);
             if (oppPerms.isEmpty()) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
 
             Card card = ComputerUtilCard.getBestPlaneswalkerAI(oppPerms);
             if (card != null) {
-                return true;
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
             // 5 percent chance to cast per opposing card with a non mana ability
-            return MyRandom.getRandom().nextFloat() <= .05 * oppPerms.size();
+            if (MyRandom.getRandom().nextFloat() <= .05 * oppPerms.size()) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-        return mandatory;
+
+        if (mandatory) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.card.spellability.SpellAbility, java.util.List, boolean)
@@ -92,7 +102,7 @@ public class ChooseCardNameAi extends SpellAbilityAi {
         final CardDb cardDb = StaticData.instance().getCommonCards();
 
         for (ICardFace face : faces) {
-            final CardRules rules = cardDb.getRules(face.getName());
+            final CardRules rules = cardDb.getRulesOrElseUnsupported(face.getName());
             boolean isOther = rules.getOtherPart() == face;
             final PaperCard paper = cardDb.getCard(rules.getName());
             final Card card = Card.fromPaperCard(paper, ai);

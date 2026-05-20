@@ -17,6 +17,8 @@
  */
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.player.Player;
@@ -38,7 +40,7 @@ import java.util.List;
 public class AddTurnAi extends SpellAbilityAi {
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
         Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
 
@@ -47,41 +49,41 @@ public class AddTurnAi extends SpellAbilityAi {
             if (sa.canTarget(ai) && (mandatory || !ai.getGame().getReplacementHandler().wouldExtraTurnBeSkipped(ai))) {
                 sa.getTargets().add(ai);
             } else if (mandatory) {
-            	for (final Player ally : ai.getAllies()) {
+                for (final Player ally : ai.getAllies()) {
                     if (sa.canTarget(ally)) {
-                    	sa.getTargets().add(ally);
-                    	break;
+                        sa.getTargets().add(ally);
+                        break;
                     }
-            	}
+                }
                 if (!sa.getTargetRestrictions().isMinTargetsChosen(sa.getHostCard(), sa) && opp != null) {
                     sa.getTargets().add(opp);
                 } else {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
             } else {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
         } else {
             final List<Player> tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
             for (final Player p : tgtPlayers) {
                 if (p.isOpponentOf(ai) && !mandatory) {
-                    return false;
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }
             // TODO: improve ai for Sage of Hours
-            return StringUtils.isNumeric(sa.getParam("NumTurns"));
-            // not sure if the AI should be playing with cards that give the
-            // Human more turns.
+            if (!StringUtils.isNumeric(sa.getParam("NumTurns"))) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        return doTriggerAINoCost(aiPlayer, sa, false);
+    protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
+        return doTriggerNoCost(aiPlayer, sa, false);
     }
 
 }

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling White
+Title=Dungeon Crawling White
+Icon=Dungeon Crawling White.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine/Apparition_-_Zombie_(Standard,_#1629897).dck
+Deck Type=constructed
+
+[Main]
+4 Champion of the Perished
+2 Jadar, Ghoulcaller of Nephalia
+3 Tainted Adversary
+4 Archghoul of Thraben
+4 Glissa Sunslayer
+4 Headless Rider
+2 Sheoldred, the Apocalypse
+4 Tyvar's Stand
+4 Go for the Throat
+2 Tear Asunder
+2 Ghoulcaller's Harvest
+2 Invasion of Innistrad
+9 Forest
+10 Swamp
+2 Llanowar Wastes
+2 Deathcap Glade
+[Sideboard]
+2 Tear Asunder
+4 Graveyard Trespasser
+2 Liliana of the Veil
+3 No Way Out
+4 Invoke Despair

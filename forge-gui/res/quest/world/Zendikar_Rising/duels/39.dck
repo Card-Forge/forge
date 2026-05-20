@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Abraham Lincoln
+Title=Abraham Lincoln
+Icon=Abraham Lincoln.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Adrian_Bejar_-_4c_Control_(Standard,_#1045872).dck
+Deck Type=constructed
+
+[Main]
+2 Lovestruck Beast
+2 Giant Killer
+2 Brazen Borrower
+4 Beanstalk Giant
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Fae of Wishes
+4 Omnath, Locus of Creation
+4 Lucky Clover
+3 Escape to the Wilds
+1 Plains
+2 Raugrin Triome
+2 Forest
+2 Ketria Triome
+2 Mountain
+4 Cragcrown Pathway
+4 Fabled Passage
+4 Branchloft Pathway
+6 Island
+[Sideboard]
+1 Wilt
+1 Miscast
+1 Essence Scatter
+1 Negate
+1 Once and Future
+1 Primal Might
+1 Mystic Repeal
+1 Redcap Melee
+1 Run Afoul
+1 Ugin, the Spirit Dragon
+1 Tormod's Crypt
+1 Storm's Wrath
+3 Mystical Dispute

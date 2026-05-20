@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Chief_Wiggum
+Title=Chief_Wiggum
+Icon=Chief_Wiggum.jpg
+Difficulty=Hard
+Description=../Modern/Dragons_of_Tarkir/SCG_Premier_IQ_St._Louis/Stuart_Silverman_-_Red_Deck_Wins_(Modern,_#334312).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Eidolon of the Great Revel
+4 Goblin Guide
+3 Grim Lavamancer
+4 Monastery Swiftspear
+2 Soulfire Grand Master
+4 Atarka's Command
+4 Lightning Bolt
+2 Magma Jet
+2 Searing Blaze
+2 Searing Blood
+4 Shard Volley
+3 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Bloodstained Mire
+4 Mountain
+2 Rootbound Crag
+2 Sacred Foundry
+3 Stomping Ground
+[Sideboard]
+4 Destructive Revelry
+2 Faerie Macabre
+3 Path to Exile
+4 Skullcrack
+2 Spellskite

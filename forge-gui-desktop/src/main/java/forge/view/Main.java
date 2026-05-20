@@ -58,6 +58,7 @@ public final class Main {
 
         //install our error handler
         ExceptionHandler.registerErrorHandling();
+        GuiBase.logHWInfo();
 
         // Start splash screen first, then data models, then controller.
         if (args.length == 0) {

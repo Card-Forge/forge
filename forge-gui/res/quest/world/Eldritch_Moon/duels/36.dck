@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Newton
+Title=Newton
+Icon=Newton.jpg
+Difficulty=Medium
+Description=Eldritch_Moon/Grand_Prix_Portland_2016_-_Last_Chance_Trial/JORDAN_BAMBER_-_WBR_Control_(Standard,_#635960).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Bruna, the Fading Light
+1 Gisela, the Broken Blade
+4 Goblin Dark-Dwellers
+2 Linvala, the Preserver
+2 Grasp of Darkness
+3 Kolaghan's Command
+1 Murder
+4 Declaration in Stone
+3 Languish
+3 Read the Bones
+2 Ruinous Path
+3 Tormenting Voice
+4 Nahiri, the Harbinger
+4 Battlefield Forge
+4 Caves of Koilos
+2 Evolving Wilds
+3 Mountain
+3 Needle Spires
+2 Plains
+4 Shambling Vent
+4 Swamp
+[Sideboard]
+1 Chandra, Flamecaller
+3 Exquisite Firecraft
+3 Gideon, Ally of Zendikar
+2 Goldnight Castigator
+3 Infinite Obliteration
+1 Sorin, Grim Nemesis
+1 Stasis Snare

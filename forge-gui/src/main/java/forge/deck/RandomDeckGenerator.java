@@ -5,6 +5,7 @@ import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.IHasGameType;
 import forge.gamemodes.quest.QuestController;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
@@ -146,61 +147,35 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
     private Deck getUserDeck() {
         Iterable<DeckProxy> decks;
         final GameType gameType = lstDecks.getGameType();
-        switch (gameType) {
-            case CommanderGauntlet:
-            case Commander:
-                decks = DeckProxy.getAllCommanderDecks(DeckFormat.Commander.isLegalDeckPredicate());
-                break;
-            case Oathbreaker:
-                decks = DeckProxy.getAllOathbreakerDecks(DeckFormat.Oathbreaker.isLegalDeckPredicate());
-                break;
-            case TinyLeaders:
-                decks = DeckProxy.getAllTinyLeadersDecks(DeckFormat.TinyLeaders.isLegalDeckPredicate());
-                break;
-            case Brawl:
-                decks = DeckProxy.getAllBrawlDecks(DeckFormat.Brawl.isLegalDeckPredicate());
-                break;
-            case Archenemy:
-                decks = DeckProxy.getAllSchemeDecks(DeckFormat.Archenemy.isLegalDeckPredicate());
-                break;
-            case Planechase:
-                decks = DeckProxy.getAllPlanarDecks(DeckFormat.Planechase.isLegalDeckPredicate());
-                break;
-            default:
-                decks = DeckProxy.getAllConstructedDecks(gameType.getDeckFormat().isLegalDeckPredicate());
-                break;
-        }
+        decks = switch (gameType) {
+            case CommanderGauntlet, Commander -> DeckProxy.getAllCommanderDecks(DeckFormat.Commander.isLegalDeckPredicate());
+            case Oathbreaker -> DeckProxy.getAllOathbreakerDecks(DeckFormat.Oathbreaker.isLegalDeckPredicate());
+            case TinyLeaders -> DeckProxy.getAllTinyLeadersDecks(DeckFormat.TinyLeaders.isLegalDeckPredicate());
+            case Brawl -> DeckProxy.getAllBrawlDecks(DeckFormat.Brawl.isLegalDeckPredicate());
+            case Archenemy -> DeckProxy.getAllSchemeDecks(DeckFormat.Archenemy.isLegalDeckPredicate());
+            case Planechase -> DeckProxy.getAllPlanarDecks(DeckFormat.Planechase.isLegalDeckPredicate());
+            default -> DeckProxy.getAllConstructedDecks(gameType.getDeckFormat().isLegalDeckPredicate());
+        };
         if (Iterables.isEmpty(decks)) {
             return getGeneratedDeck(); //fall back to generated deck if no decks in filtered list
         }
-        Iterable<DeckProxy> AIDecks = IterableUtil.filter(decks, deckProxy -> deckProxy.getAI().inMainDeck == 0);
-        if (isAi && Iterables.size(AIDecks) > 10) return Aggregates.random(AIDecks).getDeck();
+        if (isAi && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_AUTO_AIDECK_SELECTION)) {
+            Iterable<DeckProxy> AIDecks = IterableUtil.filter(decks, deckProxy -> deckProxy.getAI().inMainDeck == 0);
+            if (Iterables.size(AIDecks) > 10)
+                return Aggregates.random(AIDecks).getDeck();
+        }
         return Aggregates.random(decks).getDeck();
     }
 
     private Deck getFavoriteDeck() {
-        Iterable<DeckProxy> decks;
-        switch (lstDecks.getGameType()) {
-            case CommanderGauntlet:
-            case Commander:
-                decks = DeckProxy.getAllCommanderDecks();
-                break;
-            case Oathbreaker:
-                decks = DeckProxy.getAllOathbreakerDecks();
-                break;
-            case TinyLeaders:
-                decks = DeckProxy.getAllTinyLeadersDecks();
-                break;
-            case Archenemy:
-                decks = DeckProxy.getAllSchemeDecks();
-                break;
-            case Planechase:
-                decks = DeckProxy.getAllPlanarDecks();
-                break;
-            default:
-                decks = DeckProxy.getAllConstructedDecks();
-                break;
-        }
+        Iterable<DeckProxy> decks = switch (lstDecks.getGameType()) {
+            case CommanderGauntlet, Commander -> DeckProxy.getAllCommanderDecks();
+            case Oathbreaker -> DeckProxy.getAllOathbreakerDecks();
+            case TinyLeaders -> DeckProxy.getAllTinyLeadersDecks();
+            case Archenemy -> DeckProxy.getAllSchemeDecks();
+            case Planechase -> DeckProxy.getAllPlanarDecks();
+            default -> DeckProxy.getAllConstructedDecks();
+        };
         decks = IterableUtil.filter(decks, DeckProxy::isFavoriteDeck);
         if (Iterables.isEmpty(decks)) {
             return getGeneratedDeck(); //fall back to generated deck if no favorite decks

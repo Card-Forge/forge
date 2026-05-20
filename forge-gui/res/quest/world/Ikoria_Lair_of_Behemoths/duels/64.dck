@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Hagrid
+Title=Hagrid
+Icon=Hagrid.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Akedo_Akihiro_-_Merfolk_(Modern,_#1025692).dck
+Deck Type=constructed
+
+[Main]
+3 Benthic Biomancer
+4 Harbinger of the Tides
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+4 Merfolk Trickster
+4 Silvergill Adept
+4 Unsettled Mariner
+4 Aether Vial
+3 Force of Negation
+3 Dismember
+3 Spreading Seas
+2 Cavern of Souls
+3 Mutavault
+3 Seachrome Coast
+4 Wanderwine Hub
+8 Island
+[Sideboard]
+1 Spreading Seas
+1 Lurrus of the Dream-Den
+1 Force of Negation
+2 Echoing Truth
+2 Mana Leak
+2 Relic of Progenitus
+3 Chalice of the Void
+3 Tidebinder Mage

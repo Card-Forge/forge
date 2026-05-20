@@ -1,0 +1,10 @@
+Name:Spider-Slayer, Hatred Honed
+Variant:UniversesWithin:FlavorName:Goro Rel, Scourge to Spiders
+ManaCost:2
+Types:Legendary Artifact Creature Human Villain
+PT:2/1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Spider | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever NICKNAME deals damage to a Spider, destroy that creature.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy
+A:AB$ Token | Cost$ 6 ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | TokenTapped$ True | TokenAmount$ 2 | TokenScript$ c_1_1_a_robot_flying | SpellDescription$ Create two tapped 1/1 colorless Robot artifact creature tokens with flying.
+DeckHas:Ability$Token|Graveyard & Type$Robot
+Oracle:Whenever Spider-Slayer deals damage to a Spider, destroy that creature.\n{6}, Exile this card from your graveyard: Create two tapped 1/1 colorless Robot artifact creature tokens with flying.

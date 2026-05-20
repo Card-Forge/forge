@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Barroom Brawl
+Title=Barroom Brawl
+Icon=Barroom Brawl.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/Worlds_2011_-_4-2_Record_or_Better/Richard_Hoaen_-_12_points_-_Zoo_(Modern,_#22451).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dark Confidant
+4 Kird Ape
+4 Loam Lion
+4 Tarmogoyf
+4 Wild Nacatl
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+3 Inquisition of Kozilek
+4 Tribal Flames
+4 Arid Mesa
+1 Blood Crypt
+1 Forest
+1 Godless Shrine
+1 Misty Rainforest
+1 Plains
+1 Sacred Foundry
+4 Scalding Tarn
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+4 Verdant Catacombs
+[Sideboard]
+4 Ancient Grudge
+2 Deathmark
+1 Extirpate
+2 Qasali Pridemage
+2 Slaughter Pact
+2 Snapcaster Mage
+2 Thoughtseize

@@ -1,0 +1,9 @@
+Name:White Lotus Reinforcements
+ManaCost:1 G W
+Types:Creature Human Soldier Ally
+PT:2/3
+K:Vigilance
+S:Mode$ Continuous | Affected$ Ally.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Allies you control get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Ally
+Oracle:Vigilance\nOther Allies you control get +1/+1.

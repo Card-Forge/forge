@@ -5,11 +5,10 @@ Name=Planeshift
 Code2=PS
 Type=Expansion
 BoosterCovers=1
-Booster=11 Common, 3 Uncommon, 1 Rare, 0 Special
+Booster=11 Common, 3 Uncommon, 1 Rare
 FatPack=6
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
-ScryfallCode=PLS
 
 [cards]
 1 C Aura Blast @Ron Walotsky
@@ -158,8 +157,3 @@ ScryfallCode=PLS
 141 U Rith's Grove @Scott Bailey
 142 U Terminal Moraine @Scott Bailey
 143 U Treva's Ruins @Jerry Tiritilli
-
-[tokens]
-w_1_1_spirit_flying
-g_1_1_hippo
-g_1_1_saproling

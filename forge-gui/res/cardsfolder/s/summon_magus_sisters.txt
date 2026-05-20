@@ -1,0 +1,12 @@
+Name:Summon: Magus Sisters
+ManaCost:4 G
+Types:Enchantment Creature Saga Faerie
+PT:5/5
+K:Chapter:3:DBCharm,DBCharm,DBCharm
+SVar:DBCharm:DB$ Charm | Choices$ DBCombinePowers,DBDefense,DBFight | Random$ True
+SVar:DBCombinePowers:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 3 | SpellDescription$ Combine Powers! — Put three +1/+1 counters on target creature.
+SVar:DBDefense:DB$ PutCounter | ValidTgts$ Creature | CounterType$ SHIELD | CounterNum$ 1 | SubAbility$ DBGainLife | SpellDescription$ Defense! — Put a shield counter on target creature. You gain 3 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+SVar:DBFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select up to one target creature an opponent controls | TargetMin$ 0 | TargetMax$ 1 | SpellDescription$ Fight! — This creature fights up to one target creature an opponent controls.
+K:Haste
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II, III — Choose one at random —\n• Combine Powers! — Put three +1/+1 counters on target creature.\n• Defense! — Put a shield counter on target creature. You gain 3 life.\n• Fight! — This creature fights up to one target creature an opponent controls.\nHaste

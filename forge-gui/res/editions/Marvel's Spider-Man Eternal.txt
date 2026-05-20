@@ -6,6 +6,26 @@ Type=Expansion
 ScryfallCode=SPE
 
 [cards]
+1 C Amateur Hero @Anthony Devine
+2 R Amazing Alliance @Filipe Pagliuso
+3 U MJ, Rising Star @Bachzim
+4 M Spider-Man, Peter Parker @Paolo Rivera
+5 C Alchemax Slayer-Bots @Kevin Glint
+6 R Future Flight @Lie Setiawan
+7 U Lyla, Holographic Assistant @Nereida
+8 M Spider-Man 2099, Miguel O'Hara @Thanh Tuấn
+9 U Grendel, Spawn of Knull @Steve Prescott
+10 R Lethal Protection @Néstor Ossandón Leal
+11 C Symbiote Spawn @Helge C. Balzer
+12 M Venom, Eddie Brock @Simon Dominic
+13 R Double Trouble @Nathaniel Himawan
+14 M Ghost-Spider, Gwen Stacy @Xabi Gaztelua
+15 U The Mary Janes @Toni Infante
+16 C Rampaging Classmate @Xabi Gaztelua
+17 U Prowler, Misguided Mentor @Bartek Fedyczak
+18 M Spider-Man, Miles Morales @InHyuk Lee
+19 C Twisted Spider-Clone @Kevin Sidharta
+20 R Venom Blast @Toni Infante
 21 R Grasping Tentacles @Dan Dos Santos
 22 R Venom, Deadly Devourer @Dan Dos Santos
 23 R Green Goblin, Nemesis @Dan Dos Santos

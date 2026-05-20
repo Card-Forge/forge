@@ -1,0 +1,9 @@
+Name:Reckless Blaze
+ManaCost:3 R R
+Types:Sorcery Lesson
+A:SP$ DamageAll | ValidCards$ Creature | NumDmg$ 5 | ValidDescription$ each creature. | RememberDamaged$ True | SubAbility$ DBEffect | SpellDescription$ CARDNAME deals 5 damage to each creature.
+SVar:DBEffect:DB$ Effect | Triggers$ DiesTrig | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:DiesTrig:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+IsRemembered | Execute$ TrigMana | TriggerDescription$ Whenever a creature you control dealt damage this way dies this turn, add {R}.
+SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ 1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Reckless Blaze deals 5 damage to each creature. Whenever a creature you control dealt damage this way dies this turn, add {R}.

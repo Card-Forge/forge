@@ -11,6 +11,7 @@ ScryfallCode=PM19
 91 R Demon of Catastrophes @Igor Kieryluk
 110 U Murder @Tyler Jacobson
 145 U Guttersnipe @Izzy
+149★ R Lathliss, Dragon Queen @Alex Konstad
 180 C Elvish Rejuvenator @Winona Nelson
 230 R Desecrated Tomb @Mark Poole
 254 U Reliquary Tower @Mark Poole

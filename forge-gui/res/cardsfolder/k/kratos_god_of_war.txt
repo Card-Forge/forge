@@ -1,0 +1,10 @@
+Name:Kratos, God of War
+ManaCost:R R R
+Types:Legendary Creature God Warrior
+PT:2/3
+K:Double Strike
+S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Haste | Description$ All creatures have haste.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each player's end step, NICKNAME deals damage to that player equal to the number of creatures that player controls that didn't attack this turn.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X
+SVar:X:Count$Valid Creature.!attackedThisTurn+ActivePlayerCtrl
+Oracle:Double strike\nAll creatures have haste.\nAt the beginning of each player's end step, Kratos deals damage to that player equal to the number of creatures that player controls that didn't attack this turn.

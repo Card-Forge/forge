@@ -1,0 +1,110 @@
+caracal.png
+size: 100,137
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar
+  xy: 32, 16
+  size: 16, 16
+Idle
+  xy: 0,32
+  size: 25, 15
+Idle
+  xy: 25,32
+  size: 25, 15
+Idle
+  xy: 25,32
+  size: 25, 15
+Idle
+  xy: 25,32
+  size: 25, 15
+Idle
+  xy: 0,32
+  size: 25, 15
+Idle
+  xy: 25,32
+  size: 25, 15
+Idle
+  xy: 25,32
+  size: 25, 15
+Idle
+  xy: 25,32
+  size: 25, 15
+Idle
+  xy:50,32
+  size:25,15
+Idle
+  xy:75,32
+  size:25,15
+Idle
+  xy:75,32
+  size:25,15
+Idle
+  xy:75,32
+  size:25,15
+Idle
+  xy:75,32
+  size:25,15
+Walk
+  xy:0,47
+  size:25,15
+Walk
+  xy:25,47
+  size:25,15
+Walk
+  xy:50,47
+  size:25,15
+Walk
+  xy:75,47
+  size:25,15
+Attack
+  xy:0,62
+  size:25,15
+Attack
+  xy:25,62
+  size:25,15
+Attack
+  xy:50,62
+  size:25,15
+Attack
+  xy:75,62
+  size:25,15
+Attack
+  xy:0,77
+  size:25,15
+Attack
+  xy:25,77
+  size:25,15
+Attack
+  xy:50,77
+  size:25,15
+Attack
+  xy:75,77
+  size:25,15
+Death
+  xy:0,92
+  size:25,15
+Death
+  xy:25,92
+  size:25,15
+Death
+  xy:50,92
+  size:25,15
+Death
+  xy:75,92
+  size:25,15
+Death
+  xy:0,107
+  size:25,15
+Death
+  xy:25,107
+  size:25,15
+Death
+  xy:50,107
+  size:25,15
+Death
+  xy:75,107
+  size:25,15
+Death
+  xy:0,122
+  size:25,15

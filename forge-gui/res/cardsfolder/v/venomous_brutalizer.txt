@@ -3,7 +3,6 @@ ManaCost:2 G G
 Types:Creature Phyrexian Knight
 PT:4/4
 K:Toxic:3
-Oracle:Toxic 3 (Players dealt combat damage by this creature also get three poison counters.)
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME enters, you may pay {1}{G}. If you do, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
 SVar:TrigProliferate:AB$ Proliferate | Cost$ 1 G
 DeckHas:Ability$Proliferate
