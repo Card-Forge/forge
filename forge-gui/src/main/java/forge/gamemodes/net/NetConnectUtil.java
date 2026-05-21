@@ -42,7 +42,7 @@ public class NetConnectUtil {
         }
 
         @Override
-        public void draftPackArrived(int seatIndex, java.util.List<forge.item.PaperCard> pack,
+        public void draftPackArrived(int seatIndex, List<forge.item.PaperCard> pack,
                 int packNumber, int pickNumber, int timerDurationSeconds) {
             view.onDraftPackArrived(seatIndex, pack, packNumber, pickNumber, timerDurationSeconds);
         }

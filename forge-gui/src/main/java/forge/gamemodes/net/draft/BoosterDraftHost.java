@@ -120,8 +120,13 @@ public final class BoosterDraftHost implements IHasForgeLog {
      */
     public synchronized void shutdown() {
         finished = true;
-        cancelAllSeatTimers();
-        cancelAllGraceTimers();
+        for (Integer seatIndex : new ArrayList<>(seatTimers.keySet())) {
+            cancelSeatTimer(seatIndex);
+        }
+        for (ScheduledFuture<?> f : graceTimers.values()) {
+            if (f != null) f.cancel(false);
+        }
+        graceTimers.clear();
         timerExecutor.shutdown();
     }
 
@@ -322,10 +327,7 @@ public final class BoosterDraftHost implements IHasForgeLog {
      * the monitor; the actual network dispatch happens after release.
      */
     private void addFinishDraft(List<Runnable> dispatches) {
-        finished = true;
-        cancelAllSeatTimers();
-        cancelAllGraceTimers();
-        timerExecutor.shutdown();
+        shutdown();
         draft.postDraftActions();
         netLog.info("Draft complete — distributing pools");
 
@@ -359,12 +361,6 @@ public final class BoosterDraftHost implements IHasForgeLog {
     private void cancelSeatTimer(int seatIndex) {
         ScheduledFuture<?> f = seatTimers.remove(seatIndex);
         if (f != null) f.cancel(false);
-    }
-
-    private void cancelAllSeatTimers() {
-        for (Integer seatIndex : new ArrayList<>(seatTimers.keySet())) {
-            cancelSeatTimer(seatIndex);
-        }
     }
 
     // --- Disconnect / reconnect handling ---
@@ -462,13 +458,6 @@ public final class BoosterDraftHost implements IHasForgeLog {
     private void cancelGraceTimer(int seatIndex) {
         ScheduledFuture<?> f = graceTimers.remove(seatIndex);
         if (f != null) f.cancel(false);
-    }
-
-    private void cancelAllGraceTimers() {
-        for (ScheduledFuture<?> f : graceTimers.values()) {
-            if (f != null) f.cancel(false);
-        }
-        graceTimers.clear();
     }
 
     private void addBroadcastDisconnect(List<Runnable> dispatches, int seatIndex) {

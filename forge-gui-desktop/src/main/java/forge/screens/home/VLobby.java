@@ -343,7 +343,7 @@ public class VLobby implements ILobbyView {
 
         final boolean allowNetworking = lobby.isAllowNetworking();
 
-        ImmutableList<VariantCheckBox> vntBoxes = null;
+        ImmutableList<VariantCheckBox> vntBoxes;
         if (allowNetworking) {
             vntBoxes = vntBoxesNetwork;
         } else {
@@ -1207,10 +1207,6 @@ public class VLobby implements ILobbyView {
     @Override
     public void onDraftAutoPicked(int seatIndex, PaperCard card, int packNumber, int pickInPack) {
         controller.onDraftAutoPicked(seatIndex, card, packNumber, pickInPack);
-    }
-
-    public void cancelActiveDraft() {
-        controller.cancelActiveDraft();
     }
 
     @Override

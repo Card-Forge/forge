@@ -215,7 +215,6 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
      */
     public synchronized void populateParticipants() {
         NetworkEvent event = getCurrentEvent();
-        if (event == null) return;
         if (event.getPhase() != EventPhase.LOBBY_GATHER) {
             throw new IllegalStateException("populateParticipants only valid in LOBBY_GATHER, not " + event.getPhase());
         }
@@ -239,7 +238,6 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
      */
     public synchronized void fillRemainingWithAI(int targetSize) {
         NetworkEvent event = getCurrentEvent();
-        if (event == null) return;
         int currentSize = event.getParticipants().size();
         for (int i = currentSize; i < targetSize; i++) {
             String aiName = "Seat " + (i + 1);
@@ -253,7 +251,6 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
      */
     public synchronized void shuffleSeatPositions() {
         NetworkEvent event = getCurrentEvent();
-        if (event == null) return;
         List<EventParticipant> participants = event.getParticipants();
         List<Integer> seats = new ArrayList<>();
         for (EventParticipant p : participants) {

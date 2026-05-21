@@ -238,7 +238,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
             if (SOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblLeaveLobbyDescription"), Localizer.getInstance().getMessage("lblLeave"))) {
                 server.stopServer();
                 FNetOverlay.SINGLETON_INSTANCE.reset();
-                if (lobby != null) lobby.cancelActiveDraft();
+                if (lobby != null) lobby.getController().cancelActiveDraft();
                 return true;
             }
         } else if (client == null || SOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblLeaveLobbyConfirm"), Localizer.getInstance().getMessage("lblLeave"))) {
@@ -247,7 +247,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
                 client = null;
             }
             FNetOverlay.SINGLETON_INSTANCE.reset();
-            if (lobby != null) lobby.cancelActiveDraft();
+            if (lobby != null) lobby.getController().cancelActiveDraft();
             return true;
         }
         return false;
