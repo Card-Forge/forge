@@ -151,7 +151,12 @@ public class AiController {
         if (budget <= 0) {
             return;
         }
-        sidecarInfluence.awaitLatest(budget);
+        forge.ai.llm.SidecarStatusBus.fireThinkingStart();
+        try {
+            sidecarInfluence.awaitLatest(budget);
+        } finally {
+            forge.ai.llm.SidecarStatusBus.fireThinkingEnd();
+        }
     }
 
     public int getAttackAggression() {

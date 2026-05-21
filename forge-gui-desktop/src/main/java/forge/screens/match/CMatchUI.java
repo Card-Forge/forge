@@ -177,6 +177,13 @@ public final class CMatchUI
     private int nextNotifiableStackIndex = 0;
     private String lastPromptMessage = "";
 
+    private static final int SIDECAR_THINKING_GRACE_MS = 250;
+    private final java.util.concurrent.atomic.AtomicInteger sidecarThinkingDepth = new java.util.concurrent.atomic.AtomicInteger(0);
+    private volatile javax.swing.Timer sidecarThinkingTimer;
+    private volatile String sidecarSavedPromptMessage;
+    private volatile boolean sidecarIndicatorShown;
+    private forge.ai.llm.SidecarStatusBus.Listener sidecarStatusListener;
+
     public CMatchUI() {
         this.view = new VMatchUI(this);
         this.screen = FScreen.getMatchScreen(this, view);
@@ -196,6 +203,55 @@ public final class CMatchUI
         this.myDocs.put(EDocID.REPORT_LOG, cLog.getView());
         this.myDocs.put(EDocID.DEV_MODE, getCDev().getView());
         this.myDocs.put(EDocID.BUTTON_DOCK, getCDock().getView());
+
+        this.sidecarStatusListener = new forge.ai.llm.SidecarStatusBus.Listener() {
+            @Override public void onThinkingStart() { onSidecarThinkingStart(); }
+            @Override public void onThinkingEnd()   { onSidecarThinkingEnd();   }
+        };
+        forge.ai.llm.SidecarStatusBus.addListener(this.sidecarStatusListener);
+    }
+
+    /**
+     * Show "AI is thinking…" in the prompt panel while the AI is blocked waiting
+     * on the sidecar. A 250 ms grace prevents the indicator from flashing for
+     * fast cache hits. Re-entrant: nested start/end calls only update the UI on
+     * the outermost transition.
+     */
+    private void onSidecarThinkingStart() {
+        if (sidecarThinkingDepth.getAndIncrement() != 0) {
+            return;
+        }
+        final javax.swing.Timer timer = new javax.swing.Timer(SIDECAR_THINKING_GRACE_MS, e -> {
+            // Fires on the EDT. Only show if still in-flight.
+            if (sidecarThinkingDepth.get() <= 0) {
+                return;
+            }
+            sidecarSavedPromptMessage = lastPromptMessage;
+            sidecarIndicatorShown = true;
+            cPrompt.setMessage("AI is thinking…");
+        });
+        timer.setRepeats(false);
+        sidecarThinkingTimer = timer;
+        FThreads.invokeInEdtNowOrLater(timer::start);
+    }
+
+    private void onSidecarThinkingEnd() {
+        if (sidecarThinkingDepth.decrementAndGet() != 0) {
+            return;
+        }
+        final javax.swing.Timer timer = sidecarThinkingTimer;
+        sidecarThinkingTimer = null;
+        FThreads.invokeInEdtNowOrLater(() -> {
+            if (timer != null) {
+                timer.stop();
+            }
+            if (sidecarIndicatorShown) {
+                final String restore = sidecarSavedPromptMessage;
+                sidecarIndicatorShown = false;
+                sidecarSavedPromptMessage = null;
+                cPrompt.setMessage(restore == null ? "" : restore);
+            }
+        });
     }
 
     private void registerDocs() {
@@ -925,6 +981,10 @@ public final class CMatchUI
         }
         if (showOverlay) {
             SOverlayUtils.showOverlay();
+        }
+        if (gameView.isMatchOver() && sidecarStatusListener != null) {
+            forge.ai.llm.SidecarStatusBus.removeListener(sidecarStatusListener);
+            sidecarStatusListener = null;
         }
     }
 
