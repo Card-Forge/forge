@@ -52,6 +52,25 @@ def test_bayesian_prior_subtracts_revealed():
     assert all(0.0 <= v <= 1.0 for v in prior.values())
 
 
+def test_mana_pool_lists_sources_and_reachable_colors():
+    # Hallowed Fountain (W/U) + Mana Confluence (any) -> reachable WUBRG.
+    state = _base_state(
+        opp_mana_available=2,
+        opp_mana_spent_this_turn=1,
+        opp_untapped_sources=[["W", "U"], ["W", "U", "B", "R", "G"]],
+    )
+    text = strat._format_mana_pool(state)
+    assert "2 untapped source(s)" in text and "1 committed" in text
+    assert "[W/U]" in text and "[W/U/B/R/G]" in text
+    # Reachable colors are deduped and ordered WUBRGC.
+    assert "Reachable colors: W/U/B/R/G" in text
+
+
+def test_mana_pool_without_sources_falls_back():
+    text = strat._format_mana_pool(_base_state(opp_mana_available=3))
+    assert "3 untapped source(s)" in text and "color breakdown unavailable" in text
+
+
 @pytest.mark.asyncio
 async def test_strategist_filters_hallucinated_cards(monkeypatch):
     async def fake_generate_json(prompt, **kw):
@@ -67,7 +86,6 @@ async def test_strategist_filters_hallucinated_cards(monkeypatch):
                 {"name": "Ruby Medallion", "score": 0.9, "reason": "engine"},
                 {"name": "Not On Board", "score": 0.2, "reason": "n/a"},
             ],
-            "beatdown": {"who_is_beatdown": "opponent", "reasoning": "faster clock"},
         }
 
     monkeypatch.setattr(strat, "generate_json", fake_generate_json)
@@ -80,7 +98,41 @@ async def test_strategist_filters_hallucinated_cards(monkeypatch):
     # Threats are filtered to permanents actually on the opponent board.
     assert out["target_priorities"][0]["targets"] == ["Ruby Medallion"]
     assert out["predicted_opp_line"]["primary_play"] == "Grapeshot kill"
+    # Beatdown is board-score driven; no role/board_score -> not winning -> opponent.
     assert out["beatdown_assessment"]["who_is_beatdown"] == "opponent"
+
+
+@pytest.mark.asyncio
+async def test_beatdown_follows_board_score(monkeypatch):
+    async def fake_generate_json(prompt, **kw):
+        return {"bucket_probabilities": {}, "threat_priorities": []}
+
+    monkeypatch.setattr(strat, "generate_json", fake_generate_json)
+
+    ahead = await strat.opponent_strategist_node(
+        _base_state(role={"board_score": 0.42})
+    )
+    assert ahead["beatdown_assessment"]["who_is_beatdown"] == "ai"
+
+    behind = await strat.opponent_strategist_node(
+        _base_state(role={"board_score": -0.3})
+    )
+    assert behind["beatdown_assessment"]["who_is_beatdown"] == "opponent"
+
+    even = await strat.opponent_strategist_node(
+        _base_state(role={"board_score": 0.0})
+    )
+    assert even["beatdown_assessment"]["who_is_beatdown"] == "opponent"
+
+
+@pytest.mark.asyncio
+async def test_beatdown_emitted_on_llm_error(monkeypatch):
+    async def boom(prompt, **kw):
+        raise strat.LLMError("down")
+
+    monkeypatch.setattr(strat, "generate_json", boom)
+    out = await strat.opponent_strategist_node(_base_state(role={"board_score": 0.5}))
+    assert out["beatdown_assessment"]["who_is_beatdown"] == "ai"
 
 
 @pytest.mark.asyncio

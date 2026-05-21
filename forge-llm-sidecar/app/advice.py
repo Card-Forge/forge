@@ -626,7 +626,8 @@ def assess_role(
     ai_life, human_life = _ai_human_life(state.get("life_totals", {}))
 
     ai_natural = _natural_role(ai_strategy)
-    opp_natural = _natural_role(opp_strategy)
+    # opp_natural retained for the commented-out Flores doctrine below.
+    # opp_natural = _natural_role(opp_strategy)
 
     # Detailed creatures with P/T when available.
     ai_creatures = _creatures_from_details(state.get("own_board_details") or [])
@@ -712,27 +713,36 @@ def assess_role(
     life_delta = ai_life - human_life
     life_signal = _clamp(life_delta / 10.0)
 
-    # ---- Role decision (uses dimension scores) ---------------------------
-    # Flip rule: aggro side that is behind on BOTH board and cards becomes
-    # control. Control side that is ahead on board AND cards AND has a finite
-    # clock takes over beatdown.
-    ai_role = ai_natural
-    role_flipped = False
-    if ai_natural == "beatdown" and board_score < 0 and cards_score < 0:
-        ai_role = "control"
-        role_flipped = True
-    elif ai_natural == "control" and board_score > 0.25 and cards_score >= 0 and human_life <= 12:
-        ai_role = "beatdown"
-        role_flipped = True
-    elif ai_natural == "contested":
-        if board_score >= 0.25 or cards_score >= 0.25:
-            ai_role = "beatdown"
-        elif board_score <= -0.25 or cards_score <= -0.25:
-            ai_role = "control"
+    # ---- Role decision (strict board-score rule) -------------------------
+    # The side ahead on board is the beatdown and should be racing. We trust
+    # board_score (creature power/toughness + creature count + noncreature
+    # permanent pressure, AI's perspective) over the deck's natural role: AI
+    # ahead on board -> AI beatdown; even or behind -> AI control and the human
+    # is the beatdown. This mirrors opponent_strategist._beatdown_from_board.
+    ai_role = "beatdown" if board_score > 0.0 else "control"
+    opp_role = "control" if ai_role == "beatdown" else "beatdown"
+    role_flipped = ai_role != ai_natural
 
-    opp_role = "control" if ai_role == "beatdown" else (
-        "beatdown" if ai_role == "control" else opp_natural
-    )
+    # --- Former Mike Flores "Who's the Beatdown?" natural-role + flip doctrine.
+    # Kept commented in case we want to return to role-identity-aware flipping.
+    # Flip rule: aggro side behind on BOTH board and cards becomes control;
+    # control side ahead on board AND cards with a fast clock takes beatdown.
+    # ai_role = ai_natural
+    # role_flipped = False
+    # if ai_natural == "beatdown" and board_score < 0 and cards_score < 0:
+    #     ai_role = "control"
+    #     role_flipped = True
+    # elif ai_natural == "control" and board_score > 0.25 and cards_score >= 0 and human_life <= 12:
+    #     ai_role = "beatdown"
+    #     role_flipped = True
+    # elif ai_natural == "contested":
+    #     if board_score >= 0.25 or cards_score >= 0.25:
+    #         ai_role = "beatdown"
+    #     elif board_score <= -0.25 or cards_score <= -0.25:
+    #         ai_role = "control"
+    # opp_role = "control" if ai_role == "beatdown" else (
+    #     "beatdown" if ai_role == "control" else opp_natural
+    # )
 
     # ---- Winning side: weighted combination ------------------------------
     score = (

@@ -13,10 +13,14 @@ import com.google.common.eventbus.Subscribe;
 
 import forge.ai.AiController;
 import forge.ai.AiProps;
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.card.CardView;
+import forge.game.spellability.SpellAbility;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventPlayerLivesChanged;
@@ -319,6 +323,84 @@ public final class DeckRecognitionObserver {
         return new ArrayList<>(colors);
     }
 
+    /**
+     * The opponent's open mana picture, built from every untapped permanent
+     * that can produce mana (lands, rocks, dorks). Untapped sources are mana
+     * they can tap right now (open interaction); tapped sources are mana
+     * already committed this turn.
+     *
+     * <p>For each untapped source we record the set of colors it can produce
+     * (W/U/B/R/G/C) so the sidecar can reason about which color combinations
+     * are reachable — e.g. an untapped Hallowed Fountain contributes
+     * {@code [W, U]} and a Mana Confluence {@code [W, U, B, R, G]}. We do not
+     * enumerate the combinations here; the per-source options let the strategist
+     * work them out alongside its read on the opponent's hand.</p>
+     */
+    private ManaPicture opponentManaPicture(final Player opp) {
+        final List<List<String>> untappedSources = new ArrayList<>();
+        int spent = 0;
+        if (opp == null) {
+            return new ManaPicture(0, 0, untappedSources);
+        }
+        try {
+            for (final Card c : opp.getCardsIn(ZoneType.Battlefield)) {
+                if (c == null || c.getManaAbilities().isEmpty()) {
+                    continue;
+                }
+                if (c.isTapped()) {
+                    spent++;
+                    continue;
+                }
+                final List<String> colors = producibleColors(c);
+                if (!colors.isEmpty()) {
+                    untappedSources.add(colors);
+                }
+            }
+        } catch (final RuntimeException ex) {
+            // fall through with whatever we collected
+        }
+        return new ManaPicture(untappedSources.size(), spent, untappedSources);
+    }
+
+    /** Colors (W/U/B/R/G/C) a permanent's mana abilities can produce, reusing
+     *  Forge's own production logic so "any color" / combo / reflected mana are
+     *  all handled. Returns an empty list when none can be determined. */
+    private static List<String> producibleColors(final Card c) {
+        final Set<String> names = new LinkedHashSet<>();
+        for (final SpellAbility ab : c.getManaAbilities()) {
+            if (ab.getApi() == ApiType.ManaReflected) {
+                names.addAll(CardUtil.getReflectableManaColors(ab));
+            } else {
+                CardUtil.canProduce(6, ab, names);
+            }
+        }
+        final List<String> letters = new ArrayList<>(names.size());
+        for (final String name : names) {
+            letters.add(MagicColor.toShortString(name));
+        }
+        return letters;
+    }
+
+    /** Snapshot of the opponent's mana: count of untapped sources, count of
+     *  tapped (spent) sources, and per-untapped-source producible colors. */
+    private record ManaPicture(int available, int spent, List<List<String>> untappedSources) { }
+
+    /**
+     * Coarse decision context derived from the current phase. This reactive
+     * observer isn't tied to a specific AI choice, so it reports {@code
+     * "combat"} during combat steps (where reading the opponent's open mana
+     * matters most) and {@code "priority"} otherwise. The sidecar uses this to
+     * decide when to spend the extra strategist LLM call.
+     */
+    private String currentDecisionType() {
+        try {
+            final String phase = game.getPhaseHandler().getPhase().name();
+            return phase.startsWith("COMBAT") ? "combat" : "priority";
+        } catch (final RuntimeException ex) {
+            return "";
+        }
+    }
+
     /** First opposing player relative to the AI, or {@code null}. */
     private Player firstOpponent() {
         try {
@@ -411,6 +493,8 @@ public final class DeckRecognitionObserver {
         final List<BoardCard> ownBoardDetails = boardDetails(aiPlayer);
         final List<BoardCard> oppBoardDetails = boardDetails(opponent);
         final List<String> oppManaColors = opponentLandColors(opponent);
+        final ManaPicture oppMana = opponentManaPicture(opponent);
+        final String decisionType = currentDecisionType();
 
         final RecognitionRequest request = new RecognitionRequest(
                 RecognitionRequest.CLIENT,
@@ -435,7 +519,11 @@ public final class DeckRecognitionObserver {
                 oppLibSize,
                 ownBoardDetails,
                 oppBoardDetails,
-                oppManaColors);
+                oppManaColors,
+                oppMana.available(),
+                oppMana.spent(),
+                decisionType,
+                oppMana.untappedSources());
 
         Logger.info("DeckRecognition: POST /recognize game=" + game.getId()
                 + " turn=" + game.getPhaseHandler().getTurn()

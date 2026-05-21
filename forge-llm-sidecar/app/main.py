@@ -368,6 +368,7 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         "opponent_mana_colors_seen": req.opponent_mana_colors_seen,
         "opp_mana_available": req.opp_mana_available,
         "opp_mana_spent_this_turn": req.opp_mana_spent_this_turn,
+        "opp_untapped_sources": req.opp_untapped_sources,
         "decision_type": req.decision_type,
     }
     final = await graph.ainvoke(initial)
@@ -450,6 +451,10 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
             "observations": [o.model_dump() for o in req.observations],
             "opponent_board": req.opponent_board,
             "opponent_graveyard": req.opponent_graveyard,
+            "opp_mana_available": req.opp_mana_available,
+            "opp_mana_spent_this_turn": req.opp_mana_spent_this_turn,
+            "opp_untapped_sources": req.opp_untapped_sources,
+            "decision_type": req.decision_type,
         }
     )
 

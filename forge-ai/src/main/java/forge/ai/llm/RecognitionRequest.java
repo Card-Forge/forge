@@ -61,7 +61,20 @@ public record RecognitionRequest(
         @SerializedName("opponent_board_details") List<BoardCard> opponentBoardDetails,
         /** Colors of mana the OPPONENT has produced from lands so far — used to
          *  detect color screw. Letter codes (W/U/B/R/G/C). */
-        @SerializedName("opponent_mana_colors_seen") List<String> opponentManaColorsSeen) {
+        @SerializedName("opponent_mana_colors_seen") List<String> opponentManaColorsSeen,
+        /** v6: mana the opponent could tap right now (untapped sources) — their
+         *  open interaction mana, used to predict their next turn. */
+        @SerializedName("opp_mana_available") int oppManaAvailable,
+        /** v6: mana the opponent has committed this turn (tapped sources). */
+        @SerializedName("opp_mana_spent_this_turn") int oppManaSpentThisTurn,
+        /** v6: which decision the AI is making — lets the sidecar spend extra
+         *  effort on high-impact decisions. One of "mulligan" | "combat" |
+         *  "priority" | "critical". Empty means a routine priority decision. */
+        @SerializedName("decision_type") String decisionType,
+        /** v6: one entry per untapped opponent mana source, each the colors that
+         *  source can produce (W/U/B/R/G/C). Lets the sidecar reason about which
+         *  color combinations the opponent has open this turn. */
+        @SerializedName("opp_untapped_sources") List<List<String>> oppUntappedSources) {
 
     /** Identifier this (Forge) adapter sends as the {@code client} field. */
     public static final String CLIENT = "forge";
@@ -76,7 +89,8 @@ public record RecognitionRequest(
         this(client, gameId, format, opponentSeat, turn, observations, deckCards,
                 List.of(), List.of(), List.of(), List.of(), List.of(), Map.of(),
                 "", List.of(), Map.of(),
-                0, 0, 0, 0, List.of(), List.of(), List.of());
+                0, 0, 0, 0, List.of(), List.of(), List.of(),
+                0, 0, "", List.of());
     }
 
     /**
@@ -89,6 +103,7 @@ public record RecognitionRequest(
         this(client, gameId, format, opponentSeat, turn, observations, deckCards,
                 List.of(), List.of(), List.of(), List.of(), List.of(), Map.of(),
                 "", List.of(), personality,
-                0, 0, 0, 0, List.of(), List.of(), List.of());
+                0, 0, 0, 0, List.of(), List.of(), List.of(),
+                0, 0, "", List.of());
     }
 }

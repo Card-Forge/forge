@@ -99,6 +99,11 @@ class RecognitionRequest(BaseModel):
     # v6: opponent resource signals for the strategist's next-turn prediction.
     opp_mana_available: int = 0
     opp_mana_spent_this_turn: int = 0
+    # v6: one entry per untapped opponent mana source, each the colors that
+    # source can produce (W/U/B/R/G/C). Lets the strategist reason about which
+    # color combinations the opponent has open — e.g. an untapped Hallowed
+    # Fountain is ["W", "U"] and a Mana Confluence is ["W", "U", "B", "R", "G"].
+    opp_untapped_sources: list[list[str]] = Field(default_factory=list)
     # v6: which decision the AI is making — lets the sidecar spend extra effort
     # on high-impact decisions. One of: "mulligan" | "combat" | "priority" |
     # "critical". Empty defaults to a routine priority decision.
@@ -274,6 +279,7 @@ class GraphState(TypedDict, total=False):
     # v6 inputs for the strategist
     opp_mana_available: int
     opp_mana_spent_this_turn: int
+    opp_untapped_sources: list[list[str]]
     decision_type: str
     # resolved by the game_advisor node
     resolved_format: str | None

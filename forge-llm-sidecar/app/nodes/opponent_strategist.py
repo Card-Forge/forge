@@ -140,14 +140,44 @@ def _format_observations(state: GraphState, fmt: str, archetype: str) -> str:
     return "\n".join(lines)
 
 
+_COLOR_ORDER = "WUBRGC"
+
+
+def _format_mana_pool(state: GraphState) -> str:
+    """Describe the opponent's open mana as per-source color options plus the
+    set of reachable colors, so the model can rule out plays they can't pay for.
+
+    Each untapped source taps for ONE of its listed colors; we deliberately do
+    not pre-enumerate the (exponential) set of color combinations and leave that
+    reasoning to the model.
+    """
+    sources = state.get("opp_untapped_sources") or []
+    avail = int(state.get("opp_mana_available") or 0)
+    spent = int(state.get("opp_mana_spent_this_turn") or 0)
+    if not sources:
+        return (
+            f"Opponent open mana: {avail} untapped source(s); "
+            f"{spent} already committed this turn (color breakdown unavailable)."
+        )
+    per_source = ", ".join("[" + "/".join(s) + "]" if s else "[?]" for s in sources)
+    reachable = sorted(
+        {c for s in sources for c in s},
+        key=lambda c: _COLOR_ORDER.index(c) if c in _COLOR_ORDER else 99,
+    )
+    return (
+        f"Opponent open mana: {avail} untapped source(s), {spent} committed this turn.\n"
+        f"Untapped sources (each taps for ONE of its listed colors): {per_source}\n"
+        f"Reachable colors: {'/'.join(reachable) or '?'} — use the total count AND "
+        f"these color options to rule out lines the opponent cannot actually pay for."
+    )
+
+
 def _build_prompt(state: GraphState, profile: dict, prior: dict[str, float], revealed: set[str]) -> str:
     archetype = state.get("archetype") or ""
     fmt = (state.get("resolved_format") or state.get("format") or "").lower()
     opp_hand_size = int(state.get("opp_hand_size") or 0)
     opp_board = ", ".join(state.get("opponent_board", []) or []) or "(empty)"
     opp_gy = ", ".join(state.get("opponent_graveyard", []) or []) or "(empty)"
-    mana_avail = state.get("opp_mana_available") or 0
-    mana_spent = state.get("opp_mana_spent_this_turn") or 0
     colors = "/".join(state.get("opponent_mana_colors_seen", []) or []) or "?"
     return (
         f"Opponent archetype: {archetype} (recognition confidence "
@@ -158,7 +188,7 @@ def _build_prompt(state: GraphState, profile: dict, prior: dict[str, float], rev
         f"Opponent battlefield: {opp_board}\n"
         f"Opponent graveyard: {opp_gy}\n"
         f"Opponent mana colors seen: {colors}\n"
-        f"Opponent mana available now: {mana_avail}; spent this turn: {mana_spent}\n"
+        f"{_format_mana_pool(state)}\n"
         f"Opponent cards in hand: {opp_hand_size}\n\n"
         f"Their observed plays (chronological, tagged with role):\n"
         f"{_format_observations(state, fmt, archetype)}\n\n"
@@ -171,16 +201,14 @@ def _build_prompt(state: GraphState, profile: dict, prior: dict[str, float], rev
         "2. Predict their NEXT turn assuming they untap with one more mana than "
         "they have now. Pick the most fitting known line or describe one.\n"
         "3. Rank their permanents (and imminent threats) by how urgently the AI "
-        "should remove/answer them, using the kill priority and the board.\n"
-        "4. State who is the beatdown (the aggressor who should be racing).\n\n"
+        "should remove/answer them, using the kill priority and the board.\n\n"
         "Respond with exactly these keys:\n"
         '  "bucket_probabilities": object mapping bucket name -> {"prob": number, '
         '"top_cards": [string]},\n'
         '  "predicted_opp_line": {"primary_play": string, "supporting_plays": '
         '[string], "mana_required": string, "reasoning": string},\n'
         '  "threat_priorities": [{"name": string, "score": number, "reason": '
-        "string}] ordered most-dangerous-first,\n"
-        '  "beatdown": {"who_is_beatdown": "ai" | "opponent", "reasoning": string}'
+        "string}] ordered most-dangerous-first"
     )
 
 
@@ -206,6 +234,39 @@ def _clamp(x, lo=0.0, hi=1.0) -> float:
         return max(lo, min(hi, float(x)))
     except (TypeError, ValueError):
         return 0.0
+
+
+def _beatdown_from_board(state: GraphState) -> dict:
+    """Decide the beatdown deterministically from the board score.
+
+    The beatdown is whoever is ahead on board and should be racing. We trust
+    the upstream board_score (AI's perspective, [-1, +1]) rather than a
+    free-form LLM guess: if the AI is ahead on board it is the beatdown,
+    otherwise the human opponent is. An even/empty board defaults to the
+    opponent so the AI assumes the control role until it pulls ahead.
+    """
+    role = state.get("role") or {}
+    board_score = role.get("board_score")
+    try:
+        board_score = float(board_score)
+    except (TypeError, ValueError):
+        board_score = 0.0
+    if board_score > 0.0:
+        return {
+            "who_is_beatdown": "ai",
+            "reasoning": (
+                f"AI is ahead on board (board score {board_score:+.2f}); the side "
+                "ahead on board is the beatdown and should race to close the game."
+            ),
+        }
+    return {
+        "who_is_beatdown": "opponent",
+        "reasoning": (
+            f"Opponent is ahead or even on board (board score {board_score:+.2f}); "
+            "the AI is not winning the board, so the human is the beatdown and the "
+            "AI should take the control role."
+        ),
+    }
 
 
 async def opponent_strategist_node(state: GraphState) -> GraphState:
@@ -236,7 +297,8 @@ async def opponent_strategist_node(state: GraphState) -> GraphState:
         )
     except LLMError as exc:
         log.warning("opponent_strategist: LLM call failed (%s); keeping deterministic inference", exc)
-        return state
+        # Beatdown is board-score driven, so emit it even when the LLM is down.
+        return {**state, "beatdown_assessment": _beatdown_from_board(state)}
 
     pool = _valid_card_pool(profile, revealed, fmt, archetype)
 
@@ -294,11 +356,11 @@ async def opponent_strategist_node(state: GraphState) -> GraphState:
             }
         ]
 
-    # --- predicted next turn + beatdown (informational, surfaced to UI/logs)
+    # --- predicted next turn (informational, surfaced to UI/logs)
     predicted = result.get("predicted_opp_line")
     predicted_opp_line = predicted if isinstance(predicted, dict) else None
-    beat = result.get("beatdown")
-    beatdown_assessment = beat if isinstance(beat, dict) else None
+    # Beatdown is decided deterministically from board score, not the LLM.
+    beatdown_assessment = _beatdown_from_board(state)
 
     out: GraphState = {**state}
     if opponent_hand:

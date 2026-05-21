@@ -297,6 +297,29 @@
     .pip.B { background: #2d2d2d; }
     .pip.R { background: #d94a4a; }
     .pip.G { background: #4ad94a; }
+    .pip.C { background: #b8b8c0; }
+
+    .mana-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 3px 6px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    .llm-tag {
+      margin-left: 6px;
+      padding: 1px 6px;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border-radius: 8px;
+      background: var(--accent-glow);
+      color: var(--accent);
+      vertical-align: middle;
+    }
 
     .guide-list {
       display: flex;
@@ -666,6 +689,30 @@
           });
         }
 
+        // --- Opponent Strategist (LLM node): predicted next turn + beatdown call ---
+        let strategistHtml = '';
+        const pol = p.predicted_opp_line;
+        const ba = p.beatdown_assessment;
+        const hasPol = pol && (pol.primary_play || (pol.supporting_plays || []).length || pol.reasoning);
+        const hasBa = ba && ba.who_is_beatdown;
+        if (hasPol || hasBa) {
+          strategistHtml = '<div class="piloting-label" style="margin-top:10px">Opponent Strategist<span class="llm-tag">LLM</span></div>';
+          if (hasPol) {
+            const manaReq = pol.mana_required ? `<span class="alt-chip">${escapeHtml(pol.mana_required)}</span>` : '';
+            strategistHtml += `<div style="font-size:12px;margin-top:2px"><b>Predicted next turn:</b> ${escapeHtml(pol.primary_play || '—')} ${manaReq}</div>`;
+            if ((pol.supporting_plays || []).length) {
+              strategistHtml += `<div class="alternatives">${pol.supporting_plays.slice(0, 5).map(s => `<span class="alt-chip">${escapeHtml(s)}</span>`).join('')}</div>`;
+            }
+            if (pol.reasoning) strategistHtml += `<div class="reasoning">${escapeHtml(pol.reasoning)}</div>`;
+          }
+          if (hasBa) {
+            const who = ba.who_is_beatdown === 'ai' ? 'AI' : 'Opponent';
+            const whoColor = ba.who_is_beatdown === 'ai' ? 'var(--green)' : 'var(--red)';
+            strategistHtml += `<div style="font-size:12px;margin-top:4px"><b>Beatdown:</b> <span style="color:${whoColor};font-weight:600">${who}</span></div>`;
+            if (ba.reasoning) strategistHtml += `<div class="reasoning">${escapeHtml(ba.reasoning)}</div>`;
+          }
+        }
+
         // Guide-derived plan: overview, current-phase steps, key cards, sequencing tips,
         // and matchup advice if the recognized opponent has one in the guide.
         let guidePlanHtml = '';
@@ -733,6 +780,7 @@
             ${actionsHtml}
             ${handValuesHtml}
             ${oppHandHtml}
+            ${strategistHtml}
             ${targetsHtml}
           </div>
         `;
@@ -743,11 +791,35 @@
         altHtml = `<div class="alternatives">${entry.alternatives.slice(0, 5).map(a => `<span class="alt-chip">${escapeHtml(a)}</span>`).join('')}</div>`;
       }
 
+      // --- Opponent open mana (color-aware) -------------------------------
+      let manaHtml = '';
+      const untappedSources = entry.opp_untapped_sources || [];
+      const oppManaAvail = entry.opp_mana_available || 0;
+      const oppManaSpent = entry.opp_mana_spent_this_turn || 0;
+      if (untappedSources.length > 0 || oppManaAvail > 0 || oppManaSpent > 0) {
+        const order = 'WUBRGC';
+        const reachable = [...new Set(untappedSources.flat())]
+          .sort((a, b) => order.indexOf(a) - order.indexOf(b));
+        const sourceChips = untappedSources.map(s => {
+          const pips = (s || []).map(c => `<span class="pip ${c}" title="${c}"></span>`).join('');
+          return `<span class="mana-source">${pips || '<span style="color:var(--text-dim);font-size:10px">?</span>'}</span>`;
+        }).join('');
+        manaHtml = `
+          <div class="piloting-label" style="margin-top:8px">Opponent Open Mana
+            <span style="color:var(--text-dim);font-weight:400">${oppManaAvail} untapped · ${oppManaSpent} spent this turn</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:4px">
+            ${sourceChips || '<span class="empty-state" style="padding:0">none open</span>'}
+          </div>
+          ${reachable.length ? `<div style="margin-top:6px;font-size:11px;color:var(--text-dim);display:flex;align-items:center;gap:6px">Reachable colors: ${colorPips(reachable)}</div>` : ''}
+        `;
+      }
+
       let opponentHtml = '';
       const obs = entry.observations || [];
       const oppBoard = entry.opponent_board || [];
       const oppGy = entry.opponent_graveyard || [];
-      if (obs.length > 0 || oppBoard.length > 0 || oppGy.length > 0) {
+      if (obs.length > 0 || oppBoard.length > 0 || oppGy.length > 0 || manaHtml) {
         const eventBadge = {
           spell: 'var(--accent)',
           land: 'var(--green)',
@@ -786,6 +858,7 @@
             ${obsSection}
             ${boardChips}
             ${gyChips}
+            ${manaHtml}
           </div>
         `;
       }
@@ -802,7 +875,7 @@
         ${altHtml}
         ${opponentHtml}
         ${pilotingHtml}
-        <div class="last-update">Turn ${entry.turn} &middot; Game ${escapeHtml(entry.game_id)} &middot; ${timeAgo(entry.timestamp)}</div>
+        <div class="last-update">Turn ${entry.turn} &middot; Game ${escapeHtml(entry.game_id)}${entry.decision_type ? ` &middot; decision: ${escapeHtml(entry.decision_type)}` : ''} &middot; ${timeAgo(entry.timestamp)}</div>
       `;
     }
 
