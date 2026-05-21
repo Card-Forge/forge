@@ -1,6 +1,6 @@
-# Build and Install Forge Android APK with ADB
+# Build, Host, and Install Forge Android APK
 
-This guide builds Forge from this repo, creates an Android APK, signs it with the local Android debug keystore, and installs it to a phone over USB with `adb`.
+This guide builds Forge from this repo, creates an Android APK, signs it with the local Android debug keystore, and gets it onto a phone. The fastest test loop is the local download server: build once on this PC, open a URL from the phone, and install the APK from the browser.
 
 ## Paths Used
 
@@ -49,6 +49,50 @@ $ADB devices -l
 ```
 
 Then unplug and reconnect the phone, unlock it, and accept the USB debugging prompt.
+
+## Fast Path: Build and Host a Download Page
+
+From the repo root:
+
+```bash
+cd /home/lou/Development/forge-1
+python3 forge-gui-android/tools/build_and_host_apk.py
+```
+
+The script will:
+
+1. Run the existing Maven Android debug build.
+2. Zipalign and debug-sign the newest generated APK.
+3. Copy it to:
+
+```text
+forge-gui-android/target/apk-download/forge-android-latest.apk
+```
+
+4. Start a local HTTP server on port `8090`.
+
+When it prints an `Open on phone:` URL, open that URL from the phone over the same network or Tailscale, then tap **Download latest APK**. If Tailscale is available, the script lists the Tailscale URL first.
+
+The page also has rebuild buttons for the Android APK, desktop app, and sidecar. Tap one from the phone to start that build on this PC. Each build runs in the background, and the page shows status plus a log link. Refresh the page after it reports `Build complete`, then download the latest APK if you rebuilt Android.
+
+Useful variants:
+
+```bash
+# Host the latest existing build without rebuilding
+python3 forge-gui-android/tools/build_and_host_apk.py --no-build
+
+# Build/sign/copy the APK but do not start the server
+python3 forge-gui-android/tools/build_and_host_apk.py --no-serve
+
+# Use a different port
+python3 forge-gui-android/tools/build_and_host_apk.py --port 8091
+
+# If you expose the server through Tailscale Funnel or another tunnel,
+# show that public URL on the generated page
+python3 forge-gui-android/tools/build_and_host_apk.py --host-url https://your-hostname.ts.net
+```
+
+On Android, the browser may ask you to allow installs from that browser. Allow it, then retry/open the downloaded APK.
 
 ## 2. Build Forge and Generate the APK
 
