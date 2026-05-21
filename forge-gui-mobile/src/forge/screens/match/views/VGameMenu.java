@@ -3,6 +3,7 @@ package forge.screens.match.views;
 import forge.Forge;
 import forge.assets.FSkinImage;
 import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
@@ -70,6 +71,9 @@ public class VGameMenu extends FDropDownMenu {
         addItem(new FMenuItem(autoPassLabel, Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, e -> {
             YieldController.toggleAutoPassNoActions(MatchController.instance.getGameController());
         }));
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblResetSavedAbilityOrders"), FSkinImage.WARNING, e ->
+                MatchController.instance.getGameController().sendYieldUpdate(new YieldUpdate.ClearAbilityOrders())
+        ));
         if (!Forge.isMobileAdventureMode) {
             addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
                 //pause game when spectating AI Match

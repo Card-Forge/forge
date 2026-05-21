@@ -89,6 +89,7 @@ public enum FSkinImage implements FSkinImageInterface {
     ALPHASTRIKE  (FSkinProp.ICO_ALPHASTRIKE),
     ARCSOFF      (FSkinProp.ICO_ARCSOFF),
     ARCSON       (FSkinProp.ICO_ARCSON),
+    ARCSHOVER    (FSkinProp.ICO_ARCSHOVER),
 
     //choice-search-misc
     HDCHOICE     (FSkinProp.ICO_HDCHOICE),

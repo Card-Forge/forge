@@ -1,0 +1,5 @@
+Name:Star
+ManaCost:no cost
+Types:Artifact
+A:AB$ Pump | Cost$ T Sac<1/CARDNAME/this token> | ValidTgts$ Creature | KW$ Deathtouch & Indestructible | SpellDescription$ Target creature gains deathtouch and indestructible until end of turn.
+Oracle:{T}, Sacrifice this token: Target creature gains deathtouch and indestructible until end of turn.

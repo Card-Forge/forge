@@ -7,4 +7,4 @@ A:AB$ Dig | Cost$ 1 Sac<1/Creature.Other;Enchantment.Other/another creature or e
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
 SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Menace (This creature can't be blocked except by two or more creatures)\n{1}, Sacrifice another creature or enchantment: Exile the top card of your library. You may play that card this turn.
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\n{1}, Sacrifice another creature or enchantment: Exile the top card of your library. You may play that card this turn.

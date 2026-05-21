@@ -257,7 +257,9 @@ public class InputPassPriority extends InputSyncronizedBase {
         }
 
         passPriority(() -> {
-            getController().macros().addRememberedAction(new PassPriorityAction());
+            getController().macros().addRememberedAction(new PassPriorityAction(
+                    getController().getGame().getStack().isEmpty(),
+                    getController().getGame().getPhaseHandler().getPhase()));
             stop();
         });
     }
