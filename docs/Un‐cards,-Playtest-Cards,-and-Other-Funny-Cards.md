@@ -270,6 +270,19 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Rebellious Intelligence - Random card in sideboard. May need special attention if we ever rework Wish.
 1. (Uk) Sojourner's Enforcermite - Affinitycycling's reminder text comes out a bit weird, but the function is there.
 1. Blacker Lotus
+1. (Uk) Aetherflux Car
+1. (Uk) Char-Dog
+1. (Uk) Item Crate
+1. (Uk) MagicConsecrated Sphinx
+1. (Uk) Moth Herb Elixir
+1. (Uk) Peel Out
+1. (Uk) Where We're Going . . .
+1. (P) Common Black Removal
+1. (P) Dwarven Confluencer
+1. (P) Flanking Licid
+1. (P) Magus of the Chains
+1. (P) Noble Ox
+1. (P) Pinchy McStingbutt
 
 #### Functional Variants
 1. Sly Spy F
@@ -375,6 +388,8 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. 1996 World Champion - Activated ability in library is implemented as an emblem created at the start of the game.
 1. (HTR) War of the Spark - "from War of the Spark" is currently implemented with City in a Bottle logic, which reportedly could use some revision. Unclear if card is meant to look at exact printing or original printing. (See also: "Set Matters", Tier 2)
 1. (Uk) The Battle of Dragon Brothers // Fate Reforged - Notes choices by card name similar to a draft choice.
+1. (P) Bolshack Dragon - Using the relevant HTML tags, strikethrough does work for the Card Detail. However it doesn't display properly on the generated card image, showing the tags verbatim with no line over text (as of 2025-05-27). Thus, the relevant bits of text were removed pending suitable game engine changes. The Armored type wasn't added to TypesList.txt on the convenient assumption that an editorial lapse prevented it from being printed struck through.
+1. (P) Liliana's Other Contract // Liliana's Undead Minion - The back face is assumed, lacking any other information, to be colorless. May need some hack to display the front face image as the back face when it transforms.
 
 
 #### Banned and Restricted as an effect
@@ -429,21 +444,15 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Barry's Land
 1. Gifts Given
 1. Svega, the Unconventional
-1. (P) Common Black Removal
 1. (P) Call from the Grave
 1. (P) Chatzuk, Mighty Guitarist
-1. (P) Dwarven Confluncer
 1. (P) Fludge, Gunk Guardian
-1. (P) Flanking Licid
 1. (P) Hish of the Snake Cult
 1. (P) Jeskai Baller
 1. (P) Jund 'Em Out
 1. (P) Lazotep Archway
 1. (P) Microscope
-1. (P) Magus of the Chains
 1. (P) Meandered Towershell
-1. (P) Noble Ox
-1. (P) Pinchy McStingbutt
 1. (P) Processing Plant
 1. (P) Penumbra Umbra
 1. (P) Rin and Seri, Inseparabler
@@ -492,21 +501,14 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Cobra King
 1. (Uk) Another Night in Vegas
 1. (Uk) First Stage of Magic Design
-1. (Uk) Moth Herb Elixir
-1. (Uk) Item Crate
-1. (Uk) Aetherflux Car
-1. (Uk) Char-Dog
 1. (Uk) Mijo, the Bull
 1. (Uk) Reflective Gate
 1. (Uk) Mana Max, Afterburner
 1. (Uk) Catch-Up Mechanic
 1. (Uk) The Good Time Sleuth
 1. (Uk) Kibo's Bananamobile
-1. (Uk) MagicConsecrated Sphinx
 1. (Uk) Establishing Shot
 1. (Uk) Would You Have Done the Same?
-1. (Uk) Where We're Going...
-1. (Uk) Peel Out
 1. (Uk) Davvol's Birthdaymobile
 1. (Uk) Tarkir Omenpath
 1. (Uk) Dialogue Tree
@@ -536,7 +538,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Problematic Volcano - Similar to Raging River?
 1. (P) Patient Turtle - Player went first this game. Seen with Forsaken Crossroad.
 1. (P) Alberix, the Trade Planet - Resources seem mostly equivalent to "card exiled by CARDNAME", barring linked ability issues.
-1. (P) Bolshack Dragon - Dunno if strikethrough in oracle text would be formatted, but is functionally all possible.
 1. (P) Lich's Duel Mastery - Like Alberix, Shields seem like another "card exiled by CARDNAME".
 1. (P) Luxior, Ignited - Nothing in the rules says a Planeswalker can't be attached to a creature...
 1. (Uk) Untap, Upkeep, Draw - Similar to Obeka, Splitter of Seconds.
@@ -658,7 +659,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Essence of Ajani - Emblem spell.
 1. (P) Knight of Lost Causes - "Way behind" state.
 1. (P) Lifening Elemental - Creature that splices onto spell. Might work as-is?
-1. (P) Liliana's Other Contract // Liliana's Undead Minion - Think it works in the rules, but may need some hack to display it face up when it transforms.
 1. (P) Night of the Flying Merfolk - Bedtime Story, puts lore counters on only at end step.
 1. (P) No-Regrets Egret - Serum Powder exists, but its implementation is hard-coded.
 1. (P) Narod, the Beige Flower - Assign damage equal to mana value rather than power.
