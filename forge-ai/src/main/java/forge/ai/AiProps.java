@@ -148,8 +148,8 @@ public enum AiProps { /** */
     SIDEBOARDING_PLANESWALKER_EQ_CREATURE("false"),
     DECK_RECOGNITION_ENABLE("false"),
     DECK_RECOGNITION_SIDECAR_URL("http://100.110.52.69:18970"),
-    // Sidecar action influence feature flags (all off by default)
-    SIDECAR_INFLUENCE_ENABLE("false"),              // master switch for sidecar -> AI influence
+    // Sidecar action influence feature flags
+    SIDECAR_INFLUENCE_ENABLE("true"),               // master switch for sidecar -> AI influence
     SIDECAR_BIAS_SPELL_PLAY("50"),                  // max % boost when sidecar recommends a spell
     SIDECAR_BIAS_LAND("30"),                        // max % boost when sidecar recommends a land
     SIDECAR_BIAS_ATTACK("50"),                      // max % boost when sidecar recommends attack
@@ -168,7 +168,15 @@ public enum AiProps { /** */
     // Synchronous "thinking" budget: at key decision points (mulligan, start of
     // AI main phase, declareAttackers), the AI blocks up to this many ms for
     // any in-flight /recognize to settle before deciding. 0 = fire-and-forget.
-    SIDECAR_WAIT_MS("3000");
+    // Used as the fallback when a per-decision-type budget below is unset/0.
+    SIDECAR_WAIT_MS("10000"),
+    // Per-decision-type budgets. The deeper opponent-strategist reasoning is
+    // worth a longer pause on the highest-impact decisions; routine priority
+    // passes stay snappy. 0 falls back to SIDECAR_WAIT_MS.
+    SIDECAR_WAIT_MS_MULLIGAN("10000"),
+    SIDECAR_WAIT_MS_COMBAT("5000"),
+    SIDECAR_WAIT_MS_PRIORITY("3000"),
+    SIDECAR_WAIT_MS_CRITICAL("10000");
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 

@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "name": "Ruby Storm",
+  "format": "modern",
+  "colors": ["W", "U", "R"],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "A dedicated spells-combo deck. It wants to deploy one or two cost reducers, chain rituals and cheap cantrips to build a high storm count and refill, then end the game with Grapeshot (or a Wish target). Ral, Monsoon Mage is both a reducer and a win condition once transformed. The deck is fragile to disruption and racing, so it leans on Wish/protection to find the missing piece and resolve the kill on turns 3-5.",
+  "win_turn_window": [3, 5],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 7,
+      "cards": ["Ruby Medallion", "Ral, Monsoon Mage", "Birgi, God of Storytelling", "Goblin Electromancer"],
+      "notes": "The engine. One reducer makes rituals net positive; two makes the deck explode. Ral transforms after enough spells and becomes a finisher too."
+    },
+    "rituals": {
+      "target_count": 9,
+      "cards": ["Desperate Ritual", "Pyretic Ritual", "Manamorphose", "Past in Flames"],
+      "notes": "Manamorphose is only a net-positive ritual with a reducer down. Past in Flames flashes back the whole graveyard of rituals/cantrips for a second wind."
+    },
+    "card_advantage": {
+      "target_count": 8,
+      "cards": ["Wrenn's Resolve", "Light Up the Stage", "Bitter Reunion", "Reckless Impulse"],
+      "notes": "'Exile the top two, play until end of next turn' impulse-draw effects. There are several near-identical versions; they keep the chain going and find the kill."
+    },
+    "dig_draw": {
+      "target_count": 6,
+      "cards": ["Mishra's Bauble", "Wrenn's Resolve", "Light Up the Stage", "Reckless Impulse"],
+      "notes": "Cheap cantrips and impulse draw that also pad storm count."
+    },
+    "tutors_wildcards": {
+      "target_count": 3,
+      "cards": ["Wish", "Glittering Wish"],
+      "notes": "Wish is a wildcard: it can fetch Grapeshot, a counter, removal, or whatever the situation needs from the sideboard. Treat as 'could be anything'."
+    },
+    "win_conditions": {
+      "target_count": 5,
+      "cards": ["Grapeshot", "Ral, Monsoon Mage", "Wish"],
+      "notes": "Grapeshot scales with storm. Transformed Ral is a recurring burst. Wish can grab the finisher."
+    },
+    "threats": {
+      "target_count": 1,
+      "cards": ["Ral, Monsoon Mage"],
+      "notes": "Almost no creature threats; the planeswalker side of Ral is the closest thing to a beater."
+    },
+    "removal": {
+      "target_count": 2,
+      "cards": ["Lightning Bolt", "Abrade"],
+      "notes": "Mostly out of the sideboard / splash; rarely maindeck removal."
+    },
+    "wrath": {
+      "target_count": 0,
+      "cards": []
+    },
+    "counterspells": {
+      "target_count": 2,
+      "cards": ["Spell Pierce", "Veil of Summer"],
+      "notes": "Cheap protection to push the combo through, usually sideboarded in."
+    },
+    "protection": {
+      "target_count": 3,
+      "cards": ["Veil of Summer", "Spell Pierce", "Defense Grid"],
+      "notes": "Cards that protect the combo turn from counterspells or discard."
+    },
+    "discard_outlets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "graveyard_enablers": {
+      "target_count": 9,
+      "cards": ["Desperate Ritual", "Pyretic Ritual", "Manamorphose", "Mishra's Bauble"],
+      "notes": "Every cheap spell cast fills the yard for Past in Flames flashback."
+    },
+    "reanimation_targets": {
+      "target_count": 0,
+      "cards": []
+    },
+    "recursion": {
+      "target_count": 5,
+      "cards": ["Past in Flames", "Ral, Monsoon Mage"],
+      "notes": "Past in Flames rebuys the ritual/cantrip shell; Ral replays key instants/sorceries."
+    },
+    "engines": {
+      "target_count": 7,
+      "cards": ["Ruby Medallion", "Ral, Monsoon Mage", "Birgi, God of Storytelling", "Past in Flames"],
+      "notes": "Pieces that turn a pile of cheap spells into a kill."
+    },
+    "payoff_cards": {
+      "target_count": 5,
+      "cards": ["Grapeshot", "Ral, Monsoon Mage"],
+      "notes": "The things the storm count is being built toward."
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "pairs": [
+        ["Ruby Medallion", "Grapeshot"],
+        ["Past in Flames", "Desperate Ritual"],
+        ["Ral, Monsoon Mage", "Grapeshot"]
+      ],
+      "notes": "Reducer + Grapeshot is the cleanest kill; Past in Flames + a graveyard of rituals is the backup engine."
+    },
+    "hate_pieces": {
+      "target_count": 2,
+      "cards": ["Pyroblast", "Abrade"],
+      "notes": "Sideboard answers to opposing hate (Rest in Peace, counterspells)."
+    },
+    "mana_fixing": {
+      "target_count": 4,
+      "cards": ["Spirebluff Canal", "Steam Vents", "Sacred Foundry", "Manamorphose"],
+      "notes": "Fast lands and shocks fixing the W/U/R mana; Manamorphose also fixes."
+    },
+    "lands": {
+      "target_count": 17,
+      "cards": ["Spirebluff Canal", "Steam Vents", "Sacred Foundry", "Island", "Mountain", "Hallowed Fountain"],
+      "notes": "Low land count (~16-18) because the deck is built to win off few lands plus rituals."
+    },
+    "planeswalker_threats": {
+      "target_count": 4,
+      "cards": ["Ral, Monsoon Mage"],
+      "notes": "Ral is the only walker; it transforms from the front (reducer) side."
+    },
+    "interaction_density": 0.15
+  },
+  "dual_role_cards": [
+    {"card": "Ral, Monsoon Mage", "roles": ["mana_reducers", "win_conditions", "recursion", "planeswalker_threats", "engines"], "notes": "Front side reduces costs; transforms into a finisher that replays spells."},
+    {"card": "Manamorphose", "roles": ["rituals", "dig_draw", "mana_fixing", "graveyard_enablers"], "notes": "Free cantrip+ritual with a reducer; fixes colors and pads storm."},
+    {"card": "Past in Flames", "roles": ["rituals", "recursion", "engines"], "notes": "Flashes back the whole graveyard of cheap spells for a second combo turn."},
+    {"card": "Wish", "roles": ["tutors_wildcards", "win_conditions"], "notes": "Wildcard tutor; can be the finisher or any answer."}
+  ],
+  "tells": [
+    "multiple rituals chained in one turn",
+    "Ruby Medallion / Goblin Electromancer on an early turn",
+    "impulse-draw spells (Wrenn's Resolve, Light Up the Stage)",
+    "Ral, Monsoon Mage on turn 2-3",
+    "few lands but explosive turns"
+  ],
+  "predicted_lines": [
+    {"trigger": "A cost reducer is on the battlefield, 4+ cards in hand, RR+ available", "line": "Chain rituals + impulse draws to build storm, then Grapeshot for lethal or transform Ral."},
+    {"trigger": "Past in Flames castable and graveyard full of rituals/cantrips", "line": "Flashback the graveyard to rebuild storm count and kill."},
+    {"trigger": "Holding up mana with Wish available", "line": "Wish for the missing piece (finisher, counter, or removal) at instant speed."}
+  ],
+  "kill_priority": ["Ral, Monsoon Mage", "Ruby Medallion", "Birgi, God of Storytelling", "Goblin Electromancer"],
+  "interaction_to_disrupt": ["Veil of Summer", "Spell Pierce", "Defense Grid", "Pyroblast"],
+  "last_updated": "2026-05-21"
+}

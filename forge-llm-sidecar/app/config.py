@@ -16,6 +16,9 @@ class Config:
     llm_base_url: str
     llm_api_key: str
     model_name: str
+    # Optional separate (often faster) model for the deeper opponent_strategist
+    # call. Defaults to model_name when unset.
+    strategist_model_name: str
     host: str
     port: int
     request_timeout: float
@@ -34,6 +37,9 @@ class Config:
             llm_base_url=os.environ.get("LLM_BASE_URL", "http://localhost:8080/v1"),
             llm_api_key=os.environ.get("LLM_API_KEY", "not-needed"),
             model_name=os.environ.get("MODEL_NAME", "local-model"),
+            strategist_model_name=os.environ.get(
+                "STRATEGIST_MODEL_NAME", os.environ.get("MODEL_NAME", "local-model")
+            ),
             host=os.environ.get("HOST", "127.0.0.1"),
             port=int(os.environ.get("PORT", "18970")),
             request_timeout=float(os.environ.get("LLM_TIMEOUT", "60")),

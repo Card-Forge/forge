@@ -15,16 +15,27 @@ import functools
 from langgraph.graph import END, START, StateGraph
 
 from app.nodes.game_advisor import game_advisor_node
+from app.nodes.opponent_strategist import opponent_strategist_node
 from app.schema import GraphState
 
 _GAME_ADVISOR = "game_advisor"
+_OPPONENT_STRATEGIST = "opponent_strategist"
 
 
 @functools.lru_cache(maxsize=1)
 def get_graph():
-    """Build and compile the graph once (cached for the process lifetime)."""
+    """Build and compile the graph once (cached for the process lifetime).
+
+    ``game_advisor`` recognizes the opponent and derives own-deck piloting;
+    ``opponent_strategist`` then does the deeper Pro-Tour-style opponent
+    reasoning (hand inference, next-turn prediction, threat ranking) when a
+    profile exists for the recognized archetype. The strategist self-gates and
+    fails soft, so it adds no risk to the recognition path.
+    """
     builder = StateGraph(GraphState)
     builder.add_node(_GAME_ADVISOR, game_advisor_node)
+    builder.add_node(_OPPONENT_STRATEGIST, opponent_strategist_node)
     builder.add_edge(START, _GAME_ADVISOR)
-    builder.add_edge(_GAME_ADVISOR, END)
+    builder.add_edge(_GAME_ADVISOR, _OPPONENT_STRATEGIST)
+    builder.add_edge(_OPPONENT_STRATEGIST, END)
     return builder.compile()

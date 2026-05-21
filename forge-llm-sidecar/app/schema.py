@@ -14,7 +14,10 @@ from pydantic import BaseModel, Field
 # v5 adds real hand/library sizes, per-card P/T on the battlefield, opp mana
 # color tracking, dimension scores (Board/Cards/Clock/Tempo/Graveyard),
 # threat-aware hand valuation, and a graveyard-utility metric.
-SCHEMA_VERSION = 5
+# v6 adds the opponent_strategist node: archetype-profile-driven hand inference
+# (role buckets), a predicted opponent next-turn line, archetype-aware threat
+# priorities, and opponent resource signals + decision_type on the request.
+SCHEMA_VERSION = 6
 
 
 class Observation(BaseModel):
@@ -93,6 +96,13 @@ class RecognitionRequest(BaseModel):
     opponent_board_details: list[BoardCard] = Field(default_factory=list)
     # v5: colors of mana the opponent has access to (from their lands).
     opponent_mana_colors_seen: list[str] = Field(default_factory=list)
+    # v6: opponent resource signals for the strategist's next-turn prediction.
+    opp_mana_available: int = 0
+    opp_mana_spent_this_turn: int = 0
+    # v6: which decision the AI is making — lets the sidecar spend extra effort
+    # on high-impact decisions. One of: "mulligan" | "combat" | "priority" |
+    # "critical". Empty defaults to a routine priority decision.
+    decision_type: str = ""
 
 
 class RoleAssessment(BaseModel):
@@ -158,6 +168,22 @@ class TargetPriority(BaseModel):
     reasoning: str = ""
 
 
+class PredictedOppLine(BaseModel):
+    """The opponent_strategist's prediction of the opponent's next turn."""
+
+    primary_play: str = ""
+    supporting_plays: list[str] = Field(default_factory=list)
+    mana_required: str = ""
+    reasoning: str = ""
+
+
+class BeatdownAssessment(BaseModel):
+    """Who's-the-beatdown call from the opponent_strategist (state-dependent)."""
+
+    who_is_beatdown: str = ""  # "ai" | "opponent"
+    reasoning: str = ""
+
+
 class PilotingAdvice(BaseModel):
     """Advice on how the AI should play its own deck this turn."""
 
@@ -182,6 +208,9 @@ class PilotingAdvice(BaseModel):
     key_cards: list[dict] = Field(default_factory=list)  # [{name, role, notes}]
     sequencing_tips: list[str] = Field(default_factory=list)
     matchup_advice: str = ""  # specific advice vs the identified opponent archetype
+    # v6 opponent_strategist outputs (None when no profile / strategist skipped).
+    predicted_opp_line: PredictedOppLine | None = None
+    beatdown_assessment: BeatdownAssessment | None = None
 
 
 class TrainingExample(BaseModel):
@@ -242,6 +271,10 @@ class GraphState(TypedDict, total=False):
     own_board_details: list[dict]
     opponent_board_details: list[dict]
     opponent_mana_colors_seen: list[str]
+    # v6 inputs for the strategist
+    opp_mana_available: int
+    opp_mana_spent_this_turn: int
+    decision_type: str
     # resolved by the game_advisor node
     resolved_format: str | None
     candidate_archetypes: list[dict]
@@ -263,3 +296,6 @@ class GraphState(TypedDict, total=False):
     hand_values: list[dict]
     opponent_hand: list[dict]
     target_priorities: list[dict]
+    # v6 opponent_strategist outputs
+    predicted_opp_line: dict | None
+    beatdown_assessment: dict | None

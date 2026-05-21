@@ -15,10 +15,12 @@ def _offline():
     sample game so the node never makes a network call to detect the format."""
     game_advisor._resolved_format.clear()
     game_advisor._own_archetype.clear()
+    game_advisor._locked_archetype.clear()
     game_advisor._resolved_format["t"] = "modern"
     yield
     game_advisor._resolved_format.clear()
     game_advisor._own_archetype.clear()
+    game_advisor._locked_archetype.clear()
 
 
 @pytest.fixture

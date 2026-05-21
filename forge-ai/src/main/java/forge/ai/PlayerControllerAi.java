@@ -770,7 +770,7 @@ public class PlayerControllerAi extends PlayerController {
         // the hand-value sum as a tiebreaker against the heuristic.
         // Give the sidecar a budget to settle before we decide — mulligan is
         // the single highest-impact decision in a game.
-        brains.waitForSidecar();
+        brains.waitForSidecar(AiController.DecisionType.MULLIGAN);
         if (brains.getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE)
                 && brains.getBoolProperty(AiProps.SIDECAR_MULLIGAN_ENABLE)
                 && brains.getSidecarInfluence().hasData()) {
@@ -847,13 +847,13 @@ public class PlayerControllerAi extends PlayerController {
     public void declareAttackers(Player attacker, Combat combat) {
         // Combat is the second highest-impact decision; let the sidecar finish
         // before we commit attackers.
-        brains.waitForSidecar();
+        brains.waitForSidecar(AiController.DecisionType.COMBAT);
         brains.declareAttackers(attacker, combat);
     }
 
     @Override
     public void declareBlockers(Player defender, Combat combat) {
-        brains.waitForSidecar();
+        brains.waitForSidecar(AiController.DecisionType.COMBAT);
         brains.declareBlockersFor(defender, combat);
     }
 

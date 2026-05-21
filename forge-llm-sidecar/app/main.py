@@ -15,14 +15,16 @@ from pydantic import BaseModel, Field
 
 from app.config import CONFIG
 from app.graph import get_graph
-from app.knowledge import metagame, piloting
+from app.knowledge import loader, metagame, piloting
 from app.llm_client import is_reachable
 from app.nodes import game_advisor
 from app.schema import (
     ActionScore,
+    BeatdownAssessment,
     HandValuation,
     OpponentHandGuess,
     PilotingAdvice,
+    PredictedOppLine,
     RecognitionRequest,
     RecognitionResponse,
     RoleAssessment,
@@ -111,6 +113,8 @@ _RECOGNIZE_CACHE: "OrderedDict[str, dict]" = OrderedDict()
 _RECOGNIZE_CACHE_LIMIT = 256
 _recognize_cache_hits = 0
 _recognize_cache_misses = 0
+# Computed once at startup; busts the cache when any archetype profile changes.
+_PROFILES_VERSION = loader.all_profiles_version()
 
 
 def _recognize_cache_key(req: RecognitionRequest) -> str:
@@ -138,6 +142,13 @@ def _recognize_cache_key(req: RecognitionRequest) -> str:
             (bc.name, bc.power, bc.toughness, sorted(bc.types), bc.is_creature, bc.tapped)
             for bc in req.opponent_board_details
         ],
+        # v6: strategist inputs. decision_type changes how hard the sidecar
+        # reasons; opp mana feeds the next-turn prediction. _PROFILES_VERSION
+        # busts the cache whenever any archetype profile file is edited.
+        "dt": req.decision_type,
+        "oma": req.opp_mana_available,
+        "oms": req.opp_mana_spent_this_turn,
+        "pv": _PROFILES_VERSION,
     }
     encoded = _json.dumps(payload, sort_keys=True, default=str).encode("utf-8")
     return hashlib.blake2b(encoded, digest_size=16).hexdigest()
@@ -355,6 +366,9 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         "own_board_details": [bc.model_dump() for bc in req.own_board_details],
         "opponent_board_details": [bc.model_dump() for bc in req.opponent_board_details],
         "opponent_mana_colors_seen": req.opponent_mana_colors_seen,
+        "opp_mana_available": req.opp_mana_available,
+        "opp_mana_spent_this_turn": req.opp_mana_spent_this_turn,
+        "decision_type": req.decision_type,
     }
     final = await graph.ainvoke(initial)
     raw_actions = final.get("actions") or []
@@ -372,6 +386,14 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         for t in (final.get("target_priorities") or [])
         if isinstance(t, dict)
     ]
+    predicted_raw = final.get("predicted_opp_line")
+    predicted_opp_line = (
+        PredictedOppLine(**predicted_raw) if isinstance(predicted_raw, dict) else None
+    )
+    beatdown_raw = final.get("beatdown_assessment")
+    beatdown_assessment = (
+        BeatdownAssessment(**beatdown_raw) if isinstance(beatdown_raw, dict) else None
+    )
     guide = final.get("piloting_guide") or {}
     phase_bucket = (
         "early_game" if req.turn <= 3 else "mid_game" if req.turn <= 7 else "late_game"
@@ -409,6 +431,8 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         ],
         sequencing_tips=[str(s) for s in sequencing_tips if s],
         matchup_advice=matchup_advice,
+        predicted_opp_line=predicted_opp_line,
+        beatdown_assessment=beatdown_assessment,
     )
 
     _store = get_store()

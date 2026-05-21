@@ -29,12 +29,21 @@ def _models_url() -> str:
     return CONFIG.llm_base_url.rstrip("/") + "/models"
 
 
-async def generate_json(prompt: str, *, system: str | None = None) -> dict:
+async def generate_json(
+    prompt: str,
+    *,
+    system: str | None = None,
+    model: str | None = None,
+    temperature: float = 0.2,
+) -> dict:
     """Call the chat-completions endpoint in JSON mode and parse the result.
 
     ``response_format={"type": "json_object"}`` constrains the model to emit a
     single JSON object. Any transport or parse failure is surfaced as
     :class:`LLMError` so callers can degrade gracefully.
+
+    ``model`` / ``temperature`` let a caller override the defaults — e.g. the
+    opponent_strategist node can point at a faster model for its longer prompt.
     """
     messages: list[dict] = []
     if system:
@@ -42,10 +51,10 @@ async def generate_json(prompt: str, *, system: str | None = None) -> dict:
     messages.append({"role": "user", "content": prompt})
 
     payload: dict = {
-        "model": CONFIG.model_name,
+        "model": model or CONFIG.model_name,
         "messages": messages,
         "response_format": {"type": "json_object"},
-        "temperature": 0.2,
+        "temperature": temperature,
         "stream": False,
     }
     if CONFIG.llm_disable_thinking:

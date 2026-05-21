@@ -56,10 +56,15 @@ public final class DeckRecognitionManager {
             final String url = DeckRecognitionFeature.sidecarUrl(ai);
             final DeckRecognitionClient client = new DeckRecognitionClient(url);
             final boolean healthy = client.isSidecarHealthy();
+            // Tell the controller so waitForSidecar() can skip the blocking wait
+            // when the sidecar is offline — otherwise every decision would stall
+            // for the full budget waiting on a call that will never succeed.
+            ai.setSidecarHealthy(healthy);
             if (!healthy) {
                 Logger.info("DeckRecognition: sidecar at " + url
                         + " did not respond to /health; attaching observer anyway "
-                        + "(individual /recognize calls will fail-soft).");
+                        + "(individual /recognize calls will fail-soft, "
+                        + "synchronous wait disabled).");
             }
             final DeckRecognitionObserver observer = new DeckRecognitionObserver(player, game, client, ai);
             game.subscribeToEvents(observer);

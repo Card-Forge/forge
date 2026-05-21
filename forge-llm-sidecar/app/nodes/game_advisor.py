@@ -38,6 +38,11 @@ log = logging.getLogger(__name__)
 # Per-game caches so per-action calls do not redo one-time work.
 _resolved_format: dict[str, str] = {}
 _own_archetype: dict[str, tuple[str | None, StrategyType]] = {}
+# Once recognition is highly confident, lock the archetype for the game so
+# later turns skip the recognition LLM call entirely (the opponent's deck does
+# not change). Steady-state cost then drops to just the strategist call.
+_LOCK_CONFIDENCE = 0.95
+_locked_archetype: dict[str, dict] = {}
 
 _RECOGNITION_SYSTEM_PROMPT = (
     "You are an expert Magic: The Gathering deck-recognition analyst. "
@@ -608,14 +613,24 @@ async def game_advisor_node(state: GraphState) -> GraphState:
         )
     state["guide_source"] = guide_source
 
-    try:
-        result = await generate_json(
-            _build_recognition_prompt(state),
-            system=_RECOGNITION_SYSTEM_PROMPT,
+    game_id = state.get("game_id", "")
+    locked = _locked_archetype.get(game_id) if game_id else None
+    if locked:
+        # Deck identity is settled; reuse it and skip the recognition LLM call.
+        result = locked
+        log.info(
+            "game_advisor: game %s using locked archetype '%s' (skip recognition LLM)",
+            game_id, locked.get("archetype"),
         )
-    except LLMError as exc:
-        log.warning("game_advisor: recognition model call failed: %s", exc)
-        return _fail_soft(state, exc)
+    else:
+        try:
+            result = await generate_json(
+                _build_recognition_prompt(state),
+                system=_RECOGNITION_SYSTEM_PROMPT,
+            )
+        except LLMError as exc:
+            log.warning("game_advisor: recognition model call failed: %s", exc)
+            return _fail_soft(state, exc)
 
     archetype = str(result.get("archetype", "Unknown")).strip() or "Unknown"
     try:
@@ -623,6 +638,23 @@ async def game_advisor_node(state: GraphState) -> GraphState:
     except (TypeError, ValueError):
         confidence = 0.0
     confidence = max(0.0, min(1.0, confidence))
+
+    # Lock the archetype once we're highly confident, so subsequent turns of
+    # this game skip recognition entirely.
+    if (
+        game_id
+        and not locked
+        and confidence >= _LOCK_CONFIDENCE
+        and archetype not in ("Unknown", "")
+    ):
+        _locked_archetype[game_id] = {
+            "archetype": archetype,
+            "confidence": confidence,
+            "reasoning": str(result.get("reasoning", "")),
+            "alternatives": result.get("alternatives", []),
+        }
+        log.info("game_advisor: locked archetype '%s' for game %s (conf %.2f)",
+                 archetype, game_id, confidence)
 
     # An archetype outside the curated KB is kept but its confidence is capped,
     # since the model is guessing beyond what we can corroborate. The Off-meta

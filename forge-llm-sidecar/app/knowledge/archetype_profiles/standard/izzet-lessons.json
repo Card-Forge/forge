@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "name": "Izzet Lessons",
+  "format": "standard",
+  "colors": ["U", "R"],
+  "strategy_type": "combo",
+  "expected_deck_total": 60,
+  "macro_plan": "A combo-control deck that survives early aggression with cheap interaction and a one-drop body (Gran-Gran), then assembles a card-advantage engine: looting effects fill the graveyard with Lessons so Accumulate Wisdom draws three, while Monument to Endurance and Artist's Talent convert every loot into mana, damage, or cards. Gran-Gran and Artist's Talent are also cost reducers and discard outlets. The key danger is letting it land a cost reducer or discard outlet while Monument to Endurance is on the board or in hand — that turns the engine on and snowballs.",
+  "win_turn_window": [5, 9],
+  "buckets": {
+    "mana_reducers": {
+      "target_count": 6,
+      "cards": ["Gran-Gran", "Artist's Talent"],
+      "notes": "Gran-Gran reduces spell costs and Artist's Talent reduces costs as it filters. Both are also discard outlets — high-priority to deny under Monument to Endurance."
+    },
+    "rituals": {"target_count": 0, "cards": []},
+    "card_advantage": {
+      "target_count": 7,
+      "cards": ["Accumulate Wisdom", "Monument to Endurance", "Stormchaser's Talent"],
+      "notes": "Accumulate Wisdom is the payoff (draw three with three Lessons in yard). Monument to Endurance is a recurring advantage engine."
+    },
+    "dig_draw": {
+      "target_count": 8,
+      "cards": ["Abandon Attachments", "Stormchaser's Talent", "Firebending Lesson", "Boomerang Basics"],
+      "notes": "Looting / cantrip effects that dig and fill the graveyard with Lessons."
+    },
+    "tutors_wildcards": {"target_count": 0, "cards": []},
+    "win_conditions": {
+      "target_count": 5,
+      "cards": ["Monument to Endurance", "Artist's Talent", "Stormchaser's Talent"],
+      "notes": "Monument + Artist's Talent engine grinds out the game; Stormchaser's Otters provide a clock the opponent can't ignore."
+    },
+    "threats": {
+      "target_count": 5,
+      "cards": ["Gran-Gran", "Stormchaser's Talent"],
+      "notes": "Otter tokens with prowess and the Gran-Gran body."
+    },
+    "removal": {
+      "target_count": 6,
+      "cards": ["Firebending Lesson", "Boomerang Basics", "Torch the Tower", "Abrade"],
+      "notes": "Cheap spot removal and tempo bounce to survive to the engine turns."
+    },
+    "wrath": {
+      "target_count": 2,
+      "cards": ["Pyroclasm", "Iroh's Demonstration"],
+      "notes": "Sweepers (often sideboard) for go-wide and token decks."
+    },
+    "counterspells": {"target_count": 2, "cards": ["Annul", "Three Steps Ahead"]},
+    "protection": {"target_count": 2, "cards": ["Annul", "Boomerang Basics"]},
+    "discard_outlets": {
+      "target_count": 6,
+      "cards": ["Gran-Gran", "Artist's Talent", "Abandon Attachments", "Agna Qel'a"],
+      "notes": "Looting / discard outlets that fuel Monument to Endurance and bin Lessons. Denying these under Monument is the matchup priority."
+    },
+    "graveyard_enablers": {
+      "target_count": 8,
+      "cards": ["Abandon Attachments", "Agna Qel'a", "Firebending Lesson", "Boomerang Basics"],
+      "notes": "Anything that puts Lessons in the graveyard toward Accumulate Wisdom."
+    },
+    "reanimation_targets": {"target_count": 0, "cards": []},
+    "recursion": {
+      "target_count": 3,
+      "cards": ["Boomerang Basics", "Monument to Endurance"],
+      "notes": "Bounce re-buys ETB/triggers; Monument recovers resources."
+    },
+    "engines": {
+      "target_count": 6,
+      "cards": ["Monument to Endurance", "Artist's Talent", "Accumulate Wisdom"],
+      "notes": "The core advantage engine. Monument to Endurance is the lynchpin."
+    },
+    "payoff_cards": {
+      "target_count": 4,
+      "cards": ["Accumulate Wisdom", "Monument to Endurance"],
+      "notes": "The cards the looting/Lessons setup is building toward."
+    },
+    "combo_pieces": {
+      "target_count": 0,
+      "cards": [],
+      "pairs": [
+        ["Monument to Endurance", "Artist's Talent"],
+        ["Accumulate Wisdom", "Gran-Gran"],
+        ["Monument to Endurance", "Abandon Attachments"]
+      ],
+      "notes": "Monument + a discard outlet/looter is the engine; Accumulate Wisdom + cost reducer is Ancestral Recall."
+    },
+    "hate_pieces": {
+      "target_count": 3,
+      "cards": ["Soul-Guide Lantern", "Quantum Riddler", "Annul"],
+      "notes": "Sideboard graveyard/combo hate."
+    },
+    "mana_fixing": {
+      "target_count": 4,
+      "cards": ["Steam Vents", "Riverpyre Verge", "Agna Qel'a"],
+      "notes": "Duals fixing U/R; Agna Qel'a doubles as a discard outlet."
+    },
+    "lands": {
+      "target_count": 24,
+      "cards": ["Steam Vents", "Riverpyre Verge", "Island", "Mountain", "Agna Qel'a", "Isolated Chapel"],
+      "notes": "Standard land count; Agna Qel'a turns flood into fuel."
+    },
+    "planeswalker_threats": {"target_count": 0, "cards": []},
+    "interaction_density": 0.45
+  },
+  "dual_role_cards": [
+    {"card": "Gran-Gran", "roles": ["mana_reducers", "discard_outlets", "threats"], "notes": "One-drop body, cost reducer, and discard outlet that enables Monument to Endurance."},
+    {"card": "Artist's Talent", "roles": ["mana_reducers", "discard_outlets", "win_conditions", "engines"], "notes": "Cost reducer + looter + engine piece. Both reducer and discard outlet."},
+    {"card": "Monument to Endurance", "roles": ["card_advantage", "win_conditions", "engines", "payoff_cards", "recursion"], "notes": "The lynchpin engine; converts every loot into mana/damage/cards."},
+    {"card": "Stormchaser's Talent", "roles": ["card_advantage", "dig_draw", "threats", "win_conditions"], "notes": "Makes prowess Otters and digs."},
+    {"card": "Abandon Attachments", "roles": ["dig_draw", "discard_outlets", "graveyard_enablers"], "notes": "Accelerant + looter that bins Lessons."}
+  ],
+  "tells": [
+    "turn-1 Gran-Gran",
+    "looting effects (Abandon Attachments) early",
+    "Lessons going to the graveyard",
+    "Monument to Endurance or Artist's Talent deployed",
+    "Accumulate Wisdom drawing multiple cards"
+  ],
+  "predicted_lines": [
+    {"trigger": "Monument to Endurance in play and a discard outlet/looter available", "line": "Loot repeatedly to trigger Monument (mana/Lava Spike/cards) and bin Lessons toward Accumulate Wisdom."},
+    {"trigger": "Three Lessons in graveyard, Accumulate Wisdom in hand, cost reducer down", "line": "Cast Accumulate Wisdom cheaply to draw three and bury the opponent in cards."},
+    {"trigger": "Under early pressure with Gran-Gran available", "line": "Deploy Gran-Gran to block and stabilize, holding cheap removal/bounce for the biggest threat."}
+  ],
+  "kill_priority": ["Monument to Endurance", "Artist's Talent", "Gran-Gran", "Stormchaser's Talent"],
+  "interaction_to_disrupt": ["Annul", "Three Steps Ahead", "Boomerang Basics"],
+  "last_updated": "2026-05-21"
+}

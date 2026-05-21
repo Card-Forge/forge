@@ -103,6 +103,28 @@ public class AiController {
     private List<SpellAbility> skipped;
     private boolean timeoutReached;
     private final SidecarInfluence sidecarInfluence;
+    // Set once at attach time from the sidecar /health probe. When the sidecar
+    // is known-unreachable we skip the synchronous wait entirely so an offline
+    // sidecar can never stall the game for the full per-decision budget.
+    private volatile boolean sidecarHealthy = true;
+
+    /** High-impact decision points, each with its own sidecar wait budget. */
+    public enum DecisionType {
+        MULLIGAN(AiProps.SIDECAR_WAIT_MS_MULLIGAN),
+        COMBAT(AiProps.SIDECAR_WAIT_MS_COMBAT),
+        PRIORITY(AiProps.SIDECAR_WAIT_MS_PRIORITY),
+        CRITICAL(AiProps.SIDECAR_WAIT_MS_CRITICAL);
+
+        private final AiProps budgetProp;
+
+        DecisionType(final AiProps budgetProp) {
+            this.budgetProp = budgetProp;
+        }
+
+        AiProps budgetProp() {
+            return budgetProp;
+        }
+    }
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -138,16 +160,42 @@ public class AiController {
     }
 
     /**
-     * Block up to {@link AiProps#SIDECAR_WAIT_MS} for any in-flight /recognize
-     * to settle. Call at high-impact decision points (mulligan, start of main,
-     * declareAttackers) so the sidecar's advice is current before the AI
-     * commits. No-op when the influence is disabled or the budget is 0.
+     * Record whether the sidecar answered its /health probe at attach time.
+     * When unhealthy, {@link #waitForSidecar(DecisionType)} skips the blocking
+     * wait so an offline sidecar never stalls the game.
      */
+    public void setSidecarHealthy(final boolean healthy) {
+        this.sidecarHealthy = healthy;
+    }
+
+    /** @return whether sidecar influence is active (AI prop or system property). */
+    private boolean sidecarInfluenceEnabled() {
+        if (Boolean.getBoolean("forge.ai.sidecarInfluence")) {
+            return true;
+        }
+        return getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE);
+    }
+
+    /** Back-compat overload: routine priority decisions. */
     public void waitForSidecar() {
-        if (!getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE)) {
+        waitForSidecar(DecisionType.PRIORITY);
+    }
+
+    /**
+     * Block up to the per-{@link DecisionType} budget for any in-flight
+     * /recognize to settle, so the sidecar's advice is current before the AI
+     * commits. No-op when influence is disabled, the sidecar is known-offline,
+     * or the budget is 0.
+     */
+    public void waitForSidecar(final DecisionType type) {
+        if (!sidecarInfluenceEnabled() || !sidecarHealthy) {
             return;
         }
-        final int budget = getIntProperty(AiProps.SIDECAR_WAIT_MS);
+        int budget = getIntProperty(type.budgetProp());
+        if (budget <= 0) {
+            // Unset/0 per-type budget falls back to the global wait budget.
+            budget = getIntProperty(AiProps.SIDECAR_WAIT_MS);
+        }
         if (budget <= 0) {
             return;
         }
