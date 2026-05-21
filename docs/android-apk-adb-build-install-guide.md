@@ -73,7 +73,7 @@ forge-gui-android/target/apk-download/forge-android-latest.apk
 
 When it prints an `Open on phone:` URL, open that URL from the phone over the same network or Tailscale, then tap **Download latest APK**. If Tailscale is available, the script lists the Tailscale URL first.
 
-The page also has rebuild buttons for the Android APK, desktop app, and sidecar. Tap one from the phone to start that build on this PC. Each build runs in the background, and the page shows status plus a log link. Refresh the page after it reports `Build complete`, then download the latest APK if you rebuilt Android.
+The page also has action buttons for the Android APK, desktop app, and sidecar. Tap one from the phone to start that task on this PC. Each task runs in the background, and the page shows status plus a log link. Use **Restart Sidecar App** after rebuilding the sidecar package so the running `uvicorn` process picks up the new code. Refresh the page after Android reports `Build complete`, then download the latest APK if you rebuilt Android.
 
 Useful variants:
 

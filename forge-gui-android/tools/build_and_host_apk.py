@@ -42,16 +42,25 @@ ACTION_STATES: dict[str, BuildState] = {
     "apk": STATE,
     "desktop": BuildState(),
     "sidecar": BuildState(),
+    "sidecar-restart": BuildState(),
 }
 ACTION_LABELS = {
     "apk": "Android APK",
     "desktop": "Desktop App",
     "sidecar": "Sidecar",
+    "sidecar-restart": "Sidecar App",
 }
 ACTION_LOGS = {
     "apk": REBUILD_LOG,
     "desktop": "desktop-build.log",
     "sidecar": "sidecar-build.log",
+    "sidecar-restart": "sidecar-restart.log",
+}
+ACTION_VERBS = {
+    "apk": "Rebuild",
+    "desktop": "Rebuild",
+    "sidecar": "Rebuild",
+    "sidecar-restart": "Restart",
 }
 
 
@@ -118,6 +127,81 @@ def build_sidecar(*, output=None) -> None:
     venv_python = sidecar_dir / ".venv" / "bin" / "python"
     python = str(venv_python) if venv_python.exists() else sys.executable
     run([python, "-m", "pip", "install", "-e", "."], cwd=sidecar_dir, output=output)
+
+
+def sidecar_uvicorn_command() -> list[str]:
+    sidecar_dir = REPO_ROOT / "forge-llm-sidecar"
+    venv_uvicorn = sidecar_dir / ".venv" / "bin" / "uvicorn"
+    if venv_uvicorn.exists():
+        return [str(venv_uvicorn), "app.main:app", "--host", "0.0.0.0", "--port", "18970"]
+    venv_python = sidecar_dir / ".venv" / "bin" / "python"
+    python = str(venv_python) if venv_python.exists() else sys.executable
+    return [python, "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "18970"]
+
+
+def sidecar_pids() -> list[int]:
+    result = subprocess.run(["ps", "-eo", "pid=,args="], check=True, capture_output=True, text=True)
+    pids: list[int] = []
+    for line in result.stdout.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        pid_text, _, args = stripped.partition(" ")
+        if (
+            "uvicorn" in args
+            and "app.main:app" in args
+            and "--port 18970" in args
+            and int(pid_text) != os.getpid()
+        ):
+            pids.append(int(pid_text))
+    return pids
+
+
+def restart_sidecar(*, output=None) -> None:
+    sidecar_dir = REPO_ROOT / "forge-llm-sidecar"
+    runtime_log = SERVE_DIR / "sidecar-runtime.log"
+    pids = sidecar_pids()
+    if pids:
+        if output:
+            output.write(f"Stopping sidecar pid(s): {', '.join(str(pid) for pid in pids)}\n")
+            output.flush()
+        for pid in pids:
+            os.kill(pid, 15)
+        deadline = time.time() + 10
+        while time.time() < deadline:
+            if not any(pid in sidecar_pids() for pid in pids):
+                break
+            time.sleep(0.25)
+        remaining = [pid for pid in pids if pid in sidecar_pids()]
+        for pid in remaining:
+            if output:
+                output.write(f"Force stopping sidecar pid: {pid}\n")
+                output.flush()
+            os.kill(pid, 9)
+
+    cmd = sidecar_uvicorn_command()
+    env = os.environ.copy()
+    env.setdefault("HOST", "0.0.0.0")
+    env.setdefault("PORT", "18970")
+    env.setdefault("LLM_BASE_URL", "http://localhost:8080/v1")
+    if output:
+        output.write("+ " + " ".join(cmd) + f" > {runtime_log}\n")
+        output.flush()
+    runtime = runtime_log.open("ab")
+    process = subprocess.Popen(
+        cmd,
+        cwd=sidecar_dir,
+        env=env,
+        stdout=runtime,
+        stderr=subprocess.STDOUT,
+        start_new_session=True,
+    )
+    time.sleep(1)
+    if process.poll() is not None:
+        raise RuntimeError(f"Sidecar exited immediately with code {process.returncode}; see {runtime_log}")
+    if output:
+        output.write(f"Started sidecar pid: {process.pid}\n")
+        output.flush()
 
 
 def newest_raw_apk() -> Path:
@@ -215,13 +299,14 @@ def render_action_card(target: str) -> str:
     state = ACTION_STATES[target]
     label = ACTION_LABELS[target]
     log_name = ACTION_LOGS[target]
+    verb = ACTION_VERBS[target]
     with state.lock:
         running = state.running
         status = state.status
         started_at = state.started_at
         finished_at = state.finished_at
         error = state.error
-    button_label = f"Rebuild {label}" if not running else f"Rebuilding {label}..."
+    button_label = f"{verb} {label}" if not running else f"{verb}ing {label}..."
     button_disabled = " disabled" if running else ""
     status_class = "error" if error else "ok"
     error_html = f"<p class=\"error\">{html.escape(error)}</p>" if error else ""
@@ -246,7 +331,9 @@ def render_index(apk_path: Path, base_urls: list[str]) -> str:
         f'<li><a href="{html.escape(url)}/{LATEST_APK}">{html.escape(url)}/{LATEST_APK}</a></li>'
         for url in base_urls
     )
-    action_cards = "\n".join(render_action_card(target) for target in ("apk", "desktop", "sidecar"))
+    action_cards = "\n".join(
+        render_action_card(target) for target in ("apk", "desktop", "sidecar", "sidecar-restart")
+    )
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -323,6 +410,8 @@ def run_target_build(target: str, server: "ApkServer") -> None:
                 build_desktop(output=log)
             elif target == "sidecar":
                 build_sidecar(output=log)
+            elif target == "sidecar-restart":
+                restart_sidecar(output=log)
             else:
                 raise ValueError(f"Unknown build target: {target}")
             log.write(f"Finished: {format_timestamp(time.time())}\n")
