@@ -93,6 +93,11 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
 
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
+
+        // Seed state here so auto-picks arriving before update() runs don't NPE on a null pool
+        catalogManager.setup(ItemManagerConfig.DRAFT_PACK);
+        deckManager.setup(ItemManagerConfig.DRAFT_POOL);
+        deckManager.setPool(Collections.<PaperCard>emptyList());
     }
 
     /**
@@ -210,19 +215,11 @@ public class CEditorNetworkDraft extends ACEditorBase<PaperCard, Deck> {
 
     @Override
     public void update() {
-        this.getCatalogManager().setup(ItemManagerConfig.DRAFT_PACK);
-        this.getDeckManager().setup(ItemManagerConfig.DRAFT_POOL);
-
         if (VEditorLog.SINGLETON_INSTANCE.getParentCell() == null) {
             VCardCatalog.SINGLETON_INSTANCE.getParentCell().addDoc(VEditorLog.SINGLETON_INSTANCE);
         }
 
         ccAddLabel = this.getBtnAdd().getText();
-
-        // Start with an empty catalog — packs arrive via events
-        if (this.getDeckManager().getPool() == null) {
-            this.getDeckManager().setPool(Collections.<PaperCard>emptyList());
-        }
 
         this.getBtnAdd().setVisible(false);
         this.getBtnAdd4().setVisible(false);
