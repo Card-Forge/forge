@@ -1,0 +1,236 @@
+{
+  "archetype": "Caw-Gates",
+  "format": "pauper",
+  "strategy_type": "midrange",
+  "overview": "The Esper Caw-Gates variant shifts from a traditional control stance to a midrange approach, focusing on proactive threat removal and fair trades rather than a passive draw-go strategy. It leverages a powerful removal suite and card advantage engines to outlast opponents, eventually closing games with versatile finishers backed by a robust land base.",
+  "win_conditions": [
+    "Basilisk Gate with any creature",
+    "Guardian of the Guildpact",
+    "Sacred Cat",
+    "Outlaw Medic"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early land drops and cheap interaction",
+      "Hands containing Brainstorm or Preordain to dig for answers"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking mana sources or early game interaction",
+      "Hands heavy on late-game cards without ramp"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Lorien Revealed",
+          "Preordain",
+          "Sea Gate",
+          "Cast Down",
+          "Contaminated Aquifer"
+        ],
+        "decision": "keep",
+        "reason": "Provides early land drop, card filtering, and spot removal to stabilize"
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Secure land drops with Lorien Revealed and Preordain",
+      "Use Duress to extract information and disrupt opponent's game plan",
+      "Play cheap removal like Cast Down or Journey to Nowhere to handle early threats"
+    ],
+    "mid_game": [
+      "Force fair trades with spot interaction and conditional removal",
+      "Utilize Brainstorm and Squadron Hawk synergy to generate card advantage and filter dead cards",
+      "Cycle Suffocating Fumes to draw into answers while dealing with small creatures"
+    ],
+    "late_game": [
+      "Deploy multiple Gates to fix mana and create Treasures with Heap Gate",
+      "Turn any creature into a finisher with Basilisk Gate",
+      "Leverage Lorien Revealed as a major card advantage engine to outvalue opponents"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Basilisk Gate",
+      "role": "Win condition & mana fixer",
+      "notes": "Turns any creature into a finisher and is notoriously lethal against Aggro when used on a threat with Lifelink."
+    },
+    {
+      "name": "Brainstorm",
+      "role": "Card advantage & filtering",
+      "notes": "Synergizes with Squadron Hawk to remove dead cards or generate advantage, and works with Preordain and Lorien Revealed to dig for answers."
+    },
+    {
+      "name": "Duress",
+      "role": "Disruption & information",
+      "notes": "Provides proactive windows to disrupt the opponent's game plan and extract information for setting up future turns."
+    },
+    {
+      "name": "Cast Down",
+      "role": "Permanent removal",
+      "notes": "Deals permanently with almost any threat for two mana with virtually no restrictions."
+    },
+    {
+      "name": "Thraben Charm",
+      "role": "Conditional removal & utility",
+      "notes": "Versatile answer for various matchups, dealing with creatures or exiling graveyards against Spy Combo or Mono Blue Terror."
+    },
+    {
+      "name": "Lorien Revealed",
+      "role": "Land ramp & card advantage",
+      "notes": "Ensures land drops early but turns into a great source of card advantage as the game goes long."
+    }
+  ],
+  "sequencing_tips": [
+    "Use Lorien Revealed and Suffocating Fumes to pay the Evidence cost for Extract a Confession if needed.",
+    "Cast Brainstorm before Preordain to filter the cards left behind and dig for specific answers.",
+    "Pair Squadron Hawk with Basilisk Gate to bypass blockers and generate card advantage when Brainstorm fetches extra copies."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Mono Red Rally",
+      "advice": "Side in Hydroblast for cheap one-mana answers to survive long enough to turn the game around. Use Sacred Cat and Outlaw Medic as blockers.",
+      "watch_for": [
+        "Early aggressive threats",
+        "Burn spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Grixis Affinity",
+      "advice": "Side in Dust to Dust to set the opponent back on turns, as Caw-Gates is a slower deck. Use Arms of Hadar for broader small creature removal.",
+      "watch_for": [
+        "Artifact synergies",
+        "Fast artifact threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Blue Terror",
+      "advice": "Side in Extract a Confession and an extra Duress for disruption in attrition games. Use Thraben Charm to exile graveyards.",
+      "watch_for": [
+        "Graveyard recursion",
+        "Counterspells"
+      ]
+    },
+    {
+      "opponent_archetype": "Bogles",
+      "advice": "Side in Extract a Confession and Arms of Hadar. Focus on removal that handles flying creatures and attrition strategies.",
+      "watch_for": [
+        "Flying blockers",
+        "Attrition tactics"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Mono Red Rally",
+    "Burn",
+    "Grixis Affinity",
+    "Mono Blue Terror",
+    "Spy Combo",
+    "Bogles",
+    "Jund Wildfire",
+    "Madness",
+    "Elves"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-esper-caw-gates-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T09:30:45+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-esper-caw-gates-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:29:13+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "8a0c700685a4b6c4",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "swaps the Control plan for a Midrange stance... focuses on removing threats rather than the classic \"draw-go\" stance."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Basilisk Gate is your win condition with any creature"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Guardian of the Guildpact is pretty difficult to handle in many matchups, especially lethal alongside Basilisk Gate"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Sacred Cat and Outlaw Medic... can close out games"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Between Lorien Revealed and Suffocating Fumes, we have enough tools to pay the Evidence cost if needed."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Preordain filters the cards left behind by Brainstorm while also digging for specific answers"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Squadron Hawk... has good synergy with Brainstorm to remove dead cards from hand or generate card advantage with the extra copies it fetches."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "decks like Mono Blue Terror and Affinity are built around the combination of individual card quality"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "emerging strategies like Elves and Mono Red Madness appear as examples of decks trying to answer this efficiency"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "exiling graveyards against Spy Combo or Mono Blue Terror"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Extract a Confession comes in for the Bogles matchup but also works against Mono Blue Terror and Jund Wildfire"
+    }
+  ]
+}

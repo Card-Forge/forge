@@ -1,0 +1,342 @@
+{
+  "archetype": "Izzet Phoenix",
+  "format": "pioneer",
+  "strategy_type": "tempo",
+  "overview": "Izzet Phoenix in Pioneer functions as a tempo strategy that leverages cantrips and delve mechanics to reanimate Arclight Phoenix or establish a resilient Crackling Drake board presence. The Challenger Deck version requires significant upgrades to clarify its directional focus, either toward explosive reanimation or a more stable Drake-centric plan. Success relies on efficient filtering, graveyard synergy, and flexible removal to stabilize against diverse metagame threats.",
+  "win_conditions": [
+    "Arclight Phoenix",
+    "Crackling Drake",
+    "Wandering Fumarole",
+    "Temporal Trespass and Galvanic Iteration combo",
+    "Kazuul's Fury and Crackling Drake combo"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early cantrips like Opt or Consider",
+      "Hands containing lands that enter untapped",
+      "Hands with early threats or delve enablers"
+    ],
+    "mulligan_criteria": [
+      "Hands heavy in tapped lands without immediate value",
+      "Hands lacking card draw or filtering",
+      "Hands with only late-game reanimation spells"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Opt",
+          "Steam Vents",
+          "Arclight Phoenix",
+          "Thing in the Ice",
+          "Treasure Cruise",
+          "Shivan Reef",
+          "Lightning Axe"
+        ],
+        "decision": "keep",
+        "reason": "Provides early filtering, untapped mana, and core threats aligned with the tempo strategy."
+      },
+      {
+        "hand": [
+          "Temple of Epiphany",
+          "Sulfur Falls",
+          "Pieces of the Puzzle",
+          "Chart a Course",
+          "Thing in the Ice",
+          "Arclight Phoenix",
+          "Crackling Drake"
+        ],
+        "decision": "mulligan",
+        "reason": "Lacks early cantrips and contains lands that enter tapped, violating the tempo strategy's need to avoid wasting turns."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play untapped lands to maintain tempo and avoid wasting turns",
+      "Use cantrips like Opt and Consider to filter draws and feed the graveyard",
+      "Cast early threats or delve enablers to establish board presence"
+    ],
+    "mid_game": [
+      "Execute Treasure Cruise or Strategic Planning to find reanimation targets",
+      "Manage spell count to avoid triggering Thing in the Ice prematurely if using Crackling Drake",
+      "Remove opposing threats with Lightning Axe or other interaction"
+    ],
+    "late_game": [
+      "Reanimate multiple Arclight Phoenix or use Temporal Trespass/Galvanic Iteration for extra turns",
+      "Stabilize against attrition with Narset, Parter of Veils or Chandra, Torch of Defiance",
+      "Close out games with lethal damage from Phoenixes or Drake combos"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Arclight Phoenix",
+      "role": "Primary win condition",
+      "notes": "The heart of the strategy; reanimated from the graveyard using delve."
+    },
+    {
+      "name": "Thing in the Ice",
+      "role": "Delve enabler / Threat",
+      "notes": "Provides massive delve value and can transform into a threat; requires careful spell sequencing."
+    },
+    {
+      "name": "Crackling Drake",
+      "role": "Alternative win condition",
+      "notes": "Core of the Izzet Drake variant; returns to hand if too many spells are cast, requiring careful sequencing."
+    },
+    {
+      "name": "Treasure Cruise",
+      "role": "Card advantage / Graveyard filler",
+      "notes": "Key delve spell to find reanimation targets; synergizes with Pieces of the Puzzle."
+    },
+    {
+      "name": "Strategic Planning",
+      "role": "Filtering / Delve enabler",
+      "notes": "Replaces banned Expressive Iteration; provides impressive filtering while feeding the graveyard."
+    },
+    {
+      "name": "Lightning Axe",
+      "role": "Flexible removal",
+      "notes": "Handles 90% of relevant permanents for one mana; becomes the best removal with more Phoenixes."
+    },
+    {
+      "name": "Narset, Parter of Veils",
+      "role": "Attrition tech / Mirror match weapon",
+      "notes": "Powerful against control decks and the mirror match; restricts opponent's graveyard interaction."
+    },
+    {
+      "name": "Galvanic Iteration",
+      "role": "Combo enabler",
+      "notes": "Pairs with Temporal Trespass for explosive extra-turn plays."
+    },
+    {
+      "name": "Kazuul's Fury",
+      "role": "Combo piece / Land fetcher",
+      "notes": "Increases land count and enables a lethal sacrifice combo with Crackling Drake."
+    }
+  ],
+  "sequencing_tips": [
+    "Avoid tapping out completely to maintain tempo and cast threats efficiently.",
+    "Manage spell count carefully to prevent accidentally returning Crackling Drake to hand via Thing in the Ice.",
+    "Prioritize filtering draws with Strategic Planning or Opt to streamline the game plan.",
+    "Sequence delve spells to maximize graveyard depth before casting Treasure Cruise or reanimating.",
+    "Keep lands untapped during the opponent's turn when playing around Narset, Parter of Veils."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Liliana of the Veil",
+      "advice": "Side in Young Pyromancer to counter her board presence and apply pressure.",
+      "watch_for": [
+        "Liliana's -1 and -5 abilities",
+        "Graveyard hate"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro decks",
+      "advice": "Use early removal and Young Pyromancer to block attackers while stabilizing with Drake or Phoenix.",
+      "watch_for": [
+        "Early board presence",
+        "Wide creature spreads"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Green Devotion",
+      "advice": "Side in Aether Gust to handle their large threats and reduce their mana efficiency.",
+      "watch_for": [
+        "Big creatures",
+        "Mana dorks"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange and Control",
+      "advice": "Side in Chandra, Torch of Defiance and additional planeswalkers for attrition games.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Narset, Parter of Veils"
+      ]
+    },
+    {
+      "opponent_archetype": "Mirror Match",
+      "advice": "Rely on Narset, Parter of Veils as a primary tech to disrupt opponent's graveyard synergy.",
+      "watch_for": [
+        "Opponent's delve spells",
+        "Phoenix reanimation"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Red / Gruul Aggro / Boros Heroic / Jund Sacrifice",
+      "advice": "Side in Aether Gust to clear threats and protect your game plan.",
+      "watch_for": [
+        "Direct damage",
+        "Sacrifice outlets",
+        "Heroic triggers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Liliana of the Veil",
+    "Aggro creature spreads",
+    "Mono Green Devotion big creatures",
+    "Control board wipes",
+    "Narset, Parter of Veils",
+    "Graveyard hate"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm + Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-upgrading-the-challenger-deck-izzet-phoenix",
+    "generated_at": "2026-05-21T03:49:55+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-updating-izzet-phoenix-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T03:44:55+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-izzet-phoenix-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T03:46:39+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-upgrading-the-challenger-deck-izzet-phoenix",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T03:48:23+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "bc231c16ee239aab",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Izzet Phoenix is a Tempo strategy that doesn't want to waste a turn with tapped lands"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Arclight Phoenix — it's literally the heart of the strategy"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Crackling Drake plan carries the game on its own"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "getting another wincondition with Wandering Fumarole"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The Temporal Trespass combo with Galvanic Iteration is one of the most explosive plays available"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Kazuul's Fury... works in a sort of 2-card combo alongside Crackling Drake"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Izzet Phoenix is a Tempo strategy that doesn't want to waste a turn with tapped lands"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "you will often be forced to tap yourself out to cast Crackling Drake, or even have to avoid playing too many spells to not return it to your hand"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Strategic Planning gives impressive filtering while quickly feeding the graveyard to Treasure Cruise"
+    },
+    {
+      "confidence": 0.7,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Pieces of the Puzzle... rewards you by speeding up the amount of cards in the graveyard to reanimate the birds"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "keep the lands untapped during the opponent's turn for whatever reason is necessary"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Young Pyromancer is a necessary response against Liliana of the Veil"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "excellently blocking some Aggro decks"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Aether Gust is useful against Mono Green Devotion and archetypes with red such as Mono Red, Gruul Aggro, Boros Heroic, Jund Sacrifice"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Midranges and Controls recur at the events you attend"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Narset, Parter of Veils being a powerful tech in attrition games"
+    }
+  ]
+}

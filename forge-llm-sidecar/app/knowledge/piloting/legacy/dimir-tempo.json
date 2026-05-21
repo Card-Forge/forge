@@ -1,0 +1,314 @@
+{
+  "archetype": "Dimir Tempo",
+  "format": "legacy",
+  "strategy_type": "tempo",
+  "overview": "Dimir Tempo is a highly consistent Legacy strategy that combines pressure, tempo, and disruption to face any opponent without clear weaknesses. It inherits the Delver tradition but adds resilience through card advantage engines like Tamiyo and Stock Up. The deck features a technical gameplay style that rewards skill over automatic wins or losses.",
+  "win_conditions": [
+    "Orcish Bowmasters",
+    "Murktide Regent",
+    "Tamiyo, Inquisitive Student",
+    "Nethergoyf",
+    "Kaito, Bane of Nightmares"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "balanced amount of mana, action, and card draw",
+      "hands that lean more on attrition"
+    ],
+    "mulligan_criteria": [
+      "hands that don't do anything directly and rely on next draws",
+      "hands with too many lands that risk disabling Force of Will when using Ponder"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Thoughtseize",
+          "Fatal Push",
+          "Force of Will",
+          "Island",
+          "Island"
+        ],
+        "decision": "mulligan",
+        "reason": "Doesn't do anything directly and relies on next draws to find gas."
+      },
+      {
+        "hand": [
+          "Brainstorm",
+          "Force of Will",
+          "Island",
+          "Island"
+        ],
+        "decision": "keep",
+        "reason": "Risky keep; Brainstorm might find black mana while providing protection/disruption."
+      },
+      {
+        "hand": [
+          "Ponder",
+          "Brainstorm",
+          "Force of Will",
+          "Thoughtseize",
+          "Island",
+          "Island",
+          "Island"
+        ],
+        "decision": "keep",
+        "reason": "Perfect hand with everything needed: mana, action, and draw."
+      },
+      {
+        "hand": [
+          "Ponder",
+          "Island",
+          "Island",
+          "Island",
+          "Island",
+          "Island"
+        ],
+        "decision": "mulligan",
+        "reason": "Too many lands; using Ponder to find action might disable Force of Will."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play aggressive 1-drops like Nethergoyf and Brazen Borrower.",
+      "Use disruption like Thoughtseize and Fatal Push to slow opponents.",
+      "Transform Tamiyo, Inquisitive Student early for card flow."
+    ],
+    "mid_game": [
+      "Deploy Orcish Bowmasters to prey on opponent cantrips.",
+      "Cast Murktide Regent for evasive damage against damage-based removal.",
+      "Use Kaito, Bane of Nightmares via Ninjutsu for board control and resources."
+    ],
+    "late_game": [
+      "Rely on attrition and card advantage from Tamiyo and Stock Up.",
+      "Recycle Nethergoyf for continued pressure.",
+      "Sideboard in Barrowgoyf for resilient lifelink threats."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Force of Will",
+      "role": "Counter spell",
+      "notes": "Core blue tempo card for protection against early threats."
+    },
+    {
+      "name": "Brainstorm",
+      "role": "Card draw",
+      "notes": "Essential cantrip to find answers and mana."
+    },
+    {
+      "name": "Orcish Bowmasters",
+      "role": "Threat",
+      "notes": "Preys on opponent Brainstorms and Ponders; highly relevant in Legacy."
+    },
+    {
+      "name": "Murktide Regent",
+      "role": "Threat",
+      "notes": "Evasive 2-mana creature destructive against damage-based removal."
+    },
+    {
+      "name": "Tamiyo, Inquisitive Student",
+      "role": "Planeswalker",
+      "notes": "Provides card flow and can win the game alone if transformed early."
+    },
+    {
+      "name": "Nethergoyf",
+      "role": "Threat",
+      "notes": "Aggressive 1-drop that can return to the battlefield in longer matches."
+    },
+    {
+      "name": "Kaito, Bane of Nightmares",
+      "role": "Threat",
+      "notes": "Hard to remove; creates resources or controls the board via Ninjutsu."
+    },
+    {
+      "name": "Fatal Push",
+      "role": "Removal",
+      "notes": "Best non-Swords to Plowshares removal in Legacy."
+    },
+    {
+      "name": "Molten Collapse",
+      "role": "Removal",
+      "notes": "Versatile red splash card excellent against Chalice of the Void."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Disruption",
+      "notes": "Provides information and disruption, especially against combo decks."
+    }
+  ],
+  "sequencing_tips": [
+    "Only fetch red mana when you specifically need to play red sideboard cards to avoid Wasteland.",
+    "Fetch basic lands early against Red Stompy to mitigate Blood Moon.",
+    "Avoid tapping mana on your turn when facing Show and Tell to prevent Sneak Attack exploitation.",
+    "Be cautious when using Ponder in land-heavy hands as it may disable Force of Will."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Dimir Aggro",
+      "advice": "Focus on resource generation and key threats like Orcish Bowmasters and Murktide Regent. Sideboard in Barrowgoyf and Unlicensed Hearse to control creature size and efficiency.",
+      "watch_for": [
+        "Wasteland",
+        "Red sideboard cards"
+      ]
+    },
+    {
+      "opponent_archetype": "Show and Tell",
+      "advice": "Apply pressure with counters and disruption to prevent them from setting up. Sideboard in Hydroblast to handle Sneak Attack and Pyroblast, and remove Kaito to avoid tapping mana.",
+      "watch_for": [
+        "Sneak Attack",
+        "Pyroblast"
+      ]
+    },
+    {
+      "opponent_archetype": "Red Stompy",
+      "advice": "Fetch basic lands to avoid Blood Moon. Use Brazen Borrower or Molten Collapse against Chalice of the Void. Rely on Murktide Regent and Barrowgoyf as primary threats.",
+      "watch_for": [
+        "Blood Moon",
+        "Chalice of the Void",
+        "Simian Spirit Guide"
+      ]
+    },
+    {
+      "opponent_archetype": "Reanimator",
+      "advice": "Play control and avoid exposing yourself to reanimations. Use Force of Negation early to counter threats and disrupt the graveyard.",
+      "watch_for": [
+        "Graveyard reanimation",
+        "Blue or monoblack variants"
+      ]
+    },
+    {
+      "opponent_archetype": "Painter",
+      "advice": "Remove Goblins and Painter's Servant immediately. Sideboard in Meltdown and Molten Collapse to handle multiple threats safely without relying on counters vulnerable to Pyroblast.",
+      "watch_for": [
+        "Pyroblast",
+        "Red Elemental Blast",
+        "Painter's Servant"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Wasteland",
+    "Chalice of the Void",
+    "Blood Moon",
+    "Pyroblast",
+    "Red Elemental Blast",
+    "Sneak Attack",
+    "Simian Spirit Guide",
+    "Fable of the Mirror-Breaker"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-dimir-tempo-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T07:07:29+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-dimir-tempo-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:05:50+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "fbaf307d8a2a2318",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "This list inherited all the tradition behind Delver lists. It perfectly combines pressure, tempo, and disruption, and, as such, it can face any opponent."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Orcish Bowmasters is once again among the most relevant creatures in Legacy... Murktide Regent is simply a pile of evasive stats for 2 mana... Tamiyo, Inquisitive Student is a 1-mana Planeswalker who can win the game by herself... Nethergoyf is your aggressive 1-drop... Kaito, Bane of Nightmares easily goes into play..."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "If possible, only get red mana with your fetch lands when you want to use these cards."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "look for your basic lands with your fetch lands so Blood Moon doesn't ruin your day"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Kaito comes out because you want to avoid cards that force you to tap mana on your turn."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "If you use Ponder to try to find some action, you might disable Force of Will ."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "they can expose you to Wasteland"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "If one Chalice of the Void eventually goes through your counters"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "look for your basic lands with your fetch lands so Blood Moon doesn't ruin your day"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Hydroblast deals with both Sneak Attack and Pyroblast"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You definitely don't want to expose your cards to Pyroblast or Red Elemental Blast"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Daze is even less efficient because of Simian Spirit Guide"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Orcish Bowmasters only creates extra value against Fable of the Mirror-Breaker 's second chapter"
+    }
+  ]
+}

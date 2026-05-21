@@ -1,0 +1,156 @@
+{
+  "archetype": "Boros Prowess",
+  "format": "pioneer",
+  "strategy_type": "tempo",
+  "overview": "Boros Prowess leverages cheap, resilient creatures to apply rapid early pressure while maintaining board control. Soul-Scar Mage amplifies Prowess triggers to accelerate damage output, while Emberheart Challenger provides a versatile threat that rewards combat. Screaming Nemesis offers late-game value and board presence to close out games when the early tempo advantage holds.",
+  "win_conditions": [
+    "Attacking with pumped Prowess creatures",
+    "Emberheart Challenger dealing combat damage",
+    "Screaming Nemesis trading up to stabilize and close out"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Two or three lands",
+      "At least one cheap Prowess creature",
+      "Soul-Scar Mage or Emberheart Challenger"
+    ],
+    "mulligan_criteria": [
+      "High-cost cards without early plays",
+      "Multiple removal spells",
+      "Lack of Prowess synergies"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap Prowess creatures immediately",
+      "Cast Soul-Scar Mage to pump attackers",
+      "Apply pressure before opponent stabilizes"
+    ],
+    "mid_game": [
+      "Deploy Emberheart Challenger to swing combat",
+      "Use Prowess triggers to dodge removal",
+      "Trade efficiently with opponent's threats"
+    ],
+    "late_game": [
+      "Cast Screaming Nemesis for board presence",
+      "Use Nemesis to trade up or protect key cards",
+      "Close out with accumulated Prowess damage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Screaming Nemesis",
+      "role": "Late-game value and board presence",
+      "notes": "Hold until you have a target to trade or need a resilient blocker; use its pump ability to enable Prowess triggers."
+    },
+    {
+      "name": "Emberheart Challenger",
+      "role": "Primary win condition and combat engine",
+      "notes": "Cast before attacking to maximize its enter-the-battlefield trigger; use it to swing wide and apply pressure."
+    },
+    {
+      "name": "Soul-Scar Mage",
+      "role": "Prowess amplifier and tempo tool",
+      "notes": "Cast early to pump Prowess creatures; use its -1/-1 counter to dodge removal or boost damage output."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Soul-Scar Mage until you have a Prowess creature to pump",
+    "Cast Emberheart Challenger before attacking to maximize its enter-the-battlefield trigger",
+    "Use Screaming Nemesis to trade up or protect key threats"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Mono-Red Aggro",
+      "advice": "Prioritize early Prowess creatures and Soul-Scar Mage to outpace burn spells.",
+      "watch_for": [
+        "Early burn spells",
+        "Land destruction",
+        "Fast removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Phoenix",
+      "advice": "Use Screaming Nemesis to clear the board and stabilize against token swarms.",
+      "watch_for": [
+        "Lightning Strike",
+        "Flametongue Kavu",
+        "Graveyard recursion"
+      ]
+    },
+    {
+      "opponent_archetype": "Rhona/Devkarin Midrange",
+      "advice": "Apply pressure quickly before they establish a board with big threats.",
+      "watch_for": [
+        "Rhona, the Hammerhold",
+        "Devkarin Dissident",
+        "Board wipes"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Early burn spells",
+    "Board wipes",
+    "Counterspells",
+    "Fast removal"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T04:05:20+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:05:20+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "c5b4dacb17cd2351",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Boros Prowess Pioneer archetype"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature card interactions"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Prowess mechanic interactions"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Pioneer format meta"
+    }
+  ]
+}

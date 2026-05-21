@@ -1,0 +1,152 @@
+{
+  "archetype": "4c Kona",
+  "format": "standard",
+  "strategy_type": "ramp",
+  "overview": "A four-color ramp strategy that leverages mana dorks like Formidable Speaker and Ashling, Rekindled to accelerate into game-winning spells. Omniscience serves as the primary engine, allowing you to cast multiple threats or answers without paying mana. The deck aims to outvalue opponents by generating massive mana advantages and closing games with efficient, untapped threats.",
+  "win_conditions": [
+    "Casting multiple threats for free via Omniscience",
+    "Ramping into large finishers",
+    "Overwhelming opponents with untapped creatures"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early mana dorks and land drops",
+      "Hands containing Omniscience with follow-up spells",
+      "Hands with interactive removal or ramp"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking ramp or mana acceleration",
+      "Hands with too many lands and no threats",
+      "Hands missing Omniscience or key finishers"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and mana dorks on curve",
+      "Establish early board presence with Speaker",
+      "Prioritize land drops over early spells"
+    ],
+    "mid_game": [
+      "Cast Omniscience when you have multiple spells ready",
+      "Follow up with threats and answers simultaneously",
+      "Use Ashling to generate extra mana or untap lands"
+    ],
+    "late_game": [
+      "Flood the board with untapped creatures",
+      "Close out games with efficient, high-impact threats",
+      "Maintain mana advantage to outvalue opponents"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Formidable Speaker",
+      "role": "Mana dork and early board presence",
+      "notes": "Play on curve to accelerate into turn 3-4 spells; can block or attack to apply pressure."
+    },
+    {
+      "name": "Omniscience",
+      "role": "Free spell engine",
+      "notes": "Cast when you have multiple spells ready; prioritize threats followed by answers or more ramp."
+    },
+    {
+      "name": "Ashling, Rekindled",
+      "role": "Secondary mana dork and card advantage",
+      "notes": "Use to untap lands or generate extra mana; synergizes with Omniscience for massive turns."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up mana for counterspells if needed, but prioritize casting Omniscience when you have a clear follow-up",
+    "Play mana dorks before casting Omniscience to maximize free spells",
+    "Save removal for opponent's key threats"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play dorks early, use Omniscience to cast multiple blockers or a big threat",
+      "watch_for": [
+        "Early pressure",
+        "Sweepers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Ramp past their early game, use Omniscience to cast threats and answers simultaneously",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Outvalue them with mana advantage, close quickly with untapped threats",
+      "watch_for": [
+        "Efficient removal",
+        "Value engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast Aggro Creatures",
+    "Counterspells",
+    "Board Wipes"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T05:49:39+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:49:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "623db04bac2d8c8a",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

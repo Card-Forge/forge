@@ -1,0 +1,134 @@
+{
+  "archetype": "Mono Black Midrange",
+  "format": "legacy",
+  "strategy_type": "midrange",
+  "overview": "This Legacy midrange archetype leverages efficient black creatures alongside white and blue utility to control the early board while scaling into a resilient late-game presence. By utilizing cards like Nethergoyf and Dauthi Voidwalker, the deck applies immediate pressure while disrupting opponent mana and resources. Moonshadow provides a flexible finisher that can swing combat or clear opposing threats. The strategy balances aggressive early plays with defensive resource management to outvalue opponents over time.",
+  "win_conditions": [
+    "Trading up into a favorable board state with efficient black creatures",
+    "Using Moonshadow's combat trick to secure lethal damage or remove key blockers",
+    "Outlasting opponents through resource denial and card advantage from midrange staples"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Nethergoyf or Dauthi Voidwalker paired with early removal or mana acceleration",
+      "Two-card hands containing Moonshadow and a cheap creature for turn-one pressure",
+      "Balanced hands with at least two lands and a mix of creatures and interaction"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early plays or board presence",
+      "Mana-heavy hands with no creatures or interaction",
+      "Hands that cannot establish a turn-one or turn-two threat"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Nethergoyf on turn one to establish board presence and disrupt opponent's land drops",
+      "Use Dauthi Voidwalker to apply pressure while forcing opponent to spend resources on removal",
+      "Prioritize land drops and early interaction to stabilize against aggressive decks"
+    ],
+    "mid_game": [
+      "Trade efficiently with opponent's threats while preserving Moonshadow for key moments",
+      "Leverage card advantage by playing around expected removal and board wipes",
+      "Transition to a more controlling posture by holding up black mana for interaction"
+    ],
+    "late_game": [
+      "Use Moonshadow to swing combat, remove problematic blockers, or secure game-ending damage",
+      "Maintain board presence with resilient creatures while cycling through resources",
+      "Apply consistent pressure until opponent runs out of answers or mana"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Nethergoyf",
+      "role": "Early board presence and mana disruption",
+      "notes": "Play on turn one to force opponent to answer immediately or fall behind; use its land-destruction ability to slow down ramp or control strategies."
+    },
+    {
+      "name": "Dauthi Voidwalker",
+      "role": "Efficient threat and resource denial",
+      "notes": "Deploy to apply pressure while forcing opponent to spend cards on removal; its enter-the-battlefield effect can disrupt graveyard-dependent strategies."
+    },
+    {
+      "name": "Moonshadow",
+      "role": "Combat trick and finisher",
+      "notes": "Hold up for combat to swing attacks, remove key blockers, or deal direct damage; use selectively to maximize tempo advantage and secure lethal."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up black mana for interaction before committing creatures to combat",
+    "Play Nethergoyf before opponent's land drops to maximize disruption value",
+    "Save Moonshadow for moments when it can swing the game state or secure lethal damage"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early board presence with Nethergoyf and Dauthi Voidwalker while holding up removal for their key threats.",
+      "watch_for": [
+        "Fast damage",
+        "Board wipes",
+        "Creature sweepers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply steady pressure with efficient creatures and use Moonshadow to bypass counterspells or remove problematic permanents.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Resource denial"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup with early interaction and use Moonshadow to clear key combo pieces or finish the game before they assemble.",
+      "watch_for": [
+        "Graveyard recursion",
+        "Mana acceleration",
+        "Win conditions"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Counterspell packages"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T07:54:50+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:54:50+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "4da91939833d7e6f",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype: Mono Black Midrange, Format: legacy, Colors: W/U/B, Signature cards: Moonshadow, Nethergoyf, Dauthi Voidwalker"
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

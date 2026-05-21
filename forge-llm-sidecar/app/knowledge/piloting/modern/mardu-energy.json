@@ -1,0 +1,243 @@
+{
+  "archetype": "Mardu Energy",
+  "format": "modern",
+  "strategy_type": "aggro",
+  "overview": "Mardu Energy is a fast, resource-accelerating deck that leverages White, Black, and Red spells to generate energy and amplify threats. By sacrificing creatures for energy and spending it to buff or copy key pieces, the deck aims to overwhelm opponents before they can stabilize. Success relies on efficient resource management and maintaining relentless board pressure in the Modern format.",
+  "win_conditions": [
+    "Dealing lethal combat damage with energy-buffed creatures",
+    "Copying opponent or own threats with Orcish Bowmasters to close out games",
+    "Generating card advantage through Ragavan, Nimble Pilferer to outlast midrange strategies"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two low-cost energy generators or threats",
+      "Combinations that enable early Ragavan, Nimble Pilferer plays",
+      "Hands containing Orcish Bowmasters paired with a cheap creature to copy"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early energy production or board presence",
+      "Heavy hands with only high-cost spells or late-game value engines",
+      "Hands missing land drops or color fixers for the first three turns"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing Guide of Souls and other cheap creatures to begin accumulating energy",
+      "Establish early board presence to force opponent responses and protect energy investment",
+      "Avoid spending energy prematurely unless it enables a decisive early play"
+    ],
+    "mid_game": [
+      "Spend accumulated energy to activate Ragavan, Nimble Pilferer for card advantage and board impact",
+      "Use Orcish Bowmasters to copy high-value creatures or remove key opponent threats",
+      "Maintain a steady stream of threats to prevent opponent stabilization"
+    ],
+    "late_game": [
+      "Leverage stored energy to repeatedly activate Ragavan, Nimble Pilferer and outdraw opponents",
+      "Create massive copies with Orcish Bowmasters to close out games quickly",
+      "Recycle Guide of Souls for energy to fuel finishing moves or answer opponent threats"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Guide of Souls",
+      "role": "Energy generator and early board presence",
+      "notes": "Sacrifice for energy when you need to fuel Ragavan, Nimble Pilferer or Orcish Bowmasters, but keep it on the board as long as possible to apply pressure and trigger death triggers if applicable. | Used to generate life and energy while setting up triggers; its ETB timing can be leveraged when sequencing responses to opponent's threats. (from gameplay)"
+    },
+    {
+      "name": "Orcish Bowmasters",
+      "role": "Threat removal and board multiplier",
+      "notes": "Save energy to maximize the +1/+1 counters on the copied token, and target opponent creatures that would otherwise stall your game plan or your own threats to create immediate board advantage. | Specifically piloted in this Mardu Energy build to hard counter Necro Dominance, providing a reliable way to remove the enchantment when it resolves. (from gameplay)"
+    },
+    {
+      "name": "Ragavan, Nimble Pilferer",
+      "role": "Card advantage and aggressive threat",
+      "notes": "Use haste to attack immediately, then spend energy to draw cards and grow the creature, ensuring you maintain tempo while digging for answers or additional threats. | Can be deliberately exiled to the graveyard to set up a Rebirth/Evoke combo, trading the creature for a free Lightning Helix and graveyard value. (from gameplay)"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold energy for key moments rather than spending it on minor buffs",
+    "Sacrifice Guide of Souls only when the energy payoff directly impacts the board state",
+    "Prioritize copying threats with Orcish Bowmasters before spending energy on card draw if the game is on the back foot",
+    "Manage energy carefully since it carries over between turns and can be used to swing late-game interactions",
+    "Hold Fatal Push in response to Amped Raptor's ETB trigger to prevent energy generation, but account for trigger order with your own permanents like Guide of Souls.",
+    "When Thoughtsees reveals two Necro Dominances, take one immediately rather than waiting, as you likely won't have a second interaction before they resolve."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply early pressure with cheap threats and energy-buffed attackers to prevent them from stabilizing with countermagic or board wipes.",
+      "watch_for": [
+        "Counterspells targeting your energy generators",
+        "Board wipes that reset your energy investment",
+        "Late-game value engines that outlast your resources"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use energy to buff blockers and threats, trading efficiently while building toward a larger board presence.",
+      "watch_for": [
+        "Early board floods that overwhelm your energy curve",
+        "Direct damage spells that bypass your creatures",
+        "Removal targeting your key energy generators"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Outpace their early game with energy-accelerated threats and use Orcish Bowmasters to remove their key value pieces.",
+      "watch_for": [
+        "Card draw engines that catch up to your tempo",
+        "Removal spells targeting your biggest threats",
+        "Late-game finishers that require energy-heavy answers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup by applying lethal pressure before they can assemble their win condition, using energy to accelerate your clock.",
+      "watch_for": [
+        "Protection spells that shield their combo pieces",
+        "Fast win conditions that bypass your board state",
+        "Resource denial effects that stall your energy generation"
+      ]
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Close out the game before they can leverage their mana advantage, using energy to create immediate board impact.",
+      "watch_for": [
+        "Large threats that enter play early due to mana acceleration",
+        "Board wipes that clear your energy-invested board",
+        "Card draw that outpaces your resource generation"
+      ]
+    },
+    {
+      "opponent_archetype": "Necro Dominance",
+      "advice": "Pressurize life total early; lower life totals force conservative play with the enchantment's draw/life-loss mechanic, significantly reducing its impact. (from gameplay) Identify the deck's mode: Plan A is casting the enchantment for massive card advantage, while Plan B is a Grief/Evoke strategy. Adjust aggression based on which mode they are executing. (from gameplay)",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Control sweepers and countermagic",
+    "Aggro early board floods",
+    "Midrange value engines and removal",
+    "Combo protection and fast win conditions",
+    "Ramp-accelerated large threats"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:54:16+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:54:16+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=4NygNBb7BGA",
+      "publish_date": "2024-06-28T20:21:13Z",
+      "fetched_at": "2026-05-21T12:08:56+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Mardu Energy"
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=1gXDVZfNxk4",
+      "publish_date": "2024-06-29T19:45:58Z",
+      "fetched_at": "2026-05-21T12:09:16+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Mardu Energy"
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=EmZy9R9fcqU",
+      "publish_date": "2024-06-30T16:21:53Z",
+      "fetched_at": "2026-05-21T12:10:49+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Mardu Energy"
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "9c241053d0bc5ce2",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Mardu Energy archetype in Modern using Guide of Souls, Orcish Bowmasters, and Ragavan, Nimble Pilferer"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards Guide of Souls, Orcish Bowmasters, and Ragavan, Nimble Pilferer"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Energy mechanic interactions with Guide of Souls, Orcish Bowmasters, and Ragavan, Nimble Pilferer"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "gameplay_observed",
+      "source_index": 3,
+      "evidence_span": "11:45-12:29"
+    },
+    {
+      "confidence": 0.75,
+      "kind": "gameplay_observed",
+      "source_index": 3,
+      "evidence_span": "9:41-10:25"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Modern format archetypes and interactions with Mardu Energy signature cards"
+    }
+  ]
+}

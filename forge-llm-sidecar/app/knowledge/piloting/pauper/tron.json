@@ -1,0 +1,194 @@
+{
+  "archetype": "Tron",
+  "format": "pauper",
+  "strategy_type": "control",
+  "overview": "Tron is a classic Pauper archetype that evolved from using Locus lands to relying on Urza's trio for massive mana acceleration. Historically a control toolbox deck, it has adapted through various iterations like Fog Tron, Egg Tron, Altar Tron, and Flicker Tron to survive bans and meta shifts. Modern versions blend consistent mana fixing with combo engines or resilient control strategies to dominate the format.",
+  "win_conditions": [
+    "Return opponent's permanents to hand and force discards using Dinrova Horror",
+    "Deal lethal damage directly with Rolling Thunder",
+    "Generate infinite 3/3 tokens with Golem Foundry and attack for lethal",
+    "Create an infinite Golem army via Ashnod's Altar and Myr Retriever recursion"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing multiple Urza's lands or mana accelerants like Crop Rotation",
+      "Hands with early interaction, life gain, or card draw engines"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking land drops or mana sources",
+      "Hands with only high-cost finishers and no ramp or protection"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Crop Rotation",
+          "Bonder's Ornament",
+          "Fog",
+          "Expedition Map",
+          "Dinrova Horror"
+        ],
+        "decision": "keep",
+        "reason": "Provides fast mana assembly, early board control, and a clear win condition path."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize casting Urza's trio or mana accelerants to unlock five-color mana",
+      "Play cheap interaction and life gain spells to stall the opponent and survive early pressure"
+    ],
+    "mid_game": [
+      "Assemble the full mana base to access expensive answers and toolbox cards",
+      "Set up mini loops or combo pieces to lock down the opponent's resources and board state"
+    ],
+    "late_game": [
+      "Execute win conditions like infinite token generation, direct damage, or Golem armies",
+      "Maintain board control while cycling through the deck to find missing combo components"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Urza's trio",
+      "role": "Mana acceleration",
+      "notes": "The core engine that provides massive mana to play expensive spells across all five colors."
+    },
+    {
+      "name": "Bonder's Ornament",
+      "role": "Mana fixing and card draw",
+      "notes": "Fixes the mana curve and acts as a card draw engine similar to Monarch decks."
+    },
+    {
+      "name": "Crop Rotation",
+      "role": "Land search",
+      "notes": "Adopted to quickly find Urza's lands after Expedition Map was banned."
+    },
+    {
+      "name": "Golem Foundry",
+      "role": "Combo win condition",
+      "notes": "Generates infinite 3/3 tokens or counters when paired with recursive loops."
+    },
+    {
+      "name": "Ashnod's Altar",
+      "role": "Mana generation and recursion",
+      "notes": "Enables infinite loops by sacrificing Myr to create mana and retrieve them from the graveyard."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast Urza's lands as early as possible to unlock five-color mana",
+    "Hold back combo pieces until the mana base is fully assembled",
+    "Sacrifice artifacts in the correct order to trigger recursive loops without stalling",
+    "Use life gain and combat control spells early to buy time for the combo"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Storm",
+      "advice": "Prioritize early interaction and life gain to survive fast combo attempts",
+      "watch_for": [
+        "Fast artifact ramp",
+        "Spell count acceleration"
+      ]
+    },
+    {
+      "opponent_archetype": "Affinity",
+      "advice": "Use board wipes and artifact destruction to disrupt their token generation",
+      "watch_for": [
+        "Early artifact drops",
+        "Lethal token attacks"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Storm",
+    "Affinity"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-the-history-of-tron",
+    "generated_at": "2026-05-21T09:14:09+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-the-history-of-tron",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:12:55+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "7dbde611729577df",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Fog Tron, as it was known, was basically a control list that leaned on getting Urza's trio as fast as possible so you could take advantage of the extra mana they created to play expensive spells more easily."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Some lists used Dinrova Horror to return all the opponent's permanents to their hand and then force them to discard them."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Others used Rolling Thunder to win the game by dealing lethal damage directly."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "With this loop and a Golem Foundry in play, you'll have an infinite number of 3/3 tokens and will be able to attack for lethal."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Finally, you'll put an infinite number of counters on Foundry to create a Golem army."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "leaned on getting Urza's trio as fast as possible so you could take advantage of the extra mana they created"
+    },
+    {
+      "confidence": 0.6,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "stalled the game until you could set up mini loops"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "If you sacrifice Myr with the Altar, you'll create and will be able to get another Myr from the graveyard. Then, you'll use the mana you created to put it in play again and repeat this process infinitely."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Storm and Affinity dominated the format and were too much for old Tron, which disappeared quickly."
+    }
+  ]
+}

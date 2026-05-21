@@ -1,0 +1,155 @@
+{
+  "archetype": "Mono-White Humans",
+  "format": "pioneer",
+  "strategy_type": "aggro",
+  "overview": "This deck leverages a low curve of aggressive Human creatures to apply immediate pressure while taxing the opponent's resource advantage. Signature pieces like Thalia, Guardian of Thraben and Thalia's Lieutenant slow down opposing strategies, allowing Adeline, Resplendent Cathar to grow into a massive threat. The game plan focuses on maintaining board presence and outlasting midrange or control decks through incremental value and combat tricks.",
+  "win_conditions": [
+    "Overwhelming the opponent with early aggressive Humans",
+    "Growing Adeline, Resplendent Cathar into an unblockable threat",
+    "Taxing opponent spells until they run out of resources"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two- and three-drops that establish early board presence",
+      "Combinations featuring Thalia's Lieutenant or early Humans",
+      "Hands with removal or tax effects to disrupt opponent's early game"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early plays or curve breakers",
+      "Mana-heavy hands with only four-drops or higher",
+      "Hands missing synergistic Humans or tax effects"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap Humans to establish board presence",
+      "Prioritize Thalia's Lieutenant to tax opponent's early spells",
+      "Use combat tricks to maximize early damage"
+    ],
+    "mid_game": [
+      "Deploy Thalia, Guardian of Thraben to further tax opponent's resources",
+      "Begin pumping Adeline, Resplendent Cathar with +1/+1 counters",
+      "Maintain board pressure while answering opponent's threats"
+    ],
+    "late_game": [
+      "Focus on growing Adeline into a massive blocker and attacker",
+      "Use tax effects to stall opponent's finishers",
+      "Close out the game with combat damage or a pumped Adeline"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Adeline, Resplendent Cathar",
+      "role": "Late-game finisher and blocker",
+      "notes": "Prioritize pumping her with +1/+1 counters to make her unblockable and a major combat threat."
+    },
+    {
+      "name": "Thalia's Lieutenant",
+      "role": "Early-game tax and board presence",
+      "notes": "Play early to increase opponent's spell costs, disrupting their curve and buying time for your Humans."
+    },
+    {
+      "name": "Thalia, Guardian of Thraben",
+      "role": "Mid-game tax and removal",
+      "notes": "Deploy to further tax opponent's spells and provide a solid body that synergizes with your aggressive strategy."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up mana for combat tricks to maximize early damage",
+    "Play tax creatures before opponent's key spells to maximize disruption",
+    "Pump Adeline only when you can follow up with combat or protection"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Race early and use tax effects to slow their curve. Prioritize removal on their biggest threats.",
+      "watch_for": [
+        "Fast sweepers",
+        "Early board wipes",
+        "High-impact one-drops"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Establish board presence before they stabilize. Use tax effects to disrupt their value engines.",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Late-game threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply relentless pressure and use tax to delay their counters and sweepers. Grow Adeline quickly to force answers.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Resource denial"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipes that clear your Human army",
+    "Counterspells that stop your tax creatures",
+    "High-toughness blockers that stall Adeline"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T05:09:29+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:09:29+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "4cb34f85fdca9689",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

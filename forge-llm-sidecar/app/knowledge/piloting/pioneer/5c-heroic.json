@@ -1,0 +1,158 @@
+{
+  "archetype": "5c Heroic",
+  "format": "pioneer",
+  "strategy_type": "tempo",
+  "overview": "This five-color Heroic deck leverages cheap creatures and instant-speed pump spells to generate rapid board presence and card advantage. By repeatedly targeting your own creatures, you trigger heroic abilities to draw cards and grow threats while maintaining tempo. The strategy focuses on efficient resource usage to outpace opponents before they can stabilize.",
+  "win_conditions": [
+    "Overwhelming the opponent with pumped, high-toughness creatures",
+    "Generating card advantage through repeated heroic triggers",
+    "Using instant-speed pump spells as combat tricks to bypass blockers"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing one or two one-drop heroic creatures",
+      "Access to early pump spells like Practiced Offense",
+      "At least one removal or draw spell to sustain tempo"
+    ],
+    "mulligan_criteria": [
+      "Hands with three or more lands",
+      "Hands lacking any creatures to target",
+      "Hands with only high-mana spells or late-game threats"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap heroic creatures on curve",
+      "Use low-cost spells to trigger heroic and draw cards",
+      "Apply early pressure to force opponent responses"
+    ],
+    "mid_game": [
+      "Pump key threats with Sheltered by Ghosts and Practiced Offense",
+      "Cycle through card advantage to maintain board presence",
+      "Use removal to clear blockers while preserving tempo"
+    ],
+    "late_game": [
+      "Stabilize with larger heroic threats",
+      "Leverage card draw to out-resource control strategies",
+      "Use combat tricks to close out games efficiently"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Sheltered by Ghosts",
+      "role": "Pump and protection spell",
+      "notes": "Target a key creature to trigger heroic, give it +2/+2 and hexproof to survive opponent removal, then attack with it safely."
+    },
+    {
+      "name": "Practiced Offense",
+      "role": "Aggressive pump spell",
+      "notes": "Use as a combat trick to give a creature +3/+0 and first strike, triggering heroic while pushing lethal damage through blockers."
+    },
+    {
+      "name": "Illuminator Virtuoso",
+      "role": "Card draw engine",
+      "notes": "Play early as a cheap target for spells to consistently draw cards, fueling your hand for more pump spells and removal."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up pump spells until combat to maximize surprise and trigger timing",
+    "Prioritize targeting creatures that will survive the turn to avoid wasted triggers",
+    "Use Sheltered by Ghosts after opponent commits removal to protect your biggest threat",
+    "Sequence removal before pump spells if you expect opponent interaction"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play cheap creatures early and use pump spells to make blockers inefficient. Prioritize survival and card draw over trading.",
+      "watch_for": [
+        "Early board wipes",
+        "Fast finishers",
+        "Targeted removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure to prevent them from stabilizing. Use card draw to outlast their hand and pump threats to bypass sweepers.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Hate cards like Teferi, Hero of Dominaria"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them with efficient pump spells and combat tricks. Use removal to clear their threats while maintaining your own board presence.",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw engines",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Supreme Verdict",
+    "Teferi, Hero of Dominaria",
+    "Lightning Strike",
+    "Abrupt Decay",
+    "Kethis, the Hidden Hand"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T04:51:53+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:51:53+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "cb6a816fe2b982a3",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

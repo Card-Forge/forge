@@ -1,0 +1,155 @@
+{
+  "archetype": "Asmo Food",
+  "format": "modern",
+  "strategy_type": "tempo",
+  "overview": "Asmo Food is a quadrabonus tempo deck in Modern that leverages cheap persist creatures and Asmoranomardicadaistinaculdacar to generate relentless board presence. Archon of Cruelty provides critical life total manipulation and value generation upon death. The deck aims to outlast opponents through recursive value and aggressive pressure across W/B/R/G mana bases.",
+  "win_conditions": [
+    "Overwhelming board presence with recurried persist creatures",
+    "Life total manipulation and drain via Archon of Cruelty",
+    "Direct trample damage from Asmoranomardicadaistinaculdacar"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early persist creatures or Archon of Cruelty",
+      "Hands containing Asmoranomardicadaistinaculdacar with cheap recursion targets",
+      "Mana bases supporting W/B/R/G early turns"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early board presence or recursion targets",
+      "Hands with only high-cost cards and no persist creatures",
+      "Mana screws in the quadrabonus color scheme"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Deploy cheap persist creatures to establish early board presence",
+      "Prioritize mana development to support W/B/R/G casting costs",
+      "Hold up mana to protect key threats from early removal"
+    ],
+    "mid_game": [
+      "Cast Asmoranomardicadaistinaculdacar to begin recurring persist creatures",
+      "Use Archon of Cruelty to swing life totals and generate value",
+      "Maintain board pressure while filtering draw step for recursion targets"
+    ],
+    "late_game": [
+      "Chain persist returns to create unblockable or massive board states",
+      "Leverage Archon of Cruelty deaths to drain opponent life totals",
+      "Close out games with Asmo's trample damage or life total manipulation"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Asmoranomardicadaistinaculdacar",
+      "role": "Primary recursion engine and aggressive threat",
+      "notes": "Hold up red mana to activate or protect, then trigger death effect to return target 2-mana or less creatures like persist enablers."
+    },
+    {
+      "name": "Archon of Cruelty",
+      "role": "Life total manipulation and value generator",
+      "notes": "Sacrifice or let it die to swing life totals by 6, then recur it with Asmo for repeated value."
+    },
+    {
+      "name": "Persist",
+      "role": "Recursive creature mechanic enabling infinite value loops",
+      "notes": "Play creatures with this ability to return from graveyard with a -1/-1 counter, then recur them again with Asmo for board presence."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up red mana before Asmo dies to ensure it can be cast or protected",
+    "Time Archon of Cruelty deaths to maximize life swing before opponent's turn",
+    "Prioritize returning persist creatures with Asmo to maintain board pressure",
+    "Use W/B/R/G mana efficiently to cast recursion targets before graveyard hate"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use persist creatures to outvalue early aggression and hold up removal for key threats",
+      "watch_for": [
+        "Early board wipes",
+        "Direct damage spells",
+        "Life total reduction"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race with Asmo's trample and use Archon of Cruelty to survive board wipes",
+      "watch_for": [
+        "Graveyard hate",
+        "Creature removal",
+        "Counterspells"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Trade efficiently and recur key threats to overwhelm their resource advantage",
+      "watch_for": [
+        "Efficient removal",
+        "Board control spells",
+        "Card draw engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Graveyard hate effects",
+    "Board wipe spells",
+    "Targeted creature removal",
+    "Life total manipulation spells"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T02:05:17+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T02:05:17+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "e234cb6970b2dcba",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

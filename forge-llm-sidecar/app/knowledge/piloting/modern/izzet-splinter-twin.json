@@ -1,0 +1,160 @@
+{
+  "archetype": "Izzet Splinter Twin",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "Izzet Splinter Twin is a Modern combo deck that leverages Splinter Twin to copy creatures and generate infinite value or massive damage. The provided signature cards accelerate this game plan by tutoring for combo pieces, pumping attackers, and drawing cards to stabilize against interaction. Success hinges on protecting the combo sequence until it resolves.",
+  "win_conditions": [
+    "Copying a creature with Splinter Twin to create an infinite damage or card draw loop",
+    "Using Flow State and Fear of Missing Out to push lethal combat damage while drawing cards to outlast opponents",
+    "Tutoring for key combo pieces or lands with Tamiyo, Inquisitive Student to close games faster"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Tamiyo, Inquisitive Student or Splinter Twin",
+      "Low mana value pump spells like Flow State or Fear of Missing Out",
+      "Hands containing early interaction or lands to stabilize"
+    ],
+    "mulligan_criteria": [
+      "High mana curve hands with no combo pieces",
+      "Hands lacking lands or card draw",
+      "Hands with only pump spells but no creatures to attach them to"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Tamiyo to find Splinter Twin or a key creature",
+      "Cast pump spells on opponent's turn to protect them",
+      "Establish board presence and draw cards to find combo pieces"
+    ],
+    "mid_game": [
+      "Cast Splinter Twin to copy a creature with a relevant ability",
+      "Sequence pump spells to maximize combat damage or card draw",
+      "Begin combo loops or apply pressure to force opponent into mistakes"
+    ],
+    "late_game": [
+      "Stabilize with card advantage from pump spells",
+      "Execute infinite damage or draw loops to close the game",
+      "Use remaining resources to protect the combo from late-game interaction"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Tamiyo, Inquisitive Student",
+      "role": "Tutor and acceleration",
+      "notes": "Use to find Splinter Twin, key creatures, or lands. Exile her to avoid removal and keep the combo on track."
+    },
+    {
+      "name": "Flow State",
+      "role": "Combat pump and card draw",
+      "notes": "Cast on opponent's turn to protect it. Attach to Twin copies or attackers to push damage and draw cards."
+    },
+    {
+      "name": "Fear of Missing Out",
+      "role": "Combat pump and card draw",
+      "notes": "Synergizes with Flow State for massive damage spikes. Use to race aggro or draw into answers against control."
+    },
+    {
+      "name": "Splinter Twin",
+      "role": "Combo engine",
+      "notes": "Copy a creature to activate infinite loops or massive board swings. Sequence after pump spells to maximize impact."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold pump spells until the opponent's turn to avoid counterspells",
+    "Cast Tamiyo before Twin to ensure you have the copy target or necessary lands",
+    "Sequence Twin after pump spells are on the stack or resolved to maximize combat damage",
+    "Prioritize drawing cards with pump spells to find answers to interaction"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Race with pump spells and early Twin copies. Use Tamiyo to find lands or early interaction.",
+      "watch_for": [
+        "Early board wipes",
+        "Hate cards that tax spells or creatures",
+        "Fast damage that outpaces your combo setup"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Protect your combo pieces with pump spells and card draw. Sequence Twin carefully to avoid counters.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Hand disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Apply steady pressure with pump spells and Twin copies. Outvalue them with card draw.",
+      "watch_for": [
+        "Removal spells",
+        "Tempo creatures",
+        "Late-game finishers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspells that disrupt the combo sequence",
+    "Board wipes that clear Twin and pump spell targets",
+    "Hate cards that tax spell casting or creature abilities",
+    "Fast aggro decks that race the combo"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:56:16+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:56:16+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "89da91de5aab2705",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype name and signature cards indicate a copy-based combo strategy accelerated by pump spells and tutoring."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards provide tutoring, combat pump, and card draw, which synergize with Twin's copy mechanic to form a win condition."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard combo piloting principles applied to the provided pump spells and tutor."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "General Modern format threats that interact with combo/tempo strategies."
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "archetype": "Esper Midrange",
+  "format": "modern",
+  "strategy_type": "midrange",
+  "overview": "Esper Midrange in Modern leverages efficient disruption and tempo plays to control the board state while gradually building value. By combining early hand disruption with versatile counterspells and resilient creatures like Psychic Frog, the deck aims to outmaneuver opponents in resource exchanges. The goal is to stabilize early, trade favorably in the mid-game, and close out matches with superior card advantage and efficient threats.",
+  "win_conditions": [
+    "Outlasting opponents through superior card advantage and efficient resource trading",
+    "Using Psychic Frog to generate continuous value and board presence while disrupting opponent's plans",
+    "Closing games with resilient threats that survive interaction and apply consistent pressure"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Thoughtseize or Counterspell for early disruption",
+      "Two-land hands with a playable creature or interaction",
+      "Hands that can resolve Psychic Frog by turn two or three"
+    ],
+    "mulligan_criteria": [
+      "Hands with three or more lands and no interaction",
+      "Hands lacking any removal or counterspell",
+      "Hands with only high-cost threats and no early game plan"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Thoughtseize on turn one to strip key combo pieces or early threats",
+      "Cast Psychic Frog to establish a resilient board presence and generate card advantage",
+      "Hold Counterspell for priority threats or to protect your Frog"
+    ],
+    "mid_game": [
+      "Trade efficiently by using Frog's abilities to remove opponent's creatures or generate value",
+      "Use Counterspell to protect your board state or punish opponent's key spells",
+      "Develop additional threats while maintaining enough mana for interaction"
+    ],
+    "late_game": [
+      "Leverage accumulated card advantage to outvalue opponents",
+      "Use Frog's recurring value to outlast control decks or overwhelm aggro",
+      "Close the game with efficient threats that are difficult to remove"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Thoughtseize",
+      "role": "Early game hand disruption",
+      "notes": "Use to strip combo pieces, early threats, or key interaction. Prioritize targets that slow down the opponent's game plan or enable your Frog to resolve safely."
+    },
+    {
+      "name": "Psychic Frog",
+      "role": "Resilient value engine and board presence",
+      "notes": "Play early to establish a threat that generates card advantage. Use its abilities to remove opponent's creatures or draw cards, and protect it with Counterspell when necessary."
+    },
+    {
+      "name": "Counterspell",
+      "role": "Versatile spell disruption",
+      "notes": "Hold for priority threats, combo enablers, or to protect your board state. Use it to punish opponent's key spells or to enable your Frog to resolve and stick."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Counterspell until you see the opponent's priority threat or need to protect Psychic Frog",
+    "Use Thoughtseize before casting Frog to clear the way for it to resolve safely",
+    "Prioritize trading Frog's abilities against opponent's creatures to generate value while maintaining board presence",
+    "Save interaction for spells that enable the opponent's win condition or remove your key threats"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Thoughtseize to strip early threats or key finishers. Play Psychic Frog early to establish a resilient board presence and use Counterspell to protect it or counter key removal.",
+      "watch_for": [
+        "Early aggressive threats",
+        "Board wipes",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around their counterspells by baiting them with Psychic Frog or using Thoughtseize to strip their key interaction. Use Counterspell to protect your threats and outvalue them in the late game.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Late game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Use Thoughtseize aggressively to strip key combo pieces. Hold Counterspell for the win condition or key enablers. Play Psychic Frog to disrupt their casting sequence and generate value.",
+      "watch_for": [
+        "Key combo pieces",
+        "Draw spells",
+        "Win conditions"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Focus on efficient trades and card advantage. Use Thoughtseize to strip their key threats or interaction. Play Psychic Frog to generate value and use Counterspell to protect your board state.",
+      "watch_for": [
+        "Efficient threats",
+        "Removal spells",
+        "Counterspells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Direct damage finishers",
+    "High-impact combo pieces",
+    "Resilient late-game threats"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T00:50:05+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T00:50:05+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "9ef12db590589f02",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

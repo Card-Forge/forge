@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
+import hashlib
+import json as _json
 import logging
+from collections import OrderedDict
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
@@ -90,10 +93,82 @@ async def health() -> dict:
     }
 
 
+# --- Recognize cache --------------------------------------------------------
+#
+# Per-game LRU keyed on a digest of inputs that meaningfully affect the result.
+# The observer fires /recognize on every life change and zone churn — most of
+# those don't change the inputs the model actually reasons about, so a hit
+# returns the previous response in <1ms instead of waiting on the LLM.
+#
+# Cache key inputs (deliberately limited):
+#   game_id, turn, observations, hand, own/opp board, own/opp graveyard,
+#   life totals, phase, available mana, opp mana colors, board details.
+#
+# Excluded (don't influence the recognizer / advisor in a meaningful way):
+#   library sizes, personality (handled client-side post-hoc), ai_hand_size
+#   (already in `hand`).
+_RECOGNIZE_CACHE: "OrderedDict[str, dict]" = OrderedDict()
+_RECOGNIZE_CACHE_LIMIT = 256
+_recognize_cache_hits = 0
+_recognize_cache_misses = 0
+
+
+def _recognize_cache_key(req: RecognitionRequest) -> str:
+    payload = {
+        "g": req.game_id,
+        "t": req.turn,
+        "o": [
+            (o.turn, o.event, o.card, o.cmc, list(o.colors), list(o.types))
+            for o in req.observations
+        ],
+        "h": sorted(req.hand),
+        "ob": sorted(req.own_board),
+        "pb": sorted(req.opponent_board),
+        "og": sorted(req.your_graveyard),
+        "pg": sorted(req.opponent_graveyard),
+        "l": sorted(req.life_totals.items()),
+        "p": req.phase,
+        "m": sorted(req.available_mana),
+        "om": sorted(req.opponent_mana_colors_seen),
+        "obd": [
+            (bc.name, bc.power, bc.toughness, sorted(bc.types), bc.is_creature, bc.tapped)
+            for bc in req.own_board_details
+        ],
+        "opd": [
+            (bc.name, bc.power, bc.toughness, sorted(bc.types), bc.is_creature, bc.tapped)
+            for bc in req.opponent_board_details
+        ],
+    }
+    encoded = _json.dumps(payload, sort_keys=True, default=str).encode("utf-8")
+    return hashlib.blake2b(encoded, digest_size=16).hexdigest()
+
+
+def _cache_get(key: str) -> dict | None:
+    global _recognize_cache_hits, _recognize_cache_misses
+    cached = _RECOGNIZE_CACHE.get(key)
+    if cached is None:
+        _recognize_cache_misses += 1
+        return None
+    _RECOGNIZE_CACHE.move_to_end(key)
+    _recognize_cache_hits += 1
+    return cached
+
+
+def _cache_put(key: str, value: dict) -> None:
+    _RECOGNIZE_CACHE[key] = value
+    _RECOGNIZE_CACHE.move_to_end(key)
+    while len(_RECOGNIZE_CACHE) > _RECOGNIZE_CACHE_LIMIT:
+        _RECOGNIZE_CACHE.popitem(last=False)
+
+
 @app.post("/api/stats/reset")
 async def api_stats_reset() -> dict:
     """Clear request history and counters (uptime preserved)."""
     get_store().reset()
+    global _recognize_cache_hits, _recognize_cache_misses
+    _RECOGNIZE_CACHE.clear()
+    _recognize_cache_hits = 0
+    _recognize_cache_misses = 0
     return {"status": "ok", "cleared": True}
 
 
@@ -107,6 +182,11 @@ async def api_stats() -> dict:
         "history": store.history,
         "raw_hits_total": store.raw_hits_total,
         "raw_hits": store.raw_hits,
+        "recognize_cache": {
+            "size": len(_RECOGNIZE_CACHE),
+            "hits": _recognize_cache_hits,
+            "misses": _recognize_cache_misses,
+        },
     }
 
 
@@ -240,6 +320,17 @@ async def identify_own_archetype(
 async def recognize(req: RecognitionRequest) -> RecognitionResponse:
     """Run the game-advisor graph: opponent recognition + own-deck piloting advice."""
     log.info("recognize: client=%s game=%s turn=%s", req.client, req.game_id, req.turn)
+    cache_key = _recognize_cache_key(req)
+    cached = _cache_get(cache_key)
+    if cached is not None:
+        log.info(
+            "recognize: cache hit game=%s turn=%s (hits=%d misses=%d)",
+            req.game_id,
+            req.turn,
+            _recognize_cache_hits,
+            _recognize_cache_misses,
+        )
+        return RecognitionResponse(**cached)
     graph = get_graph()
     initial = {
         "game_id": req.game_id,
@@ -338,13 +429,15 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         }
     )
 
-    return RecognitionResponse(
+    response = RecognitionResponse(
         archetype=final.get("archetype") or "Unknown",
         confidence=final.get("confidence") or 0.0,
         reasoning=final.get("reasoning") or "",
         alternatives=final.get("alternatives") or [],
         piloting=piloting_advice,
     )
+    _cache_put(cache_key, response.model_dump())
+    return response
 
 
 class ForgeLogAnalyzeRequest(BaseModel):

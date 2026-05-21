@@ -1,0 +1,146 @@
+{
+  "archetype": "Jewel Shops",
+  "format": "vintage",
+  "strategy_type": "ramp",
+  "overview": "Jewel Shops is a blue ramp archetype that leverages artifact acceleration to rapidly deploy resources and outpace opponents. By cycling lands through Coveted Jewel and The One Ring, the deck generates massive mana advantages while maintaining board presence with Displacer Kitten. The strategy focuses on consistent mana generation and value generation to close games through overwhelming resource superiority.",
+  "win_conditions": [
+    "Achieving insurmountable mana advantage to cast high-impact spells",
+    "Grinding out value through land recursion and artifact untapping",
+    "Deploying Displacer Kitten to recover key lands and stabilize the board"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two lands and one artifact ramp piece",
+      "Combinations featuring Displacer Kitten alongside early mana sources",
+      "Draws that include multiple Coveted Jewels or The One Rings for acceleration"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking any artifact acceleration or land drops",
+      "Draws with too many lands and no creature or ramp interaction",
+      "Hands missing early-game playables to establish mana advantage"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands before tapping artifacts to avoid mana screw",
+      "Drop Coveted Jewel on turn one or two to begin land cycling",
+      "Cast Displacer Kitten as early as possible to enable land recovery"
+    ],
+    "mid_game": [
+      "Sacrifice excess lands to untap Jewels and generate incremental mana",
+      "Use The One Ring to smooth mana curves and enable larger plays",
+      "Leverage Kitten's recursion to replace lands lost to artifact untapping"
+    ],
+    "late_game": [
+      "Convert accumulated mana into decisive board impacts or win conditions",
+      "Maintain artifact untap loops to out-grind opponent resources",
+      "Protect key permanents while maximizing land recycling efficiency"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Coveted Jewel",
+      "role": "Primary mana acceleration artifact",
+      "notes": "Enter the battlefield tapped and untap by sacrificing a land; use it to cycle lands into the graveyard for later recovery while generating blue mana."
+    },
+    {
+      "name": "The One Ring",
+      "role": "Secondary ramp and mana smoothing tool",
+      "notes": "Provides flexible mana generation and can be sacrificed for incremental advantage; pair with land cycling to maintain consistent turns."
+    },
+    {
+      "name": "Displacer Kitten",
+      "role": "Value engine and land recursion",
+      "notes": "Recovers lands from the graveyard to offset artifact sacrifices; deploy early to stabilize mana base and enable continuous ramp."
+    }
+  ],
+  "sequencing_tips": [
+    "Always play lands before activating artifact untap costs to prevent mana shortages",
+    "Sacrifice lands only when you have Kitten on the battlefield or multiple Jewels to recover them",
+    "Hold up blue mana for potential interaction before committing to artifact untaps",
+    "Cycle lands in a way that preserves your most impactful land types for the win condition"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Focus on rapid mana acceleration to out-grind their counters and removal; protect your ramp pieces and use Kitten to recover lands they try to disrupt.",
+      "watch_for": [
+        "Instant-speed counterspells",
+        "Artifact destruction",
+        "Board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early Displacer Kitten drops and defensive land cycling; use artifact mana to stabilize before racing.",
+      "watch_for": [
+        "Early creature pressure",
+        "Direct damage spells",
+        "Land destruction"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their key pieces with available interaction; accelerate quickly to race or out-resource their win condition.",
+      "watch_for": [
+        "Fast win conditions",
+        "Graveyard hate",
+        "Mana denial"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Leverage your mana advantage to play multiple threats per turn; use Kitten recursion to out-value their resource engine.",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspell",
+    "Lightning Bolt",
+    "Force of Will",
+    "Beast Within",
+    "Rest in Peace"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T11:06:26+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:06:26+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "fc1b9dd746bdd0aa",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

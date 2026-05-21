@@ -1,0 +1,212 @@
+{
+  "archetype": "Golgari Midrange",
+  "format": "standard",
+  "strategy_type": "midrange",
+  "overview": "Golgari Midrange is an efficient, non-blue midrange deck that focuses on maximizing mana usage and acting on its own turns. It relies on a suite of impactful creatures that generate value and apply a steady clock, supported by a strong package of interaction and disruption spells. The deck stands out by avoiding blue and excelling at resource denial and board presence.",
+  "win_conditions": [
+    "Applying a steady clock with efficient creatures like Mosswood Dreadknight and Caustic Bronco",
+    "Generating card advantage and value through creature abilities and tutor spells",
+    "Finishing the game with Restless Cottage or a wide board of value creatures",
+    "Draining opponent's resources with Liliana and Sheoldred"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early interaction",
+      "Hands with board threats",
+      "Hands that maximize mana usage"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early interaction or threats",
+      "Hands with poor mana curve"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Mosswood Dreadknight",
+          "Caustic Bronco",
+          "Pillage the Bog",
+          "Forest",
+          "Swamp",
+          "Forest",
+          "Swamp"
+        ],
+        "decision": "keep",
+        "reason": "Contains early threat, interaction/tutor, and efficient mana sources as described for an ideal starting hand."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play interaction to disrupt opponent's resources",
+      "Drop early threats to apply pressure",
+      "Maximize mana usage on every turn"
+    ],
+    "mid_game": [
+      "Use tutors like Pillage the Bog and Analyze the Pollen to find lands or threats",
+      "Manage board state against opponent's disruption",
+      "Apply steady pressure with creatures like Glissa and Trespasser"
+    ],
+    "late_game": [
+      "Finish the game with Restless Cottage or Liliana's ultimate",
+      "Leverage Sheoldred and Dreadknight for massive value",
+      "Use removal to clear path for finishers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Mosswood Dreadknight",
+      "role": "Heart of the deck",
+      "notes": "Creates value through most actions, applies a powerful clock, and synergizes with Sheoldred."
+    },
+    {
+      "name": "Caustic Bronco",
+      "role": "Efficient 2-drop threat",
+      "notes": "Applies early pressure and generates card advantage."
+    },
+    {
+      "name": "Glissa",
+      "role": "Exceptional threat",
+      "notes": "Dodges removal, bypasses defenses, and creates card advantage nearly every turn."
+    },
+    {
+      "name": "Restless Cottage",
+      "role": "Late-game finisher/blocker",
+      "notes": "Becomes a creature to close games or block attackers; attacking enables extra abilities."
+    },
+    {
+      "name": "Sheoldred, the Apocalypse",
+      "role": "Powerful interaction piece",
+      "notes": "Drains opponent resources and synergizes powerfully with Dreadknight."
+    },
+    {
+      "name": "Liliana",
+      "role": "Devastating Planeswalker",
+      "notes": "Drains opponent's resources and sets up a powerful ultimate if stuck on board."
+    },
+    {
+      "name": "Pillage the Bog / Analyze the Pollen",
+      "role": "Tutor spells",
+      "notes": "Fetch important cards from the deck to secure land drops or threats."
+    }
+  ],
+  "sequencing_tips": [
+    "Save removal for the opponent's bigger, most problematic threats",
+    "Attack with Restless Cottage to enable its extra abilities",
+    "Play creatures defensively against Boros until you can cast Harvester of Misery",
+    "Use Trespasser to remove Memory Deluge from the graveyard in Azorius Control matchups",
+    "Be cautious of life-drain abilities in the Boros matchup"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Mono-Red Aggro",
+      "advice": "Maximize removal usage and prioritize Sheoldred with Mosswood Dreadknight. Use Tranquil Frillback to gain life.",
+      "watch_for": [
+        "Monastery Swiftspear",
+        "Goddric, Cloaked Reveler",
+        "Squee, Dubious Monarch"
+      ]
+    },
+    {
+      "opponent_archetype": "Esper Midrange",
+      "advice": "Navigate heavy disruption and control tools. Use Glissa and Sorin to generate flying threats.",
+      "watch_for": [
+        "The Wandering Emperor",
+        "Raffine, Scheming Seer",
+        "Deep-Cavern Bat",
+        "Virtue of Loyalty"
+      ]
+    },
+    {
+      "opponent_archetype": "Boros Convoke",
+      "advice": "Play defensively until you have enough mana for Harvester of Misery. Deal with main threats and watch for life drain.",
+      "watch_for": [
+        "Imodane's Recruiter",
+        "Life drain abilities"
+      ]
+    },
+    {
+      "opponent_archetype": "Azorius Control",
+      "advice": "Take the aggressor role and attack fast. Use Bronco with Glissa for turn 3 damage and stick Liliana to drain resources.",
+      "watch_for": [
+        "Wanderers",
+        "Global removals",
+        "Memory Deluge"
+      ]
+    },
+    {
+      "opponent_archetype": "Domain",
+      "advice": "Maintain an aggressive style and pressure the opponent. Deal with disruptive threats and use creatures effectively against global removal.",
+      "watch_for": [
+        "Up the Beanstalk",
+        "Archangel of Wrath",
+        "Global removals"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Monastery Swiftspear",
+    "Goddric, Cloaked Reveler",
+    "Squee, Dubious Monarch",
+    "The Wandering Emperor",
+    "Raffine, Scheming Seer",
+    "Deep-Cavern Bat",
+    "Virtue of Loyalty",
+    "Imodane's Recruiter",
+    "Memory Deluge",
+    "Up the Beanstalk",
+    "Archangel of Wrath"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-golgari-midrange-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T05:48:22+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-golgari-midrange-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:46:49+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "2c68b391950cab9c",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Golgari, as a midrange archetype, is very efficient, but it's still quite different from other midrange lists... it mostly acts on its own turns and uses its mana as much as it can."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Mosswood Dreadknight is the heart of this deck. This creature creates value... and puts on a powerful clock on the board"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "try to save your removals for them... attacking is enough to enable them... use your creatures more defensively than offensively."
+    }
+  ],
+  "common_threats_evidence": []
+}

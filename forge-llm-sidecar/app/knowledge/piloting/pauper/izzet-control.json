@@ -1,0 +1,147 @@
+{
+  "archetype": "Izzet Control",
+  "format": "pauper",
+  "strategy_type": "control",
+  "overview": "Izzet Control in Pauper relies on countering key spells and generating card advantage to outlast opponents. By leveraging cheap interaction and mana disruption, the deck stalls aggressive strategies while racing other control shells. The goal is to stabilize early and close out games with superior resource management.",
+  "win_conditions": [
+    "Outlasting opponents through superior card advantage",
+    "Countering decisive threats to stall for value",
+    "Closing out games with late-game threats or combat damage"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with 2-3 lands and a counterspell",
+      "Hands featuring Force Spike for early disruption",
+      "Hands containing Lorien Revealed for mid-game refills"
+    ],
+    "mulligan_criteria": [
+      "Hands with 0-1 lands",
+      "Hands lacking early interaction or mana",
+      "Hands with only high-cost threats"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands consistently to avoid mana screws",
+      "Hold up Counterspell or Force Spike for opponent's key plays",
+      "Avoid developing board unless opponent lacks interaction"
+    ],
+    "mid_game": [
+      "Cast Lorien Revealed to refill hand and find answers",
+      "Trade spells efficiently to maintain resource advantage",
+      "Apply pressure only when opponent's interaction is exhausted"
+    ],
+    "late_game": [
+      "Stall with counterspells until opponent runs out of resources",
+      "Cast remaining threats to close out the game",
+      "Prioritize countering win conditions over removal"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Lorien Revealed",
+      "role": "Card advantage engine",
+      "notes": "Cast when you have a full hand or need to dig for answers; synergizes with counterspell-heavy hands to maintain resource parity."
+    },
+    {
+      "name": "Counterspell",
+      "role": "Primary interaction",
+      "notes": "Hold up for opponent's threats or win conditions; use proactively to disrupt combos and force inefficient trades."
+    },
+    {
+      "name": "Force Spike",
+      "role": "Mana disruption and counter",
+      "notes": "Play on opponent's turn to counter spells while taxing their mana; excellent against aggressive decks and mana-intensive strategies."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up Counterspell before casting Lorien Revealed to protect your advantage",
+    "Use Force Spike on opponent's turn to maximize mana denial",
+    "Prioritize countering threats over removal to preserve resources"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize Force Spike on their turn to counter early threats and disrupt mana.",
+      "watch_for": [
+        "Early board presence",
+        "Burn spells",
+        "Wide creature spreads"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race for card advantage using Lorien Revealed and hold counterspells for their finishers.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Late-game threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Identify and counter the key combo pieces immediately; use Force Spike to disrupt mana-intensive turns.",
+      "watch_for": [
+        "Graveyard synergies",
+        "Ramp spells",
+        "Win-condition cards"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggro creatures",
+    "Combo win conditions",
+    "Board wipes"
+  ],
+  "metadata": {
+    "source": "Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T11:03:27+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-izzet-control-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:00:19+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:03:27+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "5e9b8f7aef553466",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

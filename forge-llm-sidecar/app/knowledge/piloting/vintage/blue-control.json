@@ -1,0 +1,191 @@
+{
+  "archetype": "Blue Control",
+  "format": "vintage",
+  "strategy_type": "control",
+  "overview": "This White/Blue control deck stabilizes games through efficient removal and recursive value generation. It leverages Lurrus of the Dream-Den to repeatedly cast Swords to Plowshares and replay resilient threats like Thing in the Ice. The strategy focuses on outlasting opponents by maintaining board control and converting card advantage into lethal damage.",
+  "win_conditions": [
+    "Outlasting opponents through superior card advantage and recursion",
+    "Closing games with high-toughness, unblockable creatures",
+    "Generating infinite value loops via Lurrus and graveyard recursion"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing early disruption and a land drop",
+      "Hands with Lurrus or Swords to Plowshares alongside two lands",
+      "Hands featuring Thing in the Ice with a way to protect or trade it"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking interaction against early aggressive boards",
+      "Hands with three or more lands and no removal",
+      "Hands without a clear path to stabilize or generate value"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and hold up white mana for Swords to Plowshares",
+      "Neutralize early threats to prevent being overwhelmed",
+      "Prioritize drawing into Lurrus to establish your recursion engine"
+    ],
+    "mid_game": [
+      "Establish board presence with Thing in the Ice when safe",
+      "Use Lurrus to replay Swords for repeated removal and board clears",
+      "Maintain card advantage by trading efficiently and protecting key assets"
+    ],
+    "late_game": [
+      "Leverage Lurrus recursion to outvalue opponent's resource base",
+      "Stabilize with resilient creatures and sweepers",
+      "Close out games with unblockable attackers or repeated damage triggers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Thing in the Ice",
+      "role": "Primary resilient threat and win condition",
+      "notes": "Play it when you have removal or protection ready to prevent it from being killed by its own triggered ability, then use it to clear opposing boards and attack for lethal."
+    },
+    {
+      "name": "Lurrus of the Dream-Den",
+      "role": "Recursive engine and value generator",
+      "notes": "Use it to replay Swords to Plowshares for repeated removal, or to bring back Thing in the Ice and other key creatures from the graveyard to maintain board presence."
+    },
+    {
+      "name": "Swords to Plowshares",
+      "role": "Versatile removal and value tool",
+      "notes": "Target opponent's threats to exile them, or use it on your own creatures with Lurrus to generate repeated value and clear the board efficiently."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up white mana for Swords to Plowshares before committing to attacks",
+    "Trigger Thing in the Ice's ability only when you have a way to save it or trade favorably",
+    "Use Lurrus to replay Swords before replaying creatures to maximize board control"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Red Aggro",
+      "advice": "Prioritize early Swords to Plowshares on high-impact creatures and use Lurrus to replay removal efficiently.",
+      "watch_for": [
+        "Early board floods",
+        "Unblockable attackers",
+        "Graveyard hate"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their casting sequence early and use Swords to exile key combo pieces before they resolve.",
+      "watch_for": [
+        "Fast mana acceleration",
+        "Protection spells",
+        "Graveyard recursion"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race them with Thing in the Ice and leverage Lurrus to outvalue their resource base.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Card draw engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Combo pieces that win on cast",
+    "Board wipes that reset the board"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T11:56:08+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:56:08+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "545a9196b37526a4",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

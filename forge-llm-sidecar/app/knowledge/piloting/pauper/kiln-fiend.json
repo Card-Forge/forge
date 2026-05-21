@@ -1,0 +1,266 @@
+{
+  "archetype": "Kiln Fiend",
+  "format": "pauper",
+  "strategy_type": "aggro",
+  "overview": "Mono-Red Kiln Fiend is a Pauper spellslinger aggro deck that relies on casting numerous instants and sorceries to pump its namesake creature. By synergizing with other creatures like Festival Crasher and Satyr Hoplite, it aims to race opponents and deal lethal damage quickly. The deck functions as a combo-style aggro list, requiring specific pieces to execute turn 2 kills or overwhelm the board.",
+  "win_conditions": [
+    "Kiln Fiend dealing lethal damage after being pumped by instants and sorceries",
+    "Festival Crasher blocking and attacking with buffs",
+    "Satyr Hoplite growing via Heroic and early spells",
+    "Mutagenic Growth or Temur Battle Rage finishing the game"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with creatures and a balanced land count",
+      "Hands that can set up a Turn 2 Kill"
+    ],
+    "mulligan_criteria": [
+      "Hands without any creatures",
+      "Hands with not enough lands",
+      "Hands with too many lands"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Kiln Fiend",
+          "Lands",
+          "Instants/Sorceries"
+        ],
+        "decision": "keep",
+        "reason": "Can set up a Turn 2 Kill or play Kiln Fiend on turn 2 depending on the opponent"
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Satyr Hoplite on turn 1 and pump it with Rite of Flame and Furor of the Bitten",
+      "Cast Kiln Fiend on turn 2 to establish a major threat"
+    ],
+    "mid_game": [
+      "Continuously cast instants and sorceries to buff Kiln Fiend and Festival Crasher",
+      "Use Apostle's Blessing for protection or evasion as needed"
+    ],
+    "late_game": [
+      "Leverage Ancestral Anger which gets better as the game goes on",
+      "Use Mutagenic Growth or Temur Battle Rage to secure lethal damage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Kiln Fiend",
+      "role": "Main win condition",
+      "notes": "Gets +3/+0 until end of turn whenever you cast instants or sorceries"
+    },
+    {
+      "name": "Festival Crasher",
+      "role": "Secondary attacker/blocker",
+      "notes": "Similar to Kiln Fiend, blocks bigger creatures and gets buffed by spells"
+    },
+    {
+      "name": "Satyr Hoplite",
+      "role": "Early game threat",
+      "notes": "1-drop with Heroic that adds +1/+1 counters when targeted by spells"
+    },
+    {
+      "name": "Furor of the Bitten",
+      "role": "Early game pump",
+      "notes": "Excellent way to make Satyr Hoplite gigantic in the first few turns"
+    },
+    {
+      "name": "Rite of Flame",
+      "role": "Mana enabler",
+      "notes": "Can be used on turn 1 to enable Furor of the Bitten"
+    },
+    {
+      "name": "Ancestral Anger",
+      "role": "Late game damage",
+      "notes": "Gets better as the game goes on"
+    },
+    {
+      "name": "Mutagenic Growth",
+      "role": "Free damage spell",
+      "notes": "Can deal extra damage or lethal in some situations as a free spell"
+    },
+    {
+      "name": "Apostle's Blessing",
+      "role": "Protection/Evasion",
+      "notes": "Gives protection or evasion depending on the situation"
+    },
+    {
+      "name": "Temur Battle Rage",
+      "role": "Finisher",
+      "notes": "Always ends the game if your creatures are big enough"
+    }
+  ],
+  "sequencing_tips": [
+    "Cast instants and sorceries before attacking to maximize Kiln Fiend's power",
+    "Use Rite of Flame on turn 1 to enable Furor of the Bitten for Satyr Hoplite",
+    "Play creatures before opponents get access to a lot of mana to avoid counters",
+    "Use Apostle's Blessing for protection or evasion depending on the board state"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Kuldotha Red",
+      "advice": "Race them and be careful when they play Burn on your creatures",
+      "watch_for": [
+        "Burn"
+      ]
+    },
+    {
+      "opponent_archetype": "Glee Combo",
+      "advice": "Use the first few turns to finish the game and race them before they stabilize",
+      "watch_for": [
+        "colorless Eldrazi tokens",
+        "Writhing Chrysalis",
+        "Snuff Out"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Blue Terror",
+      "advice": "Side in Pyroblasts and play creatures before they get mana to avoid counters",
+      "watch_for": [
+        "Hydroblast",
+        "Delver",
+        "counters"
+      ]
+    },
+    {
+      "opponent_archetype": "Elves",
+      "advice": "Be quick, use the Hot Dogs strategy, and don't give them time to recover",
+      "watch_for": [
+        "interaction"
+      ]
+    },
+    {
+      "opponent_archetype": "Gruul Ramp",
+      "advice": "Follow your main game plan, be fast, and don't let them build their board",
+      "watch_for": [
+        "Land Destruction version",
+        "ramp resources"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Burn",
+    "Snuff Out",
+    "Hydroblast",
+    "Delver",
+    "counters",
+    "colorless Eldrazi tokens",
+    "Writhing Chrysalis"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-mono-red-kiln-fiend-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T10:15:02+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-mono-red-kiln-fiend-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:13:37+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "88a02b07a3e90709",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "this is a spellslinger aggro deck"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Kiln Fiend will be able to deal lethal damage very quickly"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Festival Crasher is very similar to Kiln Fiend because it can block creatures that are slightly bigger and also gets a buff"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Satyr Hoplite is this deck's designated 1-drop and has the Heroic ability"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Mutagenic Growth... deal lethal damage... Battle Rage... always ends the game for you"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "get as much as you can from this synergy by playing numerous spells and buffing its power"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You can even do this on turn 1 if you have Rite of Flame in hand"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "always try to play your creatures before your opponent gets access to a lot of mana"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The first one gives you protection or evasion, depending on the situation"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "careful when they play Burn on your creatures"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Apostle's Blessing is great against your opponent's Snuff Out"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Hydroblast s could become an issue. Delver also helps this deck's control game plan"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Their colorless Eldrazi tokens and Writhing Chrysalis itself are a problem"
+    }
+  ]
+}

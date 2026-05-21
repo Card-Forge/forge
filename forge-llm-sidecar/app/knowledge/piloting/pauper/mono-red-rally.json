@@ -1,0 +1,166 @@
+{
+  "archetype": "Mono Red Rally",
+  "format": "pauper",
+  "strategy_type": "aggro",
+  "overview": "Mono Red Rally is an aggressive Pauper deck that leverages cheap attackers and pump spells to overwhelm opponents quickly. It relies on Goblin Bushwhacker as a growing threat, supported by direct damage and temporary stat boosts. The deck aims to establish early board presence and close games before opponents can stabilize.",
+  "win_conditions": [
+    "Attacking with a pumped Goblin Bushwhacker",
+    "Finishing with Galvanic Blast for direct damage",
+    "Overwhelming blockers with Wrenn's Resolve and trample"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more lands and an early attacker",
+      "Hands containing Galvanic Blast for early interaction",
+      "Hands with Wrenn's Resolve paired with a creature"
+    ],
+    "mulligan_criteria": [
+      "Hands with no lands or only one land",
+      "Hands full of pump spells without creatures to target",
+      "Hands lacking early damage or interaction"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and attack with cheap creatures to apply immediate pressure.",
+      "Use Galvanic Blast to remove early blockers or chip away at the opponent's life total."
+    ],
+    "mid_game": [
+      "Cast Wrenn's Resolve on Goblin Bushwhacker or other attackers to push through blockers.",
+      "Continue attacking to grow Bushwhacker with +1/+1 counters while maintaining board presence."
+    ],
+    "late_game": [
+      "Leverage a large Bushwhacker with trample to close out the game.",
+      "Use remaining removal to clear late-game threats and secure the win."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Goblin Bushwhacker",
+      "role": "Primary aggressive threat that grows with each attack",
+      "notes": "Attack early to accumulate +1/+1 counters, then pair with pump spells to push lethal damage."
+    },
+    {
+      "name": "Galvanic Blast",
+      "role": "Versatile one-mana removal and finisher",
+      "notes": "Use to clear blockers when needed, but prioritize face damage when the board is clear or you have a clear path to victory."
+    },
+    {
+      "name": "Wrenn's Resolve",
+      "role": "Temporary pump spell that grants +2/+2 and trample",
+      "notes": "Cast on attackers that can bypass blockers or on Bushwhacker to maximize damage output in a single turn."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up Galvanic Blast until you see the opponent's response to avoid wasting it on a trivial blocker.",
+    "Cast Wrenn's Resolve after the opponent declares blockers to ensure the pumped creature deals maximum damage.",
+    "Attack with Bushwhacker before casting pump spells to trigger its counter ability first."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply constant pressure and use pump spells to bypass counterspells or removal.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspell packages",
+        "Resilient late-game creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Race efficiently by using Galvanic Blast on key threats and pumping your own attackers to outdamage them.",
+      "watch_for": [
+        "Wide creature spreads",
+        "Early removal",
+        "Life total races"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Establish board presence early and use trample to push damage before they stabilize.",
+      "watch_for": [
+        "Efficient removal",
+        "Card advantage engines",
+        "Resilient blockers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipe spells",
+    "Efficient one-mana removal",
+    "Wide creature spreads",
+    "Life gain effects"
+  ],
+  "metadata": {
+    "source": "Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T09:12:53+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-mono-red-rally-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:10:07+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:12:53+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "77c17a5c73c5fdae",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

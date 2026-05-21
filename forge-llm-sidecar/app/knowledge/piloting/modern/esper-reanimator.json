@@ -1,0 +1,214 @@
+{
+  "archetype": "Esper Reanimator",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "Esper Reanimator is a Modern combo deck that leverages graveyard recursion to cast high-impact threats like Archon of Cruelty for free. It blends disruptive interaction with efficient tutoring to bypass opponent defenses and close games quickly. The W/U/B color identity provides robust card advantage and board control to protect the reanimation engine.",
+  "win_conditions": [
+    "Casting Archon of Cruelty from the graveyard to clear the board and deal lethal damage",
+    "Using Emeritus of Ideation to tutor for reanimation spells or finishers",
+    "Repeatedly reanimating cheap creatures to overwhelm opponents with card advantage"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Thoughtseize and a reanimation spell or cheap creature",
+      "Two-card hands containing a tutor and a finisher",
+      "Hands with multiple cheap interaction spells to stabilize early"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking interaction or graveyard recursion",
+      "Hands with only high-cost permanents and no early plays",
+      "Hands missing lands or with unplayable mana bases"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap creatures to fuel the graveyard and apply early pressure",
+      "Use Thoughtseize to remove key threats or tutor for reanimation pieces",
+      "Set up mana efficiently while holding up interaction for aggro or control"
+    ],
+    "mid_game": [
+      "Activate Emeritus of Ideation to find reanimation spells or board wipes",
+      "Cast reanimation spells on the opponent's turn to bypass counterspells and flash triggers",
+      "Clear opposing boards with Archon of Cruelty to establish dominance"
+    ],
+    "late_game": [
+      "Stabilize against sweepers by keeping reanimation spells in hand",
+      "Cycle through the deck to find additional finishers or disruption",
+      "Apply consistent pressure with recurring threats until the opponent runs out of resources"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Emeritus of Ideation",
+      "role": "Tutor and flash enabler",
+      "notes": "Use to find reanimation spells or finishers, and to put creatures into play on the opponent's turn to avoid interaction."
+    },
+    {
+      "name": "Archon of Cruelty",
+      "role": "Primary finisher and board clear",
+      "notes": "Reanimate this to wipe opposing boards and deal 1 damage to all creatures, often setting up lethal or clearing the path to victory."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Disruption and tutoring",
+      "notes": "Play early to remove key threats or dig for reanimation pieces, ensuring the combo engine stays protected."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Thoughtseize until you see a key threat or need to tutor for a reanimation spell",
+    "Flash Archon of Cruelty on the opponent's turn to clear their board before they can attack or cast spells",
+    "Use Emeritus of Ideation to tutor for reanimation spells only when you have the mana and graveyard targets ready",
+    "Prioritize keeping reanimation spells in hand to respond to sweepers or board wipes"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early disruption and reanimate cheap creatures to stall until you can cast Archon of Cruelty.",
+      "watch_for": [
+        "Fast attackers",
+        "Board wipes",
+        "Early game pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells by flashing threats on their turn and using multiple cheap creatures to force removal.",
+      "watch_for": [
+        "Counterspells",
+        "Graveyard hate",
+        "Late game sweepers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Disrupt their key threats early and reanimate finishers before they can establish a board presence.",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Resilient creatures"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Counterspells and interaction",
+    "Graveyard hate cards"
+  ],
+  "metadata": {
+    "source": "Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:38:14+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-esper-reanimator-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:35:07+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ]
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:38:14+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "9904bf233208de82",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

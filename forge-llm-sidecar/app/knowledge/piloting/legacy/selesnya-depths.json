@@ -1,0 +1,136 @@
+{
+  "archetype": "Selesnya Depths",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "Selesnya Depths is a Legacy combo archetype that leverages White and Green mana to assemble a game-winning board state around Dark Depths. By utilizing Green Sun's Zenith to fetch key permanents and Mox Diamond to accelerate mana production, the deck aims to quickly generate counters on Dark Depths. Once the threshold is met, the deck transitions into an aggressive attacker with a massive creature.",
+  "win_conditions": [
+    "Creating a 10/10 Ice Creature by accumulating counters on Dark Depths",
+    "Attacking for lethal damage with the generated Ice Creature",
+    "Using Green Sun's Zenith to fetch a finishing creature or land to close out the game"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing at least two mana sources and a combo piece",
+      "Hands with Green Sun's Zenith and a permanent to sacrifice",
+      "Hands featuring Dark Depths alongside early ramp or counter sources"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking sufficient mana acceleration or land drops",
+      "Hands with only late-game combo pieces and no early interaction",
+      "Hands missing both Dark Depths and Green Sun's Zenith"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands efficiently and deploy Dark Depths as soon as possible",
+      "Use early ramp to establish a mana base that supports Mox Diamond",
+      "Begin accumulating counters on Dark Depths through deck synergies"
+    ],
+    "mid_game": [
+      "Activate Mox Diamond to generate excess mana for combo assembly",
+      "Cast Green Sun's Zenith to fetch Dark Depths if it was mulliganed or to find key creatures",
+      "Protect your board state while pushing counters onto Dark Depths"
+    ],
+    "late_game": [
+      "Trigger Dark Depths to create the 10/10 Ice Creature",
+      "Attack repeatedly to close out the game before opponent can stabilize",
+      "Use remaining resources to replace lands or fetch additional threats via Green Sun's Zenith"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Dark Depths",
+      "role": "Primary combo piece and win condition",
+      "notes": "Enter the battlefield and accumulate counters; once it reaches ten, it creates a 10/10 Ice Creature that can attack for lethal."
+    },
+    {
+      "name": "Mox Diamond",
+      "role": "Mana acceleration and combo enabler",
+      "notes": "Taps for White or Green mana when you control a land with a counter, allowing you to play spells ahead of schedule and fuel the Dark Depths counter strategy."
+    },
+    {
+      "name": "Green Sun's Zenith",
+      "role": "Card selection and board manipulation",
+      "notes": "Sacrifice a permanent to search your library for a creature card or basic land, enabling you to fetch Dark Depths, replace lands, or find finishers."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize playing Dark Depths before activating Mox Diamond to ensure you have a counter-bearing land to tap for mana.",
+    "Time Green Sun's Zenith casts to avoid leaving yourself with insufficient mana for the turn's combo assembly.",
+    "Hold up mana for potential interaction before committing to the full Dark Depths combo sequence.",
+    "Use Mox Diamond's mana generation to pay for multiple spells in a single turn, accelerating the counter accumulation."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Race aggressively by pushing counters on Dark Depths early and attacking with available creatures. Use Green Sun's Zenith to fetch lands to maintain mana consistency.",
+      "watch_for": [
+        "Early board wipes",
+        "Fast finishers",
+        "Artifact destruction targeting Mox Diamond"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around removal by spreading counters across multiple permanents if possible, and use Green Sun's Zenith to fetch resilient creatures. Wait for their key answers to be played before assembling the combo.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Hand disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their assembly with early interaction and race them by prioritizing Dark Depths counters. Use Mox Diamond to accelerate your own combo ahead of theirs.",
+      "watch_for": [
+        "Fast win conditions",
+        "Graveyard hate",
+        "Library manipulation"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Artifact destruction targeting Mox Diamond or Dark Depths",
+    "Board wipes that remove counter sources and the Ice Creature",
+    "Counterspells that prevent Green Sun's Zenith or combo assembly",
+    "Land destruction that disrupts the mana base required for Mox Diamond"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T07:56:10+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:56:10+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "821e89dccea90f3a",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

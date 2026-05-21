@@ -1,0 +1,153 @@
+{
+  "archetype": "Dimir Midrange",
+  "format": "modern",
+  "strategy_type": "midrange",
+  "overview": "Dimir Midrange in Modern balances early disruption with resilient value engines to outlast opponents. By leveraging efficient removal and card-drawing artifacts, the deck maintains board presence while refilling its hand. The goal is to trade favorably in the early game and transition into a superior resource state by the late game.",
+  "win_conditions": [
+    "Efficient creature combat after early disruption",
+    "Accumulating card advantage through discard-and-draw synergies",
+    "Outvaluing opponents with resilient artifact creatures"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Thoughtseize and a one-drop",
+      "Hands containing Abhorrent Oculus and early interaction",
+      "Two-land hands with a disruptive spell"
+    ],
+    "mulligan_criteria": [
+      "High-curve hands lacking early interaction",
+      "Hands with only lands and late-game threats",
+      "Hands missing both disruption and low-cost value generators"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Cast Thoughtseize to remove key threats or combo pieces",
+      "Play Abhorrent Oculus to generate immediate card advantage",
+      "Establish land drops while holding interaction for opponent's plays"
+    ],
+    "mid_game": [
+      "Deploy Agatha's Soul Cauldron to convert discards into draws",
+      "Trade creatures efficiently to maintain board parity",
+      "Use discard effects to fuel Cauldron while disrupting opponent's hand"
+    ],
+    "late_game": [
+      "Leverage card advantage to outdraw and outresource the opponent",
+      "Play resilient threats that are difficult to remove efficiently",
+      "Use Cauldron to refill hand and close out the game with combat or spells"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Agatha's Soul Cauldron",
+      "role": "Card advantage engine",
+      "notes": "Activate when you have excess cards or need to refill after trading; synergizes with discard effects to maintain hand size while generating value."
+    },
+    {
+      "name": "Abhorrent Oculus",
+      "role": "Early game value generator",
+      "notes": "Play on turn one to establish a body and draw a card upon death; excellent for cycling into better cards or refilling after early disruption."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Early disruption",
+      "notes": "Hold for key threats, combo pieces, or game-winning cards; use aggressively in the first few turns to set the opponent back."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize Thoughtseize before playing creatures to avoid trading into removal",
+    "Trigger Abhorrent Oculus death draws early to accelerate card advantage",
+    "Time Agatha's Soul Cauldron activations to avoid leaving yourself vulnerable to board wipes"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Hold Thoughtseize for their biggest threats and play Abhorrent Oculus early to generate value and slow their momentum.",
+      "watch_for": [
+        "Fast one-drop creatures",
+        "Early board wipes",
+        "Pressure that bypasses creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race with efficient threats and use Agatha's Soul Cauldron to outdraw their resource advantage.",
+      "watch_for": [
+        "Sweepers",
+        "Counterspells",
+        "Long-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their key pieces immediately with Thoughtseize and use Cauldron to refill your hand for repeated interaction.",
+      "watch_for": [
+        "Mana acceleration",
+        "Key combo pieces",
+        "Win conditions that bypass combat"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Combo enablers and finishers",
+    "Board wipes and targeted removal"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:13:24+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:13:24+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "029a5b084dd56ac2",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

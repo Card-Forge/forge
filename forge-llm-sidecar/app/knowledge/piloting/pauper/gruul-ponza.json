@@ -1,0 +1,224 @@
+{
+  "archetype": "Gruul Ponza",
+  "format": "pauper",
+  "strategy_type": "ramp",
+  "overview": "Gruul Ponza is a land destruction and ramp deck that aims to disrupt opponents' mana bases while accelerating its own mana to cast large creatures. It thrives against decks reliant on vulnerable lands, though it faces challenges against indestructible lands and mana-generating strategies. The deck typically follows an aggressive game plan, racing opponents or applying pressure with big threats after establishing board control.",
+  "win_conditions": [
+    "Cast large creatures to attack and end the game",
+    "Race opponents by deploying threats quickly",
+    "Apply pressure with big creatures post-land destruction"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early ramp like Arbor Elf",
+      "Hands containing land destruction spells",
+      "Hands with playable creatures for an aggressive start"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early ramp or land destruction",
+      "Hands with only high-cost creatures without mana acceleration",
+      "Hands that will take too long to develop the game"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Arbor Elf",
+          "Wild Growth",
+          "Thermokarst",
+          "Natural Obsolescence"
+        ],
+        "decision": "keep",
+        "reason": "Matches the perfect stance of casting Arbor Elf on turn 1, then ramping and destroying lands immediately."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Cast Arbor Elf on turn 1",
+      "Play Wild Growth or Utopia Sprawl to ramp",
+      "Destroy opponent's lands early"
+    ],
+    "mid_game": [
+      "Continue ramping to cast large creatures",
+      "Generate value with creatures",
+      "Race opponents if they have indestructible lands"
+    ],
+    "late_game": [
+      "Deploy big creatures to attack and end the game",
+      "Use sideboard options like Weather the Storm or Deglamer/Natural Obsolescence to handle specific matchups"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Arbor Elf",
+      "role": "Early game ramp",
+      "notes": "Ideal turn 1 play to accelerate mana for land destruction and creatures."
+    },
+    {
+      "name": "Wild Growth",
+      "role": "Mana acceleration",
+      "notes": "Follows Arbor Elf to quickly ramp into threats."
+    },
+    {
+      "name": "Utopia Sprawl",
+      "role": "Mana acceleration",
+      "notes": "Alternative ramp card to quickly develop the board."
+    },
+    {
+      "name": "Deglamer",
+      "role": "Land destruction/Recursion",
+      "notes": "Shuffles indestructible lands back into the library."
+    },
+    {
+      "name": "Natural Obsolescence",
+      "role": "Land destruction/Recursion",
+      "notes": "Returns indestructible lands to the deck, crucial post-side."
+    },
+    {
+      "name": "Thermokarst",
+      "role": "Land destruction",
+      "notes": "Key land destruction spell; speed of casting it is vital in the mirror."
+    },
+    {
+      "name": "Weather the Storm",
+      "role": "Defense/Control",
+      "notes": "Sideboard card that counters burn strategies and buys time."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize casting Arbor Elf on turn 1 to enable early ramp",
+    "Follow ramp with land destruction to disrupt opponents immediately",
+    "Adjust aggression based on opponent's land types, racing if they run indestructible lands",
+    "Mulligan aggressively if the hand lacks early ramp or playable creatures"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Affinity",
+      "advice": "Race in game 1 by casting creatures quickly. Post-side, use Deglamer and Natural Obsolescence to shuffle indestructible lands back into their library.",
+      "watch_for": [
+        "Indestructible lands",
+        "Fast artifact creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Boros",
+      "advice": "Delay their game with land destruction and pressure them with big creatures. Matchup improves significantly post-side.",
+      "watch_for": [
+        "Rustvale Bridge",
+        "Boros Garrison",
+        "Bouncelands"
+      ]
+    },
+    {
+      "opponent_archetype": "Elves",
+      "advice": "Likely the worst matchup. Side in area removal to mitigate their board, but expect to lose due to their mana generation and pseudo-counterspell effects.",
+      "watch_for": [
+        "Quirion Ranger",
+        "Mana-generating creatures",
+        "Forest recursion"
+      ]
+    },
+    {
+      "opponent_archetype": "Rakdos Burn",
+      "advice": "Game can swing either way. Use sideboard options to give land destruction and aggro lines. Weather the Storm is crucial to survive burn damage.",
+      "watch_for": [
+        "Direct damage spells",
+        "Early pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Gruul Ponza",
+      "advice": "Mirror match favors the player who casts Thermokarst first. Sideboard minimally or zero, but ensure you have faster land destruction.",
+      "watch_for": [
+        "Opponent's Thermokarst",
+        "Speed of land destruction"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Indestructible lands",
+    "Rustvale Bridge",
+    "Boros Garrison",
+    "Quirion Ranger",
+    "Mana-generating creatures",
+    "Direct damage spells"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-gruul-ponza-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T09:27:44+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-gruul-ponza-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:26:11+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "7be9bc6bcbfa5c66",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "it is a land destruction deck, but we only use 8 in the list: The idea of the deck is not only to give LD, but also to ramp up a lot to be able to cast the creatures that will win the game."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "ramp up a lot to be able to cast the creatures that will win the game"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The perfect stance is to cast Arbor Elf on turn 1, then cast Wild Growth or Utopia Sprawl and already destroy some land."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "indestructible lands"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Rustvale Bridge"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Boros Garrison"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Quirion Ranger that returns the Forests to their hand, serving as a pseudo-counterspell."
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "archetype": "Sultai Ouroboroid",
+  "format": "standard",
+  "strategy_type": "ramp",
+  "overview": "Sultai Ouroboroid leverages mana acceleration and land synergy to outpace opponents in Standard while establishing a resilient board presence. By cycling through Nature's Rhythm and deploying Llanowar Elves, the deck ensures consistent land drops to cast larger threats efficiently. The strategy focuses on maintaining tempo through creature recursion and incremental advantage until the late game closes out matches.",
+  "win_conditions": [
+    "Deploying large, resilient creatures that outvalue opponent's removal",
+    "Generating incremental card and mana advantage through land synergies",
+    "Establishing an unblockable board state with token generation and recursion"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two mana sources by turn two",
+      "Early plays like Llanowar Elves or Nature's Rhythm",
+      "A mix of lands and low-cost creatures to maintain tempo"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early mana acceleration",
+      "Three or more lands without early plays",
+      "Hands missing interaction or ramp in the first three turns"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing Llanowar Elves on curve to accelerate green mana",
+      "Use Nature's Rhythm to fetch lands or draw cards, ensuring land drops",
+      "Deploy Badgermole Cub to establish early board presence and enable synergies"
+    ],
+    "mid_game": [
+      "Transition into larger threats while maintaining mana advantage",
+      "Use recursion and token generation to replace lost creatures",
+      "Apply pressure while holding up interaction for opponent's threats"
+    ],
+    "late_game": [
+      "Cast high-impact threats that leverage accumulated mana",
+      "Use land synergies and card draw to outlast opponent's resources",
+      "Close out games with unblockable attackers and board wipes if necessary"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Badgermole Cub",
+      "role": "Early board presence and synergy enabler",
+      "notes": "Play on curve to establish a body and trigger land or token synergies; use its abilities to stabilize against early aggression."
+    },
+    {
+      "name": "Nature's Rhythm",
+      "role": "Mana acceleration and card selection",
+      "notes": "Cast to search for basic lands or draw cards, ensuring you never fall behind on land drops while maintaining hand size."
+    },
+    {
+      "name": "Llanowar Elves",
+      "role": "Primary mana dork",
+      "notes": "Deploy immediately to tap for green mana, enabling early land drops and accelerating into mid-game threats."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up mana for interaction before committing to land drops",
+    "Prioritize playing mana dorks before casting ramp spells to maximize efficiency",
+    "Sequence land fetches to ensure color fixing for U/B/G spells"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early blockers and use ramp to outpace their curve",
+      "watch_for": [
+        "Early sweepers",
+        "Low-cost aggressive creatures",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply early pressure with creatures to force interaction before they stabilize",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race with efficient threats while using card advantage to outlast their removal",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Resilient creatures"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Countermagic and removal"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:33:22+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:33:22+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "76e3d288a3609bbc",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "signature cards and archetype name"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "deck archetype and signature card roles"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "general Standard ramp piloting principles"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard format meta trends"
+    }
+  ]
+}

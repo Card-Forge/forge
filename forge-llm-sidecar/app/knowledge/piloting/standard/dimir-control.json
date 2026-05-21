@@ -1,0 +1,263 @@
+{
+  "archetype": "Dimir Control",
+  "format": "standard",
+  "strategy_type": "control",
+  "overview": "Dimir Control is a Standard archetype that combines blue's value and answers with black's harsh removal and punishment. The deck aims to stabilize the board, exhaust the opponent's resources, and seize control through responsive play and card advantage. It relies on versatile Omen dragons and flexible sideboard options to navigate a creature-heavy meta.",
+  "win_conditions": [
+    "Scavenger Regent",
+    "Marang River Regent",
+    "Liliana"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Has land drops",
+      "Contains decent answers",
+      "Can create enough card advantage"
+    ],
+    "mulligan_criteria": [
+      "Can't do anything for quite a time",
+      "Lacks colored mana sources early on against fast decks"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "land drops",
+          "decent answers",
+          "card advantage spells"
+        ],
+        "decision": "keep",
+        "reason": "It has land drops, decent answers, and can create enough card advantage."
+      },
+      {
+        "hand": [
+          "one colored mana source",
+          "Demolition Field"
+        ],
+        "decision": "keep",
+        "reason": "Great in some situations but dangerous in others; you'll have to rely on Demolition Field if you can't find other colors."
+      },
+      {
+        "hand": [
+          "slow cards",
+          "no early impact"
+        ],
+        "decision": "mulligan",
+        "reason": "It can't do anything for quite a time, and this is dangerous."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Stabilize the board and use removals to counter the opponent's main strategy",
+      "Rely on Demolition Field if the mana base lacks colored sources"
+    ],
+    "mid_game": [
+      "Be responsive instead of proactive at all times",
+      "Don't let the opponent build a solid board or create excessive value",
+      "Use life points as a resource against aggressive decks"
+    ],
+    "late_game": [
+      "Lean into removals and card advantage until you have enough mana to play threats",
+      "Put Ugin in play at the right time to potentially win the game",
+      "Make the opponent exhaust their resources until the game is under your control"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Scavenger Regent",
+      "role": "Win condition / Removal",
+      "notes": "Has the Omen ability to cast as an instant/sorcery and shuffle back, or as a creature."
+    },
+    {
+      "name": "Marang River Regent",
+      "role": "Win condition / Card advantage",
+      "notes": "Creates card advantage whenever needed and shares the versatile Omen ability."
+    },
+    {
+      "name": "Dispelling Exhale",
+      "role": "Main counter",
+      "notes": "Used as much as possible to stop opponent spells and stabilize."
+    },
+    {
+      "name": "Consult the Star Charts",
+      "role": "Card advantage",
+      "notes": "Functions like Impulse early on, and with Kicker turns into a Memory Deluge later."
+    },
+    {
+      "name": "Demolition Field",
+      "role": "Mana fixer",
+      "notes": "Crucial fallback when opening hands lack sufficient colored mana sources."
+    },
+    {
+      "name": "Ugin",
+      "role": "Late-game threat",
+      "notes": "Incredible in matchups like Esper Bounce; can win the game if played at the right time."
+    },
+    {
+      "name": "Tishana's Tidebinder",
+      "role": "Sideboard versatile",
+      "notes": "Very versatile and fits many matchups."
+    },
+    {
+      "name": "Aclazotz",
+      "role": "Sideboard anti-aggro",
+      "notes": "Great against aggro lists."
+    },
+    {
+      "name": "Preacher",
+      "role": "Sideboard resources",
+      "notes": "Performs well when you need extra resources."
+    },
+    {
+      "name": "Liliana",
+      "role": "Sideboard win condition",
+      "notes": "Serves as an alternative win condition."
+    }
+  ],
+  "sequencing_tips": [
+    "Try to be responsive instead of proactive at all times",
+    "Don't let the opponent build a solid board",
+    "Use your life points as a resource as best as you can",
+    "Avoid hands that are too greedy or too slow",
+    "Put Ugin in play at the right time to maximize impact"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Izzet Cauldron",
+      "advice": "Deal with the board well and prevent the opponent from creating value. Prioritize removals that exile cards to directly counter their strategy.",
+      "watch_for": [
+        "Value creation",
+        "Opponent's main strategy"
+      ]
+    },
+    {
+      "opponent_archetype": "Golgari Midrange",
+      "advice": "Be responsive instead of proactive. Win through the right sequence of cards and trades without letting them establish a board.",
+      "watch_for": [
+        "Mosswood Dreadknight",
+        "Creature reliance"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono-Red Aggro",
+      "advice": "Use life points as a resource and manage your answers carefully. Know how to handle their main threats correctly.",
+      "watch_for": [
+        "Opening hand variance",
+        "Main threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Prowess",
+      "advice": "Pay attention to their potential control pivot. Use removals efficiently to keep key permanents off the board.",
+      "watch_for": [
+        "Otter tokens",
+        "Ral, Crackling Wit",
+        "Vivi Ornitier"
+      ]
+    },
+    {
+      "opponent_archetype": "Esper Bounce",
+      "advice": "Prevent them from playing creatures freely. Lean into removals and card advantage until you can deploy threats like Ugin at the optimal moment.",
+      "watch_for": [
+        "Bouncers",
+        "Greedy or slow hands"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Mosswood Dreadknight",
+    "Ral, Crackling Wit",
+    "Vivi Ornitier",
+    "Otter tokens"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-dimir-control-dimir-dragons-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T07:04:06+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-dimir-control-dimir-dragons-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:03:00+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "adf2937691a79f4f",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "The idea behind this deck, like any Control strategy, is to stabilize the board and make the opponent exhaust their resources until they can't do anything else and the game is under your control."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Scavenger Regent and Marang River Regent show what this deck can do and should do really well... main win conditions."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Liliana can be an alternative win condition"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Try to be responsive instead of proactive at all times, and don't let them build a solid board."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You must also use your life points as a resource as best as you can."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "avoid hands that are too greedy or too slow."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "centers around Mosswood Dreadknight above all else"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "don't let Ral, Crackling Wit stay on the board. It is an incredible source of value and almost as dangerous as Vivi Ornitier"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Their Otter tokens can destroy your life points very quickly"
+    }
+  ]
+}

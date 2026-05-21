@@ -1,0 +1,152 @@
+{
+  "archetype": "4c Midrange",
+  "format": "pioneer",
+  "strategy_type": "midrange",
+  "overview": "This four-color midrange deck leverages a wide mana base to access efficient disruption and resilient threats. By combining early interaction like Thoughtseize and Fatal Push with the card advantage engine of Quantum Riddler, it aims to stabilize quickly and outvalue opponents. The deck excels at adapting to any matchup by answering key pieces while maintaining a steady board presence.",
+  "win_conditions": [
+    "Outlasting opponents with Quantum Riddler's continuous card advantage",
+    "Securing early board control through targeted removal and hand disruption",
+    "Closing games with efficient four-color threats that pressure the opponent"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing early disruption like Thoughtseize or Fatal Push",
+      "Hands with Quantum Riddler and a cheap play to protect it",
+      "Hands with at least two lands and a threat for turns one through three"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early interaction against aggressive decks",
+      "Hands with only high-cost threats and no removal",
+      "Hands missing land drops for the first three turns"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and use Fatal Push to remove aggressive threats",
+      "Cast Thoughtseize to disrupt opponent's combo or key pieces",
+      "Develop board with cheap creatures while holding up mana for interaction"
+    ],
+    "mid_game": [
+      "Deploy Quantum Riddler to generate card advantage and stabilize",
+      "Trade efficiently to maintain board presence",
+      "Use four-color flexibility to answer whatever the opponent plays"
+    ],
+    "late_game": [
+      "Let Quantum Riddler draw multiple cards per turn to outvalue opponents",
+      "Cast larger threats to close the game",
+      "Maintain hand size and resources to outlast control decks"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Quantum Riddler",
+      "role": "Card advantage engine",
+      "notes": "Prioritize keeping it safe; use its draw ability to refill on interaction and threats while maintaining board presence."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Early game disruption",
+      "notes": "Target opponent's key combo pieces, win conditions, or early threats to slow their game plan."
+    },
+    {
+      "name": "Fatal Push",
+      "role": "Efficient removal",
+      "notes": "Use to clear low-toughness creatures and aggressive beaters, preserving mana for larger threats or interaction."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up Fatal Push before committing mana to threats to avoid being caught off guard",
+    "Cast Thoughtseize before playing Quantum Riddler to protect it from early removal",
+    "Prioritize keeping lands in hand when facing control decks to ensure Riddler can draw safely"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Fatal Push and Thoughtseize to stall until Quantum Riddler stabilizes the board.",
+      "watch_for": [
+        "Early sweeps",
+        "Wide boards"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around board wipes by keeping lands in hand and deploying Riddler on their turn.",
+      "watch_for": [
+        "Counterspell",
+        "Board clear spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their key pieces immediately with Thoughtseize and pressure them before they assemble their win condition.",
+      "watch_for": [
+        "Mana acceleration",
+        "Key combo pieces"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Aggressive creature swarms",
+    "Board wipe spells",
+    "Counterspell and hand trap disruption"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T04:38:35+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:38:35+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "bff55c2104b14f28",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "archetype": "Boros Burn",
+  "format": "pioneer",
+  "strategy_type": "aggro",
+  "overview": "Boros Burn is a fast, aggressive deck that aims to reduce the opponent's life total to zero using a suite of efficient one-mana red spells and white support. The deck leverages signature cards like Boltwave and Boros Charm to apply relentless pressure while maintaining board control. Screaming Nemesis provides a flexible finisher or removal option that scales with the number of creatures in play. Success relies on maximizing early damage output and disrupting opponent development before they can stabilize.",
+  "win_conditions": [
+    "Dealing direct damage to the opponent's life total with one-mana red spells",
+    "Using Boros Charm to clear blockers or finish the game",
+    "Deploying Screaming Nemesis as a high-impact threat or removal"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with multiple one-mana red spells",
+      "Early Boros Charm or Boltwave",
+      "At least two lands for turns one and two"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early damage spells",
+      "Hands with only white cards or high-cost threats",
+      "Hands with three or more lands"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cast one-mana red spells for direct damage",
+      "Use Boros Charm for damage or early board control",
+      "Prioritize speed over card advantage"
+    ],
+    "mid_game": [
+      "Deploy Screaming Nemesis to pressure life total or remove key blockers",
+      "Cast Boltwave to clear the board and deal residual damage",
+      "Maintain aggressive posture while answering threats"
+    ],
+    "late_game": [
+      "Use remaining red spells to close out the game",
+      "Leverage Boros Charm's combat trick mode if needed",
+      "Push damage every turn until the opponent folds or wins"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Boltwave",
+      "role": "Board wipe and direct damage spell",
+      "notes": "Cast when the opponent has multiple creatures to maximize value, or use early to clear a single blocker and deal two damage to the player."
+    },
+    {
+      "name": "Boros Charm",
+      "role": "Flexible one-mana spell for damage, removal, or combat tricks",
+      "notes": "Choose damage mode on turn one, removal mode to clear blockers, or combat trick mode to swing for lethal or protect your attackers."
+    },
+    {
+      "name": "Screaming Nemesis",
+      "role": "High-impact creature threat and conditional removal",
+      "notes": "Play as a finisher when the board is clear, or use its enter-the-battlefield effect to remove key opponent creatures and apply pressure simultaneously."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast direct damage spells before playing creatures to avoid giving the opponent free blockers",
+    "Hold Boros Charm in hand to respond to opponent's combat tricks or removal",
+    "Time Boltwave to hit multiple creatures while leaving enough damage to close the game",
+    "Use Screaming Nemesis's ETB effect to clear the path for your own attackers"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Izzet Phoenix",
+      "advice": "Prioritize direct damage over board presence and use Boros Charm to remove key threats like Kari Zev.",
+      "watch_for": [
+        "Lightning Screw",
+        "Flametongue Kavu",
+        "Doomed Artisan"
+      ]
+    },
+    {
+      "opponent_archetype": "Amalia Bankbuster",
+      "advice": "Race quickly before their combo pieces assemble and use Boltwave to clear their early board.",
+      "watch_for": [
+        "Amalia Bankbuster",
+        "Karn, the Great Creator",
+        "Swords to Plowshares"
+      ]
+    },
+    {
+      "opponent_archetype": "Rakdos Midrange",
+      "advice": "Apply early pressure to prevent them from stabilizing with removal and card draw.",
+      "watch_for": [
+        "Fatal Push",
+        "Abrupt Decay",
+        "Bloodtithe Harvester"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Lightning Bolt",
+    "Swords to Plowshares",
+    "Fatal Push",
+    "Abrupt Decay",
+    "Doomed Artisan"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm + Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T05:22:28+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-boros-burn-2025-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:19:07+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-boros-burn-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:19:14+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-sideboard-guide-boros-burn",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:19:19+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:22:28+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "b15eb87cb2cedb5b",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Boros Burn archetype in Pioneer format"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards Boltwave, Boros Charm, and Screaming Nemesis"
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Pioneer format aggro strategies"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "General aggro sequencing principles in Pioneer"
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Mechanics of Boros Charm and Boltwave"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Pioneer format meta threats"
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard burn deck interactions"
+    }
+  ]
+}

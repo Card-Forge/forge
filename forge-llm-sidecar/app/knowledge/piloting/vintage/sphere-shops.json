@@ -1,0 +1,156 @@
+{
+  "archetype": "Sphere Shops",
+  "format": "vintage",
+  "strategy_type": "control",
+  "overview": "Sphere Shops is a Vintage control archetype that leverages artifact disruption and damage mitigation to outlast opponents. By deploying Null Rod and Sphere of Resistance, it severely hampers artifact-heavy strategies while stabilizing the board. Patchwork Automaton provides a resilient, low-cost threat that synergizes with the deck's defensive posture.",
+  "win_conditions": [
+    "Outlasting opponents through resource denial and damage reduction",
+    "Deploying Patchwork Automaton as a resilient finisher",
+    "Capitalizing on opponent's inability to overcome Sphere of Resistance's cost increase"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early artifact disruption or interaction",
+      "Hands containing Sphere of Resistance or Null Rod",
+      "Hands with Patchwork Automaton and removal"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early answers to aggressive threats",
+      "Hands with only late-game cards",
+      "Hands missing land or artifact synergy"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and deploy Null Rod to disrupt artifact-dependent opponents",
+      "Hold Sphere of Resistance until you can protect it or use it to tax spells",
+      "Prioritize survival and card advantage"
+    ],
+    "mid_game": [
+      "Stabilize with Sphere of Resistance to increase opponent's spell costs",
+      "Deploy Patchwork Automaton to apply pressure while maintaining defense",
+      "Use removal to clear opposing threats"
+    ],
+    "late_game": [
+      "Leverage Sphere of Resistance to shut down combo or aggressive strategies",
+      "Use Patchwork Automaton's toughness to outvalue opponents",
+      "Transition to a grindy endgame where resource denial wins"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Null Rod",
+      "role": "Disrupts artifact synergies and provides early board presence",
+      "notes": "Play early to counter artifact-heavy decks; remove or exile if opponent has non-artifact win conditions"
+    },
+    {
+      "name": "Sphere of Resistance",
+      "role": "Increases spell costs and reduces damage taken",
+      "notes": "Hold until you can answer removal or deploy it when opponent is casting high-cost spells; synergizes with control game plan"
+    },
+    {
+      "name": "Patchwork Automaton",
+      "role": "Resilient threat that applies pressure",
+      "notes": "Deploy after stabilizing; use its toughness to survive removal and close out games"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Sphere of Resistance until you can protect it or force opponent to waste removal",
+    "Play Null Rod on turn one against artifact decks, but be ready to discard it if it becomes a liability",
+    "Deploy Patchwork Automaton after clearing the board to maximize its impact",
+    "Prioritize land drops to ensure you can cast Sphere of Resistance when needed"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Artifact Combo",
+      "advice": "Lead with Null Rod to disrupt their engine; hold Sphere of Resistance to tax their win condition",
+      "watch_for": [
+        "Early artifact plays",
+        "Protection spells for key artifacts",
+        "Alternative win conditions"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Sphere of Resistance to reduce damage and tax removal; deploy Patchwork Automaton to stabilize",
+      "watch_for": [
+        "Early board presence",
+        "Direct damage spells",
+        "Artifact-based aggression"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race with Patchwork Automaton while using Sphere of Resistance to out-grind their resources",
+      "watch_for": [
+        "Board wipes",
+        "Counterspell packages",
+        "Artifact disruption"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Artifact-based combo engines",
+    "Fast aggressive strategies",
+    "Board wipes and removal spells"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T11:24:51+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:24:51+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "c15bdf13073540cd",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Sphere Shops, Null Rod, Sphere of Resistance, Patchwork Automaton, Vintage"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Patchwork Automaton, Sphere of Resistance"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Null Rod, Sphere of Resistance, Patchwork Automaton"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Vintage format, Sphere Shops archetype"
+    }
+  ]
+}

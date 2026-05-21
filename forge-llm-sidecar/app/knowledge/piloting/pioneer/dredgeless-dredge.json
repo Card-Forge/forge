@@ -1,0 +1,157 @@
+{
+  "archetype": "Dredgeless Dredge",
+  "format": "pioneer",
+  "strategy_type": "combo",
+  "overview": "Dredgeless Dredge is a blue-black Pioneer archetype that leverages graveyard recursion and sacrifice synergies to generate overwhelming value. By cycling cheap creatures like Bloodghast and Prized Amalgam through the graveyard, the deck creates a self-sustaining engine that outmaneuvers opponents. Narcomoeba serves as the primary catalyst, enabling repeated returns of threats while drawing cards to maintain board control.",
+  "win_conditions": [
+    "Repeatedly casting Bloodghast from the graveyard to apply relentless pressure",
+    "Using Prized Amalgam's sacrifice ability to draw into game-ending threats or answers",
+    "Activating Narcomoeba to return large creatures and close out games"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Narcomoeba or early graveyard recursion",
+      "Two or more cheap creatures (Bloodghast, Prized Amalgam)",
+      "Hands with early land drops and interaction"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking graveyard interaction or sacrifice outlets",
+      "Hands with only high-cost cards",
+      "Hands missing early mana sources"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing Narcomoeba to establish recursion",
+      "Cast Bloodghast to populate the graveyard",
+      "Use Prized Amalgam to stabilize or draw into answers"
+    ],
+    "mid_game": [
+      "Activate Narcomoeba to return threats and apply pressure",
+      "Sacrifice creatures to fuel Amalgam's draw ability",
+      "Maintain board presence while cycling the graveyard"
+    ],
+    "late_game": [
+      "Execute recursive loops to outvalue opponents",
+      "Return larger threats to close the game",
+      "Manage card advantage to withstand sweepers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Bloodghast",
+      "role": "Primary recursive threat and graveyard filler",
+      "notes": "Sacrifice to return from graveyard; cycle repeatedly to apply pressure and fuel other abilities"
+    },
+    {
+      "name": "Prized Amalgam",
+      "role": "Card advantage engine and sacrifice outlet",
+      "notes": "Sacrifice to draw cards; use to refill hand after activating Narcomoeba or cycling threats"
+    },
+    {
+      "name": "Narcomoeba",
+      "role": "Graveyard recursion catalyst",
+      "notes": "Enters tapped; sacrifice to return target creature from graveyard; central to the deck's value loop"
+    }
+  ],
+  "sequencing_tips": [
+    "Activate Narcomoeba before sacrificing creatures to maximize returns",
+    "Hold up black mana to protect key activations from removal",
+    "Sacrifice Prized Amalgam after drawing to maintain hand size",
+    "Cycle Bloodghast immediately after it resolves to keep the graveyard active"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Go wide early and pressure life total before they stabilize",
+      "watch_for": [
+        "Board wipes",
+        "Graveyard hate",
+        "Counterspells"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use recursion to outvalue and stabilize with repeated threats",
+      "watch_for": [
+        "Early board presence",
+        "Direct damage",
+        "Sweepers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Grind out value and close with Narcomoeba returns",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fatal Push",
+    "Abrupt Decay",
+    "Supreme Verdict",
+    "Boros Charm"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T05:06:49+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:06:49+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "12a2d98c3f39bf2b",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype name, signature cards, and Pioneer format constraints"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Card mechanics of signature cards"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "General Magic: The Gathering stack and timing rules applied to signature cards"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Pioneer format meta and common removal options"
+    }
+  ]
+}

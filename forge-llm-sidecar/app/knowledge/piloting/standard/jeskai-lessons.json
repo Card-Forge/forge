@@ -1,0 +1,160 @@
+{
+  "archetype": "Jeskai Lessons",
+  "format": "standard",
+  "strategy_type": "tempo",
+  "overview": "Jeskai Lessons is a three-color tempo deck that leverages card advantage and sorcery-speed recursion to control the board while maintaining pressure. By cycling through cheap spells and reusing key threats, the deck aims to outvalue opponents in the mid-to-late game. The inclusion of Gran-Gran and Accumulate Wisdom provides a powerful engine for recurring removal and finishers, allowing you to stabilize against aggressive strategies and grind out control matchups.",
+  "win_conditions": [
+    "Winning via superior card advantage and resource depletion",
+    "Recurring key threats and finishers via Accumulate Wisdom and Gran-Gran",
+    "Applying consistent sorcery-speed pressure with Stormchaser's Talent and other spells",
+    "Outlasting opponents through efficient removal and board control"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early interaction or recursion engines",
+      "Mana bases that support three-color casting by turn three",
+      "Combinations of Accumulate Wisdom and cheap threats",
+      "Hands containing Gran-Gran or early removal"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early interaction or card draw",
+      "Mana bases with four or more lands",
+      "Hands without a clear path to turn two or three plays",
+      "Hands reliant solely on high-cost finishers"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap interaction to disrupt opponent's early strategy",
+      "Hold up mana for potential recursion or counterplay",
+      "Establish early board presence with low-cost threats"
+    ],
+    "mid_game": [
+      "Activate Gran-Gran to reuse removal and stabilize the board",
+      "Cast Accumulate Wisdom to filter for answers or finishers",
+      "Trade efficiently while preserving card advantage"
+    ],
+    "late_game": [
+      "Leverage recurring threats to overwhelm opponent's resources",
+      "Use sorcery-speed spells to dictate the game state",
+      "Push for damage while maintaining enough cards to respond to late-game threats"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Stormchaser's Talent",
+      "role": "Provides versatile spot removal and card advantage",
+      "notes": "Use to clear key threats while drawing a card, maintaining resource parity"
+    },
+    {
+      "name": "Accumulate Wisdom",
+      "role": "Core recursion engine for reusing spells and threats",
+      "notes": "Cast at sorcery speed to return high-impact cards to hand, enabling repeated value"
+    },
+    {
+      "name": "Gran-Gran",
+      "role": "Enables repeated casting of instants and sorceries",
+      "notes": "Hold up mana to activate its ability and recast removal or finishers, maximizing tempo"
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize holding up mana for recursion over committing to early plays",
+    "Cast Accumulate Wisdom before committing to board state changes",
+    "Use Gran-Gran's ability to recast removal after opponent commits resources",
+    "Balance aggression with card advantage to avoid running out of answers"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Focus on early interaction and stabilizing with Gran-Gran recursion",
+      "watch_for": [
+        "Early all-in turns",
+        "Wide board states",
+        "Pressure that bypasses recursion timing"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race while maintaining card advantage through repeated removal",
+      "watch_for": [
+        "Efficient value creatures",
+        "Board wipes",
+        "Late-game threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure and use recursion to outvalue their hand traps",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Resource denial strategies"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Efficient value engines",
+    "Board wipes and hand disruption",
+    "Late-game finishers"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:58:50+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:58:50+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "923c15749349eea0",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

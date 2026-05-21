@@ -1,0 +1,158 @@
+{
+  "archetype": "4c Depths",
+  "format": "legacy",
+  "strategy_type": "tempo",
+  "overview": "This four-color Legacy deck leverages card advantage and versatile removal to control the pace of the game. By cycling through the library with Brainstorm and efficiently neutralizing threats with Swords to Plowshares, it creates openings for tempo engines like Orcish Bowmasters. The goal is to maintain board presence while outmaneuvering opponents through superior resource management.",
+  "win_conditions": [
+    "Outlasting opponents through sustained card advantage and removal",
+    "Closing games with Orcish Bowmasters and its generated tokens",
+    "Clearing the board with Swords to Plowshares to deploy unblocked threats"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing early Swords to Plowshares or Brainstorm",
+      "Mana bases that support two-color starts",
+      "Low-cost threats or interaction that can be played on turn one or two"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking any interaction or cantrips",
+      "Mana screws with four or more lands",
+      "Slow hands reliant on late-game cards without early answers"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands and casting Brainstorm to find answers",
+      "Hold Swords to Plowshares for opponent's early threats",
+      "Deploy Orcish Bowmasters on curve to establish tempo"
+    ],
+    "mid_game": [
+      "Use Swords to Plowshares to clear the way for your threats",
+      "Leverage Bowmasters' triggered ability to generate card advantage",
+      "Maintain a balance of lands and spells to avoid being stuck"
+    ],
+    "late_game": [
+      "Stabilize with remaining removal and card draw",
+      "Race with unblocked threats while managing life totals",
+      "Use Swords to Plowshares for life gain to outlast attrition wars"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Brainstorm",
+      "role": "Cantrip for card advantage and consistency",
+      "notes": "Use to dig for removal or threats; return three cards to manage hand size and set up future turns"
+    },
+    {
+      "name": "Swords to Plowshares",
+      "role": "Versatile removal and life gain",
+      "notes": "Exile or exile opponent's key threats; use the exile mode against indestructible or hexproof creatures when possible"
+    },
+    {
+      "name": "Orcish Bowmasters",
+      "role": "Tempo threat and card advantage engine",
+      "notes": "Play on curve to force trades; use the token generation to block or push damage while drawing a card"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Swords to Plowshares until you see the opponent's key threats",
+    "Cast Brainstorm after assessing the board to maximize hand optimization",
+    "Play Orcish Bowmasters early to establish board presence before opponent stabilizes",
+    "Manage life totals carefully when using Swords to Plowshares for removal"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Hold Swords to Plowshares for their biggest threats and play Orcish Bowmasters early to disrupt their rhythm.",
+      "watch_for": [
+        "Early aggressive creatures",
+        "Burn spells",
+        "Fast mana acceleration"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race with Orcish Bowmasters and use Swords to Plowshares to clear their counterspells or threats.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their combo pieces with Swords to Plowshares and race with Orcish Bowmasters before they assemble.",
+      "watch_for": [
+        "Combo enablers",
+        "Draw spells",
+        "Protection spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Lightning Bolt",
+    "Thoughtseize",
+    "Delver of Secrets",
+    "Tarmogoyf",
+    "Jace, the Mind Sculptor"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:45:00+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:45:00+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "1da4951b030ce720",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype name, format, colors, and signature cards"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards and tempo strategy"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards and tempo strategy"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Legacy format staples and archetype interactions"
+    }
+  ]
+}

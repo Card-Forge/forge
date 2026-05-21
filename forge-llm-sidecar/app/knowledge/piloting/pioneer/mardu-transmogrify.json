@@ -1,0 +1,145 @@
+{
+  "archetype": "Mardu Transmogrify",
+  "format": "pioneer",
+  "strategy_type": "midrange",
+  "overview": "Mardu Transmogrify is a Pioneer midrange deck that leverages disruptive removal and creature recycling to outvalue opponents. By combining early-game interaction with late-game token generation and graveyard recursion, it aims to stabilize and close out games through incremental advantage. The deck thrives on trading efficiently and turning dead creatures into persistent threats.",
+  "win_conditions": [
+    "Overwhelming the board with recycled creatures and tokens via Transmogrify",
+    "Disrupting opponent game plans with Thoughtseize to create favorable trades",
+    "Generating long-term value and card advantage through Case of the Stashed Skeleton"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Thoughtseize and a one-drop creature",
+      "Two-land hands with early interaction or Transmogrify enablers",
+      "Hands containing Case of the Stashed Skeleton alongside removal"
+    ],
+    "mulligan_criteria": [
+      "Four or more lands with no early disruption",
+      "Hands lacking creatures to sacrifice for Transmogrify",
+      "Slow hands with only high-cost finishers and no interaction"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap creatures to establish board presence and provide sacrifice outlets",
+      "Use Thoughtseize to remove key threats or combo pieces before they resolve",
+      "Prioritize land drops to ensure Transmogrify can be cast by turn three"
+    ],
+    "mid_game": [
+      "Activate Transmogrify to recycle dead creatures into new threats or tokens",
+      "Deploy Case of the Stashed Skeleton to stabilize and generate recurring value",
+      "Trade efficiently to maintain board parity while digging for answers"
+    ],
+    "late_game": [
+      "Loop Transmogrify and recursion effects to outvalue control decks",
+      "Flood the board with tokens to pressure aggressive opponents",
+      "Hold up interaction for sweepers or finishers while closing out with board presence"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Thoughtseize",
+      "role": "Early-game disruption and threat removal",
+      "notes": "Use to eliminate key finishers, combo pieces, or high-impact creatures before they impact the board. Prioritize targets that would otherwise force unfavorable trades."
+    },
+    {
+      "name": "Case of the Stashed Skeleton",
+      "role": "Value generation and graveyard recursion",
+      "notes": "Play to recover resources and keep the graveyard stocked for Transmogrify. Use its abilities to stabilize against board wipes or to fuel late-game token generation."
+    },
+    {
+      "name": "Transmogrify",
+      "role": "Creature recycling and token generation",
+      "notes": "Sacrifice a creature to create a token or copy of a creature from your graveyard. Sequence after playing a creature or when you need to answer a threat while maintaining board presence."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Thoughtseize until you see the opponent's key threat or combo piece",
+    "Play a creature before casting Transmogrify to ensure you have a legal sacrifice target",
+    "Use Case of the Stashed Skeleton to refill your graveyard before activating Transmogrify",
+    "Prioritize land drops in the early game to avoid being mana-screwed for Transmogrify"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Thoughtseize on their primary finishers and play early creatures to race. Transmogrify can generate tokens to block multiple attackers.",
+      "watch_for": [
+        "Fast finishers",
+        "Board wipes",
+        "Early pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells by baiting them with low-value creatures. Use Transmogrify and Case of the Stashed Skeleton to outvalue their hand traps.",
+      "watch_for": [
+        "Counterspells",
+        "Removal spells",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race efficiently and use disruption to disrupt their value loops. Transmogrify provides the extra card advantage needed to win long games.",
+      "watch_for": [
+        "Removal spells",
+        "Value creatures",
+        "Stabilizers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Aggressively use Thoughtseize to find and remove key combo pieces. Keep interaction up and race with early creatures if you cannot disrupt.",
+      "watch_for": [
+        "Combo enablers",
+        "Counterspells",
+        "Fast win conditions"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive finishers",
+    "Board wipe spells",
+    "Counterspells and hand traps",
+    "High-impact value creatures"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T04:35:54+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:35:54+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "a603891cca4e12c5",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

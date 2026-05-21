@@ -1,0 +1,247 @@
+{
+  "archetype": "Nykthos Ramp",
+  "format": "pioneer",
+  "strategy_type": "ramp",
+  "overview": "Nykthos Ramp is a Mono-Green deck that leverages Devotion to Green and massive mana acceleration to flood the board with creatures quickly. Though it lost its previous combo-focused identity after Karn, the Great Creator was banned, it now functions as a consistent ramp-combo hybrid that aims to win on explosive turns. The deck relies on a core engine of Nykthos, Shrine to Nyx, dorks, and board-fillers to overwhelm opponents before they can stabilize.",
+  "win_conditions": [
+    "Generate massive mana via Nykthos, Shrine to Nyx and high Devotion to Green",
+    "Flood the board with creatures using Storm the Festival and Kiora, Behemoth Beckoner",
+    "Overwhelm opponents with a massive army to deal lethal damage in a single turn"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Nykthos, mana dorks, and card draw to find key pieces",
+      "Hands that can reach Devotion 5 by turn 2"
+    ],
+    "mulligan_criteria": [
+      "Hands that rely heavily on future land drops",
+      "Hands with only one land and no early acceleration or Devotion"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Nykthos, Shrine to Nyx",
+          "Llanowar Elves",
+          "Cavalier of Thorns",
+          "Oath of Nissa",
+          "Land",
+          "Land",
+          "Land"
+        ],
+        "decision": "keep",
+        "reason": "Has Nykthos, mana dorks, and ways to find important pieces, though it might end up too slow if you don't draw more Devotion."
+      },
+      {
+        "hand": [
+          "Kiora, Behemoth Beckoner",
+          "Llanowar Elves",
+          "Old-Growth Troll",
+          "Land",
+          "Land",
+          "Land",
+          "Land"
+        ],
+        "decision": "keep",
+        "reason": "Gives Devotion 5 as early as turn 2 and accelerates the game plan significantly with Kiora."
+      },
+      {
+        "hand": [
+          "Single Land",
+          "High-Cost Creature",
+          "Spell",
+          "Spell",
+          "Spell",
+          "Spell",
+          "Spell"
+        ],
+        "decision": "mulligan",
+        "reason": "Relies too much on the next land drops and has a huge chance of getting stuck with the first land."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play mana dorks like Llanowar Elves on turn 1 to accelerate",
+      "Prioritize lands and Devotion creatures like Cavalier of Thorns and Old-Growth Troll",
+      "Utilize Leyline of the Guildpact for explosive opening turns"
+    ],
+    "mid_game": [
+      "Cast Oath of Nissa and Invasion of Ixalan to dig for Nykthos or Kiora",
+      "Use Storm the Festival to generate tokens and additional mana",
+      "Stabilize against aggro by blocking with Old-Growth Troll to create mana"
+    ],
+    "late_game": [
+      "Activate Kiora, Behemoth Beckoner to attack with the entire board",
+      "Overwhelm opponents with massive creature counts and mana advantage",
+      "Deploy sideboard hate pieces like Tranquil Frillback or Pithing Needle to shut down specific strategies"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Nykthos, Shrine to Nyx",
+      "role": "Core engine",
+      "notes": "Names the list and generates massive mana when Devotion to Green is high; without it, the deck is just expensive green cards."
+    },
+    {
+      "name": "Kiora, Behemoth Beckoner",
+      "role": "Finisher",
+      "notes": "Lets you attack with everything on the board, representing lethal damage in nearly all situations."
+    },
+    {
+      "name": "Storm the Festival",
+      "role": "Board filler",
+      "notes": "Creates tokens and generates mana to accelerate the game plan and fill the board even more."
+    },
+    {
+      "name": "Llanowar Elves",
+      "role": "Mana dork",
+      "notes": "Accelerates the mana curve and improves Kiora's effectiveness by enabling earlier plays."
+    },
+    {
+      "name": "Cavalier of Thorns",
+      "role": "Devotion generator / Card draw",
+      "notes": "Provides Devotion to Green and can search for Nykthos or create more mana by keeping a new copy in play."
+    },
+    {
+      "name": "Leyline of the Guildpact",
+      "role": "Early game acceleration",
+      "notes": "Replaced Wolfwillow Haven to provide explosiveness in the first few turns, even if it can be dead later."
+    }
+  ],
+  "sequencing_tips": [
+    "Play mana dorks as early as possible to accelerate into Devotion creatures.",
+    "Prioritize playing Cavalier of Thorns and Old-Growth Troll quickly to maximize Nykthos's mana generation.",
+    "Use Oath of Nissa and Invasion of Ixalan to dig for missing key pieces like Nykthos or Kiora.",
+    "Plan turns carefully, especially the first few, to jump ahead in mana and flood the board."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Gruul Aggro",
+      "advice": "Get the best opening hand and great card draw. Stick big creatures fast and maximize Old-Growth Troll's blocking ability to create mana and stabilize.",
+      "watch_for": [
+        "Heartfire Hero",
+        "Emberheart Challenger",
+        "Innkeeper's Talent",
+        "Questing Druid"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Phoenix",
+      "advice": "Build a solid board as fast as possible to finish the game. Use Cavalier of Thorns to deal with flying attacks, but focus on overwhelming them quickly.",
+      "watch_for": [
+        "Removal for early creatures",
+        "Fast value generation"
+      ]
+    },
+    {
+      "opponent_archetype": "Azorius Control",
+      "advice": "Use their slow start to develop your game plan. Don't waste opportunities to deal damage and always play around removals and counters.",
+      "watch_for": [
+        "Supreme Verdict",
+        "Global removals",
+        "Counters"
+      ]
+    },
+    {
+      "opponent_archetype": "Nykthos Ramp",
+      "advice": "Make good choices and play the right cards at the right times. The player with the best starting hand and draws will win quickly in this combo mirror.",
+      "watch_for": [
+        "Opponent's explosive starts",
+        "Mirror combo interactions"
+      ]
+    },
+    {
+      "opponent_archetype": "Rakdos Midrange",
+      "advice": "Look for hands with lots of creatures to progress your plan while they discard. Overcome their value in the early turns to mow them down.",
+      "watch_for": [
+        "Discard spells",
+        "Resource disruption",
+        "Value creatures"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fatal Push",
+    "Damping Sphere",
+    "Supreme Verdict",
+    "Global removals and counters",
+    "Discard spells"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-nykthos-ramp-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T04:13:41+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-nykthos-ramp-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:11:53+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "9b2f3330be692d9e",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "The current list is really similar to the classic 2019 version, which played a lot of ramp so you could put your threats in play faster... Though this deck lost its combo-focused side, it still plays like a combo."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Nykthos is the card that names this list - without it, Mono-Green is only a green deck full of expensive cards. However, to get the most out of this land, you need Devotion"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Storm the Festival will fill the board for you, and many times let you create even more mana - which, in turn, means you'll be able to fill the board even more."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "This creature is basically a finisher in this list, as it lets you attack with everything you have after you throw your entire deck on the board. It represents a lethal amount of damage in nearly all situations."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Cavalier of Thorns and Troll will give you the Devotion you need, so you should play them as fast as possible."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You'll usually play them to find Nykthos, Kiora, or another piece."
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Your goal is to jump ahead in mana so you can put as many creatures as possible in play. For this reason, you must plan your turns really well, particularly your first few turns."
+    }
+  ],
+  "common_threats_evidence": []
+}

@@ -1,0 +1,155 @@
+{
+  "archetype": "Grixis Reanimator",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "Grixis Reanimator is a combo deck that focuses on digging for large threats and reanimating them from the graveyard. Thoughtseize provides crucial early disruption to clear the path for your finishers. Abhorrent Oculus and Archon of Cruelty serve as primary win conditions, offering value and board control respectively.",
+  "win_conditions": [
+    "Reanimate Archon of Cruelty to clear the board and deal combat damage",
+    "Cast Abhorrent Oculus to generate card advantage and find reanimation targets",
+    "Dig for and reanimate large threats to overwhelm opponents quickly"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Thoughtseize and a reanimation spell",
+      "Hands with two lands and a way to dig",
+      "Hands containing Abhorrent Oculus or Archon of Cruelty with a cheap instant"
+    ],
+    "mulligan_criteria": [
+      "Hands with no disruption or reanimation",
+      "Hands with three or more lands",
+      "Hands lacking early-game interaction"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Thoughtseize to remove key threats or combo pieces",
+      "Cast reanimation spells to bring back large threats",
+      "Set up the board for a fast finish"
+    ],
+    "mid_game": [
+      "Use Abhorrent Oculus to generate card advantage and find answers",
+      "Maintain pressure with reanimated threats",
+      "Disrupt opponent's game plan with hand traps"
+    ],
+    "late_game": [
+      "Leverage Archon of Cruelty's combat trick to clear the board",
+      "Use Abhorrent Oculus's value engine to outlast opponents",
+      "Reanimate multiple threats to secure victory"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Abhorrent Oculus",
+      "role": "Value engine and card advantage",
+      "notes": "Use its triggered abilities to dig for reanimation targets or answers while generating life gain and card draw to stay ahead."
+    },
+    {
+      "name": "Archon of Cruelty",
+      "role": "Primary finisher and board clear",
+      "notes": "Reanimate it to gain a massive combat trick that can remove opposing threats while dealing significant damage to the opponent."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Early disruption and hand trap",
+      "notes": "Cast it on turn one to remove key combo pieces, threats, or answers, setting up a clear path for your reanimation strategy."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Thoughtseize for the opponent's most impactful card rather than using it preemptively",
+    "Reanimate Archon of Cruelty when the opponent has multiple threats to maximize its combat trick",
+    "Play Abhorrent Oculus when you need to dig for a specific reanimation target or answer",
+    "Prioritize reanimating threats that can immediately impact the board state"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Thoughtseize to remove key finishers and reanimate large blockers or finishers quickly.",
+      "watch_for": [
+        "Early aggressive threats",
+        "Board wipes",
+        "Hand disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race them by reanimating threats before they stabilize and use Abhorrent Oculus to generate value.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Graveyard hate"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Disrupt their key threats with Thoughtseize and reanimate Archon of Cruelty to clear their board.",
+      "watch_for": [
+        "Removal spells",
+        "Card advantage engines",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Counterspell packages",
+    "Graveyard hate",
+    "Board wipes"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T00:34:23+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T00:34:23+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "5757aa6a36e68d96",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype name and signature cards"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards dictate primary win paths"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "General reanimator sequencing principles"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard Modern meta threats"
+    }
+  ]
+}

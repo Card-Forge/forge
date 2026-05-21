@@ -1,0 +1,134 @@
+{
+  "archetype": "Loam Pox",
+  "format": "legacy",
+  "strategy_type": "midrange",
+  "overview": "A black-green midrange deck that leverages efficient mana acceleration and disruptive interaction to establish board presence and outvalue opponents. It uses targeted removal and board wipes to control the early game while deploying resilient threats to close out matches. The strategy relies on card quality and resource advantage rather than explosive combos.",
+  "win_conditions": [
+    "Deploying Orcish Bowmasters to apply immediate pressure and clear opposing boards",
+    "Using mana advantage from Mox Diamond to out-resource opponents in extended games",
+    "Leveraging Thoughtseize to disrupt key combo pieces or answers and secure board control"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing early interaction like Thoughtseize",
+      "Hands with mana acceleration such as Mox Diamond",
+      "Hands featuring early threats or board presence cards"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking interaction or mana sources",
+      "Hands heavily skewed toward late-game cards without early plays",
+      "Hands with multiple lands but no spells"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Mox Diamond to accelerate mana production",
+      "Cast Thoughtseize to remove key threats or combo pieces",
+      "Establish land drops and maintain card advantage"
+    ],
+    "mid_game": [
+      "Deploy Orcish Bowmasters to apply pressure and clear opposing boards",
+      "Use removal to protect threats and maintain board presence",
+      "Trade efficiently to preserve resources for late-game scenarios"
+    ],
+    "late_game": [
+      "Outvalue opponent with card advantage and mana efficiency",
+      "Leverage mana advantage to cast larger threats or repeat interaction",
+      "Stabilize against aggressive strategies and close out matches"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Mox Diamond",
+      "role": "Mana acceleration",
+      "notes": "Play early to ramp into Orcish Bowmasters and other spells, ensuring consistent mana availability."
+    },
+    {
+      "name": "Orcish Bowmasters",
+      "role": "Tempo threat",
+      "notes": "Deploy to apply immediate pressure and use its triggered ability to clear opposing boards before committing to larger threats."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Disruption",
+      "notes": "Hold for key combo pieces, answers, or high-impact threats to secure board control and disrupt opponent game plans."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Thoughtseize for key combo pieces or answers rather than using it early on low-impact cards.",
+    "Play Mox Diamond early to accelerate into Orcish Bowmasters and maintain mana efficiency.",
+    "Use Bowmasters' triggered ability to clear opposing boards before committing to larger threats."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Prioritize Thoughtseize to disrupt key combo pieces and use board wipes to reset the board.",
+      "watch_for": [
+        "Fast win conditions",
+        "Protection spells",
+        "Graveyard recursion"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Orcish Bowmasters to clear boards and apply pressure, while holding removal for key threats.",
+      "watch_for": [
+        "Early creature swarms",
+        "Direct damage spells",
+        "Haste enablers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Leverage mana advantage from Mox Diamond to out-resource opponents and deploy threats behind interaction.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast combo pieces",
+    "Aggressive creature swarms",
+    "Counterspell packages"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T07:51:47+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:51:47+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "da2bb4a92300de8d",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

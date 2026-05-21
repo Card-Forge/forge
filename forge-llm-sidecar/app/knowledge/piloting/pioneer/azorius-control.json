@@ -1,0 +1,297 @@
+{
+  "archetype": "Azorius Control",
+  "format": "pioneer",
+  "strategy_type": "control",
+  "overview": "Azorius Control is a top-tier Pioneer deck that leverages Kaheera, the Orphanguard as a companion to empower creature-based strategies. It adopts a reactive, backwards posture focused on countering spells, removing threats, and exhausting the opponent's resources before deploying powerful late-game win conditions.",
+  "win_conditions": [
+    "Teferi, Hero of Dominaria",
+    "The Wandering Emperor",
+    "Shark Typhoon",
+    "Regal Caracal",
+    "Starnheim Unleashed",
+    "Hall of Storm Giants",
+    "manlands"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early interaction like Censor or Lay Down Arms",
+      "Hands containing proper answers tailored to the specific matchup"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early counterspells or removal",
+      "Hands without enough lands to support a heavy curve"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Censor",
+          "Lay Down Arms",
+          "Plains",
+          "Island",
+          "Memory Deluge",
+          "Supreme Verdict",
+          "Teferi, Hero of Dominaria"
+        ],
+        "decision": "keep",
+        "reason": "Provides early interaction and lands to stabilize, aligning with the deck's heavy curve and explicit advice to mulligan for proper answers."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands to support a heavy curve of 4+ mana spells",
+      "Use early counterspells like Censor as a Force Spike",
+      "Remove small creatures with Lay Down Arms"
+    ],
+    "mid_game": [
+      "Stabilize by countering key threats and using board wipes like Supreme Verdict or Farewell",
+      "Exhaust opponent's resources while maintaining card advantage with Memory Deluge"
+    ],
+    "late_game": [
+      "Deploy win conditions like Teferi, Hero of Dominaria and The Wandering Emperor",
+      "Attack with manlands or Regal Caracal tokens",
+      "Finish with Shark Typhoon or Starnheim Unleashed"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Kaheera, the Orphanguard",
+      "role": "Companion",
+      "notes": "Provides +1/+1 to Cat creatures, enabling the Regal Caracal strategy and requiring two white mana to cast."
+    },
+    {
+      "name": "Lay Down Arms",
+      "role": "Removal",
+      "notes": "Main removal that synergizes with Plains-type lands and handles both small and large creatures."
+    },
+    {
+      "name": "Dovin’s Veto",
+      "role": "Counterspell",
+      "notes": "Mighty counter against Midranges and in the mirror match."
+    },
+    {
+      "name": "Make Disappear",
+      "role": "Counterspell",
+      "notes": "Versatile counter that synergizes with creature tokens the deck can generate."
+    },
+    {
+      "name": "Change the Equation",
+      "role": "Counterspell",
+      "notes": "Indispensable in the current meta and extremely versatile."
+    },
+    {
+      "name": "Memory Deluge",
+      "role": "Card Advantage",
+      "notes": "Main engine that fetches needed parts at the most appropriate time."
+    },
+    {
+      "name": "Regal Caracal",
+      "role": "Win Condition",
+      "notes": "Sideboard wincon that creates two cat tokens, heavily powered by Kaheera."
+    }
+  ],
+  "sequencing_tips": [
+    "Play backwards by responding to opponent threats before deploying your own",
+    "Save answers in mirror matches and avoid rushing to prevent fatal mistakes",
+    "Prioritize countering Storm the Festival and preventing Karn from entering the board against Nykthos Ramp",
+    "Do not save removal against Gruul Midrange; kill elves immediately to prevent explosive damage"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Rakdos Midrange",
+      "advice": "Keep threats under control and ensure breath in game 1. Post-side, use Starnheim Unleashed to evade discard and Regal Caracal for token pressure.",
+      "watch_for": [
+        "Thoughtseize",
+        "Fable of the Mirror-Breaker",
+        "Reckoner Bankbuster"
+      ]
+    },
+    {
+      "opponent_archetype": "Abzan Greasefang",
+      "advice": "Kill Greasefang and Okiba Boss early, counter graveyard-filling spells, and use board wipes. Rest in Peace is key post-side.",
+      "watch_for": [
+        "Greasefang",
+        "Okiba Boss",
+        "Parhelion",
+        "discard package"
+      ]
+    },
+    {
+      "opponent_archetype": "Nykthos Ramp",
+      "advice": "Open with many counterspells, destroy Nykthos with Field of Ruin, keep devotion near zero, and never let Karn resolve.",
+      "watch_for": [
+        "Nykthos, Shrine to Nyx",
+        "Storm the Festival",
+        "Karn",
+        "Pithing Needle",
+        "The Stone Brain"
+      ]
+    },
+    {
+      "opponent_archetype": "Gruul Midrange",
+      "advice": "Do not save removal; kill elves immediately to prevent explosive damage. Finish with planeswalkers or Shark Typhoon post-side.",
+      "watch_for": [
+        "elves",
+        "explosive starts"
+      ]
+    },
+    {
+      "opponent_archetype": "Azorius Control",
+      "advice": "Play a cold war, save answers, and avoid mistakes. Resolve Emperor on the pass with backup counterspells. Shark Typhoon evades counters.",
+      "watch_for": [
+        "Yorion, Sky Nomad",
+        "Narset, Parter of Veils",
+        "Day's Undoing",
+        "counterspells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fable of the Mirror-Breaker",
+    "Reckoner Bankbuster",
+    "Greasefang",
+    "Okiba Boss",
+    "Parhelion",
+    "Karn",
+    "Nykthos, Shrine to Nyx",
+    "Storm the Festival",
+    "Pithing Needle",
+    "The Stone Brain",
+    "Yorion, Sky Nomad",
+    "Narset, Parter of Veils",
+    "Creativity",
+    "Transmogrify"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-azorius-control-kaheera-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T03:43:26+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-azorius-control-kaheera-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T03:41:50+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "0bb6c6d6bcf3522e",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Azorius Control is a classic representative of the Control archetype... Kaheera Control, a version of Azorius that runs Kaheera, the Orphanguard as a companion."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Teferi, Hero of Dominaria and The Wandering Emperor are an almost unbeatable duo"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Shark Typhoon is also very versatile and can either give you that extra draw or put a 5/5 creature with flying into play"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Regal Caracal is a very interesting addition to the deck's strategy"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Starnheim Unleashed is another alternative wincon"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Hall of Storm Giants is another possible wincondition"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "the deck can still use manlands to end the game in just a few turns"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "our posture here is to play 'backwards', responding to the opponent's threats and controlling the game until we stabilize"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Play it cool, save your answers. In this matchup, managing to resolve an Emperor on the pass with a backup counterspell can be decisive"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "counter Storm the Festival. Under no circumstances should you allow Karn to join the board."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Don't leave the elves alive and don't save removals"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Fable of the Mirror-Breaker and Reckoner Bankbuster, essential cards in the strategy of Azorius' main rival, Rakdos Midrange"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Killing Greasefang, Okiba Boss and countering the spells that feed the graveyard is essential."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "counter Storm the Festival. Under no circumstances should you allow Karn to join the board."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Classic versions of Azorius have more countespells in the main deck or run Yorion, Sky Nomad, and sometimes also have the Narset, Parter of Veils + Day's Undoing combo."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Hallowed Moonlight is a card that will act as a removal against decks with Creativity and Transmogrify."
+    }
+  ]
+}

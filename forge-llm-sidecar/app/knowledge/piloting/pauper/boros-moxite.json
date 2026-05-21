@@ -1,0 +1,162 @@
+{
+  "archetype": "Boros Moxite",
+  "format": "pauper",
+  "strategy_type": "tempo",
+  "overview": "Boros Moxite is a fast, four-color tempo deck that leverages Moxite for early mana acceleration to deploy cheap threats like Glint Hawk ahead of schedule. It uses efficient pump spells like Lembas and versatile removal such as Galvanic Blast to maintain board control and push lethal damage quickly. The W/U/B/R color scheme provides access to a wide array of low-cost interaction and finishers while staying strictly within Pauper legality.",
+  "win_conditions": [
+    "Combat damage with pumped Glint Hawks",
+    "Direct damage from Galvanic Blast",
+    "Overwhelming early board presence with accelerated threats"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Moxite paired with a one-drop threat or spell",
+      "Hands with two or more cheap interaction spells",
+      "Hands featuring early pump or removal to protect a turn-one play"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early mana acceleration or one-drops",
+      "Hands with only high-cost cards or no interaction",
+      "Hands missing a clear path to turn-one or turn-two pressure"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Moxite on turn one to enable turn-two threats",
+      "Deploy Glint Hawk early to establish flying pressure",
+      "Use Galvanic Blast to remove key blockers or chip away at life total"
+    ],
+    "mid_game": [
+      "Cast Lembas to pump existing threats and push through blockers",
+      "Leverage the four-color palette for versatile cheap interaction",
+      "Maintain board presence by cycling through low-cost spells and artifacts"
+    ],
+    "late_game": [
+      "Use accumulated pump effects to push lethal combat damage",
+      "Transition to value by trading efficiently with Galvanic Blast",
+      "Stabilize with resilient creatures and finish with direct damage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Moxite",
+      "role": "Mana acceleration",
+      "notes": "Play on turn one to enable turn-two threats; prioritize keeping it in mulligans for early speed"
+    },
+    {
+      "name": "Glint Hawk",
+      "role": "Early flying threat",
+      "notes": "Deploy ahead of schedule with Moxite; pump with Lembas to create unblockable attackers"
+    },
+    {
+      "name": "Galvanic Blast",
+      "role": "Flexible removal and direct damage",
+      "notes": "Use to clear blockers, answer problematic creatures, or chip damage to the opponent"
+    },
+    {
+      "name": "Lembas",
+      "role": "Instant-speed pump spell",
+      "notes": "Cast on your turn to maximize combat impact; use to push through blockers or secure lethal"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Galvanic Blast in hand until you identify a key threat to remove or a moment to chip damage",
+    "Cast Lembas on your turn to maximize combat damage rather than using it defensively",
+    "Prioritize playing Moxite before pumping to ensure you have enough mana for both spells",
+    "Use the four-color interaction suite to answer opponent's plays while maintaining your own board presence"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Galvanic Blast efficiently to remove their biggest threats and chip damage; pump Glint Hawks to push through early pressure.",
+      "watch_for": [
+        "Fast one-drop creatures",
+        "Lifelink effects",
+        "Early board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply constant pressure with accelerated threats to prevent them from stabilizing; use pump spells to bypass counterspells and removal.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Card advantage engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them with early flying threats and pump effects; use Galvanic Blast to disrupt their value loops and maintain tempo.",
+      "watch_for": [
+        "Resilient creatures",
+        "Removal spells",
+        "Card draw engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspells",
+    "Board wipes",
+    "High-toughness creatures",
+    "Direct damage spells"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T09:41:00+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:41:00+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "fbb3119af5a62ddd",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

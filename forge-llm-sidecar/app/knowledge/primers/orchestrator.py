@@ -40,14 +40,19 @@ log = logging.getLogger(__name__)
 # Per-format provider order. The orchestrator instantiates these lazily so a
 # broken provider does not stop the others.
 PROVIDER_CHAIN: dict[str, list[type[Provider]]] = {
-    "modern": [HareruyaProvider, CardsRealmProvider, MoxfieldProvider, DraftsimProvider],
-    "pioneer": [CardsRealmProvider, HareruyaProvider, MoxfieldProvider, DraftsimProvider],
-    "standard": [CardsRealmProvider, MoxfieldProvider, DraftsimProvider],
-    "historic": [MTGArenaZoneProvider, CardsRealmProvider, MoxfieldProvider],
-    "legacy": [CardsRealmProvider, MoxfieldProvider, DraftsimProvider],
-    "pauper": [CardsRealmProvider, MoxfieldProvider, DraftsimProvider],
-    "vintage": [CardsRealmProvider, MoxfieldProvider],
-    "premodern": [MoxfieldProvider],
+    # Hareruya/Moxfield/MTGAZ discovery is currently unreliable (Hareruya's
+    # English path doesn't expose a usable search URL, Moxfield is
+    # Cloudflare-blocked, MTGAZ post-sitemap is partial). Cards Realm covers
+    # most of what we need and Draftsim fills the rest; everything else
+    # falls through to default_primer synthesis.
+    "modern": [CardsRealmProvider, DraftsimProvider],
+    "pioneer": [CardsRealmProvider, DraftsimProvider],
+    "standard": [CardsRealmProvider, DraftsimProvider],
+    "historic": [CardsRealmProvider],
+    "legacy": [CardsRealmProvider, DraftsimProvider],
+    "pauper": [CardsRealmProvider, DraftsimProvider],
+    "vintage": [CardsRealmProvider],
+    "premodern": [CardsRealmProvider],
 }
 
 #: max candidates to actually fetch per provider (search may return more)
@@ -198,11 +203,156 @@ def _finalize_guide(
         "model": builder_llm.MODEL_NAME,
         "schema_version": PILOTING_SCHEMA_VERSION,
     }
+    _coerce_to_schema(raw)
     try:
         return PilotingGuide.model_validate(raw)
     except Exception as exc:  # noqa: BLE001
         log.error("primer: schema validation failed for %s: %s", archetype, exc)
         return None
+
+
+def _coerce_to_schema(raw: dict) -> None:
+    """Normalize common LLM shape mistakes in place.
+
+    Local models freelance the JSON shape: strings where lists belong,
+    capitalized enums, plain card names where ``KeyCard`` objects are
+    required, etc. We coerce the easy cases here so the orchestrator can
+    accept a wider range of outputs.
+    """
+    # strategy_type: lowercase + map common synonyms
+    st = raw.get("strategy_type")
+    if isinstance(st, str):
+        s = st.strip().lower()
+        synonyms = {
+            "aggressive": "aggro",
+            "aggro-control": "tempo",
+            "midrange-control": "midrange",
+            "value": "midrange",
+            "tempo-aggro": "tempo",
+        }
+        raw["strategy_type"] = synonyms.get(s, s)
+
+    # String -> list[str] for simple list fields
+    for key in ("win_conditions", "sequencing_tips", "common_threats"):
+        v = raw.get(key)
+        if isinstance(v, str):
+            raw[key] = [seg.strip() for seg in v.split(";") if seg.strip()] if v else []
+
+    # key_cards: plain strings -> {name, role, notes}
+    kcs = raw.get("key_cards")
+    if isinstance(kcs, list):
+        normalized: list = []
+        for entry in kcs:
+            if isinstance(entry, str):
+                normalized.append({"name": entry, "role": "", "notes": ""})
+            elif isinstance(entry, dict):
+                # Some models return {"name": "...", "role": "...", "description": "..."}
+                if "notes" not in entry and "description" in entry:
+                    entry["notes"] = entry.pop("description")
+                if "name" in entry:
+                    normalized.append(entry)
+        raw["key_cards"] = normalized
+
+    # matchups: dict-of-strings or list of strings -> list[MatchupNote]
+    mus = raw.get("matchups")
+    if isinstance(mus, dict):
+        raw["matchups"] = [
+            {"opponent_archetype": k, "advice": v if isinstance(v, str) else "", "watch_for": []}
+            for k, v in mus.items()
+        ]
+    elif isinstance(mus, list):
+        normalized_m: list = []
+        for entry in mus:
+            if isinstance(entry, str):
+                normalized_m.append({"opponent_archetype": entry, "advice": "", "watch_for": []})
+            elif isinstance(entry, dict):
+                if "opponent_archetype" not in entry:
+                    for alt in ("opponent", "name", "archetype", "matchup"):
+                        if alt in entry:
+                            entry["opponent_archetype"] = entry.pop(alt)
+                            break
+                if "opponent_archetype" in entry:
+                    normalized_m.append(entry)
+        raw["matchups"] = normalized_m
+
+    # mulligan: string -> {keep_criteria, mulligan_criteria, examples}
+    mull = raw.get("mulligan")
+    if isinstance(mull, str):
+        raw["mulligan"] = {
+            "keep_criteria": [mull.strip()] if mull.strip() else [],
+            "mulligan_criteria": [],
+            "examples": [],
+        }
+    elif isinstance(mull, dict):
+        for k in ("keep_criteria", "mulligan_criteria"):
+            v = mull.get(k)
+            if isinstance(v, str):
+                mull[k] = [seg.strip() for seg in v.split(";") if seg.strip()] if v else []
+            elif v is None:
+                mull[k] = []
+        # examples: drop unparseable strings; coerce inner shapes
+        ex = mull.get("examples")
+        if isinstance(ex, list):
+            fixed: list = []
+            for e in ex:
+                if not isinstance(e, dict):
+                    continue
+                # hand may be a string "Card1, Card2, Card3"
+                hand = e.get("hand")
+                if isinstance(hand, str):
+                    e["hand"] = [c.strip() for c in hand.split(",") if c.strip()]
+                elif hand is None:
+                    e["hand"] = []
+                elif not isinstance(hand, list):
+                    e["hand"] = []
+                # decision: lowercase + map common aliases
+                d = e.get("decision")
+                if isinstance(d, str):
+                    d_low = d.strip().lower()
+                    if d_low in ("keep", "kept", "k"):
+                        e["decision"] = "keep"
+                    elif d_low in ("mulligan", "mull", "mulled", "shipped"):
+                        e["decision"] = "mulligan"
+                    else:
+                        e["decision"] = "keep"  # default if ambiguous
+                else:
+                    e["decision"] = "keep"
+                e.setdefault("reason", "")
+                fixed.append(e)
+            mull["examples"] = fixed
+        elif ex is None:
+            mull["examples"] = []
+        else:
+            mull["examples"] = []
+
+    # game_plan: string -> early/mid/late
+    gp = raw.get("game_plan")
+    if isinstance(gp, str):
+        raw["game_plan"] = {
+            "early_game": [gp.strip()] if gp.strip() else [],
+            "mid_game": [],
+            "late_game": [],
+        }
+    elif isinstance(gp, dict):
+        for k in ("early_game", "mid_game", "late_game"):
+            v = gp.get(k)
+            if isinstance(v, str):
+                gp[k] = [seg.strip() for seg in v.split(";") if seg.strip()] if v else []
+            elif v is None:
+                gp[k] = []
+
+    # evidence list fields: drop if not a list
+    for key in (
+        "win_conditions_evidence",
+        "sequencing_tips_evidence",
+        "common_threats_evidence",
+    ):
+        if key in raw and not isinstance(raw[key], list):
+            raw[key] = []
+
+    # overview_evidence: drop if not dict
+    if "overview_evidence" in raw and not isinstance(raw["overview_evidence"], (dict, type(None))):
+        raw["overview_evidence"] = None
 
 
 def _guess_strategy_type(raw: dict) -> str:

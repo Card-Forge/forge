@@ -1,0 +1,181 @@
+{
+  "archetype": "Dimir Faeries",
+  "format": "pauper",
+  "strategy_type": "tempo",
+  "overview": "Dimir Faeries is a Pauper U/B tempo deck that leverages small flying creatures and instant-speed interaction to control the board while steadily draining the opponent's life total. By combining Spellstutter Sprite's life loss triggers with Snuff Out's conditional counters, the deck applies constant pressure and disrupts key threats. Lorien Revealed serves as a board-clearing finisher that stabilizes the game state and provides crucial life gain.",
+  "win_conditions": [
+    "Gradually reduce opponent life total through repeated Spellstutter Sprite triggers",
+    "Control the board with Snuff Out and -1/-1 counters to outlast aggressive strategies",
+    "Close out games with flying creatures and card advantage after Lorien Revealed clears the board"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Snuff Out or early Spellstutter Sprite",
+      "Balanced curves with at least two sources of interaction or flying creatures",
+      "Lorien Revealed paired with early counters or removal"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking any instant-speed interaction or early plays",
+      "Overloaded with late-game sorceries like Lorien Revealed without early defense",
+      "No flying creatures or life loss triggers to apply pressure"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Deploy Spellstutter Sprite immediately to start triggering life loss on opponent spells",
+      "Use Snuff Out to counter high-impact creature spells or early threats",
+      "Establish a flying presence to pressure the opponent while maintaining board control"
+    ],
+    "mid_game": [
+      "Time Lorien Revealed to clear multiple opponent creatures and gain substantial life",
+      "Continue applying -1/-1 counters to shrink threats and enable favorable trades",
+      "Maintain hand of instant-speed interaction to disrupt opponent's key turns"
+    ],
+    "late_game": [
+      "Leverage accumulated life advantage and card draw to outvalue the opponent",
+      "Use remaining counters and removal to protect your flying finishers",
+      "Close the game by repeatedly triggering Sprite on opponent's recovery spells"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Spellstutter Sprite",
+      "role": "Primary life loss engine and board presence",
+      "notes": "Play early to maximize triggers; target opponent's largest creatures with -1/-1 counters to shrink threats while draining life"
+    },
+    {
+      "name": "Snuff Out",
+      "role": "Conditional counter and board control",
+      "notes": "Prioritize countering creature spells to trigger the -1/-1 counter clause; use to protect your board or set up favorable trades"
+    },
+    {
+      "name": "Lorien Revealed",
+      "role": "Board clear and life gain stabilizer",
+      "notes": "Cast when opponent has multiple creatures to maximize board wipe effect and life gain; use to reset unfavorable board states"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Snuff Out until the opponent commits to a high-value spell to maximize the -1/-1 counter trigger",
+    "Trigger Spellstutter Sprite on opponent's spells rather than your own to avoid self-inflicted counters",
+    "Cast Lorien Revealed after the opponent has played multiple creatures to maximize life gain and board impact"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize countering early threats with Snuff Out and use Sprite to drain life while trading efficiently",
+      "watch_for": [
+        "Fast one-drop creatures",
+        "Unstoppable early pressure",
+        "Board wipes that ignore counters"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent flying pressure and life loss to force them to use removal inefficiently",
+      "watch_for": [
+        "Counterspell packages",
+        "Late-game finishers",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Disrupt their key value creatures with Snuff Out and use Lorien Revealed to reset their board development",
+      "watch_for": [
+        "Efficient value creatures",
+        "Removal spells",
+        "Graveyard recursion"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures that bypass flying",
+    "Uncounterable spells or creatures with hexproof",
+    "Board wipes that remove counters and clear your board"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T09:21:24+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-dimir-faeries-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:18:03+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-dimir-faeries-decktech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:18:09+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:21:24+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "4d49ff9acea3914e",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "archetype": "Eldrazi",
+  "format": "legacy",
+  "strategy_type": "tempo",
+  "overview": "This white/red Eldrazi variant leverages mana acceleration and artifact denial to establish early board presence and disrupt opponent strategies. By utilizing Lotus Petal to cast Chalice of the Void and Kozilek's Command ahead of schedule, the deck aims to control the pace while generating incremental value. The Kozilek token serves as a flexible win condition that can attack, block, or be sacrificed for card advantage and removal.",
+  "win_conditions": [
+    "Kozilek token attacking for lethal damage",
+    "Drawing into game-winning spells via Kozilek's Command",
+    "Locking opponent mana with Chalice of the Void to force unfavorable trades"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Lotus Petal and Chalice of the Void",
+      "Hands with Kozilek's Command and early interaction",
+      "Hands with three or more lands and a one-drop"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking artifact interaction or mana acceleration",
+      "Hands with four or more lands",
+      "Hands without Kozilek's Command or Chalice"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Lotus Petal to enable turn-one Chalice of the Void or Kozilek's Command",
+      "Set Chalice at zero or one to disrupt fast aggro and combo strategies",
+      "Use Kozilek's Command to draw cards or destroy early threats"
+    ],
+    "mid_game": [
+      "Stabilize the board by maintaining Chalice pressure and generating Kozilek tokens",
+      "Trade efficiently with opponent's creatures while preserving card advantage",
+      "Begin applying pressure with tokens or creatures to force opponent to respond"
+    ],
+    "late_game": [
+      "Outvalue the opponent through repeated Kozilek's Command activations and card draw",
+      "Use Chalice to lock out late-game finishers or sweepers",
+      "Close out games with accumulated resources and board presence"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Lotus Petal",
+      "role": "Mana acceleration",
+      "notes": "Play on turn one to cast Chalice of the Void or Kozilek's Command ahead of schedule, enabling early disruption and value generation."
+    },
+    {
+      "name": "Chalice of the Void",
+      "role": "Artifact denial and counterspell",
+      "notes": "Enter with X=0 or X=1 to counter fast spells and disrupt mana, forcing opponents into inefficient plays while protecting your board."
+    },
+    {
+      "name": "Kozilek's Command",
+      "role": "Card advantage, removal, and win condition",
+      "notes": "Use to draw cards, destroy problematic permanents, or produce a Kozilek token that can attack, block, or be sacrificed for additional value."
+    }
+  ],
+  "sequencing_tips": [
+    "Drop Chalice of the Void before the opponent's turn to maximize disruption",
+    "Use Lotus Petal to cast Kozilek's Command on turn one or two for immediate impact",
+    "Hold up mana to counter spells if Chalice is already on the battlefield",
+    "Prioritize drawing cards with Kozilek's Command when behind on resources"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Set Chalice at zero or one to slow down early creatures and use Kozilek's Command for targeted removal.",
+      "watch_for": [
+        "Fast one-drop creatures",
+        "Mana acceleration",
+        "Early board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Set Chalice at two to disrupt mid-range spells and use Kozilek's Command to draw into answers and race with tokens.",
+      "watch_for": [
+        "Counterspell packages",
+        "Board wipes",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Set Chalice at zero or one to disrupt key combo pieces and use Kozilek's Command to draw into disruption or clear the board.",
+      "watch_for": [
+        "Mana denial",
+        "Fast win conditions",
+        "Artifact synergies"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Balance Chalice settings between one and two, use Kozilek's Command to trade efficiently, and race with tokens.",
+      "watch_for": [
+        "Efficient creatures",
+        "Removal spells",
+        "Card draw engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast one-drop creatures",
+    "Mana disruption artifacts",
+    "Board wipe spells",
+    "Targeted removal",
+    "Card draw engines"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T07:21:29+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-eldrazi-linebreaker-aggro-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:16:30+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-eldrazi-aggro-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:18:08+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:21:29+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "564f0232c7cbadc4",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

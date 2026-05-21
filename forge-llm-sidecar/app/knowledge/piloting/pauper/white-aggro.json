@@ -1,0 +1,301 @@
+{
+  "archetype": "White Aggro",
+  "format": "pauper",
+  "strategy_type": "aggro",
+  "overview": "Mono White Aggro is a concise, aggressive Pauper deck focused on cheap creatures with useful ETBs and flexible disruptive effects. It aims to apply early pressure while drawing cards through one-drops and token generators. The deck leverages versatile removal and board protection to navigate the current metagame and secure quick victories.",
+  "win_conditions": [
+    "Deploy cheap creatures with ETBs to apply early pressure",
+    "Generate virtual card advantage and token armies using Raffine’s Informant with Battle Screech or Prismatic Strands",
+    "Push lethal attacks protected by Guardians’ Pledge",
+    "Use flexible removal like Thraben Charm to clear paths and control the board"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with multiple cheap one-drops like Novice Inspector or Lunarch Veteran",
+      "Early interaction or removal to handle aggressive starts",
+      "A mix of creatures and card draw to maintain pressure"
+    ],
+    "mulligan_criteria": [
+      "Lack of early pressure or fast clock",
+      "Hands heavy on lands or high-cost cards without early plays",
+      "No answers to expected aggressive threats"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Novice Inspector",
+          "Lunarch Veteran",
+          "Thraben Charm",
+          "Plains",
+          "Plains",
+          "Plains",
+          "Plains"
+        ],
+        "decision": "keep",
+        "reason": "Provides early pressure, card draw, and interaction on curve."
+      },
+      {
+        "hand": [
+          "Eagles of the North",
+          "Idyllic Grange",
+          "Plains",
+          "Plains",
+          "Plains",
+          "Plains",
+          "Plains"
+        ],
+        "decision": "mulligan",
+        "reason": "Lacks early creatures or pressure to establish a fast clock."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap one-drops like Novice Inspector and Lunarch Veteran to generate clues and apply pressure",
+      "Use Lunarch Veteran for efficient chump blocks to gain extra turns",
+      "Hold up mana for flexible removal like Thraben Charm"
+    ],
+    "mid_game": [
+      "Cast Battle Screech or Prismatic Strands alongside Raffine’s Informant to create token armies and draw cards",
+      "Use Kor Skyfisher to reuse ETBs for additional value",
+      "Protect key creatures and push damage with Guardians’ Pledge"
+    ],
+    "late_game": [
+      "Deploy Eagles of the North and Idyllic Grange for board presence and +1/+1 counters",
+      "Sideboard in targeted hate cards like Dust to Dust, Destroy Evil, or Coalition Honor Guard based on matchup",
+      "Maintain board control with Thraben Charm and token generation to close out games"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Novice Inspector",
+      "role": "Card draw",
+      "notes": "One-drop that generates Clues when it enters the battlefield, enabling early card advantage."
+    },
+    {
+      "name": "Lunarch Veteran",
+      "role": "Early aggression/blocker",
+      "notes": "Main weapon against Kuldotha Red and Aggro; offers 2-for-1 potential against removal and efficient chump blocks."
+    },
+    {
+      "name": "Thraben Charm",
+      "role": "Flexible removal",
+      "notes": "Provides almost unconditional removal, counters enchantments like Sadistic Glee, and answers graveyards/reanimator."
+    },
+    {
+      "name": "Raffine’s Informant",
+      "role": "Card draw/token synergy",
+      "notes": "Cheap drop that draws cards and synergizes with Battle Screech/Prismatic Strands for virtual card advantage."
+    },
+    {
+      "name": "Battle Screech",
+      "role": "Token generation",
+      "notes": "Creates 1/1 tokens, interacts with Informant, and can push lethal when protected by Guardians’ Pledge."
+    },
+    {
+      "name": "Guardians’ Pledge",
+      "role": "Board protection/finisher",
+      "notes": "Functions like Rally the Peasants to protect from sweepers or enable lethal attacks with tokens."
+    },
+    {
+      "name": "Suture Priest",
+      "role": "Hate card",
+      "notes": "Locks Basking Broodscale and Sadistic Glee; flexible slot that may become a four-of if those threats grow."
+    },
+    {
+      "name": "Coalition Honor Guard",
+      "role": "Sideboard hate",
+      "notes": "Evades Drown in Sorrow and forces unfavorable trades against Kuldotha Red, though vulnerable to Snuff Out."
+    }
+  ],
+  "sequencing_tips": [
+    "Pair Battle Screech or Prismatic Strands with Raffine’s Informant to maximize token generation and card draw",
+    "Use Lunarch Veteran for chump blocks to gain tempo and extra turns against aggressive decks",
+    "Hold up mana for Thraben Charm to handle removal, enchantments, or graveyard strategies flexibly",
+    "Avoid overextending with Battle Screech against decks that run End the Festivities",
+    "Use Guardians’ Pledge proactively to protect against sweepers like Drown in Sorrow or Breath Weapon"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Kuldotha Red",
+      "advice": "Maindeck Lunarch Veteran and sideboard Coalition Honor Guard, Holy Light, and Prismatic Strands. Force 2-for-1 trades or make them waste Galvanic Blast.",
+      "watch_for": [
+        "Galvanic Blast",
+        "Red sweepers",
+        "Aggressive early pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Bogles",
+      "advice": "Sideboard in Standard Bearer and Revoke Existence to handle enchantments and key threats.",
+      "watch_for": [
+        "Key enchantments",
+        "Drown in Sorrow",
+        "Artifact creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Grixis Affinity",
+      "advice": "Sideboard in Dust to Dust and Revoke Existence to shut down artifact synergies.",
+      "watch_for": [
+        "Artifacts",
+        "Fast artifact combos",
+        "Removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Broodscale Combo",
+      "advice": "Sideboard in Suture Priest, Standard Bearer, and Coalition Honor Guard. Maintain a fast clock to avoid being stalled.",
+      "watch_for": [
+        "Basking Broodscale",
+        "Drown in Sorrow",
+        "End the Festivities"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Blue/Dimir/Izzet Terror",
+      "advice": "Sideboard in Destroy Evil for creature removal and board control.",
+      "watch_for": [
+        "Terror creatures",
+        "Excessive removal",
+        "Graveyard strategies"
+      ]
+    },
+    {
+      "opponent_archetype": "Gruul Ramp",
+      "advice": "Sideboard in Destroy Evil and Prismatic Strands to handle large creatures and buy time.",
+      "watch_for": [
+        "Large creatures",
+        "Sweepers",
+        "Ramp resources"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Cheap sweepers like Drown in Sorrow and Breath Weapon",
+    "Excessive removal such as Galvanic Blast and Snuff Out",
+    "Sadistic Glee and Basking Broodscale",
+    "Game plans hard to interact with like Familiars, Turbo Fog, and Gardens",
+    "End the Festivities"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-mono-white-aggro-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T09:24:33+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-mono-white-aggro-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:22:58+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "ac07cc851a114677",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Mono White Aggro (or White Weenie) is an extremely concise deck in its game plan and follows the same old line: cheap creatures with useful ETBs and/or disruptive effects against the current Metagame."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "cheap creatures with useful ETBs and/or disruptive effects"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "good interactions with Raffine’s Informant to generate virtual card advantage"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "use it both for a lethal attack with Battle Screech tokens and to protect our creatures from sweepers"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "good interactions with Raffine’s Informant to generate virtual card advantage"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "offering a 2-for-1 against removal and/or even an efficient chump block exchange to gain a few extra turns"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "being such a flexible piece that it deserves four slots in the maindeck"
+    },
+    {
+      "confidence": 0.6,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "it's not the best card for the matchup because it encourages overextending yourself with Battle Screech - which can be answered with End the Festivities"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "protect our creatures from sweepers like Drown in Sorrow or Breath Weapon"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "suffers from the same old problems: cheap sweepers, excessive removal and game plans that it has a hard time interacting with"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "hate against powerful enchantments like Sadistic Glee"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "locks Basking Broodscale and Sadistic Glee"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "you can't beat Familiars, Turbo Fog or Gardens even if you dedicate too many slots against them"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "answered with End the Festivities"
+    }
+  ]
+}

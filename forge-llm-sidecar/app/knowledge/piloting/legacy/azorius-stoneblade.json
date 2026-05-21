@@ -1,0 +1,189 @@
+{
+  "archetype": "Azorius Stoneblade",
+  "format": "legacy",
+  "strategy_type": "control",
+  "overview": "Azorius Stoneblade is a Legacy control deck that leverages White and Blue's superior card selection and disruption to outlast opponents. It uses Stoneforge Mystic to fetch a stabilizing sword, Tamiyo, Inquisitive Student for massive card advantage, and Stifle to shut down key opponent spells. The goal is to establish a resilient board state and win through incremental value and targeted interaction.",
+  "win_conditions": [
+    "Stoneforge Mystic fetching a sword to stabilize and generate value",
+    "Tamiyo, Inquisitive Student drawing into answers and outlasting the opponent",
+    "Stifle countering game-winning combo pieces or tutors to stall for time"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Stifle or other early interaction",
+      "Two or more lands with a path to Stoneforge Mystic or Tamiyo",
+      "Hands that can respond to common Legacy opening plays"
+    ],
+    "mulligan_criteria": [
+      "Hands with no interaction or removal",
+      "Hands with three or more lands",
+      "Hands lacking a clear path to the sword or card advantage engine"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands and holding up mana for Stifle",
+      "Use Stifle to counter fetch lands, tutors, or early combo pieces",
+      "Play Stoneforge Mystic as early as possible to set up the sword"
+    ],
+    "mid_game": [
+      "Fetch the designated sword using Stoneforge Mystic",
+      "Cast Tamiyo, Inquisitive Student to draw cards and find answers",
+      "Maintain a hand of interaction while developing board presence"
+    ],
+    "late_game": [
+      "Stabilize with the sword's defensive or value-generating abilities",
+      "Use Tamiyo's draw to out-resource the opponent",
+      "Close the game once the opponent runs out of threats or interaction"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Stoneforge Mystic",
+      "role": "Engine to fetch a sword",
+      "notes": "Play on curve and equip immediately to stabilize against early aggression or set up late-game value."
+    },
+    {
+      "name": "Tamiyo, Inquisitive Student",
+      "role": "Card advantage and tutoring",
+      "notes": "Use its draw ability to refill your hand after interaction, and its tutor ability to find specific answers or the sword if needed."
+    },
+    {
+      "name": "Stifle",
+      "role": "Targeted counterspell",
+      "notes": "Hold up mana to counter spells with mana costs, particularly fetch lands, tutors, or combo finishers, to disrupt the opponent's game plan."
+    }
+  ],
+  "sequencing_tips": [
+    "Always hold up Stifle until you know what the opponent is casting",
+    "Play Stoneforge Mystic before casting Tamiyo to ensure the sword is available for defense",
+    "Use Tamiyo's draw ability when your hand is low and you need specific answers",
+    "Manage mana carefully to keep interaction available while developing board presence"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Use Stifle aggressively on tutors, fetch lands, or key combo pieces to buy time for Stoneforge and Tamiyo.",
+      "watch_for": [
+        "Early land drops",
+        "Tutors searching for finishers",
+        "Mana acceleration spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early Stifle on threats if possible, but focus on playing Stoneforge quickly to fetch a defensive sword.",
+      "watch_for": [
+        "Early creature drops",
+        "Burn spells",
+        "Pressure that bypasses counterspells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race to establish the sword and use Tamiyo to draw out their interaction while holding Stifle for their win conditions.",
+      "watch_for": [
+        "Counterspells targeting your engines",
+        "Board wipes",
+        "Late-game value generators"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Disrupt their early game with Stifle, then stabilize with the sword and outdraw them with Tamiyo.",
+      "watch_for": [
+        "Early threats",
+        "Removal spells",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Stifle their mana acceleration or tutors, then race to the sword before they assemble a large threat.",
+      "watch_for": [
+        "Land search spells",
+        "Mana dorks",
+        "Big threats on turn 4-5"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fetch lands enabling fast turns",
+    "Tutors finding game-ending pieces",
+    "Early aggressive creatures",
+    "Counterspells targeting your engines",
+    "Board wipes resetting your board"
+  ],
+  "metadata": {
+    "source": "Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:07:03+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-azorius-meteor-stoneblade-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:03:58+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:07:03+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "333113d2a54dab2d",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "archetype": "Bant Gearhulk",
+  "format": "standard",
+  "strategy_type": "midrange",
+  "overview": "Bant Gearhulk leverages three-color flexibility to establish early board presence while ramping into high-value card advantage engines. By stabilizing with efficient removal and draw spells, the deck transitions into a late-game grind where massive creatures and recurring threats overwhelm opponents. The strategy prioritizes resource accumulation over early aggression, aiming to outlast and outvalue opposing decks in Standard.",
+  "win_conditions": [
+    "Outvaluing opponents through Quantum Riddler's card draw and removal",
+    "Deploying large, resilient creatures that bypass early-game disruption",
+    "Generating excess mana with Nature's Rhythm to cast multiple threats per turn"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early mana sources and a one or two-drop",
+      "Draw spells or removal to stabilize against aggressive starts",
+      "Nature's Rhythm paired with a creature to accelerate curve"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early mana acceleration or interaction",
+      "Three or more high-cost cards without ramp",
+      "Hands missing a clear path to turn three or four"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and low-cost creatures to establish board presence",
+      "Use early interaction to disrupt opponent's game plan",
+      "Prioritize drawing cards to find ramp and threats"
+    ],
+    "mid_game": [
+      "Cast Nature's Rhythm to accelerate mana production",
+      "Deploy Quantum Riddler to generate card advantage and remove blockers",
+      "Maintain board control while searching for win conditions"
+    ],
+    "late_game": [
+      "Cast large creatures that pressure the opponent's life total",
+      "Use excess mana to cast multiple spells per turn",
+      "Stabilize against late-game threats with removal and card draw"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Badgermole Cub",
+      "role": "Early-game board presence and token generation",
+      "notes": "Play on curve to establish early pressure and generate tokens that can block or trigger abilities. Use its low cost to stabilize against aggressive decks."
+    },
+    {
+      "name": "Quantum Riddler",
+      "role": "Card advantage and removal engine",
+      "notes": "Prioritize casting when you have excess cards or need to clear a blocker. Use its draw ability to refill your hand and find answers, maintaining resource superiority."
+    },
+    {
+      "name": "Nature's Rhythm",
+      "role": "Mana acceleration and curve smoothing",
+      "notes": "Cast on turn three or four to enable larger threats ahead of schedule. Ensure you have enough lands to support the extra mana, and use the generated mana to cast multiple spells or play a large creature."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up removal for opponent's key threats before committing to your own plays",
+    "Cast Nature's Rhythm before playing large creatures to ensure you have enough mana",
+    "Use Quantum Riddler's draw ability to find answers before making a major board commitment",
+    "Prioritize playing lands and ramp before committing to high-cost spells"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and board presence to slow down their early pressure. Use Badgermole Cub to generate blockers and stabilize the board.",
+      "watch_for": [
+        "Early sweepers",
+        "Low-cost creatures with haste",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around their removal by holding up counterspells or using Quantum Riddler to draw into answers. Ramp efficiently to outvalue them in the late game.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them by deploying threats quickly while maintaining card advantage. Use Nature's Rhythm to accelerate into larger creatures before they stabilize.",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw engines",
+        "Resilient creatures"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Counterspell packages",
+    "Late-game value engines"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:44:27+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:44:27+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "4ac2fe230053c4e2",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

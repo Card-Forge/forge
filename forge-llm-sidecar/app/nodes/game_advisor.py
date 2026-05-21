@@ -48,17 +48,17 @@ _RECOGNITION_SYSTEM_PROMPT = (
 
 
 def _format_archetypes(archetypes: list[dict]) -> str:
+    # One line per archetype: name + colors + strategy + signature cards.
+    # `tells` was previously included but adds ~30% prompt size for low signal
+    # (signature cards already convey deck identity). Re-add if recall drops.
     lines = []
     for a in archetypes:
         colors = "/".join(a.get("colors", [])) or "?"
         sig = ", ".join(a.get("signature_cards", [])) or "(none listed)"
-        tells = "; ".join(a.get("tells", [])) or "(none listed)"
         share = a.get("meta_share")
-        share_str = f" — {share:.1f}% of the current metagame" if share else ""
+        share_str = f" {share:.1f}%" if share else ""
         lines.append(
-            f"- {a.get('name', '?')} [{colors}]{share_str}: {a.get('strategy', '')}\n"
-            f"    signature cards: {sig}\n"
-            f"    tells: {tells}"
+            f"- {a.get('name', '?')} [{colors}]{share_str} ({a.get('strategy', '')}): {sig}"
         )
     return "\n".join(lines)
 
@@ -187,27 +187,12 @@ def _build_recognition_prompt(state: GraphState) -> str:
         f"{k}={v:.2f}" for k, v in style_scores.items()
     )
 
+    # The strategy archetypes are well-known to any MTG-trained model; the long
+    # descriptive heuristics block was kept only as a recall-safety net. Trimmed
+    # to the off-meta label set since that's the only thing the model needs the
+    # taxonomy for.
     heuristics = (
-        "STRATEGY HEURISTICS for off-meta classification:\n"
-        "- Aggro: cheap (CMC<=2) creatures on turns 1-2, fast clock, "
-        "rarely casts spells with CMC>=4. Red is commonly aggressive.\n"
-        "- Control: counterspells, board wipes (Wrath of God, Damnation, "
-        "Supreme Verdict, Sunfall, Farewell, Toxic Deluge, Sweltering Suns, "
-        "Anger of the Gods, ...), big card-draw (Sphinx's Revelation, Memory "
-        "Deluge, ...), passes early turns with mana up (esp. blue), late "
-        "first spell. Blue is commonly controlling.\n"
-        "- Combo: known combo pieces (Goryo's Vengeance, Splinter Twin, "
-        "Through the Breach, Scapeshift, Grapeshot/Storm pieces, Goblin "
-        "Charbelcher, Amulet of Vigor + Primeval Titan, Living End + "
-        "cascade, Devoted Druid + Vizier, ...), heavy cheap card selection "
-        "(Brainstorm/Ponder/Preordain/Manamorphose), few or no creatures.\n"
-        "- Midrange: planeswalkers, mid-CMC threats (3-5 CMC), targeted "
-        "removal that produces 2-for-1s (Lightning Bolt + creature trade, "
-        "Fatal Push, Path to Exile, etc.). Black/Green is the classic "
-        "midrange color pair.\n"
-        "- Tempo: cheap creatures plus interaction (counterspells, bounce, "
-        "cheap removal); U/R Delver-like is canonical tempo. Distinguished "
-        "from aggro by having interaction, from control by having a clock.\n"
+        "Off-meta labels available: " + ", ".join(OFF_META_NAMES) + "."
     )
 
     rules = (

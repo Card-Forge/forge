@@ -1,0 +1,285 @@
+{
+  "archetype": "Creative Technique",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "Creative Technique is a Legacy combo deck designed to win on turn 3 by demonstrating the namesake spell to cascade into multiple copies, Emrakul, the Aeons Torn, and other cascade cards. The deck floods the board with creatures that gain haste from Maelstrom Wanderer, while Emrakul provides a backup extra turn. It operates as a glass cannon that is naturally resistant to counterspells but highly vulnerable to land destruction, discard, and mana disruption.",
+  "win_conditions": [
+    "Demonstrate Creative Technique to cascade into multiple copies and cascade cards",
+    "Summon Maelstrom Wanderer to grant haste to the army",
+    "Use Emrakul, the Aeons Torn for an extra turn if the initial attack doesn't win"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands capable of playing Creative Technique or a 6-mana cascade on turn 3",
+      "Hands with the correct land combination to produce 5-6 mana by turn 3"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking the correct mana to cascade on turn 3",
+      "Hands drawing multiple Maelstrom Wanderer, which reduces haste odds",
+      "Hands overly vulnerable to discard or Wasteland without opponent knowledge"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Boarding Party",
+          "Ancient Tomb",
+          "Red lands"
+        ],
+        "decision": "keep",
+        "reason": "Can play on turn 3 or 4 over Wasteland; Ancient Tomb should only be played on the combo turn."
+      },
+      {
+        "hand": [
+          "Maelstrom Wanderer",
+          "Maelstrom Wanderer",
+          "Incorrect mana lands"
+        ],
+        "decision": "mulligan",
+        "reason": "Lacks correct mana for turn 3 cascade and reduces odds of granting haste to the team."
+      },
+      {
+        "hand": [
+          "Creative Technique",
+          "Lands for 6 mana on turn 3"
+        ],
+        "decision": "keep",
+        "reason": "Has Technique and mana access; vulnerable to Wasteland but resistant to discard."
+      },
+      {
+        "hand": [
+          "Cascade enablers",
+          "Turn 3 mana"
+        ],
+        "decision": "keep",
+        "reason": "Cascades on turn 3 but risky against discard/Wasteland; keep if opponent unknown, mulligan if threats known."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Ramp to 5-6 mana using dual lands and channel lands",
+      "Play Creative Technique or a 6-mana cascade on turn 3"
+    ],
+    "mid_game": [
+      "Demonstrate Creative Technique to stack two copies",
+      "Cascade through multiple Techniques, Emrakul, and other cascade cards",
+      "Summon Maelstrom Wanderer to grant haste and attack immediately"
+    ],
+    "late_game": [
+      "If combo is disrupted, use Emrakul's extra turn to recover",
+      "Rely on sideboard interactions like Tibalt's Trickery or Pyrokinesis to stabilize"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Creative Technique",
+      "role": "Combo engine",
+      "notes": "Demonstrated to create two copies on the stack, cascading into more techniques, Emrakul, or other cascade cards."
+    },
+    {
+      "name": "Emrakul, the Aeons Torn",
+      "role": "Win condition / Extra turn",
+      "notes": "Summoned via cascade to provide an extra turn if the initial army doesn't finish the game."
+    },
+    {
+      "name": "Maelstrom Wanderer",
+      "role": "Haste enabler",
+      "notes": "Grants haste to the summoned cascade monsters so they can attack immediately."
+    },
+    {
+      "name": "Ancient Tomb",
+      "role": "Mana acceleration",
+      "notes": "Crucial for reaching 6 mana on turn 3; should only be played on the combo turn to avoid Wasteland."
+    },
+    {
+      "name": "City of Traitors",
+      "role": "Mana acceleration",
+      "notes": "Alternative to Ancient Tomb or Crystal Vein for turn 3 mana."
+    },
+    {
+      "name": "Otawara, Soaring City",
+      "role": "Land protection",
+      "notes": "Mitigates vulnerability to Wasteland and Blood Moon, though it delays the game plan."
+    },
+    {
+      "name": "Tibalt's Trickery",
+      "role": "Sideboard interaction",
+      "notes": "Paired with Throes of Chaos to sacrifice consistency for speed and discard resistance."
+    },
+    {
+      "name": "Pyrokinesis",
+      "role": "Sideboard removal",
+      "notes": "Wins time against aggressive decks and removes lock pieces like Thalia, Guardian of Thraben or Archon of Emeria."
+    }
+  ],
+  "sequencing_tips": [
+    "Play Ancient Tomb only on the turn you will summon the combo card to minimize Wasteland impact.",
+    "Demonstrate Creative Technique to put two copies on the stack, letting the opponent's resolve first.",
+    "Use any 6-mana cascade card as an alternative trigger if Creative Technique is not in hand.",
+    "Sideboard Tibalt's Trickery and Throes of Chaos together to cascade into a counter that finds the combo."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "UR / Grixis Delver",
+      "advice": "Post-side, bring Pyrokinesis to win time and remove Cascades that are hard to play when mana base is attacked. Avoid Daze if possible since Technique needs 2 counters.",
+      "watch_for": [
+        "Wasteland",
+        "Daze"
+      ]
+    },
+    {
+      "opponent_archetype": "Reanimator",
+      "advice": "Do not sideboard Leyline of the Void; instead, try to combo over discards. Reanimator can discard big cascade monsters and reanimate them.",
+      "watch_for": [
+        "Discard effects",
+        "Griselbrand",
+        "Atraxa, Grand Unifier"
+      ]
+    },
+    {
+      "opponent_archetype": "Stompy (Red Prison, RG, RW, W Initiative)",
+      "advice": "Channel lands will do heavy lifting. Use Pyrokinesis to remove Magus or Archons, and Mirrorshell Crab for lock pieces. Cannot combo over Archon of Emeria or Trinisphere.",
+      "watch_for": [
+        "Archon of Emeria",
+        "Trinisphere",
+        "Blood Moon"
+      ]
+    },
+    {
+      "opponent_archetype": "Blue Control (UW, Bant, Jeskai, 4CC)",
+      "advice": "Game 1 is favorable unless they have 2 Force of Will or early Teferi, Time Raveler (answered by Otawara). Post-side, keep a land open to interact with their plays.",
+      "watch_for": [
+        "Force of Will",
+        "Teferi, Time Raveler"
+      ]
+    },
+    {
+      "opponent_archetype": "Painter",
+      "advice": "Favorable matchup. Their combo doesn't work with Emrakul in the deck, and their counters cost mana and require Painter's Servant. No sideboard changes needed.",
+      "watch_for": [
+        "Painter's Servant",
+        "Counterspells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Wasteland",
+    "Blood Moon",
+    "Back to Basics",
+    "The Stone Brain",
+    "Surgical Extraction",
+    "Trinisphere",
+    "Teferi, Time Raveler",
+    "Discard effects",
+    "Oops, All Spells",
+    "Goblin Charbelcher"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-deck-tech-creative-technique-combo",
+    "generated_at": "2026-05-21T07:59:25+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-deck-tech-creative-technique-combo",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:57:49+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "2fc532a3a1594b32",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "This is fundamentally a combo deck in the 'Glass Cannon' style; very powerful, but shatters when attacked... naturally resistant to counterspells"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Each resolved Technique will result in one of the 3 following cases: another Creative Technique, Emrakul, the Aeons Torn... or a Cascade card."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "summoning close to a dozen monsters which get Haste through Maelstrom Wanderer"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "you get an extra turn from Emrakul in case, for some reason, this isn't enough to finish the game on the spot."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Ancient Tomb should only be played on the turn you'll summon the card."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "when you play Creative Technique, you have the option to 'demonstrate' it... Your opponent's copy resolves first"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "any of your 6-mana Cascades can be used to activate the combo"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Throes of Chaos' Cascade will always hit Tibalt's Trickery, which in turn counters the original Throes and luckily hits either Creative Technique or some other Cascade"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "makes this deck vulnerable to Wasteland, Blood Moon and Back to Basics."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "vulnerable to effects such as The Stone Brain or Surgical Extraction."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "vulnerable to discards and effects which prevent the casting of spells, such as Trinisphere and Teferi, Time Raveler."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "shatters when attacked, such as Oops, All Spells or Goblin Charbelcher."
+    }
+  ]
+}

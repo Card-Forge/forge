@@ -2,138 +2,252 @@
   "archetype": "Boros Energy",
   "format": "modern",
   "strategy_type": "aggro",
-  "overview": "Despite its name, this deck does not utilize the Energy mechanic. Instead, it is a fast, resilient aggressive strategy that leverages haste, lifelink, and combat tricks to apply relentless pressure. The game plan revolves around deploying efficient threats early, protecting them with targeted removal, and closing games before opponents can stabilize.",
+  "overview": "Boros Energy is a Modern aggro deck that leverages the Energy mechanic to cast spells for free and establish a fast clock. It merges an Energy package centered on Amped Raptor and Guide of Souls with a blink/value strategy using Phelia, Exuberant Shepherd to maximize ETB effects and card advantage.",
   "win_conditions": [
-    "Phlage, Titan of Fire's Fury",
-    "Ragavan, Nimble Pilferer",
-    "Ocelot Pride",
-    "Guide of Souls"
+    "Establish a fast clock with cheap creatures and Guide of Souls",
+    "Deal direct damage with Unstable Amulet and Phlage, Titan of Fire’s Fury",
+    "Generate value and board presence by blinking permanents with Phelia, Exuberant Shepherd",
+    "Cast spells for free using Amped Raptor to accelerate damage"
   ],
   "mulligan": {
-    "keep_criteria": [
-      "Hands with 2-3 lands and at least one 1- or 2-mana creature",
-      "Hands containing early removal or combat tricks",
-      "Hands with Ragavan or Ocelot Pride alongside a cheap spell"
-    ],
-    "mulligan_criteria": [
-      "Hands with 4+ lands or 0-1 lands",
-      "Hands lacking early interaction or threats",
-      "Hands heavy with 4+ mana spells"
-    ],
-    "examples": [
-      {
-        "hand": [
-          "Ragavan, Nimble Pilferer",
-          "Lightning Strike",
-          "Mountain",
-          "Plains",
-          "Mountain"
-        ],
-        "decision": "keep",
-        "reason": "Provides turn-one pressure, early removal, and a solid mana base."
-      },
-      {
-        "hand": [
-          "Phlage, Titan of Fire's Fury",
-          "Abrupt Decay",
-          "Mountain",
-          "Mountain",
-          "Mountain",
-          "Mountain",
-          "Plains"
-        ],
-        "decision": "mulligan",
-        "reason": "Too many lands and lacks early-game presence or interaction to apply pressure."
-      }
-    ]
+    "keep_criteria": [],
+    "mulligan_criteria": [],
+    "examples": []
   },
   "game_plan": {
     "early_game": [
-      "Play 1- and 2-mana creatures on curve",
-      "Use cheap removal to clear blockers",
-      "Establish early board presence to force opponent reactions"
+      "Play cheap creatures and lands to establish a fast clock",
+      "Generate energy with Static Prison or Galvanic Discharge",
+      "Use Amped Raptor to cast early threats or removal for free"
     ],
     "mid_game": [
-      "Deploy Ragavan and Ocelot Pride to accelerate damage",
-      "Utilize combat tricks and lifelink to stabilize against board wipes",
-      "Sequence removal to protect key threats"
+      "Blink permanents with Phelia, Exuberant Shepherd to trigger ETB effects and grow the board",
+      "Use Guide of Souls to make creatures threatening and bypass blockers",
+      "Deal incremental damage with Unstable Amulet while maintaining card advantage"
     ],
     "late_game": [
-      "Close out with resilient, high-impact threats like Phlage",
-      "Leverage Guide of Souls for recursion and value",
-      "Maintain pressure to prevent opponent from setting up win conditions"
+      "Maintain pressure with recurring value from Phelia and Unstable Amulet",
+      "Leverage Ragavan, Nimble Pilferer and Phlage, Titan of Fire’s Fury for graveyard value and damage",
+      "Utilize sideboard cards like White Orchid Phantom or Disruptor Flute to close out specific matchups"
     ]
   },
   "key_cards": [
     {
-      "name": "Phlage, Titan of Fire's Fury",
-      "role": "Win condition",
-      "notes": "High toughness and lifelink make it resilient; attacks for significant damage while stabilizing against removal."
-    },
-    {
-      "name": "Ragavan, Nimble Pilferer",
-      "role": "Card advantage & pressure",
-      "notes": "Provides turn-one haste, card draw, and relentless combat damage."
-    },
-    {
-      "name": "Ocelot Pride",
-      "role": "Evasion & pressure",
-      "notes": "Flying and haste bypass blockers; synergizes with combat tricks to close games."
+      "name": "Amped Raptor",
+      "role": "Energy generator & spellcaster",
+      "notes": "Can cast almost every spell for free; tends to come out when needing conditional responses that might whiff."
     },
     {
       "name": "Guide of Souls",
-      "role": "Recursion & value",
-      "notes": "Returns creatures from graveyard to hand, enabling repeated pressure and protecting against board wipes."
+      "role": "Threat enabler",
+      "notes": "Turns any creature into a threat; easily triggered by Energy to establish a fast clock."
+    },
+    {
+      "name": "Unstable Amulet",
+      "role": "Card advantage & damage",
+      "notes": "Recurring source of advantage/damage; main target for Phelia's blink effect."
+    },
+    {
+      "name": "Phelia, Exuberant Shepherd",
+      "role": "Value engine & removal",
+      "notes": "Adds value with ETB effects, synergizes with Ajani and Unstable Amulet, can remove unwanted blockers."
+    },
+    {
+      "name": "Ajani, Nacatl Pariah",
+      "role": "Efficient threat & blocker",
+      "notes": "Legends rule interaction creates tokens to protect it, making it highly efficient in games."
+    },
+    {
+      "name": "Phlage, Titan of Fire’s Fury",
+      "role": "Removal & threat",
+      "notes": "Feeds on graveyard, sets a two-turn clock, deals up to 11 damage with Guide of Souls."
+    },
+    {
+      "name": "Static Prison",
+      "role": "Energy generator & board control",
+      "notes": "Low mana cost, gives two energy before sacrificing itself, even without a target."
+    },
+    {
+      "name": "Galvanic Discharge",
+      "role": "Flexible removal",
+      "notes": "Deals with creatures/planeswalkers; stores unused energy on smaller creatures for Unstable Amulet."
+    },
+    {
+      "name": "Lightning Bolt",
+      "role": "Classic removal",
+      "notes": "Ensures Amped Raptor doesn't whiff, speeds up clock against various threats."
+    },
+    {
+      "name": "Fetch Lands / Aether Hub / Elegant Parlor / Inspiring Vantage",
+      "role": "Mana base",
+      "notes": "Maintains consistency, finds basics for Blood Moon, fuels Phlage, generates mana."
     }
   ],
   "sequencing_tips": [
-    "Hold up removal until you see what the opponent plays",
-    "Attack with Ragavan before casting spells to maximize card advantage",
-    "Use lifelink triggers to stabilize against sweepers",
-    "Sequence combat tricks to maximize damage while maintaining blockers if needed"
+    "Blink Amped Raptor with Phelia to generate energy for triggering Guide of Souls on the following turn.",
+    "Cast Static Prison early to generate two energy before it sacrifices itself, even without a target.",
+    "Use Galvanic Discharge on smaller creatures to store excess energy for Unstable Amulet.",
+    "Save Amped Raptor for games requiring conditional responses to avoid whiffing."
   ],
   "matchups": [
     {
-      "opponent_archetype": "Control",
-      "advice": "Apply maximum early pressure and use evasion to bypass counterspells. Prioritize protecting your win conditions.",
+      "opponent_archetype": "Mono Black Evoke",
+      "advice": "Side in graveyard hate and disruption to counter their win condition and apply early pressure.",
       "watch_for": [
-        "Swords to Plowshares",
-        "Teferi's Protection",
-        "Counterspell"
+        "Graveyard synergies",
+        "Cheap removal",
+        "Evoke creatures"
       ]
     },
     {
-      "opponent_archetype": "Aggro",
-      "advice": "Use removal efficiently to clear the path. Hold up interaction for their key threats and race with resilient creatures.",
+      "opponent_archetype": "Amulet Titan",
+      "advice": "Use Disruptor Flute and Wrath of the Skies to disrupt their combo and clear token boards.",
       "watch_for": [
-        "Board wipes",
-        "Early aggressive creatures",
-        "Removal spells"
+        "Simulacrum Synthesizer tokens",
+        "Urza's Saga",
+        "Amulet of Power"
       ]
     },
     {
-      "opponent_archetype": "Midrange",
-      "advice": "Race with haste threats and use lifelink to stabilize. Sequence removal to protect your board while applying pressure.",
+      "opponent_archetype": "Bant Nadu",
+      "advice": "Side in White Orchid Phantom to control lands and maintain aggression against their ramp.",
       "watch_for": [
-        "Targeted removal",
-        "Value engines",
-        "Stabilizing creatures"
+        "Nadu, Winged Wisdom",
+        "Land drops",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Living End",
+      "advice": "Side in Tormod's Crypt and Unlicensed Hearse to disrupt graveyard interactions and prevent their win condition.",
+      "watch_for": [
+        "Graveyard recursion",
+        "Mass graveyards",
+        "Life total manipulation"
+      ]
+    },
+    {
+      "opponent_archetype": "Golgari Yawgmoth",
+      "advice": "Use Galvanic Discharge to deal with Yawgmoth, Thran Physician early and apply pressure before they stabilize.",
+      "watch_for": [
+        "Yawgmoth, Thran Physician",
+        "Graveyard value",
+        "Token generation"
       ]
     }
   ],
   "common_threats": [
-    "Swords to Plowshares",
-    "Abrupt Decay",
-    "Lightning Strike",
-    "Teferi's Protection",
-    "Fatal Push",
-    "Supreme Verdict"
+    "Yawgmoth, Thran Physician",
+    "Nadu, Winged Wisdom",
+    "Primeval Titan",
+    "Urza's Saga",
+    "Simulacrum Synthesizer",
+    "Blood Moon"
   ],
   "metadata": {
-    "source": "build_piloting_guides.py + draftsim",
-    "source_url": "https://draftsim.com/boros-energy/",
-    "generated_at": "2026-05-20T17:18:47+00:00",
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-boros-energy-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-20T23:27:12+00:00",
     "model": "local-model",
-    "schema_version": 1
-  }
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-boros-energy-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-20T23:25:36+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "1df0c38bb3aa597e",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Boros Energy is one of the new archetypes enabled by MH3's impact on Modern... a new variant of aggressive decks has emerged and highlighted one of the main mechanics that MH3 brought: Energy."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Guide of Souls turns any creature we have into a threat, and in an archetype focused on the Energy mechanic, it is not difficult for us to trigger its ability every turn."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Unstable Amulet is a recurring source of card advantage and damage in Boros Energy... Phlage, Titan of Fire’s Fury... can deal up to 11 damage in a single attack."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "use Phelia, Exuberant Shepherd to add value along with powerful ETB effects."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Amped Raptor is one of the strongest cards in MH3 so far and can cast almost every spell on the list for free."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "blinking an Amped Raptor is a good proposal, as it guarantees the necessary energy to trigger Guide of Souls the next turn."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Static Prison... even if there is no target in play for the enchantment, it will still give us two energy before being sacrificed the next turn."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Galvanic Discharge... in smaller creatures, we can store unused Energy to power Unstable Amulet."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Amped Raptor... tends to come out in games where we need more conditional responses that can “whiff” when played by it."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Galvanic Discharge can deal with almost any creature or Planeswalker on this list, and it is common to use it to destroy Yawgmoth, Thran Physician , Nadu, Winged Wisdom or even Primeval Titan if necessary."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Wrath of the Skies... we can use it mainly to deal with Urza's Saga and Simulacrum Synthesizer 's tokens."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The pack of six Fetch Lands is enough to maintain archetype consistency and find basic lands for matches against opponents who use Blood Moon in Game 1."
+    }
+  ]
 }

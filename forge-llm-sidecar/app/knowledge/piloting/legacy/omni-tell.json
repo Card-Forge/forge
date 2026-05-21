@@ -1,0 +1,155 @@
+{
+  "archetype": "Omni-Tell",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "Omni-Tell is a five-color Legacy combo deck that leverages Show and Tell to enter the battlefield with massive creatures for zero mana. By pairing this with Omniscience and Flow State, the pilot can cast high-impact spells and threats without paying their mana costs, rapidly overwhelming opponents. The deck aims to assemble its key pieces quickly while maintaining enough interaction to survive until the combo resolves.",
+  "win_conditions": [
+    "Casting Show and Tell to enter a large creature for free",
+    "Using Omniscience to cast multiple spells and finish the game",
+    "Flow State enabling free spellcasting to bypass mana requirements",
+    "Combining free casting effects with big threats for lethal damage"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Show and Tell and a large creature",
+      "Hands with Omniscience or Flow State and cheap interaction",
+      "Hands with multiple lands and a combo piece"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking lands or combo pieces",
+      "Hands with only removal or utility cards",
+      "Hands with high-cost cards and no free casting"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap interaction",
+      "Look for Show and Tell or free casting enablers",
+      "Disrupt opponent's early game"
+    ],
+    "mid_game": [
+      "Cast Show and Tell to bring out a threat",
+      "Activate Omniscience or Flow State to cast spells for free",
+      "Apply pressure while protecting combo pieces"
+    ],
+    "late_game": [
+      "Cast multiple spells for free to overwhelm opponent",
+      "Use remaining resources to close out the game",
+      "Maintain board presence with large creatures"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Show and Tell",
+      "role": "Enables free entry of large creatures",
+      "notes": "Prioritize casting this early to establish board presence without mana commitment"
+    },
+    {
+      "name": "Omniscience",
+      "role": "Allows casting spells without paying mana costs",
+      "notes": "Use to chain multiple spells or cast high-cost threats for free"
+    },
+    {
+      "name": "Flow State",
+      "role": "Grants free spellcasting until end of turn",
+      "notes": "Ideal for casting a sequence of spells or finishing the game in one turn"
+    }
+  ],
+  "sequencing_tips": [
+    "Cast Show and Tell before activating free casting effects to maximize impact",
+    "Hold up interaction to protect combo pieces from removal",
+    "Use Flow State or Omniscience on turns with multiple spells to cast",
+    "Prioritize lands early to ensure combo pieces can be cast if needed"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play interaction early and use Show and Tell to outvalue",
+      "watch_for": [
+        "Early board presence",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Protect combo pieces and use free casting to bypass counters",
+      "watch_for": [
+        "Counterspell",
+        "Board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup and race with free casting",
+      "watch_for": [
+        "Fast win conditions",
+        "Hand disruption"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspell",
+    "Thoughtseize",
+    "Lightning Bolt",
+    "Rest in Peace"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T07:39:35+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:39:35+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "7afb562bbb9bfea2",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "derived from signature cards and Legacy format knowledge"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "derived from signature cards and Legacy format knowledge"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "derived from signature cards and Legacy format knowledge"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "derived from signature cards and Legacy format knowledge"
+    }
+  ]
+}

@@ -1,0 +1,276 @@
+{
+  "archetype": "Burn",
+  "format": "pauper",
+  "strategy_type": "aggro",
+  "overview": "Synthesizer Burn is a revitalized Mono Red Aggro deck in Pauper that replaces the banned Kuldotha Rebirth with an artifact-focused shell. It combines classic Burn spells with damage amplifiers like Kessig Flamebreather and Thermo-Alchemist to race opponents. The deck relies on sequencing multiple spells per turn to maximize damage output while maintaining board presence with one-drops.",
+  "win_conditions": [
+    "Deal direct damage with Burn spells like Galvanic Blast and Lightning Bolt",
+    "Amplify spell damage using Kessig Flamebreather and Thermo-Alchemist",
+    "Apply early board pressure with one-drops and Goblin Tomb Raider"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with one-drops like Goblin Tomb Raider or Voldaren Epicure",
+      "Hands containing mana sources and at least one Burn spell or amplifier"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early plays or mana acceleration",
+      "Hands with only high-cost cards or no interaction"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Goblin Tomb Raider",
+          "Great Furnace",
+          "Galvanic Blast",
+          "Mountain",
+          "Mountain"
+        ],
+        "decision": "keep",
+        "reason": "Provides early pressure, artifact synergy, and immediate burn potential."
+      },
+      {
+        "hand": [
+          "Wrenn's Resolve",
+          "Experimental Synthesizer",
+          "Mountain",
+          "Mountain",
+          "Mountain"
+        ],
+        "decision": "mulligan",
+        "reason": "Lacks early-game impact and one-drops needed to establish pressure."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play one-drops like Voldaren Epicure and Clockwork Percussionist to enable Goblin Tomb Raider",
+      "Establish early board presence and artifact count"
+    ],
+    "mid_game": [
+      "Sequence Burn spells through Kessig Flamebreather and Thermo-Alchemist to maximize damage",
+      "Use Galvanic Blast for removal or direct damage while maintaining artifact synergy"
+    ],
+    "late_game": [
+      "Leverage Experimental Synthesizer and Wrenn's Resolve for card advantage and token generation",
+      "Finish the game with accumulated Burn spells and amplified damage triggers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Goblin Tomb Raider",
+      "role": "Early-game threat & artifact payoff",
+      "notes": "Becomes a 2/2 with Haste for {1}R, applying immediate pressure and synergizing with the artifact shell."
+    },
+    {
+      "name": "Kessig Flamebreather",
+      "role": "Damage amplifier",
+      "notes": "Triggers with Experimental Synthesizer and amplifies damage from all spells cast."
+    },
+    {
+      "name": "Galvanic Blast",
+      "role": "Primary Burn spell",
+      "notes": "Deals 4 damage, justifies the artifact shell, and removes blockers like Myr Enforcer."
+    },
+    {
+      "name": "Experimental Synthesizer",
+      "role": "Card advantage & late-game threat",
+      "notes": "Generates two cards from one slot, interacts with artifacts, and creates a 2/2 token upon sacrifice."
+    },
+    {
+      "name": "Thermo-Alchemist",
+      "role": "Damage amplifier & consistency",
+      "notes": "Complements Flamebreather and helps push extra damage each turn even with bad topdecks."
+    },
+    {
+      "name": "Wrenn's Resolve",
+      "role": "Card draw",
+      "notes": "Provides a draw two for two mana, interacts with amplifiers, and can be used until the next turn."
+    },
+    {
+      "name": "Great Furnace",
+      "role": "Mana acceleration",
+      "notes": "Increases consistency for Galvanic Blast and Goblin Tomb Raider, with land count increased to 18."
+    }
+  ],
+  "sequencing_tips": [
+    "Accumulate enough mana, an amplifier (Kessig Flamebreather or Thermo-Alchemist), and multiple spells to sequence between turns",
+    "Save three-damage spells like Lightning Bolt for key removal opportunities or optimal burn windows",
+    "Prioritize resolving spells that trigger amplifiers before using removal or card draw"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Mono Blue / Dimir Faeries",
+      "advice": "Side in Pyroblast, End the Festivities, and Cast into the Fire. Remove Clockwork Percussionist and Thermo-Alchemist.",
+      "watch_for": [
+        "Mono Blue",
+        "Dimir",
+        "X/1 creatures",
+        "Interaction with Kuldotha Rebirth (lost)"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Blue / Dimir Terror",
+      "advice": "Side in Relic of Progenitus and Pyroblast. Cut one of each pertinent slot to maintain card advantage and consistency.",
+      "watch_for": [
+        "Tolarian Terror",
+        "Graveyard hate needs"
+      ]
+    },
+    {
+      "opponent_archetype": "Affinity",
+      "advice": "Side in Smash to Smithereens and Cast into the Fire. Play under the opponent's curve and cut non-interacting cards.",
+      "watch_for": [
+        "Blockers",
+        "Artifact mana base",
+        "Gorilla Shaman (mentioned but not recommended)"
+      ]
+    },
+    {
+      "opponent_archetype": "Gruul Ramp",
+      "advice": "No changes. Swap End the Festivities for Flaring Pain if opponent runs Moment's Peace instead of Weather the Storm.",
+      "watch_for": [
+        "Moment's Peace",
+        "Weather the Storm"
+      ]
+    },
+    {
+      "opponent_archetype": "Elves",
+      "advice": "Side in End the Festivities and Cast into the Fire. Remove Goblin Tomb Raider as it becomes a dead card against blockers.",
+      "watch_for": [
+        "Plenty of blockers",
+        "Wide creature spreads"
+      ]
+    },
+    {
+      "opponent_archetype": "High Tide",
+      "advice": "Side in Pyroblast. Play a race and avoid spending two mana on your turn; stay ready to respond to key cards.",
+      "watch_for": [
+        "High Tide",
+        "Key card responses needed"
+      ]
+    },
+    {
+      "opponent_archetype": "Synthesizer Burn",
+      "advice": "No changes. Consider Smash to Smithereens cautiously. Use Chain Lightning at opportune moments.",
+      "watch_for": [
+        "Chain Lightning timing",
+        "Generating value for opponent"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Faeries",
+    "Tolarian Terror",
+    "Affinity",
+    "Elves",
+    "High Tide",
+    "Moment's Peace",
+    "Weather the Storm",
+    "Myr Enforcer"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm + Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-synthesizer-burn-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T09:53:18+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-rakdos-wizard-burn-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:48:19+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-madness-burn-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:49:58+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-synthesizer-burn-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:51:39+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "f3dee2450e43b9c4",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Goblin Tomb Raider and Experimental Synthesizer join forces with Kessig Flamebreather to revitalize Mono Red in Pauper, with a new version that mixes an aggressive plan with artifacts added to the archetype's classic Burn spells!"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Kessig Flamebreather is one of the best ways to amplify the damage done by our spells"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "maximize our damage output"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Our pivot turns now require a larger setup around accumulating three resources: enough mana, Kessig Flamebreather or Thermo-Alchemist, and the means to sequence multiple spells between two turns to maximize our damage output."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "It's important to know when to use it against a creature that can hurt you in other games, or when to save it for the best opportunity to burn through your opponent's life total."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "In the early part of the format, blue decks and Affinity have been the two standouts in Leagues"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "End the Festivities is a mini-sweeper against Faeries, Elves, and other decks with lots of X/1 creatures"
+    }
+  ]
+}

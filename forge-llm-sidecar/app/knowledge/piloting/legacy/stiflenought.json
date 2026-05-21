@@ -1,0 +1,168 @@
+{
+  "archetype": "Stiflenought",
+  "format": "legacy",
+  "strategy_type": "tempo",
+  "overview": "Stiflenought is a white-blue tempo shell that leverages efficient card advantage engines to outmaneuver opponents in Legacy. By deploying low-cost threats like Nulldrifter and Phyrexian Dreadnought, the deck generates continuous value while using instant-speed interaction like Daze to dictate the pace of the game. The goal is to stabilize early, maintain board presence, and win through superior resource management.",
+  "win_conditions": [
+    "Outlasting opponents through superior card advantage from Nulldrifter and Phyrexian Dreadnought",
+    "Deploying efficient threats to apply pressure while holding instant-speed interaction",
+    "Stabilizing with Daze to protect key permanents and force unfavorable trades"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two lands and a one-drop threat or interaction",
+      "Combinations of Daze and early creatures to establish tempo",
+      "Hands that can play a threat on turn one or two"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early interaction or threats",
+      "Mana-heavy hands with no one-drops",
+      "Hands that cannot establish board presence by turn two"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and deploy one-drops like Nulldrifter to establish board presence and draw cards",
+      "Use Daze to counter opponent's early threats or protect your permanents",
+      "Prioritize mana efficiency to maintain tempo advantage"
+    ],
+    "mid_game": [
+      "Transition to Phyrexian Dreadnought to generate card advantage and apply pressure",
+      "Hold Daze for key removal or counters to stabilize against aggressive pushes",
+      "Use Dreadnought's activated ability to dig for answers while managing life total"
+    ],
+    "late_game": [
+      "Rely on continuous card advantage from Dreadnought and Nulldrifter recursion to outvalue opponents",
+      "Maintain board control with instant-speed interaction to close out games",
+      "Manage life total carefully while activating Dreadnought to find game-ending answers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Phyrexian Dreadnought",
+      "role": "Efficient threat and card advantage engine",
+      "notes": "Deploy on curve to pressure opponents; activate ability selectively to draw cards while monitoring life total to avoid self-damage."
+    },
+    {
+      "name": "Daze",
+      "role": "Instant-speed counter and tempo tool",
+      "notes": "Use to protect early threats, counter key opponent plays, or force unfavorable trades; prioritize holding up mana for interaction when behind."
+    },
+    {
+      "name": "Nulldrifter",
+      "role": "Low-cost flying threat and value generator",
+      "notes": "Play on turn one to establish presence; let it die to draw a card and maintain resource parity against aggressive decks."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up Daze before committing to a threat to protect against instant-speed removal",
+    "Activate Phyrexian Dreadnought only when you have a clear path to recovery or when digging for a specific answer",
+    "Prioritize playing Nulldrifter early to trigger its death value and draw into more interaction"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize Daze on their biggest threats and play Nulldrifter early to draw into answers; use Dreadnought to stabilize.",
+      "watch_for": [
+        "Early board wipes",
+        "Fast one-drops",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race with Dreadnought and Nulldrifter while holding Daze for their key counters or removal; avoid overextending into sweepers.",
+      "watch_for": [
+        "Counterspell packages",
+        "Board wipes",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Use Daze to disrupt their combo pieces and deploy threats quickly to force them to interact; Dreadnought provides value if they go wide.",
+      "watch_for": [
+        "Combo enablers",
+        "Graveyard recursion",
+        "Fast win conditions"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Aggressive creature decks",
+    "Control shells with heavy interaction",
+    "Combo strategies relying on graveyard or mana acceleration"
+  ],
+  "metadata": {
+    "source": "Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:13:53+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-deck-tech-stiflenought",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:10:48+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:13:53+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "5ae102282268a856",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Stiflenought"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Nulldrifter, Phyrexian Dreadnought, Daze"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Daze, Phyrexian Dreadnought, Nulldrifter"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Legacy format context"
+    }
+  ]
+}

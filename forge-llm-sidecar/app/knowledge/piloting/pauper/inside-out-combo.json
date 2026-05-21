@@ -1,0 +1,157 @@
+{
+  "archetype": "Inside Out Combo",
+  "format": "pauper",
+  "strategy_type": "combo",
+  "overview": "This Pauper quadrant deck leverages Faithless Looting to rapidly dig for its core pieces: Inside Out, Tireless Tribe, and Sneaky Snacker. By reversing the text boxes of the tribe and the snacker, the deck creates a recursive loop that generates infinite +1/+1 counters, trample, and card draw. The goal is to assemble the combo quickly and execute it before the opponent can stabilize or interact.",
+  "win_conditions": [
+    "Executing the Inside Out reversal combo on Tireless Tribe and Sneaky Snacker to generate infinite value and lethal damage",
+    "Overwhelming the opponent with a massively pumped, trampling Tireless Tribe",
+    "Drawing into lethal card advantage or combo pieces via Faithless Looting and Sneaky Snacker triggers"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Faithless Looting or multiple low-cost cantrips",
+      "Hands with at least two combo pieces (Inside Out, Tireless Tribe, Sneaky Snacker)",
+      "Hands with early disruption or cheap creatures to protect the combo"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking Faithless Looting or any combo piece",
+      "Hands with only high-cost cards or no lands",
+      "Hands with multiple removal spells but no way to deploy them early"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap creatures to establish board presence",
+      "Cast Faithless Looting on turn 2 or 3 to dig for combo pieces",
+      "Avoid unnecessary combat that could lose key pieces to removal"
+    ],
+    "mid_game": [
+      "Assemble the Inside Out, Tireless Tribe, and Sneaky Snacker trio",
+      "Use card draw and counters to outvalue the opponent",
+      "Protect combo pieces with cheap interaction or evasion"
+    ],
+    "late_game": [
+      "Execute the reversal combo to generate infinite counters and draw",
+      "Attack with the pumped Tireless Tribe to close out the game",
+      "Use excess card advantage to find answers to late-game threats"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Faithless Looting",
+      "role": "Primary combo enabler and dig tool",
+      "notes": "Cast on turn 2 or 3 to discard two cards and draw four, rapidly finding Inside Out, Tireless Tribe, and Sneaky Snacker. Manage graveyard carefully to avoid opponent interaction."
+    },
+    {
+      "name": "Tireless Tribe",
+      "role": "Core combo piece and win condition",
+      "notes": "Attack with it to trigger its ability. When reversed by Inside Out, the reordered text enables a recursive loop with Sneaky Snacker to generate infinite counters and trample."
+    },
+    {
+      "name": "Sneaky Snacker",
+      "role": "Secondary combo piece and card draw engine",
+      "notes": "Works in tandem with the reversed Tireless Tribe to create the infinite loop. Its reversed text allows continuous counter placement and card draw without leaving the battlefield."
+    }
+  ],
+  "sequencing_tips": [
+    "Always cast Faithless Looting before deploying your combo pieces to maximize dig potential",
+    "Hold up mana for potential counterspells or removal before committing to the combo",
+    "Reverse Tireless Tribe first, then Sneaky Snacker, to ensure the trigger order resolves correctly",
+    "Attack with the reversed Tribe immediately after assembling the loop to avoid opponent interaction"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early disruption and use Faithless Looting to find cheap blockers or the combo quickly. Avoid trading key pieces unnecessarily.",
+      "watch_for": [
+        "Early board wipes",
+        "Direct damage spells",
+        "Creature removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Use card draw to outlast their resources. Protect combo pieces with evasion or counterspells. Execute the combo before they can assemble a full board of answers.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Hand disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them by going wide with cheaper creatures while digging for the combo. Use Sneaky Snacker for incremental value to outdraw their curve.",
+      "watch_for": [
+        "Efficient removal",
+        "Card advantage engines",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipes that remove Tireless Tribe and Sneaky Snacker",
+    "Counterspells that prevent Inside Out or Faithless Looting from resolving",
+    "Hand disruption that delays combo assembly",
+    "Direct damage spells that bypass the combo's defensive value"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T09:32:24+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:32:24+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "9a2d9ad602b74050",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype: Inside Out Combo, Format: pauper, Colors: W/U/B/R, Signature cards: Tireless Tribe, Faithless Looting, Sneaky Snacker"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards and archetype name imply a recursive value loop and combat-focused finish"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard combo sequencing principles applied to the provided signature cards and Inside Out mechanics"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "General Pauper format meta knowledge applied to combo deck vulnerabilities"
+    }
+  ]
+}

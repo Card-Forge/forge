@@ -1,0 +1,264 @@
+{
+  "archetype": "Azorius Control",
+  "format": "standard",
+  "strategy_type": "control",
+  "overview": "Azorius Control aims to manipulate the match from an early disadvantage to eventual inevitability by controlling the board and accumulating card advantage. It relies on a handful of powerful win conditions backed by extensive removal and interaction. The deck excels at answering aggressive strategies and combo decks while leveraging token synergy and planeswalker value to close out games.",
+  "win_conditions": [
+    "Elspeth, Storm Slayer",
+    "Jace, the Perfected Mind",
+    "Regent"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Has enough lands to develop the game plan",
+      "Contains a win condition and control pieces",
+      "Includes card advantage tools like Stock Up or Three Steps Ahead"
+    ],
+    "mulligan_criteria": [
+      "Lacks enough lands to progress the game plan",
+      "Relies solely on card draw to find mana"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Three Steps Ahead",
+          "Lands",
+          "Win Condition",
+          "Control Pieces"
+        ],
+        "decision": "keep",
+        "reason": "Has enough lands to develop the game plan, a win condition, and control pieces. Three Steps Ahead provides card advantage."
+      },
+      {
+        "hand": [
+          "Lockdown",
+          "Ride's End",
+          "Stock Up",
+          "Regent",
+          "Lands"
+        ],
+        "decision": "keep",
+        "reason": "Very solid against aggro lists. Lockdown buys time, Ride's End handles threats, Stock Up brings answers, and Regent can win the game."
+      },
+      {
+        "hand": [
+          "Not enough lands"
+        ],
+        "decision": "mulligan",
+        "reason": "Doesn't have enough lands to progress the game plan and would have to rely solely on card draw to find a third land."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play defensively and use Temporary Lockdown to buy time against early threats",
+      "Prioritize finding lands and early interaction like Ride's End"
+    ],
+    "mid_game": [
+      "Stabilize the board using removal and counters",
+      "Generate card advantage with Stock Up and Three Steps Ahead to find answers",
+      "Develop token engines like Overlord of the Mistmoors and Beza, the Bounding Spring"
+    ],
+    "late_game": [
+      "Reach inevitability by controlling everything that happens",
+      "Use Elspeth, Storm Slayer's abilities to create tokens and remove threats",
+      "Cast Jace, the Perfected Mind's ultimate to win by deck out"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Elspeth, Storm Slayer",
+      "role": "Primary win condition",
+      "notes": "Creates creature tokens for protection, interacts with threats, and removes enemy creatures with its third ability."
+    },
+    {
+      "name": "Jace, the Perfected Mind",
+      "role": "Alternative win condition",
+      "notes": "Wins games outside of combat and can use its ultimate to make the opponent lose by decking out."
+    },
+    {
+      "name": "Stock Up",
+      "role": "Card advantage engine",
+      "notes": "Looks at the top 5 cards and puts two in hand, nearly always providing a useful tool."
+    },
+    {
+      "name": "Temporary Lockdown",
+      "role": "Early game defense",
+      "notes": "Main weapon against aggro decks in the first few turns, buying time to deal with threats."
+    },
+    {
+      "name": "Ride's End",
+      "role": "Board control",
+      "notes": "Handles threats that come after early game defenses."
+    },
+    {
+      "name": "Overlord of the Mistmoors",
+      "role": "Token engine",
+      "notes": "Synergizes exceptionally with Elspeth by putting more tokens into play."
+    },
+    {
+      "name": "Beza, the Bounding Spring",
+      "role": "Token engine",
+      "notes": "Versatile token producer that performs well, particularly against aggro decks."
+    }
+  ],
+  "sequencing_tips": [
+    "Don't rush things and let the opponent think they control the game before taking control back.",
+    "Save resources and try to lead the opponent into making a mistake.",
+    "Never pass a turn without enough mana to interact.",
+    "Don't let the opponent force you to play something at the end of your turn."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Mono-Red Aggro",
+      "advice": "Use Temporary Lockdown and Ultima carefully. Don't rush things and let the opponent think they control the game before taking control back.",
+      "watch_for": [
+        "Screaming Nemesis",
+        "Monstrous Rage",
+        "Magebane Lizard"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Prowess",
+      "advice": "Play similarly to Mono-Red but be careful since Izzet uses blue and can play slightly differently to control you instead.",
+      "watch_for": [
+        "Drake Hatcher",
+        "Cori-Steel Cutter",
+        "Vivi Ornitier"
+      ]
+    },
+    {
+      "opponent_archetype": "Omniscience Combo",
+      "advice": "Focus on disrupting the interaction between Abuelo's Awakening and Omniscience. Watch out for their alternative game plan.",
+      "watch_for": [
+        "Abuelo's Awakening",
+        "Omniscience"
+      ]
+    },
+    {
+      "opponent_archetype": "Dimir Midrange",
+      "advice": "Save resources, lead the opponent into mistakes, never pass without enough mana to interact, and avoid being forced to play at end of turn.",
+      "watch_for": [
+        "Disruption pieces",
+        "Blue interaction"
+      ]
+    },
+    {
+      "opponent_archetype": "4C Zur",
+      "advice": "Deal with Zur, Eternal Schemer whenever possible. Use Get Lost to handle threats and be aware of ETB effects like Overlords.",
+      "watch_for": [
+        "Up the Beanstalk",
+        "Zur, Eternal Schemer",
+        "Overlords"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Screaming Nemesis",
+    "Monstrous Rage",
+    "Magebane Lizard",
+    "Drake Hatcher",
+    "Cori-Steel Cutter",
+    "Vivi Ornitier",
+    "Abuelo's Awakening",
+    "Omniscience",
+    "Zur, Eternal Schemer",
+    "Up the Beanstalk"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-the-new-azorius-control-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T06:15:22+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-the-new-azorius-control-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:13:56+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "2609f32a50aee1ff",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Azorius Control wins by manipulating the match well enough to tip the scales in its favor. It will eventually control everything that happens in the game and reach inevitability."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Elspeth, Storm Slayer is this deck's main win condition."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Another interesting win condition this list plays that is often an alternative to Elspeth is Jace, the Perfected Mind."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Regent can both draw you another card and win the game for you."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Don't rush things and let your opponent think they control the game. That's when you'll get control back again with Azorius."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Save your resources and try to lead your opponent into making a mistake. Never pass a turn without enough mana to interact, and don't let them force you to play something at the end of your turn."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Screaming Nemesis and Monstrous Rage. Nemesis is the core of red aggro strategies... Monstrous Rage, on the other side, can simply end games"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Magebane Lizard is very annoying, perhaps just as much as the main drops in Red."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "With Drake Hatcher and Cori-Steel Cutter, Izzet should dominate the format"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Zur, Eternal Schemer is also critical for them, so try to deal with it whenever possible."
+    }
+  ]
+}

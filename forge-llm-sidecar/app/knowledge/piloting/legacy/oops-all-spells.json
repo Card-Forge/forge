@@ -1,0 +1,316 @@
+{
+  "archetype": "Oops! All Spells",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "Oops! All Spells is a Legacy combo deck that mills its entire deck on turn 1 without playing any lands. It generates mana using Spirit Guides, Rituals, Lotus Petal, and MDFCs, then triggers Balustrade Spy or Undercity Informer to mill the deck. The resulting graveyard state enables Narcomoebas and Bridge from Below to fuel Cabal Therapy, ultimately resolving Dread Return's flashback to cast Thassa's Oracle and win the game.",
+  "win_conditions": [
+    "Mill the entire deck using Balustrade Spy or Undercity Informer when zero lands are on the battlefield",
+    "Sacrifice Narcomoebas and Bridge from Below tokens to cast Cabal Therapy and find combo pieces",
+    "Pay the flashback cost of Dread Return to cast Thassa's Oracle and win immediately"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands that can execute the full combo on turn 1",
+      "Hands containing the combo, protection, and sufficient mana",
+      "Hands that can set up a turn 2 combo under Pact of Negation protection (only in rare, known matchups)"
+    ],
+    "mulligan_criteria": [
+      "Hands that cannot combo on turn 1",
+      "Hands lacking protection against Thoughtseize but still attempting to combo (highly risky)",
+      "Hands that do not combo on turn 1 and are not cutting to 4 cards"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Pact of Negation",
+          "Combo pieces",
+          "Missing 1 black mana"
+        ],
+        "decision": "mulligan",
+        "reason": "You just need to draw 1 black mana to combo on turn 2 with this hand, all under Pact's protection. It's worth the risk, right? Remember what I said above? If you can't combo on turn 1, you need to send the whole hand back."
+      },
+      {
+        "hand": [
+          "Undercity Informer",
+          "Mana sources",
+          "No turn 1 combo"
+        ],
+        "decision": "mulligan",
+        "reason": "This hand doesn't combo on turn 1, so: Mulligan. However, it is an exception if you know your opponent's deck because you can play Undercity Informer on turn 1 with it and have enough mana to activate it on turn 2."
+      },
+      {
+        "hand": [
+          "Combo pieces",
+          "Mana sources",
+          "No protection"
+        ],
+        "decision": "keep",
+        "reason": "This hand has the combo, but doesn't have the mana to protect it against Thoughtseize . Do you risk it? Of course, you've already committed to going all-in when you decided to play this deck!"
+      },
+      {
+        "hand": [
+          "Combo pieces",
+          "Protection",
+          "Mana sources"
+        ],
+        "decision": "keep",
+        "reason": "This hand has the combo, protection, and mana. It is the reason this deck sees play. Verdict: Instant keep."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Mulligan aggressively until a turn 1 combo hand is found",
+      "Generate exactly 4 mana (including 1 black) using Spirit Guides, Rituals, Lotus Petal, and MDFCs",
+      "Play Balustrade Spy or activate Undercity Informer to mill the entire deck"
+    ],
+    "mid_game": [
+      "Sacrifice Narcomoebas and Bridge from Below tokens to cast Cabal Therapy",
+      "Use Cabal Therapy to locate Dread Return and Thassa's Oracle",
+      "Cast Dread Return for flashback to return Thassa's Oracle from the graveyard"
+    ],
+    "late_game": [
+      "Win immediately when Thassa's Oracle enters the battlefield",
+      "Use Memory's Journey flashback to reshuffle the graveyard and attempt a second combo if disrupted",
+      "Use Jack-o'-Lantern to filter mana for flashback costs or Oracle's second blue mana"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Balustrade Spy",
+      "role": "Combo enabler",
+      "notes": "Triggers mill effect when deck has no lands"
+    },
+    {
+      "name": "Undercity Informer",
+      "role": "Combo enabler",
+      "notes": "Activated ability mills deck if no lands are on battlefield"
+    },
+    {
+      "name": "Thassa's Oracle",
+      "role": "Win condition",
+      "notes": "Wins game immediately upon entering battlefield if deck has no cards"
+    },
+    {
+      "name": "Dread Return",
+      "role": "Win condition enabler",
+      "notes": "Flashback returns Oracle from graveyard to battlefield"
+    },
+    {
+      "name": "Narcomoeba",
+      "role": "Value engine",
+      "notes": "Enters battlefield when milled, sacrificed for Cabal Therapy"
+    },
+    {
+      "name": "Bridge from Below",
+      "role": "Value engine",
+      "notes": "Creates tokens to sacrifice for additional Cabal Therapies"
+    },
+    {
+      "name": "Cabal Therapy",
+      "role": "Card draw/Disruption",
+      "notes": "Finds combo pieces and removes opponent's threats"
+    },
+    {
+      "name": "Pact of Negation",
+      "role": "Protection",
+      "notes": "Counters spells to protect the combo from interaction"
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Disruption",
+      "notes": "Removes opponent's key cards before or during combo"
+    },
+    {
+      "name": "Memory's Journey",
+      "role": "Re-combo tool",
+      "notes": "Flashback reshuffles graveyard to combo again if disrupted"
+    },
+    {
+      "name": "Jack-o'-Lantern",
+      "role": "Mana filter",
+      "notes": "Provides black/white mana for flashback or Oracle's cost"
+    },
+    {
+      "name": "Simian Spirit Guide",
+      "role": "Mana acceleration",
+      "notes": "Tapped for 1 mana, counts as a spell for mill triggers"
+    },
+    {
+      "name": "Elvish Spirit Guide",
+      "role": "Mana acceleration",
+      "notes": "Tapped for 1 mana, counts as a spell for mill triggers"
+    },
+    {
+      "name": "Lotus Petal",
+      "role": "Mana acceleration",
+      "notes": "Tapped for 1 colorless mana, counts as a spell"
+    },
+    {
+      "name": "Dark Ritual",
+      "role": "Mana acceleration",
+      "notes": "Provides instant black mana for combo"
+    },
+    {
+      "name": "Fell the Profane",
+      "role": "Mana acceleration/Spell",
+      "notes": "MDFC front side counts as spell, back side is land"
+    }
+  ],
+  "sequencing_tips": [
+    "Generate exactly 4 mana (including 1 black) before activating the mill trigger",
+    "Play Pact of Negation or Thoughtseize before or during the combo to bypass opponent's interaction",
+    "Sacrifice Narcomoebas and Bridge from Below tokens in sequence to cast multiple Cabal Therapies",
+    "Use Jack-o'-Lantern's ability to filter mana for Memory's Journey flashback or Thassa's Oracle's second blue mana"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Frognator",
+      "advice": "Overwhelm defenses with combo hands and protection; add more disruption post-side.",
+      "watch_for": [
+        "Force of Will",
+        "Discard spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Eldrazi Aggro",
+      "advice": "Play around Chalice/Vexing Bauble by using Memory's Journey to return Reanimate; ignore Leyline by exiling deck and playing Oracle from hand.",
+      "watch_for": [
+        "Chalice of the Void",
+        "Vexing Bauble",
+        "Leyline of the Void",
+        "Faerie Macabre"
+      ]
+    },
+    {
+      "opponent_archetype": "Red Stompy",
+      "advice": "Perform well in game 1; sideboard for graveyard hate.",
+      "watch_for": [
+        "Faerie Macabre"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Open turn 1 by discarding to understand threats, then combo on turn 2; apply same strategy post-side.",
+      "watch_for": [
+        "Counterspells",
+        "Graveyard hate"
+      ]
+    },
+    {
+      "opponent_archetype": "Painter",
+      "advice": "Vulnerable in game 1; stacking Oracles is weak due to Pyroblast.",
+      "watch_for": [
+        "Painter's Servant",
+        "Pyroblast"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Force of Will",
+    "Thoughtseize",
+    "Faerie Macabre",
+    "Surgical Extraction",
+    "Leyline of the Void",
+    "Chalice of the Void",
+    "Vexing Bauble",
+    "Pyroblast",
+    "Painter's Servant"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-oops-all-spells-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T07:16:27+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-oops-all-spells-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:14:52+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "4453b848f047741a",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "create 4 mana (1 should be black), and then either play Balustrade Spy or play and activate Undercity Informer . The result in either case is the same: your deck has no lands, and, therefore, you'll mill it all at once."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Once you activate their abilities, your entire deck will go to your graveyard and, thus, Narcomoeba s will enter play. Then, you can sacrifice them for Cabal Therapy to make sure nothing will stand in your way. Bridge From Below and Poxwalkers will give you all the extra bodies you need, and, finally, you'll pay for Dread Return 's Flashback cost, and Thassa's Oracle will enter play to finish the game."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "create 4 mana (1 should be black), and then either play Balustrade Spy or play and activate Undercity Informer ."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "If Jack-o'-Lantern is in your graveyard, you'll be able to filter mana and either pay for Memory's Journey 's Flashback or Thassa's Oracle second blue mana"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Then, you can sacrifice them for Cabal Therapy to make sure nothing will stand in your way."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Thoughtseize and Pact of Negation will help you play your combo through enemy defenses."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "usually as an answer to a Faerie Macabre or a Surgical Extraction ."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "At most, they can play Chalice of the Void or Vexing Bauble , which disrupt but don't interrupt your combo completely."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Their main graveyard answer is Leyline of the Void ."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Stacking your Thassa's Oracle s is also not that strong in this case because they play several Pyroblast s."
+    }
+  ]
+}

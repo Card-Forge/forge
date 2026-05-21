@@ -1,0 +1,157 @@
+{
+  "archetype": "Sultai Scapeshift",
+  "format": "pioneer",
+  "strategy_type": "combo",
+  "overview": "Sultai Scapeshift is a Pioneer combo deck that leverages land acceleration to assemble a resilient board state. By exiling lands with Scapeshift, you rapidly deploy Yorion, Sky Nomad and Lumra, Bellow of the Woods to generate overwhelming card advantage and combat pressure. The deck wins by out-drawing opponents through Yorion's death trigger while Lumra grows into an unblockable threat.",
+  "win_conditions": [
+    "Yorion, Sky Nomad dying to draw lethal cards or answers",
+    "Lumra, Bellow of the Woods pumping itself to lethal combat damage",
+    "Scapeshift dumping lands to fetch multiple win conditions in a single turn"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Scapeshift and at least two basic lands",
+      "Hands containing Yorion or Lumra with cheap land drops",
+      "Hands with early disruption and a clear path to turn three"
+    ],
+    "mulligan_criteria": [
+      "Hands with zero lands or only high-cost permanents",
+      "Hands lacking Scapeshift or a clear acceleration plan",
+      "Hands with multiple high-cost creatures but no mana sources"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands efficiently to enable Scapeshift on turn two or three",
+      "Hold up mana for potential hand disruption or counterspells",
+      "Deploy Lumra early to establish a board presence and begin counter accumulation"
+    ],
+    "mid_game": [
+      "Cast Scapeshift to exile lands and fetch Yorion or additional Lumra copies",
+      "Use combat tricks or natural growth to pump Lumra before attacking",
+      "Position Yorion to survive combat while drawing cards upon its eventual sacrifice"
+    ],
+    "late_game": [
+      "Leverage Yorion's massive draw to find finishers or sweepers",
+      "Use Scapeshift repeatedly to bypass land count limits and stabilize",
+      "Close out games with a pumped Lumra while maintaining card advantage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Yorion, Sky Nomad",
+      "role": "Primary win condition and card engine",
+      "notes": "Deploy via Scapeshift, let it accumulate counters if possible, then sacrifice it at end of turn to draw cards equal to its power."
+    },
+    {
+      "name": "Scapeshift",
+      "role": "Combo enabler and acceleration spell",
+      "notes": "Exile X lands to put X lands onto the battlefield, using it to fetch Yorion, Lumra, or additional mana sources while bypassing land count restrictions."
+    },
+    {
+      "name": "Lumra, Bellow of the Woods",
+      "role": "Combat threat and counter pump",
+      "notes": "Play early to trigger its combat pump ability, grow it with counters, and use it to pressure opponents while you set up Yorion."
+    }
+  ],
+  "sequencing_tips": [
+    "Always play lands before casting Scapeshift to maximize the number of lands you can exile",
+    "Hold up Scapeshift until you have a clear target or need to bypass a land count limit",
+    "Pump Lumra during your opponent's turn or before combat to maximize surprise and combat damage",
+    "Sacrifice Yorion at the end of your turn to draw cards safely and avoid opponent interaction"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early Lumra deployment and use Scapeshift to fetch defensive lands or Yorion for card draw to outlast the early pressure.",
+      "watch_for": [
+        "Fast one-drop creatures",
+        "Early board wipes",
+        "Pressure that forces you to play Yorion face"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around instant-speed interaction by holding up mana, and use Scapeshift to bypass hand traps by fetching multiple threats at once.",
+      "watch_for": [
+        "Counterspell",
+        "Thoughtseize",
+        "Board wipes that target high-power creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race with Lumra while using Yorion's draw to find answers to their threats, and leverage Scapeshift to stabilize when they swing hard.",
+      "watch_for": [
+        "Mid-sized creatures with enter-the-battlefield triggers",
+        "Removal spells",
+        "Card draw engines that outpace Yorion"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures that pressure early",
+    "Instant-speed counterspells that stop Scapeshift",
+    "Hand disruption targeting Yorion or Lumra",
+    "Board wipes that clear pumped creatures"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T04:00:41+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:00:41+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "2173e29331950744",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype: Sultai Scapeshift; Format: pioneer; Signature cards: Yorion, Sky Nomad, Scapeshift, Lumra, Bellow of the Woods"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards: Yorion, Sky Nomad, Scapeshift, Lumra, Bellow of the Woods"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "General Pioneer combo/ramp piloting principles applied to signature cards"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard Pioneer meta threats inferred from format knowledge and deck structure"
+    }
+  ]
+}

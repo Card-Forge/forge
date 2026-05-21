@@ -1,0 +1,142 @@
+{
+  "archetype": "4c Legends",
+  "format": "pioneer",
+  "strategy_type": "midrange",
+  "overview": "This four-color legendary midrange deck leverages Aether Revolt staples to control the board while applying steady pressure. By combining discard effects, sacrifice-based removal, and growing legendary threats, it aims to outvalue opponents in the mid-to-late game. The package thrives on card advantage and efficient board wipes disguised as creature sacrifices.",
+  "win_conditions": [
+    "Outvalue opponents through card advantage from Crimson Chaos and Tinybones Joins Up",
+    "Close games with growing legendary threats like Tinybones Joins Up",
+    "Control the board with sacrifice-based removal and token generation"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early legendary creatures or token generators",
+      "Hands containing Crimson Chaos or Carnage with a creature to sacrifice",
+      "Mana bases that support four-color casting by turn three"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking removal or discard effects",
+      "Hands with only late-game legends and no early interaction",
+      "Hands missing two or more basic lands or key duals"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and early legends to establish board presence",
+      "Use Crimson Chaos to disrupt opponent's hand while drawing cards",
+      "Hold creatures to fuel Carnage if needed"
+    ],
+    "mid_game": [
+      "Sacrifice tokens or excess creatures to cast Carnage for targeted removal",
+      "Let Tinybones Joins Up grow while applying pressure",
+      "Maintain card advantage through discard and draw effects"
+    ],
+    "late_game": [
+      "Scale Tinybones Joins Up into a massive threat",
+      "Generate token armies with Glasspool Mimic deaths",
+      "Outlast opponents with superior card economy and board control"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Glasspool Mimic",
+      "role": "Token generator and early beatstick",
+      "notes": "Cast early to establish presence; its death triggers Thopter tokens that can fuel Carnage or block."
+    },
+    {
+      "name": "Carnage",
+      "role": "Sacrifice-based removal",
+      "notes": "Requires a creature sacrifice; use tokens or excess legends to remove key threats efficiently."
+    },
+    {
+      "name": "Crimson Chaos",
+      "role": "Hand disruption and card draw",
+      "notes": "Play on opponent's turn to discard their key cards, then draw to maintain tempo and find answers."
+    },
+    {
+      "name": "Tinybones Joins Up",
+      "role": "Scaling legendary threat",
+      "notes": "Enters with discard; grows larger with each creature you control, making it a primary win condition."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold creatures in hand to enable Carnage when facing big threats",
+    "Cast Crimson Chaos before playing creatures to maximize hand disruption",
+    "Save Glasspool Mimic deaths for when you need blockers or Carnage fuel",
+    "Prioritize keeping Tinybones Joins Up alive while building board state"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early blockers and use Carnage on their biggest threats. Keep discard in hand to slow their curve.",
+      "watch_for": [
+        "Early board wipes",
+        "Fast finishers",
+        "Creature sweepers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply steady pressure with legends and tokens. Use Crimson Chaos to strip their hand before they stabilize.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Late-game value engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race with growing threats while maintaining card advantage. Sacrifice tokens to remove their key pieces.",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw spells",
+        "Value legends"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Creature sweepers",
+    "Counterspells",
+    "Board wipes",
+    "Fast finishers",
+    "Card draw engines"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T04:29:30+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:29:30+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "0aaa97c216271e08",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Signature cards emphasize discard, sacrifice removal, and scaling legends, indicating a midrange tempo approach."
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

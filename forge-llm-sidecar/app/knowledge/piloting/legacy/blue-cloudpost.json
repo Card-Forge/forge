@@ -1,0 +1,135 @@
+{
+  "archetype": "Blue Cloudpost",
+  "format": "legacy",
+  "strategy_type": "tempo",
+  "overview": "Blue Cloudpost is a Legacy tempo deck that leverages Kozilek's Command for flexible card advantage and disruption, while using Karn, the Great Creator to control the board through artifact conversion and untap effects. Thundertrap Trainer serves as a scalable threat that grows into a finisher or board-clearing engine through its counter and damage mechanics. Success relies on sequencing these signature pieces to outmaneuver Legacy's fast-paced threats while maintaining resource parity.",
+  "win_conditions": [
+    "Winning with Thundertrap Trainer after repeated +1/+1 counter applications",
+    "Overwhelming the opponent with Karn's artifact conversion and untap abilities",
+    "Closing out games with Kozilek's Command damage mode after stripping opponent's resources"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Kozilek's Command for early disruption",
+      "Hands containing Karn, the Great Creator with a play-around plan",
+      "Hands with Thundertrap Trainer and cheap interaction"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking instant-speed interaction in a Legacy environment",
+      "Hands with only high-cost permanents and no draw",
+      "Hands missing a clear path to stabilize against aggressive Legacy archetypes"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing Kozilek's Command to draw into answers or disrupt opponent's turns",
+      "Deploy Thundertrap Trainer to establish board presence and generate incremental value",
+      "Hold up mana for interaction while assessing opponent's opening strategy"
+    ],
+    "mid_game": [
+      "Use Karn, the Great Creator to convert opponent's threats into artifacts and untap them for control",
+      "Apply +1/+1 counters to Thundertrap Trainer to grow it into a board wipe or finisher",
+      "Cycle Kozilek's Command modes to maintain card advantage and manage tempo"
+    ],
+    "late_game": [
+      "Leverage Karn's untap ability to repeatedly trigger artifact synergies and outvalue opponents",
+      "Push damage with a large Thundertrap Trainer while protecting it with Kozilek's Command",
+      "Transition to a grindy control game by stripping opponent's resources and closing with direct damage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Kozilek's Command",
+      "role": "Primary source of card advantage and disruption",
+      "notes": "Use the draw mode early to find answers, switch to damage mode to close games, and utilize the untap mode to accelerate Karn's abilities."
+    },
+    {
+      "name": "Karn, the Great Creator",
+      "role": "Board control and artifact synergy engine",
+      "notes": "Convert opponent's creatures to artifacts to enable untap control, and use his +1/+1 counter ability to protect himself or boost other permanents."
+    },
+    {
+      "name": "Thundertrap Trainer",
+      "role": "Incremental advantage creature and potential finisher",
+      "notes": "Tap to add +1/+1 counters and flying for evasion, or untap to deal damage and generate card advantage through its triggered abilities."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up Kozilek's Command before committing Karn to the battlefield to protect against early removal",
+    "Prioritize giving Thundertrap Trainer flying before attacking to avoid being blocked by aggressive threats",
+    "Use Karn's untap ability on your opponent's turn to disrupt their resource generation while maintaining board presence"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize Kozilek's Command for early disruption and use Thundertrap Trainer's flying to bypass early blockers while growing counters.",
+      "watch_for": [
+        "Fast one-drop threats",
+        "Early board wipes",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Use Karn to convert their key counterspells or permanents into artifacts, forcing them to waste removal on untapped or converted pieces.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspell packages",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their casting sequence with Kozilek's Command and use Karn's artifact conversion to break up their combo pieces if they rely on non-artifact permanents.",
+      "watch_for": [
+        "Combo enablers",
+        "Graveyard recursion",
+        "Win-condition pieces"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Counterspell packages",
+    "Graveyard hate"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:51:02+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:51:02+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "1683b30e4902c6f9",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "signature cards and Legacy format pace"
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

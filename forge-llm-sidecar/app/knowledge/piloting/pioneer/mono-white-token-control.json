@@ -1,0 +1,144 @@
+{
+  "archetype": "Mono-White Token Control",
+  "format": "pioneer",
+  "strategy_type": "control",
+  "overview": "This Pioneer archetype blends token generation with traditional control elements to stabilize and outvalue opponents. By leveraging Enduring Innocence for recursion and board wipes, you protect your token engines while setting up lethal Yorion, Sky Nomad attacks. Caretaker's Talent serves as a persistent value sink that punishes aggressive strategies and fuels your late-game dominance.",
+  "win_conditions": [
+    "Yorion, Sky Nomad dealing combat damage with token support",
+    "Caretaker's Talent generating card advantage to outdraw opponents",
+    "Enduring Innocence enabling recursive board states and value loops"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early token generators or one-drops",
+      "Draws containing Enduring Innocence or Caretaker's Talent",
+      "Combinations that enable turn-two Yorion attacks"
+    ],
+    "mulligan_criteria": [
+      "High mana counts without early interaction",
+      "Hands lacking token producers or Yorion",
+      "Draws with only late-game finishers and no ramp"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands and one-drops to establish token presence",
+      "Use early interaction to disrupt opponent's game plan",
+      "Look for turn-two Yorion attacks if possible"
+    ],
+    "mid_game": [
+      "Activate Caretaker's Talent to stabilize against aggressive decks",
+      "Cycle through Enduring Innocence to recover key permanents",
+      "Build a wide board of tokens to pressure life totals"
+    ],
+    "late_game": [
+      "Commit Yorion to the board for massive combat damage",
+      "Use Caretaker's Talent to draw into answers or finishers",
+      "Leverage Enduring Innocence to replay threats and close games"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Yorion, Sky Nomad",
+      "role": "Primary finisher and combat damage engine",
+      "notes": "Attack with as many tokens as possible to maximize damage; keep it safe until you have a wide board."
+    },
+    {
+      "name": "Caretaker's Talent",
+      "role": "Value engine and board wipe",
+      "notes": "Activate it when opponents attack or cast spells to draw cards; use it to outvalue control decks and stabilize against aggro."
+    },
+    {
+      "name": "Enduring Innocence",
+      "role": "Recursion and board control",
+      "notes": "Exile key permanents to replay them later; use it to bounce opponent's threats or recover your own token generators."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up mana for Yorion's attack before casting other spells",
+    "Activate Caretaker's Talent in response to opponent's combat or spells",
+    "Time Enduring Innocence activations to protect your board or disrupt key turns"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Focus on early token production and activate Caretaker's Talent to draw into answers.",
+      "watch_for": [
+        "Early board wipes",
+        "Fast finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Use Enduring Innocence to bypass counterspells and generate value with Caretaker's Talent.",
+      "watch_for": [
+        "Permanent removal",
+        "Game-ending board clears"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipes",
+    "Permanent removal",
+    "Card draw engines"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T04:54:53+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:54:53+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "2e2617f509c5f454",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

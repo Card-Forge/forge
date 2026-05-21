@@ -1,0 +1,258 @@
+{
+  "archetype": "Yawgmoth",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "BG Yawgmoth is a complex, synergistic combo deck in Modern that loops Yawgmoth, Thran Physician with Undying creatures to draw cards and win via sacrifice triggers. The deck relies on mana dorks, tutors, and careful resource management to navigate a steep learning curve and an interactive metagame. Mastering its sequencing allows players to consistently execute the combo or apply alternate win conditions.",
+  "win_conditions": [
+    "Blood Artist",
+    "Geralf's Messenger",
+    "Grist, the Hunger Tide",
+    "Hapatra, Vizier of Poisons"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing mana dorks like Birds of Paradise or Ignoble Hierarch",
+      "Low-cost Undying creatures to start the loop",
+      "Tutors like Chord of Calling or Eldritch Evolution"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early mana acceleration",
+      "Hands without combo pieces or tutors",
+      "Hands vulnerable to early disruption without interaction"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Birds of Paradise",
+          "Ignoble Hierarch",
+          "Chord of Calling",
+          "Yawgmoth, Thran Physician",
+          "Blood Artist"
+        ],
+        "decision": "keep",
+        "reason": "Contains mana dorks, a tutor, and core combo pieces to establish early game presence and search for missing links."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play mana dorks like Birds of Paradise and Ignoble Hierarch to accelerate mana",
+      "Use Wall of Roots to generate mana on both turns",
+      "Establish low-cost Undying creatures to enable the loop"
+    ],
+    "mid_game": [
+      "Deploy tutors like Chord of Calling and Eldritch Evolution to find combo pieces",
+      "Begin sacrificing creatures to trigger Yawgmoth, Thran Physician and draw cards",
+      "Navigate opponent's interaction by playing around counterspells and discards"
+    ],
+    "late_game": [
+      "Execute the full Undying/Yawgmoth loop to drain opponent's life or draw into victory",
+      "Utilize alternate win conditions like Hapatra's tokens or Grist's abilities",
+      "Manage resources to create constant combo attempts that evade answers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Yawgmoth, Thran Physician",
+      "role": "Core combo engine",
+      "notes": "Draws cards when creatures with +1/+1 counters gain -1/-1 counters, enabling the Undying loop."
+    },
+    {
+      "name": "Blood Artist",
+      "role": "Primary win condition",
+      "notes": "Drains opponent's life whenever a creature dies, synergizing with the sacrifice loop."
+    },
+    {
+      "name": "Geralf's Messenger",
+      "role": "Primary win condition",
+      "notes": "Drains opponent's life upon entering the battlefield, repeatedly triggered by the Undying loop."
+    },
+    {
+      "name": "Birds of Paradise",
+      "role": "Mana dork",
+      "notes": "Classic mana acceleration to cast the 4-mana core piece."
+    },
+    {
+      "name": "Ignoble Hierarch",
+      "role": "Mana dork",
+      "notes": "New dork from Modern Horizons II that provides mana and tribal synergy."
+    },
+    {
+      "name": "Wall of Roots",
+      "role": "Mana generator",
+      "notes": "Generates two mana for tutors like Chord of Calling and can be activated on opponent's turn."
+    },
+    {
+      "name": "Chord of Calling",
+      "role": "Tutor",
+      "notes": "Reliable tutor for low-cost creatures, fitting the deck's early game focus."
+    },
+    {
+      "name": "Eldritch Evolution",
+      "role": "Tutor",
+      "notes": "Functions as a 3-mana tutor to put 4-cost creatures directly into play, highly valuable with Undying cards."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Interaction",
+      "notes": "Minimal interaction used to remove key threats, though opponents often play around it."
+    },
+    {
+      "name": "Grist, the Hunger Tide",
+      "role": "Utility/Alternate win condition",
+      "notes": "Creates bodies, destroys creatures/planeswalkers via sacrifice, and can win the game."
+    }
+  ],
+  "sequencing_tips": [
+    "Identify the best plays and anticipate the opponent's worst answers to play around them.",
+    "Control your own sacrifices carefully, as they are an essential resource for the loop.",
+    "Expose Yawgmoth, Thran Physician at the safest time, preferably with combo possibilities in response to removal.",
+    "Manage resources to either go off quickly with dorks and Eldritch Evolution or create constant combo attempts to evade answers."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Interactive/Control",
+      "advice": "Play around counterspells and discards by sequencing tutors and combo pieces carefully.",
+      "watch_for": [
+        "counterspells",
+        "discards",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "opponent_archetype": "Graveyard Hate",
+      "advice": "Use Outland Liberator as a silver bullet to bypass graveyard restrictions.",
+      "watch_for": [
+        "Graveyard Hates",
+        "Torpor Orb"
+      ]
+    },
+    {
+      "opponent_archetype": "Artifact/Enchantment Heavy",
+      "advice": "Sideboard Outland Liberator to deal with problematic permanents and enable a more interactive approach.",
+      "watch_for": [
+        "Urza's Saga",
+        "Hammer Time's artifacts",
+        "Chalice of the Void",
+        "Leyline of Sanctity"
+      ]
+    }
+  ],
+  "common_threats": [
+    "counterspells",
+    "discards",
+    "Leyline of Sanctity",
+    "Graveyard Hates",
+    "Torpor Orb",
+    "Urza's Saga",
+    "Hammer Time's artifacts",
+    "Chalice of the Void",
+    "removal"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-bg-yawgmoth-and-the-strength-of-complexity",
+    "generated_at": "2026-05-21T01:17:59+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-bg-yawgmoth-and-the-strength-of-complexity",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:16:32+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "ebb41609a9948b93",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "BG Yawgmoth is a deck that keeps appearing in the meta in a more contained way, but that always shows a lot of efficiency... This is one of the few combos that still stands in the format currently."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "end the game, either with Blood Artist on the battlefield or with Geralf's Messenger"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Grist... may even be an alternate wincondition."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Hapatra, Vizier of Poisons is practically an alternate windoncidition"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "identify which are the best plays and always think about the opponent's worst answers and play around them"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "needing to control your own sacrifices, which are an essential resource"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "know the safest time to expose Yawgmoth, preferably with combo possibilities in response to some removal"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "By managing your resources, you can either go off fast, thanks to the dorks and Eldritch Evolution, or create a constant sequence of combo attempts, thus evading interactive decks' answers."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "there are many counterspells and discards in almost every deck"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "ignores effects like Leyline of Sanctity"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "good answer against sideboard cards like Graveyard Hates and Torpor Orb"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "dealing with problematic cards from the current metagame like Urza's Saga, Hammer Time's artifacts and Chalice of the Void"
+    }
+  ]
+}

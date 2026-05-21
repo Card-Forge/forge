@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
 import org.tinylog.Logger;
@@ -54,8 +57,54 @@ public final class SidecarInfluence {
 
     private volatile boolean enabled = false;
 
+    /**
+     * Latest in-flight /recognize future, pushed by the observer when it fires
+     * a call. {@link #awaitLatest(long)} blocks on this so decision points can
+     * give the LLM a budget to finish before the heuristic AI commits.
+     */
+    private volatile CompletableFuture<?> latestCall = CompletableFuture.completedFuture(null);
+
     public SidecarInfluence(final AiController ai) {
         this.ai = ai;
+    }
+
+    /** Called by the observer when it fires a /recognize call. */
+    public void setLatestCall(final CompletableFuture<?> future) {
+        if (future != null) {
+            latestCall = future;
+        }
+    }
+
+    /**
+     * Block up to {@code timeoutMs} for the most recent /recognize to settle.
+     * Used at key decision points (mulligan, start of main, declare-attackers)
+     * so the AI gives the sidecar a budget to deliver fresh advice before
+     * committing. Returns immediately if no call is in flight or it's already
+     * done.
+     *
+     * @return true if the call completed within the budget, false on timeout.
+     */
+    public boolean awaitLatest(final long timeoutMs) {
+        if (timeoutMs <= 0) {
+            return latestCall.isDone();
+        }
+        final CompletableFuture<?> f = latestCall;
+        if (f.isDone()) {
+            return true;
+        }
+        try {
+            f.get(timeoutMs, TimeUnit.MILLISECONDS);
+            return true;
+        } catch (final TimeoutException ex) {
+            Logger.debug("SidecarInfluence: awaitLatest timed out after %d ms", timeoutMs);
+            return false;
+        } catch (final InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            return false;
+        } catch (final Exception ex) {
+            // Future never throws (fail-soft); any unexpected exception is harmless here.
+            return true;
+        }
     }
 
     /**
@@ -153,54 +202,52 @@ public final class SidecarInfluence {
     }
 
     /**
-     * Apply second-pass personality weighting from AiProps.
-     * Aggressive profiles boost ATTACK/PLAY_SPELL; defensive ones boost BLOCK/PASS.
+     * Apply personality weighting as a soft DOWN-weight only.
+     *
+     * <p>Historically this was a two-sided multiplier (boost favored actions,
+     * dampen disfavored ones). That compounded with the
+     * {@link AiProps#SIDECAR_BIAS_ATTACK}/...{@code _BLOCK}/...{@code _PASS}
+     * multipliers applied at the decision sites — an aggressive AI's ATTACK
+     * could get boosted twice. Bias is already the user-tunable knob per
+     * profile, so personality is now restricted to DOWN-weighting
+     * actions that conflict with the personality. That preserves the
+     * "aggressive AI doesn't sandbag" intent without re-boosting actions the
+     * profile already favors.</p>
+     *
+     * <p>{@link AiProps#SIDECAR_PERSONALITY_WEIGHT} = 0 disables personality
+     * entirely. Higher values mean stronger dampening (cap 0.5x).</p>
      */
     private double applyPersonalityWeight(final ActionScore action) {
-        double pct = action.percentage();
+        final double pct = action.percentage();
 
-        final boolean isAggro = ai.getBoolProperty(AiProps.PLAY_AGGRO);
         final int weight = ai.getIntProperty(AiProps.SIDECAR_PERSONALITY_WEIGHT);
-
         if (weight <= 0) {
-            return pct; // personality weighting disabled
+            return pct;
         }
-
-        final double factor = 1.0 + (weight / 100.0 - 1.0) * 0.5; // normalize to 0.5x-1.5x
+        final boolean isAggro = ai.getBoolProperty(AiProps.PLAY_AGGRO);
+        // Dampening factor ranges from 1.0 (weight=0) down to 0.5 (weight=100).
+        final double damp = Math.max(0.5, 1.0 - (weight / 100.0) * 0.5);
 
         switch (action.actionType()) {
-            case "PLAY_SPELL":
-            case "ACTIVATE_ABILITY":
-                if (isAggro) {
-                    pct *= Math.min(factor * 1.2, 1.5);
-                }
-                break;
             case "ATTACK":
-                if (isAggro) {
-                    pct *= Math.min(factor * 1.3, 1.6);
-                } else {
-                    pct *= 0.85;
-                }
-                break;
-            case "BLOCK":
                 if (!isAggro) {
-                    pct *= Math.min(factor * 1.15, 1.4);
-                } else {
-                    pct *= 0.8;
+                    return pct * damp;
                 }
                 break;
             case "PASS":
                 if (isAggro) {
-                    pct *= 0.7;
-                } else {
-                    pct *= Math.min(factor * 1.1, 1.3);
+                    return pct * damp;
+                }
+                break;
+            case "BLOCK":
+                if (isAggro) {
+                    return pct * damp;
                 }
                 break;
             default:
                 break;
         }
-
-        return Math.max(0.0, Math.min(100.0, pct));
+        return pct;
     }
 
     /** @return the best action of a given type, or empty if none. */

@@ -1,0 +1,157 @@
+{
+  "archetype": "Blue Artifacts",
+  "format": "legacy",
+  "strategy_type": "tempo",
+  "overview": "This U/R artifact deck leverages fast mana from Mox Opal and Lotus Petal to accelerate into Goblin Welder recursion. By combining red aggression with blue control, it applies early pressure while maintaining the flexibility to disrupt opponents. The goal is to establish an artifact engine that generates consistent value and closes out games through relentless board presence.",
+  "win_conditions": [
+    "Goblin Welder artifact recursion loops",
+    "Early artifact pressure combined with red removal",
+    "Blue spell suite disruption enabling finishers"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with fast mana and a one- or two-drop",
+      "Hands containing Goblin Welder alongside artifact support",
+      "Hands featuring blue interaction paired with early threats"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking artifact synergy or fast mana",
+      "Hands composed entirely of high-cost cards",
+      "Hands without early disruption or threats"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Deploy Mox Opal and Lotus Petal immediately to accelerate mana",
+      "Play low-cost artifacts to enable Goblin Welder activations",
+      "Use red instant-speed removal to clear early blockers"
+    ],
+    "mid_game": [
+      "Activate Goblin Welder to fetch key artifacts from the graveyard",
+      "Cast blue control spells to protect your board state",
+      "Build a resilient artifact engine that pressures the opponent"
+    ],
+    "late_game": [
+      "Loop Goblin Welder and artifacts to generate infinite value",
+      "Cast high-impact finishers to close the game",
+      "Maintain card advantage through continuous artifact recursion"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Mox Opal",
+      "role": "Fast artifact mana acceleration",
+      "notes": "Play on turn one to enable early Goblin Welder or artifact drops; prioritize hands with artifact synergy."
+    },
+    {
+      "name": "Lotus Petal",
+      "role": "Flexible colorless mana ramp",
+      "notes": "Provides early mana for blue spells or artifact casting; often paired with Opal for turn-two plays."
+    },
+    {
+      "name": "Goblin Welder",
+      "role": "Artifact recursion and value engine",
+      "notes": "Sacrifice artifacts to fetch key pieces from the graveyard; use repeatedly to generate value and disrupt opponents."
+    }
+  ],
+  "sequencing_tips": [
+    "Always play Mox Opal before Lotus Petal when artifact mana is required",
+    "Hold blue counterspells for opponent's key threats rather than early swats",
+    "Sacrifice expendable artifacts first to protect your core engine pieces",
+    "Activate Goblin Welder before opponent's instant-speed removal resolves"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race with early artifact pressure and use Welder to fetch disruptive artifacts.",
+      "watch_for": [
+        "Counterspell",
+        "Rest in Peace",
+        "Path to Exile"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize red removal and use artifacts for early blockers or finishers.",
+      "watch_for": [
+        "Lightning Bolt",
+        "Abrupt Decay",
+        "Early board presence"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their casting sequence with blue interaction and use Welder to find answers.",
+      "watch_for": [
+        "Fast mana",
+        "Key combo pieces",
+        "Graveyard recursion"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Rest in Peace",
+    "Lightning Bolt",
+    "Counterspell",
+    "Abrupt Decay"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T07:48:39+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:48:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "2f97dee4f5550165",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

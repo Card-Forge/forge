@@ -1,0 +1,134 @@
+{
+  "archetype": "Mono Red Pingers",
+  "format": "pauper",
+  "strategy_type": "aggro",
+  "overview": "Mono Red Pingers is a fast, aggressive Pauper archetype that floods the board with cheap one-toughness creatures to apply relentless pressure. It leverages signature threats like Kessig Flamebreather to deal direct damage on attack, while Wrenn's Resolve enables combat math and card advantage. Finish games quickly with instant-speed burn like Lava Spike before opponents can stabilize.",
+  "win_conditions": [
+    "Dealing combat damage with multiple low-cost creatures",
+    "Triggering Kessig Flamebreather's attack ability to reduce opponent life",
+    "Closing out games with direct damage spells like Lava Spike"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with turn-one or turn-two creature plays",
+      "Curves that include cheap removal or burn spells",
+      "Multiple one-mana creatures to establish early board presence"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early plays or curve disruption",
+      "Draws with only high-cost cards or no interaction",
+      "Lack of burn spells to close out games"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap creatures immediately to establish board presence",
+      "Use one-mana threats to force early blockers or go face",
+      "Save mana for instant-speed burn to clear blockers or apply pressure"
+    ],
+    "mid_game": [
+      "Cast Wrenn's Resolve on attacking creatures to push through blockers and draw cards",
+      "Trade one-toughness creatures efficiently into larger threats",
+      "Use Lava Spike to remove key blockers or reduce opponent life total"
+    ],
+    "late_game": [
+      "Flood the board with additional cheap threats to overwhelm defenses",
+      "Prioritize direct damage spells to finish the game quickly",
+      "Maintain pressure to prevent opponents from setting up late-game answers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Kessig Flamebreather",
+      "role": "Primary attacker and direct damage engine",
+      "notes": "Attack with it every turn to deal one damage to any target, forcing opponents to block inefficiently or take chip damage."
+    },
+    {
+      "name": "Wrenn's Resolve",
+      "role": "Combat math and card advantage tool",
+      "notes": "Cast after blockers are declared to boost attackers, ensure combat damage triggers, and draw a card to maintain hand size."
+    },
+    {
+      "name": "Lava Spike",
+      "role": "Instant-speed removal and finisher",
+      "notes": "Hold up mana to clear blockers at instant speed or deal two damage to the opponent to close out games."
+    }
+  ],
+  "sequencing_tips": [
+    "Declare attackers before casting Wrenn's Resolve to maximize combat damage triggers",
+    "Hold up red mana for instant-speed burn to respond to opponent plays",
+    "Trade one-toughness creatures into larger blockers to preserve your burn spells for the opponent"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Go wide with cheap creatures and use burn spells to bypass counterspells and life gain.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Life gain effects"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Race efficiently by using removal on their biggest threats and pushing damage with Flamebreather.",
+      "watch_for": [
+        "Cheap removal",
+        "Creature sweepers",
+        "Early board presence"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Apply maximum early pressure before they can stabilize with removal or larger creatures.",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipe spells",
+    "Cheap removal targeting one-toughness creatures",
+    "Life gain effects that extend the game"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T10:26:03+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:26:03+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "5263741b85b4f5c4",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

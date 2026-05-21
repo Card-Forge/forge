@@ -1,0 +1,246 @@
+{
+  "archetype": "Jeskai Ephemerate",
+  "format": "pauper",
+  "strategy_type": "control",
+  "overview": "Jeskai Ephemerate is a control deck that leverages Cleansing Wildfire and indestructible artifact lands to ramp and draw cards early. It combines white, blue, and red to provide answers, recursion, and value engines like Archaeomancer. However, its reliance on ramp and answers makes it somewhat slow and vulnerable in the early game.",
+  "win_conditions": [
+    "Archaeomancer combined with Ephemerate for huge value",
+    "Token generation from Soul of Migration",
+    "Monarch strategy with Crimson Fleet Commodore",
+    "Out-resourcing and locking the opponent"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "red land",
+      "Cleansing Wildfire",
+      "Preordain"
+    ],
+    "mulligan_criteria": [
+      "hands with few lands",
+      "hands without answers"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Mountain",
+          "Cleansing Wildfire",
+          "Preordain",
+          "Counterspell",
+          "Island",
+          "Plains",
+          "Archaeomancer"
+        ],
+        "decision": "keep",
+        "reason": "Contains the essential red land, Cleansing Wildfire, and Preordain to ramp and draw into needed answers."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize keeping red land and Cleansing Wildfire",
+      "Use Preordain to find answers",
+      "Play patiently and avoid aggressive early plays"
+    ],
+    "mid_game": [
+      "Control the board by removing key threats",
+      "Set up the Archaeomancer and Ephemerate lock",
+      "Use removal like Lightning Bolt and Abrade efficiently"
+    ],
+    "late_game": [
+      "Generate massive card advantage with Archaeomancer",
+      "Out-resource the opponent to secure the lock",
+      "Win with token swarms or monarch"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Cleansing Wildfire",
+      "role": "ramp/draw",
+      "notes": "Essential for early game mana advantage and card draw."
+    },
+    {
+      "name": "Archaeomancer",
+      "role": "value engine",
+      "notes": "Combined with Ephemerate yields huge value."
+    },
+    {
+      "name": "Ephemerate",
+      "role": "protection",
+      "notes": "Protects key permanents and synergizes with Archaeomancer."
+    },
+    {
+      "name": "Preordain",
+      "role": "cantrip",
+      "notes": "Used to find needed answers during the game."
+    },
+    {
+      "name": "Dawnbringer Cleric",
+      "role": "enchantment removal/life gain",
+      "notes": "Destroys enchantments and gains life."
+    },
+    {
+      "name": "Lightning Bolt",
+      "role": "removal",
+      "notes": "Key early game answer and part of the removal lock."
+    },
+    {
+      "name": "Counterspell",
+      "role": "answers",
+      "notes": "Blue interaction to stop opponent's spells."
+    },
+    {
+      "name": "Dust to Dust",
+      "role": "sideboard removal",
+      "notes": "Exiles artifacts, including indestructible lands."
+    },
+    {
+      "name": "Crimson Fleet Commodore",
+      "role": "monarch",
+      "notes": "Provides an alternative win condition."
+    }
+  ],
+  "sequencing_tips": [
+    "Activate Relic of Progenitus every turn to prevent Gurmag from resolving",
+    "Resolve Mulldrifter to stop faeries and gain card advantage",
+    "Use Dust to Dust early in Boros matchups to remove artifact lands",
+    "Prioritize red land and Cleansing Wildfire in opening hand"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Affinity",
+      "advice": "Use Abrade on lands in Game 1, side in Dust to Dust for Game 2 to exile artifacts and indestructible lands.",
+      "watch_for": [
+        "Atog",
+        "Disciple of the Vault",
+        "indestructible lands"
+      ]
+    },
+    {
+      "opponent_archetype": "Dimir Faeries",
+      "advice": "Play a patience game, resolve Mulldrifter to stop faeries, side in Pyroblast.",
+      "watch_for": [
+        "Ninja of the Deep Hours",
+        "Gurmag",
+        "graveyard cards"
+      ]
+    },
+    {
+      "opponent_archetype": "Bogles",
+      "advice": "Use Archaeomancer, Ephemerate, and Lightning Bolt lock, side in Dawnbringer Cleric and Circle of Protection: Green for hexproof creatures.",
+      "watch_for": [
+        "Slippery Bogle",
+        "hexproof creatures",
+        "enchantments"
+      ]
+    },
+    {
+      "opponent_archetype": "Boros Synthesizer",
+      "advice": "Counter and kill the right cards, use Dust to Dust early to remove artifact lands.",
+      "watch_for": [
+        "white indestructible artifact lands",
+        "Dust to Dust"
+      ]
+    },
+    {
+      "opponent_archetype": "Jeskai Ephemerate",
+      "advice": "Avoid mistakes and bait, focus on generating more resources and locking the opponent.",
+      "watch_for": [
+        "missing land drops",
+        "bait",
+        "risky plays"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Atog",
+    "Disciple of the Vault",
+    "Ninja of the Deep Hours",
+    "Gurmag",
+    "Slippery Bogle",
+    "hexproof creatures",
+    "indestructible artifact lands"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-jeskai-ephemerate-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T09:29:11+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-jeskai-ephemerate-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:27:46+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "3d1af10bcf9d8cc3",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "talk about a control deck... improved a lot with Cleansing Wildfire and the indestructible artifact lands... being a little slow, so it suffers a bit on the early game"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Archaeomancer which combined with Ephemerate yields a huge value"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "creatures like Soul of Migration and the tokens it makes"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "monarch Crimson Fleet Commodore"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "generate more resources than the opponent and try to lock them"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "activating Relic of Progenitus every turn or even popping it if necessary"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "resolve our Mulldrifter , which, in addition to stopping the faeries, will give us the card advantage"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "if well played at the beginning of the game, can be very advantageous"
+    }
+  ],
+  "common_threats_evidence": []
+}

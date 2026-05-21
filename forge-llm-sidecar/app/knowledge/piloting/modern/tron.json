@@ -1,0 +1,319 @@
+{
+  "archetype": "Tron",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "Tron is a Modern archetype focused on ramping mana by assembling Urza's Mine, Urza's Tower, and Urza's Power Plant to generate seven mana by turn three. Once the combo is assembled, the deck wins by casting gigantic creatures, using taxing artifacts, and controlling the board with versatile removal.",
+  "win_conditions": [
+    "Cast gigantic creatures like Emrakul, the World Anew",
+    "Use Kozilek's Command for board control and removal",
+    "Attack with an indestructible The One Ring",
+    "Fetch finishers like Cityscape Leveler or Sundering Titan with Karn"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Having three Tron pieces already in hand",
+      "Having two Tron pieces and an Expedition Map or Devourer of Destiny",
+      "Having a Tron piece, an Expedition Map, and a Devourer of Destiny",
+      "Hands with Ugin's Labyrinth and Mind Stone if you have a 4-drop"
+    ],
+    "mulligan_criteria": [
+      "Aggressively mulligan to maximize the number of Tron pieces in hand",
+      "Mulligan if you lack the consistency pieces to assemble Tron by turn 3"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Urza's Mine",
+          "Urza's Tower",
+          "Urza's Power Plant"
+        ],
+        "decision": "keep",
+        "reason": "Having three Tron pieces already in hand guarantees a turn 3 combo."
+      },
+      {
+        "hand": [
+          "Urza's Mine",
+          "Expedition Map",
+          "Devourer of Destiny"
+        ],
+        "decision": "keep",
+        "reason": "Having a Tron piece, an Expedition Map, and a Devourer of Destiny is a typical keep."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Dedicate turns 1 and 2 to assembling three different Tron lands",
+      "Cast Expedition Map on turn 1 if holding two Tron pieces to crack on turn 2",
+      "Use Ugin's Labyrinth to enable a turn 1 Mind Stone for a turn 2 4-drop"
+    ],
+    "mid_game": [
+      "Cast gigantic creatures and expensive colorless cards once Tron is assembled",
+      "Use Kozilek's Command for removal, card draw, or graveyard exile",
+      "Deploy taxing artifacts like Chalice of the Void or The One Ring"
+    ],
+    "late_game": [
+      "Maintain board control with All Is Dust or Kozilek's Command",
+      "Use Karn, the Great Creator to tutor sideboard artifacts or finishers",
+      "Reset The One Ring to avoid life tax or attack with it"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Urza's Mine",
+      "role": "Core combo land",
+      "notes": "Part of the three-piece land combo to generate 7 mana."
+    },
+    {
+      "name": "Urza's Tower",
+      "role": "Core combo land",
+      "notes": "Provides extra mana when played as a second copy after assembling the combo."
+    },
+    {
+      "name": "Expedition Map",
+      "role": "Consistency/Ramp",
+      "notes": "Critical for assembling perfect Tron on turn 3; cast turn 1, crack turn 2."
+    },
+    {
+      "name": "Devourer of Destiny",
+      "role": "Filter/Removal",
+      "notes": "Filters draws for Tron pieces and exiles colored permanents."
+    },
+    {
+      "name": "Emrakul, the World Anew",
+      "role": "Finisher",
+      "notes": "Protected on cast, takes control of opponent's creatures, can be cast for 6 mana via madness."
+    },
+    {
+      "name": "Karn, the Great Creator",
+      "role": "Tutor/Utility",
+      "notes": "Fetches artifacts from exile or sideboard, creates indestructible tokens."
+    },
+    {
+      "name": "The One Ring",
+      "role": "Tax/Attacker",
+      "notes": "Indestructible 4/4 attacker that taxes life; can be reset by playing another copy."
+    },
+    {
+      "name": "Mind Stone",
+      "role": "Mana Dork",
+      "notes": "Enables turn 2 plays like Expedition Map or 4-drops when paired with Ugin's Labyrinth."
+    },
+    {
+      "name": "All Is Dust",
+      "role": "Board Wipe",
+      "notes": "Staple colorless removal that exiles all nonbasic lands and creatures."
+    },
+    {
+      "name": "Chalice of the Void",
+      "role": "Tax",
+      "notes": "Essential against cheap spell decks like Burn or Cascade."
+    }
+  ],
+  "sequencing_tips": [
+    "Play a second Urza's Tower after assembling the combo for extra mana.",
+    "Cast Expedition Map on turn 1 with two Tron pieces to crack on turn 2.",
+    "Discard Emrakul, the World Anew with The Underworld Cookbook to cast it for 6 mana via madness.",
+    "Reset The One Ring by playing another copy to avoid the life tax or maintain an indestructible attacker.",
+    "Use Karn, the Great Creator to fetch artifacts exiled by Devourer of Destiny or from the opponent's graveyard."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Burn",
+      "advice": "Side in Chalice of the Void to tax cheap spells.",
+      "watch_for": [
+        "Cheap spells",
+        "Early aggression"
+      ]
+    },
+    {
+      "opponent_archetype": "Cascade/Living End",
+      "advice": "Side in Chalice of the Void to counter cheap combo pieces.",
+      "watch_for": [
+        "Crashing Footfalls",
+        "Living End"
+      ]
+    },
+    {
+      "opponent_archetype": "Graveyard Strategies (Izzet)",
+      "advice": "Side in Tormod's Crypt to disrupt graveyard recursion.",
+      "watch_for": [
+        "Graveyard-dependent spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Creature Combos (Yawgmoth)",
+      "advice": "Side in Grafdigger's Cage and Pithing Needle to shut down activated abilities.",
+      "watch_for": [
+        "Yawgmoth, Thran Physician"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo/Valakut",
+      "advice": "Side in The Stone Brain to exile key lands.",
+      "watch_for": [
+        "Valakut, the Molten Pinnacle"
+      ]
+    },
+    {
+      "opponent_archetype": "Mirror Match",
+      "advice": "Side in Liquimetal Coating to destroy lands by turning them into artifacts.",
+      "watch_for": [
+        "Opponent's Tron lands",
+        "Karn activations"
+      ]
+    },
+    {
+      "opponent_archetype": "Ruby Storm",
+      "advice": "Side out All Is Dust and side in The Stone Brain or The Filigree Sylex.",
+      "watch_for": [
+        "Token generation",
+        "Storm count"
+      ]
+    },
+    {
+      "opponent_archetype": "Land Destruction",
+      "advice": "Be cautious; the deck is vulnerable to nonbasic land hate.",
+      "watch_for": [
+        "Fulminator Mage",
+        "Blood Moon",
+        "Harbinger of the Seas"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Land destruction and nonbasic land hate",
+    "Fulminator Mage",
+    "Thoughtseize",
+    "Blood Moon",
+    "Harbinger of the Seas",
+    "Boseiju, Who Endures",
+    "Assassin's Trophy",
+    "Demolition Field",
+    "Ragavan, Nimble Pilferer"
+  ],
+  "metadata": {
+    "source": "Draftsim",
+    "source_url": "https://draftsim.com/tron-modern/",
+    "generated_at": "2026-05-20T22:04:18+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Draftsim",
+      "author": "",
+      "source_url": "https://draftsim.com/tron-modern/",
+      "publish_date": "",
+      "fetched_at": "2026-05-20T22:02:36+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "bd99a2f9d9cbb5c4",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "each of them has two key components to win games: taxing your opponents, and ramping your mana so you can play your big spells as early as turn 3 thanks to a natural Tron."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "After that, you want to cast your gigantic creatures and use Kozilek's Commander to control the game a bit."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "When all else fails, you can always swing with a 4/4 indestructible The One Ring"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Cityscape Leveler and Sundering Titan : Fetch these when you need a finisher if you don’t already have a big creature in hand."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "A second Urza's Tower is better than your second copies of the other Tron pieces once you’ve assembled the combo, as it provides an extra mana."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "the plan being to cast it on turn 1 if you have at least two different Tron pieces in hand. This way, you can crack it on turn 2"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You can discard Emrakul, the World Anew with The Underworld Cookbook , and still cast it using its madness ability for a reduced cost of 6 mana."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Remember that you can “reset” your The One Ring by simply putting another copy of it on the field."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Thanks to Karn, the Great Creator ‘s ability, you can fetch any artifact that was incidentally exiled with Devourer of Destiny"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The most common strategy for beating a Tron deck in Modern is land destruction or nonbasic land hate"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Rakdos Midrange decks running Fulminator Mage in the sideboard"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Hand hate in the form of Thoughtseize is key at removing your opponents’ most significant threats"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "the most powerful ones being Blood Moon and Harbinger of the Seas"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "useful to have if you run up against Boseiju, Who Endures , Assassin's Trophy , or Demolition Field"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "handle early threats like Ragavan, Nimble Pilferer"
+    }
+  ]
+}

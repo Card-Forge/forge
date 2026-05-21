@@ -1,0 +1,288 @@
+{
+  "archetype": "Bogles",
+  "format": "pauper",
+  "strategy_type": "combo",
+  "overview": "Glitter Bogles is a Pauper combo deck that focuses on attaching multiple powerful auras to a hexproof creature to create an unblockable, lethal threat. While it contains aggro elements, its win condition relies on setting up specific key pieces to reach inevitability rather than winning purely through combat. The deck utilizes mana fixing and card draw to consistently assemble its combo while navigating a meta heavy on removal and enchantment hate.",
+  "win_conditions": [
+    "Deal lethal combat damage with a massive hexproof creature buffed by multiple auras",
+    "Survive aggressive decks by utilizing lifelink auras to gain life and outvalue opponents",
+    "Race combo decks by assembling the aura combo faster than the opponent can win"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing creatures to develop the game plan",
+      "Adequate land drops to ensure mana consistency",
+      "Cards that guarantee mana fixing for the splash colors"
+    ],
+    "mulligan_criteria": [
+      "Hands completely lacking creatures",
+      "Hands that cannot dig through the deck for key pieces",
+      "Risky hands without auras that leave the board vulnerable to wipes"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "creature",
+          "land",
+          "land",
+          "land",
+          "land"
+        ],
+        "decision": "mulligan",
+        "reason": "Article states this hand has potential but will likely put you in an irreversible situation before finding a creature, making the risk not worth it."
+      },
+      {
+        "hand": [
+          "creature",
+          "land",
+          "land",
+          "land",
+          "land"
+        ],
+        "decision": "keep",
+        "reason": "Article notes this hand is playable but risky due to lacking an aura to buff creatures, exposing the board to wipes, and inability to dig for missing pieces."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands and fixing mana to access splash colors",
+      "Deploy creatures early to establish a board presence",
+      "Play around early removal and edicts by holding up mana or sequencing carefully"
+    ],
+    "mid_game": [
+      "Attach multiple auras like Ethereal Armor and All That Glitters to hexproof creatures",
+      "Use ramp and draw spells like Utopia Sprawl and Commune with Spirits to find missing combo pieces",
+      "Navigate board wipes and enchantment hate by mulliganing appropriately or playing around known threats"
+    ],
+    "late_game": [
+      "Push for lethal damage with the buffed hexproof creature",
+      "Utilize lifelink to stabilize against aggressive decks",
+      "Race combo decks by maximizing damage output in available windows"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Ethereal Armor",
+      "role": "Primary buff aura",
+      "notes": "Essential for increasing power/toughness to reach lethal quickly."
+    },
+    {
+      "name": "All That Glitters",
+      "role": "Secondary buff aura",
+      "notes": "Works synergistically with Ethereal Armor and Ancestral Mask to create a giant unit."
+    },
+    {
+      "name": "Ancestral Mask",
+      "role": "Buff aura",
+      "notes": "Provides additional stats to the main creature."
+    },
+    {
+      "name": "Rancor",
+      "role": "Recursive buff aura",
+      "notes": "Offers recursion and consistent +1/+1 counters."
+    },
+    {
+      "name": "Armadillo Cloak",
+      "role": "Win condition/Defense",
+      "notes": "Practically a win condition against aggro decks, particularly red, by providing massive toughness."
+    },
+    {
+      "name": "Utopia Sprawl",
+      "role": "Mana ramp/fixing",
+      "notes": "Ramps and fixes mana to play expensive auras and splash colors."
+    },
+    {
+      "name": "Commune with Spirits",
+      "role": "Card draw/fixing",
+      "notes": "Fixes mana and provides card advantage, potentially finding the missing piece to win."
+    },
+    {
+      "name": "Spirited Companion",
+      "role": "Card advantage/Interaction",
+      "notes": "Acts as an extra source of card advantage and interacts with other cards rather than serving as a main creature."
+    }
+  ],
+  "sequencing_tips": [
+    "Curve well to maximize mana efficiency and take advantage of windows of opportunity",
+    "Play around counterspells and global removal by holding up mana or sequencing auras after threats are resolved",
+    "Prioritize surviving the early game against aggro before committing to the full combo",
+    "Mulligan aggressively if the hand cannot develop the game plan or dig for key pieces"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Boros Synthesizer",
+      "advice": "Considered favorable; Bogles deals more damage and gets a lot out of All That Glitters. Try to end the game as fast as possible.",
+      "watch_for": [
+        "Dawnbringer Cleric",
+        "Destroy Evil",
+        "Krark-Clan Shaman"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono-Red Kuldotha",
+      "advice": "Matchup defined by lifelink. With lifelink, survive 2-3 turns to win. Without it, rely on draws and hope opponent doesn't have key spells.",
+      "watch_for": [
+        "Kuldotha Rebirth",
+        "Goblin Bushwhacker"
+      ]
+    },
+    {
+      "opponent_archetype": "Golgari Gardens",
+      "advice": "Run against time and play around Edicts. If opponent has an Edict and you have one creature, it's game over unless played around.",
+      "watch_for": [
+        "Chainer's Edict",
+        "Enchantment hate"
+      ]
+    },
+    {
+      "opponent_archetype": "Jeskai Ephemerate",
+      "advice": "Similar to Gardens but with more control. Exploit Jeskai's slow early game to pressure the board and prepare the combo.",
+      "watch_for": [
+        "Ephemerate",
+        "Dawnbringer Cleric",
+        "Archaeomancer",
+        "Stonehorn Dignitary",
+        "Counterspells",
+        "Board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Turbo Fog",
+      "advice": "One of the worst matchups. Curve well and use Flaring Pain to break through fogs. Rely on luck and windows of opportunity.",
+      "watch_for": [
+        "Fog spells",
+        "Card draw engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Chainer’s Edict",
+    "Enchantment hate",
+    "Counterspells",
+    "Board wipes",
+    "Dawnbringer Cleric",
+    "Destroy Evil",
+    "Krark-Clan Shaman",
+    "Kuldotha Rebirth",
+    "Goblin Bushwhacker",
+    "Ephemerate",
+    "Archaeomancer",
+    "Stonehorn Dignitary",
+    "Fog spells"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-glitter-bogles-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T09:59:28+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-glitter-bogles-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:57:54+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "9acdd2a028045f94",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Bogles basically works like a combo deck... put many powerful auras on a creature with hexproof. It will eventually become a giant unit and deal lethal damage to your opponent."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "put many powerful auras on a creature with hexproof. It will eventually become a giant unit and deal lethal damage to your opponent."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Against aggressive opponents, you only need to survive until you can deal a lot of damage with one of your lifelink auras."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "As for combo decks, you'll be able to play everything you want without any fear, but keep in mind time is an important factor."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Just curve well, and take advantage of your windows of opportunity."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Against Midrange and Control decks, you have to worry about counters and/or removals that can hit your creatures... and play around these cards as you develop your game plan."
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Against aggressive opponents, you only need to survive until you can deal a lot of damage with one of your lifelink auras."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You must send back hands like the one above... risk isn't worth it."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Chainer’s Edict and similar cards... enchantment hates (for BW and BG), and counterspells (UB)."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Dawnbringer Cleric , Destroy Evil , and Krark-Clan Shaman are the main cards Boros has against you"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The worst-case scenario is if they have saved up Kuldotha Rebirth or Goblin Bushwhacker ."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Ephemerate + Dawnbringer Cleric + Archaeomancer is simply devastating for Bogles, and Stonehorn Dignitary is even more impossible to beat."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Flaring Pain is perfect against Fogs. Considering the meta is full of Turbo Fogs"
+    }
+  ]
+}

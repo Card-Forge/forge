@@ -1,0 +1,157 @@
+{
+  "archetype": "Nic Fit",
+  "format": "legacy",
+  "strategy_type": "ramp",
+  "overview": "Nic Fit is a Legacy UBRG ramp deck that leverages mana acceleration and card selection to outpace opponents. By combining Veteran Explorer's mana generation with Green Sun's Zenith's targeted fetching, the deck establishes early board presence and scales into late-game threats. Cabal Therapy provides crucial card advantage and information to navigate complex matchups.",
+  "win_conditions": [
+    "Generating massive mana advantage with Veteran Explorer to cast oversized threats",
+    "Using Green Sun's Zenith to fetch precise finishers or answers",
+    "Outvaluing opponents through repeated Cabal Therapy draws"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more lands and at least one ramp or interaction spell",
+      "Hands containing Veteran Explorer or Green Sun's Zenith with sufficient mana sources",
+      "Hands with early Cabal Therapy to secure information"
+    ],
+    "mulligan_criteria": [
+      "Hands with three or more lands and no ramp or interaction",
+      "Hands lacking any card that impacts the early game",
+      "Hands with only late-game threats and no acceleration"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize land drops and cast ramp spells to enable turn-three or turn-four plays",
+      "Use Cabal Therapy to probe opponent's hand and identify key threats or answers",
+      "Hold up mana for potential interaction while establishing a minimal board presence"
+    ],
+    "mid_game": [
+      "Cast Veteran Explorer to generate excess mana and accelerate the curve",
+      "Deploy Green Sun's Zenith to find targeted threats, removal, or additional ramp based on Therapy information",
+      "Begin applying pressure with mid-sized creatures while maintaining card advantage"
+    ],
+    "late_game": [
+      "Flood the board with mana-accelerated threats that opponents cannot answer",
+      "Use repeated Cabal Therapy to strip opponent's remaining resources",
+      "Close out games by leveraging mana advantage to cast multiple threats per turn"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Veteran Explorer",
+      "role": "Mana acceleration and curve extension",
+      "notes": "Cast on curve to generate two additional mana per turn, enabling oversized spells and multiple Zenith casts"
+    },
+    {
+      "name": "Green Sun's Zenith",
+      "role": "Card selection and threat fetching",
+      "notes": "Use after Cabal Therapy to precisely target threats or answers needed for the current matchup"
+    },
+    {
+      "name": "Cabal Therapy",
+      "role": "Card advantage and information gathering",
+      "notes": "Cast early to reveal opponent's game plan, then use that information to optimize Zenith targets and sequencing"
+    }
+  ],
+  "sequencing_tips": [
+    "Cast Cabal Therapy before Green Sun's Zenith to know exactly which creature or spell to fetch",
+    "Play Veteran Explorer as early as possible to maximize cumulative mana generation",
+    "Hold up black mana for potential interaction while keeping enough open to cast ramp on curve",
+    "Prioritize fetching threats that pressure the opponent's weakest color or matchup weakness"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Ramp quickly to large threats and use Cabal Therapy to strip early removal",
+      "watch_for": [
+        "Early board floods",
+        "Direct damage spells",
+        "Creature sweepers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Use Green Sun's Zenith to find answers to counterspells and race with mana advantage",
+      "watch_for": [
+        "Counterspell suites",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt key combo pieces with Cabal Therapy and race with accelerated threats",
+      "watch_for": [
+        "Mana acceleration",
+        "Win condition pieces",
+        "Protection spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Counterspell packages",
+    "Board wipe spells",
+    "Card draw engines"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:18:19+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:18:19+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "bc0b15050e4ba7e7",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "signature cards and format context"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "signature cards and format context"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "signature cards and format context"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "signature cards and format context"
+    }
+  ]
+}

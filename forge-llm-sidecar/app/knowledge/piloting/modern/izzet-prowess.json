@@ -1,0 +1,173 @@
+{
+  "archetype": "Izzet Prowess",
+  "format": "modern",
+  "strategy_type": "tempo",
+  "overview": "Izzet Prowess leverages cheap creatures and noncreature spells to generate rapid +1/+1 and haste triggers, racing opponents before they stabilize. By cycling through low-cost artifacts and instants, the deck maintains board presence while applying relentless pressure. Success depends on efficient mana usage and sequencing spells to maximize combat impact.",
+  "win_conditions": [
+    "Race opponents with haste-enabled prowess creatures",
+    "Overwhelm blockers through repeated spell-casting buffs",
+    "Generate value via token creation and mana dork synergy"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least one cheap creature and a noncreature spell",
+      "Two mana sources and a low-CMC threat",
+      "Mishra's Bauble paired with an instant or sorcery"
+    ],
+    "mulligan_criteria": [
+      "Zero noncreature spells to trigger prowess",
+      "Three or more lands in a six-card hand",
+      "High-CMC cards without early mana acceleration"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Mishra's Bauble and Cori-Steel Cutter on curve",
+      "Cast cheap instants or artifacts to trigger prowess before combat",
+      "Tap creatures for mana only when necessary to maintain board presence"
+    ],
+    "mid_game": [
+      "Use Slickshot Show-Off's tap ability to push lethal or clear blockers",
+      "Cycle through cheap spells to keep prowess triggers active",
+      "Hold up mana for interaction if opponent attempts to stabilize"
+    ],
+    "late_game": [
+      "Sacrifice Baubles for flying prowess tokens to bypass blockers",
+      "Maintain pressure with continuous spell casting to outvalue control decks",
+      "Pivot to defensive prowess triggers if opponent boards large threats"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Cori-Steel Cutter",
+      "role": "Mana dork and prowess engine",
+      "notes": "Tap for colored mana to enable spells, but leave untapped when possible to attack with haste. Use its prowess to quickly grow into a combat threat."
+    },
+    {
+      "name": "Slickshot Show-Off",
+      "role": "Board control and damage pusher",
+      "notes": "Tap to buff allies or kill blockers. Sequence its ability after casting a noncreature spell to maximize combat damage."
+    },
+    {
+      "name": "Mishra's Bauble",
+      "role": "Mana acceleration and token generator",
+      "notes": "Tap for mana early to cast spells. Sacrifice for two mana to create a flying prowess token when you need to race or bypass blockers."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast noncreature spells before declaring attackers to trigger prowess for combat",
+    "Hold up mana for potential counterspells or tax effects before committing to attacks",
+    "Use tap abilities after prowess triggers resolve to avoid missing combat"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race aggressively before they resolve answers. Use flying tokens and haste to bypass counterspells.",
+      "watch_for": [
+        "Countermagic",
+        "Board wipes",
+        "Large finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with cheap removal and use prowess triggers to outpace their curve. Prioritize blocking over attacking early.",
+      "watch_for": [
+        "Wide creature spreads",
+        "Sweepers",
+        "Early pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Disrupt their game plan with cheap interaction. Use prowess to race their value engines before they establish board control.",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Resilient threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their key pieces with interaction. Use haste to apply pressure before they assemble their win condition.",
+      "watch_for": [
+        "Stack manipulation",
+        "Graveyard recursion",
+        "Win condition pieces"
+      ]
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them before they deploy large threats. Use cheap spells to trigger prowess and push damage early.",
+      "watch_for": [
+        "Mana acceleration",
+        "Large creatures",
+        "Board wipes"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspells",
+    "Board wipes",
+    "Large creatures",
+    "Tax effects",
+    "Direct damage spells"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T00:28:31+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T00:28:31+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "96d041fc70e13bf9",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

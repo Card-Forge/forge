@@ -1,0 +1,153 @@
+{
+  "archetype": "Belcher",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "This Modern blue deck revolves around assembling Goblin Charbelcher and a damage source to trigger its ability for lethal damage. Sea Gate Restoration provides the card advantage needed to find combo pieces quickly, while Disrupting Shoal offers early disruption or additional damage to enable the trigger. The deck aims to close games rapidly before opponents can stabilize or interact.",
+  "win_conditions": [
+    "Trigger Goblin Charbelcher's ability by dealing damage to yourself to deal lethal damage to the opponent",
+    "Use Sea Gate Restoration to draw into combo pieces and finish the game",
+    "Leverage Disrupting Shoal for disruption or additional damage to enable the Charbelcher trigger"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Goblin Charbelcher and a damage source",
+      "Hands with multiple Sea Gate Restoration copies for card advantage",
+      "Hands with early Disrupting Shoal to disrupt opponent's game plan"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking Goblin Charbelcher or damage sources",
+      "Hands with only high-cost cards or no cantrips",
+      "Hands with multiple lands and no combo pieces"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and Sea Gate Restoration to draw cards",
+      "Cast Goblin Charbelcher as soon as possible",
+      "Use Disrupting Shoal to remove early threats or set up damage"
+    ],
+    "mid_game": [
+      "Continue drawing with Restoration to find damage sources",
+      "Protect Charbelcher from removal",
+      "Look for ways to deal damage to yourself to trigger the ability"
+    ],
+    "late_game": [
+      "Execute the combo for lethal damage",
+      "Use remaining disruption to stall if combo fails",
+      "Rely on card advantage to outvalue opponents"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Goblin Charbelcher",
+      "role": "Primary win condition",
+      "notes": "Cast early and trigger its ability by dealing damage to yourself to deal lethal damage to the opponent."
+    },
+    {
+      "name": "Sea Gate Restoration",
+      "role": "Card advantage engine",
+      "notes": "Cast repeatedly to draw into combo pieces, damage sources, and disruption while maintaining tempo."
+    },
+    {
+      "name": "Disrupting Shoal",
+      "role": "Disruption and damage source",
+      "notes": "Use to remove early threats or deal damage to yourself to enable Charbelcher triggers, depending on the board state."
+    }
+  ],
+  "sequencing_tips": [
+    "Always cast Sea Gate Restoration before committing to a Charbelcher trigger to ensure you have backup plans.",
+    "Hold Disrupting Shoal for opponent's key threats rather than using it prematurely for self-damage.",
+    "Prioritize playing Goblin Charbelcher on turn one or two to maximize its uptime and pressure."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early disruption and draw into damage sources quickly to combo off before they stabilize.",
+      "watch_for": [
+        "Early board presence",
+        "Removal spells",
+        "Life gain effects"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Use Sea Gate Restoration to draw around counterspells and find ways to bypass interaction.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Apply early pressure with Charbelcher and use Disrupting Shoal to disrupt their value loops.",
+      "watch_for": [
+        "Removal",
+        "Card advantage spells",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Goblin Charbelcher",
+    "Sea Gate Restoration",
+    "Disrupting Shoal"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T00:24:40+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T00:24:40+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "0c92e1e23c0b22c6",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

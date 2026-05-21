@@ -1,0 +1,157 @@
+{
+  "archetype": "Selesnya Gearhulk",
+  "format": "standard",
+  "strategy_type": "ramp",
+  "overview": "Selesnya Gearhulk is a ramp-focused strategy that leverages land acceleration and creature scaling to outvalue opponents. By playing efficient early-game creatures and using land-searching tools, the deck transitions into high-impact threats like Ouroboroid. The goal is to establish an unblockable board presence and win through combat damage.",
+  "win_conditions": [
+    "Combat damage from large creatures like Ouroboroid",
+    "Overwhelming the board with scaled creatures and tokens",
+    "Ramping into multiple threats per turn to bypass interaction"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two lands and a one-drop or two-drop",
+      "Hands containing Keen-Eyed Curator or early creatures",
+      "Hands that can play a threat by turn three"
+    ],
+    "mulligan_criteria": [
+      "Hands with three or more lands",
+      "Hands with only high-cost cards like Ouroboroid",
+      "Hands lacking early interaction or ramp"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize land drops and play Keen-Eyed Curator to accelerate mana",
+      "Cast small creatures like Badgermole Cub to establish board presence",
+      "Avoid overextending into early aggression"
+    ],
+    "mid_game": [
+      "Use Curator to fetch additional lands and smooth out mana base",
+      "Begin casting larger threats and leverage creature synergies",
+      "Block efficiently while building toward a decisive turn"
+    ],
+    "late_game": [
+      "Cast Ouroboroid and other high-cost finishers",
+      "Deploy multiple creatures per turn to overwhelm blockers",
+      "Close out the game with combat damage before opponent can stabilize"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Badgermole Cub",
+      "role": "Early-game creature that scales or provides board presence",
+      "notes": "Play on curve to apply early pressure and grow into a relevant threat; use as a blocker or attacker depending on matchup"
+    },
+    {
+      "name": "Ouroboroid",
+      "role": "Late-game finisher and value engine",
+      "notes": "Cast when you have sufficient mana; leverage its death trigger to generate tokens and maintain board control"
+    },
+    {
+      "name": "Keen-Eyed Curator",
+      "role": "Land acceleration and mana smoothing",
+      "notes": "Use its ability to fetch basic lands or put lands onto the battlefield to accelerate into big spells; keep it on board to enable turn-three threats"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up mana for potential interaction before committing to large spells",
+    "Play Curator before casting expensive creatures to ensure mana availability",
+    "Time Ouroboroid's entrance to maximize its death trigger value",
+    "Prioritize land drops over unnecessary creature trades in the early game"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early blockers and use Curator to ramp past their curve; avoid trading large creatures early.",
+      "watch_for": [
+        "Fast one-drops",
+        "Early board wipes",
+        "Aggressive combat tricks"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Ramp quickly to bypass counterspells and deploy threats that are hard to remove; use Curator to find lands consistently.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them by playing efficiently and leveraging creature scaling; use Ouroboroid to outvalue their removal.",
+      "watch_for": [
+        "Removal spells",
+        "Efficient creatures",
+        "Hand disruption"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Counterspells and hand disruption",
+    "Efficient midrange threats"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T05:45:12+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:45:12+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "f26ad64963e16c68",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Selesnya Gearhulk, W/G, Badgermole Cub, Ouroboroid, Keen-Eyed Curator"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Ouroboroid, Badgermole Cub"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Keen-Eyed Curator, Ouroboroid"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard format meta"
+    }
+  ]
+}

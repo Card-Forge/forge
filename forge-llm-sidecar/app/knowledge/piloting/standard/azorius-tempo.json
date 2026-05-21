@@ -1,0 +1,276 @@
+{
+  "archetype": "Azorius Tempo",
+  "format": "standard",
+  "strategy_type": "tempo",
+  "overview": "Azorius Tempo is a Standard archetype that leverages cheap creatures with relevant ETB effects to assert board control while delaying the opponent's turns. It combines efficient clocks like Voice of Victory with versatile instant-speed interaction to handle problematic permanents. The deck's win condition revolves around applying early pressure, resetting the board with Avatar's Wrath to reuse ETBs, and scaling into a late-game threat with Aang, Swift Savior and Abandoned Air Temple.",
+  "win_conditions": [
+    "Aang, Swift Savior as a proactive bounce and late-game 5/5 threat",
+    "Voice of Victory as an efficient clock and interaction deterrent",
+    "Avatar's Wrath to exile all creatures and reuse ETB effects",
+    "Abandoned Air Temple to boost creature power for closing damage"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with cheap ETB creatures and early interaction",
+      "Hands containing Enduring Curiosity or dual lands for mana consistency",
+      "Hands with a clear clock like Voice of Victory"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking one-drops or early board presence",
+      "Hands heavy on lands or late-game cards without early interaction",
+      "Hands without answers to aggressive early pressure"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Spyglass Siren",
+          "Enduring Curiosity",
+          "Aven Interrupter",
+          "Island",
+          "Mountain",
+          "Meticulous Archive",
+          "Floodfarm Verge"
+        ],
+        "decision": "keep",
+        "reason": "Provides early filtering, a relevant ETB creature, and mana consistency to deploy interaction on curve."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Deploy cheap one-drops like Spyglass Siren and Aven Interrupter to filter and delay opponent's plays.",
+      "Use instant-speed interaction like No More Lies and Tishana’s Tidebinder to disrupt key triggers or permanents."
+    ],
+    "mid_game": [
+      "Apply pressure with Voice of Victory and Floodpits Drowner to remove blockers and deal damage.",
+      "Utilize Avatar's Wrath to clear the board and trigger ETB effects a second time, gaining tempo advantage."
+    ],
+    "late_game": [
+      "Transform Aang, Swift Savior into a 5/5 to boost board presence and close out games.",
+      "Leverage Abandoned Air Temple for power boosts and sideboard in attrition tools like Enduring Innocence."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Spyglass Siren",
+      "role": "Early game filter & card advantage",
+      "notes": "Best blue one-drop; guarantees top filtering and cheap extra draws with Enduring Curiosity."
+    },
+    {
+      "name": "Voice of Victory",
+      "role": "Clock & interaction deterrent",
+      "notes": "Prevents opponent interaction on your turn; tokens count as extra draws on empty boards."
+    },
+    {
+      "name": "Aang, Swift Savior",
+      "role": "Interaction & win condition",
+      "notes": "Functions as a proactive bounce and scales into a 5/5 that buffs all creatures in play."
+    },
+    {
+      "name": "Avatar’s Wrath",
+      "role": "Board reset & ETB retrigger",
+      "notes": "Exiles all creatures to reuse ETB effects at a lower cost, preventing opponent recovery."
+    },
+    {
+      "name": "Enduring Curiosity",
+      "role": "Card draw engine",
+      "notes": "Offers draw upon combat damage at instant speed, crucial for tempo decks."
+    },
+    {
+      "name": "Abandoned Air Temple",
+      "role": "Late-game power boost",
+      "notes": "Provides permanent power increase at end of opponent's turn, ideal for small-body creatures."
+    },
+    {
+      "name": "Tishana’s Tidebinder",
+      "role": "Versatile counter",
+      "notes": "Permanently locks down Planeswalkers, Ouroboroid triggers, or Repurposing Bay."
+    },
+    {
+      "name": "Floodpits Drowner",
+      "role": "Blocker removal & damage",
+      "notes": "Removes blockers at end of opponent's turn while dealing two damage; can exile problematic creatures."
+    }
+  ],
+  "sequencing_tips": [
+    "Play Floodpits Drowner at the end of the opponent's turn to remove blockers and deal damage simultaneously.",
+    "Use Aang, Swift Savior proactively as a bounce to disrupt opponent's turns before they resolve.",
+    "Cast Avatar's Wrath to exile all creatures, then replay ETB creatures to gain a second round of value.",
+    "Deploy Voice of Victory on your turn to pressure the opponent while protecting your board from interaction.",
+    "Hold Tishana’s Tidebinder for instant speed to permanently lock problematic triggers like Ouroboroid."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Simic Aggro",
+      "advice": "Sideboard in Disdainful Stroke for stack interaction against mana dorks like Quantum Riddler and Sab-Sunen, Luxa Embodied.",
+      "watch_for": [
+        "Quantum Riddler",
+        "Sab-Sunen, Luxa Embodied",
+        "Aggressive early pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Dimir Midrange",
+      "advice": "Bring in Spider-Sense to protect against removal and sweepers, and to resolve problematic creature triggers.",
+      "watch_for": [
+        "Game-changing triggers",
+        "Removal spells",
+        "Board sweepers"
+      ]
+    },
+    {
+      "opponent_archetype": "Jeskai Control",
+      "advice": "Sideboard Disdainful Stroke and Clarion Conqueror to handle artifacts, planeswalkers, and lock down their threats.",
+      "watch_for": [
+        "Artifacts",
+        "Planeswalkers",
+        "Control interaction"
+      ]
+    },
+    {
+      "opponent_archetype": "Reanimator",
+      "advice": "Use Ghost Vacuum for timely answers and Disdainful Stroke to disrupt their casting sequence.",
+      "watch_for": [
+        "Reanimation spells",
+        "Late-game threats",
+        "Stack disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Gruul Leyline",
+      "advice": "Sideboard in Seam Rip to combat faster clocks and aggressive creature combinations.",
+      "watch_for": [
+        "Red Aggro clock",
+        "Badgermole Cub",
+        "Mana dorks"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Looting",
+      "advice": "Prepare for late-game plans with Ghost Vacuum against Stormchaser’s Talent variants and Izzet Prowess.",
+      "watch_for": [
+        "Stormchaser’s Talent",
+        "Izzet Prowess",
+        "Lessons",
+        "Dimir Bounce"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Jeskai Control",
+    "Reanimator",
+    "Omniscience",
+    "Artifact lists",
+    "Simic Aggro with Quantum Riddler",
+    "Dimir Midrange",
+    "Red Aggro",
+    "Badgermole Cub",
+    "Ouroboroid",
+    "Stormchaser’s Talent",
+    "Izzet Prowess",
+    "Lessons",
+    "Dimir Bounce"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-azorius-tempo-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T05:52:48+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-azorius-tempo-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:51:11+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "800333ca573c805c",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Azorius Tempo is an archetype that uses cheap creatures with relevant ETB effects to assert board dominance while delaying your opponent's turns, combined with cheap interaction to deal with the main troublesome cards."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Aang, Swift Savior as an interaction and win condition"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Voice of Victory... offering an efficient clock"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Avatar’s Wrath can turn games in our favor by allowing us to exile all creatures in play... use the ETB effect of the others a second time"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Abandoned Air Temple guarantees a significant power boost in games where we are ahead on the clock"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Floodpits Drowner can be used... to remove a blocker from the board at the end of the opponent's turn while guaranteeing two more damage."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Aang also has the advantage of being able to be played proactively as a 'bounce'"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Avatar’s Wrath... can be used as a way to reuse all the ETBs of your cards a second time"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Voice of Victory... plays a fundamental role in pressuring the opponent while preventing certain types of interaction"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Tishana’s Tidebinder is still the most versatile Stifle in Standard, capable of permanently 'locking down' Planeswalkers, the trigger for Ouroboroid"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Disdainful Stroke is primarily used against Jeskai Control, Reanimator, Omniscience, and Artifact lists... Simic versions... Quantum Riddler and Sab-Sunen... Spider-Sense... Ideal against Dimir Midrange... Seam Rip... Red Aggro, or the combination of Badgermole Cub and mana dorks... Ouroboroid... Stormchaser’s Talent decks... Izzet Prowess, Lessons and Dimir Bounce."
+    }
+  ]
+}

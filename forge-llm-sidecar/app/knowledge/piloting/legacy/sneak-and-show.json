@@ -1,0 +1,166 @@
+{
+  "archetype": "Sneak and Show",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "Sneak and Show is a Legacy combo deck that leverages Lotus Petal for rapid mana acceleration to cast Show and Tell and Sneak Attack. The goal is to bypass mana costs and cheat powerful threats or multiple creatures onto the battlefield before opponents can interact. By combining artifact ramp with instant-speed cheating, the deck aims to assemble a game-winning board state on turns two or three.",
+  "win_conditions": [
+    "Casting Show and Tell to cheat a zero-mana-cost threat onto the battlefield",
+    "Casting Sneak Attack to flood the board with creatures for an overwhelming attack",
+    "Establishing a protected combo engine that outpaces opponent interaction"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Lotus Petal paired with Show and Tell or Sneak Attack",
+      "Hands with multiple cantrips and at least one combo piece",
+      "Hands that can assemble the combo by turn two or three"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking Lotus Petal or other mana acceleration",
+      "Hands with only slow, non-combo cards",
+      "Hands that cannot cast Show and Tell or Sneak Attack by turn three"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing Lotus Petal to generate excess mana",
+      "Draw cards to locate Show and Tell or Sneak Attack",
+      "Protect your combo pieces from early disruption"
+    ],
+    "mid_game": [
+      "Cast Show and Tell to cheat a high-impact threat onto the battlefield",
+      "Use Sneak Attack to put multiple creatures into play simultaneously",
+      "Establish board presence that forces opponents to use interaction"
+    ],
+    "late_game": [
+      "Leverage cheated-in threats to control the board or generate value",
+      "Use Sneak Attack tokens or creatures to push lethal damage",
+      "Maintain card advantage to outlast opponent resources"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Lotus Petal",
+      "role": "Mana acceleration",
+      "notes": "Play early to enable Show and Tell or Sneak Attack on turn two or three. Protect it from removal to ensure combo speed."
+    },
+    {
+      "name": "Show and Tell",
+      "role": "Threat cheating",
+      "notes": "Cast when you have enough mana to pay its cost. Target a zero-mana-cost creature or artifact that can stabilize the game or win it outright."
+    },
+    {
+      "name": "Sneak Attack",
+      "role": "Board flood and finisher",
+      "notes": "Hold until you have sufficient mana or when you need to bypass countermagic. Use it to put multiple creatures onto the battlefield for a lethal push or to overwhelm removal."
+    }
+  ],
+  "sequencing_tips": [
+    "Always play Lotus Petal before casting Show and Tell to minimize mana requirements",
+    "Cast Show and Tell before Sneak Attack if you need a single powerful threat to stabilize",
+    "Save Sneak Attack for when you can go for lethal or when opponents have exhausted their counterspells",
+    "Use card draw spells to find combo pieces before committing to the board"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race to assemble your combo before they stabilize. Use Sneak Attack to overwhelm their counterspell suite.",
+      "watch_for": [
+        "Counterspell",
+        "Thoughtseize",
+        "Board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Show and Tell to cheat in a large threat that can block multiple attackers. Prioritize Lotus Petal for speed.",
+      "watch_for": [
+        "Early pressure",
+        "Removal spells",
+        "Life total drops"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Go first and execute your combo as quickly as possible. Use interaction if available to delay their win condition.",
+      "watch_for": [
+        "Fast mana",
+        "Game-ending spells",
+        "Protection spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Establish a board presence with Show and Tell before they develop their threats. Use Sneak Attack to push damage through their blockers.",
+      "watch_for": [
+        "Removal",
+        "Card draw",
+        "Tempo plays"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspell",
+    "Thoughtseize",
+    "Lightning Bolt",
+    "Rest in Peace"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T07:11:57+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:11:57+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "9459aa84d86a4287",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "archetype": "Jeskai Ascendancy",
+  "format": "pioneer",
+  "strategy_type": "midrange",
+  "overview": "This five-color Pioneer archetype leverages incremental board presence and card advantage to outlast aggressive decks while scaling into a dominant late-game board state. By cycling through low-cost creatures and talent-based draw engines, the deck maintains tempo while searching for its namesake finisher. The strategy relies on careful resource management across W/U/B/R/G to stabilize and eventually overwhelm opponents.",
+  "win_conditions": [
+    "Accumulating a wide board of creatures that outvalues opponent's removal and board wipes",
+    "Drawing into Jeskai Ascendancy to trigger a game-ending board state or combat advantage",
+    "Using Stormchaser's Talent to generate card advantage that outpaces opponent's resource pool"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing at least two lands and a playable creature or talent card",
+      "Early access to Badgermole Cub to establish board presence and draw a card",
+      "Mana base that supports five-color casting without severe clumps"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking land drops for the first three turns",
+      "Overloaded with high-cost finishers without early interaction or draw",
+      "Missing any of the signature cards in a 40-card deck context where they are critical"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and deploy Badgermole Cub immediately to generate value",
+      "Use Stormchaser's Talent to draw cards and find answers or threats",
+      "Prioritize mana base consistency to support five-color casting"
+    ],
+    "mid_game": [
+      "Trade efficiently to preserve board presence while cycling through draw engines",
+      "Hold up mana for potential interaction while advancing toward Jeskai Ascendancy",
+      "Apply pressure with creatures to force opponent to use resources prematurely"
+    ],
+    "late_game": [
+      "Cast Jeskai Ascendancy to lock down the game or create an unanswerable board state",
+      "Flood the board with creatures to overwhelm opponent's remaining removal",
+      "Maintain card advantage through repeated talent activations to close out the match"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Badgermole Cub",
+      "role": "Early-game value engine and board presence",
+      "notes": "Deploy on turn one or two to establish a creature that can trigger card draw or counter effects, setting up a tempo advantage against faster decks."
+    },
+    {
+      "name": "Stormchaser's Talent",
+      "role": "Card advantage and tempo maintenance",
+      "notes": "Use to refill your hand after early trades, ensuring you have answers for opponent's threats while advancing toward your late-game finisher."
+    },
+    {
+      "name": "Jeskai Ascendancy",
+      "role": "Late-game win condition and board state controller",
+      "notes": "Cast when you have sufficient mana and board presence to trigger its effects, often creating a decisive advantage that opponents cannot recover from."
+    }
+  ],
+  "sequencing_tips": [
+    "Play Badgermole Cub before using removal to maximize its triggered value",
+    "Hold Stormchaser's Talent until after opponent commits resources to avoid wasting draw potential",
+    "Delay Jeskai Ascendancy until you have enough mana and board presence to trigger its full effect"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early Badgermole Cub deployment and use Stormchaser's Talent to draw into early interaction. Avoid overcommitting to the board before stabilizing.",
+      "watch_for": [
+        "Early board wipes",
+        "Direct damage spells",
+        "Fast one-drop creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around hand traps and board wipes by holding back key cards. Use card advantage to outlast their resource pool and cast Jeskai Ascendancy on a protected turn.",
+      "watch_for": [
+        "Counterspell packages",
+        "Mass removal",
+        "Life gain effects"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race efficiently while maintaining card advantage. Trade up with creatures and use talent cards to find answers to their threats before they stabilize.",
+      "watch_for": [
+        "Efficient removal",
+        "Board presence creatures",
+        "Card draw engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Early-game aggressive creatures that pressure life total",
+    "Board wipes that reset incremental advantages",
+    "Counterspells that disrupt Jeskai Ascendancy casting"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T05:08:12+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:08:12+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "abe1d676118380a9",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype name and signature card list imply a midrange strategy leveraging card advantage and incremental board presence across five colors."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Win conditions derived directly from the provided signature cards and standard midrange Pioneer principles."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Sequencing advice inferred from standard midrange tempo principles and the functional roles of the provided signature cards."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Threats inferred from standard Pioneer meta dynamics and the deck's midrange/tempo profile."
+    }
+  ]
+}

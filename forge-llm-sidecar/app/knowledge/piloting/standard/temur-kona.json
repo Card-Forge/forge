@@ -1,0 +1,153 @@
+{
+  "archetype": "Temur Kona",
+  "format": "standard",
+  "strategy_type": "tempo",
+  "overview": "Temur Kona leverages land acceleration and spell discounting to deploy large threats ahead of curve. By combining Formidable Speaker's mana generation with Omniscience's zero-cost casting, the deck overwhelms opponents through rapid board presence and value. The strategy focuses on maintaining tempo while setting up North Wind Avatar as a resilient finisher.",
+  "win_conditions": [
+    "Casting North Wind Avatar for free during Omniscience",
+    "Overwhelming the board with multiple Formidable Speakers",
+    "Generating excess mana to cast multiple threats in a single turn"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Two or more lands",
+      "Formidable Speaker",
+      "Cheap spells or interaction"
+    ],
+    "mulligan_criteria": [
+      "Three or more lands without ramp",
+      "High mana cost threats without acceleration",
+      "No interaction against early pressure"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize land drops and Formidable Speaker activation",
+      "Hold up mana for potential interaction",
+      "Avoid committing to North Wind Avatar prematurely"
+    ],
+    "mid_game": [
+      "Cast Omniscience once you have excess mana",
+      "Deploy multiple threats and interaction for free",
+      "Use Speaker's draw ability to find answers"
+    ],
+    "late_game": [
+      "Stabilize with North Wind Avatar",
+      "Leverage mana advantage to outvalue opponents",
+      "Protect key permanents from board wipes"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Formidable Speaker",
+      "role": "mana acceleration and card draw",
+      "notes": "Activate early to enable Omniscience and draw into threats"
+    },
+    {
+      "name": "Omniscience",
+      "role": "tempo enabler and combo piece",
+      "notes": "Cast with excess mana to deploy multiple threats and finish the game"
+    },
+    {
+      "name": "North Wind Avatar",
+      "role": "primary finisher",
+      "notes": "Save for Omniscience turns or use as a resilient blocker"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up blue and green mana for potential interaction before committing to Omniscience",
+    "Activate Formidable Speaker before casting Omniscience to maximize free spells",
+    "Prioritize casting North Wind Avatar last during Omniscience to avoid early removal"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play defensively early, use Speaker to ramp past their curve, and save Omniscience for a turn where you can deploy a large threat and clear their board.",
+      "watch_for": [
+        "Early creature pressure",
+        "Board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race their hand size and removal by going wide with cheap threats, then close out with North Wind Avatar.",
+      "watch_for": [
+        "Counterspell",
+        "Board clearers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Match their resource output with Speaker, then use Omniscience to swing the tempo advantage decisively.",
+      "watch_for": [
+        "Efficient removal",
+        "Value engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Early creature pressure",
+    "Board wipes",
+    "Counterspells",
+    "Efficient removal"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:35:39+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:35:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "3d41e7ee320d51a3",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Formidable Speaker, Omniscience, North Wind Avatar"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Omniscience enables free casting of large threats"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard tempo sequencing principles applied to U/R/G ramp"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard format meta expectations for U/R/G tempo"
+    }
+  ]
+}

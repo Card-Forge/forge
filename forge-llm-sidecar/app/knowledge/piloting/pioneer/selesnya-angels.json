@@ -1,0 +1,267 @@
+{
+  "archetype": "Selesnya Angels",
+  "format": "pioneer",
+  "strategy_type": "midrange",
+  "overview": "Selesnya Angels is a resilient Pioneer archetype that leverages typal interactions and massive life gain to outvalue aggressive decks. It relies on efficient mana dorks to accelerate into explosive board states via Collected Company and Kayla's Reconstruction. While it struggles against removal-heavy strategies, its ability to lock down damage-based threats and snowball with lords makes it a top-tier predator in red-heavy metagames.",
+  "win_conditions": [
+    "Accumulating massive life totals with Bishop of Wings and Righteous Valkyrie to outlast opponents",
+    "Deploying explosive board states using Collected Company and Kayla's Reconstruction",
+    "Locking down aggressive threats like Sunspine Lynx with Skyclave Apparition to secure a race win"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early mana dorks like Llanowar Elves or Giada, Font of Hope",
+      "Hands containing Bishop of Wings or early angels to establish life gain",
+      "Hands with Collected Company or Kayla's Reconstruction paired with sufficient lands and dorks"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early interaction or life gain sources",
+      "Hands with too many lands or high-cost lords without acceleration",
+      "Hands without answers to aggressive red threats like Sunspine Lynx"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Llanowar Elves",
+          "Bishop of Wings",
+          "Resplendent Angel",
+          "Islet of Sanity",
+          "Selesnya Sanctuary",
+          "Collected Company",
+          "Kayla's Reconstruction"
+        ],
+        "decision": "keep",
+        "reason": "Provides early acceleration, life gain, and explosive combo potential."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play mana dorks to accelerate into Bishop of Wings and early angels",
+      "Establish life gain quickly to invalidate damage-based strategies",
+      "Sideboard out mana dorks if racing is not the priority"
+    ],
+    "mid_game": [
+      "Cast Collected Company or Kayla's Reconstruction to deploy multiple lords and angels",
+      "Use Skyclave Apparition to lock down key aggressive threats",
+      "Trigger Resplendent Angel and Inspiring Overseer to flood the board with tokens"
+    ],
+    "late_game": [
+      "Leverage massive life totals and board presence to outvalue opponents",
+      "Utilize sideboard cards like Tocasia's Welcome or Reidane, God of the Worthy against control/midrange",
+      "Maintain board control with Eiganjo, Seat of the Empire and Portable Hole"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Bishop of Wings",
+      "role": "Core enabler",
+      "notes": "Ideal two-drop that generates considerable life gain for each angel entering the battlefield, turning removal into negative trades."
+    },
+    {
+      "name": "Righteous Valkyrie",
+      "role": "Lord",
+      "notes": "Main lord that provides a significant power increase when at 27+ life, creating game-winning board states with Company or Kayla's."
+    },
+    {
+      "name": "Collected Company",
+      "role": "Combo engine",
+      "notes": "Enables explosive plays by bringing back multiple angels and lords, offering resilience against targeted removal."
+    },
+    {
+      "name": "Kayla's Reconstruction",
+      "role": "Combo engine",
+      "notes": "Alternative to Company that enables explosive plays and can be used to find sideboard cards like Portable Hole."
+    },
+    {
+      "name": "Skyclave Apparition",
+      "role": "Interaction",
+      "notes": "Handles almost everything that matters in Pioneer and is the primary answer to Screaming Nemesis and Sunspine Lynx."
+    },
+    {
+      "name": "Giada, Font of Hope",
+      "role": "Mana dork / Enabler",
+      "notes": "Interacts only with angels, turns creatures into bombs with a positive board, and triggers Bishop of Wings and Righteous Valkyrie."
+    },
+    {
+      "name": "Resplendent Angel",
+      "role": "Token generator",
+      "notes": "Creates tokens easily with Bishop of Wings and Righteous Valkyrie, putting more permanents on the board each turn."
+    },
+    {
+      "name": "Eiganjo, Seat of the Empire",
+      "role": "Utility land",
+      "notes": "Doubles as removal and helps maximize mana efficiency alongside untapped dual lands."
+    }
+  ],
+  "sequencing_tips": [
+    "Play Bishop of Wings as early as possible to maximize life gain from subsequent angel ETBs",
+    "Hold Skyclave Apparition in hand until the opponent plays Sunspine Lynx or Screaming Nemesis",
+    "Sideboard Portable Hole over Collected Company in games against heavy aggro or when facing Witch's Oven",
+    "Use Kayla's Reconstruction to dig for sideboard cards like Portable Hole when needed"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Mono Red Lynx",
+      "advice": "Use Skyclave Apparition to lock down Sunspine Lynx and rely on life gain to outvalue the deck, though the matchup isn't guaranteed due to life gain locks.",
+      "watch_for": [
+        "Sunspine Lynx",
+        "Screaming Nemesis",
+        "Cori-Steel Cutter"
+      ]
+    },
+    {
+      "opponent_archetype": "Rakdos Demons",
+      "advice": "Poor matchup due to removal-focused strategies that don't rely on damage. Sideboard carefully to mitigate spot removal.",
+      "watch_for": [
+        "Spot removal",
+        "Mayhem Devil"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Phoenix",
+      "advice": "Sideboard in Archon of Emeria, Deafening Silence, Damping Sphere, and Rest in Peace to disrupt graveyard reliance and high spell counts.",
+      "watch_for": [
+        "Graveyard recursion",
+        "Multiple spells per turn",
+        "Supreme Verdict"
+      ]
+    },
+    {
+      "opponent_archetype": "Greasefang, Okiba Boss",
+      "advice": "Use Rest in Peace to shut down graveyard synergy and life gain denial. The deck can occasionally interrupt the combo-kill.",
+      "watch_for": [
+        "Greasefang, Okiba Boss",
+        "Graveyard interactions"
+      ]
+    },
+    {
+      "opponent_archetype": "Azorius Control",
+      "advice": "Struggles against removal-focused strategies. Sideboard in Tocasia's Welcome and Reidane, God of the Worthy for breathing room and sweeper delay.",
+      "watch_for": [
+        "Teferi, Hero of Dominaria",
+        "Supreme Verdict",
+        "Extinction Event"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Sunspine Lynx",
+    "Screaming Nemesis",
+    "Supreme Verdict",
+    "Extinction Event",
+    "Teferi, Hero of Dominaria",
+    "Mayhem Devil",
+    "Witch's Oven",
+    "Unholy Annex",
+    "Cori-Steel Cutter"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-selesnya-angels-2025-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T04:02:21+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-selesnya-angels-2025-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:00:44+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "336efb466070110e",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Selesnya Angels mixes typal interactions and efficient ETBs with Collected Company and Kayla's Reconstruction, making it one of the top predators for Pioneer's red Aggro decks today."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "We cannot ignore the ability to gain absurd amounts of life with Bishop of Wings and Righteous Valkyrie , making all creatures turn into a considerable clock in the game"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Collected Company and Kayla’s Reconstruction offer resilience against targeted removal by offering a two-for-one or greater, and they also enable the most explosive plays in this list."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Skyclave Apparition isn't an angel, but provides a board interaction that handles almost everything that matters in Pioneer today, and is our main way to answer Screaming Nemesis or Sunspine Lynx in this list."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Bishop of Wings , despite not being an angel, is the ideal two-drop for the list: it makes each angel enter with a considerable life gain"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Skyclave Apparition isn't an angel, but provides a board interaction that handles almost everything that matters in Pioneer today, and is our main way to answer Screaming Nemesis or Sunspine Lynx in this list."
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Portable Hole is the main removal available in the Sideboard for Aggro... It’s worth noting that it can be found with Kayla’s Reconstruction . Therefore, it’s common to leave it instead of Collected Company in some games."
+    },
+    {
+      "confidence": 0.6,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Mana dorks speed up the casting of Collected Company and Kayla’s Reconstruction... They are a common side out when we know that winning on the race is not the best option."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "due to the ability of Screaming Nemesis and Sunspine Lynx to “lock” life gain"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "delays sweepers like Supreme Verdict and Extinction Event , Planeswalkers like Teferi, Hero of Dominaria"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "deals with other troublesome permanents like Witch’s Oven"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "deal with higher mana value permanents like Unholy Annex and Teferi, Hero of Dominaria"
+    }
+  ]
+}

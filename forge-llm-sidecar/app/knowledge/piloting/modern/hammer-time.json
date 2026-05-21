@@ -1,0 +1,317 @@
+{
+  "archetype": "Hammer Time",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "Hammer Time is an explosive aggro/combo deck in Modern that aims for fast combo kills in the early game while retaining a resilient beatdown plan for later stages. The mono-white version avoids fetch lands and shocklands to reduce mana screw and self-damage. It operates as a metagame 'dolphin' strategy, cycling in and out of popularity based on opponent hate levels.",
+  "win_conditions": [
+    "Fast combo kills using Colossus Hammer, Sigarda's Aid, and Stoneforge Mystic",
+    "Late-game beatdown plan centered on Urza's Saga",
+    "Streak of spells from The Reality Chip",
+    "Racing opponents with Shadowspear"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Lands, Target cards, and Search cards",
+      "Direct Equipment in hand",
+      "Short-term game development plan"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking a Target despite having Search and Equipment",
+      "Hands dependent on topdecking early game",
+      "Average hands without a clear plan"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Inkmoth Nexus",
+          "Springleaf Drum",
+          "0-Cost Creature",
+          "Plains",
+          "Colossus Hammer",
+          "Sigarda's Aid"
+        ],
+        "decision": "keep",
+        "reason": "God Hand example that can finish the game on turn 2."
+      },
+      {
+        "hand": [],
+        "decision": "keep",
+        "reason": "Turn one Lotus Bloom with supporting lands — Starting with Lotus Bloom significantly increases the chance of winning on turn four."
+      },
+      {
+        "hand": [],
+        "decision": "keep",
+        "reason": "Pinnacle Emissary on turn one — Unlocks the hand by enabling early artifact plays and combo pieces."
+      },
+      {
+        "hand": [],
+        "decision": "mulligan",
+        "reason": "Generic Affinity hand — Affinity does not mulligan well; it requires a full hand of cheap artifacts to litter the board effectively."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Aim for explosive combo kills with equipment and targets",
+      "Aggressive Mulligan to ensure a short-term plan",
+      "Race aggro decks or play around control removals"
+    ],
+    "mid_game": [
+      "Use protections like Giver of Runes or Sanctifier en-Vec",
+      "Play around opponent's removals and hate cards",
+      "Utilize Mana Tithe to slow down midrange/control"
+    ],
+    "late_game": [
+      "Shift to a beatdown plan with Urza's Saga",
+      "Generate constant artifact threats",
+      "Maintain board presence to force 2-for-1s"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Colossus Hammer",
+      "role": "Equipment",
+      "notes": "Core combo piece for early game kills"
+    },
+    {
+      "name": "Sigarda's Aid",
+      "role": "Search/Spell",
+      "notes": "Enables finding equipment or targets for the combo"
+    },
+    {
+      "name": "Stoneforge Mystic",
+      "role": "Search/Creature",
+      "notes": "Primary engine to fetch equipment from the library"
+    },
+    {
+      "name": "Urza's Saga",
+      "role": "Artifact/Beatdown",
+      "notes": "Enables late-game plan by creating Construct tokens"
+    },
+    {
+      "name": "The Reality Chip",
+      "role": "Artifact/Combo",
+      "notes": "Can win games with a streak of spells from the top"
+    },
+    {
+      "name": "Sanctifier en-Vec",
+      "role": "Creature/Protection",
+      "notes": "Defensive threat that disrupts graveyard strategies and survives removal"
+    },
+    {
+      "name": "Shadowspear",
+      "role": "Equipment",
+      "notes": "Key for racing aggro decks and applying pressure against Burn"
+    },
+    {
+      "name": "Mana Tithe",
+      "role": "Enchantment/Protection",
+      "notes": "Slows down opponents and buys time to assemble combo or beatdown"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold off on the combo initially to handle early threats with March of Otherworldly Light",
+    "Play around opponent removals before committing to the combo",
+    "Use protections or wait for opponent to tap out before going all-in",
+    "Distribute damage rather than attacking for lethal if opponent has open mana",
+    "Save Mana Tithe and Pithing Needle for key combo pieces or hate cards",
+    "Hold Engineered Explosives until you are ready to win the game, as it destroys your own zero-cost artifacts. Only use it as a desperation play to stop a resolving Lotus Bloom.",
+    "Lead with a turn one Lotus Bloom to maximize the probability of resolving a turn four win condition.",
+    "Use Consign to Memory to counter the triggered ability of Oza, the Thousand Faces, delaying the search for Pithing Needle and buying time for Lotus Blooms to resolve."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Izzet Murktide",
+      "advice": "Hold off initial threats, play Sanctifier en-Vec for defense/offense, use Pithing Needle on Engineered Explosives.",
+      "watch_for": [
+        "Blood Moon",
+        "Engineered Explosives",
+        "Removal in hand"
+      ]
+    },
+    {
+      "opponent_archetype": "Elementals",
+      "advice": "Focus on Urza's Saga plan for constant threats, play around free removals, don't miss attacks.",
+      "watch_for": [
+        "Free removals",
+        "Elemental 2-for-1s"
+      ]
+    },
+    {
+      "opponent_archetype": "Living End",
+      "advice": "On Play, race with combo before turn 4. On Draw, play reactively with Drannith Magistrate and Mana Tithe.",
+      "watch_for": [
+        "Cascade",
+        "Creature discards",
+        "Living End cast"
+      ]
+    },
+    {
+      "opponent_archetype": "Burn",
+      "advice": "Hold initial pressure, race with Shadowspear, distribute damage to avoid Deflecting Palm.",
+      "watch_for": [
+        "Deflecting Palm",
+        "Smash to Smithereens",
+        "Open mana"
+      ]
+    },
+    {
+      "opponent_archetype": "Yawgmoth",
+      "advice": "Attack quickly, play around artifact hate, use Path/March on small combo pieces, save Tithe/Needle for Yawgmoth.",
+      "watch_for": [
+        "Force of Vigor",
+        "Outland Liberator",
+        "Boseiju, Who Endures",
+        "Young Wolf"
+      ]
+    },
+    {
+      "opponent_archetype": "Affinity",
+      "advice": "Lead with Oza, the Thousand Faces on turn one to find Pithing Needle by turn three and name Goblin Charbelcher. (from gameplay) If Pithing Needle resolves, use Sink into Stupor to bounce it, then untap and win with Goblin Charbelcher. (from gameplay) Monitor the opponent's mana base; if they lack blue mana, they cannot cast counter spells, allowing you to play aggressively without fear of interaction. (from gameplay)",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Engineered Explosives",
+    "Blood Moon",
+    "Deflecting Palm",
+    "Smash to Smithereens",
+    "Force of Vigor",
+    "Outland Liberator",
+    "Boseiju, Who Endures",
+    "Living End",
+    "Cascade",
+    "Free removals"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-hammer-time-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T01:30:18+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-azorius-hammer-time-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:26:59+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-hammer-time-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:28:42+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=2Nh6bPjcOhk",
+      "publish_date": "2025-09-28T01:41:41Z",
+      "fetched_at": "2026-05-21T12:04:20+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Hammer Time"
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "c5bb390a03a33483",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Hammer Time brings one of the fastest combo-kills in Modern, but with the resilience to have a great beatdown plan on later stages of the game."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "you can combo with the right cards in the Early Game or go to a beatdown plan with Urza's Saga in the late-game."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The idea here is to hold off a possible initial threat with March of Otherworldly Light before going into the combo."
+    },
+    {
+      "confidence": 0.8,
+      "kind": "gameplay_observed",
+      "source_index": 2,
+      "evidence_span": "4:06-4:50"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "gameplay_observed",
+      "source_index": 2,
+      "evidence_span": "4:48-5:32"
+    },
+    {
+      "confidence": 0.75,
+      "kind": "gameplay_observed",
+      "source_index": 2,
+      "evidence_span": "13:21-14:04"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "opponent can only deal with it playing Engineered Explosives"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "cast Blood Moon"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Deflecting Palm : that's the card you have to always be playing around"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "destroyed by Smash to Smithereens"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Force of Vigor , Outland Liberator and often Boseiju, Who Endures"
+    }
+  ]
+}

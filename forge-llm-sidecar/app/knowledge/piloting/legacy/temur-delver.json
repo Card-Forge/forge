@@ -1,0 +1,307 @@
+{
+  "archetype": "Temur Delver",
+  "format": "legacy",
+  "strategy_type": "aggro",
+  "overview": "Temur Delver is a traditional Legacy aggro-tempo deck that has returned to prominence following the December 2024 banlist. It relies on a low mana curve, a heavy cantrip suite, and early threats like Delver of Secrets to apply immediate pressure. The deck aims to disrupt opponents with Wasteland and Lightning Bolt while using Questing Druid for card advantage to outlast attrition wars.",
+  "win_conditions": [
+    "Flipping Delver of Secrets on turn 2 for early damage",
+    "Dealing direct damage to finish the game",
+    "Using Murktide Regent's Delve to cast large threats late game",
+    "Generating card advantage with Questing Druid to outlast opponents"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with 1-2 lands and proactive action (creatures or cantrips)",
+      "Hands with a mix of cantrips, one creature, and one interaction",
+      "Hands that can open with Ponder to find a second land safely"
+    ],
+    "mulligan_criteria": [
+      "Hands with more than 2 lands",
+      "Hands that are too reactive without guaranteed pressure",
+      "Hands lacking action or card draw"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Daze",
+          "Lightning Bolt",
+          "Brazen Borrower",
+          "Wasteland",
+          "Mishra's Bauble",
+          "Lands"
+        ],
+        "decision": "mulligan",
+        "reason": "Too reactive and Bauble alone can't guarantee pressure."
+      },
+      {
+        "hand": [
+          "Delver of Secrets",
+          "Delver of Secrets",
+          "Daze",
+          "Lightning Bolt",
+          "Lands"
+        ],
+        "decision": "keep",
+        "reason": "Provides turn 1 action, high chance to transform Delver, and enables Murktide Regent's Delve if resolved."
+      },
+      {
+        "hand": [
+          "Ponder",
+          "Preordain",
+          "Delver of Secrets",
+          "Lightning Bolt",
+          "Island"
+        ],
+        "decision": "keep",
+        "reason": "Ideal hand structure; open with Ponder to draw a land and avoid enemy Wasteland."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap threats like Delver of Secrets on turn 1 or 2",
+      "Use Lightning Bolt and Daze to disrupt early threats and protect your board",
+      "Cast Wasteland immediately to hinder opponent's mana base"
+    ],
+    "mid_game": [
+      "Trade cards efficiently in attrition wars against blue tempo decks",
+      "Use Questing Druid to generate card advantage and stabilize",
+      "Leverage cantrips like Brainstorm and Ponder to find answers and threats"
+    ],
+    "late_game": [
+      "Close out games with direct damage or remaining creatures",
+      "Cast Murktide Regent using Delve if early threats are removed",
+      "Rely on sideboard answers like Consign to Memory or Price of Progress against specific archetypes"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Delver of Secrets",
+      "role": "Primary threat",
+      "notes": "Flipped on turn 2 to deal early damage and apply pressure."
+    },
+    {
+      "name": "Lightning Bolt",
+      "role": "Removal and finisher",
+      "notes": "Key early game interaction that became relevant again after Psychic Frog's ban."
+    },
+    {
+      "name": "Wasteland",
+      "role": "Land disruption",
+      "notes": "Used to stop opponents from developing mana, particularly Eldrazi Temples and Ancient Tombs."
+    },
+    {
+      "name": "Questing Druid",
+      "role": "Card advantage",
+      "notes": "Fills the role left by banned Expressive Iteration to help win attrition wars."
+    },
+    {
+      "name": "Brainstorm",
+      "role": "Cantrip",
+      "notes": "Part of the heavy cantrip suite that enables the deck's low mana curve and hand quality."
+    },
+    {
+      "name": "Murktide Regent",
+      "role": "Late game threat",
+      "notes": "Becomes playable via Delve if early Delvers are resolved by the opponent."
+    }
+  ],
+  "sequencing_tips": [
+    "Open with Ponder instead of Delver when holding only one land to safely draw a second land and avoid enemy Wasteland.",
+    "Prioritize destroying the opponent's basic Island as soon as possible when facing Red Stompy to mitigate Blood Moon.",
+    "Keep Daze in hand against Red Stompy even if they play Simian Spirit Guide, as it remains important when playing first.",
+    "Watch for Chalice of the Void in Eldrazi matchups and adjust mana usage accordingly."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Reanimator",
+      "advice": "Focus on stopping them from reanimating cards by swapping removals for sideboard answers like Grafdigger's Cage.",
+      "watch_for": [
+        "Reanimator",
+        "Oops, I Did It Again",
+        "Nadu Elves"
+      ]
+    },
+    {
+      "opponent_archetype": "Blue Aggro",
+      "advice": "Expect a war of attrition where you trade card for card; Questing Druid helps recover card disadvantage.",
+      "watch_for": [
+        "Orcish Bowmasters",
+        "Daze",
+        "Wasteland"
+      ]
+    },
+    {
+      "opponent_archetype": "Eldrazi Aggro",
+      "advice": "Use Wasteland to hit Eldrazi Temple, Eye of Ugin, or Ancient Tomb. Lightning Bolt is excellent against their smaller creatures.",
+      "watch_for": [
+        "Cavern of Souls",
+        "Chalice of the Void",
+        "Thought-Knot Seer",
+        "Sowing Mycospawn"
+      ]
+    },
+    {
+      "opponent_archetype": "Red Stompy",
+      "advice": "Resolve Blood Moon and Chalice of the Void quickly. Destroy their basic Island ASAP when playing first.",
+      "watch_for": [
+        "Blood Moon",
+        "Chalice of the Void",
+        "Simian Spirit Guide"
+      ]
+    },
+    {
+      "opponent_archetype": "Nadu Breakfast",
+      "advice": "Play as aggressively as possible to prevent them from assembling their combo pieces.",
+      "watch_for": [
+        "Nomads en-Kor",
+        "Nadu, Winged Wisdom",
+        "Combo pieces"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Psychic Frog",
+    "Orcish Bowmasters",
+    "Thought-Knot Seer",
+    "Sowing Mycospawn",
+    "Nomads en-Kor",
+    "Nadu, Winged Wisdom",
+    "Blood Moon",
+    "Chalice of the Void",
+    "Cavern of Souls",
+    "Simian Spirit Guide"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-temur-delver-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T08:56:00+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-temur-delver-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:54:22+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "fb62b570e2c3c83c",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "The December 2024 banlist brought back from the shadows one of the most traditional Legacy decks: Temur Delver... you're still playing an aggro deck."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "flipping Delver on turn 2 is still one of the most efficient tactics around"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "finish the game by dealing damage to what's left of their life points directly"
+    },
+    {
+      "confidence": 0.6,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "if your opponent manages to deal with the 2 Delvers, this will most likely enable Murktide Regent 's Delve"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "adopted Questing Druid , and, in some lists, Up the Beanstalk , as card advantage"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "you should open with Ponder instead of Delver to draw a second land and not risk running into enemy Wasteland s"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "go after your basic Island as soon as possible; doing this is easier when you're playing first"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "They can play around Daze with Simian Spirit Guide , but it is still important when you're playing first, so don't send them back straight away"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You should keep your eyes open for Chalice of the Void"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Psychic Frog dominated the format... made Lightning Bolt basically irrelevant"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Lists with black are dangerous because of Orcish Bowmasters"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "stops Thought-Knot Seer 's and Sowing Mycospawn 's triggered abilities"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Nomads en-Kor and Nadu, Winged Wisdom , are resistant to Lightning Bolt"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "They play 2 threats you have to resolve... Blood Moon and Chalice of the Void"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Your counters might lose value because of Cavern of Souls"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "They can play around Daze with Simian Spirit Guide"
+    }
+  ]
+}

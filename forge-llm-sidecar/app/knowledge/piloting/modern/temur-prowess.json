@@ -1,0 +1,156 @@
+{
+  "archetype": "Temur Prowess",
+  "format": "modern",
+  "strategy_type": "tempo",
+  "overview": "Temur Prowess is a fast, artifact-centric strategy that leverages the prowess mechanic to create unblockable, oversized threats. By cycling cheap creatures alongside low-cost artifacts, the deck applies immediate pressure while maintaining board presence. The U/R/G color identity provides efficient removal, card advantage, and flexible mana to outpace midrange and control shells.",
+  "win_conditions": [
+    "Combat damage from unblockable prowess creatures",
+    "Overwhelming board presence with artifact synergies",
+    "Fast clock that forces opponents into unfavorable trades"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least one artifact and a one-drop prowess creature",
+      "Two-card starts featuring Mishra's Bauble and early aggression",
+      "Draws with early removal and artifact enablers"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking artifacts or early creature drops",
+      "Slow draws heavy on late-game cards or high mana costs",
+      "Hands with no interaction against early board wipes"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play artifacts on curve to enable prowess immediately",
+      "Drop cheap creatures to establish early pressure and unblockability",
+      "Use early removal to clear opposing one-drops and protect your board"
+    ],
+    "mid_game": [
+      "Ramp mana production with additional artifacts to play larger threats",
+      "Trade efficiently while maintaining at least one artifact on the battlefield",
+      "Apply constant combat pressure to force opponent's resources into inefficient answers"
+    ],
+    "late_game": [
+      "Maintain artifact count to keep prowess active and threats unblockable",
+      "Use card draw and value generators to outlast resource-depleted opponents",
+      "Close out games with wide, unblockable attacks or oversized finishers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Slickshot Show-Off",
+      "role": "Primary early-game prowess threat",
+      "notes": "Play alongside artifacts to become unblockable and gain +1/+1 counters, applying immediate pressure while surviving early trades."
+    },
+    {
+      "name": "Cori-Steel Cutter",
+      "role": "Artifact interaction and prowess enabler",
+      "notes": "Use its enter-the-battlefield effect to remove problematic opponent artifacts while simultaneously activating prowess for your other creatures."
+    },
+    {
+      "name": "Mishra's Bauble",
+      "role": "Core artifact enabler and mana acceleration",
+      "notes": "Drop on turn one to immediately trigger prowess, then untap to fetch mana for larger threats or additional artifacts."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold artifact plays in hand until combat to surprise blockers and trigger prowess unexpectedly",
+    "Prioritize playing prowess creatures before opponent's blockers resolve to secure unblockable status",
+    "Sequence removal to clear threats that would otherwise remove your artifacts or key creatures",
+    "Manage artifact count carefully to ensure prowess remains active even after board wipes or targeted hate"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Ramp aggressively and go wide to overwhelm slow answers, avoiding artifact-heavy plays if they run targeted hate.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Artifact destruction"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play artifacts early to enable prowess, use unblockable threats to bypass their board, and prioritize removal for their biggest creatures.",
+      "watch_for": [
+        "Early board presence",
+        "Swarm strategies",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race efficiently by maintaining constant pressure, trade favorably while keeping an artifact out, and punish slow starts with lethal sequences.",
+      "watch_for": [
+        "Efficient removal",
+        "Card advantage engines",
+        "Late-game value threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Abrupt Decay",
+    "Smothering Tithe",
+    "Vandalblast",
+    "Naturalize",
+    "Lightning Helix"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:19:36+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:19:36+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "96d041fc70e13bf9",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Temur Prowess archetype in Modern"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Prowess mechanic and artifact synergy"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Prowess mechanic timing and artifact dependency"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Modern format meta and artifact/prowess synergy vulnerabilities"
+    }
+  ]
+}

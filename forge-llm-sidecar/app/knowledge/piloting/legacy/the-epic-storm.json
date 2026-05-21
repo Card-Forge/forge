@@ -1,0 +1,152 @@
+{
+  "archetype": "The EPIC Storm",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "The EPIC Storm archetype is a Legacy combo deck that utilizes a four-color mana base to assemble a high-storm-count spell sequence. By leveraging signature mana accelerants like Lion's Eye Diamond and Mox Opal alongside card selection tools, the pilot aims to cast a storm spell on turn two or three. Burning Wish provides critical flexibility to fetch missing combo pieces or interaction from the sideboard. Success relies on precise sequencing and protecting the combo from disruption.",
+  "win_conditions": [
+    "Casting a storm spell with a high storm count to resolve multiple copies simultaneously",
+    "Using Lion's Eye Diamond and Mox Opal to generate excess mana for turn-two or turn-three combos",
+    "Fetching missing combo pieces or interaction with Burning Wish to close out the game"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more lands and a cantrip like Brainstorm or Ponder",
+      "Hands containing Mox Opal or Lion's Eye Diamond alongside a land",
+      "Hands with early interaction like Force of Will or Daze"
+    ],
+    "mulligan_criteria": [
+      "Hands with only one land and no mana rocks",
+      "Hands lacking card draw or combo enablers",
+      "Hands with multiple lands but no way to draw into the storm spell"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and mana rocks to establish a fast mana base",
+      "Use cantrips to dig for the storm spell and combo pieces",
+      "Hold up interaction to protect against early disruption"
+    ],
+    "mid_game": [
+      "Sequence spells to maximize the storm count before casting the win condition",
+      "Use Burning Wish to fetch sideboard interaction or missing combo pieces",
+      "Manage the stack carefully to ensure the storm spell resolves"
+    ],
+    "late_game": [
+      "If the combo is disrupted, transition to a control game plan using fetched interaction",
+      "Use card advantage to outlast opponents while searching for a second combo attempt",
+      "Leverage excess mana to cast multiple spells in a single turn"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Burning Wish",
+      "role": "Fetches missing combo pieces or sideboard interaction",
+      "notes": "Use to find Epic Storm, additional mana rocks, or answers to the opponent's threats"
+    },
+    {
+      "name": "Lion's Eye Diamond",
+      "role": "Generates a burst of mana and card draw",
+      "notes": "Cast with sufficient mana to pay the life cost, then use the generated mana to cast the storm spell"
+    },
+    {
+      "name": "Mox Opal",
+      "role": "Provides early mana acceleration",
+      "notes": "Play on turn one if you have a nonbasic land, or use it to enable turn-two combos"
+    },
+    {
+      "name": "Brainstorm",
+      "role": "Card draw and selection",
+      "notes": "Use to dig for the storm spell while discarding low-value cards to maintain hand size"
+    },
+    {
+      "name": "Force of Will",
+      "role": "Counterspell with blue mana requirement",
+      "notes": "Hold up to protect the combo from early disruption or to counter key opponent spells"
+    }
+  ],
+  "sequencing_tips": [
+    "Cast cantrips before mana rocks to maximize the storm count",
+    "Hold up interaction until you know the opponent's hand or play",
+    "Use Lion's Eye Diamond after other mana sources to ensure you can pay the life cost",
+    "Cast the storm spell last to ensure it resolves with the highest possible count"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and fast mana to combo before they apply lethal pressure",
+      "watch_for": [
+        "Early board presence",
+        "Direct damage spells",
+        "Removal for your mana rocks"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Use Burning Wish to fetch sideboard answers and protect your combo with multiple layers of counterspells",
+      "watch_for": [
+        "Hand disruption",
+        "Counterspells",
+        "Graveyard hate"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Race to cast your storm spell while using interaction to disrupt their sequence",
+      "watch_for": [
+        "Their combo enablers",
+        "Priority stealing",
+        "Unexpected win conditions"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Force of Will",
+    "Daze",
+    "Brainstorm",
+    "Ponder",
+    "Lightning Bolt",
+    "Shock",
+    "Duress",
+    "Inquisition of Kozilek",
+    "Beast Within",
+    "Rest in Peace"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T07:27:49+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:27:49+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "571b4a50fd67b2f0",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

@@ -87,7 +87,26 @@ def _restore_from_archive(fmt: str, slug: str) -> bool:
     return True
 
 
-def build_one(arch: dict, fmt: str, *, force: bool) -> bool:
+def _maybe_enrich(guide, arch: dict, fmt: str, *, enabled: bool, known_archetypes: list[dict]):
+    """Optionally run YouTube enrichment over a freshly-built guide."""
+    if not enabled or guide is None:
+        return guide
+    try:
+        from app.knowledge.primers.youtube import enricher  # lazy import
+    except ImportError:
+        log.warning("youtube enrichment requested but package import failed")
+        return guide
+    known_names = [a.get("name", "") for a in known_archetypes if a.get("name")]
+    return enricher.enrich(
+        guide,
+        archetype=arch.get("name", ""),
+        fmt=fmt,
+        signature_cards=arch.get("signature_cards") or [],
+        known_archetypes=known_names,
+    )
+
+
+def build_one(arch: dict, fmt: str, *, force: bool, enrich_from_youtube: bool = False, all_archetypes: list[dict] | None = None) -> bool:
     name = arch.get("name") or ""
     slug = slugify(name)
     if not slug:
@@ -108,6 +127,10 @@ def build_one(arch: dict, fmt: str, *, force: bool) -> bool:
     if guide is None:
         log.error("failed to build any guide for %s in %s", name, fmt)
         return False
+
+    guide = _maybe_enrich(
+        guide, arch, fmt, enabled=enrich_from_youtube, known_archetypes=all_archetypes or []
+    )
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(guide.model_dump_json(indent=2, exclude={"stale_flags"}) + "\n", encoding="utf-8")
@@ -167,6 +190,7 @@ def build_format(
     from_diff: bool,
     rebuild_archived: bool,
     refresh_stale: bool,
+    enrich_from_youtube: bool = False,
 ) -> int:
     archetypes = _load_archetypes(fmt)
     if not archetypes:
@@ -178,7 +202,7 @@ def build_format(
         if not target:
             log.error("archetype %r not found in %s", archetype, fmt)
             return 0
-        return 1 if build_one(target, fmt, force=force) else 0
+        return 1 if build_one(target, fmt, force=force, enrich_from_youtube=enrich_from_youtube, all_archetypes=archetypes) else 0
 
     queue: list[dict] = []
 
@@ -223,7 +247,7 @@ def build_format(
 
     ok = 0
     for i, arch in enumerate(queue):
-        if build_one(arch, fmt, force=force):
+        if build_one(arch, fmt, force=force, enrich_from_youtube=enrich_from_youtube, all_archetypes=archetypes):
             ok += 1
         if i < len(queue) - 1:
             time.sleep(2)
@@ -250,6 +274,11 @@ def main(argv: list[str]) -> int:
         action="store_true",
         help="rebuild guides older than the format TTL (standard/historic 30d, others longer)",
     )
+    parser.add_argument(
+        "--enrich-from-youtube",
+        action="store_true",
+        help="after building each guide, append gameplay heuristics extracted from cached YouTube videos",
+    )
     args = parser.parse_args(argv[1:])
 
     formats = args.formats or sorted(p.stem for p in METAGAME_DIR.glob("*.json") if not p.stem.endswith(".diff"))
@@ -265,6 +294,7 @@ def main(argv: list[str]) -> int:
             from_diff=args.from_diff,
             rebuild_archived=args.rebuild_archived,
             refresh_stale=args.refresh_stale,
+            enrich_from_youtube=args.enrich_from_youtube,
         )
     log.info("done: %d guide(s) written", total)
     return 0 if total else 1

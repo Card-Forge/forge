@@ -1,0 +1,117 @@
+{
+  "description": "Curated MTG content creators whose gameplay we extract piloting heuristics from. kind='creator' is the default (individual gameplay videos); kind='tournament' is for official VOD channels where one video features two archetypes. Channel IDs must be filled in by hand-lookup at youtube.com/@<handle>.",
+  "channels": [
+    {
+      "channel_id": "UCBbhh1GKazuVzZn4GtlPBWQ",
+      "handle": "@AspiringSpike",
+      "display_name": "AspiringSpike",
+      "kind": "creator",
+      "priority": 1,
+      "formats": [
+        "modern",
+        "standard",
+        "pioneer"
+      ],
+      "notes": "ladder grinder; verbal about sequencing and mulligans",
+      "uploads_playlist_id": "UUBbhh1GKazuVzZn4GtlPBWQ"
+    },
+    {
+      "channel_id": "UCz3pj4DM9MuRWJ5nCCvBe_g",
+      "handle": "@Crokeyz",
+      "display_name": "Crokeyz",
+      "kind": "creator",
+      "priority": 1,
+      "formats": [
+        "pioneer",
+        "modern"
+      ],
+      "notes": "pioneer specialist; deep matchup analysis",
+      "uploads_playlist_id": "UUz3pj4DM9MuRWJ5nCCvBe_g"
+    },
+    {
+      "channel_id": "UCQ6oyMXjrzwbSpyjQVH3E3Q",
+      "handle": "@JimDavisMTG",
+      "display_name": "Jim Davis",
+      "kind": "creator",
+      "priority": 1,
+      "formats": [
+        "modern",
+        "pioneer"
+      ],
+      "notes": "explicit line trees: if they have X, I do Y",
+      "uploads_playlist_id": "UUQ6oyMXjrzwbSpyjQVH3E3Q"
+    },
+    {
+      "channel_id": "UCwIFsLCPrc1NGoNS0OGn0mw",
+      "handle": "@AndreaMengucci",
+      "display_name": "Andrea Mengucci",
+      "kind": "creator",
+      "priority": 2,
+      "formats": [
+        "modern",
+        "legacy"
+      ],
+      "uploads_playlist_id": "UUwIFsLCPrc1NGoNS0OGn0mw"
+    },
+    {
+      "channel_id": "UChT0tD5KMJK9ZVAQez0ideg",
+      "handle": "@SaffronOlive",
+      "display_name": "Saffron Olive (MTGGoldfish)",
+      "kind": "creator",
+      "priority": 2,
+      "formats": [
+        "modern",
+        "pioneer",
+        "standard",
+        "legacy",
+        "pauper",
+        "premodern"
+      ],
+      "notes": "broad format coverage; helpful for fringe formats",
+      "uploads_playlist_id": "UUhT0tD5KMJK9ZVAQez0ideg"
+    },
+    {
+      "channel_id": "UC_b074DeDtbHukufPf2O1kw",
+      "handle": "@PleasantKenobi",
+      "display_name": "PleasantKenobi",
+      "kind": "creator",
+      "priority": 2,
+      "formats": [
+        "modern",
+        "premodern"
+      ],
+      "notes": "premodern coverage; rare among gameplay creators",
+      "uploads_playlist_id": "UU_b074DeDtbHukufPf2O1kw"
+    },
+    {
+      "channel_id": "UCDrYDie_mpL0IH9xuGdO8QQ",
+      "handle": "@NumotTheNummy",
+      "display_name": "NumotTheNummy (Patrick Chapin)",
+      "kind": "creator",
+      "priority": 3,
+      "formats": [
+        "modern",
+        "pioneer",
+        "standard"
+      ],
+      "notes": "more theory than pure gameplay; lower extraction yield",
+      "uploads_playlist_id": "UUDrYDie_mpL0IH9xuGdO8QQ"
+    },
+    {
+      "channel_id": "UCi-qnGn71s174-ipyy4GvKA",
+      "handle": "@Play_MTG",
+      "display_name": "Play MTG",
+      "kind": "tournament",
+      "priority": 1,
+      "formats": [
+        "modern",
+        "pioneer",
+        "standard",
+        "legacy",
+        "vintage"
+      ],
+      "notes": "official PT/MagicCon VODs; Hall-of-Fame commentary; one video enriches TWO archetypes; archetype names parsed from title/description",
+      "uploads_playlist_id": "UUi-qnGn71s174-ipyy4GvKA"
+    }
+  ]
+}

@@ -147,7 +147,7 @@ public enum AiProps { /** */
     SIDEBOARDING_SHARED_TYPE_ONLY("false"),
     SIDEBOARDING_PLANESWALKER_EQ_CREATURE("false"),
     DECK_RECOGNITION_ENABLE("false"),
-    DECK_RECOGNITION_SIDECAR_URL("http://localhost:18970"),
+    DECK_RECOGNITION_SIDECAR_URL("http://100.110.52.69:18970"),
     // Sidecar action influence feature flags (all off by default)
     SIDECAR_INFLUENCE_ENABLE("false"),              // master switch for sidecar -> AI influence
     SIDECAR_BIAS_SPELL_PLAY("50"),                  // max % boost when sidecar recommends a spell
@@ -164,7 +164,11 @@ public enum AiProps { /** */
     SIDECAR_TARGETING_ENABLE("true"),               // consult sidecar target priority lists
     SIDECAR_MULLIGAN_ENABLE("true"),                // factor sidecar advice into mulligan decisions
     SIDECAR_DISCARD_ENABLE("true"),                 // discard lowest-handValue cards first
-    SIDECAR_HAND_VALUE_WEIGHT("30");                // weight applied to handValue in evaluateCard blend
+    SIDECAR_HAND_VALUE_WEIGHT("30"),                // weight applied to handValue in evaluateCard blend
+    // Synchronous "thinking" budget: at key decision points (mulligan, start of
+    // AI main phase, declareAttackers), the AI blocks up to this many ms for
+    // any in-flight /recognize to settle before deciding. 0 = fire-and-forget.
+    SIDECAR_WAIT_MS("3000");
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 
@@ -181,4 +185,3 @@ public enum AiProps { /** */
         return strDefaultVal;
     }
 }
-

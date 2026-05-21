@@ -1,0 +1,297 @@
+{
+  "archetype": "Selesnya Landfall",
+  "format": "standard",
+  "strategy_type": "aggro",
+  "overview": "Selesnya Landfall is an aggressive Standard variant that leverages a white splash for sideboard tools and early-game acceleration. It utilizes Fetch Lands and Icetill Explorer to maximize Landfall triggers, growing threats like Mossborn Hydra and Tifa Lockhart while generating card advantage through Dyadrine, Synthesis Amalgam and Felidar Retreat.",
+  "win_conditions": [
+    "Tifa Lockhart hit-kills",
+    "Mossborn Hydra growing large with Trample",
+    "Felidar Retreat token swarm and board pressure",
+    "Dyadrine, Synthesis Amalgam resource generation and board presence"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early land drops and Fetch Lands",
+      "Hands containing early threats like Sazh's Chocobo or Bristly Bill, Spine Sower"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking land drops or early acceleration",
+      "Hands heavy on late-game cards without early plays"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Sazh's Chocobo",
+          "Bristly Bill, Spine Sower",
+          "Fetch Land",
+          "Forest",
+          "Forest"
+        ],
+        "decision": "keep",
+        "reason": "Provides early board presence and Landfall triggers to establish pressure quickly."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Fetch Lands to trigger Landfall and find basics",
+      "Drop early threats like Sazh's Chocobo and Bristly Bill, Spine Sower",
+      "Use Icetill Explorer to guarantee Landfall and reuse Fetch Lands"
+    ],
+    "mid_game": [
+      "Double Landfall triggers with Traveling Chocobo for explosive plays",
+      "Grow Mossborn Hydra and Tifa Lockhart with +1/+1 counters",
+      "Cast Felidar Retreat to generate tokens and pump the board"
+    ],
+    "late_game": [
+      "Rely on Bristly Bill, Spine Sower's late-game ability to dominate",
+      "Use Dyadrine, Synthesis Amalgam to generate card advantage and extra bodies",
+      "Apply sideboard answers like Dawn's Truce or Requisition Raid to close out matches"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Tifa Lockhart",
+      "role": "Win condition",
+      "notes": "Originally used for combo-kill potential, now serves as a secondary win condition supported by pumps and Veils."
+    },
+    {
+      "name": "Sazh's Chocobo",
+      "role": "Early threat",
+      "notes": "Becomes a large creature quickly with Fetch Lands and Bristly Bill, shifting focus to permanent power."
+    },
+    {
+      "name": "Mossborn Hydra",
+      "role": "Mid-game threat",
+      "notes": "Starts small but grows rapidly with Landfall and Bristly Bill, eventually gaining Trample to win on its own."
+    },
+    {
+      "name": "Bristly Bill, Spine Sower",
+      "role": "Engine/Enabler",
+      "notes": "The deck's glue that boosts all creatures on land drops and has a powerful late-game ability."
+    },
+    {
+      "name": "Traveling Chocobo",
+      "role": "Trigger multiplier",
+      "notes": "Doubles Landfall triggers for explosive plays and occasional surprise hit-kills."
+    },
+    {
+      "name": "Felidar Retreat",
+      "role": "Board protection & token generator",
+      "notes": "Prevents board wipes, generates tokens, and pumps creatures to maintain pressure."
+    },
+    {
+      "name": "Icetill Explorer",
+      "role": "Landfall enabler",
+      "notes": "Acts as extra Traveling Chocobo copies, guarantees Landfall, and reuses Fetch Lands."
+    },
+    {
+      "name": "Dyadrine, Synthesis Amalgam",
+      "role": "Card advantage & body",
+      "notes": "Provides resources, trample, and can sacrifice counters to draw cards and create tokens."
+    },
+    {
+      "name": "Fetch Lands",
+      "role": "Acceleration & Trigger source",
+      "notes": "Enables multiple Landfall triggers per turn and finds basic lands for Icetill Explorer."
+    }
+  ],
+  "sequencing_tips": [
+    "Play Fetch Lands before other lands to maximize Landfall triggers",
+    "Preserve Fetch Lands in hand when needed for key creatures like Mossborn Hydra",
+    "Use Icetill Explorer to reuse Fetch Lands and guarantee triggers",
+    "Remove +1/+1 counters from creatures to activate Dyadrine, Synthesis Amalgam for card advantage when damage isn't the priority",
+    "Cast Felidar Retreat to protect the board and generate tokens when opponents have removal"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Gruul Aggro",
+      "advice": "Side in Sheltered by Ghosts to hold the opponent's clock while interacting with the board, removing blockers or larger threats.",
+      "watch_for": [
+        "Red Aggro variants",
+        "Spot removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Esper Bounce",
+      "advice": "Use Surrak, Elusive Hunter to bypass Pinnacle Starcage and punish spot removal with its built-in protection.",
+      "watch_for": [
+        "Pinnacle Starcage",
+        "Bounce effects"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono White Tokens",
+      "advice": "Bring in Sheltered by Ghosts to control the board and hold the opponent's clock while interacting with their token swarm.",
+      "watch_for": [
+        "Token generators",
+        "Board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Azorius Control",
+      "advice": "Side in Frenzied Baloth for immediate impact and Requisition Raid to deal with artifacts/enchantments while buffing your board.",
+      "watch_for": [
+        "Control elements",
+        "Artifacts and enchantments"
+      ]
+    },
+    {
+      "opponent_archetype": "Naya Yuna",
+      "advice": "Side in Rest in Peace to shut down graveyards and disrupt their combo or value engines.",
+      "watch_for": [
+        "Graveyard synergy",
+        "Yuna combos"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Green Landfall",
+      "advice": "Use Sheltered by Ghosts to hold the clock and interact with the board in the mirror match.",
+      "watch_for": [
+        "Mirror match dynamics",
+        "Landfall triggers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Day of Judgment",
+    "Zero-Point Ballad",
+    "Pinnacle Starcage",
+    "Caretaker's Talent",
+    "Overlord of the Hauntwoods",
+    "Spot removal"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-selesnya-landfall-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T05:32:30+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-selesnya-mightform-landfall-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:29:07+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-selesnya-landfall-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:30:50+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "88e7f5076c6ce641",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Although this is an Aggro deck, we need to use Fetch Lands to enable more Landfall triggers each turn... Dyadrine, Synthesis Amalgam offers an element I've always missed when playing this archetype in other versions: resources."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Tifa became another win condition rather than the archetype's primary game plan. She still receives support from Bristly Bill, Spine Sower and Snakeskin Veil , but winning with hit-kills has become less of a priority."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "A Fetch or a Bristly Bill mix with it can turn any land drop into a 4/4, and maybe even a 10/10 the next turn with Trample. It's the kind of card that demands an answer or will win the game on its own."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Felidar Retreat complements the Landfall package. It ensures our board doesn't go empty in games where opponents clog their removal lists, while also making it harder to interact."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Dyadrine, Synthesis Amalgam offers an element I've always missed when playing this archetype in other versions: resources. Besides having a decent body for its cost and Trample... it can remove two +1/+1 counters from your creatures to put another body on the board and draw more cards"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "each Fetch will find a basic land, and since we can play two lands per turn, that's four +1/+1 counters on all creatures or four 2/2 tokens"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "there are many situations where preserving Fetch Lands is important for other cards."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Icetill Explorer works almost like copies 5 and 6 of Traveling Chocobo , but with the bonus of always guaranteeing Landfall for your cards and, most importantly, always reusing Fetch Lands."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "it can remove two +1/+1 counters from your creatures to put another body on the board and draw more cards, sometimes more important than the damage we can deal that turn."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Felidar Retreat complements the Landfall package. It ensures our board doesn't go empty in games where opponents clog their removal lists"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Dawn's Truce is the best option we have to protect our creatures from sweepers like Day of Judgment or Zero-Point Ballad ."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Surrak, Elusive Hunter... bypasses Pinnacle Starcage , serving as another mid-game threat."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Requisition Raid deals with troublesome artifacts and enchantments like Caretaker's Talent and Overlord of the Hauntwoods or Pinnacle Starcage"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "punish the opponent's spot removals"
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "archetype": "Dredge",
+  "format": "vintage",
+  "strategy_type": "combo",
+  "overview": "Dredge is a combo strategy that mills its own library to populate the graveyard, then returns creatures to the battlefield to overwhelm opponents. It relies on card advantage engines and targeted disruption to protect its game plan. The deck operates independently of mana acceleration, focusing instead on graveyard recursion and board presence.",
+  "win_conditions": [
+    "Overwhelming the opponent with a swarm of creatures from the graveyard",
+    "Executing a graveyard-based combo sequence to reduce opponent life",
+    "Leveraging mill effects to accelerate recursion and close the game"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing early mill or graveyard recursion",
+      "Hands with disruption to protect the game plan",
+      "Hands with card advantage engines to find missing pieces"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking interaction or graveyard synergy",
+      "Hands with only lands and non-interactive spells",
+      "Hands missing mill or recursion components"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play mill spells to rapidly fill the graveyard",
+      "Cast disruption to protect early recursion attempts",
+      "Use card advantage engines to draw into combo pieces"
+    ],
+    "mid_game": [
+      "Recycle creatures from the graveyard to apply pressure",
+      "Hold targeted counterspells for opponent's threats",
+      "Maintain board presence while continuing to mill"
+    ],
+    "late_game": [
+      "Flood the battlefield with recycled creatures",
+      "Use card advantage to outlast or find answers to hate cards",
+      "Close out games with overwhelming board state"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Bazaar of Baghdad",
+      "role": "Card advantage engine",
+      "notes": "Use to draw into combo pieces or mill spells, and leverage its draw ability to find missing recursion components."
+    },
+    {
+      "name": "Force of Negation",
+      "role": "Targeted counterspell",
+      "notes": "Hold for opponent's threats or to protect your graveyard recursion, ensuring your game plan isn't interrupted."
+    },
+    {
+      "name": "Grief",
+      "role": "Mill acceleration",
+      "notes": "Cast to rapidly fill the graveyard and enable dredge recursion, prioritizing it early to establish board presence."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize mill before recursion to ensure graveyard population",
+    "Hold disruption for key threats rather than using it preemptively",
+    "Use card advantage to find missing pieces before committing to recursion",
+    "Protect graveyard from hate by sequencing counterspells after opponent's interaction"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Out-grind with card advantage and protect your combo sequence",
+      "watch_for": [
+        "Library hate",
+        "Graveyard hate",
+        "Counterspells"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Mill quickly and use disruption on early threats to stabilize",
+      "watch_for": [
+        "Early pressure",
+        "Board wipes",
+        "Direct damage"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their sequence and mill to find answers before they win",
+      "watch_for": [
+        "Fast wins",
+        "Non-creature threats",
+        "Interaction"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Library hate",
+    "Graveyard hate",
+    "Board wipes",
+    "Direct damage",
+    "Counterspells"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T11:07:40+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:07:40+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "ec7c12061ac182f1",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "archetype": "Orzhov Midrange",
+  "format": "standard",
+  "strategy_type": "midrange",
+  "overview": "Orzhov Midrange leverages efficient removal and resilient creatures to stabilize early and outvalue opponents in the mid-to-late game. By playing a balanced curve of threats and answers, the deck aims to survive aggressive starts before deploying larger, game-ending threats. The synergy between creature death triggers and conditional removal creates a flexible game plan that adapts to the opponent's strategy.",
+  "win_conditions": [
+    "Trading efficiently to establish a board presence with resilient creatures",
+    "Using removal to clear the path for late-game threats",
+    "Generating incremental value through creature death triggers and conditional spells"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early interaction or a 1-2 drop creature",
+      "Balanced mana bases with at least two lands",
+      "Combinations of removal and a threat that can play turn 3"
+    ],
+    "mulligan_criteria": [
+      "Mana screws or heavy land hands",
+      "Hands lacking early plays or answers",
+      "Overloaded with high-cost cards without early interaction"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap threats to establish presence",
+      "Use early removal to disrupt opponent's game plan",
+      "Prioritize card advantage by trading efficiently"
+    ],
+    "mid_game": [
+      "Deploy signature creatures to apply pressure",
+      "Hold removal for key opponent threats",
+      "Begin generating value through death triggers and conditional effects"
+    ],
+    "late_game": [
+      "Stabilize with larger threats and board wipes if necessary",
+      "Leverage accumulated card advantage to outlast opponents",
+      "Close out games with resilient, hard-to-remove creatures"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Bloodletter of Aclazotz",
+      "role": "Resilient threat that generates value upon death",
+      "notes": "Use as a board presence that pressures opponents while providing incremental damage or card advantage when removed."
+    },
+    {
+      "name": "Unstoppable Slasher",
+      "role": "Fast, aggressive creature to apply early pressure",
+      "notes": "Deploy early to force trades or attack directly, leveraging its speed to disrupt opponent's timing."
+    },
+    {
+      "name": "Requiting Hex",
+      "role": "Conditional removal to clear opponent's threats",
+      "notes": "Hold for high-value targets or use proactively to maintain board control, ensuring the condition is met for maximum efficiency."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize playing threats before holding removal unless a specific answer is needed",
+    "Use creature death triggers to trigger additional effects before casting removal",
+    "Manage mana carefully to ensure you can cast both a threat and an answer on the same turn"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play defensively early, using removal on their biggest threats and holding up lands for answers.",
+      "watch_for": [
+        "Early all-in turns",
+        "Wide board spreads",
+        "Pressure on life total"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply steady pressure with resilient creatures and force them to use multiple removal spells.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Late-game value engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Focus on card advantage and efficient trades, looking for windows to deploy threats they cannot answer.",
+      "watch_for": [
+        "Similar removal spells",
+        "Value creatures",
+        "Mana advantage"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Efficient removal spells",
+    "Board wipes and sweepers"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:47:15+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:47:15+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "8d9625dfb791ccc0",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype name and signature cards imply a balanced, value-oriented approach typical of midrange."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Derived from midrange archetype principles and the provided signature cards."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard midrange piloting principles applied to the provided card list."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard format meta trends and midrange archetype interactions."
+    }
+  ]
+}

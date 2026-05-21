@@ -1,0 +1,212 @@
+{
+  "archetype": "Mono-Black Pox",
+  "format": "legacy",
+  "strategy_type": "control",
+  "overview": "Mono-Black Pox is a Legacy control deck that leverages disruption and board wipes to stabilize against aggressive strategies. By deploying Pox to reduce all creatures to 0/1, the deck turns opponent threats into liabilities while advancing with cheap creatures and planeswalkers. The provided signature cards enable early disruption, targeted removal, and efficient threat generation to secure long-term board control.",
+  "win_conditions": [
+    "Pox combined with low-cost creatures to outvalue opponents",
+    "Thoughtseize disruption to strip key combo pieces or finishers",
+    "Sinkhole removal to clear high-toughness threats and enable Pox's effect",
+    "Orcish Bowmasters as a resilient attacker and removal tool under Pox"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Thoughtseize or Sinkhole for early interaction",
+      "Pox paired with at least two mana sources",
+      "Orcish Bowmasters with a removal spell or Pox"
+    ],
+    "mulligan_criteria": [
+      "No interaction or board presence in the opening hand",
+      "Mana-heavy hands lacking Pox or cheap threats",
+      "Hands with only high-cost cards and no disruption"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Use Thoughtseize to disrupt opponent's game plan and find Pox",
+      "Play lands consistently to ensure Pox and removal are accessible",
+      "Deploy Orcish Bowmasters early to apply pressure and remove key threats"
+    ],
+    "mid_game": [
+      "Cast Pox when the opponent has multiple creatures on the board",
+      "Use Sinkhole to eliminate large threats that Pox cannot handle alone",
+      "Develop board presence with cheap creatures to capitalize on Pox's effect"
+    ],
+    "late_game": [
+      "Maintain card advantage by trading efficiently with Sinkhole and Bowmasters",
+      "Attack with resilient low-cost creatures while opponent's threats are weakened",
+      "Stabilize against combo attempts by holding up interaction and Pox"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Orcish Bowmasters",
+      "role": "Cheap threat and removal tool",
+      "notes": "Use its triggered ability to remove opponent's key creatures or planeswalkers. Under Pox, it becomes a resilient 2/1 attacker that can outlast many threats."
+    },
+    {
+      "name": "Sinkhole",
+      "role": "Targeted removal",
+      "notes": "Prioritize using it on high-toughness creatures or artifacts that bypass Pox. Hold it up to answer threats that would otherwise close the game."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Early disruption",
+      "notes": "Cast on turn one to strip opponent's best cards, find Pox, or disrupt combo sequences. Use it to delay aggressive strategies or remove key interaction."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Thoughtseize until you see a key threat or combo piece before committing it",
+    "Play Pox only when the opponent has multiple creatures to maximize board impact",
+    "Use Sinkhole on threats that Pox cannot reduce to 0/1, such as artifacts or indestructible creatures",
+    "Trigger Orcish Bowmasters' ability on high-value targets to generate card advantage"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize Pox to shut down their creature swarm, then use Thoughtseize to strip key finishers. Attack with cheap creatures to race them.",
+      "watch_for": [
+        "Fast one-drop threats",
+        "Lack of interaction in their opening hand",
+        "Early board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Use Thoughtseize to disrupt their game plan and hold Pox until they commit multiple creatures. Race with Orcish Bowmasters while they search for answers.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "High-toughness finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt early with Thoughtseize to break up combo pieces. Play Pox to stop creature-based combos and use Sinkhole on key artifacts or permanents.",
+      "watch_for": [
+        "Mana acceleration",
+        "Key combo enablers",
+        "Graveyard recursion"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "High-toughness finishers",
+    "Artifact-based threats",
+    "Graveyard recursion engines"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:54:19+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:54:19+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "6804709d25aa382f",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

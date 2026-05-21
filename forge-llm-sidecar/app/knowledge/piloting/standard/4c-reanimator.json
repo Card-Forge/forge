@@ -1,0 +1,152 @@
+{
+  "archetype": "4c Reanimator",
+  "format": "standard",
+  "strategy_type": "combo",
+  "overview": "This four-color Reanimator deck aims to bypass the normal game state by casting high-impact creatures directly from the graveyard. It leverages cheap instants and sorceries to fetch targets, then uses mana acceleration and reanimation spells to bring them onto the battlefield for lethal damage or overwhelming board presence. The inclusion of Deceit provides a flexible way to copy and cast these threats efficiently.",
+  "win_conditions": [
+    "Casting Overlord of the Balemurk from the graveyard for immediate combat damage",
+    "Using Formidable Speaker to generate massive mana and cast multiple threats in a single turn",
+    "Copying and casting reanimation targets with Deceit to overwhelm opponents before they can respond"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with a reanimation spell and a target in the deck or graveyard",
+      "Hands containing Deceit paired with a cheap instant or sorcery",
+      "Hands with at least two mana sources and a way to interact"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking any graveyard interaction or reanimation spells",
+      "Hands with only lands and no early-game impact",
+      "Hands missing a clear path to casting a signature threat"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Discard or tutor for reanimation targets into the graveyard",
+      "Play lands and cheap cantrips to set up Deceit copies",
+      "Hold up counterspells to protect key reanimation plays"
+    ],
+    "mid_game": [
+      "Execute the combo by casting reanimation spells to bring back Overlord of the Balemurk or Formidable Speaker",
+      "Use Deceit to duplicate cheap spells and generate additional value or protection",
+      "Apply pressure with reanimated creatures while searching for win conditions"
+    ],
+    "late_game": [
+      "Rely on Formidable Speaker's mana generation to cast multiple threats per turn",
+      "Use Deceit to copy game-ending spells or board wipes if needed",
+      "Maintain graveyard depth to continuously reanimate answers and threats"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Overlord of the Balemurk",
+      "role": "Primary win condition and combat threat",
+      "notes": "Prioritize casting this from the graveyard early to secure combat damage before opponents can stabilize."
+    },
+    {
+      "name": "Formidable Speaker",
+      "role": "Mana acceleration and secondary win condition",
+      "notes": "Use its ability to generate excess mana for casting multiple reanimation spells or copying Deceit targets in a single turn."
+    },
+    {
+      "name": "Deceit",
+      "role": "Spell duplication and combo enabler",
+      "notes": "Copy cheap instants or sorceries to fetch targets, protect reanimation plays, or generate additional value when combined with graveyard synergies."
+    }
+  ],
+  "sequencing_tips": [
+    "Always ensure you have a counter or removal ready before casting your reanimation spell",
+    "Use Deceit to copy graveyard tutors or discard spells to set up your targets efficiently",
+    "Hold up mana for protection before committing to casting Formidable Speaker or Overlord of the Balemurk"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize reanimating large creatures early to outpace their damage output.",
+      "watch_for": [
+        "Fast removal",
+        "Early board presence"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Use Deceit to copy protection spells and ensure your reanimation resolves.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them by casting Overlord of the Balemurk on turn two or three.",
+      "watch_for": [
+        "Removal spells",
+        "Card advantage engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Counterspells and removal",
+    "Board wipes and graveyard hate"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:16:46+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:16:46+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "fe9b499d95039e11",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype name and signature cards imply a graveyard-centric combo strategy focused on casting large creatures early."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Derived from signature card effects and standard reanimator archetype mechanics."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Based on standard reanimator sequencing principles and interaction timing."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Inferred from typical Standard meta responses to graveyard combo decks."
+    }
+  ]
+}

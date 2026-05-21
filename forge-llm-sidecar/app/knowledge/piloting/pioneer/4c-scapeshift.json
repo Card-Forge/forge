@@ -1,0 +1,156 @@
+{
+  "archetype": "4c Scapeshift",
+  "format": "pioneer",
+  "strategy_type": "ramp",
+  "overview": "This four-color Pioneer deck utilizes Scapeshift to rapidly accelerate land count, enabling early access to high-cost threats. By combining land search and untap effects from Lumra and Formidable Speaker, it generates massive mana advantages to overwhelm opponents before they can stabilize.",
+  "win_conditions": [
+    "Casting large creatures or spells early via Scapeshift acceleration",
+    "Triggering landfall or enter-the-battlefield effects repeatedly",
+    "Generating overwhelming card and mana advantage through land untap engines"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Scapeshift and multiple lands",
+      "Hands containing Formidable Speaker or Lumra with early land drops",
+      "Hands with at least three mana sources and a ramp spell"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking Scapeshift or land acceleration",
+      "Hands with four or more lands but no combo enablers",
+      "Hands missing early mana sources to cast Formidable Speaker"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cast Lumra to search for basics and establish board presence",
+      "Prioritize drawing into Scapeshift while maintaining land count",
+      "Avoid overcommitting to non-land cards unless necessary"
+    ],
+    "mid_game": [
+      "Activate Formidable Speaker to untap extra lands each upkeep",
+      "Cast Scapeshift to exile hand cards and flood the battlefield with lands",
+      "Begin deploying large threats or combo pieces enabled by the mana surge"
+    ],
+    "late_game": [
+      "Maintain landfall triggers and continuous mana generation",
+      "Use excess mana to cast game-ending spells or stabilize against opponent's threats",
+      "Cycle through hand to keep Scapeshift viable if needed"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Scapeshift",
+      "role": "Primary acceleration engine",
+      "notes": "Cast when you have multiple lands and non-land cards in hand to exile them and put equal or greater number of lands from your graveyard onto the battlefield, enabling early access to high-cost spells."
+    },
+    {
+      "name": "Lumra, Bellow of the Woods",
+      "role": "Early ramp and land search",
+      "notes": "Play on turn one or two to search for a basic land and put it onto the battlefield tapped, ensuring consistent mana base development while providing a body."
+    },
+    {
+      "name": "Formidable Speaker",
+      "role": "Mana generation and upkeep engine",
+      "notes": "Untaps an additional land during each upkeep, creating exponential mana growth when combined with Scapeshift land floods to cast large threats early."
+    }
+  ],
+  "sequencing_tips": [
+    "Always ensure you have enough lands in hand to pay for Scapeshift before exiling them",
+    "Prioritize untapping lands with Formidable Speaker before casting Scapeshift to maximize land count",
+    "Hold back at least one land in hand to pay for Scapeshift's mana cost",
+    "Sequence land drops to maintain a steady curve before triggering the combo"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early land drops and use Lumra to stabilize quickly, then accelerate past their curve with Scapeshift.",
+      "watch_for": [
+        "Early board wipes",
+        "Creature removal",
+        "Fast mana acceleration"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells by holding back key cards, and use Formidable Speaker to generate enough mana to cast threats on curve despite disruption.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Hand disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them by flooding lands early and deploying large threats before they can establish value engines.",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Late-game finishers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Counterspells and board wipes",
+    "Hand disruption and card draw engines"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T04:04:04+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:04:04+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "de7767d0cb3992ad",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Scapeshift, Lumra, Bellow of the Woods, Formidable Speaker"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Scapeshift, Lumra, Bellow of the Woods, Formidable Speaker"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Scapeshift, Lumra, Bellow of the Woods, Formidable Speaker"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Scapeshift, Lumra, Bellow of the Woods, Formidable Speaker"
+    }
+  ]
+}

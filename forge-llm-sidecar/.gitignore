@@ -10,3 +10,11 @@ venv/
 .ruff_cache/
 .mypy_cache/
 guidance/progress.json
+
+# Build / runtime caches
+cache/
+logs/
+
+# Local secrets
+.env
+.env.local

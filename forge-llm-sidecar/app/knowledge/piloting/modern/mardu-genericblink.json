@@ -1,0 +1,272 @@
+{
+  "archetype": "Mardu GenericBlink",
+  "format": "modern",
+  "strategy_type": "tempo",
+  "overview": "Mardu GenericBlink is a tempo strategy that leverages creature recursion and disruption to control the board while generating incremental value. By cycling threats through the graveyard and back into play, the deck applies consistent pressure and outmaneuvers opponents who lack efficient answers. Thoughtseize provides early-game disruption to protect the recursion engine and key threats.",
+  "win_conditions": [
+    "Outvalue opponents by repeatedly blinking and recycling creatures with Solitude and Overlord of the Balemurk",
+    "Apply early pressure with low-cost threats while disrupting opponent's game plan with Thoughtseize",
+    "Dodge removal and board wipes by returning creatures to hand, preserving board presence and card advantage"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Thoughtseize or other early disruption",
+      "Playable creatures by turn two or three",
+      "At least one component of the Solitude/Overlord of the Balemurk recursion package"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking disruption or early plays",
+      "Mana bases that cannot support W/B/R spells by turn three",
+      "Hands heavy on high-cost cards without recursion setup"
+    ],
+    "examples": [
+      {
+        "hand": [],
+        "decision": "keep",
+        "reason": "7-card hand with Preordain and Atraxa — Atraxa is kept on top specifically to pitch to Force of Negation, protecting the Quantum Riddler + Ephemerate combo line from being disrupted."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Cast Thoughtseize to remove key threats or disruption from the opponent's hand",
+      "Play low-cost creatures to establish board presence and generate early value",
+      "Prioritize mana development to enable Solitude and Overlord of the Balemurk"
+    ],
+    "mid_game": [
+      "Activate Solitude to blink creatures, dodging removal or triggering death abilities",
+      "Use Overlord of the Balemurk's death trigger to return blinked or removed creatures to hand",
+      "Maintain board pressure while cycling threats to exhaust opponent's resources"
+    ],
+    "late_game": [
+      "Leverage the recursion loop to generate sustained value and board presence",
+      "Hold up mana for Solitude to protect key threats from late-game sweepers",
+      "Close out the game by repeatedly casting recycled threats until the opponent runs out of answers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Solitude",
+      "role": "Blink engine and removal dodger",
+      "notes": "Tap for 1W to return a creature to its owner's hand. Use it to dodge targeted removal, trigger death effects, or retrigger enter-the-battlefield abilities. Hold up mana to protect key threats. | Used as a hard-cast removal spell to strip a key card draw engine early, preventing it from filling the opponent's hand or synergizing with their recursion package. (from gameplay) | Used to exile a lethal double-striking creature instead of Force of Negation, preserving Surveil triggers and combo timing. (from gameplay) | Omitted from the Esper Blink list as it is a liability against Azorius Control; replaced by Subtlety for better matchup viability. (from gameplay)"
+    },
+    {
+      "name": "Overlord of the Balemurk",
+      "role": "Graveyard recursion and value generator",
+      "notes": "Enters tapped as a 3/3. When it dies, return a creature card from your graveyard to your hand. Blink it with Solitude or sacrifice it to trigger the recursion effect, fueling the deck's win condition. | Played to search for Quantum Riddler, discarding Psychic Frog and Fatal Push to establish the Riddler draw engine. (from gameplay)"
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Early-game disruption and card advantage",
+      "notes": "Discard a card to make an opponent discard a card. Use it to remove key threats, disruption, or win conditions from the opponent's hand. Prioritize targeting cards that would otherwise stall your recursion engine. | Deployed after establishing board presence to strip key answers or setup pieces, ensuring the opponent cannot easily stabilize against your threats. (from gameplay)"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Thoughtseize until you know what the opponent is running or until a key threat appears",
+    "Blink creatures with Solitude after the opponent commits removal or before they can interact",
+    "Trigger Overlord of the Balemurk's death effect strategically to fetch the most impactful creature from the graveyard",
+    "Manage mana carefully to ensure you can cast Solitude's ability and follow up with recycled threats",
+    "Cycle Ephemerate on Quantum Riddler to trigger its rebound effect for card advantage, prioritizing hand reconstruction over immediate combat damage when your hand is depleted.",
+    "Cast Solitude early to remove problematic card draw engines before they can overwhelm your hand or create unmanageable interactions with your own draw spells.",
+    "Violent Urge checks for Delirium on resolution, not on cast. Sequence graveyard-dumping spells (like Lava Dart or flashbacks) after casting it to ensure the double-strike bonus triggers.",
+    "When holding both Solitude and Force of Negation, use Solitude to exile lethal threats. Force of Negation only delays the game and wastes a Surveil trigger needed for the combo.",
+    "Keep a blue card (like Atraxa) on top of the library specifically to pitch to Force of Negation, protecting key combo pieces like Quantum Riddler and Ephemerate.",
+    "Sacrifice a fetch land during your main phase to fetch an untapped land, then immediately kick Orum's Chant off Ischron Scepter to maintain the turn lock.",
+    "Play Felia on your upkeep rather than your end step to trigger Quantum Riddler's draw step ability and draw two cards.",
+    "Cycle Failure repeatedly to keep your hand size at exactly 1, ensuring Quantum Riddler triggers on every draw step."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Thoughtseize to remove key finishers and blink creatures to dodge early removal. Prioritize board presence and value generation to outlast the aggressive strategy.",
+      "watch_for": [
+        "Early sweepers or board wipes",
+        "Low-cost threats that can close the game quickly",
+        "Disruption targeting your recursion engine"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply early pressure with creatures and use Thoughtseize to remove countermagic or sweepers. Blink threats to dodge removal and outvalue the opponent over the long game.",
+      "watch_for": [
+        "Counterspells targeting your recursion setup",
+        "Board wipes that clear your threats",
+        "Late-game finishers or value engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race the opponent by maintaining board presence and using Thoughtseize to remove their key threats. Blink creatures to trigger death effects and generate incremental value.",
+      "watch_for": [
+        "Removal spells targeting your recursion pieces",
+        "Card advantage engines that outpace your value",
+        "Board wipes that reset the board state"
+      ]
+    },
+    {
+      "opponent_archetype": "Esper GenericBlink",
+      "advice": "Apply pressure quickly and close out the game fast. The longer you give the control opponent, the more counterspells they draw, reducing your chances to resolve key threats. (from gameplay) Prevent the opponent from establishing an Isochron Scepter and Orum's Chant lock, as pairing it with their planeswalkers completely shuts down your ability to play cards or attack. (from gameplay) Avoid leaning on a single threat; multiple threats are required to bypass Solitude and apply pressure before the combo resolves. (from gameplay) Expect Force of Negation to be used on board-flooding threats (like Cory Steel Cutter) rather than early creatures, as protecting the Quantum Riddler + Ephemerate combo is the priority. (from gameplay) Use Solitude to stop lethal aggression, then rely on Surveil lands and Gorio's Vengeance to dig for combo pieces like Atraxa or Gristlebrand. (from gameplay) Build with four Force of Negation and four Subtlety instead of Solitude; this pre-sideboards against Azorius Control by providing reliable planeswalker interaction and avoiding Solitude's liability. (from gameplay) Prioritize sticking a planeswalker like Tefairy or Narset and shutting down Quantum Riddler to secure the win. (from gameplay) Use Force of Negation early to answer Tefairy before the Ischron Scepter/Orum's Chant lock becomes unbreakable. (from gameplay)",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Targeted removal spells",
+    "Board wipes and sweepers",
+    "Countermagic and hand disruption",
+    "Graveyard hate or exile effects"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T00:39:56+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T00:39:56+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=NGlBhydLAuI",
+      "publish_date": "2025-09-28T01:41:44Z",
+      "fetched_at": "2026-05-21T11:57:29+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Mardu GenericBlink"
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=LBkEDKfWpaA",
+      "publish_date": "2025-09-28T01:41:34Z",
+      "fetched_at": "2026-05-21T12:00:03+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Mardu GenericBlink"
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=TLhzJ8f-wO4",
+      "publish_date": "2025-09-28T21:23:16Z",
+      "fetched_at": "2026-05-21T12:02:31+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Mardu GenericBlink"
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "43ab9bcd362cbe70",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Signature cards Solitude and Overlord of the Balemurk indicate a blink recursion engine, while Thoughtseize and the Mardu color identity point to a tempo approach in Modern."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Solitude enables blinking to dodge removal and trigger death effects, while Overlord of the Balemurk provides graveyard recursion. Thoughtseize secures early advantage."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Blink decks require precise timing to maximize value and dodge interaction. Thoughtseize is most effective when used reactively. Solitude and Balemurk synergy demands mana and graveyard management."
+    },
+    {
+      "confidence": 0.75,
+      "kind": "gameplay_observed",
+      "source_index": 1,
+      "evidence_span": "12:33-13:17"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "gameplay_observed",
+      "source_index": 1,
+      "evidence_span": "7:37-8:19"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "gameplay_observed",
+      "source_index": 2,
+      "evidence_span": "11:27-12:12"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "gameplay_observed",
+      "source_index": 2,
+      "evidence_span": "11:27-12:12"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "gameplay_observed",
+      "source_index": 2,
+      "evidence_span": "16:24-17:08"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "gameplay_observed",
+      "source_index": 3,
+      "evidence_span": "5:36-6:20"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "gameplay_observed",
+      "source_index": 3,
+      "evidence_span": "13:21-14:05"
+    },
+    {
+      "confidence": 0.75,
+      "kind": "gameplay_observed",
+      "source_index": 3,
+      "evidence_span": "14:45-15:29"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Blink recursion strategies are vulnerable to targeted removal, sweepers, and graveyard disruption. Modern format interactions typically include these threat types."
+    }
+  ]
+}

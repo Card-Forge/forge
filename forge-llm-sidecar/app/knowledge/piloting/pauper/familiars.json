@@ -1,0 +1,286 @@
+{
+  "archetype": "Familiars",
+  "format": "pauper",
+  "strategy_type": "combo",
+  "overview": "Grixis Tide Familiars is a Pauper combo deck that leverages the newly legal High Tide to generate massive mana for its win conditions. It utilizes Nightscape Familiar to discount spells and provide regeneration, while relying on Stream of Thought or infinite Murmuring Mystic tokens to close games. The deck also features a flexible Ardent Elementalist and Snapcaster Mage mini-combo alongside strong black removal.",
+  "win_conditions": [
+    "Stream of Thought",
+    "Murmuring Mystic infinite token engine",
+    "Ardent Elementalist and Snapcaster Mage combo"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with solid land drops",
+      "Cantrips to manipulate the top of the deck and create card advantage",
+      "Combo pieces like High Tide, Mulldrifter, and Nightscape Familiar"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking land drops",
+      "Hands with no cantrips or deck manipulation",
+      "Hands that cannot execute the game plan early"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Preordain",
+          "Mulldrifter",
+          "Nightscape Familiar",
+          "High Tide",
+          "Lands"
+        ],
+        "decision": "keep",
+        "reason": "Has great land drops, cantrips for card advantage, and combo potential with High Tide."
+      },
+      {
+        "hand": [
+          "High Tide",
+          "Mulldrifter",
+          "Nightscape Familiar",
+          "Snapcaster Mage",
+          "Lands"
+        ],
+        "decision": "keep",
+        "reason": "Greedy but rewarding; can generate massive mana early and evoke Mulldrifter."
+      },
+      {
+        "hand": [
+          "Non-land cards without cantrips"
+        ],
+        "decision": "mulligan",
+        "reason": "Cannot do anything until land drops are found; lacks cantrips or deck manipulation."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cantrips like Preordain to find combo pieces",
+      "Cast Nightscape Familiar to discount red and blue spells",
+      "Set up High Tide for mana acceleration"
+    ],
+    "mid_game": [
+      "Execute the Ardent Elementalist and Snapcaster Mage mini-combo",
+      "Use Snuff Out to remove problematic creatures",
+      "Play Mulldrifter for card advantage and board presence"
+    ],
+    "late_game": [
+      "Cast Stream of Thought for a massive draw and win",
+      "Activate Murmuring Mystic to generate infinite 1/1 Bird tokens",
+      "Regenerate Nightscape Familiar to block and attack repeatedly"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "High Tide",
+      "role": "Mana acceleration",
+      "notes": "Enables the combo by turning lands into blue mana."
+    },
+    {
+      "name": "Stream of Thought",
+      "role": "Win condition",
+      "notes": "Primary way to beat opponents using High Tide mana."
+    },
+    {
+      "name": "Murmuring Mystic",
+      "role": "Win condition",
+      "notes": "Alternative engine to create infinite 1/1 Bird tokens."
+    },
+    {
+      "name": "Nightscape Familiar",
+      "role": "Discount & Regeneration",
+      "notes": "Discounts red and blue spells, can regenerate and attack."
+    },
+    {
+      "name": "Ardent Elementalist",
+      "role": "Combo piece",
+      "notes": "Part of a mini-combo with Snapcaster Mage; costs less with multiple Familiars."
+    },
+    {
+      "name": "Snapcaster Mage",
+      "role": "Combo piece",
+      "notes": "Works with Ardent Elementalist to replay spells for free."
+    },
+    {
+      "name": "Snuff Out",
+      "role": "Removal",
+      "notes": "One of the best removal spells in the format, enabled by black mana."
+    },
+    {
+      "name": "Preordain",
+      "role": "Cantrip",
+      "notes": "Manipulates the top of the deck to find combo pieces."
+    },
+    {
+      "name": "Mulldrifter",
+      "role": "Card advantage",
+      "notes": "Provides card draw and can be evoked for tempo."
+    }
+  ],
+  "sequencing_tips": [
+    "Discount counterspells like Negate using Nightscape Familiar for efficiency.",
+    "Look for windows in the opponent's strategy to safely play your combo.",
+    "Use Snuff Out early to clear the board before executing win conditions.",
+    "Prioritize land drops and cantrips in opening hands to avoid dead turns."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Mono Blue Tide",
+      "advice": "Side in Snuff Out and Negate. Use Nightscape Familiar as a blocker and regenerate it. Wait for a window to play the combo.",
+      "watch_for": [
+        "Rush of Knowledge",
+        "Lórien Revealed",
+        "Tolarian Terror",
+        "Counterspells"
+      ]
+    },
+    {
+      "opponent_archetype": "Jund Wildfire",
+      "advice": "Side in Cast into the Fire to exile indestructible lands and deal with problematic permanents.",
+      "watch_for": [
+        "Nihil Spellbomb",
+        "Blood Fountain",
+        "Midrange threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Madness Burn",
+      "advice": "Side in interaction to handle aggressive burn. Note that Grixis lacks God-Pharaoh's Faithful for life gain, making it vulnerable.",
+      "watch_for": [
+        "Aggressive burn spells",
+        "Pressure on life total"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono-White Aggro",
+      "advice": "Side in removal and interaction. Use Familiars' removal to clear their creatures and develop your game plan.",
+      "watch_for": [
+        "Thraben Charm",
+        "Early pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Bogles",
+      "advice": "Side in Pyroblast to counter Slippery Bogle on the stack. Treat the matchup as a race.",
+      "watch_for": [
+        "Slippery Bogle",
+        "Indestructible creatures"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Thraben Charm",
+    "Slippery Bogle",
+    "Nihil Spellbomb",
+    "Blood Fountain",
+    "Counterspells",
+    "Aggressive burn spells",
+    "Tolarian Terror"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-grixis-tide-familiars-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T09:37:52+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-grixis-tide-familiars-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:36:32+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "7ad51b57a09e8b43",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "The main game plan is to take advantage of the mana High Tide creates so you can beat your opponent with Stream of Thought, but this deck also plays Murmuring Mystic as an alternative win condition."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "beat your opponent with Stream of Thought"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Murmuring Mystic as an alternative win condition. You can use it as an engine to create infinite 1/1 Bird tokens."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Ardent Elementalist is part of a mini-combo with Snap"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Negate is a powerful counter, particularly if you discount its cost with Nightscape."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Try to be smart and look for a window in your opponent's strategy to play your combo."
+    },
+    {
+      "confidence": 0.8,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Snuff Out is excellent to deal with their board"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Blue decks usually recover well from mulligans because of their cantrips"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Thraben Charm is a bit problematic"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Pyroblast might seem a weird sideboard choice, but it is actually one of the few ways to stop Slippery Bogle"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "deal with Nihil Spellbomb and Blood Fountain, which are quite problematic"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "decks with lots of counters"
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+{
+  "archetype": "Azorius Control",
+  "format": "modern",
+  "strategy_type": "control",
+  "overview": "Azorius Control in Modern relies on surviving early aggression and combo attempts through disruptive board wipes like Supreme Verdict. Once the board is clear, the deck transitions into a value grind using Solitude and Kaheera, the Orphanguard to generate card advantage. By outlasting opponents through efficient resource management and graveyard synergy, the deck secures victory in the late game.",
+  "win_conditions": [
+    "Outvaluing opponents with Solitude and Kaheera, the Orphanguard",
+    "Resetting the board with Supreme Verdict to regain initiative",
+    "Stabilizing against aggressive strategies and closing out with late-game creatures"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two to three lands and early interaction",
+      "Supreme Verdict on turn three or four",
+      "Solitude or Kaheera, the Orphanguard with sufficient mana sources"
+    ],
+    "mulligan_criteria": [
+      "Zero or one land",
+      "Five or more cards with no interaction",
+      "Hands lacking Supreme Verdict or value engines against aggressive decks"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize land drops and hold up mana for Supreme Verdict",
+      "Disrupt opponent's early board state before committing resources",
+      "Use Kaheera, the Orphanguard to dig for answers if the graveyard is populated"
+    ],
+    "mid_game": [
+      "Deploy Solitude to establish a durable blocker and value source",
+      "Time Supreme Verdict to clear multiple threats simultaneously",
+      "Cycle through the graveyard using Kaheera and Solitude to find late-game answers"
+    ],
+    "late_game": [
+      "Leverage Solitude and Kaheera, the Orphanguard to generate massive card advantage",
+      "Maintain board presence while digging for win conditions or additional control",
+      "Outpace opponent's resources through continuous value generation"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Supreme Verdict",
+      "role": "Board reset and disruption",
+      "notes": "Hold up mana to clear aggressive starts or protect value engines; use sparingly to maintain resource parity"
+    },
+    {
+      "name": "Kaheera, the Orphanguard",
+      "role": "Card advantage and stabilization",
+      "notes": "Activate ability to draw cards when the graveyard is full; pair with graveyard-filling strategies to sustain the grind"
+    },
+    {
+      "name": "Solitude",
+      "role": "Late-game finisher and value engine",
+      "notes": "Use exile ability to find answers or win conditions; keep on board to outvalue opponents through repeated activations | Used to deal with Nadu while it is on the stack, preventing the opponent from drawing a card instead of answering it after it resolves. (from gameplay)"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up mana for Supreme Verdict before making irreversible plays",
+    "Activate Kaheera, the Orphanguard and Solitude to find answers before attacking",
+    "Prioritize clearing threats that cannot be answered by value engines",
+    "Manage graveyard state to maximize Kaheera and Solitude activations",
+    "Prioritize casting Solitude on Nadu while it is on the stack rather than waiting for it to resolve, to prevent the opponent from drawing a card."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play Supreme Verdict on curve to reset the board, then stabilize with Solitude and Kaheera, the Orphanguard to outvalue the opponent.",
+      "watch_for": [
+        "Fast damage",
+        "Graveyard hate",
+        "Early pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt key pieces with Supreme Verdict, then use Solitude and Kaheera, the Orphanguard to dig for answers and outlast the combo attempt.",
+      "watch_for": [
+        "Win conditions",
+        "Card advantage engines",
+        "Graveyard recursion"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Trade efficiently in the early game, use Supreme Verdict to reset board states, and transition into a value grind with Solitude and Kaheera, the Orphanguard.",
+      "watch_for": [
+        "Efficient threats",
+        "Removal spells",
+        "Resource parity"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race the opponent's value engines by aggressively deploying Solitude and Kaheera, the Orphanguard, while timing Supreme Verdict to clear their board.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Late-game threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Living End",
+      "advice": "Use Dress Down to temporarily remove Nadu's abilities for a turn. (from gameplay) Be aware that Sun Cleanser removes all energy counters and prevents gaining new ones, completely shutting down your energy-based sweepers. (from gameplay) Watch out for Vexing Devil, which stops counter magic and instant-speed interaction. (from gameplay)",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Aggressive creature swarms",
+    "Combo win conditions",
+    "Efficient midrange threats",
+    "Graveyard hate cards"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T02:01:36+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T02:01:36+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=L65DILjrQN8",
+      "publish_date": "2024-06-30T14:30:07Z",
+      "fetched_at": "2026-05-21T12:12:14+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Azorius Control"
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "f824e04e3e88f874",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.8,
+      "kind": "gameplay_observed",
+      "source_index": 1,
+      "evidence_span": "34:41-35:24"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

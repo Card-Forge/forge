@@ -1,0 +1,134 @@
+{
+  "archetype": "Mono-Black Midrange",
+  "format": "pioneer",
+  "strategy_type": "midrange",
+  "overview": "This Mono-Black Midrange deck leverages early-game hand disruption to stabilize into a mid-game of resilient threats and graveyard recursion. It aims to outvalue opponents by consistently trading up with removal and hand size advantage, eventually deploying a dominant late-game finisher. The strategy relies on controlling the board state while accumulating resources for a decisive endgame.",
+  "win_conditions": [
+    "Deploying Sheoldred, the Apocalypse to drain opponent life and remove threats",
+    "Attacking with a board of resilient creatures like Graveyard Trespasser",
+    "Outlasting opponents through consistent hand advantage and resource denial"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Thoughtseize and a one or two-drop threat",
+      "Hands with multiple disruption spells to control the early game",
+      "Hands that enable a turn-one or turn-two play"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early disruption or threats",
+      "Hands with only high-cost cards like Sheoldred",
+      "Hands with no lands or unplayable mana bases"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Cast Thoughtseize on turn one to disrupt opponent's game plan",
+      "Play low-cost threats to establish board presence",
+      "Use disruption to protect key cards or set up combos"
+    ],
+    "mid_game": [
+      "Deploy Graveyard Trespasser to apply pressure and enable graveyard synergies",
+      "Trade efficiently with removal and hand size advantage",
+      "Begin accumulating resources for late-game finishers"
+    ],
+    "late_game": [
+      "Cast Sheoldred, the Apocalypse to control the board and drain life",
+      "Leverage graveyard recursion to outvalue opponents",
+      "Close out games with overwhelming board presence and life total advantage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Thoughtseize",
+      "role": "Early-game disruption and hand advantage",
+      "notes": "Use on turn one to remove key threats or combo pieces, or hold to protect your own threats"
+    },
+    {
+      "name": "Sheoldred, the Apocalypse",
+      "role": "Late-game win condition and value engine",
+      "notes": "Deploy when you have board control to drain life and remove opponent's threats, leveraging its death triggers"
+    },
+    {
+      "name": "Graveyard Trespasser",
+      "role": "Mid-game threat and graveyard enabler",
+      "notes": "Play to apply pressure and enable recursion synergies, often serving as a resilient blocker or attacker"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Thoughtseize if opponent has a known turn-one play that disrupts your game plan",
+    "Prioritize playing threats before casting Sheoldred to maximize its death triggers",
+    "Use Graveyard Trespasser to enable graveyard recursion strategies before committing to late-game finishers"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Thoughtseize to remove key early threats and stabilize with resilient blockers",
+      "watch_for": [
+        "Fast damage",
+        "Early board presence",
+        "Burn spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply early pressure with threats and use hand advantage to outlast their removal",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their combo pieces with Thoughtseize and stabilize with mid-game threats",
+      "watch_for": [
+        "Combo enablers",
+        "Fast win conditions",
+        "Graveyard hate"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Combo enablers and finishers"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T04:18:30+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:18:30+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "bef69096bba7d37c",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

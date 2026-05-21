@@ -1,0 +1,137 @@
+{
+  "archetype": "LED Dredge",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "LED Dredge is a graveyard-centric combo deck that mills its own library to assemble powerful synergies. By leveraging Lion's Eye Diamond for explosive mana acceleration and Cabal Therapy for consistent card advantage, the deck rapidly constructs lethal sequences. Stinkweed Imp provides early board presence and flexible value to protect the combo or trigger graveyard effects.",
+  "win_conditions": [
+    "Assembling infinite mana and damage combos from the graveyard",
+    "Milling the opponent's library to zero cards",
+    "Overwhelming the board with recursive cheap creatures"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two mana sources and a cheap spell or creature",
+      "Hands containing Cabal Therapy or Stinkweed Imp alongside lands",
+      "Hands that can mill three or more cards by turn two"
+    ],
+    "mulligan_criteria": [
+      "Hands with four or more lands",
+      "Hands lacking any card draw or graveyard interaction",
+      "Hands with only high-cost cards and no acceleration"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands and casting cheap creatures to establish board presence",
+      "Use Cabal Therapy to dig for combo pieces and discard dead draws",
+      "Begin milling your deck to populate the graveyard with key synergies"
+    ],
+    "mid_game": [
+      "Activate Lion's Eye Diamond once you have sufficient mana sources and graveyard pieces",
+      "Recast creatures and spells from the graveyard to apply pressure or set up combos",
+      "Manage your life total carefully while assembling the final pieces"
+    ],
+    "late_game": [
+      "Execute the assembled combo for lethal damage or infinite resources",
+      "Use recursive threats to maintain board control if the combo is disrupted",
+      "Leverage excess mana to cast multiple spells in a single turn"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Lion's Eye Diamond",
+      "role": "Mana acceleration and combo enabler",
+      "notes": "Hold until you have enough mana sources and graveyard pieces to safely activate and untap, then use the burst mana to cast multiple spells or finish the game."
+    },
+    {
+      "name": "Cabal Therapy",
+      "role": "Card advantage and graveyard tutoring",
+      "notes": "Cast early to find combo pieces, discard low-value cards to reduce milling time, and repeatedly cast from the graveyard for consistent value."
+    },
+    {
+      "name": "Stinkweed Imp",
+      "role": "Early threat and value engine",
+      "notes": "Use to pressure the opponent on curve, sacrifice to fuel other graveyard triggers or remove itself safely, and recast from the graveyard for recurring board presence."
+    }
+  ],
+  "sequencing_tips": [
+    "Mill your deck before activating Lion's Eye Diamond to ensure you have enough pieces in the graveyard",
+    "Cast Cabal Therapy before committing to a combo to verify you have all necessary components",
+    "Hold up mana for potential interaction before resolving your final combo sequence",
+    "Sacrifice Stinkweed Imp only when it triggers a beneficial effect or avoids lethal damage"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race their hand size and board state by milling quickly and assembling your combo before they can stabilize with counterspells or graveyard hate.",
+      "watch_for": [
+        "Counterspell",
+        "Rest in Peace",
+        "Empty the Graveyard"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Stinkweed Imp and cheap recursive creatures to stall early turns while you mill and draw into your combo pieces.",
+      "watch_for": [
+        "Lightning Bolt",
+        "Abrupt Decay",
+        "Early board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Prioritize disruption and racing their win condition by leveraging Cabal Therapy to find answers or accelerate your own sequence.",
+      "watch_for": [
+        "Doomsday",
+        "Belbe's Portal",
+        "Fast mana acceleration"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspell",
+    "Rest in Peace",
+    "Lightning Bolt",
+    "Abrupt Decay",
+    "Empty the Graveyard"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T07:53:18+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:53:18+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "71ebdde3bd3be943",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

@@ -137,6 +137,23 @@ public class AiController {
         return sidecarInfluence;
     }
 
+    /**
+     * Block up to {@link AiProps#SIDECAR_WAIT_MS} for any in-flight /recognize
+     * to settle. Call at high-impact decision points (mulligan, start of main,
+     * declareAttackers) so the sidecar's advice is current before the AI
+     * commits. No-op when the influence is disabled or the budget is 0.
+     */
+    public void waitForSidecar() {
+        if (!getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE)) {
+            return;
+        }
+        final int budget = getIntProperty(AiProps.SIDECAR_WAIT_MS);
+        if (budget <= 0) {
+            return;
+        }
+        sidecarInfluence.awaitLatest(budget);
+    }
+
     public int getAttackAggression() {
         return lastAttackAggression;
     }
@@ -1706,30 +1723,47 @@ public class AiController {
     /**
      * If sidecar influence is enabled, check if it recommends a specific
      * PLAY_SPELL or ACTIVATE_ABILITY action for a card we can play.
+     *
+     * <p>The bias flags ({@link AiProps#SIDECAR_BIAS_SPELL_PLAY},
+     * {@link AiProps#SIDECAR_BIAS_ABILITY}) gate how confident the sidecar must
+     * be before we override the heuristic's pick. The check is
+     * {@code percentage * bias/100 > 50}, mirroring {@link #sidecarRecommendsPass}.
+     * Bias=100 trusts the sidecar fully; bias=0 disables the override entirely;
+     * the default of 50 requires the sidecar to score the action above 100% raw
+     * confidence (effectively "only when the sidecar is very sure").</p>
      */
     private SpellAbility trySidecarRecommendedPlay(final List<SpellAbility> all, boolean skipCounter) {
         if (!getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE) || !sidecarInfluence.hasData()) {
             return null;
         }
         // PLAY_SPELL: try each recommended card in priority order; pick the
-        // first one we can legally play and pay for.
-        for (final String targetCard : sidecarInfluence.bestPlaySpellNames()) {
-            if (targetCard == null || targetCard.isEmpty()) continue;
-            for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
-                if (skipCounter && sa.getApi() == ApiType.Counter) continue;
-                sa.setActivatingPlayer(player);
-                final String cardName = sa.getHostCard() != null ? sa.getHostCard().getName() : "";
-                if (cardName.equalsIgnoreCase(targetCard) || cardName.contains(targetCard)) {
-                    if (canPlayAndPayFor(sa) == AiPlayDecision.WillPlay) {
-                        return sa;
+        // first one we can legally play and pay for, IF the sidecar's confidence
+        // (after applying the spell-play bias) clears the threshold.
+        final double spellBias = getIntProperty(AiProps.SIDECAR_BIAS_SPELL_PLAY) / 100.0;
+        if (spellBias > 0.0) {
+            for (final var spellAction : sidecarInfluence.getActions()) {
+                if (!"PLAY_SPELL".equals(spellAction.actionType())) continue;
+                if (spellAction.percentage() * spellBias <= 50.0) continue;
+                final String targetCard = spellAction.target();
+                if (targetCard == null || targetCard.isEmpty()) continue;
+                for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
+                    if (skipCounter && sa.getApi() == ApiType.Counter) continue;
+                    sa.setActivatingPlayer(player);
+                    final String cardName = sa.getHostCard() != null ? sa.getHostCard().getName() : "";
+                    if (cardName.equalsIgnoreCase(targetCard) || cardName.contains(targetCard)) {
+                        if (canPlayAndPayFor(sa) == AiPlayDecision.WillPlay) {
+                            return sa;
+                        }
                     }
                 }
             }
         }
         // ACTIVATE_ABILITY: single best entry (rare, the sidecar usually emits
-        // PLAY_SPELL).
+        // PLAY_SPELL). Same bias gate.
+        final double abilityBias = getIntProperty(AiProps.SIDECAR_BIAS_ABILITY) / 100.0;
         var abilityAction = sidecarInfluence.bestAction("ACTIVATE_ABILITY");
-        if (abilityAction.isPresent()) {
+        if (abilityBias > 0.0 && abilityAction.isPresent()
+                && abilityAction.get().percentage() * abilityBias > 50.0) {
             final String targetCard = abilityAction.get().target();
             if (targetCard != null && !targetCard.isEmpty()) {
                 for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {

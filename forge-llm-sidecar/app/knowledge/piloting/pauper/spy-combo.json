@@ -1,0 +1,158 @@
+{
+  "archetype": "Spy Combo",
+  "format": "pauper",
+  "strategy_type": "combo",
+  "overview": "This Pauper B/R/G Spy Combo deck leverages Land Grant and Generous Ent to rapidly accelerate mana and deploy Masked Vandal alongside other threats. By playing multiple turns ahead, you aim to overwhelm opponents with efficient creature deployment and targeted board control. Success hinges on protecting your ramp pieces while sequencing spells to maximize tempo and card advantage.",
+  "win_conditions": [
+    "Deploying multiple Masked Vandals to remove opponent threats while dealing direct damage",
+    "Using Generous Ent and Land Grant to accelerate into unblockable or large creatures",
+    "Establishing early board presence and outpacing control or midrange strategies"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two land acceleration spells like Land Grant or Generous Ent",
+      "Hands containing Masked Vandal alongside early land drops",
+      "Hands with a mix of mana sources and one threat"
+    ],
+    "mulligan_criteria": [
+      "Hands with zero land acceleration or threats",
+      "Hands with three or more lands but no creatures",
+      "Hands lacking early game interaction or ramp"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cast Generous Ent or Land Grant to accelerate mana",
+      "Deploy early creatures to apply pressure and protect ramp pieces",
+      "Prioritize drawing into Masked Vandal for board control"
+    ],
+    "mid_game": [
+      "Use accumulated mana to play multiple Masked Vandals and other threats",
+      "Counter opponent key plays by targeting them with Vandal counters",
+      "Search for Forests and basic lands to ensure consistent casting of combo pieces"
+    ],
+    "late_game": [
+      "Deploy large threats accelerated by ramp spells to finish the game",
+      "Use Generous Ent card draw to find answers to late game threats",
+      "Maintain board presence while outdrawing and outmaneuvering opponents"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Land Grant",
+      "role": "Mana acceleration",
+      "notes": "Cast early to fetch a basic land, enabling faster casting of Generous Ent and Masked Vandal. Use it to fix mana or accelerate into turn three threats."
+    },
+    {
+      "name": "Masked Vandal",
+      "role": "Primary threat and board control",
+      "notes": "Deploy to apply pressure and remove opponent key creatures with minus one minus one counters. Prioritize targeting high impact threats to clear the path for your combo."
+    },
+    {
+      "name": "Generous Ent",
+      "role": "Ramp and card advantage",
+      "notes": "Play to search for a Forest, ensuring consistent green mana for Land Grant and other spells. Use the card draw effect to find additional threats or answers."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast Land Grant before Generous Ent to ensure you have the green mana needed for the Ent ability",
+    "Hold up black mana for Masked Vandal casting cost while using green mana for ramp spells",
+    "Prioritize playing Generous Ent on turns when you can immediately use the drawn Forest for a follow up spell",
+    "Save Masked Vandal triggered ability for opponent most threatening creature rather than using it preemptively"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize playing Masked Vandal early to remove aggressive creatures and stabilize the board. Use Generous Ent to accelerate into larger blockers.",
+      "watch_for": [
+        "Early board wipes",
+        "Direct damage spells",
+        "Fast mana acceleration"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around removal by holding up counters or playing threats on your opponent turn if possible. Use Land Grant to ensure you have lands to play around counterspells.",
+      "watch_for": [
+        "Counterspell equivalents",
+        "Board sweepers",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them by deploying multiple Masked Vandals quickly. Use Generous Ent to outdraw them and find answers to their value creatures.",
+      "watch_for": [
+        "Efficient removal",
+        "Card advantage engines",
+        "Late game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Counterspell equivalents",
+    "Card draw engines",
+    "Large late game threats"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T09:26:09+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:26:09+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "1113425273c28683",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Land Grant and Generous Ent provide acceleration, while Masked Vandal serves as the primary threat, aligning with the Spy Combo archetype in Pauper."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards emphasize land acceleration and creature deployment, typical of combo strategies in Pauper."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Mana base optimization and trigger timing are standard piloting principles for ramp combo decks in Pauper."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard Pauper meta threats that interact with ramp combo strategies."
+    }
+  ]
+}

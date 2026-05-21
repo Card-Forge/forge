@@ -1,0 +1,169 @@
+{
+  "archetype": "Mono-Red Aggro",
+  "format": "standard",
+  "strategy_type": "aggro",
+  "overview": "Mono-Red Aggro in Standard relies on a fast curve and relentless pressure to close games before opponents can stabilize. By leveraging early threats like Hired Claw and mid-game finishers like Razorkin Needlehead, you overwhelm opponents with combat damage. Hearthborn Battler provides flexible board control and damage pushing to maintain momentum throughout the match.",
+  "win_conditions": [
+    "Direct damage via Razorkin Needlehead's haste ability",
+    "Overwhelming board presence with Hired Claw and Hearthborn Battler",
+    "Closing out games before turn five through relentless combat pressure"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing one or two lands and a one- or two-drop",
+      "Hands featuring Hired Claw or Hearthborn Battler for early curve",
+      "Hands with Razorkin Needlehead paired with early mana sources"
+    ],
+    "mulligan_criteria": [
+      "Hands with three or more lands",
+      "Hands lacking a one- or two-drop creature",
+      "Hands composed entirely of three-drops or higher"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and one- or two-drops strictly on curve",
+      "Attack immediately with Hired Claw to establish pressure",
+      "Use Hearthborn Battler to clear small blockers or push early damage"
+    ],
+    "mid_game": [
+      "Deploy Razorkin Needlehead to apply haste pressure and clear blockers",
+      "Trade efficiently to keep the opponent's board manageable",
+      "Look for opportunities to activate Hearthborn Battler before attacking"
+    ],
+    "late_game": [
+      "Commit all remaining resources to finish the game quickly",
+      "Use Needlehead's death trigger to remove final obstacles",
+      "Avoid stalling or playing defensively, as red aggro loses to attrition"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Razorkin Needlehead",
+      "role": "Primary finisher and haste threat",
+      "notes": "Prioritize keeping in mulligans. Attack early and use its death trigger to clear opposing creatures or push direct damage."
+    },
+    {
+      "name": "Hired Claw",
+      "role": "Early game pressure and curve filler",
+      "notes": "Play on turn one to establish immediate board presence. Trade it into small blockers to protect larger threats."
+    },
+    {
+      "name": "Hearthborn Battler",
+      "role": "Mid-game board clear and damage pusher",
+      "notes": "Use its activated ability to remove opposing creatures or deal direct damage. Hold up mana if needed to activate before attacking."
+    }
+  ],
+  "sequencing_tips": [
+    "Activate Hearthborn Battler before attacking to remove blockers",
+    "Hold up mana for combat tricks when the opponent has removal",
+    "Attack with Hired Claw first to test for removal before committing Needlehead"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Push maximum damage early before they stabilize. Use Hearthborn Battler to clear their early answers.",
+      "watch_for": [
+        "Early removal",
+        "Counterspells",
+        "Life gain effects"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them by playing on curve and trading up. Use Razorkin Needlehead to force unfavorable trades.",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Resilient creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Mirror match dynamics require careful trading. Use Hearthborn Battler to clear their threats and push damage.",
+      "watch_for": [
+        "Fast curve creatures",
+        "Combat tricks",
+        "Early board wipes"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Early removal spells",
+    "Counterspells",
+    "Resilient mid-sized creatures",
+    "Life gain effects"
+  ],
+  "metadata": {
+    "source": "Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:07:31+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-mono-red-aggro-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:04:31+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:07:31+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "33e23b373495852d",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

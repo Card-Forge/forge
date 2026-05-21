@@ -1,0 +1,165 @@
+{
+  "archetype": "Jeskai Steel-Cutter",
+  "format": "modern",
+  "strategy_type": "tempo",
+  "overview": "Jeskai Steel-Cutter is a tempo deck that leverages early mana acceleration to establish a wide board of creatures. It uses card advantage and land tutoring to outpace opponents while protecting its key finisher. The deck aims to overwhelm defenses through incremental damage and resilient land recursion.",
+  "win_conditions": [
+    "Cori-Steel Cutter growing large through repeated combat damage triggers",
+    "Tamiyo, Inquisitive Student tutoring key lands and drawing cards to maintain board presence",
+    "Overwhelming the opponent with a wide board of low-cost creatures"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Mox Opal and a Mountain symbol land",
+      "Two-land hands with early interaction or cheap creatures",
+      "Tamiyo, Inquisitive Student paired with a land drop"
+    ],
+    "mulligan_criteria": [
+      "Three-land hands with no early plays",
+      "Hands lacking Mountain symbols for Mox Opal",
+      "Heavy hands with only late-game cards"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Mox Opal on turn one if possible to accelerate mana",
+      "Establish land drops and play cheap creatures to apply early pressure",
+      "Use early interaction to disrupt opponent's game plan"
+    ],
+    "mid_game": [
+      "Cast Tamiyo, Inquisitive Student to draw cards and tutor for lands",
+      "Attack with multiple creatures to pump Cori-Steel Cutter with +1/+1 counters",
+      "Maintain board control while developing your advantage"
+    ],
+    "late_game": [
+      "Let Cori-Steel Cutter finish the game with a large attack",
+      "Recycle lands from the graveyard using Cori's death trigger or Tamiyo's tutor",
+      "Stabilize with card advantage and land recursion to outlast opponents"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Mox Opal",
+      "role": "Mana acceleration",
+      "notes": "Play on turn one with a Mountain symbol land to enable early spells and creatures"
+    },
+    {
+      "name": "Tamiyo, Inquisitive Student",
+      "role": "Card advantage and land tutoring",
+      "notes": "Use to draw cards, tutor for key lands, and provide mana dorking to support the board"
+    },
+    {
+      "name": "Cori-Steel Cutter",
+      "role": "Primary finisher and land recursion",
+      "notes": "Attack with other creatures to trigger its growth ability, then attack with it for lethal damage. Use its death trigger to return lands from the graveyard."
+    }
+  ],
+  "sequencing_tips": [
+    "Play Mox Opal before casting Tamiyo to maximize early mana availability",
+    "Coordinate attacks with multiple creatures to trigger Cori-Steel Cutter's growth ability efficiently",
+    "Use Tamiyo's tutor ability to find lands that enable Mox Opal or specific threats",
+    "Prioritize keeping Cori-Steel Cutter alive until it has accumulated enough counters to threaten lethal"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Rakdos Midrange",
+      "advice": "Play around early removal and board wipes by keeping interaction in hand",
+      "watch_for": [
+        "Lightning Bolt",
+        "Abrupt Decay",
+        "Fatal Push"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Phoenix",
+      "advice": "Disrupt their early game with interaction and avoid trading creatures into their recursion",
+      "watch_for": [
+        "Lightning Strike",
+        "Spell Pierce",
+        "Phoenix recursion"
+      ]
+    },
+    {
+      "opponent_archetype": "Amulet Titan",
+      "advice": "Apply early pressure to prevent them from setting up their combo engine",
+      "watch_for": [
+        "Amulet of Vigor",
+        "Kodama of the Center Tree",
+        "Graveyard recursion"
+      ]
+    },
+    {
+      "opponent_archetype": "Rakdos Control",
+      "advice": "Use Tamiyo to draw around their interaction and play around board wipes",
+      "watch_for": [
+        "Thoughtseize",
+        "Inferno Titan",
+        "Rest in Peace"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Lightning Bolt",
+    "Abrupt Decay",
+    "Thoughtseize",
+    "Rest in Peace",
+    "Inferno Titan"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:52:36+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:52:36+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "e844591eb5a81686",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

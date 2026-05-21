@@ -1,0 +1,153 @@
+{
+  "archetype": "Jund Sacrifice",
+  "format": "pioneer",
+  "strategy_type": "midrange",
+  "overview": "Jund Sacrifice is a midrange archetype that leverages creature sacrifice to generate card advantage and direct damage. By cycling threats through Witch's Oven and Cauldron Familiar, the deck maintains board control while applying consistent pressure. Mayhem Devil serves as both an aggressive finisher and a versatile removal spell.",
+  "win_conditions": [
+    "Direct damage from Witch's Oven",
+    "Combat damage from Mayhem Devil and other creatures",
+    "Card advantage leading to board overwhelm"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early sacrifice outlets",
+      "Hands containing Mayhem Devil or cheap creatures",
+      "Hands with at least two mana sources"
+    ],
+    "mulligan_criteria": [
+      "Hands with only high-cost cards",
+      "Hands lacking sacrifice synergies",
+      "Hands with no removal or threats"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Deploy cheap creatures to establish a board presence",
+      "Prioritize playing Witch's Oven or similar outlets",
+      "Use early sac triggers to draw into key cards"
+    ],
+    "mid_game": [
+      "Cycle opponent's threats through Cauldron Familiar",
+      "Cast Mayhem Devil for removal and pressure",
+      "Balance direct damage with board development"
+    ],
+    "late_game": [
+      "Leverage accumulated card advantage to out-resource opponents",
+      "Use Witch's Oven to clear blockers or finish the game",
+      "Maintain sac outlets to keep drawing cards"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Mayhem Devil",
+      "role": "Aggressive threat and removal",
+      "notes": "Cast early to apply pressure or use as a targeted removal spell; the life loss is a manageable tempo trade."
+    },
+    {
+      "name": "Cauldron Familiar",
+      "role": "Sacrifice engine and card advantage",
+      "notes": "Deploy to fuel Witch's Oven; sacrifice opponent's creatures or your own beaters to draw cards and maintain tempo."
+    },
+    {
+      "name": "Witch's Oven",
+      "role": "Sacrifice outlet and direct damage",
+      "notes": "Use to trigger Cauldron Familiar, remove threats, or deal direct damage; prioritize high-value targets before combat."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold sacrifice outlets until you can trigger them for maximum value",
+    "Use Witch's Oven to remove threats before they attack or block",
+    "Trigger Cauldron Familiar on opponent's creatures to gain card advantage",
+    "Cast Mayhem Devil when you need immediate board impact or removal"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early sacrifice outlets and use Witch's Oven to remove key attackers.",
+      "watch_for": [
+        "Fast mana acceleration",
+        "Overwhelming creature counts"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply steady pressure with Mayhem Devil and use sac engine to out-draw their resources.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspell packages"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Mirror match dynamics favor efficient sequencing and card advantage generation.",
+      "watch_for": [
+        "Similar sacrifice synergies",
+        "Removal spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Rakdos Bloodfiend",
+    "Krenko, Mob Boss",
+    "Spell Queller"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T03:58:56+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T03:58:56+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "4d65c1d8e16afe71",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "signature cards and format constraints"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "signature cards and format constraints"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "signature cards and format constraints"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "signature cards and format constraints"
+    }
+  ]
+}

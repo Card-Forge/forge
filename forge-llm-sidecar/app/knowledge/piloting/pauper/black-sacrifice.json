@@ -1,0 +1,159 @@
+{
+  "archetype": "Black Sacrifice",
+  "format": "pauper",
+  "strategy_type": "aggro",
+  "overview": "Black Sacrifice in Pauper leverages low-cost creatures and sacrifice outlets to generate continuous value and clear opposing boards. By repeatedly sacrificing creatures to Carrion Feeder and Mortician Beetle, you create a recursive loop that outvalues opponents while maintaining combat pressure. Village Rites serves as both efficient removal and a trigger source, ensuring you can bypass blockers and close out games quickly.",
+  "win_conditions": [
+    "Combat damage after clearing blockers with Village Rites",
+    "Attrition via repeated Mortician Beetle and Carrion Feeder triggers",
+    "Board state advantage from forcing opponent sacrifices"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with turn 1 or 2 creature plays",
+      "At least one sacrifice outlet or removal spell",
+      "Two or more lands with an early mana curve"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early creatures or lands",
+      "Hands with only high-cost cards or late-game value",
+      "Hands without removal or sacrifice triggers"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap creatures to establish board presence",
+      "Prioritize casting Carrion Feeder by turn 2",
+      "Hold Village Rites for early blockers or to trigger sacrifice effects"
+    ],
+    "mid_game": [
+      "Use Village Rites to remove key threats and trigger death abilities",
+      "Sacrifice creatures to Carrion Feeder to pump it into a combat threat",
+      "Trigger Mortician Beetle recursion to force opponent sacrifices"
+    ],
+    "late_game": [
+      "Maintain a wide board of pumped creatures",
+      "Use sacrifice triggers to drain opponent resources",
+      "Push combat damage while opponent lacks answers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Carrion Feeder",
+      "role": "Core sacrifice engine and combat threat",
+      "notes": "Sacrifice cheap creatures or opponent's creatures to pump it. Keep it alive as long as possible to maximize value and close games."
+    },
+    {
+      "name": "Mortician Beetle",
+      "role": "Recursive sacrifice trigger",
+      "notes": "Play early to trigger opponent sacrifices. When it dies, it can trigger itself again if you sacrifice another creature, creating a chain reaction."
+    },
+    {
+      "name": "Village Rites",
+      "role": "Removal and trigger source",
+      "notes": "Use to kill blockers or finish the game. Sacrificing a creature to cast it can trigger multiple death abilities simultaneously."
+    }
+  ],
+  "sequencing_tips": [
+    "Sacrifice creatures to Carrion Feeder before casting Village Rites to maximize pump",
+    "Hold Village Rites in hand to respond to opponent's combat tricks or board wipes",
+    "Avoid sacrificing your last creature unless it directly wins the game or triggers a lethal chain",
+    "Trigger Mortician Beetle's death ability by sacrificing it to Carrion Feeder or Village Rites"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Mono-Red Aggro",
+      "advice": "Use Village Rites early to clear aggressive threats. Keep Carrion Feeder alive to outvalue their burn spells.",
+      "watch_for": [
+        "Lightning Bolt",
+        "Inferno Titan",
+        "Doom Blade"
+      ]
+    },
+    {
+      "opponent_archetype": "Blue-Black Control",
+      "advice": "Play around board wipes by keeping a wide board. Use sacrifice triggers to pressure life total before they stabilize.",
+      "watch_for": [
+        "Fumigate",
+        "Abrupt Decay",
+        "Doom Blade"
+      ]
+    },
+    {
+      "opponent_archetype": "Green-White Midrange",
+      "advice": "Clear their wide boards with Village Rites and Beetle recursion. Pump Feeder to match their combat stats.",
+      "watch_for": [
+        "Wrath of God",
+        "Krenko, Mob Boss",
+        "Lightning Bolt"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Lightning Bolt",
+    "Doom Blade",
+    "Abrupt Decay",
+    "Fumigate",
+    "Inferno Titan",
+    "Blood Artist"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T09:43:57+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:43:57+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "184113d6f03da3c6",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Derived from signature card interactions and standard Pauper format dynamics."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Based on recursive sacrifice mechanics and low-mana format pacing."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Based on standard sacrifice deck sequencing principles and card text interactions."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Common Pauper format threats that interact with creature-heavy strategies."
+    }
+  ]
+}

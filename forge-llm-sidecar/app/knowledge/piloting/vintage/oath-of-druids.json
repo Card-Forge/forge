@@ -1,0 +1,155 @@
+{
+  "archetype": "Oath of Druids",
+  "format": "vintage",
+  "strategy_type": "combo",
+  "overview": "This Vintage combo deck leverages a suite of tutors to assemble Oath of Druids, which draws cards and tutors for a win condition. The primary goal is to cast Show and Tell to bypass mana costs and bring in Atraxa, Grand Unifier. Atraxa's death trigger then generates infinite card advantage and mana to close out the game.",
+  "win_conditions": [
+    "Casting Oath of Druids to draw into and tutor for Atraxa, Grand Unifier",
+    "Using Show and Tell to cast Atraxa or other high-cost threats for free",
+    "Leveraging Atraxa's death trigger to generate infinite resources and overwhelm the opponent"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with multiple tutors to find Oath of Druids",
+      "Hands containing Show and Tell with early mana acceleration",
+      "Hands with early interaction to protect combo pieces"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking tutors or mana sources",
+      "Hands with only high-cost cards and no draw",
+      "Hands vulnerable to early disruption without answers"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play mana rocks and tutors to locate Oath of Druids",
+      "Use early interaction to counter opponent's disruption",
+      "Prioritize drawing cards to find combo pieces"
+    ],
+    "mid_game": [
+      "Cast Oath of Druids and activate its ability to draw and tutor",
+      "Search for Atraxa, Grand Unifier or Show and Tell",
+      "Begin generating card advantage and setting up the win"
+    ],
+    "late_game": [
+      "Use Atraxa's death trigger to draw cards and tutor for more threats",
+      "Cast Show and Tell to bypass mana costs for game-ending cards",
+      "Overwhelm opponent with infinite resources and unblockable threats"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Oath of Druids",
+      "role": "Core combo engine",
+      "notes": "Cast it, then activate its ability to draw cards and tutor for a creature or artifact. Prioritize finding Atraxa or Show and Tell."
+    },
+    {
+      "name": "Atraxa, Grand Unifier",
+      "role": "Win condition and card engine",
+      "notes": "When it dies, draw cards and tutor for a creature. Use it to generate infinite value or find Show and Tell."
+    },
+    {
+      "name": "Show and Tell",
+      "role": "Free cast enabler",
+      "notes": "Cast it to put a creature onto the battlefield without paying its mana cost. Use it to cast Atraxa or other high-cost threats immediately."
+    }
+  ],
+  "sequencing_tips": [
+    "Always tutor for Atraxa first when possible to enable Show and Tell or further tutoring",
+    "Hold up interaction for opponent's known disruption before committing to Oath of Druids",
+    "Use Show and Tell to cast Atraxa if you lack the mana, then use Atraxa's death trigger to find more pieces"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Prioritize finding Oath of Druids quickly and use Show and Tell to bypass counterspells. Keep interaction in hand to protect your combo pieces.",
+      "watch_for": [
+        "Counterspells targeting Oath of Druids",
+        "Board wipes that clear Atraxa",
+        "Enchantment destroyers"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use early interaction to slow down aggressive strategies. Rush to Oath of Druids and use Atraxa's death trigger to recover from board wipes or aggressive pressure.",
+      "watch_for": [
+        "Early board presence",
+        "Removal spells",
+        "Life total pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Race against other combo decks by optimizing tutor lines. Use Show and Tell to accelerate your win condition and keep interaction for their key pieces.",
+      "watch_for": [
+        "Fast mana",
+        "Combo enablers",
+        "Priority windows"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspells targeting Oath of Druids or Show and Tell",
+    "Board wipes that clear Atraxa before it can trigger",
+    "Enchantment destroyers targeting key permanents"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T11:09:09+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:09:09+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "a1cf95ee2147bbfa",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

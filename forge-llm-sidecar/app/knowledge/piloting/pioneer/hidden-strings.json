@@ -1,0 +1,152 @@
+{
+  "archetype": "Hidden Strings",
+  "format": "pioneer",
+  "strategy_type": "control",
+  "overview": "Hidden Strings is a five-color Pioneer control deck that leverages early removal, land acceleration, and board-clearing value spells to outlast opponents. By stabilizing with Fatal Push and untapping lands via Lotus Field, the deck transitions into a late-game grind where Vibrance provides both board control and massive card advantage. The strategy focuses on maintaining tempo while systematically depleting the opponent's resources.",
+  "win_conditions": [
+    "Outdraw and outvalue opponents through Vibrance card draw",
+    "Stabilize early with Fatal Push and race with midrange threats",
+    "Use Lotus Field to accelerate into late-game finishers and sweepers"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Fatal Push and two lands",
+      "Low-cost threats that can race early",
+      "Hands containing Lotus Field for mana acceleration"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking removal or early interaction",
+      "Hands with three or more lands and no spells",
+      "Hands missing Fatal Push against aggressive matchups"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands efficiently and hold Fatal Push for instant-speed answers",
+      "Prioritize removing power 2 or less threats to stabilize",
+      "Use Lotus Field cautiously to avoid mana screw while setting up acceleration"
+    ],
+    "mid_game": [
+      "Develop board presence with resilient creatures",
+      "Sacrifice Lotus Field to untap lands for key spells or sweepers",
+      "Begin drawing into late-game resources while maintaining board control"
+    ],
+    "late_game": [
+      "Cast Vibrance to clear opponent's board and draw into finishers",
+      "Leverage card advantage to outlast opponent's resources",
+      "Close out games with large threats or repeated board clears"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Lotus Field",
+      "role": "Land acceleration and untap engine",
+      "notes": "Sacrifice to untap lands for big spells; manage tapped entry carefully to avoid mana shortages"
+    },
+    {
+      "name": "Vibrance",
+      "role": "Board clear and card draw engine",
+      "notes": "Hold for opponent's big turns; synergizes with +1/+1 counter creatures if present"
+    },
+    {
+      "name": "Fatal Push",
+      "role": "Early game removal",
+      "notes": "Use on power 2 or less threats to stabilize; prioritize opponent's aggressive creatures"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Fatal Push for instant speed to counter aggressive pushes",
+    "Time Lotus Field sacrifices to ensure you have enough untapped mana for key spells",
+    "Cast Vibrance after opponent commits resources to the board to maximize card draw and board state swing"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize Fatal Push on their biggest threats; use Lotus Field to untap lands for early interaction",
+      "watch_for": [
+        "Fast curve creatures",
+        "Burn spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race with midrange threats; use Vibrance to clear their board and draw into answers",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt early setup with Fatal Push; use Lotus Field to accelerate into answers",
+      "watch_for": [
+        "Key combo pieces",
+        "Untap tricks"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Aggressive creatures with power 2 or less",
+    "Board wipe spells",
+    "Countermagic"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T03:54:13+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T03:54:13+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "41db22a0c6ef2dd1",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "archetype": "Song of Creation",
+  "format": "pioneer",
+  "strategy_type": "combo",
+  "overview": "This five-color Pioneer deck leverages Mox Amber to fetch key lands and Beseech the Mirror to duplicate permanents, culminating in a Song of Creation payoff. By rapidly assembling a board of 1/1 creatures, the deck aims to overwhelm opponents before they can stabilize. The strategy relies on precise sequencing and mana acceleration to bypass early-game vulnerability.",
+  "win_conditions": [
+    "Casting Song of Creation to create a 1/1 creature for each land controlled",
+    "Using Mox Amber to fetch lands for Beseech the Mirror",
+    "Copying key permanents with Beseech the Mirror to apply pressure"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Mox Amber and early lands",
+      "Hands with Beseech the Mirror and mana sources",
+      "Hands featuring Song of Creation and acceleration"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking mana acceleration",
+      "Hands with only high-cost cards",
+      "Hands missing key combo pieces"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands and Mox Amber",
+      "Search for specific lands needed for combo pieces",
+      "Protect combo pieces from early disruption"
+    ],
+    "mid_game": [
+      "Cast Beseech the Mirror to copy key permanents",
+      "Accumulate mana and creatures for the payoff",
+      "Apply pressure with copied creatures or lands"
+    ],
+    "late_game": [
+      "Cast Song of Creation to flood the board",
+      "Use the army of 1/1s to attack directly",
+      "Maintain board presence with copied permanents"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Song of Creation",
+      "role": "Payoff spell that creates a 1/1 creature for each land you control",
+      "notes": "Cast when you have maximum lands and mana to overwhelm the board quickly"
+    },
+    {
+      "name": "Mox Amber",
+      "role": "Artifact that fetches a land of any type",
+      "notes": "Use to find specific lands needed for Beseech the Mirror or to boost land count for Song of Creation"
+    },
+    {
+      "name": "Beseech the Mirror",
+      "role": "Sorcery that copies a target permanent",
+      "notes": "Copy lands to increase land count or copy creatures to apply early pressure"
+    }
+  ],
+  "sequencing_tips": [
+    "Always play Mox Amber before casting high-cost spells",
+    "Copy lands with Beseech the Mirror before casting Song of Creation",
+    "Hold up mana for potential counterspells or removal"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize copying creatures and playing lands quickly to stabilize",
+      "watch_for": [
+        "Early board wipes",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Rush the combo before they can interact with your spells",
+      "watch_for": [
+        "Counterspells",
+        "Board clearers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Use copied permanents to apply pressure while setting up the payoff",
+      "watch_for": [
+        "Removal spells",
+        "Card advantage engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspell",
+    "Lightning Bolt",
+    "Wrath of God"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T05:23:47+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:23:47+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "e55bf32185cf3df0",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Song of Creation, Mox Amber, Beseech the Mirror"
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

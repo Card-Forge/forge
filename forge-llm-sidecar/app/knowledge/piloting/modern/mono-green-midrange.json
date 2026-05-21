@@ -1,0 +1,168 @@
+{
+  "archetype": "Mono-Green Midrange",
+  "format": "modern",
+  "strategy_type": "midrange",
+  "overview": "Mono-Green Midrange in Modern leverages rapid mana acceleration to deploy large, resilient threats ahead of the opponent's curve. The deck uses Noble Hierarch to generate early mana and tokens, while Badgermole Cub provides turn-one board presence and consistent card draw. Green Sun's Zenith serves as the primary engine for value, allowing you to fetch multiple threats and outlast opponents in extended games.",
+  "win_conditions": [
+    "Outpacing opponents by casting large creatures on turn three using Noble Hierarch and other mana dorks",
+    "Generating infinite card advantage and board presence through repeated Green Sun's Zenith casts",
+    "Evolving Badgermole Cub into a massive threat that draws cards and closes out games",
+    "Flood the zone with tokens and wide boards to overwhelm control or combo strategies"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing two or more lands and a turn-one mana dork or Badgermole Cub",
+      "Hands with Noble Hierarch and a ramp spell to ensure turn-three threats",
+      "Hands featuring Green Sun's Zenith with enough mana sources to cast it by turn three"
+    ],
+    "mulligan_criteria": [
+      "Hands with only lands and no creatures or acceleration",
+      "Hands lacking early board presence or card draw",
+      "Hands with multiple high-cost threats but insufficient mana to deploy them"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands and mana dorks to accelerate into turn-three threats",
+      "Deploy Badgermole Cub immediately to establish board presence and draw into answers",
+      "Use Noble Hierarch to generate mana and create tokens for early blocks or trades"
+    ],
+    "mid_game": [
+      "Cast Green Sun's Zenith to fetch key threats that match or exceed the opponent's curve",
+      "Trade efficiently with opponent's creatures while maintaining a mana advantage",
+      "Use ramp spells to stay ahead on the curve and pressure the opponent's resources"
+    ],
+    "late_game": [
+      "Flood the board with large creatures and tokens to apply overwhelming combat damage",
+      "Recast Green Sun's Zenith repeatedly to refill your hand and maintain pressure",
+      "Close out games by leveraging unblockable attackers or massive board states"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Badgermole Cub",
+      "role": "Early board presence and card advantage",
+      "notes": "Play on turn one or two to establish a threat. Use its draw ability to find ramp or removal, and let it grow into a larger threat over time."
+    },
+    {
+      "name": "Green Sun's Zenith",
+      "role": "Card advantage and threat fetching",
+      "notes": "Use to fetch key threats when you have excess mana. Can also be used to replace itself or fetch removal in a pinch, ensuring you never run out of resources."
+    },
+    {
+      "name": "Noble Hierarch",
+      "role": "Mana acceleration and token generation",
+      "notes": "Deploy early to ramp into turn-three spells. Use its token ability to block, trade, or generate additional mana for big plays."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize playing Noble Hierarch before casting Green Sun's Zenith to maximize available mana for fetching threats.",
+    "Hold back interaction until you see what the opponent is playing, as mono-green midrange relies on reading the board state.",
+    "Use Badgermole Cub's card draw to find ramp spells, ensuring you stay ahead on the curve.",
+    "Sequence Green Sun's Zenith after playing your lands to avoid mana screw and ensure you can cast the fetched creature immediately."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Focus on early blockers and use Noble Hierarch tokens to stall. Prioritize fetching wide threats to outvalue them.",
+      "watch_for": [
+        "Early board floods",
+        "Direct damage spells",
+        "Creature sweepers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells by holding up mana. Use Green Sun's Zenith to fetch threats that can pressure their hand or board.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Hand disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup with early interaction. Use Badgermole Cub to draw into answers and apply pressure before they assemble their combo.",
+      "watch_for": [
+        "Graveyard pieces",
+        "Specific combo enablers",
+        "Unusual mana usage"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race efficiently by leveraging mana advantage. Use Green Sun's Zenith to fetch threats that match or exceed their curve.",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Lightning Bolt",
+    "Abrupt Decay",
+    "Fatal Push",
+    "Counterspell",
+    "Teferi, Hero of Dominaria",
+    "Koth of the Hammer",
+    "Chalice of the Void"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:50:50+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:50:50+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "43e08e0e77bb9d08",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

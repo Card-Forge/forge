@@ -1,0 +1,291 @@
+{
+  "archetype": "Jeskai Affinity",
+  "format": "pauper",
+  "strategy_type": "aggro",
+  "overview": "Jeskai Affinity is a fast, artifact-based aggressive deck that leverages All That Glitters to enchant creatures and deal accumulating combat damage. It merges the core Glitters game plan with Boros Synthesizer and third-color interaction like Galvanic Blast and Experimental Synthesizer for card advantage. While more flexible and resilient to specific hate than Azorius Affinity, it requires careful mana management and can be vulnerable to early graveyard hate like Dust to Dust.",
+  "win_conditions": [
+    "All That Glitters",
+    "Gearseeker Serpent",
+    "Gingerbrute"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early artifacts like Frogmite or Novice Inspector",
+      "Mana base with access to red and white for Galvanic Blast and Glitters",
+      "At least one All That Glitters or Gingerbrute"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking artifact synergy or early plays",
+      "Hands with only lands or high-cost cards like Gearseeker Serpent without protection",
+      "Hands vulnerable to early Dust to Dust without answers"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Frogmite",
+          "Novice Inspector",
+          "Springleaf Drum",
+          "All That Glitters",
+          "Galvanic Blast",
+          "Thoughtcast",
+          "Ancient Den",
+          "Mountain",
+          "Island",
+          "Plains"
+        ],
+        "decision": "keep",
+        "reason": "Provides early artifact drops, mana flexibility, and a clear path to enchant a creature by turn 3."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play artifact creatures like Frogmite and Novice Inspector to build affinity and board presence.",
+      "Use Springleaf Drum to fix mana and enable early colored spells.",
+      "Sequence Frogmites to cast Myr Enforcer on turn 2 and set up All That Glitters by turn 3."
+    ],
+    "mid_game": [
+      "Deploy Gingerbrute or Glint Hawk to carry All That Glitters and apply immediate pressure.",
+      "Use Galvanic Blast post-combat to remove blockers or finish off creatures.",
+      "Cast Thoughtcast to dig for key cards and maintain card advantage."
+    ],
+    "late_game": [
+      "Utilize Experimental Synthesizer for continuous value and artifact recursion.",
+      "Deploy Gearseeker Serpent as a resilient clock to close out games.",
+      "Sideboard in Relic of Progenitus or Destroy Evil to handle specific meta threats."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "All That Glitters",
+      "role": "Win Condition",
+      "notes": "Main win condition that accumulates damage on enchanted creatures; forces opponents to block or remove it."
+    },
+    {
+      "name": "Gearseeker Serpent",
+      "role": "Clock / Threat",
+      "notes": "Four-turn clock that pressures opponents and survives combat well, though vulnerable to removal."
+    },
+    {
+      "name": "Gingerbrute",
+      "role": "Aggressive Threat",
+      "notes": "Haste and unblockable by non-creatures make it ideal for carrying Glitters and closing games quickly."
+    },
+    {
+      "name": "Glint Hawk",
+      "role": "Flying Threat / Value",
+      "notes": "Flying attacker that synergizes with Experimental Synthesizer and can reuse land drops."
+    },
+    {
+      "name": "Frogmite",
+      "role": "Early Game Enabler",
+      "notes": "Low-cost artifact creature used to sequence turns, build affinity, and enable early Myr Enforcer and Glitters."
+    },
+    {
+      "name": "Springleaf Drum",
+      "role": "Mana Fixer / Accelerant",
+      "notes": "Provides colored mana flexibility in a 16-land deck and enables explosive early turns."
+    },
+    {
+      "name": "Galvanic Blast",
+      "role": "Removal",
+      "notes": "Main removal spell with greater reach; often used post-combat to clear blockers or finish creatures."
+    },
+    {
+      "name": "Thoughtcast",
+      "role": "Card Advantage",
+      "notes": "Primary card draw engine that replaces Treasure Cruise, keeping the deck consistent and rewarding."
+    },
+    {
+      "name": "Experimental Synthesizer",
+      "role": "Value Engine",
+      "notes": "Generates card advantage, increases affinity, and synergizes heavily with Glint Hawk."
+    },
+    {
+      "name": "Myr Enforcer",
+      "role": "Board Control / Threat",
+      "notes": "Holds back small creatures and poses as a threat; mandatory four-of in Pauper Affinity."
+    }
+  ],
+  "sequencing_tips": [
+    "Sequence multiple Frogmites on turn 2 to cast Myr Enforcer and enchant a creature with All That Glitters by turn 3.",
+    "Cast Thoughtcast after playing a sequence of Frogmites to maximize card advantage.",
+    "Use Galvanic Blast after combat to remove blockers or finish off creatures that survived attacks.",
+    "Protect early Gearseeker Serpent with Dispel if the opponent has instant-speed removal."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Kuldotha Red",
+      "advice": "Sideboard in End the Festivities to take away board advantage and Dispel or Hydroblast for removal.",
+      "watch_for": [
+        "Kuldotha Rebirth",
+        "Red creatures",
+        "Snuff Out"
+      ]
+    },
+    {
+      "opponent_archetype": "Dimir Terror",
+      "advice": "Sideboard in Relic of Progenitus to delay threats and protect the graveyard.",
+      "watch_for": [
+        "Tolarian Terror",
+        "Cryptic Serpent",
+        "Gurmag Angler"
+      ]
+    },
+    {
+      "opponent_archetype": "Dimir Faeries",
+      "advice": "Sideboard in End the Festivities to clear the board and Dispel for counterspells.",
+      "watch_for": [
+        "Faeries",
+        "Counterspell",
+        "Deglamer"
+      ]
+    },
+    {
+      "opponent_archetype": "Golgari Gardens",
+      "advice": "Sideboard in Destroy Evil to handle their creatures and avoid lethal damage.",
+      "watch_for": [
+        "Golgari Gardens's creatures",
+        "Bogles"
+      ]
+    },
+    {
+      "opponent_archetype": "Boros Synthesizer",
+      "advice": "Use sideboard staples to handle their enchantments and board presence.",
+      "watch_for": [
+        "Boros Synthesizer",
+        "Standard Bearer"
+      ]
+    },
+    {
+      "opponent_archetype": "Jeskai Affinity",
+      "advice": "Mirror match; rely on sideboard interaction and board control.",
+      "watch_for": [
+        "Galvanic Blast",
+        "Dispel"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Tolarian Terror",
+    "Cryptic Serpent",
+    "Gurmag Angler",
+    "Standard Bearer",
+    "Dust to Dust",
+    "Deglamer",
+    "Snuff Out",
+    "Counterspell",
+    "Kuldotha Rebirth",
+    "Avenging Hunter",
+    "Bogles"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-jeskai-affinity-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T10:33:22+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-jeskai-utrom-affinity-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:30:07+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-jeskai-affinity-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:31:46+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "b6294c2269bf01ec",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Its proposal is a mix of the Glitters game plan with Boros Synthesizer , with the addition of cards like Experimental Synthesizer for card advantage and Galvanic Blast for greater reach and interaction."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "All That Glitters is our main win condition and powerful “free-win” button at different points in the game."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Gearseeker Serpent is a four-turn clock that holds even larger creatures like Tolarian Terror , as well as putting as establishing a huge pressure if the opponent only has small creatures in play."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "if sequenced well, a second turn with multiple copies of it helps to cast Myr Enforcer to, on the third turn, enchant some creature with All That Glitters and close lethal damage in two attacks."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Using it after combat is more common than it might seem, but it also works as an excellent answer to Myr Enforcer , Avenging Hunter and other creatures we have trouble getting past."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "cast Thoughtcast after a sequence of Frogmite s."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Relic of Progenitus is our default answer to delaying Tolarian Terror , Cryptic Serpent , and Gurmag Angler"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "less vulnerable to some hate, such as Standard Bearer"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "more likely to lose matches due to a well-applied Dust to Dust in the first turns."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Dispel is needed against Snuff Out , Counterspell , Deglamer and other troublesome spells."
+    }
+  ]
+}

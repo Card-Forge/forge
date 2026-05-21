@@ -1,0 +1,155 @@
+{
+  "archetype": "Food Retriever Combo",
+  "format": "pauper",
+  "strategy_type": "combo",
+  "overview": "This quadrants Pauper deck leverages food counters and artifact recursion to assemble a high-value combo engine. By cycling Myr Retriever and Cauldron Familiar, players manipulate counters from Lembas to generate exponential life gain or unblockable board presence. Success depends on protecting the core pieces until the loop resolves.",
+  "win_conditions": [
+    "Generating infinite life through food counter manipulation",
+    "Overwhelming the opponent with food-countered creatures",
+    "Maintaining combo continuity via artifact recursion"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Myr Retriever or Cauldron Familiar with two lands",
+      "Hands with Lembas and early mana sources",
+      "Hands with artifact recursion synergies"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking combo pieces or early mana",
+      "Hands with only late-game cards",
+      "Hands vulnerable to early aggression without protection"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap combo pieces like Cauldron Familiar",
+      "Protect key creatures from early removal",
+      "Cast Lembas to establish food counters"
+    ],
+    "mid_game": [
+      "Use Myr Retriever to fetch artifacts that enable the combo",
+      "Move food counters to creatures for stats and life gain",
+      "Stabilize against opponent's threats"
+    ],
+    "late_game": [
+      "Execute the food counter loop for infinite life or board control",
+      "Recycle artifacts to maintain pressure",
+      "Close out the game with unblockable threats"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Myr Retriever",
+      "role": "Artifact recursion engine",
+      "notes": "Use its enter-the-battlefield trigger to fetch key artifacts from the graveyard, enabling combo continuity and protecting against one-time removal."
+    },
+    {
+      "name": "Cauldron Familiar",
+      "role": "Food counter manipulator",
+      "notes": "Deploy to strip food counters from the opponent's graveyard and place them on your creatures, boosting stats and enabling life gain loops."
+    },
+    {
+      "name": "Lembas",
+      "role": "Primary food counter source",
+      "notes": "Cast early to generate initial counters; tap and remove counters to gain life or fuel the combo, ensuring a steady supply of resources."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast Cauldron Familiar before moving counters to maximize board impact",
+    "Prioritize protecting Myr Retriever to maintain artifact recursion",
+    "Use Lembas's life gain to stabilize against aggressive matchups"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize life gain with Lembas and protect combo pieces until the loop resolves.",
+      "watch_for": [
+        "Early removal",
+        "Fast attackers",
+        "Board clearers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells and removal by splitting mana and using artifact recursion to recover key pieces.",
+      "watch_for": [
+        "Counterspells",
+        "Graveyard hate",
+        "Board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race the opponent by assembling the combo quickly while using food counters to outvalue their threats.",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw engines",
+        "Late-game finishers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Early game removal",
+    "Graveyard hate",
+    "Board wipes"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T10:55:34+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:55:34+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "9f55653ef30be8ab",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype name and signature cards indicate a food-counter and artifact recursion combo strategy."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Derived from Cauldron Familiar's counter manipulation and Lembas's life gain potential."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Based on standard combo sequencing principles and the provided card interactions."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard Pauper format threats that disrupt combo and graveyard-dependent strategies."
+    }
+  ]
+}

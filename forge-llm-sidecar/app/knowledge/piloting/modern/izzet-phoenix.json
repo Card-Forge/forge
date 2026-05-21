@@ -1,0 +1,133 @@
+{
+  "archetype": "Izzet Phoenix",
+  "format": "modern",
+  "strategy_type": "tempo",
+  "overview": "Izzet Phoenix leverages discard and card draw to fuel Demilich, constantly replaying low-cost creatures from the graveyard. Manamorphose provides early acceleration and filtering, while Gut Shot offers efficient one-mana removal to clear blockers. The deck aims to overwhelm opponents through relentless board presence and card advantage before they can stabilize.",
+  "win_conditions": [
+    "Attacking with continuously replayed low-cost creatures",
+    "Generating insurmountable card advantage through Demilich triggers",
+    "Clearing key threats with efficient removal like Gut Shot"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with 2-3 lands and at least one low-cost creature",
+      "Hands containing Demilich or Manamorphose",
+      "Hands with early interaction such as Gut Shot"
+    ],
+    "mulligan_criteria": [
+      "Hands with 0 or 4+ lands",
+      "Hands lacking early creatures or draw engines",
+      "Hands composed entirely of high-cost cards"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap creatures to establish board presence",
+      "Cast Manamorphose to draw cards and filter into Demilich",
+      "Use Gut Shot to remove early aggressive threats"
+    ],
+    "mid_game": [
+      "Trigger Demilich to replay discarded creatures and maintain pressure",
+      "Cycle through the deck to find more removal and draw spells",
+      "Protect key engines while applying consistent damage"
+    ],
+    "late_game": [
+      "Flood the board with replayed creatures to close out the game",
+      "Leverage card advantage to outvalue slower strategies",
+      "Clear remaining blockers with targeted removal to secure victory"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Manamorphose",
+      "role": "Card draw and land filter",
+      "notes": "Cast early to accelerate into Demilich or find removal; discard a card to draw two, fueling the graveyard engine."
+    },
+    {
+      "name": "Gut Shot",
+      "role": "Targeted removal",
+      "notes": "Use to clear blockers or finish off damaged creatures; efficient one-mana removal that fits the deck's low mana curve."
+    },
+    {
+      "name": "Demilich",
+      "role": "Graveyard recursion engine",
+      "notes": "Triggers on every discard to return a creature card to the battlefield; central to the deck's strategy of cycling and replaying threats."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize casting Manamorphose before Demilich to fuel the graveyard",
+    "Hold Gut Shot for key threats rather than using it preemptively",
+    "Discard creatures intentionally to trigger Demilich when mana is available"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play around early pressure by holding up removal and replaying creatures to block",
+      "watch_for": [
+        "Early wide boards",
+        "Direct damage spells",
+        "Creature sweepers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply early pressure before they stabilize and use card draw to outlast their resources",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Permanent removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them by replaying creatures quickly and using Gut Shot to clear their value engines",
+      "watch_for": [
+        "Card advantage spells",
+        "Efficient removal",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Lightning Bolt",
+    "Abrupt Decay",
+    "Fatal Push",
+    "Beast Within"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:58:10+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:58:10+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "bf0888f2344ec737",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

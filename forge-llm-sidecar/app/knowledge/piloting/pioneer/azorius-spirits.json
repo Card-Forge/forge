@@ -1,0 +1,212 @@
+{
+  "archetype": "Azorius Spirits",
+  "format": "pioneer",
+  "strategy_type": "aggro",
+  "overview": "Azorius Spirits is an aggro-based creature deck that blends proactive flying threats with control elements. It wins by applying early pressure with lords and cheap spirits while using utility creatures to counter spells, tap down blockers, and protect against board wipes. The deck relies on evasive damage and resource denial to close out games.",
+  "win_conditions": [
+    "Dealing combat damage with high-power flying creatures",
+    "Squeezing the opponent out of resources through 2-for-1 utility spirits",
+    "Protecting the board with instant-speed indestructible to survive board wipes"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with 1-2 lands and multiple cheap Spirit creatures",
+      "Hands containing lords like Empyrion Eagle or Supreme Phantom"
+    ],
+    "mulligan_criteria": [
+      "Hands with only high-cost lords or no lands",
+      "Hands lacking early-game pressure or utility"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Empyrion Eagle",
+          "Rattlechains",
+          "Island",
+          "Island",
+          "Mountain",
+          "Nebelgast Herald",
+          "Spell Queller"
+        ],
+        "decision": "keep",
+        "reason": "Provides early lord pressure, cheap utility, and a land count suitable for an aggro curve"
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap Spirits to establish board presence",
+      "Cast lords like Empyrion Eagle or Supreme Phantom to boost power"
+    ],
+    "mid_game": [
+      "Deploy utility Spirits like Rattlechains and Spell Queller to disrupt opponent's removal and spells",
+      "Use Shacklegeist and Nebelgast Herald to tap down opposing creatures"
+    ],
+    "late_game": [
+      "Win with large evasive creatures",
+      "Flash in Selfless Spirit for instant-speed indestructible to survive board wipes and close the game"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Empyrion Eagle",
+      "role": "Aggro lord",
+      "notes": "Provides power boost to Spirits for the aggro portion of the deck"
+    },
+    {
+      "name": "Supreme Phantom",
+      "role": "Aggro lord",
+      "notes": "Gives power in the air to flying Spirits"
+    },
+    {
+      "name": "Selfless Spirit",
+      "role": "Control/Protection",
+      "notes": "Makes the Spirit team indestructible to Wrath effects at instant speed"
+    },
+    {
+      "name": "Rattlechains",
+      "role": "Control/Disruption",
+      "notes": "Stops removal spells and enables flash-in tricks for other Spirits"
+    },
+    {
+      "name": "Spell Queller",
+      "role": "Counterspell",
+      "notes": "Acts as a counterspell to disrupt opponent's plays"
+    },
+    {
+      "name": "Shacklegeist",
+      "role": "Tap-down utility",
+      "notes": "Taps down creatures without requiring mana investment or a Spirit to flash in"
+    },
+    {
+      "name": "Nebelgast Herald",
+      "role": "Tap-down utility",
+      "notes": "Taps down creatures, often used in conjunction with flash-in Spirits"
+    }
+  ],
+  "sequencing_tips": [
+    "Know when to switch between aggro and control modes based on the board state",
+    "Flash in Spirits at instant speed to maximize combat tricks and utility",
+    "Prioritize tapping down opponent's key creatures before they can attack or block"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aura-based deck",
+      "advice": "Exploit their weakness by constantly tapping down their big creatures with Shacklegeist and Nebelgast Herald, forcing them to spend resources on Karametra's Blessing or lose tempo.",
+      "watch_for": [
+        "Karametra's Blessing",
+        "Large auras",
+        "First strike/lifelink creatures"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Supreme Verdict",
+    "Karametra's Blessing",
+    "Removal spells",
+    "Oppressive combo decks (e.g., Inverter, Heliod Ballista)"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/interview-azorius-spirits-the-dominating-deck-in-pioneer-royale",
+    "generated_at": "2026-05-21T05:19:05+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-azorius-spirit-deck-guide-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:16:01+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/interview-azorius-spirits-the-dominating-deck-in-pioneer-royale",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:17:45+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "576248f3433c23f7",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "an aggro-based creature deck, but with a twist... it is an aggro deck that can kill with big powered creatures in the air, but it also has a lot of control elements"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "kill with big powered creatures in the air"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "squeezing the opponent out of resources"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Selfless Spirit even makes your team indestructible to Wrath effects"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "takes a pilot a lot of practice and experience to know when to switch from one mode to the other"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "making it that I can flash in spirits, for extra tricks, like flashing in a Selfless Spirit to give my team indestructible an instant speed"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "if I played something like Goblins, and the opponent plays a Supreme Verdict, it makes me feel so helpless"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The only counter-play they have against it is Karametra's Blessing which provides hexproof"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Rattlechains trying to stop a removal spell"
+    }
+  ]
+}

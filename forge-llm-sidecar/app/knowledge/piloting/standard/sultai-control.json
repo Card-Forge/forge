@@ -1,0 +1,157 @@
+{
+  "archetype": "Sultai Control",
+  "format": "standard",
+  "strategy_type": "control",
+  "overview": "Sultai Control in Standard leverages three-color synergy to outlast opponents through superior card advantage and resource denial. By utilizing draw engines like Flow State and Rakshasa's Bargain alongside land acceleration from Ancient Cornucopia, the deck stabilizes early and transitions into a resilient late-game. The goal is to control the board with interaction while gradually building an insurmountable hand size and mana base.",
+  "win_conditions": [
+    "Outdrawing the opponent with Rakshasa's Bargain and Flow State",
+    "Stabilizing with Ancient Cornucopia to cast late-game threats",
+    "Winning through attrition and board control"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early interaction or draw spells",
+      "Hands containing Ancient Cornucopia or dual lands",
+      "Hands with at least two lands and a one-drop"
+    ],
+    "mulligan_criteria": [
+      "Hands with only lands or only high-cost cards",
+      "Hands lacking early answers or card draw",
+      "Hands with three or more lands"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and Ancient Cornucopia to accelerate mana",
+      "Cast Flow State or Rakshasa's Bargain to draw into answers",
+      "Hold up interaction for opponent's early threats"
+    ],
+    "mid_game": [
+      "Use extra cards to maintain board control",
+      "Search for basics with Cornucopia to fix mana",
+      "Trade efficiently while preserving key removal"
+    ],
+    "late_game": [
+      "Lean on card advantage to outvalue opponents",
+      "Cast win conditions or finish with combat tricks",
+      "Maintain hand size to pressure opponent's resources"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Flow State",
+      "role": "Instant-speed card draw and tempo tool",
+      "notes": "Cast for one mana when possible to maximize efficiency; hold up for key opponent spells or use to dig into late-game answers."
+    },
+    {
+      "name": "Ancient Cornucopia",
+      "role": "Land acceleration and mana fixing",
+      "notes": "Play early to search for missing basics; prioritize untapped lands when possible to maintain tempo, but accept tapped lands to secure three-color consistency."
+    },
+    {
+      "name": "Rakshasa's Bargain",
+      "role": "Massive card advantage engine",
+      "notes": "Use to recover from board wipes or dig for win conditions; manage life total carefully and pair with healing or life gain if available."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize casting Flow State before Rakshasa's Bargain to maximize hand size",
+    "Use Ancient Cornucopia before playing high-cost spells to ensure mana availability",
+    "Hold up interaction until the opponent commits to a threat",
+    "Draw into answers before committing to combat tricks"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early removal and life total management; use Rakshasa's Bargain cautiously to avoid lethal damage.",
+      "watch_for": [
+        "Early creature swarms",
+        "Burn spells",
+        "Fast finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race for board control while stabilizing with draw spells; use Cornucopia to outpace their mana curve.",
+      "watch_for": [
+        "Efficient removal",
+        "Value creatures",
+        "Board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race for card advantage and tempo; use Flow State to disrupt their game plan and dig for win conditions.",
+      "watch_for": [
+        "Countermagic",
+        "Board wipes",
+        "Stax effects"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Efficient removal",
+    "Countermagic"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:23:15+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:23:15+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "380e59810377b5f2",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

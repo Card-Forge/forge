@@ -1,0 +1,132 @@
+{
+  "archetype": "Mardu Monument",
+  "format": "standard",
+  "strategy_type": "midrange",
+  "overview": "Mardu Monument is a midrange strategy that leverages recurring defensive resources and efficient spot removal to outlast opponents. By cycling Monument to Endurance for consistent 3/3 blockers and pairing it with cheap debuffs like Moonshadow and Cool but Rude, the deck stabilizes early and transitions into a resilient late game. The white-black-red color identity provides a balanced toolkit of life gain, removal, and card advantage to navigate Standard's meta.",
+  "win_conditions": [
+    "Trading up with recurring 3/3 Wall tokens while draining opponent's board",
+    "Outlasting opponents through efficient -X/-0 removal and life total management",
+    "Closing out games with incremental advantage from repeated Monument cycles"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two lands and a one- or two-drop removal spell",
+      "Hands containing Monument to Endurance paired with early interaction",
+      "Hands that can play a threat or blocker on turn two"
+    ],
+    "mulligan_criteria": [
+      "Mana-heavy hands with no early interaction",
+      "Hands lacking removal to handle aggressive starts",
+      "Hands with only high-cost cards and no ramp"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands and casting Moonshadow or Cool but Rude to disrupt early threats",
+      "Hold up mana for removal while setting up Monument to Endurance on turn three or four",
+      "Use early removal to buy time for the Monument to enter and generate a Wall token"
+    ],
+    "mid_game": [
+      "Cycle the Monument to the bottom of the library to avoid life loss while maintaining board presence",
+      "Trade opponent's creatures into the recurring Wall tokens to preserve your life total",
+      "Use cheap removal to clear the way for incremental value and card advantage"
+    ],
+    "late_game": [
+      "Let the Monument cycle repeatedly to generate infinite blockers and drain opponent's resources",
+      "Focus on life gain and board control to force opponents into unfavorable trades",
+      "Manage the Monument's upkeep carefully to maximize token generation without taking lethal damage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Monument to Endurance",
+      "role": "Recurring defensive engine and sacrifice outlet",
+      "notes": "Cast on turn three or four to generate a 3/3 Wall token. Return it to the library during upkeep to avoid life loss and recycle it later, or keep it to block repeatedly if life is not a concern."
+    },
+    {
+      "name": "Moonshadow",
+      "role": "Efficient black removal and combat trick",
+      "notes": "Use to kill or severely weaken early threats. Hold up black mana to counter aggressive turns or reduce large creatures to manageable sizes for your Walls."
+    },
+    {
+      "name": "Cool but Rude",
+      "role": "Fast red spot removal and tempo tool",
+      "notes": "Cast on opponent's turn to remove threats before they attack. Pairs well with Monument by clearing the board so your recurring Walls can dominate combat."
+    }
+  ],
+  "sequencing_tips": [
+    "Always assess life totals before deciding whether to keep or cycle Monument to Endurance",
+    "Hold up removal mana during opponent's turn to maximize surprise and combat disruption",
+    "Prioritize cycling the Monument when you have a full board of Walls to maintain pressure without paying life",
+    "Use Moonshadow and Cool but Rude to clear the path for Monument's entry, ensuring the initial Wall token survives"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early removal and cycle Monument quickly to establish a wall of blockers. Avoid trading life for board control.",
+      "watch_for": [
+        "Early curve threats that bypass Walls",
+        "Removal that targets your recurring tokens"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Use Monument to exhaust their removal spells and force inefficient trades. Preserve life total while cycling the artifact.",
+      "watch_for": [
+        "Board wipes that clear your Walls",
+        "Card draw engines that outvalue your removal suite"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race with recurring blockers while using cheap removal to disrupt their key threats. Manage the Monument's upkeep to avoid self-damage.",
+      "watch_for": [
+        "Efficient removal that targets Monument",
+        "Value engines that outscale your token generation"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures that pressure life total before Monument resolves",
+    "Board wipes that clear recurring Wall tokens",
+    "Efficient removal spells that target Monument to Endurance"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:53:19+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:53:19+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "b1f563c67e70312b",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Monument to Endurance, Moonshadow, Cool but Rude"
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

@@ -1,0 +1,292 @@
+{
+  "archetype": "Domain Zoo",
+  "format": "modern",
+  "strategy_type": "aggro",
+  "overview": "Domain Zoo is a Modern aggressive archetype that leverages the Domain mechanic to quickly cast Scion of Draco alongside Leyline of the Guildpact. It uses cheap, high-power creatures like Wild Nacatl and Territorial Kavu to apply early pressure, while the enchantment combo transforms its threats into nearly unblockable forces. The deck relies on a fast start and attrition, adapting its sideboard to a broad metagame.",
+  "win_conditions": [
+    "Attacking with cheap, high-power creatures like Wild Nacatl and Ragavan",
+    "Using the Scion of Draco and Leyline of the Guildpact combo to buff creatures into unblockable threats",
+    "Clearing blockers with Lightning Bolt and Tribal Flames to deal direct damage",
+    "Winning with Tribal Flames after a few attacks"
+  ],
+  "mulligan": {
+    "keep_criteria": [],
+    "mulligan_criteria": [],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap creatures like Wild Nacatl and Ragavan to establish early pressure",
+      "Fetch Savai Triome and cycle Shock Lands to establish Domain quickly",
+      "Cast Leyline of the Guildpact or use Stubborn Denial as early interaction"
+    ],
+    "mid_game": [
+      "Cast Scion of Draco to synergize with Leyline and buff existing creatures",
+      "Attack with Territorial Kavu and Nishoba Brawler, leveraging +1/+1 counters and trample",
+      "Use Lightning Bolt and Tribal Flames to clear blockers or finish the opponent"
+    ],
+    "late_game": [
+      "Rely on attrition and sideboard hosers like Drannith Magistrate or Rest in Peace to stall",
+      "Use targeted removal like Prismatic Ending or Pick Your Poison to handle specific threats",
+      "Continue applying pressure with buffed creatures until lethal"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Wild Nacatl",
+      "role": "Primary aggressive drop",
+      "notes": "Face of the archetype; negligible body but interacts perfectly with the strategy"
+    },
+    {
+      "name": "Ragavan, Nimble Pilferer",
+      "role": "Value one-drop",
+      "notes": "Generates value, carries games alone, and forces opponent resource commitment"
+    },
+    {
+      "name": "Territorial Kavu",
+      "role": "Core threat",
+      "notes": "5/5 for two mana; filters hand or hates graveyard; synergizes heavily with Scion/Leyline"
+    },
+    {
+      "name": "Nishoba Brawler",
+      "role": "Redundant threat",
+      "notes": "Vulnerable Territorial Kavu variant that adds consistency and trample"
+    },
+    {
+      "name": "Scion of Draco",
+      "role": "Combo enabler",
+      "notes": "Transforms creatures into keyword soup threats; evasive on its own"
+    },
+    {
+      "name": "Leyline of the Guildpact",
+      "role": "Mana & buff engine",
+      "notes": "Facilitates any-color mana access and massively buffs Scion's creatures"
+    },
+    {
+      "name": "Lightning Bolt",
+      "role": "Conditional removal",
+      "notes": "Mandatory for clearing blockers and closing out games"
+    },
+    {
+      "name": "Tribal Flames",
+      "role": "Board wipe & finisher",
+      "notes": "Forces unfavorable trades and can win games after a few attacks"
+    },
+    {
+      "name": "Leyline Binding",
+      "role": "Unconditional removal",
+      "notes": "Handles any permanent without hindering the clock; can be sequenced with creatures"
+    },
+    {
+      "name": "Stubborn Denial",
+      "role": "Spell interaction",
+      "notes": "Default answer to unwanted spells; acts as Negate or Force Spike against key threats like Blood Moon"
+    }
+  ],
+  "sequencing_tips": [
+    "Fetch Savai Triome on turn one and Breeding Pool on turn two to cast Scion of Draco by turn two",
+    "Sequence Leyline Binding with a creature to maximize efficiency without stalling the clock",
+    "Use Fetch Lands to find at least one basic land to avoid being two-for-one'd by opponent's Pick Your Poison",
+    "Hold Stubborn Denial as a Force Spike against early targeted hate like Blood Moon or key spells"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Cascade",
+      "advice": "Sideboard in Drannith Magistrate to lock the game alongside Scion/Leyline, and use Flusterstorm as a cheap, uninteractable answer.",
+      "watch_for": [
+        "Cascade spells",
+        "Early board presence"
+      ]
+    },
+    {
+      "opponent_archetype": "Golgari Yawgmoth",
+      "advice": "Use Cursed Totem to delay opponent's turns and Rest in Peace to block infinite loops.",
+      "watch_for": [
+        "Yawgmoth loops",
+        "Graveyard recursion"
+      ]
+    },
+    {
+      "opponent_archetype": "Living End",
+      "advice": "Sideboard in Rest in Peace to significantly delay the combo and protect your board.",
+      "watch_for": [
+        "Graveyard setup",
+        "Living End cast"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange/Aggro",
+      "advice": "Use Prismatic Ending for low-cost threats and Legion's End for tokens or larger creatures.",
+      "watch_for": [
+        "Low-cost threats",
+        "Crashing Footfalls tokens"
+      ]
+    },
+    {
+      "opponent_archetype": "Indomitable Creativity",
+      "advice": "Consider sideboarding Doorkeeper Thrull if this archetype grows in the metagame.",
+      "watch_for": [
+        "Creativity combos",
+        "Token generation"
+      ]
+    },
+    {
+      "opponent_archetype": "Enchantment/Artifact heavy",
+      "advice": "Use Tear Asunder for instant-speed artifact/enchantment removal, especially if the game extends.",
+      "watch_for": [
+        "Amulet of Vigor",
+        "Problematic permanents"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Cascade decks",
+    "Golgari Yawgmoth",
+    "Living End",
+    "Midrange and Aggro decks",
+    "Amulet of Vigor",
+    "Crashing Footfalls tokens",
+    "Murktide Regent",
+    "Primeval Titan",
+    "Blood Moon",
+    "Magus of the Moon",
+    "Pick Your Poison",
+    "Indomitable Creativity"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-domain-zoo-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-20T23:32:51+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-domain-zoo-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-20T23:31:06+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "e55ccd269dade13c",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "an Aggro deck that has gained popularity in recent weeks with the \"combo\" between Leyline of the Guildpact and Scion of Draco!"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Wild Nacatl is basically the face of this archetype... remains one of the main aggressive drops available in Modern"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Leyline of the Guildpact... makes Scion of Draco transform his creatures into almost unbeatable threats"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Lightning Bolt... offers ways to remove blockers to pressure the opponent, in addition to taking the last points of damage to them"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Tribal Flames as removal, as well as being capable of winning games after a few attacks"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "search for Savai Triome on the first turn and Breeding Pool on the second. It offers significant advantages to your creatures if it stays in play"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "possibility of casting it very early or sequencing it with a creature"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "look for at least one land with them to avoid taking a two-for-one from Pick Your Poison"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "using it as a Force Spike for key spells and/or targeted hate, like Blood Moon"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Drannith Magistrate is essential against Cascade decks"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Cursed Totem deals with Golgari Yawgmoth"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Rest in Peace significantly delays Living End"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Prismatic Ending is our answer to Midranges and Aggro with low-cost threats, as well as resolving other problematic permanents like Amulet of Vigor"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Legion’s End is an efficient removal against Crashing Footfalls tokens"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Path to Exile is our standard one-of answer against larger creatures like Murktide Regent or Primeval Titan"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Pick Your Poison has become a necessity for dealing with Scion of Draco or Leyline of the Guildpact , as well as responding to Blood Moon"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Doorkeeper Thrull if Indomitable Creativity decks continue to grow"
+    }
+  ]
+}

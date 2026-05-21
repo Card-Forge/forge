@@ -1,0 +1,291 @@
+{
+  "archetype": "Eldrazi Tron",
+  "format": "modern",
+  "strategy_type": "ramp",
+  "overview": "Eldrazi Tron aims to rapidly assemble Urza's Land Trio or use alternative acceleration methods to cast massive Eldrazi threats. The deck leverages mana acceleration and card manipulation to outpace opponents, while utilizing versatile tools like Karn, the Great Creator for sideboard flexibility. If the primary game plan stalls, it can still apply pressure through efficient mana development and targeted disruption.",
+  "win_conditions": [
+    "Devourer of Destiny",
+    "Kozilek's Command",
+    "Thought-Knot Seer",
+    "Sowing Mycospawn",
+    "Karn, the Great Creator"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands that put your plan in motion straight away",
+      "Hands that accelerate your mana curve as much as possible",
+      "Hands that enable Ugin's Labyrinth on turn 1 and guarantee a Seer on turn 2"
+    ],
+    "mulligan_criteria": [
+      "Hands that give Karn on turn 4 with dead cards if green mana is inaccessible",
+      "Complicated hands that might fail to find the third Urza land piece",
+      "Hands with Chalice of the Void and Talismans when playing first against an unknown opponent"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Ugin's Labyrinth",
+          "Devourer of Destiny",
+          "Thought-Knot Seer",
+          "Mystic Forge",
+          "Land",
+          "Land",
+          "Land"
+        ],
+        "decision": "keep",
+        "reason": "Enables Labyrinth on turn 1, may find another land with Devourer, guarantees a Seer on turn 2, and has Forge to speed up the plan."
+      },
+      {
+        "hand": [
+          "Karn, the Great Creator",
+          "Land",
+          "Land",
+          "Land",
+          "Land",
+          "Land",
+          "Land"
+        ],
+        "decision": "mulligan",
+        "reason": "May give Karn on turn 4 which is not ideal, and two cards will be dead if you can't access green mana."
+      },
+      {
+        "hand": [
+          "Urza's Mine",
+          "Urza's Power Plant",
+          "Chalice of the Void",
+          "Talisman of Dominance",
+          "Land",
+          "Land",
+          "Land"
+        ],
+        "decision": "mulligan",
+        "reason": "Might not find the third piece needed, and Chalice and Talisman are not great if playing first against an unknown deck, potentially costing the game."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Complete Urza's Land Trio or accelerate mana curve through alternative means",
+      "Enable Ugin's Labyrinth on turn 1 to reduce Eldrazi costs",
+      "Use Devourer of Destiny to manipulate the top four cards and find lands or spells",
+      "Cast Mystic Forge to play spells directly from the library"
+    ],
+    "mid_game": [
+      "Play giant Eldrazi threats like Kozilek's Command or Thought-Knot Seer",
+      "Utilize Karn, the Great Creator to access sideboard hate cards",
+      "Apply pressure and survive early disruption while developing the board"
+    ],
+    "late_game": [
+      "Use Karn's +1 ability with Liquimetal Coating for land destruction",
+      "Cast Sowing Mycospawn to fix mana and destroy opponent's lands",
+      "Maintain board presence with resilient Eldrazi and targeted removal"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Ugin's Labyrinth",
+      "role": "Mana Acceleration / Cost Reduction",
+      "notes": "Goes really well with Eldratron's -cost cards and enables faster casting of Eldrazi."
+    },
+    {
+      "name": "Devourer of Destiny",
+      "role": "Card Manipulation / Win Condition",
+      "notes": "Needed in starting hand to look at top 4 cards, put one on top, and enable Labyrinth on the same turn."
+    },
+    {
+      "name": "Mystic Forge",
+      "role": "Acceleration / Consistency",
+      "notes": "Lets you see the top card and play spells directly from the library to speed up the game plan."
+    },
+    {
+      "name": "Karn, the Great Creator",
+      "role": "Sideboard Access / Versatility",
+      "notes": "Makes sideboard more versatile, allowing access to hate cards like Pithing Needle and Liquimetal Coating."
+    },
+    {
+      "name": "Chalice of the Void",
+      "role": "Disruption / Hate Card",
+      "notes": "Excellent in main deck to disable opponent's main threats and artifacts, critical in many matchups."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize enabling Ugin's Labyrinth on turn 1 alongside Devourer of Destiny to manipulate the top cards and accelerate mana.",
+    "Use Mystic Forge early to bypass mana constraints and play spells directly from the library.",
+    "Deploy Kozilek's Command to develop the game plan and handle critical moments.",
+    "Avoid playing Chalice of the Void or Talismans on turn 1 if playing first against an unknown opponent, as they may cost the game."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Boros Energy",
+      "advice": "Survive the first few turns, pay attention to their hates, and follow your game plan. The matchup is favorable post-ban.",
+      "watch_for": [
+        "Amped Raptor",
+        "Hate cards",
+        "Early pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Rakdos Midrange",
+      "advice": "Use Chalice of the Void to disable their main threats. Struggle against disruption and creatures, so prioritize efficient mana acceleration.",
+      "watch_for": [
+        "Ragavan",
+        "Disruption",
+        "Creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Grinding Station",
+      "advice": "Rely on Karn, the Great Creator and Chalice of the Void to disrupt their artifact synergy. They need a great opening hand to win on turn 2.",
+      "watch_for": [
+        "Underworld Breach",
+        "Thassa's Oracle",
+        "Mox Opal"
+      ]
+    },
+    {
+      "opponent_archetype": "Goryo’s Vengeance",
+      "advice": "Guarantee a strong start to catch them off guard. Use Karn to get Pithing Needle and rely on graveyard hate in the sideboard.",
+      "watch_for": [
+        "FON",
+        "Counterspell",
+        "Psychic Frog"
+      ]
+    },
+    {
+      "opponent_archetype": "Eldrazi Tron",
+      "advice": "Use Liquimetal Coating with Karn for land destruction. Thought-Knot Seer and Sowing Mycospawn are critical. Avoid messing with the main deck too much.",
+      "watch_for": [
+        "Liquimetal Coating",
+        "Sowing Mycospawn",
+        "Mirror match variance"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Ragavan",
+    "Underworld Breach",
+    "Thassa's Oracle",
+    "FON",
+    "Counterspell",
+    "Psychic Frog",
+    "Amped Raptor"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-eldrazi-tron-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T01:08:55+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-eldrazi-tron-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:07:20+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "2fc351af21e19a7e",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "the plan is to complete Urza's Land Trio as fast as possible to accelerate the mana curve and play giant Eldrazi on the board."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Devourer of Destiny is the card you need in your starting hand besides Labyrinth"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Kozilek's Command is quite versatile. It develops your game plan"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Thought-Knot Seer is extremely powerful, and Sowing Mycospawn is another way to use land destruction"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Karn makes your sideboard more versatile, so removing pieces may make the deck less consistent"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Devourer of Destiny is the card you need in your starting hand besides Labyrinth... you can also enable Ugin's Labyrinth with it on that same turn"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Mystic Forge is great at that. It lets you not only see the top card of your library but also play spells directly from there"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Kozilek's Command is quite versatile. It develops your game plan and can be useful in many critical moments."
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "if you're playing first and don't know what your opponent is playing, Chalice of the Void and Talisman are not great, and may simply cost you the game."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Ragavan will always be problematic."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "use Grinding Station to mill their entire deck with Underworld Breach in play, and then win with Thassa's Oracle."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "uses FON and Counterspell"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Be careful with Psychic Frog, as it can easily derail the game"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Boros was also hit by the latest bans, as it lost Amped Raptor"
+    }
+  ]
+}

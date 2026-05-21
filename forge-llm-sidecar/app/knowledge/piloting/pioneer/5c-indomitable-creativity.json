@@ -1,0 +1,157 @@
+{
+  "archetype": "5c Indomitable Creativity",
+  "format": "pioneer",
+  "strategy_type": "combo",
+  "overview": "A five-color combo deck that leverages Indomitable Creativity to draw cards and cast spells for free, accelerating into game-winning sequences. Prismari Command provides flexible draw and land acceleration, while Spell Pierce protects the combo from disruption. The deck aims to assemble its pieces quickly and overwhelm opponents before they can stabilize.",
+  "win_conditions": [
+    "Casting a high-impact spell for free via Indomitable Creativity to close the game",
+    "Drawing into a lethal combination of cheap spells and creatures",
+    "Using Prismari Command to fetch lands and draw into the combo package"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two mana sources and a draw engine",
+      "Hands containing Indomitable Creativity or Prismari Command with early interaction",
+      "Hands with Spell Pierce and a cheap spell to protect the combo"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking mana acceleration or draw",
+      "Hands with only high-cost spells and no protection",
+      "Hands without interaction against early aggression"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap spells to establish board presence",
+      "Use Spell Pierce to counter key removal or counterspells",
+      "Look for early Prismari Command to draw into Creativity"
+    ],
+    "mid_game": [
+      "Cast Indomitable Creativity to draw two and cast a finisher for free",
+      "Maintain card advantage by cycling through cheap spells",
+      "Apply pressure with creatures while protecting combo pieces"
+    ],
+    "late_game": [
+      "Execute free spell sequences to deplete opponent's resources",
+      "Use excess card draw to find answers to board wipes",
+      "Close out games with unanswerable threats or direct damage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Indomitable Creativity",
+      "role": "Primary combo engine",
+      "notes": "Cast to draw two cards and cast a nonland card for free; prioritize high-impact spells or finishers."
+    },
+    {
+      "name": "Prismari Command",
+      "role": "Flexible draw and acceleration",
+      "notes": "Use to draw cards, fetch dual lands, or tap lands for mana to enable Creativity."
+    },
+    {
+      "name": "Spell Pierce",
+      "role": "Protection and disruption",
+      "notes": "Hold up to counter removal, counterspells, or key threats that would stall the combo."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Spell Pierce up until the opponent reveals their hand or commits to a spell",
+    "Cast Prismari Command before Indomitable Creativity to ensure you have enough cards to choose from",
+    "Prioritize casting cheap spells before Creativity to maximize the free cast potential"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Spell Pierce to counter early threats and buy time for Creativity",
+      "watch_for": [
+        "Fast sweepers",
+        "Early board presence",
+        "Mana denial"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells by baiting them with cheap spells before casting Creativity",
+      "watch_for": [
+        "Counterspell",
+        "Teferi, Hero of Dominaria",
+        "Board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Apply steady pressure while protecting combo pieces with interaction",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspell",
+    "Teferi, Hero of Dominaria",
+    "Lightning Strike",
+    "Abrupt Decay",
+    "Supreme Verdict"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T04:39:54+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:39:54+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "f2e271688b8c8737",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "5c Indomitable Creativity, Prismari Command, Spell Pierce"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Indomitable Creativity, Prismari Command"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Spell Pierce, Prismari Command, Indomitable Creativity"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Pioneer format meta"
+    }
+  ]
+}

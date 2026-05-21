@@ -1,0 +1,262 @@
+{
+  "archetype": "Izzet Terror",
+  "format": "pauper",
+  "strategy_type": "control",
+  "overview": "Izzet Terror is a control-oriented Pauper deck that leverages cheap removal, countermagic, and cantrips to stabilize against aggressive and combo strategies. It utilizes meta-call cards like Cast into the Fire to specifically target top-tier decks such as Affinity and Kuldotha Red. Once the opponent's resources are depleted, the deck closes games with resilient threats like Tolarian Terror or token generation from Murmuring Mystic.",
+  "win_conditions": [
+    "Tolarian Terror",
+    "Murmuring Mystic"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing 2-3 lands to avoid mana screw",
+      "Early interaction like Counterspell or cheap removal",
+      "Cantrips to dig for necessary answers"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking lands or early interaction",
+      "Hands heavy on late-game threats without draw or protection"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Counterspell",
+          "Skred",
+          "Brainstorm",
+          "Island",
+          "Mountain"
+        ],
+        "decision": "keep",
+        "reason": "Provides early interaction, removal, and card advantage to stabilize against early pressure."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and use cantrips like Brainstorm and Ponder to find answers",
+      "Deploy cheap removal and Counterspell to disrupt opponent's early threats"
+    ],
+    "mid_game": [
+      "Stabilize the board using sweepers like Breath Weapon and meta calls like Cast into the Fire",
+      "Maintain Monarch state if possible to generate extra card advantage"
+    ],
+    "late_game": [
+      "Deploy Tolarian Terror to create a four-turn clock or endless blockers",
+      "Use Murmuring Mystic to flood the board with tokens once opponent's resources are exhausted"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Tolarian Terror",
+      "role": "Win condition",
+      "notes": "Main threat that protects itself and creates a four-turn clock or endless stream of blockers."
+    },
+    {
+      "name": "Cast into the Fire",
+      "role": "Meta call / Removal",
+      "notes": "Targets Affinity's Modern Horizons 2 lands, clears Faeries tokens, and handles Kuldotha Rebirth tokens."
+    },
+    {
+      "name": "Counterspell",
+      "role": "Stack interaction",
+      "notes": "Classic Pauper blue card used to secure early game and answer opponent's key spells."
+    },
+    {
+      "name": "Brainstorm",
+      "role": "Cantrip",
+      "notes": "Digs deeper into the deck to find necessary answers and threats."
+    },
+    {
+      "name": "Ponder",
+      "role": "Cantrip",
+      "notes": "Helps shuffle useless cards on top and smooths out the draw step."
+    },
+    {
+      "name": "Galvanic Discharge",
+      "role": "Removal",
+      "notes": "Handles multiple creatures like Myr Enforcer, Tolarian Terror, and Writhing Chrysalis."
+    },
+    {
+      "name": "Skred",
+      "role": "Default removal",
+      "notes": "Best red removal against most creatures, though slow against early 2-toughness aggro."
+    },
+    {
+      "name": "Breath Weapon",
+      "role": "Sweeper",
+      "notes": "Primary answer against aggro and go-wide strategies in Pauper."
+    }
+  ],
+  "sequencing_tips": [
+    "Use Brainstorm to dig deep, then follow up with Ponder to shuffle unfavorable cards on top.",
+    "Cast Lorien Revealed to search for Volatile Fjord, ensuring consistent red mana access.",
+    "Time Cast into the Fire to clear multiple tokens or lands simultaneously for maximum efficiency.",
+    "Retain Monarch by avoiding combat damage to draw an extra card each turn."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Kuldotha Red",
+      "advice": "Sideboard in Hydroblast to handle Kuldotha Rebirth and creatures. Be cautious of early Goblin Tomb Raider plays.",
+      "watch_for": [
+        "Goblin Tomb Raider",
+        "Kuldotha Rebirth",
+        "Two-toughness creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Grixis Affinity",
+      "advice": "Sideboard in Gorilla Shaman and Annul. Use Cast into the Fire to target Modern Horizons 2 lands and Annul for artifacts/enchantments.",
+      "watch_for": [
+        "Modern Horizons 2 lands",
+        "Myr Enforcer",
+        "Artifact threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Jund Broodscale",
+      "advice": "Sideboard in Annul and Dispel to answer artifacts, enchantments, and protective spells like Tamiyo's Safekeeping.",
+      "watch_for": [
+        "Broodscale Combo",
+        "Tamiyo's Safekeeping",
+        "Enchantments"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Blue Terror",
+      "advice": "Sideboard in Pyroblast and consider Dispel. Use Pyroblast to bypass counterspells and answer their threats.",
+      "watch_for": [
+        "Counterspell",
+        "Removal",
+        "Blue threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Faeries",
+      "advice": "Sideboard in Pyroblast and rely on maindeck Cast into the Fire. Clear tokens efficiently and use Pyroblast for key threats.",
+      "watch_for": [
+        "Token swarm",
+        "Removal",
+        "Counterspell"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Myr Enforcer",
+    "Writhing Chrysalis",
+    "Goblin Tomb Raider",
+    "Kuldotha Rebirth",
+    "Broodscale Combo",
+    "Faeries tokens",
+    "Tamiyo's Safekeeping",
+    "Mnemonic Wall",
+    "Archaeomancer"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-izzet-terror-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T10:05:47+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-izzet-terror-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:04:19+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "3d1af10bcf9d8cc3",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Izzet Terror is a more control-oriented variant of Tolarian Terror lists that runs cards like Cast into the Fire to prey on the best Pauper decks"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Tolarian Terror is our main threat to win games."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Murmuring Mystic... start creating an army of tokens with it."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Brainstorm digging deeper while Ponder helps shuffle useless cards on top."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Lorien Revealed can search for Volatile Fjord , increasing our consistency of access to red mana"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "its damage mode also allows you to deal with Faeries and two Kuldotha Rebirth tokens with a single card"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Monarch , which generates an extra draw every turn in which we retain this game state by not taking combat damage."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "the second can always deal with Myr Enforcer , Tolarian Terror , and Writhing Chrysalis"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "slow on the draw against Kuldotha Red if it starts the game with Goblin Tomb Raider"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "deal with Faeries and two Kuldotha Rebirth tokens"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "protect the Broodscale Combo, such as Tamiyo’s Safekeeping"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Ghostly Flicker and/or Ephemerate show up with Mnemonic Wall or Archaeomancer"
+    }
+  ]
+}

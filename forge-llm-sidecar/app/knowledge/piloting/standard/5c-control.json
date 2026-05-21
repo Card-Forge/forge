@@ -1,0 +1,169 @@
+{
+  "archetype": "5c Control",
+  "format": "standard",
+  "strategy_type": "control",
+  "overview": "This five-color control deck aims to outlast opponents by leveraging a wide array of removal and board wipes like Day of Judgment. It stabilizes early games with efficient answers, then transitions into a value-heavy late game using Stock Up to build an unblockable board presence. Jeskai Revelation serves as a flexible finisher that rewards spell-heavy turns, allowing you to close games efficiently once the board is clear.",
+  "win_conditions": [
+    "Lethal damage from Jeskai Revelation on a turn with multiple spells",
+    "Overwhelming board presence using Stock Up auras to deal trample damage",
+    "Outlasting opponents in a grind until they run out of resources"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early interaction or board wipes",
+      "Hands containing Jeskai Revelation with cheap spells to enable it",
+      "Hands with Stock Up and a creature to equip"
+    ],
+    "mulligan_criteria": [
+      "Hands with only late-game finishers and no early answers",
+      "Hands lacking land drops or mana fixing",
+      "Hands with multiple high-cost board wipes and no removal"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and hold up mana for interaction",
+      "Use cheap removal to handle early threats",
+      "Prioritize keeping the board clear to survive"
+    ],
+    "mid_game": [
+      "Cast Day of Judgment to reset the board when opponents commit resources",
+      "Begin equipping creatures with Stock Up to generate value",
+      "Cast Jeskai Revelation to trade efficiently or chip away at life totals"
+    ],
+    "late_game": [
+      "Flood the board with Stock Up auras to create unblockable attackers",
+      "Chain multiple spells together to maximize Jeskai Revelation damage",
+      "Grind out the game by cycling through your deck and outlasting the opponent"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Stock Up",
+      "role": "Board presence and value engine",
+      "notes": "Cast on your own creatures to grant trample and +1/+1. Prioritize equipping when you have multiple creatures to maximize the discount and create wide, unblockable boards."
+    },
+    {
+      "name": "Jeskai Revelation",
+      "role": "Flexible finisher and trade tool",
+      "notes": "Hold up for combat tricks or cast on your turn after casting multiple spells. Use it to finish games or efficiently remove threats while advancing your own game plan."
+    },
+    {
+      "name": "Day of Judgment",
+      "role": "Board wipe and reset button",
+      "notes": "Cast when the opponent has a wide board or is about to commit to a lethal attack. Use it to clear the way for your Stock Up creatures or to buy time for more answers."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast Jeskai Revelation after other spells on the same turn to maximize its damage output",
+    "Hold up Day of Judgment until the opponent commits creatures to the board",
+    "Equip Stock Up to creatures that can immediately attack or block to maximize tempo",
+    "Prioritize removal over board wipes when the opponent has few threats"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Focus on early interaction and hold up Day of Judgment for their big turns. Use Jeskai Revelation to trade efficiently and buy time until you can stabilize with Stock Up.",
+      "watch_for": [
+        "Fast, wide creature boards",
+        "Lethal combat tricks",
+        "Early game burn spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Prioritize countering or removing key combo pieces early. Use Day of Judgment to disrupt creature-based combos and Jeskai Revelation to finish games before they can assemble their win condition.",
+      "watch_for": [
+        "Graveyard recursion",
+        "Instant-speed combo enablers",
+        "Protection spells on key pieces"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race the opponent by equipping Stock Up to multiple creatures and using Jeskai Revelation for incremental damage. Use Day of Judgment to clear their board and force them to rebuild.",
+      "watch_for": [
+        "Board wipes",
+        "Card advantage engines",
+        "Counterspells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast, wide creature decks",
+    "Graveyard-based combo strategies",
+    "Other control decks with superior card advantage"
+  ],
+  "metadata": {
+    "source": "Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:30:18+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-atraxa-ramp-5c-control-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:27:32+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:30:18+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "a976631290130d31",
+  "overview_evidence": {
+    "confidence": 0.4,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.4,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.4,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.4,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "archetype": "Abzan Greasefang",
+  "format": "pioneer",
+  "strategy_type": "combo",
+  "overview": "Abzan Greasefang is a Pioneer combo deck that mills vehicles into the graveyard to reanimate them with Greasefang, Okiba Boss for a rapid combat kill. It supplements this primary win condition with efficient discard, recursion, and attrition threats like Esika’s Chariot and Overlord of the Balemurk. The deck aims to apply early pressure while forcing opponents to play around its inevitable combo sequence.",
+  "win_conditions": [
+    "Reanimate Parhelion II with Greasefang, Okiba Boss to deal 13 combat damage plus token attacks",
+    "Use Esika’s Chariot and Skysovereign, Consul Flagship for attrition and board control",
+    "Leverage Overlord of the Balemurk and Sheoldred, the Apocalypse for late-game card advantage and threat generation"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early lands, mill effects, or discard spells",
+      "Hands containing Greasefang, Okiba Boss with a way to mill a vehicle",
+      "Hands with Thoughtseize or Traverse the Ulvenwald for early disruption and mana"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking lands or early interaction",
+      "Hands with multiple Parhelion II copies without discard outlets",
+      "Hands focused solely on late-game threats without setup"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Thoughtseize",
+          "Traverse the Ulvenwald",
+          "Overlord of the Balemurk",
+          "Islet of Shadow",
+          "Steam Vents",
+          "Caves of Koilos",
+          "Raffine's Informant"
+        ],
+        "decision": "keep",
+        "reason": "Provides early disruption, mana fixing, and a mill engine to set up the combo."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Thoughtseize on turn one to extract information and remove key threats",
+      "Use Traverse the Ulvenwald for land drops or toolbox creatures like Boseiju, Who Endures",
+      "Deploy Raffine’s Informant or mill effects to begin filling the graveyard"
+    ],
+    "mid_game": [
+      "Cast Greasefang, Okiba Boss on turn three to reanimate milled vehicles",
+      "Force opponents to play around Greasefang to gain virtual extra turns",
+      "Use discard spells like Bitter Triumph or Liliana of the Veil to drain resources and mill vehicles"
+    ],
+    "late_game": [
+      "Transition to attrition with Esika’s Chariot, Overlord of the Balemurk, and Sheoldred, the Apocalypse",
+      "Use Glissa Sunslayer for card advantage and enchantment removal",
+      "Maintain constant threat flow and life gain to outlast opponents"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Greasefang, Okiba Boss",
+      "role": "Combo enabler",
+      "notes": "Reanimates vehicles from the graveyard; casting it early forces opponents to play around it, granting virtual extra turns."
+    },
+    {
+      "name": "Parhelion II",
+      "role": "Primary win condition",
+      "notes": "Milled into the graveyard to be reanimated; deals 13 combat damage and creates two 4/4 tokens."
+    },
+    {
+      "name": "Esika’s Chariot",
+      "role": "Attrition threat",
+      "notes": "Provides ten power across four permanents when reanimated; serves as a fair backup plan against combo-focused lists."
+    },
+    {
+      "name": "Overlord of the Balemurk",
+      "role": "Mill engine & late-game threat",
+      "notes": "Mills cards, can return Greasefang to hand, and provides two permanent types for Traverse the Ulvenwald."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Early disruption",
+      "notes": "Main first-turn play to extract information; can target yourself to discard Parhelion II for the combo."
+    },
+    {
+      "name": "Traverse the Ulvenwald",
+      "role": "Mana fixing & toolbox",
+      "notes": "Guarantees early land drops, searches for Greasefang, and accesses creatures like Boseiju, Who Endures or Knight of Autumn."
+    }
+  ],
+  "sequencing_tips": [
+    "Target yourself with Thoughtseize to discard Parhelion II, then cast Greasefang, Okiba Boss to immediately reanimate it.",
+    "Use Traverse the Ulvenwald early for lands, then later to fetch Boseiju, Who Endures to Channel into artifact/enchantment removal.",
+    "Force opponents to play around Greasefang early to gain virtual extra turns for proactive plays like Esika's Chariot."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Rakdos Demons",
+      "advice": "Sideboard in Reckoner Bankbuster and Liliana of the Veil for attrition and card advantage; use Vanishing Verse to handle large permanents.",
+      "watch_for": [
+        "Treasure Cruise",
+        "Artist's Talent",
+        "Large demon threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Dimir Bounce",
+      "advice": "Sideboard in Vanishing Verse and Knight of Autumn to deal with enchantments and artifacts; use Witherbloom Command to resolve low mana value permanents.",
+      "watch_for": [
+        "Monument to Endurance",
+        "Abhorrent Oculus",
+        "Bounce spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Atarka Gruul",
+      "advice": "Sideboard in Fatal Push, Temporary Lockdown, and Vanishing Verse to handle wide creature boards; use Knight of Autumn for extra life.",
+      "watch_for": [
+        "Aggro pressure",
+        "Wide creature spreads",
+        "Early game clock"
+      ]
+    },
+    {
+      "opponent_archetype": "Lotus Combo",
+      "advice": "Sideboard in Damping Sphere to delay their combo turns; use Vanishing Verse to remove key artifacts.",
+      "watch_for": [
+        "Lotus Petal",
+        "Quintorius Kand",
+        "Fast artifact assembly"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Rakdos Demons",
+    "Azorius Control",
+    "Dimir Bounce",
+    "Atarka Gruul",
+    "Lotus Combo",
+    "Nykthos Ramp",
+    "Aggro decks",
+    "Midrange decks"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-abzan-greasefang-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T03:44:53+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-abzan-greasefang-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T03:43:28+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "8da9e4e9ca99704f",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Abzan Greasefang connects self-mill themes with a combo around Greasefang, Okiba Boss, and Parhelion II, complementing it with Esika's Chariot for attrition games."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Ideally, a Parhelion II will be the first target, guaranteeing 13 damage in combat with two more 4/4 tokens on the board to end the game the following turn"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Seize chooses the target player and can be used on its controller to discard Parhelion II , and then cast Greasefang, Okiba Boss to reanimate it."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "forcing your opponent to play around Greasefang gives its controller virtual extra turns, which can be exploited with proactive plays"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "ideal for games against Rakdos Prowess, Atarka Gruul, Mono Red Aggro, Selesnya Company, Humans, among others."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "works well against Azorius Control and Midrange"
+    }
+  ]
+}

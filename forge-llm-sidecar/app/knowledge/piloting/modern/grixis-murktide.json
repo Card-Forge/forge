@@ -1,0 +1,164 @@
+{
+  "archetype": "Grixis Murktide",
+  "format": "modern",
+  "strategy_type": "tempo",
+  "overview": "Grixis Murktide is a Modern tempo deck that leverages graveyard recursion and +1/-1 counter synergies to generate card advantage and stabilize games. By combining disruption like Thoughtseize with draw engines such as Abhorrent Oculus and Agatha's Soul Cauldron, the deck aims to outvalue opponents while maintaining board presence. The strategy relies on efficient sequencing and graveyard depth to transition from early interaction to late-game inevitability.",
+  "win_conditions": [
+    "Combat damage from large, counter-boosted creatures",
+    "Graveyard recursion and card draw engines to outvalue opponents",
+    "Disruption followed by stabilized board state"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Thoughtseize and a one- or two-drop threat",
+      "Mana bases that enable early interaction",
+      "Draw engines like Abhorrent Oculus paired with cheap removal"
+    ],
+    "mulligan_criteria": [
+      "Mana-heavy hands with no interaction",
+      "Hands lacking graveyard synergy or card advantage",
+      "Slow, three-drop heavy hands without disruption"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Cast Thoughtseize to disrupt opponent's game plan",
+      "Play cheap threats or draw engines to establish board presence",
+      "Prioritize mana efficiency to enable turn-two interaction"
+    ],
+    "mid_game": [
+      "Activate Abhorrent Oculus and Murktide Regent abilities to draw cards and exile threats",
+      "Build graveyard depth to fuel Agatha's Soul Cauldron",
+      "Use removal and disruption to maintain tempo while developing board"
+    ],
+    "late_game": [
+      "Cast Agatha's Soul Cauldron as a primary win condition and card advantage engine",
+      "Leverage +1/-1 counters to create unblockable or high-toughness creatures",
+      "Outvalue opponents through continuous draw and graveyard recursion"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Agatha's Soul Cauldron",
+      "role": "Late-game win condition and card advantage engine",
+      "notes": "Cast when graveyard is deep to enter with multiple counters; sacrifice counters to draw cards and stabilize"
+    },
+    {
+      "name": "Abhorrent Oculus",
+      "role": "Mid-game draw engine and counter synergist",
+      "notes": "Activate to draw cards and remove counters; pairs well with other +1/-1 counter generators"
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Early-game disruption and tempo tool",
+      "notes": "Hold for key threats or combo pieces; use to delay opponent's game plan while developing your board"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Thoughtseize until you see a key threat or combo piece",
+    "Prioritize drawing cards with Oculus before casting Agatha to maximize counter generation",
+    "Use +1/-1 counter abilities strategically to exile threats or draw into answers"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Rakdos Midrange",
+      "advice": "Use Thoughtseize to target their key threats and removal; stabilize with Oculus and transition to Agatha",
+      "watch_for": [
+        "Lightning Strike",
+        "Abrupt Decay",
+        "Blood Moon"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Phoenix",
+      "advice": "Disrupt their early game with Thoughtseize; use graveyard recursion to outvalue their burn and removal",
+      "watch_for": [
+        "Lightning Bolt",
+        "Flametongue Kavu",
+        "Rest in Peace"
+      ]
+    },
+    {
+      "opponent_archetype": "Ad Nauseam",
+      "advice": "Target their draw spells and win conditions with Thoughtseize; play cheap threats to force interaction",
+      "watch_for": [
+        "Ad Nauseam",
+        "Pestilent Soulmonger",
+        "Duress"
+      ]
+    },
+    {
+      "opponent_archetype": "Field of the Dead",
+      "advice": "Disrupt their graveyard setup with Thoughtseize; use your own graveyard engines to race or outvalue",
+      "watch_for": [
+        "Field of the Dead",
+        "Rest in Peace",
+        "Tormod's Cryptbreaker"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Lightning Strike",
+    "Abrupt Decay",
+    "Rest in Peace",
+    "Field of the Dead",
+    "Duress"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T00:55:56+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T00:55:56+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "029a5b084dd56ac2",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

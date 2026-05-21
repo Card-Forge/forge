@@ -25,48 +25,73 @@ _DROP_TAGS = (
     "input",
 )
 
-_BLACKLIST_CLASS_SUBSTRINGS = (
-    "ad-",
+#: dropped if a class token equals this, starts with ``<entry>-``, or ends with ``-<entry>``
+_BLACKLIST_CLASS_TOKENS = frozenset({
+    "ad",
     "ads",
     "advert",
+    "advertisement",
     "sidebar",
     "breadcrumb",
+    "breadcrumbs",
     "related",
     "share",
+    "shares",
     "social",
-    "comment",
     "newsletter",
     "subscribe",
     "promo",
+    "promotion",
     "cookie",
+    "cookies",
     "popup",
     "modal",
-    "nav-",
     "menu",
+    "nav",
     "site-header",
     "site-footer",
     "author-box",
     "tag-list",
-)
+    "comments",
+    "comment-form",
+    "comment-list",
+})
 
-_BLACKLIST_ID_SUBSTRINGS = (
+#: dropped if the id starts with or equals one of these
+_BLACKLIST_ID_PREFIXES = (
     "comments",
     "sidebar",
     "newsletter",
-    "header",
     "footer",
-    "nav",
-    "ads",
+    "nav-",
+    "ad-",
+    "ads-",
 )
 
 
+def _class_matches_blacklist(token: str) -> bool:
+    if not token:
+        return False
+    if token in _BLACKLIST_CLASS_TOKENS:
+        return True
+    for bad in ("ad", "ads", "advert", "nav", "menu", "sidebar", "promo"):
+        if token.startswith(bad + "-") or token.endswith("-" + bad):
+            return True
+    return False
+
+
 def _node_should_drop(el) -> bool:
-    classes = " ".join(el.get("class", [])).lower() if hasattr(el, "get") else ""
-    if any(sub in classes for sub in _BLACKLIST_CLASS_SUBSTRINGS):
-        return True
-    el_id = (el.get("id") or "").lower() if hasattr(el, "get") else ""
-    if any(sub in el_id for sub in _BLACKLIST_ID_SUBSTRINGS):
-        return True
+    if not hasattr(el, "get"):
+        return False
+    classes = el.get("class") or []
+    for tok in classes:
+        if _class_matches_blacklist(tok.lower()):
+            return True
+    el_id = (el.get("id") or "").lower()
+    if el_id:
+        for prefix in _BLACKLIST_ID_PREFIXES:
+            if el_id == prefix.rstrip("-") or el_id.startswith(prefix):
+                return True
     return False
 
 

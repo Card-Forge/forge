@@ -1,0 +1,327 @@
+{
+  "archetype": "Walls Combo",
+  "format": "pauper",
+  "strategy_type": "combo",
+  "overview": "Walls Combo is a five-color Pauper deck that leverages defender creatures and mana-producing barriers like Axebane Guardian and Overgrown Battlement. By pairing these with Freed From the Real or Galvanic Alchemist, the deck generates infinite mana to tutor for and execute various win conditions. It relies on card advantage engines and mana acceleration to assemble its combo quickly before opponents can interact.",
+  "win_conditions": [
+    "Valakut Invoker",
+    "Secret Door",
+    "Generous Ent",
+    "Vivien's Grizzly"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "mana dorks",
+      "tutors",
+      "at least 1 land",
+      "Lead the Stampede",
+      "Winding Way",
+      "Shield-Wall Sentinel"
+    ],
+    "mulligan_criteria": [
+      "hands with many doubles that don't do anything",
+      "cards you can't cast straight away",
+      "too many lands",
+      "cards that cost different types of mana"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Saruli Caretaker",
+          "Quirion Ranger",
+          "Overgrown Battlement",
+          "Orochi Leafcaller",
+          "Freed From the Real",
+          "Valakut Invoker",
+          "Tranquil Landscape"
+        ],
+        "decision": "keep",
+        "reason": "Potentially wins on turn 3 by accelerating Overgrown, enchanting it with Freed, and tutoring for Valakut Invoker."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play mana dorks like Saruli Caretaker and Quirion Ranger to accelerate the curve.",
+      "Cast barriers with haste like Tuktuk Rubblefort and Crashing Drawbridge to enable early combo turns."
+    ],
+    "mid_game": [
+      "Assemble the infinite mana loop using Axebane Guardian or Overgrown Battlement paired with Freed From the Real or Galvanic Alchemist.",
+      "Use tutors like Drift of Phantasms and Shield-Wall Sentinel to find missing combo pieces or win conditions."
+    ],
+    "late_game": [
+      "Execute win conditions such as Valakut Invoker, Vivien's Grizzly, or Secret Door using infinite mana.",
+      "Utilize Reaping the Graves to recover discarded combo pieces and create a secondary transmute loop."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Axebane Guardian",
+      "role": "Mana producer",
+      "notes": "Creates massive amounts of mana when enchanted or paired with barriers."
+    },
+    {
+      "name": "Overgrown Battlement",
+      "role": "Mana producer",
+      "notes": "Core barrier that generates mana; requires Orochi Leafcaller for color fixing if used."
+    },
+    {
+      "name": "Freed From the Real",
+      "role": "Combo enabler",
+      "notes": "Enchantment that lets you untap the enchanted barrier to create more mana and repeat the loop."
+    },
+    {
+      "name": "Galvanic Alchemist",
+      "role": "Combo enabler",
+      "notes": "Alternative to Freed that pairs with barriers to untap them and generate infinite mana."
+    },
+    {
+      "name": "Drift of Phantasms",
+      "role": "Tutor",
+      "notes": "Transmutes to find key combo pieces or win conditions; hard to interact with due to flying."
+    },
+    {
+      "name": "Valakut Invoker",
+      "role": "Win condition",
+      "notes": "Primary finisher found via tutors after generating infinite mana."
+    },
+    {
+      "name": "Vivien's Grizzly",
+      "role": "Win condition",
+      "notes": "One-of finisher that draws your entire deck using infinite mana."
+    },
+    {
+      "name": "Lead the Stampede",
+      "role": "Card advantage",
+      "notes": "Main source of card advantage that searches for creatures to put into your hand."
+    },
+    {
+      "name": "Winding Way",
+      "role": "Card advantage",
+      "notes": "Main source of card advantage that searches for lands to put into your hand."
+    },
+    {
+      "name": "Shield-Wall Sentinel",
+      "role": "Tutor/Consistency",
+      "notes": "Adds consistency, upgrades barrier abilities, and acts as a tutor."
+    },
+    {
+      "name": "Saruli Caretaker",
+      "role": "Mana acceleration",
+      "notes": "Fixes mana and accelerates the curve with other creatures."
+    },
+    {
+      "name": "Quirion Ranger",
+      "role": "Mana acceleration",
+      "notes": "Works with Saruli to accelerate curve; also sideboarded to kill land destruction."
+    },
+    {
+      "name": "Tuktuk Rubblefort",
+      "role": "Haste enabler",
+      "notes": "Gives haste to creatures to get the combo going early; has defender."
+    },
+    {
+      "name": "Crashing Drawbridge",
+      "role": "Haste enabler",
+      "notes": "Gives haste to creatures; has defender."
+    },
+    {
+      "name": "Tranquil Landscape",
+      "role": "Mana base",
+      "notes": "New land that adds consistency to the mana base and helps with splashes."
+    },
+    {
+      "name": "Reaping the Graves",
+      "role": "Recovery/Loop",
+      "notes": "Gets back removed pieces, tutors via Drift, and enables a mini transmute loop."
+    },
+    {
+      "name": "Orochi Leafcaller",
+      "role": "Mana fixing",
+      "notes": "Turns green mana into other colors to enable Overgrown Battlement combo."
+    }
+  ],
+  "sequencing_tips": [
+    "Play Saruli Caretaker on turn 1 to generate initial mana.",
+    "Play Quirion Ranger on turn 2 to accelerate Overgrown Battlement and Orochi Leafcaller.",
+    "Enchant Overgrown Battlement with Freed From the Real on turn 3 to trigger infinite mana.",
+    "Tutor for and cast Valakut Invoker immediately after generating infinite mana.",
+    "Play cards in the exact order required to guarantee the combo on turn 3 if possible."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Land Destruction",
+      "advice": "Quirion Ranger effectively neutralizes land destruction; focus on developing your game plan without worrying about land drops.",
+      "watch_for": [
+        "Ponza",
+        "Gruul land destruction"
+      ]
+    },
+    {
+      "opponent_archetype": "Grixis Affinity",
+      "advice": "Extremely unfavorable; sideboard helps but Krark-Clan Shaman and Galvanic Blast severely disrupt plans.",
+      "watch_for": [
+        "Krark-Clan Shaman",
+        "Galvanic Blast"
+      ]
+    },
+    {
+      "opponent_archetype": "Orzhov Blade",
+      "advice": "Slight advantage; exploit their slower start to combo quickly or bait removal with Reaping the Graves to create an opening.",
+      "watch_for": [
+        "Kor Skyfisher",
+        "Glint Hawk",
+        "Tithing Blade",
+        "Refurbished Familiar"
+      ]
+    },
+    {
+      "opponent_archetype": "Kuldotha Red",
+      "advice": "Survive long enough by protecting cards and using Quirion Ranger with Gingerbread Cabin for life gain; aggro deck needs to close game quickly.",
+      "watch_for": [
+        "Lightning Bolt",
+        "Chain Lightning"
+      ]
+    },
+    {
+      "opponent_archetype": "Walls Cascade/Combo",
+      "advice": "Race to inevitability; manage life against Cascade, play combo sequence carefully against Combo; side in Standard Bearer to disrupt Quirions.",
+      "watch_for": [
+        "Cascade creatures",
+        "Avenging Hunter",
+        "Standard Bearer"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Krark-Clan Shaman",
+    "Galvanic Blast",
+    "Lightning Bolt",
+    "Chain Lightning",
+    "Refurbished Familiar",
+    "Standard Bearer",
+    "Removal spells"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm + Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-5c-walls-combo-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T10:04:17+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-spy-walls-combo-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:59:31+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-nyxborn-walls-combo-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:01:10+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-5c-walls-combo-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:02:46+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "931b2ceabf4f9f99",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "This deck centers around defender creatures, and abuses Axebane Guardian 's and Overgrown Battlement 's abilities to create massive amounts of mana as fast as possible."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "your win condition, which is usually Valakut Invoker"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "venture into dungeons infinite times with Secret Door"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "put all your Generous Ent in play and move on to combat"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Vivien's Grizzly is another excellent one-of in this deck that wins you the game"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Start on turn 1 with Saruli 's mana, then, on turn 2, put Quirion in play accelerating Overgrown and Orochi , and on turn 3 enchant Overgrown with Freed From the Real . That's how you get infinite mana to get your Valakut from your deck and win the game."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Krark-Clan Shaman simply destroys any of your hopes of following any of your plans, and Galvanic Blast kills any of your barriers."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Facing Lightning Bolt s and Chain Lightning s is quite sad"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The recent addition of Refurbished Familiar gave this deck another powerful interaction through its bounce."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Standard Bearer is the most relevant card you can side in for these matchups as it disrupts Quirions and stops the combo."
+    }
+  ]
+}

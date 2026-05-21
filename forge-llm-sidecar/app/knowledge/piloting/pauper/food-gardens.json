@@ -1,0 +1,157 @@
+{
+  "archetype": "Food Gardens",
+  "format": "pauper",
+  "strategy_type": "aggro",
+  "overview": "Food Gardens is a black-green aggro deck built for the Pauper format that leverages highly efficient one-mana spells to disrupt opponents while applying immediate pressure. By cycling cheap creatures and utilizing targeted board interaction, the deck aims to close out games before opponents can establish a stable board state. The synergy between instant-speed buffs and sacrifice-based removal creates a dynamic, hard-to-answer game plan.",
+  "win_conditions": [
+    "Overwhelming the opponent with a swarm of cheap creatures boosted by instant-speed buffs",
+    "Using sacrifice-based removal to bypass blockers and swing for lethal",
+    "Generating card advantage through targeted interaction to outlast aggressive matchups"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing at least two one-mana spells",
+      "Early land drops paired with a creature or interaction",
+      "Combinations that enable turn-one or turn-two pressure"
+    ],
+    "mulligan_criteria": [
+      "Hands with three or more lands",
+      "Lack of one-mana spells or early creatures",
+      "Hands reliant solely on high-cost cards"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize land drops and play cheap creatures to establish immediate board presence",
+      "Use one-mana interaction to disrupt opponent's early threats or clear paths for attackers",
+      "Hold up mana when necessary to respond to opponent's plays"
+    ],
+    "mid_game": [
+      "Leverage sacrifice outlets to remove problematic blockers or finish off damaged creatures",
+      "Apply consistent pressure with buffed attackers while maintaining card advantage",
+      "Adapt playstyle based on opponent's board state, swinging hard when clear or trading efficiently"
+    ],
+    "late_game": [
+      "Rely on card draw from interaction spells to maintain resources",
+      "Use remaining mana to push for lethal with optimized creature stats",
+      "Avoid overextending into board wipes by keeping a hand of interaction"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Fanatical Offering",
+      "role": "Sacrifice-based removal",
+      "notes": "Use to eliminate blockers or finish off damaged creatures, ensuring your attackers can swing freely"
+    },
+    {
+      "name": "Lembas",
+      "role": "Instant-speed creature buff",
+      "notes": "Cast before attacking to maximize damage output and push lethal faster"
+    },
+    {
+      "name": "Eviscerator's Insight",
+      "role": "Targeted removal with card draw",
+      "notes": "Hold up mana to respond to threats, then draw a card to maintain resource parity"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up black mana to keep Eviscerator's Insight available for instant-speed responses",
+    "Time Fanatical Offering to coincide with a sacrificial creature or when you need to clear a specific blocker",
+    "Play Lembas immediately before declaring attackers to maximize combat damage",
+    "Prioritize land drops early to ensure consistent access to one-mana spells"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use instant-speed interaction to disrupt their early board state and buy time for your own threats to develop",
+      "watch_for": [
+        "Fast finishers",
+        "Board wipes",
+        "Early pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply relentless pressure to prevent them from stabilizing, using card advantage to outlast their removal",
+      "watch_for": [
+        "Counterspells",
+        "Late-game threats",
+        "Resource denial"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Trade efficiently with sacrifice-based removal and maintain board presence with buffed creatures",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw engines",
+        "Resilient creatures"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipe spells",
+    "Targeted creature removal",
+    "Counterspells",
+    "Land destruction"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T09:36:29+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:36:29+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "2d5c6a9511cb0d5d",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

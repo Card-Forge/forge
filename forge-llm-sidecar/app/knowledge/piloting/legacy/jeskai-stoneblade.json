@@ -1,0 +1,135 @@
+{
+  "archetype": "Jeskai Stoneblade",
+  "format": "legacy",
+  "strategy_type": "tempo",
+  "overview": "Jeskai Stoneblade is a tempo-control archetype that leverages card advantage to stabilize against early pressure and outvalue opponents over time. By cycling through the deck with draw spells, it reliably finds Stoneforge Mystic to fetch a signature weapon that dictates combat and board trades. The deck aims to control the pace of the game, using efficient removal and board wipes to clear paths for lethal damage.",
+  "win_conditions": [
+    "Lethal combat damage with a signature weapon",
+    "Drawing out the opponent through superior card advantage",
+    "Clearing the board with a sweeper and finishing with a weapon"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more lands and early interaction",
+      "Hands containing Ponder or Brainstorm to dig for answers",
+      "Hands with Stoneforge Mystic and a way to play it on curve"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking removal or board interaction",
+      "Hands with four or more lands",
+      "Hands with no draw spells and slow mana development"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands and casting draw spells to find answers",
+      "Hold removal for opponent's early threats rather than playing it preemptively",
+      "Play Stoneforge Mystic as soon as mana allows to begin fetching a weapon"
+    ],
+    "mid_game": [
+      "Fetch the signature weapon and use it to trade efficiently with opponent's creatures",
+      "Maintain board control by answering threats before they become unmanageable",
+      "Use draw spells to find sweepers or additional removal as the board state grows"
+    ],
+    "late_game": [
+      "Race the opponent by attacking with the weapon while holding up mana for interaction",
+      "Deploy board wipes to reset the game state and gain tempo advantage",
+      "Close out the game by leveraging card advantage to find finishers or lethal sequences"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Stoneforge Mystic",
+      "role": "Primary engine for fetching a signature weapon",
+      "notes": "Play on curve to accelerate weapon acquisition; hold up mana if needed to cast it later when the board is clearer."
+    },
+    {
+      "name": "Ponder",
+      "role": "Card selection and draw engine",
+      "notes": "Use to find removal, sweepers, or Stoneforge Mystic; always put back a land or relevant answer to maintain consistency."
+    },
+    {
+      "name": "Brainstorm",
+      "role": "Rapid card advantage and deck thinning",
+      "notes": "Cast early to dig for key cards; be mindful of opponent's interaction and hold up mana for answers when facing aggressive decks."
+    }
+  ],
+  "sequencing_tips": [
+    "Always hold up mana for interaction when facing unknown or aggressive strategies",
+    "Use Ponder before Brainstorm to ensure you are drawing into relevant answers",
+    "Delay fetching the weapon if the board is heavily populated with threats you cannot remove",
+    "Play draw spells before removal to ensure you have answers for the opponent's next turn"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early removal and hold draw spells for answers; play Stoneforge Mystic on curve to fetch a weapon that can trade efficiently.",
+      "watch_for": [
+        "Fast one-drop threats",
+        "Early board wipes or sweepers",
+        "Pressure that forces you to play draw spells without mana up"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their casting sequence with early interaction; use draw spells to find specific answers and hold up mana for counterspells or removal.",
+      "watch_for": [
+        "Unexpected win conditions",
+        "Card draw that signals a combo attempt",
+        "Mana left open for instant-speed plays"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race by attacking with the weapon while holding interaction; use sweepers to clear their board and gain tempo advantage.",
+      "watch_for": [
+        "Board wipes that reset your progress",
+        "Counterspells targeting your draw spells or Mystic",
+        "Late-game value engines that outdraw you"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures that pressure life total early",
+    "Unexpected combo pieces that win on the spot",
+    "Board wipes that clear your signature weapon and creatures"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:49:28+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:49:28+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "495466e7db3fe48b",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

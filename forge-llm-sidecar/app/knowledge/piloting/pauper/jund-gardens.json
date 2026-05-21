@@ -1,0 +1,168 @@
+{
+  "archetype": "Jund Gardens",
+  "format": "pauper",
+  "strategy_type": "midrange",
+  "overview": "Jund Gardens is a Pauper midrange deck that leverages land sacrifice and life gain to outlast opponents while applying steady pressure. By converting lands into card advantage and board wipes, it disrupts traditional mana bases and controls the pace of the game. The strategy relies on efficient removal, resilient creatures, and timely land destruction to close out matches.",
+  "win_conditions": [
+    "Trading lands for life and card advantage to outvalue opponents",
+    "Using Defile to disrupt enemy mana while maintaining board presence",
+    "Sacrificing creatures with Fanatical Offering to stabilize and close out games"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early land drops and a removal spell",
+      "Combinations featuring Fanatical Offering and a creature to sacrifice",
+      "Defile paired with a way to play it on curve"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early land interaction or card draw",
+      "Overloaded hands with multiple Defiles and no creatures",
+      "Hands missing a clear path to turn two or three"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap creatures to establish board presence",
+      "Use Fanatical Offering on turn two or three to gain life and remove threats",
+      "Hold Defile for when opponent commits to a large land drop"
+    ],
+    "mid_game": [
+      "Cycle lands into card advantage using Lembas and other sac outlets",
+      "Trade efficiently to keep the board clear while gaining life",
+      "Apply pressure with resilient creatures while waiting for opponent to run out of resources"
+    ],
+    "late_game": [
+      "Use Defile to strip opponent's mana base if they are ahead",
+      "Sacrifice remaining lands and creatures to stabilize and close out",
+      "Rely on life total and card advantage to outlast aggressive strategies"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Fanatical Offering",
+      "role": "Sacrifice outlet and life gain",
+      "notes": "Use on opponent's threats or your own creatures to stabilize and gain tempo. Prioritize sacrificing high-power creatures for maximum life gain."
+    },
+    {
+      "name": "Lembas",
+      "role": "Card draw engine",
+      "notes": "Sacrifice to draw a card when you need answers or to cycle into better resources. Keep it on the board to pressure opponents while waiting for removal."
+    },
+    {
+      "name": "Defile",
+      "role": "Board wipe and land destruction",
+      "notes": "Cast when opponent has multiple lands untapped or after they play a key spell. Use it to disrupt mana while your board remains intact due to life gain and sac outlets."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Defile until after opponent's main phase to maximize land disruption",
+    "Sacrifice creatures with Fanatical Offering before casting Defile to preserve life total",
+    "Use Lembas for card draw when you have a full board or need specific answers"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early Fanatical Offering to gain life and remove threats. Hold Defile for when they go wide.",
+      "watch_for": [
+        "Fast one-drops",
+        "Swarm tactics",
+        "Early board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply steady pressure and use Defile to disrupt their late-game mana. Sacrifice lands to draw cards and outvalue them.",
+      "watch_for": [
+        "Counterspell",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them by leveraging life gain and land sacrifice. Use Defile to break their mana curve.",
+      "watch_for": [
+        "Efficient removal",
+        "Resilient creatures",
+        "Card advantage spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Card draw engines"
+  ],
+  "metadata": {
+    "source": "Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T10:21:39+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-jund-gardens-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:18:33+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:21:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "05ca561ef430f0d1",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "No editorial primer available; derived from archetype name, B/R/G colors, and signature cards implying land-sacrifice midrange."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "No editorial primer available; derived from signature cards and Pauper midrange principles."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "No editorial primer available; derived from card interactions and Pauper tempo principles."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "No editorial primer available; derived from Pauper format meta and deck vulnerabilities."
+    }
+  ]
+}

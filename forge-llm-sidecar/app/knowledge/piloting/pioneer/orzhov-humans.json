@@ -1,0 +1,191 @@
+{
+  "archetype": "Orzhov Humans",
+  "format": "pioneer",
+  "strategy_type": "aggro",
+  "overview": "Orzhov Humans is a focused beatdown archetype that wins by populating the board with a large number of synergistic creatures. It relies on a stable manabase, a core of lords for collective buffs, and early aggressive threats to apply immediate pressure. The strategy emphasizes speed and straightforward execution over flexibility, making it highly effective in local events.",
+  "win_conditions": [
+    "Populating the board with a wide array of creatures",
+    "Winning through creature count and synergy",
+    "Attacking directly to remove Planeswalkers",
+    "Executing sudden lethal damage with protected creatures"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with multiple one-drops",
+      "Hands containing lords or early interaction",
+      "Hands with a mix of creatures and removal"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early threats or lords",
+      "Hands heavy on late-game cards or sideboard-only spells",
+      "Hands with only lands or high-cost creatures"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Bloodsoaked Champion",
+          "Thalia's Lieutenant",
+          "Dire Tactics",
+          "Mutavault",
+          "Unclaimed Territory",
+          "Secluded Courtyard",
+          "Kitesail Freebooter"
+        ],
+        "decision": "keep",
+        "reason": "Provides early aggression, a lord for buffs, and board interaction to protect the plan."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play one-drops like Bloodsoaked Champion and Dauntless Bodyguard to establish early pressure",
+      "Cast lords like Thalia's Lieutenant and Rally the Ranks to buff the army",
+      "Use Kitesail Freebooter to gain information and force removal"
+    ],
+    "mid_game": [
+      "Maintain board presence with recurring threats via Extraction Specialist",
+      "Play around sweepers using Mutavault and Selfless Spirit",
+      "Apply continuous pressure to force opponent answers"
+    ],
+    "late_game": [
+      "Utilize Brave the Elements to protect creatures and enable sudden lethal",
+      "Deploy powerful lords like General Kudro of Drannith or Adeline, Resplendent Cathar to steamroll",
+      "Sideboard in graveyard hate and unconditional removal for control matchups"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Thalia, Guardian of Thraben",
+      "role": "Taxing lord",
+      "notes": "Staple for creature decks; significantly delays opponent spells and buffs Humans."
+    },
+    {
+      "name": "Luminarch Aspirant",
+      "role": "Aggressive lord",
+      "notes": "Forces an immediate answer to avoid steamrolling the game on its own."
+    },
+    {
+      "name": "Extraction Specialist",
+      "role": "Recursion",
+      "notes": "Returns relevant non-attacking lords like Thalia's Lieutenant or Thalia to the battlefield."
+    },
+    {
+      "name": "Dire Tactics",
+      "role": "Board interaction",
+      "notes": "Preferred removal over Bloodchief's Thirst; interacts well with the go-wide proposal."
+    },
+    {
+      "name": "Brave the Elements",
+      "role": "Protection/Finisher",
+      "notes": "Protects creatures from red sweepers and enables sudden lethal by giving protection from opponent's blocker colors."
+    },
+    {
+      "name": "General Kudro of Drannith",
+      "role": "Lord/Graveyard hate",
+      "notes": "Doubles as a recurring graveyard hate and a powerful lord, far more important than conditional removal."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize returning non-attacking lords like Thalia's Lieutenant or Thalia with Extraction Specialist",
+    "Manipulate the day and night cycle to optimize Brutal Cathar's protection",
+    "Use Brave the Elements to protect creatures from sweepers and enable sudden lethal",
+    "Play Mutavault to help play around sweepers while caring for creature types"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Sideboard in Duress to remove sweepers, Selfless Spirit for protection, and graveyard hate like Graveyard Trespasser.",
+      "watch_for": [
+        "Supreme Verdict",
+        "Board wipes",
+        "Card advantage engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Red / Burn",
+      "advice": "Use Extraction Specialist's lifelink to survive, and play around early damage with resilient creatures.",
+      "watch_for": [
+        "Early burn spells",
+        "Anger of the Gods",
+        "Direct damage"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Phoenix",
+      "advice": "Sideboard in Containment Priest or Graveyard Trespasser to punish graveyard reliance.",
+      "watch_for": [
+        "Graveyard recursion",
+        "Indomitable Creativity",
+        "Token generation"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Supreme Verdict",
+    "Anger of the Gods",
+    "Board sweepers",
+    "Planeswalkers",
+    "Graveyard hate",
+    "Conditional removal like Giant Killer"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-upgrading-the-challenger-deck-orzhov-humans",
+    "generated_at": "2026-05-21T05:15:59+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-upgrading-the-challenger-deck-orzhov-humans",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:14:29+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "e0bb6a2c9d9bbf40",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Betting on populating the board with creatures and winning the game through the amount and synergy between its cards... this is a beatdown archetype"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "winning the game through the amount and synergy between its cards... making it easy to remove Planeswalkers from by attacking them"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Your priority targets are those that don't need to attack to be useful... how easily this archetype can manipulate the day and night cycle"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "protect creatures from sweepers like Supreme Verdict... red sweepers like Anger of the Gods... deals with Planeswalkers"
+    }
+  ]
+}

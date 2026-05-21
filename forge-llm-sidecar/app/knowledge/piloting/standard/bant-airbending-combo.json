@@ -1,0 +1,156 @@
+{
+  "archetype": "Bant Airbending Combo",
+  "format": "standard",
+  "strategy_type": "combo",
+  "overview": "This Bant deck leverages flying creatures and evasion to assemble a synergistic board state centered around Aang, Swift Savior and Appa, Steadfast Guardian. By cycling through Bramble Familiar and other low-cost spells, you generate card advantage while protecting your combo pieces. The goal is to quickly establish an unblockable aerial threat that overwhelms opponents before they can stabilize in Standard.",
+  "win_conditions": [
+    "Assemble Aang, Swift Savior and Appa, Steadfast Guardian to create an unblockable flying threat.",
+    "Use Bramble Familiar to generate card advantage and protect key combo pieces.",
+    "Overwhelm the opponent with rapid aerial pressure before they can deploy board wipes."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more low-cost creatures.",
+      "Hands containing Aang, Swift Savior or Appa, Steadfast Guardian.",
+      "Hands with Bramble Familiar and a cheap spell to cycle."
+    ],
+    "mulligan_criteria": [
+      "Hands with only high-cost cards.",
+      "Hands lacking creature synergies or cycling outlets.",
+      "Hands with no way to protect or deploy the combo pieces early."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap creatures to establish board presence.",
+      "Cycle through Bramble Familiar to find combo pieces.",
+      "Protect Aang, Swift Savior and Appa, Steadfast Guardian from early removal."
+    ],
+    "mid_game": [
+      "Assemble the core combo by getting both signature creatures onto the battlefield.",
+      "Use flying evasion to apply pressure while searching for answers.",
+      "Maintain card advantage through cycling and draw effects."
+    ],
+    "late_game": [
+      "Close out the game with an unblockable aerial assault.",
+      "Stabilize against board wipes by keeping backup creatures in hand.",
+      "Leverage card advantage to out-resource opponents in extended games."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Appa, Steadfast Guardian",
+      "role": "Core combo piece that provides evasion and board presence.",
+      "notes": "Prioritize keeping this protected until Aang, Swift Savior enters the battlefield to maximize synergy."
+    },
+    {
+      "name": "Aang, Swift Savior",
+      "role": "Primary win condition that enables unblockable flying threats.",
+      "notes": "Deploy early to trigger synergies with Appa, Steadfast Guardian and apply immediate pressure."
+    },
+    {
+      "name": "Bramble Familiar",
+      "role": "Card advantage engine and combo protector.",
+      "notes": "Use its cycling ability to dig for key pieces while maintaining a body to block or trade."
+    }
+  ],
+  "sequencing_tips": [
+    "Always prioritize casting Aang, Swift Savior before Appa, Steadfast Guardian to maximize early synergy.",
+    "Cycle Bramble Familiar only when you have enough lands to play the next turn's combo piece.",
+    "Hold up removal or counterspells to protect your flying threats from opponent's early interaction."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize playing Bramble Familiar early to stabilize and cycle for removal. Keep flying blockers in hand to trade efficiently.",
+      "watch_for": [
+        "Early sweepers",
+        "Direct damage spells",
+        "Fast flying threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells by cycling cheap cards to bait removal. Assemble the combo quickly before they can lock down the board.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspell packages",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Apply consistent aerial pressure to force unfavorable trades. Use Bramble Familiar to out-draw them while protecting your combo pieces.",
+      "watch_for": [
+        "Removal spells",
+        "Value creatures",
+        "Late-game finishers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipe spells",
+    "Direct removal targeting flying creatures",
+    "Counterspells targeting your combo pieces",
+    "Fast aggressive creatures"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:20:12+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:20:12+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "40dec87c43db792d",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype name and signature cards imply a flying-focused combo strategy in Standard."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Derived from signature cards and combo archetype naming."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard combo piloting principles applied to the provided signature cards."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard format meta expectations applied to a flying combo archetype."
+    }
+  ]
+}

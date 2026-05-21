@@ -1,0 +1,218 @@
+{
+  "archetype": "Mono-Green Basking Broodscale Combo",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "This mono-green Modern deck leverages +1/+1 counter synergies and life-loss acceleration to rapidly assemble a massive, equipped threat. By combining Basking Broodscale's combat damage triggers with Kozilek's Command and Blade of the Bloodchief, it aims to overwhelm opponents before they can stabilize. Devourer of Destiny provides board control while further fueling the counter engine.",
+  "win_conditions": [
+    "Attacking with a Blade of the Bloodchief-equipped creature pumped by Kozilek's Command and Basking Broodscale triggers",
+    "Exiling key blockers with Devourer of Destiny to clear the path for lethal combat damage",
+    "Using Kozilek's Command to draw into finishers while simultaneously growing the board presence"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two lands and a one-drop or two-drop creature",
+      "Hands containing Kozilek's Command paired with early mana sources",
+      "Hands that include Blade of the Bloodchief and a creature to equip it to"
+    ],
+    "mulligan_criteria": [
+      "Hands with three or more lands and no early plays",
+      "Hands lacking any creatures or counter-generating effects",
+      "Hands with only high-cost finishers and no ramp"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize land drops and play Basking Broodscale to establish early counter generation",
+      "Use Kozilek's Command for small X values to draw cards and add initial counters",
+      "Avoid overcommitting to life loss if opponent has early removal or burn"
+    ],
+    "mid_game": [
+      "Equip Blade of the Bloodchief to your largest creature before combat",
+      "Cast Devourer of Destiny to exile opponent's threats and transfer their counters to your board",
+      "Cycle through Kozilek's Command to maintain card advantage while steadily growing your threat"
+    ],
+    "late_game": [
+      "Focus on maximizing combat damage triggers to snowball counters",
+      "Use Kozilek's Command for larger X values to refill hand and pump for lethal",
+      "Maintain pressure to prevent opponent from setting up permanent answers or sweepers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Basking Broodscale",
+      "role": "Early-game counter engine",
+      "notes": "Attack with this creature whenever possible to generate +1/+1 counters that can be distributed to larger threats"
+    },
+    {
+      "name": "Kozilek's Command",
+      "role": "Acceleration and card draw",
+      "notes": "Balance life loss with board state; use the counter mode to pump equipped creatures and the draw mode to find answers"
+    },
+    {
+      "name": "Blade of the Bloodchief",
+      "role": "Massive power/toughness multiplier",
+      "notes": "Equip to your biggest creature before combat damage resolves to maximize the +X/+X bonus based on life lost that turn"
+    },
+    {
+      "name": "Devourer of Destiny",
+      "role": "Board control and counter transfer",
+      "notes": "Target opponent's countered creatures to steal their growth, or use on blockers to clear the way while gaining trample"
+    }
+  ],
+  "sequencing_tips": [
+    "Always equip Blade of the Bloodchief before declaring attackers to ensure the life-loss bonus applies to combat damage",
+    "Cast Kozilek's Command on your turn before combat to maximize the +X/+X bonus from the Blade",
+    "Use Devourer of Destiny in response to opponent's ETB triggers or during their combat phase to disrupt their game plan",
+    "Save life total for Kozilek's Command when you need to draw into sweepers or additional finishers"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Rakdos Control",
+      "advice": "Manage life total carefully to avoid giving them free card advantage with Thoughtseize or Inquisition of Kozilek",
+      "watch_for": [
+        "Thoughtseize",
+        "Inquisition of Kozilek",
+        "Lightning Bolt",
+        "Rest in Peace"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Spell Sniper",
+      "advice": "Protect your key artifacts and creatures with counters, as they will target them with Lightning Bolts and Spell Snipers",
+      "watch_for": [
+        "Lightning Bolt",
+        "Spell Sniper",
+        "Teferi, Hero of Dominaria",
+        "Counterspell"
+      ]
+    },
+    {
+      "opponent_archetype": "Amulet Titan",
+      "advice": "Disrupt their early game by attacking with Basking Broodscale to prevent them from setting up their combo",
+      "watch_for": [
+        "Amulet of Vigor",
+        "Kodama of the East Tree",
+        "Smuggler's Copter",
+        "Thassa's Oracle"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Lightning Bolt",
+    "Thoughtseize",
+    "Teferi, Hero of Dominaria",
+    "Rest in Peace",
+    "Field of the Dead"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T00:47:01+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T00:47:01+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "ce127b9a62e7b81b",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

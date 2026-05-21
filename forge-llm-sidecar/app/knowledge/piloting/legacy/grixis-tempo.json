@@ -1,0 +1,155 @@
+{
+  "archetype": "Grixis Tempo",
+  "format": "legacy",
+  "strategy_type": "tempo",
+  "overview": "Grixis Tempo in Legacy leverages efficient early pressure and superior card selection to outmaneuver opponents. By combining cheap threats with proactive draw and protection, the deck maintains board presence while disrupting enemy plans. The goal is to dictate the pace of the game and close it before opponents can stabilize.",
+  "win_conditions": [
+    "Attacking with a countered Delver of Secrets",
+    "Wearing down opponents through efficient removal and card advantage",
+    "Closing out games with Flow State-empowered threats"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands featuring Ponder alongside a one-drop or early interaction",
+      "Playable curves that include Flow State or Delver of Secrets",
+      "Balanced mana bases with at least two lands and a threat"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early plays or interactive spells",
+      "Multiple high-cost cards without sufficient mana sources",
+      "Unplayable land counts or color screw risks"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Cast Ponder to optimize your opening hand and find lands or answers",
+      "Play Delver of Secrets and counter it to establish a 4/2 flying threat",
+      "Use cheap interaction to clear opposing board states and maintain tempo"
+    ],
+    "mid_game": [
+      "Deploy Flow State to protect key threats and draw into additional resources",
+      "Trade efficiently to keep pressure on while digging for finishers",
+      "Maintain board presence by replaying countered creatures or leveraging card advantage"
+    ],
+    "late_game": [
+      "Leverage accumulated card advantage to outlast opponent's resources",
+      "Use remaining interaction to shut down comeback attempts",
+      "Close the game with a resilient board state that opponents cannot easily clear"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Delver of Secrets",
+      "role": "Primary early-game threat",
+      "notes": "Counter it on turn two to create a 4/2 flying creature that pressures opponents immediately and forces unfavorable trades."
+    },
+    {
+      "name": "Flow State",
+      "role": "Protection and card advantage",
+      "notes": "Use to untap and draw cards when you need to replay threats or survive a combat, ensuring you maintain board control and tempo."
+    },
+    {
+      "name": "Ponder",
+      "role": "Mana fixing and draw engine",
+      "notes": "Play on your own turn to find lands, removal, or threats, and always consider mulligging to improve your next turn's options."
+    }
+  ],
+  "sequencing_tips": [
+    "Always Ponder before committing to a play to ensure you have the right answer or threat",
+    "Counter Delver only when you are confident you can follow up with pressure or interaction",
+    "Use Flow State reactively to protect against sweepers or combat tricks while maintaining initiative"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and keep Delver on the board to force trades and stall their clock.",
+      "watch_for": [
+        "Early board wipes",
+        "Unexpected removal",
+        "Fast finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure and use Flow State to bypass counterspells and recover from board wipes.",
+      "watch_for": [
+        "Board wipes",
+        "Hand disruption",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup with early interaction and maintain a threatening board state to force them to respond.",
+      "watch_for": [
+        "Mana acceleration",
+        "Key combo pieces",
+        "Unexpected wins"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast one-drop creatures",
+    "Board wipe spells",
+    "Hand disruption"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:39:12+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:39:12+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "a920bc0fe1f6078c",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

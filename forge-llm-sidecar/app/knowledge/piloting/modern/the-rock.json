@@ -1,0 +1,155 @@
+{
+  "archetype": "The Rock",
+  "format": "modern",
+  "strategy_type": "aggro",
+  "overview": "This Black/Green Modern deck leverages fast, evasive creatures and graveyard recursion to apply immediate pressure. Street Wraith provides early board presence and life total manipulation, while Archon of Cruelty serves as a hard removal spell that doubles as a formidable attacker. Stitcher's Supplier ensures your best threats return from the graveyard, creating a relentless cycle of value that overwhelms opponents before they can stabilize.",
+  "win_conditions": [
+    "Direct combat damage from Archon of Cruelty and recurring creatures",
+    "Life drain and life gain triggers from Street Wraith deaths",
+    "Graveyard recursion loops via Stitcher's Supplier to outpace opponent's resources"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two one- or two-mana creatures",
+      "Hands containing Street Wraith or Archon of Cruelty",
+      "Hands with early land drops to support the curve"
+    ],
+    "mulligan_criteria": [
+      "Hands with only three-mana or higher cards",
+      "Hands lacking creature threats",
+      "Hands with zero lands or four+ lands"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Street Wraith on turn one to establish flying pressure and begin life manipulation",
+      "Prioritize land drops to ensure Archon of Cruelty can be cast by turn two",
+      "Use early creatures to force opponent's removal spells"
+    ],
+    "mid_game": [
+      "Cast Archon of Cruelty to remove key threats while establishing a 4/4 body",
+      "Trigger Stitcher's Supplier to replay Street Wraith or Archon of Cruelty from the graveyard",
+      "Maintain board presence to force opponent into unfavorable trades"
+    ],
+    "late_game": [
+      "Cycle Archon of Cruelty repeatedly to generate value and combat damage",
+      "Leverage Stitcher's Supplier to continuously refill the board with recurring threats",
+      "Grind down opponent's life total through attrition and life drain triggers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Archon of Cruelty",
+      "role": "Removal and primary attacker",
+      "notes": "Cast to exile opponent's key threats, then use the 4/4 body to close out games. Be mindful of the self-damage trigger when it leaves the battlefield."
+    },
+    {
+      "name": "Stitcher's Supplier",
+      "role": "Graveyard recursion engine",
+      "notes": "Sacrifice or let it die to return Street Wraith or Archon of Cruelty to the battlefield, creating infinite value loops and board presence."
+    },
+    {
+      "name": "Street Wraith",
+      "role": "Early pressure and life manipulation",
+      "notes": "Play on turn one to apply flying pressure. Its death trigger drains opponent life while stabilizing your own, making it ideal for baiting removal."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Archon of Cruelty until you can cast it for maximum impact, such as removing a game-winning threat",
+    "Sacrifice Stitcher's Supplier immediately after it resolves or when it dies naturally to avoid wasting its trigger",
+    "Play Street Wraith before casting Archon of Cruelty to maximize early pressure and life swing",
+    "Manage your life total carefully, as Archon of Cruelty's departure deals damage to you"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play aggressively early to force removal spells before they stabilize. Use Archon of Cruelty to clear their key counters or sweepers.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize life gain with Street Wraith to extend the game. Use Archon of Cruelty to remove their biggest threats and buy time for Stitcher's Supplier recursion.",
+      "watch_for": [
+        "Wide creature spreads",
+        "Direct damage spells",
+        "Fast board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them by applying constant pressure. Recycle threats with Stitcher's Supplier to outvalue their resource advantage.",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Resilient creatures"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Flying creatures that bypass your ground blockers",
+    "Board wipes that clear your recurring threats",
+    "Direct damage spells that bypass your life gain strategy",
+    "Wide creature spreads that overwhelm your removal"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T00:57:19+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T00:57:19+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "2a9e6a545276f2eb",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archon of Cruelty, Stitcher's Supplier, Street Wraith"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Street Wraith, Archon of Cruelty, Stitcher's Supplier"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Archon of Cruelty, Stitcher's Supplier, Street Wraith"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Modern format meta dynamics"
+    }
+  ]
+}

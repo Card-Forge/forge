@@ -206,8 +206,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             Forge.getLocalizer().getMessage("cbEnableAICheats"),
             Forge.getLocalizer().getMessage("nlEnableAICheats")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_DECK_RECOGNITION,
-            Forge.getLocalizer().getMessage("cbEnableDeckRecognition"),
-            Forge.getLocalizer().getMessage("nlEnableDeckRecognition")), 1);
+            Forge.getLocalizer().getMessageorUseDefault("cbEnableDeckRecognition", "Enable AI Deck Recognition"),
+            Forge.getLocalizer().getMessageorUseDefault("nlEnableDeckRecognition",
+                    "Let the AI use the LLM sidecar to identify your deck archetype during a game.")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_MANABURN,
             Forge.getLocalizer().getMessage("cbManaBurn"),
             Forge.getLocalizer().getMessage("nlManaBurn")), 1);

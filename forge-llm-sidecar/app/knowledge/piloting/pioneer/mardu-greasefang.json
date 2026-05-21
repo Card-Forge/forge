@@ -1,0 +1,163 @@
+{
+  "archetype": "Mardu Greasefang",
+  "format": "pioneer",
+  "strategy_type": "midrange",
+  "overview": "Mardu Greasefang leverages disruptive interaction and efficient removal to stabilize against aggressive decks before closing out games with its namesake finisher. The deck uses card advantage engines and graveyard denial to outlast opponents in extended matchups. By controlling the board state and untapping to attack repeatedly, it applies relentless pressure while maintaining defensive resilience.",
+  "win_conditions": [
+    "Greasefang, Okiba Boss untapping to attack and exile blockers",
+    "Fear of Missing Out generating tokens to trade or apply pressure",
+    "Card advantage from Parhelion II and disruption outlasting opponents in combat"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Thoughtseize and a one-drop or land",
+      "Hands containing Fear of Missing Out and early disruption",
+      "Hands with two lands and a playable creature or artifact"
+    ],
+    "mulligan_criteria": [
+      "Hands with three or more lands",
+      "Hands lacking any disruption or early plays",
+      "Hands with only high-cost finishers and no interaction"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap creatures to establish board presence",
+      "Use Thoughtseize to disrupt opponent's combo pieces or early threats",
+      "Hold up mana for potential instant-speed interaction if needed"
+    ],
+    "mid_game": [
+      "Deploy Fear of Missing Out to clear problematic permanents or draw cards",
+      "Establish a board of creatures that can trade efficiently",
+      "Use Parhelion II to exile graveyard threats or generate card advantage"
+    ],
+    "late_game": [
+      "Enter Greasefang, Okiba Boss to clear the board and untap for a massive attack",
+      "Cycle through card advantage engines to maintain resource superiority",
+      "Use remaining interaction to protect your finisher and close the game"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Thoughtseize",
+      "role": "Early disruption",
+      "notes": "Target key combo pieces, early threats, or game-winning cards to slow down the opponent and buy time for your strategy."
+    },
+    {
+      "name": "Fear of Missing Out",
+      "role": "Board control and value",
+      "notes": "Use the exile mode to remove problematic creatures or artifacts, and the token mode to generate blockers, attackers, or fuel for other abilities."
+    },
+    {
+      "name": "Parhelion II",
+      "role": "Graveyard hate and card draw",
+      "notes": "Activate to exile cards from graveyards to disrupt reanimation or mill strategies, or exile it to draw a card when you need to refill your hand."
+    },
+    {
+      "name": "Greasefang, Okiba Boss",
+      "role": "Primary finisher",
+      "notes": "Use its activated ability to exile blockers or threats, then untap yourself to attack with your entire board for lethal damage."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Thoughtseize until you see the opponent's key threat or combo piece",
+    "Prioritize exiling threats with Fear of Missing Out before generating tokens unless you need immediate board presence",
+    "Time Greasefang's ability to maximize the number of creatures attacking in a single turn",
+    "Use Parhelion II's draw mode when you are low on cards, but keep it on the battlefield for graveyard denial when facing mill or reanimation decks"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early disruption and use Fear of Missing Out to clear their biggest threats. Stabilize with Parhelion II and transition to Greasefang.",
+      "watch_for": [
+        "Early all-in turns",
+        "Cheap removal",
+        "Token generators"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply early pressure with creatures and tokens to force them to use removal. Save Thoughtseize for their win conditions or sweepers.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Graveyard hate"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Use Thoughtseize aggressively to find and remove key combo pieces. Keep Parhelion II ready to exile graveyard components if needed.",
+      "watch_for": [
+        "Specific combo enablers",
+        "Mill effects",
+        "Unexpected win conditions"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Krenko, Mob Leader",
+    "Rakdos Carnarium",
+    "Spell Queller",
+    "Doomsday",
+    "Infect creatures"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T04:23:00+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:23:00+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "4cd0c6bee23e0e9f",
+  "overview_evidence": {
+    "confidence": 0.4,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype name and signature cards indicate a control-midrange hybrid focused on board control and a legendary finisher."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.4,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Derived from signature card functionalities and standard Pioneer midrange patterns."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.4,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard midrange sequencing principles applied to the provided signature cards."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.4,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Common Pioneer format threats that interact with midrange strategies."
+    }
+  ]
+}

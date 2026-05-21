@@ -1,0 +1,164 @@
+{
+  "archetype": "Sam Combo",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "Sam Combo is a quadrants Modern deck that leverages mana acceleration and card selection to assemble lethal sequences. By combining Birthing Ritual and Cauldron Familiar, the deck rapidly generates resources to cast Chord of Calling and find its win conditions. The strategy focuses on outpacing opponents through efficient spell sequencing and land search.",
+  "win_conditions": [
+    "Accelerate into multiple Chord of Calling targets to overwhelm defenses",
+    "Use Cauldron Familiar to search for combo enabler lands and Birthing Ritual to pay for high-cost finishers",
+    "Deploy a sequence of cheap spells and mana dorks to close the game before opponent interaction resolves"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Cauldron Familiar and at least two lands",
+      "Hands with Birthing Ritual and a cheap spell or Chord of Calling",
+      "Hands that can play a turn-one land and a turn-two acceleration spell"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking mana acceleration or land search",
+      "Hands with only high-cost spells and no early interaction",
+      "Hands missing Chord of Calling or combo enablers in a 4-card hand"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and immediately activate Cauldron Familiar to search for optimal mana bases",
+      "Cast cheap spells to establish board presence and protect acceleration",
+      "Hold back mana to respond to early disruption if possible"
+    ],
+    "mid_game": [
+      "Chain Birthing Ritual with Chord of Calling to find multiple threats or finishers",
+      "Use Cauldron Familiar repeatedly to fix mana and find combo pieces",
+      "Apply pressure while searching for the final components of the combo"
+    ],
+    "late_game": [
+      "Execute the full combo sequence to generate lethal damage or untouchable board states",
+      "Flood the board with Chord of Calling targets to exhaust opponent removal",
+      "Maintain card advantage through continuous land search and spell recursion"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Chord of Calling",
+      "role": "Card selection and threat deployment",
+      "notes": "Cast to search for multiple combo pieces or finishers; prioritize targets that synergize with mana acceleration"
+    },
+    {
+      "name": "Birthing Ritual",
+      "role": "Mana acceleration",
+      "notes": "Use to pay for Chord of Calling or high-cost combo enablers; chain with Cauldron Familiar for maximum efficiency"
+    },
+    {
+      "name": "Cauldron Familiar",
+      "role": "Land search and mana dork",
+      "notes": "Play early to search for dual lands or combo-specific lands; use its tap ability to fix mana for Birthing Ritual and Chord of Calling"
+    }
+  ],
+  "sequencing_tips": [
+    "Activate Cauldron Familiar before playing lands to maximize search efficiency",
+    "Cast Birthing Ritual immediately before Chord of Calling to ensure you can pay for multiple targets",
+    "Hold up mana for potential counterspells or removal before committing to the full combo sequence"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early Cauldron Familiar and cheap spells to stabilize; use Birthing Ritual to accelerate into board wipes or finishers before they close out the game.",
+      "watch_for": [
+        "Early sweepers",
+        "Direct damage spells",
+        "Creature removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells by holding up mana; use Chord of Calling to find multiple threats and overwhelm their hand size.",
+      "watch_for": [
+        "Counterspell",
+        "Rest in Peace",
+        "Board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race their value engines by accelerating quickly; use Cauldron Familiar to find lands that enable combo turns before they stabilize.",
+      "watch_for": [
+        "Card draw spells",
+        "Efficient removal",
+        "Late-game threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup with early interaction; race them by executing your combo sequence as quickly as possible.",
+      "watch_for": [
+        "Their combo pieces",
+        "Hand disruption",
+        "Priority plays"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Early sweepers",
+    "Hand disruption",
+    "Counterspells",
+    "Permanent destruction",
+    "Graveyard hate"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:26:57+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:26:57+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "65ad2876497e225e",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype: Sam Combo, Format: modern, Colors: W/U/B/G, Signature cards: Chord of Calling, Birthing Ritual, Cauldron Familiar"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards: Chord of Calling, Birthing Ritual, Cauldron Familiar"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards: Chord of Calling, Birthing Ritual, Cauldron Familiar"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Format: modern"
+    }
+  ]
+}

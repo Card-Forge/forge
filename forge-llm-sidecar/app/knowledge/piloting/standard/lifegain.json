@@ -1,0 +1,214 @@
+{
+  "archetype": "Lifegain",
+  "format": "standard",
+  "strategy_type": "midrange",
+  "overview": "An Orzhov Standard deck built around gaining life when creatures enter the battlefield to grow key threats and control the board. It offers two upgrade paths: a Bats subtheme focused on flying synergies and scrying, or a pure Lifegain build emphasizing card advantage and aggressive pressure. The strategy aims to delay explosive turns and outlast opponents through steady resource generation.",
+  "win_conditions": [
+    "Growing creatures like Amalia Benavides Aguirre and Essence Channeler through life gain triggers",
+    "Going wide with flying creatures and bats to apply pressure",
+    "Using Restless Fortress as an auxiliary win condition",
+    "Delaying explosive turns to outvalue opponents"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with turn-one plays like Momo, Friendly Flier",
+      "Hands containing turn-two threats like Hinterland Sanctifier",
+      "Hands with early land drops and life gain triggers"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early creatures or lands",
+      "Hands heavy on high-cost payoffs without early triggers"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Momo, Friendly Flier",
+          "Hinterland Sanctifier",
+          "Godless Shrine",
+          "Concealed Courtyard",
+          "Erode",
+          "Abandoned Air Temple",
+          "Darkstar Augur"
+        ],
+        "decision": "keep",
+        "reason": "Provides a turn-one play, turn-two threat, and early lands matching the deck's low mana curve."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Momo, Friendly Flier on turn one to reduce flying costs and enable early bats",
+      "Use Starting Town to pay life for Essence Channeler's ability",
+      "Establish early life gain triggers with Case of the Uneaten Feast"
+    ],
+    "mid_game": [
+      "Accumulate triggers with Hinterland Sanctifier and Zoraline, Cosmos Caller or Voice of Victory",
+      "Grow Amalia Benavides Aguirre and Essence Channeler with +1/+1 counters",
+      "Use interaction like Erode and Deep-Cavern Bat to clear board and hand"
+    ],
+    "late_game": [
+      "Leverage card advantage engines like Haliya, Guided by Light, Darkstar Augur, and Enduring Innocence",
+      "Activate Restless Fortress for additional life gain and pressure",
+      "Close out with large, triggered creatures and wide board presence"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Essence Channeler",
+      "role": "Life gain engine",
+      "notes": "Gains life when creatures enter, synergizes with Starting Town's life loss."
+    },
+    {
+      "name": "Amalia Benavides Aguirre",
+      "role": "Primary payoff",
+      "notes": "Grows with life gain triggers and provides board control."
+    },
+    {
+      "name": "Momo, Friendly Flier",
+      "role": "Early game enabler",
+      "notes": "Reduces flying costs, acts as a bat, and enables turn-one plays."
+    },
+    {
+      "name": "Hinterland Sanctifier",
+      "role": "Trigger multiplier",
+      "notes": "Accumulates life gain triggers and becomes a 2/3 on turn two with Valley Questcaller."
+    },
+    {
+      "name": "Erode",
+      "role": "Interaction",
+      "notes": "Best white removal in Standard, essential for clearing threats."
+    },
+    {
+      "name": "Haliya, Guided by Light",
+      "role": "Card advantage",
+      "notes": "Generates life gain triggers that guarantee extra draws."
+    },
+    {
+      "name": "Restless Fortress",
+      "role": "Auxiliary win condition",
+      "notes": "Provides life gain that can be offset with Scoured Barrens."
+    },
+    {
+      "name": "Darkstar Augur",
+      "role": "Resource generator",
+      "notes": "Ensures more resources as the game goes on, synergizes with Momo."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize playing Momo, Friendly Flier on turn one to unlock flying synergies",
+    "Use Starting Town's life loss to fuel Essence Channeler early",
+    "Offset life loss from Starting Town with Scoured Barrens later",
+    "Sequence Hinterland Sanctifier on turn two to maximize early triggers"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Mono Red Mice",
+      "advice": "Use ETB life gain effects to delay their explosive turns and outvalue them in Best of One.",
+      "watch_for": [
+        "Explosive early turns",
+        "Aggressive creature pressure"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Rest in Peace",
+    "Similar enchantment removal in sideboards",
+    "Explosive early-game turns from aggressive decks"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-upgrading-the-theme-deck-lifegain",
+    "generated_at": "2026-05-21T06:48:47+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-upgrading-the-theme-deck-lifegain",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:47:17+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "eace3ce9ff453960",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "runs a mix of effects to gain life when creatures enter the battlefield, creatures that grow with those triggers, and a bat subtheme"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "creatures that grow with those triggers"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "go wide strategy"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Restless Fortress as an auxiliary win condition"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "delay the opponent's most explosive turns"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "playing it on turn one helps with another issue"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "capable of providing the life loss bonus for Essence Channeler"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "life gain can be 'offset' with Scoured Barrens"
+    },
+    {
+      "confidence": 0.6,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "turning it into a 2/3 on turn two"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "too many Rest in Peace and similar cards in sideboards today"
+    }
+  ]
+}

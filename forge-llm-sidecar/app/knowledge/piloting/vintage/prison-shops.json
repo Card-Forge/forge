@@ -1,0 +1,175 @@
+{
+  "archetype": "Prison Shops",
+  "format": "vintage",
+  "strategy_type": "control",
+  "overview": "Prison Shops is a control archetype that slows the game to a crawl by taxing opponent spells and combat damage. It relies on artifact-based stax pieces and card advantage to outlast opponents in the Vintage format. The deck aims to stabilize early, then grind down the opponent through attrition or decisive artifact creature attacks.",
+  "win_conditions": [
+    "Golos, Tireless Pilgrim combat damage",
+    "Lodestone Golem combat damage",
+    "Opponent running out of resources due to spell and combat taxes"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early interaction or artifact lands",
+      "Hands containing Sphere of Resistance or Lodestone Golem",
+      "Hands with multiple lands and a win condition"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking lands or early answers",
+      "Hands with only late-game cards",
+      "Hands without artifact synergy"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play artifact lands and cheap stax pieces",
+      "Use Sphere of Resistance to tax opponent's early spells",
+      "Prioritize survival and resource denial"
+    ],
+    "mid_game": [
+      "Deploy Lodestone Golem to tax combat and gain card advantage",
+      "Search for Golos, Tireless Pilgrim to stabilize and draw cards",
+      "Maintain board presence while digging for answers"
+    ],
+    "late_game": [
+      "Use Golos to draw into finishers or additional stax",
+      "Attack with artifact creatures to bypass opponent's defenses",
+      "Grind opponent out of resources through continuous taxes"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Lodestone Golem",
+      "role": "Combat tax and card advantage engine",
+      "notes": "Play early to force opponent to pay life or lose creatures, generating value and slowing aggressive strategies."
+    },
+    {
+      "name": "Sphere of Resistance",
+      "role": "Spell tax and artifact enabler",
+      "notes": "Increases spell costs to disrupt combo and aggro, while making artifact creatures cheaper to cast."
+    },
+    {
+      "name": "Golos, Tireless Pilgrim",
+      "role": "Card advantage and win condition",
+      "notes": "Search for artifact lands or stax pieces, then attack to draw cards and close out the game."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Sphere of Resistance until opponent casts key spells to maximize tax impact",
+    "Play Lodestone Golem before opponent commits multiple creatures to the board",
+    "Use Golos to fetch lands when mana is tight, or fetch stax when board is clear"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize Lodestone Golem and Sphere of Resistance to tax attacks and spells, forcing opponent to overextend.",
+      "watch_for": [
+        "Early creature floods",
+        "Bypass effects",
+        "Removal for your stax pieces"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Use Sphere of Resistance to disrupt casting, then deploy Lodestone Golem to stop any creature-based finishes.",
+      "watch_for": [
+        "Fast win conditions",
+        "Counterspell packages",
+        "Artifact destruction"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race to deploy Golos and stax pieces before opponent establishes their own board control.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Tax their value generators with Sphere and Golem, then out-grind them with Golos.",
+      "watch_for": [
+        "Removal spells",
+        "Token generators",
+        "Late-game threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Disrupt their early land drops with Sphere, then tax their big spells with Lodestone Golem.",
+      "watch_for": [
+        "Land acceleration",
+        "Big finishers",
+        "Protection spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspell",
+    "Lightning Bolt",
+    "Rest in Peace",
+    "Field of the Dead",
+    "Thief of Hope"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T11:53:15+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:53:15+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "92b11ea33f00861f",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

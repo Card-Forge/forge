@@ -1,0 +1,153 @@
+{
+  "archetype": "Azorius Ephemerate",
+  "format": "pauper",
+  "strategy_type": "control",
+  "overview": "Azorius Ephemerate is a control/tempo deck that leverages cheap disruption and card selection to dictate the pace of the game. By holding up mana for Counterspell and Preordain, you can safely navigate the early turns while setting up powerful board clears or permanent removal. The deck aims to stabilize by turn four, then use Ephemerate to repeatedly exile key threats and generate massive card advantage.",
+  "win_conditions": [
+    "Outlasting opponents through superior card advantage",
+    "Exiling key threats with Ephemerate to clear the board",
+    "Winning with a resilient late-game plan or combat tricks"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Preordain and a cheap counter or removal",
+      "Two-mana spells that can interact on turn one or two",
+      "Mana bases that support early W/U spells"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking interaction or card draw",
+      "Mana screws with too many lands or too few",
+      "Hands that cannot play anything before turn three"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and Preordain to filter your deck",
+      "Hold up mana for Counterspell to protect your resources",
+      "Avoid committing permanents unless necessary"
+    ],
+    "mid_game": [
+      "Use Ephemerate on high-value threats or board sweepers",
+      "Cycle through your deck to find answers while maintaining mana advantage",
+      "Start building a board presence if the opponent stalls"
+    ],
+    "late_game": [
+      "Replay Ephemerate on recurring threats or finishers",
+      "Leverage card advantage to out-resource the opponent",
+      "Close out the game with efficient removal or combat damage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Ephemerate",
+      "role": "Primary disruption and card advantage engine",
+      "notes": "Cast on turn four to exile a threat for four turns, then replay it to exile another or the same card for massive advantage."
+    },
+    {
+      "name": "Counterspell",
+      "role": "Early game interaction and tempo tool",
+      "notes": "Hold up one blue mana to counter key spells, protecting your board state and buying time to draw into answers."
+    },
+    {
+      "name": "Preordain",
+      "role": "Deck filtering and card selection",
+      "notes": "Cast on turn one to find lands, counterspells, or Ephemerate, ensuring you never get stuck without answers."
+    }
+  ],
+  "sequencing_tips": [
+    "Always prioritize Preordain on turn one to optimize your hand",
+    "Hold up mana for Counterspell before playing lands or other spells",
+    "Delay Ephemerate until you can replay it for maximum value",
+    "Save counters for game-ending threats rather than early fliers"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize Counterspell on early threats and use Ephemerate on their win conditions.",
+      "watch_for": [
+        "Fast attackers",
+        "Bypassing counters with haste or enter-the-battlefield effects"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race them by finding answers to their sweepers and using Ephemerate to stall their finishers.",
+      "watch_for": [
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Use Counterspell on key combo pieces and Preordain to find specific answers.",
+      "watch_for": [
+        "Winning on turn three or four",
+        "Unstoppable one-card combos"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board sweepers that clear your counters",
+    "Unstoppable combo pieces"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T10:27:09+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:27:09+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "b705eb4599eee7fc",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Azorius Ephemerate control/tempo playstyle"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards and control archetype principles"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "General control sequencing principles applied to signature cards"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard Pauper format threats"
+    }
+  ]
+}

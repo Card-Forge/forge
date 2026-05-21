@@ -1,0 +1,241 @@
+{
+  "archetype": "8-Cast",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "8-Cast is a Legacy archetype that utilizes a high density of cheap artifacts to fuel card-drawing 'Cast' cards like Thoughtcast and Thought Monitor. It aims for explosive early-game plays by improvising Kappa Cannoneer and generating pressure with Urza's Saga tokens, while incorporating prison and control elements via Chalice of the Void. The deck intentionally forgoes Brainstorm and Ponder to maximize the impact of its artifact synergies and one-mana hate cards.",
+  "win_conditions": [
+    "Kappa Cannoneer",
+    "Urza's Saga",
+    "Sai, Master Thopterist",
+    "Shadowspear"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "On draw: reactive hands with access to Force of Will",
+      "On play: hands enabling a turn 2 Kappa Cannoneer or turn 1 Chalice of the Void to 1"
+    ],
+    "mulligan_criteria": [
+      "Hands that fall halfway between the deck's various play styles",
+      "Hands that offer acceleration but no cards to make use of or a way to replenish",
+      "Very slow hands in mirror matches"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Force of Will",
+          "Ancient Tomb",
+          "Lotus Petal",
+          "Chalice of the Void",
+          "Kappa Cannoneer"
+        ],
+        "decision": "keep",
+        "reason": "On draw, provides reactivity against explosive decks like Storm, Oops or Red Prison while retaining early game options."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap artifacts to reduce mana costs for Cast cards and improvise Kappa Cannoneer",
+      "Cast Chalice of the Void to 1 on turn 1 using mana accelerators to punish one-mana cards",
+      "Activate Urza's Saga's token generation on turn 2 to apply immediate pressure"
+    ],
+    "mid_game": [
+      "Generate thopters with Sai, Master Thopterist and fatten Saga tokens to reach critical mass",
+      "Use versatile cards like Otawara, Soaring City, Aether Spellbomb, and Shadowspear to solve game situations",
+      "Tutor for specific answers like Aether Spellbomb or Shadowspear using Urza's Saga"
+    ],
+    "late_game": [
+      "Adapt to opponent's sideboard hate cards and avoid putting all eggs in one basket",
+      "Maintain artifact pressure while leveraging prison/control elements to lock down the opponent",
+      "Win with explosive plays or race with Shadowspear if the board is disrupted"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Kappa Cannoneer",
+      "role": "Win condition / Finisher",
+      "notes": "Nicknamed 'Turtle', needs to be improvised or cheated onto the battlefield for explosive impact."
+    },
+    {
+      "name": "Urza's Saga",
+      "role": "Engine / Pressure",
+      "notes": "Generates tokens to pressure opponents and tutors for Aether Spellbomb or Shadowspear; Chapter III targets Retrofitter Foundry."
+    },
+    {
+      "name": "Thought Monitor",
+      "role": "Card draw / Fuel",
+      "notes": "Draws two cards with Affinity, fueling the deck's synergies alongside Thoughtcast."
+    },
+    {
+      "name": "Chalice of the Void",
+      "role": "Prison / Control",
+      "notes": "Played to 1 on turn 1 to punish one-mana cards, creating false symmetry that justifies cutting Brainstorm and Ponder."
+    },
+    {
+      "name": "Force of Will",
+      "role": "Reactive counter",
+      "notes": "Crucial on the draw to prevent falling victim to explosive decks like Storm, Oops, or Red Prison."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize playing the cheapest artifacts first to reduce costs for Cast cards and enable early Kappa Cannoneer",
+    "Sequence mana accelerators like Ancient Tomb, Lotus Petal, and Mox Opal to resolve Chalice of the Void to 1 on turn 1",
+    "Activate Urza's Saga's second ability on turn 2 to maximize token generation and pressure",
+    "Use Otawara, Soaring City's ability with reduced cost for Emry, Lurker of the Loch or Sai, Master Thopterist when needed",
+    "Mulligan very slow hands in mirror matches to ensure explosive early plays"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Izzet Delver",
+      "advice": "Play around Daze and rely on threats immune to Lightning Bolt; do not trade Force of Will for proactive cards due to Meltdown threat.",
+      "watch_for": [
+        "Pyroblast",
+        "Red Elemental Blast",
+        "Abrade",
+        "Meltdown"
+      ]
+    },
+    {
+      "opponent_archetype": "Death and Taxes",
+      "advice": "Chalice is less effective and can be flickered; focus on resolving Kappa Cannoneer before hate cards land.",
+      "watch_for": [
+        "Kataki, War's Wage",
+        "Serenity",
+        "Flickerwisp",
+        "Mother of Runes"
+      ]
+    },
+    {
+      "opponent_archetype": "Burn",
+      "advice": "Fit a Chalice and protect it, or quickly play a big threat to win the race; use Brazen Borrower for problematic cards.",
+      "watch_for": [
+        "Smash to Smithereens",
+        "Meltdown",
+        "Sulfuric Vortex",
+        "Maddening Hex"
+      ]
+    },
+    {
+      "opponent_archetype": "Jeskai/Grixis Control",
+      "advice": "Game plan is similar against both; anticipate hate cards and adapt sideboard accordingly.",
+      "watch_for": [
+        "Meltdown",
+        "Hidetsugu Consumes All",
+        "Null Rod",
+        "Serenity"
+      ]
+    },
+    {
+      "opponent_archetype": "BG Depths",
+      "advice": "Aether Spellbomb shines; use Shadowspear to avoid Marit Lage range and Dismember for Ouphe/Reclaimer.",
+      "watch_for": [
+        "Seeds of Innocence",
+        "Collector Ouphe",
+        "Marit Lage",
+        "Elvish Reclaimer"
+      ]
+    },
+    {
+      "opponent_archetype": "Red Prison",
+      "advice": "Counters for Chalice and Trinisphere are crucial; Bridge has no answer to Turtle.",
+      "watch_for": [
+        "Fiery Confluence",
+        "Chalice of the Void",
+        "Trinisphere"
+      ]
+    },
+    {
+      "opponent_archetype": "Oops, All Spells",
+      "advice": "Stay vigilant as an oversight allows them to go all-in; manage discard and Force of Vigor.",
+      "watch_for": [
+        "Force of Vigor",
+        "Discard spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Mirror Match",
+      "advice": "Be as explosive as possible; the first Turtle to resolve usually wins the game.",
+      "watch_for": [
+        "Opponent's Kappa Cannoneer",
+        "Slow hands"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Null Rod",
+    "Serenity",
+    "Seeds of Innocence",
+    "Collector Ouphe",
+    "Meltdown",
+    "Force of Negation",
+    "Pyroblast",
+    "Red Elemental Blast",
+    "Abrade",
+    "Kataki, War's Wage",
+    "Flickerwisp",
+    "Smash to Smithereens",
+    "Hidetsugu Consumes All",
+    "Fiery Confluence",
+    "Force of Vigor"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-8-cast-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T08:26:10+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-8-cast-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:24:25+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "cd132025b266ad5c",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "The 8-Cast... is a relatively recent archetype to the Legacy setting, solidified with the inclusions of Kappa Cannoneer , Urza's Saga and Thought Monitor... capable of extremely explosive plays combined with elements of Prison and Control."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "solidified with the inclusions of Kappa Cannoneer , Urza's Saga and Thought Monitor... must generate thopters with Sai, you have to fatten those Saga tokens."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "you need to reduce the mana costs of the Casts, you need to improvise the Turtles... play the card with a counter on turn 1... activate the token generation on turn 2 of a Saga played on 1"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "some might be brutal like Null Rod , Serenity , Seeds of Innocence , Collector Ouphe and Meltdown"
+    }
+  ]
+}

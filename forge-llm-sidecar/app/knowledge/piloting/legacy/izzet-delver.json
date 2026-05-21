@@ -1,0 +1,318 @@
+{
+  "archetype": "Izzet Delver",
+  "format": "legacy",
+  "strategy_type": "aggro",
+  "overview": "Izzet Delver is a reliable Legacy staple that applies early pressure through low-cost spells and consistent card advantage. The updated list integrates Cori-Steel Cutter to generate oppressive token swarms while maintaining its classic disruption and tempo game plan. It remains a safe haven in the format, capable of adapting to various meta shifts without losing its core identity.",
+  "win_conditions": [
+    "Transforming Delver of Secrets into a 3/2 flying creature",
+    "Generating token swarms with Cori-Steel Cutter",
+    "Casting rapid low-cost spells to apply early pressure"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with 1 or 2 lands",
+      "Inclusion of card draw spells like Brainstorm or Ponder",
+      "Early pressure or disruption like Wasteland",
+      "Reactive cards paired with cantrips to find answers"
+    ],
+    "mulligan_criteria": [
+      "Hands with 3 lands unless accompanied by Wasteland or strong action",
+      "Overly reactive hands lacking early pressure",
+      "Hands without card draw to filter or find threats"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Force of Will",
+          "Brainstorm",
+          "Ponder",
+          "Daze",
+          "Wasteland",
+          "Murktide Regent",
+          "Lightning Bolt"
+        ],
+        "decision": "keep",
+        "reason": "Has protection, card draw, disruption, and can fit Murktide Regent early despite lacking a turn 1 creature."
+      },
+      {
+        "hand": [
+          "Brainstorm",
+          "Ponder",
+          "Delver of Secrets",
+          "Lightning Bolt",
+          "Wasteland",
+          "Fetchland",
+          "Island"
+        ],
+        "decision": "keep",
+        "reason": "Provides pressure for the first two turns, Brainstorm finds protection/action, and fetchland shuffles dead cards."
+      },
+      {
+        "hand": [
+          "Dragon's Rage Channeler",
+          "Daze",
+          "Force of Will",
+          "Wasteland",
+          "Island",
+          "Island",
+          "Island"
+        ],
+        "decision": "mulligan",
+        "reason": "Lacks card draw to filter, relies solely on Channeler, and Wasteland could ruin the match if lands are needed."
+      },
+      {
+        "hand": [
+          "Brazen Borrower",
+          "Mishra's Bauble",
+          "Urza's Bauble",
+          "Delver of Secrets",
+          "Lightning Bolt",
+          "Island",
+          "Island"
+        ],
+        "decision": "keep",
+        "reason": "Brazen Borrower offers defense, Baubles ensure Delver transforms, and stack manipulation at upkeep optimizes the draw."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play low-cost spells to apply immediate pressure",
+      "Use Wasteland to disrupt opponent's mana base",
+      "Hold up Force of Will or Daze for protection"
+    ],
+    "mid_game": [
+      "Transform Delver of Secrets using Baubles or card draw",
+      "Activate Cori-Steel Cutter to generate tokens on both turns",
+      "Utilize Murktide Regent's Delve and Dragon's Rage Channeler's Delirium"
+    ],
+    "late_game": [
+      "Maintain board presence with token swarms",
+      "Continue cycling through card draw to find answers",
+      "Adapt sideboard choices based on meta threats"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Delver of Secrets",
+      "role": "Primary win condition",
+      "notes": "Transforms into a 3/2 flying creature to close out games."
+    },
+    {
+      "name": "Cori-Steel Cutter",
+      "role": "Token generator",
+      "notes": "Creates oppressive tokens that trigger on both turns when casting spells."
+    },
+    {
+      "name": "Dragon's Rage Channeler",
+      "role": "Card filtering and Delirium enabler",
+      "notes": "Allows filtering the top card and enables Delirium for Mishra's Bauble."
+    },
+    {
+      "name": "Force of Will",
+      "role": "Protection",
+      "notes": "Essential counter spell to protect early threats and key plays."
+    },
+    {
+      "name": "Brainstorm",
+      "role": "Card advantage",
+      "notes": "Core cantrip to find lands, threats, and answers while maintaining tempo."
+    },
+    {
+      "name": "Wasteland",
+      "role": "Mana disruption",
+      "notes": "Destroys nonbasic lands to hinder opponent's strategy."
+    },
+    {
+      "name": "Mishra's Bauble",
+      "role": "Delirium and acceleration",
+      "notes": "Provides card draw and enables Delirium for Channeler and Regent."
+    },
+    {
+      "name": "Urza's Bauble",
+      "role": "Acceleration and token fuel",
+      "notes": "Complements Mishra's Bauble, fuels Cori-Steel Cutter, and enables Delve/Delirium."
+    }
+  ],
+  "sequencing_tips": [
+    "Put Cori-Steel Cutter on the board on turn 2 and immediately follow up with a 0-cost spell to trigger its ability.",
+    "Activate Mishra's Bauble at the end of the opponent's turn to trigger Delirium before your turn begins.",
+    "When using Brazen Borrower, set up the stack at your upkeep to reveal the top card before drawing it if it's decent, or draw first if it isn't.",
+    "Prioritize casting spells on the opponent's turn to maximize Cori-Steel Cutter's token generation."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Dimir Aggro",
+      "advice": "Keep some Force of Will instead of removing all, as Barrowgoyf is a major threat. Use Murktide Regent's Delve to control its size.",
+      "watch_for": [
+        "Barrowgoyf"
+      ]
+    },
+    {
+      "opponent_archetype": "Show and Tell",
+      "advice": "Race to prevent them from resolving Show and Tell or Sneak Attack. Add more counters and remove Lightning Bolt post-side.",
+      "watch_for": [
+        "Show and Tell",
+        "Sneak Attack"
+      ]
+    },
+    {
+      "opponent_archetype": "Red Stompy",
+      "advice": "Delver is slightly favored. Use Wasteland on Ancient Tomb. Note that Daze is less reliable due to Simian Spirit Guide.",
+      "watch_for": [
+        "Chalice of the Void",
+        "Blood Moon",
+        "Simian Spirit Guide"
+      ]
+    },
+    {
+      "opponent_archetype": "Reanimator",
+      "advice": "Lists vary between blue/tempo and monoblack. Adjust sideboard accordingly, focusing on graveyard hate and counters.",
+      "watch_for": [
+        "Reanimated threats",
+        "Graveyard synergy"
+      ]
+    },
+    {
+      "opponent_archetype": "Painter",
+      "advice": "Kill Painter's Servant immediately to prevent combo and amplified Blasts. Cori-Steel Cutter performs better than Murktide Regent here.",
+      "watch_for": [
+        "Painter's Servant",
+        "Red Elemental Blast",
+        "Pyroblast"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Barrowgoyf",
+    "Show and Tell",
+    "Sneak Attack",
+    "Chalice of the Void",
+    "Blood Moon",
+    "Ancient Tomb",
+    "Simian Spirit Guide",
+    "Painter's Servant",
+    "Red Elemental Blast",
+    "Pyroblast"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-izzet-delver-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T07:13:37+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-izzet-delver-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:12:00+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "03130c2174335208",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Delver is Legacy's safe haven. Even when it isn't the best deck, it is always reliable and can beat any other archetype in the format."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "get another shot to evolve your 1/1 into a 3/2"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "both create tokens that can become oppressive quite quickly"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "play many low-cost spells in a row and put pressure on the opponent"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "the best way to use it is to put it on the board on turn 2 and follow up with a 0-cost spell."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "you'll activate one of them at the end of the opponent's turn."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "set up the stack at your upkeep to reveal it before you draw it. If it isn't, draw it before you reveal it"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Cutter's ability triggers on both turns, so casting 2 spells on your opponent's turn will give you another token."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The key card in this matchup is Barrowgoyf."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "prevent them from resolving Show and Tell or Sneak Attack"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Chalice of the Void and Blood Moon can be disruptive"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Wasteland is still brutal when you use it on an Ancient Tomb"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "they often play around it with Simian Spirit Guide"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Painter's Servant needs to die as soon as possible"
+    }
+  ]
+}

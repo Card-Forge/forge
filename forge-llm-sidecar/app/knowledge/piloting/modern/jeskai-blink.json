@@ -1,0 +1,267 @@
+{
+  "archetype": "Jeskai Blink",
+  "format": "modern",
+  "strategy_type": "tempo",
+  "overview": "Jeskai Blink is a tempo strategy that leverages repeated battlefield entries to generate card advantage and protect key threats. By cycling creatures like Quantum Riddler, Solitude, and Phlage through exile and return, the deck draws cards, triggers enter-the-battlefield effects, and disrupts opponent plans. The goal is to maintain board presence while outmaneuvering opponents through superior resource generation and flexible interaction.",
+  "win_conditions": [
+    "Triggering Phlage, Titan of Fire's Fury repeatedly to draw into answers and finishers",
+    "Using Solitude and Quantum Riddler to generate overwhelming card advantage",
+    "Blinking threats to dodge removal and close out games with resilient board presence"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two- or three-mana blink spells or creatures",
+      "Draws containing Quantum Riddler or Solitude with early interaction",
+      "Combinations that enable turn-one or turn-two board presence"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early plays or blink enablers",
+      "Draws heavy on high-cost threats without acceleration",
+      "Hands missing interaction against aggressive strategies"
+    ],
+    "examples": [
+      {
+        "hand": [],
+        "decision": "keep",
+        "reason": "Land and Lotus Bloom in graveyard, with Tameshi and a dual land in hand — Planning to play Teferi using white mana from the dual land to bounce Lotus Bloom and generate mana. Passed on Stern Scolding due to lack of targets in the opponent's deck."
+      },
+      {
+        "hand": [],
+        "decision": "keep",
+        "reason": "Hand with early threats like Kapkan Cannoneer — The combo deck is known to be a turn-4 combo, giving at least four turns to establish pressure and win the race."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Deploy low-cost blink enablers and resilient creatures",
+      "Establish board presence with Quantum Riddler to begin card draw loops",
+      "Use early interaction to disrupt opponent's opening sequence"
+    ],
+    "mid_game": [
+      "Cycle Solitude and Phlage through exile to generate card advantage",
+      "Protect key threats by blinking them into evasion or to dodge removal",
+      "Develop board state while maintaining hand size for late-game answers"
+    ],
+    "late_game": [
+      "Leverage repeated Phlage triggers to draw into game-ending threats",
+      "Use blink effects to stabilize against sweepers or targeted removal",
+      "Close out games with resilient, counter-boosted creatures"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Quantum Riddler",
+      "role": "Early-game blink engine and card draw source",
+      "notes": "Deploy on turn two to establish presence; blink it to draw cards and maintain tempo while applying early pressure. | Part of the midrange card draw package; requires a permanent to blink with Solitude to activate its draw trigger, making it a key piece for recovering from board wipes or stalling turns. (from gameplay)"
+    },
+    {
+      "name": "Solitude",
+      "role": "Mid-game value generator and resilient threat",
+      "notes": "Use its enter-the-battlefield trigger to draw cards; blink it repeatedly to outpace opponents in resources while surviving removal. | Included as four copies in the main deck to permanently remove Tameshi, which cannot be countered by Force of Negation. (from gameplay) | Used strategically to blink key threats like Pinnacle Emissary off the battlefield, but timing is critical to either stop triggers or secure card draw from Quantum Riddler. (from gameplay)"
+    },
+    {
+      "name": "Phlage, Titan of Fire's Fury",
+      "role": "Late-game win condition and card advantage engine",
+      "notes": "Prioritize blinking Phlage to trigger its draw effect multiple times; protect it with counters and blink effects to close games."
+    }
+  ],
+  "sequencing_tips": [
+    "Blink creatures before opponent's removal resolves to preserve value",
+    "Hold up mana for instant-speed blink effects to dodge targeted spells",
+    "Prioritize blinking Phlage when ahead to accelerate card draw",
+    "Use blink effects to reposition blockers or dodge combat damage",
+    "When facing a deck with Flare of Denial, cast Orchard Chant in response to the opponent's threat before casting your counter spell. This prevents the opponent from sacrificing a creature to Flare of Denial to counter your counter, ensuring your counter resolves.",
+    "Suspending Lotus Bloom is generally weak against control decks because they can easily exile it with Orchard Chant or counter it. It is often better to leave it in the graveyard to be recurried by Tameshi.",
+    "Hold up mana for Consign to Memory on the opponent's combo turn rather than attacking or casting threats, ensuring you can counter their win condition.",
+    "Use Replicate on Consign to Memory to create a backup counter, protecting against the opponent having multiple counters or unexpected interactions.",
+    "Delay playing Pithing Needle if the opponent cannot combo on their next turn, preserving hand flexibility and avoiding early answers.",
+    "When facing Pinnacle Emissary, use Solitude immediately upon its entry to prevent the token generation trigger from unlocking the opponent's artifact engine.",
+    "If you must let Weapons Manufacturing resolve, prioritize countering the subsequent Mox Opal or Thoughtcast with Consign to Memory or Force of Negation to stall the artifact flood and preserve hand size for your combo pieces.",
+    "Play Weapons Manufacturing into an empty Tormod's Crypt to generate a Munitions token before the Crypt can be used to exile a key artifact or stop recursion."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Focus on early blink protection and resilient creatures to survive the initial rush",
+      "watch_for": [
+        "Early sweepers",
+        "Targeted removal",
+        "Overwhelming early pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Use blink effects to dodge counterspells and removal while generating card advantage",
+      "watch_for": [
+        "Board wipes",
+        "Hand disruption",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race with blink loops while using interaction to disrupt their value engines",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Resilient threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Living End",
+      "advice": "Azorius Control is favored 60/40. Game 1 is difficult for both sides, but control improves significantly post-sideboard. If games go fast, Living End wins; if they go long, Control wins. (from gameplay) Be aware that Living End can sacrifice Felagi Archaeologist to Flare of Denial to counter two spells (e.g., Sink into Stupor), which can disrupt combo attempts like Days of Undoing. (from gameplay)",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Amulet Titan",
+      "advice": "Sideboard in Consign to Memory and Emry, Lurker of the Dreams to counter the combo spell and handle graveyard recursion, while maintaining pressure with threats like Kapkan Cannoneer. (from gameplay) Leverage open deck list knowledge to precisely identify which hands to keep or mulligan, focusing on hands that can establish a fast clock before the opponent's turn 4 combo window. (from gameplay) Use Sink into Stupor as a land to generate mana, then flip it to counter the opponent's combo spell if they attempt to go off, buying a turn to recover. (from gameplay)",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Affinity",
+      "advice": "Maindeck three copies of Tormod's Crypt to hard counter the Gorious Vengeance package, as graveyard recursion is their primary win condition and the mana cost is negligible for a 0-mana artifact deck. (from gameplay) Prioritize winning Game 1, as Affinity's board state becomes difficult to manage post-sideboard against sweepers like Wrath of the Skies, Meltdown, and Fire Magic. (from gameplay) Single-target removal like Prismatic Ending is often insufficient against a flooded artifact board; you typically need to draw multiple copies to clear the way for your combo. (from gameplay)",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Targeted removal spells",
+    "Board wipe effects",
+    "Counterspell packages",
+    "Fast aggressive creatures"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T00:21:49+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T00:21:49+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=DF02r6D9ZRw",
+      "publish_date": "2025-09-28T21:23:19Z",
+      "fetched_at": "2026-05-21T11:31:52+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Jeskai Blink"
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=Twk5UKP-Ekg",
+      "publish_date": "2025-09-27T01:04:50Z",
+      "fetched_at": "2026-05-21T11:33:14+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Jeskai Blink"
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=uLDAZd31kY0",
+      "publish_date": "2025-09-27T01:04:43Z",
+      "fetched_at": "2026-05-21T11:34:53+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Jeskai Blink"
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "6d7954888133fcf0",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Jeskai Blink mechanics and signature card synergies"
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.8,
+      "kind": "gameplay_observed",
+      "source_index": 1,
+      "evidence_span": "10:29-11:12"
+    },
+    {
+      "confidence": 0.75,
+      "kind": "gameplay_observed",
+      "source_index": 1,
+      "evidence_span": "08:21-09:06"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "gameplay_observed",
+      "source_index": 2,
+      "evidence_span": "13:56-14:40"
+    },
+    {
+      "confidence": 0.75,
+      "kind": "gameplay_observed",
+      "source_index": 2,
+      "evidence_span": "14:39-15:24"
+    },
+    {
+      "confidence": 0.7,
+      "kind": "gameplay_observed",
+      "source_index": 2,
+      "evidence_span": "10:28-11:13"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "gameplay_observed",
+      "source_index": 3,
+      "evidence_span": "05:33-06:16"
+    },
+    {
+      "confidence": 0.75,
+      "kind": "gameplay_observed",
+      "source_index": 3,
+      "evidence_span": "14:41-15:25"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "gameplay_observed",
+      "source_index": 3,
+      "evidence_span": "04:13-04:56"
+    }
+  ],
+  "common_threats_evidence": []
+}

@@ -1,0 +1,135 @@
+{
+  "archetype": "Mono-Green Landfall",
+  "format": "standard",
+  "strategy_type": "ramp",
+  "overview": "Mono-Green Landfall accelerates mana by playing multiple lands each turn to trigger landfall abilities repeatedly. The deck leverages signature creatures like Badgermole Cub, Icetill Explorer, and Mightform Harmonizer to convert land drops into immediate board presence, card advantage, or combat stats. Success depends on maintaining a steady stream of land drops while protecting key triggers from disruption in Standard.",
+  "win_conditions": [
+    "Overwhelm the opponent with a large, pumped Badgermole Cub",
+    "Trigger Mightform Harmonizer repeatedly to draw into finishers",
+    "Use Icetill Explorer to stabilize and outvalue opponents through landfall triggers"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more lands and a signature creature",
+      "Early landfall triggers like Badgermole Cub on turn one or two",
+      "Mana acceleration to enable Icetill Explorer by turn three"
+    ],
+    "mulligan_criteria": [
+      "Zero-land hands",
+      "Hands lacking early landfall triggers or ramp",
+      "Clumped mana sources without creatures"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands to trigger landfall abilities immediately",
+      "Cast Badgermole Cub early to establish a growing threat",
+      "Use cheap ramp or landfall triggers to accelerate toward Icetill Explorer"
+    ],
+    "mid_game": [
+      "Drop multiple lands per turn to maximize Mightform Harmonizer triggers",
+      "Protect key creatures with blockers or evasion if available",
+      "Trade efficiently while maintaining landfall trigger count"
+    ],
+    "late_game": [
+      "Flood the board with lands to trigger massive landfall effects",
+      "Push combat with a pumped army to close the game",
+      "Use card draw from landfall to find sweepers or finishers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Badgermole Cub",
+      "role": "Early-game landfall beneficiary that grows with each land drop",
+      "notes": "Cast on turn one or two to establish a threat; prioritize playing lands immediately after to trigger its growth ability."
+    },
+    {
+      "name": "Icetill Explorer",
+      "role": "Mid-game engine that stabilizes the board through landfall synergy",
+      "notes": "Hold back lands to trigger its ability when it enters or when lands are played; use it to draw cards or pump other creatures."
+    },
+    {
+      "name": "Mightform Harmonizer",
+      "role": "Late-game multiplier that converts land drops into combat stats or card advantage",
+      "notes": "Play after establishing a board presence; sequence land drops to trigger it multiple times per turn for maximum impact."
+    }
+  ],
+  "sequencing_tips": [
+    "Always play lands before casting creatures to ensure landfall triggers resolve before the creature enters",
+    "Sequence Mightform Harmonizer after playing your final land for the turn to maximize triggers",
+    "Prioritize dropping Icetill Explorer when you have multiple lands in hand to chain triggers"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play lands aggressively to pump Badgermole Cub quickly and outpace early pressure",
+      "watch_for": [
+        "Early removal",
+        "Board wipes",
+        "Fast finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Use Icetill Explorer to draw into answers and play lands to trigger Mightform Harmonizer for value",
+      "watch_for": [
+        "Counterspells",
+        "Creature removal",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race with landfall triggers while protecting key creatures from mid-game threats",
+      "watch_for": [
+        "Removal spells",
+        "Tempo creatures",
+        "Resource denial"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Early aggressive creatures",
+    "Targeted removal spells",
+    "Board wipes",
+    "Counterspells"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T05:38:21+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:38:21+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "69aa19d6fab2dc6d",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype name and signature cards imply land-drop synergy and acceleration."
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

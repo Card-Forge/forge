@@ -1,0 +1,203 @@
+{
+  "archetype": "Neobrand",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "Neobrand is a five-color Modern deck that leverages cheap creatures and untap/haste synergies to generate explosive early turns. By chaining Summoner's Pact and Allosaurus Rider, players can bypass normal turn structure to attack with tapped creatures like Griselbrand immediately. The deck aims to overwhelm opponents through unexpected damage spikes and relentless card advantage.",
+  "win_conditions": [
+    "Griselbrand attacking immediately after being untapped and given haste",
+    "Swinging for lethal damage using multiple Pact and Rider untap chains in a single turn",
+    "Outdrawing opponents through repeated Summoner's Pact resolution while maintaining board presence"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Summoner's Pact paired with at least one creature",
+      "Early mana sources to support five-color requirements",
+      "Allosaurus Rider or Griselbrand with a way to untap them"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking interaction or card draw",
+      "Heavy lands with no creatures or Pact",
+      "Griselbrand without an untap or haste source"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap creatures and cast Summoner's Pact to draw cards and discard",
+      "Use Allosaurus Rider to untap creatures and grant haste for immediate attacks",
+      "Prioritize mana development to enable five-color casting by turn three"
+    ],
+    "mid_game": [
+      "Chain Pact and Rider to generate multiple attacks per turn",
+      "Stabilize against removal by keeping Pact in hand to replace lost creatures",
+      "Begin setting up Griselbrand as a primary threat once mana is established"
+    ],
+    "late_game": [
+      "Attack with Griselbrand repeatedly using untap loops",
+      "Maintain card advantage by cycling through Pact draws",
+      "Close out games with overwhelming board presence or direct damage from haste creatures"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Griselbrand",
+      "role": "Primary win condition and late-game threat",
+      "notes": "Enters tapped but can attack immediately if untapped and given haste by Rider or Pact; prioritize protecting it once it resolves"
+    },
+    {
+      "name": "Summoner's Pact",
+      "role": "Card advantage and untap engine",
+      "notes": "Use the second mode to untap a creature and exile a card from your graveyard; chain with Rider for multiple attacks per turn"
+    },
+    {
+      "name": "Allosaurus Rider",
+      "role": "Haste generator and untap source",
+      "notes": "Activates to untap a creature and give it +1/+1 and haste; sequence before attacking to maximize damage output"
+    }
+  ],
+  "sequencing_tips": [
+    "Always untap and grant haste before declaring attackers to avoid wasting tempo",
+    "Chain Pact's untap mode after Rider to attack the same creature twice in one turn",
+    "Manage your graveyard carefully since Pact can exile cards you might need for other effects",
+    "Hold up Pact in hand to respond to removal rather than committing it too early"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Pact to draw into answers and swing early with haste creatures before they stabilize",
+      "watch_for": [
+        "Early board wipes",
+        "Direct removal",
+        "Face damage from multiple attackers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Go wide with cheap creatures and use Pact to outvalue them; protect Griselbrand with counters or evasion if possible",
+      "watch_for": [
+        "Counterspells",
+        "Board clearers",
+        "Graveyard interaction"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Apply early pressure with Rider and Pact chains to force them to play defensively",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipe spells",
+    "Counterspells targeting Pact or Griselbrand",
+    "Graveyard hate effects",
+    "Direct creature removal"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T00:25:53+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T00:25:53+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "f57500bacd7f257d",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

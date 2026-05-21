@@ -34,10 +34,19 @@ class StrategyType(str, Enum):
 
 
 class EvidenceKind(str, Enum):
-    """Whether a field came verbatim from a primer or was inferred."""
+    """Where a field came from.
+
+    EXPLICIT          — quoted from an editorial article
+    INFERRED          — LLM-derived without verbatim source
+    GAMEPLAY_OBSERVED — extracted from a video transcript (commentary or
+                        narrated gameplay). Sits between explicit and inferred:
+                        the reasoning is verbatim from a human player but it
+                        reflects a single play, not a general claim.
+    """
 
     EXPLICIT = "explicit"
     INFERRED = "inferred"
+    GAMEPLAY_OBSERVED = "gameplay_observed"
 
 
 class FieldEvidence(BaseModel):
@@ -104,6 +113,11 @@ class Provenance(BaseModel):
     fetched_at: str = ""
     http_status: int = 0
     used_for_fields: list[str] = Field(default_factory=list)
+    # YouTube-only: range within the source video that produced this advice.
+    transcript_timestamp_range: Optional[tuple[float, float]] = None
+    # YouTube tournament VODs feature two archetypes; this records which one
+    # this entry was extracted FOR (the other appears as the matchup opponent).
+    extracted_for_archetype: str = ""
 
 
 class LegalEra(BaseModel):

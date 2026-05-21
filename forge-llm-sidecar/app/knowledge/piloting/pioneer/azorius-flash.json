@@ -1,0 +1,285 @@
+{
+  "archetype": "Azorius Flash",
+  "format": "pioneer",
+  "strategy_type": "tempo",
+  "overview": "Azorius Flash is a Pioneer deck that builds upon the Azorius Spirits foundation by integrating Enduring Curiosity as a primary card draw engine. It focuses on applying early aggressive pressure with flying creatures while utilizing interaction like Mausoleum Wanderer and Spell Queller to disrupt opponents. The deck aims to control the game, deny opponents space, and efficiently close out matches through consistent board presence.",
+  "win_conditions": [
+    "Attacking from above with flying creatures",
+    "Applying consistent pressure with buffed Spirits",
+    "Using Mausoleum Wanderer's sacrifice ability to counter key spells while dealing damage"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands that let you be aggressive early on",
+      "Hands that have answers to enemy removals and interactions"
+    ],
+    "mulligan_criteria": [
+      "Hands that are quite reactive and only have one turn-3 creature",
+      "Hands that can't easily deal with early game threats",
+      "Hands that lack an extra land and will likely get stuck"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Mausoleum Wanderer",
+          "Spell Queller",
+          "Enduring Curiosity"
+        ],
+        "decision": "keep",
+        "reason": "Allows you to be aggressive early on and have answers to enemy interactions."
+      },
+      {
+        "hand": [
+          "Skyclave Apparition",
+          "Sheltered by Ghosts",
+          "Turn-3 creature"
+        ],
+        "decision": "mulligan",
+        "reason": "Cannot easily deal with early game threats and relies too much on card draw to progress, giving the opponent time to develop."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Put creatures in play and attack from above",
+      "Protect strategies with counters and Spell Queller",
+      "Build the board fast against aggro decks"
+    ],
+    "mid_game": [
+      "Use Mausoleum Wanderer as a flexible counter spell",
+      "Deal with problematic cards using Spell Queller and Skyclave Apparition",
+      "Apply pressure with Supreme Phantom and Brazen Borrower"
+    ],
+    "late_game": [
+      "Rely on card draw to progress the game plan",
+      "Use The Wandering Emperor to buff creatures and remove threats",
+      "Maintain board presence and life total while denying opponent space"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Enduring Curiosity",
+      "role": "Card draw engine",
+      "notes": "Draws a card whenever a creature you control deals damage to an opponent."
+    },
+    {
+      "name": "Mausoleum Wanderer",
+      "role": "Main beater / Counter",
+      "notes": "1-drop with evasion that gets bigger temporarily; sacrifice ability forces opponent to pay extra value or counters their spell."
+    },
+    {
+      "name": "Supreme Phantom",
+      "role": "Lord / Pressure",
+      "notes": "Buffs creatures' toughness and power to put pressure on opponent."
+    },
+    {
+      "name": "Spell Queller",
+      "role": "Interaction / Damage",
+      "notes": "Powerful way to deal with problematic cards and deal considerable damage."
+    },
+    {
+      "name": "The Wandering Emperor",
+      "role": "Planeswalker / Support",
+      "notes": "Buffs creatures, puts more on board, and removes enemy threats."
+    },
+    {
+      "name": "Sheltered by Ghosts",
+      "role": "Removal / Enchantment",
+      "notes": "Removes an enemy permanent while enchanting one of your creatures for more firepower and life."
+    }
+  ],
+  "sequencing_tips": [
+    "Activate Mausoleum Wanderer's sacrifice ability whenever needed as long as it is on the board",
+    "Play it safe and use your creatures well against midrange decks",
+    "Stop opponents from resolving Collected Company at all costs",
+    "Be careful with your life total against aggressive decks"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Rakdos Aggro",
+      "advice": "Build your board fast and fit in some Spirits with Supreme Phantom.",
+      "watch_for": [
+        "low-cost creatures",
+        "Prowess spells",
+        "combat phase value"
+      ]
+    },
+    {
+      "opponent_archetype": "Niv to Light",
+      "advice": "Put pressure on them consistently and be careful with their removals.",
+      "watch_for": [
+        "global removals",
+        "stabilizing spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Nykthos Ramp",
+      "advice": "Attack from above and put pressure on them before they can start playing the game.",
+      "watch_for": [
+        "Cavalier of Thorns",
+        "snow-balling"
+      ]
+    },
+    {
+      "opponent_archetype": "Rakdos Midrange",
+      "advice": "Play it safe, use your creatures well, and be careful with problematic creatures.",
+      "watch_for": [
+        "Thoughtseize",
+        "Duress",
+        "Sheoldred, the Apocalypse"
+      ]
+    },
+    {
+      "opponent_archetype": "Selesnya Company",
+      "advice": "Be fast, attack them from above, and stop them from resolving a Collected Company at all costs.",
+      "watch_for": [
+        "Aven Interrupter",
+        "Brutal Cathar",
+        "Collected Company"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Aven Interrupter",
+    "Brutal Cathar",
+    "Collected Company",
+    "Cavalier of Thorns",
+    "Sheoldred, the Apocalypse",
+    "Thoughtseize",
+    "Duress",
+    "global removals"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-azorius-flash-spirits-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T04:34:33+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-azorius-lock-flash-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:31:18+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-azorius-flash-spirits-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:33:05+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "3b9198c0cdc20655",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Azorius Flash is a variation of Azorius Spirit - it uses Enduring Curiosity as its main card draw engine, but its foundation is card by card the Spirits foundation."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You'll put your creatures in play, attack from above, and protect your strategies with counters and Spell Queller."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Supreme Phantom, it is your lord - it buffs your creatures' toughness and power and puts a lot of pressure on your opponent."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Mausoleum Wanderer... has a sacrifice ability that can be considered a counter because it forces your opponent to pay an extra value equal to how Wanderer costs at that moment, or it will counter their spell."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Keep in mind that Mausoleum Wanderer is a counter spell, and that you can activate it whenever you want, as long as it is on the board."
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Play it safe, use your creatures well, and be careful with problematic creatures like Sheoldred, the Apocalypse."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "stop them from resolving a Collected Company at all costs."
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Be careful with your life, as this Rakdos can destroy it quite easily."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Aven Interrupter and Brutal Cathar are very problematic"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "stop them from resolving a Collected Company at all costs"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Be careful with Cavalier of Thorns, their main flying blocker"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "be careful with problematic creatures like Sheoldred, the Apocalypse"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The disruptive Thoughtseize + Duress kit can be quite destructive"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "be careful with their removals, particularly their global removals"
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "archetype": "Dimir Reanimator",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "Dimir Reanimator is a Legacy combo archetype that uses cheap disruption and graveyard recursion to deploy massive threats for zero mana. By leveraging Thoughtseize to strip opponent hands and Reanimate to bypass casting costs, the deck aims to establish an insurmountable board presence early. Atraxa, Grand Unifier serves as the primary finisher, generating infinite value and closing games before opponents can stabilize.",
+  "win_conditions": [
+    "Casting Atraxa, Grand Unifier for free to generate infinite value and board presence",
+    "Using Reanimate to bypass mana costs and deploy large creatures immediately",
+    "Disrupting opponent's game plan with Thoughtseize to secure uninterrupted turns"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Reanimate and a cheap cantrip or tutor",
+      "Hands containing Thoughtseize and a win condition",
+      "Two-mana or three-mana opening hands with clear paths to turn one or two"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking interaction or card advantage",
+      "Hands with only high-cost cards and no Reanimate",
+      "Hands with multiple lands and no early plays"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Thoughtseize to remove key opponent cards",
+      "Cast Reanimate to bring back a win condition",
+      "Use cheap cantrips to dig for missing pieces"
+    ],
+    "mid_game": [
+      "Stabilize with board presence from reanimated threats",
+      "Answer opponent's threats with discard or removal",
+      "Set up infinite loops or value engines with Atraxa"
+    ],
+    "late_game": [
+      "Close out the game with overwhelming board state",
+      "Use Atraxa's abilities to generate infinite mana or cards",
+      "Maintain card advantage through continuous disruption"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Atraxa, Grand Unifier",
+      "role": "Primary win condition and value engine",
+      "notes": "Cast for free via Reanimate to trigger its enter abilities, generating infinite value and board presence to close games."
+    },
+    {
+      "name": "Reanimate",
+      "role": "Zero-mana casting spell",
+      "notes": "Use to bypass mana requirements and deploy large creatures directly from graveyards, enabling turn-one threats."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Early-game disruption",
+      "notes": "Cast on curve to remove opponent's key threats or answers, protecting your combo pieces and securing tempo."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast Thoughtseize before playing lands to hide your hand size",
+    "Prioritize Reanimate on turn one if you have a clear win condition",
+    "Hold up mana for counterspells only if opponent shows aggressive early plays"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Thoughtseize to remove early threats and race with reanimated creatures.",
+      "watch_for": [
+        "Early board presence",
+        "Lack of interaction",
+        "Pressure on turn two"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Disrupt their key answers with Thoughtseize and race before they stabilize.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Identify and remove their key combo pieces early, then deploy your own threats quickly.",
+      "watch_for": [
+        "Tutors",
+        "Mana acceleration",
+        "Win condition setup"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Early aggressive creatures",
+    "Counterspells that stop Reanimate",
+    "Board wipes that clear your board",
+    "Discard that targets your hand"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:34:43+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:34:43+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "811f4e7dc36fd35f",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

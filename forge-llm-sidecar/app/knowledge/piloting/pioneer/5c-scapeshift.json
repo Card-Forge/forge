@@ -1,0 +1,142 @@
+{
+  "archetype": "5c Scapeshift",
+  "format": "pioneer",
+  "strategy_type": "ramp",
+  "overview": "5c Scapeshift is a Pioneer ramp archetype that uses Scapeshift to rapidly accelerate mana and play oversized threats. By leveraging five-color synergy, the deck efficiently tutors for and casts powerful spells like Lumra, Bellow of the Woods. Formidable Speaker provides additional value by casting cheap spells for free, enabling a smooth transition from early disruption to late-game dominance.",
+  "win_conditions": [
+    "Casting Lumra, Bellow of the Woods for zero mana after ramping",
+    "Using Formidable Speaker to repeatedly cast cheap threats and interaction",
+    "Playing massive mana-accelerated creatures that outpace opponent defenses"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Scapeshift and at least two basic or dual lands",
+      "Hands with Formidable Speaker and cheap spells to stabilize",
+      "Hands with multiple land ramp sources and a clear win condition"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking Scapeshift or any mana acceleration",
+      "Hands with four or more lands and no cheap spells",
+      "Hands with only high-cost threats and no way to cast them early"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and hold Scapeshift until you have a safe window to dump lands",
+      "Use Formidable Speaker to cast cheap interaction or draw cards",
+      "Avoid playing unnecessary lands before Scapeshift to maximize land count for the spell"
+    ],
+    "mid_game": [
+      "Cast Scapeshift to ramp into seven or more lands, drawing into threats",
+      "Play Lumra, Bellow of the Woods immediately after ramping to apply pressure",
+      "Use Formidable Speaker to cast additional cheap threats or removal from hand"
+    ],
+    "late_game": [
+      "Maintain board presence with oversized creatures that are difficult to remove",
+      "Cycle through cheap spells using Formidable Speaker to outvalue opponents",
+      "Protect your mana base and win condition with available interaction"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Scapeshift",
+      "role": "Primary mana acceleration engine",
+      "notes": "Discard lands to put more onto the battlefield, enabling zero-cost casting of Lumra and drawing into threats. Hold until you have enough lands to dump safely."
+    },
+    {
+      "name": "Lumra, Bellow of the Woods",
+      "role": "Primary win condition and board presence",
+      "notes": "Cast for significantly reduced mana after Scapeshift. Use its trample ability to push damage quickly while surviving combat."
+    },
+    {
+      "name": "Formidable Speaker",
+      "role": "Value generator and cheap spell enabler",
+      "notes": "Enter the battlefield to cast spells with mana value 3 or less for free. Use it to tutor, stabilize, or cast additional threats without spending mana."
+    },
+    {
+      "name": "Five-Color Land Base",
+      "role": "Mana fixing and Scapeshift fuel",
+      "notes": "Access to all five colors ensures optimal land choices and spell selection, allowing Scapeshift to reliably find the right lands and threats without color screw."
+    }
+  ],
+  "sequencing_tips": [
+    "Play lands before casting Scapeshift to maximize the number of lands you can put onto the battlefield",
+    "Hold Scapeshift until you have a clear path to play Lumra or another high-cost threat",
+    "Use Formidable Speaker's triggered ability before or after Scapeshift depending on whether you need immediate interaction or want to save cheap spells for later",
+    "Avoid overcommitting to the board early if you plan to Scapeshift, as discarded lands can be replaced"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and hold Scapeshift until you can play a large blocker or win condition. Use Formidable Speaker to cast cheap removal or draw cards to stabilize.",
+      "watch_for": [
+        "Early aggressive creatures",
+        "Direct damage spells",
+        "Board wipes that target low-toughness creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Ramp quickly to bypass early disruption and play unblockable threats. Use Formidable Speaker to cast interaction for free and protect your win conditions.",
+      "watch_for": [
+        "Counterspells targeting Scapeshift or Lumra",
+        "Board wipes",
+        "Hand disruption targeting your cheap spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race with Lumra and use Formidable Speaker to generate more value than their incremental advantage plays. Time your Scapeshift to avoid their removal spells.",
+      "watch_for": [
+        "Efficient removal spells",
+        "Card draw engines",
+        "Tempo plays that disrupt your ramp sequence"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Lightning Strike",
+    "Abrupt Decay",
+    "Thoughtseize",
+    "Fatal Push",
+    "Beast Within"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T04:11:51+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:11:51+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "de7767d0cb3992ad",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

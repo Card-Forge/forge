@@ -1,0 +1,157 @@
+{
+  "archetype": "Naya Ramp",
+  "format": "pauper",
+  "strategy_type": "ramp",
+  "overview": "Naya Ramp accelerates mana production to deploy threats ahead of schedule and maintain board presence. The deck leverages landfall synergies and card draw engines to out-resource opponents over time. By stabilizing early with efficient creatures, it transitions into a late-game flood of high-impact permanents.",
+  "win_conditions": [
+    "Mana advantage enabling multiple spells per turn",
+    "Card advantage through landfall and draw engines",
+    "Overwhelming board presence with large, efficient creatures"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Two to three lands in hand",
+      "At least one early ramp spell or low-cost threat",
+      "Mana base coverage for W/R/G spells"
+    ],
+    "mulligan_criteria": [
+      "Four or more lands",
+      "No ramp or early interaction",
+      "All cards cost four or more mana"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize land drops and ramp spells",
+      "Play efficient threats to apply early pressure",
+      "Avoid overextending into removal"
+    ],
+    "mid_game": [
+      "Trigger landfall synergies with Utopia Sprawl",
+      "Deploy Generous Ent and Avenging Hunter for card advantage",
+      "Maintain board presence while filtering deck"
+    ],
+    "late_game": [
+      "Flood the board with large creatures",
+      "Use excess mana to play multiple threats per turn",
+      "Close out games with overwhelming stats and card draw"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Avenging Hunter",
+      "role": "Early-game threat and card draw engine",
+      "notes": "Play on land drops to trigger its draw ability. Use as a clock to pressure aggressive opponents while refilling your hand."
+    },
+    {
+      "name": "Generous Ent",
+      "role": "Mana acceleration and card advantage",
+      "notes": "Deploy to tap for extra mana and draw cards. Prioritize playing it when you have open mana to maximize its utility."
+    },
+    {
+      "name": "Utopia Sprawl",
+      "role": "Landfall synergy and card draw",
+      "notes": "Triggers on every land entering the battlefield. Use it to draw cards and generate mana, but be mindful of its upkeep cost."
+    }
+  ],
+  "sequencing_tips": [
+    "Play lands before ramp spells to maximize landfall triggers",
+    "Hold up mana for counters or removal when facing interactive decks",
+    "Deploy threats before ramp when ahead to pressure opponents",
+    "Prioritize card draw engines when behind to catch up"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play early threats and use removal efficiently. Prioritize survival until your ramp engines come online.",
+      "watch_for": [
+        "Fast one-drop threats",
+        "Early board wipes",
+        "Pressure before turn three"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Ramp past early interaction and flood the board with threats. Use card draw to find answers to their counterspells.",
+      "watch_for": [
+        "Countermagic",
+        "Board wipes",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race with efficient threats and leverage card advantage. Avoid trading up into their larger creatures.",
+      "watch_for": [
+        "Efficient removal",
+        "Value engines",
+        "Board control spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggro creatures",
+    "Board wipes and removal spells",
+    "Countermagic and hand disruption",
+    "Land destruction and mana hate"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T10:41:22+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:41:22+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "52051abf62c81bb3",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "No editorial primer available; derived from format rules and signature cards."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "No editorial primer available; derived from format rules and signature cards."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "No editorial primer available; derived from format rules and signature cards."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "No editorial primer available; derived from format rules and signature cards."
+    }
+  ]
+}

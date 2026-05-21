@@ -1,0 +1,222 @@
+{
+  "archetype": "Doomsday",
+  "format": "vintage",
+  "strategy_type": "combo",
+  "overview": "This Vintage archetype leverages Doomsday to rapidly dig for mana rocks and tutors, establishing a powerful board state. Lurrus of the Dream-Den enables recursive casting of cheap spells, creating infinite loops or repeated Doomsday cycles. Psychic Frog accelerates card draw and hand management, ensuring the combo pieces are found quickly while applying pressure.",
+  "win_conditions": [
+    "Infinite mana and tutor recursion via Lurrus of the Dream-Den",
+    "Digging for a win-more finisher like Emrakul or Oblivion Stone after Doomsday",
+    "Repeated Doomsday cycles to find answers and close out the game"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hand contains Doomsday and at least two cheap tutors or accelerants",
+      "Hand features Psychic Frog with multiple one-mana spells",
+      "Multiple lands and a clear path to turn two or three Doomsday"
+    ],
+    "mulligan_criteria": [
+      "No Doomsday and no cheap spells to enable Lurrus recursion",
+      "Too many lands or high-cost cards that slow down the combo",
+      "Lack of card draw or hand size management tools"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap tutors to stabilize and draw into Doomsday",
+      "Cast Psychic Frog to draw two cards and discard a dead draw",
+      "Prioritize finding Doomsday or setting up Lurrus recursion"
+    ],
+    "mid_game": [
+      "Cast Doomsday to dig for mana rocks, tutors, and win conditions",
+      "Use Lurrus to replay Doomsday or key tutors for infinite loops",
+      "Manage hand size and discard carefully to avoid losing combo pieces"
+    ],
+    "late_game": [
+      "Execute infinite mana and tutor loops to win on the spot",
+      "Use Lurrus to repeatedly cast Doomsday for additional answers",
+      "Stabilize against interaction by cycling through the top of the library"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Doomsday",
+      "role": "Core combo enabler that reshuffles the top three cards and draws seven",
+      "notes": "Cast as early as possible, ideally turn two or three, to find mana rocks and tutors for the Lurrus loop"
+    },
+    {
+      "name": "Lurrus of the Dream-Den",
+      "role": "Recursive engine that allows replaying cards from the graveyard",
+      "notes": "Use to repeatedly cast Doomsday, Brainstorm, or Preordain to generate infinite value or find win conditions"
+    },
+    {
+      "name": "Psychic Frog",
+      "role": "Card draw and hand management tool that synergizes with cheap spells",
+      "notes": "Cast early to dig for Doomsday or tutors, and discard dead draws to keep the combo pipeline efficient"
+    }
+  ],
+  "sequencing_tips": [
+    "Play Psychic Frog before Doomsday to increase the odds of drawing the combo enabler",
+    "Prioritize casting one-mana tutors before Lurrus to maximize recursion potential",
+    "Discard high-impact combo pieces only if necessary, keeping Doomsday and Lurrus in hand or graveyard",
+    "Use Lurrus to replay Doomsday after resolving the first one to maintain momentum"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race to cast Doomsday before they resolve countermagic or hand disruption",
+      "watch_for": [
+        "Counterspell",
+        "Thoughtseize",
+        "Rest in Peace"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize fast Doomsday and use Lurrus to replay cheap answers or win conditions",
+      "watch_for": [
+        "Early board presence",
+        "Removal spells",
+        "Pressure before turn three"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Use Psychic Frog and Doomsday to dig for interaction or out-combo them with infinite loops",
+      "watch_for": [
+        "Their combo pieces",
+        "Counterspell",
+        "Graveyard hate"
+      ]
+    },
+    {
+      "opponent_archetype": "Dredge",
+      "advice": "Avoid playing into their graveyard hate and use Lurrus to bypass it",
+      "watch_for": [
+        "Rest in Peace",
+        "Tormod's Crypt",
+        "Ghoulcaller's Bell"
+      ]
+    },
+    {
+      "opponent_archetype": "Storm",
+      "advice": "Disrupt their spell chain with Doomsday-dug interaction or win before they assemble",
+      "watch_for": [
+        "Ponder",
+        "Brainstorm",
+        "Lightning Bolt"
+      ]
+    },
+    {
+      "opponent_archetype": "Reanimator",
+      "advice": "Race to infinite mana before they cast their win condition",
+      "watch_for": [
+        "Tarmogoyf",
+        "Griselbrand",
+        "Crypt Incursion"
+      ]
+    },
+    {
+      "opponent_archetype": "Blue Moon",
+      "advice": "Play around countermagic and use Lurrus to replay Doomsday for additional answers",
+      "watch_for": [
+        "Counterspell",
+        "Force of Will",
+        "Daze"
+      ]
+    },
+    {
+      "opponent_archetype": "Affinity",
+      "advice": "Dig for removal or win quickly with Lurrus recursion before they swarm",
+      "watch_for": [
+        "Lightning Bolt",
+        "Shrapnel Blast",
+        "Ornithopter"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Red",
+      "advice": "Prioritize speed and use Psychic Frog to find answers to their aggressive starts",
+      "watch_for": [
+        "Lightning Bolt",
+        "Flame Rift",
+        "Early creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race their big spells with Doomsday and infinite loops",
+      "watch_for": [
+        "Cultivate",
+        "Sylvan Library",
+        "Big finishers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspell",
+    "Thoughtseize",
+    "Rest in Peace",
+    "Dismantler",
+    "Force of Will",
+    "Duress"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T11:26:36+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:26:36+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "2e4a01ba2d6e6714",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

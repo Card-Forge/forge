@@ -1,0 +1,209 @@
+{
+  "archetype": "Gruul Midrange",
+  "format": "pioneer",
+  "strategy_type": "midrange",
+  "overview": "Gruul Midrange is a deceptively simple deck that focuses on generating card advantage through optimized 2-for-1 trades. It utilizes versatile split cards and vehicles to execute both aggressive early-game plans and grindy midrange strategies. The deck adapts its posture based on the metagame, leaning into fast mana dorks and haste enablers against control or combo, while relying on value engines and removal against aggressive opponents.",
+  "win_conditions": [
+    "Deploying high-impact finishers like Esika's Chariot or Lovestruck Beast // Heart's Desire to close out games",
+    "Executing an aggressive turn 2 plan with Reckless Stormseeker // Storm-Charged Slasher to grant haste and win by turn 4-5",
+    "Using Chandra, Awakened Inferno to place emblems on the opponent and end the game in long matches"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Llanowar Elves or Elvish Mystic for early acceleration",
+      "Hands with early interaction like Obliterating Bolt or Bonecrusher Giant // Stomp"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking mana dorks or early-turn cards when facing aggressive decks",
+      "Hands composed entirely of high mana cost cards (3 or more) without early plays"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Llanowar Elves",
+          "Bonecrusher Giant // Stomp",
+          "Obliterating Bolt"
+        ],
+        "decision": "keep",
+        "reason": "Provides turn 1 mana acceleration and multiple options for turn 2 threats or interaction."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Accelerate mana with Llanowar Elves or Elvish Mystic",
+      "Cast turn 2 threats like Bonecrusher Giant // Stomp or Reckless Stormseeker // Storm-Charged Slasher",
+      "Use early removal like Obliterating Bolt to disrupt opponent's board"
+    ],
+    "mid_game": [
+      "Counter opponent's gameplan with targeted removal and sweepers",
+      "Make favorable 2-for-1 trades to maintain card advantage",
+      "Deploy vehicles like Esika's Chariot or Skysovereign, Consul Flagship for value and pressure"
+    ],
+    "late_game": [
+      "Close the game with high-impact creatures or vehicles",
+      "Use Chandra, Awakened Inferno for emblem-based win conditions",
+      "Maintain board presence and resource advantage without relying on card draw"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Llanowar Elves",
+      "role": "Mana Acceleration",
+      "notes": "Essential for enabling turn 2 plays and aggressive postures."
+    },
+    {
+      "name": "Bonecrusher Giant // Stomp",
+      "role": "Early Threat / Removal",
+      "notes": "Can be cast as Stomp for early interaction or Giant to deal damage and create a token."
+    },
+    {
+      "name": "Reckless Stormseeker // Storm-Charged Slasher",
+      "role": "Aggressive Win Condition",
+      "notes": "Grants haste to creatures and vehicles, enabling a fast turn 4-5 game plan."
+    },
+    {
+      "name": "Esika's Chariot",
+      "role": "Midrange Finisher",
+      "notes": "Excellent value engine that returns to the battlefield after board wipes like Supreme Verdict."
+    },
+    {
+      "name": "The Akroan War",
+      "role": "Removal / Value",
+      "notes": "Key card for dealing with large creatures like Old-Growth Troll or Sheoldred, the Apocalypse."
+    },
+    {
+      "name": "Embercleave",
+      "role": "Sideboard Finisher",
+      "notes": "Used post-sideboard to aggressively end games before opponent's board wipes resolve."
+    }
+  ],
+  "sequencing_tips": [
+    "Wait to equip Embercleave until after the opponent responds to your attack to avoid wasting mana on removal.",
+    "Cast Bonecrusher Giant // Stomp as Stomp to remove Bloodtithe Harvester, saving The Akroan War for Sheoldred, the Apocalypse.",
+    "Account for Brave the Elements when casting removal spells and deciding which creatures to block with."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Azorius Control",
+      "advice": "Play fast with three-drops, use Esika's Chariot post-wipe, and side in Embercleave and Chandra, Awakened Inferno.",
+      "watch_for": [
+        "Supreme Verdict",
+        "Farewell"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono-Green Ramp",
+      "advice": "Interact with elves early, use Obliterating Bolt and The Akroan War on big creatures, and side in Embercleave for aggression.",
+      "watch_for": [
+        "Old-Growth Troll",
+        "Cavalier of Thorns"
+      ]
+    },
+    {
+      "opponent_archetype": "Rakdos Midrange",
+      "advice": "Seek maximum value with favorable trades, avoid filling the board too much post-side, and use Hazoret the Fervent for indestructible pressure.",
+      "watch_for": [
+        "Sheoldred, the Apocalypse",
+        "sweepers"
+      ]
+    },
+    {
+      "opponent_archetype": "Sultai Lotus",
+      "advice": "Be extremely fast, play Reckless Stormseeker // Storm-Charged Slasher immediately, and use Outland Liberator // Frenzied Trapbreaker on Omniscience.",
+      "watch_for": [
+        "Lier, Disciple of the Drowned",
+        "Omniscience"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono-White Aggro",
+      "advice": "Control early turns with cheap removal, avoid The Akroan War due to Thalia, and play around Brave the Elements.",
+      "watch_for": [
+        "Thalia, Guardian of Thraben",
+        "Adeline, Resplendent Cathar",
+        "Brutal Cathar // Moonrage Brute"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Supreme Verdict",
+    "Farewell",
+    "Old-Growth Troll",
+    "Cavalier of Thorns",
+    "Sheoldred, the Apocalypse",
+    "Bloodtithe Harvester",
+    "Lier, Disciple of the Drowned",
+    "Omniscience",
+    "Thalia, Guardian of Thraben",
+    "Adeline, Resplendent Cathar",
+    "Brutal Cathar // Moonrage Brute",
+    "Brave the Elements"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-gruul-midrange-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T05:05:36+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-gruul-midrange-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:04:03+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "b2b4a6e22569ae56",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Gruul Midrange is a deck that has card advantage as its main strategy, since almost all of its plays are optimized to make 2-for-1 trades."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "end the game with your high-impact cards on the board like Esika's Chariot or the creatures Bonecrusher Giant // Stomp and Lovestruck Beast // Heart's Desire"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "During the attack, we have to be careful when casting Embercleave , to let the opponent respond to our attack first and then equip it."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "excellent card to return to the game after Supreme Verdict or Farewell"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "excellent removal for the opponent's two main creatures: Old- Growth Troll and Cavalier of Thorns"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "archetype": "Merfolk",
+  "format": "legacy",
+  "strategy_type": "tempo",
+  "overview": "This Legacy Merfolk deck leverages blue's speed and card selection to establish early board presence and maintain tempo. Aether Vial enables aggressive early plays, while Lord of Atlantis provides consistent token generation and board control. Vodalian Hexcatcher ensures long-term card advantage by cycling through the deck and protecting key threats.",
+  "win_conditions": [
+    "Establishing an early board with low-cost Merfolk",
+    "Generating overwhelming token advantage with Lord of Atlantis",
+    "Maintaining card advantage and threat protection via Vodalian Hexcatcher"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Aether Vial and early Merfolk",
+      "Hands containing Lord of Atlantis or Vodalian Hexcatcher with lands",
+      "Hands with multiple low-cost threats and interaction"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking lands or early plays",
+      "Hands with only high-cost cards",
+      "Hands missing interaction or board presence"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize casting Aether Vial to enable early Merfolk",
+      "Play low-cost threats to apply immediate pressure",
+      "Hold interaction for opponent's early threats"
+    ],
+    "mid_game": [
+      "Cast Lord of Atlantis to generate tokens and stabilize",
+      "Use Vodalian Hexcatcher to draw cards and protect the board",
+      "Maintain board presence while cycling through the deck"
+    ],
+    "late_game": [
+      "Leverage token generation to overwhelm opponent's removal",
+      "Use card advantage to outlast control strategies",
+      "Close out games with relentless board pressure"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Lord of Atlantis",
+      "role": "Token generator and board controller",
+      "notes": "Cast when you have mana to generate tokens, using them to block, attack, or sacrifice for value. Prioritize keeping it protected with counterspells."
+    },
+    {
+      "name": "Aether Vial",
+      "role": "Early game acceleration and threat deployment",
+      "notes": "Play on turn one to enable a Merfolk on turn two. Use its ability to untap and cast threats early, then transition to a mana rock in later turns."
+    },
+    {
+      "name": "Vodalian Hexcatcher",
+      "role": "Card advantage and threat protection",
+      "notes": "Cast to draw a card and gain hexproof from a color. Use it to protect key threats from removal while cycling through your deck for answers."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up counterspells for opponent's early threats before committing to the board",
+    "Sequence Aether Vial plays to maximize early pressure without stalling",
+    "Prioritize casting Vodalian Hexcatcher when opponent has removal in hand",
+    "Use Lord of Atlantis tokens to absorb removal before committing larger threats"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play aggressively early to prevent them from stabilizing. Use Vodalian Hexcatcher to protect key threats from removal.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stall early with interaction and Aether Vial untaps. Prioritize Lord of Atlantis for token generation to outpace their damage.",
+      "watch_for": [
+        "Early board floods",
+        "Direct damage spells",
+        "Removal spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their early turns with interaction. Keep hands with multiple spells and prioritize finding disruption quickly.",
+      "watch_for": [
+        "Twin pieces",
+        "Spell syphoners",
+        "Unstoppable win conditions"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Doom Blade",
+    "Lightning Strike",
+    "Inferno Titan",
+    "Thoughtseize",
+    "Daze"
+  ],
+  "metadata": {
+    "source": "Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:22:45+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-merfolk-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:19:50+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:22:45+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "ad6c0b608d3f4509",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

@@ -1,0 +1,179 @@
+{
+  "archetype": "Infect",
+  "format": "legacy",
+  "strategy_type": "aggro",
+  "overview": "This W/U/G Infect deck leverages rapid token generation and the infect mechanic to race opponents in Legacy. By combining Glistener Elf and Noble Hierarch, it floods the board with poison-dealing creatures while maintaining mana flexibility. Legolas's Quick Reflexes enables graveyard recursion and surprise attacks, pressuring opponents before they can stabilize.",
+  "win_conditions": [
+    "Accumulating ten poison counters on an opponent through infect creature combat damage",
+    "Swarming the board with multiple infect tokens to overwhelm blockers",
+    "Replaying key threats from the graveyard using Legolas's Quick Reflexes to close out games"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing at least two lands and a token generator",
+      "Early access to Glistener Elf or Noble Hierarch",
+      "Presence of Legolas's Quick Reflexes to enable graveyard value"
+    ],
+    "mulligan_criteria": [
+      "Zero lands or mana sources",
+      "No creature spells or token producers",
+      "Heavy reliance on late-game cards without early pressure"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands and token generators to establish board presence",
+      "Use Glistener Elf to create infect tokens and apply immediate poison pressure",
+      "Hold up mana to protect key threats from early removal"
+    ],
+    "mid_game": [
+      "Leverage Noble Hierarch for mana ramp and additional flying tokens",
+      "Activate Legolas's Quick Reflexes to cast creatures from the graveyard on opponent's turn",
+      "Trade efficiently to preserve infect tokens while advancing poison counters"
+    ],
+    "late_game": [
+      "Flood the board with multiple infect sources to bypass blockers",
+      "Use graveyard recursion to replay lethal threats repeatedly",
+      "Maintain mana advantage through Noble Hierarch to outvalue control strategies"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Glistener Elf",
+      "role": "Token generator and infect engine",
+      "notes": "Tap for green mana to create 1/1 insect tokens with infect; prioritize keeping it protected to maintain poison pressure"
+    },
+    {
+      "name": "Legolas's Quick Reflexes",
+      "role": "Graveyard recursion and flash enabler",
+      "notes": "Enables casting creature cards from the graveyard with flash; use on opponent's turn to surprise or replay lethal threats"
+    },
+    {
+      "name": "Noble Hierarch",
+      "role": "Mana dork and token producer",
+      "notes": "Provides W/U/G mana and creates flying spirit tokens; use to accelerate into larger threats or block while advancing poison"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up white mana to protect infect tokens from targeted removal",
+    "Cast Legolas's Quick Reflexes before playing lands to maximize surprise value",
+    "Prioritize attacking with infect creatures over trading to accumulate poison counters",
+    "Use Noble Hierarch's flying tokens to block flying threats while keeping ground infect safe"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Race efficiently by prioritizing poison counters over board control; use flying tokens to block and Legolas to replay threats.",
+      "watch_for": [
+        "Early board wipes",
+        "Targeted removal for token generators",
+        "Wide creature spreads"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply relentless early pressure to prevent them from stabilizing; use graveyard recursion to bypass counterspells.",
+      "watch_for": [
+        "Counterspells on key threats",
+        "Board wipes",
+        "Hand disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their casting sequence with early poison pressure; use Legolas to replay threats during their turn to interrupt combos.",
+      "watch_for": [
+        "Fast mana acceleration",
+        "Combo pieces on the stack",
+        "Game-ending spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Outpace their value generation by flooding the board with infect tokens; avoid trading into their efficient removal.",
+      "watch_for": [
+        "Efficient removal spells",
+        "Card draw engines",
+        "Late-game finishers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipes that clear token swarms",
+    "Targeted removal for Glistener Elf and Noble Hierarch",
+    "Counterspells that disrupt Legolas's Quick Reflexes recursion",
+    "Hand disruption that limits early token generation"
+  ],
+  "metadata": {
+    "source": "Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:47:59+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-deck-tech-bant-infect",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:45:03+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:47:59+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "47b3b2d7a53f3fcf",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

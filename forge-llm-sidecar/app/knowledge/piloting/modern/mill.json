@@ -1,0 +1,330 @@
+{
+  "archetype": "Mill",
+  "format": "modern",
+  "strategy_type": "control",
+  "overview": "This Modern mill deck aims to win by exhausting the opponent's library before they can reduce your life total to zero. It relies on a core of eight crabs for consistent milling, supported by a robust suite of removal, counterspells, and card advantage engines to survive aggressive strategies and close out games.",
+  "win_conditions": [
+    "Reduce opponent's library to zero cards",
+    "Force opponent to draw from an empty library"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with turn 1 crabs",
+      "Hands with Drown in the Loch or Crypt Incursion against Living End"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early land drops to follow a crab",
+      "Hands without interactive spells against fast decks"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Hedron Crab",
+          "Island",
+          "Fatal Push",
+          "Fractured Sanity",
+          "Watery Grave"
+        ],
+        "decision": "keep",
+        "reason": "Allows leading with a turn 1 crab and having removal to stay alive, aligning with the advice to play early crabs and keep interactive spells."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play a crab on turn one to establish early pressure and landfall triggers.",
+      "Use Fatal Push and Drown in the Loch to remove immediate threats and survive.",
+      "Fetch lands to double-dip on landfall and find shock lands."
+    ],
+    "mid_game": [
+      "Execute the mill package with Fractured Sanity, Tasha's Hideous Laughter, and Archive Trap.",
+      "Generate card advantage with Visions of Beyond and Jace, the Perfected Mind to snowball mill effects.",
+      "Use Consign to Memory and Surgical Extraction to disrupt opponent strategies and remove hate cards."
+    ],
+    "late_game": [
+      "Close out games with Jace's -X ability or force draws with Cephalid Coliseum.",
+      "Utilize Shelldock Isle to cast hideaway spells cheaply.",
+      "Continue milling until the opponent runs out of cards."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Hedron Crab",
+      "role": "Core mill creature",
+      "notes": "Blocks aggressive creatures and triggers landfall with fetch lands."
+    },
+    {
+      "name": "Ruin Crab",
+      "role": "Core mill creature",
+      "notes": "Blocks aggressive creatures and triggers landfall with fetch lands."
+    },
+    {
+      "name": "Fractured Sanity",
+      "role": "Mill spell",
+      "notes": "Flexible spell that can mill a large chunk or cycle for card advantage with no downsides."
+    },
+    {
+      "name": "Tasha's Hideous Laughter",
+      "role": "Mill spell",
+      "notes": "High variance mill that exiles cards, bypassing graveyard synergies like Murktide."
+    },
+    {
+      "name": "Archive Trap",
+      "role": "Mill spell",
+      "notes": "Auto-include in fetch-heavy formats for efficient milling."
+    },
+    {
+      "name": "Visions of Beyond",
+      "role": "Card advantage",
+      "notes": "Refills hand cheaply to snowball mill effects."
+    },
+    {
+      "name": "Jace, the Perfected Mind",
+      "role": "Card advantage / Closer",
+      "notes": "Provides card draw, mill, protection, and closes games with its -X ability."
+    },
+    {
+      "name": "Fatal Push",
+      "role": "Removal",
+      "notes": "Critical tool to stay alive; kills almost anything relevant except Murktide Regent."
+    },
+    {
+      "name": "Drown in the Loch",
+      "role": "Removal / Counter",
+      "notes": "Catch-all spell to prevent resolution or remove resolved creatures."
+    },
+    {
+      "name": "Consign to Memory",
+      "role": "Counter / Stifle",
+      "notes": "Handles evoke, storm, Eldrazi, and opposing countermagic via replicate."
+    },
+    {
+      "name": "Surgical Extraction",
+      "role": "Graveyard hate / Utility",
+      "notes": "Exiles key milled cards or hate cards from the graveyard."
+    },
+    {
+      "name": "Field of Ruin",
+      "role": "Land disruption",
+      "notes": "Forces library searches to reduce Archive Trap cost and disrupts nonbasic-heavy decks."
+    },
+    {
+      "name": "Oboro, Palace in the Clouds",
+      "role": "Utility land",
+      "notes": "Tech land that synergizes perfectly with a deck running eight crabs."
+    },
+    {
+      "name": "Otawara, Soaring City",
+      "role": "Utility land",
+      "notes": "Bounces disruptive or threatening permanents."
+    },
+    {
+      "name": "Shelldock Isle",
+      "role": "Utility land",
+      "notes": "Enables cheap hideaway spells in the mid-to-late game."
+    },
+    {
+      "name": "Cephalid Coliseum",
+      "role": "Utility land",
+      "notes": "Provides card draw or forces opponents to draw three cards to wrap up the mill plan."
+    }
+  ],
+  "sequencing_tips": [
+    "Lead with a turn 1 crab unless facing heavy removal, then wait for a land drop.",
+    "Do not tap out; play mill spells at instant speed to keep removal and counters available for lethal threats.",
+    "Immediately remove hate cards like Endurance from the graveyard using Extirpate to avoid free recasts.",
+    "Prioritize killing early threats like Ragavan, Nimble Pilferer or Murktide Regent before focusing on milling.",
+    "Play around opposing countermagic by sequencing mill spells carefully."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Burn",
+      "advice": "Block with crabs, remove Eidolon of the Great Revel immediately, and use Surgical Extraction/Extirpate to guess and exile key damage spells.",
+      "watch_for": [
+        "Direct damage package",
+        "Eidolon of the Great Revel"
+      ]
+    },
+    {
+      "opponent_archetype": "Ruby Storm",
+      "advice": "Disrupt their game plan with Surgical Extraction and Extirpate, and lean on Consign to Memory to counter the storm trigger off Grapeshot.",
+      "watch_for": [
+        "Ruby Medallion",
+        "Grapeshot"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Murktide",
+      "advice": "Kill early threats, mill fast while playing around counters, and resolve Ensnaring Bridge post-board to stall their attackers.",
+      "watch_for": [
+        "Ragavan, Nimble Pilferer",
+        "Murktide Regent",
+        "Counterspells"
+      ]
+    },
+    {
+      "opponent_archetype": "Yawgmoth",
+      "advice": "Exile undying creatures with Surgical Extraction and Extirpate on the stack or in the graveyard, mill normally, and watch for Endurance.",
+      "watch_for": [
+        "Yawgmoth, Thran Physician",
+        "Undying creatures",
+        "Endurance"
+      ]
+    },
+    {
+      "opponent_archetype": "Boros Energy",
+      "advice": "Sideboard in board wipes like Engineered Explosives and Toxic Deluge to slow them down, and ditch slow cards like Surgical Extraction and Visions of Beyond.",
+      "watch_for": [
+        "Fast damage",
+        "Amped Raptor"
+      ]
+    },
+    {
+      "opponent_archetype": "Living End",
+      "advice": "Mulligan for Drown in the Loch or Crypt Incursion, aim to mill and exile Living End, and stall big creatures with Ensnaring Bridge.",
+      "watch_for": [
+        "Living End",
+        "Big creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Dimir Mill",
+      "advice": "Be fast, kill their crabs quickly using fetch land triggers, sideboard in Leyline of Sanctity, and use hand disruption to slow them down.",
+      "watch_for": [
+        "Opponent's crabs",
+        "Mill package"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Ragavan, Nimble Pilferer",
+    "Goblin Guide",
+    "Murktide Regent",
+    "Endurance",
+    "Eidolon of the Great Revel",
+    "Colossus Hammer",
+    "Living End",
+    "Ruby Medallion",
+    "Grapeshot",
+    "Yawgmoth, Thran Physician",
+    "Amped Raptor"
+  ],
+  "metadata": {
+    "source": "Draftsim",
+    "source_url": "https://draftsim.com/mill-modern/",
+    "generated_at": "2026-05-20T21:41:54+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Draftsim",
+      "author": "",
+      "source_url": "https://draftsim.com/mill-modern/",
+      "publish_date": "",
+      "fetched_at": "2026-05-20T21:40:14+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "eeca3540c0868b2b",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "The strategy is simple: Reduce your opponents’ library to zero cards before they kill you."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "If a player runs out of cards in their library and must draw a card, they lose the game."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "It’s usually good to lead with a turn 1 crab because your opponent could have difficulty dealing with it."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You run a mix of mill, removal, and counters, so don't tap out and try to play your mill spells at instant speed."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Hate cards like Endurance are good to immediately remove from your opponent's graveyard with Extirpate."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "answer the threats that immediately kill you, like Colossus Hammer or Murktide Regent , rather than the ones that are mostly just annoying."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "mill them as fast as you can by playing around counters as much as you can."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "These little guys can block some of the most aggressive creatures in Modern like Ragavan, Nimble Pilferer or Goblin Guide pretty well."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "answer the threats that immediately kill you, like Colossus Hammer or Murktide Regent"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Hate cards like Endurance are good to immediately remove from your opponent's graveyard"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "One card you may want to remove as soon as possible is Eidolon of the Great Revel"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "handle the namesake Ruby Medallion , it counters the actual storm trigger off Grapeshot"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "assemble their combo with its signature card Yawgmoth, Thran Physician along with their undying creatures"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Boros Energy’s a terrifyingly fast deck even in a post- Amped Raptor Modern"
+    }
+  ]
+}

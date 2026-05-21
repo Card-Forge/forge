@@ -325,3 +325,23 @@ SIDEBOARDING_CHANCE_ON_WIN=0
 SIDEBOARDING_SHARED_TYPE_ONLY=false
 # Allow replacing a creature with a planeswalker and vice versa when sideboarding if the previous option is disabled
 SIDEBOARDING_PLANESWALKER_EQ_CREATURE=false
+
+# ===========================================================================
+# LLM Sidecar integration. The sidecar lives in forge-llm-sidecar/ and is
+# reached at the URL set by DECK_RECOGNITION_SIDECAR_URL (default
+# http://100.110.52.69:18970 — change in AiProps.java if needed).
+#
+# Two separate switches:
+#   * DECK_RECOGNITION_ENABLE: master ON/OFF. When false, Forge does NOT
+#     contact the sidecar at all — no /identify-own-archetype, no /recognize.
+#   * SIDECAR_INFLUENCE_ENABLE: gates whether AiController biases its play
+#     decisions using sidecar data that has already arrived. Useless without
+#     DECK_RECOGNITION_ENABLE=true.
+# ===========================================================================
+DECK_RECOGNITION_ENABLE=true
+SIDECAR_INFLUENCE_ENABLE=true
+SIDECAR_ROLE_ASSESSMENT_ENABLE=true
+SIDECAR_HAND_VALUATION_ENABLE=true
+SIDECAR_OPPONENT_INFERENCE_ENABLE=true
+SIDECAR_TARGETING_ENABLE=true
+SIDECAR_MULLIGAN_ENABLE=true

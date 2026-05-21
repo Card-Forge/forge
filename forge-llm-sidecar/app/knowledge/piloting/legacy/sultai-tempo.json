@@ -1,0 +1,134 @@
+{
+  "archetype": "Sultai Tempo",
+  "format": "legacy",
+  "strategy_type": "tempo",
+  "overview": "Sultai Tempo in Legacy leverages cheap, efficient removal and card advantage to control the board while racing with aggressive threats. By cycling through Ponder and Brainstorm, the pilot finds answers to early pressure and sets up lethal combinations. The deck aims to stabilize quickly using Fatal Push and other spot removal, then close out games with resilient creatures and value engines.",
+  "win_conditions": [
+    "Establishing board presence with efficient creatures while denying opponent's threats",
+    "Cycling into lethal combinations or value engines through consistent draw spells",
+    "Outlasting opponents through superior card advantage and cheap removal"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with one or two lands and a removal spell like Fatal Push",
+      "Draw spells that can find missing pieces such as Ponder or Brainstorm",
+      "Early threats that apply pressure while setting up answers"
+    ],
+    "mulligan_criteria": [
+      "Mana screws with three or more lands and no interaction",
+      "Hands lacking removal or card draw in the first three turns",
+      "Slow value cards without early board presence or answers"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands efficiently and cast Fatal Push to remove key early threats",
+      "Use Brainstorm and Ponder to dig for answers and smooth out mana",
+      "Establish a small creature to apply pressure while protecting it with removal"
+    ],
+    "mid_game": [
+      "Transition to larger threats and value cards while maintaining board control",
+      "Trade efficiently and cycle through draw spells to find game-ending pieces",
+      "Look for opportunities to swing for lethal while keeping removal in hand"
+    ],
+    "late_game": [
+      "Leverage card advantage to outvalue opponents and find finishers",
+      "Use targeted removal to clear the path for lethal swings",
+      "Stabilize against combo decks by disrupting their key pieces and racing with resilient creatures"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Ponder",
+      "role": "Card draw and filtering",
+      "notes": "Cast on turn one to find lands or answers, then replay later to set up combos or find removal."
+    },
+    {
+      "name": "Brainstorm",
+      "role": "Card advantage and acceleration",
+      "notes": "Use to dig for Fatal Push or early threats, discarding unneeded lands or slow cards to maintain tempo."
+    },
+    {
+      "name": "Fatal Push",
+      "role": "Early game removal",
+      "notes": "Target opponent's key creatures or your own blockers to maintain board control and protect your game plan."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize casting Fatal Push before playing creatures to avoid trading into removal",
+    "Use Ponder to find lands when behind on mana, and Brainstorm to accelerate when ahead",
+    "Hold up removal for opponent's key threats rather than casting it preemptively unless necessary"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Focus on early Fatal Push and board control to stall until you can stabilize with larger threats.",
+      "watch_for": [
+        "Early wide boards",
+        "Unexpected sweepers",
+        "Pressure that bypasses removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply early pressure with creatures while cycling through draw spells to find answers to their late-game threats.",
+      "watch_for": [
+        "Counterspell packages",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their key pieces with removal and use Ponder and Brainstorm to find interaction before they assemble their win condition.",
+      "watch_for": [
+        "Fast mana",
+        "Key combo pieces",
+        "Unexpected win conditions"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggro creatures that pressure early",
+    "Counterspells that disrupt your game plan",
+    "Board wipes that clear your board presence"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:09:25+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:09:25+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "843a8064428fd539",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

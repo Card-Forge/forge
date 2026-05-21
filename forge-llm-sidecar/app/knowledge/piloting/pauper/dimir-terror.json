@@ -1,0 +1,272 @@
+{
+  "archetype": "Dimir Terror",
+  "format": "pauper",
+  "strategy_type": "tempo",
+  "overview": "Dimir Terror is a Pauper tempo deck that uses low-cost creatures, cheap disruption, and card selection to delay opponents and maintain board control. It relies on a graveyard-heavy cantrip package to efficiently cast powerful threats like Tolarian Terror and Gurmag Angler. The deck adapts its posture between aggressive and reactive lines depending on the matchup, aiming to outmaneuver opponents with mana-efficient interaction and protected win conditions.",
+  "win_conditions": [
+    "Tolarian Terror",
+    "Gurmag Angler"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hand contains a decent number of cantrips",
+      "Includes two lands",
+      "Has at least one interaction spell or threat"
+    ],
+    "mulligan_criteria": [
+      "Hand is mismatched to known opponent (e.g., full of Snuff Out vs Burn)",
+      "Lacks lands or cantrips to find answers",
+      "Relies exclusively on cantrips to find initial interaction without Preordain"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Brainstorm",
+          "Thought Scour",
+          "Consider",
+          "Islet Sanctuary",
+          "Ice Tunnel",
+          "Spell Pierce",
+          "Tolarian Terror"
+        ],
+        "decision": "keep",
+        "reason": "Contains multiple cantrips, two lands, and interaction/threats, meeting the criteria for a safe keep against an unknown opponent."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cast cheap cantrips like Brainstorm and Consider to filter the deck",
+      "Use low-cost disruption like Spell Pierce and Snuff Out to delay opponent's plans",
+      "Avoid over-committing to cantrips if it delays finding necessary interaction against aggressive decks"
+    ],
+    "mid_game": [
+      "Cast Tolarian Terror or Gurmag Angler once the graveyard is sufficiently populated",
+      "Protect threats with counterspells and removal to maintain board control",
+      "Adopt a reactive posture against explosive aggro to stabilize, or act first against value midranges"
+    ],
+    "late_game": [
+      "Leverage 2-for-1 engines like Deep Analysis and Chainer's Edict for card advantage",
+      "Use sideboarded sweepers and targeted removal to handle resilient threats",
+      "Maintain pressure or control depending on matchup, ensuring opponent cannot outvalue the deck"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Tolarian Terror",
+      "role": "Primary Win Condition",
+      "notes": "Discounted by instants and sorceries in graveyard, protects itself well, and provides a four-turn clock."
+    },
+    {
+      "name": "Gurmag Angler",
+      "role": "Secondary Win Condition",
+      "notes": "Discounted by graveyard size, offers a 5/5 body for low mana, but requires careful graveyard management to avoid counterintuitive interactions with Terror."
+    },
+    {
+      "name": "Brainstorm",
+      "role": "Cantrip / Card Selection",
+      "notes": "Infinitely useful for discarding useless cards and setting up combos with Thought Scour or Deep Analysis."
+    },
+    {
+      "name": "Thought Scour",
+      "role": "Cantrip / Graveyard Accelerator",
+      "notes": "Adds three cards to graveyard to speed up Terror or Angler, but risks milling threats."
+    },
+    {
+      "name": "Consider",
+      "role": "Cantrip / Card Selection",
+      "notes": "Preferred over Mental Note for safety; removes a useless card from the top while interacting with other cantrips."
+    },
+    {
+      "name": "Spell Pierce",
+      "role": "Interaction / Disruption",
+      "notes": "Solid answer in a mana-intensive format; protects Terror by making removal cost four additional mana."
+    },
+    {
+      "name": "Snuff Out",
+      "role": "Removal",
+      "notes": "Can be cast for free, allowing proactive board control or threat protection."
+    },
+    {
+      "name": "Cast Down",
+      "role": "Removal",
+      "notes": "Best two-mana black removal in Pauper, handles almost anything without protection or hexproof."
+    }
+  ],
+  "sequencing_tips": [
+    "Measure graveyard size carefully before casting Gurmag Angler to balance discount with Tolarian Terror's needs.",
+    "Use Brainstorm to discard dead cards and set up Thought Scour or Deep Analysis for maximum efficiency.",
+    "Avoid relying solely on cantrips early game to find interaction, as it costs mana and delays development.",
+    "Pair removal on Tolarian Terror with Spell Pierce to force opponents to pay four extra mana to answer it.",
+    "Adopt an aggressive posture against midranges to prevent them from growing, but slow down against explosive aggro to stabilize."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Bogles",
+      "advice": "Play slightly faster to avoid Armadillo Cloak turning the game around; sideboard extra Chainer's Edict.",
+      "watch_for": [
+        "Armadillo Cloak",
+        "Hexproof creatures",
+        "Slow board development"
+      ]
+    },
+    {
+      "opponent_archetype": "Burn / Mono Red Blitz",
+      "advice": "Slow their clock initially to stabilize; be cautious with Deep Analysis due to life loss; sideboard Hydroblast and Unexpected Fangs.",
+      "watch_for": [
+        "Fast damage output",
+        "Cheap interaction",
+        "Unexpected Fangs timing"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange / Value",
+      "advice": "Act first and respond later; protect threats early to prevent their card advantage engines from hitting the board.",
+      "watch_for": [
+        "Superior board position",
+        "Late-game answers",
+        "Grindy attrition"
+      ]
+    },
+    {
+      "opponent_archetype": "Blue-Based Tempo",
+      "advice": "Sideboard extra Dispel for Game 2; expect longer games where late-game safety valves matter.",
+      "watch_for": [
+        "Counterspells",
+        "Removal",
+        "Extended resource wars"
+      ]
+    },
+    {
+      "opponent_archetype": "Affinity / Setup-Heavy",
+      "advice": "Use Duress to disrupt early-game plans and check for Gurmag Angler timing; sideboard Hydroblast.",
+      "watch_for": [
+        "Specific win conditions",
+        "Artifact synergies",
+        "Early tap-outs"
+      ]
+    },
+    {
+      "opponent_archetype": "Go-Wide / Tokens",
+      "advice": "Sideboard Suffocating Fumes and Arms of Hadar to clear boards and extend sweeper reach.",
+      "watch_for": [
+        "Token generation",
+        "Wide boards",
+        "Faeries/Elves"
+      ]
+    },
+    {
+      "opponent_archetype": "Mirror Match",
+      "advice": "Sideboard Nihil Spellbomb to punish graveyard reliance and cycling strategies.",
+      "watch_for": [
+        "Graveyard setup",
+        "Cycling spells",
+        "Symmetrical threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Bogles",
+    "Boros Synthesizer",
+    "Affinity",
+    "Burn",
+    "Mono Red Blitz",
+    "Caw-Gate",
+    "Stompy",
+    "White Weenie",
+    "Izzet Faeries",
+    "Jund Cascade",
+    "Boros Bully",
+    "Cycling Storm"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-dimir-terror-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T09:45:42+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-dimir-terror-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:44:00+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "a22627415ec14d23",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "this is a Tempo deck similar to the classic Dimir Delver — low-cost creatures with a fast clock, cheap or free disruption, card selection and counterspells with a small number of lands — and your objective is to delay the opponent's plans and keep the board clean for enough turns to win the game."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "These are your threats, with only four copies of each... Tolarian Terror wants a graveyard full of Instants and Sorceries... Gurmag Angler, on the other hand, wants your graveyard full as soon as possible to feed on it directly"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "it is necessary to measure how much you need that certain number of Instants and Sorceries in your graveyard before casting it for the lowest cost benefit"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Brainstorm becomes infinitely more useful than Preordain or Ponder due to its interaction with other spells, allowing for a setup where you can get rid of useless cards from your hand."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "relying exclusively on them to find the initial interaction tends to be a bad idea, especially without Preordain."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "along with Tolarian Terror, any removal on that creature alongside Spell Pierce now costs 4 more mana"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "you don't want to give the Midranges too much time to grow... while also not rushing too fast against very explosive Aggros"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "such as against Bogles, Boros Synthesizer, Affinity, Burn, Mono Red Blitz, etc."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "against Caw-Gate, or other Basilisk Gate decks... against Stompy, Moggwarts, and White Weenie... against Izzet Faeries, Affinity or Jund Cascade... punishing strategies like Boros Bully, Familiars, and Cycling Storm."
+    }
+  ]
+}

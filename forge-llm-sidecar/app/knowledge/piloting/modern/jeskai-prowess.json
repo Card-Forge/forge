@@ -1,0 +1,156 @@
+{
+  "archetype": "Jeskai Prowess",
+  "format": "modern",
+  "strategy_type": "aggro",
+  "overview": "Jeskai Prowess is a fast, spell-heavy deck that leverages the prowess mechanic to generate immediate combat value. By casting cheap instants and sorceries, players repeatedly buff their creatures with +1/+1 and first strike. The goal is to overwhelm opponents through efficient trading and rapid board presence before they can stabilize.",
+  "win_conditions": [
+    "Overwhelming the board with multiple first-strike creatures",
+    "Trading efficiently using prowess-triggered buffs to win combat",
+    "Casting a high density of cheap spells to generate unblockable attackers"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two cheap noncreature spells",
+      "Hands containing a prowess creature and early interaction",
+      "Hands that can play a creature and cast a spell on turn one"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early spell density or creature threats",
+      "Hands with only high-cost cards or no interaction",
+      "Hands that cannot establish board presence by turn two"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play low-cost creatures and immediately cast instants to trigger prowess",
+      "Establish first-strike advantage to trade favorably into opposing aggro",
+      "Use Mishra's Bauble for card advantage if life total permits"
+    ],
+    "mid_game": [
+      "Maintain spell density to keep prowess creatures relevant and threatening",
+      "Use interaction to clear opposing threats while continuing to apply pressure",
+      "Go wide with multiple prowess creatures to force difficult blockers"
+    ],
+    "late_game": [
+      "Transition to larger threats while continuing to cast cheap spells for buffs",
+      "Stabilize the board by trading efficiently and leveraging first strike",
+      "Push for lethal with buffed attackers or value out the opponent with card draw"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Slickshot Show-Off",
+      "role": "Primary prowess creature",
+      "notes": "Cast early to establish board presence; buff with every noncreature spell to create efficient first-strike attackers."
+    },
+    {
+      "name": "Cori-Steel Cutter",
+      "role": "Secondary prowess creature",
+      "notes": "Provides redundancy and board pressure; use alongside other creatures to split damage and trigger prowess repeatedly."
+    },
+    {
+      "name": "Mishra's Bauble",
+      "role": "Card advantage engine",
+      "notes": "Tap and pay life to draw cards, fueling spell density; manage life total carefully to avoid dying to the cost."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast noncreature spells before combat to maximize prowess buffs for the turn",
+    "Prioritize first-strike triggers to win combat trades before opponents can retaliate",
+    "Sequence cheap spells to maintain tempo and keep the board active",
+    "Save interaction for when it can clear a threat and still allow a prowess trigger"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Race efficiently by leveraging first strike to trade up into larger creatures.",
+      "watch_for": [
+        "Early board wipes",
+        "Direct damage spells",
+        "Fast one-drop creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply relentless pressure before they can stabilize with removal and counterspells.",
+      "watch_for": [
+        "Board sweepers",
+        "Counterspell packages",
+        "Late-game value engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Go wide and force them to use removal on multiple targets while maintaining spell density.",
+      "watch_for": [
+        "Targeted removal",
+        "Card draw spells",
+        "Resilient creature threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Lightning Bolt",
+    "Abrupt Decay",
+    "Thoughtseize",
+    "Fatal Push",
+    "Lightning Helix"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:43:39+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:43:39+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "96d041fc70e13bf9",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

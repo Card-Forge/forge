@@ -1,0 +1,135 @@
+{
+  "archetype": "Dimir Aggro",
+  "format": "pioneer",
+  "strategy_type": "aggro",
+  "overview": "Dimir Aggro in Pioneer leverages cheap, disruptive spells and fast creatures to overwhelm opponents before they can establish a board. By combining early disruption with aggressive threats like Kaito, Bane of Nightmares, the deck aims to close games quickly while maintaining card advantage through Thoughtseize and Mockingbird. Success relies on precise sequencing and capitalizing on opponent mistakes in the Pioneer environment.",
+  "win_conditions": [
+    "Closing out with Kaito, Bane of Nightmares",
+    "Overwhelming with early board presence and disruption",
+    "Securing lethal through consistent pressure and card advantage"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with 1-2 mana and a cheap creature",
+      "Hands containing Thoughtseize or Mockingbird",
+      "Hands with Kaito and early land drops"
+    ],
+    "mulligan_criteria": [
+      "Hands with 3+ mana and no disruption",
+      "Hands lacking early threats",
+      "Hands with only late-game cards"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap creatures immediately",
+      "Cast Thoughtseize to remove key answers or threats",
+      "Use Mockingbird to disrupt opponent's early turns"
+    ],
+    "mid_game": [
+      "Develop board with Kaito and other aggressive threats",
+      "Maintain card advantage through disruption",
+      "Apply consistent pressure to force opponent into unfavorable trades"
+    ],
+    "late_game": [
+      "Push for lethal with remaining creatures",
+      "Use card draw or value engines if available",
+      "Close out quickly before opponent stabilizes"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Kaito, Bane of Nightmares",
+      "role": "Primary win condition and early pressure",
+      "notes": "Cast early to establish a threatening board presence that forces opponent to deal with it immediately or lose quickly."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Disruption and card advantage",
+      "notes": "Use to remove key answers, early threats, or game-winning cards from opponent's hand to secure your early board state."
+    },
+    {
+      "name": "Mockingbird",
+      "role": "Early disruption and tempo",
+      "notes": "Play on turn one to force opponent to discard a card, slowing their development and protecting your early threats."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Thoughtseize for opponent's turn to maximize information",
+    "Cast Mockingbird before playing threats to force discards first",
+    "Prioritize land drops over holding up mana for early turns"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Thoughtseize to find sweepers or key blockers, and prioritize playing your threats early to race.",
+      "watch_for": [
+        "Early sweepers",
+        "Fast finishers",
+        "Hand disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply relentless early pressure with Kaito and cheap creatures before they stabilize with removal and counterspells.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Late-game value engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Disrupt their key threats with Thoughtseize and Mockingbird, then race with your early board presence.",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw spells",
+        "Resilient creatures"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Hand disruption",
+    "Counterspells"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T04:56:16+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:56:16+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "ac82f2e868f16baa",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

@@ -1,0 +1,142 @@
+{
+  "archetype": "Lurrus Vault Key",
+  "format": "vintage",
+  "strategy_type": "combo",
+  "overview": "This archetype leverages artifact recursion and flash-enabled artifact deployment to assemble recursive loops quickly. By cycling cheap permanents through the graveyard and battlefield, it generates overwhelming value or infinite resources before opponents can stabilize. The W/U/R color scheme provides efficient mana acceleration and versatile interaction to protect the combo.",
+  "win_conditions": [
+    "Assembling a recursive artifact loop for infinite mana and turns",
+    "Overwhelming the board with cheap artifact creatures and recursion",
+    "Executing a flash-enabled artifact combo on the opponent's turn"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Lurrus of the Dream-Den paired with cheap artifacts or creatures",
+      "Hands with Goblin Welder or Goblin Engineer alongside Vault Key",
+      "Hands with multiple mana rocks and artifact recursion pieces"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking artifact recursion or combo enablers",
+      "Hands with only high-cost permanents and no acceleration",
+      "Hands without interaction or mana base consistency"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing Vault Key to enable flash artifact deployment",
+      "Establish mana acceleration with cheap artifact permanents",
+      "Set up Goblin Engineer to bypass casting costs for key artifacts"
+    ],
+    "mid_game": [
+      "Use Goblin Welder to exile unwanted artifacts and enter combo pieces",
+      "Recycle Lurrus of the Dream-Den or other key permanents from the graveyard",
+      "Apply pressure while assembling the recursive loop"
+    ],
+    "late_game": [
+      "Execute the artifact recursion combo for infinite resources",
+      "Stabilize with infinite mana to cast game-ending spells",
+      "Maintain board presence with recurring artifact creatures"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Lurrus of the Dream-Den",
+      "role": "Graveyard recursion engine",
+      "notes": "Return cheap artifacts or creatures to hand to replay them, fueling recursion loops and maintaining board presence."
+    },
+    {
+      "name": "Goblin Welder",
+      "role": "Artifact manipulation and recursion",
+      "notes": "Exile problematic artifacts or swap them for combo pieces, enabling rapid assembly of recursive loops."
+    },
+    {
+      "name": "Goblin Engineer",
+      "role": "Artifact deployment accelerator",
+      "notes": "Tap to put artifacts onto the battlefield from hand, bypassing mana costs and enabling surprise plays."
+    },
+    {
+      "name": "Vault Key",
+      "role": "Flash artifact enabler",
+      "notes": "Grants flash to artifacts, allowing you to play combo pieces or recursion tools on the opponent's turn to catch them off guard."
+    }
+  ],
+  "sequencing_tips": [
+    "Play Vault Key as early as possible to unlock flash artifact deployment",
+    "Use Goblin Engineer to get key artifacts onto the battlefield before activating Goblin Welder",
+    "Recycle Lurrus of the Dream-Den from the graveyard to replay it or fetch other cheap permanents",
+    "Hold interaction in hand to protect combo pieces until the loop is fully assembled"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells and board wipes by holding up interaction and using flash artifacts on their turn. Prioritize recursion to recover from sweepers.",
+      "watch_for": [
+        "Counterspell",
+        "Swords to Plowshares",
+        "Rest in Peace"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Race their combo by assembling your loop quickly. Use disruption to delay their setup and leverage flash artifacts to interrupt their sequence.",
+      "watch_for": [
+        "Dredge",
+        "Storm",
+        "Belbe's Portal"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize with cheap artifact creatures and recursion. Use Goblin Welder to remove their key threats and assemble your combo behind a defensive board.",
+      "watch_for": [
+        "Affinity",
+        "Red Deck Wins",
+        "Mono-Green Devotion"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspell",
+    "Swords to Plowshares",
+    "Rest in Peace",
+    "Field of the Dead",
+    "Lightning Bolt"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T11:45:37+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:45:37+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "c9e814f3a737e9eb",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

@@ -1,0 +1,221 @@
+{
+  "archetype": "Goryo's Vengeance",
+  "format": "modern",
+  "strategy_type": "control",
+  "overview": "This Esper control archetype stabilizes games by repeatedly bouncing opponent threats and drawing cards. It leverages Goryo's Vengeance and Solitude to disrupt early and mid-game board states while cycling toward a locked position. Atraxa, Grand Unifier serves as the uncounterable finisher that generates continuous value and board control.",
+  "win_conditions": [
+    "Outlasting opponents through repeated bounce disruption",
+    "Locking the board with Atraxa, Grand Unifier",
+    "Generating continuous card advantage via Solitude and Atraxa"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Goryo's Vengeance for early interaction",
+      "Hands containing Solitude for card advantage",
+      "Hands with Atraxa, Grand Unifier and bounce support"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking interaction or card draw",
+      "Hands with only late-game permanents",
+      "Hands with no way to handle early aggression"
+    ],
+    "examples": [
+      {
+        "hand": [],
+        "decision": "mulligan",
+        "reason": "Mulligan to five cards — Starting at five cards is heavily disadvantaged against fast Prowess decks. The Goryo's player must slog through and find combo pieces quickly, as the opponent can win before the graveyard combo assembles."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and hold Goryo's Vengeance for opponent's threats",
+      "Prioritize survival over early development",
+      "Use bounce effects to disrupt early board presence"
+    ],
+    "mid_game": [
+      "Cast Solitude to draw cards and bounce multiple threats",
+      "Begin setting up Atraxa, Grand Unifier",
+      "Maintain board control by repeatedly bouncing key pieces"
+    ],
+    "late_game": [
+      "Deploy Atraxa, Grand Unifier to lock the board and draw cards",
+      "Use bounce effects to protect Atraxa from counters or removal",
+      "Outvalue opponents through continuous card draw and disruption"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Goryo's Vengeance",
+      "role": "Bounce and counter spell",
+      "notes": "Use to return threats to hand or counter spells, enabling repeated disruption. | Sequenced after casting a surveil land to search the top of the library for a big creature like Atraxa or Grizzlebrand, maximizing the chance of finding a win condition. (from gameplay) | The archetype's strategy revolves around leveraging creature synergies for card advantage. The player emphasizes attacking with key threats and pitching one-mana cards on the stack to draw cards, particularly in late-game scenarios when hand size is low. (from gameplay)"
+    },
+    {
+      "name": "Solitude",
+      "role": "Card draw and board reset",
+      "notes": "Draw two cards and bounce two target permanents to reset the board and gain advantage. | Used to exile a double-striking creature to prevent lethal damage, buying crucial time to assemble the Goryo's combo. (from gameplay)"
+    },
+    {
+      "name": "Atraxa, Grand Unifier",
+      "role": "Uncounterable lock piece",
+      "notes": "Deploy when safe; draws a card each turn and bounces a permanent, stabilizing the game."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Goryo's Vengeance for high-impact threats or spells",
+    "Cast Solitude when opponent has multiple permanents to maximize bounce value",
+    "Protect Atraxa, Grand Unifier with bounce effects if opponent has removal or counters",
+    "Cast Force of Negation before Tainted Indulgence to surveil first, hiding the card you are searching for from the opponent's knowledge.",
+    "Pump spells that check for Delirium evaluate the condition on resolution, not at cast time. You can cast them before hitting Delirium and still get the full effect if you resolve them after.",
+    "When utilizing the deck's primary win condition alongside a warp creature, attack with the creature and pitch one-mana cards on the stack to draw two cards. This card-advantage loop is most effective when you are down to two or three cards in hand."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Goryo's Vengeance to bounce aggressive creatures and buy time for Solitude and Atraxa.",
+      "watch_for": [
+        "Early board floods",
+        "Unblockable attackers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Bounce their key threats repeatedly with Solitude and Goryo's Vengeance to stall until Atraxa resolves.",
+      "watch_for": [
+        "Value engines",
+        "Removal spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race to deploy Atraxa, Grand Unifier first and use bounce spells to disrupt their game plan.",
+      "watch_for": [
+        "Counterspell packages",
+        "Board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Esper GenericBlink",
+      "advice": "Prowess decks are creature-based and highly vulnerable to exile effects. Do not lean on a single threat, as it can be easily neutralized by Solitude. (from gameplay) If you can resolve an Atraxa or Grizzlebrand early, you will likely have enough time to stabilize and win the matchup despite the early aggression. (from gameplay)",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Jeskai Blink",
+      "advice": "Expect a more aggressive, white-heavy blink shell that relies on one-drops and token generators to pressure you early. The opponent will heavily depend on warp creatures to enable blink effects; disrupting these enablers or countering their early threats is crucial to stopping their combo. (from gameplay)",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Early aggressive creatures",
+    "High-impact midrange threats",
+    "Counterspells and removal"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T00:23:14+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T00:23:14+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=LBkEDKfWpaA",
+      "publish_date": "2025-09-28T01:41:34Z",
+      "fetched_at": "2026-05-21T11:36:11+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Goryo's Vengeance"
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=zpjJnG3wgfI",
+      "publish_date": "2025-09-27T01:04:37Z",
+      "fetched_at": "2026-05-21T11:37:29+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Goryo's Vengeance"
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "c946a4c5d43641aa",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Goryo's Vengeance, Solitude, Atraxa, Grand Unifier"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Atraxa, Grand Unifier"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Goryo's Vengeance, Solitude, Atraxa, Grand Unifier"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "gameplay_observed",
+      "source_index": 1,
+      "evidence_span": "5:35-6:19"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "gameplay_observed",
+      "source_index": 1,
+      "evidence_span": "11:27-12:12"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "gameplay_observed",
+      "source_index": 2,
+      "evidence_span": "17:03-17:47"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Modern format context"
+    }
+  ]
+}

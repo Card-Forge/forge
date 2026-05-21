@@ -1,0 +1,136 @@
+{
+  "archetype": "Rakdos Midrange",
+  "format": "modern",
+  "strategy_type": "midrange",
+  "overview": "Rakdos Midrange in Modern leverages efficient removal and board control to outvalue opponents over multiple turns. By combining targeted disruption with creature-based pressure, the deck aims to stabilize early and close games with resilient threats. The provided signature cards exemplify this approach through board wipes, life drain, and flexible interaction.",
+  "win_conditions": [
+    "Trading up with Orcish Bowmasters to clear opposing boards while preserving life total",
+    "Using Moonshadow to enable aggressive pushes with smaller creatures while restricting opponent blockers",
+    "Grinding out life with Burning Inquiry to force unfavorable trades and close games"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two lands and a removal spell or early creature",
+      "Draws containing Burning Inquiry or Orcish Bowmasters paired with mana sources",
+      "Combinations that allow for immediate board presence or disruption"
+    ],
+    "mulligan_criteria": [
+      "Mana screws with three or more lands and no interaction",
+      "Hands lacking removal or early game answers",
+      "Draws with only high-cost cards and no ramp or draw"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and deploy early creatures to establish board presence",
+      "Use Burning Inquiry to disrupt opponent's opening turns and gain life",
+      "Hold removal for key threats while developing your own board"
+    ],
+    "mid_game": [
+      "Utilize Orcish Bowmasters to clear opposing boards and generate value",
+      "Cast Moonshadow to restrict blocking and push damage with your creatures",
+      "Trade efficiently to maintain board advantage while drawing into more resources"
+    ],
+    "late_game": [
+      "Stabilize with resilient threats and card advantage engines",
+      "Use life gain from Burning Inquiry to outlast attrition strategies",
+      "Close out games with efficient removal and board control"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Orcish Bowmasters",
+      "role": "Board control and value generation",
+      "notes": "Cast on opponent's turn or when they have multiple creatures to maximize the death trigger. Use it to clear blockers before attacking or to remove key threats while preserving your life total."
+    },
+    {
+      "name": "Moonshadow",
+      "role": "Board state manipulation and aggression enabler",
+      "notes": "Play when you have multiple small creatures to bypass blockers. Use it to force unfavorable trades and push damage through while restricting opponent's combat options."
+    },
+    {
+      "name": "Burning Inquiry",
+      "role": "Disruption and life gain",
+      "notes": "Use to scout opponent's hand or library for key cards. Prioritize targeting high-value spells or threats. The life gain helps stabilize against aggressive decks and extends your game length."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Burning Inquiry for opponent's key spells or when you need life to survive a push",
+    "Cast Orcish Bowmasters after opponent commits to a board state to maximize the death trigger",
+    "Play Moonshadow before attacking to force opponent to commit blockers or concede damage",
+    "Prioritize removal on threats that can't be blocked efficiently",
+    "Manage life total carefully to avoid being burned out by opponent's finishers"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize life gain with Burning Inquiry and use Orcish Bowmasters to clear early boards. Play Moonshadow to restrict their aggressive pushes and buy time for your midrange threats.",
+      "watch_for": [
+        "Early board floods",
+        "Direct damage spells",
+        "Fast finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply steady pressure with creatures and use removal to clear their counterspells or sweepers. Burn through their resources with efficient trades and close games before they stabilize.",
+      "watch_for": [
+        "Counterspell packages",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their key pieces with Burning Inquiry and hold removal for their combo enablers. Use Orcish Bowmasters to clear their board if they go wide, and apply pressure to force them to play around you.",
+      "watch_for": [
+        "Combo pieces",
+        "Protection spells",
+        "Fast win conditions"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Card draw and value engines",
+    "Direct damage finishers",
+    "Counterspell packages"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T02:03:23+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T02:03:23+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "9361b4a2a80ff62b",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

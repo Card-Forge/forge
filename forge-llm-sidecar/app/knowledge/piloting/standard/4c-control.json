@@ -1,0 +1,134 @@
+{
+  "archetype": "4c Control",
+  "format": "standard",
+  "strategy_type": "control",
+  "overview": "This four-color control deck leverages Jeskai and Black mana to stabilize against aggressive strategies and grind out value in longer matchups. By utilizing Stock Up for early resource acceleration and Jeskai Revelation for combat tricks and card draw, the deck maintains parity while searching for a finish. Inevitable Defeat serves as the primary board reset and card advantage engine, allowing you to outlast opponents in the Standard format.",
+  "win_conditions": [
+    "Outlasting opponents through superior card advantage and resource generation",
+    "Closing out games with Jeskai Revelation combat tricks and value loops",
+    "Stabilizing with Inevitable Defeat and grinding out incremental advantages"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early draw or interaction",
+      "Hands containing Stock Up or Jeskai Revelation",
+      "Hands with balanced land counts and mana curve"
+    ],
+    "mulligan_criteria": [
+      "Hands with only high-cost finishers",
+      "Hands lacking early answers or card draw",
+      "Hands with too many or too few lands"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and draw spells to stabilize",
+      "Use early interaction to disrupt opponent's game plan",
+      "Prioritize finding Stock Up to accelerate resources"
+    ],
+    "mid_game": [
+      "Deploy Jeskai Revelation to generate value and combat tricks",
+      "Use Inevitable Defeat to clear boards and gain card advantage",
+      "Maintain hand size and resource parity"
+    ],
+    "late_game": [
+      "Grind out value with Jeskai Revelation's draw and pump",
+      "Use Inevitable Defeat as a recurring finisher or board clear",
+      "Close the game with efficient threats and combat math"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Inevitable Defeat",
+      "role": "Board clear and card advantage",
+      "notes": "Use to wipe aggressive boards or remove key threats while drawing a card to maintain parity"
+    },
+    {
+      "name": "Stock Up",
+      "role": "Resource acceleration and card draw",
+      "notes": "Cast early to fetch lands and draw cards, enabling faster access to high-cost control spells"
+    },
+    {
+      "name": "Jeskai Revelation",
+      "role": "Value engine and combat trick",
+      "notes": "Play to draw cards and pump creatures, using it to close games or outswing opponents in combat"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Inevitable Defeat until the opponent commits multiple creatures or a key threat",
+    "Cast Stock Up as early as possible to smooth out mana and draw into answers",
+    "Use Jeskai Revelation's combat trick after the opponent commits to blockers or attacks"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and use Inevitable Defeat to reset the board",
+      "watch_for": [
+        "Fast finishers",
+        "Lifelink threats",
+        "Early pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race with Jeskai Revelation value and use Stock Up to outdraw them",
+      "watch_for": [
+        "Removal spells",
+        "Efficient threats",
+        "Hand disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play for attrition, use Jeskai Revelation to generate card advantage, and time Inevitable Defeat carefully",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Grind-out finishers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Efficient midrange threats",
+    "Hand disruption spells"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T05:42:40+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:42:40+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "b961847c5a9ea7cd",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

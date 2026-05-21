@@ -1,0 +1,171 @@
+{
+  "archetype": "4c Synthesizer",
+  "format": "pauper",
+  "strategy_type": "tempo",
+  "overview": "This four-color Pauper deck leverages cheap flying creatures and efficient instant-speed spells to establish early board presence while maintaining interaction. By recycling key removal and damage spells through Kor Skyfisher, it aims to outpace opponents in the midgame and close out with direct damage or unblockable attackers. The mana base requires careful management to support the wide color requirements without stalling.",
+  "win_conditions": [
+    "Unblockable flying pressure from Glint Hawk and Kor Skyfisher",
+    "Direct damage and threat removal via Galvanic Blast",
+    "Spell recursion to generate value and outlast opponents",
+    "Mana efficiency to maintain tempo across four colors"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with a turn-one Glint Hawk or Galvanic Blast",
+      "Two-land hands with early interaction",
+      "Kor Skyfisher paired with a recycled spell target",
+      "Mana bases that hit at least two of the four colors early"
+    ],
+    "mulligan_criteria": [
+      "Zero lands or three+ lands with no early plays",
+      "Heavy hands lacking instant-speed interaction",
+      "Hands missing flying creatures or removal",
+      "Mana bases heavily skewed to one color"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands and dropping Glint Hawk for immediate pressure",
+      "Use Galvanic Blast to clear early blockers or chip the opponent's life total",
+      "Hold interaction for key aggressive threats while establishing board presence"
+    ],
+    "mid_game": [
+      "Deploy Kor Skyfisher to stabilize the board and begin recycling Galvanic Blast",
+      "Maintain tempo by trading efficiently and keeping the opponent on the back foot",
+      "Manage four-color mana carefully to avoid clashing while casting spells"
+    ],
+    "late_game": [
+      "Recycle high-impact spells repeatedly to exhaust opponent's resources",
+      "Push damage with flying creatures while holding Blast for finishers or sweepers",
+      "Transition to a value grind if the opponent stabilizes, leveraging recursion"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Galvanic Blast",
+      "role": "Efficient removal and direct damage",
+      "notes": "Use to clear early threats, finish games, or disrupt opponent's key plays. Prioritize holding it up for instant-speed interaction."
+    },
+    {
+      "name": "Glint Hawk",
+      "role": "Early-game flying pressure",
+      "notes": "Play on turn one to establish an unblockable attacker. Use haste to push damage immediately or force unfavorable trades."
+    },
+    {
+      "name": "Kor Skyfisher",
+      "role": "Board presence and spell recursion",
+      "notes": "Deploy to stabilize and recycle Galvanic Blast or other key spells. Use its trigger strategically to maintain tempo and outvalue opponents."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Galvanic Blast up for instant-speed interaction rather than casting it on your turn",
+    "Play Glint Hawk early to force blockers before dropping Kor Skyfisher",
+    "Recycle Galvanic Blast with Kor Skyfisher only when you have a clear target or need to finish the game",
+    "Prioritize mana base consistency by playing lands that support multiple colors early",
+    "Trade flying creatures efficiently to preserve board advantage while recycling spells"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Boros Aggro",
+      "advice": "Hold Galvanic Blast for key threats like Boros Elite or Lightning Strike. Use Glint Hawk to pressure early and force inefficient trades.",
+      "watch_for": [
+        "Lightning Strike",
+        "Boros Elite",
+        "Fervent Champion"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Charm",
+      "advice": "Play around Izzet Charm by keeping Galvanic Blast in hand. Use Kor Skyfisher to recycle spells and outvalue their burn package.",
+      "watch_for": [
+        "Izzet Charm",
+        "Lightning Bolt",
+        "Goblin Electromancer"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono-Black Control",
+      "advice": "Apply early pressure with Glint Hawk before they stabilize. Recycle Galvanic Blast to clear their threats and close out games.",
+      "watch_for": [
+        "Dark Banishing",
+        "Doom Blade",
+        "Graveyard hate"
+      ]
+    },
+    {
+      "opponent_archetype": "Esper Midrange",
+      "advice": "Maintain tempo with flying creatures and instant-speed removal. Use Kor Skyfisher to disrupt their board development and recycle key spells.",
+      "watch_for": [
+        "Path to Exile",
+        "Counterspell",
+        "Esper Sentinel"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Instant-speed removal",
+    "Board wipes",
+    "Graveyard hate",
+    "Mana disruption",
+    "Cheap aggressive creatures"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T10:57:05+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:57:05+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "d017a16f3cd228b5",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Galvanic Blast, Glint Hawk, Kor Skyfisher"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Glint Hawk, Galvanic Blast, Kor Skyfisher"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Galvanic Blast, Glint Hawk, Kor Skyfisher"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Pauper format meta"
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "archetype": "Naya Energy",
+  "format": "modern",
+  "strategy_type": "aggro",
+  "overview": "Naya Energy is a Modern aggro deck that leverages life payment and +1/+1 counter synergies to rapidly scale its creature base. By cycling Guide of Souls and empowering Ocelot Pride and Ajani, Nacatl Pariah, the deck applies relentless pressure while bypassing traditional blockers. The strategy relies on trading life for board presence to close games before opponents can stabilize.",
+  "win_conditions": [
+    "Overwhelm the opponent with oversized creatures generated through life payment",
+    "Use Ajani, Nacatl Pariah's evasion to deal unblocked damage",
+    "Recycle Guide of Souls to maintain permanent board pressure"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with one or two mana creatures",
+      "Access to life payment synergies",
+      "Guide of Souls for early recursion"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early plays",
+      "Slow mana curves without counter synergies",
+      "No creatures to activate Ocelot Pride or Ajani"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap creatures immediately to establish board presence",
+      "Begin paying life to stack counters on Ocelot Pride",
+      "Use Guide of Souls to trigger early recursion"
+    ],
+    "mid_game": [
+      "Deploy Ajani, Nacatl Pariah to split blockers and apply direct damage",
+      "Continue scaling creatures while monitoring life total",
+      "Trade efficiently to preserve key threats"
+    ],
+    "late_game": [
+      "Snowball counters into unblockable threats",
+      "Recycle Guide of Souls repeatedly to outlast opponent's resources",
+      "Close out games with Ajani's evasion when board is cleared"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Ocelot Pride",
+      "role": "Counter engine and life payment outlet",
+      "notes": "Pay life to pump this creature or other threats, prioritizing targets that can immediately impact the board"
+    },
+    {
+      "name": "Ajani, Nacatl Pariah",
+      "role": "Evasion threat and secondary counter source",
+      "notes": "Use its cannot-be-blocked-by-more-than-one ability to bypass wide boards, and pay life to make it unblockable or boost other creatures"
+    },
+    {
+      "name": "Guide of Souls",
+      "role": "Recursive board presence and counter generator",
+      "notes": "Bounce it to trigger death effects or reuse it against removal, ensuring you always have a creature to activate life payment abilities"
+    }
+  ],
+  "sequencing_tips": [
+    "Pay life for counters only when you have card advantage or board presence",
+    "Hold Ajani, Nacatl Pariah until you can bypass a key blocker",
+    "Bounce Guide of Souls to trigger death effects or reuse it against removal",
+    "Prioritize keeping life above lethal thresholds while scaling",
+    "Intentionally tap out on your turn to bait the opponent into playing multiple creatures, then clear the entire board with a mass removal spell like Supreme Verdict on your following turn."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play aggressively early to force responses before they stabilize, and use Ajani's evasion to bypass counterspells",
+      "watch_for": [
+        "Board wipes",
+        "Life gain spells",
+        "Counterspells"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Race by scaling Ocelot Pride quickly and using Guide of Souls recursion to out-tempo their early board",
+      "watch_for": [
+        "Early removal",
+        "Wide creature spreads",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Apply consistent pressure to prevent them from developing their curve, and leverage Ajani to split blockers",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw engines",
+        "Board control spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Azorius Control",
+      "advice": "Kill Pinnacle Emissary immediately with single-target removal to prevent it from generating artifact tokens and enabling an early Capashen Knight. (from gameplay) Play Narset, Parter of Veils early to restrict the opponent to one card draw per turn, directly countering their reliance on Thought Monitor and Thoughtcast for resource generation. (from gameplay) Prioritize attacking Planeswalkers over the player's life total to apply pressure without risking lethal damage, forcing the control player to use removal on the walkers instead of your board. (from gameplay)",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Board wipes that clear counters",
+    "Targeted removal for key creatures",
+    "Life gain spells that negate life payment advantages",
+    "Counterspells that disrupt recursion"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:46:49+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:46:49+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=K5HAvSGDvoU",
+      "publish_date": "2025-09-27T01:04:34Z",
+      "fetched_at": "2026-05-21T12:08:23+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Naya Energy"
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "4cb88c0161fc2d48",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.8,
+      "kind": "gameplay_observed",
+      "source_index": 1,
+      "evidence_span": "10:32-11:17"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

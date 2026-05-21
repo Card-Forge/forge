@@ -1,0 +1,158 @@
+{
+  "archetype": "Oops! All Spells",
+  "format": "vintage",
+  "strategy_type": "control",
+  "overview": "Oops! All Spells is a Vintage control archetype that leverages instant-speed spellcasting and powerful counters to dictate the pace of the game. By combining cheap mana acceleration with versatile interaction, the deck aims to stabilize early, outdraw opponents, and close games with efficient threats or recursive value engines. The W/U/B color identity provides a robust suite of removal, draw, and countermagic tailored to the Vintage metagame.",
+  "win_conditions": [
+    "Stabilizing with Pact of Negation to protect a game-ending threat",
+    "Outdrawing opponents with efficient card advantage engines",
+    "Using Beseech the Mirror to generate infinite value or lethal damage",
+    "Deploying resilient creatures that survive interaction to attack directly"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two lands and a cheap interaction spell",
+      "Combinations featuring Chrome Mox and a one-drop counter or draw spell",
+      "Packages that can answer turn-one threats or establish early tempo"
+    ],
+    "mulligan_criteria": [
+      "Mana-heavy hands lacking early interaction",
+      "Hands with only high-cost threats and no answers",
+      "Draws missing at least two sources of instant-speed spells"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands and Chrome Mox to enable turn-one or turn-two interaction",
+      "Use Pact of Negation or other counters to disrupt opponent's key plays",
+      "Hold up mana to respond to threats rather than committing resources prematurely"
+    ],
+    "mid_game": [
+      "Stabilize the board by removing problematic permanents and drawing into more answers",
+      "Leverage Beseech the Mirror to copy and replay spells for massive value or board control",
+      "Begin deploying resilient threats once the opponent's interaction is exhausted"
+    ],
+    "late_game": [
+      "Transition to a grindy attrition battle using superior card advantage and recursion",
+      "Protect your win conditions with layered countermagic and damage prevention",
+      "Close out the game by attacking with untapped creatures or resolving uncounterable finishers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Chrome Mox",
+      "role": "Zero-mana artifact that taps to add one mana of any color",
+      "notes": "Play on turn one to enable early interaction or fetch lands; prioritize keeping it in hands with cheap spells."
+    },
+    {
+      "name": "Beseech the Mirror",
+      "role": "Sorcery that copies target instant or sorcery spell you control and lets you cast the copy",
+      "notes": "Use to double up on countermagic, draw spells, or finishers; sequence after resolving the original to maximize impact."
+    },
+    {
+      "name": "Pact of Negation",
+      "role": "Enchantment that counters target spell and prevents all damage for one turn",
+      "notes": "Hold up three mana to cast; best used to protect key threats or negate opponent's game-winning combos."
+    }
+  ],
+  "sequencing_tips": [
+    "Always hold up Pact of Negation's mana requirement before committing to other spells",
+    "Cast Beseech the Mirror after your primary spell resolves to ensure the copy targets the correct state",
+    "Use Chrome Mox to fix mana for counterspells rather than accelerating threats early",
+    "Prioritize countering the opponent's most impactful spell over their mana sources"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Focus on early disruption and holding up Pact of Negation for their key pieces",
+      "watch_for": [
+        "Turn-one mana acceleration",
+        "Unexpected instant-speed threats",
+        "Graveyard-based recursion"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use damage prevention and countermagic to stall until you can deploy resilient threats",
+      "watch_for": [
+        "Early creature drops",
+        "Lifeloss effects",
+        "Board wipe spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race their resource count by using Beseech the Mirror to outvalue their interaction suite",
+      "watch_for": [
+        "Stacked countermagic",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast mana artifacts",
+    "Unstoppable finishers",
+    "Board wipe spells",
+    "Graveyard hate"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T11:58:47+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:58:47+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "86e5517d0db725c7",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "archetype": "Madness Burn",
+  "format": "pauper",
+  "strategy_type": "aggro",
+  "overview": "Madness Burn is a two-color Rakdos Pauper Burn variant that leverages Looting effects alongside cards with the Madness mechanic to generate virtual card advantage and resilience. By combining direct damage spells with recurring threats like Sneaky Snacker, it maintains a permanent aggressive clock while offering more flexibility than monocolored Burn. The deck aims to dictate the format's speed and outlast opponents through graveyard recursion and efficient mana fixing.",
+  "win_conditions": [
+    "Apply early pressure with Kitchen Imp and Sneaky Snacker to set a permanent aggressive clock",
+    "Deal direct damage with Lightning Bolt, Fiery Temper, and Chain Lightning to close out games",
+    "Recursively cast Sneaky Snacker from the graveyard using Looting effects to bypass removal and maintain board presence"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early damage spells or creatures to establish the aggressive clock",
+      "Hands containing Looting effects paired with Madness cards to enable virtual card advantage",
+      "Hands with at least two lands to support early sequencing"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early interaction or damage to set the clock",
+      "Hands with too many lands or late-game cards that delay the aggressive strategy"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Lightning Bolt",
+          "Kitchen Imp",
+          "Faithless Looting",
+          "Sneaky Snacker",
+          "Razortrap Gorge",
+          "Jagged Barrens",
+          "Bojuka Bog"
+        ],
+        "decision": "keep",
+        "reason": "Provides immediate clock, early looting synergy, and land drop for turn 1/2 sequencing"
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Sequence spells carefully to drop Razortrap Gorge untapped by turn 3 or 4",
+      "Play Kitchen Imp and Sneaky Snacker immediately to establish an aggressive clock",
+      "Cast Looting effects like Faithless Looting or Grab the Prize to trigger Madness and draw into threats"
+    ],
+    "mid_game": [
+      "Use Alms of the Vein for life gain in Aggro mirrors while dealing damage",
+      "Deploy Voldaren Epicure to create a token that enables further Madness triggers",
+      "Utilize Highway Robbery or Vampire’s Kiss for additional damage and discard synergy"
+    ],
+    "late_game": [
+      "Reuse Faithless Looting from the graveyard to cycle hand or enable more Sneaky Snacker copies",
+      "Play Stormshriek Feral as an extra threat and discard outlet",
+      "Leverage Rakdos Carnarium to reuse Jagged Barrens or Bojuka Bog ETB effects for mana fixing and damage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Kitchen Imp",
+      "role": "Early game threat",
+      "notes": "Has Haste and Flying, acting as efficient early damage and a recurring clock."
+    },
+    {
+      "name": "Sneaky Snacker",
+      "role": "Primary payoff and recurring threat",
+      "notes": "Returns from graveyard via Madness, bypassing traditional interactions and maintaining pressure."
+    },
+    {
+      "name": "Faithless Looting",
+      "role": "Core engine",
+      "notes": "Draws two cards for one mana, triggers Madness twice, and can be reused from graveyard to cycle or enable Snacker."
+    },
+    {
+      "name": "Lightning Bolt",
+      "role": "Direct damage staple",
+      "notes": "Flexible removal and damage spell to interact with the board or close games."
+    },
+    {
+      "name": "Jagged Barrens",
+      "role": "Mana base and damage",
+      "notes": "Functions as a land that deals extra damage on ETB, reusable via Rakdos Carnarium."
+    },
+    {
+      "name": "Razortrap Gorge",
+      "role": "Mana fixing",
+      "notes": "Helps fix mana in the two-color deck and can enter untapped by turn 3 or 4 with correct sequencing."
+    },
+    {
+      "name": "Bojuka Bog",
+      "role": "Graveyard hate",
+      "notes": "Efficient maindeck graveyard disruption that enters tapped but supports the slower, resilient Burn plan."
+    },
+    {
+      "name": "Rakdos Carnarium",
+      "role": "Mana fixing and recursion",
+      "notes": "Allows reuse of Jagged Barrens or Bojuka Bog ETB effects while fixing mana."
+    },
+    {
+      "name": "Stormshriek Feral",
+      "role": "Late game threat",
+      "notes": "New discard outlet that functions as an immediate-impact creature in longer games."
+    },
+    {
+      "name": "Voldaren Epicure",
+      "role": "Multi-tool threat",
+      "notes": "Deals damage, puts a body on board, and creates a token to discard/draw, enabling Madness effects."
+    }
+  ],
+  "sequencing_tips": [
+    "Sequence early spells carefully to ensure Razortrap Gorge enters untapped by turn 3 or 4",
+    "Prioritize casting Looting effects before or alongside Madness cards to maximize virtual card advantage",
+    "Save Faithless Looting for the graveyard to reuse it in longer games for cycling or enabling Sneaky Snacker",
+    "Use Alms of the Vein strategically in Aggro mirrors to gain life while maintaining damage output"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Mono Blue Terror",
+      "advice": "Sideboard in Pyroblast and Nihil Spellbomb to counter blue spells and graveyard reliance",
+      "watch_for": [
+        "Blue Terror",
+        "Graveyard synergy"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Blue Faeries",
+      "advice": "Sideboard in Pyroblast to handle the aggressive blue creature strategy",
+      "watch_for": [
+        "Faeries",
+        "Blue spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Grixis Affinity",
+      "advice": "Sideboard in Gorilla Shaman to delay artifact turns and disrupt the combo",
+      "watch_for": [
+        "Affinity",
+        "Artifacts"
+      ]
+    },
+    {
+      "opponent_archetype": "Bogles",
+      "advice": "Sideboard in Duress and Extract a Confession to remove key non-creature spells and threats",
+      "watch_for": [
+        "Bogles",
+        "Non-creature spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Synthesizer Burn",
+      "advice": "Adjust sideboard to handle traditional burn threats and maintain clock pressure",
+      "watch_for": [
+        "Experimental Synthesizer",
+        "Kessig Flamebreather"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Mono Blue Terror",
+    "Mono Blue Faeries",
+    "Grixis Affinity",
+    "Bogles",
+    "High Tide",
+    "Tron",
+    "Dredge",
+    "Tolarian Terror"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-madness-burn-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T09:22:56+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-madness-burn-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:21:26+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "6c08f1b04a75ac83",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "takes advantage of the synergy of Looting effects with cards like Madness and Sneaky Snacker... serving as one of the main means of dictating the format's speed while, by having access to Looting effects and a second color, it can have more flexibility and resilience"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Kitchen Imp and Sneaky Snacker are cheap creatures with high power that set the permanent aggressive clock"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Fiery Temper and Alms of the Vein function as extra Lightning Bolts and Lava Spikes in the list"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Snacker is the main payoff for playing Madness today... guarantees resilience in keeping the clock active every turn"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Razortrap Gorge has a good chance of entering this list untapped by turn 3 or 4 if we sequence our spells correctly in the early game"
+    },
+    {
+      "confidence": 0.7,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Faithless Looting... can be reused from the graveyard to remove useless cards from the hand in longer games, or to enable more copies of Sneaky Snacker"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Pyroblast remains the best tool against Blue Terror and Faeries... Duress is the standard answer against Bogles, Affinity... Contaminated Ground plays mainly against Tron... Nihil Spellbomb fits into any game that relies too much on the graveyard, like Mono Blue Terror and Dredge."
+    }
+  ]
+}

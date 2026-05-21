@@ -1,0 +1,245 @@
+{
+  "archetype": "Bant Spirits",
+  "format": "pioneer",
+  "strategy_type": "tempo",
+  "overview": "Bant Spirits is an aggressive tempo deck in Pioneer that leverages Collected Company to flood the board with flying creatures and lords. It utilizes flash creatures for disruption and card advantage while aiming to close games quickly between turns four and five. The deck adapts its posture between an aggressive attack plan and a disruptive, value-oriented strategy depending on the matchup.",
+  "win_conditions": [
+    "Finish the game between turns 4 and 5 using aggressive flying creatures and lords",
+    "Flood the battlefield with Collected Company to overwhelm opponents",
+    "Leverage flash creatures like Rattlechains and Mausoleum Wanderer for disruption and race control"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Portable Hole or Skyclave Apparition",
+      "Aggressive hands with lords to play with Collected Company",
+      "Hands with Mausoleum Wanderer for early pressure"
+    ],
+    "mulligan_criteria": [
+      "Hands with Damping Sphere and Rest in Peace but only 3 mana value creatures",
+      "Hands lacking interaction or early threats"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Damping Sphere",
+          "Rest in Peace",
+          "Skyclave Apparition"
+        ],
+        "decision": "mulligan",
+        "reason": "The article states that hands with Damping Sphere and Rest in Peace but only 3 mana value creatures are a correct mulligan against Lotus Combo."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play flying creatures as fast as possible alongside Supreme Phantom",
+      "Use Collected Company on your turn to attack and remove blockers",
+      "Prioritize Mausoleum Wanderer for early pressure and protection"
+    ],
+    "mid_game": [
+      "Use Collected Company as an answer to opponent's spells for disruption",
+      "Leverage flash creatures like Rattlechains and Spell Queller to stay ahead in the race",
+      "Trade efficiently to build card advantage"
+    ],
+    "late_game": [
+      "Avoid late game against control due to limited card draw",
+      "Use Shapers' Sanctuary and Extraction Specialist to return dead creatures",
+      "Win through sustained card advantage and 2-to-1 trades"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Collected Company",
+      "role": "Board flood and interaction",
+      "notes": "Used on your turn for aggression or as an answer for disruption; looks for answers like Spell Queller or aggressive lords."
+    },
+    {
+      "name": "Supreme Phantom",
+      "role": "Lord and finisher",
+      "notes": "Increases power of other spirits; used to finish quickly in the aggressive game plan."
+    },
+    {
+      "name": "Mausoleum Wanderer",
+      "role": "Early pressure and protection",
+      "notes": "Helps finish games by turns 4-5; protects from removal and discards; can counter key cards like Pore Over the Pages."
+    },
+    {
+      "name": "Spell Queller",
+      "role": "Disruption and answer",
+      "notes": "Counters spells; held to answer Supreme Verdict or The Wandering Emperor."
+    },
+    {
+      "name": "Rattlechains",
+      "role": "Disruption and race control",
+      "notes": "Flash creature used to keep ahead in plays and the race."
+    },
+    {
+      "name": "Shapers' Sanctuary",
+      "role": "Protection and value",
+      "notes": "Enhances card advantage against spot removals; start with it to reduce opponent's spot removal potential."
+    },
+    {
+      "name": "Portable Hole",
+      "role": "Interaction",
+      "notes": "Favors interaction with permanents; useful against opponent's copies or to prevent stabilization."
+    }
+  ],
+  "sequencing_tips": [
+    "Use Collected Company on your turn to increase attack and remove blockers",
+    "Use Collected Company as an answer to opponent's spells for disruption",
+    "Hold Spell Queller to answer Supreme Verdict or The Wandering Emperor",
+    "Start the match with Mausoleum Wanderer to protect from removals and discards",
+    "Block creatures enchanted with Curious Obsession to prevent opponent card advantage",
+    "Use Shacklegeist to remove blockers like Old-Growth Troll"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Azorius Control",
+      "advice": "Prioritize quickest strategy early, optimize tempo post-side, remove Shacklegeist and Remorseful Cleric, keep Portable Hole and use Shapers' Sanctuary with Extraction Specialist.",
+      "watch_for": [
+        "Supreme Verdict",
+        "The Wandering Emperor",
+        "Spot removals"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono-Green Ramp",
+      "advice": "Apply fast board pressure, prefer hands with Portable Hole or Skyclave Apparition, side in Damping Sphere, use Shacklegeist on blockers.",
+      "watch_for": [
+        "Old-Growth Troll",
+        "Cavalier of Thorns",
+        "Elder Gargaroth",
+        "Ramp units"
+      ]
+    },
+    {
+      "opponent_archetype": "Rakdos Midrange",
+      "advice": "Enhance Rattlechains and Mausoleum Wanderer to protect Supreme Phantom, trade 2-to-1 for card advantage, start with Shapers' Sanctuary, reduce 3-drop creatures.",
+      "watch_for": [
+        "Sheoldred, the Apocalypse",
+        "Fable of the Mirror-Breaker // Reflection of Kiki-Jiki",
+        "Spot removals",
+        "Discards"
+      ]
+    },
+    {
+      "opponent_archetype": "Lotus Combo",
+      "advice": "Go for speed, prioritize Mausoleum Wanderer early, counter key cards with Spell Queller, mulligan to speed over combo prevention, side in Damping Sphere and Rest in Peace.",
+      "watch_for": [
+        "Pore Over the Pages",
+        "Global removals post-side",
+        "Combo pieces"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono U Spirits",
+      "advice": "Keep battlefield creatures bigger than opponent's, block Curious Obsession enchanted creatures, side in Lifelink creatures, use Extraction Specialist for combat damage trades, use Portable Hole early.",
+      "watch_for": [
+        "Curious Obsession",
+        "Opponent's creatures",
+        "Stabilization attempts"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Supreme Verdict",
+    "The Wandering Emperor",
+    "Old-Growth Troll",
+    "Cavalier of Thorns",
+    "Elder Gargaroth",
+    "Sheoldred, the Apocalypse",
+    "Fable of the Mirror-Breaker // Reflection of Kiki-Jiki",
+    "Pore Over the Pages",
+    "Curious Obsession"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-bant-spirits-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T05:14:26+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-bant-spirits-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:12:59+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "3fc1a0efc7158ec5",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "As it is a deck that only has 7 noncreature spells, the Bant version becomes the most aggressive of Spirits lists, as all their creatures can go into the battlefield with Collected Company"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "With this play, it is possible to finish the game between turns 4 and 5, specially if there is a Mausoleum Wanderer in play."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "all their creatures can go into the battlefield with Collected Company"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "favor using Collected Company on your turn to increase its attack and remove possible blockers."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "use Collected Company as an answer to your opponents' spells, looking for good answers at that moment."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "holding out our Spell Queller to answer Supreme Verdict or The Wandering Emperor."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "holding out our Spell Queller to answer Supreme Verdict or The Wandering Emperor."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "We must remove Old-Growth Trolls and ramp units to delay our opponents from casting Cavalier of Thorns or Elder Gargaroth"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "deal with our opponent's threats, such as Sheoldred, the Apocalypse and Fable of the Mirror-Breaker // Reflection of Kiki-Jiki"
+    }
+  ]
+}

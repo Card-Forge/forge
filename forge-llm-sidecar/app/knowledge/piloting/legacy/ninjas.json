@@ -1,0 +1,137 @@
+{
+  "archetype": "Ninjas",
+  "format": "legacy",
+  "strategy_type": "tempo",
+  "overview": "This U/B Ninja deck operates as a tempo strategy in Legacy, leveraging cheap creatures and instant-speed interaction to control the board while generating card advantage. Orcish Bowmasters provides immediate disruption by stealing key threats, while Yuriko, the Tiger's Shadow offers flexible removal and untap value. Tamiyo, Inquisitive Student ensures you stay ahead in the card economy, allowing you to outmaneuver opponents through calculated trades and incremental advantages.",
+  "win_conditions": [
+    "Stealing high-impact creatures with Orcish Bowmasters to swing board state",
+    "Exiling problematic permanents via Yuriko's death trigger",
+    "Outlasting opponents with Tamiyo's sustained card advantage while maintaining board presence"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Orcish Bowmasters and a cheap spell to cast on turn one",
+      "Hands containing Yuriko paired with removal or draw spells",
+      "Hands with Tamiyo and at least two other cards to enable her draw ability"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking Orcish Bowmasters or Yuriko in a 6-card hand",
+      "Hands with only high-cost creatures and no early interaction",
+      "Hands missing Tamiyo or draw engines in longer formats"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Orcish Bowmasters on curve to steal an early threat or disrupt opponent's board",
+      "Cast Yuriko to establish a body and prepare for death-trigger removal",
+      "Use Tamiyo to draw cards when casting early spells, maintaining hand size"
+    ],
+    "mid_game": [
+      "Trade Yuriko into problematic creatures to exile them permanently",
+      "Sequence spells to maximize Tamiyo's draw triggers while keeping Orcish Bowmasters on board",
+      "Apply pressure with stolen creatures while holding up removal for opponent's answers"
+    ],
+    "late_game": [
+      "Rely on Tamiyo's card advantage to find answers to late-game threats",
+      "Use Yuriko's untap ability to generate extra value from stolen creatures",
+      "Stabilize with board control and win through incremental card advantage and board presence"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Yuriko, the Tiger's Shadow",
+      "role": "Flexible removal and board presence",
+      "notes": "Cast on curve, then sacrifice to exile key threats. Use her untap ability to generate extra value from Orcish Bowmasters steals."
+    },
+    {
+      "name": "Orcish Bowmasters",
+      "role": "Creature theft and tempo disruption",
+      "notes": "Play early to steal high-impact creatures. Protect it with counters or use it as a trade target to trigger Yuriko's death ability."
+    },
+    {
+      "name": "Tamiyo, Inquisitive Student",
+      "role": "Card advantage and engine",
+      "notes": "Cast after other spells to draw cards. Keep her on board to consistently refill your hand and outlast opponents."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast Orcish Bowmasters before Yuriko to ensure you have a creature to exile if Yuriko dies",
+    "Sequence Tamiyo after other spells to maximize card draw triggers",
+    "Hold up removal until opponent commits to a board state, then use Yuriko's death trigger for maximum impact",
+    "Prioritize stealing creatures that can be untapped by Yuriko for extra value"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Orcish Bowmasters to steal early threats and Yuriko's death trigger to remove key attackers. Keep Tamiyo for card advantage to outlast.",
+      "watch_for": [
+        "Early board wipes",
+        "Direct damage spells",
+        "Fast removal targeting Orcish Bowmasters"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells by sequencing Orcish Bowmasters carefully. Use Tamiyo to draw through their interaction and apply steady pressure.",
+      "watch_for": [
+        "Hand traps",
+        "Board sweepers",
+        "Counterspells on key creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race with stolen creatures while using Yuriko to remove their threats. Leverage Tamiyo to stay ahead in card economy.",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Late-game finishers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Early aggressive creatures",
+    "Instant-speed removal",
+    "Hand disruption",
+    "Board sweepers",
+    "Late-game value engines"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:10:45+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:10:45+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "bda27ddaed35dcec",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

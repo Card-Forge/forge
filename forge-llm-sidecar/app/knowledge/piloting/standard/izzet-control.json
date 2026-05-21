@@ -1,0 +1,168 @@
+{
+  "archetype": "Izzet Control",
+  "format": "standard",
+  "strategy_type": "control",
+  "overview": "Izzet Control in Standard leverages blue disruption and red removal to stabilize against early pressure before deploying resilient finishers. The deck aims to outlast opponents by controlling the board and generating incremental card advantage. Signature cards like Tablet of Discovery and Ashling's Command provide the necessary value engines to transition into a late-game advantage.",
+  "win_conditions": [
+    "Outlasting opponents with superior card advantage",
+    "Deploying resilient finishers like Colorstorm Stallion",
+    "Generating incremental value with Ashling's Command and Tablet of Discovery"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early interaction and a land",
+      "Hands containing Tablet of Discovery or Ashling's Command with mana",
+      "Hands with two-land starts that include a counterspell or removal"
+    ],
+    "mulligan_criteria": [
+      "Mana screws with no early interaction",
+      "Hands heavy on finishers without disruption",
+      "Three-land starts lacking early game answers"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and hold up mana for counterspells",
+      "Use red removal to clear early threats",
+      "Prioritize surviving turns 1-3 over developing board presence"
+    ],
+    "mid_game": [
+      "Deploy Tablet of Discovery to filter and draw into answers",
+      "Use Ashling's Command to stabilize and generate card advantage",
+      "Begin applying pressure with resilient creatures like Colorstorm Stallion"
+    ],
+    "late_game": [
+      "Leverage Ashling's Command's triggered abilities to outvalue opponents",
+      "Use Colorstorm Stallion's evasion and power to close the game",
+      "Maintain hand size and mana advantage to dictate the pace"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Colorstorm Stallion",
+      "role": "Late-game finisher",
+      "notes": "Hold up red mana to activate its ability for evasion or extra damage, using it to bypass blockers or close out games."
+    },
+    {
+      "name": "Ashling's Command",
+      "role": "Card advantage engine",
+      "notes": "Use its modal abilities to draw cards, protect permanents, or gain life, triggering its enter-the-battlefield ability for additional value."
+    },
+    {
+      "name": "Tablet of Discovery",
+      "role": "Board control and draw",
+      "notes": "Cast it to exile opponent's threats and draw cards, or use it to protect your own key permanents while filtering your deck."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up blue mana for counterspells before committing to red removal",
+    "Trigger Ashling's Command abilities before casting Tablet of Discovery to maximize card draw",
+    "Save Colorstorm Stallion's ability for when it can bypass a key blocker or deal lethal damage"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and life total preservation, using Ashling's Command to stabilize.",
+      "watch_for": [
+        "Early board floods",
+        "Direct damage spells",
+        "Low-cost creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race with Colorstorm Stallion and use Tablet of Discovery to disrupt their game plan.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspell chains",
+        "Graveyard hate"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Control the early game and transition into your value engines before they establish a board.",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw spells",
+        "Resilient threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipes",
+    "Direct damage spells"
+  ],
+  "metadata": {
+    "source": "Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:26:14+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-izzet-control-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:23:18+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:26:14+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "25b5e170b5fc0f1e",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Izzet Control archetype, Standard format, signature cards"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards and control archetype principles"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "General Izzet Control piloting principles"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard format meta expectations"
+    }
+  ]
+}

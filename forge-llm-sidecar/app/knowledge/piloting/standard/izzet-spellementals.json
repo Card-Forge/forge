@@ -1,0 +1,157 @@
+{
+  "archetype": "Izzet Spellementals",
+  "format": "standard",
+  "strategy_type": "tempo",
+  "overview": "Izzet Spellementals is a fast, aggressive tempo deck that leverages cheap, high-impact spells and token generation to overwhelm opponents before they can stabilize. By cycling through Traumatic Critique for early damage and using Eddymurk Crab to flood the board with haste elementals, the deck maintains constant pressure. Hearth Elemental provides crucial graveyard recursion to replay key threats and burn spells, extending the game's reach when needed.",
+  "win_conditions": [
+    "Overwhelm the opponent with a wide board of haste elementals and direct damage",
+    "Recycle key threats and burn spells via Hearth Elemental to close out games",
+    "Maintain tempo advantage by trading efficiently while keeping the board active"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two lands and a one- or two-drop threat",
+      "Hands containing Traumatic Critique paired with early board presence",
+      "Hands that can play a spell on turn one and follow up on turn two"
+    ],
+    "mulligan_criteria": [
+      "Hands with three or more lands",
+      "Hands lacking any one- or two-drops",
+      "Hands with only high-cost cards and no early interaction"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap threats like Eddymurk Crab to establish board presence",
+      "Use Traumatic Critique to chip away at the opponent's life total or force unfavorable trades",
+      "Prioritize keeping the board active and applying immediate pressure"
+    ],
+    "mid_game": [
+      "Leverage Hearth Elemental to recycle key spells from the graveyard",
+      "Generate additional elementals to widen the board and force blockers",
+      "Maintain card advantage by replaying efficient threats and burn spells"
+    ],
+    "late_game": [
+      "Use recycled threats to clear the board and close out the game",
+      "Push for lethal with a combination of board presence and direct damage",
+      "Avoid overcommitting to the board if the opponent has sweepers or board wipes"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Traumatic Critique",
+      "role": "Early-game direct damage and tempo tool",
+      "notes": "Use to chip away at life totals, force unfavorable trades, or finish off opponents when combined with board presence"
+    },
+    {
+      "name": "Eddymurk Crab",
+      "role": "Token generator and early board presence",
+      "notes": "Play early to flood the board with haste elementals, applying immediate pressure and forcing blockers"
+    },
+    {
+      "name": "Hearth Elemental",
+      "role": "Graveyard recursion and card advantage engine",
+      "notes": "Use to replay key threats and burn spells from the graveyard, extending the deck's reach and maintaining tempo"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up Traumatic Critique for instant-speed interaction when possible",
+    "Play Eddymurk Crab before Hearth Elemental to maximize token generation and board presence",
+    "Recycle high-impact spells first, then use Hearth Elemental to replay threats",
+    "Avoid overcommitting to the board if the opponent has sweepers or board wipes"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early board presence and use Traumatic Critique to force unfavorable trades",
+      "watch_for": [
+        "Fast sweepers",
+        "Early removal",
+        "Life total pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply constant pressure and use Hearth Elemental to bypass card advantage strategies",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race before they stabilize and use recursion to outvalue their resource engine",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw spells",
+        "Board control effects"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast sweepers that clear the board",
+    "Direct removal targeting key threats",
+    "Card draw engines that outpace recursion",
+    "Life gain effects that extend the game"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T05:33:40+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:33:40+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "a28e56764b5a6002",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

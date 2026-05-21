@@ -1,0 +1,226 @@
+{
+  "archetype": "Storm",
+  "format": "pauper",
+  "strategy_type": "aggro",
+  "overview": "The article evaluates new Tarkir: Dragonstorm commons for Pauper, highlighting how cards like Fortress Kin-Guard and Salt Road Packbeast bolster Mono-White and RG Aggro strategies. It also explores how Sagu Wildling and Heritage Reclamation can enhance combo and midrange builds like 5-Land Spy and Gruul Ponza. The format is currently adapting to recent bans and unbans, making it an ideal time to test these new additions.",
+  "win_conditions": [
+    "Filling the board with creatures to discount Salt Road Packbeast",
+    "Using trample counters from Champion of Dusan to push damage",
+    "Milling the deck with Balustrade Spy and returning Lotleth Giant for lethal",
+    "Leveraging card draw and graveyard hate from Heritage Reclamation"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early mana and aggressive creatures like Fortress Kin-Guard",
+      "Hands containing key combo pieces like Balustrade Spy or Sagu Wildling"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early threats or card draw",
+      "Hands with only high-cost creatures without ramp or discount effects"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Fortress Kin-Guard",
+          "Salt Road Packbeast",
+          "Land",
+          "Land",
+          "Land",
+          "Land",
+          "Land"
+        ],
+        "decision": "keep",
+        "reason": "Provides early board presence and sets up the affinity discount for the late-game threat."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play low-cost creatures like Fortress Kin-Guard to establish board presence and generate tokens.",
+      "Use versatile red card draw to stabilize or buff early threats."
+    ],
+    "mid_game": [
+      "Leverage creature tokens to discount Salt Road Packbeast and push damage.",
+      "Exile Champion of Dusan from the graveyard to apply trample counters to key attackers."
+    ],
+    "late_game": [
+      "Execute the 5-Land Spy combo by milling the deck and returning Lotleth Giant.",
+      "Use Heritage Reclamation for graveyard disruption and card advantage to close out games."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Fortress Kin-Guard",
+      "role": "Early-game threat & token generator",
+      "notes": "Endure 1 lets you create a 1/1 Spirit token or pump itself, synergizing with ETB effects and discounting Salt Road Packbeast."
+    },
+    {
+      "name": "Salt Road Packbeast",
+      "role": "Late-game finisher",
+      "notes": "4/3 creature with affinity for creatures; becomes highly efficient when the board is filled with tokens."
+    },
+    {
+      "name": "Champion of Dusan",
+      "role": "Mid-game attacker & trample source",
+      "notes": "3-mana 4/2 trampler that can be exiled from the graveyard to give a +1/+1 and trample counter to another creature."
+    },
+    {
+      "name": "Heritage Reclamation",
+      "role": "Utility & card draw",
+      "notes": "Upgraded Return to Nature that offers bounce, graveyard hate, and card draw, fitting well in Gruul Ponza."
+    },
+    {
+      "name": "Sagu Wildling",
+      "role": "Combo enabler & mill",
+      "notes": "Green Omen dragon that mills cards and shuffles itself back, improving consistency for the 5-Land Spy strategy."
+    },
+    {
+      "name": "Balustrade Spy",
+      "role": "Combo core",
+      "notes": "Mills the entire deck from the graveyard to enable the Lotleth Giant lethal sequence."
+    },
+    {
+      "name": "Lotleth Giant",
+      "role": "Lethal threat",
+      "notes": "Returned from the graveyard via Dread Return to deal game-ending damage."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize playing Fortress Kin-Guard early to generate tokens that reduce Salt Road Packbeast's cost.",
+    "Save Champion of Dusan's Renew ability for when you have a strong attacker like Writhing Chrysalis or Boarding Party to maximize trample impact.",
+    "In 5-Land Spy, use Sagu Wildling to mill lands and creatures, then trigger Balustrade Spy before casting Dread Return for Lotleth Giant."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "RG Aggro / Midrange",
+      "advice": "Use Champion of Dusan's trample counters to out-stat Bannerhide Krushok decks, and leverage Heritage Reclamation to bounce their key threats.",
+      "watch_for": [
+        "Bannerhide Krushok",
+        "Malevolent Rumble"
+      ]
+    },
+    {
+      "opponent_archetype": "Control / Graveyard Hate",
+      "advice": "Rely on card draw from red spells and Heritage Reclamation to maintain pressure, while using Sagu Wildling to bypass graveyard disruption by shuffling back into the deck.",
+      "watch_for": [
+        "Graveyard hate",
+        "Board wipes"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Bannerhide Krushok",
+    "Malevolent Rumble",
+    "Graveyard hate effects",
+    "Board wipes"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm + Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-best-cards-from-tarkir-dragonstorm",
+    "generated_at": "2026-05-21T10:40:02+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-gruul-storm-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:35:01+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-grixis-cycling-storm-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:36:39+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-best-cards-from-tarkir-dragonstorm",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:38:22+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "4b3376360672465c",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "TDM will bring us two fascinating white cards that, I believe, could be quite valuable in Mono-White Aggro lists."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Salt Road is clearly better, as it has a sort of Affinity for creatures. It will be incredible with Fortress Kin-Guard , which will fill your board and discount the cost of Salt Road."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The trample counter is incredibly strong in the right build... Imagine putting a trample counter on Writhing Chrysalis , for instance, or even on Boarding Party ."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The goal behind this strategy is putting Balustrade Spy in play, milling your entire deck from your graveyard, and putting more creatures in play from there. Then, you just have to use Dread Return to bring Lotleth Giant from the graveyard and deal lethal damage to the opponent."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Heritage Reclamation has the same effects as Return to Nature , but its last mode is not only a spot graveyard hate, but also card draw"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.6,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "It will be incredible with Fortress Kin-Guard , which will fill your board and discount the cost of Salt Road."
+    },
+    {
+      "confidence": 0.6,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Imagine putting a trample counter on Writhing Chrysalis , for instance, or even on Boarding Party ."
+    },
+    {
+      "confidence": 0.6,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Sagu Wildling could do the same as Many Partings , but the difference is that it is a creature, and you'll shuffle it back into your deck with its Omen. This makes the Spy game plan a lot better."
+    }
+  ],
+  "common_threats_evidence": []
+}

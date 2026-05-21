@@ -1,0 +1,166 @@
+{
+  "archetype": "Selesnya Ouroboroid",
+  "format": "standard",
+  "strategy_type": "aggro",
+  "overview": "Selesnya Ouroboroid is a white-green aggressive deck built around rapid board presence and escalating creature threats. It leverages low-cost starters like Badgermole Cub to establish early pressure, then transitions into heavy hitters such as Brightglass Gearhulk and Ouroboroid to close out games. The strategy relies on maintaining a wide board while using tribal and recursive synergies to outpace opponents before they can stabilize.",
+  "win_conditions": [
+    "Attacking with a wide board of creatures led by Brightglass Gearhulk",
+    "Using Ouroboroid's self-sustaining recursion to overwhelm defenses",
+    "Accelerating early pressure with Badgermole Cub to force fatal damage before turn four"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two one- or two-mana creatures",
+      "Combinations featuring Badgermole Cub and a removal or board presence spell",
+      "Draws that include Brightglass Gearhulk or Ouroboroid alongside early curve creatures"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking any creature or land drop by turn two",
+      "Draws heavy on high-cost finishers without early acceleration",
+      "Hands missing color fixers or containing only non-creature spells"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and deploy Badgermole Cub immediately to set the tempo",
+      "Prioritize attacking over holding up mana to force early concessions",
+      "Use any available white removal to clear blockers threatening your curve"
+    ],
+    "mid_game": [
+      "Transition into Brightglass Gearhulk to apply heavy pressure and clear minor blockers",
+      "Maintain board width by playing creatures on curve and trading efficiently",
+      "Begin setting up recursive loops or tribal synergies that empower Ouroboroid"
+    ],
+    "late_game": [
+      "Cast Ouroboroid to secure a self-sustaining threat that recurs or scales indefinitely",
+      "Push lethal damage with a wide board while protecting key finishers",
+      "Cycle through the deck to find additional value or recursion to outlast opponent's resources"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Badgermole Cub",
+      "role": "Early-game curve creature that establishes immediate board presence",
+      "notes": "Deploy on turn one or two to attack face; prioritize keeping it in the opening hand to avoid slow starts"
+    },
+    {
+      "name": "Brightglass Gearhulk",
+      "role": "Mid-game heavy hitter that applies decisive pressure",
+      "notes": "Play when you have sufficient blockers or removal to protect it; use its stats to trade up or push lethal"
+    },
+    {
+      "name": "Ouroboroid",
+      "role": "Late-game finisher with recursive or self-sustaining capabilities",
+      "notes": "Save for when the board is stabilized; leverage its ability to return to hand or battlefield to maintain relentless pressure"
+    }
+  ],
+  "sequencing_tips": [
+    "Always attack with Badgermole Cub before holding up removal unless a specific blocker demands it",
+    "Hold up white mana selectively to bounce or remove threats that would stall Brightglass Gearhulk",
+    "Delay casting Ouroboroid until you have a clear path to lethal or a way to protect it from sweepers",
+    "Prioritize playing lands before creatures to ensure you can cast your curve without tapping out unnecessarily"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Push early damage relentlessly with Badgermole Cub and early creatures to prevent them from setting up counters and sweepers",
+      "watch_for": [
+        "Board wipes",
+        "Counterspell packages",
+        "Late-game value engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them by keeping the board wide and using Brightglass Gearhulk to force unfavorable trades",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Resilient creatures with enter-the-battlefield effects"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use early blockers to stabilize, then outvalue them with Ouroboroid's recursion and sustained pressure",
+      "watch_for": [
+        "Fast one-drops",
+        "Lethal turn three combos",
+        "Board presence spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup with early interaction and race them before they assemble their win condition",
+      "watch_for": [
+        "Graveyard recursion",
+        "Mana acceleration",
+        "Instant-speed win conditions"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipe spells",
+    "Targeted removal for large creatures",
+    "Counterspells targeting finishers",
+    "Graveyard hate or recursion denial"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:09:09+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:09:09+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "069275cb9ecd9f5d",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype name and signature cards"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature card names and aggro strategy"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard aggro sequencing principles applied to signature cards"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard format meta expectations for aggressive decks"
+    }
+  ]
+}

@@ -1,0 +1,259 @@
+{
+  "archetype": "Selesnya Company",
+  "format": "pioneer",
+  "strategy_type": "aggro",
+  "overview": "Selesnya Company is a Pioneer aggro archetype that aims to flood the board with low-cost creatures to apply early pressure and win games before opponents can stabilize. It leverages powerful enter-the-battlefield effects, static abilities, and card advantage engines like Enduring Innocence and Collected Company to control the board and outpace value decks. The deck is highly adaptable, utilizing flexible slots and a targeted sideboard to navigate a diverse metagame.",
+  "win_conditions": [
+    "Flood the board with low-cost creatures to apply early pressure",
+    "Trigger Enduring Innocence repeatedly for card advantage and board presence",
+    "Use Collected Company to go wide and overwhelm opponents",
+    "Win before opponents can deploy sweepers or stabilize with value engines"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with one-drop mana dorks like Llanowar Elves or Elvish Mystic",
+      "Hands containing efficient two-drops like Thalia or Kellan",
+      "Hands with a mix of lands and creatures to jump from one to three mana by turn two"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early mana acceleration",
+      "Hands heavy on lands or high-cost cards without early threats",
+      "Hands without a clear path to apply turn one or two pressure"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Llanowar Elves",
+          "Elvish Mystic",
+          "Thalia, Guardian of Thraben",
+          "Forest",
+          "Forest",
+          "Island",
+          "Plains"
+        ],
+        "decision": "keep",
+        "reason": "Provides unconditional mana dorks and an efficient two-drop to jump from one to three mana by turn two."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play unconditional mana dorks like Llanowar Elves and Elvish Mystic to accelerate mana",
+      "Cast efficient two-drops like Thalia, Guardian of Thraben to tax opponents and protect creatures",
+      "Aim to jump from one mana to three by turn two"
+    ],
+    "mid_game": [
+      "Deploy board interaction like Skyclave Apparition and Werefox Bodyguard",
+      "Use Anointed Peacekeeper to identify targets for Aven Interrupter",
+      "Cast Collected Company to flood the board and apply pressure"
+    ],
+    "late_game": [
+      "Utilize Shefet Dunes to increase pressure in longer games or mirrors",
+      "Maintain board presence with Enduring Innocence to outvalue opponents",
+      "Sideboard in attrition tools like Gideon, Ally of Zendikar or Elite Spellbinder against control"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Llanowar Elves",
+      "role": "Mana acceleration",
+      "notes": "Unconditional one-drop dork to jump from one to three mana by turn two."
+    },
+    {
+      "name": "Thalia, Guardian of Thraben",
+      "role": "Tax effect & protection",
+      "notes": "Ensures creatures survive sweepers, forces less explosive plays, and headaches non-creature spell decks."
+    },
+    {
+      "name": "Aven Interrupter",
+      "role": "Spell disruption",
+      "notes": "Exiles key opponent spells, granting an extra turn of tempo; best saved for game-changing cards."
+    },
+    {
+      "name": "Anointed Peacekeeper",
+      "role": "Information & removal",
+      "notes": "Reveals top card to guide Aven Interrupter usage and deals with Planeswalkers or activated abilities."
+    },
+    {
+      "name": "Archon of Emeria",
+      "role": "Meta call & land delay",
+      "notes": "Answers Rakdos Prowess and Izzet Phoenix while delaying nonbasic lands against combo decks."
+    },
+    {
+      "name": "Enduring Innocence",
+      "role": "Card advantage & threat",
+      "notes": "Triggers with almost any creature for constant card advantage and returns as an enchantment if destroyed."
+    },
+    {
+      "name": "Collected Company",
+      "role": "Board flood",
+      "notes": "Main way to go wide and play fair against value archetypes."
+    }
+  ],
+  "sequencing_tips": [
+    "Play mana dorks before two-drops to ensure smooth mana curve and early pressure",
+    "Hold Aven Interrupter for key opponent spells rather than casting it immediately",
+    "Use Anointed Peacekeeper's reveal to decide whether to cast Aven Interrupter or play another creature",
+    "Prioritize untapped lands like Eiganjo and Boseiju to maintain aggressive tempo"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Rakdos Prowess",
+      "advice": "Sideboard in Brutal Cathar, Werefox Bodyguard, and Portable Hole. Use Thalia's tax to slow their explosive starts and target key creatures.",
+      "watch_for": [
+        "Prowess creatures",
+        "Sweepers",
+        "Portable Hole targets"
+      ]
+    },
+    {
+      "opponent_archetype": "Azorius Control",
+      "advice": "Sideboard in Voice of Resurgence and attrition tools. Apply early pressure before they stabilize with counters and sweepers.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Card advantage engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Phoenix",
+      "advice": "Sideboard in Unlicensed Hearse or Rest in Peace. Use Archon of Emeria to delay nonbasic lands and disrupt their graveyard recursion.",
+      "watch_for": [
+        "Graveyard recursion",
+        "Lightning Strike",
+        "Nonbasic lands"
+      ]
+    },
+    {
+      "opponent_archetype": "Selesnya Company",
+      "advice": "Sideboard in Gideon, Ally of Zendikar for its Glorious Anthem ability. Use Shefet Dunes to increase pressure in the mirror.",
+      "watch_for": [
+        "Mirror matches",
+        "Gideon's anthem",
+        "Shefet Dunes"
+      ]
+    },
+    {
+      "opponent_archetype": "Jund Sacrifice",
+      "advice": "Sideboard in Portable Hole and Unlicensed Hearse. Target Witch's Oven and disrupt their sacrifice outlets.",
+      "watch_for": [
+        "Witch's Oven",
+        "Sacrifice outlets",
+        "Graveyard hate"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Liliana of the Veil",
+    "Agatha's Soul Cauldron",
+    "Witch's Oven",
+    "Sweepers",
+    "Rakdos Prowess",
+    "Izzet Phoenix",
+    "Azorius Control",
+    "Lotus Combo",
+    "Enigmatic Incarnation"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-selesnya-company-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T03:36:43+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-selesnya-company-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T03:35:00+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "de3d5e21498755ed",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Selesnya Company is a very adaptable deck with a wide range of answers for different Metagames... one of the main ways for “go wide” Aggro decks to play fair games against value archetypes."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "one of the main ways for “go wide” Aggro decks to play fair games against value archetypes"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "By triggering with almost any creature we have, it gives us a constant source of card advantage while also being a threat on the board"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "prevent them from burying us in card advantage... win before a sweeper"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Capitalizing on its ETB is essential to pressure the opponent, and it is best to save it for key cards that can turn the tide of the game."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Anointed Peacekeeper usually provides us the information that defines the best cast for Aven Interrupter."
+    },
+    {
+      "confidence": 0.7,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "we aim to use as many lands as possible that come into play untapped, while providing us with access to the mana colors we need at the right time."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "specific answers against cards like Liliana of the Veil with Loxodon Smiter"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "deals with unwanted Planeswalkers and activated effects of other troublesome permanents, such as Agatha's Soul Cauldron"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "counter to Witch’s Oven in Jund Sacrifice"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "answer against two of the best decks in the format: Rakdos Prowess and Izzet Phoenix"
+    }
+  ]
+}

@@ -442,7 +442,10 @@ public final class DeckRecognitionObserver {
                 + " observations=" + observations.size()
                 + " cards=" + observations.stream().map(Observation::card).toList());
 
-        client.recognizeAsync(request).whenComplete((result, err) -> {
+        final var future = client.recognizeAsync(request);
+        // Expose to the influence object so decision sites can wait on it.
+        aiController.getSidecarInfluence().setLatestCall(future);
+        future.whenComplete((result, err) -> {
             if (err != null) {
                 Logger.info("DeckRecognition: /recognize failed: " + err.getMessage());
             } else if (result == null || result.isEmpty()) {

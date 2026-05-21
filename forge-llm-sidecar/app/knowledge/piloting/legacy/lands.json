@@ -1,0 +1,302 @@
+{
+  "archetype": "Lands",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "The Lands deck is a Legacy archetype that abuses the format's extensive land pool to generate mana, control the board, and win through specific combos. It relies on an engine of Mox Diamond, Exploration, Crop Rotation, and Life from the Loam to cycle lands and recover card advantage. Recently, the deck has integrated four Sphere of Resistance into the main deck to improve consistency against faster strategies.",
+  "win_conditions": [
+    "Deploying Marit Lage to finish games faster",
+    "Executing the Dark Depths and Thespian's Stage finishing combo",
+    "Overwhelming opponents with an avalanche of land resources via Life from the Loam"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing acceleration and action",
+      "Hands that can play Forest - Exploration - Saga on turn 1",
+      "Hands threatening Marit Lage by turn 2 against decks without counters",
+      "Risky hands that can buy time and likely draw a green mana source soon"
+    ],
+    "mulligan_criteria": [
+      "Hands with no action or acceleration against almost everything",
+      "Hands relying on Marit Lage when facing decks with counterspells"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "No acceleration cards",
+          "No action cards"
+        ],
+        "decision": "mulligan",
+        "reason": "It doesn't have acceleration, nor any action. Verdict: Mulligan against almost everything."
+      },
+      {
+        "hand": [
+          "Forest",
+          "Exploration",
+          "Urza's Saga",
+          "Crop Rotation",
+          "Life from the Loam",
+          "Sphere of Resistance"
+        ],
+        "decision": "keep",
+        "reason": "You can both rely on drawing one of your many lands and play the sequence of Forest - Exploration - Saga on turn 1, Crop Rotation into a fetchland, tap it, and Life from the Loam to recover both lands and play the Sphere."
+      },
+      {
+        "hand": [
+          "Risky hand cards"
+        ],
+        "decision": "keep",
+        "reason": "Risky keep; a bet on drawing a green mana source. It can buy you some time."
+      },
+      {
+        "hand": [
+          "Marit Lage"
+        ],
+        "decision": "keep",
+        "reason": "Threatens to play Marit Lage at the end of turn 2. Keep against decks with no answer, mulligan against decks with counters."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands to establish a robust mana base",
+      "Hold off attackers with Maze of Ith, The Tabernacle at Pendrell Vale, and Karakas",
+      "Deploy Sphere of Resistance to slow down opponent's spell casting"
+    ],
+    "mid_game": [
+      "Control opponent's mana with Wasteland and Ghost Quarter",
+      "Utilize Urza's Saga as a toolbox to find answers like Haywire Mite or Soul-Guide Lantern",
+      "Cycle lands with Crop Rotation and recover them with Life from the Loam"
+    ],
+    "late_game": [
+      "Summon Marit Lage to secure victory",
+      "Execute the Dark Depths and Thespian's Stage combo",
+      "Overwhelm opponents with continuous land production and resource advantage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Mox Diamond",
+      "role": "Land acceleration",
+      "notes": "Converts lands into early mana to speed up the engine."
+    },
+    {
+      "name": "Exploration",
+      "role": "Land acceleration",
+      "notes": "Allows tapping lands for extra mana to fuel the combo."
+    },
+    {
+      "name": "Crop Rotation",
+      "role": "Land search",
+      "notes": "Fetches specific lands like Karakas or fetchlands to enable combos and control."
+    },
+    {
+      "name": "Life from the Loam",
+      "role": "Card recovery",
+      "notes": "Returns lands from the graveyard to hand, recovering card disadvantage."
+    },
+    {
+      "name": "Sphere of Resistance",
+      "role": "Spell delay",
+      "notes": "Slows down combo decks by increasing mana cost of spells."
+    },
+    {
+      "name": "Dark Depths",
+      "role": "Win condition",
+      "notes": "Part of the finishing combo with Thespian's Stage."
+    },
+    {
+      "name": "Thespian's Stage",
+      "role": "Win condition",
+      "notes": "Copies Dark Depths to create a massive creature."
+    },
+    {
+      "name": "Marit Lage",
+      "role": "Win condition",
+      "notes": "Large creature that helps finish games faster."
+    },
+    {
+      "name": "Urza's Saga",
+      "role": "Toolbox/Mana",
+      "notes": "Generates mana and exiles cards to find sideboard options like Haywire Mite."
+    },
+    {
+      "name": "Wasteland",
+      "role": "Mana denial",
+      "notes": "Destroys opponent's lands to control their mana."
+    }
+  ],
+  "sequencing_tips": [
+    "Play Forest, then Exploration, then Urza's Saga on turn 1 to accelerate land drops.",
+    "Crop Rotation into a fetchland, tap it for mana, then cast Life from the Loam to recover both lands and play Sphere of Resistance.",
+    "Prioritize holding off attackers with Maze of Ith or Karakas before committing to the combo.",
+    "Use Urza's Saga to exile and retrieve sideboard cards like Haywire Mite or Soul-Guide Lantern as needed."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Grixis / Temur / 4C Delver",
+      "advice": "Remove Spheres and some Saga targets. Rely on the Life from the Loam engine to overwhelm them with resources, as they have limited Wastelands and Forces of Will.",
+      "watch_for": [
+        "Wasteland",
+        "Force of Will"
+      ]
+    },
+    {
+      "opponent_archetype": "Reanimator",
+      "advice": "Use main deck answers like Bojuka Bog, Karakas, and Maze of Ith. Swords to Plowshares is crucial for Archon of Cruelty. Spheres are less effective here.",
+      "watch_for": [
+        "Archon of Cruelty",
+        "Atraxa, Grand Unifier",
+        "Griselbrand"
+      ]
+    },
+    {
+      "opponent_archetype": "Stompy (Red Prison / Boros Initiative)",
+      "advice": "Recruit Marit Lage as soon as possible before Initiative resolves. Use Dark Depths to potentially remove Magus of the Moon. Sideboard Torpor Orb and Deafening Silence.",
+      "watch_for": [
+        "Blood Moon",
+        "Magus of the Moon",
+        "Archon of Emeria",
+        "Chalice of the Void",
+        "Initiative"
+      ]
+    },
+    {
+      "opponent_archetype": "Uro Control",
+      "advice": "Battle for resources. Main deck can handle Uro. Sphere can force out threats like Choke. Marit Lage is a backup win condition.",
+      "watch_for": [
+        "Uro, Titan of Nature's Wrath",
+        "Force of Negation",
+        "Choke"
+      ]
+    },
+    {
+      "opponent_archetype": "Doomsday",
+      "advice": "Use Sphere of Resistance to delay them. Torpor Orb from the sideboard can be an ace in the hole. Aim to finish with Marit Lage.",
+      "watch_for": [
+        "Doomsday combo",
+        "Counterspells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Delver versions",
+    "Combo decks",
+    "Archon of Cruelty",
+    "Blood Moon",
+    "Magus of the Moon",
+    "Archon of Emeria",
+    "Chalice of the Void",
+    "Initiative",
+    "Force of Negation",
+    "Counterspells"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-deck-tech-lands-an-old-classic-revived",
+    "generated_at": "2026-05-21T07:24:46+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-landstill-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:21:31+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-deck-tech-lands-an-old-classic-revived",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:23:09+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "2c0cd7f3fbd0008e",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "This deck's base exists since Legacy was created: Mox Diamond , Exploration , Crop Rotation and Life from the Loam are useful to abuse the extensive land options available in this format."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The possibility of summoning Marit Lage helped this deck finish games faster"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "we added the Dark Depths Thespian's Stage finishing combo"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "the Life from the Loam engine will, sooner or later, bury them under an avalanche of resources"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You can both rely on drawing one of your many lands and play the sequence of Forest - Exploration - Saga on turn 1, Crop Rotation into a fetchland, tap it, and Life from the Loam to recover both lands and play the Sphere."
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "hold off attackers with Maze of Ith , The Tabernacle at Pendrell Vale and Karakas"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "For years, this deck stood on a delicate balance between having positive games against the several Delver versions, and breaking a sweat to deal with combo decks."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Blood Moon / Magus of the Moon / Archon of Emeria are the cards you definitely don't want to see in front of you."
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The problem is Archon of Cruelty , so your Swords to Plowshares shine here."
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Force of Negation is useful to deal with Life from the Loam"
+    }
+  ]
+}

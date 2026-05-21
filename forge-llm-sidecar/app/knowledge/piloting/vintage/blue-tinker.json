@@ -1,0 +1,159 @@
+{
+  "archetype": "Blue Tinker",
+  "format": "vintage",
+  "strategy_type": "combo",
+  "overview": "Blue Tinker is a Vintage combo archetype that leverages artifact synergy and card draw to bypass traditional resource curves. By combining Tinker's mana reduction with Flow State's draw engine and Stock Up's artifact acceleration, the deck aims to assemble high-impact spells quickly. The WUB color scheme provides versatile disruption and finishers while maintaining a focused artifact-centric game plan.",
+  "win_conditions": [
+    "Casting a high-cmc finisher for zero mana via Tinker",
+    "Generating massive card advantage and board presence through Flow State",
+    "Rapidly deploying multiple artifacts to trigger synergistic effects or overwhelm opponents"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Tinker and at least one artifact",
+      "Hands with Flow State and early draw spells",
+      "Hands with Stock Up and multiple artifacts",
+      "Hands containing disruption and a combo piece"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking artifacts or draw engines",
+      "Hands with only high-cmc spells and no acceleration",
+      "Hands missing interaction in aggressive matchups"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize drawing cards and finding artifacts to fuel Tinker",
+      "Play cheap artifacts to reduce Tinker's cost and enable Flow State",
+      "Use disruption to delay opponent's game plan while assembling pieces"
+    ],
+    "mid_game": [
+      "Cast Tinker to bring out a finisher or key artifact",
+      "Activate Flow State to refill hand and find answers or additional combo pieces",
+      "Use Stock Up to accelerate artifact deployment and apply pressure"
+    ],
+    "late_game": [
+      "Leverage accumulated card advantage to out-resource opponents",
+      "Deploy multiple finishers or board wipes to reset unfavorable boards",
+      "Maintain artifact presence to keep Tinker relevant for follow-up turns"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Tinker",
+      "role": "Primary combo enabler that reduces artifact CMC",
+      "notes": "Cast with minimal mana to fetch high-impact artifacts; prioritize keeping it in hand until acceleration is ready"
+    },
+    {
+      "name": "Flow State",
+      "role": "Card draw engine and combo accelerator",
+      "notes": "Use to find Tinker, artifacts, or answers; can be cast repeatedly if mana and artifacts are available"
+    },
+    {
+      "name": "Stock Up",
+      "role": "Artifact acceleration and board presence",
+      "notes": "Deploy early to reduce Tinker's cost and generate value; synergizes with artifact-heavy hands"
+    }
+  ],
+  "sequencing_tips": [
+    "Always assess opponent's hand size and known threats before casting Tinker",
+    "Hold back one artifact to ensure Tinker remains legal if the first is countered",
+    "Cast Flow State after playing artifacts to maximize draw potential and find follow-up pieces",
+    "Use Stock Up to trigger artifact synergies before committing to a Tinker resolution"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early disruption and artifact deployment to stabilize",
+      "watch_for": [
+        "Fast damage",
+        "Board wipes",
+        "Hand disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race with Tinker finishers while using Flow State to out-draw them",
+      "watch_for": [
+        "Counterspell",
+        "Board wipes",
+        "Hand destruction"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their assembly and go wide with artifacts to apply pressure",
+      "watch_for": [
+        "Their combo pieces",
+        "Counterspell",
+        "Game-ending spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspell",
+    "Dismantle",
+    "Beacon of Destruction",
+    "Force of Will",
+    "Smuggler's Copter"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T11:30:30+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:30:30+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "0557da1202ae99a5",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Blue Tinker, Vintage, W/U/B, Tinker, Flow State, Stock Up"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Tinker, Flow State, Stock Up"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Tinker, Flow State, Stock Up"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Vintage meta, artifact synergy"
+    }
+  ]
+}

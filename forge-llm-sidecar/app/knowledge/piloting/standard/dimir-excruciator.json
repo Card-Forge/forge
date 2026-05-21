@@ -1,0 +1,262 @@
+{
+  "archetype": "Dimir Excruciator",
+  "format": "standard",
+  "strategy_type": "combo",
+  "overview": "Dimir Excruciator is a Combo-Control archetype that wins by reducing both players' libraries to six cards with Doomsday Excruciator, then milling the opponent to zero with Restless Reef. It supplements this primary combo with cheap disruption, Deceit copies via Superior Spider-Man, and flexible removal to handle aggressive and control strategies. The deck relies on early discard to enable faster combo turns and deep draw spells like Stock Up to find key pieces.",
+  "win_conditions": [
+    "Execute Doomsday Excruciator to leave both players with six cards, then attack with Restless Reef to mill the opponent's remaining cards.",
+    "Copy Deceit with Superior Spider-Man to generate multiple 4/4 bodies and board/hand disruption.",
+    "Copy Doomsday Excruciator with Superior Spider-Man to accelerate the library reduction combo."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early discard to put Doomsday Excruciator in the graveyard",
+      "Two-land hands with access to black mana for early interaction",
+      "Hands containing Deceit or Superior Spider-Man for early clock/disruption"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early discard or black mana sources",
+      "Hands with only high-cost sweepers or late-game threats",
+      "Hands missing lands or combo enablers"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Winternight Stories",
+          "Bitter Triumph",
+          "Watery Grave",
+          "Gloomlake Verge",
+          "Deceit",
+          "Intimidation Tactics",
+          "Doomsday Excruciator"
+        ],
+        "decision": "keep",
+        "reason": "Provides early discard to enable the combo, dual lands for mana, and a clock/disruption piece."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap disruption like Intimidation Tactics and Requiting Hex to slow aggressive decks.",
+      "Use Winternight Stories and Bitter Triumph to discard Doomsday Excruciator for future turns.",
+      "Establish a clock or board presence with Deceit."
+    ],
+    "mid_game": [
+      "Execute the Doomsday Excruciator and Restless Reef combo to mill the opponent.",
+      "Use Stock Up to dig for combo pieces, lands, or sideboard cards while memorizing the bottom cards.",
+      "Copy Deceit or Excruciator with Superior Spider-Man to accelerate the win condition."
+    ],
+    "late_game": [
+      "Rely on Deceit's 4/4 body and ETB disruption as a recurring clock.",
+      "Use sweepers like Harvester of Misery and Deadly Cover-Up to clear boards or dig for answers.",
+      "Sideboard in Quantum Riddler for extra card draw and a resilient threat in attrition matchups."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Doomsday Excruciator",
+      "role": "Primary combo piece",
+      "notes": "Exiles cards from both libraries until each has six, setting up the win condition."
+    },
+    {
+      "name": "Restless Reef",
+      "role": "Win condition enabler",
+      "notes": "Mills four cards from the opponent's deck upon attacking, leaving them with two turns to win."
+    },
+    {
+      "name": "Superior Spider-Man",
+      "role": "Combo accelerator & clock",
+      "notes": "Copies Deceit for disruption/bodies or copies Excruciator to speed up the library reduction."
+    },
+    {
+      "name": "Deceit",
+      "role": "Disruption & clock",
+      "notes": "Functions as Distress and Into the Roil, providing a 4/4 body and ETB hand/board disruption."
+    },
+    {
+      "name": "Stock Up",
+      "role": "Card advantage & setup",
+      "notes": "Dig Through Time-like draw that helps find combo pieces or lands; cards placed on bottom are drawn after Excruciator."
+    },
+    {
+      "name": "Insatiable Avarice",
+      "role": "Card advantage & acceleration",
+      "notes": "Finds needed pieces and can force the opponent to draw, speeding up the win after Excruciator."
+    },
+    {
+      "name": "Requiting Hex",
+      "role": "Early interaction",
+      "notes": "Handles aggressive threats and counters mana explosions from cards like Badgermole Cub."
+    },
+    {
+      "name": "Deadly Cover-Up",
+      "role": "Sweeper & dig",
+      "notes": "Clears boards and functions as Surgical Extraction against control and combo decks."
+    }
+  ],
+  "sequencing_tips": [
+    "Memorize the cards Stock Up places on the bottom of your library, as they will be drawn after Doomsday Excruciator resolves.",
+    "Force the opponent to draw cards with Insatiable Avarice immediately after resolving Doomsday Excruciator to accelerate the mill win.",
+    "Prioritize discarding Doomsday Excruciator with Winternight Stories or Bitter Triumph on turns 1-2 to enable a faster combo turn.",
+    "Use Superior Spider-Man to copy Deceit early for board control, or copy Excruciator to reduce the combo to a single turn."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Dimir Excruciator",
+      "advice": "Sideboard in Cruelclaw's Heist for additional discard and to steal key combo pieces. Play for attrition and use Deceit's disruption effectively.",
+      "watch_for": [
+        "Mirror combo execution",
+        "Key pieces in opponent's hand"
+      ]
+    },
+    {
+      "opponent_archetype": "Jeskai Control",
+      "advice": "Use Cruelclaw's Heist to steal high-value cards. Rely on Deadly Cover-Up as Surgical Extraction and Deceit for late-game clock.",
+      "watch_for": [
+        "High-value permanents",
+        "Stack interaction"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Red Aggro",
+      "advice": "Keep maindeck Requiting Hex and Intimidation Tactics to slow the clock. Use Superior Spider-Man to copy Harvester of Misery or Deceit early.",
+      "watch_for": [
+        "Early creature pressure",
+        "Mana explosions"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Lessons",
+      "advice": "Sideboard in Soul-Guide Lantern to shut down value generation. Use Negate for stack interaction in longer games.",
+      "watch_for": [
+        "Lessons value loops",
+        "ETB triggers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Formidable Speaker",
+    "Craterhoof Behemoth",
+    "Elementals",
+    "Jeskai Control high-value cards",
+    "Reanimator strategies",
+    "Lessons value engines",
+    "Ouroboroid",
+    "Mightform Harmonizer",
+    "Badgermole Cub"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-dimir-excruciator-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T05:41:28+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-dimir-excruciator-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:39:55+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "2b20ab2f10fff7a4",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Dimir Excruciator is, in essence, a \"Combo-Control\" deck... Its strategy involves a mix of cheap disruption through removal and Deceit, combined with the interaction between Doomsday Excruciator and Restless Reef"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Excruciator exiles cards from both players' libraries, leaving each with only six cards, and Restless Reef mills four cards from the opponent's deck when it attacks"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "copying it with Superior Spider-Man by paying is pretty easy, giving you bounce and discard on ETB plus a 4/4 body for four mana"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Another important approach involves copying Excruciator with Superior Spider-Man"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Keep in mind you can also memorize the cards it puts on the bottom, since they will be the cards you will draw after an Excruciator."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Another important mode involves forcing the opponent to draw cards after resolving Doomsday Excruciator, speeding up victory just like we do with Restless Reef."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Winternight Stories and Bitter Triumph serve as reliable discard sources to put Doomsday Excruciator into the graveyard during the early turns."
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "To facilitate this strategy and even execute the \"combo-kill\" two turns earlier... copying Excruciator with Superior Spider-Man"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "ETB effects are everywhere: from Formidable Speaker / Craterhoof Behemoth to the new Elementals"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "strategies running high-value cards like Jeskai Control or Elementals"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "already an important Standard piece against Reanimator and for shutting down value generated by Lessons decks"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "opponents rely on specific creatures staying on board, like Ouroboroid or Mightform Harmonizer"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "dealing with potential mana explosions from Badgermole Cub"
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "archetype": "Beseech Storm",
+  "format": "vintage",
+  "strategy_type": "combo",
+  "overview": "A blue-black combo deck that leverages cheap mana acceleration and spell-copying effects to generate massive Storm counts. By combining Dark Ritual for early acceleration, Flow State for free spell casting, and Beseech the Mirror to duplicate key spells, the deck aims to resolve a high-impact finisher before the opponent can respond. The strategy prioritizes speed and spell density over board presence.",
+  "win_conditions": [
+    "Resolving a high-Storm-count spell that deals lethal damage or draws the entire library",
+    "Using Beseech the Mirror to copy finishers and multiply their effects",
+    "Casting Flow State to bypass mana costs and rapidly accumulate Storm count"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Dark Ritual and at least two combo enablers",
+      "Hands with Flow State and early land drops",
+      "Hands with Beseech the Mirror and cheap spells to copy"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking acceleration or combo pieces",
+      "Hands with only lands and high-cost cards",
+      "Hands without a clear path to turn one or two interaction"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cast Dark Ritual to enable turn one or two combo pieces",
+      "Set up Flow State and Beseech the Mirror while protecting them from disruption",
+      "Prioritize drawing into additional cheap spells to fuel the Storm count"
+    ],
+    "mid_game": [
+      "Cast Flow State to begin casting spells without paying mana costs",
+      "Use Beseech the Mirror to duplicate cheap spells and rapidly increase Storm count",
+      "Maintain a hand of spells to bait out opponent counterspells or discard"
+    ],
+    "late_game": [
+      "Resolve the primary finisher once Storm count is sufficient",
+      "If combo fails, use remaining resources to stabilize or draw into answers",
+      "Look for alternate win conditions like card draw or direct damage spells"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Dark Ritual",
+      "role": "Mana acceleration",
+      "notes": "Cast on turn one to enable early combo pieces or protect Flow State from disruption"
+    },
+    {
+      "name": "Beseech the Mirror",
+      "role": "Spell duplication and Storm count builder",
+      "notes": "Use to copy cheap spells or finishers to maximize Storm count and damage output"
+    },
+    {
+      "name": "Flow State",
+      "role": "Mana reduction and free casting",
+      "notes": "Cast when you have multiple cheap spells in hand to rapidly build Storm count without spending mana"
+    }
+  ],
+  "sequencing_tips": [
+    "Cast Dark Ritual before Flow State to ensure you can cast or protect it",
+    "Use Beseech the Mirror after Flow State resolves to copy the free spells",
+    "Prioritize casting the cheapest spells first to maximize the number of spells in the Storm count",
+    "Hold up mana for counterspells if you suspect opponent interaction"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells by baiting them out with cheap spells before casting Flow State",
+      "watch_for": [
+        "Force of Will",
+        "Counterspell",
+        "Leyline of Sanctity"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Go wide with cheap spells and use Dark Ritual for early interaction to survive until turn two",
+      "watch_for": [
+        "Early board presence",
+        "Direct damage spells",
+        "Removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Race for Storm count and prioritize speed over interaction",
+      "watch_for": [
+        "Opponent combo pieces",
+        "Mana acceleration",
+        "Disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Use Flow State to bypass their resource advantage and finish before they stabilize",
+      "watch_for": [
+        "Card advantage engines",
+        "Removal",
+        "Board control"
+      ]
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Finish quickly before they establish a large mana base and board presence",
+      "watch_for": [
+        "Mana dorks",
+        "Land acceleration",
+        "Big threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Force of Will",
+    "Counterspell",
+    "Leyline of Sanctity",
+    "Field of the Dead",
+    "Sneak Attack"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T11:42:27+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:42:27+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "b0570efb2d3cea22",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

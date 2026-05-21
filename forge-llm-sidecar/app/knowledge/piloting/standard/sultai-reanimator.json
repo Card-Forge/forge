@@ -1,0 +1,213 @@
+{
+  "archetype": "Sultai Reanimator",
+  "format": "standard",
+  "strategy_type": "combo",
+  "overview": "Sultai Reanimator is a Tier 2 Standard combo deck that leverages Universes Beyond cards to cheat large threats into play. It primarily uses Superior Spider-Man and Bringer of the Last Gift to assemble a massive board state, often finishing games with Ardyn, the Usurper's combat triggers. While currently sitting behind top-tier decks like Izzet Vivi Cauldron and Red Deck Wins, it offers a high upside for players who enjoy graveyard-based strategies.",
+  "win_conditions": [
+    "Casting Superior Spider-Man to copy Bringer of the Last Gift and return the entire graveyard to the battlefield",
+    "Using Ardyn, the Usurper to turn reanimated utility creatures into 5/5s and boost all demons for a lethal combat swing",
+    "Assembling a wide board of demons and utility creatures to overwhelm opponents before they can stabilize"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Superior Spider-Man alongside cheap graveyard fillers or cantrips",
+      "Hands with multiple low-cost utility creatures and Proft's Eidetic Memory"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking Superior Spider-Man or a reliable way to interact with the graveyard",
+      "Hands composed only of high-cost threats without early game acceleration"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Superior Spider-Man",
+          "Proft's Eidetic Memory",
+          "Kavaero, Mind-Bitten",
+          "Steamcore Scholar",
+          "Watery Grave",
+          "Gloomlake Verge",
+          "Bitter Triumph"
+        ],
+        "decision": "keep",
+        "reason": "Contains the primary win condition with cheap graveyard fillers and cantrips to dig for the rest of the combo."
+      },
+      {
+        "hand": [
+          "Valgavoth, Terror Eater",
+          "Overlord of the Balemurk",
+          "Ardyn, the Usurper",
+          "Blazemire Verge",
+          "Island",
+          "Swamp",
+          "Mountain"
+        ],
+        "decision": "mulligan",
+        "reason": "Lacks Superior Spider-Man and early game pieces, making it too slow to execute the combo before opponent interaction."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap utility creatures like Kavaero, Mind-Bitten or Steamcore Scholar",
+      "Use Proft's Eidetic Memory to dig for Superior Spider-Man and Bringer of the Last Gift",
+      "Avoid unnecessary combat to preserve creatures for the graveyard"
+    ],
+    "mid_game": [
+      "Cast Superior Spider-Man to copy Bringer of the Last Gift",
+      "Trigger Bringer to return the entire graveyard, including Ardyn, the Usurper",
+      "Prepare to swing for lethal on the following turn"
+    ],
+    "late_game": [
+      "Execute the OTK combat phase with Ardyn's 5/5 triggers and boosted demons",
+      "Use remaining resources to stabilize if the combo is interrupted",
+      "Look for alternate win conditions like Overlord of the Balemurk if the primary plan fails"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Superior Spider-Man",
+      "role": "Primary combo enabler",
+      "notes": "Copies Bringer of the Last Gift to return the entire graveyard to the battlefield."
+    },
+    {
+      "name": "Bringer of the Last Gift",
+      "role": "Graveyard recursion engine",
+      "notes": "Returns all creatures from the graveyard when copied by Superior Spider-Man."
+    },
+    {
+      "name": "Ardyn, the Usurper",
+      "role": "Combat finisher and board filler",
+      "notes": "Reanimates utility creatures as 5/5s and boosts all demons during combat."
+    },
+    {
+      "name": "Overlord of the Balemurk",
+      "role": "Secondary win condition",
+      "notes": "Provides an alternate path to victory if the primary combo is disrupted."
+    },
+    {
+      "name": "Valgavoth, Terror Eater",
+      "role": "Lethal threat",
+      "notes": "A large demon that benefits from Ardyn's combat boost and can swing for lethal."
+    },
+    {
+      "name": "Proft's Eidetic Memory",
+      "role": "Card advantage and combo finder",
+      "notes": "Draws cards to locate Superior Spider-Man and Bringer of the Last Gift."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast Superior Spider-Man targeting a copy of Bringer of the Last Gift to trigger the mass return effect",
+    "Ensure Ardyn, the Usurper is in the graveyard before casting Bringer so it returns to the battlefield",
+    "Wait until the beginning of combat to trigger Ardyn's ability, reanimating a utility creature as a 5/5",
+    "Swing with Bringer of the Last Gift and all other demons simultaneously to maximize Ardyn's combat boost"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Izzet Vivi Cauldron",
+      "advice": "Prioritize speed and try to close out games before they establish a wide board of tokens and removal.",
+      "watch_for": [
+        "Agatha's Soul Cauldron",
+        "Removal spells targeting your key threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Red Deck Wins",
+      "advice": "Play around early aggression and use your utility creatures to block or trade efficiently while setting up the combo.",
+      "watch_for": [
+        "Early game burn",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Dimir Aggro",
+      "advice": "Use your early game creatures to stall and dig for the combo, as they lack the graveyard hate to completely shut you down.",
+      "watch_for": [
+        "Fast attackers",
+        "Card draw engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Agatha's Soul Cauldron",
+    "Graveyard hate pieces",
+    "Early game aggression"
+  ],
+  "metadata": {
+    "source": "Draftsim",
+    "source_url": "https://draftsim.com/sultai-reanimator-standard/",
+    "generated_at": "2026-05-21T06:50:11+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Draftsim",
+      "author": "",
+      "source_url": "https://draftsim.com/sultai-reanimator-standard/",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:48:53+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "01929e9addab48bb",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "A novel Reanimator brew sits in a comfortable tier two under Cauldrons and Mountains , and has been brought back thanks to the excellent teamwork of two Universes Beyond cards: Superior Spider-Man , and Final Fantasy ‘s Ardyn, The Usurper ."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You cast Superior Spider-Man a copy of Bringer of the Last Gift . Bringer then returns everything, including Ardyn."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "At the beginning of combat, Ardyn brings back one of your utility creatures as a 5/5, and lets you swing with Bringer of the Last Gift and any other demons you might have"
+    },
+    {
+      "confidence": 0.7,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "he turns your Bringer pile into an OTK"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You cast Superior Spider-Man a copy of Bringer of the Last Gift . Bringer then returns everything, including Ardyn."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "At the beginning of combat, Ardyn brings back one of your utility creatures as a 5/5, and lets you swing with Bringer of the Last Gift and any other demons you might have"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Superior Spider-Man is great for reanimating your creatures even when there's a very high likelihood that your opponent is going to be playing one of the best graveyard hate pieces in Standard: Agatha's Soul Cauldron ."
+    }
+  ]
+}

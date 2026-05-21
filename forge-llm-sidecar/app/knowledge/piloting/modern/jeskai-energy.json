@@ -1,0 +1,164 @@
+{
+  "archetype": "Jeskai Energy",
+  "format": "modern",
+  "strategy_type": "tempo",
+  "overview": "Jeskai Energy in Modern leverages the energy mechanic to rapidly accelerate into large, resilient threats while maintaining board presence and card advantage. The deck uses cheap early plays to establish energy generation, then transitions into massive creatures that can overwhelm opponents through combat or direct damage. Interaction and graveyard recursion provide the necessary resilience to outlast aggressive strategies and close out games against control.",
+  "win_conditions": [
+    "Overwhelming combat damage with pumped Phlage, Titan of Fire's Fury",
+    "Direct damage from energy spenders and creature abilities",
+    "Card advantage and board control via Nulldrifter and Doorkeeper Thrull"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two lands and an early energy generator or Nulldrifter",
+      "Hands containing Doorkeeper Thrull paired with removal or energy acceleration",
+      "Hands that can play a creature on turn one or two"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking lands or early plays",
+      "Hands with only late-game energy spenders and no generators",
+      "Hands with multiple high-cost cards and no ramp"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing Nulldrifter to establish an early board presence and protect energy generators",
+      "Begin generating energy immediately to fuel Phlage, Titan of Fire's Fury's growth",
+      "Use cheap interaction to disrupt opponent's early game"
+    ],
+    "mid_game": [
+      "Bring in Phlage, Titan of Fire's Fury and pump it using accumulated energy",
+      "Activate Doorkeeper Thrull to exile opponent's graveyard threats or prevent lethal damage",
+      "Maintain board pressure while cycling through energy resources"
+    ],
+    "late_game": [
+      "Convert excess energy into massive combat damage or direct damage",
+      "Use Doorkeeper Thrull's recursion to refill hand and maintain card advantage",
+      "Close out games with unblockable or oversized creatures"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Phlage, Titan of Fire's Fury",
+      "role": "Primary win condition and energy sink",
+      "notes": "Generate energy before attacking to pump it, then use its sacrifice ability to deal direct damage or finish the game"
+    },
+    {
+      "name": "Nulldrifter",
+      "role": "Early game board presence and tempo play",
+      "notes": "Play on turn one to establish a flying threat that forces opponent to answer early, buying time for energy generation"
+    },
+    {
+      "name": "Doorkeeper Thrull",
+      "role": "Graveyard interaction and damage prevention",
+      "notes": "Use its ability to exile opponent's key cards from the graveyard or prevent lethal damage, then reuse it by returning it from exile"
+    }
+  ],
+  "sequencing_tips": [
+    "Generate energy before declaring attackers to maximize Phlage, Titan of Fire's Fury's size",
+    "Hold up energy for Doorkeeper Thrull's damage prevention before committing to all-in attacks",
+    "Prioritize playing energy generators before spenders to avoid stalling",
+    "Use Nulldrifter to block or pressure while setting up energy for turn three"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play Doorkeeper Thrull early to prevent damage and disrupt their graveyard recursion, then race with pumped Phlage, Titan of Fire's Fury",
+      "watch_for": [
+        "Early board wipes",
+        "Direct damage spells",
+        "Fast creature pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Use Nulldrifter to force early answers, then flood the board with energy-fueled threats that are hard to remove efficiently",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their key pieces with Doorkeeper Thrull's exile ability and apply early pressure with Nulldrifter to prevent them from assembling their combo",
+      "watch_for": [
+        "Graveyard synergies",
+        "Mana acceleration",
+        "Win condition pieces"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race their value engines by pumping Phlage, Titan of Fire's Fury quickly and using energy to out-tempo their removal",
+      "watch_for": [
+        "Removal spells",
+        "Card advantage engines",
+        "Late game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipes that clear energy investments",
+    "Counterspells that stall energy generation",
+    "Fast aggro creatures that pressure before energy ramps",
+    "Graveyard hate that disrupts Doorkeeper Thrull"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T00:42:48+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T00:42:48+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "ada602e16e7fc751",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

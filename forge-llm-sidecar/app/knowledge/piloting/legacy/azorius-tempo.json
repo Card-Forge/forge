@@ -1,0 +1,156 @@
+{
+  "archetype": "Azorius Tempo",
+  "format": "legacy",
+  "strategy_type": "tempo",
+  "overview": "Azorius Tempo in Legacy leverages card advantage and disruption to control the pace of the game without committing to a full control or combo strategy. By cycling through Ponder and Brainstorm, you maintain a consistent hand size while searching for answers to opponent threats. Flow State provides the necessary acceleration to outpace aggressive decks and close out games before opponents can stabilize.",
+  "win_conditions": [
+    "Outdrawing opponents through consistent card advantage from Ponder and Brainstorm",
+    "Using Flow State to generate temporary power spikes and lethal damage",
+    "Maintaining board presence while disrupting opponent turns until they run out of resources"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two to three lands and at least one cantrip",
+      "Hands containing early disruption or a playable threat",
+      "Hands that allow you to Ponder or Brainstorm on turn one"
+    ],
+    "mulligan_criteria": [
+      "Hands with zero or four+ lands",
+      "Hands lacking any interaction or card selection",
+      "Hands that cannot play a turn-one land or cantrip"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands and resolving Ponder or Brainstorm to fix your hand",
+      "Play early threats if available to force opponent responses",
+      "Hold interaction for opponent's key plays while maintaining a full hand"
+    ],
+    "mid_game": [
+      "Cast Flow State to gain tempo and accelerate your resource curve",
+      "Trade efficiently, using card advantage to outvalue opponent's board state",
+      "Apply consistent pressure to prevent opponents from setting up their win conditions"
+    ],
+    "late_game": [
+      "Lean into card advantage to draw into finishing threats",
+      "Use Flow State repeatedly if possible to maintain board control",
+      "Grind out the game by disrupting late-game plans and closing out with efficient threats"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Flow State",
+      "role": "Tempo and acceleration engine",
+      "notes": "Cast on opponent's turn or when you have a threat ready to play next turn to maximize the temporary power boost and card draw."
+    },
+    {
+      "name": "Ponder",
+      "role": "Card selection and fixing",
+      "notes": "Use to find lands, answers, or threats while keeping the top card if it is favorable; cycle it when you need to dig deeper."
+    },
+    {
+      "name": "Brainstorm",
+      "role": "Card advantage and digging",
+      "notes": "Play to draw three cards and discard one, prioritizing keeping threats or answers while discarding low-value cards or lands if necessary."
+    }
+  ],
+  "sequencing_tips": [
+    "Always Ponder before Brainstorm if you need a specific answer, as Ponder offers more control over the top card.",
+    "Hold Flow State until you have a clear follow-up play to avoid giving the opponent a free turn with a larger hand.",
+    "Use Brainstorm to dig for lands when behind on mana, but keep threats in hand to apply pressure.",
+    "Prioritize playing lands before cantrips to ensure you have the mana to cast answers on the opponent's turn."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Flow State to outpace their early damage and find answers through Ponder. Prioritize playing lands and holding interaction for their key threats.",
+      "watch_for": [
+        "Early aggressive creatures",
+        "Fast damage spells",
+        "Pressure that forces you to play suboptimally"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply early pressure to prevent them from setting up a locked board. Use Brainstorm to find removal and Flow State to accelerate past their sweepers.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspell packages",
+        "Late-game value engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their key pieces early with interaction found via Ponder. Use Flow State to generate tempo and close the game before they assemble their combo.",
+      "watch_for": [
+        "Specific combo pieces",
+        "Graveyard recursion",
+        "Fast win conditions"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Combo pieces that assemble quickly",
+    "Control sweepers and counterspells"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T07:46:02+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:46:02+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "4392c03b65adc7c9",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype: Azorius Tempo, Format: legacy, Signature cards: Flow State, Ponder, Brainstorm"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards: Flow State, Ponder, Brainstorm"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards: Flow State, Ponder, Brainstorm"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Format: legacy, Archetype: Azorius Tempo"
+    }
+  ]
+}

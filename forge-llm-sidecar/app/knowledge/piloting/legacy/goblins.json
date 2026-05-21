@@ -1,0 +1,292 @@
+{
+  "archetype": "Goblins",
+  "format": "legacy",
+  "strategy_type": "aggro",
+  "overview": "Rakdos Goblins is a Legacy aggro deck that relies on cheating creatures into play early using Aether Vial and Goblin Lackey. It aims to overwhelm opponents with a wide board of hasty Goblins, using toolbox cards like Goblin Matron and removal like Broadside Bombardiers to control the game. The deck wins by racing opponents with combat damage or draining life with Sling-Gang Lieutenant.",
+  "win_conditions": [
+    "Swarming the board with hasty Goblins to deal combat damage",
+    "Using Sling-Gang Lieutenant to drain life",
+    "Casting Muxus, Goblin Grandee for a massive threat"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Have Aether Vial or Goblin Lackey in hand",
+      "Have a nice sequence for the first three turns"
+    ],
+    "mulligan_criteria": [
+      "Lack Aether Vial or Goblin Lackey without a strong early sequence",
+      "Hand cannot impact turn 1 or 2 effectively"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Lands",
+          "Muxus, Goblin Grandee"
+        ],
+        "decision": "mulligan",
+        "reason": "Doesn't do anything on turn 1, can put a 2/2 on turn 2, and Muxus won't go in play soon."
+      },
+      {
+        "hand": [
+          "Lands",
+          "Goblin Lackey",
+          "Goblin Matron"
+        ],
+        "decision": "keep",
+        "reason": "Can play uncounterable Lackey on turn 1 and Matron on turn 2, which can find Muxus."
+      },
+      {
+        "hand": [
+          "Goblin Lackey",
+          "Muxus, Goblin Grandee",
+          "Removals"
+        ],
+        "decision": "keep",
+        "reason": "Can put Lackey in play on turn 1, might put Muxus on turn 2, and has removals for blockers."
+      },
+      {
+        "hand": [
+          "Aether Vial",
+          "Aether Vial",
+          "Goblin Ringleader"
+        ],
+        "decision": "keep",
+        "reason": "Two Vials on turn 1 means you'll basically be able to resolve at least 1, even against Force of Will."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Aether Vial or Goblin Lackey on turn 1 to establish early board presence",
+      "Use 1-drops like Greasewrench Goblin to filter lands or play aggressively"
+    ],
+    "mid_game": [
+      "Use Munitions Expert and Broadside Bombardiers to control the board",
+      "Utilize Goblin Matron as a toolbox to find answers or threats",
+      "Refill resources with Rundvelt Hordemaster, Greasewrench Goblin, and Goblin Ringleader"
+    ],
+    "late_game": [
+      "Give haste to your horde with Howlsquad Heavy or Draconautics Engineer",
+      "Use Sling-Gang Lieutenant to drain life and finish the game",
+      "Use Gempalm Incinerator for extra removal and card draw in drawn-out matches"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Aether Vial",
+      "role": "Early game acceleration",
+      "notes": "Essential for turn 1 plays; having two increases chances of resolving one against counterspells."
+    },
+    {
+      "name": "Goblin Lackey",
+      "role": "Early game acceleration",
+      "notes": "Provides uncounterable turn 1 plays and changes how the deck performs entirely."
+    },
+    {
+      "name": "Muxus, Goblin Grandee",
+      "role": "Win condition / Big threat",
+      "notes": "An extreme way to put Goblins in play; a massive threat that opponents struggle to handle."
+    },
+    {
+      "name": "Goblin Matron",
+      "role": "Toolbox / Answers",
+      "notes": "Provides various answers and can find Muxus, Goblin Grandee if needed."
+    },
+    {
+      "name": "Broadside Bombardiers",
+      "role": "Board control",
+      "notes": "Controls the board alongside Munitions Expert; crucial for going over threats like Atraxa, Grand Unifier."
+    },
+    {
+      "name": "Howlsquad Heavy",
+      "role": "Haste / Board growth",
+      "notes": "Combines Goblin Rabblemaster and Goblin Warchief; grows the board constantly and gives haste."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize resolving Aether Vial or Goblin Lackey on turn 1 to set the pace",
+    "Use Greasewrench Goblin's ability to filter lands or unused Aether Vials when needed",
+    "Save Stingscourger to bounce big threats like Emrakul, the Aeons Torn back to hand",
+    "Create gigantic boards and sacrifice them instantly with Sling-Gang Lieutenant to kill opponents on their turn against The One Ring"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Dimir Reanimator",
+      "advice": "Bring Leyline of the Void and Blasts. Use Broadside Bombardiers to go over Atraxa, Grand Unifier. Stingscourger can turn the tables. Howlsquad Heavy and Munitions Expert can be liabilities against reanimated threats.",
+      "watch_for": [
+        "Atraxa, Grand Unifier",
+        "Barrowgoyf",
+        "Griselbrand",
+        "Brazen Borrower"
+      ]
+    },
+    {
+      "opponent_archetype": "Temur/Izzet Delver",
+      "advice": "Aether Vial can win on its own if resolved. Use answers for small threats and Murktide Regent. Once you gain board advantage, they lack tools to revert it.",
+      "watch_for": [
+        "Murktide Regent",
+        "Small threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Eldrazi Aggro",
+      "advice": "Vial and Lackey go over mana disruption. Cheat out Muxus, Goblin Grandee. Sideboard plan involves removing random Goblins, adding removals, and a Moon effect.",
+      "watch_for": [
+        "Mana disruption",
+        "Eldrazi threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Red Stompy",
+      "advice": "Fury balances the matchup. Lackey can ignore Chalice of the Void with Cavern of Souls. Create gigantic boards and sacrifice with Sling-Gang Lieutenant to bypass The One Ring.",
+      "watch_for": [
+        "Chalice of the Void",
+        "The One Ring",
+        "Blood Moon"
+      ]
+    },
+    {
+      "opponent_archetype": "Nadu Breakfast",
+      "advice": "Difficult matchup. Sideboard into pseudo-control to prevent Nadu advantage. Use Muxus or Ringleader for card advantage so Broadside Bombardiers can finish.",
+      "watch_for": [
+        "Cephalid Illusionist combo",
+        "Nadu, Winged Wisdom"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Atraxa, Grand Unifier",
+    "Murktide Regent",
+    "Chalice of the Void",
+    "The One Ring",
+    "Nadu, Winged Wisdom",
+    "Emrakul, the Aeons Torn",
+    "Force of Will"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-rakdos-goblins-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T08:00:58+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-rakdos-goblins-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:59:27+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "9b943031a63f1aa0",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "These cards are just more ways to put your Goblins in play... Sling-Gang Lieutenant makes your Goblins drain your opponent's life points all at once."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Battle Cry Goblin, Howlsquad Heavy, and Draconautics Engineer can give haste to your horde of Goblins"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Sling-Gang Lieutenant makes your Goblins drain your opponent's life points all at once"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Muxus, Goblin Grandee, for instance, is the extreme way to do this"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Any of them on turn 1 will change how the deck performs entirely"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "sometimes you'll have to use its ability to filter lands or unused Aether Vials, and it will be crucial"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Stingscourger sends things like Emrakul, the Aeons Torn back to your opponent's hand"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Consider creating gigantic boards that you can sacrifice instantly with Sling-Gang Lieutenant so you can kill your opponent on their turn."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "try to go over things like Atraxa, Grand Unifier with Broadside Bombardiers"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You have many answers to deal with small threats and Murktide Regent"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Chalice of the Void for 1 can disrupt Aether Vial"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The One Ring can make winning impossible"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Nadu, Winged Wisdom can cost you the game"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Stingscourger sends things like Emrakul, the Aeons Torn back to your opponent's hand"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "even if you're against Force of Will"
+    }
+  ]
+}

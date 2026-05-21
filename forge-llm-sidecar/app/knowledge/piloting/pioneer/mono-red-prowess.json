@@ -1,0 +1,135 @@
+{
+  "archetype": "Mono-Red Prowess",
+  "format": "pioneer",
+  "strategy_type": "aggro",
+  "overview": "Mono-Red Prowess in Pioneer is an aggressive strategy that leverages one-mana spells to accelerate creatures with the prowess mechanic. By playing cheap threats like Monastery Swiftspear and Soul-Scar Mage early, the deck generates immediate board presence and direct damage. The game plan revolves around triggering prowess repeatedly to overwhelm opponents before they can stabilize.",
+  "win_conditions": [
+    "Direct damage from burn spells and activated abilities",
+    "Attacking with accelerated prowess creatures",
+    "Overwhelming the board with tokens from Emberheart Challenger"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with a one-mana creature or burn spell",
+      "Hands containing Soul-Scar Mage or Monastery Swiftspear",
+      "Hands with two lands and multiple cheap spells"
+    ],
+    "mulligan_criteria": [
+      "Hands with only three-mana or higher cards",
+      "Hands lacking early interaction or creatures",
+      "Hands with three or more lands"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap creatures immediately",
+      "Cast one-mana spells to trigger prowess on Swiftspear",
+      "Use burn to clear blockers or push damage"
+    ],
+    "mid_game": [
+      "Deploy Emberheart Challenger to generate tokens and trigger prowess",
+      "Maintain board pressure while cycling through burn spells",
+      "Look for card advantage through token generation"
+    ],
+    "late_game": [
+      "Flood the board with tokens to overwhelm defenses",
+      "Use remaining burn to finish the game",
+      "Transition to a wide board state if the opponent stalls"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Emberheart Challenger",
+      "role": "Token generator and prowess enabler",
+      "notes": "Cast on turn 3 to create a 1/1 token, triggering prowess on other creatures and providing immediate board presence."
+    },
+    {
+      "name": "Soul-Scar Mage",
+      "role": "Early game burn and prowess trigger",
+      "notes": "Play on turn 1 to deal 1 damage and trigger prowess, then use its activated ability to clear blockers or push damage."
+    },
+    {
+      "name": "Monastery Swiftspear",
+      "role": "Aggressive early attacker",
+      "notes": "Enter the battlefield on turn 1 or 2 and attack immediately; cast cheap spells each turn to make it grow rapidly."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast one-mana spells before attacking to maximize prowess triggers",
+    "Hold burn spells in hand to trigger prowess on Swiftspear before using them",
+    "Play Emberheart Challenger when you have multiple prowess creatures to maximize token synergy"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Izzet Phoenix",
+      "advice": "Prioritize board presence over direct damage to force them to use removal on creatures rather than your face.",
+      "watch_for": [
+        "Lightning Bolt",
+        "Abrupt Decay",
+        "Teferi, Hero of Dominaria"
+      ]
+    },
+    {
+      "opponent_archetype": "Amalia's Assassin",
+      "advice": "Keep burn spells in hand to trigger prowess before casting them, and avoid leaving yourself open to a lethal Assassin strike.",
+      "watch_for": [
+        "Amalia's Assassin",
+        "Path to Exile",
+        "Lightning Strike"
+      ]
+    },
+    {
+      "opponent_archetype": "Rakdos Midrange",
+      "advice": "Apply early pressure to prevent them from stabilizing with removal and wide threats.",
+      "watch_for": [
+        "Fatal Push",
+        "Doomed Traveler",
+        "Bloodmist Infiltrator"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Abrupt Decay",
+    "Path to Exile",
+    "Lightning Strike",
+    "Teferi, Hero of Dominaria"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T03:51:10+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T03:51:10+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "89b24bf4103c2b91",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

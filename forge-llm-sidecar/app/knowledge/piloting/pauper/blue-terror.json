@@ -1,0 +1,168 @@
+{
+  "archetype": "Blue Terror",
+  "format": "pauper",
+  "strategy_type": "control",
+  "overview": "Blue Terror is a U/B control archetype that leverages card advantage and disruption to outlast opponents. By cycling through the library with Mental Note and Lorien Revealed, it discards opponent's threats while finding answers. Counterspell provides early interaction, setting up a grindy mid-to-late game where resource superiority dictates victory.",
+  "win_conditions": [
+    "Outdrawing and outmaneuvering opponents through cumulative card advantage",
+    "Discarding key threats to clear the board and hand",
+    "Countering game-ending spells to stall until superior resources close the game"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early Counterspell or cheap disruption",
+      "Hands containing Mental Note or Lorien Revealed with lands",
+      "Hands with at least two lands and a way to interact"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking interaction or card draw",
+      "Hands with only lands or only high-cost cards",
+      "Hands missing early game answers to aggressive strategies"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and hold Counterspell for opponent's early threats",
+      "Use Mental Note or Lorien Revealed on curve to discard opponent's hand while drawing into answers",
+      "Prioritize survival and hand disruption over early board presence"
+    ],
+    "mid_game": [
+      "Continue cycling with discard spells to find removal and counters",
+      "Target opponent's key threats with discard and counterspells",
+      "Establish a minimal board presence if necessary to apply pressure"
+    ],
+    "late_game": [
+      "Leverage card advantage to overwhelm opponent with answers",
+      "Use discard spells to strip opponent's hand of finishers",
+      "Stall with counterspells until superior resources or value engines secure victory"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Mental Note",
+      "role": "Card draw and hand disruption",
+      "notes": "Cast on curve to discard opponent's threats while drawing into answers; use sparingly when opponent has few cards"
+    },
+    {
+      "name": "Lorien Revealed",
+      "role": "Card draw and hand disruption",
+      "notes": "Provides similar utility to Mental Note with a lower discard requirement; ideal for cycling when opponent has a full hand"
+    },
+    {
+      "name": "Counterspell",
+      "role": "Early game interaction",
+      "notes": "Hold up for opponent's early threats or key plays; prioritize countering game-changing spells over minor threats"
+    }
+  ],
+  "sequencing_tips": [
+    "Cast discard spells before playing lands to maximize hand size for counters",
+    "Hold Counterspell until opponent commits to a key play rather than using it preemptively",
+    "Cycle Mental Note and Lorien Revealed alternately to maintain hand disruption pressure"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early Counterspell and discard spells to strip aggressive threats; play lands first to ensure you can cast interaction.",
+      "watch_for": [
+        "Early creature swarms",
+        "Burn spells",
+        "Fast mana acceleration"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race the opponent's card advantage by discarding their answers and countering their finishers; avoid overcommitting to the board.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspell packages",
+        "Value engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Use Counterspell on the key combo piece and discard spells to strip their hand; prioritize finding the right answer over playing lands.",
+      "watch_for": [
+        "Fast mana",
+        "Combo enablers",
+        "Win conditions"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Early aggressive creatures",
+    "Fast combo pieces",
+    "High-impact finishers"
+  ],
+  "metadata": {
+    "source": "Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:59:02+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-mono-blue-terror-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:56:01+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:59:02+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "09ed64feb96d81db",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Mental Note, Lorien Revealed, Counterspell"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Mental Note, Lorien Revealed, Counterspell"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Mental Note, Lorien Revealed, Counterspell"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Pauper U/B control meta"
+    }
+  ]
+}

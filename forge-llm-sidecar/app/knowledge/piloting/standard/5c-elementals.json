@@ -1,0 +1,244 @@
+{
+  "archetype": "5c Elementals",
+  "format": "standard",
+  "strategy_type": "tempo",
+  "overview": "This five-color deck leverages elemental synergy to control the board while generating consistent value. Wistfulness provides targeted tutoring to find key threats, while Vibrance offers card advantage and mana filtering. Ashling serves as the primary win condition by producing tokens and dealing direct damage, supported by Rekindled for recursion and late-game sustainability.",
+  "win_conditions": [
+    "Direct damage from Ashling, Rekindled, and generated tokens",
+    "Board presence overwhelming opponent's resources",
+    "Card advantage and filtering from Vibrance enabling consistent value loops"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two lands and an early elemental or Wistfulness",
+      "Draws containing Vibrance paired with a relevant elemental target",
+      "Balanced color distribution supporting five-color mana base"
+    ],
+    "mulligan_criteria": [
+      "Zero lands or more than four lands",
+      "No early plays or elemental synergies",
+      "Heavy concentration of late-game recursion without setup"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Establish mana base and play low-cost elementals",
+      "Cast Wistfulness to tutor for immediate threats or answers",
+      "Avoid overcommitting resources before establishing board presence"
+    ],
+    "mid_game": [
+      "Deploy Ashling to generate tokens and apply pressure",
+      "Use Vibrance to filter draws and find recursion or finishers",
+      "Maintain board control while cycling through the deck efficiently"
+    ],
+    "late_game": [
+      "Leverage Rekindled to return key elementals from graveyard",
+      "Sustain token production to outvalue opponent's removal",
+      "Close out games with direct damage and overwhelming board state"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Wistfulness",
+      "role": "Targeted tutor for elementals and key spells",
+      "notes": "Cast early to find immediate threats or answers; prioritize tutoring for Ashling or board control spells based on matchup"
+    },
+    {
+      "name": "Vibrance",
+      "role": "Card advantage and mana filtering",
+      "notes": "Use to draw cards and filter unwanted lands or spells; hold up appropriate colors to maximize utility and maintain five-color consistency"
+    },
+    {
+      "name": "Ashling, Rekindled",
+      "role": "Primary win condition and token producer",
+      "notes": "Protect at all costs; use token generation to trade efficiently and apply direct damage; synergizes with recursion for repeated value"
+    },
+    {
+      "name": "Rekindled",
+      "role": "Graveyard recursion and value engine",
+      "notes": "Target high-impact elementals or Ashling from graveyard; use in late game to outlast opponent's resources and close games"
+    }
+  ],
+  "sequencing_tips": [
+    "Cast Wistfulness before committing to large spells to ensure optimal targets",
+    "Hold up mana for Vibrance's filter ability to maintain color consistency",
+    "Protect Ashling with blockers or counterspells to preserve token generation",
+    "Sequence Rekindled after opponent plays removal to maximize value"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Prioritize board presence and token generation to pressure life total before they stabilize; use Wistfulness to find answers to their key spells.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Permanent removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use early elementals and Wistfulness to find removal or blockers; delay Ashling until you can protect it and generate value.",
+      "watch_for": [
+        "Fast curve creatures",
+        "Direct damage spells",
+        "Early board pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race with token production while using Vibrance to filter for recursion; avoid trading efficiently into their value engines.",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw spells",
+        "Late-game threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup with early interaction; use Wistfulness to find specific answers and maintain board presence to delay their win condition.",
+      "watch_for": [
+        "Combo pieces",
+        "Draw engines",
+        "Protection spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure before they accelerate; use Rekindled and Ashling to outvalue their late-game threats once they commit resources.",
+      "watch_for": [
+        "Mana accelerants",
+        "Large threats",
+        "Board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Tempo",
+      "advice": "Match their pace with efficient elementals and token generation; use Vibrance to filter for recursion and close games quickly.",
+      "watch_for": [
+        "Efficient removal",
+        "Card advantage spells",
+        "Board control"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipes",
+    "Permanent removal",
+    "Counterspells",
+    "Land destruction",
+    "Direct damage spells"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:01:10+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:01:10+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "5669d68fcf48a1a6",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

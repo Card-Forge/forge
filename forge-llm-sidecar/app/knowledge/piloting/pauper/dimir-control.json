@@ -1,0 +1,156 @@
+{
+  "archetype": "Dimir Control",
+  "format": "pauper",
+  "strategy_type": "control",
+  "overview": "Dimir Control in Pauper focuses on surviving the early game with efficient removal and board wipes, then stabilizing with resilient creatures and card advantage. By leveraging signature cards like Snuff Out and Lorien Revealed, the deck clears opposing boards while maintaining its own resources. Tolarian Terror provides a durable, value-generating finisher that pressures opponents over time.",
+  "win_conditions": [
+    "Outlasting opponents through card advantage and board control",
+    "Pressuring with resilient threats like Tolarian Terror",
+    "Winning via combat damage after clearing the board with Lorien Revealed"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early interaction like Snuff Out",
+      "Mana bases that support two-color casting by turn three",
+      "Combinations of removal and a late-game threat"
+    ],
+    "mulligan_criteria": [
+      "Mana screws with three or more lands",
+      "Hands lacking any removal or board impact",
+      "Overloaded hands with only late-game cards"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and hold up mana for Snuff Out",
+      "Trade early threats efficiently to preserve life total",
+      "Prioritize drawing into more removal and board wipes"
+    ],
+    "mid_game": [
+      "Cast Lorien Revealed to reset the board when ahead or at parity",
+      "Deploy Tolarian Terror to establish a persistent threat",
+      "Use card draw and filtering to find answers to opposing strategies"
+    ],
+    "late_game": [
+      "Maintain board presence with Tolarian Terror and other resilient creatures",
+      "Answer opposing finishers with remaining removal",
+      "Close out the game by trading up or attacking with a larger board"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Tolarian Terror",
+      "role": "Value engine and finisher",
+      "notes": "Cast when you have card advantage or board control; its +1/+1 counter generation and flying make it difficult to remove without multiple answers."
+    },
+    {
+      "name": "Snuff Out",
+      "role": "Early game removal",
+      "notes": "Use to kill low-toughness threats or finish off damaged creatures; prioritize targets that would otherwise pressure your life total."
+    },
+    {
+      "name": "Lorien Revealed",
+      "role": "Board wipe and tempo swing",
+      "notes": "Cast when you have few or no permanents to clear the board; follow up with Tolarian Terror or other threats to regain initiative."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up black mana for Snuff Out during opponent's turn to catch fast threats",
+    "Wait to cast Lorien Revealed until after opponents play their key threats or tap into combat",
+    "Cast Tolarian Terror on your turn when you can protect it or trade efficiently"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early removal and life total preservation; use Lorien Revealed to reset aggressive boards.",
+      "watch_for": [
+        "Fast one-drop threats",
+        "Burn spells",
+        "Early board floods"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race to board wipes and value engines; avoid trading removal into unremovable threats.",
+      "watch_for": [
+        "Resilient creatures",
+        "Card draw engines",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Establish board presence early with Tolarian Terror; force opponents to use removal before casting board wipes.",
+      "watch_for": [
+        "Counterspell packages",
+        "Board wipes",
+        "Stax effects"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Unblockable or flying threats",
+    "Board wipes and mass removal",
+    "Card draw engines"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T10:18:30+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:18:30+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "d8ee0c1921ce173a",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Dimir Control archetype in Pauper format"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards and control archetype principles"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard control sequencing principles applied to Pauper Dimir"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Pauper format meta trends and control deck vulnerabilities"
+    }
+  ]
+}

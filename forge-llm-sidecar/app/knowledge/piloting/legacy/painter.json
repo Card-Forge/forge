@@ -1,0 +1,197 @@
+{
+  "archetype": "Painter",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "Painter is a Legacy Red combo deck that leverages Painter's Servant to manipulate permanent types into 0/1 creatures, enabling board clears or infinite value loops. Goblin Welder provides a reliable sacrifice outlet to trigger death triggers or fuel the combo, while Pyroblast secures early game tempo against aggressive strategies. The deck aims to assemble its key pieces quickly and overwhelm opponents through relentless pressure or sudden lethal sequences.",
+  "win_conditions": [
+    "Infinite damage or value loops enabled by Painter's Servant and sacrifice outlets",
+    "Board wipes that remove opponent's permanents while leaving your own intact",
+    "Goblin Welder sacrifice triggers to generate lethal damage or card advantage",
+    "Pyroblast disruption to stall opponents until combo pieces are assembled"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Painter's Servant and a land",
+      "Hands with Goblin Welder and an artifact or creature",
+      "Hands with Pyroblast and a low-cost spell or land"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking lands or key combo pieces",
+      "Hands with only high-cost cards",
+      "Hands without interaction or acceleration"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Cast lands efficiently and look for Pyroblast to disrupt opponent's early threats",
+      "Play Painter's Servant as soon as possible to set up type-changing effects",
+      "Use Goblin Welder to sacrifice early artifacts or creatures for value"
+    ],
+    "mid_game": [
+      "Leverage Painter's Servant to turn opponent's permanents into 0/1 creatures",
+      "Trigger Goblin Welder repeatedly to generate card advantage or damage",
+      "Maintain board presence while searching for combo enablers or board wipes"
+    ],
+    "late_game": [
+      "Execute infinite loops or lethal sequences using Painter's Servant and sacrifice outlets",
+      "Clear opponent's board with targeted removal or board wipes",
+      "Stall with Pyroblast if opponent attempts a comeback"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Painter's Servant",
+      "role": "Combo enabler and board control",
+      "notes": "Use to change permanent types to creature, then sacrifice them with Goblin Welder or board wipes for value."
+    },
+    {
+      "name": "Goblin Welder",
+      "role": "Sacrifice outlet and value engine",
+      "notes": "Sacrifice artifacts or creatures to draw cards or trigger death triggers, fueling Painter's Servant loops."
+    },
+    {
+      "name": "Pyroblast",
+      "role": "Early game disruption",
+      "notes": "Hold for opponent's key threats or combo pieces to buy time for your own setup."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize casting Painter's Servant before opponent's permanents enter the battlefield",
+    "Save Pyroblast for high-impact threats rather than early creatures",
+    "Use Goblin Welder's ability strategically to trigger death triggers or draw cards at optimal moments",
+    "Maintain mana efficiency to keep interaction available for opponent's turns"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Pyroblast on early threats and prioritize Painter's Servant to turn their creatures into 0/1s for easy removal.",
+      "watch_for": [
+        "Fast attackers",
+        "Lifelink creatures",
+        "Early board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race with Goblin Welder value and Painter's Servant tricks while using Pyroblast to disrupt their key spells.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup with Pyroblast and use Painter's Servant to neutralize their combo pieces.",
+      "watch_for": [
+        "Combo enablers",
+        "Protection spells",
+        "Fast win conditions"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Counterspells and removal",
+    "Board wipes",
+    "Card draw engines"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm + Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T07:34:15+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-cam-painter-combo-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:27:52+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-tezzeret-painter-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:29:37+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-izzet-planisphere-painter-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:31:21+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:34:15+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "4e97be2b45f2096b",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Painter's Servant, Goblin Welder, Pyroblast"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Painter's Servant, Goblin Welder, Pyroblast"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Painter's Servant, Goblin Welder, Pyroblast"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Painter's Servant, Goblin Welder, Pyroblast"
+    }
+  ]
+}

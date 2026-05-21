@@ -1,0 +1,261 @@
+{
+  "archetype": "Jeskai Control",
+  "format": "standard",
+  "strategy_type": "control",
+  "overview": "Jeskai Control is an Azorius Control variant that splashes red to effectively handle the creature-heavy Standard meta. The deck aims to control the board using spot removal, counterspells, and lifegain until the opponent exhausts their resources. Once the board is stabilized, it transitions to powerful win conditions to close out the game.",
+  "win_conditions": [
+    "Elspeth, Storm Slayer",
+    "Beza, the Bounding Spring"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with interaction tools",
+      "Hands with sufficient land drops",
+      "Versatile hands that perform well across multiple matchups"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking interaction or land drops",
+      "Risky hands against unknown opponents that rely on topdeck manipulation"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "interaction",
+          "land drops"
+        ],
+        "decision": "keep",
+        "reason": "Has ways to interact with the opponent but needs land drops to put plans in motion."
+      },
+      {
+        "hand": [
+          "versatile options"
+        ],
+        "decision": "keep",
+        "reason": "Can perform really well in many matchups and is versatile enough to keep in most cases."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and early interaction",
+      "Use spot removal and counterspells to control the board",
+      "Gain life to survive aggro strategies"
+    ],
+    "mid_game": [
+      "Continue controlling the board and preventing opponent value",
+      "Bounce problematic creatures with Marang River Regent",
+      "Manage resources and keep backup plans in hand"
+    ],
+    "late_game": [
+      "Deploy win conditions like Elspeth, Storm Slayer and Beza, the Bounding Spring",
+      "Finish the game once the opponent runs out of resources"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Elspeth, Storm Slayer",
+      "role": "Win condition",
+      "notes": "Fills board with tokens, buffs creatures with evasion, and removes 3+ cost creatures."
+    },
+    {
+      "name": "Beza, the Bounding Spring",
+      "role": "Finisher/Aggro answer",
+      "notes": "Deals with aggro decks, interacts well with Elspeth, and finishes games."
+    },
+    {
+      "name": "Marang River Regent",
+      "role": "Versatile threat",
+      "notes": "Excellent in combat, creates card advantage, and bounces creatures."
+    },
+    {
+      "name": "Lightning Helix",
+      "role": "Spot removal",
+      "notes": "Exceptional against Red Decks."
+    },
+    {
+      "name": "Ride's End",
+      "role": "Spot removal",
+      "notes": "Deals with recursive creatures like Mosswood Dreadknight."
+    },
+    {
+      "name": "Stock Up",
+      "role": "Card advantage",
+      "notes": "Heart of the entire strategy."
+    },
+    {
+      "name": "Tishana's Tidebinder",
+      "role": "Sideboard blocker",
+      "notes": "Versatile ability lets you block many meta cards."
+    },
+    {
+      "name": "Rest in Peace",
+      "role": "Sideboard graveyard hate",
+      "notes": "Critical against graveyard strategies."
+    },
+    {
+      "name": "Regal Caracal",
+      "role": "Sideboard aggro answer",
+      "notes": "One of the best cards against aggro, complements Beza."
+    }
+  ],
+  "sequencing_tips": [
+    "Don't pass turns without mana open against bounce strategies.",
+    "Keep global removals in hand for the right timing.",
+    "Control your opponent's board and life points carefully against aggro.",
+    "Prevent opponents from creating value with creatures, especially when Cauldron is in play.",
+    "Use removals wisely and save them for the right time."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Izzet Cauldron",
+      "advice": "Control the opponent and prevent them from creating value with creatures, especially if Cauldron is in play.",
+      "watch_for": [
+        "Vivi Ornitier",
+        "scary turns",
+        "recursion"
+      ]
+    },
+    {
+      "opponent_archetype": "Dimir Midrange",
+      "advice": "Control the board and prevent value from problematic cards; Jeskai has the upper hand in game 1.",
+      "watch_for": [
+        "Kaito, Bane of Nightmares",
+        "Ninjutsu"
+      ]
+    },
+    {
+      "opponent_archetype": "Esper Bounce",
+      "advice": "Play around the opponent's sequences and avoid passing turns without mana.",
+      "watch_for": [
+        "incredibly strong sequences",
+        "creature-centric game plan"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono-Red Aggro",
+      "advice": "Control the board and life points carefully, using removals at the right time.",
+      "watch_for": [
+        "Screaming Nemesis"
+      ]
+    },
+    {
+      "opponent_archetype": "Manufacturing Combo",
+      "advice": "Disrupt the combo and game plan in any way possible until you can deploy your win conditions.",
+      "watch_for": [
+        "Weapons Manufacturing",
+        "artifact engines",
+        "damage when artifacts leave the board"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Vivi Ornitier",
+    "Kaito, Bane of Nightmares",
+    "Screaming Nemesis",
+    "Mosswood Dreadknight",
+    "Weapons Manufacturing",
+    "Cauldron"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-jeskai-control-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T05:46:47+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-jeskai-control-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:45:14+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "76523cc0ddf9fe59",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Jeskai Control is an Azorius Control variant that splashes to red to take advantage of how valuable this color is in many matchups. ... The main game plan is simple: all you have to do is control the game until your opponent runs out of resources and you can easily play your win condition."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Elspeth, Storm Slayer is that win condition."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "It is also a great finisher."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "don't pass turns without any mana because this could be fatal."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Keep a few global removals for the right time, and use them wisely."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "don't give your opponent even an inch of freedom, and always have a backup plan in hand."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Vivi Ornitier is still dominating Magic: The Gathering."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Be careful with Kaito, Bane of Nightmares and his Ninjutsu."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Be careful with Screaming Nemesis because it can be very problematic for you"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Ride's End deals with recursive creatures (like Mosswood Dreadknight) really well."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Basically, your opponent will use Weapons Manufacturing to fill their board with artifacts."
+    }
+  ]
+}

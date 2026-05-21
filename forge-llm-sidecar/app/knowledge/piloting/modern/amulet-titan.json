@@ -2,245 +2,127 @@
   "archetype": "Amulet Titan",
   "format": "modern",
   "strategy_type": "ramp",
-  "overview": "Amulet Titan is a skill-intensive Modern strategy that combines explosive ramp with a toolbox land package to generate massive mana and board presence. The game plan is to establish Amulet of Vigor and bounce lands early, creating ritual-like mana bursts that enable Primeval Titan as early as turn 2. Titan then tutors lands to stabilize, protect, or close the game, while Scapeshift serves as a powerful alternate finisher to sacrifice lands for lethal damage or utility.",
+  "overview": "Amulet Titan is a skill-intensive Modern strategy that combines explosive ramp with a toolbox-style land package and intricate sequencing. It aims to deploy Primeval Titan as early as turn two to snowball into a winning position, while maintaining enough interaction and redundancy to grind through disruption in longer games.",
   "win_conditions": [
-    "Primeval Titan: Fetches lands to ramp further, stabilize, or win via haste lands like Hanweir Battlements and mana explosions like Lotus Field.",
-    "Scapeshift: Combo finisher that sacrifices lands to bring in the exact package needed for lethal damage or utility.",
-    "Cultivator Colossus: Massive body that refills hand with extra lands while growing huge."
+    "Primeval Titan",
+    "Scapeshift",
+    "Cultivator Colossus",
+    "Hanweir Battlements",
+    "Lotus Field",
+    "Urza's Saga"
   ],
   "mulligan": {
-    "keep_criteria": [
-      "Hands with Amulet of Vigor and bounce lands (e.g., Gruul Turf, Simic Growth Chamber).",
-      "Hands with early ramp like Arboreal Grazer or Explore.",
-      "Hands with Primeval Titan and a path to cast it (e.g., Urza's Saga or Spelunking).",
-      "Hands with interaction like Force of Vigor or Dismember if ramp is present."
-    ],
-    "mulligan_criteria": [
-      "Hands lacking Amulet of Vigor or bounce land synergy.",
-      "Hands with only slow lands or no ramp sources.",
-      "Hands with Primeval Titan but no way to cast it.",
-      "Hands heavy on finishers without the mana engine."
-    ],
-    "examples": [
-      {
-        "hand": [
-          "Amulet of Vigor",
-          "Gruul Turf",
-          "Explore",
-          "Primeval Titan",
-          "Dismember",
-          "Simic Growth Chamber",
-          "Urza's Saga"
-        ],
-        "decision": "keep",
-        "reason": "Core engine present with Amulet and bounce lands, plus Explore for consistency and Titan as payoff."
-      },
-      {
-        "hand": [
-          "Primeval Titan",
-          "Cultivator Colossus",
-          "Scapeshift",
-          "Dismember",
-          "Force of Vigor",
-          "Mountain",
-          "Forest"
-        ],
-        "decision": "mulligan",
-        "reason": "No Amulet of Vigor or bounce lands to generate the explosive mana needed to cast Titan or enable the strategy."
-      }
-    ]
+    "keep_criteria": [],
+    "mulligan_criteria": [],
+    "examples": []
   },
   "game_plan": {
     "early_game": [
-      "Prioritize casting Amulet of Vigor and playing bounce lands to create mana explosions.",
-      "Use Arboreal Grazer and Explore to accelerate land count and hand size.",
-      "Look for Urza's Saga to tutor Amulet or Spelunking to enable land synergies.",
-      "Cast Primeval Titan as early as possible, ideally turn 2 with Amulet and bounce lands."
+      "Play Arboreal Grazer on turn 1 for a land and blocker",
+      "Sequence Amulet of Vigor and bounce lands carefully to dodge disruption",
+      "Use Explore and Spelunking to smooth land drops and draw cards"
     ],
     "mid_game": [
-      "Use Titan triggers to tutor lands that stabilize the board, provide protection, or set up wins.",
-      "Deploy Cultivator Colossus to refill hand and apply pressure.",
-      "Use interaction like Dismember and Force of Vigor to handle threats without losing tempo.",
-      "Maintain mana advantage to out-grind opponents or set up Scapeshift."
+      "Deploy Primeval Titan to fetch lands that stabilize, protect, or attack",
+      "Use Summoner's Pact when you can win immediately or afford the upkeep cost",
+      "Leverage Urza's Saga to tutor Amulet or generate Construct token pressure"
     ],
     "late_game": [
-      "Execute Scapeshift to sacrifice lands for lethal damage or key utility lands.",
-      "Overwhelm with Primeval Titan triggers and haste lands like Hanweir Battlements.",
-      "Use Lotus Field for mana explosions to cast multiple threats or finish the game.",
-      "Leverage redundancy from Spelunking and Explore to recover from disruption."
+      "Chain Cultivator Colossus with untapped lands to draw cards and grow the creature",
+      "Execute Aftermath Analyst loops with Scapeshift or Lotus Field for massive mana bursts",
+      "Utilize Shifting Woodland and Mirrorpool for infinite recursion and repeated Titan triggers"
     ]
   },
   "key_cards": [
     {
       "name": "Amulet of Vigor",
-      "role": "Engine/Ramp",
-      "notes": "Namesake card that allows bounce lands to function as supercharged ramp rituals."
+      "role": "Core engine",
+      "notes": "Lets bounce lands function like supercharged ramp by untapping them before they return to hand."
     },
     {
       "name": "Primeval Titan",
-      "role": "Payoff/Win Condition",
-      "notes": "Fetches lands to ramp, stabilize, or win; can be cast as early as turn 2."
+      "role": "Primary payoff",
+      "notes": "Fetches lands to ramp further, stabilize, or set up lethal damage."
+    },
+    {
+      "name": "Simic Growth Chamber",
+      "role": "Bounce land",
+      "notes": "Creates explosive mana when combined with Amulet of Vigor."
     },
     {
       "name": "Scapeshift",
-      "role": "Combo Finisher",
-      "notes": "Sacrifices lands to bring in exact package needed for lethal damage or utility."
-    },
-    {
-      "name": "Bounce Lands (e.g., Gruul Turf, Simic Growth Chamber)",
-      "role": "Mana Base/Ramp",
-      "notes": "Create explosive mana with Amulet of Vigor; essential for speed."
-    },
-    {
-      "name": "Urza's Saga",
-      "role": "Mana Base/Tutor",
-      "notes": "Fetches Amulet of Vigor or other small artifacts; provides mana acceleration."
-    },
-    {
-      "name": "Tolaria West",
-      "role": "Mana Base/Tutor",
-      "notes": "Tutors key pieces from the library."
-    },
-    {
-      "name": "Arboreal Grazer",
-      "role": "Ramp",
-      "notes": "Gets extra lands on board early; can be cut in sideboard against certain matchups."
-    },
-    {
-      "name": "Explore",
-      "role": "Ramp/Consistency",
-      "notes": "Keeps hand moving and mana base expanding; provides redundancy."
+      "role": "Combo finisher",
+      "notes": "Sacrifices lands to bring in the exact package needed for lethal or utility."
     },
     {
       "name": "Spelunking",
-      "role": "Glue/Synergy",
-      "notes": "Glue piece that enables land synergies and consistency."
+      "role": "Glue piece",
+      "notes": "Draws a card, drops a land, and makes all future lands enter untapped."
     },
     {
-      "name": "Dismember",
-      "role": "Removal",
-      "notes": "Cheap creature removal for threats like Ragavan or Ledger Shredder."
+      "name": "Urza's Saga",
+      "role": "Flexible land",
+      "notes": "Tutors Amulet of Vigor and generates Construct tokens as a backup plan."
     },
     {
-      "name": "Force of Vigor",
-      "role": "Interaction",
-      "notes": "Handles problematic artifacts and enchantments without tempo cost."
-    },
-    {
-      "name": "Otawara, Soaring City",
-      "role": "Interaction",
-      "notes": "Doubles as bounce for tricky permanents."
-    },
-    {
-      "name": "Fire Magic",
-      "role": "Sweeper",
-      "notes": "Scalable sweeper for small creature decks."
+      "name": "Aftermath Analyst",
+      "role": "Combo piece",
+      "notes": "Turns graveyard recursion into fuel by returning sacrificed lands untapped."
     },
     {
       "name": "Cultivator Colossus",
-      "role": "Payoff",
-      "notes": "Massive body that refills hand with lands while growing huge."
-    },
-    {
-      "name": "Hanweir Battlements",
-      "role": "Win Condition Land",
-      "notes": "Tutored by Titan for haste to attack immediately."
-    },
-    {
-      "name": "Lotus Field",
-      "role": "Win Condition Land",
-      "notes": "Tutored by Titan for mana explosions."
+      "role": "Massive threat",
+      "notes": "Refills hand with extra lands while growing huge, especially with untapped land drops."
     }
   ],
   "sequencing_tips": [
-    "Cast Amulet of Vigor before playing bounce lands to maximize mana generation.",
-    "Hold Force of Vigor or Dismember for key threats rather than using them preemptively.",
-    "Use Otawara, Soaring City to bounce problematic permanents while maintaining board presence.",
-    "Sequence Scapeshift carefully to ensure you have enough lands to sacrifice and the right lands to fetch.",
-    "Prioritize tutoring Hanweir Battlements or Lotus Field with Titan when you need to close the game.",
-    "Use Spelunking to enable land synergies or recover from disruption.",
-    "Don't overload on removal; rely on proactive plays and interaction like Force of Vigor."
+    "When Amulet of Vigor and a bounce land trigger, ensure Amulet's untap resolves before the land's return trigger to tap it for mana first.",
+    "Sequence Amulet of Vigor and lands carefully to dodge disruption; sometimes play Amulet first, sometimes lay lands out first.",
+    "Use Summoner's Pact only when you can win that turn or guarantee mana for the upkeep cost.",
+    "Float mana and plan ahead for Urza's Saga's Chapter III sacrifice timing.",
+    "Chain Cultivator Colossus land drops while Amulet or Spelunking is active to maximize card draw and creature size."
   ],
   "matchups": [
     {
       "opponent_archetype": "Boros Energy",
-      "advice": "Use Fire Magic to sweep small creatures and Dismember for bigger threats. Cut Arboreal Grazer as blocking is less important.",
+      "advice": "Side in Fire Magic to sweep small creatures and Dismember for larger threats. Cut Arboreal Grazer since blocking is unimportant.",
       "watch_for": [
-        "Small creature swarms",
-        "Ragavan",
-        "Ledger Shredder"
+        "small creatures",
+        "early board presence"
       ]
     },
     {
       "opponent_archetype": "Izzet Murktide",
-      "advice": "Grind it out with Dismember for early creatures, Bojuka Bog to shrink graveyard, and Green Sun's Zenith for consistency. Otawara provides extra interaction.",
+      "advice": "Bring in Six for long-game card advantage, Dismember for early creatures, and Bojuka Bog to shrink their graveyard. Trim Scapeshift and Explore.",
       "watch_for": [
-        "Early creatures",
-        "Graveyard recursion",
-        "Long game grind"
+        "counters",
+        "early creatures",
+        "graveyard recursion"
       ]
     },
     {
       "opponent_archetype": "Eldrazi Ramp",
-      "advice": "Use Force of Vigor to break their setup and Collector Ouphe to lock down artifacts. Green Sun's Zenith finds hate creatures. Cut Cultivator Colossus and Arboreal Grazer.",
+      "advice": "Use Force of Vigor to break their setup and Collector Ouphe to lock down artifacts. Cut Cultivator Colossus and Arboreal Grazer.",
       "watch_for": [
-        "Mana rocks",
-        "Big plays",
-        "Artifact engines"
+        "mana rocks",
+        "big plays"
       ]
     },
     {
       "opponent_archetype": "Ruby Storm",
-      "advice": "Fight back quickly with Force of Vigor on Ruby Medallion and Dismember on cost reducers like Ral. Bojuka Bog provides graveyard interaction. Cut Cultivator Colossus.",
+      "advice": "Fight back quickly with Force of Vigor on Ruby Medallion, Dismember on cost reducers, and Bojuka Bog. Cut slow cards like Cultivator Colossus, Spelunking, and Explore.",
       "watch_for": [
         "Ruby Medallion",
         "Ral, Storm Conduit",
-        "Fast combo attempts"
+        "fast damage"
       ]
     },
     {
-      "opponent_archetype": "Amulet Titan Mirror",
-      "advice": "Focus on breaking their engine with Force of Vigor targeting Amulet of Vigor or Spelunking. Cut Arboreal Grazer.",
+      "opponent_archetype": "The Mirror Match",
+      "advice": "Focus on keeping your engine intact. Force of Vigor is crucial for breaking their Amulet of Vigor.",
       "watch_for": [
-        "Amulet of Vigor",
-        "Spelunking",
-        "Engine integrity"
-      ]
-    },
-    {
-      "opponent_archetype": "Charbelcher",
-      "advice": "Shut off their combo with Collector Ouphe and Green Sun's Zenith to find it. Force of Vigor helps. Cut Arboreal Grazer and Explore.",
-      "watch_for": [
-        "Charbelcher combo pieces",
-        "Artifact synergy",
-        "Fast win attempts"
-      ]
-    },
-    {
-      "opponent_archetype": "Domain Zoo",
-      "advice": "Rely on Dismember as the best tool against creature-heavy decks. Cut Arboreal Grazer as blocking doesn't line up well.",
-      "watch_for": [
-        "Creature pressure",
-        "Small threats",
-        "Blocking requirements"
-      ]
-    },
-    {
-      "opponent_archetype": "Affinity",
-      "advice": "Use Collector Ouphe, Force of Vigor, and Green Sun's Zenith to target artifacts. Cut Arboreal Grazer and Explore.",
-      "watch_for": [
-        "Artifact synergies",
-        "Thopter foundries",
-        "Fast artifact plays"
-      ]
-    },
-    {
-      "opponent_archetype": "Broodscale Combo",
-      "advice": "Mix removal and disruption: Dismember and Fire Magic for creatures, Force of Vigor and Collector Ouphe for artifacts. Green Sun's Zenith ensures Ouphe consistency. Cut Arboreal Grazer and Explore.",
-      "watch_for": [
-        "Broodscale combo pieces",
-        "Creature threats",
-        "Artifact threats"
+        "engine disruption",
+        "Amulet of Vigor"
       ]
     }
   ],
@@ -248,19 +130,68 @@
     "Ragavan, Nimble Pilferer",
     "Ledger Shredder",
     "Abhorrent Oculus",
+    "small creatures",
+    "counters",
+    "mana rocks",
     "Ruby Medallion",
-    "Ral, Storm Conduit",
-    "Blood Moon",
-    "Magus of the Moon",
-    "Damping Sphere",
-    "Ghost Quarter",
-    "Field of Ruin"
+    "Ral, Storm Conduit"
   ],
   "metadata": {
-    "source": "build_piloting_guides.py + draftsim",
+    "source": "Draftsim",
     "source_url": "https://draftsim.com/mtg-amulet-titan-modern-deck/",
-    "generated_at": "2026-05-20T17:23:52+00:00",
+    "generated_at": "2026-05-20T21:16:58+00:00",
     "model": "local-model",
-    "schema_version": 1
-  }
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Draftsim",
+      "author": "",
+      "source_url": "https://draftsim.com/mtg-amulet-titan-modern-deck/",
+      "publish_date": "",
+      "fetched_at": "2026-05-20T21:15:31+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "f316fdb62fc77fc8",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "The deck is one of the most powerful and skill-intensive strategies in Modern, one that combines explosive ramp with toolbox-style land packages and some of the most intricate sequencing in the format. At its best, this deck can land a Primeval Titan as early as turn 2, but it also has the staying power to grind through removal and disruption in longer games."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The primary win condition is to overwhelm with Primeval Titan. It chains into damage by finding Hanweir Battlements for haste or lands like Lotus Field for mana explosions. Scapeshift is the alternate plan, which is to turn all your lands into a game-ending swing. When needed, Cultivator Colossus is big enough to trample over just about anything."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "When both triggers go on the stack, make sure Amulet’s untap resolves before the land’s “return a land” trigger... Sometimes you jam an Amulet first, other times you lay out your lands carefully to dodge disruption... You usually want to use it when you’re winning that same turn... Just be mindful of Saga’s timing: It sacrifices itself after Chapter III, so float mana and plan ahead."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Dismember gives you cheap creature removal, even against larger threats... clean up creatures like Ragavan, Nimble Pilferer, Ledger Shredder, or Abhorrent Oculus... Force of Vigor handles problematic artifacts and enchantments... Bojuka Bog gives you some graveyard interaction."
+    }
+  ]
 }

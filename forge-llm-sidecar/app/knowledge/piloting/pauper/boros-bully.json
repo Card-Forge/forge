@@ -1,0 +1,264 @@
+{
+  "archetype": "Boros Bully",
+  "format": "pauper",
+  "strategy_type": "aggro",
+  "overview": "Boros Bully is a competitive Pauper Aggro deck that leverages low-cost creatures, protection spells, and graveyard recursion to secure quick victories. It adapts to the metagame by including specific maindeck answers for popular strategies like Affinity, Faeries, and Elves. Success relies on careful resource management and precise timing rather than simply flooding the board.",
+  "win_conditions": [
+    "Rally the Peasants",
+    "Squadron Hawk",
+    "Battle Screech",
+    "Lunarch Veteran // Luminous Phantom"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Squadron Hawk",
+      "Hands with early creatures and lands"
+    ],
+    "mulligan_criteria": [
+      "Hands full of lands paired with Faithless Looting",
+      "Hands lacking early threats or card advantage"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Squadron Hawk",
+          "Mountain",
+          "Plains",
+          "Lunarch Veteran",
+          "Sacred Cat"
+        ],
+        "decision": "keep",
+        "reason": "Squadron Hawk is one of the best cards to have in your starting hand, especially if you're on a Mulligan."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play low-cost creatures quickly to establish board presence",
+      "Avoid opening with Faithless Looting on turn 1 to preserve information and graveyard options",
+      "Prioritize resolving Squadron Hawk"
+    ],
+    "mid_game": [
+      "Hold Prismatic Strands to protect against sweepers and red removal",
+      "Cast Battle Screech to generate value and board presence",
+      "Discard Dust to Dust if not facing Affinity to find better answers"
+    ],
+    "late_game": [
+      "Recast Rally the Peasants to finish the game quickly",
+      "Maintain land count and board control to outvalue opponents"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Squadron Hawk",
+      "role": "Early game threat and card advantage",
+      "notes": "One of the best cards to have in your starting hand; resolves to put a flying creature on the board and 'draw' three other creatures."
+    },
+    {
+      "name": "Rally the Peasants",
+      "role": "Win condition and board development",
+      "notes": "Used to win many times in just one attack; can be recast from the graveyard to finish games."
+    },
+    {
+      "name": "Prismatic Strands",
+      "role": "Protection and tempo",
+      "notes": "Protects creatures from sweepers and red removal; essential against Goblins Combo and Faeries."
+    },
+    {
+      "name": "Dust to Dust",
+      "role": "Maindeck answer and flexible slot",
+      "notes": "Crucial against Affinity; can be discarded early in other matchups to find answers or reused from the graveyard."
+    },
+    {
+      "name": "Electrickery",
+      "role": "Removal and mirror match finisher",
+      "notes": "Excellent against Faeries, Elves, and the mirror match; can end games when boards are locked."
+    },
+    {
+      "name": "Thrilling Discovery",
+      "role": "Card advantage and graveyard setup",
+      "notes": "Draws two cards and can discard them, improving odds of finding answers and fueling the graveyard recursion mechanic."
+    },
+    {
+      "name": "Lunarch Veteran // Luminous Phantom",
+      "role": "Early game blocker and finisher",
+      "notes": "Helps against Burn and aggro decks by providing early board presence and flying."
+    },
+    {
+      "name": "Battle Screech",
+      "role": "Value and board presence",
+      "notes": "Creates 4 creatures with just one card, providing massive value and attacking pressure."
+    }
+  ],
+  "sequencing_tips": [
+    "Avoid playing Faithless Looting on turn 1 to keep information and potential graveyard reuse",
+    "Prioritize resolving Squadron Hawk early to flood the board",
+    "Hold Prismatic Strands to protect against sweepers and red removal",
+    "Discard Dust to Dust early if not facing Affinity to find answers",
+    "Use Electrickery carefully in the mirror to break locked boards"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Affinity",
+      "advice": "Use Dust to Dust right away, preferably at the start of the game. Make as many creatures as possible to force land spending and stay ahead.",
+      "watch_for": [
+        "Makeshift Munitions",
+        "Fiery Cannonade"
+      ]
+    },
+    {
+      "opponent_archetype": "Faeries",
+      "advice": "Use flying creatures to avoid Ninjutsu. Protect Squadron Hawk and Battle Screech with counters or sweepers. Side in Parapet against Dimir and Prismatic Strands against Izzet.",
+      "watch_for": [
+        "Echoing Decay",
+        "Suffocating Fumes",
+        "Electrickery",
+        "Fiery Cannonade",
+        "Gurmag Angler"
+      ]
+    },
+    {
+      "opponent_archetype": "Elves",
+      "advice": "Go by quantity and try to win in one swing with Rally the Peasants. Use Electrickery to clear the board and Prismatic Strands for protection.",
+      "watch_for": [
+        "Jaspera Sentinel"
+      ]
+    },
+    {
+      "opponent_archetype": "Gruul Ponza",
+      "advice": "Play creatures as quickly as possible to prevent board establishment, but keep lands in play. Resolve high-cost cards like Battle Screech and Rally the Peasants to finish.",
+      "watch_for": [
+        "Speed of opponent's deck",
+        "Board establishment"
+      ]
+    },
+    {
+      "opponent_archetype": "Boros Bully",
+      "advice": "Start with Squadron Hawk and play Battle Screech on turn 4. Expect a locked board with Prismatic Strands and lootings; use Electrickery to break the stalemate.",
+      "watch_for": [
+        "Squadron Hawk",
+        "Battle Screech",
+        "Prismatic Strands",
+        "Electrickery"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Makeshift Munitions",
+    "Fiery Cannonade",
+    "Echoing Decay",
+    "Suffocating Fumes",
+    "Electrickery",
+    "Jaspera Sentinel",
+    "Gurmag Angler"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-boros-bully-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T09:57:51+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-boros-bully-2025-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:54:44+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-boros-bully-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:56:22+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "f2eb1408b483c647",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "It is an Aggro with good answers and protection for its creatures."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "winning many times in just one attack [with Rally the Peasants]"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Squadron Hawk... we will 'draw' three other creatures."
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Battle Screech to create 4 creatures with just one card"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "I don't particularly like opening a handful of lands with Faithless Looting and discarding and drawing other cards right on turn 1."
+    },
+    {
+      "confidence": 0.6,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "we have to know how to spend our resources at the right time."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Affinity has a card that is incredibly troublesome for us, Makeshift Munitions"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Dimir has Echoing Decay and/or Suffocating Fumes , and from Izzet has Electrickery and/or Fiery Cannonade"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "with Jaspera Sentinel , things got complicated, as this creature blocks ours incredibly well."
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "best answer against Gurmag Angler"
+    }
+  ]
+}

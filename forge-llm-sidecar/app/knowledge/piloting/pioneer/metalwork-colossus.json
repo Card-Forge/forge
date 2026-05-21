@@ -1,0 +1,234 @@
+{
+  "archetype": "Metalwork Colossus",
+  "format": "pioneer",
+  "strategy_type": "combo",
+  "overview": "This Pioneer Azorius deck revolves around casting Metalwork Colossus for free or cheap using high-mana-value artifacts like Brass Knuckles and Leyline Axe to achieve a double-strike lethal attack. It features an alternative win condition via Simulacrum Synthesizer tokens and includes board interaction and recursion tools to protect the combo. The deck aims to assemble its pieces quickly, bypass blockers with Wedding Invitation, and loop back to hand if removal is encountered.",
+  "win_conditions": [
+    "Metalwork Colossus equipped with Brass Knuckles and/or Leyline Axe for a double-strike lethal attack",
+    "Simulacrum Synthesizer tokens equipped with Leyline Axe",
+    "Ingenious Smith as a complementary threat if it stays on the board"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Leyline Axe and early artifact enablers like Brass Knuckles or Moonsnare Prototype",
+      "Hands with multiple high-mana-value artifacts to trigger Simulacrum Synthesizer"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early mana or artifact reduction tools",
+      "Hands heavy on lands or late-game recursion without early setup"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Leyline Axe",
+          "Brass Knuckles",
+          "Moonsnare Prototype",
+          "Island",
+          "Island"
+        ],
+        "decision": "keep",
+        "reason": "Leyline Axe is explicitly noted as the best card for the starting hand, and combined with Brass Knuckles and early mana, it enables a fast Colossus play."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Leyline Axe on turn one if possible to establish free mana and cost reduction",
+      "Use Moonsnare Prototype to ramp and protect Leyline Axe",
+      "Search for artifacts with Ingenious Smith"
+    ],
+    "mid_game": [
+      "Cast Metalwork Colossus for free or cheap on turn three or four",
+      "Equip with Brass Knuckles and Leyline Axe for double strike",
+      "Use Wedding Invitation to clear blockers for lethal combat"
+    ],
+    "late_game": [
+      "Sacrifice artifacts to return Colossus to hand and repeat the loop if killed",
+      "Pivot to Simulacrum Synthesizer token generation",
+      "Use Fabrication Foundry to reanimate artifacts and accelerate the combo"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Metalwork Colossus",
+      "role": "Primary win condition",
+      "notes": "Hard-to-kill 10/10 threat with absurd mana value that can be cast for free starting turn four."
+    },
+    {
+      "name": "Brass Knuckles",
+      "role": "Combo enabler",
+      "notes": "Creates a copy on entry, reduces Colossus's mana value by eight, and grants double strike when both are equipped."
+    },
+    {
+      "name": "Leyline Axe",
+      "role": "Combo enabler & mana source",
+      "notes": "Enters for free on turn one, reduces cost by four, grants trample and double strike, and acts as a Sol Ring equivalent later."
+    },
+    {
+      "name": "Simulacrum Synthesizer",
+      "role": "Alternative win condition",
+      "notes": "Generates tokens from artifacts with mana value 3+, which can be equipped with Leyline Axe for lethal damage."
+    },
+    {
+      "name": "Wedding Invitation",
+      "role": "Board clearance",
+      "notes": "Removes blockers to enable lethal combat and reduces Colossus's mana value while returning to hand."
+    },
+    {
+      "name": "Fabrication Foundry",
+      "role": "Acceleration & recursion",
+      "notes": "Adds virtual mana, speeds up Brass Knuckles, and reanimates artifacts for longer games or Synthesizer plans."
+    },
+    {
+      "name": "Portable Hole",
+      "role": "Removal",
+      "notes": "Handles red aggro creatures, Prowess, Cori-Steel Cutter, Artist's Talent, and Witch's Oven."
+    },
+    {
+      "name": "Perilous Snare",
+      "role": "Removal & value",
+      "notes": "Destroys larger permanents while triggering Simulacrum Synthesizer."
+    },
+    {
+      "name": "Inventors' Fair",
+      "role": "Mana base & interaction",
+      "notes": "Provides recurring life gain and allows searching for specific artifacts or sideboard answers."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize playing Leyline Axe on turn one to establish early mana and cost reduction.",
+    "Hold Wedding Invitation until combat to clear blockers for a lethal Colossus attack.",
+    "If Colossus faces removal, sacrifice two artifacts to return it to hand and repeat the combo next turn.",
+    "Use Fabrication Foundry's reanimation ability to recover key artifacts in attrition games."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Mono Red Lynx",
+      "advice": "Side in Torpor Orb to shut down Sunspine Lynx ETB and Knockout Blow for early creatures.",
+      "watch_for": [
+        "Sunspine Lynx",
+        "Early aggressive creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Phoenix",
+      "advice": "Side in Unlicensed Hearse to disrupt graveyard recursion and keep Portable Hole for Arclight Phoenix and Artist's Talent.",
+      "watch_for": [
+        "Arclight Phoenix",
+        "Artist's Talent",
+        "Cori-Steel Cutter"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Black Midrange",
+      "advice": "Side in Glass Casket for small creatures and Perilous Snare for larger threats, while leveraging Inventors' Fair for life gain.",
+      "watch_for": [
+        "Screaming Nemesis",
+        "Mayhem Devil",
+        "Bonecrusher Giant"
+      ]
+    },
+    {
+      "opponent_archetype": "Selesnya Angels",
+      "advice": "Side in Torpor Orb to block life gain and board interaction, and Containment Priest to handle Angels at instant speed.",
+      "watch_for": [
+        "Kayla's Reconstruction",
+        "Collected Company",
+        "Angel ETBs"
+      ]
+    },
+    {
+      "opponent_archetype": "Lotus Combo",
+      "advice": "Focus on early disruption and use Portable Hole on key combo pieces, while maintaining board presence with Colossus.",
+      "watch_for": [
+        "Lotus combo pieces",
+        "Fast mana acceleration"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Sunspine Lynx",
+    "Arclight Phoenix",
+    "Cauldron Familiar",
+    "Cori-Steel Cutter",
+    "Artist's Talent",
+    "Witch's Oven",
+    "Screaming Nemesis",
+    "Mayhem Devil",
+    "Bonecrusher Giant",
+    "Kayla's Reconstruction",
+    "Collected Company"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-azorius-metalwork-colossus-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T05:27:46+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-azorius-metalwork-colossus-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:26:33+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "524d507e0f5a0ceb",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Once Colossus is on the board, we want to perform a combo-kill: equip it with one of the above cards and attack with Double Strike for 20 damage."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Once Colossus is on the board, we want to perform a combo-kill: equip it with one of the above cards and attack with Double Strike for 20 damage."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Simulacrum Synthesizer is our alternative win condition."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.6,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "If your opponent has removal, simply sacrifice some artifacts and return Colossus to your hand, repeating the process the following turn."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Portable Hole is still one of the most effective removals in the current Metagame: it takes care of most Red Aggro creatures, Prowess, Cori-Steel Cutter and Artist's Talent in Izzet Phoenix, and Witch's Oven when necessary."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Glass Casket deals with small creatures that fall outside the scope of Portable Hole , such as Screaming Nemesis , Mayhem Devil , Bonecrusher Giant , and others."
+    }
+  ]
+}

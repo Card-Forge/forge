@@ -1,0 +1,305 @@
+{
+  "archetype": "Izzet Prowess",
+  "format": "pioneer",
+  "strategy_type": "aggro",
+  "overview": "Izzet Prowess is an aggressive Pioneer deck that combines cheap cantrips, burn spells, and efficient threats to apply constant pressure. It leverages Cori-Steel Cutter to generate tokens from spellcast triggers, increasing resilience and damage output. The strategy focuses on explosive early turns and proactive graveyard feeding while using instant-speed interaction to control the pace.",
+  "win_conditions": [
+    "Triggering Cori-Steel Cutter with cheap cantrips and spells to generate 1/1 tokens and deal damage",
+    "Explosive turns with Monastery Swiftspear and Slickshot Show-Off to close out games quickly",
+    "Using Burst Lightning and Play with Fire to clear blockers and deal direct damage",
+    "Leveraging Stormchaser’s Talent for late-game damage and breathing room"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with one-mana spells and early threats like Monastery Swiftspear",
+      "Hands with dual lands and cantrips to trigger Cori-Steel Cutter"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking cheap spells to trigger equipment",
+      "Hands with only high-cost cards or multiple lands"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Monastery Swiftspear",
+          "Opt",
+          "Shivan Reef",
+          "Into the Flood Maw",
+          "Burst Lightning",
+          "Consider",
+          "Otawara, Soaring City"
+        ],
+        "decision": "keep",
+        "reason": "Provides an early threat, multiple cheap spells for Cutter triggers, and consistent land drops."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap threats and cantrips to trigger Cori-Steel Cutter",
+      "Apply pressure with Monastery Swiftspear and burn spells",
+      "Use Plot cost on Slickshot Show-Off to cast multiple spells"
+    ],
+    "mid_game": [
+      "Filter deck with Play with Fire scry effect at upkeep",
+      "Bounce problematic permanents with Into the Flood Maw",
+      "Maintain tempo with Spell Pierce and instant-speed cantrips"
+    ],
+    "late_game": [
+      "Rely on Stormchaser’s Talent for damage and resilience",
+      "Use Den of the Bugbear and Otawara, Soaring City for utility and threats",
+      "Avoid bad topdecks by sideboarding out Monstrous Rage against heavy removal"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Cori-Steel Cutter",
+      "role": "Core engine",
+      "notes": "Triggers on spellcast to create tokens and deal damage, central to the deck's resilience."
+    },
+    {
+      "name": "Monastery Swiftspear",
+      "role": "Early threat",
+      "notes": "Classic red aggro creature that enables explosive turns from turn two."
+    },
+    {
+      "name": "Slickshot Show-Off",
+      "role": "Late-game closer",
+      "notes": "Exponentially grows with one-mana spells and can close games via Plot cost."
+    },
+    {
+      "name": "Stormchaser’s Talent",
+      "role": "Late-game threat",
+      "notes": "Provides a 1/1 Prowess creature and a second ability for late-game breathing room."
+    },
+    {
+      "name": "Burst Lightning",
+      "role": "Burn/Removal",
+      "notes": "Handles minor blockers and amplifies creature damage, often used with kicker."
+    },
+    {
+      "name": "Play with Fire",
+      "role": "Burn/Filter",
+      "notes": "Deals damage and provides Scry 1 to filter the top card, usable at upkeep."
+    },
+    {
+      "name": "Into the Flood Maw",
+      "role": "Tempo/Interaction",
+      "notes": "Bounces noncreature permanents like Temporary Lockdown or Authority of the Consuls to regain tempo."
+    },
+    {
+      "name": "Opt",
+      "role": "Cantrip",
+      "notes": "Prioritized for instant-speed interaction to trigger Cori-Steel Cutter on opponent's turn."
+    },
+    {
+      "name": "Annul",
+      "role": "Sideboard Counter",
+      "notes": "Complements Spell Pierce to handle key spells like Fable of the Mirror-Breaker or Unholy Annex."
+    },
+    {
+      "name": "Screaming Nemesis",
+      "role": "Sideboard Threat",
+      "notes": "Counters life gain and pressures midrange decks with high damage potential."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast instant-speed cantrips like Opt and Consider on the opponent's turn to trigger Cori-Steel Cutter before they respond.",
+    "Use Play with Fire's Scry 1 effect during your upkeep to filter the top card before drawing.",
+    "Hold Into the Flood Maw until the end of the opponent's turn to bounce temporary answers like Temporary Lockdown and attack for lethal."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Rakdos Demons",
+      "advice": "Side in Screaming Nemesis to counter life gain and apply pressure. Watch for removal and life total swings.",
+      "watch_for": [
+        "Life gain spells",
+        "Mayhem Devil",
+        "Removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Black Midrange",
+      "advice": "Use Abrade and Redcap Melee for creature removal. Watch for graveyard hate and efficient blockers.",
+      "watch_for": [
+        "Graveyard hate",
+        "Efficient blockers",
+        "Removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Red Lynx",
+      "advice": "Side in Redcap Melee to handle their aggressive creatures. Watch for early burn and board wipes.",
+      "watch_for": [
+        "Early burn",
+        "Board wipes",
+        "Aggressive creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Phoenix",
+      "advice": "Side in Abrade and Annul to disrupt their combo pieces. Watch for Phoenix recursion and burn spells.",
+      "watch_for": [
+        "Phoenix recursion",
+        "Burn spells",
+        "Counterspells"
+      ]
+    },
+    {
+      "opponent_archetype": "Azorius Control",
+      "advice": "Side out Monstrous Rage to reduce bad topdecks against heavy removal. Watch for counterspells and board wipes.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Heavy removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Jund Sacrifice",
+      "advice": "Side in Unlicensed Hearse and Abrade. Watch for sacrifice outlets and removal.",
+      "watch_for": [
+        "Sacrifice outlets",
+        "Removal",
+        "Graveyard hate"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono White Tokens",
+      "advice": "Side in Abrade and Redcap Melee. Watch for token generation and removal.",
+      "watch_for": [
+        "Token generation",
+        "Removal",
+        "Board control"
+      ]
+    },
+    {
+      "opponent_archetype": "Mardu Greasefang",
+      "advice": "Side in Redcap Melee and Abrade to handle Greasefang and other threats. Watch for big creatures and burn.",
+      "watch_for": [
+        "Greasefang, Okiba Boss",
+        "Big creatures",
+        "Burn spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Temporary Lockdown",
+    "Authority of the Consuls",
+    "Greasefang, Okiba Boss",
+    "Cori-Steel Cutter",
+    "Fable of the Mirror-Breaker",
+    "Unholy Annex",
+    "Caretaker’s Talent",
+    "Artist's Talent",
+    "Monument to Endurance",
+    "Mayhem Devil"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-izzet-prowess-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T03:41:48+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-izzet-prowess-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T03:40:15+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "033c2c3dc425220a",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "mixing cheap cantrips, damage spells, and efficient threats to pressure the opponent while creating new tokens every turn with the equipment"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "easily take advantage of the artifact and trigger its ability every turn"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "guarantees explosive turns with it from the second turn onwards"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "deal with minor blockers while amplifying the damage output of our creatures"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "guarantees more breathing room in the late game to pull out the last points of damage"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "prioritize Opt and Consider to have more instant-speed interactions that allow the artifact to trigger on the opponent's turn"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "use, for example, at our upkeep to filter the top before drawing"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "common to use it to remove Temporary Lockdown at the end of the opponent's turn to return our permanents to the board and attack the next turn for lethal"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "remove Temporary Lockdown at the end of the opponent's turn"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "bounce Authority of the Consuls to return with Slickshot Show-Off"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "deals with Greasefang, Okiba Boss and the like"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "format that includes Cori-Steel Cutter, Fable of the Mirror-Breaker, Unholy Annex, Caretaker’s Talent, Artist's Talent and Monument to Endurance"
+    }
+  ]
+}

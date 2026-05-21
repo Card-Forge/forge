@@ -1,0 +1,286 @@
+{
+  "archetype": "Cradle Control",
+  "format": "legacy",
+  "strategy_type": "control",
+  "overview": "Cradle Control evolved from the traditional Elves aggro-combo deck into a resilient control archetype in Legacy. It leverages Gaea's Cradle and Natural Order alongside Modern Horizons 3 additions like Wight of the Reliquary and Springheart Nantuko to generate massive mana and token value. The deck aims to outlast opponents in attrition wars before closing the game with Craterhoof Behemoth or Atraxa, Grand Unifier.",
+  "win_conditions": [
+    "Craterhoof Behemoth",
+    "Atraxa, Grand Unifier",
+    "Gaea's Cradle mana acceleration",
+    "Springheart Nantuko insect token generation"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Access to Once Upon a Time and Elvish Reclaimer on turn 1",
+      "Mana acceleration on turn 1 and Wight of the Reliquary on turn 2",
+      "Threat of Natural Order as early as turn 3"
+    ],
+    "mulligan_criteria": [
+      "Hands containing Craterhoof Behemoth (dead draw)",
+      "Too much mana and not enough action",
+      "Vulnerability to Wasteland or Blood Moon without early protection"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Once Upon a Time",
+          "Elvish Reclaimer",
+          "Springheart Nantuko",
+          "Land",
+          "Land",
+          "Land"
+        ],
+        "decision": "keep",
+        "reason": "Provides turn 1 Reclaimer and free Once Upon a Time, setting up value or enchantment for turn 2."
+      },
+      {
+        "hand": [
+          "Elvish Reclaimer",
+          "Green Sun's Zenith",
+          "Craterhoof Behemoth",
+          "Land",
+          "Land",
+          "Land"
+        ],
+        "decision": "mulligan",
+        "reason": "Behemoth is a dead draw in hand, and the hand is vulnerable to land destruction."
+      },
+      {
+        "hand": [
+          "Land",
+          "Land",
+          "Land",
+          "Land",
+          "Land",
+          "Once Upon a Time"
+        ],
+        "decision": "mulligan",
+        "reason": "Too much mana, not enough action."
+      },
+      {
+        "hand": [
+          "Elvish Reclaimer",
+          "Wight of the Reliquary",
+          "Natural Order",
+          "Craterhoof Behemoth",
+          "Land",
+          "Land"
+        ],
+        "decision": "keep",
+        "reason": "Risky due to Behemoth, but has ideal early curve and Natural Order threat."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play 1-mana dorks and Elvish Reclaimer to establish board presence and mana",
+      "Use Once Upon a Time for consistency and card advantage",
+      "Search for lands with Wight of the Reliquary and Elvish Reclaimer"
+    ],
+    "mid_game": [
+      "Enchant Elvish Reclaimer with Springheart Nantuko to generate insect tokens",
+      "Tutor for answers like Grist, the Hunger Tide or Endurance using Green Sun's Zenith",
+      "Set up Gaea's Cradle and activate Lair of the Hydra for extra mana"
+    ],
+    "late_game": [
+      "Cast Natural Order into Craterhoof Behemoth or Atraxa, Grand Unifier",
+      "Copy the enchanted creature to create massive value",
+      "Win attrition wars against blue tempo and combo decks"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Gaea's Cradle",
+      "role": "Mana acceleration",
+      "notes": "Core namesake that converts creature power into mana, enabling big spells."
+    },
+    {
+      "name": "Natural Order",
+      "role": "Win condition tutor",
+      "notes": "Searches for Craterhoof Behemoth or Atraxa, Grand Unifier to close games."
+    },
+    {
+      "name": "Wight of the Reliquary",
+      "role": "Land searcher & board pressure",
+      "notes": "Replaces Fiend Artisan, searches lands while applying pressure with Vigilance."
+    },
+    {
+      "name": "Elvish Reclaimer",
+      "role": "Token enabler & land searcher",
+      "notes": "Provides redundancy for Wight's game plan and can be enchanted by Springheart Nantuko."
+    },
+    {
+      "name": "Springheart Nantuko",
+      "role": "Token generator",
+      "notes": "Creates insect tokens from fetch lands and Wight sacrifices to fuel Cradle and Behemoth."
+    },
+    {
+      "name": "Once Upon a Time",
+      "role": "Card consistency",
+      "notes": "Provides extra consistency and can be played without mana cost in certain hands."
+    },
+    {
+      "name": "Endurance",
+      "role": "Graveyard hate & body",
+      "notes": "Counters graveyard interactions and provides a resilient body against Delver/Channeler."
+    },
+    {
+      "name": "Talon Gates of Madara",
+      "role": "Tutorable protection",
+      "notes": "Replaces Sejiri Steppe, enters untapped and protects from global removal."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize playing Atraxa, Grand Unifier as fast as possible against Red Stompy",
+    "Avoid over-relying on mana dorks when facing Orcish Bowmasters",
+    "Use Gaea's Cradle mana to activate Lair of the Hydra for powerful attacks",
+    "Tutor for specific answers with Wight, Reclaimer, and Zenith before committing to win conditions"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Scaminator",
+      "advice": "Increase resilience against reanimation and add answers for Psychic Frog.",
+      "watch_for": [
+        "Psychic Frog",
+        "Reanimation spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Grixis / Dimir Delver",
+      "advice": "Add removal after game 1 to handle Psychic Frog and win attrition wars.",
+      "watch_for": [
+        "Psychic Frog",
+        "Delver of Secrets"
+      ]
+    },
+    {
+      "opponent_archetype": "Red Stompy",
+      "advice": "Play Atraxa quickly and use Snuff Out for Broadside Bombardiers; be wary of Blood Moon and Fury.",
+      "watch_for": [
+        "Blood Moon",
+        "Fury",
+        "Broadside Bombardiers"
+      ]
+    },
+    {
+      "opponent_archetype": "Eldrazi Aggro",
+      "advice": "Add more creature removal post-side and race to get Atraxa into play.",
+      "watch_for": [
+        "Thought-Knot Seer",
+        "Fleshraker"
+      ]
+    },
+    {
+      "opponent_archetype": "Mystic Forge Combo",
+      "advice": "Side in Collector Ouphe and Force of Vigor to counter their game plan; avoid Vexing Bauble interactions.",
+      "watch_for": [
+        "The One Ring",
+        "Vexing Bauble",
+        "Mystic Forge"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Orcish Bowmasters",
+    "Psychic Frog",
+    "Blood Moon",
+    "Wasteland",
+    "Fury",
+    "Broadside Bombardiers",
+    "The One Ring",
+    "Vexing Bauble",
+    "Dragon's Rage Channeler",
+    "Delver of Secrets"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-cradle-control-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T07:38:44+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-badgermole-cradle-control-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:35:37+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-cradle-control-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:37:20+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "754a653262ff36eb",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "What in the past was a very popular aggro combo deck turned into one of the most important control decks in this new Legacy meta."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "boards in which either Craterhoof Behemoth or Atraxa, Grand Unifier ... win you the game"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "This seemingly innocent Monk creates a mighty hoard of Insects from thin air"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The idea is to put Atraxa, Grand Unifier in play as fast as possible"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Your mana dorks are vulnerable to Orcish Bowmasters, so don't rely too much on them"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Orcs ... won their war against the Elves because they attacked on two fronts"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Psychic Frog is still a threat, and you'll need to add a few removals after game 1 to deal with it"
+    }
+  ]
+}

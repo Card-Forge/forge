@@ -1,0 +1,234 @@
+{
+  "archetype": "Poison Storm",
+  "format": "pauper",
+  "strategy_type": "combo",
+  "overview": "Poison Storm is a Pauper combo deck that leverages Phyrexian proliferation mechanics to generate massive mana and multiply poison counters on opponents. It aims to reach lethal poison without attacking, relying on fast mana artifacts and lands to fuel its game plan. The deck uses card advantage and life gain spells to survive early disruption and execute its linear strategy.",
+  "win_conditions": [
+    "Proliferate poison counters on the opponent to lethal",
+    "Multiply poison counters using proliferate spells to win without attacking"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "2 depletion lands of different colors",
+      "a proliferate spell and a Pentad Prism",
+      "an early poison enabler",
+      "a Big Card Advantage spell like Deep Analysis or Vivisurgeon's Insight",
+      "Weather the Storm in the opener against aggressive decks"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking lands or blue sources",
+      "Hands without a clear path to mana acceleration",
+      "Hands that do not match the required speed for the matchup"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Depletion Land",
+          "Depletion Land",
+          "Pentad Prism",
+          "Vivisurgeon's Insight",
+          "Prologue to Phyresis",
+          "Island",
+          "Experimental Augury"
+        ],
+        "decision": "keep",
+        "reason": "Matches the ideal hand structure with mana acceleration, proliferation, and a poison enabler."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play non-blue depletion lands first to enable Everflowing Chalice",
+      "Prioritize developing mana over casting poison enablers",
+      "Cast early proliferate spells if mana allows"
+    ],
+    "mid_game": [
+      "Deploy Pentad Prisms and Everflowing Chalices to generate exponential mana",
+      "Use proliferate spells like Experimental Augury to control sequences and draw cards",
+      "Multiply poison counters and artifact/land counters simultaneously"
+    ],
+    "late_game": [
+      "Chain proliferate spells to reach lethal poison quickly",
+      "Cast Weather the Storm at the end of high-spell turns to gain massive life",
+      "Resolve key spells through disruption using sideboarded counterspells"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Pentad Prism",
+      "role": "Mana producer",
+      "notes": "Best mana producer in the deck; proliferating it makes 2+ mana value spells effectively free."
+    },
+    {
+      "name": "Everflowing Chalice",
+      "role": "Mana producer",
+      "notes": "Provides massive colorless mana after 1-2 turns; helps pay colorless requirements."
+    },
+    {
+      "name": "Prologue to Phyresis",
+      "role": "Poison enabler",
+      "notes": "Quickest way to give opponent a poison counter; blue-friendly and mana efficient."
+    },
+    {
+      "name": "Vivisurgeon's Insight",
+      "role": "Proliferation & card draw",
+      "notes": "Strong early proliferate spell; generates massive card advantage and mana back."
+    },
+    {
+      "name": "Weather the Storm",
+      "role": "Utility/Life gain",
+      "notes": "Necessary evil to gain 24+ life and survive pressure when casting many spells."
+    },
+    {
+      "name": "Serrated Arrows",
+      "role": "Utility/Removal",
+      "notes": "Deals with threats; arrowhead counters and -1/-1 counters can be proliferated."
+    },
+    {
+      "name": "Deep Analysis",
+      "role": "Card draw",
+      "notes": "Alternative to Vivisurgeon's Insight; better against counterspells as it's two separate spells."
+    },
+    {
+      "name": "Bring the Ending",
+      "role": "Sideboard/Counterspell",
+      "notes": "Easier to cast counterspell for winning counter wars; corrupted effect triggers naturally."
+    }
+  ],
+  "sequencing_tips": [
+    "Play non-blue depletion lands first to enable Everflowing Chalice and maximize Pentad Prism",
+    "Prioritize developing mana over casting poison enablers early",
+    "Use proliferate spells to multiply both poison counters and artifact/land counters for mana generation",
+    "Cast Weather the Storm at the end of turns with high spell counts to maximize life gain",
+    "Split card draw into multiple spells like Deep Analysis to bypass counterspells"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Mono Red",
+      "advice": "Deal with initial wave, keep depletion-heavy lands to explode after they cast Raze, side in Hydroblast.",
+      "watch_for": [
+        "Raze",
+        "Monastery Swiftspear",
+        "Fireblast"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Blue Faeries",
+      "advice": "Remove bad artifacts like Everflowing Chalice and Serrated Arrows to avoid dead cards, side in Anoint with Affliction to handle early Faeries.",
+      "watch_for": [
+        "Annul",
+        "Steel Sabotage",
+        "Spellstutter Sprite",
+        "Ninjaing"
+      ]
+    },
+    {
+      "opponent_archetype": "Affinity",
+      "advice": "Fairly free matchup, side in Moment's Peace as extra Weather the Storm and Bring the Ending to handle Pyroblast.",
+      "watch_for": [
+        "Pyroblast",
+        "Midrange/Control plays"
+      ]
+    },
+    {
+      "opponent_archetype": "Dimir Terror",
+      "advice": "Side in Deep Analysis over Vivisurgeon's Insight to split card draw, use Bring the Ending for crucial spells.",
+      "watch_for": [
+        "Counterspells",
+        "Small amount of disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "BW Midrange",
+      "advice": "No sideboard changes needed, optionally swap Serrated Arrows for Anoint with Affliction.",
+      "watch_for": [
+        "Creature pressure"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Mono Red",
+    "Mono Blue Faeries",
+    "Affinity",
+    "Dimir Terror",
+    "BW Midrange",
+    "Walls Combo",
+    "Spellstutter Sprite",
+    "Annul",
+    "Steel Sabotage",
+    "Pyroblast",
+    "Raze"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-poison-storm-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T10:16:18+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-poison-storm-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:15:05+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "974f981cf12a878d",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "You can proliferate your opponent to lethal Poison Counters without ever needing to attack them."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You can proliferate your opponent to lethal Poison Counters without ever needing to attack them."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "playing the non-blue depletion land first is generally correct, as is allows you to cast Everflowing Chalice and maximizes Pentad Prism"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Developing your mana is much more important. This is because you have access to so many proliferate spells, that if you need to deploy 3-4 of these to develop your mana, there is still plenty more in the deck"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Looking at the card choices lets us see how we can survive in a Mono Red and Mono Blue Mine Field."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Walls Combo along with other combo decks are particularly problematic for this deck"
+    }
+  ]
+}

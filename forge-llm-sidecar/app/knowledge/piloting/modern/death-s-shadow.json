@@ -1,0 +1,189 @@
+{
+  "archetype": "Death's Shadow",
+  "format": "modern",
+  "strategy_type": "midrange",
+  "overview": "This U/B deck leverages early disruption and card advantage to stabilize against aggressive strategies while scaling into a dominant late-game threat. By efficiently filling the graveyard with cheap spells and discard, the deck enables its namesake creature to grow into a massive, unblockable attacker. Consistent value generation ensures the pilot can outlast opponents in attrition battles.",
+  "win_conditions": [
+    "Death's Shadow attacking for lethal damage",
+    "Grinding out card advantage with Flow State until the opponent runs out of resources",
+    "Using discard to strip the opponent's game plan while maintaining a scaled threat"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing at least one one-mana spell",
+      "Hands with early disruption like Thoughtseize",
+      "Hands that can reliably cast Death's Shadow by turn three"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking one-mana spells or cheap cantrips",
+      "Hands with only high-cost cards and no draw",
+      "Hands without interaction or graveyard synergy"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play one-mana spells to build the graveyard and disrupt the opponent",
+      "Use Thoughtseize to remove key threats or combo pieces",
+      "Prioritize land drops to ensure smooth mana base"
+    ],
+    "mid_game": [
+      "Cast Death's Shadow once the graveyard is sufficiently populated",
+      "Use Flow State to refill the hand and maintain tempo",
+      "Trade efficiently to keep the board clear for the scaled threat"
+    ],
+    "late_game": [
+      "Repeatedly cast Flow State to generate overwhelming card advantage",
+      "Attack with Death's Shadow while using discard to strip remaining answers",
+      "Grind out the game by out-valuing the opponent's resource pool"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Death's Shadow",
+      "role": "Primary win condition and scalable threat",
+      "notes": "Cast after filling the graveyard with cheap spells and discard to maximize power and toughness"
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Early game disruption and graveyard fuel",
+      "notes": "Use to remove opponent's key threats or combo pieces while simultaneously enabling Death's Shadow"
+    },
+    {
+      "name": "Flow State",
+      "role": "Card advantage and graveyard synergy",
+      "notes": "Cast to draw cards, refill the hand, and add more bodies to the graveyard for scaling"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Thoughtseize for the opponent's most impactful card rather than using it preemptively",
+    "Cast Flow State after the opponent commits resources to maximize value",
+    "Prioritize graveyard depth before casting Death's Shadow to ensure it enters the battlefield at a threatening size"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Thoughtseize to remove key finishers and play cheap spells to scale Death's Shadow quickly. Prioritize survival until turn three.",
+      "watch_for": [
+        "Early board presence",
+        "Direct damage spells",
+        "Removal targeting Death's Shadow"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play patiently, using Flow State to outdraw them and discard to strip their interaction. Wait for them to use removal before committing Death's Shadow.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Graveyard hate"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them by scaling Death's Shadow early and using discard to disrupt their value engines. Maintain board presence to pressure them.",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw engines",
+        "Lifelink threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Direct damage spells",
+    "Board wipes",
+    "Graveyard hate",
+    "Efficient removal",
+    "Counterspells"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:35:03+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-sultai-deaths-shadow-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:30:21+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ]
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/modern-five-decklists-with-deaths-shadow",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:32:05+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ]
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:35:03+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "51173e8f82090bd7",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Death's Shadow scales with graveyard size"
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Flow State provides recurring card advantage"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Discard timing maximizes disruption value"
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Flow State timing optimizes card advantage"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard Modern interaction patterns"
+    }
+  ]
+}

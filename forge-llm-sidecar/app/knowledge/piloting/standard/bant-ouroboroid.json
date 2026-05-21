@@ -1,0 +1,137 @@
+{
+  "archetype": "Bant Ouroboroid",
+  "format": "standard",
+  "strategy_type": "tempo",
+  "overview": "Bant Ouroboroid leverages mana acceleration and efficient creature threats to establish early board presence while maintaining card advantage. By cycling through Quantum Riddler and growing Badgermole Cub, the deck applies consistent pressure without overextending. Nature's Rhythm ensures you can cast larger threats ahead of schedule, allowing you to dictate the pace of the game. The win condition relies on outpacing opponents in resource conversion and closing the game with a resilient, value-driven board state.",
+  "win_conditions": [
+    "Trading efficiently to maintain a superior board state",
+    "Accelerating mana to cast oversized threats early",
+    "Generating card advantage through Quantum Riddler to outlast opponents",
+    "Growing Badgermole Cub into a resilient finisher"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more lands and a one-drop threat",
+      "Combinations featuring Nature's Rhythm and a cheap creature",
+      "Hands containing Quantum Riddler with early interaction or ramp"
+    ],
+    "mulligan_criteria": [
+      "Hands with three or more lands and no early plays",
+      "Hands lacking curve or card advantage engines",
+      "Hands with only high-cost threats and no acceleration"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap creatures like Badgermole Cub to establish presence",
+      "Hold interaction for opponent's early threats",
+      "Use Nature's Rhythm to untap lands or generate extra mana for turn two or three plays"
+    ],
+    "mid_game": [
+      "Deploy Quantum Riddler to filter the deck and find answers or threats",
+      "Trade efficiently to preserve your growing creatures",
+      "Begin casting larger threats accelerated by your mana base"
+    ],
+    "late_game": [
+      "Focus on board control and value generation",
+      "Let Badgermole Cub grow into a resilient blocker and attacker",
+      "Use card advantage to outmaneuver opponent's late-game resources"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Badgermole Cub",
+      "role": "Early-game threat and scalable finisher",
+      "notes": "Play on curve to establish board presence. Choose whether to pay for immediate stats or let it enter with counters based on matchup needs."
+    },
+    {
+      "name": "Quantum Riddler",
+      "role": "Card advantage engine and threat",
+      "notes": "Use to dig for removal, ramp, or larger creatures. Protect it when possible as it fuels the deck's consistency."
+    },
+    {
+      "name": "Nature's Rhythm",
+      "role": "Mana acceleration and tempo tool",
+      "notes": "Cast early to enable turn-two or turn-three plays. Sequence it to untap lands for combat tricks or to cast multiple spells in a turn."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold removal or interaction until the opponent commits to a threat",
+    "Cast Nature's Rhythm before deploying Quantum Riddler to maximize mana efficiency",
+    "Let Badgermole Cub grow before trading it into larger blockers",
+    "Prioritize card advantage over board wipes in close games"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early blockers and efficient trades. Use Nature's Rhythm to accelerate into resilient threats.",
+      "watch_for": [
+        "Early board floods",
+        "Combat tricks",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply pressure with multiple small threats to force removal. Save Quantum Riddler for late-game value.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspell suites",
+        "Life gain effects"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race with efficient threats while maintaining card parity. Use ramp to outpace their curve.",
+      "watch_for": [
+        "Removal spells",
+        "Value creatures",
+        "Hand disruption"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast one-drop creatures",
+    "Board wipe spells",
+    "Counterspell packages",
+    "Hand disruption"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T05:51:08+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:51:08+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "4ac2fe230053c4e2",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Bant color pie emphasizes efficiency and value, supported by Nature's Rhythm's ramp and Quantum Riddler's card selection."
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

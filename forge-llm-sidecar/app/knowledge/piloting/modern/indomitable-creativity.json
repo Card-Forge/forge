@@ -1,0 +1,131 @@
+{
+  "archetype": "Indomitable Creativity",
+  "format": "modern",
+  "strategy_type": "ramp",
+  "overview": "This deck leverages green mana acceleration and card advantage to outpace opponents in the mid-to-late game. By combining token generation with graveyard recursion, it builds an overwhelming board presence that is difficult to clear. The black and red splashes provide efficient removal and aggressive pressure to close games quickly.",
+  "win_conditions": [
+    "Overwhelming the opponent with a wide board of tokens and recursed creatures",
+    "Drawing into precise answers while maintaining card advantage through Indomitable Creativity",
+    "Returning large threats from the graveyard with Archon of Cruelty to race or close out the game"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing two or more lands and an early play like Indomitable Creativity",
+      "Hands with Wrenn and Six and enough lands to cast it by turn three",
+      "Hands with early interaction or recursion to protect key threats"
+    ],
+    "mulligan_criteria": [
+      "Hands with zero or one land",
+      "Hands lacking early plays or card draw",
+      "Hands heavy on high-cost finishers without ramp"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize land drops and cast Indomitable Creativity to establish board presence and draw cards",
+      "Use red and black spells for early disruption or burn to slow aggressive opponents"
+    ],
+    "mid_game": [
+      "Deploy Wrenn and Six to untap lands and accelerate into larger threats",
+      "Cast Archon of Cruelty to begin recycling key creatures and apply flying pressure"
+    ],
+    "late_game": [
+      "Flood the board with tokens and recursed threats to create unblockable attackers",
+      "Use card advantage to outlast control decks and race midrange opponents"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Indomitable Creativity",
+      "role": "Card advantage and token generation",
+      "notes": "Cast on opponent's turn to surprise them with a 4/4 body and card draw, or use it to refill your hand after playing big spells."
+    },
+    {
+      "name": "Wrenn and Six",
+      "role": "Mana acceleration and card draw",
+      "notes": "Use its untap ability to cast multiple spells in a turn, and leverage the saproling creation for additional blockers or recursion fuel."
+    },
+    {
+      "name": "Archon of Cruelty",
+      "role": "Graveyard recursion and finisher",
+      "notes": "Let it die or sacrifice it intentionally to return high-impact creatures from your graveyard, creating a snowball effect with token generation."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up black and red mana for interaction before committing to big green spells",
+    "Use Wrenn and Six to untap lands specifically for casting Archon of Cruelty or Indomitable Creativity",
+    "Time Archon of Cruelty's death to coincide with having key threats in your graveyard for maximum impact",
+    "Play Indomitable Creativity in response to removal to maintain board presence and card advantage"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Ramp aggressively and use recursion to outvalue their hand traps. Keep early interaction to protect Wrenn and Six.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspell packages",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use tokens as early blockers and draw into efficient removal. Race with Archon of Cruelty once you stabilize.",
+      "watch_for": [
+        "Early burn spells",
+        "Wide creature boards",
+        "Removal targeting your ramp pieces"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Establish a board presence quickly and use card advantage to dictate the pace. Recycle threats to pressure their resources.",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw engines",
+        "Race threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Early burn spells that target your face or ramp pieces",
+    "Board wipes that clear your token army",
+    "Hand disruption that removes key combo pieces before they resolve",
+    "Efficient removal spells that answer your Archon of Cruelty"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:04:27+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:04:27+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "72dc2b85412c1662",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

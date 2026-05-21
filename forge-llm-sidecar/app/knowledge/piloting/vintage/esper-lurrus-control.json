@@ -1,0 +1,157 @@
+{
+  "archetype": "Esper Lurrus Control",
+  "format": "vintage",
+  "strategy_type": "control",
+  "overview": "Esper Lurrus Control leverages cheap, disruptive creatures to stall aggressive strategies and dismantle combo plans in Vintage. By cycling Lurrus of the Dream-Den, the deck generates massive card advantage while recycling key threats and removal. Psychic Frog and Orcish Bowmasters provide early tempo and information, allowing you to dictate the pace until your superior resource generation closes out the game.",
+  "win_conditions": [
+    "Recycling Lurrus and cheap threats to outvalue opponents over multiple turns",
+    "Using Psychic Frog to reveal and disrupt critical combo pieces or win conditions",
+    "Deploying Orcish Bowmasters to remove key threats while maintaining board presence"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two lands and a one-drop creature",
+      "Combinations featuring Lurrus alongside removal or disruption",
+      "Draws containing Psychic Frog or Orcish Bowmasters with early interaction"
+    ],
+    "mulligan_criteria": [
+      "Mana screws lacking early land drops",
+      "Hands heavy on late-game cards without early tempo",
+      "Draws missing interaction against the current meta"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize casting one-drops to establish tempo and gather information",
+      "Use Psychic Frog to force reveals and adjust your game plan accordingly",
+      "Play lands and cheap disruption to stabilize against fast strategies"
+    ],
+    "mid_game": [
+      "Begin cycling Lurrus to return creatures from the graveyard to your hand",
+      "Trade Orcish Bowmasters for high-value threats to maintain board control",
+      "Filter your deck with cheap spells to find answers to opponent's threats"
+    ],
+    "late_game": [
+      "Leverage infinite Lurrus recursion loops to exhaust opponent's resources",
+      "Recycle Orcish Bowmasters repeatedly to clear the board and close the game",
+      "Maintain card advantage by continuously cycling cheap creatures and interaction"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Lurrus of the Dream-Den",
+      "role": "Core recursion engine and card advantage generator",
+      "notes": "Cast early, then repeatedly return it from the graveyard to your hand to pay its cost and cycle other cheap creatures or removal spells."
+    },
+    {
+      "name": "Orcish Bowmasters",
+      "role": "Efficient removal and tempo threat",
+      "notes": "Use its death trigger to destroy opponent's key creatures, then recycle it with Lurrus to generate continuous value and board presence."
+    },
+    {
+      "name": "Psychic Frog",
+      "role": "Information gatherer and combo disruption",
+      "notes": "Play on turn one to force an opponent to reveal a card, helping you identify combo pieces or adjust your sequencing against their strategy."
+    }
+  ],
+  "sequencing_tips": [
+    "Always cast Psychic Frog before playing other creatures to maximize information gain",
+    "Hold up Lurrus recursion until you have a clear target in the graveyard to cycle",
+    "Use Orcish Bowmasters' death trigger to remove threats that would otherwise trigger opponent's abilities",
+    "Prioritize land drops early to ensure you can pay Lurrus's recursion cost consistently"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Vintage Combo",
+      "advice": "Focus on disrupting their key pieces with Psychic Frog and use Lurrus to recycle interaction until they run out of resources.",
+      "watch_for": [
+        "Fast win conditions",
+        "Graveyard hate",
+        "Counterspell packages"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play cheap creatures early to stall and use Orcish Bowmasters to remove their biggest threats while recycling Lurrus for value.",
+      "watch_for": [
+        "Early board floods",
+        "Direct damage spells",
+        "Creature sweepers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race their resource generation by cycling Lurrus aggressively and using Orcish Bowmasters to clear their board before they stabilize.",
+      "watch_for": [
+        "Permanent removal",
+        "Counterspells",
+        "Card draw engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast combo win conditions",
+    "Aggressive creature boards",
+    "Permanent removal spells",
+    "Graveyard interaction"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T11:04:42+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:04:42+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "84ad202e55cf464e",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

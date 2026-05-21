@@ -1,0 +1,157 @@
+{
+  "archetype": "Izzet Self-Bounce",
+  "format": "standard",
+  "strategy_type": "tempo",
+  "overview": "Izzet Self-Bounce leverages instant-speed bounce spells to repeatedly trigger enters-the-battlefield abilities, generating massive card advantage and board presence. By cycling creatures back and forth, the deck outvalues opponents in the midgame while maintaining tempo pressure. Success relies on precise sequencing and protecting key bounce targets from removal.",
+  "win_conditions": [
+    "Generating overwhelming card advantage through repeated ETB triggers",
+    "Overwhelming the opponent with continuous tempo pressure and board presence",
+    "Closing the game with high-value ETB creatures while opponents are resource-starved"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing at least one bounce spell and one ETB creature",
+      "Two-mana or three-mana curves with early interaction",
+      "Hands that can trigger a bounce loop on turn one or two"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking bounce spells or ETB targets",
+      "High-cost hands with no early game plan",
+      "Hands vulnerable to early aggro pressure without interaction"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap ETB creatures and immediately bounce them to draw cards",
+      "Use bounce spells as early interaction against opponent's threats",
+      "Establish a minimal board presence while cycling through the deck"
+    ],
+    "mid_game": [
+      "Execute self-bounce loops to trigger ETB abilities multiple times per turn",
+      "Maintain board presence while drawing into answers and finishers",
+      "Prioritize bouncing creatures with the highest impact ETB effects"
+    ],
+    "late_game": [
+      "Leverage accumulated card advantage to control the board",
+      "Use bounce spells to dodge removal and sweepers",
+      "Close out games by repeatedly triggering value engines"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Stormchaser's Talent",
+      "role": "Primary bounce spell and card draw engine",
+      "notes": "Use to bounce ETB creatures, draw a card, and disrupt opponent's board. Prioritize bouncing your own creatures for value, but can be used defensively."
+    },
+    {
+      "name": "Flow State",
+      "role": "Untap and bounce spell for extended loops",
+      "notes": "Untap a creature, then bounce it to trigger its ETB again. Enables multi-trigger loops in a single turn and provides card advantage."
+    },
+    {
+      "name": "Slickshot Show-Off",
+      "role": "Core ETB creature and bounce target",
+      "notes": "Provides immediate value upon entering the battlefield. Bounce it repeatedly with Stormchaser's Talent and Flow State to draw cards and maintain tempo."
+    }
+  ],
+  "sequencing_tips": [
+    "Bounce creatures before the opponent's turn to trigger ETBs and draw cards safely",
+    "Use Flow State to untap a creature, then bounce it to trigger its ETB a second time in the same turn",
+    "Prioritize bouncing creatures with the most impactful ETB abilities to maximize value",
+    "Hold bounce spells in hand to dodge opponent's removal and sweepers"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use bounce spells defensively to remove threats and draw into answers. Prioritize ETB creatures that can block or apply pressure.",
+      "watch_for": [
+        "Early board wipes",
+        "Fast finishers",
+        "Removal spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply early pressure with ETB creatures before they stabilize. Use bounce to dodge removal and generate card advantage.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race the opponent by maximizing ETB triggers and maintaining board presence. Use bounce to disrupt their value engines.",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Board wipes"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipes",
+    "Targeted removal",
+    "Counterspells",
+    "Sweepers"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T05:43:55+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:43:55+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "977172d651f635ac",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

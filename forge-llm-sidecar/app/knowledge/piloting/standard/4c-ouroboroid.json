@@ -1,0 +1,157 @@
+{
+  "archetype": "4c Ouroboroid",
+  "format": "standard",
+  "strategy_type": "ramp",
+  "overview": "This four-color Standard deck leverages mana acceleration and card advantage to outpace opponents. By combining ramp spells with resilient creatures, it establishes early board presence and scales into a dominant late-game state. The synergy between land development and value engines allows consistent pressure while maintaining interaction.",
+  "win_conditions": [
+    "Establishing an unblockable board presence with ramped creatures",
+    "Generating continuous card advantage through value engines",
+    "Outlasting opponents with superior resource generation"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more lands",
+      "Early ramp or acceleration spells",
+      "Low-cost creatures that apply immediate pressure"
+    ],
+    "mulligan_criteria": [
+      "Zero or one land",
+      "No early interaction or ramp",
+      "High-cost cards without acceleration"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and ramp spells to accelerate mana base",
+      "Deploy early creatures to establish board presence",
+      "Hold up mana for interaction if opponent plays aggressively"
+    ],
+    "mid_game": [
+      "Cast signature value creatures and ramp sorceries",
+      "Use card draw to find answers to opponent's threats",
+      "Begin applying consistent pressure with developed board"
+    ],
+    "late_game": [
+      "Leverage excess mana for continuous value generation",
+      "Protect key engines with removal or evasion",
+      "Close out the game with overwhelming board state"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Badgermole Cub",
+      "role": "Early board presence and scaling threat",
+      "notes": "Deploy on curve to apply pressure; use its growth potential to outvalue early aggression."
+    },
+    {
+      "name": "Quantum Riddler",
+      "role": "Tempo engine and card advantage source",
+      "notes": "Prioritize keeping it safe; use its abilities to draw cards or disrupt opponent's sequencing."
+    },
+    {
+      "name": "Nature's Rhythm",
+      "role": "Mana acceleration and card draw",
+      "notes": "Cast early to ramp into bigger threats; use the draw effect to find interaction or finishers."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize ramp spells before high-cost threats to maintain tempo",
+    "Hold up colored mana for interaction when opponent has sweepers or removal",
+    "Use card draw effects to refill hand before committing to large plays",
+    "Protect value engines until opponent's removal is exhausted"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early blockers and ramp to stabilize quickly.",
+      "watch_for": [
+        "Early board wipes",
+        "Fast finishers",
+        "Removal spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply pressure with multiple threats to force removal usage.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup with interaction and maintain board presence.",
+      "watch_for": [
+        "Key combo pieces",
+        "Card draw engines",
+        "Protection spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Counterspell packages",
+    "Value engines that outdraw the deck"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:45:50+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:45:50+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "4ac2fe230053c4e2",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

@@ -1,0 +1,249 @@
+{
+  "archetype": "Boros Heroic",
+  "format": "pioneer",
+  "strategy_type": "aggro",
+  "overview": "Boros Heroic is a proactive Pioneer strategy that leverages one-drop creatures and combat tricks to trigger Heroic and Prowess abilities. The deck aims to establish early tempo and overwhelm opponents with explosive damage, primarily using Illuminator Virtuoso alongside Monstrous Rage. Consistency is maintained through card advantage engines like Dreadhorde Arcanist and efficient removal like Reckless Rage.",
+  "win_conditions": [
+    "Illuminator Virtuoso",
+    "Monstrous Rage"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing one-drops like Favored Hoplite or Monastery Swiftspear",
+      "Hands with early spells to trigger Heroic/Prowess abilities"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early pressure or sufficient land drops",
+      "Hands without interaction to protect threats"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Favored Hoplite",
+          "Monstrous Rage",
+          "Isolated Chapel",
+          "Gods Willing"
+        ],
+        "decision": "keep",
+        "reason": "Provides immediate pressure and spells to trigger abilities, aligning with the deck's proactive game plan."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play one-drops to force opponent answers and pave the way for larger threats",
+      "Use Defiant Strike or Homestead Courage to draw cards and trigger abilities"
+    ],
+    "mid_game": [
+      "Deploy Illuminator Virtuoso and pump it with Monstrous Rage or Ancestral Anger for explosive damage",
+      "Use Gods Willing to protect threats and deflect blockers"
+    ],
+    "late_game": [
+      "Leverage Dreadhorde Arcanist for card advantage and value",
+      "Sideboard into attrition engines like Showdown of the Skalds or Jegantha, the Wellspring for longer games"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Illuminator Virtuoso",
+      "role": "Main win condition",
+      "notes": "Grows on its own, has Double Strike, and synergizes with Monstrous Rage for lethal damage."
+    },
+    {
+      "name": "Monstrous Rage",
+      "role": "Combat trick / Pump",
+      "notes": "Permanently guarantees Trample, increases consistency for explosive plays, and acts as a cheap Embercleave on Virtuoso."
+    },
+    {
+      "name": "Dreadhorde Arcanist",
+      "role": "Card advantage engine",
+      "notes": "Reuses spells from the graveyard, generates value when attacking, and acts as a removal magnet."
+    },
+    {
+      "name": "Reckless Rage",
+      "role": "Maindeck removal",
+      "notes": "Large scope to deal with threats, bypasses drawback with most deck creatures, and triggers abilities."
+    },
+    {
+      "name": "Gods Willing",
+      "role": "Protection / Deflection",
+      "notes": "Protects creatures from removal and deflects potential blockers, especially in monocolored decks."
+    },
+    {
+      "name": "Favored Hoplite",
+      "role": "Early pressure",
+      "notes": "Efficient one-drop that forces quick answers and paves the way for larger threats."
+    },
+    {
+      "name": "Monastery Swiftspear",
+      "role": "Early pressure",
+      "notes": "Grows alongside other one-drops and ensures opponent spends resources early."
+    },
+    {
+      "name": "Defiant Strike",
+      "role": "Cantrip / Trigger enabler",
+      "notes": "Guarantees an extra draw while triggering Heroic/Prowess abilities."
+    },
+    {
+      "name": "Showdown of the Skalds",
+      "role": "Sideboard attrition",
+      "notes": "Provides card advantage and grows creatures for matchups requiring a less linear approach."
+    },
+    {
+      "name": "Rending Volley",
+      "role": "Sideboard removal",
+      "notes": "Essential against aggressive decks and complements Reckless Rage against Greasefang, Okiba Boss."
+    }
+  ],
+  "sequencing_tips": [
+    "Force opponents to spend resources on early one-drops before attacking with larger threats like Illuminator Virtuoso.",
+    "Combine Monstrous Rage with other spells to threaten lethal damage over multiple turns.",
+    "Use Defiant Strike as a cantrip to draw into answers while triggering creature abilities.",
+    "Hold up Gods Willing to protect key threats from removal or deflect blockers.",
+    "Avoid going 'all-in' against interactive decks; instead, apply steady pressure to force hasty plays."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Lotus Combo",
+      "advice": "Establish tempo and force victory in as few turns as possible.",
+      "watch_for": [
+        "Bounce effects",
+        "Fast mana"
+      ]
+    },
+    {
+      "opponent_archetype": "Rakdos Midrange",
+      "advice": "Avoid going all-in; apply steady pressure to force hasty plays and react accordingly.",
+      "watch_for": [
+        "Removals",
+        "Sweepers"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Green Devotion",
+      "advice": "Push for early tempo and close the game quickly before they stabilize.",
+      "watch_for": [
+        "Large threats",
+        "Ramp"
+      ]
+    },
+    {
+      "opponent_archetype": "Abzan Greasefang",
+      "advice": "Sideboard Rending Volley to complement Reckless Rage and deal with Greasefang cheaply.",
+      "watch_for": [
+        "Greasefang, Okiba Boss",
+        "Board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Azorius Control",
+      "advice": "Sideboard Loran's Escape to handle removals and sweepers, and play a more patient game.",
+      "watch_for": [
+        "Counterspells",
+        "Board clears"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Greasefang, Okiba Boss",
+    "Sheoldred, the Apocalypse",
+    "Cavalier of Thorns",
+    "Atraxa, Grand Unifier",
+    "Mayhem Devil",
+    "Witch's Oven",
+    "Cauldron Familiar",
+    "Thalia, Guardian of Thraben",
+    "Sweepers",
+    "Removals"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-boros-heroic-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T04:53:33+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-boros-heroic-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:51:55+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "757728dd93d8d569",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Boros Heroic is one of the most fun and proactive strategies in Pioneer today... Starting the game with a one-drop is an excellent way to put pressure on your opponent"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Illuminator Virtuoso is our main wincondition... turns Monstrous Rage into an Embercleave for one mana."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Both ensure that the opponent needs to find a quick answer, while paving the way for larger and more efficient threats, like Illuminator Virtuoso , to attack unimpeded after we force our opponents to spend resources to deal with them."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Defiant Strike is, in essence, a cantrip that interacts with the list's proposal, and its only function is to guarantee an extra draw while triggering our creatures' abilities."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "In these cases, we must look for the best route to take a few points of damage each turn, and force the opponent to react accordingly. If we can force a hasty play, we will have the perfect opportunity for a more explosive turn to secure victory."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Rending Volley is essential for dealing with the main aggressive decks... complement Reckless Rage in dealing with Greasefang, Okiba Boss"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Destroy Evil is the best multipurpose card we have for dealing with Sheoldred, the Apocalypse and other bigger bombs like Cavalier of Thorns and Atraxa, Grand Unifier"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "prevent Mayhem Devil 's looping with Witch's Oven and Cauldron Familiar from becoming a machine gun"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Spikefield Hazard... works to kill some specific threats, such as mana dorks and Thalia, Guardian of Thraben"
+    }
+  ]
+}

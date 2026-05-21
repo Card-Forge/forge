@@ -1,0 +1,136 @@
+{
+  "archetype": "Esper Self-Bounce",
+  "format": "standard",
+  "strategy_type": "tempo",
+  "overview": "Esper Self-Bounce operates as a tempo strategy that leverages return-to-hand effects to disrupt opponent plays while recycling your own permanents for repeated value. By bouncing key threats and lands, you maintain board presence, generate card advantage, and control the pace of the game. The deck aims to outmaneuver opponents through efficient sequencing and relentless pressure rather than raw power.",
+  "win_conditions": [
+    "Direct damage using repeatedly cast creatures",
+    "Card advantage from bouncing and reactivating permanents",
+    "Resource denial by returning opponent lands and threats to hand"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early bounce spells and 1-drops",
+      "Two-mana spells that enable turn-two disruption",
+      "Draw spells to stabilize in longer games"
+    ],
+    "mulligan_criteria": [
+      "High curve hands lacking interaction",
+      "Hands with three or more lands",
+      "Decks devoid of bounce effects or recursion"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play bounce spells to disrupt early threats",
+      "Establish land drops while holding interaction",
+      "Use low-cost creatures to apply pressure"
+    ],
+    "mid_game": [
+      "Recycle your own permanents to generate value",
+      "Target opponent's key pieces with return-to-hand effects",
+      "Maintain card advantage through draw synergies"
+    ],
+    "late_game": [
+      "Lock opponent out by repeatedly bouncing lands and threats",
+      "Use accumulated resources to close out the game",
+      "Prioritize bouncing high-impact permanents over low-value ones"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Kaito, Bane of Nightmares",
+      "role": "Core engine and value generator",
+      "notes": "Use its abilities to trigger bounce synergies and punish opponent's board state. Keep it protected until you can leverage its full potential."
+    },
+    {
+      "name": "Stormchaser's Talent",
+      "role": "Card draw and tempo enabler",
+      "notes": "Cast to refill your hand after bouncing permanents, ensuring you always have answers or follow-up threats."
+    },
+    {
+      "name": "Boomerang Basics",
+      "role": "Primary disruption and recursion suite",
+      "notes": "Deploy these spells to return opponent threats to hand while bouncing your own lands or creatures for repeated activations."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold bounce spells in hand to respond to opponent's turns",
+    "Bounce your own permanents only when you have a clear follow-up",
+    "Prioritize bouncing opponent's lands when they are ahead on resources",
+    "Use draw spells before committing to a bounce sequence to ensure hand size"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Focus on bouncing early threats and lands to stall until you can stabilize. Use your creatures to apply pressure while holding interaction.",
+      "watch_for": [
+        "Early all-in turns",
+        "Unblockable creatures",
+        "Lack of removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Bounce their key counterspells and lands to disrupt their game plan. Use your recursion to outvalue them over time.",
+      "watch_for": [
+        "Board wipes",
+        "Permanent removal",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Disrupt their curve by bouncing their threats and lands. Maintain board presence to force them to use resources inefficiently.",
+      "watch_for": [
+        "Efficient removal",
+        "Value creatures",
+        "Late-game finishers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Permanent removal effects",
+    "Card draw engines"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T07:02:57+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:02:57+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "a092bd277062aba6",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

@@ -1,0 +1,157 @@
+{
+  "archetype": "Death and Taxes (Yorion) - Mono White",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "This Legacy mono-white archetype leverages Yorion, Sky Nomad to generate exponential Spirit token armies, then locks them in with Solitude for indestructibility and size. Stoneforge Mystic provides artifact synergy to accelerate the board state and close games. The deck operates as a combo-focused tempo strategy, aiming to establish an unblockable, unkillable token presence before opponents can stabilize.",
+  "win_conditions": [
+    "Generate a massive Spirit token army using Yorion, Sky Nomad's triggered ability",
+    "Grant indestructible and +1/+1 to all Spirits via Solitude to overwhelm opponents in combat",
+    "Fetch and play key artifacts with Stoneforge Mystic to enable token generation or finish games"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing two or more lands alongside Yorion, Sky Nomad or Solitude",
+      "Hands with Stoneforge Mystic and a cheap artifact or land drop",
+      "Hands that can establish early board presence or protect key combo pieces"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking lands or key signature cards",
+      "Hands with only high-cost spells and no early interaction",
+      "Hands that cannot efficiently cast Yorion, Sky Nomad or Solitude by turn three"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize land drops to ensure mana availability for Stoneforge Mystic and early spells",
+      "Cast Stoneforge Mystic to search for artifacts that support token generation or board control",
+      "Play cheap spells or hold mana to protect against early disruption"
+    ],
+    "mid_game": [
+      "Cast Yorion, Sky Nomad when you control Spirits to trigger massive token generation",
+      "Play Solitude immediately after token generation to grant indestructible and +1/+1",
+      "Use fetched artifacts to stabilize the board or accelerate token production"
+    ],
+    "late_game": [
+      "Attack with the indestructible Spirit army to close out the game",
+      "Maintain mana open to counter removal or board wipes if possible",
+      "Leverage Stoneforge Mystic for late-game artifacts that provide value or win conditions"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Yorion, Sky Nomad",
+      "role": "Primary token generator and combo engine",
+      "notes": "Cast when you control Spirits to maximize the number of 1/1 Spirit tokens created; sequence carefully to avoid leaving yourself vulnerable before Solitude resolves"
+    },
+    {
+      "name": "Solitude",
+      "role": "Enchantment that buffs and protects Spirits",
+      "notes": "Play immediately after Yorion, Sky Nomad triggers to grant indestructible and +1/+1 to the entire token army, making them immune to most removal and combat damage"
+    },
+    {
+      "name": "Stoneforge Mystic",
+      "role": "Artifact fetcher and value engine",
+      "notes": "Use to find key artifacts that synergize with Spirits or provide board control; prioritize fetching artifacts that can be played early to establish tempo"
+    }
+  ],
+  "sequencing_tips": [
+    "Always play lands before casting Stoneforge Mystic to ensure you can pay for fetched artifacts",
+    "Cast Yorion, Sky Nomad only when you have enough mana to follow up with Solitude on the same turn or immediately after",
+    "Hold up mana for counterspells or protection if you suspect opponent interaction",
+    "Prioritize playing Solitude before attacking to ensure tokens survive combat damage and removal"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race the opponent before they stabilize with board wipes or counterspells; use Solitude early to protect tokens from removal",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Artifact destruction"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Solitude to make tokens larger and indestructible for blocking; prioritize early Stoneforge Mystic fetches for defensive artifacts",
+      "watch_for": [
+        "Fast damage",
+        "Direct removal",
+        "Early board presence"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup with early interaction; focus on fetching artifacts that provide disruption or race their win condition",
+      "watch_for": [
+        "Cantrips",
+        "Win condition pieces",
+        "Mana acceleration"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipes that remove tokens",
+    "Counterspells targeting Yorion, Sky Nomad or Solitude",
+    "Artifact destruction targeting Stoneforge Mystic or fetched artifacts",
+    "Direct removal that bypasses indestructible"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:42:04+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:42:04+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "366c4c4090e0d535",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Yorion, Sky Nomad; Solitude; Stoneforge Mystic; Legacy format"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Yorion, Sky Nomad; Solitude; Stoneforge Mystic"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Yorion, Sky Nomad; Solitude; Stoneforge Mystic; Legacy format"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Legacy format; Yorion, Sky Nomad; Solitude; Stoneforge Mystic"
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "archetype": "Jeskai Artifacts",
+  "format": "standard",
+  "strategy_type": "tempo",
+  "overview": "Jeskai Artifacts is a Standard tempo deck that leverages artifact synergies to establish early board presence and generate consistent card advantage. By cycling threats through Repurposing Bay and amplifying artifact triggers with Simulacrum Synthesizer, the deck maintains pressure while protecting its resources. United Battlefront serves as a pivotal board-clearing tool to reset unfavorable states and secure late-game swings.",
+  "win_conditions": [
+    "Overwhelming the opponent with repeated artifact creature triggers",
+    "Using United Battlefront to clear opposing boards while preserving your artifact synergies",
+    "Generating sustained card advantage through Repurposing Bay recursion"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more low-cost artifacts",
+      "Early interaction paired with a ramp or draw engine",
+      "Simulacrum Synthesizer alongside cheap artifact enablers"
+    ],
+    "mulligan_criteria": [
+      "Four or more lands",
+      "Late-game finishers without early plays",
+      "Hands lacking artifact synergy or interaction"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap artifacts to trigger Simulacrum Synthesizer",
+      "Establish a minimal board presence to apply pressure",
+      "Use early interaction to disrupt opponent's game plan"
+    ],
+    "mid_game": [
+      "Activate Repurposing Bay to recycle dead cards into threats",
+      "Scale artifact synergies to outpace opponent's development",
+      "Hold up mana for counterspells to protect key permanents"
+    ],
+    "late_game": [
+      "Cast United Battlefront to wipe opposing boards and swing with your artifacts",
+      "Leverage card advantage from Repurposing Bay to refill your hand",
+      "Close out games with repeated artifact triggers and combat damage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Simulacrum Synthesizer",
+      "role": "Core artifact synergy engine",
+      "notes": "Prioritize playing cheap artifacts before or alongside it to maximize trigger value and board presence."
+    },
+    {
+      "name": "Repurposing Bay",
+      "role": "Card advantage and recursion hub",
+      "notes": "Use it to dig for answers or recycle played artifacts back into your hand for repeated value."
+    },
+    {
+      "name": "United Battlefront",
+      "role": "Board reset and swing tool",
+      "notes": "Hold until opponent commits multiple threats, then cast to clear their board while your artifacts survive or trigger favorably."
+    }
+  ],
+  "sequencing_tips": [
+    "Trigger Simulacrum Synthesizer before combat to maximize value",
+    "Activate Repurposing Bay after opponent commits resources to the board",
+    "Cast United Battlefront on your turn to immediately follow up with artifact attacks",
+    "Hold up colored mana for interaction before committing to artifact plays"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Ramp quickly and use United Battlefront to reset their board while preserving your artifact triggers.",
+      "watch_for": [
+        "Early sweepers",
+        "Artifact destruction",
+        "Fast finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Go wide with artifacts and use Repurposing Bay to outvalue their hand traps and removal.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Permanent removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race with artifact pressure and time United Battlefront to clear their value engines.",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw spells",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Artifact destruction spells",
+    "Board wipe effects",
+    "Counterspell packages",
+    "Fast aggressive creatures"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:54:37+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:54:37+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "aac8228268c7269d",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

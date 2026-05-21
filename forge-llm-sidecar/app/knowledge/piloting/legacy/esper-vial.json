@@ -1,0 +1,149 @@
+{
+  "archetype": "Esper Vial",
+  "format": "legacy",
+  "strategy_type": "tempo",
+  "overview": "Esper Vial is a Legacy tempo deck that leverages Aether Vial to deploy threats untapped and maintain board pressure. Quantum Riddler and Yorion, Sky Nomad provide explosive early-game value, evasion, and untap synergy to outpace opponents. The deck aims to control the middle game with interaction while closing out matches with relentless flying attackers.",
+  "win_conditions": [
+    "Overwhelm the opponent with untapped flying creatures played via Aether Vial",
+    "Generate infinite value and attacks by repeatedly untapping Quantum Riddler and Aether Vial",
+    "Pressure the opponent with Yorion, Sky Nomad's evasion and card exile ability"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Aether Vial and at least two early spells or creatures",
+      "Hands with Quantum Riddler and sufficient lands to cast it by turn two",
+      "Hands featuring Yorion, Sky Nomad alongside interaction or acceleration"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking Aether Vial or any form of acceleration",
+      "Hands with only late-game cards or high-mana creatures",
+      "Hands with insufficient lands to cast turn-one or turn-two threats"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Aether Vial on turn one to enable untapped threats",
+      "Deploy Quantum Riddler or Yorion, Sky Nomad to establish immediate board presence",
+      "Use basic interaction to protect your early advantages"
+    ],
+    "mid_game": [
+      "Leverage Quantum Riddler's entry ability to untap Aether Vial and lands for additional plays",
+      "Maintain tempo by countering key opponent threats and playing Yorion with flying exiles",
+      "Cycle through your hand to find removal and card draw while keeping pressure"
+    ],
+    "late_game": [
+      "Stabilize the board by repeatedly untapping Quantum Riddler and Aether Vial",
+      "Use Yorion, Sky Nomad to exile opponent's blockers or give your creatures flying",
+      "Close the game with a flurry of untapped attackers while holding up counterspells"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Aether Vial",
+      "role": "Core enabler for untapped creature deployment and untap synergy",
+      "notes": "Play it early to drop threats without tapping lands; use its untap ability to fuel Quantum Riddler loops"
+    },
+    {
+      "name": "Yorion, Sky Nomad",
+      "role": "Flying threat and card advantage engine",
+      "notes": "Exile cards from hand to give flying to other creatures or protect Yorion; play untapped via Vial for immediate pressure"
+    },
+    {
+      "name": "Quantum Riddler",
+      "role": "Untap engine and value generator",
+      "notes": "Enter with a counter to untap two permanents; pair with Aether Vial to play multiple creatures in a single turn"
+    }
+  ],
+  "sequencing_tips": [
+    "Always play Aether Vial before your creatures to maximize untapped entries",
+    "Use Quantum Riddler's triggered ability to untap Aether Vial and a land, then play another creature",
+    "Hold up counterspells for opponent's board wipes or key threats before committing your Yorion",
+    "Exile cards with Yorion only when you need flying evasion or to protect a key permanent"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Aether Vial to play Yorion and Quantum Riddler early to race their damage output; prioritize countering their finishers.",
+      "watch_for": [
+        "Board wipes",
+        "Early sweepers",
+        "Fast damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply steady pressure with untapped threats to force counterspells; use Quantum Riddler to untap and play around their hand size.",
+      "watch_for": [
+        "Hard counters",
+        "Hand traps",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their assembly with counterspells and removal; use Yorion's flying to pressure while they search for pieces.",
+      "watch_for": [
+        "Graveyard hate",
+        "Library manipulation",
+        "Instant-speed win conditions"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipes",
+    "Counterspells",
+    "Graveyard hate",
+    "Land destruction"
+  ],
+  "metadata": {
+    "source": "Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:37:57+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-deck-tech-yorion-esper-vial-80-card-toolbox",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:34:45+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:37:57+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "a2461b16fd29d22e",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

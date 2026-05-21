@@ -1,0 +1,157 @@
+{
+  "archetype": "Izzet Spells",
+  "format": "standard",
+  "strategy_type": "tempo",
+  "overview": "Izzet Spells is a tempo strategy that leverages cheap, synergistic instants and sorceries to establish early board presence while generating card advantage. By cycling through the deck rapidly, the pilot aims to outpace opponents with consistent value generation and disruptive interaction. The deck relies on spell-triggered effects to maintain pressure and control the pace of the game.",
+  "win_conditions": [
+    "Casting a high volume of spells to trigger draw effects",
+    "Developing a resilient board presence with spell-activated creatures",
+    "Overwhelming opponents with cumulative value and direct damage"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more cheap spells",
+      "Hands containing a signature card paired with interaction",
+      "Hands that can play a turn-one spell or creature"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early interaction or card draw",
+      "Hands with only high-cost finishers",
+      "Hands missing land drops for the first three turns"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap spells to trigger Stormchaser's Talent and establish early tempo",
+      "Deploy Slickshot Show-Off to apply pressure and enable spell synergies",
+      "Hold interaction for opponent's early threats"
+    ],
+    "mid_game": [
+      "Cast Flow State to accelerate card advantage and stabilize the board",
+      "Use removal and counterspells to protect key permanents",
+      "Cycle through the deck to find finishers and additional value engines"
+    ],
+    "late_game": [
+      "Leverage accumulated card advantage to out-resource opponents",
+      "Maintain board control while chipping away at life totals",
+      "Commit to all-in spells when the opponent runs out of answers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Stormchaser's Talent",
+      "role": "Generates card advantage when spells are cast",
+      "notes": "Prioritize casting it early to fuel the deck's spell synergy and maintain hand size"
+    },
+    {
+      "name": "Slickshot Show-Off",
+      "role": "Provides early board presence and spell synergy",
+      "notes": "Use as a turn-one or turn-two play to establish tempo and trigger spell-based effects"
+    },
+    {
+      "name": "Flow State",
+      "role": "Rewards casting multiple spells with value or draw",
+      "notes": "Cast when you have a sequence of spells ready to maximize its trigger potential and stabilize the game"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up interaction until the opponent commits to a threat",
+    "Cast cheap spells before playing permanents to maximize trigger counts",
+    "Prioritize drawing cards over dealing damage when behind on tempo",
+    "Save removal for high-impact threats rather than early creatures"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Focus on early disruption and card draw to outlast the initial rush",
+      "watch_for": [
+        "Fast creature attacks",
+        "Burn spells",
+        "Early board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure and use spell synergy to generate value faster than their answers",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them with efficient spells while protecting your key permanents",
+      "watch_for": [
+        "Removal spells",
+        "Resilient creatures",
+        "Value generators"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Direct damage spells",
+    "Board wipe effects",
+    "Counterspell packages"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T05:29:05+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:29:05+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "977172d651f635ac",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

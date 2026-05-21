@@ -1,0 +1,325 @@
+{
+  "archetype": "Orzhov Greasefang",
+  "format": "pioneer",
+  "strategy_type": "combo",
+  "overview": "Orzhov Greasefang is a combo-focused Pioneer archetype that reanimates Parhelion II with Greasefang, Okiba Boss to create a fast two-turn clock. It synergizes with Monument to Endurance and multiple discard outlets to generate continuous card advantage and incremental damage. The deck is highly resilient, using The Mycosynth Gardens to stack triggers and maintaining a straightforward alternative game plan that doesn't interfere with its primary combo.",
+  "win_conditions": [
+    "Reanimate Parhelion II with Greasefang, Okiba Boss, crew it, and attack to create two 4/4 Angel tokens for lethal damage.",
+    "Trigger Monument to Endurance repeatedly with discard outlets and The Mycosynth Gardens to generate card advantage, ramp, and incremental damage.",
+    "Use Overlord of the Balemurk to discard cards and reuse creatures each combat as a secondary win condition."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Monument to Endurance and at least one discard outlet",
+      "Hands containing Greasefang, Okiba Boss and Parhelion II",
+      "Hands with early interaction like Thoughtseize or Fatal Push"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking discard outlets to enable Monument to Endurance",
+      "Hands with only lands or high-cost permanents",
+      "Hands missing both combo pieces and interaction"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Monument to Endurance",
+          "Seasoned Hallowblade",
+          "Parhelion II",
+          "Godless Shrine",
+          "Concealed Courtyard",
+          "Urborg, Tomb of Yawgmoth",
+          "Thoughtseize"
+        ],
+        "decision": "keep",
+        "reason": "Contains the core combo piece, a discard outlet to trigger Monument, a land base, and early interaction to protect the plan."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Monument to Endurance and discard Parhelion II to begin generating value.",
+      "Deploy cheap discard outlets like Seasoned Hallowblade, Guardian of New Benalia, or Fleeting Spirit to trigger Monument repeatedly.",
+      "Use Thoughtseize or Fatal Push to disrupt aggressive opponents or protect combo pieces."
+    ],
+    "mid_game": [
+      "Reanimate Parhelion II using Greasefang, Okiba Boss and immediately crew it to attack.",
+      "Cast The Mycosynth Gardens to copy Monument to Endurance triggers and accelerate card advantage.",
+      "Use Sheltered by Ghosts on creatures that can gain indestructible via discard to protect against removal."
+    ],
+    "late_game": [
+      "Stack Monument triggers with Seasoned Hallowblade and similar cards to create a snowball effect.",
+      "Use Takenuma, Abandoned Mire and Geier Reach Sanitarium to recur key creatures and draw cards.",
+      "Close out the game with Angel token attacks or incremental Monument damage."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Greasefang, Okiba Boss",
+      "role": "Combo enabler",
+      "notes": "Returns Parhelion II from the graveyard with Haste to crew it and create Angel tokens."
+    },
+    {
+      "name": "Parhelion II",
+      "role": "Primary win condition",
+      "notes": "Vehicle that creates two 4/4 Angel tokens when crewed, dealing 13 damage on turn one and eight more the next turn."
+    },
+    {
+      "name": "Monument to Endurance",
+      "role": "Engine/Value generator",
+      "notes": "Triggers on discard to provide card advantage, ramp, and damage; synergizes with discard outlets."
+    },
+    {
+      "name": "The Mycosynth Gardens",
+      "role": "Trigger multiplier",
+      "notes": "Functions as extra copies of Monument to Endurance to stack triggers for each discarded card."
+    },
+    {
+      "name": "Seasoned Hallowblade",
+      "role": "Discard outlet/Trigger enabler",
+      "notes": "Cheap creature that enables multiple Monument triggers each turn and can crew Parhelion II if needed."
+    },
+    {
+      "name": "Guardian of New Benalia",
+      "role": "Discard outlet/Trigger enabler",
+      "notes": "Provides repeated discard effects to generate value with Monument while having a decent body."
+    },
+    {
+      "name": "Fleeting Spirit",
+      "role": "Discard outlet/Recursion",
+      "notes": "Enables Monument triggers and can be recursed from the graveyard by exiling three cards."
+    },
+    {
+      "name": "Overlord of the Balemurk",
+      "role": "Discard outlet/Secondary win condition",
+      "notes": "Puts cards directly into the graveyard and allows reusing any creature each combat."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Interaction",
+      "notes": "Protects the combo, removes key cards, provides information, and counters aggressive explosive turns."
+    },
+    {
+      "name": "Fatal Push",
+      "role": "Interaction",
+      "notes": "Best one-mana answer against small creatures like Mono Red Aggro, Angels, or Spirits."
+    },
+    {
+      "name": "Sheltered by Ghosts",
+      "role": "Protection",
+      "notes": "Slows down Aggro and protects permanents; safe to use on creatures that can gain indestructible via discard."
+    },
+    {
+      "name": "Geier Reach Sanitarium",
+      "role": "Recursion/Draw",
+      "notes": "Recurring discard outlet that provides an extra draw or Bump in the Night with each Monument in play."
+    },
+    {
+      "name": "Takenuma, Abandoned Mire",
+      "role": "Recursion",
+      "notes": "Feeds the graveyard and recurs creatures, primarily targeting Greasefang, Okiba Boss."
+    },
+    {
+      "name": "Vanishing Verse",
+      "role": "Sideboard interaction",
+      "notes": "Handles Red Aggro, Rakdos Midrange, Izzet Phoenix, Selesnya Angels, and graveyard hate like Leyline of the Void and Rest in Peace."
+    },
+    {
+      "name": "Unlicensed Hearse",
+      "role": "Sideboard hate",
+      "notes": "Targeted graveyard hate that can be returned to play and then to hand with Greasefang; works against Izzet Phoenix, mirror, and Sacrifice."
+    }
+  ],
+  "sequencing_tips": [
+    "Discard Parhelion II early to enable Monument to Endurance triggers before reanimating it.",
+    "Play Monument to Endurance before casting discard outlets to maximize triggers per turn.",
+    "Use The Mycosynth Gardens to copy Monument triggers after playing discard outlets to stack value.",
+    "Target Sheltered by Ghosts on creatures that can gain indestructible through discard effects to mitigate removal.",
+    "Crew Parhelion II immediately after reanimating it with Greasefang to attack on the same turn."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Mono Red Aggro",
+      "advice": "Side in Vanishing Verse and Seam Rip. Use Fatal Push and Sheltered by Ghosts to slow down small creatures and protect your board.",
+      "watch_for": [
+        "Early aggressive creatures",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Rakdos Demons",
+      "advice": "Side in Vanishing Verse. Use Thoughtseize to disrupt their combo or key threats, and Fatal Push for early demons.",
+      "watch_for": [
+        "Blood Artist",
+        "Gorehorn Minotaurs"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Phoenix",
+      "advice": "Side in Vanishing Verse, Duress, Go Blank, and Unlicensed Hearse. Target their Phoenix or key spells with interaction.",
+      "watch_for": [
+        "Phoenix recursion",
+        "Counterspells",
+        "Removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Azorius Control",
+      "advice": "Side in Go Blank and Damping Sphere. Use Thoughtseize to find their answers and protect your combo pieces.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Card draw"
+      ]
+    },
+    {
+      "opponent_archetype": "Selesnya Angels",
+      "advice": "Side in Vanishing Verse. Use Fatal Push early and Sheltered by Ghosts to protect your creatures from their removal.",
+      "watch_for": [
+        "Angel tokens",
+        "Removal spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Lotus Combo",
+      "advice": "Side in Vanishing Verse, Go Blank, and Damping Sphere. Disrupt their spell sequencing and protect your graveyard.",
+      "watch_for": [
+        "Lotus Field",
+        "Fast combo execution"
+      ]
+    },
+    {
+      "opponent_archetype": "Boros Hammer",
+      "advice": "Side in Vanishing Verse and Damping Sphere. Use interaction to slow their board development and protect your combo.",
+      "watch_for": [
+        "Hammer of Purphoros",
+        "Aggressive creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Jund Sacrifice",
+      "advice": "Side in Unlicensed Hearse. Protect your creatures with Sheltered by Ghosts and use discard outlets to trigger Monument before they sacrifice them.",
+      "watch_for": [
+        "Sacrifice outlets",
+        "Graveyard hate"
+      ]
+    },
+    {
+      "opponent_archetype": "Orzhov Greasefang",
+      "advice": "Side in Go Blank and Unlicensed Hearse. Disrupt their Monument triggers and protect your own graveyard from their interaction.",
+      "watch_for": [
+        "Mirror interaction",
+        "Monument triggers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Leyline of the Void",
+    "Rest in Peace",
+    "Witch’s Oven",
+    "Targeted removal",
+    "Counterspells",
+    "Aggressive creature decks (Mono Red Aggro, Angels, Spirits)"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-orzhov-greasefang-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T03:38:29+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-orzhov-greasefang-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T03:36:45+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "63e11f67ef6f3fb2",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Orzhov Greasefang is the latest variant... combining the already established plan of reanimating Parhelion II with Monument to Endurance and several creatures with free discard effects to trigger the artifact every turn, creating a synergistic plan while being difficult to counter with targeted answers."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "With Parhelion II in the graveyard, we can use Greasefang, Okiba Boss to return it to the battlefield with Haste and use Greasefang to crew the vehicle, attacking with it and creating two 4/4 Angel tokens for 13 damage."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Since we need to discard Parhelion II , we use Monument to Endurance with cards that allow repeated discard effects to generate value with the artifact, transforming it into a Ramp, a clock, and a source of card advantage."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Overlord of the Balemurk puts cards from the deck directly into the graveyard and allows you to reuse any creature each combat. It also functions as a less reliable win condition."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Since we need to discard Parhelion II , we use Monument to Endurance with cards that allow repeated discard effects to generate value with the artifact..."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The Mycosynth Gardens function as extra copies of Monument to Endurance to stack more artifact triggers for each card we discard..."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Since eight of our creatures can gain indestructible by discarding cards, we have relatively safe targets for the card [Sheltered by Ghosts] even in games with tons of removal."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "graveyard hates like Leyline of the Void and Rest in Peace"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Witch’s Oven"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "removal or counterspells"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "decks with small creatures like Mono Red Aggro, Angels, or Spirits"
+    }
+  ]
+}

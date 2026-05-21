@@ -1,0 +1,155 @@
+{
+  "archetype": "Boros Midrange",
+  "format": "modern",
+  "strategy_type": "midrange",
+  "overview": "This Boros Midrange deck leverages efficient red and white threats to apply steady pressure while outlasting aggressive strategies. By cycling through high-impact creatures and combat tricks, it aims to stabilize early and close games with overwhelming board presence. The strategy relies on reading opponent interactions and maximizing value from each card played.",
+  "win_conditions": [
+    "Deploying Ragavan, Nimble Pilferer to steal key opponent cards and attack immediately with haste.",
+    "Generating relentless token pressure and card advantage through Ocelot Pride's triggered abilities.",
+    "Finishing games with Phlage, Titan of Fire's Fury by combat tricking it into lethal damage or using it as a resilient blocker."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more lands and at least one early threat or card draw",
+      "Hands containing Ragavan, Nimble Pilferer paired with a land drop",
+      "Hands with Ocelot Pride and a way to trigger its ability or protect it"
+    ],
+    "mulligan_criteria": [
+      "Hands with zero lands or four or more lands",
+      "Hands lacking any creatures or interactive spells",
+      "Hands with only high-cost finishers like Phlage, Titan of Fire's Fury without early plays"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands consistently to avoid mana screw",
+      "Deploy low-cost threats to establish board presence",
+      "Use card draw to find answers to early aggression"
+    ],
+    "mid_game": [
+      "Transition to Ocelot Pride to generate tokens and stabilize",
+      "Trade efficiently to preserve card advantage",
+      "Begin setting up Ragavan, Nimble Pilferer for tempo swings"
+    ],
+    "late_game": [
+      "Deploy Phlage, Titan of Fire's Fury as a combat trick or finisher",
+      "Use stolen cards from Ragavan to disrupt opponent plans",
+      "Maintain board control while pushing for lethal damage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Ragavan, Nimble Pilferer",
+      "role": "Tempo threat and card disruption",
+      "notes": "Play on curve to attack immediately. Use its steal ability to remove key opponent spells or threats, then reposition for combat."
+    },
+    {
+      "name": "Ocelot Pride",
+      "role": "Token generator and board stabilizer",
+      "notes": "Trigger its ability whenever possible to create tokens that can block, push damage, or sacrifice for value. Protect it early to maximize output."
+    },
+    {
+      "name": "Phlage, Titan of Fire's Fury",
+      "role": "Late-game finisher and combat trick",
+      "notes": "Hold up mana to cast it in response to combat damage or removal. Use its power to trade up or close out games efficiently."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold back removal or counterspells until you see what the opponent is protecting.",
+    "Cast Ragavan, Nimble Pilferer before committing other threats to maximize its steal potential.",
+    "Use Ocelot Pride tokens to pump larger creatures or block efficiently before committing the Pride itself.",
+    "Delay casting Phlage, Titan of Fire's Fury until combat or after opponent's main phase to avoid wasting it on board wipes."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early blockers and card draw to outlast their initial rush. Use Ragavan, Nimble Pilferer to steal their key finishers.",
+      "watch_for": [
+        "Early board wipes",
+        "Fast one-drop threats",
+        "Burn spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply steady pressure with Ocelot Pride tokens to force early removal. Save Phlage, Titan of Fire's Fury for after their sweepers resolve.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race efficiently while trading up with combat tricks. Use Ragavan, Nimble Pilferer to disrupt their game plan and gain tempo.",
+      "watch_for": [
+        "Efficient removal",
+        "Card advantage engines",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast one-mana creatures that apply early pressure",
+    "Board wipes that clear token boards",
+    "Card draw spells that outvalue midrange strategies",
+    "Counterspells that disrupt key threats"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T02:10:18+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T02:10:18+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "1df0c38bb3aa597e",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype: Boros Midrange, Format: modern, Colors: W/R"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards: Ragavan, Nimble Pilferer, Ocelot Pride, Phlage, Titan of Fire's Fury"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "General Modern midrange piloting principles applied to W/R signature cards"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard Modern format dynamics inferred from W/R midrange archetype"
+    }
+  ]
+}

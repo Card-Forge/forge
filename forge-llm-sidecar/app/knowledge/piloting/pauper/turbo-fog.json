@@ -1,0 +1,166 @@
+{
+  "archetype": "Turbo Fog",
+  "format": "pauper",
+  "strategy_type": "control",
+  "overview": "Turbo Fog is a control strategy that leverages cheap board wipes and targeted removal to reset aggressive boards and stall for card advantage. By cycling through Moment's Peace and efficient answers like Tangle and Lorien Revealed, the deck aims to outlast opponents and close games with resilient, low-cost threats. Success depends on precise timing of wipes and maintaining a steady stream of card draw to refill the hand after each reset.",
+  "win_conditions": [
+    "Stabilizing against wide boards with repeated board wipes",
+    "Outdrawing opponents using cheap card advantage engines",
+    "Closing games with efficient, resilient beaters after fog clears the board"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two cheap spells or removal",
+      "Early lands paired with Moment's Peace or Tangle",
+      "Card draw spells that enable finding fog or answers"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking interaction or board wipes",
+      "Too many lands without early plays",
+      "Slow, high-cost cards that cannot respond to early aggression"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and hold removal for early threats",
+      "Use Tangle or Lorien Revealed to clear pathing blockers or finish off attackers",
+      "Draw cards to find Moment's Peace or additional answers"
+    ],
+    "mid_game": [
+      "Cast Moment's Peace when the opponent has multiple threats or is about to stabilize",
+      "Rebuild the board with cheap, efficient creatures after the wipe resolves",
+      "Maintain hand size by cycling low-cost spells and drawing into more fog"
+    ],
+    "late_game": [
+      "Stabilize completely by repeatedly clearing boards and drawing into finishers",
+      "Use removal to protect key threats or clear unblockable attackers",
+      "Close out the game with a resilient threat that survives or bypasses remaining answers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Moment's Peace",
+      "role": "Primary board wipe and tempo engine",
+      "notes": "Drop when the opponent has two or more threats or is about to cast a game-winning spell. Use the upkeep timing to respond to combat tricks or late-game swings."
+    },
+    {
+      "name": "Tangle",
+      "role": "Cheap instant-speed removal and combat trick",
+      "notes": "Use to reduce a creature's power to 0 or less, making it vulnerable to combat damage or other effects. Hold for unblockable attackers or to clear the way for a fog."
+    },
+    {
+      "name": "Lorien Revealed",
+      "role": "Targeted removal for mid-sized threats",
+      "notes": "Efficiently clears creatures with power 3 or greater. Use to protect your board or clear a key threat before casting Moment's Peace to maximize tempo."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold removal until the opponent commits to a threat or attacks",
+    "Cast Moment's Peace after the opponent plays their last threat for the turn",
+    "Use Tangle to reduce a creature's power before combat to enable trading or survival",
+    "Prioritize clearing unblockable or flying threats before using board wipes"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Moment's Peace early to reset wide boards and buy time for card draw. Hold Tangle and Lorien Revealed for key finishers.",
+      "watch_for": [
+        "Unblockable attackers",
+        "Creatures with haste",
+        "Early game burn or direct damage"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells by holding fog in hand until the opponent uses their counters. Use cheap removal to pressure their life total while they search for answers.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup by using removal on key combo pieces. Drop Moment's Peace to clear the board if they go wide, and use card draw to find disruption.",
+      "watch_for": [
+        "Combo enablers",
+        "Protection spells",
+        "Fast win conditions"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Outvalue them by cycling cheap spells and using fog to reset their board. Use removal to clear their efficient threats before they stabilize.",
+      "watch_for": [
+        "Removal spells",
+        "Resilient threats",
+        "Card advantage engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Cheap aggressive creatures",
+    "Wide boards of low-cost threats",
+    "Unblockable or flying attackers",
+    "Counterspells and protection effects"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T09:42:33+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:42:33+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "043d12c09b93b832",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

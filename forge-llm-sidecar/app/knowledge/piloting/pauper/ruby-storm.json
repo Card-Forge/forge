@@ -1,0 +1,157 @@
+{
+  "archetype": "Ruby Storm",
+  "format": "pauper",
+  "strategy_type": "aggro",
+  "overview": "Ruby Storm is a fast, mana-dense aggro deck that leverages cheap mana acceleration to cast Seething Song and Desperate Ritual on curve. By flooding the board with low-cost creatures and reducing their costs, it aims to overwhelm opponents before they can stabilize. The inclusion of Manamorphose provides crucial card advantage and mana fixing to keep the aggressive pressure consistent throughout the game.",
+  "win_conditions": [
+    "Overwhelm opponent with multiple cheap creatures on turns two and three",
+    "Cast Seething Song early to reduce creature costs and accelerate damage",
+    "Use Desperate Ritual to cast multiple spells in a single turn for explosive board presence"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more mana sources and a cheap creature",
+      "Hands containing Desperate Ritual or Seething Song with early lands",
+      "Hands with Manamorphose and a way to cast it on turn two"
+    ],
+    "mulligan_criteria": [
+      "Hands with three or more lands and no spells",
+      "Hands lacking a turn-one or turn-two play",
+      "Hands with only high-cost cards or multiple Manamorphoses"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize casting Desperate Ritual on turn two to enable a cheap creature and a spell",
+      "Look for Seething Song on turn three to flood the board with 1-drops",
+      "Play Manamorphose to draw cards and fix mana while maintaining tempo"
+    ],
+    "mid_game": [
+      "Maintain board pressure by cycling through cheap threats",
+      "Use extra mana to cast multiple creatures or combat tricks in a single turn",
+      "Protect key attackers while chipping away at opponent's life total"
+    ],
+    "late_game": [
+      "If the game stalls, use Manamorphose to find finishers or removal",
+      "Leverage mana advantage to outvalue slower decks",
+      "Close out games with repeated Seething Song effects or large creature swarms"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Seething Song",
+      "role": "Cost reduction and board flood",
+      "notes": "Cast on turn three or four to play multiple 1-mana creatures for free, accelerating damage output."
+    },
+    {
+      "name": "Desperate Ritual",
+      "role": "Early mana acceleration",
+      "notes": "Play on turn two to enable a two-mana creature or spell, setting up explosive turns."
+    },
+    {
+      "name": "Manamorphose",
+      "role": "Card advantage and mana fixing",
+      "notes": "Use to draw two cards and fix colors, ensuring you can cast Seething Song and Desperate Ritual consistently."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast Desperate Ritual before playing creatures to maximize mana efficiency",
+    "Hold up mana for Seething Song until you have multiple creatures in hand or on board",
+    "Play Manamorphose when you need to fix colors or replace a played land",
+    "Prioritize casting Seething Song on your opponent's turn if possible to surprise them with a board flood"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "control",
+      "advice": "Play aggressively and commit resources early before they can stabilize",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Life gain"
+      ]
+    },
+    {
+      "opponent_archetype": "midrange",
+      "advice": "Race them by going wide with cheap creatures rather than trading up",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Efficient blockers"
+      ]
+    },
+    {
+      "opponent_archetype": "combo",
+      "advice": "Disrupt their setup with early pressure and prioritize finding interaction",
+      "watch_for": [
+        "Mana acceleration",
+        "Key combo pieces",
+        "Protection spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipes that clear your flooded board",
+    "Counterspells targeting Seething Song or Desperate Ritual",
+    "Life gain effects that slow down your race",
+    "Efficient removal that trades favorably with your creatures"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T09:46:49+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:46:49+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "1e1e21bdc3c99ca5",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "signature cards and format constraints"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Seething Song, Desperate Ritual"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "general aggro sequencing principles"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "standard pauper meta interactions"
+    }
+  ]
+}

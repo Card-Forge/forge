@@ -768,6 +768,9 @@ public class PlayerControllerAi extends PlayerController {
     public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn)  {
         // Sidecar influence: explicit MULLIGAN action wins; otherwise consult
         // the hand-value sum as a tiebreaker against the heuristic.
+        // Give the sidecar a budget to settle before we decide — mulligan is
+        // the single highest-impact decision in a game.
+        brains.waitForSidecar();
         if (brains.getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE)
                 && brains.getBoolProperty(AiProps.SIDECAR_MULLIGAN_ENABLE)
                 && brains.getSidecarInfluence().hasData()) {
@@ -842,16 +845,23 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public void declareAttackers(Player attacker, Combat combat) {
+        // Combat is the second highest-impact decision; let the sidecar finish
+        // before we commit attackers.
+        brains.waitForSidecar();
         brains.declareAttackers(attacker, combat);
     }
 
     @Override
     public void declareBlockers(Player defender, Combat combat) {
+        brains.waitForSidecar();
         brains.declareBlockersFor(defender, combat);
     }
 
     @Override
     public List<SpellAbility> chooseSpellAbilityToPlay() {
+        // Main-phase decisions: pause once at the start of each picker run so
+        // the sidecar's PLAY_SPELL / target priority advice is current.
+        brains.waitForSidecar();
         return brains.chooseSpellAbilityToPlay();
     }
 

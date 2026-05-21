@@ -1,0 +1,157 @@
+{
+  "archetype": "Temur Harmonizer Combo",
+  "format": "standard",
+  "strategy_type": "combo",
+  "overview": "Temur Harmonizer Combo leverages mana acceleration and card selection to assemble a lethal sequence quickly. By ramping into multiple lands and drawing into key pieces, the deck aims to bypass traditional combat. The strategy culminates in a sudden burst of damage that closes the game before opponents can stabilize.",
+  "win_conditions": [
+    "Cast Full Bore for lethal damage after ramping into multiple lands.",
+    "Use Mightform Harmonizer to generate excess mana and enable oversized spells.",
+    "Leverage Consult the Star Charts to find combo pieces and scry away disruption."
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Mightform Harmonizer and at least two lands.",
+      "Hands containing Consult the Star Charts and early ramp.",
+      "Hands with Full Bore and enough mana sources to cast it by turn three."
+    ],
+    "mulligan_criteria": [
+      "Hands lacking lands or mana acceleration.",
+      "Hands with only removal or late-game finishers.",
+      "Hands missing Consult the Star Charts or Harmonizer in a slow curve."
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands and casting Mightform Harmonizer to establish mana advantage.",
+      "Use Consult the Star Charts to scry for combo pieces and maintain hand size.",
+      "Avoid early combat unless necessary to stabilize against aggro."
+    ],
+    "mid_game": [
+      "Continue ramping while filtering your deck for Full Bore.",
+      "Protect your Harmonizer and land drops from opponent disruption.",
+      "Sequence spells to maximize mana efficiency and trigger any synergies."
+    ],
+    "late_game": [
+      "Cast Full Bore once land count reaches lethal threshold.",
+      "Use remaining card draw to find answers to board wipes or counterspells.",
+      "Close out the game quickly to avoid attrition from opponent's threats."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Consult the Star Charts",
+      "role": "Card draw and scry engine",
+      "notes": "Use to filter for Full Bore or Harmonizer, and to scry away opponent's removal or counterspells."
+    },
+    {
+      "name": "Mightform Harmonizer",
+      "role": "Mana acceleration and combo enabler",
+      "notes": "Play early to generate extra mana, enabling faster land drops and earlier Full Bore casts."
+    },
+    {
+      "name": "Full Bore",
+      "role": "Lethal finisher",
+      "notes": "Hold until you have enough lands to deal lethal damage, then cast as an instant to bypass blockers."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast Consult the Star Charts before playing lands to scry for combo pieces.",
+    "Hold Full Bore in hand until you have sufficient lands and can cast it on opponent's turn.",
+    "Prioritize Harmonizer over early removal to maintain combo velocity.",
+    "Use scry effects to bury lands when you have enough mana sources."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Ramp quickly and use Full Bore on their turn to bypass early pressure.",
+      "watch_for": [
+        "Early board wipes",
+        "Direct damage spells",
+        "Creature sweepers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Protect Harmonizer and use scry to avoid counterspells, then go off with Full Bore.",
+      "watch_for": [
+        "Counterspell",
+        "Board wipes",
+        "Hand disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race their value engines by accelerating mana and finishing before they stabilize.",
+      "watch_for": [
+        "Removal spells",
+        "Card advantage engines",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Instant-speed counterspells",
+    "Early-game direct damage",
+    "Board wipes",
+    "Targeted hand disruption"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:40:08+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:40:08+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "9ae98d307bbeb823",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype name and signature cards imply a ramp-to-finisher combo strategy."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Derived from the mechanical synergy between land ramp, card draw, and a land-counting finisher."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard combo piloting principles applied to the provided card interactions."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Common Standard format threats that disrupt combo and ramp strategies."
+    }
+  ]
+}

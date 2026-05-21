@@ -1,0 +1,131 @@
+{
+  "archetype": "Izzet Steel-Cutter",
+  "format": "modern",
+  "strategy_type": "aggro",
+  "overview": "Izzet Steel-Cutter is a fast, aggressive Modern deck that leverages turn-one mana rocks to deploy Cori-Steel Cutter early and apply relentless pressure. By combining Mox Opal and Tamiyo, Inquisitive Student, the deck accelerates its curve while maintaining card advantage to outpace opponents. The goal is to establish a threatening board presence before opponents can stabilize or generate value.",
+  "win_conditions": [
+    "Early aggressive attacks with Cori-Steel Cutter",
+    "Mana acceleration via Mox Opal and Tamiyo to outpace opponents",
+    "Card advantage from Tamiyo to maintain board presence"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Mox Opal or Tamiyo plus Cori-Steel Cutter",
+      "Two mana rocks with a one-mana spell",
+      "Cori-Steel Cutter with two lands"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early mana acceleration",
+      "Hands with only high-cost cards",
+      "Hands without Cori-Steel Cutter or early threats"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Mox Opal or Tamiyo on turn one",
+      "Cast Cori-Steel Cutter on turn two or three",
+      "Attack immediately to establish pressure"
+    ],
+    "mid_game": [
+      "Use Tamiyo's card draw to find answers or additional threats",
+      "Protect Cori-Steel Cutter from removal",
+      "Maintain aggressive tempo to prevent opponent stabilization"
+    ],
+    "late_game": [
+      "Leverage accumulated card advantage to outvalue opponents",
+      "Scale board presence with additional threats",
+      "Close out games with relentless attacks"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Mox Opal",
+      "role": "Early mana acceleration",
+      "notes": "Play on turn one to enable turn-two Cori-Steel Cutter or other red spells"
+    },
+    {
+      "name": "Tamiyo, Inquisitive Student",
+      "role": "Mana acceleration and card draw",
+      "notes": "Deploy early to draw into answers or additional threats while fixing mana"
+    },
+    {
+      "name": "Cori-Steel Cutter",
+      "role": "Primary attacker and win condition",
+      "notes": "Attack as soon as it enters to maximize pressure and trigger its abilities"
+    }
+  ],
+  "sequencing_tips": [
+    "Play Mox Opal before Tamiyo to ensure red mana availability for Cori-Steel Cutter",
+    "Attack with Cori-Steel Cutter immediately upon entering the battlefield",
+    "Hold up mana for potential interaction if the opponent plays defensively",
+    "Prioritize playing mana rocks before spells to maximize turn-one and turn-two impact"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply relentless early pressure before they stabilize",
+      "watch_for": [
+        "board wipes",
+        "counterspells"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Tamiyo's card draw to find answers and race",
+      "watch_for": [
+        "wide creature spreads",
+        "early removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Leverage mana rocks to outvalue their curve",
+      "watch_for": [
+        "efficient removal",
+        "card draw engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipes",
+    "Counterspells",
+    "Early removal spells",
+    "Wide creature decks"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T00:41:23+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T00:41:23+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "e844591eb5a81686",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

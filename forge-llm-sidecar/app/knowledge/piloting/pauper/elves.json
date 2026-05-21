@@ -1,0 +1,280 @@
+{
+  "archetype": "Elves",
+  "format": "pauper",
+  "strategy_type": "aggro",
+  "overview": "The UG Elves deck is a fast, aggressive tribal strategy that wins by flooding the board with low-cost creatures to deal lethal damage in a single strike or overwhelm opponents with mana and life gain. Despite facing targeted removal and sweepers, it maintains resilience through draw spells and a low land count. It is considered a strong, beloved (or hated) archetype in the current Pauper metagame.",
+  "win_conditions": [
+    "Deal lethal damage in a single attack with a large board of Elves",
+    "Generate massive mana to play multiple creatures per turn",
+    "Gain significant life to outlast attrition while applying pressure"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with 1 land are often sufficient if they contain draw spells",
+      "Hands that can apply early pressure or fit Lead the Stampede or Distant Melody"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking lands or draw spells that cannot establish early board presence"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Lead the Stampede",
+          "Distant Melody",
+          "Forest"
+        ],
+        "decision": "keep",
+        "reason": "A hand with 1 land is enough to put up a good work and apply pressure on the opponent, especially when fitting a draw spell."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Adopt an aggressive 'all win' posture to close out games quickly",
+      "Play early mana dorks like Wellwisher to generate life and pressure"
+    ],
+    "mid_game": [
+      "Play enough Elves to win without necessarily committing your entire board at once",
+      "Use draw spells to refill your hand and maintain pressure after playing multiple creatures"
+    ],
+    "late_game": [
+      "If the game stalls, use sideboarded artifacts like Viridian Longbow to lock down the board",
+      "Continue flooding the board to overwhelm opponents with mana and creature count"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Jaspera Sentinel",
+      "role": "Mana dork / Flying blocker",
+      "notes": "1 cost with a 1/2 body, having reach to block creatures with flying - especially faeries. Also, it's another colored mana source."
+    },
+    {
+      "name": "Sylvan Ranger",
+      "role": "Mana dork / Island enabler",
+      "notes": "Guarantees the Island is played, enabling counterspells to protect the board."
+    },
+    {
+      "name": "Lys Alana Huntmaster",
+      "role": "Mana dork / Ramp",
+      "notes": "Costs 4 mana but helps generate enough mana to play multiple creatures per turn."
+    },
+    {
+      "name": "Distant Melody",
+      "role": "Draw spell / Creature",
+      "notes": "Can draw 10 or more cards, refilling the hand without taking up a sideboard slot."
+    },
+    {
+      "name": "Lead the Stampede",
+      "role": "Draw spell",
+      "notes": "Allows the player to easily return to the game after board wipes or removal."
+    },
+    {
+      "name": "Gleeful Sabotage",
+      "role": "Sideboard removal",
+      "notes": "Used against Makeshift Munitions or specific enchantments that provide trample, protection, or lifegain."
+    },
+    {
+      "name": "Scattershot Archer",
+      "role": "Sideboard removal",
+      "notes": "Effective against Faeries decks to clear out flying threats."
+    },
+    {
+      "name": "Spidersilk Armor",
+      "role": "Sideboard protection",
+      "notes": "Provides protection against targeted removal and sweepers from Faeries decks."
+    },
+    {
+      "name": "Viridian Longbow",
+      "role": "Sideboard board control",
+      "notes": "Makes a difference in locked games, but less effective if the opponent can still generate mana and play creatures."
+    },
+    {
+      "name": "Wellwisher",
+      "role": "Early game life gain / Mana dork",
+      "notes": "Needed early to gain more life than the opponent can deal, especially against Bogles."
+    }
+  ],
+  "sequencing_tips": [
+    "Avoid playing your entire board at once to prevent losing everything to a single sweeper",
+    "Prioritize playing enough Elves to secure a win while conserving resources",
+    "Play carefully around threats like Krark-Clan Shaman that can easily clean the board",
+    "Use draw spells to refill your hand after committing multiple creatures to the battlefield"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Gruul Ponza",
+      "advice": "Favorable matchup as Elves are natural predators; destroying lands doesn't work well against mana-generating creatures. Sideboard out Lead the Stampede post-side to avoid dumping it.",
+      "watch_for": [
+        "Fiery Cannonade"
+      ]
+    },
+    {
+      "opponent_archetype": "Affinity",
+      "advice": "Play carefully around board cleaners. Use Gleeful Sabotage specifically against Makeshift Munitions rather than lands.",
+      "watch_for": [
+        "Krark-Clan Shaman",
+        "Makeshift Munitions"
+      ]
+    },
+    {
+      "opponent_archetype": "Bogles",
+      "advice": "Get Wellwisher early to gain life faster than they can deal damage. Use Gleeful Sabotage to remove key enchantments.",
+      "watch_for": [
+        "Trample enchantments",
+        "Protection enchantments",
+        "Lifegain enchantments"
+      ]
+    },
+    {
+      "opponent_archetype": "Dimir Faeries",
+      "advice": "Use Jaspera Sentinel early to block flying threats. Sideboard in Scattershot Archer, Spidersilk Armor, and Viridian Longbow.",
+      "watch_for": [
+        "Spellstutter Sprite",
+        "Suffocating Fumes",
+        "Echoing Decay"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Faeries",
+      "advice": "Game 1 is slightly better as sweepers are usually sideboarded. Use Jaspera Sentinel and sideboard similarly to Dimir.",
+      "watch_for": [
+        "Spellstutter Sprite",
+        "Fiery Cannonade",
+        "Electrickery"
+      ]
+    },
+    {
+      "opponent_archetype": "Elves",
+      "advice": "Whoever plays Lead the Stampede, Distant Melody, or Timberwatch Elf first usually wins. Sideboard in Viridian Longbow only if the game is locked.",
+      "watch_for": [
+        "Lead the Stampede",
+        "Distant Melody",
+        "Timberwatch Elf"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fiery Cannonade",
+    "Suffocating Fumes",
+    "Krark-Clan Shaman",
+    "Makeshift Munitions",
+    "Spellstutter Sprite",
+    "Echoing Decay",
+    "Electrickery"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-ug-elves-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T09:08:31+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-cheap-elves-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:05:21+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-ug-elves-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:07:01+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "aabaff6b8906f0dc",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Our posture must be that of an Aggro player... The strength of the Elves, united, is overwhelming, and it can be very fast."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "you've definitely lost to Elves in just one attack and taking a lot of damage"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "play more than 10 creatures, gain a lot of life or win the game with just one strike"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "With Elves, we need to remember and always think: 'I don't want to lose my entire board at once'. With that in mind, let's play enough Elves to win the game."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Krark-Clan Shaman — which easily cleans our board, and we can't interact so easily - so play carefully around it."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "many targeted removals and sweepers like Fiery Cannonade and Suffocating Fumes"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Krark-Clan Shaman — which easily cleans our board"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Makeshift Munitions , which gives us a huge headache"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Spellstutter Sprite , which counters almost everything in our deck"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Dimir usually has Suffocating Fumes and even Echoing Decay in the maindeck"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Izzet version will have Fiery Cannonade and even Electrickery"
+    }
+  ]
+}

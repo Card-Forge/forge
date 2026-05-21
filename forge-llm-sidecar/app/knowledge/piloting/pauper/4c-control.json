@@ -1,0 +1,134 @@
+{
+  "archetype": "4c Control",
+  "format": "pauper",
+  "strategy_type": "control",
+  "overview": "This four-color Pauper control deck stabilizes games by denying opponent spells and resetting aggressive boards. It leverages Counterspell for instant-speed denial, Lorien Revealed for board wipes and mana acceleration, and Skred as a resilient value engine. The goal is to outlast opponents through card advantage and late-game resilience.",
+  "win_conditions": [
+    "Outlasting opponents with cumulative card advantage from Skred",
+    "Denying key threats and combo pieces with Counterspell to stall for time",
+    "Resetting aggressive boards with Lorien Revealed to stabilize and close out games"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Counterspell or early interaction",
+      "Mana bases that reliably support four colors by turn three",
+      "Access to Skred or Lorien Revealed alongside lands"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking instant-speed denial or board control",
+      "Mana-heavy hands with no early spells or draw",
+      "Hands missing key signature cards or finishers"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands efficiently while holding up mana for Counterspell",
+      "Prioritize denying early threats to slow aggressive decks",
+      "Draw into Skred or removal to establish a foothold"
+    ],
+    "mid_game": [
+      "Cast Lorien Revealed to clear boards and fetch additional lands",
+      "Deploy Skred to generate value and apply steady pressure",
+      "Maintain hand size with counterspells and card draw to stay ahead"
+    ],
+    "late_game": [
+      "Stabilize against combo or midrange decks with repeated spell denial",
+      "Leverage Skred's cumulative value to outresource opponents",
+      "Close out games with board control and resilient threats"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Lorien Revealed",
+      "role": "Board wipe and mana acceleration",
+      "notes": "Cast when facing multiple threats to reset the board; use the landfall effect to fetch additional lands for consistency and four-color support."
+    },
+    {
+      "name": "Counterspell",
+      "role": "Instant-speed spell denial",
+      "notes": "Hold up mana to counter key threats, combo pieces, or finishers; prioritize high-impact spells over minor threats to conserve resources."
+    },
+    {
+      "name": "Skred",
+      "role": "Value engine and late-game finisher",
+      "notes": "Deploy to generate card advantage and apply pressure; protect with counterspells and use its abilities to outlast opponents in long games."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up mana for Counterspell before committing to non-essential spells",
+    "Cast Lorien Revealed after opponent commits resources to maximize board reset value",
+    "Prioritize Skred's value-generating abilities over direct damage when behind on resources"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Counterspell on early threats and Lorien Revealed to clear boards; prioritize Skred for sustained pressure.",
+      "watch_for": [
+        "Early all-ins",
+        "Unstoppable creatures",
+        "Mana acceleration"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Save Counterspell for key combo pieces; use Lorien Revealed to disrupt board states; rely on Skred to outvalue if combo fails.",
+      "watch_for": [
+        "Hidden combo pieces",
+        "Graveyard interactions",
+        "Fast mana"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race with Skred's value generation; use Counterspell efficiently to deny their win conditions; time Lorien Revealed to clear their threats.",
+      "watch_for": [
+        "Counterspell wars",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Combo finishers",
+    "Resilient midrange threats"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T10:53:56+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:53:56+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "3d1af10bcf9d8cc3",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype: 4c Control, Format: pauper, Signature cards: Lorien Revealed, Counterspell, Skred"
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

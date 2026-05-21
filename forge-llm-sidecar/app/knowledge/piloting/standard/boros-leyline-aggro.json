@@ -1,0 +1,166 @@
+{
+  "archetype": "Boros Leyline Aggro",
+  "format": "standard",
+  "strategy_type": "aggro",
+  "overview": "Boros Leyline Aggro is a fast, aggressive Standard deck that aims to overwhelm opponents with early combat damage and efficient creature plays. It leverages low-cost threats and combat tricks to close games before midrange or control strategies can stabilize. The deck relies on consistent curve plays and aggressive sequencing to maintain board presence.",
+  "win_conditions": [
+    "Deal 20 combat damage quickly using low-cost creatures",
+    "Utilize combat tricks to bypass blockers or deal excess damage",
+    "Maintain board pressure to force opponent into unfavorable trades"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two 1-drops or a 1-drop and a 2-drop",
+      "Hands containing early combat tricks or pump effects",
+      "Hands that can play a creature on turn 1 and follow up on turn 2"
+    ],
+    "mulligan_criteria": [
+      "Hands with only 3-drops or higher",
+      "Hands lacking early land drops or creature plays",
+      "Hands with multiple removal spells but no early threats"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and 1-drops consistently to establish early board presence",
+      "Use combat tricks to maximize damage on turns 1 and 2",
+      "Avoid trading up unless it leaves you with a larger threat"
+    ],
+    "mid_game": [
+      "Deploy signature creatures like Emberheart Challenger to apply pressure",
+      "Use Voice of Victory to swing for lethal or clear blockers",
+      "Maintain mana advantage by playing creatures before removal resolves"
+    ],
+    "late_game": [
+      "Push for lethal with remaining creatures and combat tricks",
+      "Use pump effects to bypass late-game board wipes or sweepers",
+      "If stalled, look for value triggers or combat damage to close the game"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Voice of Victory",
+      "role": "Combat finisher and pump effect",
+      "notes": "Use to swing for lethal or protect key attackers from removal; hold up for combat tricks rather than playing it as a static threat."
+    },
+    {
+      "name": "Slickshot Show-Off",
+      "role": "Early-game pressure creature",
+      "notes": "Play on curve to establish board presence; use its combat ability to trade favorably or push damage through."
+    },
+    {
+      "name": "Emberheart Challenger",
+      "role": "Mid-game threat and board presence",
+      "notes": "Deploy on turn 2 or 3 to maintain aggression; prioritize attacking over blocking to keep pressure on opponent's life total."
+    }
+  ],
+  "sequencing_tips": [
+    "Play creatures before holding up mana for combat tricks to avoid being outdrawn",
+    "Use pump effects on the last creature in combat to maximize damage",
+    "Hold removal for opponent's key threats rather than trading early",
+    "Prioritize attacking with multiple creatures to force difficult blocker assignments"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Push early damage relentlessly and use combat tricks to bypass counterspells; avoid trading creatures unnecessarily.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Late-game value engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race before they stabilize with removal and big creatures; use pump effects to swing for lethal on turn 3 or 4.",
+      "watch_for": [
+        "Removal spells",
+        "Efficient blockers",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play for board control and favorable trades; use combat tricks to push damage through their blockers.",
+      "watch_for": [
+        "Early sweepers",
+        "Deathtouch creatures",
+        "Combat disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup with early pressure and removal; race if they cannot interact with your board.",
+      "watch_for": [
+        "Fast mana",
+        "Win conditions",
+        "Protection spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Efficient removal spells",
+    "Board wipes and sweepers",
+    "Large blockers with evasion",
+    "Counterspells and disruption"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:55:50+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:55:50+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "9df03ea456c9ebb6",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype name and color identity imply aggressive early-game pressure."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard aggro principles applied to Boros creature suite."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "General Standard aggro sequencing principles applied to Boros combat suite."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard meta threats that typically counter aggressive creature decks."
+    }
+  ]
+}

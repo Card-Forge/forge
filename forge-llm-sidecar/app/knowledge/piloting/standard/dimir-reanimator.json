@@ -1,0 +1,290 @@
+{
+  "archetype": "Dimir Reanimator",
+  "format": "standard",
+  "strategy_type": "combo",
+  "overview": "Dimir Reanimator is a Standard archetype that blends midrange disruption with an unfair reanimation combo to cheat large threats onto the battlefield. It leverages graveyard synergy and threshold enablers like Kiora, the Rising Tide to efficiently cast Zombify and Nullpriest of Oblivion. While its primary goal is to reanimate Atraxa, Grand Unifier or Valgavoth, Terror Eater, it maintains a resilient Plan B through token generation and flexible removal.",
+  "win_conditions": [
+    "Reanimating Atraxa, Grand Unifier for card advantage and board presence",
+    "Reanimating Valgavoth, Terror Eater to generate value from opponent's removal",
+    "Winning with Kiora, the Rising Tide token generation as a Plan B"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with cheap reanimation spells like Zombify",
+      "Hands containing enablers like Kiora, the Rising Tide or Evangel of Synthesis",
+      "Hands with early interaction and lands"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking reanimation targets or spells",
+      "Hands without early game disruption or filtering",
+      "Hands with too many high-cost bombs without enablers"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Zombify",
+          "Kiora, the Rising Tide",
+          "Evangel of Synthesis",
+          "Undercity Sewers",
+          "Fountainport",
+          "Cut Down",
+          "Atraxa, Grand Unifier"
+        ],
+        "decision": "keep",
+        "reason": "Provides filtering, early interaction, a reanimation spell, and a target to execute the plan quickly."
+      },
+      {
+        "hand": [
+          "Virtue of Persistence",
+          "Nullpriest of Oblivion",
+          "Valgavoth, Terror Eater",
+          "Atraxa, Grand Unifier",
+          "Fountainport",
+          "Restless Reef",
+          "Go for the Throat"
+        ],
+        "decision": "mulligan",
+        "reason": "Lacks cheap reanimation or early filtering, making it difficult to reach the combo on curve."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Filter draws with Kiora, the Rising Tide and Evangel of Synthesis",
+      "Play cheap removal like Cut Down and Anoint with Affliction to stabilize",
+      "Dump cards into the graveyard to enable Zombify and threshold"
+    ],
+    "mid_game": [
+      "Cast reanimation spells like Zombify and Nullpriest of Oblivion to bring back threats",
+      "Use Overlord of the Balemurk to recur enablers and reanimation spells",
+      "Apply pressure with reanimated creatures or Kiora tokens"
+    ],
+    "late_game": [
+      "Win with board presence from Atraxa or Valgavoth",
+      "Use sideboard answers like Malicious Eclipse or Withering Torment to clear wide boards or enchantments",
+      "Leverage card advantage from reanimated threats to outvalue opponents"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Zombify",
+      "role": "Reanimation spell",
+      "notes": "Cheapest reanimation effect, most linear; priority is big creatures but can be used on Kiora or Overlord."
+    },
+    {
+      "name": "Atraxa, Grand Unifier",
+      "role": "Reanimation target",
+      "notes": "Primary target against Aggro, combo, or White Tokens; generates card advantage and board presence."
+    },
+    {
+      "name": "Valgavoth, Terror Eater",
+      "role": "Reanimation target",
+      "notes": "Primary target against Midrange; generates value from opponent's spot removal."
+    },
+    {
+      "name": "Kiora, the Rising Tide",
+      "role": "Enabler / Alternative win condition",
+      "notes": "Filters draws, triggers Threshold, and creates tokens for a Plan B if the board is empty."
+    },
+    {
+      "name": "Overlord of the Balemurk",
+      "role": "Enabler / Recursion engine",
+      "notes": "Recurs Kiora or Nullpriest of Oblivion from the graveyard, adding resilience to the game plan."
+    },
+    {
+      "name": "Nullpriest of Oblivion",
+      "role": "Reanimation spell / Early threat",
+      "notes": "Six-mana reanimation effect that can be recur with Overlord; provides a 2/1 lifelink body early."
+    },
+    {
+      "name": "Virtue of Persistence",
+      "role": "Reanimation spell / Removal",
+      "notes": "Expensive reanimation but functions as cheap early removal; cast for seven mana later in the game."
+    },
+    {
+      "name": "Bitter Triumph",
+      "role": "Interaction",
+      "notes": "Efficient response against creatures and Planeswalkers; synergizes by discarding cards to the graveyard."
+    },
+    {
+      "name": "Duress",
+      "role": "Disruption",
+      "notes": "Protects the combo from counterspells and finds reanimation targets or threats."
+    },
+    {
+      "name": "Undercity Sewers",
+      "role": "Land",
+      "notes": "Filters the top of the deck and puts reanimation targets in the graveyard or feeds Kiora."
+    }
+  ],
+  "sequencing_tips": [
+    "Use Duress early to protect your reanimation spells from counterspells or to find targets.",
+    "Prioritize reanimating Atraxa or Valgavoth with Zombify, but consider reanimating Kiora or Overlord if you need immediate filtering or recursion.",
+    "Attack with Overlord of the Balemurk to trigger its ability and return Kiora or Nullpriest of Oblivion to your hand.",
+    "Use Bitter Triumph to discard cards to the graveyard while efficiently removing opponent's threats.",
+    "Save counterspells like Negate or Disdainful Stroke for spells that prevent your combo or for opponent's answers to your reanimated creatures."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Gruul Prowess / Boros Prowess",
+      "advice": "Use cheap removal and Duress to disrupt their early game. Reanimate threats quickly to outpace their aggression.",
+      "watch_for": [
+        "Early aggressive creatures",
+        "Spot removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Golgari Midrange",
+      "advice": "Target Valgavoth, Terror Eater as your primary reanimation target to generate value from their removal. Use Withering Torment for larger creatures.",
+      "watch_for": [
+        "Spot removal",
+        "Larger creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Jeskai Convoke",
+      "advice": "Side in Malicious Eclipse to handle their wide board. Use Duress to find reanimation targets and protect your combo.",
+      "watch_for": [
+        "Wide boards",
+        "Counterspells"
+      ]
+    },
+    {
+      "opponent_archetype": "Azorius Tempo",
+      "advice": "Side in Ghost Vacuum to exile their threats and protect your graveyard. Use counterspells to disrupt their tempo plays.",
+      "watch_for": [
+        "Counterspells",
+        "Ghost Vacuum"
+      ]
+    },
+    {
+      "opponent_archetype": "Temur Otters",
+      "advice": "Use early removal and reanimate threats to stabilize. Leverage Kiora's token plan if the board clears.",
+      "watch_for": [
+        "Aggressive creatures",
+        "Board wipes"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Jeskai Convoke",
+    "Azorius Aggro",
+    "Kaito, Bane of Nightmares",
+    "Domain Ramp",
+    "Four-Color Zur",
+    "Unstoppable Slasher",
+    "Enduring Innocence",
+    "Unholy Annex",
+    "Leyline Binding",
+    "Rest in Peace",
+    "Leyline of the Void"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-dimir-reanimator-foundations-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T07:05:50+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-dimir-reanimator-foundations-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:04:09+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "b7587f5f9da62864",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Empowered by the inclusion of Zombify in Foundations and the ability of Valgavoth, Terror Eater to take over games... The rest of the deck is classic Midrange with cheap removal and disruption... On the one hand, we have an unfair plan that wins games for free... since we require them for the “combo” to work."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Atraxa, Grand Unifier is best in games where we don't need to protect our threats and/or where we want to generate a lot of card advantage."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Valgavoth, Terror Eater excels in games where the opponent has a lot of spot removal while also generating card advantage with the opponent's cards"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The token created by her wins the game in a few turns if we keep the board empty"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Sometimes it's worth reanimating Kiora, The Rising Tide or Overlord of the Balemurk with it, but the priority should be on the big creatures."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "its attack trigger and ETB ensure that we can always return Kiora or Nullpriest of Oblivion to our hand"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The two copies of Duress in the maindeck guarantee protection against counterspells when we want to execute the combo"
+    },
+    {
+      "confidence": 0.75,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "our best targets for counterspells are the spells that prevent our combo from working, but we should also consider the types of responses our opponents may have after we reanimate a creature."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "presence of Jeskai Convoke and Azorius Aggro in the current Metagame"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Blot Out is our answer to Kaito, Bane of Nightmares , but it can also be used against Domain Ramp and/or other archetypes where Hexproof is relevant, such as in the mirror or against Four-Color Zur."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Affliction also has the advantage of dealing with Unstoppable Slasher and Enduring Innocence permanently."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "answers troublesome enchantments like Unholy Annex and Leyline Binding . It is an essential piece in games where we expect Rest in Peace or Leyline of the Void ."
+    }
+  ]
+}

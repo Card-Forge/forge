@@ -1,0 +1,264 @@
+{
+  "archetype": "Soulflayer",
+  "format": "pioneer",
+  "strategy_type": "combo",
+  "overview": "This Pioneer deck mills cards into the graveyard to reduce the cost of Delve creatures, then uses Neoform or Eldritch Evolution to cheat Atraxa, Grand Unifier into play. Atraxa provides massive card advantage and enables a recurring loop, while Soulflayer serves as a resilient backup threat that gains keywords from sacrificed Atraxas. The deck prioritizes deep deck-diving tools over traditional cantrips to accelerate the combo and protect it with targeted disruption.",
+  "win_conditions": [
+    "Casting Atraxa, Grand Unifier via Neoform or Eldritch Evolution to draw cards and establish a board presence",
+    "Sacrificing Atraxa to Soulflayer to create a 4/4 with Flying, Deathtouch, Vigilance, and Lifelink",
+    "Using Tyrranax Rex as a resilient clock against targeted removal"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing a first-turn disruption spell, a second-turn mill spell, and combo pieces for turn three",
+      "Hands with combo pieces, disruption, and two lands that can find the third land and a Delve spell via Otherworldly Gaze or Contingency Plan"
+    ],
+    "mulligan_criteria": [
+      "Any one-lander hand due to the deck's mana greedy nature",
+      "Hands requiring two perfect turns to act when facing aggressive decks",
+      "Hands lacking a first-turn option or protection against opponent's Thoughtseize"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Thoughtseize",
+          "Otherworldly Gaze",
+          "Tasigur",
+          "Neoform",
+          "Lands"
+        ],
+        "decision": "keep",
+        "reason": "Allows casting Thoughtseize on turn one, mill on turn two, and perform the combo on turn three."
+      },
+      {
+        "hand": [
+          "Soulflayer",
+          "Stubborn Denial",
+          "Eldritch Evolution",
+          "Lands"
+        ],
+        "decision": "keep",
+        "reason": "Can cast Soulflayer on turn three with Denial as backup, then sacrifice it with Evolution on turn four, though slower."
+      },
+      {
+        "hand": [
+          "One land",
+          "Combo pieces"
+        ],
+        "decision": "mulligan",
+        "reason": "One-landers are strongly recommended to mulligan because the deck needs consistent land drops to execute the mana-intensive combo."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize land drops to avoid mana screw in a greedy mana base",
+      "Cast Thoughtseize to remove opponent disruption and gauge their hand",
+      "Begin milling cards with Otherworldly Gaze or Contingency Plan to enable Delve"
+    ],
+    "mid_game": [
+      "Cast Delve creatures cheaply once enough cards are in the graveyard",
+      "Use Neoform or Eldritch Evolution to cheat Atraxa, Grand Unifier into play",
+      "Protect threats with Stubborn Denial once a creature is on the battlefield"
+    ],
+    "late_game": [
+      "Use Atraxa's card draw to find more combo pieces or mill spells",
+      "Sacrifice Atraxa to Soulflayer for a resilient, keyword-heavy threat",
+      "Apply pressure with Tyrranax Rex if Atraxa is removed or the combo stalls"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Atraxa, Grand Unifier",
+      "role": "Main win condition / Card draw engine",
+      "notes": "Cheated into play via Neoform/Evolution; draws 3-4 cards; feeds Soulflayer for keywords."
+    },
+    {
+      "name": "Neoform",
+      "role": "Combo enabler",
+      "notes": "Fetches Atraxa from graveyard; requires mill setup to reduce cost."
+    },
+    {
+      "name": "Soulflayer",
+      "role": "Backup win condition / Secondary threat",
+      "notes": "Gains keywords from sacrificed Atraxa; provides a fair Plan B and five-turn clock."
+    },
+    {
+      "name": "Otherworldly Gaze",
+      "role": "Mill / Combo setup",
+      "notes": "Puts cards into graveyard to reduce Delve costs; helps find lands and pieces."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Disruption / Information",
+      "notes": "Removes opponent's interaction; helps time the combo safely."
+    },
+    {
+      "name": "Stubborn Denial",
+      "role": "Protection",
+      "notes": "Functions as Negate if a creature is on the battlefield; protects Atraxa or threats."
+    },
+    {
+      "name": "Tyrranax Rex",
+      "role": "Resilient threat / Sideboard staple",
+      "notes": "Hard to kill with targeted removal; pressures control/midrange decks."
+    },
+    {
+      "name": "Contingency Plan",
+      "role": "Mill / Search",
+      "notes": "Finds Tasigur or Soulflayer; mills to enable Delve."
+    },
+    {
+      "name": "Eldritch Evolution",
+      "role": "Combo enabler",
+      "notes": "Alternative to Neoform for fetching Atraxa."
+    },
+    {
+      "name": "Mana Confluence",
+      "role": "Land / Mana base",
+      "notes": "Four copies included for color consistency; replaces utility lands."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast Thoughtseize on turn one to remove disruption, then mill on turn two, and combo on turn three.",
+    "Reverse spell order if needed to ensure Neoform goes unimpeded, but risk opponent's Thoughtseize.",
+    "Use Stubborn Denial to protect Atraxa or other threats once a creature is on the battlefield.",
+    "If Contingency Plan finds nothing, hold Soulflayer for turn three and sacrifice it with Eldritch Evolution on turn four."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Rakdos Midrange",
+      "advice": "Pressure with Tyrranax Rex; sideboard in Leyline of Sanctity and Assassin's Trophy; remove Atraxa, Soulflayer, and Stubborn Denial.",
+      "watch_for": [
+        "Graveyard hate",
+        "Targeted removal",
+        "Slow interaction"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Green Devotion",
+      "advice": "Close the game quickly before opponent's interaction resolves; reduce consistency slightly to handle hate.",
+      "watch_for": [
+        "Big creatures",
+        "Graveyard hate",
+        "Interrupts"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Thoughtseize",
+    "Rest in Peace",
+    "Grafdigger's Cage",
+    "Unlicensed Hearse",
+    "Targeted removal",
+    "Instant-speed counterspells"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-atraxa-soulflayer-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T05:00:45+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-atraxa-soulflayer-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:59:21+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "9b9d3f966d50a696",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "put enough cards into the graveyard to cast a creature with Delve on the second or third turn, then cast Neoform and thus look for Atraxa, Grand Unifier"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "cast Neoform and thus look for Atraxa, Grand Unifier which... will also guarantee an average of four more cards"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Soulflayer wants to feed on because it grants four relevant keywords to our creature"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Tyrranax Rex as an efficient answer against archetypes that rely on targeted removals"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "cast Thoughtseize on the first turn, Otherworldly Gaze on the second, and perform the combo on the third"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "reverse the spell order in this situation to ensure a safer opportunity to play Neoform unimpeded"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Stubborn Denial, which works as a Negate if any of our creatures are in play"
+    },
+    {
+      "confidence": 0.75,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "casting Soulflayer on the third turn with Stubborn Denial as a backup to sacrifice it with Eldritch Evolution on the fourth"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Thoughtseize is one of our biggest enemies in the format"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "dealing with more resolved hates like Rest in Peace, Grafdigger's Cage and Unlicensed Hearse"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "archetypes that rely on targeted removals to deal with our creatures"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Dispel is an efficient answer to Instant-Speed removals and counterspells"
+    }
+  ]
+}

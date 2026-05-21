@@ -1,0 +1,157 @@
+{
+  "archetype": "Simic Scapeshift",
+  "format": "pioneer",
+  "strategy_type": "ramp",
+  "overview": "Simic Scapeshift leverages landfall synergies and massive mana acceleration to overwhelm opponents before they can stabilize. By cycling lands into the graveyard and replaying them with Scapeshift, the deck generates explosive board states and outscales most Pioneer strategies. Success relies on carefully sequencing land drops to maximize triggers while maintaining enough resources to cast high-impact threats.",
+  "win_conditions": [
+    "Triggering multiple landfall abilities simultaneously",
+    "Casting high-mana-cost threats that close the game",
+    "Flooding the board with mana-producing lands to outpace opponent's removal"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more lands and a ramp spell",
+      "Scapeshift paired with early landfall triggers",
+      "Spelunking to fix mana and set up the graveyard"
+    ],
+    "mulligan_criteria": [
+      "Zero lands or only high-cost cards",
+      "Multiple Scapeshifts without landfall outlets",
+      "Hands lacking early interaction or acceleration"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands consistently to build a base",
+      "Use Spelunking to fetch specific land types and sacrifice lands to the graveyard",
+      "Deploy early landfall creatures to apply pressure"
+    ],
+    "mid_game": [
+      "Cast Scapeshift to replay lands from the graveyard",
+      "Chain landfall triggers to deploy threats and generate value",
+      "Manage life total carefully when using life-drain ramp"
+    ],
+    "late_game": [
+      "Flood the board with additional lands to produce massive mana",
+      "Cast win-condition threats that scale with land count",
+      "Use excess mana to cast multiple spells or activate abilities"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Scapeshift",
+      "role": "Core engine for land replay",
+      "notes": "Cast when you have lands in the graveyard to trigger landfall and accelerate mana production."
+    },
+    {
+      "name": "Lumra, Bellow of the Woods",
+      "role": "Landfall trigger and mana dork",
+      "notes": "Enters with a landfall trigger and untaps two lands, enabling faster Scapeshift casts."
+    },
+    {
+      "name": "Spelunking",
+      "role": "Mana fixing and graveyard setup",
+      "notes": "Search for needed lands and put others into the graveyard to fuel Scapeshift, but watch your life total."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize putting lands into the graveyard before casting Scapeshift",
+    "Trigger landfall abilities in an order that maximizes board impact",
+    "Save Spelunking for when you need specific land types or graveyard fuel"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Ramp quickly to stabilize and use landfall triggers to outvalue their early pressure.",
+      "watch_for": [
+        "Early sweepers",
+        "Direct damage spells",
+        "Creature removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race their hand disruption by flooding the board with lands and casting threats they cannot answer.",
+      "watch_for": [
+        "Counterspell",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Outpace their curve by accelerating mana and deploying multiple threats per turn.",
+      "watch_for": [
+        "Removal spells",
+        "Tempo creatures",
+        "Resource denial"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Abrupt Decay",
+    "Lightning Strike",
+    "Thoughtseize",
+    "Karn, the Great Creator",
+    "Lurrus of the Dream-Den"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T04:46:08+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:46:08+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "dcb478e573a81723",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

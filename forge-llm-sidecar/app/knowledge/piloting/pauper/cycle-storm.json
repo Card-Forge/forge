@@ -1,0 +1,158 @@
+{
+  "archetype": "Cycle Storm",
+  "format": "pauper",
+  "strategy_type": "combo",
+  "overview": "Cycle Storm is a combo archetype that generates storm count by casting cheap instants and sorceries, then resolves a high-damage spell to win the game. It utilizes mana acceleration to cast multiple spells in a single turn, bypassing traditional resource curves. The deck aims to assemble its pieces quickly and execute a lethal sequence before opponents can stabilize.",
+  "win_conditions": [
+    "Casting Songs of the Damned with a high storm count",
+    "Executing a multi-spell turn accelerated by Cabal Ritual and Dark Ritual",
+    "Generating lethal damage through accumulated storm count before opponent interaction resolves"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two cheap spells or rituals",
+      "Hands containing a win condition and acceleration",
+      "Hands with early interaction and land drops"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking mana acceleration or cheap spells",
+      "Hands with only lands or high-cost cards",
+      "Hands missing a clear path to storm count"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize land drops and casting cheap instants to build storm count",
+      "Use early interaction to disrupt opponent's board",
+      "Search for mana acceleration to enable combo turns"
+    ],
+    "mid_game": [
+      "Accumulate storm count while holding up mana for potential counterspells",
+      "Set up the turn to cast multiple rituals followed by the win condition",
+      "Manage card advantage by cycling through the deck efficiently"
+    ],
+    "late_game": [
+      "Execute the lethal sequence by casting rituals before the storm spell",
+      "Adapt to opponent's interaction by going wider or finding alternative damage sources",
+      "Maintain pressure if the initial combo is disrupted"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Cabal Ritual",
+      "role": "Mana acceleration",
+      "notes": "Cast early to enable multi-spell turns; sacrifice a creature if needed to avoid backfire, but prioritize casting it for mana."
+    },
+    {
+      "name": "Dark Ritual",
+      "role": "Mana acceleration",
+      "notes": "Provides immediate black mana to cast spells; use it to bridge mana gaps or enable early storm count generation."
+    },
+    {
+      "name": "Songs of the Damned",
+      "role": "Win condition",
+      "notes": "Cast after rituals and other instants to maximize storm count; ensure you have enough mana to cast it after acceleration."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast all rituals and cheap instants before the win condition to maximize storm count",
+    "Hold up mana for interaction if the opponent has countermagic",
+    "Prioritize casting spells that generate storm count over drawing cards unless you need to find the win condition",
+    "Use Cabal Ritual's sacrifice clause strategically to avoid losing key creatures prematurely"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Go wide with storm count to overwhelm countermagic; prioritize early interaction to buy time.",
+      "watch_for": [
+        "Counterspell",
+        "Thoughtseize",
+        "Lightning Bolt"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use early interaction to stall; aim for a fast combo turn on turn three or four.",
+      "watch_for": [
+        "Early board presence",
+        "Direct damage spells",
+        "Removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Race to assemble your pieces; use interaction to disrupt their win condition if possible.",
+      "watch_for": [
+        "Fast mana",
+        "Combo pieces",
+        "Countermagic"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspell",
+    "Thoughtseize",
+    "Lightning Bolt",
+    "Path to Exile",
+    "Duress"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T09:54:41+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:54:41+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "1beb7a285a065966",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Cycle Storm archetype definition and Pauper format constraints"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards Songs of the Damned, Cabal Ritual, Dark Ritual"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "General storm combo sequencing principles"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Pauper format staple interaction"
+    }
+  ]
+}

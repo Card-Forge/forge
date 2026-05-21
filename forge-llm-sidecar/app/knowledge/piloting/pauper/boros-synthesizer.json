@@ -1,0 +1,248 @@
+{
+  "archetype": "Boros Synthesizer",
+  "format": "pauper",
+  "strategy_type": "midrange",
+  "overview": "Boros Synthesizer is a midrange deck that generates massive card advantage by cycling cheap artifacts like Experimental Synthesizer with bounce creatures such as Glint Hawk and Kor Skyfisher. It establishes board control using flying threats, removal, and lifegain, while adapting its posture to play aggressively with Seeker of the Way against aggressive or control opponents.",
+  "win_conditions": [
+    "Establish board presence with flying threats",
+    "Generate massive card advantage via artifact bounce loops",
+    "Apply aggressive pressure with Seeker of the Way",
+    "Outvalue opponents with removal and lifegain"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early artifacts like Experimental Synthesizer and bounce creatures",
+      "Hands featuring aggressive starts like Seeker of the Way"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early plays or interaction",
+      "Hands without a clear game plan for the matchup"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Experimental Synthesizer",
+          "Glint Hawk",
+          "Kor Skyfisher",
+          "Seeker of the Way",
+          "Pyroblast",
+          "Mountain",
+          "Island"
+        ],
+        "decision": "keep",
+        "reason": "Provides early value generation, board presence, and interaction, aligning with the deck's midrange posture."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap artifacts to draw cards",
+      "Cast bounce creatures to return artifacts to hand",
+      "Use removal on opponent's early threats",
+      "Optionally lead with Seeker of the Way for aggressive pressure"
+    ],
+    "mid_game": [
+      "Cycle artifacts repeatedly to generate card advantage",
+      "Establish flying threats to apply pressure",
+      "Manage resources carefully to avoid misplays"
+    ],
+    "late_game": [
+      "Outvalue opponents with continuous card draw",
+      "Use lifegain and removal to stabilize",
+      "Avoid letting games drag out against combo decks like Affinity"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Experimental Synthesizer",
+      "role": "Core value engine",
+      "notes": "Costs only 1 red mana to draw a card, replacing the banned Prophetic Prism and enabling efficient cycling."
+    },
+    {
+      "name": "Glint Hawk",
+      "role": "Artifact bouncer",
+      "notes": "Returns artifacts to hand when it enters the battlefield, enabling repeated casting and card draw."
+    },
+    {
+      "name": "Kor Skyfisher",
+      "role": "Artifact bouncer",
+      "notes": "Works alongside Glint Hawk to bounce rocks and generate card advantage."
+    },
+    {
+      "name": "Seeker of the Way",
+      "role": "Aggressive threat / lifegain",
+      "notes": "Can win games on its own and triggers for lifegain when rocks are played after it enters."
+    }
+  ],
+  "sequencing_tips": [
+    "Play Seeker of the Way before casting draw rocks to trigger its lifegain ability",
+    "Wait for the optimal moment to destroy opponent's enchantments in GW Auras matchups",
+    "Prioritize aggressive plays over value generation against aggressive or control decks"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Faeries",
+      "advice": "Use removal and flying creatures to answer their key threats. Post-side, Pyroblast and Electrickery improve the matchup. Make careful decisions to avoid falling behind.",
+      "watch_for": [
+        "Spellstutter Sprite",
+        "Ninja of the Deep Hours",
+        "Moon-Circuit Hacker",
+        "Gurmag Angler",
+        "Stormbound Geist"
+      ]
+    },
+    {
+      "opponent_archetype": "Affinity",
+      "advice": "Play as aggressively as possible and avoid letting the game drag out. Sideboard provides strong answers. Against Grixis, side in Pyroblast and out Experimental Synthesizer.",
+      "watch_for": [
+        "Myr Enforcer",
+        "Frogmite",
+        "Disciple of the Vault"
+      ]
+    },
+    {
+      "opponent_archetype": "Burn",
+      "advice": "Adopt an aggressive posture to close out games quickly. Seeker of the Way is a powerful threat. Side in Leave no Trace if they run specific curses, and Relic of Progenitus against Black/Madness variants.",
+      "watch_for": [
+        "Curse of the Pierced Heart",
+        "Trespasser's Curse",
+        "Okiba Reckoner Raid"
+      ]
+    },
+    {
+      "opponent_archetype": "GW Auras",
+      "advice": "Wait for the right time to destroy enchantments and try to end the game quickly before they create huge creatures. Post-side improves the matchup significantly.",
+      "watch_for": [
+        "Enchantment-based creatures",
+        "Aura synergies"
+      ]
+    },
+    {
+      "opponent_archetype": "Boros Synthesizer",
+      "advice": "Mirror match requires experience, attention to detail, and careful mulligan/order of play decisions. Time management on MTGO can be crucial. Side in Relic of Progenitus only if opponent runs Omen of the Dead.",
+      "watch_for": [
+        "Omen of the Dead",
+        "Opponent's rock cycling",
+        "Clock pressure"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Spellstutter Sprite",
+    "Ninja of the Deep Hours",
+    "Moon-Circuit Hacker",
+    "Gurmag Angler",
+    "Stormbound Geist",
+    "Myr Enforcer",
+    "Frogmite",
+    "Disciple of the Vault",
+    "Curse of the Pierced Heart",
+    "Trespasser's Curse",
+    "Okiba Reckoner Raid",
+    "Omen of the Dead"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm + Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-boros-synthesizer-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T10:09:14+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-boros-synthesizer-2025-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:05:59+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-boros-synthesizer-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:06:04+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-boros-synthesizer-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:07:56+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "fbb3119af5a62ddd",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "We can say that Boros Synthesizer is a midrange deck, which as I mentioned above, wants to start generating value with the rocks draws in the first turns, in addition to spending removals on the opponent's creatures and establishing a board with our flying threats."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "By doing this, it is possible to play them again and draw more cards and generate tons of card advantage"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "establishing a board with our flying threats"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "starting with Seeker of the Way and only then making playing your draw rocks to trigger its ability"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "It's important to wait for the right time to destroy the enemy's enchantments"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "opponent's main cards, which are Spellstutter Sprite and the ninjas, the Ninja of the Deep Hours and Moon-Circuit Hacker"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Myr Enforcer and Frogmite are colorless. The combo with Disciple of the Vault"
+    }
+  ]
+}

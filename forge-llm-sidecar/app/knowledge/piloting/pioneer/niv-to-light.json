@@ -1,0 +1,287 @@
+{
+  "archetype": "Niv to Light",
+  "format": "pioneer",
+  "strategy_type": "midrange",
+  "overview": "Niv to Light is a five-color midrange toolbox deck that leverages Bring to Light to access a wide array of silver bullets and threats tailored to the metagame. Its core engine revolves around Niv-Mizzet Reborn to generate massive card advantage and apply relentless pressure, supported by ramp like Sylvan Caryatid and a rebuilt mana base for consistency. The deck aims to stabilize early with efficient removal and board wipes, then snowball into a late-game state where chaining Nivs and using Kolaghan's Command for reach closes out games.",
+  "win_conditions": [
+    "Niv-Mizzet Reborn",
+    "Omnath, Locus of Creation",
+    "The Scarab God",
+    "Valki, God of Lies",
+    "Kolaghan's Command"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with a turn 1 land and turn 2 Sylvan Caryatid or Growth Spiral",
+      "Hands containing Bring to Light or Niv-Mizzet Reborn with adequate mana",
+      "Hands with early removal like Dreadbore or Abrupt Decay"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early ramp or mana fixing",
+      "Hands with only high-cost threats and no lands",
+      "Hands missing Bring to Light in a format where toolbox consistency is key"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Forest",
+          "Sylvan Caryatid",
+          "Bring to Light",
+          "Niv-Mizzet Reborn",
+          "Dreadbore",
+          "Indatha Triome",
+          "Kolaghan's Command"
+        ],
+        "decision": "keep",
+        "reason": "Provides turn 1 land, turn 2 ramp, and access to the deck's core engine and removal."
+      },
+      {
+        "hand": [
+          "Niv-Mizzet Reborn",
+          "Omnath, Locus of Creation",
+          "The Scarab God",
+          "Valki, God of Lies",
+          "Extinction Event",
+          "Solar Blaze",
+          "Zagoth Triome"
+        ],
+        "decision": "mulligan",
+        "reason": "Lacks early ramp and mana sources to deploy threats efficiently, leading to a stalled start."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play a triome or basic land on turn 1 to fix mana and enable turn 2 plays.",
+      "Cast Sylvan Caryatid or Growth Spiral on turn 2 to accelerate to four mana and block small creatures.",
+      "Use early removal like Dreadbore or Abrupt Decay to answer aggressive threats."
+    ],
+    "mid_game": [
+      "Deploy Niv-Mizzet Reborn to draw cards and apply flying pressure.",
+      "Utilize Bring to Light to find specific silver bullets like Shadows' Verdict or Slaughter Games based on the matchup.",
+      "Cast Expressive Iteration on turn 3 or later to filter for threats and answers."
+    ],
+    "late_game": [
+      "Chain Niv-Mizzet Reborn into itself to overwhelm opponents with card advantage.",
+      "Use Kolaghan's Command to rebuy threats and generate reach.",
+      "Play board wipes like Deafening Clarion or Solar Blaze to reset the board and swing life totals."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Bring to Light",
+      "role": "Toolbox enabler",
+      "notes": "Allows access to the entire deck, enabling silver bullets and shifting deckbuilding week-to-week to address specific matchups."
+    },
+    {
+      "name": "Niv-Mizzet Reborn",
+      "role": "Card advantage engine & win condition",
+      "notes": "A 6/6 flyer that draws 2-4 cards on ETB, making 1-for-1 trades highly favorable and enabling a chaining engine."
+    },
+    {
+      "name": "Sylvan Caryatid",
+      "role": "Ramp & blocker",
+      "notes": "Best pure ramp card in Pioneer; accelerates from two to four mana, fixes mana, blocks 2-power creatures, and survives removal."
+    },
+    {
+      "name": "Dreadbore",
+      "role": "Efficient removal",
+      "notes": "Handles planeswalkers and creatures alike; allows double-spelling and holds up instant-speed spells post-board."
+    },
+    {
+      "name": "Kolaghan's Command",
+      "role": "Late-game reach & recursion",
+      "notes": "Rebuys creatures, answers smaller threats, and provides the deck's only form of reach in game 1."
+    },
+    {
+      "name": "Expressive Iteration",
+      "role": "Card filtering & advantage",
+      "notes": "Draws cards and filters the deck; best played on turn 3 or later to ensure two cards and target specific threats."
+    }
+  ],
+  "sequencing_tips": [
+    "Play Expressive Iteration on turn 3 or later to guarantee drawing two cards and better filter for late-game answers.",
+    "Use Growth Spiral to search for lands only when necessary, ideally after ensuring a free land drop to trigger Omnath's ability.",
+    "Double-spell with Dreadbore and another removal spell to efficiently clear threats while holding up instant-speed interaction.",
+    "Prioritize casting Sylvan Caryatid on turn 2 over Growth Spiral for better blocking and survival against removal.",
+    "Save Deafening Clarion for when you have a Niv, Omnath, or Scarab God in play to maximize life gain swings."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use lifegain from Omnath and Deafening Clarion to stall, deploy The Scarab God to lock out recursion, and use board wipes to clear small creatures.",
+      "watch_for": [
+        "Small aggressive creatures",
+        "Burn damage",
+        "Vampire recursion"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Bring to Light for Slaughter Games to instantly deal with combo pieces, and use Shadows' Verdict to wipe boards and graveyards.",
+      "watch_for": [
+        "Fast combo sequences",
+        "Graveyard recursion",
+        "Jeskai Ascendancy"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange/Mirror",
+      "advice": "Leverage Solar Blaze to handle larger threats, use Kolaghan's Command for reach, and prioritize chaining Niv-Mizzet Reborn for card advantage.",
+      "watch_for": [
+        "Archon of Emeria",
+        "Recursive threats",
+        "Opponent's Bring to Light targets"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply pressure with Niv-Mizzet Reborn, use Vanishing Verse for mono-colored threats, and filter for answers with Expressive Iteration.",
+      "watch_for": [
+        "Counterspells",
+        "Esika's Chariot",
+        "Late-game sweepers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Esika's Chariot",
+    "Jeskai Ascendancy",
+    "Archon of Emeria",
+    "Small aggressive creatures",
+    "Recursive graveyard creatures",
+    "Mono-colored aggro permanents"
+  ],
+  "metadata": {
+    "source": "Draftsim",
+    "source_url": "https://draftsim.com/niv-to-light-pioneer/",
+    "generated_at": "2026-05-21T03:40:13+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Draftsim",
+      "author": "",
+      "source_url": "https://draftsim.com/niv-to-light-pioneer/",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T03:38:33+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "47e623968986ed8b",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Powerful midrange strategies can shift answers and threats to respond to any top deck... One hallmark of Niv to Light is using Bring to Light to enable a suite of silver bullets... The deck’s second namesake, Niv-Mizzet Reborn, acts as this deck’s card advantage engine and primary win condition."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Niv-Mizzet Reborn, acts as this deck’s card advantage engine and primary win condition."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Omnath, Locus of Creation gaining you life and presenting a blocker that’s difficult to answer"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The Scarab God... locks out aggro decks and the rebuying of threats like Niv or Omnath often locks up any close game."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Valki, God of Lies... get a 7-mana planeswalker that’s incredibly hard to answer."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Kolaghan's Command allows you to rebuy your creatures in the late game... this is your only form of reach in game 1."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You want to play this on turn 3 or later to make sure you get two cards out of the deal."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "ideally wait until you can ensure a free land before you cast it."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "it’s easy to double-spell with Dreadbore and another piece of removal at just ."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "there really isn’t any debate on which you’d rather cast on turn 2 in a format littered with small creatures."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Deafening Clarion works well at clearing smaller creatures off the board while giving huge swings of life if you already have a Niv, Omnath, or Scarab God in play."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Except for cards like Esika's Chariot or Jeskai Ascendancy, Dreadbore can handle it all."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Many decks overload on 3-drop creatures like Archon of Emeria that can cause issues."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Tolsimir, Friend to Wolves is a backbreaking answer to small aggressive creatures."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "A silver bullet against other midrange decks and decks that use the graveyard for recursive creatures."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Between mono green, Boros burn being exclusively red permanents, mono black aggro, and vampires, along with plenty of other important mono-colored cards"
+    }
+  ]
+}

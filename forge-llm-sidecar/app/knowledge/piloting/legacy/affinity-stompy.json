@@ -1,0 +1,176 @@
+{
+  "archetype": "Affinity Stompy",
+  "format": "legacy",
+  "strategy_type": "tempo",
+  "overview": "Affinity Stompy in Legacy leverages artifact ramp and cost reduction to deploy a wide board of resilient creatures quickly. The U/R color scheme provides instant-speed interaction and card selection to protect your game plan against aggressive and control opponents. By prioritizing early artifact drops, you accelerate into a dominant mid-game where reduced costs enable overwhelming combat pressure.",
+  "win_conditions": [
+    "Deploying multiple low-cost artifact creatures to overwhelm opponents with combat damage",
+    "Using artifact count to reduce creature costs and accelerate ahead of opponent's curve",
+    "Maintaining board presence through U/R instant-speed interaction while applying relentless pressure"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing at least two lands and an early artifact or creature",
+      "Draws with Urza's Bauble or Lotus Petal alongside a one-drop creature or removal",
+      "Hands with Mox Opal and a land that can produce blue or red mana"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking lands or early plays",
+      "Draws with only high-cost creatures and no ramp",
+      "Hands missing artifact synergy or U/R interaction"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Urza's Bauble and Lotus Petal on turn one to establish immediate mana acceleration",
+      "Drop early artifact creatures to begin reducing costs and applying pressure",
+      "Use U/R cantrips or removal to find lands and protect early threats"
+    ],
+    "mid_game": [
+      "Leverage Mox Opal for color fixing and additional mana to play multiple creatures per turn",
+      "Prioritize wide artifact creature drops to maximize cost reduction and board presence",
+      "Sequence removal to clear blockers while maintaining tempo"
+    ],
+    "late_game": [
+      "Stabilize with a wide board of artifact creatures that are difficult to clear efficiently",
+      "Use U/R interaction to counter or remove opponent's finishers or board wipes",
+      "Push for lethal by playing multiple reduced-cost creatures in a single turn"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Mox Opal",
+      "role": "Mana acceleration and color fixing",
+      "notes": "Play early to enable U/R spells and accelerate artifact creature drops; prioritize when you need specific colored mana for interaction"
+    },
+    {
+      "name": "Lotus Petal",
+      "role": "Early mana ramp",
+      "notes": "Deploy on turn one to enable turn-two plays; sacrifice or use carefully to maintain artifact count for cost reduction"
+    },
+    {
+      "name": "Urza's Bauble",
+      "role": "Mana acceleration and artifact count",
+      "notes": "Provides early mana and contributes to artifact count; use its ability to tap for colorless mana to play creatures ahead of curve"
+    }
+  ],
+  "sequencing_tips": [
+    "Play artifacts before creatures to maximize cost reduction for subsequent drops",
+    "Hold U/R instant-speed interaction in hand to protect key artifact creature plays",
+    "Prioritize Lotus Petal and Urza's Bauble on turns one and two to establish early board presence",
+    "Use Mox Opal flexibly to fix mana for removal or to accelerate into a wide turn"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play aggressively around potential board wipes; prioritize artifact creatures that can return from the graveyard or are resilient to sweepers. Use U/R interaction to disrupt their late-game setup.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Permanent removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Stabilize early by playing efficient artifact creatures and using U/R removal to clear their threats. Leverage cost reduction to outpace their damage output.",
+      "watch_for": [
+        "Early board presence",
+        "Direct damage spells",
+        "Creature sweepers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their combo pieces with U/R interaction and apply immediate pressure to force them to respond. Prioritize artifact creatures that can block or trade efficiently.",
+      "watch_for": [
+        "Combo enablers",
+        "Card draw spells",
+        "Protection spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them by going wide with artifact creatures; use cost reduction to play multiple threats per turn. Hold interaction for their key removal or sweepers.",
+      "watch_for": [
+        "Removal spells",
+        "Board wipes",
+        "Value engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Apply early pressure before they establish a large mana base; use U/R interaction to disrupt their ramp pieces. Leverage artifact count to accelerate ahead of their curve.",
+      "watch_for": [
+        "Mana acceleration",
+        "Large threats",
+        "Board wipes"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipes that clear artifact creatures",
+    "Artifact destruction spells",
+    "Direct removal targeting key threats",
+    "Counterspells disrupting early plays",
+    "Non-creature sweepers"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T07:47:26+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:47:26+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "66ed617c2c5ab7d6",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

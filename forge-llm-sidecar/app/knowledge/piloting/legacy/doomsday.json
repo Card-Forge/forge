@@ -1,0 +1,289 @@
+{
+  "archetype": "Doomsday",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "Sultai Flow Doomsday is a combo deck that aims to cast Doomsday as early as possible to stack cycling cards and win on the following turn with Thassa's Oracle. The inclusion of Flow State provides crucial resilience against discard and counterspell-heavy metas, allowing the pilot to recover key pieces or hoard resources. Green mana adds utility through Veil of Summer, Carpet of Flowers, and Witherbloom Charm to navigate hate cards.",
+  "win_conditions": [
+    "Thassa's Oracle",
+    "Jace, Wielder of Mysteries",
+    "Barrowgoyf and Dauthi Voidwalker midrange plan"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands that can find the combo through cantrips",
+      "Hands with protection, card draw, and Doomsday",
+      "Hands that can activate Flow State early or win on turn 2 with backup"
+    ],
+    "mulligan_criteria": [
+      "Hands with lots of disruption but only a few cantrips"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Doomsday",
+          "Force of Will",
+          "Brainstorm",
+          "Ponder",
+          "Veil of Summer"
+        ],
+        "decision": "keep",
+        "reason": "Has protection, card draw, and Doomsday, providing everything needed to set up the combo."
+      },
+      {
+        "hand": [
+          "Lotus Petal",
+          "Brainstorm",
+          "Witherbloom Charm",
+          "Thoughtseize",
+          "Flow State"
+        ],
+        "decision": "keep",
+        "reason": "Nearly unusable on its own but can find what's needed and activate Flow State as early as turn 2."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cantrips like Brainstorm and Ponder to find Doomsday and key combo pieces.",
+      "Use Dark Ritual and Lotus Petal for early mana acceleration.",
+      "Cast Doomsday as soon as possible to stack cycling cards."
+    ],
+    "mid_game": [
+      "Execute the combo by playing Thassa's Oracle with 2 or fewer cards in the deck.",
+      "Use Force of Will, Daze, and Veil of Summer to protect the combo from disruption.",
+      "Stack cards like Cavern of Souls or Thoughtseize to bypass enemy counters or hate cards."
+    ],
+    "late_game": [
+      "Use Flow State to recover from discards or unexpected counterspells.",
+      "If the combo is stalled, hoard resources with Flow State or transition to a midrange plan with Barrowgoyf and Dauthi Voidwalker post-sideboard."
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Doomsday",
+      "role": "Combo engine",
+      "notes": "The core spell that allows you to stack the top 4 cards of your deck to set up the win condition."
+    },
+    {
+      "name": "Thassa's Oracle",
+      "role": "Primary win condition",
+      "notes": "Wins the game when played with 2 or fewer cards in your deck."
+    },
+    {
+      "name": "Flow State",
+      "role": "Resilience and recovery",
+      "notes": "Allows you to recover key cards after discards or counters, and hoard resources against passive opponents."
+    },
+    {
+      "name": "Brainstorm",
+      "role": "Cantrip",
+      "notes": "Essential for finding Doomsday and combo pieces early in the game."
+    },
+    {
+      "name": "Force of Will",
+      "role": "Protection",
+      "notes": "Key counterspell to protect the combo, often used as backup for turn-2 wins."
+    },
+    {
+      "name": "Witherbloom Charm",
+      "role": "Utility/Answer",
+      "notes": "Flexible answer against Chalice of the Void and Thalia, Guardian of Thraben; can give life or draw cards."
+    },
+    {
+      "name": "Veil of Summer",
+      "role": "Protection",
+      "notes": "Counterspell that also protects against discard spells."
+    },
+    {
+      "name": "Carpet of Flowers",
+      "role": "Mana acceleration",
+      "notes": "Creates an absurd amount of mana to hoard resources and push through defenses."
+    },
+    {
+      "name": "Barrowgoyf",
+      "role": "Sideboard win condition",
+      "notes": "Transforms the deck into a midrange strategy post-sideboard, particularly effective against aggressive decks."
+    },
+    {
+      "name": "Jace, Wielder of Mysteries",
+      "role": "Alternative win condition",
+      "notes": "Replaces Thassa's Oracle when met with Surgical Extraction and is immune to Consign to Memory."
+    }
+  ],
+  "sequencing_tips": [
+    "Stack cycling cards like Edge of Autumn and Street Wraith on top of the deck to draw Thassa's Oracle.",
+    "Stack Cavern of Souls to bypass counterspells or Chalice of the Void for 2.",
+    "Stack Thoughtseize to remove enemy Consign to Memory or Mindbreak Trap.",
+    "Stack Lion's Eye Diamond to generate blue mana and play around Blood Moon.",
+    "Put a land or blue card on top to pay for Force of Will while playing Thoughtseize on turn 2."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Dimir Tempo",
+      "advice": "Flow State is critical to recover lost cards. Do not go for the aggro game plan as they will out-Dimir you.",
+      "watch_for": [
+        "Counterspells",
+        "Discard spells",
+        "Early pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Show and Tell",
+      "advice": "Sideboard in Carpet of Flowers as a giant threat while fighting for resources. Use Veil of Summer in main.",
+      "watch_for": [
+        "Combo pieces",
+        "Counterspells",
+        "Discard spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Boros Aggro",
+      "advice": "Play the combo fast. Sideboard in Barrowgoyf to force them to keep dead removal cards, buying time.",
+      "watch_for": [
+        "Ajani, Nacatl Pariah",
+        "Goblin Bombardment",
+        "Efficient answers to Barrowgoyf"
+      ]
+    },
+    {
+      "opponent_archetype": "Oops",
+      "advice": "Use Force of Will, discards, and Veil of Summer to stop their combo. Force of Negation can stop Dark Ritual as a turn-0 answer.",
+      "watch_for": [
+        "Dice roll advantage",
+        "Dark Ritual",
+        "Discard spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Trini Tron",
+      "advice": "Watch Trinisphere's effect on your combo turn. Use Witherbloom Charm to hit Grim Monolith for time. Sideboard in more answers.",
+      "watch_for": [
+        "Disruptor Flute",
+        "Karn, the Great Creator",
+        "Trinisphere",
+        "Grim Monolith"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspells",
+    "Discard spells",
+    "Chalice of the Void",
+    "Thalia, Guardian of Thraben",
+    "Blood Moon",
+    "Consign to Memory",
+    "Surgical Extraction",
+    "Disruptor Flute",
+    "Karn, the Great Creator",
+    "Trinisphere",
+    "Mindbreak Trap"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-sultai-flow-doomsday-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T07:26:22+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-sultai-flow-doomsday-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:24:48+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "fedd01fbcb0b6705",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "The secret behind this list is playing the sorcery that names it ( Doomsday !) as soon as possible and winning in the following turn with Thassa's Oracle."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "winning in the following turn with Thassa's Oracle"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Jace, Wielder of Mysteries . It is an alternative win condition that replaces Thassa's Oracle"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "with 4 Barrowgoyf s and 2 Dauthi Voidwalker s, you'll turn this list into a sort of Dimir Midrange"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You'll usually do this by stacking cards with cycling, like Edge of Autumn and Street Wraith , on top of your deck and playing Oracle with 2 or less cards in your deck."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "For instance, you can stack Cavern of Souls to go over counterspells or Chalice of the Void for 2, or stack Thoughtseize to get Consign to Memory or Mindbreak Trap out of your way."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You can also stack Lion's Eye Diamond to play around Blood Moon ."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Veil of Summer is amazing against counters and discards."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Witherbloom Charm , one of the new cards, is a flexible answer against several problematic cards, like Chalice of the Void and Thalia, Guardian of Thraben"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "stack Lion's Eye Diamond to play around Blood Moon"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Consign to Memory is still the most popular card for Legacy sideboards"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Karn, the Great Creator disables your mana artifacts."
+    }
+  ]
+}

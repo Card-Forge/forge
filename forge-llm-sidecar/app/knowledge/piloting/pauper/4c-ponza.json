@@ -1,0 +1,135 @@
+{
+  "archetype": "4c Ponza",
+  "format": "pauper",
+  "strategy_type": "midrange",
+  "overview": "4c Ponza is a four-color midrange deck that leverages land destruction to disrupt opponents while maintaining board presence with efficient creatures and token generation. By integrating blue into the traditional W/R/G foundation, the archetype gains additional card advantage and tempo tools to outlast aggressive strategies and race control decks. The core loop revolves around trading lands for creatures, using Utopia Sprawl to stabilize, and closing games with overwhelming combat pressure.",
+  "win_conditions": [
+    "Overwhelm the opponent with a board of creatures while their lands are destroyed",
+    "Deal direct damage through land destruction effects combined with combat",
+    "Outvalue the opponent in the late game using Utopia Sprawl token generation"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early land destruction like Thermokarst or Avenging Hunter",
+      "Mana base that supports at least two colors by turn two",
+      "Cheap creatures or Utopia Sprawl to establish early board presence"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early plays or land destruction",
+      "Mana screws with too many lands or too few",
+      "High-cost cards without early support or draw"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap threats to establish board presence",
+      "Use Thermokarst or Avenging Hunter to destroy key opponent lands",
+      "Prioritize disrupting aggressive strategies before they gain momentum"
+    ],
+    "mid_game": [
+      "Maintain board control while generating value with Utopia Sprawl",
+      "Sequence land destruction to hit lands before opponent casts high-cost spells",
+      "Use blue cards for card draw or removal to stabilize against board wipes"
+    ],
+    "late_game": [
+      "Flood the board with Treefolk tokens from Utopia Sprawl",
+      "Race control decks by pushing damage while their mana is disrupted",
+      "Trade efficiently to preserve lands and close out the game"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Thermokarst",
+      "role": "Instant-speed land destruction and direct damage",
+      "notes": "Hold for when opponent plays a key land or before combat to maximize disruption and damage output"
+    },
+    {
+      "name": "Avenging Hunter",
+      "role": "Cheap creature with land destruction on death",
+      "notes": "Use as an early threat or sacrifice to trigger its death ability, targeting opponent's most impactful land"
+    },
+    {
+      "name": "Utopia Sprawl",
+      "role": "Land untap effect and token generator",
+      "notes": "Enter tapped to untap a land for spells, then repeatedly generate 1/1 Treefolk tokens to outvalue and close games"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Thermokarst until after opponent commits to a land or before combat to maximize impact",
+    "Trigger Avenging Hunter's death ability strategically, often by trading it into a removal spell or sacrificing it",
+    "Use Utopia Sprawl's untap ability to cast multiple spells in a turn or to generate tokens for combat tricks",
+    "Prioritize destroying opponent's nonbasic lands or lands that enable their key strategies"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play land destruction early to slow their mana and use cheap blockers to survive the initial rush",
+      "watch_for": [
+        "Early aggressive creatures",
+        "Burn spells",
+        "Haste effects"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Disrupt their mana base early and race them before they can assemble board wipes or win conditions",
+      "watch_for": [
+        "Board wipe spells",
+        "Card draw engines",
+        "High-cost finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them by maintaining board presence and using land destruction to disrupt their curve",
+      "watch_for": [
+        "Efficient creatures",
+        "Removal spells",
+        "Card advantage engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Early aggressive creatures that apply pressure before land destruction can stabilize",
+    "Board wipe spells that clear your creature board and tokens",
+    "Card draw and value engines that outpace your resource generation"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T11:00:17+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:00:17+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "a54f9edb71de889c",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

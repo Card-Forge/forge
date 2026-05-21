@@ -1,0 +1,316 @@
+{
+  "archetype": "Rakdos Monument",
+  "format": "standard",
+  "strategy_type": "aggro",
+  "overview": "Rakdos Monument leverages Lorwyn Eclipsed additions to return Monument to Endurance to its aggressive roots. By using Iron-Shield Elf and other free discard sources, the deck consistently triggers the artifact for value while establishing board presence with hard-to-remove creatures. It wins through a combination of beatdown, recurring graveyard threats, and Monument's reach and card advantage.",
+  "win_conditions": [
+    "Classic beatdown paired with strong removal",
+    "Recurring threats discarded from the graveyard",
+    "Monument to Endurance triggers providing reach and card advantage"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early discard outlets or lands to trigger Monument to Endurance",
+      "Hands with low-cost creatures to establish early board presence"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early interaction or discard sources",
+      "Hands with only high-cost permanents without early triggers"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Iron-Shield Elf",
+          "Restless Vents",
+          "Blood Crypt",
+          "Monument to Endurance",
+          "Tersa Lightshatter",
+          "Requiting Hex",
+          "Flamewake Phoenix"
+        ],
+        "decision": "keep",
+        "reason": "Provides early land, discard outlet, and artifact trigger potential consistent with the aggressive game plan."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Monument to Endurance and lands to establish the engine",
+      "Use early discard outlets like Iron-Shield Elf or Restless Vents to trigger Monument",
+      "Deploy hard-to-remove creatures to apply early pressure"
+    ],
+    "mid_game": [
+      "Cycle through discard sources to maintain Monument triggers and card advantage",
+      "Use Moonshadow to fetch high-power creatures like Flamewake Phoenix",
+      "Leverage Bloodthorn Flail and Bloodghast to return discarded threats to the battlefield"
+    ],
+    "late_game": [
+      "Cycle Marauding Mako for card advantage rather than playing it as a one-drop",
+      "Sideboard in attrition tools like Case of the Crimson Pulse and Sunspine Lynx",
+      "Use sweepers like Pyroclasm to clear wide boards while protecting recurring threats"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Iron-Shield Elf",
+      "role": "Engine/Trigger",
+      "notes": "Lorwyn Eclipsed addition that consistently triggers Monument to Endurance."
+    },
+    {
+      "name": "Monument to Endurance",
+      "role": "Core Artifact/Engine",
+      "notes": "Priority trigger order is Draw, Damage, Treasure unless a specific trigger wins or extra mana is needed."
+    },
+    {
+      "name": "Moonshadow",
+      "role": "Utility/Recursion",
+      "notes": "Reliable staple to fetch permanents; ideally used with power four or greater to survive combat and trigger Flamewake Phoenix."
+    },
+    {
+      "name": "Flamewake Phoenix",
+      "role": "Recurring Threat",
+      "notes": "Key payoff for discard outlets; provides immediate board impact and positive value when cycled."
+    },
+    {
+      "name": "Bloodthorn Flail",
+      "role": "Equipment/Recursion",
+      "notes": "Recurring discard source that helps reach the four-power threshold for Flamewake Phoenix and can return Bloodghast."
+    },
+    {
+      "name": "Tersa Lightshatter",
+      "role": "Discard/Body",
+      "notes": "Provides two discards from a single effect with immediate battlefield impact; has a spell-reuse ability."
+    },
+    {
+      "name": "Bloodghast",
+      "role": "Recursion/Utility",
+      "notes": "Returns from graveyard when discarded or destroyed via Landfall; enables same-turn Flamewake Phoenix returns."
+    },
+    {
+      "name": "Inti, Seneschal of the Sun",
+      "role": "Card Advantage",
+      "notes": "Generates card advantage on discards but does not draw cards, so it doesn't fuel discard outlets."
+    },
+    {
+      "name": "Marauding Mako",
+      "role": "Payoff/Cantrip",
+      "notes": "Payoff for discards; cycling it away is often more reliable late-game than playing it as a one-drop."
+    },
+    {
+      "name": "Bitter Triumph",
+      "role": "Removal/Discard",
+      "notes": "Contributes to discard count while unconditionally handling creatures and Planeswalkers."
+    },
+    {
+      "name": "Requiting Hex",
+      "role": "Interaction/Removal",
+      "notes": "New Lorwyn Eclipsed card that eases interaction against Badgermole Cub, Dimir Midrange, and Mono Red Aggro."
+    },
+    {
+      "name": "Restless Vents",
+      "role": "Land/Threat",
+      "notes": "Functions as both a threat and a discard source for Monument to Endurance."
+    },
+    {
+      "name": "Sunspine Lynx",
+      "role": "Sideboard/Attrition",
+      "notes": "Exploits greedy shock land mana bases in longer games; watch out for own non-basic count."
+    },
+    {
+      "name": "Case of the Crimson Pulse",
+      "role": "Sideboard/Attrition",
+      "notes": "Fuels Monument to Endurance and provides extra resources each turn to maintain attrition wars."
+    },
+    {
+      "name": "Duress",
+      "role": "Sideboard/Disruption",
+      "notes": "Classic staple to delay opponent's game plan or ensure key cards resolve unimpeded."
+    },
+    {
+      "name": "Soul-Guide Lantern",
+      "role": "Sideboard/Answer",
+      "notes": "Necessary against Sultai Reanimator and Superior Spider-Man/Doomsday Excruciator combos; strong answer against Lessons."
+    },
+    {
+      "name": "Pyroclasm",
+      "role": "Sideboard/Sweeper",
+      "notes": "Clears wide boards early; leverages indestructible, power growth, and graveyard recursion to our advantage."
+    },
+    {
+      "name": "Shoot the Sheriff",
+      "role": "Sideboard/Removal",
+      "notes": "Rounds out spot removal for specific threats outside Requiting Hex's range."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize Monument to Endurance triggers in the order of Draw, Damage, Treasure unless a specific trigger wins immediately or extra mana is needed for an explosive play.",
+    "Use Moonshadow to fetch creatures with power four or greater to survive combat and trigger Flamewake Phoenix.",
+    "Combine Bloodthorn Flail with Bloodghast to return Flamewake Phoenix to the battlefield on the same turn for board consistency.",
+    "Cycle Marauding Mako in the late game rather than playing it as a one-drop that does nothing on its own."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Dimir Excruciator",
+      "advice": "Sideboard in Requiting Hex and interaction to handle their game plan.",
+      "watch_for": [
+        "Doomsday Excruciator",
+        "Superior Spider-Man"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Lessons",
+      "advice": "Sideboard in Soul-Guide Lantern as a strong answer against Lessons.",
+      "watch_for": [
+        "Lessons",
+        "Control elements"
+      ]
+    },
+    {
+      "opponent_archetype": "Simic Rhythm",
+      "advice": "Use Pyroclasm to clear go-wide strategies like Nature's Rhythm.",
+      "watch_for": [
+        "Badgermole Cub",
+        "Nature's Rhythm"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono-Red Aggro",
+      "advice": "Sideboard in Pyroclasm and Requiting Hex to handle early pressure and wide boards.",
+      "watch_for": [
+        "Mono Red Aggro",
+        "Early board presence"
+      ]
+    },
+    {
+      "opponent_archetype": "Reanimator",
+      "advice": "Sideboard in Soul-Guide Lantern to counter Superior Spider-Man and Doomsday Excruciator combos.",
+      "watch_for": [
+        "Sultai Reanimator",
+        "Superior Spider-Man",
+        "Doomsday Excruciator"
+      ]
+    },
+    {
+      "opponent_archetype": "Jeskai Control",
+      "advice": "Focus on attrition and recurring threats to outlast their resources.",
+      "watch_for": [
+        "Control elements",
+        "Card advantage"
+      ]
+    },
+    {
+      "opponent_archetype": "Bant Airbending",
+      "advice": "Leverage Monument triggers and removal to handle their flying threats.",
+      "watch_for": [
+        "Flying creatures",
+        "Airbending strategies"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Badgermole Cub",
+    "Nature's Rhythm",
+    "Superior Spider-Man",
+    "Doomsday Excruciator",
+    "Lessons",
+    "Dimir Midrange",
+    "Mono Red Aggro",
+    "Sultai Reanimator"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-rakdos-monument-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T06:31:55+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-rakdos-monument-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:30:21+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "b1f563c67e70312b",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Rakdos Monument leverages the additions from Lorwyn Eclipsed to bring Monument to Endurance back to the aggressive roots... using free discard sources to generate value repeatedly each turn cycle while establishing board presence with hard-to-remove creatures."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "This approach gives you three distinct paths to victory: classic beatdown paired with strong removal, recurring threats you discard from the graveyard, and Monument to Endurance triggers providing reach and card advantage."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The priority, in most cases, will be Draw, Damage, Treasure unless a specific trigger can win the game immediately, or if we need the extra mana for a more explosive play."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "We typically want Moonshadow with power four or greater—ideal for surviving most combat while also triggering Flamewake Phoenix"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "We can use Bloodthorn Flail with it to return Flamewake Phoenix to the battlefield on the same turn, giving us more consistency in keeping creatures on board."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "there are scenarios—especially in the late-game — where Cycling it away is a more reliable option than putting a one-drop on the board that does nothing on its own."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "makes interaction much easier against Badgermole Cub decks, Dimir Midrange, and Mono Red Aggro."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "now that players are using Superior Spider-Man with Doomsday Excruciator and other powerful cards."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "from Badgermole Cub / Nature's Rhythm lists to Mono Red Aggro."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "already necessary against Sultai Reanimator"
+    }
+  ]
+}

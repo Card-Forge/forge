@@ -1,0 +1,284 @@
+{
+  "archetype": "Mono-Blue Faeries",
+  "format": "pauper",
+  "strategy_type": "tempo",
+  "overview": "Mono-Blue Faeries is a versatile Pauper archetype that leverages Ninjutsu interactions to generate massive value and control the board. It adapts between aggressive and controlling playstyles depending on the matchup, utilizing bounce effects and card draw to outmaneuver opponents. The deck is highly effective against combo strategies like High Tide while remaining competitive against midrange and aggro decks.",
+  "win_conditions": [
+    "Repeatedly Ninjutsu creatures using bounce effects like Shrieking Drake",
+    "Attacking with unblockable Ninjas protected by Aqueous Form to draw cards and create value",
+    "Countering key opponent spells to stall and outvalue them"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with a Ninja and backup lands/cards for turn 2",
+      "Hands without Ninjas against combo decks like High Tide"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early Ninjas against aggressive or midrange decks",
+      "Hands that cannot establish board presence or interact early"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Ninja of the Deep-Hours",
+          "Lands",
+          "Spellstutter",
+          "Backup cards"
+        ],
+        "decision": "keep",
+        "reason": "Can play a Ninja on turn 2 with backup and develop game plan; Spellstutter deals with wide array of spells."
+      },
+      {
+        "hand": [
+          "No Ninjas",
+          "Counters",
+          "Lands"
+        ],
+        "decision": "keep",
+        "reason": "Specific keep only against High Tide and similar combo decks."
+      },
+      {
+        "hand": [
+          "Ninja",
+          "Lands",
+          "Counters",
+          "Flex cards"
+        ],
+        "decision": "keep",
+        "reason": "Great opening hand; allows proactive play against slow decks or responsive play against dangerous decks."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play a Ninja on turn 2 if possible",
+      "Assess matchup to play proactively or responsively",
+      "Use counters like Spellstutter or Counterspell to disrupt early threats"
+    ],
+    "mid_game": [
+      "Utilize Shrieking Drake to bounce Ninjas and repeat Ninjutsu loops",
+      "Cast Aqueous Form on a Ninja to attack freely and draw cards",
+      "Counter key removal or board wipes to protect your board"
+    ],
+    "late_game": [
+      "Transition to control by countering finishers and stalling",
+      "Generate massive value through repeated Ninjutsu and scry effects",
+      "Punish opponents who overextend or eat more than they can chew"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Shrieking Drake",
+      "role": "Ninjutsu enabler / bounce effect",
+      "notes": "Lets you Ninjutsu infinitely by bouncing creatures; interacts well with Harrier Strix and Faerie Seer; acts as pseudo-Faerie Miscreant."
+    },
+    {
+      "name": "Aqueous Form",
+      "role": "Protection / card draw",
+      "notes": "Makes Ninja unblockable and draws a card with Scry 1; ideally used on Ninja of the Deep-Hours."
+    },
+    {
+      "name": "Ninja of the Deep-Hours",
+      "role": "Primary attacker / value engine",
+      "notes": "Core creature for Ninjutsu loops and Aqueous Form synergy."
+    },
+    {
+      "name": "Counterspell",
+      "role": "Interaction / control",
+      "notes": "Critical for disrupting opponent strategies, especially against Golgari Gardens and Bogles."
+    },
+    {
+      "name": "Harrier Strix",
+      "role": "Board control / scry",
+      "notes": "Provides bounce effect and scry to find Drake or Ninjas; sideboarded out against some matchups."
+    }
+  ],
+  "sequencing_tips": [
+    "Wait for Gigadrowse to resolve to untap lands and save mana for a counter",
+    "Use Shrieking Drake's bounce after Ninjutsu to return the Ninja to hand for reuse",
+    "Play counters at the right time to control opponent rather than wasting them early",
+    "Adjust aggression based on opponent's removal density and deck speed"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Rakdos Madness",
+      "advice": "Prevent opponent from drawing cards at the right time and force them to play aggressively. Tread carefully between aggro and control strategies.",
+      "watch_for": [
+        "flying creatures",
+        "Sneaky Snacker recursion"
+      ]
+    },
+    {
+      "opponent_archetype": "Golgari Gardens",
+      "advice": "Play around their removals and don't worry too much about their creatures. Post-side, use tools to punish overextension.",
+      "watch_for": [
+        "Pactdoll Terror",
+        "Black Mage's Rod",
+        "Refurbished Familiar",
+        "Crypt Rats"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono-White Aggro",
+      "advice": "Defined by who draws better and is more assertive. Use Shrieking Drake to bounce extra cards and reuse Brinebarrow Intruder. Side in Relic of Progenitus and Unable to Scream.",
+      "watch_for": [
+        "Kor Skyfisher",
+        "Prismatic Strands",
+        "Battle Screech",
+        "Summon: Choco/Mog"
+      ]
+    },
+    {
+      "opponent_archetype": "High Tide",
+      "advice": "Prevent opponent from using High Tide and protect lands from Gigadrowse. Snap or wait for Gigadrowse to resolve. Use their High Tides for your own mana.",
+      "watch_for": [
+        "High Tide",
+        "Gigadrowse"
+      ]
+    },
+    {
+      "opponent_archetype": "Bogles",
+      "advice": "Deal with main strategies and create value from opponent. Counter Ethereal Armor and Armadillo Cloak only if beneficial. Use combat tricks and counters wisely.",
+      "watch_for": [
+        "Ethereal Armor",
+        "Armadillo Cloak",
+        "fast pieces"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Sneaky Snacker",
+    "Crypt Rats",
+    "Refurbished Familiar",
+    "Kor Skyfisher",
+    "Prismatic Strands",
+    "Battle Screech",
+    "Summon: Choco/Mog",
+    "Gigadrowse",
+    "High Tide",
+    "Ethereal Armor",
+    "Armadillo Cloak",
+    "Pactdoll Terror",
+    "Black Mage's Rod"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-upgrading-mono-blue-faeries-sideboard-guide",
+    "generated_at": "2026-05-21T09:48:17+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-upgrading-mono-blue-faeries-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:46:51+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "76d632b2dfede281",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "One of the best things about Mono-U is how it can go from aggro to control depending on the situation."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Drake lets you Ninjutsu an infinite number of times, as its ability lets you bounce a creature."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "This card lets you attack with your Ninja freely... and draw a card with Scry 1, which is what makes this entire interaction extremely powerful."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Faeries has a certain advantage over them because of Counterspell."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You can also wait for Gigadrowse to resolve to untap your lands and save some mana to play a counter."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "You can play it on the board after using Ninjutsu, return the Ninja in question to your hand, and then use Ninjutsu on the Drake on the following turn."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Use your combat tricks well, and play your counters at the right time to control your opponent."
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Against dangerous decks, you can play more passively, more responsively instead of proactively."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The most dangerous thing in this matchup are flying creatures and the incredible recursion Rakdos Madness has with Sneaky Snacker."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Refurbished Familiar can be annoying, and Crypt Rats is incredible against Faeries, as it can clear the board very easily."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Any deck with Kor Skyfisher should be an issue for Faeries, right?"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Be careful with Summon: Choco/Mog , as it can end the game very quickly if the board is full."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "prevent them from tapping your lands with Gigadrowse so you can play your combo freely."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Ethereal Armor and Armadillo Cloak are the auras you want to counter"
+    }
+  ]
+}

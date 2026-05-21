@@ -8,14 +8,17 @@ from app.knowledge.primers.sources.mtg_arena_zone import MTGArenaZoneProvider
 
 _CARDS_REALM_SEARCH = """
 <html><body>
-  <a href="/en/article/modern-boros-energy-deck-tech-sideboard-guide/12345">
+  <a href="/en-us/articles/modern-boros-energy-deck-tech-sideboard-guide">
     Modern: Boros Energy - Deck Tech &amp; Sideboard Guide
   </a>
-  <a href="/en/article/standard-mono-green-landfall/67890">
+  <a href="https://mtg.cardsrealm.com/en-us/articles/standard-mono-green-landfall">
     Standard: Mono-Green Landfall
   </a>
-  <a href="/en/article/some-unrelated-piece/99999">
+  <a href="/en-us/articles/some-unrelated-piece">
     Some unrelated article
+  </a>
+  <a href="/en-us/articles/metagame-first-impressions-of-the-may-banlist-modern">
+    Metagame: First Impressions
   </a>
 </body></html>
 """
@@ -28,8 +31,11 @@ def test_cards_realm_filters_by_format_and_archetype():
     )
     urls = [c.url for c in candidates]
     assert any("modern-boros-energy" in u for u in urls)
+    # standard article should be filtered out (wrong format token)
     assert not any("mono-green-landfall" in u for u in urls)
     assert not any("unrelated-piece" in u for u in urls)
+    # metagame digests should be filtered out even if they mention modern
+    assert not any("metagame-first-impressions" in u for u in urls)
 
 
 _HARERUYA_SEARCH = """

@@ -1,0 +1,162 @@
+{
+  "archetype": "Mystic Forge Combo",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "This white-aligned Legacy combo deck leverages rapid card filtering and mana acceleration to assemble game-ending sequences within the format's 60-card minimum structure. By cycling through the library with Mystic Forge and generating abundant colorless mana via Grim Monolith and The One Ring, the deck aims to outpace opponents before they can stabilize. Kozilek's Command serves as the versatile engine, providing card draw, token generation, or board control to protect the combo. Success depends on precise resource management and protecting key pieces from disruption.",
+  "win_conditions": [
+    "Rapidly cycle through the deck using Mystic Forge to locate and assemble a specific combo sequence",
+    "Generate overwhelming card advantage and mana acceleration to execute a multi-turn combo",
+    "Utilize Kozilek's Command's token generation or board-clearing modes to secure a decisive board state"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Mystic Forge paired with at least one mana rock",
+      "Hands featuring Kozilek's Command with early mana sources",
+      "Hands with multiple card draw or filtering options"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking mana acceleration or card filtering",
+      "Hands with only high-cost cards and no early plays",
+      "Hands missing interaction or combo enablers"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Grim Monolith or The One Ring on turn one to establish mana advantage",
+      "Use Mystic Forge to discard dead draws and thin the deck",
+      "Prioritize drawing into Kozilek's Command or additional combo pieces"
+    ],
+    "mid_game": [
+      "Activate Kozilek's Command modes to generate value or clear threats",
+      "Continue cycling with Mystic Forge to maintain card flow",
+      "Protect combo pieces with available white interaction"
+    ],
+    "late_game": [
+      "Execute the primary combo sequence once resources are assembled",
+      "Use Kozilek's Command to stabilize or finish the game",
+      "Leverage mana rocks to cast multiple spells per turn"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Grim Monolith",
+      "role": "Provides immediate colorless mana acceleration",
+      "notes": "Play on turn one to enable early Kozilek's Command or Mystic Forge activation; prioritize keeping it in hand for combo turns"
+    },
+    {
+      "name": "The One Ring",
+      "role": "Generates additional colorless mana for combo sequences",
+      "notes": "Tap for mana to fuel Kozilek's Command or Mystic Forge; can be sacrificed or traded if needed for card advantage"
+    },
+    {
+      "name": "Kozilek's Command",
+      "role": "Versatile combo engine and value generator",
+      "notes": "Choose modes dynamically: draw cards to fuel Mystic Forge, create tokens for pressure, or destroy permanents to clear blockers"
+    },
+    {
+      "name": "Mystic Forge",
+      "role": "Primary card filter and draw engine",
+      "notes": "Exile two cards from hand to draw one; use early to thin the deck and late to find specific combo pieces or discard dead draws"
+    }
+  ],
+  "sequencing_tips": [
+    "Always play mana rocks before casting Kozilek's Command to ensure you can activate multiple modes or follow up",
+    "Use Mystic Forge on turns where you have excess cards in hand to maximize deck thinning",
+    "Save Kozilek's Command's board-clearing mode for when opponents commit multiple threats",
+    "Prioritize drawing into combo pieces over generating immediate board presence"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play aggressively with Kozilek's Command's token mode to pressure before they stabilize; use Mystic Forge to find answers to their counterspells",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Hand disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Kozilek's Command to clear early threats and generate tokens for defense; cycle quickly with Mystic Forge to find game-ending combo pieces",
+      "watch_for": [
+        "Fast attackers",
+        "Early board presence",
+        "Pressure before turn three"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Race by accelerating mana with Grim Monolith and The One Ring; use Kozilek's Command to disrupt their sequence or clear key pieces",
+      "watch_for": [
+        "Unexpected win conditions",
+        "Mana acceleration",
+        "Combo enablers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspells that stop Kozilek's Command or combo pieces",
+    "Board wipes that remove tokens and permanents",
+    "Hand disruption that prevents Mystic Forge from functioning",
+    "Mana denial that hinders rock activation"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:24:23+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:24:23+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "0d51bf57a6956fa3",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

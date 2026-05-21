@@ -1,0 +1,155 @@
+{
+  "archetype": "Sultai Depths",
+  "format": "legacy",
+  "strategy_type": "ramp",
+  "overview": "Sultai Depths is a Legacy black-green ramp archetype that accelerates mana to cast large spells ahead of schedule. By leveraging Lotus Petal and Crop Rotation, it rapidly builds a mana base while cycling toward win conditions. Elvish Spirit Guide provides early board presence and card advantage, stabilizing against aggressive strategies.",
+  "win_conditions": [
+    "Casting oversized threats on turn two or three",
+    "Generating massive card advantage through land cycling",
+    "Overwhelming the opponent with early token pressure"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with multiple lands and early accelerators",
+      "Combinations including Crop Rotation and a non-basic land",
+      "At least two sources of mana by turn two"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early mana acceleration",
+      "Three or more cards of the same land type without fetch synergy",
+      "Hands missing Elvish Spirit Guide or Lotus Petal"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and accelerators to establish mana base",
+      "Use Crop Rotation to find optimal lands while cycling",
+      "Deploy Elvish Spirit Guide for early board presence and card draw"
+    ],
+    "mid_game": [
+      "Convert accumulated mana into mid-sized threats",
+      "Maintain board control with token generation",
+      "Cycle through deck to find win conditions"
+    ],
+    "late_game": [
+      "Cast oversized finishers ahead of schedule",
+      "Leverage mana advantage to out-resource opponents",
+      "Apply consistent pressure with recurring threats"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Lotus Petal",
+      "role": "Instant mana acceleration",
+      "notes": "Play on turn one to enable turn two spells; discard or sacrifice as needed for card advantage"
+    },
+    {
+      "name": "Crop Rotation",
+      "role": "Land search and cycling",
+      "notes": "Use to find specific non-basic lands while maintaining hand size; pair with fetch lands for consistency"
+    },
+    {
+      "name": "Elvish Spirit Guide",
+      "role": "Early board presence and card engine",
+      "notes": "Deploy on turn one to generate tokens and draw cards; use tokens to untap lands or block early threats"
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize playing Lotus Petal before Crop Rotation to maximize turn two mana",
+    "Cycle Crop Rotation only when you have sufficient mana sources in play",
+    "Hold Elvish Spirit Guide in hand if you need to untap lands for a big play"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Focus on early token generation and land untapping to stabilize",
+      "watch_for": [
+        "Early board wipes",
+        "Direct damage spells",
+        "Fast finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race with mid-sized threats before they establish counters",
+      "watch_for": [
+        "Counterspell packages",
+        "Board sweepers",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their mana base and race with early pressure",
+      "watch_for": [
+        "Mana acceleration",
+        "Win condition setup",
+        "Protection spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Counterspell packages",
+    "Board wipe effects"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:40:32+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:40:32+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "ad466519be687364",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Lotus Petal, Crop Rotation, Elvish Spirit Guide"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Lotus Petal, Crop Rotation, Elvish Spirit Guide"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Lotus Petal, Crop Rotation, Elvish Spirit Guide"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Lotus Petal, Crop Rotation, Elvish Spirit Guide"
+    }
+  ]
+}

@@ -1,0 +1,302 @@
+{
+  "archetype": "Boros Initiative",
+  "format": "legacy",
+  "strategy_type": "aggro",
+  "overview": "Boros Initiative is a fast, aggressive Legacy deck that establishes early board control using Chalice of the Void and Fable of the Mirror-breaker. It generates token pressure through Forth Eorlingas! and advances the Dungeon to create massive creatures or finish games. The deck relies on a tight 18-land mana base for consistency and adjusts its sideboard heavily against Reanimator and control strategies.",
+  "win_conditions": [
+    "Summoning multiple Eorlingas tokens to deal combat damage",
+    "Advancing Dungeon stages to create large creatures or trigger lethal effects",
+    "Using Fable of the Mirror-breaker to clear the board and generate value",
+    "Establishing early Initiative or Monarch to restrict opponent actions"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early Chalice of the Void and Fable of the Mirror-breaker",
+      "Hands capable of generating immediate pressure and holding back opponents",
+      "Hands containing Solitude to answer early threats"
+    ],
+    "mulligan_criteria": [
+      "Hands consisting entirely of lands",
+      "Hands with only sideboard hate cards like Rest in Peace but no pressure",
+      "Hands lacking early interaction or mana sources"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Chalice of the Void",
+          "Mountain",
+          "Simian Spirit Guide",
+          "Fable of the Mirror-breaker"
+        ],
+        "decision": "keep",
+        "reason": "Provides early board control, mana acceleration, and a strong turn 1 play despite losing the monkey to Thoughtseize."
+      },
+      {
+        "hand": [
+          "Rest in Peace"
+        ],
+        "decision": "mulligan",
+        "reason": "The 7-card hand had only 1 Rest in Peace without pressure, so it couldn't be kept."
+      },
+      {
+        "hand": [
+          "Mountain",
+          "Mountain",
+          "Mountain",
+          "Mountain",
+          "Mountain",
+          "Mountain",
+          "Mountain"
+        ],
+        "decision": "mulligan",
+        "reason": "The 5-card hand was 7 lands, offering no spells to play."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Chalice of the Void on turn 1 to lock mana or creatures",
+      "Cast Fable of the Mirror-breaker or Forth Eorlingas! on turn 1-2",
+      "Use Solitude to remove early threats like Troll of Khazad-dûm",
+      "Establish Initiative or Monarch to restrict opponent's turns"
+    ],
+    "mid_game": [
+      "Advance Dungeon stages with Seasoned Dungeoneer to create blockers or attackers",
+      "Use Fable chapters to clear opponent's board and generate Treasures",
+      "Maintain board presence with Adventurers and Dungeoneers",
+      "Sideboard out vulnerable creatures against Reanimator decks"
+    ],
+    "late_game": [
+      "Leverage Dungeon's Forge and Explore stages for massive stat boosts",
+      "Swarm the board with Eorlingas tokens to overwhelm defenses",
+      "Use accumulated Treasures to cast additional spells or generate copies",
+      "Manage mana efficiently with Sunbaked Canyon to avoid flooding"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Chalice of the Void",
+      "role": "Early board control",
+      "notes": "Played on turn 1 to lock 0 or 1 mana/creatures, severely hampering opponent's development."
+    },
+    {
+      "name": "Fable of the Mirror-breaker",
+      "role": "Win condition and board clear",
+      "notes": "Generates tokens, clears opponent's board, and provides continuous value through its chapters."
+    },
+    {
+      "name": "Forth Eorlingas!",
+      "role": "Token generation and pressure",
+      "notes": "Creates 2-3 knights to contest Monarch/Initiative, block threats, and deal combat damage."
+    },
+    {
+      "name": "Seasoned Dungeoneer",
+      "role": "Dungeon enabler",
+      "notes": "Advances Dungeon stages to create large creatures or finish games, but must be protected from Reanimate."
+    },
+    {
+      "name": "Solitude",
+      "role": "Early interaction",
+      "notes": "Answers early threats like Troll of Khazad-dûm or Living Weapon, buying time for the deck's strategy."
+    }
+  ],
+  "sequencing_tips": [
+    "Play Chalice of the Void before exposing Cavern of Souls to avoid enabling opponent's Reanimate",
+    "Use Simian Spirit Guide to pay for potential Daze on turn 2",
+    "Open with City of Traitors for Chalice to avoid exposing Cavern of Souls early",
+    "Advance Dungeon carefully to avoid giving opponent reanimation targets",
+    "Use Fable chapters to generate Goblin Shaman copies for extra blockers and Treasures"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "UB Scam",
+      "advice": "Sideboard out Caves of Chaos Adventurer and Seasoned Dungeoneer to avoid providing good targets for Reanimate, switching to a more Control mode.",
+      "watch_for": [
+        "Grief",
+        "Reanimate",
+        "Troll of Khazad-dûm"
+      ]
+    },
+    {
+      "opponent_archetype": "UB Shadow",
+      "advice": "Keep some Initiative creatures in the sideboard despite reanimation risk, play Chalice on 1 and Eorlingas on 2, and use Simian Spirit Guide for Daze protection.",
+      "watch_for": [
+        "Death's Shadow",
+        "Null Rod",
+        "Reanimate"
+      ]
+    },
+    {
+      "opponent_archetype": "Death & Taxes",
+      "advice": "Sideboard out Chalice of the Void as they can be invalidated by Flickerwisp, use Archon of Emeria to delay development, and exchange creatures with Fury and Loran.",
+      "watch_for": [
+        "Mother of Runes",
+        "Thalia, Guardian of Thraben",
+        "Flickerwisp",
+        "Umezawa's Jitte"
+      ]
+    },
+    {
+      "opponent_archetype": "UB Reanimator",
+      "advice": "Remove Petal if opponent lacks Wasteland, play Chalice on 1 and Explorer on 2 to prevent graveyard setup.",
+      "watch_for": [
+        "Grief",
+        "Reanimate",
+        "Animate Dead",
+        "Archon of Cruelty"
+      ]
+    },
+    {
+      "opponent_archetype": "Beseech Storm",
+      "advice": "Keep hate pieces to hold back the combo, play Chalice for 0 and Fable on turn 1, and establish Initiative on turn 2.",
+      "watch_for": [
+        "Sheoldred's Edict",
+        "Abrupt Decay",
+        "The One Ring",
+        "Storm count"
+      ]
+    },
+    {
+      "opponent_archetype": "Maverick",
+      "advice": "Call in cavalry with Forth Eorlingas! on turn 1 to defend the Monarch and contest board control.",
+      "watch_for": [
+        "Mother of Runes"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Grief",
+    "Reanimate",
+    "Troll of Khazad-dûm",
+    "Death's Shadow",
+    "Mother of Runes",
+    "Thalia, Guardian of Thraben",
+    "Flickerwisp",
+    "Umezawa's Jitte",
+    "Null Rod",
+    "Animate Dead",
+    "Sheoldred's Edict",
+    "Abrupt Decay",
+    "The One Ring"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/boros-initiative-legacy-report-champion-of-eternal-challenge-21",
+    "generated_at": "2026-05-21T08:52:42+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/boros-initiative-legacy-report-champion-of-eternal-challenge-21",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:51:05+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "76dfbfa08f699e15",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "this archetype has risen to the top tiers of the Legacy metagame, filling the power vacuum left by the banning of White Plume Adventurer"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "King Théoden summoned 4 Eorlingas to finish the game"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "the 3rd stage of it, Trap! , would have killed me"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Fable of the Mirror-breaker on the first turn, and Initiative on the second turn"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "I made a wrong decision to open with City of Traitors for Chalice of the Void on 1 (which got countered) to avoid exposing Cavern of Souls"
+    },
+    {
+      "confidence": 0.7,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Simian Spirit Guide in hand to pay for a potential Daze on turn 2"
+    },
+    {
+      "confidence": 0.7,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "avoiding attacks from the black Incarnation by the possibility of creating copies of the Goblin Shaman token to generate an extra blocker and using the copies generated at the end of the turn to chip away at life points and accumulate Treasures"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "wrecking my hand with Grief and Reanimate"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "interaction between Troll of Khazad-dûm and Reanimate"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "He opened with a big headache for me: Mother of Runes"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "combination of Thalia, Guardian of Thraben , Flickerwisp , and Umezawa’s Jitte"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "I was punished with a Null Rod"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Archon of Cruelty , discarded due to excessive cards in hand"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Archon of Emeria fell to Sheoldred’s Edict , Abrupt Decay took down Magus of the Moon"
+    }
+  ]
+}

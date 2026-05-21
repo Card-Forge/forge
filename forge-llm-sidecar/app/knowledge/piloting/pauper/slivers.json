@@ -1,0 +1,274 @@
+{
+  "archetype": "Slivers",
+  "format": "pauper",
+  "strategy_type": "aggro",
+  "overview": "Slivers is a Pauper aggro deck that leverages multiple lords to buff a swarm of creatures, granting shared abilities like evasion, mana production, and combat tricks. It utilizes a high number of draw spells for consistency and can run two to four colors depending on the desired keywords. The deck aims to overwhelm opponents quickly while using card advantage to navigate sweepers and maintain pressure.",
+  "win_conditions": [
+    "Attacking with a large board of buffed Slivers",
+    "Utilizing shared abilities like flying, poison, and combat tricks to close games",
+    "Outdrawing opponents to rebuild the board after sweepers"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early Slivers and lords to establish pressure",
+      "Hands containing draw spells to maintain consistency"
+    ],
+    "mulligan_criteria": [
+      "Hands completely lacking early creatures or lords",
+      "Hands that are severely color-screwed despite fixing options"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Winged Sliver",
+          "Lead the Stampede",
+          "Gemhide Sliver",
+          "Thriving Grove",
+          "Sliver Hive"
+        ],
+        "decision": "keep",
+        "reason": "Provides early board presence, card draw, and mana fixing to start attacking quickly, aligning with the deck's low mulligan rate."
+      },
+      {
+        "hand": [
+          "Winding Way",
+          "Lead the Stampede",
+          "Weather the Storm",
+          "Masked Vandal",
+          "Scattershot Archer"
+        ],
+        "decision": "mulligan",
+        "reason": "Lacks early creatures or lords to apply pressure, relying too heavily on late-game or sideboard cards despite draw potential."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Slivers and lords quickly to establish board presence",
+      "Use draw spells early to empty hand and refill for consistency",
+      "Attack immediately to apply pressure"
+    ],
+    "mid_game": [
+      "Expand the swarm and utilize shared abilities like evasion and combat tricks",
+      "Hold extra lords in hand to navigate sweepers",
+      "Force favorable trades using abilities like Hunter Sliver's provoke"
+    ],
+    "late_game": [
+      "Leverage card advantage to rebuild the board after sweepers",
+      "Continue attacking with a wide, buffed swarm to close out games",
+      "Use sideboard cards like Quick Sliver to cast threats on opponent's turn"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Winged Sliver",
+      "role": "Evasion grantor",
+      "notes": "Grants flying to the swarm and helps deal with flying creatures."
+    },
+    {
+      "name": "Winding Way",
+      "role": "Card draw",
+      "notes": "Provides consistency to empty hand and draw more cards for pressure."
+    },
+    {
+      "name": "Lead the Stampede",
+      "role": "Card draw",
+      "notes": "Draws cards based on creature count, fueling the swarm strategy."
+    },
+    {
+      "name": "Gemhide Sliver",
+      "role": "Mana fixing & acceleration",
+      "notes": "Fixes colors and speeds up casting multiple spells in a single turn."
+    },
+    {
+      "name": "Masked Vandal",
+      "role": "Sideboard removal",
+      "notes": "Exiles indestructible lands and counts as a Sliver, strong vs Affinity."
+    },
+    {
+      "name": "Weather the Storm",
+      "role": "Sideboard counter",
+      "notes": "Counters spells to survive against Burn decks."
+    },
+    {
+      "name": "Scattershot Archer",
+      "role": "Sideboard reach",
+      "notes": "Provides reach to combat Faeries and other flying threats."
+    },
+    {
+      "name": "Quick Sliver",
+      "role": "Sideboard tempo",
+      "notes": "Allows casting threats on the opponent's turn to apply pressure."
+    }
+  ],
+  "sequencing_tips": [
+    "Play lords early to maximize swarm buffs",
+    "Cast draw spells to maintain hand size and consistency",
+    "Hold lords in hand to dodge sweepers like Electrickery",
+    "Use Quick Sliver on the opponent's turn to play threats for free"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Burn",
+      "advice": "Be as fast as possible to win before they deal lethal damage. Side in Weather the Storm to protect your board.",
+      "watch_for": [
+        "Direct damage spells",
+        "Lack of lifegain"
+      ]
+    },
+    {
+      "opponent_archetype": "Affinity",
+      "advice": "Exploit their slow board development. Side in Masked Vandal to exile indestructible lands and maintain lord count.",
+      "watch_for": [
+        "Galvanic Blast",
+        "Makeshift Munitions",
+        "Indestructible lands"
+      ]
+    },
+    {
+      "opponent_archetype": "Faeries",
+      "advice": "Play aggressively fast to force bad trades. Side in Scattershot Archer for reach and Quick Sliver to cast threats on their turn.",
+      "watch_for": [
+        "Spellstutter Sprite",
+        "Sweepers",
+        "Turn order dependency"
+      ]
+    },
+    {
+      "opponent_archetype": "Dimir Initiative",
+      "advice": "A difficult matchup. Try to damage the opponent without losing creatures to enable their dungeon. Sideboard offers little help.",
+      "watch_for": [
+        "High toughness creatures",
+        "Dungeon progression",
+        "Value generation"
+      ]
+    },
+    {
+      "opponent_archetype": "Slivers",
+      "advice": "A mirror where abilities share with the opponent. Predatory Sliver is the key advantage. Win by drawing more cards to maintain board presence.",
+      "watch_for": [
+        "Card draw",
+        "Predatory Sliver",
+        "Board state parity"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Electrickery",
+    "Fiery Cannonade",
+    "Breath Weapon",
+    "Arms of Hadar",
+    "Galvanic Blast",
+    "Makeshift Munitions",
+    "Spellstutter Sprite"
+  ],
+  "metadata": {
+    "source": "Cards Realm + Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-slivers-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T10:24:49+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-naya-slivers-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:21:42+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-slivers-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:23:20+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "fc6b4549b0841f0b",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Sliver, the tribe with the most lords in Pauper is also a strong aggro? ... A differential in our deck is the amount of draw spells: there are 8 ... Our stance is like any aggro deck: make several strong creatures and attack."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Our stance is like any aggro deck: make several strong creatures and attack."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "we can easily make our creatures 3/3, 4/4 or even more."
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "draw more cards to continue pressuring the opponents."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "with the number of lords, we almost always manage to escape the sweepers"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "cast our threats at their turn"
+    },
+    {
+      "confidence": 0.6,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "empty the hand and draw more cards to continue pressuring the opponents"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "escape the sweepers like Electrickery , Fiery Cannonade , Breath Weapon and now also Arms of Hadar"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "removals are only 4 Galvanic Blast and Makeshift Munitions"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "everything will depend on Spellstutter Sprite"
+    }
+  ]
+}

@@ -1,0 +1,298 @@
+{
+  "archetype": "Lantern",
+  "format": "modern",
+  "strategy_type": "control",
+  "overview": "Lantern Control is a highly technical, slow-paced Modern strategy that focuses on milling the opponent's deck one card at a time to strictly control their draws. By leveraging low-cost artifacts and information-gathering tools, the pilot aims to win the first game by the clock, forcing the opponent into a disadvantageous tournament position. Despite its historical success and unique tactical depth, the deck fell out of favor due to powerful artifact hate and mana restrictions.",
+  "win_conditions": [
+    "Milling the opponent's deck one card at a time to control their draws",
+    "Winning the first game by the clock/time limit",
+    "Sequencing incremental damage with Pyrite Spellbomb",
+    "Generating small portions of damage with Ghirapur Aether Grid"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with 2-3 lands and at least one low-cost artifact or removal spell",
+      "Hands containing Lantern of Insight or multiple milling artifacts",
+      "Hands with early interaction like Thoughtseize or Abrupt Decay"
+    ],
+    "mulligan_criteria": [
+      "Hands with too many lands or zero artifacts",
+      "Hands lacking early game interaction or milling engines",
+      "Hands without a clear path to control the opponent's first few draws"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Lantern of Insight",
+          "Ghoulcaller’s Bell",
+          "Thoughtseize",
+          "Island",
+          "Mountain"
+        ],
+        "decision": "keep",
+        "reason": "Provides immediate artifact play, early discard to see opponent's hand, and a mana base to operate, aligning with the deck's slow, information-heavy game plan."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play low-cost artifacts like Ghoulcaller’s Bell and Codex Shredder to begin milling",
+      "Use discard spells like Thoughtseize and Inquisition of Kozilek to see the opponent's hand and disrupt their game plan",
+      "Establish mana base and play Inventor’s Fair for consistency"
+    ],
+    "mid_game": [
+      "Use Lantern of Insight to view the top card and control the opponent's draws one by one",
+      "Deploy Ensnaring Bridge to hold off attacks and buy time",
+      "Sequence milled cards to deny key combo pieces or lands based on the matchup"
+    ],
+    "late_game": [
+      "Utilize Academy Ruins to loop graveyard artifacts and generate value",
+      "Sequence damage with Pyrite Spellbomb or Ghirapur Aether Grid to close out the game",
+      "Aim to win by the clock, leaving the opponent at a tournament disadvantage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Lantern of Insight",
+      "role": "Core Engine",
+      "notes": "Grants the ability to see the opponent's top card, enabling precise draw control."
+    },
+    {
+      "name": "Ghoulcaller’s Bell",
+      "role": "Milling Artifact",
+      "notes": "Low-cost artifact that mills one card at a time to manipulate the opponent's deck."
+    },
+    {
+      "name": "Codex Shredder",
+      "role": "Milling Artifact",
+      "notes": "Works alongside other artifacts to mill cards slowly and control draws."
+    },
+    {
+      "name": "Pyxis of Pandemonium",
+      "role": "Milling Artifact",
+      "notes": "Provides additional milling capability to gradually deplete the opponent's deck."
+    },
+    {
+      "name": "Abrupt Decay",
+      "role": "Removal",
+      "notes": "Traditional control spell to remove key pieces or disable opponent's game evolution."
+    },
+    {
+      "name": "Thoughtseize",
+      "role": "Hand Disruption",
+      "notes": "Forces opponent to discard a card and reveals their hand to inform milling decisions."
+    },
+    {
+      "name": "Ensnaring Bridge",
+      "role": "Board Control",
+      "notes": "Holds off enemy attacks and protects life total while delaying the game."
+    },
+    {
+      "name": "Academy Ruins",
+      "role": "Value Engine",
+      "notes": "Creates loops with graveyard artifacts to generate infinite value or damage."
+    },
+    {
+      "name": "Inventor’s Fair",
+      "role": "Utility Land",
+      "notes": "Searches for needed pieces and replaces artifacts sacrificed for their abilities."
+    },
+    {
+      "name": "Pyrite Spellbomb",
+      "role": "Damage Sequencer",
+      "notes": "Sequences damage throughout turns to slowly drain the opponent's life total."
+    }
+  ],
+  "sequencing_tips": [
+    "Know the combos, needs, and priorities of every deck you face by heart",
+    "Control the opponent's draws one by one using Lantern of Insight",
+    "Give more lands to Burn players, fewer lands to Amulet Titan players, and always give the same copy of Urza's Land to Tron players",
+    "Use Inventor’s Fair to replace artifacts after sacrificing them for their effects",
+    "Sequence milled cards to deny key combo pieces or force unfavorable draws"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Burn",
+      "advice": "Give them more lands to slow them down and use sideboard cards like Leyline of Sanctity, Sun Droplet, and Pyroclasm for protection and creature removal.",
+      "watch_for": [
+        "Direct damage spells",
+        "Small creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Amulet Titan",
+      "advice": "Mill fewer lands to disrupt their mana base and use early discard to remove key pieces before they establish their combo.",
+      "watch_for": [
+        "Amulet of Vigor",
+        "Titan tokens"
+      ]
+    },
+    {
+      "opponent_archetype": "Tron",
+      "advice": "Always mill the same copy of Urza's Land to prevent them from completing their mana trio.",
+      "watch_for": [
+        "Urza's Mine",
+        "Urza's Power Plant",
+        "Urza's Tower"
+      ]
+    },
+    {
+      "opponent_archetype": "Reanimator",
+      "advice": "Sideboard in Grafdigger’s Cage to prevent graveyard interactions and use removal on their threats.",
+      "watch_for": [
+        "Graveyard recursion",
+        "Large creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Dredge",
+      "advice": "Use Grafdigger’s Cage to lock down their graveyard strategy and remove key pieces with Abrupt Decay.",
+      "watch_for": [
+        "Golgari Grave-Troll",
+        "Graveyard synergy"
+      ]
+    },
+    {
+      "opponent_archetype": "Artifact Hate / Control",
+      "advice": "Sideboard in Welding Jar for protection, Pithing Needle for targeted hate, and Surgical Extraction for graveyard hate. Move Ensnaring Bridge out if they lack creatures.",
+      "watch_for": [
+        "Karn the Great Creator",
+        "Collector Ouphe",
+        "Force of Vigor",
+        "Boseiju, Who Endures"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Karn the Great Creator",
+    "Collector Ouphe",
+    "Force of Vigor",
+    "Boseiju, Who Endures",
+    "Mox Opal ban (mana restriction)",
+    "Artifact destruction and ability lockouts"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/explaining-lantern-control-an-ancient-treasure-in-moderns-past",
+    "generated_at": "2026-05-21T01:23:01+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/explaining-lantern-control-an-ancient-treasure-in-moderns-past",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:21:27+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "acee461af3918e7d",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Lantern Control: a unique strategy in Modern's past, which could be used to control your opponent very efficiently... based on manipulating your opponent's deck... Its aim was spending the best of three's full time to win just the first game"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Milling the opponent's deck one card at a time"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Its aim was spending the best of three's full time to win just the first game"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Pyrite Spellbomb , which is capable of sequencing damage throughout turns and leading the opponent through a slow health point loss"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Ghirapur Aether Grid... idea is to work as an extra wincon, helping Lantern Control deal small portions of damage"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "you had to know, by heart, in and out, all other decks you might face"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "it is a deck with which you'll control your opponent's draws, one by one"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "give more lands to a Burn player, fewer lands to the Amulet Titan player, and always give the same copy of Urza's Land to the Tron player"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "helped us replace a piece we have sacrificed to use one of its other effects"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "help you decide what to mill and what to place as their top card in the deck"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "War of the Spark brought us Karn the Great Creator... locked down activated abilities of all artifacts in play"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Collector Ouphe works just like Karn the Great Creator... locked down activated abilities of all artifacts in play"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Force of Vigor... can destroy two at once, greatly disrupting this strategy"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "release of Boseiju, Who Endures , a card capable of easily breaking artifacts"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Mox Opal was banned just a few months later, which really made it hard for this deck to produce colorful mana"
+    }
+  ]
+}

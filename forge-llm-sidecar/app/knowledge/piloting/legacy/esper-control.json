@@ -1,0 +1,162 @@
+{
+  "archetype": "Esper Control",
+  "format": "legacy",
+  "strategy_type": "control",
+  "overview": "Esper Control in Legacy aims to stabilize the board through efficient interaction and card advantage, eventually closing out games with resilient finishers. By leveraging Ponder for perfect sequencing and Cabal Therapy for massive resource generation, the deck outlasts aggressive strategies and punishes combo decks. The primary path to victory revolves around protecting and deploying Ajani, Nacatl Pariah to secure an unblockable, damage-dealing presence.",
+  "win_conditions": [
+    "Deploying Ajani, Nacatl Pariah to deal unblockable damage each turn",
+    "Outdrawing opponents through Cabal Therapy and Ponder to exhaust their resources",
+    "Stabilizing against early aggression with efficient removal and counterspells before transitioning to a late-game finisher"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more lands and early interaction",
+      "Hands containing Ponder or Cabal Therapy to enable card selection",
+      "Hands with a clear path to stabilize turn three or four"
+    ],
+    "mulligan_criteria": [
+      "Hands with zero interaction or removal",
+      "Hands with three or more lands without early plays",
+      "Hands lacking a clear game plan against the expected matchup"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and hold up mana for potential counterspells or removal",
+      "Use Ponder to find answers to the opponent's early threats",
+      "Prioritize surviving the first few turns over developing your own board"
+    ],
+    "mid_game": [
+      "Cast Cabal Therapy to draw multiple cards and find specific answers",
+      "Begin deploying resilient creatures or planeswalkers if the board is clear",
+      "Maintain a hand of interaction to disrupt opponent's key turns"
+    ],
+    "late_game": [
+      "Cast Ajani, Nacatl Pariah and protect it with counterspells or removal",
+      "Use excess card advantage to outvalue opponents in long games",
+      "Cycle through your hand to find the exact answer needed to close the game"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Ajani, Nacatl Pariah",
+      "role": "Primary win condition and resilient finisher",
+      "notes": "Cast on your turn when you have mana open to protect it, and use its +1 ability to generate lifegain and protect it from removal. Prioritize keeping it alive through combat and spells."
+    },
+    {
+      "name": "Cabal Therapy",
+      "role": "Massive card advantage and resource generation",
+      "notes": "Use it to draw enough cards to find specific answers or to flood your hand with interaction. Sequence it after Ponder to maximize the quality of cards drawn."
+    },
+    {
+      "name": "Ponder",
+      "role": "Card selection and sequencing engine",
+      "notes": "Cast it at the end of your turn to look at the top five cards, ensuring you draw the exact answer or land needed for the next turn. Always shuffle the top card back if it is not useful."
+    },
+    {
+      "name": "Lightning Bolt",
+      "role": "Efficient early-game removal",
+      "notes": "Hold up one red mana to clear aggressive threats or reduce opponent's life total. Use it reactively to preserve card advantage and stabilize the board."
+    }
+  ],
+  "sequencing_tips": [
+    "Always cast Ponder at the end of your turn to optimize your opening hand for the next turn",
+    "Sequence Cabal Therapy after drawing into it to immediately find answers to the opponent's current threats",
+    "Hold up white and blue mana early to counter or remove aggressive creatures before they become unmanageable",
+    "Protect Ajani, Nacatl Pariah by keeping counterspells or removal in hand until the opponent commits to attacking it"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and life total preservation. Use Ponder to find removal and counterspells, then stabilize before deploying Ajani, Nacatl Pariah.",
+      "watch_for": [
+        "Early wide creature spreads",
+        "Burn spells that bypass blockers",
+        "Pressure that forces you to play suboptimally"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their key combo pieces with counterspells and removal. Use Cabal Therapy to draw multiple answers and find the exact card needed to stop their win condition.",
+      "watch_for": [
+        "Card draw spells that enable their combo",
+        "Hidden win conditions in their hand",
+        "Attempts to go wide or cheat creatures into play"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race to deploy Ajani, Nacatl Pariah while maintaining a hand of interaction. Use Cabal Therapy to outdraw them and find answers to their sweepers and counterspells.",
+      "watch_for": [
+        "Board sweepers that clear your finishers",
+        "Counterspells held up for your key plays",
+        "Attrition games where card advantage decides the match"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Aggressive creature decks that overwhelm early interaction",
+    "Combo decks that bypass traditional removal",
+    "Board sweepers that clear resilient finishers",
+    "Counterspells that disrupt key finishers"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T07:57:46+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:57:46+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "b3abbeb9a3020912",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

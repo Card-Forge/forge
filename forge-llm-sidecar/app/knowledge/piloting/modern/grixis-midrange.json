@@ -1,0 +1,153 @@
+{
+  "archetype": "Grixis Midrange",
+  "format": "modern",
+  "strategy_type": "midrange",
+  "overview": "Grixis Midrange in Modern leverages a blend of instant-speed interaction, efficient removal, and resilient creatures to control the pace of the game. By utilizing Orcish Bowmasters and Counterspell early, the deck disrupts aggressive strategies while Tamiyo, Inquisitive Student provides the card advantage needed to outlast opponents. The goal is to stabilize against early pressure, trade efficiently, and close out games with superior resource management.",
+  "win_conditions": [
+    "Outlasting opponents through Tamiyo's card advantage engine",
+    "Closing games with efficient removal and combat disruption",
+    "Securing board control by countering key threats and winning trades"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands featuring Counterspell or Orcish Bowmasters with playable lands",
+      "Mana bases that ensure a smooth turn 3 or 4 for Tamiyo",
+      "Hands with a clear path to early interaction and a follow-up threat"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking any instant-speed interaction or removal",
+      "Mana screws with four or more lands or zero lands",
+      "Hands that cannot stabilize against early aggressive pressure"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and hold up mana for Counterspell to answer early threats",
+      "Deploy Orcish Bowmasters to bounce aggressive creatures and disrupt opponent's rhythm",
+      "Use Tamiyo to dig for answers or draw into removal when the board is manageable"
+    ],
+    "mid_game": [
+      "Stabilize against early pressure by trading efficiently while maintaining card advantage",
+      "Set up board presence with resilient creatures that can withstand removal",
+      "Sequence countermagic to protect key threats and force unfavorable trades"
+    ],
+    "late_game": [
+      "Leverage Tamiyo's draw engine to out-resource opponents and find finishers",
+      "Use countermagic to protect your board state and answer late-game win conditions",
+      "Close out games with incremental value, combat tricks, and superior card selection"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Orcish Bowmasters",
+      "role": "Early game disruption and tempo",
+      "notes": "Use to bounce aggressive threats or force unfavorable trades, buying time for your game plan."
+    },
+    {
+      "name": "Tamiyo, Inquisitive Student",
+      "role": "Card advantage and late-game engine",
+      "notes": "Activate to draw into removal or countermagic, and use its death trigger to stabilize against board wipes."
+    },
+    {
+      "name": "Counterspell",
+      "role": "Instant-speed interaction and tempo",
+      "notes": "Hold up to protect key threats, answer opponent's win conditions, or secure board control during combat."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Counterspell for opponent's most impactful spell rather than using it preemptively",
+    "Play Orcish Bowmasters before committing resources to the board to maximize tempo",
+    "Activate Tamiyo after opponent passes to maximize information and minimize counter risk"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early Counterspell and Orcish Bowmasters to slow the clock, then stabilize with Tamiyo.",
+      "watch_for": [
+        "Early all-in turns",
+        "Unblockable creatures",
+        "Burn spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around their interaction by sequencing threats carefully and using Tamiyo to dig for answers.",
+      "watch_for": [
+        "Board wipes",
+        "Countermagic",
+        "Graveyard hate"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Save Counterspell for their key combo pieces and use Orcish Bowmasters to disrupt their setup.",
+      "watch_for": [
+        "Graveyard recursion",
+        "Mana acceleration",
+        "Win condition spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Graveyard hate cards"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T00:44:15+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T00:44:15+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "5e00b786972acf46",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

@@ -1,0 +1,316 @@
+{
+  "archetype": "Red Stompy",
+  "format": "legacy",
+  "strategy_type": "aggro",
+  "overview": "Saga Moon Red Stompy combines Blood Moon and Urza's Saga to create a prison strategy that freezes the Saga at two lore counters, generating infinite Construct tokens. The deck leverages acceleration, graveyard hate, and equip artifacts like Fable of the Mirror-Breaker to apply early pressure and lock down opponents. It thrives on disrupting mana and graveyard-dependent strategies while pushing damage through lifelink and equipped tokens.",
+  "win_conditions": [
+    "Freezing Urza's Saga with Blood Moon to generate infinite Construct tokens",
+    "Equipping tokens with Fable of the Mirror-Breaker and Lavaspur Boots to push damage",
+    "Using Chalice of the Void to lock opponent's key spells or lands",
+    "Lifelink from Shadowspear to win the life total race"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands that can play a threat or disruption on turn 1 or 2",
+      "Hands containing acceleration and The One Ring to recover card disadvantage",
+      "Hands with graveyard hate when playing first against Dimir Reanimator"
+    ],
+    "mulligan_criteria": [
+      "Hands that are too slow to return fire or lack turn 1/2 impact",
+      "Hands lacking sufficient mana resources to cast key cards",
+      "Hands vulnerable to Daze or Wasteland without backup plans"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "graveyard hate card"
+        ],
+        "decision": "mulligan",
+        "reason": "Too slow to return fire and vulnerable to Daze unless playing first against Reanimator"
+      },
+      {
+        "hand": [
+          "Chalice of the Void",
+          "Fable of the Mirror-Breaker"
+        ],
+        "decision": "mulligan",
+        "reason": "Extremely risky, relies heavily on drawing mana and vulnerable to Wasteland"
+      },
+      {
+        "hand": [
+          "Ancient Tomb",
+          "Lavaspur Boots",
+          "Mox",
+          "Pyrogoyf",
+          "Chalice of the Void"
+        ],
+        "decision": "keep",
+        "reason": "Can sequence to play Fable and equip token on turn 2, or play Fable turn 1 if Chalice is inefficient"
+      },
+      {
+        "hand": [
+          "Magus of the Moon",
+          "acceleration"
+        ],
+        "decision": "keep",
+        "reason": "Can play Magus on turn 1 against certain decks if able to draw additional mana sources"
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Deploy acceleration like Ancient Tomb, Sol Lands, and Chrome Mox to cast Chalice of the Void and Blood Moon by turn 1 or 2",
+      "Imprint Pyrogoyf or play Fable of the Mirror-Breaker to establish early board presence",
+      "Use The One Ring to recover cards if the opening hand is thin"
+    ],
+    "mid_game": [
+      "Freeze Urza's Saga at two lore counters with Blood Moon to generate Construct tokens indefinitely",
+      "Equip tokens with Fable of the Mirror-Breaker and Lavaspur Boots to apply consistent pressure",
+      "Deploy graveyard hate like Soul-Guide Lantern and Pithing Needle to disrupt opponent's strategies"
+    ],
+    "late_game": [
+      "Push damage through equipped tokens and Shadowspear's lifelink to win the life total race",
+      "Maintain prison board state with Chalice and Blood Moon to stall opponent's recovery",
+      "Use sideboard tools like Disruptor Flute and Fiery Confluence to handle specific late-game threats"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Urza's Saga",
+      "role": "Token generator",
+      "notes": "Frozen at two lore counters by Blood Moon to create infinite Construct tokens"
+    },
+    {
+      "name": "Blood Moon",
+      "role": "Mana disruption / Saga freezer",
+      "notes": "Locks opponent's non-basic lands and freezes Urza's Saga progression"
+    },
+    {
+      "name": "Fable of the Mirror-Breaker",
+      "role": "Primary win condition",
+      "notes": "Imprints Pyrogoyf and equips to tokens for massive damage output"
+    },
+    {
+      "name": "Chalice of the Void",
+      "role": "Board control",
+      "notes": "Set to 1 to lock lands or key spells, disrupting opponent's early game"
+    },
+    {
+      "name": "The One Ring",
+      "role": "Card advantage",
+      "notes": "Recovers cards to compensate for thin opening hands"
+    },
+    {
+      "name": "Soul-Guide Lantern",
+      "role": "Graveyard hate",
+      "notes": "Reduces Barrowgoyf size and disrupts Murktide Regent's Delve"
+    },
+    {
+      "name": "Lavaspur Boots",
+      "role": "Token equipping",
+      "notes": "Provides flying and +1/+1 to tokens, synergizes with Fable's other side"
+    },
+    {
+      "name": "Shadowspear",
+      "role": "Lifelink / Aggro answer",
+      "notes": "Balances life total race and provides combat damage"
+    },
+    {
+      "name": "Pithing Needle",
+      "role": "Targeted disruption",
+      "notes": "Name-drops key cards like Karn, the Great Creator or Tamiyo, Seasoned Scholar"
+    },
+    {
+      "name": "Disruptor Flute",
+      "role": "Artifact/Enchantment hate",
+      "notes": "Counters Show and Tell, Karn, and Nomads en-Kor"
+    }
+  ],
+  "sequencing_tips": [
+    "Play Ancient Tomb, then Lavaspur Boots, then a Mox, imprint Pyrogoyf, and follow with Chalice of the Void for 1",
+    "If Chalice is inefficient against the matchup, play Fable of the Mirror-Breaker on turn 1 instead",
+    "Against certain decks, lead with Magus of the Moon on turn 1 if you can draw additional mana sources",
+    "Use Urza's Saga's third chapter to find a Chrome Mox and fix mana"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Dimir Reanimator",
+      "advice": "Play Moon effects early if going first; use Chalice for 1 if drawing first. Soul-Guide Lantern prevents reanimation for a round. Sideboard Shadowspear for Barrowgoyf.",
+      "watch_for": [
+        "Entomb + Reanimate combo",
+        "Barrowgoyf",
+        "Daze"
+      ]
+    },
+    {
+      "opponent_archetype": "Dimir Aggro",
+      "advice": "Use main deck graveyard hate and sideboard Pithing Needle for Tamiyo, Seasoned Scholar. Saga version handles Barrowgoyf better.",
+      "watch_for": [
+        "Barrowgoyf",
+        "Tamiyo, Seasoned Scholar"
+      ]
+    },
+    {
+      "opponent_archetype": "Mirror",
+      "advice": "Game 1 is about drawing fewer dead cards. Post-side, use Fiery Confluence, Shadowspear, and sideboard Needle/Flute if opponent has key cards like The One Ring or Broadside Bombardiers.",
+      "watch_for": [
+        "The One Ring",
+        "Broadside Bombardiers",
+        "Dead cards"
+      ]
+    },
+    {
+      "opponent_archetype": "Forge Combo",
+      "advice": "Guess Chalice cost carefully. Main deck lacks answers to The One Ring. Sideboard Flutes and Needles to disrupt Karn, the Great Creator and Tezzeret, Cruel Captain.",
+      "watch_for": [
+        "Lotus Petal",
+        "Mox Opal",
+        "Manifold Key",
+        "The One Ring"
+      ]
+    },
+    {
+      "opponent_archetype": "Show and Tell",
+      "advice": "Worst matchup. Rely on Disruptor Flute to delay the combo and Fiery Confluence to push 6 damage. Pray for luck.",
+      "watch_for": [
+        "Show and Tell combo pieces",
+        "Instant game-ending sorceries"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Barrowgoyf",
+    "Murktide Regent",
+    "Karn, the Great Creator",
+    "Tezzeret, Cruel Captain",
+    "Pinnacle Emissary",
+    "The One Ring",
+    "Broadside Bombardiers",
+    "Daze",
+    "Wasteland",
+    "Boseiju, Who Endures",
+    "Force of Vigor",
+    "Tamiyo, Seasoned Scholar",
+    "Nomads en-Kor"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-saga-moon-red-stompy-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T07:50:23+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-saga-moon-red-stompy-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:48:41+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "e90bc551e557866e",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Now, instead of killing it, Moon freezes the Saga as it is... lets us create Constructs forever"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "if you freeze it when it has two lore counters, it can still create Construct tokens... lets us create Constructs forever"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Fable of the Mirror-Breaker is the best card in the game... equip the token on turn 2"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "play Chalice for 1 on turn 1"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Shadowspear makes the lifepoints race balanced because of its lifelink"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "I'd play Tomb, Lavaspur Boots, Mox, then imprint Pyrogoyf and follow with Chalice for 1"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "If Chalice isn't efficient against my opponent... I'd play Fable on turn 1"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Against a few decks, the best strategy is playing Magus on turn 1, though if you do this, you'll need to draw other sources of mana"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "the third chapter of the Saga can always find a Chrome Mox and fix our mana for us"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "problematic cards, like Barrowgoyf and Murktide Regent"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Karn, the Great Creator or Nomads en-Kor"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Tezzeret, Cruel Captain decks became more popular, as both Forge Combo, Artifact Blue, and the new Affinity lists use Pinnacle Emissary"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "naturally resistant to Boseiju, Who Endures and Force of Vigor"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "vulnerable to Daze as well... crumble very easily if your opponent plays a Wasteland"
+    }
+  ]
+}

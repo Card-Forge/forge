@@ -35,12 +35,41 @@ def _prompt(archetype: str, fmt: str, signature_cards: list[str], colors: list[s
         f"Signature cards: {sig}\n\n"
         "No editorial primer was found for this deck. Write a best-effort "
         "piloting guide using only the data above and your general knowledge "
-        "of the format. Return JSON with these keys (same schema as the "
-        "editorial extractor): strategy_type, overview, overview_evidence, "
-        "win_conditions, win_conditions_evidence, mulligan, game_plan, "
-        "key_cards, sequencing_tips, sequencing_tips_evidence, matchups, "
-        "common_threats, common_threats_evidence. Mark every *_evidence "
-        "entry as {\"confidence\": 0.3, \"kind\": \"inferred\", \"evidence_span\": \"\"}."
+        "of the format.\n\n"
+        "Return a JSON object EXACTLY matching this skeleton — keep every "
+        "field at the type shown (lists stay lists, objects stay objects, "
+        "strings stay strings). strategy_type must be lowercase.\n\n"
+        "{\n"
+        '  "strategy_type": "aggro"|"tempo"|"midrange"|"control"|"combo"|"ramp",\n'
+        '  "overview": "2-4 sentence summary",\n'
+        '  "overview_evidence": {"confidence": 0.3, "kind": "inferred", "evidence_span": ""},\n'
+        '  "win_conditions": ["..."],\n'
+        '  "win_conditions_evidence": [],\n'
+        '  "mulligan": {\n'
+        '    "keep_criteria": ["..."],\n'
+        '    "mulligan_criteria": ["..."],\n'
+        '    "examples": []\n'
+        "  },\n"
+        '  "game_plan": {\n'
+        '    "early_game": ["..."],\n'
+        '    "mid_game": ["..."],\n'
+        '    "late_game": ["..."]\n'
+        "  },\n"
+        '  "key_cards": [\n'
+        '    {"name": "Card Name", "role": "what it does", "notes": "how to use"}\n'
+        "  ],\n"
+        '  "sequencing_tips": ["..."],\n'
+        '  "sequencing_tips_evidence": [],\n'
+        '  "matchups": [\n'
+        '    {"opponent_archetype": "name", "advice": "...", "watch_for": ["..."]}\n'
+        "  ],\n"
+        '  "common_threats": ["..."],\n'
+        '  "common_threats_evidence": []\n'
+        "}\n\n"
+        "Every key_cards entry MUST be an object with name/role/notes (not a "
+        "bare string). Every matchups entry MUST be an object. win_conditions, "
+        "sequencing_tips, common_threats MUST be arrays of strings, NOT "
+        "single strings."
     )
 
 

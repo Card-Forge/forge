@@ -1,0 +1,173 @@
+{
+  "archetype": "Devoted Combo",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "Devoted Combo is a Modern archetype that leverages exponential mana generation to cast game-ending spells for free. The core engine revolves around untapping Delighted Halfling with Devoted Druid to produce infinite green mana. Once the loop is established, Green Sun's Zenith is cast to search for a zero-mana-cost finisher that dictates the win condition. Success depends on protecting the combo pieces and executing the sequence before opponent interaction can disrupt the timeline.",
+  "win_conditions": [
+    "Generate infinite mana by looping Devoted Druid and Delighted Halfling",
+    "Cast Green Sun's Zenith for zero mana to retrieve a zero-mana-cost creature",
+    "Activate the retrieved creature's abilities to win via infinite damage, infinite life, or library depletion"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more lands",
+      "Hands containing both Devoted Druid and Delighted Halfling",
+      "Hands with Green Sun's Zenith and early mana sources"
+    ],
+    "mulligan_criteria": [
+      "Hands with zero or one land",
+      "Hands missing either Druid or Halfling",
+      "Hands with only high-cost cards and no combo pieces"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands and setting up the Devoted Druid and Delighted Halfling loop",
+      "Avoid unnecessary combat to preserve combo pieces",
+      "Play cheap spells or ramp cards if available"
+    ],
+    "mid_game": [
+      "Execute the mana loop once both creatures are on the battlefield",
+      "Cast Green Sun's Zenith immediately after generating infinite mana",
+      "Search for a zero-mana-cost finisher that matches the matchup"
+    ],
+    "late_game": [
+      "Activate the finisher's abilities to secure victory",
+      "Use excess mana to cast additional spells or protect the board if the combo is interrupted",
+      "Transition to a grind game only if the combo is disrupted"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Devoted Druid",
+      "role": "Mana acceleration and loop enabler",
+      "notes": "Play after Delighted Halfling to untap it repeatedly, generating exponential green mana."
+    },
+    {
+      "name": "Delighted Halfling",
+      "role": "Mana generation and loop catalyst",
+      "notes": "Play first to establish a base mana source, then use Devoted Druid to untap it for the infinite mana loop."
+    },
+    {
+      "name": "Green Sun's Zenith",
+      "role": "Finisher enabler and card advantage",
+      "notes": "Cast only after achieving infinite mana to search for a zero-mana-cost creature that provides a win condition."
+    }
+  ],
+  "sequencing_tips": [
+    "Always play Delighted Halfling before Devoted Druid to ensure the loop can start",
+    "Verify you have enough mana to cast both creatures before attempting the loop",
+    "Cast Green Sun's Zenith immediately after the loop to avoid opponent interaction",
+    "Prioritize finishers that bypass opponent's board state or life total"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Rush the combo on turns three or four before they can apply lethal pressure",
+      "watch_for": [
+        "Early board presence",
+        "Cheap removal",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Protect your combo pieces and look for windows to go off when their hand is empty",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Hand disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Balance speed with resilience, using infinite mana to cast multiple spells if the combo is interrupted",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Tempo plays"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Single-target removal targeting Devoted Druid or Delighted Halfling",
+    "Board wipes that clear your combo setup",
+    "Counterspells aimed at Green Sun's Zenith",
+    "Hand disruption that delays your mana loop"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:59:44+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:59:44+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=4NygNBb7BGA",
+      "publish_date": "2024-06-28T20:21:13Z",
+      "fetched_at": "2026-05-21T12:11:14+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Devoted Combo"
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "895ca8210cd82dd3",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "archetype": "5c Humans",
+  "format": "pioneer",
+  "strategy_type": "tempo",
+  "overview": "This five-color Humans deck leverages Collected Company to rapidly flood the board with low-cost creatures, applying immediate pressure while generating card advantage. Thalia's Lieutenant taxes opponent spells to slow their game plan, while Reflector Mage provides recursive value and board control by bouncing threats. The deck aims to establish an early lead, stabilize with card advantage, and close out games through combat damage or attrition.",
+  "win_conditions": [
+    "Combat damage from a wide board of 1-taps and 2-drops",
+    "Card advantage loops using Reflector Mage and Collected Company",
+    "Outlasting opponents through Thalia's Lieutenant tax and efficient removal"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more lands and a 1-drop or 2-drop",
+      "Collected Company with three or more lands",
+      "Hands containing Thalia's Lieutenant or Reflector Mage with early lands"
+    ],
+    "mulligan_criteria": [
+      "Hands with zero or one land",
+      "Hands with only high-cost cards or removal",
+      "Hands lacking early board presence or card draw"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and 1-drops to establish early board presence",
+      "Use Thalia's Lieutenant to tax opponent's early spells",
+      "Prioritize keeping hands that can play a creature by turn two"
+    ],
+    "mid_game": [
+      "Cast Collected Company to flood the board and gain card advantage",
+      "Use Reflector Mage to bounce key threats and generate value",
+      "Apply pressure while managing opponent's removal and board wipes"
+    ],
+    "late_game": [
+      "Stabilize by bouncing threats with Reflector Mage and drawing into answers",
+      "Close out games with combat damage from a wide board",
+      "Use card advantage to outvalue control decks and recover from wipes"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Collected Company",
+      "role": "Board flood and card draw",
+      "notes": "Cast when you have enough lands to play it and follow up with creatures; use it to recover from board wipes or establish a wide board quickly."
+    },
+    {
+      "name": "Thalia's Lieutenant",
+      "role": "Spell tax and early board presence",
+      "notes": "Play early to increase the cost of opponent's spells; use its attack to pressure life totals while forcing opponents to spend extra mana."
+    },
+    {
+      "name": "Reflector Mage",
+      "role": "Board control and card advantage",
+      "notes": "Bounce high-value threats or your own creatures to replay them for value; use it to disrupt opponent's board state while generating card advantage."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast Collected Company after playing your early creatures to maximize the number of cards drawn",
+    "Hold up mana for Reflector Mage's ability before attacking to bounce threats",
+    "Play Thalia's Lieutenant early to tax opponent's spells, but be mindful of its low power/toughness",
+    "Prioritize playing lands before casting Collected Company to ensure you can follow up",
+    "Use Reflector Mage to bounce opponent's removal or board wipes when possible"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Thalia's Lieutenant to tax early spells and buy time; prioritize keeping hands with early blockers and Collected Company to stabilize.",
+      "watch_for": [
+        "Fast board wipes",
+        "Early aggressive creatures",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply early pressure with 1-drops and 2-drops; use Collected Company to flood the board before they stabilize; bounce their key answers with Reflector Mage.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Removal spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them with early board presence; use Thalia's tax to slow their value engines; leverage Reflector Mage to disrupt their board state.",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw engines",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipe spells",
+    "Single-target removal",
+    "Counterspells",
+    "Creature hate cards",
+    "Fast aggro pressure"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T05:26:30+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:26:30+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "54e023c4b6ffe3c8",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "signature cards & Pioneer format rules"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "signature cards & Pioneer format rules"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "signature cards & Pioneer format rules"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "signature cards & Pioneer format rules"
+    }
+  ]
+}

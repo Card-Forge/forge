@@ -1,0 +1,179 @@
+{
+  "archetype": "Rakdos Prowess",
+  "format": "pioneer",
+  "strategy_type": "aggro",
+  "overview": "Rakdos Prowess is a fast, spell-slinging aggro deck that leverages cheap noncreature spells to repeatedly trigger the prowess mechanic. By cycling through low-cost creatures and instant-speed interactions, it aims to overwhelm opponents before they can establish a stable board state. The deck thrives on efficient resource usage and graveyard recursion to maintain relentless pressure.",
+  "win_conditions": [
+    "Combat damage from repeatedly buffed prowess creatures",
+    "Graveyard recursion of Slickshot Show-Off to close out games",
+    "Leveraging Emberheart Challenger's death trigger to create a large threat"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with a turn-one prowess creature and at least one noncreature spell",
+      "Curves that guarantee plays on turns two and three",
+      "Removal or interaction to handle early threats"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking noncreature spells to trigger prowess",
+      "Stuck on three-drops or higher without early interaction",
+      "Multiple high-cost creatures with no cheap spells"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Deploy Monastery Swiftspear immediately and cast cheap instants or sorceries to buff it",
+      "Prioritize land drops and spell density to maximize prowess triggers",
+      "Use early removal to clear blockers and keep damage on track"
+    ],
+    "mid_game": [
+      "Introduce Slickshot Show-Off and Emberheart Challenger to apply wider pressure",
+      "Cast noncreature spells before combat to maximize prowess buffs",
+      "Begin recycling Slickshot from the graveyard to maintain board presence"
+    ],
+    "late_game": [
+      "Focus on finishing the game with accumulated prowess counters",
+      "Use Emberheart Challenger's death trigger to create a final threat",
+      "Maintain spell density to outvalue slower decks and close out matches"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Monastery Swiftspear",
+      "role": "Primary early-game prowess engine",
+      "notes": "Play on turn one and trigger prowess with every noncreature spell to quickly become a relevant threat"
+    },
+    {
+      "name": "Slickshot Show-Off",
+      "role": "Mid-game pressure and graveyard recursion",
+      "notes": "Cast from hand or graveyard to maintain board presence and trigger prowess repeatedly"
+    },
+    {
+      "name": "Emberheart Challenger",
+      "role": "Late-game finisher and counter generator",
+      "notes": "Use as a sacrifice outlet or let it deal combat damage to place a +1/+1 counter on another creature for a game-ending push"
+    }
+  ],
+  "sequencing_tips": [
+    "Cast noncreature spells before declaring attackers to maximize prowess buffs",
+    "Hold removal in hand to respond to opponent's key threats or blockers",
+    "Time Emberheart Challenger's death trigger to leave a counter on your largest creature",
+    "Prioritize casting spells that trigger prowess over drawing cards when ahead on damage"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Push damage aggressively before they stabilize with sweepers or card draw",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Card advantage engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Race efficiently by using removal on their biggest threats and triggering prowess to outpace them",
+      "watch_for": [
+        "Wide creature spreads",
+        "Early removal",
+        "Life total reduction"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Apply constant pressure with cheap spells and prowess triggers to prevent them from developing value",
+      "watch_for": [
+        "Removal spells",
+        "Card draw",
+        "Resilient creatures"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup with early interaction and close out quickly before they assemble their win condition",
+      "watch_for": [
+        "Key combo pieces",
+        "Protection spells",
+        "Graveyard hate"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipes that clear prowess counters",
+    "Targeted removal for key creatures",
+    "Card draw engines that outpace the deck",
+    "Wide creature spreads that block damage"
+  ],
+  "metadata": {
+    "source": "Cards Realm + builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T05:04:01+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-rakdos-prowess-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:00:47+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "(failed extraction)"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:04:01+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "ccbec74cfc146e46",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "signature cards and format mechanics"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "card abilities and archetype name"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "prowess mechanic and card interactions"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "format meta and archetype vulnerabilities"
+    }
+  ]
+}

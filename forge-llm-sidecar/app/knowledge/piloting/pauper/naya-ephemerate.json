@@ -1,0 +1,155 @@
+{
+  "archetype": "Naya Ephemerate",
+  "format": "pauper",
+  "strategy_type": "tempo",
+  "overview": "Naya Ephemerate is a tempo strategy that leverages cheap creatures and efficient board-clearing spells to control the pace of the game while applying steady pressure. The deck uses pump effects and graveyard recursion to maintain resource advantage and swing combat trades in its favor. Its multicolor identity provides flexible answers and resilient game plans tailored to the Pauper environment.",
+  "win_conditions": [
+    "Overwhelming the opponent with pumped creatures and combat damage",
+    "Closing out games with direct damage from board-clearing spells",
+    "Outlasting opponents through graveyard recursion and card advantage"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with one or two cheap creatures to establish early presence",
+      "Hands containing Malevolent Rumble paired with a threat or recursion",
+      "Hands with Writhing Chrysalis for early graveyard interaction"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early plays or interaction",
+      "Hands with only high-cost cards or multiple lands",
+      "Hands missing color fixers for key spells"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Deploy low-cost creatures to establish board presence and force trades",
+      "Use Sacred Cat to immediately boost early threats and enable favorable exchanges",
+      "Hold up interaction or recursion to disrupt opponent's opening sequence"
+    ],
+    "mid_game": [
+      "Cast Malevolent Rumble to clear opposing boards while dealing direct damage",
+      "Leverage Writhing Chrysalis deaths to recover key spells or creatures from the graveyard",
+      "Maintain tempo by playing creatures on opponent's turn when possible to disrupt their rhythm"
+    ],
+    "late_game": [
+      "Stabilize with recycled threats and pumped survivors to apply consistent pressure",
+      "Force opponent into unfavorable trades using board clears and combat math",
+      "Use remaining resources to close out the game or outvalue control strategies"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Sacred Cat",
+      "role": "Early-game pump and board presence",
+      "notes": "Cast on curve to immediately boost a threat, enabling favorable trades and early pressure. Use it to push lethal or survive aggressive openings."
+    },
+    {
+      "name": "Malevolent Rumble",
+      "role": "Board control and direct damage",
+      "notes": "Use to clear opposing boards while chipping away at the opponent's life total. Time it to maximize board swing and direct damage impact."
+    },
+    {
+      "name": "Writhing Chrysalis",
+      "role": "Resource recycling and graveyard interaction",
+      "notes": "Sacrifice or trade early to retrieve key spells or creatures from the graveyard. Maintain card advantage and keep your game plan flexible."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold up colors for Malevolent Rumble before committing to a full board push",
+    "Trigger Writhing Chrysalis carefully to ensure you can recover high-impact cards",
+    "Time Sacred Cat to maximize combat damage or enable a lethal strike",
+    "Prioritize playing creatures on opponent's turn to disrupt their sequencing"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early blockers and use Malevolent Rumble to reset the board while dealing damage.",
+      "watch_for": [
+        "Fast one-drop creatures",
+        "Early direct damage spells",
+        "Overwhelming creature counts"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply steady pressure and use recursion to outlast their resource base.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Long-game win conditions"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them with pumped threats and use tempo spells to disrupt their curve.",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw engines",
+        "Late-game threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup with early interaction and use board clears to delay their win.",
+      "watch_for": [
+        "Graveyard recursion",
+        "Stack manipulation",
+        "Unexpected win conditions"
+      ]
+    },
+    {
+      "opponent_archetype": "Ramp",
+      "advice": "Race them before they deploy large threats and use recursion to maintain pressure.",
+      "watch_for": [
+        "Land acceleration",
+        "Large creatures",
+        "Mana denial effects"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast one-drop creatures",
+    "Direct damage spells",
+    "Board-clearing effects",
+    "Graveyard hate",
+    "Counterspells"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T10:52:19+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T10:52:19+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "5a64608af7727c2f",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

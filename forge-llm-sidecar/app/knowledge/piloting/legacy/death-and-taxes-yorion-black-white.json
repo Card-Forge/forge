@@ -1,0 +1,157 @@
+{
+  "archetype": "Death and Taxes (Yorion) - Black/White",
+  "format": "legacy",
+  "strategy_type": "tempo",
+  "overview": "This Legacy Black/White deck operates as a tempo-control hybrid, leveraging early interaction to stabilize against aggressive strategies. It transitions into a mid-game setup phase using Stoneforge Mystic to fetch protective artifacts, then stabilizes with Solitude for sustained card advantage. The primary win condition is Yorion, Sky Nomad, which grows into an unblockable threat while Solitude continuously refills your hand.",
+  "win_conditions": [
+    "Yorion combat damage",
+    "Solitude card advantage loop",
+    "Stoneforge artifact setup"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two lands and early interaction",
+      "Hands containing Yorion or Solitude with removal",
+      "Hands with Stoneforge Mystic and artifact slots"
+    ],
+    "mulligan_criteria": [
+      "Heavy land counts without early plays",
+      "Hands lacking removal or card advantage",
+      "Hands with only late-game finishers"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands efficiently and hold interaction for key threats",
+      "Use removal to clear the path for early tempo plays",
+      "Prioritize survival over early artifact deployment"
+    ],
+    "mid_game": [
+      "Activate Stoneforge Mystic to fetch protective boots or greaves",
+      "Cast Solitude once you have a steady stream of cards to exile",
+      "Deploy Yorion when the board is clear or protected"
+    ],
+    "late_game": [
+      "Use Solitude to maintain hand size and outvalue opponents",
+      "Push damage with Yorion while cycling through your deck",
+      "Leverage artifact synergies to protect your win condition"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Yorion, Sky Nomad",
+      "role": "Primary win condition and tempo threat",
+      "notes": "Play when the board is clear; use its flying and +1/+1 counter generation to pressure opponents while they lack answers."
+    },
+    {
+      "name": "Solitude",
+      "role": "Card advantage and late-game engine",
+      "notes": "Cast when you have multiple cards in hand; exile cards to draw new ones, maintaining hand size and finding answers."
+    },
+    {
+      "name": "Stoneforge Mystic",
+      "role": "Artifact fetcher and setup piece",
+      "notes": "Use to fetch protective artifacts like boots or greaves; activate before playing the artifact to ensure it enters untapped and protected."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold removal until you see the opponent's key threats",
+    "Play Solitude after you have established a steady card flow",
+    "Activate Stoneforge Mystic before casting the fetched artifact to avoid counterspells",
+    "Deploy Yorion only when you have protection or the board is empty"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early removal and play Yorion as soon as possible to race",
+      "watch_for": [
+        "Fast one-mana removal",
+        "Board wipes",
+        "Early creature pressure"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Use Solitude to outvalue their hand size and push damage with Yorion",
+      "watch_for": [
+        "Counterspells",
+        "Hand traps",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup with interaction and use Solitude to exile key pieces",
+      "watch_for": [
+        "Fast combo pieces",
+        "Graveyard recursion",
+        "Unexpected win conditions"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast one-mana removal",
+    "Board wipes",
+    "Card draw engines",
+    "Graveyard hate"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T07:35:35+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:35:35+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "366c4c4090e0d535",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype: Death and Taxes (Yorion) - Black/White, Format: legacy, Signature cards: Yorion, Sky Nomad, Solitude, Stoneforge Mystic"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards: Yorion, Sky Nomad, Solitude, Stoneforge Mystic"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards: Yorion, Sky Nomad, Solitude, Stoneforge Mystic"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Format: legacy, Archetype: Death and Taxes (Yorion) - Black/White"
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "archetype": "4/5c Omnath",
+  "format": "modern",
+  "strategy_type": "ramp",
+  "overview": "This deck leverages land drops and mana acceleration to rapidly deploy Omnath, Locus of Creation, generating massive card advantage and mana advantage. Solitude and Teferi, Time Raveler provide board control and tempo while the engine ramps into an insurmountable resource lead. The goal is to outvalue opponents through relentless land plays and protective permanents.",
+  "win_conditions": [
+    "Outvalue opponents with Omnath's land-drop counters and mana generation",
+    "Stall the board with Solitude and Teferi, Time Raveler until resources are exhausted",
+    "Deploy a wide board of lands and creatures to overwhelm defenses"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with 2+ lands and a cheap spell or creature",
+      "Hands containing Omnath, Locus of Creation with early land drops",
+      "Hands with Solitude or Teferi, Time Raveler and sufficient mana"
+    ],
+    "mulligan_criteria": [
+      "Hands with 0 or 1 land",
+      "Hands with only high-cost permanents and no acceleration",
+      "Hands lacking interaction or early plays"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize land drops and cheap mana rocks to accelerate into Omnath",
+      "Play Solitude early to disrupt opponent's board development",
+      "Use Teferi, Time Raveler to protect key permanents and gain tempo"
+    ],
+    "mid_game": [
+      "Focus on playing lands to trigger Omnath's counters and generate mana",
+      "Use generated mana to cast additional threats or answer opponent's plays",
+      "Maintain board presence with Solitude and Teferi while ramping"
+    ],
+    "late_game": [
+      "Leverage massive mana advantage to deploy multiple threats simultaneously",
+      "Use Omnath's counters to draw cards or generate additional resources",
+      "Close out the game with an unblockable board state or direct damage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Omnath, Locus of Creation",
+      "role": "Core engine that generates mana and counters when lands are played",
+      "notes": "Prioritize playing lands to maximize its triggers; use counters to draw cards or generate additional mana"
+    },
+    {
+      "name": "Solitude",
+      "role": "Board control and tempo disruption",
+      "notes": "Play early to prevent opponent from developing their board; use its ability to bounce threats or protect your permanents"
+    },
+    {
+      "name": "Teferi, Time Raveler",
+      "role": "Protection and card advantage",
+      "notes": "Use to bounce opponent's threats, protect Omnath, or draw cards; keep it on the battlefield as long as possible"
+    }
+  ],
+  "sequencing_tips": [
+    "Always play lands before other spells to trigger Omnath's abilities",
+    "Hold up mana for Solitude's ability to bounce key threats",
+    "Use Teferi, Time Raveler's abilities to respond to opponent's plays rather than proactively",
+    "Prioritize keeping Solitude and Teferi on the battlefield to maintain tempo"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Play Solitude early to disrupt their board and buy time for Omnath to come online",
+      "watch_for": [
+        "Early aggressive creatures",
+        "Board wipes that clear your Solitude",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Ramp quickly to outvalue them and use Teferi to protect your permanents from their removal",
+      "watch_for": [
+        "Counterspell packages",
+        "Board wipes",
+        "Permanent removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Balance land drops with threats to pressure their board while ramping into Omnath",
+      "watch_for": [
+        "Efficient removal",
+        "Board control spells",
+        "Value engines"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Aggro creatures",
+    "Board wipes",
+    "Permanent removal",
+    "Counterspells",
+    "Value engines"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:45:01+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:45:01+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "c0f000772ce219d0",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

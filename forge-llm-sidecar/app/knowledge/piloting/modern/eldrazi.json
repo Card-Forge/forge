@@ -1,0 +1,153 @@
+{
+  "archetype": "Eldrazi",
+  "format": "modern",
+  "strategy_type": "ramp",
+  "overview": "Green Eldrazi in Modern leverages land recovery and mana acceleration to deploy massive creatures ahead of curve. The deck focuses on recovering lands from the graveyard to maintain tempo and overwhelm opponents with raw power. Signature cards like Thought-Knot Seer and Glaring Fleshraker enable this aggressive ramp strategy.",
+  "win_conditions": [
+    "Deploying large Eldrazi creatures early via mana acceleration",
+    "Overwhelming opponents with combat damage from oversized threats",
+    "Maintaining board presence through continuous land recovery"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early land recovery spells like Kozilek's Command",
+      "Playable one-drops or early land recoverers on curve",
+      "Sufficient early land drops (4+ cards in hand)"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking land recovery or acceleration",
+      "Hands with only high-cost threats and no early plays",
+      "Hands with too many lands and no spells"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and immediately use land recovery spells to accelerate",
+      "Deploy early threats or Thought-Knot Seer to establish board presence",
+      "Prioritize mana efficiency to reach turn three or four drops"
+    ],
+    "mid_game": [
+      "Continue recovering lands to maintain tempo against midrange decks",
+      "Play medium-sized Eldrazi to apply consistent pressure",
+      "Use Kozilek's Command for removal or card advantage when ahead"
+    ],
+    "late_game": [
+      "Deploy massive Eldrazi threats to close out the game",
+      "Focus on combat damage rather than card draw",
+      "Use remaining land recovery to stabilize against control answers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Thought-Knot Seer",
+      "role": "Early land recovery and board presence",
+      "notes": "Play on curve to recover a land from the graveyard, accelerating into larger threats while providing a body to block or attack."
+    },
+    {
+      "name": "Kozilek's Command",
+      "role": "Versatile two-drop for acceleration, removal, or value",
+      "notes": "Use the land recovery mode early to ramp, switch to removal or draw when ahead, and generate tokens to protect larger threats."
+    },
+    {
+      "name": "Glaring Fleshraker",
+      "role": "Land recovery engine and early threat",
+      "notes": "Return lands to hand to replay them for untapped mana, enabling faster casting of Eldrazi while maintaining a 2/2 body on the battlefield."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize land recovery on turns one and two to enable three and four mana threats",
+    "Hold up mana for potential counterspells if facing control, otherwise play threats on opponent's turn",
+    "Use Kozilek's Command removal to clear blockers before attacking with large Eldrazi"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race their hand size and use land recovery to play threats ahead of curve",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Creature removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use early land recovery to deploy large blockers and finish quickly",
+      "watch_for": [
+        "Early pressure",
+        "Direct damage spells",
+        "Creature sweepers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Maintain tempo with continuous land recovery and apply steady pressure",
+      "watch_for": [
+        "Removal spells",
+        "Card advantage engines",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Large Eldrazi creatures",
+    "Land recovery spells",
+    "Mana acceleration engines"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T00:48:36+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T00:48:36+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "9e5b415492b72a69",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

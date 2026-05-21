@@ -12,6 +12,8 @@ dependencies = [
     "pydantic>=2.6",
     "beautifulsoup4>=4.12",
     "aiohttp>=3.9",
+    "youtube-transcript-api>=0.6",
+    "google-api-python-client>=2.0",
 ]
 
 [project.optional-dependencies]

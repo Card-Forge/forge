@@ -1,0 +1,134 @@
+{
+  "archetype": "Sultai Midrange",
+  "format": "pioneer",
+  "strategy_type": "midrange",
+  "overview": "Sultai Midrange in Pioneer leverages efficient one-mana removal and resilient creatures to stabilize early and outvalue opponents in the mid-to-late game. By filtering draws with Consult the Star Charts and applying immediate pressure with Shark Typhoon, the deck aims to control the board while maintaining card advantage. Fatal Push ensures that early threats are neutralized efficiently, allowing your larger threats to clear the path.",
+  "win_conditions": [
+    "Outlasting opponents through superior card advantage and efficient removal",
+    "Closing out games with Shark Typhoon's flying and direct damage potential",
+    "Stabilizing with resilient creatures and filtering into finishers via Consult the Star Charts"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with Fatal Push and a one-drop creature",
+      "Hands containing Consult the Star Charts and early interaction",
+      "Hands with two removal spells and a Shark Typhoon"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking any one-mana spells or early interaction",
+      "Hands with only high-cost creatures and no draw",
+      "Hands missing land drops for the first three turns"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cast Fatal Push to remove early aggressive threats",
+      "Use Consult the Star Charts to filter into better hands and draw cards",
+      "Deploy Shark Typhoon to establish board presence and apply pressure"
+    ],
+    "mid_game": [
+      "Trade efficiently with removal while preserving card advantage",
+      "Use Shark Typhoon's ability to deal direct damage or block efficiently",
+      "Filter draws to find larger threats and additional interaction"
+    ],
+    "late_game": [
+      "Stabilize the board with resilient creatures and continued card draw",
+      "Leverage Shark Typhoon's flying to bypass blockers and close the game",
+      "Maintain pressure while outlasting opponents through superior resource management"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Consult the Star Charts",
+      "role": "Card draw and hand filtering",
+      "notes": "Cast early to dig for removal or finishers; prioritize keeping it in opening hands for consistency."
+    },
+    {
+      "name": "Shark Typhoon",
+      "role": "Efficient threat and direct damage engine",
+      "notes": "Attack with it to deal 2 damage to the opponent if you control another creature; use its flying to bypass early blockers."
+    },
+    {
+      "name": "Fatal Push",
+      "role": "Instant-speed removal for small creatures",
+      "notes": "Hold up for combat tricks or use on opponent's turn to clear one-drops and two-drops efficiently; prioritize it in mulligans."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Fatal Push for combat tricks to maximize value against aggressive decks",
+    "Cast Consult the Star Charts before playing threats to ensure you have answers ready",
+    "Use Shark Typhoon's direct damage ability when you have a clear path to victory or need to close out a game quickly"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize keeping Fatal Push and early interaction; use Shark Typhoon to block and apply pressure while filtering into larger threats.",
+      "watch_for": [
+        "Early one-drops and two-drops",
+        "Race conditions",
+        "Board wipes that clear your early board"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells by splitting your hand; use Shark Typhoon to apply pressure while they search for answers.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race efficiently by leveraging card advantage; use Fatal Push to clear their early threats and Shark Typhoon to maintain board presence.",
+      "watch_for": [
+        "Removal spells",
+        "Card draw engines",
+        "Efficient blockers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Early one-drop creatures",
+    "Flying threats that bypass your blockers",
+    "Board wipes that reset the board state"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T04:44:37+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T04:44:37+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "eb1f88a46985c22b",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

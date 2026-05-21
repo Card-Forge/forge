@@ -1,0 +1,205 @@
+{
+  "archetype": "Fastbond Lands",
+  "format": "vintage",
+  "strategy_type": "ramp",
+  "overview": "Fastbond Lands is a green ramp archetype that leverages land acceleration and graveyard recursion to generate overwhelming mana advantage. By combining Fastbond's extra land drops with Crucible of Worlds' replay ability, the deck floods the board with lands to fuel Kaheera, the Orphanguard's untap and counter-generating potential. This land-centric approach aims to outpace opponents in resource generation while maintaining board presence through continuous land deployment.",
+  "win_conditions": [
+    "Generate excessive mana to cast large spells or combo pieces",
+    "Use Kaheera to untap lands repeatedly for continuous value and board control",
+    "Flood the battlefield with lands to trigger landfall effects or overwhelm opponent's board state"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Fastbond or Crucible of Worlds with at least two lands",
+      "Hands featuring Kaheera, the Orphanguard alongside land acceleration",
+      "Hands with multiple lands and a way to replay or untap them"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking Fastbond, Crucible, or Kaheera",
+      "Hands with three or fewer lands and no acceleration",
+      "Hands heavy on non-land permanents without mana sources"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing Fastbond on turn one or two to establish land acceleration",
+      "Deploy Crucible of Worlds as soon as mana allows to enable land recursion",
+      "Play lands consistently to build a graveyard pool for Crucible"
+    ],
+    "mid_game": [
+      "Use Crucible to replay lands from the graveyard, triggering landfall and increasing board presence",
+      "Cast Kaheera, the Orphanguard and use its untap ability to generate extra mana or replay lands",
+      "Maintain a steady stream of land drops to outpace opponent's resource generation"
+    ],
+    "late_game": [
+      "Leverage massive mana pools to close out games or deploy finishers",
+      "Continuously replay lands with Crucible to maintain board pressure and trigger effects",
+      "Use Kaheera's counters and untap ability to stabilize against board wipes or removal"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Fastbond",
+      "role": "Enchantment that allows an additional land to be played each turn",
+      "notes": "Play early to accelerate land drops and build a graveyard pool for Crucible; protects against land screw and enables rapid mana ramp"
+    },
+    {
+      "name": "Crucible of Worlds",
+      "role": "Artifact that enables playing lands from the graveyard",
+      "notes": "Synergizes with Fastbond by allowing continuous land deployment; use to replay lands for landfall triggers or to untap with Kaheera"
+    },
+    {
+      "name": "Kaheera, the Orphanguard",
+      "role": "Creature that enters with counters and can untap lands or sacrifice lands for value",
+      "notes": "Use untap ability to generate extra mana or replay lands with Crucible; sacrifice lands to generate counters or value when needed"
+    }
+  ],
+  "sequencing_tips": [
+    "Play Fastbond before Crucible to maximize the number of lands you can drop and replay",
+    "Use Kaheera's untap ability after replaying lands with Crucible to generate additional mana or triggers",
+    "Prioritize replaying lands that trigger landfall effects or provide immediate value over basic lands",
+    "Hold back Crucible if opponent has artifact destruction available to protect your recursion engine"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Focus on flooding the board with lands to overwhelm removal and generate mana advantage; protect Crucible and Kaheera with counters or land triggers.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Artifact destruction"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup by playing lands aggressively to trigger landfall or use Kaheera to untap lands for early pressure; prioritize replaying lands to maintain board presence.",
+      "watch_for": [
+        "Fast combo pieces",
+        "Hand disruption",
+        "Priority plays"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Fastbond to accelerate into Kaheera quickly; replay lands with Crucible to trigger landfall defenses or generate mana for removal; prioritize board control.",
+      "watch_for": [
+        "Early aggression",
+        "Board wipes",
+        "Direct damage"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipes that clear lands and permanents",
+    "Artifact destruction targeting Crucible of Worlds",
+    "Counterspells interrupting key plays",
+    "Hand disruption reducing acceleration options"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T11:48:20+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:48:20+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "94e6de65f4ae54c3",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

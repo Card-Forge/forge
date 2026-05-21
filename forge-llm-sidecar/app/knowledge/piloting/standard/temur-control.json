@@ -1,0 +1,154 @@
+{
+  "archetype": "Temur Control",
+  "format": "standard",
+  "strategy_type": "control",
+  "overview": "Temur Control in Standard stabilizes through resource acceleration and graveyard recursion, leveraging Stock Up for early mana and Consult the Star Charts for flexible draw. The deck aims to outlast opponents by cycling spells into the graveyard and reactivating them via Flashback. Victory comes from maintaining board control while building a reusable hand of value-generating cards.",
+  "win_conditions": [
+    "Reactivating spells via Flashback",
+    "Drawing into answers with Consult the Star Charts",
+    "Outvaluing opponents through Stock Up acceleration"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Stock Up",
+      "Consult the Star Charts",
+      "Spells with Flashback",
+      "Early interaction"
+    ],
+    "mulligan_criteria": [
+      "High-cost cards without recursion",
+      "Lands only",
+      "No graveyard setup"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Cast Stock Up to ramp and draw",
+      "Play cheap interaction to survive",
+      "Begin cycling cards for Flashback fuel"
+    ],
+    "mid_game": [
+      "Use Consult the Star Charts to find specific answers",
+      "Stabilize against early threats",
+      "Maintain graveyard depth"
+    ],
+    "late_game": [
+      "Recycle high-impact spells via Flashback",
+      "Control the board with repeated removal",
+      "Win through card advantage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Consult the Star Charts",
+      "role": "Flexible draw engine",
+      "notes": "Draw into answers when ahead, or cycle to fuel Flashback when behind."
+    },
+    {
+      "name": "Stock Up",
+      "role": "Ramp and card draw",
+      "notes": "Play early to accelerate mana and draw cards, enabling faster access to flashback spells."
+    },
+    {
+      "name": "Flashback",
+      "role": "Graveyard recursion mechanic",
+      "notes": "Prioritize cycling or discarding spells with this ability to reuse them for board control or value."
+    }
+  ],
+  "sequencing_tips": [
+    "Cycle low-value cards early to fuel Flashback",
+    "Hold up interaction before casting Stock Up",
+    "Use Consult the Star Charts to dig for specific answers",
+    "Prioritize Flashback on high-impact spells over minor ones"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Focus on early interaction and graveyard setup.",
+      "watch_for": [
+        "Fast finishers",
+        "Direct damage"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Race with flashback recursion and card advantage.",
+      "watch_for": [
+        "Board wipes",
+        "Hand disruption"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Stabilize with Consult the Star Charts and outvalue them.",
+      "watch_for": [
+        "Efficient threats",
+        "Removal"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Early aggressive creatures",
+    "Board wipes",
+    "Hand disruption"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:42:53+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:42:53+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "bd3ce08d164cf186",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

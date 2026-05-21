@@ -1,0 +1,157 @@
+{
+  "archetype": "Green Devotion",
+  "format": "modern",
+  "strategy_type": "ramp",
+  "overview": "This deck leverages mana acceleration and devotion to green to cast large, efficient creatures ahead of the curve. Noble Hierarch provides consistent ramp and color fixing, while Green Sun's Zenith offers flexible card advantage and threat fetching. Frenzied Baloth anchors the strategy as a resilient pressure piece that enables further devotion plays.",
+  "win_conditions": [
+    "Casting large devotion creatures ahead of the curve to overwhelm opponents",
+    "Using Green Sun's Zenith to fetch key threats or finishers",
+    "Applying sustained combat pressure with resilient creatures like Frenzied Baloth",
+    "Generating card advantage through Zenith searches to outlast midrange and control decks"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Noble Hierarch or early mana acceleration",
+      "Hands with Green Sun's Zenith and a clear early target",
+      "Hands with two or more lands and a turn-one or turn-two play"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking acceleration or early interaction",
+      "Hands with four or more lands",
+      "Hands missing black mana for key spells or removal"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and prioritize casting Noble Hierarch on turn one",
+      "Use Green Sun's Zenith to fetch early threats or additional lands",
+      "Establish a mana base that supports both black and green spells"
+    ],
+    "mid_game": [
+      "Cast Frenzied Baloth and other devotion creatures to apply pressure",
+      "Use excess mana to cast multiple spells or fetch answers with Zenith",
+      "Trade efficiently with opponent's threats while preserving key permanents"
+    ],
+    "late_game": [
+      "Flood the board with large creatures to close out the game",
+      "Use Zenith to fetch game-ending threats or removal as needed",
+      "Leverage mana advantage to outpace opponent's resources and win with combat"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Green Sun's Zenith",
+      "role": "Card advantage and threat fetching",
+      "notes": "Use to find lands when behind on mana or threats when ahead. Watch for opponent's removal or counterspells targeting the fetched creature."
+    },
+    {
+      "name": "Noble Hierarch",
+      "role": "Mana acceleration and color fixing",
+      "notes": "Play on turn one if possible to enable early devotion creatures and Zenith. Use its mana abilities to smooth out your curve and cast larger spells."
+    },
+    {
+      "name": "Frenzied Baloth",
+      "role": "Resilient threat and devotion enabler",
+      "notes": "Use to pressure opponents while surviving targeted removal. Its presence enables casting larger devotion creatures and stabilizes the board."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize playing Noble Hierarch before casting Green Sun's Zenith to maximize mana efficiency",
+    "Hold up black mana for counterspells or removal when facing control or midrange decks",
+    "Use Zenith to fetch lands when behind on mana, and threats when ahead of the curve",
+    "Play Frenzied Baloth after establishing a base of devotion to maximize its board impact"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early removal and Zenith fetches for blockers to stabilize the board",
+      "watch_for": [
+        "Fast attackers",
+        "Burn spells",
+        "Early board wipes"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells by varying your Zenith targets and using Hierarch to outpace their curve",
+      "watch_for": [
+        "Countermagic",
+        "Board wipes",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race with resilient threats and use Hierarch to maintain mana advantage throughout the game",
+      "watch_for": [
+        "Targeted removal",
+        "Value engines",
+        "Card draw spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Lightning Bolt",
+    "Abrupt Decay",
+    "Thoughtseize",
+    "Fatal Push",
+    "Lightning Helix"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T02:08:32+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T02:08:32+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "a5e16829f782d6b8",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "archetype": "Mono-White Initiative",
+  "format": "vintage",
+  "strategy_type": "aggro",
+  "overview": "Mono-White Initiative leverages fast mana and low-cost attackers to establish immediate board presence in Vintage. By attacking early and often, the deck triggers growth and card draw abilities to outpace opponents before they can stabilize. The strategy relies on maintaining relentless pressure while efficiently cycling through resources.",
+  "win_conditions": [
+    "Overwhelming the opponent with a large, growing White Plume Adventurer",
+    "Generating card advantage through repeated Seasoned Dungeoneer attacks",
+    "Closing out games quickly before opponent's late-game answers resolve"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Chrome Mox and at least one one-drop creature",
+      "Two-land hands with multiple attackers",
+      "Hands that can attack by turn one"
+    ],
+    "mulligan_criteria": [
+      "Hands with zero artifacts or creatures",
+      "Hands stuck on three or more lands",
+      "Hands lacking early attack triggers"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Chrome Mox immediately to accelerate mana",
+      "Drop White Plume Adventurer and Seasoned Dungeoneer on curve",
+      "Attack every turn to trigger abilities and establish pressure"
+    ],
+    "mid_game": [
+      "Prioritize attacking over blocking to maximize triggers",
+      "Use drawn cards to maintain board presence and apply pressure",
+      "Look for ways to grow Adventurer into an unblockable threat"
+    ],
+    "late_game": [
+      "Commit to all-out attacks to close the game quickly",
+      "Avoid stalling, as Vintage control decks stabilize over time",
+      "Use card advantage to out-resource opponents in attrition"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "White Plume Adventurer",
+      "role": "Primary aggressive threat that grows each turn",
+      "notes": "Attack with it every turn to add +1/+1 counters, quickly making it difficult to block and a major damage source."
+    },
+    {
+      "name": "Chrome Mox",
+      "role": "Fast mana acceleration",
+      "notes": "Play on turn one to enable early creature drops and ensure you can attack on curve without mana screw."
+    },
+    {
+      "name": "Seasoned Dungeoneer",
+      "role": "Card advantage engine and early pressure",
+      "notes": "Attack with it to draw cards, refilling your hand to maintain tempo and find answers or additional threats."
+    }
+  ],
+  "sequencing_tips": [
+    "Always attack with Seasoned Dungeoneer before blocking to draw cards",
+    "Play Chrome Mox before lands to optimize early turns",
+    "Attack with White Plume Adventurer even if it dies, as the counter triggers on attack declaration",
+    "Prioritize damage over board control in the early game"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Attack relentlessly to prevent them from setting up counterspells and board wipes.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their setup by attacking early and forcing them to use interaction on your creatures.",
+      "watch_for": [
+        "Fast finishers",
+        "Protection spells",
+        "Graveyard hate"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Seasoned Dungeoneer to draw into removal or larger threats, and trade efficiently.",
+      "watch_for": [
+        "Early board wipes",
+        "Flying creatures",
+        "Direct damage spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspells",
+    "Board wipes",
+    "Fast combo finishes",
+    "Direct damage spells"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T11:10:35+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T11:10:35+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "bef5faf4683a5a8a",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

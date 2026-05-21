@@ -1,0 +1,209 @@
+{
+  "archetype": "Living End",
+  "format": "modern",
+  "strategy_type": "combo",
+  "overview": "Living End is a four-color combo deck that aims to cast cheap spells to trigger its namesake card, exiling the entire board and returning creatures with 0+ mana value to create an overwhelming advantage. It relies on interaction like Force of Negation and Subtlety to protect its combo pieces and control the game until the trigger resolves. The deck operates in Modern by leveraging a wide range of cheap instants and sorceries to reliably reach the necessary trigger count.",
+  "win_conditions": [
+    "Triggering Living End to exile all permanents and return creatures with 0+ mana value to the battlefield",
+    "Establishing a board state with multiple low-cost creatures that outvalue the opponent",
+    "Using interaction to stall until the combo can be assembled and resolved"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two cheap instants or sorceries",
+      "Hands containing Living End plus a trigger source",
+      "Hands with early interaction like Force of Negation or Subtlety"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking cheap trigger sources",
+      "Hands with only high-cost permanents",
+      "Hands missing interaction or combo pieces"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play cheap lands and trigger sources to build toward the Living End trigger",
+      "Use Force of Negation to counter key threats or protect your combo pieces",
+      "Hold Subtlety to silence problematic creatures or prevent opponent's interaction"
+    ],
+    "mid_game": [
+      "Continue casting cheap spells to reach the required trigger count for Living End",
+      "Maintain hand size and card advantage by cycling or drawing into more triggers",
+      "Use interaction to clear the path for your combo resolution"
+    ],
+    "late_game": [
+      "Cast Living End once you have enough triggers queued or in hand",
+      "Return a suite of low-cost creatures to dominate the board",
+      "Stall with remaining interaction if the combo is disrupted"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Living End",
+      "role": "Core combo piece that exiles all permanents and returns creatures with 0+ mana value",
+      "notes": "Cast only when you have enough cheap spells cast that turn or can queue them in the same turn to maximize the board reflood"
+    },
+    {
+      "name": "Force of Negation",
+      "role": "Priority 0 counter that protects combo pieces or shuts down threats",
+      "notes": "Use to counter opponent's removal or counterspells targeting your Living End or trigger sources | Used to counter Cord of Calling and Solitude to deal with Nadu while it is on the stack. (from gameplay) | Used to counter key combo pieces on the stack to prevent the opponent from drawing cards, serving as the primary interaction against the combo. (from gameplay)"
+    },
+    {
+      "name": "Subtlety",
+      "role": "Silence effect that prevents creatures from activating abilities or attacking",
+      "notes": "Hold to shut down problematic threats or use to protect your low-cost creatures from being removed by activated abilities | Mentioned as a card that counters can't help against in games 1 and 2, indicating it bypasses standard counter-magic interaction. (from gameplay) | Bypasses certain stack-based protections in games one and two, indicating it requires direct answers rather than relying on stack manipulation effects. (from gameplay)"
+    }
+  ],
+  "sequencing_tips": [
+    "Cast your cheapest instants and sorceries before Living End to ensure the trigger count is met",
+    "Hold interaction in hand to respond to opponent's attempts to disrupt your combo",
+    "Queue spells in the same turn as Living End to maximize the number of creatures returned"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and hold Subtlety to stall until you can trigger Living End",
+      "watch_for": [
+        "Fast removal",
+        "Board wipes",
+        "Pressure that forces you to play defensively"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Use Force of Negation to protect your combo pieces and cycle through your deck to find triggers",
+      "watch_for": [
+        "Counterspells",
+        "Hand disruption",
+        "Permanent removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Balance trigger casting with interaction to avoid being outvalued before your combo resolves",
+      "watch_for": [
+        "Efficient removal",
+        "Card advantage engines",
+        "Board presence"
+      ]
+    },
+    {
+      "opponent_archetype": "Azorius Control",
+      "advice": "Use Force of Negation to counter Cord of Calling and Solitude to counter Nadu while it is on the stack, preventing the opponent from drawing cards instead. (from gameplay) Include Dress Down to temporarily remove Nadu's abilities, disrupting its combo potential for a turn. (from gameplay) Sun Cleanser is highly effective against the energy package (Galvanic Discharge, Wrath of the Skies) because it removes all energy counters and prevents the opponent from gaining new ones. (from gameplay) The control list is specifically tuned to beat Bant Nadu, providing a strong advantage in games 1 and 2 before sideboard adjustments. (from gameplay) Prioritize countering key combo pieces on the stack with Force of Negation rather than playing board wipes that allow the opponent to draw cards instead. (from gameplay) Be aware that certain stack-protection effects do not help resolve key combo pieces against Subtlety in games one and two, requiring direct answers rather than stack manipulation. (from gameplay)",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Counterspells",
+    "Removal spells",
+    "Board wipes",
+    "Hand disruption"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T00:27:04+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T00:27:04+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=4NygNBb7BGA",
+      "publish_date": "2024-06-28T20:21:13Z",
+      "fetched_at": "2026-05-21T03:24:53+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Living End"
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=L65DILjrQN8",
+      "publish_date": "2024-06-30T14:30:07Z",
+      "fetched_at": "2026-05-21T03:25:59+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Living End"
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=1gXDVZfNxk4",
+      "publish_date": "2024-06-29T19:45:58Z",
+      "fetched_at": "2026-05-21T03:26:42+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Living End"
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "37a87aa230988b8a",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

@@ -1,0 +1,281 @@
+{
+  "archetype": "Coveted Jewel Combo",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "This Legacy combo deck evolved from the Paradox Engine/The One Ring archetype into a mono-blue list centered on Coveted Jewel. It generates exponential mana and card advantage by copying the Jewel with Copy Artifact or Phyrexian Metamorph, often swapping it for Paradox Engine via Transmute Artifact. The deck wins primarily by casting Emrakul, the Aeons Torn, but also features backup plans using Urza's Saga with Lavaspur Boots or Show and Tell for early game acceleration.",
+  "win_conditions": [
+    "Emrakul, the Aeons Torn",
+    "Urza's Saga generating Construct tokens with Lavaspur Boots",
+    "Show and Tell to cheat out Coveted Jewel or Emrakul, the Aeons Torn early"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing combo pieces like lands, artifact keys, Show and Tell, The One Ring, or Transmute Artifact",
+      "Hands that can execute the Coveted Jewel loop on turns 1-2"
+    ],
+    "mulligan_criteria": [
+      "Hands missing essential combo pieces",
+      "Hands with Urza's Saga but no sacrifice target",
+      "Hands with Force of Will but nothing to protect",
+      "Slow hands relying on relics or Paradox Engine without early acceleration"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Island",
+          "Key",
+          "Show and Tell"
+        ],
+        "decision": "keep",
+        "reason": "Play the island and the key on turn 1 and Show and Tell for Jewel on turn 2. Then you can access the key to create more mana and Copy Artifact to create even more mana and cards."
+      },
+      {
+        "hand": [
+          "Urza's Saga",
+          "Force of Will",
+          "Show and Tell"
+        ],
+        "decision": "mulligan",
+        "reason": "It has the Saga, but you can't activate it without sacrificing something. It has Force of Will, but nothing to protect, and Show and Tell, but nothing to put in play."
+      },
+      {
+        "hand": [
+          "Relic",
+          "Paradox Engine"
+        ],
+        "decision": "mulligan",
+        "reason": "You can't use Force of Will with it, and it is too slow in general."
+      },
+      {
+        "hand": [
+          "The One Ring",
+          "Transmute Artifact",
+          "Coveted Jewel"
+        ],
+        "decision": "keep",
+        "reason": "Play the Ring on turn 2, Transmute Artifact on it on turn 3 for Coveted Jewel, and then you'll follow the plan we mentioned before and just copy the jewel forever."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and artifact keys on turn 1",
+      "Use Show and Tell to cheat Coveted Jewel or The One Ring into play early",
+      "Hold Force of Will and Force of Negation to protect combo pieces from counterspells"
+    ],
+    "mid_game": [
+      "Tap Coveted Jewel to draw cards and generate mana",
+      "Copy the Jewel with Copy Artifact or Phyrexian Metamorph to accelerate the loop",
+      "Use Transmute Artifact to swap the Jewel for Paradox Engine to untap artifacts"
+    ],
+    "late_game": [
+      "Cast Emrakul, the Aeons Torn to win the game",
+      "Activate Urza's Saga chapters to generate Construct tokens and fetch Lavaspur Boots for an alternate win condition"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Coveted Jewel",
+      "role": "Core combo engine",
+      "notes": "Draws 3 cards and creates 3 mana when tapped, enabling the deck's exponential resource generation."
+    },
+    {
+      "name": "Copy Artifact",
+      "role": "Combo accelerator",
+      "notes": "Copies Coveted Jewel to double the mana and card draw output each turn."
+    },
+    {
+      "name": "Phyrexian Metamorph",
+      "role": "Combo accelerator",
+      "notes": "Alternative to Copy Artifact that can also copy opponent's artifacts like Archon of Cruelty."
+    },
+    {
+      "name": "Transmute Artifact",
+      "role": "Combo enabler",
+      "notes": "Swaps Coveted Jewel for Paradox Engine to untap artifacts and sustain the loop."
+    },
+    {
+      "name": "Show and Tell",
+      "role": "Early acceleration",
+      "notes": "Allows casting Coveted Jewel or Emrakul, the Aeons Torn way earlier than normal mana constraints."
+    },
+    {
+      "name": "Urza's Saga",
+      "role": "Backup win condition",
+      "notes": "Generates Construct tokens and fetches Lavaspur Boots for an aggressive alternate plan."
+    },
+    {
+      "name": "Force of Will",
+      "role": "Counter spell",
+      "notes": "Primary interactive answer to protect the combo or disrupt opponents, utilizing the blue card pool."
+    }
+  ],
+  "sequencing_tips": [
+    "Play the Jewel, tap it for mana and cards, then immediately play a Copy Artifact or Phyrexian Metamorph to copy it.",
+    "After copying, tap both to generate massive mana, then play Transmute Artifact to swap the original Jewel for Paradox Engine.",
+    "Untap the copied Jewel to draw more cards and generate mana, repeating the loop until you can cast Emrakul, the Aeons Torn.",
+    "Use Show and Tell on turn 2 if you lack early mana acceleration, cheating the Jewel or Ring into play.",
+    "Save Force of Will and Force of Negation for opponent's disruptive spells or key threats rather than wasting them early."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Scaminator (UB Scam Hybrid)",
+      "advice": "Side in Leyline of the Void to disrupt their graveyard strategy. Use Phyrexian Metamorph to copy and kill Archon of Cruelty.",
+      "watch_for": [
+        "Hand disruption",
+        "Accelerated Show and Tell"
+      ]
+    },
+    {
+      "opponent_archetype": "Grixis / Temur / 4C Delver",
+      "advice": "Side in Wurmcoil Engine and Lodestone Golem. Use Show and Tell to bypass counterspells. Be careful of Meltdown.",
+      "watch_for": [
+        "Wasteland",
+        "Daze",
+        "Counterspells",
+        "Meltdown"
+      ]
+    },
+    {
+      "opponent_archetype": "Goblin Stompy",
+      "advice": "Save Force of Will for Goblin threats or Muxus, Goblin Grandee. Counter the nameless Goblin if played before their land. Side out Saga if they run Moon effects.",
+      "watch_for": [
+        "Muxus, Goblin Grandee",
+        "Cavern of Souls",
+        "Blood Moon effects"
+      ]
+    },
+    {
+      "opponent_archetype": "Beanstalk Control",
+      "advice": "They usually lack enough counters to stop the Ring or Jewel. Side in Chain of Vapor to free artifacts stuck by Leyline Binding.",
+      "watch_for": [
+        "Leyline Binding",
+        "Counterspells"
+      ]
+    },
+    {
+      "opponent_archetype": "Red Stompy",
+      "advice": "Side in all Force of Negation for Blood Moon and Null Rod. Side in Wurmcoil Engine but expect Broadside Bombardiers to reduce its impact. Expect 6-7 Moon effects post-side.",
+      "watch_for": [
+        "Blood Moon",
+        "Null Rod",
+        "Magus of the Moon",
+        "Broadside Bombardiers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Null Rod",
+    "Blood Moon",
+    "Deafening Silence",
+    "Wasteland",
+    "Daze",
+    "Leyline Binding",
+    "Chalice of the Void",
+    "Trinisphere",
+    "Meltdown",
+    "Broadside Bombardiers"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-deck-tech-coveted-jewel-combo",
+    "generated_at": "2026-05-21T08:33:27+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/legacy-deck-tech-coveted-jewel-combo",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:31:55+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "dc276597d92d7626",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "this deck starts moving extremely fast, and creates cards and mana at an absurd pace... Eventually, this deck will play an Emrakul, the Aeons Torn and that's the end of the match."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Eventually, this deck will play an Emrakul, the Aeons Torn and that's the end of the match."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Urza's Saga... Lavaspur Boots, which the Saga's third chapter will get for you so you can already attack with 2 construct tokens as early as turn 3."
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "this deck uses Show and Tell as a way to play Coveted Jewel way earlier than you'd usually be able to. But it can also play Emrakul, the Aeons Torn for just 3 mana"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "you play the jewel, draw 3 cards, tap it, create 3 mana, play a Copy Artifact or Phyrexian Metamorph, draw 3 cards, tap it, create 3 mana, play Transmute Artifact, swap the jewel for Paradox Engine"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "this deck uses Show and Tell as a way to play Coveted Jewel way earlier than you'd usually be able to."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "vulnerable to Null Rod"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "gigantic problems like Blood Moon, Null Rod or Deafening Silence"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "get the Ring or the jewel through Wasteland and Daze"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Be careful with Meltdown"
+    },
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "they are not the auto-win play they once were because of Broadside Bombardiers"
+    }
+  ]
+}

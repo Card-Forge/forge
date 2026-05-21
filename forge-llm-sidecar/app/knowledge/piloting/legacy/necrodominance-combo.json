@@ -1,0 +1,157 @@
+{
+  "archetype": "Necrodominance Combo",
+  "format": "legacy",
+  "strategy_type": "combo",
+  "overview": "Necrodominance Combo is a Legacy U/B/G deck that leverages fast artifact mana to accelerate into Beseech the Mirror. By copying key permanents early, the deck generates overwhelming value, infinite mana, or direct win conditions before opponents can stabilize. Success relies on precise sequencing and protecting the combo engine from disruption.",
+  "win_conditions": [
+    "Copying a mana-producing artifact with Beseech the Mirror to generate infinite mana",
+    "Using Beseech the Mirror on a creature to trigger multiple combat damage or ability resolutions",
+    "Accelerating into a game-ending spell via Chrome Mox and Lotus Petal"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two mana sources (Chrome Mox, Lotus Petal, or lands)",
+      "Hands containing Beseech the Mirror plus acceleration",
+      "Hands with a clear path to turn two or three combo execution"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking artifact lands or mox/lotus synergy",
+      "Hands with only slow ramp or no combo pieces",
+      "Hands missing color fixing for U/B/G spells"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing Chrome Mox and Lotus Petal to enable early Beseech the Mirror",
+      "Play lands and hold up colors for U/B/G spells",
+      "Avoid unnecessary combat to preserve combo pieces"
+    ],
+    "mid_game": [
+      "Execute Beseech the Mirror on a key permanent to generate value or mana",
+      "Use copied permanents to cast game-ending spells or stabilize",
+      "Apply pressure if combo is disrupted to buy time"
+    ],
+    "late_game": [
+      "Reassemble combo pieces using draw spells or recursion",
+      "Leverage multiple artifact permanents for repeated Beseech the Mirror copies",
+      "Close out the game with overwhelming resource advantage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Chrome Mox",
+      "role": "Fast mana acceleration",
+      "notes": "Play on turn one to enable early Beseech the Mirror or color fixing for U/B/G spells"
+    },
+    {
+      "name": "Lotus Petal",
+      "role": "Colorless mana ramp",
+      "notes": "Provides early mana to cast Beseech the Mirror or other combo enablers ahead of schedule"
+    },
+    {
+      "name": "Beseech the Mirror",
+      "role": "Core combo engine",
+      "notes": "Copy a key artifact or creature to generate infinite mana, trigger multiple abilities, or resolve a game-ending effect"
+    }
+  ],
+  "sequencing_tips": [
+    "Always play Chrome Mox before Lotus Petal to maximize color fixing early",
+    "Hold up mana for Beseech the Mirror before committing to other spells",
+    "Prioritize copying permanents that generate mana or card advantage first"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize speed and use artifact lands to block early threats",
+      "watch_for": [
+        "Early creature attacks",
+        "Artifact hate like Smashing Hammer",
+        "Board wipes that clear your combo setup"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells and prioritize going first",
+      "watch_for": [
+        "Counterspell",
+        "Rest in Peace",
+        "Teferi, Hero of Dominaria"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Race for board presence and disrupt their setup with interaction",
+      "watch_for": [
+        "Fast win conditions",
+        "Hand disruption",
+        "Priority for turn two plays"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Rest in Peace",
+    "Smashing Hammer",
+    "Counterspell",
+    "Doomsday",
+    "Beloved Chaplain"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:30:23+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:30:23+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "2f70ce6fcede8f6c",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

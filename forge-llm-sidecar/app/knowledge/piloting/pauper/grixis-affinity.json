@@ -1,0 +1,282 @@
+{
+  "archetype": "Grixis Affinity",
+  "format": "pauper",
+  "strategy_type": "control",
+  "overview": "Grixis Affinity is a value-focused control deck in Pauper that relies on card advantage, efficient removal, and resilient creatures to outlast opponents. Despite a slower early game due to tap lands, it excels at trading at instant speed and overwhelming opponents with accumulated resources. Key synergies like Krark-Clan Shaman and Toxin Analysis provide board control, while Refurbished Familiar offers consistent pressure and card selection.",
+  "win_conditions": [
+    "Drowning opponent in resources to control the game",
+    "Krark-Clan Shaman and Toxin Analysis combo",
+    "Atog + Fling play",
+    "Refurbished Familiar pressure and card advantage"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands that draw cards efficiently on the first few turns",
+      "Hands that develop the game plan"
+    ],
+    "mulligan_criteria": [
+      "Hands with only one land"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Islet of Refuge",
+          "Refurbished Familiar",
+          "Cast Down",
+          "Galvanic Blast",
+          "Candy Trail",
+          "Kenku Artificer",
+          "Mountain"
+        ],
+        "decision": "keep",
+        "reason": "Multiple lands and early card draw/removal align with prioritizing efficient first-turn development."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play slowly due to tap lands",
+      "Prioritize efficient card draw and game plan development"
+    ],
+    "mid_game": [
+      "Draw cards and hoard resources",
+      "Trade well at instant speed",
+      "Disrupt opponent's board with Krark-Clan Shaman and Toxin Analysis"
+    ],
+    "late_game": [
+      "Drown opponent in accumulated resources",
+      "Take full control of the game after opponent spends resources"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Refurbished Familiar",
+      "role": "Creature/Removal/Card Advantage",
+      "notes": "2/1 flying that enters for {1}{U}, removes resources or gives card advantage."
+    },
+    {
+      "name": "Krark-Clan Shaman",
+      "role": "Creature/Removal",
+      "notes": "Creature-shaped removal that destroys nonflying creatures and combos with Toxin Analysis."
+    },
+    {
+      "name": "Cast Down",
+      "role": "Instant/Removal",
+      "notes": "Essential removal for threats Krark or Galvanic Blast can't reach."
+    },
+    {
+      "name": "Galvanic Blast",
+      "role": "Sorcery/Removal",
+      "notes": "Nearly always deals 4 damage; can be held in hand until opponent is in range then played all at once."
+    },
+    {
+      "name": "Candy Trail",
+      "role": "Instant/Card Advantage",
+      "notes": "Lets you select cards and provides card advantage as well as life gain."
+    },
+    {
+      "name": "Myr Enforcer",
+      "role": "Creature/Pressure",
+      "notes": "Extremely effective on battlefield and excellent sacrifice target for Reckoner's Bargain."
+    }
+  ],
+  "sequencing_tips": [
+    "Keep two or three Galvanic Blasts in hand until opponent is in range, then play them all at once",
+    "Trade well at instant speed to punish opponent mistakes",
+    "Sacrifice Myr Enforcer to Reckoner's Bargain when facing Kuldotha Red",
+    "Use Krark-Clan Shaman and Toxin Analysis to clear the board after disrupting ramp"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Glee Combo",
+      "advice": "Stick Myr Enforcers and Refurbished Familiars for pressure, use Krark+Toxin but watch for protection.",
+      "watch_for": [
+        "Turn 3 combo",
+        "Counters",
+        "Protection spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Dimir Faeries",
+      "advice": "Play reactively, trade at instant speed, and side in Red Elemental Blast.",
+      "watch_for": [
+        "Nihil Spellbomb",
+        "Spellstutters",
+        "Sneaky Snacker",
+        "The Modern Age"
+      ]
+    },
+    {
+      "opponent_archetype": "Gruul Ramp",
+      "advice": "Disrupt ramp game plan, use Krark+Toxin to clear board, and take control after resources are spent.",
+      "watch_for": [
+        "Avenging Hunter",
+        "Gigantic board presence"
+      ]
+    },
+    {
+      "opponent_archetype": "Izzet Terror",
+      "advice": "Don't worry too much about graveyard, avoid drowning in 1/1 tokens.",
+      "watch_for": [
+        "Murmuring Mystic",
+        "1/1 tokens"
+      ]
+    },
+    {
+      "opponent_archetype": "Kuldotha Red",
+      "advice": "Protect life total, sacrifice Myr Enforcer to Reckoner's Bargain, and side in Blue Elemental Blast.",
+      "watch_for": [
+        "Fast opening hand",
+        "Reckoner's Bargain"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Turn 3 combo",
+    "Nihil Spellbomb",
+    "Spellstutters",
+    "Avenging Hunter",
+    "Murmuring Mystic",
+    "Reckoner's Bargain",
+    "Counters",
+    "Protection spells"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-grixis-affinity-deck-tech-and-sideboard-guide",
+    "generated_at": "2026-05-21T09:10:04+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-grixis-affinity-deck-tech-and-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:08:34+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "08b867779fd6e216",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Currently, Affinity plays like a control deck with a game plan that focuses very heavily on value."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "drown your opponent in them and control the game"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "the combo with Toxin Analysis is simply absurd"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "the famous Atog + Fling play"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Refurbished Familiar is one of the main reasons why this deck is still relevant"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "keep two or three Galvanics in your hand until your opponent is just in range of them, and then play all of them at once"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Affinity can play reactive matches really well: it trades well at instant speed"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Myr Enforcer is an excellent sacrifice for Reckoner's Bargain"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "use Krark + Toxin to clear the board"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "precautions against their turn 3 combo"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Nihil Spellbomb is quite strong"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Be careful with Spellstutters"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Be careful with Avenging Hunter"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Murmuring Mystic is dangerous"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Myr Enforcer is an excellent sacrifice for Reckoner's Bargain"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "when they don't have counters, Affinity is favored"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "be careful with your opponent's protection"
+    }
+  ]
+}

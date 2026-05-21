@@ -1,0 +1,154 @@
+{
+  "archetype": "Mono-Black Midrange",
+  "format": "modern",
+  "strategy_type": "midrange",
+  "overview": "Mono-Black Midrange in Modern leverages efficient disruption and card advantage to stabilize early and outvalue opponents in the late game. It relies on disruptive one-mana spells to dictate the board state before deploying resilient threats. The deck aims to control the pace without overcommitting resources, transitioning smoothly into a dominant endgame.",
+  "win_conditions": [
+    "Outlasting opponents through superior card advantage and removal efficiency",
+    "Deploying Kozilek's Command as a game-ending threat or board wipe",
+    "Establishing resilient creatures like Thought-Knot Seer to apply consistent pressure"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least one one-mana disruption spell",
+      "Hands containing a creature threat and a removal option",
+      "Two-mana curve hands that establish early board presence"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking disruption or early interaction",
+      "Mana-heavy hands with no one or two-drop",
+      "Hands that rely solely on late-game threats without setup"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Thoughtseize on turn one to disrupt opponent's combo or aggressive strategy",
+      "Deploy Thought-Knot Seer to gain card advantage and apply early pressure",
+      "Hold disruption for high-value targets while establishing a minimal board presence"
+    ],
+    "mid_game": [
+      "Trade efficiently using removal to clear opposing threats",
+      "Use Kozilek's Command to stabilize or take the lead when the board is favorable",
+      "Maintain card parity by leveraging Seer's death trigger and cheap spells"
+    ],
+    "late_game": [
+      "Deploy Kozilek's Command as a primary win condition or board reset",
+      "Outvalue opponents by consistently generating card advantage",
+      "Close out games with resilient threats that are difficult to remove efficiently"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Thoughtseize",
+      "role": "One-mana disruption",
+      "notes": "Use on turn one to remove key combo pieces, early threats, or game-winning spells. Prioritize targets that significantly alter the opponent's game plan."
+    },
+    {
+      "name": "Thought-Knot Seer",
+      "role": "Card advantage engine",
+      "notes": "Play early to trigger its death ability, drawing a card when it dies. Use it to block efficiently and generate value over multiple turns."
+    },
+    {
+      "name": "Kozilek's Command",
+      "role": "Late-game threat and board control",
+      "notes": "Deploy when you have a favorable board state or need to clear opposing creatures. Use its modal abilities to stabilize, draw cards, or finish the game."
+    }
+  ],
+  "sequencing_tips": [
+    "Always play Thoughtseize before committing creatures to the board",
+    "Hold Kozilek's Command until you have a clear board advantage or need a reset",
+    "Trigger Thought-Knot Seer's death ability as early as possible to maximize card draw",
+    "Prioritize removing high-impact threats over low-value blockers"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Disrupt early game plans with Thoughtseize and establish resilient blockers. Use Kozilek's Command to clear boards and stabilize.",
+      "watch_for": [
+        "Early aggressive threats",
+        "Burn spells",
+        "Fast clock strategies"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply early pressure with Seer and cheap threats. Use Kozilek's Command to outvalue their removal suite and close the game.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Identify and remove key combo pieces immediately with Thoughtseize. Disrupt their setup phase to prevent them from assembling their win condition.",
+      "watch_for": [
+        "Key combo enablers",
+        "Ramp spells",
+        "Protection spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "High-impact combo pieces"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:21:17+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:21:17+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "b98440e06798006b",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "archetype": "Mono-Blue Spellementals",
+  "format": "standard",
+  "strategy_type": "tempo",
+  "overview": "Mono-Blue Spellementals is a tempo strategy that leverages spell-casting triggers to generate card advantage and board presence. By consistently playing instants and sorceries, the deck activates abilities on creatures like Sunderflock and Eddymurk Crab to outpace opponents. The goal is to stabilize early, control the board with efficient answers, and close the game through accumulated value and token generation.",
+  "win_conditions": [
+    "Accumulating card advantage through spell-triggered draw effects",
+    "Generating a wide board of creature tokens to attack",
+    "Outlasting opponents through efficient removal and counterspells",
+    "Direct damage from spell-triggered abilities"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with one-drops or early interaction to protect spell triggers",
+      "Multiple spell-casting outlets to activate Sunderflock and Eddymurk Crab",
+      "A mix of land and cheap instants/sorceries for turn-one or turn-two plays"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early interaction or spell density",
+      "Hands with too many lands or high-cost creatures without early plays",
+      "Hands that cannot cast spells on curve to trigger key abilities"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cheap spells to establish board presence",
+      "Prioritize casting instants to trigger spell abilities immediately",
+      "Use early interaction to protect key creatures from removal"
+    ],
+    "mid_game": [
+      "Maintain spell density to maximize token generation and card draw",
+      "Trade efficiently while preserving your trigger engines",
+      "Apply pressure with creatures while holding up answers for opponent's threats"
+    ],
+    "late_game": [
+      "Leverage accumulated card advantage to outvalue opponents",
+      "Flood the board with tokens to overwhelm defenses",
+      "Use counterspells to shut down game-winning attempts while closing with your army"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Three Steps Ahead",
+      "role": "Card draw and token generation",
+      "notes": "Cast as an instant to trigger spell abilities while refilling your hand and creating a 1/1 Spirit token for board presence."
+    },
+    {
+      "name": "Sunderflock",
+      "role": "Spell-trigger engine and board presence",
+      "notes": "Keep protected in the early game; each spell cast activates its ability to generate value or tokens, so prioritize casting other spells while it is on the battlefield."
+    },
+    {
+      "name": "Eddymurk Crab",
+      "role": "Spell-trigger engine and direct damage",
+      "notes": "Functions as a secondary trigger source; cast spells freely to activate its ability, and use it to apply pressure or finish games through accumulated damage."
+    }
+  ],
+  "sequencing_tips": [
+    "Cast instants before playing creatures to maximize trigger counts",
+    "Hold up interaction for opponent's key threats before committing to trigger engines",
+    "Prioritize drawing cards with Three Steps Ahead when your hand is low to maintain spell density",
+    "Use token generation to block multiple attackers while preserving your main creatures"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and hold up counterspells for key threats; use spell triggers to generate blockers quickly.",
+      "watch_for": [
+        "Early sweepers",
+        "Fast curve creatures",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply consistent pressure with tokens and creatures while using card draw to outlast their hand; avoid overcommitting to triggers if they have board wipes.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them by maximizing spell density and token generation; use interaction to disrupt their value creatures.",
+      "watch_for": [
+        "Value creatures",
+        "Removal spells",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Board wipes that clear your trigger engines",
+    "Counterspells that stop your key instants",
+    "Direct damage spells that bypass your blockers",
+    "High-toughness creatures that are hard to remove"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:27:30+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:27:30+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "1d816844b941cbb3",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

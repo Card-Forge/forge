@@ -1,0 +1,155 @@
+{
+  "archetype": "Goblins",
+  "format": "modern",
+  "strategy_type": "aggro",
+  "overview": "This B/R/G Modern deck leverages cheap Goblin creatures alongside targeted discard and combat tricks to overwhelm opponents before they can stabilize. By combining rapid board presence with hand disruption, it aims to dictate the pace and close games quickly.",
+  "win_conditions": [
+    "Overwhelm with pumped Goblin tokens and creatures",
+    "Deplete opponent's hand via Conspicuous Snoop and Boggart Trawler death triggers",
+    "Push lethal damage using Birthing Ritual combat tricks"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more cheap Goblins",
+      "Access to early discard effects",
+      "Birthing Ritual paired with a creature"
+    ],
+    "mulligan_criteria": [
+      "High mana curve with no early threats",
+      "Lack of interaction or board presence",
+      "Hands missing both discard and pump effects"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Deploy low-cost Goblins to establish immediate pressure",
+      "Play Conspicuous Snoop or Boggart Trawler to force early discards",
+      "Hold up mana for potential combat tricks"
+    ],
+    "mid_game": [
+      "Use Birthing Ritual to pump attackers or block efficiently",
+      "Cycle through discard triggers to strip opponent's answers",
+      "Maintain board advantage while searching for finishers"
+    ],
+    "late_game": [
+      "Leverage accumulated board presence to close out the match",
+      "Use remaining discard effects to clear late-game threats",
+      "Push for lethal with maximized combat damage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Birthing Ritual",
+      "role": "Instant pump spell",
+      "notes": "Cast during combat to boost attackers or save blockers; synergizes with cheap Goblins to push lethal"
+    },
+    {
+      "name": "Conspicuous Snoop",
+      "role": "Discard enabler",
+      "notes": "Sacrifice or let it die to force opponent to discard, disrupting their game plan early"
+    },
+    {
+      "name": "Boggart Trawler",
+      "role": "Aggressive discard threat",
+      "notes": "Provides early board presence and triggers discard on death, applying pressure while stripping resources"
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize playing discard creatures before pumping to maximize hand disruption",
+    "Save Birthing Ritual for combat tricks rather than static board states",
+    "Manage hand size carefully to avoid discarding key cards when multiple death triggers resolve"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Focus on stripping counterspells and removal via discard triggers, then push aggressive damage",
+      "watch_for": [
+        "Counterspell",
+        "Rest in Peace",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Race the board while using discard to remove their key threats, prioritize blocking efficiently",
+      "watch_for": [
+        "Lightning Strike",
+        "Abrupt Decay",
+        "Early wide boards"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Establish early pressure before they stabilize, use discard to delay their value engines",
+      "watch_for": [
+        "Tarmogoyf",
+        "Fatal Push",
+        "Kethic Arsonist"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspell",
+    "Lightning Strike",
+    "Fatal Push",
+    "Tarmogoyf",
+    "Rest in Peace"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:48:07+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:48:07+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ]
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "0be9adc195ac77de",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Goblin archetype in Modern with Birthing Ritual, Conspicuous Snoop, Boggart Trawler"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Signature cards provide pump and discard effects"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Interaction between pump and discard mechanics in B/R/G Goblin lists"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard Modern threats relevant to aggressive discard strategies"
+    }
+  ]
+}

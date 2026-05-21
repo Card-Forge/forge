@@ -1,0 +1,156 @@
+{
+  "archetype": "Sultai Excruciator",
+  "format": "standard",
+  "strategy_type": "midrange",
+  "overview": "Sultai Excruciator is a midrange deck that leverages graveyard recursion and sacrifice synergies to generate card advantage and stabilize games. By cycling threats into the graveyard and replaying them via Emeritus of Ideation, the deck maintains board presence while using Rakshasa's Bargain to convert excess creatures into life and cards. Deceit provides additional disruption and value, allowing the pilot to outlast aggressive strategies and close out control matchups.",
+  "win_conditions": [
+    "Outvaluing opponents through repeated creature recursion and life gain",
+    "Establishing a resilient board state that pressures life totals while surviving removal",
+    "Using Deceit to disrupt opponent's game plan and secure key trades"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early land drops (2-3)",
+      "Hands containing Emeritus of Ideation or Rakshasa's Bargain",
+      "Hands with a mix of creatures and recursion/removal"
+    ],
+    "mulligan_criteria": [
+      "Hands with 0-1 lands",
+      "Hands lacking any graveyard interaction or threats",
+      "Hands with only high-cost cards and no early plays"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and low-cost creatures to establish board presence",
+      "Use early disruption or Deceit to counter opponent's opening strategy",
+      "Begin cycling creatures to set up the graveyard for recursion"
+    ],
+    "mid_game": [
+      "Cast Emeritus of Ideation to replay key spells from the graveyard",
+      "Activate Rakshasa's Bargain to convert excess creatures into card advantage and life gain",
+      "Maintain board control while building toward a winning board state"
+    ],
+    "late_game": [
+      "Leverage repeated recursion to overwhelm opponent's resources",
+      "Use life gain to stabilize against burn or aggressive finishes",
+      "Close out games with resilient threats that are difficult to remove permanently"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Deceit",
+      "role": "Disruption and value generation",
+      "notes": "Use to counter key threats or set up graveyard synergies; prioritize targeting opponent's win conditions or protecting your recursion engines."
+    },
+    {
+      "name": "Rakshasa's Bargain",
+      "role": "Card advantage and life gain",
+      "notes": "Sacrifice excess or damaged creatures to draw cards and stabilize life total; hold for when you have multiple bodies on board."
+    },
+    {
+      "name": "Emeritus of Ideation",
+      "role": "Graveyard recursion engine",
+      "notes": "Deploy to replay instants, sorceries, or creatures from the graveyard; protect it as it enables repeated value and board presence."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize cycling creatures before casting Rakshasa's Bargain to maximize draw and life gain",
+    "Hold Deceit for opponent's key plays rather than using it preemptively",
+    "Cast Emeritus of Ideation after filling the graveyard with relevant spells to maximize replay value"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Focus on early disruption and life gain to survive the initial rush",
+      "watch_for": [
+        "Early board wipes",
+        "Fast finishers",
+        "Removal that targets your recursion engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Use Deceit to bypass counterspells and apply steady pressure with resilient threats",
+      "watch_for": [
+        "Board wipes",
+        "Counterspell packages",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race the opponent by maximizing card advantage through sacrifice and recursion",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw engines",
+        "Board control spells"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Counterspells and removal",
+    "Graveyard hate"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T07:00:23+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T07:00:23+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "8647233686abac87",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "signature cards and Sultai color identity"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "deck name and signature card effects"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "mechanical interactions of signature cards"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard format meta trends and deck vulnerabilities"
+    }
+  ]
+}

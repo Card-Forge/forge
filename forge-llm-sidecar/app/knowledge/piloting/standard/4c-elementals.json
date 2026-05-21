@@ -1,0 +1,157 @@
+{
+  "archetype": "4c Elementals",
+  "format": "standard",
+  "strategy_type": "midrange",
+  "overview": "This four-color Standard deck leverages a resilient elemental creature base to control the board while generating incremental advantage. By cycling through Wistfulness for card draw, Deceit for board manipulation, and Vibrance for mana acceleration, the pilot aims to outlast early pressure and close games with a superior resource count. The strategy relies on flexible interaction and steady value generation rather than explosive combos.",
+  "win_conditions": [
+    "Combat damage from a wide board of elementals",
+    "Card advantage loops fueled by Wistfulness",
+    "Overwhelming mana production via Vibrance to deploy multiple threats"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early elemental creatures or mana dorks",
+      "Hands containing Wistfulness or Deceit for early interaction",
+      "Hands with at least three lands and a playable curve"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early plays or land drops",
+      "Hands heavy on late-game cards without acceleration",
+      "Hands missing key interaction or elemental synergies"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and low-cost elementals to establish board presence",
+      "Use Deceit to disrupt opponent's early threats or bounce their creatures",
+      "Prioritize keeping the board clear while searching for Wistfulness"
+    ],
+    "mid_game": [
+      "Deploy Vibrance to accelerate mana and enable larger elementals",
+      "Cast Wistfulness to refill the hand and maintain pressure",
+      "Trade efficiently while preserving key removal for bigger threats"
+    ],
+    "late_game": [
+      "Flood the board with high-impact elementals using excess mana",
+      "Leverage card advantage to out-resource control decks",
+      "Close out games with wide attacks or targeted finishers"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Wistfulness",
+      "role": "Card draw and hand refresher",
+      "notes": "Cast when behind on cards or to enable multiple spells in a turn; prioritize keeping it in mulligans for consistency."
+    },
+    {
+      "name": "Deceit",
+      "role": "Board manipulation and disruption",
+      "notes": "Use to bounce opponent's key threats, protect your elementals, or set up favorable trades; hold up for instant-speed interaction if possible."
+    },
+    {
+      "name": "Vibrance",
+      "role": "Mana acceleration and stat boosting",
+      "notes": "Play early to enable faster curve; use its abilities to pump elementals or generate extra mana for late-game sweeps."
+    }
+  ],
+  "sequencing_tips": [
+    "Lead with Deceit to clear paths for early elementals before committing resources",
+    "Cast Wistfulness after resolving threats to ensure you have answers for the next turn",
+    "Use Vibrance's mana generation to smooth out four-color mana base clumps",
+    "Hold interaction until opponent commits to a play to maximize efficiency"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early Deceit to bounce or remove key attackers; use Wistfulness to find answers and stabilize.",
+      "watch_for": [
+        "Early sweepers",
+        "Fast mana acceleration",
+        "Low-cost wide threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply steady pressure with elementals; use Vibrance to race their finishers; save Deceit for their game-winning cards.",
+      "watch_for": [
+        "Board wipes",
+        "Permanent removal",
+        "Stax effects that hinder casting"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their key combo pieces with Deceit; use Wistfulness to draw into counters or disruption; race if they lack interaction.",
+      "watch_for": [
+        "Mana dorks",
+        "Draw engines",
+        "Win-condition pieces"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board-wide removal spells",
+    "Card draw and value engines",
+    "Mana acceleration artifacts"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:13:54+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:13:54+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "6d8c6002c4b75605",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype name, format, and signature cards provided in prompt"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Derived from elemental archetype mechanics and signature card names"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard tempo/midrange piloting principles applied to provided signature cards"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard format meta expectations and archetype counterplay needs"
+    }
+  ]
+}

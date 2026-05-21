@@ -1,0 +1,157 @@
+{
+  "archetype": "Simic Landfall",
+  "format": "standard",
+  "strategy_type": "ramp",
+  "overview": "Simic Landfall leverages the landfall mechanic to accelerate resource generation and grow threats rapidly. By playing multiple lands per turn and cycling through Earthbender Ascension, the deck triggers landfall repeatedly to buff Badgermole Cub and Mightform Harmonizer. This approach aims to outpace opponents through consistent board presence and incremental value generation.",
+  "win_conditions": [
+    "Trigger landfall repeatedly to grow Badgermole Cub and Mightform Harmonizer into unblockable threats",
+    "Use Earthbender Ascension to accelerate land drops and trigger landfall on turn 3-4",
+    "Outvalue opponents through continuous landfall triggers and board presence"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least two lands and a landfall-triggering creature",
+      "Hands containing Earthbender Ascension with early land drops",
+      "Hands with multiple low-cost creatures that benefit from landfall"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking lands or landfall synergy",
+      "Hands with only high-cost cards and no ramp",
+      "Hands with multiple removal spells but no threats"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize playing lands to trigger landfall before casting creatures",
+      "Establish early board presence with Badgermole Cub",
+      "Hold up mana for potential Earthbender Ascension plays"
+    ],
+    "mid_game": [
+      "Play multiple lands per turn to maximize landfall triggers",
+      "Use Earthbender Ascension to fetch lands and trigger landfall repeatedly",
+      "Grow Mightform Harmonizer and other threats to control the board"
+    ],
+    "late_game": [
+      "Maintain landfall triggers every turn to keep threats growing",
+      "Use excess mana to play lands and trigger landfall even when ahead",
+      "Close out games with large, unblockable creatures and board presence"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Badgermole Cub",
+      "role": "Early-game landfall beneficiary",
+      "notes": "Play on turns when lands enter to trigger growth or value; keep it safe until it becomes a significant threat."
+    },
+    {
+      "name": "Earthbender Ascension",
+      "role": "Ramp and landfall trigger engine",
+      "notes": "Use to play extra lands or search for lands, ensuring landfall triggers on the same turn; hold up mana if needed for counterspells."
+    },
+    {
+      "name": "Mightform Harmonizer",
+      "role": "Mid-to-late game board presence",
+      "notes": "Synergizes with landfall to grow or buff other creatures; prioritize keeping it alive to maximize cumulative triggers."
+    }
+  ],
+  "sequencing_tips": [
+    "Always play lands before casting creatures to ensure landfall triggers on the same turn",
+    "Hold up mana for Earthbender Ascension when you suspect opponent interaction",
+    "Prioritize landfall triggers over combat damage when you are ahead in board state",
+    "Sequence removal to protect key landfall beneficiaries before they are fully grown"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early land drops and landfall triggers to grow threats quickly; use Earthbender Ascension to accelerate past their early pressure.",
+      "watch_for": [
+        "Fast one-drop creatures",
+        "Board wipes",
+        "Early removal"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around counterspells by holding up mana; use landfall triggers to generate value even when spells are countered.",
+      "watch_for": [
+        "Counterspells",
+        "Board wipes",
+        "Card draw engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race with landfall triggers while using removal to clear their threats; maintain board presence to outvalue them.",
+      "watch_for": [
+        "Efficient removal",
+        "Card advantage engines",
+        "Late-game finishers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipes",
+    "Counterspells",
+    "Efficient removal spells"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:41:40+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:41:40+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "cbf7ec852f88c3ba",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": "Archetype name and signature cards indicate landfall synergy and ramp focus."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Derived from landfall mechanic and signature card interactions."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard landfall deck sequencing principles applied to signature cards."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Standard format meta threats that interact with ramp/landfall strategies."
+    }
+  ]
+}

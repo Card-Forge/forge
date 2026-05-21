@@ -1,0 +1,277 @@
+{
+  "archetype": "Izzet Lessons",
+  "format": "standard",
+  "strategy_type": "combo",
+  "overview": "Izzet Lessons is a Combo-Control archetype that leverages graveyard synergy and looting effects to generate massive card advantage. The deck combines Gran-Gran and Accumulate Wisdom with the Lessons package to fuel the Monument to Endurance and Artist's Talent engine. This synergy allows the deck to survive early aggression while accelerating into a late-game resource disparity that overwhelms opponents.",
+  "win_conditions": [
+    "Monument to Endurance and Artist's Talent engine",
+    "Gran-Gran and Accumulate Wisdom combo for card advantage",
+    "Stormchaser's Talent and Otters for board pressure"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early interaction like Firebending Lesson or Boomerang Basics",
+      "Hands containing Gran-Gran or Accumulate Wisdom with adequate land count",
+      "Hands that can proactively use mana to set up permanents"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early mana sources to proactively play permanents",
+      "Hands heavy on late-game cards without early interaction or one-drops",
+      "Hands without ways to fill the graveyard for Accumulate Wisdom"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Gran-Gran",
+          "Accumulate Wisdom",
+          "Boomerang Basics",
+          "Isolated Chapel",
+          "Steam Vents"
+        ],
+        "decision": "keep",
+        "reason": "Provides early interaction, a one-drop protector, and the core combo pieces with sufficient lands to play proactively."
+      },
+      {
+        "hand": [
+          "Monument to Endurance",
+          "Artist's Talent",
+          "Accumulate Wisdom",
+          "Firebending Lesson",
+          "Steam Vents"
+        ],
+        "decision": "mulligan",
+        "reason": "Lacks early mana and one-drops to set up the engine proactively, risking early beatdown."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play Gran-Gran as a one-drop to protect against early beatdown and enable Monument to Endurance",
+      "Use Firebending Lesson or Boomerang Basics for early spot removal and stalling",
+      "Proactively spend mana to set up permanents and avoid flooding"
+    ],
+    "mid_game": [
+      "Loot cards with Abandon Attachments to dig for answers and fill the graveyard with Lessons",
+      "Activate Monument to Endurance triggers by looting or attacking with Gran-Gran",
+      "Use Artist's Talent to reduce costs and filter the hand for combo pieces"
+    ],
+    "late_game": [
+      "Cast Accumulate Wisdom with three Lessons in the graveyard to draw three cards and create a massive resource disparity",
+      "Use Gran-Gran as a cost reducer for late-game spells",
+      "Leverage Monument to Endurance to recover from unfavorable matchups by generating mana or Lava Spikes"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Monument to Endurance",
+      "role": "Win condition and recovery engine",
+      "notes": "Turns looting effects into Lava Spikes, mana, or card advantage. Enables survival against aggro and acceleration against control."
+    },
+    {
+      "name": "Artist's Talent",
+      "role": "Selection engine and combo piece",
+      "notes": "Reduces costs and filters the hand to ensure resources keep flowing. Synergizes with Monument to Endurance."
+    },
+    {
+      "name": "Gran-Gran",
+      "role": "Ideal one-drop and cost reducer",
+      "notes": "Protects against early beatdown, enables Monument to Endurance with attack trigger, and reduces spell costs in the late game."
+    },
+    {
+      "name": "Accumulate Wisdom",
+      "role": "Core card advantage spell",
+      "notes": "Draws three cards for low cost when three Lessons are in the graveyard. Functions like Ancestral Recall when combined with cost reducers."
+    },
+    {
+      "name": "Stormchaser's Talent",
+      "role": "Pressure generator",
+      "notes": "Creates Otters with Prowess that opponents cannot ignore. Benefits from Boomerang Basics interactions."
+    },
+    {
+      "name": "Boomerang Basics",
+      "role": "Interaction and cantrip",
+      "notes": "Stalls beatdown, provides extra turns, and can return permanents to hand to reuse triggers."
+    },
+    {
+      "name": "Abandon Attachments",
+      "role": "Accelerator and looter",
+      "notes": "Digs for answers while putting Lessons into the graveyard to activate Accumulate Wisdom and Monument to Endurance."
+    },
+    {
+      "name": "Agna Qel'a",
+      "role": "Utility land",
+      "notes": "Avoids flooding by turning dead lands into discard fuel, providing another way to trigger Monument to Endurance."
+    }
+  ],
+  "sequencing_tips": [
+    "Sequence looting effects like Abandon Attachments before Monument to Endurance is on the battlefield to maximize value.",
+    "Return Stormchaser's Talent or Monument to Endurance to hand with Boomerang Basics to reset them as new objects and reuse all triggers.",
+    "Prioritize playing Gran-Gran early to protect against beatdown and enable Monument to Endurance triggers through combat.",
+    "Use Firebending Lesson early for spot removal, but hold it if you need to fill the graveyard with Lessons for Accumulate Wisdom."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Izzet Looting / Mirror",
+      "advice": "Side in Quantum Riddler and Soul-Guide Lantern. Use Lantern to lock combos and prevent opponent from extracting value from Lessons.",
+      "watch_for": [
+        "Opponent's Accumulate Wisdom triggers",
+        "Graveyard synergy"
+      ]
+    },
+    {
+      "opponent_archetype": "Reanimator",
+      "advice": "Side in Soul-Guide Lantern to lock their combo for a turn and prevent them from extracting more value.",
+      "watch_for": [
+        "Early graveyard threats",
+        "Combo attempts"
+      ]
+    },
+    {
+      "opponent_archetype": "Jeskai Artifacts / Control",
+      "advice": "Side in Annul and Price of Freedom to deal with problematic artifacts and enchantments. Use Abrade for proactive plays.",
+      "watch_for": [
+        "Board wipes",
+        "Artifact threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Go Wide / Bant Airbending / Simic Aggro",
+      "advice": "Side in Pyroclasm and Torch the Tower. Use Iroh's Demonstration to clear boards full of tokens.",
+      "watch_for": [
+        "Token swarms",
+        "Early beatdown"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Red Aggro",
+      "advice": "Side in Pyroclasm and Torch the Tower. Use Gran-Gran's body to block early and Monument to Endurance for recovery.",
+      "watch_for": [
+        "Early pressure",
+        "Direct damage spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Dimir Midrange",
+      "advice": "Side in Torch the Tower and Abrade. Focus on card advantage with Accumulate Wisdom to outvalue their threats.",
+      "watch_for": [
+        "Recurring threats",
+        "Death trigger creatures"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Early-game beatdown creatures",
+    "Boards full of tokens",
+    "Recurring threats or creatures with death triggers",
+    "Problematic artifacts and enchantments",
+    "Larger threats that require stack interaction"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-izzet-lessons-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T05:39:53+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/standard-izzet-lessons-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T05:38:24+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "c59807c74debe6ae",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "The archetype is a sort of Combo-Control, using the graveyard and looting effects to combine Accumulate Wisdom and Gran-Gran for card advantage, coupled with the Monument to Endurance and Artist's Talent engine as a win condition."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.95,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "coupled with the Monument to Endurance and Artist's Talent engine as a win condition."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "using the graveyard and looting effects to combine Accumulate Wisdom and Gran-Gran for card advantage"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Stormchaser's Talent generates pressure. The Otters with Prowess are threats the opponent cannot ignore"
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "can also return Stormchaser's Talent or Monument to Endurance to hand, where it becomes a new object and can reuse all triggers."
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Its attack trigger enables Monument to Endurance"
+    },
+    {
+      "confidence": 0.65,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": "Abandon Attachments functions as the accelerator. It digs for answers or engines while putting the necessary lessons into the graveyard"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Its body protects against early-game beatdown"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "allows clearing boards full of tokens"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "ideal for dealing with recurring threats or creatures with death triggers"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "deals with problematic artifacts and enchantments in the current Metagame"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "have difficulty dealing with larger threats"
+    }
+  ]
+}

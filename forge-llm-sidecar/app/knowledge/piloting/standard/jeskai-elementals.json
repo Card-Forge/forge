@@ -1,0 +1,166 @@
+{
+  "archetype": "Jeskai Elementals",
+  "format": "standard",
+  "strategy_type": "tempo",
+  "overview": "Jeskai Elementals operates as a tempo strategy that leverages disruptive sorceries and conditional ramp to outpace opponents. The deck uses Deceit to steal key spells or threats while generating card advantage, supported by Wistfulness to accelerate lands and draw cards when Elementals are on the battlefield. Roaming Throne provides flexible pump and counter manipulation to quickly scale small Elementals into formidable blockers or finishers.",
+  "win_conditions": [
+    "Beat down with pumped Elementals to close out games",
+    "Generate overwhelming card advantage through Wistfulness and Deceit",
+    "Control board state by copying opponent removal or threats via Deceit"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with at least one early Elemental or Roaming Throne",
+      "Hands containing Deceit paired with a land drop",
+      "Hands with Wistfulness and a playable creature"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking interaction or early board presence",
+      "Hands with only high-cost spells and no ramp",
+      "Hands missing lands or card draw engines"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play small Elementals to trigger Wistfulness's draw condition",
+      "Use Wistfulness to fetch lands and maintain mana advantage",
+      "Hold Deceit for opponent's turn to disrupt early threats"
+    ],
+    "mid_game": [
+      "Activate Roaming Throne to move counters onto key Elementals",
+      "Cast Deceit to copy opponent's removal or pump spells",
+      "Maintain board presence while cycling through card advantage"
+    ],
+    "late_game": [
+      "Scale Elementals into unblockable threats using Roaming Throne",
+      "Leverage Deceit to replicate late-game finishers or sweepers",
+      "Close games with mana advantage and superior board state"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Roaming Throne",
+      "role": "Counter pump and board presence",
+      "notes": "Enter with a +1/+1 counter, then tap to move it to an Elemental. Use it to quickly scale a 1/1 into a 2/2 or larger, or to save a key creature from removal by boosting its toughness."
+    },
+    {
+      "name": "Wistfulness",
+      "role": "Conditional ramp and card draw",
+      "notes": "Play it when you control an Elemental to draw a card while putting a land onto the battlefield. Use it to accelerate into Deceit or maintain tempo against aggressive decks."
+    },
+    {
+      "name": "Deceit",
+      "role": "Hand disruption and spell replication",
+      "notes": "Cast during your opponent's turn to reveal their hand and copy a nonland card. Target removal to protect your board, or copy threats to swing the game. Always consider holding it up for surprise timing."
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Deceit until your opponent's turn to maximize disruption and avoid wasting it on a dead hand",
+    "Cast Wistfulness immediately after playing an Elemental to secure the card draw and land drop in one turn",
+    "Move counters from Roaming Throne only when an Elemental needs immediate size to block or attack",
+    "Prioritize copying opponent's removal over threats when your board is vulnerable"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use Deceit to copy early removal or pump spells, and prioritize blocking with pumped Elementals. Wistfulness helps you outpace their mana curve.",
+      "watch_for": [
+        "Early wide boards",
+        "Direct damage spells",
+        "Creature sweepers"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Play around their board wipes by holding Deceit to copy their counterspells or removal. Use Roaming Throne to quickly recover board presence after a sweep.",
+      "watch_for": [
+        "Counterspell packages",
+        "Board wipes",
+        "Late-game value engines"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their key pieces with Deceit during their turn. Use Wistfulness to accelerate into interaction before they assemble their win condition.",
+      "watch_for": [
+        "Mana acceleration",
+        "Key combo pieces",
+        "Protection spells"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Race them with pumped Elementals while using Deceit to steal their value generators. Maintain tempo by trading efficiently and leveraging Wistfulness for card advantage.",
+      "watch_for": [
+        "Efficient removal",
+        "Card draw engines",
+        "Late-game threats"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Wide creature spreads that overwhelm early board presence",
+    "Board wipes that clear pumped Elementals",
+    "Counterspells that protect key combo pieces or threats",
+    "Direct damage spells that bypass blockers"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T06:21:57+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T06:21:57+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "04a953d50d343e86",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

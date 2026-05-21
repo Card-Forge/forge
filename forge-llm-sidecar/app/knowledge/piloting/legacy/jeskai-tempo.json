@@ -1,0 +1,134 @@
+{
+  "archetype": "Jeskai Tempo",
+  "format": "legacy",
+  "strategy_type": "tempo",
+  "overview": "Jeskai Tempo in Legacy leverages white, blue, and red to control the board while maintaining a steady stream of card advantage. By cycling through Ponder and Flow State, you smooth your draws and adapt to the opponent's strategy without falling behind. Tamiyo, Inquisitive Student provides a resilient source of value that disrupts opposing game plans while keeping you ahead in resources.",
+  "win_conditions": [
+    "Outdrawing opponents with Ponder and Tamiyo, Inquisitive Student",
+    "Closing games with efficient threats accelerated by Flow State",
+    "Disrupting opponent's key plays with cheap interaction and card selection"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands containing Ponder or Flow State for turn one or two",
+      "Hands with early disruption and a land drop",
+      "Hands featuring Tamiyo, Inquisitive Student alongside interaction"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking card draw or interaction",
+      "Hands with multiple lands and no spells",
+      "Hands without a clear path to turn one or two plays"
+    ],
+    "examples": []
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and cast Ponder to smooth draws",
+      "Use cheap interaction to disrupt opponent's early strategy",
+      "Establish board presence with efficient creatures"
+    ],
+    "mid_game": [
+      "Deploy Tamiyo, Inquisitive Student to generate card advantage",
+      "Cast Flow State to accelerate threats or draw into answers",
+      "Maintain tempo by trading efficiently and keeping the board clear"
+    ],
+    "late_game": [
+      "Leverage card advantage to outlast opponents",
+      "Close out games with resilient threats",
+      "Use draw spells to find finishers and stabilize"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Tamiyo, Inquisitive Student",
+      "role": "Card advantage engine",
+      "notes": "Play on curve to draw cards and disrupt opponent's board state while maintaining tempo"
+    },
+    {
+      "name": "Flow State",
+      "role": "Flexible utility spell",
+      "notes": "Use to draw cards, accelerate lands, or boost threats based on the current game state"
+    },
+    {
+      "name": "Ponder",
+      "role": "Card selection tool",
+      "notes": "Cast on turn one to smooth draws and find key interaction or threats for subsequent turns"
+    }
+  ],
+  "sequencing_tips": [
+    "Hold Ponder for turn one to maximize draw smoothing before committing resources",
+    "Cast Flow State before deploying threats to optimize resource efficiency",
+    "Use Tamiyo, Inquisitive Student to answer opponent's key plays while drawing cards to stay ahead"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Use Ponder to find answers to their disruption, and leverage Tamiyo, Inquisitive Student to outdraw them over the long game.",
+      "watch_for": [
+        "Counterspell",
+        "Board wipes",
+        "Resource denial"
+      ]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize early interaction and use Flow State to accelerate threats or draw into removal to stabilize.",
+      "watch_for": [
+        "Early aggression",
+        "Direct damage",
+        "Fast finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Disrupt their combo pieces early with Ponder and use Tamiyo, Inquisitive Student to stabilize the board.",
+      "watch_for": [
+        "Card draw spells",
+        "Combo enablers",
+        "Win conditions"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Counterspell",
+    "Lightning Bolt",
+    "Thoughtseize"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T08:31:52+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T08:31:52+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "147dbcdccdb27fe7",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [],
+  "sequencing_tips_evidence": [],
+  "common_threats_evidence": []
+}

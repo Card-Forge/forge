@@ -1,0 +1,305 @@
+{
+  "archetype": "Rakdos Midrange",
+  "format": "pioneer",
+  "strategy_type": "midrange",
+  "overview": "Rakdos Midrange is a value-oriented strategy that leverages high-impact creatures and discard spells to consistently make favorable trades and outlast opponents. Originally built around Lurrus and Kroxa, the post-ban version focuses on threats like Graveyard Trespasser and Bonecrusher Giant to pressure opponents while maintaining early control. The deck can flex between aggressive and control stances depending on the matchup, ultimately winning through sustained card advantage and resilient clocks.",
+  "win_conditions": [
+    "Kroxa, Titan of Death's Hunger acts as a resilient clock and card advantage engine",
+    "Graveyard Trespasser and Bonecrusher Giant deal damage and force favorable 2-for-1 trades",
+    "Planeswalkers like Chandra, Torch of Defiance and Sorin the Mirthless close out games through favorable trades",
+    "Fable of the Mirror-Breaker generates value and board presence to outvalue opponents"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with early discard spells like Duress or Thoughtseize",
+      "Hands containing key threats like Necromentia or Go Blank",
+      "Hands that enable early favorable trades or board control"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking early interaction or threats",
+      "Hands that cannot apply pressure or disrupt the opponent's game plan"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Duress",
+          "Necromentia",
+          "Graveyard Trespasser",
+          "Bonecrusher Giant",
+          "Fable of the Mirror-Breaker",
+          "Kroxa, Titan of Death's Hunger",
+          "Fatal Push"
+        ],
+        "decision": "keep",
+        "reason": "Contains turn 1 discard to find threats, a key value creature, and multiple removal options for favorable early trades."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play discards and removals to control the board and disrupt the opponent's hand",
+      "Seek turn 1 Duress or Thoughtseize to find key threats like Necromentia or Go Blank"
+    ],
+    "mid_game": [
+      "Deploy value threats like Graveyard Trespasser, Bonecrusher Giant, and Fable of the Mirror-Breaker",
+      "Make favorable 2-for-1 trades to gain card advantage and maintain board presence"
+    ],
+    "late_game": [
+      "Use Kroxa, Titan of Death's Hunger as a clock and recursion engine",
+      "Deploy Planeswalkers like Chandra, Torch of Defiance to close out games",
+      "Maintain board presence to outlast opponent's resources and finish with damage"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Kroxa, Titan of Death's Hunger",
+      "role": "Clock and card advantage engine",
+      "notes": "Provides excellent recursion and value; play carefully around counterspells and ensure exile removal is cleared from opponent's hand first."
+    },
+    {
+      "name": "Graveyard Trespasser",
+      "role": "Value threat",
+      "notes": "Forces favorable 2-for-1 trades by making opponents discard cards to kill it."
+    },
+    {
+      "name": "Bonecrusher Giant",
+      "role": "Aggressive threat",
+      "notes": "Deals two damage on entry and can be cast as a creature to close games quickly."
+    },
+    {
+      "name": "Fable of the Mirror-Breaker",
+      "role": "Value threat",
+      "notes": "Always a favorable trade; generates cards and a threat to pressure opponents."
+    },
+    {
+      "name": "Thoughtseize / Duress",
+      "role": "Hand disruption",
+      "notes": "Used early to remove key cards or find threats; Duress is preferred post-side against Planeswalkers."
+    },
+    {
+      "name": "Go Blank",
+      "role": "Late-game disruption",
+      "notes": "Removes high-cost threats and improves card advantage, especially effective post-side."
+    },
+    {
+      "name": "Kalitas, Traitor of Ghet",
+      "role": "Value creature",
+      "notes": "Gains life and turns removal into threats; save for last to bait opponent's removal spells."
+    },
+    {
+      "name": "Den of the Bugbear",
+      "role": "Board control",
+      "notes": "Used opportunistically to clear boards; vulnerable to cheap removal like March of Otherworldly Light."
+    }
+  ],
+  "sequencing_tips": [
+    "Play discard spells on turn 1 to find key threats like Necromentia or Go Blank.",
+    "Delay discarding against Winota until after turn 1 to avoid removing Esika's Chariot too early.",
+    "Use Fatal Push early to remove mana dorks like Elvish Mystic and Llanowar Elves.",
+    "Save Kalitas, Traitor of Ghet for last to bait opponent's removal spells.",
+    "Play Den of the Bugbear only at opportune times to avoid cheap removal like March of Otherworldly Light.",
+    "Take exile removals out of opponent's hand before playing Kroxa from the graveyard."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Lotus Field",
+      "advice": "Take an aggressive stance early and try to cast Kroxa on turn four. Side in discards to delay the combo and gain time.",
+      "watch_for": [
+        "Combo pieces",
+        "Key threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Azorius Control",
+      "advice": "Play carefully around counterspells to ensure key threats resolve. Side in Planeswalker removal like Fry and Noxious Grasp.",
+      "watch_for": [
+        "Censor",
+        "Teferi, Hero of Dominaria",
+        "The Wandering Emperor",
+        "Supreme Verdict",
+        "March of Otherworldly Light"
+      ]
+    },
+    {
+      "opponent_archetype": "Naya Winota",
+      "advice": "Adopt a control stance early, using removal on small creatures. Delay discards until after turn 1 to avoid Esika's Chariot.",
+      "watch_for": [
+        "Esika's Chariot",
+        "Elvish Mystic",
+        "Llanowar Elves",
+        "Tovolar's Huntmaster"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono-Red Burn",
+      "advice": "Play control and drag the game to later turns. Use discard to remove Planeswalkers and save Kalitas to bait removal.",
+      "watch_for": [
+        "Chandra, Dressed to Kill",
+        "Chandra, Torch of Defiance",
+        "Monastery Swiftspear",
+        "Soul-Scar Mage",
+        "Lava Coil",
+        "Redcap Melee"
+      ]
+    },
+    {
+      "opponent_archetype": "Rakdos Midrange",
+      "advice": "Use discards to handle Kalitas and Graveyard Trespasser. Save Dreadbore for Planeswalkers and trade creatures in combat.",
+      "watch_for": [
+        "Kalitas, Traitor of Ghet",
+        "Graveyard Trespasser",
+        "Planeswalkers"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Esika's Chariot",
+    "Elvish Mystic",
+    "Llanowar Elves",
+    "Tovolar's Huntmaster",
+    "Chandra, Dressed to Kill",
+    "Chandra, Torch of Defiance",
+    "Monastery Swiftspear",
+    "Soul-Scar Mage",
+    "Teferi, Hero of Dominaria",
+    "The Wandering Emperor"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-rakdos-midrange-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T03:52:46+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pioneer-rakdos-midrange-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T03:51:13+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "9a0185edd17ac21c",
+  "overview_evidence": {
+    "confidence": 0.9,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Rakdos Midrange is a variation of the old Rakdos Kroxa... taking advantage of high-impact cards when entering the battlefield such as Graveyard Trespasser and Bonecrusher Giant , which makes favorable 2-for-1 trades"
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Kroxa, Titan of Death's Hunger , which provides an excellent clock and a great Card Advantage."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Graveyard Trespasser or Bonecrusher Giant , which can end the game by hitting the opponent for a few turns."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Planeswalkers in their game plan such as Chandra, Torch of Defiance and Sorin the Mirthless , being able to make many favorable trades"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Fable of the Mirror-Breaker , a card that, in itself, is always a favorable trade for us."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Seek hands with Duress or Thoughtseize on turn 1, allied with another key card like Necromentia or Go Blank"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "I don't recommend doing the discard on turn one, but waiting a turn before the opponent's four mana."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Don't skimp on Fatal Push — ideally remove mana dorks like Elvish Mystic and Llanowar Elves from the opponent."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "always leave Kalitas, Traitor of Ghet for last, after baiting their removals into other creatures."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Remember to use Den of the Bugbear only at opportune times, as March of Otherworldly Light removes it with just one mana."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "remember to take exile removals out of your opponent's hand before playing it from your graveyard."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Our opponent's top card is Esika's Chariot"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "remove mana dorks like Elvish Mystic and Llanowar Elves from the opponent"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Tovolar's Huntmaster is a powerful threat"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "take Chandra, Dressed to Kill , or as discard fodder"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Always kill creatures with prowess, such as Monastery Swiftspear and Soul-Scar Mage"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "resolve Teferi, Hero of Dominaria and The Wandering Emperor"
+    }
+  ]
+}

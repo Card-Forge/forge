@@ -25,7 +25,11 @@ log = logging.getLogger(__name__)
 BASE_URL = os.environ.get("BUILDER_LLM_BASE_URL", CONFIG.llm_base_url)
 API_KEY = os.environ.get("BUILDER_LLM_API_KEY", CONFIG.llm_api_key)
 MODEL_NAME = os.environ.get("BUILDER_MODEL_NAME", CONFIG.model_name)
-TIMEOUT = float(os.environ.get("BUILDER_LLM_TIMEOUT", "180"))
+TIMEOUT = float(os.environ.get("BUILDER_LLM_TIMEOUT", "600"))
+# Reasoning-capable models (e.g. Qwen3 thinking variants) spend tokens on a
+# hidden chain of thought; the structured guide answer also runs ~1-2k tokens.
+# Give them plenty of headroom or the server returns empty content.
+MAX_TOKENS = int(os.environ.get("BUILDER_LLM_MAX_TOKENS", "8192"))
 
 
 class BuilderLLMError(RuntimeError):
@@ -33,7 +37,14 @@ class BuilderLLMError(RuntimeError):
 
 
 def generate_guide_json(prompt: str, *, system: str | None = None) -> dict:
-    """Call the chat-completions endpoint in JSON mode and parse the result."""
+    """Call the chat-completions endpoint in JSON mode and parse the result.
+
+    Retries once on transient connection failures (llama-server occasionally
+    crashes mid-generation under heavy load — systemd restarts it but the
+    in-flight request fails).
+    """
+    import time
+
     messages: list[dict] = []
     if system:
         messages.append({"role": "system", "content": system})
@@ -45,26 +56,81 @@ def generate_guide_json(prompt: str, *, system: str | None = None) -> dict:
         "response_format": {"type": "json_object"},
         "temperature": 0.3,
         "stream": False,
+        "max_tokens": MAX_TOKENS,
     }
     headers = {"Authorization": f"Bearer {API_KEY}"}
     url = BASE_URL.rstrip("/") + "/chat/completions"
 
-    try:
-        resp = httpx.post(url, json=payload, headers=headers, timeout=TIMEOUT)
-        resp.raise_for_status()
-        body = resp.json()
-    except (httpx.HTTPError, ValueError) as exc:
-        raise BuilderLLMError(f"builder LLM request failed: {exc}") from exc
+    last_exc: Exception | None = None
+    for attempt in range(2):
+        try:
+            resp = httpx.post(url, json=payload, headers=headers, timeout=TIMEOUT)
+            resp.raise_for_status()
+            body = resp.json()
+            break
+        except (httpx.HTTPError, ValueError) as exc:
+            last_exc = exc
+            transient = isinstance(exc, (httpx.ConnectError, httpx.RemoteProtocolError, httpx.ReadError))
+            if attempt == 0 and transient:
+                log.warning("builder LLM transient failure (%s); retrying in 5s", exc)
+                time.sleep(5)
+                continue
+            raise BuilderLLMError(f"builder LLM request failed: {exc}") from exc
+    else:
+        raise BuilderLLMError(f"builder LLM request failed: {last_exc}") from last_exc
 
     try:
-        content = body["choices"][0]["message"]["content"]
+        message = body["choices"][0]["message"]
     except (KeyError, IndexError, TypeError) as exc:
         raise BuilderLLMError(f"unexpected builder LLM response: {body!r}") from exc
 
+    content = message.get("content") or ""
+    # Reasoning models (Qwen3 thinking, deepseek-r1, etc.) sometimes emit the
+    # final JSON inside reasoning_content when their visible content is empty.
+    if not content.strip():
+        content = message.get("reasoning_content") or ""
+
+    parsed = _parse_json_loose(content)
+    if parsed is None:
+        finish = body["choices"][0].get("finish_reason", "?")
+        raise BuilderLLMError(
+            f"builder LLM returned non-JSON (finish={finish}): {content[:500]!r}"
+        )
+    return parsed
+
+
+def _parse_json_loose(text: str) -> dict | None:
+    """Parse JSON, peeling off code fences or surrounding prose if needed."""
+    if not text:
+        return None
+    text = text.strip()
+    # Try direct parse first.
     try:
-        return json.loads(content)
-    except (json.JSONDecodeError, TypeError) as exc:
-        raise BuilderLLMError(f"builder LLM returned non-JSON: {content!r}") from exc
+        out = json.loads(text)
+        return out if isinstance(out, dict) else None
+    except (json.JSONDecodeError, TypeError):
+        pass
+    # Strip ```json fences.
+    if text.startswith("```"):
+        text = text.strip("`")
+        if text.lower().startswith("json"):
+            text = text[4:]
+        text = text.strip()
+        try:
+            out = json.loads(text)
+            return out if isinstance(out, dict) else None
+        except (json.JSONDecodeError, TypeError):
+            pass
+    # Last resort: find the first {...} block.
+    start = text.find("{")
+    end = text.rfind("}")
+    if start != -1 and end > start:
+        try:
+            out = json.loads(text[start : end + 1])
+            return out if isinstance(out, dict) else None
+        except (json.JSONDecodeError, TypeError):
+            pass
+    return None
 
 
 _EXTRACT_SYSTEM = (
@@ -93,25 +159,33 @@ def _extract_prompt(
         "---\n"
         f"{cleaned_text}\n"
         "---\n\n"
-        "Return a single JSON object with these keys (omit a key only if the "
-        "article has zero relevant information for it):\n"
-        '  "strategy_type": one of "aggro","tempo","midrange","control","combo","ramp",\n'
-        '  "overview": short string (2-4 sentences),\n'
-        '  "overview_evidence": {"confidence": 0-1, "kind": "explicit"|"inferred", "evidence_span": short quote},\n'
-        '  "win_conditions": [string],\n'
-        '  "win_conditions_evidence": [{"confidence","kind","evidence_span"}],\n'
-        '  "mulligan": {"keep_criteria":[string], "mulligan_criteria":[string], '
-        '"examples":[{"hand":[string],"decision":"keep"|"mulligan","reason":string}]},\n'
-        '  "game_plan": {"early_game":[string], "mid_game":[string], "late_game":[string]},\n'
-        '  "key_cards": [{"name":string, "role":string, "notes":string}],\n'
-        '  "sequencing_tips": [string],\n'
-        '  "sequencing_tips_evidence": [{"confidence","kind","evidence_span"}],\n'
-        '  "matchups": [{"opponent_archetype":string, "advice":string, "watch_for":[string]}],\n'
-        '  "common_threats": [string],\n'
-        '  "common_threats_evidence": [{"confidence","kind","evidence_span"}].\n'
-        "Mark `kind` as 'explicit' for facts you can quote and 'inferred' "
-        "otherwise; confidence should reflect that distinction "
-        "(0.8-1.0 explicit, 0.3-0.7 inferred)."
+        "Return a JSON object EXACTLY matching this skeleton — keep every "
+        "field at the type shown. strategy_type must be lowercase.\n\n"
+        "{\n"
+        '  "strategy_type": "aggro"|"tempo"|"midrange"|"control"|"combo"|"ramp",\n'
+        '  "overview": "2-4 sentence summary",\n'
+        '  "overview_evidence": {"confidence": 0.8, "kind": "explicit", "evidence_span": "short quote"},\n'
+        '  "win_conditions": ["..."],\n'
+        '  "win_conditions_evidence": [{"confidence": 0.8, "kind": "explicit", "evidence_span": "..."}],\n'
+        '  "mulligan": {\n'
+        '    "keep_criteria": ["..."],\n'
+        '    "mulligan_criteria": ["..."],\n'
+        '    "examples": [{"hand": ["card","card","..."], "decision": "keep"|"mulligan", "reason": "..."}]\n'
+        "  },\n"
+        '  "game_plan": {"early_game": ["..."], "mid_game": ["..."], "late_game": ["..."]},\n'
+        '  "key_cards": [{"name": "Card Name", "role": "...", "notes": "..."}],\n'
+        '  "sequencing_tips": ["..."],\n'
+        '  "sequencing_tips_evidence": [{"confidence": 0.7, "kind": "inferred", "evidence_span": ""}],\n'
+        '  "matchups": [{"opponent_archetype": "name", "advice": "...", "watch_for": ["..."]}],\n'
+        '  "common_threats": ["..."],\n'
+        '  "common_threats_evidence": []\n'
+        "}\n\n"
+        "Every key_cards entry MUST be an object with name/role/notes. "
+        "win_conditions, sequencing_tips, common_threats MUST be arrays of "
+        "strings, NOT single strings. matchups MUST be a list of objects. "
+        "mulligan and game_plan MUST be objects, NOT strings. Mark `kind` as "
+        "'explicit' for facts you can quote from the article and 'inferred' "
+        "otherwise (confidence 0.8-1.0 explicit, 0.3-0.7 inferred)."
     )
 
 

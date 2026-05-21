@@ -1,0 +1,284 @@
+{
+  "archetype": "Esper GenericBlink",
+  "format": "modern",
+  "strategy_type": "tempo",
+  "overview": "Esper Generic Blink is a Modern tempo strategy that leverages cheap blink engines to repeatedly trigger enter-the-battlefield effects. By cycling permanents back to hand, the deck generates incremental value, disrupts opponent turns, and grows its creatures into unblockable threats. The archetype relies on efficient resource exchange and board control to outmaneuver faster decks while stabilizing against slower strategies.",
+  "win_conditions": [
+    "Growing blink engines with +1/+1 counters to attack for lethal",
+    "Repeatedly blinking lands and artifacts to accelerate mana and disrupt opponent casting",
+    "Trading opponent's threats back to hand to control the board and win via attrition"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with two or more lands and at least one blink spell or creature",
+      "Early interaction that can return opponent's threats to hand",
+      "Mana base that supports W/U/B casting by turn two"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking lands or playable cards by turn two",
+      "Hands with only late-game blink engines and no early disruption",
+      "Hands with four or more lands and no early plays"
+    ],
+    "examples": [
+      {
+        "hand": [],
+        "decision": "keep",
+        "reason": "Hand capable of deploying a major threat (Kapka, Canaan's Fiend) on turn 2 — The opponent is a turn 4 combo deck, so you have at least four turns to establish pressure and win the race."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play lands and establish a mana base",
+      "Cast cheap blink targets or creatures to trigger ETB effects",
+      "Use blink spells to remove opponent's early threats"
+    ],
+    "mid_game": [
+      "Blink your own permanents to grow counters on blink engines",
+      "Return opponent's key cards to hand to stall their strategy",
+      "Maintain board presence while cycling resources"
+    ],
+    "late_game": [
+      "Attack with large, counter-filled blink engines",
+      "Blink lands repeatedly to generate excess mana for late-game answers",
+      "Close out the game with combat or attrition after depleting opponent's resources"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Quantum Riddler",
+      "role": "Early-game blink engine",
+      "notes": "Cast on turn two to return a land or artifact to hand, then blink it back to trigger ETB and add a +1/+1 counter. Use it to accelerate mana or disrupt early threats. | Sequenced with removal or bounce to draw cards and find answers like Ephemerate, often used after Prismatic Ending to recover card advantage. (from gameplay)"
+    },
+    {
+      "name": "Solitude",
+      "role": "Mid-game blink engine",
+      "notes": "Provides a larger body than Quantum Riddler while maintaining the same blink trigger. Blink lands or opponent's creatures to grow counters and control the board. | Maindecked to permanently remove Tameshi, the Afflicted when counters run out. (from gameplay) | Used to bounce Pinnacle Emissary on cast to prevent token generation, and to bounce threats while preserving triggers on stack. (from gameplay)"
+    },
+    {
+      "name": "Overlord of the Balemurk",
+      "role": "Late-game win condition",
+      "notes": "Starts as a 4/4 and grows rapidly with repeated blinks. Use it to trade efficiently, block multiple threats, and eventually attack for lethal once counters are accumulated."
+    }
+  ],
+  "sequencing_tips": [
+    "Blink lands before casting expensive spells to ensure mana availability",
+    "Return opponent's creatures to hand before they can attack or block",
+    "Blink your own permanents in response to opponent's removal to save them",
+    "Prioritize blinking artifacts and lands to maximize mana acceleration and board disruption",
+    "When facing a Tameshi, the Afflicted with limited counters, cast Orchard Chant in response to protect your counter spell, ensuring it resolves even if the opponent has Flare of Denial.",
+    "Use Consult the Stars to look at the top five cards and draw two, helping to find answers like Solitude or counter spells while Tameshi is on the battlefield.",
+    "Hold Pithing Needle in hand rather than playing it immediately, as the opponent cannot combo on the following turn; playing it early only gives them free turns to find an answer.",
+    "Leave mana open for interaction (like Consign to Memory) instead of committing to attacks or saga activations when the opponent is approaching their combo turn.",
+    "Use Replicate on Consign to Memory to generate a second counter spell, protecting against backup counters or combo pieces without spending extra mana.",
+    "Use Solitude immediately on Pinnacle Emissary's cast trigger to prevent token generation, even if Affinity has Tormod's Crypt on stack, to stop the board from unlocking Thoughtcast and Capacitor.",
+    "When low on cards, prioritize countering Thoughtcast with Force of Negation over bouncing with Solitude, preserving hand size to sequence Prismatic Ending and draw two cards off Quantum Riddler."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Use blink spells to return aggressive creatures to hand, delaying their damage output while growing your engines.",
+      "watch_for": [
+        "Early sweepers",
+        "Direct damage spells",
+        "Fast mana acceleration"
+      ]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Blink lands and artifacts to disrupt their mana base, and grow blink engines to pressure their life total before they stabilize.",
+      "watch_for": [
+        "Board wipes",
+        "Counterspells",
+        "Late-game finishers"
+      ]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Identify and blink key combo pieces back to hand, using your blink engines to control the board while they search for consistency.",
+      "watch_for": [
+        "Graveyard recursion",
+        "Card draw engines",
+        "Win condition pieces"
+      ]
+    },
+    {
+      "opponent_archetype": "Midrange",
+      "advice": "Trade efficiently by blinking their threats and growing your counters, outvaluing them over multiple turns.",
+      "watch_for": [
+        "Removal spells",
+        "Card advantage engines",
+        "Late-game threats"
+      ]
+    },
+    {
+      "opponent_archetype": "Living End",
+      "advice": "Suspending Lotus Bloom is weak against blue-white control because they can counter the trigger or exile it with Orchard Chant. Consider sideboarding down to one Lotus Bloom to search for with Word of Invention. (from gameplay) Narset, Parter of Veils' static ability is particularly strong against Quantum Riddler decks, and combos well with Day's Undoing to lock the opponent out. (from gameplay)",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Amulet Titan",
+      "advice": "Sideboard Blood Moon because the opponent's 'lands' are actually flip cards that tap for blue, not actual Islands, making them vulnerable to land destruction. (from gameplay)",
+      "watch_for": []
+    },
+    {
+      "opponent_archetype": "Affinity",
+      "advice": "Abandon the Gorion's Vengeance graveyard plan and pivot to the midrange engine (Psychic Frog, Quantum Riddler, Ephemerate) due to Affinity's main deck Tormod's Crypts. (from gameplay) Focus heavily on winning Game 1, as Affinity's explosive starts are hardest to handle pre-sideboard; Esper's sideboard heavily favors Games 2+. (from gameplay)",
+      "watch_for": []
+    }
+  ],
+  "common_threats": [
+    "Fast aggressive creatures",
+    "Board wipe spells",
+    "Counterspell packages",
+    "Graveyard-based combo pieces"
+  ],
+  "metadata": {
+    "source": "builder_llm_default",
+    "source_url": "",
+    "generated_at": "2026-05-21T01:14:45+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "builder_llm_default",
+      "author": "local-model",
+      "source_url": "",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T01:14:45+00:00",
+      "http_status": 0,
+      "used_for_fields": [
+        "*"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=DF02r6D9ZRw",
+      "publish_date": "2025-09-28T21:23:19Z",
+      "fetched_at": "2026-05-21T11:49:31+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Esper GenericBlink"
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=Twk5UKP-Ekg",
+      "publish_date": "2025-09-27T01:04:50Z",
+      "fetched_at": "2026-05-21T11:52:00+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Esper GenericBlink"
+    },
+    {
+      "publisher": "YouTube/Play MTG",
+      "author": "Play MTG",
+      "source_url": "https://www.youtube.com/watch?v=uLDAZd31kY0",
+      "publish_date": "2025-09-27T01:04:43Z",
+      "fetched_at": "2026-05-21T11:54:35+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "sequencing_tips",
+        "matchups",
+        "mulligan.examples",
+        "key_cards.notes"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": "Esper GenericBlink"
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "cdb9bdd8bb23042a",
+  "overview_evidence": {
+    "confidence": 0.3,
+    "kind": "inferred",
+    "source_index": 0,
+    "evidence_span": ""
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    },
+    {
+      "confidence": 0.8,
+      "kind": "gameplay_observed",
+      "source_index": 1,
+      "evidence_span": "10:29-11:12"
+    },
+    {
+      "confidence": 0.7,
+      "kind": "gameplay_observed",
+      "source_index": 1,
+      "evidence_span": "16:14-16:58"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "gameplay_observed",
+      "source_index": 2,
+      "evidence_span": "10:28-11:13"
+    },
+    {
+      "confidence": 0.85,
+      "kind": "gameplay_observed",
+      "source_index": 2,
+      "evidence_span": "13:56-14:40"
+    },
+    {
+      "confidence": 0.75,
+      "kind": "gameplay_observed",
+      "source_index": 2,
+      "evidence_span": "14:39-15:24"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "gameplay_observed",
+      "source_index": 3,
+      "evidence_span": "04:13-04:56"
+    },
+    {
+      "confidence": 0.75,
+      "kind": "gameplay_observed",
+      "source_index": 3,
+      "evidence_span": "15:23-16:02"
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.3,
+      "kind": "inferred",
+      "source_index": 0,
+      "evidence_span": ""
+    }
+  ]
+}

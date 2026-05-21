@@ -1,0 +1,301 @@
+{
+  "archetype": "Glintblade",
+  "format": "pauper",
+  "strategy_type": "tempo",
+  "overview": "Glintblade is an interactive Pauper strategy that leverages a bounce package centered on Glint Hawk, Refurbished Familiar, and Tithing Blade to extract resources and disrupt opponents. By cycling cheap artifacts and creatures, the deck generates card advantage through Deadly Dispute and Refurbished Familiar while maintaining board control. Its flexible maindeck and targeted sideboard allow it to adapt to various Tier 1.5 matchups.",
+  "win_conditions": [
+    "Bouncing opponent's creatures repeatedly with Tithing Blade and Glint Hawk",
+    "Generating card advantage and disruption via Refurbished Familiar and Deadly Dispute",
+    "Establishing inevitability by cycling Kor Skyfisher and Omen of the Dead",
+    "Trading efficiently with cheap blockers and removal to outlast opponents"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Hands with artifact lands and cheap artifact sources like Thraben Inspector",
+      "Hands containing bounce/removal tools like Tithing Blade or Glint Hawk",
+      "Hands with early disruption or card draw like Refurbished Familiar"
+    ],
+    "mulligan_criteria": [
+      "Hands lacking artifact lands or early artifact sources",
+      "Hands with only high-cost cards or no interaction",
+      "Hands without a clear path to turn one or two plays"
+    ],
+    "examples": [
+      {
+        "hand": [
+          "Thraben Inspector",
+          "Glint Hawk",
+          "Tithing Blade",
+          "Orzhov Basilica",
+          "Radiant Fountain",
+          "Deadly Dispute",
+          "Cast Down"
+        ],
+        "decision": "keep",
+        "reason": "Provides turn one artifact, early bounce/removal, and consistent mana base."
+      },
+      {
+        "hand": [
+          "Lembas",
+          "Omen of the Dead",
+          "Deadly Dispute",
+          "Thraben Charm",
+          "Bojuka Bog",
+          "Radiant Fountain",
+          "Orzhov Basilica"
+        ],
+        "decision": "mulligan",
+        "reason": "Lacks early artifact sources and cheap interaction, making it vulnerable to early aggression."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Play artifact lands and cheap artifact sources like Thraben Inspector to enable bounce effects",
+      "Use Tithing Blade to remove larger threats while saving Glint Hawk for recursion",
+      "Deploy Refurbished Familiar for early disruption and eventual card advantage"
+    ],
+    "mid_game": [
+      "Recycle Suffocating Fumes to handle small creatures when Tithing Blade is less efficient",
+      "Use Deadly Dispute on opponent's creatures to generate card advantage",
+      "Cycle Kor Skyfisher and Omen of the Dead to maintain board presence and inevitability"
+    ],
+    "late_game": [
+      "Hold removal like Arms of Hadar or Thraben Charm to clear boards and protect value engines",
+      "Use Dawnbringer Cleric's enchantment destruction and graveyard exile to handle combo decks",
+      "Leverage Lembas for life gain and value generation against attrition matchups"
+    ]
+  },
+  "key_cards": [
+    {
+      "name": "Refurbished Familiar",
+      "role": "Disruption & Card Advantage",
+      "notes": "Provides cheap disruption that turns into card advantage and serves as an ideal bounce target."
+    },
+    {
+      "name": "Glint Hawk",
+      "role": "Bounce Engine",
+      "notes": "Core interaction piece that enables repeated use of Tithing Blade and synergizes with black cards."
+    },
+    {
+      "name": "Tithing Blade",
+      "role": "Reusable Removal",
+      "notes": "Gives the deck its name and operates as repeatable removal for larger creatures."
+    },
+    {
+      "name": "Kor Skyfisher",
+      "role": "Recursion & Value",
+      "notes": "Returns artifacts to hand, enabling cycling with Omen of the Dead and Inspector tokens."
+    },
+    {
+      "name": "Thraben Inspector",
+      "role": "Early Artifact Source",
+      "notes": "Guarantees artifacts on turn one, acts as a cheap blocker, and can be returned to hand."
+    },
+    {
+      "name": "Deadly Dispute",
+      "role": "Card Advantage",
+      "notes": "Extracts value from bounced creatures and tokens, with three to four copies recommended."
+    },
+    {
+      "name": "Omen of the Dead",
+      "role": "Inevitability Engine",
+      "notes": "Cycles with Kor Skyfisher to return multiple copies to hand, adding inevitability and removal protection."
+    },
+    {
+      "name": "Cast Down",
+      "role": "Unconditional Removal",
+      "notes": "Best unconditional removal in Pauper, essential for handling big threats."
+    },
+    {
+      "name": "Thraben Charm",
+      "role": "Flexible Interaction",
+      "notes": "Functions as removal, counters Sadistic Glee, and exiles graveyards against Terror/Dredge."
+    },
+    {
+      "name": "Dust to Dust",
+      "role": "Sideboard Anti-Affinity",
+      "notes": "Essential against Affinity, cleans up Myr Enforcer and transformed lands while generating a two-for-one."
+    },
+    {
+      "name": "Trespasser's Curse",
+      "role": "Sideboard Combo Hate",
+      "notes": "Stops Basking Broodscale and Sadistic Glee combos by punishing creature ETBs."
+    },
+    {
+      "name": "Arms of Hadar",
+      "role": "Sideboard Sweeper",
+      "notes": "Best sweeper for the deck as it doesn't destroy own creatures, effective against aggro and midrange."
+    }
+  ],
+  "sequencing_tips": [
+    "Prioritize using Tithing Blade on larger creatures while saving Suffocating Fumes for smaller ones, recycling Fumes when the board lacks X/1s.",
+    "Use Duress early to extract information and remove card advantage sources, allowing better spell sequencing in subsequent turns.",
+    "Chain Omen of the Dead and Kor Skyfisher to return multiple Kors to hand, ensuring you have enough resources to handle removal.",
+    "Hold Thraben Charm to respond to Sadistic Glee or exile graveyards against Tolarian Terror and Dredge."
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Grixis Affinity",
+      "advice": "Sideboard in Dust to Dust to resolve on turn three, cleaning up Myr Enforcer and Kenku Artificer lands while generating a two-for-one.",
+      "watch_for": [
+        "Myr Enforcer",
+        "Kenku Artificer"
+      ]
+    },
+    {
+      "opponent_archetype": "Kuldotha Red",
+      "advice": "Use life gain from Lembas and Dawnbringer Cleric to hold off early pressure. Sideboard in Lone Missionary for extra life and Goblin Tomb Raider trades.",
+      "watch_for": [
+        "Goblin Tomb Raider",
+        "Early Aggression"
+      ]
+    },
+    {
+      "opponent_archetype": "Jund Broodscale",
+      "advice": "Sideboard in Trespasser's Curse to stop the Basking Broodscale and Sadistic Glee combo. Use Dawnbringer Cleric to destroy enchantments.",
+      "watch_for": [
+        "Basking Broodscale",
+        "Sadistic Glee",
+        "Enchantments"
+      ]
+    },
+    {
+      "opponent_archetype": "Mono Blue Faeries",
+      "advice": "The sideboard is targeted to deal with Faeries. Use removal and bounce to disrupt their board development.",
+      "watch_for": [
+        "Faeries",
+        "Small Creatures"
+      ]
+    }
+  ],
+  "common_threats": [
+    "Myr Enforcer",
+    "Kenku Artificer",
+    "Basking Broodscale",
+    "Sadistic Glee",
+    "Goblin Tomb Raider",
+    "Makeshift Munitions",
+    "Tolarian Terror"
+  ],
+  "metadata": {
+    "source": "Cards Realm",
+    "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-orzhov-glintblade-deck-tech-sideboard-guide",
+    "generated_at": "2026-05-21T09:39:35+00:00",
+    "model": "local-model",
+    "schema_version": 2
+  },
+  "provenance": [
+    {
+      "publisher": "Cards Realm",
+      "author": "",
+      "source_url": "https://mtg.cardsrealm.com/en-us/articles/pauper-orzhov-glintblade-deck-tech-sideboard-guide",
+      "publish_date": "",
+      "fetched_at": "2026-05-21T09:37:57+00:00",
+      "http_status": 200,
+      "used_for_fields": [
+        "overview",
+        "key_cards",
+        "matchups"
+      ],
+      "transcript_timestamp_range": null,
+      "extracted_for_archetype": ""
+    }
+  ],
+  "legal_era": {
+    "br_window_start": "",
+    "br_window_end": "",
+    "set_legality_snapshot": []
+  },
+  "decklist_hash": "7cfa37f376fc8efd",
+  "overview_evidence": {
+    "confidence": 0.95,
+    "kind": "explicit",
+    "source_index": 0,
+    "evidence_span": "Glintblade takes advantage of the interaction between Glint Hawk, Refurbished Familiar, and Tithing Blade to extract resources from the opponent in a bounce strategy."
+  },
+  "win_conditions_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Tithing Blade gives Glintblade its name and operates as a removal that we can reuse over and over with Glint Hawk and Kor Skyfisher ."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Refurbished Familiar has significantly improved the variants of the Kor Skyfisher archetypes... Its mix of cheap disruption that later turns into card advantage"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Omen of the Dead has an interaction with Kor Skyfisher where we can use it to return a copy of Kor from the graveyard... adding inevitability to the deck"
+    },
+    {
+      "confidence": 0.8,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Thraben Inspector and Novice Inspector guarantee artifacts on the board from turn one, are cheap blockers, and can be returned to the hand with Kor Skyfisher ."
+    }
+  ],
+  "sequencing_tips_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Ideally, we'll use it to destroy larger creatures while Suffocating Fumes , which can be recycled in games without many X/1s on the board, deals with the small creatures."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "The information it provides from the opponent's hand is also essential to know how to sequence your spells in the following turns."
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Omen of the Dead has an interaction with Kor Skyfisher where we can use it to return a copy of Kor from the graveyard, return Omen to the hand and use it again to return another Kor Skyfisher"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "Thraben Charm has a triple function in the list: it is a removal if we have enough creatures in play, it responds to Sadistic Glee in the best possible way, and it can also exile the graveyard against Terror or Dredge."
+    }
+  ],
+  "common_threats_evidence": [
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "clean answer against Myr Enforcer and lands transformed by Kenku Artificer"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "stops the Basking Broodscale and Sadistic Glee combo"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "trades with Goblin Tomb Raider"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "deal with Makeshift Munitions and Bogles"
+    },
+    {
+      "confidence": 0.9,
+      "kind": "explicit",
+      "source_index": 0,
+      "evidence_span": "extra time against Tolarian Terror decks"
+    }
+  ]
+}
