@@ -22,6 +22,7 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorTokenViewer;
+import forge.screens.home.welcome.WelcomeWizardDialog;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FComboBox;
@@ -179,6 +180,8 @@ public enum CSubmenuPreferences implements ICDoc {
         });
 
         view.getBtnReset().setCommand((UiCommand) CSubmenuPreferences.this::resetForgeSettingsToDefault);
+
+        view.getBtnReplayWelcomeWizard().setCommand((UiCommand) WelcomeWizardDialog::replay);
 
         view.getBtnDeleteEditorUI().setCommand((UiCommand) CSubmenuPreferences.this::resetDeckEditorLayout);
 
@@ -351,21 +354,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void initializeDefaultLanguageComboBox() {
-    	final File lang_root = new File(ForgeConstants.LANG_DIR);
-    	final File[] files = lang_root.listFiles();
-    	final List<String> allLanguages = new ArrayList<>();
-    	for ( File file : files ) {
-    		if ( !file.isFile() ) {
-    			continue;
-    		}
-    		String languageName = file.getName();
-    		if (!languageName.endsWith(".properties")) {
-    			continue;
-    		}
-    		allLanguages.add(languageName.replace(".properties", ""));
-    	}
-        final String [] choices = new String[ allLanguages.size() ];
-        allLanguages.toArray( choices );
+        final String[] choices = ForgeConstants.getAvailableLanguages().toArray(new String[0]);
         final FPref userSetting = FPref.UI_LANGUAGE;
         final FComboBoxPanel<String> panel = this.view.getCbpDefaultLanguageComboBoxPanel();
         final FComboBox<String> comboBox = createComboBox(choices, userSetting);

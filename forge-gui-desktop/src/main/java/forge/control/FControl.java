@@ -60,6 +60,7 @@ import forge.menus.ForgeMenu;
 import forge.model.FModel;
 import forge.sound.SoundSystem;
 import forge.screens.deckeditor.CDeckEditorUI;
+import forge.screens.home.welcome.WelcomeWizardDialog;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.util.BuildInfo;
@@ -299,6 +300,7 @@ public enum FControl implements KeyEventDispatcher {
         setGlobalKeyboardHandler();
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(getLocalizer().getMessage("lblOpeningMainWindow"));
         SwingUtilities.invokeLater(() -> Singletons.getView().initialize());
+        SwingUtilities.invokeLater(WelcomeWizardDialog::maybeShow);
     }
 
     public boolean isSnapshot() {

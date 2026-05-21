@@ -52,6 +52,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
     private final FLabel btnReset = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnReset")).build();
+    private final FLabel btnReplayWelcomeWizard = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnReplayWelcomeWizard")).build();
     private final FLabel btnDeleteMatchUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnDeleteMatchUI")).build();
     private final FLabel btnDeleteEditorUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnDeleteEditorUI")).build();
     private final FLabel btnDeleteWorkshopUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnDeleteWorkshopUI")).build();
@@ -188,6 +189,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(btnContentDirectoryUI, twoButtonConstraints2);
         pnlPrefs.add(btnClearImageCache, twoButtonConstraints1);
         pnlPrefs.add(btnTokenPreviewer, twoButtonConstraints2);
+        pnlPrefs.add(btnReplayWelcomeWizard, twoButtonConstraints1);
+        pnlPrefs.add(new JLabel(""), twoButtonConstraints2);
 
         // Search bar
         pnlPrefs.add(getSearchPanel(), "w 80%!, h 28px!, gap 25px 0 30px 40px, span 2 1");
@@ -1064,6 +1067,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link forge.toolbox.FLabel} */
     public FLabel getBtnReset() {
         return btnReset;
+    }
+
+    public FLabel getBtnReplayWelcomeWizard() {
+        return btnReplayWelcomeWizard;
     }
 
     public FLabel getBtnPlayerName() {

@@ -22,7 +22,9 @@ import forge.util.FileUtil;
 import forge.util.Localizer;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public final class ForgeConstants {
@@ -390,6 +392,24 @@ public final class ForgeConstants {
                 localizer.getMessage("lblAlways"), "ALWAYS",
                 localizer.getMessage("lblNever"), "NEVER"
         );
+    }
+
+    /** Locale codes for each {@code <locale>.properties} file under {@link #LANG_DIR}, sorted alphabetically.
+     *  Falls back to a single {@code en-US} entry if the directory is missing or empty. */
+    public static List<String> getAvailableLanguages() {
+        final List<String> result = new ArrayList<>();
+        final File[] files = new File(LANG_DIR).listFiles();
+        if (files != null) {
+            for (final File f : files) {
+                final String name = f.getName();
+                if (f.isFile() && name.endsWith(".properties")) {
+                    result.add(name.replace(".properties", ""));
+                }
+            }
+        }
+        if (result.isEmpty()) result.add("en-US");
+        Collections.sort(result);
+        return result;
     }
 
     public enum CounterDisplayLocation {
