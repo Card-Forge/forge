@@ -283,6 +283,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Magus of the Chains
 1. (P) Noble Ox
 1. (P) Pinchy McStingbutt
+1. (HTR) Mr. Monopoly, On the Go
 
 #### Functional Variants
 1. Sly Spy F
