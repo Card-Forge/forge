@@ -31,12 +31,13 @@ public enum FDraftOverlay {
     SINGLETON_INSTANCE;
 
     private static final int DEFAULT_WIDTH  = 420;
-    private static final int DEFAULT_HEIGHT = 95;
+    private static final int DEFAULT_HEIGHT = 123;
 
     private boolean hasBeenShown;
 
     private final FSkin.SkinnedLabel lblPackInfo  = makeTextLabel("");
     private final FSkin.SkinnedLabel lblTimer     = makeTextLabel("");
+    private final DraftTimerRope     rope         = new DraftTimerRope();
     private final JPanel pnlNeighbors = new JPanel(new FlowLayout(FlowLayout.CENTER, 4, 0));
 
     private static ImageIcon cardBackIcon;
@@ -62,10 +63,8 @@ public enum FDraftOverlay {
         window.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         window.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
 
-        // Two-row layout: [pack info | timer] then [neighbor strip spanning both columns];
-        // second row grows to fill remaining vertical space so the neighbor strip
-        // centers between the info row and the bottom of the window
-        window.setLayout(new MigLayout("insets 4, gap 0, wrap 2", "", "[][grow]"));
+        // Rows: [pack info | timer], [timer rope spanning 2 cols], [neighbor strip spanning 2 cols, grows]
+        window.setLayout(new MigLayout("insets 8 4 4 4, gap 0, wrap 2", "", "[]10[10!]10[grow]"));
 
         lblPackInfo.setHorizontalAlignment(SwingConstants.LEFT);
         lblTimer.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -75,7 +74,9 @@ public enum FDraftOverlay {
         // Row 1: pack info on the left, timer on the right
         window.add(lblPackInfo,  "pushx, growx, gapleft 4");
         window.add(lblTimer,     "pushx, growx, gapright 4, al right");
-        // Row 2: neighbor strip spans both columns, vertically centered in its cell
+        // Row 2: timer rope spans both columns, with extra horizontal margin to inset it from the dialog edge
+        window.add(rope,         "span 2, growx, h 10!, gapleft 4, gapright 4");
+        // Row 3: neighbor strip spans both columns, vertically centered in its cell
         window.add(pnlNeighbors, "span 2, pushx, growx, gapleft 4, gapright 4, ay center");
 
         // Load card back icon (scaled to small size)
@@ -253,6 +254,7 @@ public enum FDraftOverlay {
         stopCountdown();
         secondsRemaining = seconds;
         updateTimerLabel();
+        rope.start(seconds);
         countdownTimer = new Timer(1000, e -> {
             secondsRemaining--;
             if (secondsRemaining <= 0) {
@@ -269,6 +271,7 @@ public enum FDraftOverlay {
             countdownTimer.stop();
             countdownTimer = null;
         }
+        rope.stop();
     }
 
     private void updateTimerLabel() {
