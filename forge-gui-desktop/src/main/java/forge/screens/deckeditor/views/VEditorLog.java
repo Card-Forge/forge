@@ -12,6 +12,7 @@ import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import java.awt.Color;
 import java.util.List;
 
 /**
@@ -34,7 +35,9 @@ public enum VEditorLog implements IVDoc<CEditorLog> {
     private final FScrollPane scroller = new FScrollPane(pnlContent, false);
 
 
-    private final List<String> editorLogEntries = Lists.newArrayList();
+    private record LogEntry(String text, Color color) { }
+    private final List<LogEntry> entries = Lists.newArrayList();
+    private boolean draftLogVisible = true;
 
     VEditorLog() {
         pnlContent.setOpaque(false);
@@ -86,9 +89,8 @@ public enum VEditorLog implements IVDoc<CEditorLog> {
     }
 
     public void resetNewDraft() {
-        // Should we store the draft?
         gameLog.reset();
-        editorLogEntries.clear();
+        entries.clear();
     }
 
     public void updateConsole() {
@@ -96,7 +98,22 @@ public enum VEditorLog implements IVDoc<CEditorLog> {
     }
 
     public void addLogEntry(String entry) {
-        gameLog.addLogEntry(entry);
-        this.editorLogEntries.add(entry);
+        addLogEntry(entry, null);
+    }
+
+    public void addLogEntry(String entry, Color foreground) {
+        entries.add(new LogEntry(entry, foreground));
+        if (draftLogVisible) {
+            gameLog.addLogEntry(entry, foreground);
+        }
+    }
+
+    public void setDraftLogVisible(boolean visible) {
+        if (draftLogVisible == visible) return;
+        draftLogVisible = visible;
+        gameLog.reset();
+        if (visible) {
+            for (LogEntry e : entries) gameLog.addLogEntry(e.text, e.color);
+        }
     }
 }

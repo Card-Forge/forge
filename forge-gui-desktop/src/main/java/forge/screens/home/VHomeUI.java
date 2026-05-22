@@ -42,6 +42,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.home.gauntlet.*;
+import forge.screens.home.online.VSubmenuOnlineDecks;
 import forge.screens.home.online.VSubmenuOnlineLobby;
 import forge.screens.home.puzzle.VSubmenuPuzzleCreate;
 import forge.screens.home.puzzle.VSubmenuPuzzleSolve;
@@ -120,6 +121,7 @@ public enum VHomeUI implements IVTopLevelUI {
         //allSubmenus.add(VSubmenuWinston.SINGLETON_INSTANCE);
 
         allSubmenus.add(VSubmenuOnlineLobby.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuOnlineDecks.SINGLETON_INSTANCE);
 
         allSubmenus.add(VSubmenuQuestStart.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuQuestLoadData.SINGLETON_INSTANCE);
