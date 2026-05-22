@@ -1,17 +1,24 @@
 # Forge LLM Sidecar
 
 A standalone Python service that runs the LangGraph agent powering Forge's
-LLM-assisted AI. The single node — **`game_advisor`** — does two things in one
-LLM call:
+LLM-assisted AI. The graph is a chain of four nodes that together provide:
 
-- **Deck recognition** — given the game format and the opponent's observed
-  plays, it guesses which deck/archetype the opponent is playing.
-- **Piloting advice** — using a per-archetype piloting guide for the AI's own
-  deck, it recommends what the AI should play next (see
-  [docs/PILOTING.md](docs/PILOTING.md)).
+- **Deck recognition** (`game_advisor`) — given the game format and the
+  opponent's observed plays, it guesses which deck/archetype the opponent is
+  playing.
+- **Piloting advice** (`game_advisor` + `mulligan_planner`) — using a
+  per-archetype piloting guide for the AI's own deck, it recommends mulligan
+  decisions and what the AI should play next (see [docs/PILOTING.md](docs/PILOTING.md)).
+- **Combo lines** (`combo_strategist`) — for AI combo decks with a combo
+  profile, it scores the best line to advance.
+- **Opponent reasoning** (`opponent_strategist`) — infers the opponent's hand,
+  predicts their next turn, and ranks their threats.
 
 Forge's Java AI calls this service over local HTTP. The recognition guess is
-shown in the game log only — it does not change how the heuristic AI plays.
+always written to the game log; whether the rest of the response actually
+changes how the AI plays is controlled on the Forge side by the
+`SIDECAR_INFLUENCE_*` AI properties (see *Connecting Forge* below). With
+influence off, the sidecar is purely advisory/log-only.
 
 ## Architecture
 
@@ -22,9 +29,12 @@ client + adapter --HTTP--> this sidecar (FastAPI + LangGraph) --HTTP--> llama.cp
                                   \─ piloting/*.json      (deck-piloting guides)
 ```
 
-The LangGraph graph is `START -> game_advisor -> END`. New nodes can be added
-later without changing the HTTP contract. The sidecar is client-agnostic;
-Forge is the reference *adapter* — see [docs/ADAPTERS.md](docs/ADAPTERS.md).
+The LangGraph graph is the linear chain
+`START → game_advisor → mulligan_planner → combo_strategist → opponent_strategist → END`.
+Only `game_advisor` always runs an LLM call; the later nodes self-gate and fail
+soft, so a request makes 1–3 LLM calls. New nodes can be appended without
+changing the HTTP contract. The sidecar is client-agnostic; Forge is the
+reference *adapter* — see [docs/ADAPTERS.md](docs/ADAPTERS.md).
 
 ## Requirements
 
@@ -121,11 +131,23 @@ game. Fully fail-soft: on failure it falls back to `DEFAULT_META_FORMAT`.
 
 - `GET /health` — `{"status":"ok","model":"...","metagame_enabled":...}`. Used
   by Forge for a fail-soft availability check.
-- `POST /recognize` — opponent recognition + own-deck piloting advice. See
-  `app/schema.py` for the request/response models.
+- `POST /recognize` — runs the full graph: opponent recognition + own-deck
+  piloting advice + combo/opponent strategy. See `app/schema.py` for the models.
+- `POST /mulligan-plan` — opening-hand keep/mulligan decision and early plan.
+- `POST /identify-own-archetype` — deterministic (no-LLM) identification of the
+  AI's own archetype from its decklist; cached and reused by `/recognize`.
+- `POST /forge-log/analyze` — parse a Forge game log into structured events
+  (used by tooling and post-game analysis).
+- `POST /selfplay/reflect` — summarize a batch of self-play games into learnings.
+- `POST /selfplay/record` — persist a finished self-play run into the results store
+  (the runner calls this automatically at the end of a run).
+- `GET /api/selfplay/trends` — per-deck baseline-vs-latest self-play results over time
+  (powers the dashboard's "Self-play Trends" panel; `?archetype=` for one deck's full
+  per-run series). Backed by the `selfplay/results.db` store — see below.
 - `GET /metagame?format=modern` — debug: shows the loaded metagame breakdown.
 - `GET /piloting?format=modern&archetype=...` — debug: shows the resolved
   piloting guide (omit `archetype` to list available guides).
+- `GET /` and `GET /dashboard` — live recognition-history dashboard.
 
 ### Quick manual test
 
@@ -149,17 +171,68 @@ curl -X POST http://localhost:18970/recognize \
   }'
 ```
 
+## Self-play results tracking
+
+The Java `SelfPlayRunner` writes per-seat JSONL (one record per sidecar seat per game) and
+records each finished run into a small SQLite store (`selfplay/results.db`, gitignored;
+override with `FORGE_SELFPLAY_DB`) so every deck has a baseline and its performance can be
+tracked over time.
+
+**Automatic** — at the end of a run the runner POSTs its records to `POST /selfplay/record`
+(fail-soft: the JSONL is still written if the sidecar is unreachable). Pass `-format` and an
+optional `-label baseline` to tag the run; disable recording with `-record false`:
+
+```sh
+forge selfplay -config goldfish -p1 ruby.dck -p2 60-islands.dck -n 50 \
+  -out runs/ruby.jsonl -format modern -label baseline
+```
+
+**Manual** — ingest existing JSONL files after the fact with the same store:
+
+```sh
+python -m scripts.record_run selfplay/runs/ruby.jsonl --format modern --config goldfish --label baseline
+```
+
+Read the results back:
+
+```sh
+# Per-deck baseline-vs-latest win% and turns-to-win deltas
+python -m scripts.selfplay_trends
+# Full per-run series for one deck (each run shows its learnings_version)
+python -m scripts.selfplay_trends --archetype "Ruby Storm"
+```
+
+Each run snapshots the `learnings_version()` token, so win-rate / turns-to-win movements
+line up against learnings changes. The same data renders live in the dashboard's
+**Self-play Trends** panel via `GET /api/selfplay/trends`. `scripts/selfplay_report.py`
+remains the quick one-shot aggregator over raw JSONL files.
+
 ## Connecting Forge
 
-In an AI profile (`.ai` file) or via system property, enable the feature:
+Forge integrates the sidecar through `forge.ai.llm.*` (see Forge's
+[docs/AI.md](../docs/AI.md) for the Java-side design). There are two layers, each
+gated by AI properties (set in an `.ai` profile or via system property):
 
-- `DECK_RECOGNITION_ENABLE=true`
+**1. Deck recognition** — fires `/recognize` and writes the guess to the game log.
+
+- `DECK_RECOGNITION_ENABLE=true` (off by default), or launch with
+  `-Dforge.ai.deckRecognition=true`
 - `DECK_RECOGNITION_SIDECAR_URL=http://localhost:18970`
 
-or launch Forge with `-Dforge.ai.deckRecognition=true`.
+**2. Sidecar influence** — lets the sidecar's response actually change AI play
+(piloting, mulligan, targeting, combat). On by default *once recognition is
+enabled*:
 
-The feature is **off by default** and **fail-soft**: if the sidecar is not
-running, Forge logs one debug line and plays normally.
+- `SIDECAR_INFLUENCE_ENABLE=true`, `SIDECAR_INFLUENCE_WEIGHT=0..100`
+  (0 = advisory/log-only, 100 = force legal sidecar choices)
+- finer-grained `SIDECAR_BIAS_*`, `SIDECAR_*_ENABLE`, and `SIDECAR_WAIT_MS_*`
+  knobs — see `AiProps` in forge-ai
+
+Everything is **fail-soft**: if the sidecar is not running or influence is off,
+Forge logs one line and plays exactly as stock Forge.
+
+The desktop GUI shows a transient "AI is thinking…" indicator while a decision
+blocks on the sidecar (via `SidecarStatusBus`).
 
 ## Remote access over Tailscale
 
@@ -210,13 +283,18 @@ tailnet device's browser at
 ```
 forge-llm-sidecar/
 ├─ app/
-│  ├─ main.py                 FastAPI app: /health, /recognize, /metagame, /piloting
+│  ├─ main.py                 FastAPI app: /recognize, /mulligan-plan, /piloting, ...
 │  ├─ config.py               Environment-driven configuration
 │  ├─ schema.py               Request/response models + GraphState
-│  ├─ graph.py                LangGraph graph definition
+│  ├─ graph.py                LangGraph graph definition (the four-node chain)
 │  ├─ llm_client.py           OpenAI-compatible LLM client (llama.cpp)
+│  ├─ advice.py / early_plan.py / combo.py / opponent_hand_probability.py
+│  │                          Deterministic helpers backing the nodes
 │  ├─ nodes/
-│  │  └─ game_advisor.py      The graph node: recognition + piloting advice
+│  │  ├─ game_advisor.py      Recognition + locally-derived piloting advice
+│  │  ├─ mulligan_planner.py  Keep/mulligan decision + early-game plan
+│  │  ├─ combo_strategist.py  Combo-line scoring for AI combo decks
+│  │  └─ opponent_strategist.py  Opponent hand inference / threat ranking
 │  └─ knowledge/
 │     ├─ metagame.py          Runtime loader for scraped metagame data
 │     ├─ scraper.py           MTGGoldfish scraper (CI/builder only)
@@ -225,6 +303,7 @@ forge-llm-sidecar/
 │     ├─ piloting.py          Piloting-guide loader + own-archetype id
 │     ├─ piloting_schema.py   Pydantic models for piloting guides
 │     ├─ builder_llm.py       Offline LLM client for the guide builder
+│     ├─ learnings.py         Self-play learnings loader (baseline + promoted notes)
 │     ├─ archetypes/          Hand-curated archetype detail (strategy/tells)
 │     ├─ metagame_data/       Scraped metagame JSON (refreshed weekly by CI)
 │     └─ piloting/            Piloting guides (generic/ + per-format/)
@@ -237,6 +316,8 @@ forge-llm-sidecar/
 
 ## Documentation
 
+- [docs/PLAYING_WITH_SIDECAR.md](docs/PLAYING_WITH_SIDECAR.md) — end-to-end
+  walkthrough of playing a game with the sidecar attached.
 - [docs/DECK_IDENTIFICATION.md](docs/DECK_IDENTIFICATION.md) — a guided
   walkthrough of how the AI identifies a deck, including the LLM prompt.
 - [docs/PILOTING.md](docs/PILOTING.md) — the piloting-guidance layer: the

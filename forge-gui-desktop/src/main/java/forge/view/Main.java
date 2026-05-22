@@ -77,6 +77,10 @@ public final class Main {
                 SimulateMatch.simulate(args);
                 break;
 
+            case "selfplay":
+                SelfPlayRunner.run(args);
+                break;
+
             case "parse":
                 CardReaderExperiments.parseAllCards(args);
                 break;
@@ -86,7 +90,7 @@ public final class Main {
                 break;
 
             default:
-                System.out.println("Unknown mode.\nKnown mode is 'sim', 'parse' ");
+                System.out.println("Unknown mode.\nKnown modes are 'sim', 'selfplay', 'parse' ");
                 break;
         }
 

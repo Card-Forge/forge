@@ -75,6 +75,8 @@ When it prints an `Open on phone:` URL, open that URL from the phone over the sa
 
 The page also has action buttons for the Android APK, desktop app, and sidecar. Tap one from the phone to start that task on this PC. Each task runs in the background, and the page shows status plus a log link. Use **Restart Sidecar App** after rebuilding the sidecar package so the running `uvicorn` process picks up the new code. Refresh the page after Android reports `Build complete`, then download the latest APK if you rebuilt Android.
 
+**Import Meta Decks** scrapes every tracked format's current MTGGoldfish meta decks (standard, pioneer, modern, legacy, vintage, pauper, commander) and bundles them into a `forge-meta-decks.zip` with one folder per format. When it finishes, a **Download meta decks (ZIP)** link appears at the top of the page — download it on the phone and unzip into Forge's `decks/constructed` folder, and each format shows up as its own deck folder. Card names are normalized to Forge's database on import (e.g. Room cards like `Roaring Furnace // Steaming Sauna`), so decks load without dropped cards. The full scrape across all formats can take several minutes; watch the log link for per-format progress.
+
 Useful variants:
 
 ```bash

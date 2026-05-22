@@ -410,7 +410,7 @@
     </div>
 
     <!-- Last Recognition -->
-    <div class="card">
+    <div class="card full-width">
       <div class="card-title">Last Recognition</div>
       <div id="lastRecognition">
         <div class="empty-state">No recognition requests yet</div>
@@ -431,6 +431,14 @@
       <div class="card-title">Piloting Guides</div>
       <div id="guideList">
         <div class="empty-state">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Self-play Trends -->
+    <div class="card full-width">
+      <div class="card-title">Self-play Trends <span id="trendsCount" style="color: var(--accent)"> (0)</span></div>
+      <div id="trendsTable">
+        <div class="empty-state">No self-play runs recorded yet</div>
       </div>
     </div>
 
@@ -456,6 +464,7 @@
     let statsData = null;
     let metagameData = null;
     let pilotingData = null;
+    let trendsData = null;
 
     // --- Helpers ---
     function fmtUptime(seconds) {
@@ -764,6 +773,49 @@
           });
         }
 
+        let oppCardProbHtml = '';
+        if (p.opponent_card_probabilities && p.opponent_card_probabilities.length > 0) {
+          oppCardProbHtml = '<div class="piloting-label" style="margin-top:10px">Opponent Card Probabilities</div>';
+          p.opponent_card_probabilities.slice(0, 12).forEach(g => {
+            const pct = Math.round((g.probability || 0) * 100);
+            const barColor = pct >= 40 ? 'var(--red)' : pct >= 20 ? 'var(--yellow)' : 'var(--text-dim)';
+            const meta = `${g.remaining_copies || 0} left, ${g.known_removed || 0} known out`;
+            oppCardProbHtml += `
+              <div style="padding:3px 0;font-size:12px">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span style="min-width:150px;font-size:11px">${escapeHtml(g.card)}</span>
+                  <div style="flex:1;height:4px;background:var(--bg);border-radius:2px;overflow:hidden">
+                    <div style="height:100%;width:${pct}%;background:${barColor};border-radius:2px"></div>
+                  </div>
+                  <span style="min-width:32px;text-align:right;font-family:var(--mono);color:var(--text-dim)">${pct}%</span>
+                </div>
+                <div style="margin-left:156px;color:var(--text-dim);font-size:11px">${escapeHtml(meta)}</div>
+              </div>
+            `;
+          });
+        }
+
+        let aiDrawProbHtml = '';
+        if (p.ai_draw_probabilities && p.ai_draw_probabilities.length > 0) {
+          aiDrawProbHtml = '<div class="piloting-label" style="margin-top:10px">AI Next Draw Odds</div>';
+          p.ai_draw_probabilities.slice(0, 12).forEach(g => {
+            const pct = Math.round((g.probability || 0) * 100);
+            const meta = `${g.remaining_copies || 0} left, ${g.known_removed || 0} known out`;
+            aiDrawProbHtml += `
+              <div style="padding:3px 0;font-size:12px">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span style="min-width:150px;font-size:11px">${escapeHtml(g.card)}</span>
+                  <div style="flex:1;height:4px;background:var(--bg);border-radius:2px;overflow:hidden">
+                    <div style="height:100%;width:${pct}%;background:var(--blue);border-radius:2px"></div>
+                  </div>
+                  <span style="min-width:32px;text-align:right;font-family:var(--mono);color:var(--text-dim)">${pct}%</span>
+                </div>
+                <div style="margin-left:156px;color:var(--text-dim);font-size:11px">${escapeHtml(meta)}</div>
+              </div>
+            `;
+          });
+        }
+
         // --- Opponent Strategist (LLM node): predicted next turn + beatdown call ---
         let strategistHtml = '';
         const pol = p.predicted_opp_line;
@@ -857,6 +909,8 @@
             ${actionsHtml}
             ${handValuesHtml}
             ${oppHandHtml}
+            ${oppCardProbHtml}
+            ${aiDrawProbHtml}
             ${strategistHtml}
             ${targetsHtml}
           </div>
@@ -1047,6 +1101,52 @@
       `;
     }
 
+    function fmtTurn(v) { return (v === null || v === undefined) ? '-' : v; }
+
+    function deltaCell(v, lowerIsBetter) {
+      if (v === null || v === undefined) return '<td>-</td>';
+      const good = lowerIsBetter ? v < 0 : v > 0;
+      const color = v === 0 ? 'inherit' : (good ? 'var(--ok, #4caf50)' : 'var(--bad, #e57373)');
+      const sign = v > 0 ? '+' : '';
+      return `<td style="color:${color}">${sign}${v}</td>`;
+    }
+
+    function renderTrends() {
+      const el = document.getElementById('trendsTable');
+      const groups = (trendsData && trendsData.groups) ? trendsData.groups : [];
+      document.getElementById('trendsCount').textContent = ` (${groups.length})`;
+
+      if (groups.length === 0) {
+        el.innerHTML = '<div class="empty-state">No self-play runs recorded yet</div>';
+        return;
+      }
+
+      el.innerHTML = `
+        <table>
+          <thead>
+            <tr><th>Deck / Opponent / Mode</th><th>Runs</th><th>Base win%</th><th>Last win%</th><th>Δwin%</th><th>Base turn</th><th>Last turn</th><th>Δturn</th></tr>
+          </thead>
+          <tbody>
+            ${groups.map(g => {
+              const dwin = (g.delta_win_rate === null || g.delta_win_rate === undefined)
+                ? null : Math.round(g.delta_win_rate * 1000) / 10;
+              return `
+              <tr>
+                <td>${escapeHtml(g.label)}</td>
+                <td>${g.n_runs}</td>
+                <td>${Math.round(g.baseline.win_rate * 100)}%</td>
+                <td>${Math.round(g.latest.win_rate * 100)}%</td>
+                ${deltaCell(dwin, false)}
+                <td>${fmtTurn(g.baseline.mean_win_turn)}</td>
+                <td>${fmtTurn(g.latest.mean_win_turn)}</td>
+                ${deltaCell(g.delta_mean_win_turn, true)}
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
     // --- Fetch ---
     async function fetchHealth() {
       try {
@@ -1080,6 +1180,14 @@
       }
     }
 
+    async function fetchTrends() {
+      try {
+        trendsData = await fetch(`${API}/api/selfplay/trends`).then(r => r.json());
+      } catch (e) {
+        console.error('Trends fetch failed', e);
+      }
+    }
+
     // --- Refresh ---
     async function refresh() {
       const fmt = document.getElementById('metaFormat').value || 'modern';
@@ -1088,6 +1196,7 @@
         fetchStats(),
         fetchMetagame(fmt),
         fetchPiloting(fmt),
+        fetchTrends(),
       ]);
     }
 
@@ -1097,6 +1206,7 @@
       renderLastRecognition();
       renderMetagame();
       renderGuides();
+      renderTrends();
       renderHistory();
       document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
     }

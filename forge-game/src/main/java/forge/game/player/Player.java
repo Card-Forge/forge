@@ -2402,7 +2402,15 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final RegisteredPlayer getRegisteredPlayer() {
-        return game.getMatch().getPlayers().get(game.getRegisteredPlayers().indexOf(this));
+        // During player setup the controller (and the sidecar observer it
+        // attaches) is created before this player is added to the registered
+        // list, so indexOf can be -1 momentarily. Return null instead of
+        // throwing; callers already handle a null registered player.
+        final int idx = game.getRegisteredPlayers().indexOf(this);
+        if (idx < 0) {
+            return null;
+        }
+        return game.getMatch().getPlayers().get(idx);
     }
 
     public final PlayerOutcome getOutcome() {

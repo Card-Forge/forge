@@ -47,8 +47,12 @@ import org.tinylog.Logger;
  * finishes. Intermediate states may be skipped, but the final state is always
  * evaluated.</p>
  *
- * <p>This class only <em>reads</em> events and <em>writes</em> to the game log;
- * it never influences the heuristic AI's decisions.</p>
+ * <p>This class only <em>reads</em> game events; it never mutates game state.
+ * On each recognition response it both writes the guess to the game log and
+ * hands the result to {@link AiController#onSidecarResult} ->
+ * {@link SidecarInfluence}. Whether that result actually affects play is gated
+ * separately by {@code SIDECAR_INFLUENCE_ENABLE} / {@code SIDECAR_INFLUENCE_WEIGHT}
+ * (see {@link AiProps}); with influence off, the guess is log-only.</p>
  */
 public final class DeckRecognitionObserver {
 
@@ -64,8 +68,12 @@ public final class DeckRecognitionObserver {
     private final AtomicBoolean inFlight = new AtomicBoolean(false);
     private final AtomicBoolean rerunRequested = new AtomicBoolean(false);
 
-    /** The AI's own deck (card names), used by the sidecar for format detection. */
-    private final List<String> deckCards;
+    /** The AI's own deck (card names), used by the sidecar for format detection.
+     *  Resolved lazily: at construction the player is not yet registered with
+     *  the game, so {@link #extractDeckCards} returns empty; the first time it
+     *  is actually needed (a /recognize fire) the registration is in place and
+     *  it resolves. */
+    private volatile List<String> deckCards;
 
     /** Last message written to the log, to suppress identical consecutive guesses. */
     private volatile String lastPostedMessage = null;
@@ -123,7 +131,7 @@ public final class DeckRecognitionObserver {
     }
 
     /** Read the AI's own decklist (main deck card names) once, up front. */
-    static List<String> extractDeckCards(final Player aiPlayer) {
+    public static List<String> extractDeckCards(final Player aiPlayer) {
         final List<String> names = new ArrayList<>();
         try {
             final RegisteredPlayer rp = aiPlayer.getRegisteredPlayer();
@@ -144,7 +152,19 @@ public final class DeckRecognitionObserver {
 
     /** @return full AI main-deck card names, preserving duplicate copies. */
     List<String> deckCards() {
-        return List.copyOf(deckCards);
+        return List.copyOf(resolvedDeckCards());
+    }
+
+    /** Lazily resolve the AI's decklist, retrying until registration makes it
+     *  available (see {@link #deckCards}). */
+    private List<String> resolvedDeckCards() {
+        if (deckCards.isEmpty()) {
+            final List<String> fresh = extractDeckCards(aiPlayer);
+            if (!fresh.isEmpty()) {
+                deckCards = fresh;
+            }
+        }
+        return deckCards;
     }
 
     /** Single handler — Guava delivers every {@link GameEvent} subtype here. */
@@ -494,9 +514,12 @@ public final class DeckRecognitionObserver {
         final List<String> hand = zoneNames(aiPlayer, ZoneType.Hand);
         final List<String> ownBoard = zoneNames(aiPlayer, ZoneType.Battlefield);
         final List<String> ownGy = zoneNames(aiPlayer, ZoneType.Graveyard);
+        final List<String> ownExile = zoneNames(aiPlayer, ZoneType.Exile);
         final Player opponent = firstOpponent();
+        final List<String> opponentDeckCards = opponent == null ? List.of() : extractDeckCards(opponent);
         final List<String> oppBoard = opponent == null ? List.of() : zoneNames(opponent, ZoneType.Battlefield);
         final List<String> oppGy = opponent == null ? List.of() : zoneNames(opponent, ZoneType.Graveyard);
+        final List<String> oppExile = opponent == null ? List.of() : zoneNames(opponent, ZoneType.Exile);
         final Map<String, Integer> lifeTotals = buildLifeTotals(opponent);
         final String phase = currentPhaseName();
         final List<String> availableMana = availableManaColors();
@@ -517,12 +540,16 @@ public final class DeckRecognitionObserver {
                 aiPlayer.getId(),
                 currentAiTurnNumber(),
                 new ArrayList<>(observations),
-                deckCards,
+                resolvedDeckCards(),
                 hand,
                 ownBoard,
                 oppBoard,
                 ownGy,
                 oppGy,
+                opponentDeckCards,
+                ownExile,
+                oppExile,
+                List.of(),
                 lifeTotals,
                 phase,
                 availableMana,
@@ -540,7 +567,8 @@ public final class DeckRecognitionObserver {
                 oppMana.untappedSources(),
                 List.of(),
                 0,
-                aiController.getIntProperty(AiProps.SIDECAR_INFLUENCE_WEIGHT));
+                aiController.getIntProperty(AiProps.SIDECAR_INFLUENCE_WEIGHT),
+                DeckRecognitionFeature.pilotMode());
 
         Logger.info("DeckRecognition: POST /recognize game=" + game.getId()
                 + " aiTurn=" + currentAiTurnNumber()

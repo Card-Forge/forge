@@ -1,0 +1,4 @@
+{"game_id":"1","seat":0,"player":"Ai(1)-Izzet Spells","archetype":"Izzet Spells","opponent_player":"Ai(2)-Selesnya Landfall","opponent":"Selesnya Landfall","pilot_mode":"normal","won":false,"turns":17}
+{"game_id":"1","seat":1,"player":"Ai(2)-Selesnya Landfall","archetype":"Selesnya Landfall","opponent_player":"Ai(1)-Izzet Spells","opponent":"Izzet Spells","pilot_mode":"normal","won":true,"win_turn":9,"turns":9}
+{"game_id":"2","seat":0,"player":"Ai(1)-Izzet Spells","archetype":"Izzet Spells","opponent_player":"Ai(2)-Selesnya Landfall","opponent":"Selesnya Landfall","pilot_mode":"normal","won":false,"turns":14}
+{"game_id":"2","seat":1,"player":"Ai(2)-Selesnya Landfall","archetype":"Selesnya Landfall","opponent_player":"Ai(1)-Izzet Spells","opponent":"Izzet Spells","pilot_mode":"normal","won":true,"win_turn":7,"turns":7}

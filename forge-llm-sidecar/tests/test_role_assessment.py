@@ -66,3 +66,46 @@ def test_role_not_flipped_when_board_matches_natural_role():
     role = advice.assess_role(state, "aggro", "control")
     assert role["ai_role"] == "beatdown"
     assert role["role_flipped"] is False  # natural beatdown, board agrees
+
+
+def test_opponent_missed_drops_uses_opponent_turns_not_global_turn_counter():
+    state = _state(
+        [],
+        [],
+        turn=4,
+        observations=[
+            {"turn": 2, "event": "land", "card": "Mountain"},
+            {"turn": 4, "event": "land", "card": "Mountain"},
+        ],
+    )
+    assert advice.opponent_lands_dropped(state) == 2
+    assert advice.opponent_missed_drops(state) == 0
+
+
+def test_opponent_missed_drops_counts_one_per_observed_opponent_turn():
+    state = _state(
+        [],
+        [],
+        turn=4,
+        observations=[
+            {"turn": 2, "event": "land", "card": "Mountain"},
+            {"turn": 4, "event": "spell", "card": "Lightning Bolt"},
+        ],
+    )
+    assert advice.opponent_lands_dropped(state) == 1
+    assert advice.opponent_missed_drops(state) == 1
+
+
+def test_assess_role_reasoning_omits_false_missed_land_on_even_forge_turns():
+    state = _state(
+        [],
+        [],
+        turn=4,
+        observations=[
+            {"turn": 2, "event": "land", "card": "Mountain"},
+            {"turn": 4, "event": "land", "card": "Mountain"},
+        ],
+    )
+    role = advice.assess_role(state, "aggro", "aggro")
+    assert role["opp_missed_drops"] == 0
+    assert "opp missed" not in role["reasoning"]

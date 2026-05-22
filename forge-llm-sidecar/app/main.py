@@ -7,6 +7,7 @@ import json as _json
 import logging
 from collections import OrderedDict
 from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse
@@ -15,15 +16,20 @@ from pydantic import BaseModel, Field
 
 from app.config import CONFIG
 from app.graph import get_graph
-from app.knowledge import loader, metagame, piloting
-from app.llm_client import is_reachable
+from app.knowledge import learnings, loader, metagame, piloting
+from app.llm_client import LLMError, generate_json, is_reachable
 from app.nodes import game_advisor
 from app.schema import (
     ActionScore,
     BeatdownAssessment,
+    CardDrawProbability,
     ComboPlan,
     EarlyGamePlan,
     HandValuation,
+    LegalAction,
+    Lesson,
+    LessonEvidence,
+    OpponentCardProbability,
     OpponentHandGuess,
     PilotingAdvice,
     PredictedOppLine,
@@ -33,6 +39,8 @@ from app.schema import (
     TargetPriority,
     TrainingExample,
 )
+from app import selfplay_store
+from app.opponent_hand_probability import ai_draw_probabilities, opponent_card_probabilities
 from app.store import get_store
 
 logging.basicConfig(level=logging.INFO)
@@ -57,7 +65,11 @@ async def _log_every_request(request: Request, call_next):
     # when validation fails (422) or the request never reaches /recognize.
     response = await call_next(request)
     path = request.url.path
-    if path not in ("/api/stats", "/dashboard") and not path.startswith("/static"):
+    if path not in (
+        "/api/stats",
+        "/api/selfplay/trends",
+        "/dashboard",
+    ) and not path.startswith("/static"):
         client_host = request.client.host if request.client else "?"
         log.info(
             "HTTP %s %s -> %d (from %s)",
@@ -111,7 +123,7 @@ async def health() -> dict:
 # returns the previous response in <1ms instead of waiting on the LLM.
 #
 # Cache key inputs (deliberately limited):
-#   game_id, turn, observations, hand, own/opp board, own/opp graveyard,
+#   game_id, turn, observations, decklists, hand, own/opp board, known graveyard/exile,
 #   life totals, phase, available mana, opp mana colors, board details.
 #
 # Excluded (don't influence the recognizer / advisor in a meaningful way):
@@ -129,16 +141,22 @@ _COMBO_PROFILES_VERSION = piloting.combo_profiles_version()
 def _recognize_cache_key(req: RecognitionRequest) -> str:
     payload = {
         "g": req.game_id,
+        "seat": req.opponent_seat,
         "t": req.turn,
         "o": [
             (o.turn, o.event, o.card, o.cmc, list(o.colors), list(o.types))
             for o in req.observations
         ],
+        "d": sorted(req.deck_cards),
         "h": sorted(req.hand),
         "ob": sorted(req.own_board),
         "pb": sorted(req.opponent_board),
         "og": sorted(req.your_graveyard),
         "pg": sorted(req.opponent_graveyard),
+        "ye": sorted(req.your_exile),
+        "od": sorted(req.opponent_deck_cards),
+        "oe": sorted(req.opponent_exile),
+        "osh": sorted(req.opponent_seen_hand),
         "l": sorted(req.life_totals.items()),
         "p": req.phase,
         "m": sorted(req.available_mana),
@@ -161,8 +179,12 @@ def _recognize_cache_key(req: RecognitionRequest) -> str:
         "la": [a.model_dump() for a in req.legal_actions],
         "ctr": req.cards_to_return,
         "si": req.sidecar_influence,
+        "pm": req.pilot_mode,
         "pv": _PROFILES_VERSION,
         "cv": _COMBO_PROFILES_VERSION,
+        # Computed per-request (cheap) so cache busts when /selfplay/reflect
+        # stages new learnings while the process is running.
+        "lv": learnings.learnings_version(),
     }
     encoded = _json.dumps(payload, sort_keys=True, default=str).encode("utf-8")
     return hashlib.blake2b(encoded, digest_size=16).hexdigest()
@@ -213,6 +235,85 @@ async def api_stats() -> dict:
             "misses": _recognize_cache_misses,
         },
     }
+
+
+class RecordRunRequest(BaseModel):
+    """One self-play run (one runner invocation) to persist into the results DB.
+
+    ``records`` are the runner's per-seat dicts (archetype, opponent, pilot_mode,
+    won, win_turn, turns) — the same objects it writes to JSONL.
+    """
+
+    records: list[dict] = Field(default_factory=list)
+    format: str = ""
+    config: str = ""
+    label: str = ""
+    source_file: str = ""
+
+
+class RecordRunResponse(BaseModel):
+    run_id: int
+    n_games: int
+    n_wins: int
+    db_path: str
+
+
+@app.post("/selfplay/record", response_model=RecordRunResponse)
+async def selfplay_record(req: RecordRunRequest) -> RecordRunResponse:
+    """Persist a finished self-play run so it can be baselined and tracked over time.
+
+    Called by the Java ``SelfPlayRunner`` at the end of a run (it also keeps
+    writing JSONL as the raw artifact). The server snapshots ``learnings_version``
+    and the git sha so the run lines up against the learnings state at that moment.
+    """
+    conn = selfplay_store.connect()
+    try:
+        run_id = selfplay_store.insert_run(
+            conn,
+            records=req.records,
+            config=req.config,
+            format=req.format,
+            learnings_version=selfplay_store.current_learnings_version(),
+            git_sha=selfplay_store.current_git_sha(),
+            source_file=req.source_file,
+            label=req.label,
+        )
+    finally:
+        conn.close()
+    n_wins = sum(1 for r in req.records if r.get("won"))
+    log.info(
+        "Recorded self-play run #%d: %d games, %d wins (%s / %s)",
+        run_id,
+        len(req.records),
+        n_wins,
+        req.format or "?",
+        req.config or "?",
+    )
+    return RecordRunResponse(
+        run_id=run_id,
+        n_games=len(req.records),
+        n_wins=n_wins,
+        db_path=str(selfplay_store.db_path()),
+    )
+
+
+@app.get("/api/selfplay/trends")
+async def api_selfplay_trends(archetype: str | None = None) -> dict:
+    """Self-play results over time for the dashboard panel.
+
+    Default: per-deck baseline-vs-latest with deltas. With ``?archetype=`` the
+    full per-run series for one deck. Fail-soft: if no results DB exists yet,
+    returns empty groups so the panel renders blank rather than erroring.
+    """
+    if not selfplay_store.db_exists():
+        return {"groups": []}
+    conn = selfplay_store.connect()
+    try:
+        if archetype:
+            return {"groups": selfplay_store.archetype_trend(conn, archetype)}
+        return {"groups": selfplay_store.baseline_vs_latest(conn)}
+    finally:
+        conn.close()
 
 
 @app.get("/metagame")
@@ -359,6 +460,7 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
     graph = get_graph()
     initial = {
         "game_id": req.game_id,
+        "opponent_seat": req.opponent_seat,
         "format": req.format,
         "turn": req.turn,
         "observations": [o.model_dump() for o in req.observations],
@@ -368,6 +470,10 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         "opponent_board": req.opponent_board,
         "your_graveyard": req.your_graveyard,
         "opponent_graveyard": req.opponent_graveyard,
+        "your_exile": req.your_exile,
+        "opponent_deck_cards": req.opponent_deck_cards,
+        "opponent_exile": req.opponent_exile,
+        "opponent_seen_hand": req.opponent_seen_hand,
         "life_totals": req.life_totals,
         "phase": req.phase,
         "available_mana": req.available_mana,
@@ -387,6 +493,7 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         "legal_actions": [a.model_dump() for a in req.legal_actions],
         "cards_to_return": req.cards_to_return,
         "sidecar_influence": req.sidecar_influence,
+        "pilot_mode": req.pilot_mode,
     }
     final = await graph.ainvoke(initial)
     response = _response_from_final(req, final)
@@ -404,6 +511,16 @@ def _response_from_final(req: RecognitionRequest, final: dict) -> RecognitionRes
     ]
     opponent_hand = [
         OpponentHandGuess(**g) for g in (final.get("opponent_hand") or []) if isinstance(g, dict)
+    ]
+    opponent_cards = [
+        OpponentCardProbability(**g)
+        for g in opponent_card_probabilities(final)
+        if isinstance(g, dict)
+    ]
+    ai_draws = [
+        CardDrawProbability(**g)
+        for g in ai_draw_probabilities(final)
+        if isinstance(g, dict)
     ]
     target_priorities = [
         TargetPriority(**t)
@@ -449,6 +566,8 @@ def _response_from_final(req: RecognitionRequest, final: dict) -> RecognitionRes
         role=role_obj,
         hand_values=hand_values,
         opponent_hand=opponent_hand,
+        opponent_card_probabilities=opponent_cards,
+        ai_draw_probabilities=ai_draws,
         target_priorities=target_priorities,
         guide_overview=(guide.get("overview") or "") if guide else "",
         phase_plan=[str(s) for s in phase_plan if s],
@@ -515,6 +634,7 @@ async def mulligan_plan(req: RecognitionRequest) -> RecognitionResponse:
     graph = get_graph()
     initial = {
         "game_id": req.game_id,
+        "opponent_seat": req.opponent_seat,
         "format": req.format,
         "turn": req.turn,
         "observations": [o.model_dump() for o in req.observations],
@@ -524,6 +644,10 @@ async def mulligan_plan(req: RecognitionRequest) -> RecognitionResponse:
         "opponent_board": req.opponent_board,
         "your_graveyard": req.your_graveyard,
         "opponent_graveyard": req.opponent_graveyard,
+        "your_exile": req.your_exile,
+        "opponent_deck_cards": req.opponent_deck_cards,
+        "opponent_exile": req.opponent_exile,
+        "opponent_seen_hand": req.opponent_seen_hand,
         "life_totals": req.life_totals,
         "phase": req.phase,
         "available_mana": req.available_mana,
@@ -543,6 +667,7 @@ async def mulligan_plan(req: RecognitionRequest) -> RecognitionResponse:
         "legal_actions": [a.model_dump() for a in req.legal_actions],
         "cards_to_return": req.cards_to_return,
         "sidecar_influence": req.sidecar_influence,
+        "pilot_mode": req.pilot_mode,
     }
     final = await graph.ainvoke(initial)
     response = _response_from_final(req, final)
@@ -670,6 +795,171 @@ async def forge_log_analyze(req: ForgeLogAnalyzeRequest) -> ForgeLogAnalyzeRespo
     return ForgeLogAnalyzeResponse(
         checkpoints=results,
         training_data=training_data,
+    )
+
+
+# ---------------------------------------------------------------------------
+# Self-play reflection: distill a batch of goldfishing/mirror games into
+# context-tagged lessons and auto-stage them to the learnings store.
+# ---------------------------------------------------------------------------
+
+
+class ReflectGame(BaseModel):
+    """One self-play game outcome from the runner's per-seat JSONL."""
+
+    won: bool = False
+    # Turn the deck won on (None for losses/timeouts). Lower is better.
+    win_turn: int | None = None
+    # Compact per-turn action summary, if the runner captured it.
+    actions: list[str] = Field(default_factory=list)
+    # Raw Forge game log, optional fallback when `actions` is absent.
+    log: str = ""
+
+
+class ReflectRequest(BaseModel):
+    """A batch of games for ONE (archetype, context, pilot_mode) to reflect on."""
+
+    format: str
+    archetype: str
+    # Context the resulting lessons are tagged with — gates injection later.
+    context: str = "no_interaction"
+    pilot_mode: str = "solve"
+    games: list[ReflectGame]
+    # Auto-stage the distilled lessons to the learnings store.
+    stage: bool = True
+    # Hard cap on lessons distilled per batch (keeps the injected block small).
+    max_lessons: int = 5
+
+
+class ReflectResponse(BaseModel):
+    archetype: str
+    format: str
+    context: str
+    n_games: int
+    n_wins: int
+    win_rate: float
+    fastest_win: int | None = None
+    mean_win_turn: float | None = None
+    median_win_turn: float | None = None
+    lessons: list[Lesson] = Field(default_factory=list)
+    staged_path: str | None = None
+
+
+_REFLECT_SYSTEM_PROMPT = (
+    "You are a Magic: The Gathering goldfishing analyst. Given aggregate "
+    "self-play results and per-game summaries for ONE deck, distill a few "
+    "concise, CONDITIONAL lessons that would help it win in fewer turns. Each "
+    "lesson has a 'trigger' (the situation) and a 'recommendation' (the line). "
+    "Keep each recommendation under ~25 words. Do not invent cards. Phrase "
+    "lessons conditionally, never as 'always ignore interaction'. Always answer "
+    "with a single JSON object and nothing else."
+)
+
+
+def _summarize_games(games: list[ReflectGame], *, limit: int = 12) -> str:
+    """Compact textual summary of the most informative games (fastest wins
+    first, then a few losses), bounded so the reflection stays one cheap call."""
+    wins = sorted(
+        (g for g in games if g.won and g.win_turn is not None),
+        key=lambda g: g.win_turn,
+    )
+    losses = [g for g in games if not g.won]
+    chosen = (wins[:limit] + losses[:3])[:limit]
+    lines: list[str] = []
+    for g in chosen:
+        outcome = f"WON turn {g.win_turn}" if g.won else "did not win"
+        seq = "; ".join(g.actions[:20]) if g.actions else (g.log[:400] if g.log else "")
+        lines.append(f"- {outcome}: {seq}" if seq else f"- {outcome}")
+    return "\n".join(lines)
+
+
+def _reflect_confidence(n_games: int, win_rate: float) -> float:
+    """Grounded confidence: scales with sample size and win rate, capped 0.95."""
+    return round(min(0.95, win_rate * min(1.0, n_games / 20.0)), 2)
+
+
+@app.post("/selfplay/reflect", response_model=ReflectResponse)
+async def selfplay_reflect(req: ReflectRequest) -> ReflectResponse:
+    """Distill a batch of self-play games into context-tagged lessons.
+
+    One LLM call per batch (not per game) — aggregate stats plus compact
+    per-game summaries go in, a short list of conditional lessons comes out,
+    each carrying batch-level evidence (sample size + turns-to-win headroom).
+    """
+    import statistics
+
+    games = req.games or []
+    n_games = len(games)
+    win_turns = [g.win_turn for g in games if g.won and g.win_turn is not None]
+    n_wins = len(win_turns)
+    win_rate = (n_wins / n_games) if n_games else 0.0
+    fastest = min(win_turns) if win_turns else None
+    mean_turn = round(statistics.fmean(win_turns), 2) if win_turns else None
+    median_turn = round(statistics.median(win_turns), 2) if win_turns else None
+    # Headroom between the average and the best line — how much faster the deck
+    # *can* win than it typically does. This is the lesson's evidence delta.
+    delta = round((mean_turn - fastest), 2) if (mean_turn is not None and fastest is not None) else 0.0
+
+    log.info(
+        "selfplay/reflect: archetype=%s context=%s games=%d wins=%d fastest=%s",
+        req.archetype, req.context, n_games, n_wins, fastest,
+    )
+
+    lessons: list[Lesson] = []
+    if n_games:
+        prompt = (
+            f"Deck: {req.archetype} ({req.format})\n"
+            f"Pilot mode: {req.pilot_mode}  Context: {req.context}\n"
+            f"Games: {n_games}  Wins: {n_wins}  Win rate: {win_rate:.0%}\n"
+            f"Win turns — fastest: {fastest}, mean: {mean_turn}, median: {median_turn}\n\n"
+            f"PER-GAME SUMMARIES (fastest wins first):\n{_summarize_games(games)}\n\n"
+            f"Distill at most {req.max_lessons} conditional lessons that would make "
+            "this deck win faster. Return exactly:\n"
+            '  "lessons": [{"trigger": string, "recommendation": string}]'
+        )
+        try:
+            raw = await generate_json(prompt, system=_REFLECT_SYSTEM_PROMPT)
+        except LLMError as exc:
+            log.warning("selfplay/reflect: LLM call failed (%s); returning aggregates only", exc)
+            raw = {}
+        confidence = _reflect_confidence(n_games, win_rate)
+        now = datetime.now(timezone.utc).isoformat()
+        for item in (raw.get("lessons") or [])[: req.max_lessons]:
+            if not isinstance(item, dict):
+                continue
+            rec = str(item.get("recommendation") or "").strip()
+            if not rec:
+                continue
+            lessons.append(
+                Lesson(
+                    archetype=req.archetype,
+                    format=req.format,
+                    context=req.context,
+                    trigger=str(item.get("trigger") or "").strip(),
+                    recommendation=rec,
+                    evidence=LessonEvidence(turns_to_win_delta=delta, n_games=n_games),
+                    confidence=confidence,
+                    created_at=now,
+                    source="selfplay",
+                )
+            )
+
+    staged_path: str | None = None
+    if req.stage and lessons:
+        staged_path = str(learnings.append_lessons(req.format, req.archetype, lessons))
+
+    return ReflectResponse(
+        archetype=req.archetype,
+        format=req.format,
+        context=req.context,
+        n_games=n_games,
+        n_wins=n_wins,
+        win_rate=round(win_rate, 3),
+        fastest_win=fastest,
+        mean_win_turn=mean_turn,
+        median_win_turn=median_turn,
+        lessons=lessons,
+        staged_path=staged_path,
     )
 
 

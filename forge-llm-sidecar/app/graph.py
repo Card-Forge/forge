@@ -1,9 +1,17 @@
 """The LangGraph agent graph.
 
-A single node: START -> game_advisor -> END. The ``game_advisor`` node does
-opponent deck recognition with one LLM call per trigger. AI piloting advice is
-derived locally from the resolved guide, so recognition does not receive AI deck
-guidance or AI game state and stays grounded only in observed human plays.
+A linear chain: START -> game_advisor -> mulligan_planner -> combo_strategist
+-> opponent_strategist -> END.
+
+``game_advisor`` does opponent deck recognition with one LLM call per trigger
+(and derives AI piloting advice locally from the resolved guide, so recognition
+stays grounded only in observed human plays — it never sees the AI deck or game
+state). The later nodes self-gate and fail soft, only enriching the state:
+``mulligan_planner`` adds keep/mulligan and rolling early-game planning,
+``combo_strategist`` refines action scores for combo decks, and
+``opponent_strategist`` does deeper opponent reasoning (hand inference,
+next-turn prediction, threat ranking).
+
 Further nodes can still be added with ``add_node`` / ``add_edge`` without
 changing the HTTP contract, because :class:`GraphState` is a superset TypedDict.
 """

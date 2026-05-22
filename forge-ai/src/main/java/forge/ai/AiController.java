@@ -178,6 +178,20 @@ public class AiController {
         this.sidecarDeckCards = deckCards == null ? List.of() : List.copyOf(deckCards);
     }
 
+    /** Resolve the AI's decklist lazily. The snapshot captured at attach time
+     *  is empty when the player was not yet registered with the game (sim
+     *  path); recompute from the now-registered player on demand. */
+    private List<String> resolveSidecarDeckCards() {
+        if (!sidecarDeckCards.isEmpty()) {
+            return sidecarDeckCards;
+        }
+        final List<String> fresh = forge.ai.llm.DeckRecognitionObserver.extractDeckCards(player);
+        if (!fresh.isEmpty()) {
+            sidecarDeckCards = List.copyOf(fresh);
+        }
+        return sidecarDeckCards;
+    }
+
     /** @return whether sidecar influence is active (AI prop or system property). */
     private boolean sidecarInfluenceEnabled() {
         if (Boolean.getBoolean("forge.ai.sidecarInfluence")) {
@@ -209,7 +223,8 @@ public class AiController {
             Logger.info("DeckRecognition: skipping /mulligan-plan (sidecar client not attached)");
             return false;
         }
-        if (sidecarDeckCards.isEmpty()) {
+        final List<String> deckCards = resolveSidecarDeckCards();
+        if (deckCards.isEmpty()) {
             Logger.info("DeckRecognition: skipping /mulligan-plan (AI decklist unavailable)");
             return false;
         }
@@ -220,14 +235,22 @@ public class AiController {
                 player.getId(),
                 currentAiTurnNumber(),
                 List.of(),
-                sidecarDeckCards,
+                deckCards,
                 currentZoneNames(ZoneType.Hand),
                 currentZoneNames(ZoneType.Battlefield),
                 player.getOpponents().isEmpty() ? List.of() : currentZoneNames(player.getOpponents().get(0), ZoneType.Battlefield),
                 currentZoneNames(ZoneType.Graveyard),
                 player.getOpponents().isEmpty() ? List.of() : currentZoneNames(player.getOpponents().get(0), ZoneType.Graveyard),
+                player.getOpponents().isEmpty() ? List.of() : forge.ai.llm.DeckRecognitionObserver.extractDeckCards(player.getOpponents().get(0)),
+                currentZoneNames(ZoneType.Exile),
+                player.getOpponents().isEmpty() ? List.of() : currentZoneNames(player.getOpponents().get(0), ZoneType.Exile),
+                List.of(),
                 Map.of(),
-                game.getPhaseHandler().getPhase().name(),
+                // During mulligan there is no active phase yet, so getPhase()
+                // can be null — guard it (this call is reached now that the
+                // decklist resolves; previously the empty-deck check returned early).
+                game.getPhaseHandler().getPhase() == null
+                        ? "MULLIGAN" : game.getPhaseHandler().getPhase().name(),
                 List.of(),
                 Map.of("play_aggro", getBoolProperty(AiProps.PLAY_AGGRO)),
                 player.getCardsIn(ZoneType.Hand).size(),
@@ -243,7 +266,8 @@ public class AiController {
                 List.of(),
                 List.of(),
                 cardsToReturn,
-                getSidecarInfluenceWeight());
+                getSidecarInfluenceWeight(),
+                forge.ai.llm.DeckRecognitionFeature.pilotMode());
         Logger.info("DeckRecognition: POST /mulligan-plan game=" + game.getId()
                 + " aiTurn=" + currentAiTurnNumber()
                 + " cardsToReturn=" + cardsToReturn

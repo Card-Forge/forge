@@ -21,7 +21,9 @@ from pydantic import BaseModel, Field
 # combo line that can adjust the existing action scores.
 # v8 adds early_game_plan, legal_actions, cards_to_return, and a global
 # sidecar influence weight.
-SCHEMA_VERSION = 8
+# v9 adds card-by-card opponent hand probabilities and AI draw probabilities
+# computed from decklists minus cards known to have left the library.
+SCHEMA_VERSION = 9
 
 
 class Observation(BaseModel):
@@ -92,6 +94,13 @@ class RecognitionRequest(BaseModel):
     opponent_board: list[str] = Field(default_factory=list)
     your_graveyard: list[str] = Field(default_factory=list)
     opponent_graveyard: list[str] = Field(default_factory=list)
+    your_exile: list[str] = Field(default_factory=list)
+    # v9: opponent deck probability inputs. opponent_deck_cards is the
+    # opponent's main-deck card list with duplicate copies. The known zones are
+    # removed from that list to compute card-by-card hand probabilities.
+    opponent_deck_cards: list[str] = Field(default_factory=list)
+    opponent_exile: list[str] = Field(default_factory=list)
+    opponent_seen_hand: list[str] = Field(default_factory=list)
     life_totals: dict[str, int] = Field(default_factory=dict)
     # Current game phase (e.g. "MAIN1", "COMBAT_DECLARE_ATTACKERS"). Optional —
     # board-aware advice uses it to pick phase-appropriate actions.
@@ -130,6 +139,11 @@ class RecognitionRequest(BaseModel):
     cards_to_return: int = 0
     # v8: global sidecar influence weight, 0=no influence, 100=force if legal.
     sidecar_influence: int = 50
+    # Pilot mode. "normal" is the production path. "solve" is set ONLY by the
+    # self-play goldfishing runner against a non-interactive opponent: it tells
+    # the advice engine to assume zero opponent interaction and chase the fastest
+    # line. Production callers never set it, so the normal path is unaffected.
+    pilot_mode: str = "normal"
 
 
 class RoleAssessment(BaseModel):
@@ -179,6 +193,26 @@ class OpponentHandGuess(BaseModel):
 
     category: str = ""  # "counterspell" | "removal" | "wrath" | "threat" | "combo_piece" | ...
     example_cards: list[str] = Field(default_factory=list)
+    probability: float = 0.0  # 0-1
+    reasoning: str = ""
+
+
+class OpponentCardProbability(BaseModel):
+    """Probability the opponent currently has at least one copy of a card."""
+
+    card: str
+    remaining_copies: int = 0
+    known_removed: int = 0
+    probability: float = 0.0  # 0-1
+    reasoning: str = ""
+
+
+class CardDrawProbability(BaseModel):
+    """Probability the AI draws a card as the next card from its library."""
+
+    card: str
+    remaining_copies: int = 0
+    known_removed: int = 0
     probability: float = 0.0  # 0-1
     reasoning: str = ""
 
@@ -272,6 +306,8 @@ class PilotingAdvice(BaseModel):
     role: RoleAssessment | None = None
     hand_values: list[HandValuation] = Field(default_factory=list)
     opponent_hand: list[OpponentHandGuess] = Field(default_factory=list)
+    opponent_card_probabilities: list[OpponentCardProbability] = Field(default_factory=list)
+    ai_draw_probabilities: list[CardDrawProbability] = Field(default_factory=list)
     target_priorities: list[TargetPriority] = Field(default_factory=list)
     # Surfaced from the resolved piloting guide so the dashboard / Forge UI
     # can show a more precise plan rather than just a slug.
@@ -323,9 +359,46 @@ class RecognitionResponse(BaseModel):
 # LangGraph state. Kept as a superset TypedDict so the HTTP contract and the
 # graph state can evolve independently.
 # ---------------------------------------------------------------------------
+class LessonEvidence(BaseModel):
+    """Quantitative backing for a self-play lesson."""
+
+    # Mean turns-to-win improvement attributed to following this lesson
+    # (positive = faster wins). Reflection fills this from aggregate stats.
+    turns_to_win_delta: float = 0.0
+    # Number of games the lesson was distilled from. Gates injection.
+    n_games: int = 0
+
+
+class Lesson(BaseModel):
+    """A distilled, context-tagged self-play lesson.
+
+    Produced by the /selfplay/reflect endpoint, auto-staged to the learnings
+    store, and injected (capped + gated) alongside the curated piloting guide.
+    Lessons are stored CONDITIONALLY: ``context`` records the situation they
+    were learned in (e.g. "no_interaction"), and injection only fires when the
+    live game state matches that context.
+    """
+
+    archetype: str
+    format: str = ""
+    # The situation this lesson applies to. "no_interaction" lessons come from
+    # goldfishing and only inject when the opponent has shown no interaction.
+    context: str = "no_interaction"
+    trigger: str = ""
+    recommendation: str
+    evidence: LessonEvidence = Field(default_factory=LessonEvidence)
+    confidence: float = 0.0
+    created_at: str = ""
+    source: str = "selfplay"
+
+
 class GraphState(TypedDict, total=False):
     # inputs
     game_id: str
+    # Seat identifier for the AI making the request. Two AI seats in one game
+    # share a game_id but have different own decks, so per-game caches key on
+    # (game_id, opponent_seat) to avoid cross-contamination.
+    opponent_seat: int
     format: str
     turn: int
     observations: list[dict]
@@ -335,6 +408,10 @@ class GraphState(TypedDict, total=False):
     opponent_board: list[str]
     your_graveyard: list[str]
     opponent_graveyard: list[str]
+    your_exile: list[str]
+    opponent_deck_cards: list[str]
+    opponent_exile: list[str]
+    opponent_seen_hand: list[str]
     life_totals: dict[str, int]
     phase: str
     available_mana: list[str]
@@ -355,6 +432,7 @@ class GraphState(TypedDict, total=False):
     legal_actions: list[dict]
     cards_to_return: int
     sidecar_influence: int
+    pilot_mode: str
     # resolved by the game_advisor node
     resolved_format: str | None
     candidate_archetypes: list[dict]
@@ -375,6 +453,8 @@ class GraphState(TypedDict, total=False):
     role: dict | None
     hand_values: list[dict]
     opponent_hand: list[dict]
+    opponent_card_probabilities: list[dict]
+    ai_draw_probabilities: list[dict]
     target_priorities: list[dict]
     # v6 opponent_strategist outputs
     predicted_opp_line: dict | None

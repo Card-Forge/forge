@@ -48,5 +48,5 @@ build-backend = "setuptools.build_meta"
 packages = ["app", "app.nodes", "app.knowledge", "app.forge_log", "app.static"]
 
 [tool.setuptools.package-data]
-"app.knowledge" = ["archetypes/*.json", "metagame_data/*.json", "piloting/*/*.json"]
+"app.knowledge" = ["archetypes/*.json", "metagame_data/*.json", "piloting/*/*.json", "card_name_overrides.json"]
 "app.static" = ["*.html"]

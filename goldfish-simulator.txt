@@ -1,0 +1,3505 @@
+╭─── Claude Code v2.1.146 ─────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│                  Welcome back Lou!                 │ started                 │
+│                                                    │ Run /init to create a … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ What's new              │
+│                        ▘▘ ▝▝                       │ Fixed the Bash tool re… │
+│    Opus 4.7 · Claude Pro · loud1990@gmail.com's    │ Pinned background sess… │
+│    Organization                                    │ Renamed `/simplify` to… │
+│                ~/Development/forge-1               │ /release-notes for more │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+❯ /clear                                                                        
+  ⎿  (no content)
+
+❯ /usage 
+  ⎿  Settings dialog dismissed
+
+❯ Brainstorm ways we can build a "gold fishing" system. This is where a player  
+  basically plays a deck by themselves and no opponent and tries to win the     
+  game in as few turns as possible. I was doing this manually against a deck of 
+   60 Islands in Forge. Ideally, this could be simulated so that we could       
+  generate a ton of real data. This data could be used to improve the AI        
+  Sidecar over time. It could keep notes of what worked to get wins quicker     
+  than other turns and save this information to is guidance documentation. How  
+  big in tokens should this be to keep llm calls at a reasonable speed? What is 
+   the real difference in response time between say 2000 tokens and 10000       
+  tokens? 100000 tokens? Is it meaningful?  This will lead to decisions being   
+  made about the size of data                                                   
+
+● I'll explore the sidecar codebase to understand how guidance docs and the AI
+  work, then design a goldfishing system. Let me start.
+
+● 2 Explore agents finished (ctrl+o to expand)
+   ├ Explore sidecar guidance system · 0 tool uses
+   │ ⎿  Done
+   └ Explore Forge simulation/headless capabilities · 0 tool uses
+     ⎿  Done
+
+● I've now got a clear picture of both halves: the sidecar (Python/LangGraph +
+  JSON piloting guides) and Forge's simulation infra. Let me answer your latency
+   question directly, then sketch the goldfishing design, then confirm a couple
+  of forks before I write the plan.
+
+  The latency question (this should drive your sizing decisions)
+
+  LLM latency splits into two phases, and they scale very differently:
+
+  - Prefill — processing the input prompt. Scales ~linearly with input tokens.
+  Parallelizable, so relatively cheap per token.
+  - Decode — generating output tokens one at a time (autoregressive). Each token
+   is a full forward pass, so it's the usual bottleneck — but only matters in
+  proportion to output length.
+
+  Your sidecar emits small JSON (a few hundred output tokens), so for you
+  input/prefill dominates. That's exactly the lever your guidance-doc sizing
+  controls.
+
+  Rough throughput on a local llama.cpp setup (your default localhost:8080):
+
+  ┌────────────┬──────────────────────────────────┬──────────────────────────┐
+  │            │ Decent GPU (~3000 tok/s prefill) │ CPU (~150 tok/s prefill) │
+  ├────────────┼──────────────────────────────────┼──────────────────────────┤
+  │ 2,000 in   │ ~0.7s                            │ ~13s                     │
+  ├────────────┼──────────────────────────────────┼──────────────────────────┤
+  │ 10,000 in  │ ~3.3s                            │ ~67s                     │
+  ├────────────┼──────────────────────────────────┼──────────────────────────┤
+  │ 100,000 in │ ~33s                             │ ~11 min                  │
+  └────────────┴──────────────────────────────────┴──────────────────────────┘
+
+  So is the difference meaningful? Yes, very — and it's roughly linear. 2k→10k
+  is a 5x prefill cost. 100k is a non-starter for per-turn calls: it needs a
+  128k-context model, tens of GB of KV-cache memory, and quality degrades in the
+   middle of long contexts ("lost in the middle").
+
+  The crucial caveat: KV prefix caching. If a chunk of the prompt is static and 
+  identical across calls (like a piloting guide), llama.cpp can cache its
+  prefill and reuse it — so you pay that cost once, not every call. Your sidecar
+   already does whole-response LRU caching; the win is to also structure prompts
+   so the static guidance is a stable prefix.
+
+  Recommended budget:
+  - Per-call dynamic content (game state, observations): keep < ~2-4k tokens →
+  snappy.
+  - Static guidance injected per archetype: your guides currently format to
+  ~2,900-3,370 tokens. That's fine if cached as a prefix; otherwise trim toward
+  ~1,500-2,500.
+  - Goldfishing-learned notes appended to a guide: distill hard — ≤ ~500 tokens 
+  of high-signal tips, never raw logs. The whole point is compression: "Turn-3
+  kill needs 2 rituals + reducer by T2" not a transcript.
+
+  The trap to avoid: dumping accumulated goldfishing data straight into prompts.
+   That's how you'd drift toward 100k. The system must distill before it writes
+  back.
+
+  Goldfishing system — the shape of it
+
+  You already have the hard parts. SimulateMatch +
+  GameSimulator/GameCopier/SpellAbilityPicker give you headless games and
+  lookahead. Goldfishing = run a deck vs. a passive opponent, measure
+  turns-to-win, repeat thousands of times, distill what correlates with fast
+  kills, write it back to the piloting JSON.
+
+  The big fork is who plays the deck during goldfishing, because it changes
+  everything downstream:
+
+  - A) Built-in Forge AI — fast, deterministic, no LLM, scales to thousands of
+  games trivially. Data reflects what Forge's AI does, which may be suboptimal
+  goldfishing.
+  - B) Search for the optimal/fastest line — use the existing GameSimulator
+  lookahead (beam/MCTS over action sequences) to actually find the fewest-turn
+  kill. This is "true" goldfishing and produces the most valuable guidance, but
+  it's more to build.
+  - C) The LLM sidecar itself — slow, but tests/improves the actual system.
+  Realistically only viable at low volume.
+
+  Let me confirm direction before writing the plan.
+
+● User answered Claude's questions:
+  ⎿  · Who should pilot the deck during goldfishing runs — i.e., what generates 
+     the data? → The whole point is to test the Sidecar, LLM Sidecar should 
+     pilot. We should also implement some type of post game analysis reflection,
+      what decisions led to a win or a loss, and how to change or do that again 
+     next time depending on the results. This could go directly into the 
+     guidance documentation or another self improvement system.
+     · What should the goldfishing data actually improve? → What are the 
+     pros/cons of each option? What do you recommend and why?
+     · How does a distilled learning get into the guidance docs? → Auto-stage, 
+     human-promote
+
+● Got it — LLM sidecar pilots, with a post-game reflection step, and
+  auto-stage/human-promote writeback. Before I answer your pros/cons question
+  and write the plan, let me ground a few details by reading the actual
+  reflection and guide-injection code.
+
+  Read 2 files (ctrl+o to expand)
+
+● I now have enough to answer your target question and write the plan.
+
+  Target: pros/cons + my recommendation
+
+  Option A — write distilled tips straight into the curated piloting JSON guides
+  - Pros: single source of truth; _format_guide() (game_advisor.py:116) already
+  injects it, zero new plumbing.
+  - Cons: machine noise pollutes hand-curated guides; no provenance (can't tell
+  learned vs. authored); hard to roll back; guides grow unbounded → token bloat
+  → slower prefill (the exact thing your latency budget is fighting).
+
+  Option B — separate learnings layer, injected alongside guides
+  - Pros: clean provenance; you can cap injected size, gate by
+  confidence/sample-count, A/B test, and roll back trivially; curated guides
+  stay pristine.
+  - Cons: new injection + formatting plumbing; risk of learnings
+  drifting/conflicting with the guide if never reconciled.
+
+  Option C — both: machine writes to a learnings layer, vetted tips get promoted
+   into curated guides
+  - Pros: exactly matches your "auto-stage, human-promote" choice — the
+  learnings layer is the staging area, promotion is the human gate. Safe
+  auto-write, clean permanent guides, full provenance + rollback, bounded token
+  cost.
+  - Cons: most plumbing (a learnings store + a promotion tool).
+
+  I recommend C. It's the only option that's coherent with the writeback model
+  you already picked: auto-staging needs somewhere safe to land that isn't the
+  curated guide, and "human-promote" needs a curated destination to promote
+  into. A and B each give you only one half of that. C also directly serves your
+   latency concern — the learnings injection is capped and confidence-gated, so
+  distilled notes can't silently bloat prompts.
+
+  One honest flag on scale: with the LLM piloting every decision, a single game
+  is many sequential LLM calls, so "thousands of games" is throughput-bound.
+  Mitigations I'll bake into the plan: pilot with a fast/small model
+  (STRATEGIST_MODEL_NAME already supports a separate model), lean hard on the
+  existing response cache, run games in parallel across multiple sidecar
+  workers, and do reflection per batch (aggregate over N games → one distilled
+  lesson set) rather than per game — fewer LLM calls and far more signal than
+  reflecting on a single noisy game.
+
+  Let me write the plan.
+
+● Updated plan
+  ⎿  /plan to preview
+
+● The plan is written. Let me present it for approval.
+  ⎿  User rejected Claude's plan:
+     ╭─────────────────────────────────────────────────────────────────────────╮
+     │ Goldfishing Self-Improvement System for the LLM Sidecar                 │
+     │                                                                         │
+     │ Context                                                                 │
+     │                                                                         │
+     │ The sidecar (forge-llm-sidecar/) advises Forge's AI via piloting guides │
+     │ (app/knowledge/piloting/<format>/<slug>.json, injected by               │
+     │ game_advisor._format_guide, game_advisor.py:116). Today those guides    │
+     │ are                                                                     │
+     │ hand-authored. We want a closed loop: have the LLM sidecar pilot a deck │
+     │ solitaire against a passive "60 Islands" opponent, measure turns-to-win │
+     │  over                                                                   │
+     │ many games, run a post-game reflection that distills what sped up or    │
+     │ slowed                                                                  │
+     │ the kill, auto-stage those lessons to a learnings layer, and let a      │
+     │ human                                                                   │
+     │ promote vetted lessons into the curated guides.                         │
+     │                                                                         │
+     │ The system is throughput-bound (LLM in the decision loop = many         │
+     │ sequential                                                              │
+     │ calls per game), so token sizing and caching are first-class design     │
+     │ constraints, not afterthoughts.                                         │
+     │                                                                         │
+     │ Token / latency budget (drives all sizing decisions)                    │
+     │                                                                         │
+     │ LLM latency = prefill (input tokens, ~linear, cheap/token) + decode     │
+     │ (output                                                                 │
+     │ tokens, one-at-a-time, the usual bottleneck). The sidecar emits small   │
+     │ JSON, so                                                                │
+     │ input/prefill dominates — exactly what guidance-doc size controls.      │
+     │ Local llama.cpp rough prefill: ~0.7s (2k in) / ~3.3s (10k) / ~33s       │
+     │ (100k) on a                                                             │
+     │ decent GPU; 10-50x worse on CPU. 100k is a non-starter per call. KV     │
+     │ prefix                                                                  │
+     │ caching makes static guidance ~free after the first call if it's a      │
+     │ stable                                                                  │
+     │ prompt prefix.                                                          │
+     │                                                                         │
+     │ Budget:                                                                 │
+     │ - Per-call dynamic content (game state): < ~2-4k tokens.                │
+     │ - Curated guide injection: ~1,500-2,500 tokens (current guides          │
+     │ ~2,900-3,370;                                                           │
+     │ acceptable only as a cached prefix).                                    │
+     │ - Learnings injection: hard cap ~500 tokens, confidence/sample-gated.   │
+     │ - Reflection output per lesson: ≤ ~500 tokens, distilled — never raw    │
+     │ logs.                                                                   │
+     │                                                                         │
+     │ Decisions (confirmed with user)                                         │
+     │                                                                         │
+     │ - Pilot: the LLM sidecar drives plays (max sidecar influence), to test  │
+     │ the                                                                     │
+     │ real system. Plus a post-game reflection pass.                          │
+     │ - Target: Option C — a separate learnings layer that auto-stages, with  │
+     │ vetted lessons promoted into curated guides (matches the writeback      │
+     │ model).                                                                 │
+     │ - Writeback: auto-stage to learnings layer; human-promote into guides.  │
+     │                                                                         │
+     │ Architecture                                                            │
+     │                                                                         │
+     │ [Java goldfishing runner]  pilot deck (sidecar-driven AI) vs 60-Islands │
+     │  passive                                                                │
+     │    |  per-game JSONL: archetype, mulligan, turn-by-turn actions,        │
+     │ turn-won, log                                                           │
+     │    v                                                                    │
+     │ [Sidecar /goldfish/reflect]  batch reflection over N games per          │
+     │ archetype                                                               │
+     │    |  distilled lessons (<=500 tok each): trigger, recommended line,    │
+     │    |  turns-to-win evidence, sample size, confidence                    │
+     │    v                                                                    │
+     │ [Learnings store]  app/knowledge/learnings/<format>/<slug>.json         │
+     │ (auto-staged)                                                           │
+     │    |  injected (capped, gated) alongside curated guide in game_advisor  │
+     │    v                                                                    │
+     │ [Promotion tool]  human reviews staged lessons -> promotes into         │
+     │ piloting/<...>.json                                                     │
+     │                                                                         │
+     │ Components & files                                                      │
+     │                                                                         │
+     │ 1. Goldfishing runner (Java) — new                                      │
+     │                                                                         │
+     │ - New tool modeled on                                                   │
+     │ forge-gui-desktop/.../forge/view/SimulateMatch.java                     │
+     │ (reuse simulate/simulateSingleMatch, deck loading, quiet mode,          │
+     │ timeout).                                                               │
+     │ - Match setup: P1 = pilot deck with sidecar influence forced to max so  │
+     │ the                                                                     │
+     │ LLM's advice actually drives plays (influence weight is v8+ in          │
+     │ RecognitionRequest, consumed by AiController); P2 = passive "60         │
+     │ Islands"                                                                │
+     │ punching bag (.dck that only plays lands / always passes).              │
+     │ - Per-game capture → JSONL: archetype, mulligan keep/mull, ordered      │
+     │ actions per                                                             │
+     │ turn, win turn (or loss/timeout), and the full game.getGameLog() so the │
+     │ existing log parser can replay it.                                      │
+     │ - Win detection: Game.isGameOver() /                                    │
+     │ Game.getOutcome().getWinningPlayer().                                   │
+     │                                                                         │
+     │ 2. Reflection endpoint (Python) — extends existing log analysis         │
+     │                                                                         │
+     │ - Build on /forge-log/analyze (main.py:600) and                         │
+     │ app/forge_log/ForgeLogAdapter,                                          │
+     │ which already replays a Forge log through the graph at each checkpoint  │
+     │ and                                                                     │
+     │ emits training data.                                                    │
+     │ - New /goldfish/reflect: takes a batch of game logs + outcomes for one  │
+     │ archetype, aggregates (turns-to-win distribution, which mulligan keeps  │
+     │ /                                                                       │
+     │ opening sequences correlate with faster kills), then ONE LLM reflection │
+     │  call                                                                   │
+     │ per batch → list of distilled lessons. Batch (not per-game) keeps LLM   │
+     │ calls                                                                   │
+     │ low and signal high.                                                    │
+     │ - Lesson schema (new Pydantic model in schema.py): archetype, format,   │
+     │ trigger (situation), recommendation (line), evidence                    │
+     │ (turns_to_win_delta, n_games), confidence, created_at,                  │
+     │ source="goldfish".                                                      │
+     │                                                                         │
+     │ 3. Learnings store — new                                                │
+     │                                                                         │
+     │ - app/knowledge/learnings/<format>/<slug>.json, list of lesson objects  │
+     │ with                                                                    │
+     │ provenance + confidence + sample size + timestamp.                      │
+     │ - New loader app/knowledge/learnings.py mirroring knowledge/piloting.py │
+     │ (validate against schema, skip invalid, expose get_learnings(format,    │
+     │ slug)).                                                                 │
+     │                                                                         │
+     │ 4. Injection (Python) — minimal change to game_advisor                  │
+     │                                                                         │
+     │ - Add _format_learnings(lessons) and append its output after            │
+     │ _format_guide                                                           │
+     │ output where the own-deck guide is built (around                        │
+     │ game_advisor.py:600-614).                                               │
+     │ - Enforce the ~500-token cap + confidence/sample threshold here (top-K  │
+     │ by                                                                      │
+     │ confidence). Add a learnings version token to the recognition cache key │
+     │ (alongside existing profile/combo version tokens) so edits bust the     │
+     │ cache.                                                                  │
+     │                                                                         │
+     │ 5. Promotion tool (Python CLI) — new                                    │
+     │                                                                         │
+     │ - scripts/promote_learning.py: lists staged lessons per archetype,      │
+     │ shows the                                                               │
+     │ diff against the curated piloting/<...>.json guide, and on approval     │
+     │ merges a                                                                │
+     │ lesson into the guide (e.g. into sequencing_tips / game_plan /          │
+     │ matchups)                                                               │
+     │ and marks/removes it from the learnings store. Human gate = the         │
+     │ approval step.                                                          │
+     │                                                                         │
+     │ 6. Scale mitigations (config, not new code where possible)              │
+     │                                                                         │
+     │ - Pilot with a fast model via STRATEGIST_MODEL_NAME; keep               │
+     │ LLM_DISABLE_THINKING=true.                                              │
+     │ - Reuse the 256-entry response LRU; run multiple sidecar workers +      │
+     │ parallel                                                                │
+     │ games for volume. Treat LLM-piloted runs as quality signal; turn count, │
+     │  not                                                                    │
+     │ raw game count, is the headline metric.                                 │
+     │                                                                         │
+     │ Phasing                                                                 │
+     │                                                                         │
+     │ 1. Java goldfishing runner + passive 60-Islands deck; emit per-game     │
+     │ JSONL and                                                               │
+     │ game logs. Verify a sidecar-piloted deck reaches a win and turn-won is  │
+     │ logged.                                                                 │
+     │ 2. Learnings store + loader + capped/gated injection in game_advisor +  │
+     │ cache                                                                   │
+     │ version token. (No reflection yet — hand-write one lesson to test       │
+     │ injection.)                                                             │
+     │ 3. /goldfish/reflect batch endpoint producing distilled lessons;        │
+     │ auto-stage to                                                           │
+     │ the learnings store.                                                    │
+     │ 4. promote_learning.py human-promotion tool.                            │
+     │ 5. Aggregate metrics/reporting (turns-to-win distribution per           │
+     │ archetype).                                                             │
+     │                                                                         │
+     │ Verification                                                            │
+     │                                                                         │
+     │ - Runner: run N=20 goldfishing games for one archetype vs 60 Islands;   │
+     │ confirm                                                                 │
+     │ JSONL has a win_turn for wins and full logs replay cleanly through      │
+     │ ForgeLogAdapter.                                                        │
+     │ - Injection: add a synthetic high-confidence lesson; hit /recognize for │
+     │ that archetype and confirm the lesson text appears in the prompt and    │
+     │ the cache                                                               │
+     │ key changes when the learnings file changes. Measure prompt token delta │
+     │  stays                                                                  │
+     │ within the ~500-token cap.                                              │
+     │ - Reflection: POST a batch of the 20 logs to /goldfish/reflect; confirm │
+     │  it                                                                     │
+     │ returns ≤ ~500-token lessons with evidence/sample-size and writes them  │
+     │ to                                                                      │
+     │ learnings/<format>/<slug>.json.                                         │
+     │ - Promotion: run promote_learning.py, approve one lesson, confirm it    │
+     │ lands                                                                   │
+     │ in the curated guide and is cleared from the learnings store.           │
+     │ - Latency sanity: time /recognize with vs without learnings injected to │
+     │ confirm prefill cost stays in budget; verify warm-cache calls are       │
+     │ ~free.                                                                  │
+     ╰─────────────────────────────────────────────────────────────────────────╯
+
+● Strong instincts — the poisoning risk is real and worth designing around
+  explicitly. Here's my thinking.
+
+  The anti-poisoning frame: store the unobstructed line, not "ignore 
+  interaction"
+
+  The danger isn't the aggressive prompt itself — it's an unconditional lesson
+  ("commit everything, don't hedge") leaking into production reasoning against a
+   control deck. You defend against that with two gates and a reframe:
+
+  1. Quarantine the prompt as a mode, not the production prompt. Add a
+  goldfish/solve pilot mode that swaps in a system prompt like "the opponent has
+   zero interaction; find the fastest possible kill, do not hedge for 
+  counterspells or removal." This prompt only exists inside the simulator —
+  production /recognize never loads it. No code path connects them.
+  2. Tag every learned lesson with the context it was learned in. A goldfish
+  lesson is stored as conditional, never absolute: "Fastest unobstructed kill: 
+  T2 reducer → T3 ritual chain → win (goldfish-derived, assumes no 
+  interaction)." It is literally a different sentence from "ignore
+  counterspells."
+  3. The reframe that makes it safe AND useful: goldfishing computes your deck's
+   theoretical fastest clock / nut line assuming no resistance. That's an upper 
+  bound, not a directive. Production reasoning anchors to that line and then
+  degrades from it based on observed interaction. So the lesson feeds the "plan
+  turns ahead" system as a baseline plan — "here's the kill if unobstructed;
+  deviate only as much as the opponent's shown interaction demands." Against 60
+  Islands you execute it fully; against a control deck showing untapped blue
+  mana, the strategist already hedges. You're not telling it to ignore
+  counterspells — you're giving it the optimum it's hedging away from.
+  4. Injection gating + human promotion (already in the plan): goldfish lessons
+  inject only when state matches their context (opponent non-interactive / no
+  interaction shown), and a human rewrites them conditionally before they ever
+  reach a curated guide.
+
+  Generic harness vs. goldfishing-only
+
+  I'd build the general self-play harness and treat goldfishing as configuration
+   #1, not a separate system. Goldfishing is just the special case where the
+  opponent profile = "passive, no interaction." It's barely more code (the
+  runner takes an opponent-deck arg and a pilot-mode arg), and the reflection →
+  learnings → promotion pipeline is identical regardless of opponent. Building
+  goldfish-only would force a rewrite the moment you want a "vs control" or "vs
+  aggro gauntlet" run.
+
+  And goldfishing specifically earns its place: no-interaction = zero opponent
+  variance = the cleanest possible signal for "what is my optimal line?" For
+  combo/aggro that's exactly where the nut sequencing falls out, which is the
+  highest-value input to the turns-ahead planner. Matchup gauntlets (vs real
+  decks) are noisier and produce conditional lessons — valuable, but second.
+
+  One scope question before I revise the plan.
+
+● User answered Claude's questions:
+  ⎿  · How much of the general harness should v1 cover? → Goldfish + one 
+     gauntlet
+     · Where should the goldfish-derived optimal line primarily feed? → Both
+
+● Both answers fold in cleanly. Let me revise the plan to reflect the
+  parameterized harness (goldfish + one control gauntlet in v1), the quarantined
+   pilot prompt, context-tagged conditional lessons, and feeding both the
+  turns-ahead planner and conditional injection.
+
+● Updated plan
+  ⎿  /plan to preview
+
+● Plan updated with the anti-poisoning design baked in. Ready for your review.
+  ⎿  User rejected Claude's plan:
+     ╭─────────────────────────────────────────────────────────────────────────╮
+     │ Self-Play Improvement Harness for the LLM Sidecar (Goldfishing +        │
+     │ Gauntlet)                                                               │
+     │                                                                         │
+     │ Context                                                                 │
+     │                                                                         │
+     │ The sidecar (forge-llm-sidecar/) advises Forge's AI via piloting guides │
+     │ (app/knowledge/piloting/<format>/<slug>.json, injected by               │
+     │ game_advisor._format_guide, game_advisor.py:116). Today those guides    │
+     │ are                                                                     │
+     │ hand-authored. We want a closed loop: have the LLM sidecar pilot a deck │
+     │ through automated games, measure performance (turns-to-win), run a      │
+     │ post-game                                                               │
+     │ reflection that distills what worked, auto-stage lessons to a learnings │
+     │ layer, and let a human promote vetted lessons into the curated guides.  │
+     │                                                                         │
+     │ This is built as a general, parameterized self-play harness, with       │
+     │ goldfishing as configuration #1. Goldfishing = opponent profile         │
+     │ "passive,                                                               │
+     │ no interaction" (a 60-Islands punching bag). Because there's zero       │
+     │ opponent                                                                │
+     │ variance, it gives the cleanest possible signal for a deck's optimal /  │
+     │ fastest unobstructed line — the highest-value input to the "plan turns  │
+     │ ahead"                                                                  │
+     │ system, especially for combo/aggro. A second config in v1 runs vs an    │
+     │ interactive control gauntlet deck to exercise the conditional-lesson +  │
+     │ context-gating path early.                                              │
+     │                                                                         │
+     │ Anti-poisoning principle (core design constraint)                       │
+     │                                                                         │
+     │ We must NOT teach the production AI to "ignore counterspells / never    │
+     │ hedge."                                                                 │
+     │ Defenses:                                                               │
+     │ 1. Quarantined pilot prompt. A solve/goldfish pilot mode swaps in an    │
+     │ aggressive system prompt ("opponent has zero interaction; find the      │
+     │ fastest                                                                 │
+     │ kill, don't hedge"). This prompt exists ONLY in the simulator;          │
+     │ production                                                              │
+     │ /recognize never loads it — no shared code path.                        │
+     │ 2. Lessons are stored conditionally, tagged with their learned context. │
+     │  A                                                                      │
+     │ goldfish lesson reads "Fastest unobstructed kill:  (goldfish-derived,   │
+     │ assumes no interaction)" — never "ignore counterspells."                │
+     │ 3. Reframe: goldfishing yields the deck's theoretical fastest clock (an │
+     │ upper bound). Production anchors to it and degrades from it based on    │
+     │ observed interaction. The turns-ahead planner gets the optimum to hedge │
+     │ away from, not a directive to play recklessly.                          │
+     │ 4. Injection gating + human promotion: goldfish lessons inject only     │
+     │ when                                                                    │
+     │ game state matches their context (opponent non-interactive / no         │
+     │ interaction                                                             │
+     │ observed); a human rewrites them conditionally before they reach a      │
+     │ guide.                                                                  │
+     │                                                                         │
+     │ Token / latency budget (drives all sizing)                              │
+     │                                                                         │
+     │ Latency = prefill (input tokens, ~linear) + decode (output tokens, the  │
+     │ usual                                                                   │
+     │ bottleneck). Sidecar emits small JSON, so input/prefill dominates —     │
+     │ exactly                                                                 │
+     │ what guidance size controls. Local llama.cpp prefill rough: ~0.7s (2k)  │
+     │ / ~3.3s                                                                 │
+     │ (10k) / ~33s (100k) on a decent GPU; 10-50x worse on CPU. 100k is a     │
+     │ non-starter                                                             │
+     │ per call. KV prefix caching makes static guidance ~free after first     │
+     │ call if                                                                 │
+     │ it's a stable prefix.                                                   │
+     │ - Per-call dynamic content (game state): < ~2-4k tokens.                │
+     │ - Curated guide injection: ~1,500-2,500 tokens (only acceptable as      │
+     │ cached prefix).                                                         │
+     │ - Learnings injection: hard cap ~500 tokens, confidence/sample-gated.   │
+     │ - Reflection output per lesson: ≤ ~500 tokens, distilled — never raw    │
+     │ logs.                                                                   │
+     │                                                                         │
+     │ Decisions (confirmed with user)                                         │
+     │                                                                         │
+     │ - Pilot: LLM sidecar drives plays (max sidecar influence), to test the  │
+     │ real                                                                    │
+     │ system, plus post-game reflection.                                      │
+     │ - Target: separate learnings layer that auto-stages; vetted lessons     │
+     │ human-promoted into curated guides.                                     │
+     │ - Writeback: auto-stage to learnings; human-promote into guides.        │
+     │ - Scope (v1): parameterized harness shipping TWO configs — goldfish     │
+     │ (passive 60 Islands) AND one interactive control gauntlet.              │
+     │ - Consumer: optimal line feeds BOTH the turns-ahead planner (as a       │
+     │ baseline)                                                               │
+     │ AND conditional learnings injection.                                    │
+     │                                                                         │
+     │ Architecture                                                            │
+     │                                                                         │
+     │ [Java self-play runner]  pilot deck (sidecar-driven AI, pilot-mode arg) │
+     │    |                     vs opponent-deck arg (60 Islands | control     │
+     │ gauntlet)                                                               │
+     │    |  per-game JSONL: archetype, pilot_mode, opponent, mulligan,        │
+     │ turn-by-turn                                                            │
+     │    |  actions, turn-won/loss, full game log                             │
+     │    v                                                                    │
+     │ [Sidecar /selfplay/reflect]  batch reflection over N games per          │
+     │ (archetype,                                                             │
+     │    |  opponent-context) -> distilled, context-tagged lessons (<=500     │
+     │ tok)                                                                    │
+     │    v                                                                    │
+     │ [Learnings store]  app/knowledge/learnings/<format>/<slug>.json         │
+     │ (auto-staged)                                                           │
+     │    |  context-tagged + confidence + sample size                         │
+     │    +--> injected (capped, gated by observed-interaction context) in     │
+     │ game_advisor                                                            │
+     │    +--> exposed to turns-ahead planner as "fastest unobstructed line"   │
+     │ baseline                                                                │
+     │    v                                                                    │
+     │ [Promotion tool]  human reviews staged lessons -> rewrites conditional  │
+     │ ->                                                                      │
+     │                   promotes into piloting/<...>.json                     │
+     │                                                                         │
+     │ Components & files                                                      │
+     │                                                                         │
+     │ 1. Self-play runner (Java) — new, parameterized                         │
+     │                                                                         │
+     │ - Modeled on forge-gui-desktop/.../forge/view/SimulateMatch.java (reuse │
+     │ simulate/simulateSingleMatch, deck loading, quiet mode, timeout).       │
+     │ - Args: --pilot-deck, --opponent-deck, --pilot-mode (solve|normal),     │
+     │ --n. v1 ships two opponent decks: passive 60-Islands .dck (only plays   │
+     │ lands / always passes) and one control gauntlet .dck.                   │
+     │ - P1 = pilot deck with sidecar influence forced high so the LLM drives  │
+     │ plays                                                                   │
+     │ (influence weight is v8+ in RecognitionRequest, consumed by             │
+     │ AiController).                                                          │
+     │ - --pilot-mode solve signals the sidecar to use the quarantined         │
+     │ aggressive                                                              │
+     │ prompt (passed as a request flag, see #2). normal uses production       │
+     │ prompt.                                                                 │
+     │ - Per-game capture → JSONL: archetype, pilot_mode, opponent label,      │
+     │ mulligan                                                                │
+     │ keep/mull, ordered actions per turn, win turn (or loss/timeout), full   │
+     │ game.getGameLog(). Win detection via Game.isGameOver() /                │
+     │ Game.getOutcome().getWinningPlayer().                                   │
+     │                                                                         │
+     │ 2. Quarantined pilot prompt mode (Python) — new flag, isolated          │
+     │                                                                         │
+     │ - Add a pilot_mode field to RecognitionRequest (schema.py); default     │
+     │ normal.                                                                 │
+     │ - solve mode (only ever set by the runner) selects an aggressive system │
+     │  prompt                                                                 │
+     │ in the piloting node — fastest unobstructed kill, no hedging.           │
+     │ Production                                                              │
+     │ callers never set it, so the production path is unaffected.             │
+     │                                                                         │
+     │ 3. Reflection endpoint (Python) — extends existing log analysis         │
+     │                                                                         │
+     │ - Build on /forge-log/analyze (main.py:600) +                           │
+     │ app/forge_log/ForgeLogAdapter,                                          │
+     │ which already replays a Forge log through the graph per checkpoint and  │
+     │ emits                                                                   │
+     │ training data.                                                          │
+     │ - New /selfplay/reflect: takes a batch of logs + outcomes for one       │
+     │ (archetype, opponent-context), aggregates (turns-to-win distribution,   │
+     │ which                                                                   │
+     │ mulligan keeps / opening sequences correlate with faster wins), then    │
+     │ ONE LLM                                                                 │
+     │ reflection call per batch → context-tagged lessons. Batch (not          │
+     │ per-game) keeps                                                         │
+     │ LLM calls low and signal high.                                          │
+     │ - Lesson schema (new Pydantic model, schema.py): archetype, format,     │
+     │ context (e.g. "no_interaction" | "vs_control"), trigger,                │
+     │ recommendation, evidence (turns_to_win_delta, n_games), confidence,     │
+     │ created_at, source ("selfplay").                                        │
+     │                                                                         │
+     │ 4. Learnings store — new                                                │
+     │                                                                         │
+     │ - app/knowledge/learnings/<format>/<slug>.json, list of context-tagged  │
+     │ lesson                                                                  │
+     │ objects with provenance + confidence + sample size + timestamp.         │
+     │ - New loader app/knowledge/learnings.py mirroring knowledge/piloting.py │
+     │ (validate, skip invalid, get_learnings(format, slug)).                  │
+     │                                                                         │
+     │ 5. Injection + planner wiring (Python) — minimal game_advisor change    │
+     │                                                                         │
+     │ - Add _format_learnings(lessons, observed_context); append after        │
+     │ _format_guide where the own-deck guide is built                         │
+     │ (~game_advisor.py:600-614).                                             │
+     │ - Gate by context: a no_interaction lesson injects only when the        │
+     │ opponent                                                                │
+     │ has shown no interaction (or is a known non-interactive archetype).     │
+     │ Enforce                                                                 │
+     │ the ~500-token cap + confidence/sample threshold here (top-K by         │
+     │ confidence).                                                            │
+     │ - Planner baseline: expose the highest-confidence no_interaction        │
+     │ "fastest                                                                │
+     │ line" lesson to the turns-ahead / combo planning path (combo_strategist │
+     │  /                                                                      │
+     │ early_plan) as the unobstructed-clock anchor it degrades from.          │
+     │ - Add a learnings version token to the recognition cache key (alongside │
+     │  existing                                                               │
+     │ profile/combo tokens) so edits bust the cache.                          │
+     │                                                                         │
+     │ 6. Promotion tool (Python CLI) — new                                    │
+     │                                                                         │
+     │ - scripts/promote_learning.py: lists staged lessons per archetype,      │
+     │ shows diff                                                              │
+     │ vs the curated guide, lets the human rewrite to a conditional form and  │
+     │ merge into the guide (sequencing_tips / game_plan / matchups), then     │
+     │ clears it from the learnings store. Human gate = approval + conditional │
+     │  rewrite.                                                               │
+     │                                                                         │
+     │ 7. Scale mitigations (config-first)                                     │
+     │                                                                         │
+     │ - Pilot via a fast STRATEGIST_MODEL_NAME; keep                          │
+     │ LLM_DISABLE_THINKING=true.                                              │
+     │ - Reuse the 256-entry response LRU; run multiple sidecar workers +      │
+     │ parallel                                                                │
+     │ games. Headline metric is turns-to-win, not raw game count.             │
+     │                                                                         │
+     │ Phasing                                                                 │
+     │                                                                         │
+     │ 1. Parameterized Java runner + passive 60-Islands deck + one control    │
+     │ gauntlet                                                                │
+     │ deck; emit per-game JSONL + logs. Verify a sidecar-piloted deck wins    │
+     │ and                                                                     │
+     │ turn-won/opponent/pilot_mode are logged.                                │
+     │ 2. pilot_mode flag + quarantined solve prompt; confirm production       │
+     │ /recognize is byte-identical when pilot_mode unset.                     │
+     │ 3. Learnings store + loader + context-gated, capped injection in        │
+     │ game_advisor +                                                          │
+     │ cache version token (hand-write one lesson to test injection + gating). │
+     │ 4. /selfplay/reflect batch endpoint producing context-tagged lessons;   │
+     │ auto-stage to learnings store.                                          │
+     │ 5. Planner baseline wiring (feed fastest-line lesson to                 │
+     │ turns-ahead/combo path).                                                │
+     │ 6. promote_learning.py human-promotion tool.                            │
+     │ 7. Aggregate metrics/reporting (turns-to-win distribution per           │
+     │ archetype/opponent).                                                    │
+     │                                                                         │
+     │ Verification                                                            │
+     │                                                                         │
+     │ - Runner: N=20 goldfish games + N=20 vs control gauntlet for one        │
+     │ archetype;                                                              │
+     │ confirm JSONL has win_turn, opponent, pilot_mode, and logs replay       │
+     │ through                                                                 │
+     │ ForgeLogAdapter.                                                        │
+     │ - Quarantine: diff a production /recognize response/prompt with and     │
+     │ without                                                                 │
+     │ pilot_mode in the request — must be identical when unset.               │
+     │ - Injection gating: add a synthetic no_interaction lesson; confirm it   │
+     │ appears in the prompt when opponent shows no interaction and is         │
+     │ SUPPRESSED when                                                         │
+     │ interaction is observed; confirm cache key changes on learnings edit    │
+     │ and the                                                                 │
+     │ prompt token delta stays within the ~500-token cap.                     │
+     │ - Reflection: POST the 20 goldfish logs to /selfplay/reflect; confirm   │
+     │ ≤500-token context-tagged lessons with evidence/sample-size land in     │
+     │ learnings/<format>/<slug>.json.                                         │
+     │ - Planner: confirm the turns-ahead/combo path receives the fastest-line │
+     │ baseline and that observed interaction degrades the plan rather than    │
+     │ ignoring it.                                                            │
+     │ - Promotion: run promote_learning.py, approve + conditionally rewrite   │
+     │ one                                                                     │
+     │ lesson, confirm it lands in the curated guide and clears from the       │
+     │ store.                                                                  │
+     │ - Latency sanity: time /recognize with vs without learnings injected;   │
+     │ verify warm-cache calls are ~free.                                      │
+     ╰─────────────────────────────────────────────────────────────────────────╯
+
+● Good idea — but let me be precise about why, because the "double the lessons
+  in the same time" framing has one catch worth naming.
+
+  The catch: your scarce resource is LLM inference, and a two-sidecar game makes
+   ~2x the LLM calls per game (both seats query the sidecar) — so it's not a
+  free 2x on wall-clock when inference is the bottleneck, which it is. In a
+  goldfish game the passive opponent burns ~zero LLM calls; making that seat a
+  second sidecar player doubles the inference cost of that game.
+
+  Why it's still worth doing: the win isn't inference savings, it's (a) two
+  labeled trajectories per engine game — you amortize all the Forge
+  setup/sim/orchestration overhead across two lessons — and (b) genuinely
+  interactive lessons from a real opponent making real plays, which is strictly
+  higher quality than learning vs a scripted gauntlet AI. If you were going to
+  run interactive gauntlets anyway, making both seats sidecar-piloted is the
+  obvious upgrade.
+
+  Two important constraints:
+  - Mirror matches serve the matchup/conditional-lesson goal, not the
+  optimal-line goal. Goldfishing's value is zero opponent variance = clean
+  "fastest unobstructed line" signal; a mirror match reintroduces variance. So
+  keep the passive 60-Islands config for optimal-line learning — don't spend LLM
+   on a seat that should do nothing.
+  - Both seats must use the normal/production prompt, never solve. Two players
+  both told "ignore interaction, race" would generate garbage lessons. The
+  quarantined aggressive prompt stays goldfish-only.
+
+  So: it becomes a third config (sidecar-vs-sidecar mirror, normal mode), and it
+   can subsume the scripted control gauntlet since sidecar-vs-sidecar is better
+  data. Reflection just needs to attribute each game to both seats separately —
+  which the per-(archetype, opponent-context) batching already handles.
+
+  Let me fold this in.
+
+● Updated plan
+  ⎿  /plan to preview
+● Updated plan
+  ⎿  /plan to preview
+
+● Updated plan
+  ⎿  /plan to preview
+
+● Updated plan
+  ⎿  /plan to preview
+
+● Update(~/.handle/plans/placeholder)
+  ⎿  File not found
+
+● Disregard that — wrong path. Let me update the remaining sections.
+
+● Updated plan
+  ⎿  /plan to preview
+
+● Updated plan
+  ⎿  /plan to preview
+
+● Updated plan
+  ⎿  /plan to preview
+
+● Plan now covers both configs: goldfish (A, optimal-line) and mirror
+  sidecar-vs-sidecar (B, interactive matchup lessons), with per-seat trajectory
+  capture and the solve-mode quarantine intact. Ready for review.
+
+● User approved Claude's plan
+  ⎿  Plan saved to: ~/.claude/plans/brainstorm-ways-we-can-cryptic-snowflake.md 
+     · /plan to edit
+     Self-Play Improvement Harness for the LLM Sidecar (Goldfishing + Gauntlet)
+
+     Context
+
+     The sidecar (forge-llm-sidecar/) advises Forge's AI via piloting guides
+     (app/knowledge/piloting/<format>/<slug>.json, injected by
+     game_advisor._format_guide, game_advisor.py:116). Today those guides are
+     hand-authored. We want a closed loop: have the LLM sidecar pilot a deck
+     through automated games, measure performance (turns-to-win), run a
+     post-game
+     reflection that distills what worked, auto-stage lessons to a learnings
+     layer, and let a human promote vetted lessons into the curated guides.
+
+     This is built as a general, parameterized self-play harness with three run
+     configs:
+     - (A) Goldfish — opponent is passive (60-Islands punching bag), pilot uses
+     the quarantined solve prompt. Zero opponent variance → cleanest signal for
+     a
+     deck's optimal / fastest unobstructed line; highest-value input to the
+     "plan turns ahead" system, especially combo/aggro. Only one seat burns LLM.
+     - (B) Mirror / sidecar-vs-sidecar — BOTH seats are LLM-sidecar players
+     using
+     the normal/production prompt. Yields TWO labeled trajectories per engine
+     game
+     (amortizes Forge setup/sim overhead) and produces genuinely interactive
+     matchup lessons. Costs ~2x LLM calls per game (both seats query the
+     sidecar),
+     so it's not a free throughput 2x — but it's strictly better data per engine
+     game and supersedes a scripted control gauntlet.
+     - (Optional) scripted gauntlet — cheaper (one seat LLM) but lower-quality
+     opponent than (B); skip in favor of (B) unless inference budget forces it.
+
+     Goldfish (A) feeds the optimal-line goal; Mirror (B) feeds the
+     matchup/conditional-lesson goal. They are complementary, not substitutes —
+     never run mirror games in solve mode (two recklessly-racing players
+     generate
+     garbage lessons).
+
+     Anti-poisoning principle (core design constraint)
+
+     We must NOT teach the production AI to "ignore counterspells / never
+     hedge."
+     Defenses:
+     1. Quarantined pilot prompt. A solve/goldfish pilot mode swaps in an
+     aggressive system prompt ("opponent has zero interaction; find the fastest
+     kill, don't hedge"). This prompt exists ONLY in the simulator; production
+     /recognize never loads it — no shared code path.
+     2. Lessons are stored conditionally, tagged with their learned context. A
+     goldfish lesson reads "Fastest unobstructed kill:  (goldfish-derived,
+     assumes no interaction)" — never "ignore counterspells."
+     3. Reframe: goldfishing yields the deck's theoretical fastest clock (an
+     upper bound). Production anchors to it and degrades from it based on
+     observed interaction. The turns-ahead planner gets the optimum to hedge
+     away from, not a directive to play recklessly.
+     4. Injection gating + human promotion: goldfish lessons inject only when
+     game state matches their context (opponent non-interactive / no interaction
+     observed); a human rewrites them conditionally before they reach a guide.
+
+     Token / latency budget (drives all sizing)
+
+     Latency = prefill (input tokens, ~linear) + decode (output tokens, the
+     usual
+     bottleneck). Sidecar emits small JSON, so input/prefill dominates — exactly
+     what guidance size controls. Local llama.cpp prefill rough: ~0.7s (2k) /
+     ~3.3s
+     (10k) / ~33s (100k) on a decent GPU; 10-50x worse on CPU. 100k is a
+     non-starter
+     per call. KV prefix caching makes static guidance ~free after first call if
+     it's a stable prefix.
+     - Per-call dynamic content (game state): < ~2-4k tokens.
+     - Curated guide injection: ~1,500-2,500 tokens (only acceptable as cached
+     prefix).
+     - Learnings injection: hard cap ~500 tokens, confidence/sample-gated.
+     - Reflection output per lesson: ≤ ~500 tokens, distilled — never raw logs.
+
+     Decisions (confirmed with user)
+
+     - Pilot: LLM sidecar drives plays (max sidecar influence), to test the real
+     system, plus post-game reflection.
+     - Target: separate learnings layer that auto-stages; vetted lessons
+     human-promoted into curated guides.
+     - Writeback: auto-stage to learnings; human-promote into guides.
+     - Scope (v1): parameterized harness shipping TWO configs — goldfish (A,
+     passive 60 Islands, solve mode) AND mirror (B, sidecar-vs-sidecar, normal
+     mode). Mirror replaces the scripted gauntlet for interactive lessons.
+     - Consumer: optimal line feeds BOTH the turns-ahead planner (as a baseline)
+     AND conditional learnings injection.
+
+     Architecture
+
+     [Java self-play runner]  config A: pilot (solve) vs passive 60 Islands
+        |                     config B: sidecar (normal) vs sidecar (normal)
+        |  per-game JSONL, one record PER sidecar seat: archetype, pilot_mode,
+        |  opponent label, mulligan, turn-by-turn actions, turn-won/loss, full
+     log
+        v
+     [Sidecar /selfplay/reflect]  batch reflection per (archetype,
+     opponent-context,
+        |  pilot_mode); mirror games attribute each game to both seats
+     separately
+        |  -> distilled, context-tagged lessons (<=500 tok)
+        v
+     [Learnings store]  app/knowledge/learnings/<format>/<slug>.json
+     (auto-staged)
+        |  context-tagged + confidence + sample size
+        +--> injected (capped, gated by observed-interaction context) in
+     game_advisor
+        +--> exposed to turns-ahead planner as "fastest unobstructed line"
+     baseline
+        v
+     [Promotion tool]  human reviews staged lessons -> rewrites conditional ->
+                       promotes into piloting/<...>.json
+
+     Components & files
+
+     1. Self-play runner (Java) — new, parameterized
+
+     - Modeled on forge-gui-desktop/.../forge/view/SimulateMatch.java (reuse
+     simulate/simulateSingleMatch, deck loading, quiet mode, timeout).
+     - Args: --config (goldfish|mirror), --p1-deck, --p2-deck, --n.
+     Config sets seats + pilot mode: goldfish = P1 sidecar solve vs P2 passive
+     60-Islands .dck (only plays lands / always passes); mirror = both seats
+     sidecar normal.
+     - Sidecar seats run with sidecar influence forced high so the LLM drives
+     plays (influence weight is v8+ in RecognitionRequest, consumed by
+     AiController). Two sidecar seats issue ~2x LLM calls per game.
+     - Per-game capture → JSONL, one record per sidecar seat: archetype,
+     pilot_mode, opponent label, mulligan keep/mull, ordered actions per turn,
+     win
+     turn (or loss/timeout), full game.getGameLog(). Win detection via
+     Game.isGameOver() / Game.getOutcome().getWinningPlayer().
+
+     2. Quarantined pilot prompt mode (Python) — new flag, isolated
+
+     - Add a pilot_mode field to RecognitionRequest (schema.py); default normal.
+     - solve mode (only ever set by the runner) selects an aggressive system
+     prompt
+     in the piloting node — fastest unobstructed kill, no hedging. Production
+     callers never set it, so the production path is unaffected.
+
+     3. Reflection endpoint (Python) — extends existing log analysis
+
+     - Build on /forge-log/analyze (main.py:600) +
+     app/forge_log/ForgeLogAdapter,
+     which already replays a Forge log through the graph per checkpoint and
+     emits
+     training data.
+     - New /selfplay/reflect: takes a batch of logs + outcomes for one
+     (archetype, opponent-context), aggregates (turns-to-win distribution, which
+     mulligan keeps / opening sequences correlate with faster wins), then ONE
+     LLM
+     reflection call per batch → context-tagged lessons. Batch (not per-game)
+     keeps
+     LLM calls low and signal high.
+     - Lesson schema (new Pydantic model, schema.py): archetype, format,
+     context (e.g. "no_interaction" | "vs_control"), trigger,
+     recommendation, evidence (turns_to_win_delta, n_games), confidence,
+     created_at, source ("selfplay").
+
+     4. Learnings store — new
+
+     - app/knowledge/learnings/<format>/<slug>.json, list of context-tagged
+     lesson
+     objects with provenance + confidence + sample size + timestamp.
+     - New loader app/knowledge/learnings.py mirroring knowledge/piloting.py
+     (validate, skip invalid, get_learnings(format, slug)).
+
+     5. Injection + planner wiring (Python) — minimal game_advisor change
+
+     - Add _format_learnings(lessons, observed_context); append after
+     _format_guide where the own-deck guide is built (~game_advisor.py:600-614).
+     - Gate by context: a no_interaction lesson injects only when the opponent
+     has shown no interaction (or is a known non-interactive archetype). Enforce
+     the ~500-token cap + confidence/sample threshold here (top-K by
+     confidence).
+     - Planner baseline: expose the highest-confidence no_interaction "fastest
+     line" lesson to the turns-ahead / combo planning path (combo_strategist /
+     early_plan) as the unobstructed-clock anchor it degrades from.
+     - Add a learnings version token to the recognition cache key (alongside
+     existing
+     profile/combo tokens) so edits bust the cache.
+
+     6. Promotion tool (Python CLI) — new
+
+     - scripts/promote_learning.py: lists staged lessons per archetype, shows
+     diff
+     vs the curated guide, lets the human rewrite to a conditional form and
+     merge into the guide (sequencing_tips / game_plan / matchups), then
+     clears it from the learnings store. Human gate = approval + conditional
+     rewrite.
+
+     7. Scale mitigations (config-first)
+
+     - Pilot via a fast STRATEGIST_MODEL_NAME; keep LLM_DISABLE_THINKING=true.
+     - Reuse the 256-entry response LRU; run multiple sidecar workers + parallel
+     games. Mirror games double concurrent load (two seats), so size workers
+     accordingly. Headline metric is turns-to-win, not raw game count.
+
+     Phasing
+
+     1. Parameterized Java runner with goldfish (passive 60-Islands) and mirror
+     (sidecar-vs-sidecar) configs; emit per-seat JSONL + logs. Verify a
+     sidecar-piloted deck wins, mirror emits two records per game, and
+     turn-won/opponent/pilot_mode are logged.
+     2. pilot_mode flag + quarantined solve prompt; confirm production
+     /recognize is byte-identical when pilot_mode unset.
+     3. Learnings store + loader + context-gated, capped injection in
+     game_advisor +
+     cache version token (hand-write one lesson to test injection + gating).
+     4. /selfplay/reflect batch endpoint producing context-tagged lessons;
+     auto-stage to learnings store.
+     5. Planner baseline wiring (feed fastest-line lesson to turns-ahead/combo
+     path).
+     6. promote_learning.py human-promotion tool.
+     7. Aggregate metrics/reporting (turns-to-win distribution per
+     archetype/opponent).
+
+     Verification
+
+     - Runner: N=20 goldfish games + N=20 mirror games for one archetype;
+     confirm
+     goldfish emits one record/game and mirror emits two (one per seat), each
+     with
+     win_turn, opponent, pilot_mode, and logs that replay through
+     ForgeLogAdapter.
+     - Quarantine: diff a production /recognize response/prompt with and without
+     pilot_mode in the request — must be identical when unset.
+     - Injection gating: add a synthetic no_interaction lesson; confirm it
+     appears in the prompt when opponent shows no interaction and is SUPPRESSED
+     when
+     interaction is observed; confirm cache key changes on learnings edit and
+     the
+     prompt token delta stays within the ~500-token cap.
+     - Reflection: POST the 20 goldfish logs to /selfplay/reflect; confirm
+     ≤500-token context-tagged lessons with evidence/sample-size land in
+     learnings/<format>/<slug>.json.
+     - Planner: confirm the turns-ahead/combo path receives the fastest-line
+     baseline and that observed interaction degrades the plan rather than
+     ignoring it.
+     - Promotion: run promote_learning.py, approve + conditionally rewrite one
+     lesson, confirm it lands in the curated guide and clears from the store.
+     - Latency sanity: time /recognize with vs without learnings injected;
+     verify warm-cache calls are ~free.
+
+● Plan approved. Let me set up task tracking, save a project memory for the
+  initiative, then start Phase 1 by reading the actual SimulateMatch and
+  sidecar-influence wiring to ground the Java runner.
+
+● Now let me save a project memory for this initiative and read the actual code
+  I'll be modifying.
+
+  Read 1 file, wrote 1 memory (ctrl+o to expand)
+● SimulateMatch is clear. Now I need to understand the Java-side sidecar
+  integration — how influence is set per player and how requests are built — to
+  know how to force influence high, pass pilot_mode, and capture per-seat data.
+  Let me explore that package.
+
+  Read 3 files, ran 1 shell command (ctrl+o to expand)
+
+● The sidecar wiring is clear: recognition is enabled via
+  -Dforge.ai.deckRecognition=true, and a per-player observer fires /recognize
+  and builds the request. A 60-Islands deck is naturally passive (no
+  creatures/spells), so goldfish needs no special opponent controller. Let me
+  read the observer and request builder to see where pilot_mode and influence
+  threading go.
+
+  Read 2 files (ctrl+o to expand)
+
+● I now have the full Java integration picture: influence is forced via
+  AiProps.SIDECAR_INFLUENCE_WEIGHT (0-100, sent in the request at
+  observer.java:550), and pilot_mode would be a new request field threaded
+  through the observer. The Forge engine is a heavy Maven build, whereas the
+  Python sidecar is independently testable with curl — so I'll start with the
+  foundational, self-contained Python piece (Task #2: the quarantined
+  pilot_mode/solve prompt), which the Java runner depends on.
+
+  Let me read the piloting-prompt construction in game_advisor.py and the
+  request model in schema.py.
+
+  Read 1 file (ctrl+o to expand)
+
+● The piloting advice is largely deterministic (in advice.py), not an LLM prompt
+   — recognition and the opponent-strategist are the LLM calls. So
+  pilot_mode=solve is best implemented as a flag that disables the "play around
+  interaction / hedge" gates in the advice engine and treats the opponent as
+  non-interactive (which is literally true in goldfish). Let me find those hedge
+   gates.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The cleanest quarantine: in solve mode, zero out opponent-hand inference so
+  all the play-around math (p_counter, p_wrath, p_threat) collapses to 0 — pure
+  speed, no hedging. Production never sets the flag, so behavior stays
+  byte-identical. Let me read the request model, GraphState, and the /recognize
+  handler to wire it through.
+
+  Read 2 files (ctrl+o to expand)
+
+● I have everything needed for Task #2. Let me check the GraphState definition
+  and the cache-key function, then implement.
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● Let me read the cache-key function to add pilot_mode to it.
+
+  Read 1 file (ctrl+o to expand)
+
+● Now I'll implement Task #2. First the schema additions.
+
+● Update(forge-llm-sidecar/app/schema.py)
+  ⎿  Added 5 lines
+      139      cards_to_return: int = 0
+      140      # v8: global sidecar influence weight, 0=no influence, 100
+           =force if legal.
+      141      sidecar_influence: int = 50
+      142 +    # Pilot mode. "normal" is the production path. "solve" is 
+          +set ONLY by the                                               
+      143 +    # self-play goldfishing runner against a non-interactive o
+          +pponent: it tells                                             
+      144 +    # the advice engine to assume zero opponent interaction an
+          +d chase the fastest                                           
+      145 +    # line. Production callers never set it, so the normal pat
+          +h is unaffected.                                              
+      146 +    pilot_mode: str = "normal"                                
+      147  
+      148  
+      149  class RoleAssessment(BaseModel):
+
+● Update(forge-llm-sidecar/app/schema.py)
+  ⎿  Added 1 line
+      395      legal_actions: list[dict]
+      396      cards_to_return: int
+      397      sidecar_influence: int
+      398 +    pilot_mode: str                                           
+      399      # resolved by the game_advisor node
+      400      resolved_format: str | None
+      401      candidate_archetypes: list[dict]
+
+● Now thread pilot_mode through /recognize's initial state and the cache key in
+  main.py.
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Error editing file
+
+● Two call sites (recognize + mulligan-plan). Let me look at the second one.
+
+  Read 1 file (ctrl+o to expand)
+
+● Both call sites should carry pilot_mode. Let me use replace_all since the
+  inserted line is identical in both.
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 2 lines
+      400          "legal_actions": [a.model_dump() for a in req.legal_ac
+           tions],
+      401          "cards_to_return": req.cards_to_return,
+      402          "sidecar_influence": req.sidecar_influence,
+      403 +        "pilot_mode": req.pilot_mode,                         
+      404      }
+      405      final = await graph.ainvoke(initial)
+      406      response = _response_from_final(req, final)
+     ...
+      573          "legal_actions": [a.model_dump() for a in req.legal_ac
+           tions],
+      574          "cards_to_return": req.cards_to_return,
+      575          "sidecar_influence": req.sidecar_influence,
+      576 +        "pilot_mode": req.pilot_mode,                         
+      577      }
+      578      final = await graph.ainvoke(initial)
+      579      response = _response_from_final(req, final)
+
+● Now add pilot_mode to the cache key so solve and normal don't collide.
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 1 line
+      170          "la": [a.model_dump() for a in req.legal_actions],
+      171          "ctr": req.cards_to_return,
+      172          "si": req.sidecar_influence,
+      173 +        "pm": req.pilot_mode,                                 
+      174          "pv": _PROFILES_VERSION,
+      175          "cv": _COMBO_PROFILES_VERSION,
+      176      }
+
+● Now mark task #2 in progress and apply the core quarantine in game_advisor.py:
+   zero opponent-hand inference in solve mode.
+● Now the core quarantine in game_advisor.py — zero opponent-hand inference in
+  solve mode, right after it's computed and before it feeds hand scoring and
+  action generation.
+
+● Update(forge-llm-sidecar/app/nodes/game_advisor.py)
+  ⎿  Added 7 lines
+      714          state.get("turn", 0),
+      715          opp_hand_size=role.get("opp_hand_size") if isinstance(
+           role, dict) else None,
+      716      )
+      717 +    # Goldfishing quarantine: in "solve" mode the opponent is 
+          +known to have zero                                            
+      718 +    # interaction, so we drop all inferred-hand signals. This 
+          +collapses the                                                 
+      719 +    # play-around math (counterspell/wrath/removal risk) to 0 
+          +in advice.py and                                              
+      720 +    # lets the engine chase the fastest line. Only the self-pl
+          +ay runner sets                                                
+      721 +    # this; production leaves pilot_mode="normal" so behavior 
+          +is unchanged.                                                 
+      722 +    if state.get("pilot_mode") == "solve":                    
+      723 +        opp_hand = []                                         
+      724      hand_values = advice.score_hand(
+      725          state.get("hand", []) or [],
+      726          guide_dict,
+
+● Let me verify the wiring without needing a live LLM — check the test setup and
+   run a focused check that the request parses pilot_mode, the cache key
+  differs, and solve mode is respected.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Schema and cache wiring verified. Now let me run the existing test suite to
+  confirm I haven't broken the graph or piloting paths.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Let me confirm the behavioral effect directly: that empty opponent-hand
+  inference collapses the play-around penalty in advice.score_hand, proving
+  solve mode removes hedging.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● My test cards didn't hit the penalty branches. The penalties all derive from
+  _opp_hand_categories(opp_hand_inference) — let me confirm that collapses to
+  empty (zeroing every p_* risk) when inference is empty, which is the single
+  source feeding all hedging.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Task #2 done and verified. Status:
+
+  Quarantined solve pilot mode (Task #2) — complete
+  - pilot_mode field on RecognitionRequest (default "normal") + GraphState,
+  threaded through both /recognize and /mulligan-plan, and added to the cache
+  key (schema.py, main.py).
+  - In game_advisor.py, solve mode zeros opponent-hand inference. Verified this
+  collapses _opp_hand_categories to {}, which zeroes every
+  p_counter/p_wrath/p_removal/p_threat — so all play-around/hedging penalties in
+   advice.py are skipped. Pure-speed piloting, exactly what goldfishing wants.
+  - Quarantine confirmed: normal-path cache key is unchanged, solve only
+  branches on == "solve", and the 48 existing graph/piloting tests pass —
+  production behavior is byte-identical when the flag is unset.
+
+  One follow-up I deliberately scoped out: the opponent_strategist node still
+  makes its (now-irrelevant) LLM call in solve mode. It can't poison piloting
+  since opp_hand is already zeroed, but skipping it would save a call — worth
+  doing when I build the runner.
+
+  Next is Task #3 (learnings store + loader + context-gated injection), also
+  Python/testable. Let me read the piloting loader I'll mirror.
+
+  Read 1 file (ctrl+o to expand)
+
+● The loader pattern is clear. Let me check where _format_guide output actually
+  reaches a prompt, so I inject learnings in the right place.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Good — the guide dict in state["piloting_guide"] is consumed by the planner
+  (combo_strategist.py:110, early_plan.py:151), the deterministic advice, and
+  the response builder; _format_guide renders it at game_advisor.py:276. That
+  tells me where learnings should attach.
+
+  I've hit a clean milestone, so let me checkpoint before opening up the larger
+  multi-file Task #3.
+
+  Progress
+
+  Done & verified — Task #2 (quarantined solve mode): pilot_mode plumbed through
+   schema → /recognize + /mulligan-plan → cache key → game_advisor, where solve
+  zeros opponent-hand inference (collapsing all hedging in advice.py).
+  Production is byte-identical when unset; 48 tests pass.
+
+  Plan for Task #3 (learnings store), now grounded in the code:
+  - New Lesson model in schema.py; context tag ("no_interaction" etc.),
+  confidence, evidence, source.
+  - New app/knowledge/learnings.py mirroring piloting.py — get_learnings(format,
+   slug) reading learnings/<format>/<slug>.json, validate-and-skip, plus a
+  learnings_version() cache-busting token (like combo_profiles_version).
+  - Attach gated lessons onto state["piloting_guide"]["learnings"] so the
+  planner (combo_strategist/early_plan) reads them directly (covers Task #5's
+  baseline wiring too), and have _format_guide render them capped at ~500
+  tokens. Context-gating uses the has_opp_state/opp_hand signals already
+  computed in the node.
+
+  The remaining tasks (#1 Java runner, #3, #4 reflection, #5 planner, #6
+  promotion CLI, #7 metrics) are each substantial. Before I dive into the Task
+  #3 multi-file change, two checks worth your call:
+
+● User answered Claude's questions:
+  ⎿  · How should I proceed from here? → Continue with Task #3
+     · Where should learnings injection render into the prompt? → Onto 
+     piloting_guide + _format_guide
+
+● Continuing with Task #3. Let me mark it in progress, add the Lesson model to
+  schema.py, then build the loader.
+
+● Update(forge-llm-sidecar/app/schema.py)
+  ⎿  Added 33 lines
+      359  # LangGraph state. Kept as a superset TypedDict so the HTTP co
+           ntract and the
+      360  # graph state can evolve independently.
+      361  # ------------------------------------------------------------
+           ---------------
+      362 +class LessonEvidence(BaseModel):                              
+      363 +    """Quantitative backing for a self-play lesson."""        
+      364 +                                                              
+      365 +    # Mean turns-to-win improvement attributed to following th
+          +is lesson                                                     
+      366 +    # (positive = faster wins). Reflection fills this from agg
+          +regate stats.                                                 
+      367 +    turns_to_win_delta: float = 0.0                           
+      368 +    # Number of games the lesson was distilled from. Gates inj
+          +ection.                                                       
+      369 +    n_games: int = 0                                          
+      370 +                                                              
+      371 +                                                              
+      372 +class Lesson(BaseModel):                                      
+      373 +    """A distilled, context-tagged self-play lesson.          
+      374 +                                                              
+      375 +    Produced by the /selfplay/reflect endpoint, auto-staged to
+          + the learnings                                                
+      376 +    store, and injected (capped + gated) alongside the curated
+          + piloting guide.                                              
+      377 +    Lessons are stored CONDITIONALLY: ``context`` records the 
+          +situation they                                                
+      378 +    were learned in (e.g. "no_interaction"), and injection onl
+          +y fires when the                                              
+      379 +    live game state matches that context.                     
+      380 +    """                                                       
+      381 +                                                              
+      382 +    archetype: str                                            
+      383 +    format: str = ""                                          
+      384 +    # The situation this lesson applies to. "no_interaction" l
+          +essons come from                                              
+      385 +    # goldfishing and only inject when the opponent has shown 
+          +no interaction.                                               
+      386 +    context: str = "no_interaction"                           
+      387 +    trigger: str = ""                                         
+      388 +    recommendation: str                                       
+      389 +    evidence: LessonEvidence = Field(default_factory=LessonEvi
+          +dence)                                                        
+      390 +    confidence: float = 0.0                                   
+      391 +    created_at: str = ""                                      
+      392 +    source: str = "selfplay"                                  
+      393 +                                                              
+      394 +                                                              
+      395  class GraphState(TypedDict, total=False):
+      396      # inputs
+      397      game_id: str
+
+● Now the loader module, mirroring piloting.py:
+
+● Write(forge-llm-sidecar/app/knowledge/learnings.py)
+  ⎿  Wrote 163 lines to forge-llm-sidecar/app/knowledge/learnings.py
+      1 """Loads and stages self-play "lessons" — the auto-staged learnin
+      2 
+      3 Lessons live as JSON lists under ``learnings/<format>/<slug>.json
+      4 produced by the ``/selfplay/reflect`` endpoint (distilled from go
+      5 mirror game logs), auto-staged here, and injected — capped and co
+        ntext-gated —
+        ed lessons
+      7 into the curated guides via ``scripts/promote_learning.py``; this
+      8 machine-writable staging area kept separate so it can never silen
+      9 the hand-authored guides.
+     … +183 lines (ctrl+o to expand)
+
+● Now wire it into game_advisor.py — import the loader, compute
+  observed_interaction, and attach gated lessons + the fastest-line baseline
+  onto the guide. First the import.
+● Update(forge-llm-sidecar/app/nodes/game_advisor.py)
+  ⎿  Added 1 line
+      21  from app.knowledge import (
+      22      archetype_signals as arch_signals_lib,
+      23      format_detect,
+      24 +    learnings as learnings_lib,                                
+      25      loader,
+      26      metagame,
+      27      piloting,
+
+● Update(forge-llm-sidecar/app/nodes/game_advisor.py)
+  ⎿  Added 20 lines
+      753          or has_opp_spells
+      754          or bool(state.get("opponent_graveyard") or [])
+      755      )
+      756 +                                                              
+      757 +    # Attach gated self-play learnings to the guide so both th
+          +e deterministic                                               
+      758 +    # advice/planner (combo_strategist, early_plan read state[
+          +"piloting_guide"])                                            
+      759 +    # and _format_guide see them. "no_interaction" lessons inj
+          +ect only when the                                             
+      760 +    # opponent has shown no interaction — the anti-poisoning g
+          +ate.                                                          
+      761 +    opp_hand_cats = {(g.get("category") or "").lower() for g i
+          +n (opp_hand or [])}                                           
+      762 +    observed_interaction = has_opp_spells or bool(            
+      763 +        opp_hand_cats & {"counterspell", "removal", "wrath"}  
+      764 +    )                                                         
+      765 +    guide_for_learnings = state.get("piloting_guide")         
+      766 +    if guide_for_learnings is not None and own_name:          
+      767 +        all_lessons = learnings_lib.get_learnings(slug, own_na
+          +me)                                                           
+      768 +        selected = learnings_lib.select_for_injection(        
+      769 +            all_lessons, observed_interaction=observed_interac
+          +tion                                                          
+      770 +        )                                                     
+      771 +        if selected:                                          
+      772 +            guide_for_learnings["learnings"] = [lsn.model_dump
+          +() for lsn in selected]                                       
+      773 +        baseline = learnings_lib.fastest_line(all_lessons)    
+      774 +        if baseline is not None:                              
+      775 +            guide_for_learnings["fastest_line"] = baseline.mod
+          +el_dump()                                                     
+      776      # Detect whether the AI's own deck is a token strategy so 
+           the wrath-
+      777      # avoidance gate doesn't suppress its plays (tokens want t
+           o flood).
+      778      ai_own_signals = arch_signals_lib.signals_for(own_name)
+
+● Now render learnings in _format_guide:
+
+● Update(forge-llm-sidecar/app/nodes/game_advisor.py)
+  ⎿  Added 7 lines
+      150          parts.append("Matchup notes: " + mu)
+      151      if guide.get("common_threats"):
+      152          parts.append("Threats to watch for: " + "; ".join(guid
+           e["common_threats"]))
+      153 +    if guide.get("learnings"):                                
+      154 +        rendered = "; ".join(                                 
+      155 +            (f"when {lsn.get('trigger')}, " if lsn.get("trigge
+          +r") else "")                                                  
+      156 +            + (lsn.get("recommendation") or "")               
+      157 +            for lsn in guide["learnings"]                     
+      158 +        )                                                     
+      159 +        parts.append("Self-play learnings (conditional): " + r
+          +endered)                                                      
+      160      return "\n".join(parts)
+      161  
+      162  
+
+● Now add the learnings cache-busting token. Let me check how the version
+  constants are defined in main.py.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● _PROFILES_VERSION is computed once at import, but learnings get written at
+  runtime by /selfplay/reflect, so I'll compute the learnings token per-request
+  (cheap rglob) to bust the cache when files change.
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 1 line, removed 1 line
+      15  
+      16  from app.config import CONFIG
+      17  from app.graph import get_graph
+      18 -from app.knowledge import loader, metagame, piloting           
+      18 +from app.knowledge import learnings, loader, metagame, piloting
+      19  from app.llm_client import is_reachable
+      20  from app.nodes import game_advisor
+      21  from app.schema import (
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 3 lines
+      173          "pm": req.pilot_mode,
+      174          "pv": _PROFILES_VERSION,
+      175          "cv": _COMBO_PROFILES_VERSION,
+      176 +        # Computed per-request (cheap) so cache busts when /se
+          +lfplay/reflect                                                
+      177 +        # stages new learnings while the process is running.  
+      178 +        "lv": learnings.learnings_version(),                  
+      179      }
+      180      encoded = _json.dumps(payload, sort_keys=True, default=str
+           ).encode("utf-8")
+      181      return hashlib.blake2b(encoded, digest_size=16).hexdigest(
+           )
+
+● Now verify Task #3: loader round-trips, gating works, injection renders, cache
+   busts, and existing tests still pass.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● All gating works. The version token didn't change only because both writes
+  landed in the same wall-clock second (mtime is whole-second) and it's the same
+   file. Appends do change file size, so I'll fold total size into the token to
+  make it robust against same-second writes.
+
+● Update(forge-llm-sidecar/app/knowledge/learnings.py)
+  ⎿  Added 6 lines, removed 2 lines
+      159          return "0:0"
+      160      if not paths:
+      161          return "0:0"
+      162 -    newest = max(int(p.stat().st_mtime) for p in paths)       
+      163 -    return f"{len(paths)}:{newest}"                           
+      162 +    stats = [p.stat() for p in paths]                         
+      163 +    newest = max(int(s.st_mtime) for s in stats)              
+      164 +    # Total size is folded in so an append within the same wal
+          +l-clock second                                                
+      165 +    # (mtime is whole-second) still busts the cache.          
+      166 +    total = sum(s.st_size for s in stats)                     
+      167 +    return f"{len(paths)}:{newest}:{total}"                   
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Task #3 core works. Let me confirm _format_guide's output (line 276) actually
+  reaches an LLM prompt, so the rendered learnings land somewhere a model reads.
+
+  Read 1 file (ctrl+o to expand)
+
+● Line 276 is the end of the recognition prompt, not the guide. Let me find
+  where _format_guide is actually called.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● _format_guide turns out to be unused dead code — so the live consumption path
+  is the planner nodes reading state["piloting_guide"]. Let me check whether
+  combo_strategist builds an LLM prompt from the guide, which would mean
+  learnings already reach a model there.
+
+  Read 1 file (ctrl+o to expand)
+
+● combo_strategist builds an LLM prompt from the guide but doesn't yet read
+  learnings/fastest_line — that's exactly the Task #5 wiring, and I'm already
+  here. Task #3's backbone (store/loader/gating/attachment/cache) is done; the
+  consumption belongs in #5. Let me wire the fastest-line baseline + learnings
+  into the combo prompt now.
+
+● Update(forge-llm-sidecar/app/nodes/combo_strategist.py)
+  ⎿  Added 34 lines
+      27  )
+      28  
+      29  
+      30 +def _learnings_block(state: GraphState) -> str:                
+      31 +    """Render the self-play baseline + learnings for the combo 
+         +prompt.                                                        
+      32 +                                                               
+      33 +    The fastest line is the deck's *unobstructed* clock — an up
+         +per bound the                                                  
+      34 +    pilot anchors to and degrades from based on the opponent's 
+         +observed                                                       
+      35 +    interaction. It is explicitly NOT a directive to ignore int
+         +eraction.                                                      
+      36 +    """                                                        
+      37 +    guide = state.get("piloting_guide") or {}                  
+      38 +    if not isinstance(guide, dict):                            
+      39 +        return ""                                              
+      40 +    parts: list[str] = []                                      
+      41 +    fastest = guide.get("fastest_line")                        
+      42 +    if isinstance(fastest, dict) and fastest.get("recommendatio
+         +n"):                                                           
+      43 +        trigger = f"when {fastest['trigger']}, " if fastest.get
+         +("trigger") else ""                                            
+      44 +        parts.append(                                          
+      45 +            "FASTEST UNOBSTRUCTED LINE (self-play baseline — as
+         +sumes ZERO "                                                   
+      46 +            "opponent interaction; this is the upper-bound cloc
+         +k to anchor to "                                               
+      47 +            "and degrade FROM based on the opponent's observed 
+         +interaction, NOT "                                             
+      48 +            "a directive to ignore countermagic):\n"           
+      49 +            f"  {trigger}{fastest['recommendation']}"          
+      50 +        )                                                      
+      51 +    learnings = guide.get("learnings")                         
+      52 +    if isinstance(learnings, list) and learnings:              
+      53 +        rendered = "; ".join(                                  
+      54 +            (f"when {lsn.get('trigger')}, " if lsn.get("trigger
+         +") else "")                                                    
+      55 +            + (lsn.get("recommendation") or "")                
+      56 +            for lsn in learnings                               
+      57 +            if isinstance(lsn, dict)                           
+      58 +        )                                                      
+      59 +        if rendered:                                           
+      60 +            parts.append("SELF-PLAY LEARNINGS (conditional):\n 
+         + " + rendered)                                                 
+      61 +    return ("\n\n" + "\n\n".join(parts)) if parts else ""      
+      62 +                                                               
+      63 +                                                               
+      64  def _prompt(state: GraphState, profile: dict, deterministic: di
+          ct) -> str:
+      65      return (
+      66          f"AI deck: {state.get('own_archetype') or 'Unknown'}\n"
+
+● Update(forge-llm-sidecar/app/nodes/combo_strategist.py)
+  ⎿  Added 2 lines, removed 1 line
+      74          f"Opponent open mana sources: {json.dumps(state.get('op
+          p_untapped_sources') or [])}\n"
+      75          f"Opponent inferred hand: {json.dumps(state.get('oppone
+          nt_hand') or [])}\n\n"
+      76          f"COMBO PROFILE\n{json.dumps(profile, indent=2)}\n\n"
+      77 -        f"DETERMINISTIC ANALYSIS\n{json.dumps(deterministic, in
+         -dent=2)}\n\n"                                                  
+      77 +        f"DETERMINISTIC ANALYSIS\n{json.dumps(deterministic, in
+         +dent=2)}"                                                      
+      78 +        f"{_learnings_block(state)}\n\n"                       
+      79          "Return exactly these keys:\n"
+      80          '  "line_name": string,\n'
+      81          '  "go_for_it_now": boolean,\n'
+
+● Now verify the planner prompt renders the baseline correctly and stays absent
+  when there are no learnings, then run the combo/strategist tests.
+
+❯ /usage 
+  ⎿  Settings dialog dismissed
+  Ran 1 shell command (ctrl+o to expand)
+
+● All 200 tests pass. Let me mark #3 and #5 complete.
+
+● Three tasks complete and verified (all Python, 200 tests passing). Checkpoint:
+
+  Done
+
+  - #2 — Quarantined solve mode: pilot_mode plumbed end-to-end; solve zeros
+  opponent-hand inference → collapses all hedging in advice.py. Production
+  byte-identical when unset.
+  - #3 — Learnings store + gated injection: new Lesson/LessonEvidence models;
+  app/knowledge/learnings.py with get_learnings, confidence/sample/context-gated
+   select_for_injection, append_lessons (auto-staging), and a learnings_version
+  cache token folded into the recognize cache key. Verified: no_interaction
+  lessons inject only when no interaction is observed, weak lessons are
+  filtered, cache busts on append.
+  - #5 — Planner baseline wiring: combo_strategist prompt now carries the
+  fastest_line baseline and learnings, framed explicitly as the unobstructed
+  clock to anchor to and degrade from — never "ignore interaction." Absent when
+  there are no learnings.
+
+  The anti-poisoning design is fully realized on the Python side: solve-mode
+  quarantine + conditional, context-gated lessons + anchor-and-degrade framing.
+
+  Remaining
+
+  - #4 — /selfplay/reflect batch reflection endpoint (Python, testable) —
+  distills logs → context-tagged lessons → append_lessons.
+  - #1 — Java self-play runner (goldfish + mirror) — heavy Maven build of the
+  Forge engine; also needs a pilot_mode field added to the Java
+  RecognitionRequest.
+  - #6 — promote_learning.py human-promotion CLI.
+  - #7 — metrics/reporting.
+
+  #4 is the next self-contained Python piece and builds directly on
+  append_lessons. Want me to continue with #4, or switch to the Java runner
+  (#1)?
+
+✻ Worked for 19m 13s
+
+❯ continue with 4, just keep on going until you complete the tasklist           
+
+● On it — continuing through #4, #1, #6, #7. Let me read the existing
+  log-analyze models, the LLM client signature, and main.py's imports to build
+  /selfplay/reflect.
+
+  Read 2 files (ctrl+o to expand)
+
+● I have everything. Let me update imports, then add the /selfplay/reflect
+  models and endpoint.
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 3 lines, removed 1 line
+      16  from app.config import CONFIG
+      17  from app.graph import get_graph
+      18  from app.knowledge import learnings, loader, metagame, piloting
+      19 -from app.llm_client import is_reachable                        
+      19 +from app.llm_client import LLMError, generate_json, is_reachabl
+         +e                                                              
+      20  from app.nodes import game_advisor
+      21  from app.schema import (
+      22      ActionScore,
+     ...
+      26      EarlyGamePlan,
+      27      HandValuation,
+      28      LegalAction,
+      29 +    Lesson,                                                    
+      30 +    LessonEvidence,                                            
+      31      OpponentCardProbability,
+      32      OpponentHandGuess,
+      33      PilotingAdvice,
+
+● Now let me read the end of the forge_log_analyze function so I can place the
+  new endpoint right after it.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 165 lines
+      710      )
+      711  
+      712  
+      713 +# ------------------------------------------------------------
+          +---------------                                               
+      714 +# Self-play reflection: distill a batch of goldfishing/mirror 
+          +games into                                                    
+      715 +# context-tagged lessons and auto-stage them to the learnings 
+          +store.                                                        
+      716 +# ------------------------------------------------------------
+          +---------------                                               
+      717 +                                                              
+      718 +                                                              
+      719 +class ReflectGame(BaseModel):                                 
+      720 +    """One self-play game outcome from the runner's per-seat J
+          +SONL."""                                                      
+      721 +                                                              
+      722 +    won: bool = False                                         
+      723 +    # Turn the deck won on (None for losses/timeouts). Lower i
+          +s better.                                                     
+      724 +    win_turn: int | None = None                               
+      725 +    # Compact per-turn action summary, if the runner captured 
+          +it.                                                           
+      726 +    actions: list[str] = Field(default_factory=list)          
+      727 +    # Raw Forge game log, optional fallback when `actions` is 
+          +absent.                                                       
+      728 +    log: str = ""                                             
+      729 +                                                              
+      730 +                                                              
+      731 +class ReflectRequest(BaseModel):                              
+      732 +    """A batch of games for ONE (archetype, context, pilot_mod
+          +e) to reflect on."""                                          
+      733 +                                                              
+      734 +    format: str                                               
+      735 +    archetype: str                                            
+      736 +    # Context the resulting lessons are tagged with — gates in
+          +jection later.                                                
+      737 +    context: str = "no_interaction"                           
+      738 +    pilot_mode: str = "solve"                                 
+      739 +    games: list[ReflectGame]                                  
+      740 +    # Auto-stage the distilled lessons to the learnings store.
+      741 +    stage: bool = True                                        
+      742 +    # Hard cap on lessons distilled per batch (keeps the injec
+          +ted block small).                                             
+      743 +    max_lessons: int = 5                                      
+      744 +                                                              
+      745 +                                                              
+      746 +class ReflectResponse(BaseModel):                             
+      747 +    archetype: str                                            
+      748 +    format: str                                               
+      749 +    context: str                                              
+      750 +    n_games: int                                              
+      751 +    n_wins: int                                               
+      752 +    win_rate: float                                           
+      753 +    fastest_win: int | None = None                            
+      754 +    mean_win_turn: float | None = None                        
+      755 +    median_win_turn: float | None = None                      
+      756 +    lessons: list[Lesson] = Field(default_factory=list)       
+      757 +    staged_path: str | None = None                            
+      758 +                                                              
+      759 +                                                              
+      760 +_REFLECT_SYSTEM_PROMPT = (                                    
+      761 +    "You are a Magic: The Gathering goldfishing analyst. Given
+          + aggregate "                                                  
+      762 +    "self-play results and per-game summaries for ONE deck, di
+          +still a few "                                                 
+      763 +    "concise, CONDITIONAL lessons that would help it win in fe
+          +wer turns. Each "                                             
+      764 +    "lesson has a 'trigger' (the situation) and a 'recommendat
+          +ion' (the line). "                                            
+      765 +    "Keep each recommendation under ~25 words. Do not invent c
+          +ards. Phrase "                                                
+      766 +    "lessons conditionally, never as 'always ignore interactio
+          +n'. Always answer "                                           
+      767 +    "with a single JSON object and nothing else."             
+      768 +)                                                             
+      769 +                                                              
+      770 +                                                              
+      771 +def _summarize_games(games: list[ReflectGame], *, limit: int =
+          + 12) -> str:                                                  
+      772 +    """Compact textual summary of the most informative games (
+          +fastest wins                                                  
+      773 +    first, then a few losses), bounded so the reflection stays
+          + one cheap call."""                                           
+      774 +    wins = sorted(                                            
+      775 +        (g for g in games if g.won and g.win_turn is not None)
+          +,                                                             
+      776 +        key=lambda g: g.win_turn,                             
+      777 +    )                                                         
+      778 +    losses = [g for g in games if not g.won]                  
+      779 +    chosen = (wins[:limit] + losses[:3])[:limit]              
+      780 +    lines: list[str] = []                                     
+      781 +    for g in chosen:                                          
+      782 +        outcome = f"WON turn {g.win_turn}" if g.won else "did 
+          +not win"                                                      
+      783 +        seq = "; ".join(g.actions[:20]) if g.actions else (g.l
+          +og[:400] if g.log else "")                                    
+      784 +        lines.append(f"- {outcome}: {seq}" if seq else f"- {ou
+          +tcome}")                                                      
+      785 +    return "\n".join(lines)                                   
+      786 +                                                              
+      787 +                                                              
+      788 +def _reflect_confidence(n_games: int, win_rate: float) -> floa
+          +t:                                                            
+      789 +    """Grounded confidence: scales with sample size and win ra
+          +te, capped 0.95."""                                           
+      790 +    return round(min(0.95, win_rate * min(1.0, n_games / 20.0)
+          +), 2)                                                         
+      791 +                                                              
+      792 +                                                              
+      793 +@app.post("/selfplay/reflect", response_model=ReflectResponse)
+      794 +async def selfplay_reflect(req: ReflectRequest) -> ReflectResp
+          +onse:                                                         
+      795 +    """Distill a batch of self-play games into context-tagged 
+          +lessons.                                                      
+      796 +                                                              
+      797 +    One LLM call per batch (not per game) — aggregate stats pl
+          +us compact                                                    
+      798 +    per-game summaries go in, a short list of conditional less
+          +ons comes out,                                                
+      799 +    each carrying batch-level evidence (sample size + turns-to
+          +-win headroom).                                               
+      800 +    """                                                       
+      801 +    import statistics                                         
+      802 +                                                              
+      803 +    games = req.games or []                                   
+      804 +    n_games = len(games)                                      
+      805 +    win_turns = [g.win_turn for g in games if g.won and g.win_
+          +turn is not None]                                             
+      806 +    n_wins = len(win_turns)                                   
+      807 +    win_rate = (n_wins / n_games) if n_games else 0.0         
+      808 +    fastest = min(win_turns) if win_turns else None           
+      809 +    mean_turn = round(statistics.fmean(win_turns), 2) if win_t
+          +urns else None                                                
+      810 +    median_turn = round(statistics.median(win_turns), 2) if wi
+          +n_turns else None                                             
+      811 +    # Headroom between the average and the best line — how muc
+          +h faster the deck                                             
+      812 +    # *can* win than it typically does. This is the lesson's e
+          +vidence delta.                                                
+      813 +    delta = round((mean_turn - fastest), 2) if (mean_turn is n
+          +ot None and fastest is not None) else 0.0                     
+      814 +                                                              
+      815 +    log.info(                                                 
+      816 +        "selfplay/reflect: archetype=%s context=%s games=%d wi
+          +ns=%d fastest=%s",                                            
+      817 +        req.archetype, req.context, n_games, n_wins, fastest, 
+      818 +    )                                                         
+      819 +                                                              
+      820 +    lessons: list[Lesson] = []                                
+      821 +    if n_games:                                               
+      822 +        prompt = (                                            
+      823 +            f"Deck: {req.archetype} ({req.format})\n"         
+      824 +            f"Pilot mode: {req.pilot_mode}  Context: {req.cont
+          +ext}\n"                                                       
+      825 +            f"Games: {n_games}  Wins: {n_wins}  Win rate: {win
+          +_rate:.0%}\n"                                                 
+      826 +            f"Win turns — fastest: {fastest}, mean: {mean_turn
+          +}, median: {median_turn}\n\n"                                 
+      827 +            f"PER-GAME SUMMARIES (fastest wins first):\n{_summ
+          +arize_games(games)}\n\n"                                      
+      828 +            f"Distill at most {req.max_lessons} conditional le
+          +ssons that would make "                                       
+      829 +            "this deck win faster. Return exactly:\n"         
+      830 +            '  "lessons": [{"trigger": string, "recommendation
+          +": string}]'                                                  
+      831 +        )                                                     
+      832 +        try:                                                  
+      833 +            raw = await generate_json(prompt, system=_REFLECT_
+          +SYSTEM_PROMPT)                                                
+      834 +        except LLMError as exc:                               
+      835 +            log.warning("selfplay/reflect: LLM call failed (%s
+          +); returning aggregates only", exc)                           
+      836 +            raw = {}                                          
+      837 +        confidence = _reflect_confidence(n_games, win_rate)   
+      838 +        now = datetime.now(timezone.utc).isoformat()          
+      839 +        for item in (raw.get("lessons") or [])[: req.max_lesso
+          +ns]:                                                          
+      840 +            if not isinstance(item, dict):                    
+      841 +                continue                                      
+      842 +            rec = str(item.get("recommendation") or "").strip(
+          +)                                                             
+      843 +            if not rec:                                       
+      844 +                continue                                      
+      845 +            lessons.append(                                   
+      846 +                Lesson(                                       
+      847 +                    archetype=req.archetype,                  
+      848 +                    format=req.format,                        
+      849 +                    context=req.context,                      
+      850 +                    trigger=str(item.get("trigger") or "").str
+          +ip(),                                                         
+      851 +                    recommendation=rec,                       
+      852 +                    evidence=LessonEvidence(turns_to_win_delta
+          +=delta, n_games=n_games),                                     
+      853 +                    confidence=confidence,                    
+      854 +                    created_at=now,                           
+      855 +                    source="selfplay",                        
+      856 +                )                                             
+      857 +            )                                                 
+      858 +                                                              
+      859 +    staged_path: str | None = None                            
+      860 +    if req.stage and lessons:                                 
+      861 +        staged_path = str(learnings.append_lessons(req.format,
+          + req.archetype, lessons))                                     
+      862 +                                                              
+      863 +    return ReflectResponse(                                   
+      864 +        archetype=req.archetype,                              
+      865 +        format=req.format,                                    
+      866 +        context=req.context,                                  
+      867 +        n_games=n_games,                                      
+      868 +        n_wins=n_wins,                                        
+      869 +        win_rate=round(win_rate, 3),                          
+      870 +        fastest_win=fastest,                                  
+      871 +        mean_win_turn=mean_turn,                              
+      872 +        median_win_turn=median_turn,                          
+      873 +        lessons=lessons,                                      
+      874 +        staged_path=staged_path,                              
+      875 +    )                                                         
+      876 +                                                              
+      877 +                                                              
+      878  if __name__ == "__main__":
+      879      import uvicorn
+      880  
+
+● I used datetime/timezone — need to import them. Let me add the import.
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 1 line
+       7  import logging
+       8  from collections import OrderedDict
+       9  from contextlib import asynccontextmanager
+      10 +from datetime import datetime, timezone                        
+      11  
+      12  from fastapi import FastAPI, Request
+      13  from fastapi.responses import FileResponse
+
+● Now mark #4 in progress and verify with FastAPI's TestClient using a stubbed
+  LLM (no live model needed), checking aggregation, lesson construction, and
+  that staging round-trips into the injectable store.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Aggregation, lesson distillation, and staging work. The round-trip was empty
+  because a 4-game batch (confidence 0.15) is correctly below the injection
+  thresholds. Let me confirm a real-sized batch becomes injectable, then run the
+   suite.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Task #4 done — full pipeline verified (reflect → stage → load → gated inject),
+   200 tests pass.
+
+● Now Task #6 (promotion CLI). Let me look at the scripts/ conventions and a
+  sample piloting guide's structure.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● sequencing_tips is a list of strings — the natural promotion target. Let me
+  check an existing script's style, then write the promotion CLI.
+  Read 1 file (ctrl+o to expand)
+
+● I'll add a replace_lessons helper to the loader (for removing a lesson after
+  promotion), then write the CLI.
+
+● Update(forge-llm-sidecar/app/knowledge/learnings.py)
+  ⎿  Added 31 lines
+      151      return path
+      152  
+      153  
+      154 +def replace_lessons(game_format: str, archetype: str, lessons:
+          + list[Lesson]) -> Path:                                       
+      155 +    """Overwrite the store for an archetype with ``lessons`` (
+          +deletes the file                                              
+      156 +    when the list is empty). Used by the promotion tool after 
+          +a lesson is                                                   
+      157 +    promoted into a curated guide or dropped."""              
+      158 +    path = _store_path(game_format, archetype)                
+      159 +    if not lessons:                                           
+      160 +        if path.exists():                                     
+      161 +            path.unlink()                                     
+      162 +        return path                                           
+      163 +    path.parent.mkdir(parents=True, exist_ok=True)            
+      164 +    path.write_text(                                          
+      165 +        json.dumps([lsn.model_dump() for lsn in lessons], inde
+          +nt=2),                                                        
+      166 +        encoding="utf-8",                                     
+      167 +    )                                                         
+      168 +    return path                                               
+      169 +                                                              
+      170 +                                                              
+      171 +def all_staged() -> list[tuple[str, str, list[Lesson]]]:      
+      172 +    """Every staged file as ``(format, slug, lessons)`` for th
+          +e promotion tool."""                                          
+      173 +    out: list[tuple[str, str, list[Lesson]]] = []             
+      174 +    if not _LEARNINGS_DIR.exists():                           
+      175 +        return out                                            
+      176 +    for path in sorted(_LEARNINGS_DIR.rglob("*.json")):       
+      177 +        fmt = path.parent.name                                
+      178 +        slug = path.stem                                      
+      179 +        lessons = get_learnings(fmt, slug)                    
+      180 +        if lessons:                                           
+      181 +            out.append((fmt, slug, lessons))                  
+      182 +    return out                                                
+      183 +                                                              
+      184 +                                                              
+      185  def learnings_version() -> str:
+      186      """Cache-busting token over all learnings files (count:new
+           est-mtime)."""
+      187      try:
+
+● Write(forge-llm-sidecar/scripts/promote_learning.py)
+  ⎿  Wrote 181 lines to forge-llm-sidecar/scripts/promote_learning.py
+       1 #!/usr/bin/env python3
+         curated guides.
+       3 
+       5 (``app/knowledge/learnings/<format>/<slug>.json``). They are inj
+         ected at
+         authored
+       7 piloting guides until a human promotes them here — rewriting eac
+       8 conditional form before it lands in ``piloting/<format>/<slug>.j
+         son``.
+      10     # see everything staged
+     … +209 lines (ctrl+o to expand)
+
+● Let me verify the CLI end-to-end against a temp store and a temp guide.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Task #6 verified — promote rewrites conditionally into the guide and clears
+  the store.
+
+● Now Task #7 — metrics over the runner's per-seat JSONL. Let me define the
+  record schema (which the Java runner will emit) and write the report script.
+
+● Write(forge-llm-sidecar/scripts/selfplay_report.py)
+  ⎿  Wrote 119 lines to forge-llm-sidecar/scripts/selfplay_report.py
+       1 #!/usr/bin/env python3
+         ONL.
+       3 
+       4 The Java self-play runner emits one JSON object per *sidecar sea
+       5 (goldfish = one record/game; mirror = two), with at least these 
+         fields:
+       7     {"archetype": "Ruby Storm", "opponent": "60 Islands",
+       8      "pilot_mode": "solve", "won": true, "win_turn": 3}
+       9 
+         mode) and
+     … +127 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Task #7 verified. Now the last and heaviest task, #1 — the Java runner. First
+  the source changes: add pilot_mode to the Java RecognitionRequest, a resolver,
+   thread it through the observer, then the runner + 60-Islands deck.
+
+● Update(forge-ai/src/main/java/forge/ai/llm/RecognitionRequest.java)
+  ⎿  Added 5 lines, removed 1 line
+      88          /** v8: number of cards to return after keeping a Londo
+          n mulligan. */
+      89          @SerializedName("cards_to_return") int cardsToReturn,
+      90          /** v8: global sidecar influence weight, 0=no influence
+          , 100=force if legal. */
+      91 -        @SerializedName("sidecar_influence") int sidecarInfluen
+         -ce) {                                                          
+      91 +        @SerializedName("sidecar_influence") int sidecarInfluen
+         +ce,                                                            
+      92 +        /** Pilot mode. "normal" is the production path; "solve
+         +" is set ONLY by                                               
+      93 +         *  the self-play goldfishing runner and tells the side
+         +car to assume the                                              
+      94 +         *  opponent has zero interaction and chase the fastest
+         + line. */                                                      
+      95 +        @SerializedName("pilot_mode") String pilotMode) {      
+      96  
+      97      /** Identifier this (Forge) adapter sends as the {@code cli
+          ent} field. */
+      98      public static final String CLIENT = "forge";
+
+● Update(forge-ai/src/main/java/forge/ai/llm/RecognitionRequest.java)
+  ⎿  Added 2 lines, removed 2 lines
+      109                  List.of(), List.of(), List.of(), List.of(), Ma
+           p.of(),
+      110                  "", List.of(), Map.of(),
+      111                  0, 0, 0, 0, List.of(), List.of(), List.of(),
+      112 -                0, 0, "", List.of(), List.of(), 0, 50);       
+      112 +                0, 0, "", List.of(), List.of(), 0, 50, "normal
+          +");                                                           
+      113      }
+      114  
+      115      /**
+     ...
+      124                  List.of(), List.of(), List.of(), List.of(), Ma
+           p.of(),
+      125                  "", List.of(), personality,
+      126                  0, 0, 0, 0, List.of(), List.of(), List.of(),
+      127 -                0, 0, "", List.of(), List.of(), 0, 50);       
+      127 +                0, 0, "", List.of(), List.of(), 0, 50, "normal
+          +");                                                           
+      128      }
+      129  }
+
+● Now add a pilotMode() resolver to DeckRecognitionFeature and thread it into
+  the observer's request.
+
+● Update(forge-ai/src/main/java/forge/ai/llm/DeckRecognitionFeature.java)
+  ⎿  Added 14 lines
+      14      /** System property override, e.g. {@code -Dforge.ai.deckRe
+          cognition=true}. */
+      15      public static final String SYS_PROP = "forge.ai.deckRecogni
+          tion";
+      16  
+      17 +    /** System property the self-play runner sets to {@code sol
+         +ve} for goldfish                                               
+      18 +     *  runs. Unset (production) resolves to {@code normal}, so
+         + the production                                                
+      19 +     *  recognition path is never affected. */                 
+      20 +    public static final String PILOT_MODE_SYS_PROP = "forge.ai.
+         +deckRecognition.pilotMode";                                    
+      21 +                                                               
+      22      private DeckRecognitionFeature() {
+      23      }
+      24  
+      25 +    /** @return the pilot mode to send on /recognize ("normal" 
+         +or "solve"). */                                                
+      26 +    public static String pilotMode() {                         
+      27 +        final String fromSys = System.getProperty(PILOT_MODE_SY
+         +S_PROP);                                                       
+      28 +        if (fromSys != null && !fromSys.isBlank()) {           
+      29 +            return fromSys.trim();                             
+      30 +        }                                                      
+      31 +        return "normal";                                       
+      32 +    }                                                          
+      33 +                                                               
+      34      /** @return true if deck recognition should be active for t
+          he given AI. */
+      35      public static boolean isEnabled(final AiController ai) {
+      36          if (Boolean.getBoolean(SYS_PROP)) {
+
+● Update(forge-ai/src/main/java/forge/ai/llm/DeckRecognitionObserver.java)
+  ⎿  Added 2 lines, removed 1 line
+      547                  oppMana.untappedSources(),
+      548                  List.of(),
+      549                  0,
+      550 -                aiController.getIntProperty(AiProps.SIDECAR_IN
+          -FLUENCE_WEIGHT));                                             
+      550 +                aiController.getIntProperty(AiProps.SIDECAR_IN
+          +FLUENCE_WEIGHT),                                              
+      551 +                DeckRecognitionFeature.pilotMode());          
+      552  
+      553          Logger.info("DeckRecognition: POST /recognize game=" +
+            game.getId()
+      554                  + " aiTurn=" + currentAiTurnNumber()
+
+● Let me check for other callers of the main RecognitionRequest constructor that
+   need the new argument.
+
+  Searched for 2 patterns (ctrl+o to expand)
+● Two more call sites. Let me check AiController.java:216 (the main module) and
+  whether forge-llm-sidecar/forge-ai is a real compiled module.
+
+  Read 1 file (ctrl+o to expand)
+
+● AiController.java:216 uses the full constructor for the mulligan path. Let me
+  see its tail to append the new arg.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-ai/src/main/java/forge/ai/AiController.java)
+  ⎿  Added 2 lines, removed 1 line
+      247                  List.of(),
+      248                  List.of(),
+      249                  cardsToReturn,
+      250 -                getSidecarInfluenceWeight());                 
+      250 +                getSidecarInfluenceWeight(),                  
+      251 +                forge.ai.llm.DeckRecognitionFeature.pilotMode(
+          +));                                                           
+      252          Logger.info("DeckRecognition: POST /mulligan-plan game
+           =" + game.getId()
+      253                  + " aiTurn=" + currentAiTurnNumber()
+      254                  + " cardsToReturn=" + cardsToReturn
+
+● The forge-llm-sidecar/forge-ai/ tree is a separate snapshot copy with its own
+  RecognitionRequest, so it stays internally consistent — no change needed
+  there. Now the runner itself. Let me check the build setup and how the sim
+  entry point is dispatched (to add a selfplay command).
+
+  Read 1 file, listed 1 directory (ctrl+o to expand)
+
+● I'll add a selfplay mode. Let me check how sidecar influence weight is
+  resolved (to force it high in the runner) before writing the runner.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● SIDECAR_INFLUENCE_WEIGHT already defaults to "100" (force legal choices), so
+  the runner only needs to enable recognition and set pilot mode via system
+  properties — no influence plumbing required. Let me confirm forge-gui-desktop
+  can reference forge-ai (else I'll use literal property strings).
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● forge-gui-desktop depends on forge-ai. Now let me write the runner, the
+  60-Islands deck, and wire the selfplay dispatch.
+
+● Write(forge-gui-desktop/src/main/java/forge/view/SelfPlayRunner.java)
+  ⎿  Wrote 276 lines to
+     forge-gui-desktop/src/main/java/forge/view/SelfPlayRunner.java
+       1 package forge.view;
+       2 
+       3 import java.io.File;
+       4 import java.io.IOException;
+       5 import java.nio.charset.StandardCharsets;
+       6 import java.nio.file.Files;
+       7 import java.nio.file.Path;
+       8 import java.nio.file.Paths;
+       9 import java.nio.file.StandardOpenOption;
+      10 import java.util.ArrayList;
+     … +321 lines (ctrl+o to expand)
+
+● Now wire the selfplay dispatch in Main.java and create the 60-Islands deck.
+
+● Update(forge-gui-desktop/src/main/java/forge/view/Main.java)
+  ⎿  Added 4 lines
+      77                  SimulateMatch.simulate(args);
+      78                  break;
+      79  
+      80 +            case "selfplay":                                   
+      81 +                SelfPlayRunner.run(args);                      
+      82 +                break;                                         
+      83 +                                                               
+      84              case "parse":
+      85                  CardReaderExperiments.parseAllCards(args);
+      86                  break;
+
+● Update(forge-gui-desktop/src/main/java/forge/view/Main.java)
+  ⎿  Added 1 line, removed 1 line
+      90                  break;
+      91  
+      92              default:
+      93 -                System.out.println("Unknown mode.\nKnown mode i
+         -s 'sim', 'parse' ");                                           
+      93 +                System.out.println("Unknown mode.\nKnown modes 
+         +are 'sim', 'selfplay', 'parse' ");                             
+      94                  break;
+      95          }
+      96  
+
+● Write(forge-llm-sidecar/selfplay/60-islands.dck)
+  ⎿  Wrote 4 lines to forge-llm-sidecar/selfplay/60-islands.dck
+      1 [metadata]
+      2 Name=60 Islands
+      3 [Main]
+      4 60 Island
+
+● Now let me compile the changed Java to catch errors. I'll build forge-ai
+  (changed record/constructor) and forge-gui-desktop (new runner) with their
+  upstream deps.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● forge-ai compiled cleanly — the constructor change is consistent. One error:
+  getWinningPlayer() returns RegisteredPlayer. SimulateMatch uses
+  getWinningLobbyPlayer().getName(); let me match that and drop the now-unused
+  Player import.
+
+● Update(forge-gui-desktop/src/main/java/forge/view/SelfPlayRunner.java)
+  ⎿  Removed 4 lines
+      206              if (game.getOutcome() == null || game.getOutcome()
+           .isDraw()) {
+      207                  return null;
+      208              }
+      209 -            final Player p = game.getOutcome().getWinningPlaye
+          -r();                                                          
+      210 -            if (p != null) {                                  
+      211 -                return p.getName();                           
+      212 -            }                                                 
+      209              return game.getOutcome().getWinningLobbyPlayer() =
+           = null
+      210                      ? null : game.getOutcome().getWinningLobby
+           Player().getName();
+      211          } catch (final RuntimeException ex) {
+
+● Update(forge-gui-desktop/src/main/java/forge/view/SelfPlayRunner.java)
+  ⎿  Removed 1 line
+      24  import forge.game.GameRules;
+      25  import forge.game.GameType;
+      26  import forge.game.Match;
+      27 -import forge.game.player.Player;                               
+      27  import forge.game.player.RegisteredPlayer;
+      28  import forge.localinstance.properties.ForgeConstants;
+      29  import forge.model.FModel;
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Needs the reactor build (-am) since the SNAPSHOT deps aren't installed
+  standalone. Re-running the full build now that the source error is fixed.
+  Ran 1 shell command (ctrl+o to expand)
+
+● Build succeeded — all Java changes compile cleanly (forge-ai +
+  forge-gui-desktop). Let me run the full Python suite once more to confirm
+  nothing regressed after the reflect endpoint and script additions.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● All seven tasks are complete. Final summary:
+
+  Self-play improvement harness — complete
+
+  Python sidecar (fully test-verified, 200 tests pass):
+  - #2 Quarantined solve mode — pilot_mode plumbed through schema → /recognize +
+   /mulligan-plan → cache key → game_advisor, where solve zeros opponent-hand
+  inference (collapsing all hedging in advice.py). Production byte-identical
+  when unset.
+  - #3 Learnings store — Lesson/LessonEvidence models;
+  app/knowledge/learnings.py with confidence/sample/context-gated
+  select_for_injection, append_lessons, replace_lessons, all_staged, and a
+  learnings_version cache token (size-aware so same-second appends bust).
+  Attached onto the guide in game_advisor.
+  - #4 /selfplay/reflect — one LLM call per batch, aggregates turns-to-win,
+  distills context-tagged lessons with evidence/confidence, auto-stages.
+  Verified end-to-end (reflect → stage → load → gated inject).
+  - #5 Planner baseline — combo_strategist prompt now carries the fastest_line +
+   learnings, framed as "anchor to and degrade from," never "ignore
+  interaction."
+  - #6 scripts/promote_learning.py — list/show/promote/drop; promote rewrites
+  conditionally into the curated guide's sequencing_tips and clears the store.
+  Verified.
+  - #7 scripts/selfplay_report.py — turns-to-win/win-rate distributions grouped
+  by archetype/opponent/mode. Verified.
+
+  Java engine (compiles clean — forge-ai + forge-gui-desktop):
+  - #1 Runner — pilot_mode added to Java RecognitionRequest + constructors,
+  DeckRecognitionFeature.pilotMode() resolver, threaded through the observer and
+   AiController mulligan path. New SelfPlayRunner (forge selfplay -config 
+  goldfish|mirror …) wired into Main.java, emitting per-seat JSONL with
+  win_turn. Added selfplay/60-islands.dck.
+
+  Anti-poisoning, end to end: solve is simulator-only (system property, never
+  production), lessons are stored conditionally and context-gated at injection,
+  and the fastest line is a baseline to degrade from — not a directive.
+
+  Not run here: a live goldfish game (needs the llama.cpp server + full Forge
+  card-data runtime). Per the plan's verification section, the next real-world
+  step is forge selfplay -config goldfish -p1 <deck>.dck -p2 
+  forge-llm-sidecar/selfplay/60-islands.dck -n 20 -out runs/x.jsonl -url 
+  <sidecar>, then POST those records to /selfplay/reflect.
+
+✻ Cooked for 9m 53s
+
+❯ what else do you need so that you can run and troubleshoot/examine a live     
+  goldfish game? and then later, a gauntlet?                                    
+
+● Good question — let me separate "what the code needs to run" from "what I need
+   from you/the environment." Let me probe the environment first so I only ask
+  about genuine gaps.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Sidecar runs on port 18970 (not 8000), LLM on 8080. Let me check whether those
+   are actually up, how Forge launches, and what decks exist.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Most of the stack is already live: the sidecar is up on :18970 with
+  llm_reachable: true, and the LLM is a Qwen3.6-27B on :8080. Let me check the
+  launch script and whether the built jar includes my new code.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Two important findings. First, the fat jar predates my edits, so it must be
+  rebuilt (or I prepend fresh target/classes). Second — and more important —
+  run-forge.sh warns that GamePlayerUtil overwrites forge.ai.deckRecognition at
+  game start from the UI preference, which would defeat my runner's
+  System.setProperty(...). Let me check that code path, since it determines
+  whether the runner can enable recognition headlessly at all.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Confirmed the gotcha: GamePlayerUtil.createAiPlayer (line 75) overwrites
+  forge.ai.deckRecognition from the UI_ENABLE_DECK_RECOGNITION preference every
+  time an AI is created — so my runner's System.setProperty gets clobbered. The
+  fix is to set that preference instead. Let me check the FPref API.
+
+  Ran 8 shell commands (ctrl+o to expand)
+
+● Found it: setPref(FPref, boolean) exists. The runner must set the
+  UI_ENABLE_DECK_RECOGNITION preference (which createAiPlayer reads), not just
+  the system property. Let me fix SelfPlayRunner — set the pref, and default the
+   sidecar URL to localhost so it works out of the box.
+
+● Update(forge-gui-desktop/src/main/java/forge/view/SelfPlayRunner.java)
+  ⎿  Added 2 lines
+      26  import forge.game.Match;
+      27  import forge.game.player.RegisteredPlayer;
+      28  import forge.localinstance.properties.ForgeConstants;
+      29 +import forge.localinstance.properties.ForgePreferences;        
+      30 +import forge.localinstance.properties.ForgePreferences.FPref;  
+      31  import forge.model.FModel;
+      32  import forge.player.GamePlayerUtil;
+      33  
+
+● Update(forge-gui-desktop/src/main/java/forge/view/SelfPlayRunner.java)
+  ⎿  Added 9 lines, removed 6 lines
+       79          final String p1Name = first(params, "p1", null);
+       80          final String p2Name = first(params, "p2", null);
+       81          final String outPath = first(params, "out", "selfplay-
+           runs.jsonl");
+       82 -        final String url = first(params, "url", null);        
+       82 +        final String url = first(params, "url", "http://localh
+          +ost:18970");                                                  
+       83  
+       84          if (p1Name == null || p2Name == null) {
+       85              help();
+       86              return;
+       87          }
+       88  
+       89 -        // Enable recognition for AI players; set the quaranti
+          -ned solve prompt                                              
+       90 -        // for goldfish only. Mirror runs stay in production "
+          -normal" mode.                                                 
+       89 +        // Enable recognition for AI players. NOTE: GamePlayer
+          +Util.createAiPlayer                                           
+       90 +        // overwrites the forge.ai.deckRecognition system prop
+          +erty from this                                                
+       91 +        // preference every time an AI is created, so the PREF
+          +ERENCE is the                                                 
+       92 +        // authoritative switch — setting the system property 
+          +alone is not enough.                                          
+       93 +        FModel.getPreferences().setPref(FPref.UI_ENABLE_DECK_R
+          +ECOGNITION, true);                                            
+       94          System.setProperty(RECOGNITION_SYS_PROP, "true");
+       95 +        // Quarantined solve prompt for goldfish only; mirror 
+          +stays "normal".                                               
+       96 +        // pilotMode and url system properties are not clobber
+          +ed by createAiPlayer.                                         
+       97          if (goldfish) {
+       98              System.setProperty(PILOT_MODE_SYS_PROP, "solve");
+       99          } else {
+      100              System.clearProperty(PILOT_MODE_SYS_PROP);
+      101          }
+       97 -        if (url != null) {                                    
+       98 -            System.setProperty(SIDECAR_URL_SYS_PROP, url);    
+       99 -        }                                                     
+      102 +        System.setProperty(SIDECAR_URL_SYS_PROP, url);        
+      103  
+      104          final GameType type = GameType.Constructed;
+      105          final Deck p1Deck = loadDeck(p1Name, type);
+
+● ForgePreferences is now an unused import (only FPref is used). Let me drop it.
+
+● Update(forge-gui-desktop/src/main/java/forge/view/SelfPlayRunner.java)
+  ⎿  Removed 1 line
+      26  import forge.game.Match;
+      27  import forge.game.player.RegisteredPlayer;
+      28  import forge.localinstance.properties.ForgeConstants;
+      29 -import forge.localinstance.properties.ForgePreferences;        
+      29  import forge.localinstance.properties.ForgePreferences.FPref;
+      30  import forge.model.FModel;
+      31  import forge.player.GamePlayerUtil;
+
+● Now I'll rebuild the desktop fat jar so run-forge.sh picks up the new selfplay
+   command. This packages the reactor (slow). Running in the background.
+
+  Ran 1 shell command (ctrl+o to expand)
+● While the jar builds, let me check what pilot decks are readily available to
+  offer concrete options.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Background command "Package forge-gui-desktop fat jar" completed (exit code 0)
+
+● Build finished (exit 0). Let me confirm the new selfplay command is in the fat
+   jar.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The fresh jar has selfplay. The whole stack is live, so let me do a real smoke
+   run — goldfish a fast Burn deck vs the 60-Islands punching bag, with debug
+  logging, to confirm recognition attaches, /recognize fires in solve mode, and
+  JSONL is written. Running in background since the 27B model in the loop takes
+  time.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● While that runs, here's the direct answer to your question.
+
+  What's already in place (I checked)
+
+  - Sidecar is up on :18970 and reports llm_reachable: true; LLM is up on :8080
+  (Qwen3.6‑27B, 156k ctx).
+  - Runner is built — I rebuilt the desktop fat jar so forge selfplay … now
+  exists in it.
+  - Passive opponent committed: forge-llm-sidecar/selfplay/60-islands.dck.
+  - run-forge.sh already wires the sidecar URL, the XStream --add-opens, and
+  FORGE_LOG_LEVEL=debug — so I can launch and get verbose recognition logs.
+
+  What I had to fix to make it runnable
+
+  A real gotcha: GamePlayerUtil.createAiPlayer overwrites the
+  forge.ai.deckRecognition system property from the UI_ENABLE_DECK_RECOGNITION
+  preference every time an AI is created — so a plain -D flag silently does
+  nothing. I changed SelfPlayRunner to set that preference (the authoritative
+  switch) before creating players. pilot_mode and the sidecar URL aren't
+  clobbered, so those stay as system properties.
+
+  What I still need from you
+
+  1. The pilot deck. Right now I'm smoke-testing with a stand-in genetic Burn
+  deck vs the 60 Islands. For the real thing, point me at the deck you were
+  goldfishing (a .dck path, or drop it in ~/.forge/decks/constructed/ — it's
+  currently empty). Note: the fastest_line/combo-planner wiring only fully
+  engages if that deck's piloting guide has a combo_profile; plain goldfishing
+  (turns-to-win + reflection) works for any deck.
+  2. For the gauntlet later: one real opponent deck (e.g. a UW control deck).
+  Then it's -config mirror -p1 <yours> -p2 <control> — both seats sidecar,
+  normal mode, two records per game.
+
+  The throughput reality to expect
+
+  With the 27B model making a call at every decision, a single goldfish game is
+  many sequential LLM calls — expect minutes per game, not seconds. For volume
+  we'd point pilots at a faster STRATEGIST_MODEL_NAME and lean on the response
+  cache. The smoke run will give us a real per-game time.
+
+  Let me check how the smoke run is progressing.
+
+  Searched for 1 pattern, ran 1 shell command (ctrl+o to expand)
+
+● The smoke run surfaced exactly the kind of thing this exercise is for. Good
+  news and a real bug:
+
+  Working: recognition attaches for both seats, /recognize fires repeatedly
+  against the live sidecar, and it responds (it's guessing the 60-Islands
+  opponent is "Izzet Spells"). The Forge↔sidecar loop with my pilot_mode
+  plumbing runs end to end.
+
+  Critical bug it exposed: DeckRecognition: could not read AI deck: Index -1 out
+   of bounds for length 2 — the pilot's own decklist comes back empty.
+  Downstream: own-archetype isn't identified, /mulligan-plan is skipped ("AI
+  decklist unavailable"), so there's no piloting guide → solve mode and 
+  learnings have nothing to act on, and the pilot just PASSes. This is the #1
+  thing blocking a meaningful goldfish game. Let me investigate the deck-read
+  path.
+
+  Ran 1 shell command (ctrl+o to expand)
+  ⎿  Interrupted · What should Claude do instead?
+
+● Background command "Smoke-run one goldfish game" completed (exit code 0)
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● The smoke run completed end-to-end — the harness works: game ran, recognition
+  fired throughout, and the JSONL was written correctly:
+  {"game_id":"1","archetype":"...Burn...","opponent":"60 
+  Islands","pilot_mode":"solve","won":false,"turns":8}
+
+  But it exposes the real problem and I've now found the root cause.
+  extractDeckCards calls aiPlayer.getRegisteredPlayer(), which is
+  (Player.java:2404):
+  return
+  game.getMatch().getPlayers().get(game.getRegisteredPlayers().indexOf(this));
+  At attach time in the sim path, indexOf(this) returns -1, so .get(-1) throws
+  IndexOutOfBounds (length 2) — caught, and the decklist comes back empty. With
+  no decklist: no own-archetype, no piloting guide, /mulligan-plan skipped,
+  solve mode and learnings have nothing to act on → the pilot just PASSes and
+  even loses to a do-nothing deck. In the GUI this works because the player is
+  registered before attach; the sim path attaches earlier.
+
+  I have a clear fix direction, but you interrupted so I'll hold for your call
+  on approach:
+
+● User answered Claude's questions:
+  ⎿  · How should I fix the empty-decklist root cause? → Check my last message 
+     on this one
+     · What do you want to do right now? → Fix it and re-run
+
+❯ I was playing another game on my phone with izzet spells, so that is why the sidecar guessed that i was playing izzet spells. Should we build a simple pipeline to download decklists straight from mtggolfish? here are the standard decks: https://www.mtggoldfish.com/metagame/standard#paper and here is an example of one: https://www.mtggoldfish.com/archetype/standard-selesnya-landfall-woe#paper , this link will download a .txt file of that decklist: https://www.mtggoldfish.com/deck/download/7761348 . We could do this onetime (and refresh it every so often) to download the decklists 
+
+● Quick clarification on the "Izzet Spells" guess: that's the recognizer reading
+   the U/R lands my sim showed it (Island then the Burn deck's Mountain) —
+  coincidentally matching your phone game, but a separate game_id, so no
+  cross-contamination. The U/R-lands→Izzet read is reasonable.
+
+  You answered "fix it and re-run," and your mtggoldfish idea is a separate
+  (good) ask — I'll do the fix first, then address that. Let me confirm the
+  exact attach timing so the fix is correct, not guessed.
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+● Root cause confirmed deterministically: at Game.java:337 createIngamePlayer
+  (which attaches the observer) runs before line 338 allPlayers.add(pl). So
+  getRegisteredPlayer() does allPlayers.indexOf(this) → -1 → throws, during the
+  observer constructor. The deck just needs to be read lazily (after
+  registration). Let me see how AiController stores/uses the deck snapshot.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Root cause is a deterministic ordering bug — the observer reads the deck
+  before the player is registered. The fix: make getRegisteredPlayer() not
+  throw, and resolve the decklist lazily (after registration) in both the
+  observer and the AiController mulligan path. Let me read the exact
+  AiController lines, then edit.
+
+  Read 1 file (ctrl+o to expand)
+
+● Now the fixes. First, harden Player.getRegisteredPlayer():
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-game/src/main/java/forge/game/player/Player.java)
+  ⎿  Added 9 lines, removed 1 line
+      2402      }
+      2403  
+      2404      public final RegisteredPlayer getRegisteredPlayer() {
+      2405 -        return game.getMatch().getPlayers().get(game.getRegis
+           -teredPlayers().indexOf(this));                               
+      2405 +        // During player setup the controller (and the sideca
+           +r observer it                                                
+      2406 +        // attaches) is created before this player is added t
+           +o the registered                                             
+      2407 +        // list, so indexOf can be -1 momentarily. Return nul
+           +l instead of                                                 
+      2408 +        // throwing; callers already handle a null registered
+           + player.                                                     
+      2409 +        final int idx = game.getRegisteredPlayers().indexOf(t
+           +his);                                                        
+      2410 +        if (idx < 0) {                                       
+      2411 +            return null;                                     
+      2412 +        }                                                    
+      2413 +        return game.getMatch().getPlayers().get(idx);        
+      2414      }
+      2415  
+      2416      public final PlayerOutcome getOutcome() {
+● Now lazy resolution in the observer:
+
+● Update(forge-ai/src/main/java/forge/ai/llm/DeckRecognitionObserver.java)
+  ⎿  Added 6 lines, removed 2 lines
+      64      private final AtomicBoolean inFlight = new AtomicBoolean(fa
+          lse);
+      65      private final AtomicBoolean rerunRequested = new AtomicBool
+          ean(false);
+      66  
+      67 -    /** The AI's own deck (card names), used by the sidecar for
+         - format detection. */                                          
+      68 -    private final List<String> deckCards;                      
+      67 +    /** The AI's own deck (card names), used by the sidecar for
+         + format detection.                                             
+      68 +     *  Resolved lazily: at construction the player is not yet 
+         +registered with                                                
+      69 +     *  the game, so {@link #extractDeckCards} returns empty; t
+         +he first time it                                               
+      70 +     *  is actually needed (a /recognize fire) the registration
+         + is in place and                                               
+      71 +     *  it resolves. */                                        
+      72 +    private volatile List<String> deckCards;                   
+      73  
+      74      /** Last message written to the log, to suppress identical 
+          consecutive guesses. */
+      75      private volatile String lastPostedMessage = null;
+
+● Update(forge-ai/src/main/java/forge/ai/llm/DeckRecognitionObserver.java)
+  ⎿  Added 13 lines, removed 1 line
+      148  
+      149      /** @return full AI main-deck card names, preserving dupli
+           cate copies. */
+      150      List<String> deckCards() {
+      151 -        return List.copyOf(deckCards);                        
+      151 +        return List.copyOf(resolvedDeckCards());              
+      152      }
+      153  
+      154 +    /** Lazily resolve the AI's decklist, retrying until regis
+          +tration makes it                                              
+      155 +     *  available (see {@link #deckCards}). */                
+      156 +    private List<String> resolvedDeckCards() {                
+      157 +        if (deckCards.isEmpty()) {                            
+      158 +            final List<String> fresh = extractDeckCards(aiPlay
+          +er);                                                          
+      159 +            if (!fresh.isEmpty()) {                           
+      160 +                deckCards = fresh;                            
+      161 +            }                                                 
+      162 +        }                                                     
+      163 +        return deckCards;                                     
+      164 +    }                                                         
+      165 +                                                              
+      166      /** Single handler — Guava delivers every {@link GameEvent
+           } subtype here. */
+      167      @Subscribe
+      168      public void onEvent(final GameEvent ev) {
+
+● Now use the lazy resolver where fireCall builds the request:
+
+● Update(forge-ai/src/main/java/forge/ai/llm/DeckRecognitionObserver.java)
+  ⎿  Added 1 line, removed 1 line
+      536                  aiPlayer.getId(),
+      537                  currentAiTurnNumber(),
+      538                  new ArrayList<>(observations),
+      539 -                deckCards,                                    
+      539 +                resolvedDeckCards(),                          
+      540                  hand,
+      541                  ownBoard,
+      542                  oppBoard,
+
+● Now the AiController mulligan path — resolve the decklist lazily there too:
+
+● Update(forge-ai/src/main/java/forge/ai/AiController.java)
+  ⎿  Added 3 lines, removed 2 lines
+      209              Logger.info("DeckRecognition: skipping /mulligan-p
+           lan (sidecar client not attached)");
+      210              return false;
+      211          }
+      212 -        if (sidecarDeckCards.isEmpty()) {                     
+      212 +        final List<String> deckCards = resolveSidecarDeckCards
+          +();                                                           
+      213 +        if (deckCards.isEmpty()) {                            
+      214              Logger.info("DeckRecognition: skipping /mulligan-p
+           lan (AI decklist unavailable)");
+      215              return false;
+      216          }
+     ...
+      221                  player.getId(),
+      222                  currentAiTurnNumber(),
+      223                  List.of(),
+      223 -                sidecarDeckCards,                             
+      224 +                deckCards,                                    
+      225                  currentZoneNames(ZoneType.Hand),
+      226                  currentZoneNames(ZoneType.Battlefield),
+      227                  player.getOpponents().isEmpty() ? List.of() : 
+           currentZoneNames(player.getOpponents().get(0), ZoneType.Battle
+           field),
+
+● Now add the resolveSidecarDeckCards helper near setSidecarClient:
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-ai/src/main/java/forge/ai/AiController.java)
+  ⎿  Added 14 lines
+      178          this.sidecarDeckCards = deckCards == null ? List.of() 
+           : List.copyOf(deckCards);
+      179      }
+      180  
+      181 +    /** Resolve the AI's decklist lazily. The snapshot capture
+          +d at attach time                                              
+      182 +     *  is empty when the player was not yet registered with t
+          +he game (sim                                                  
+      183 +     *  path); recompute from the now-registered player on dem
+          +and. */                                                       
+      184 +    private List<String> resolveSidecarDeckCards() {          
+      185 +        if (!sidecarDeckCards.isEmpty()) {                    
+      186 +            return sidecarDeckCards;                          
+      187 +        }                                                     
+      188 +        final List<String> fresh = forge.ai.llm.DeckRecognitio
+          +nObserver.extractDeckCards(player);                           
+      189 +        if (!fresh.isEmpty()) {                               
+      190 +            sidecarDeckCards = List.copyOf(fresh);            
+      191 +        }                                                     
+      192 +        return sidecarDeckCards;                              
+      193 +    }                                                         
+      194 +                                                              
+      195      /** @return whether sidecar influence is active (AI prop o
+           r system property). */
+      196      private boolean sidecarInfluenceEnabled() {
+      197          if (Boolean.getBoolean("forge.ai.sidecarInfluence")) {
+
+● Now rebuild the jar (Player + forge-ai changes need the reactor). Running in
+  background.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● While the jar rebuilds, let me address your mtggoldfish question — and first
+  check whether the sidecar already scrapes mtggoldfish (there's a
+  scrape_metagame.py), since reusing that beats writing a new scraper.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Background command "Rebuild desktop jar with deck-read fix" completed (exit code 0)
+
+● The build finished (exit 0), and importantly: the sidecar already has a 
+  MTGGoldfish scraper (app/knowledge/scraper.py) that maps archetype →
+  archetype-page URL. So a deck-download pipeline is a small extension of
+  existing code, not a new scraper. I'll come back to that. First, let me re-run
+   the goldfish smoke test to validate the deck-read fix.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● While that runs, let me look at the existing scraper's archetype-URL mapping
+  so my mtggoldfish recommendation is concrete.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Background command "Re-run goldfish game after deck-read fix" completed (exit code 0)
+
+● The re-run finished. Let me check whether the deck-read fix worked — the
+  "could not read AI deck" error should be gone, own-archetype should resolve,
+  and the pilot should actually play.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Progress and a regression. The deck-read error is gone (count 0), but now the
+  game ends at turn 0 — worse. My getRegisteredPlayer() change likely broke
+  something in setup that expected non-null. Let me check the log for
+  exceptions.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● The deck-read fix worked — recognition attaches and the decklist now resolves.
+   But it uncovered a latent NPE that was previously masked: now that the
+  mulligan path gets past the (previously-empty) decklist guard, it reaches
+  game.getPhaseHandler().getPhase().name() at AiController.java:249 — and during
+   mulligan the phase is null, crashing the game at turn 0. Let me make that
+  phase access null-safe.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-ai/src/main/java/forge/ai/AiController.java)
+  ⎿  Added 5 lines, removed 1 line
+      246                  player.getOpponents().isEmpty() ? List.of() : 
+           currentZoneNames(player.getOpponents().get(0), ZoneType.Exile)
+           ,
+      247                  List.of(),
+      248                  Map.of(),
+      249 -                game.getPhaseHandler().getPhase().name(),     
+      249 +                // During mulligan there is no active phase ye
+          +t, so getPhase()                                              
+      250 +                // can be null — guard it (this call is reache
+          +d now that the                                                
+      251 +                // decklist resolves; previously the empty-dec
+          +k check returned early).                                      
+      252 +                game.getPhaseHandler().getPhase() == null     
+      253 +                        ? "MULLIGAN" : game.getPhaseHandler().
+          +getPhase().name(),                                            
+      254                  List.of(),
+      255                  Map.of("play_aggro", getBoolProperty(AiProps.P
+           LAY_AGGRO)),
+      256                  player.getCardsIn(ZoneType.Hand).size(),
+● Rebuilding again with the null-safe phase fix. Background.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Build is running. Here's where things stand and my answer on mtggoldfish.
+
+  Fix progress (live troubleshooting)
+
+  The smoke run drove out a chain of two bugs, both now addressed:
+  1. Empty decklist — getRegisteredPlayer() threw at observer-attach time
+  because the player isn't added to allPlayers until after createIngamePlayer
+  runs (Game.java:337→338). Fixed: getRegisteredPlayer() returns null instead of
+   throwing, and the decklist resolves lazily in both the observer and the
+  AiController mulligan path. Confirmed: the "could not read AI deck" error is
+  gone and recognition attaches cleanly.
+  2. Latent mulligan NPE (uncovered by #1) — once the decklist resolved, the
+  mulligan path got past its early-return guard and hit getPhase().name() on a
+  null phase (no phase exists yet during mulligan), crashing at turn 0. Just
+  made that null-safe ("MULLIGAN"). Rebuilding now.
+
+  Both were pre-existing real bugs that only the selfplay path exercises —
+  exactly what this run was meant to find.
+
+  mtggoldfish: yes, and it's small — reuse what's already there
+
+  The sidecar already scrapes mtggoldfish in app/knowledge/scraper.py:
+  - archetype_links(slug) → {archetype name: archetype page URL} from the
+  metagame page.
+  - fetch_archetype_decklist(page_url) → card names (but dedup'd, no quantities,
+   main+sideboard mixed — not playable as-is).
+
+  So the pipeline you described is a small extension, not a new scraper:
+  1. archetype_links("standard") to enumerate archetypes + page URLs.
+  2. New helper: parse the archetype page for its download id → the
+  /deck/download/<id> link.
+  3. Fetch the .txt (your 7761348 example) — it's count cardname lines with a
+  blank line before the sideboard.
+  4. Convert .txt → Forge .dck (trivial — exactly the format we already write).
+  5. Save per archetype slug so deck names line up with the piloting guides;
+  re-runnable to refresh.
+
+  Caveats worth knowing up front: card-name normalization for split/DFC cards
+  (e.g. Fire // Ice), and mtggoldfish markup drift (the existing scraper is
+  already best-effort/fail-soft, so we inherit that). Decks would land in
+  ~/.forge/decks/constructed/ (currently empty) so the runner can reference them
+   by name, or a dedicated selfplay/decks/standard/ dir.
+
+  My plan: get one clean goldfish game first (build + re-run, in flight), then
+  build scripts/fetch_decks.py as the next step. Let me check the build and
+  re-run.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Background command "Rebuild jar with mulligan phase NPE fix" completed (exit code 0)
+
+● Build done. Re-running the goldfish game with both fixes in place.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The run is in flight (a full game with the 27B model in the loop, capped at
+  300s). I'll report what it shows when it completes — specifically whether the
+  Burn pilot now resolves its archetype, takes real actions, and actually kills
+  the 60 Islands (a win with a turn number), versus any further issue to
+  troubleshoot. No action needed from you meanwhile.
+
+✻ Sautéed for 6m 37s
+
+● Background command "Re-run goldfish after both fixes" completed (exit code 0)
+
+● The run finished. Let me check the result.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Still turn 0 and one exception remains. Let me see the new stack.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● The NPE is still at line 249 with the original getPhase().name() — meaning the
+   running jar doesn't contain my phase fix. Let me check whether my edit
+  actually landed in the source and where line 249 now points.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Found it — a stale build. The source has my fix (mtime 23:24:06) but the
+  compiled class (23:22:39) and jar (23:22:49) predate it: the edit landed just
+  after that build kicked off, so the last run used a stale jar. The fix is
+  correct and in the source; I just need to rebuild and confirm the class is
+  newer than the source this time.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Rebuilding (background). Once it's done and I've confirmed the class is fresh,
+   I'll re-run the goldfish game. I'll report the outcome — whether the Burn
+  pilot now survives mulligan, resolves its archetype, and actually races down
+  the 60 Islands.
+
+✻ Brewed for 1m 11s
+
+● Background command "Rebuild jar (verify fresh class)" completed (exit code 0)
+
+  Read 1 file (ctrl+o to expand)
+
+● Class is now fresh (23:26 > 23:24). Re-running the goldfish game.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● I'll await the run and report whether the pilot now survives mulligan,
+  resolves its archetype, and races down the 60 Islands (a win with a turn
+  count) — or surfaces the next issue.
+
+✻ Cogitated for 13s
+
+❯ Do we need to run two separate sidecars? Currently, the dashboard is          
+  constantly shifting between the mono red aggro deck state, and the mono blue  
+  all islands deck? run another sidecar 2 on a different port?                  
+
+● Good catch — and it's worth distinguishing cosmetic from correctness here. Let
+   me verify a real concern before answering, because the sidecar caches some
+  per-game state keyed by game_id.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Background command "Re-run goldfish with fresh jar" completed (exit code 0)
+● The goldfish run also finished. Let me check it, then answer your sidecar
+  question — they're related.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Important result: no exceptions now (count 0), the game runs to completion 
+  (turn 9) — both crashes are fixed. But the Burn pilot still loses to a 
+  do-nothing Islands deck, which shouldn't be possible unless its piloting is
+  corrupted. And that ties directly to your question. Let me confirm the
+  mechanism.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Both crashes are fixed (0 exceptions, game runs to turn 9). Now to your
+  question — and there's a real bug hiding behind it, not just cosmetics.
+
+  Do you need two sidecars? Depends on the config.
+
+  What I found: One sidecar handles both seats' requests fine per request (the
+  response cache keys include each seat's hand/board, so they don't collide).
+  But two things break when both AI seats share one sidecar with the same 
+  game_id:
+
+  - Cosmetic: the dashboard shows the most recent request, so it flip-flops
+  between the burn pilot and the islands deck — what you're seeing.
+  - Real bug: the sidecar caches per-game state keyed by game_id only —
+  _own_archetype[game_id] and _locked_archetype[game_id]
+  (game_advisor.py:469, 625). Two seats with different decks but the same 
+  game_id overwrite each other. The /api/stats history even shows
+  own_archetype:"Un…" — the pilot likely ended up with the opponent's or an
+  Unknown archetype, i.e. no real guide. That plausibly explains why the Burn
+  deck durdles and loses to a do-nothing Islands deck.
+
+  Recommendation
+
+  Goldfish (now): don't add a sidecar — stop the passive seat from calling it.
+  The 60 Islands has nothing to pilot and presents no threats, yet it's making
+  half the LLM calls and corrupting _own_archetype[1]. Disabling recognition on
+  the passive seat gives you: a clean single-deck dashboard, ~2× fewer calls
+  (faster games), and no cross-contamination. This likely fixes the durdling
+  too.
+
+  Gauntlet/mirror (later): both seats are real, so you need isolation. Two
+  options:
+  - (a) Second sidecar on another port — both point at the same llama.cpp on
+  :8080, so the model (the actual bottleneck) is shared and it costs almost
+  nothing; you get a separate dashboard per deck to examine. Needs small
+  per-seat-URL plumbing in the runner. This is what you suggested, and it works.
+  - (b) Make the per-game caches seat-aware (key by game_id+seat) + a seat
+  filter on the dashboard. Single process, but one interleaved dashboard.
+
+  We should do (b) for correctness regardless; (a) additionally gives you the
+  side-by-side dashboards.
+
+● User answered Claude's questions:
+  ⎿  · Which should I implement now? → Do both fixes, option 2. And the burn 
+     deck did not actually lose, that was just bad reporting, probably from the 
+     flip-flopping dashboards. This fix should solve that issue. 
+     · For the gauntlet, how do you want to view the two decks? → option 1. two 
+     sidecars, two dashboards. Is there anything i need to do in llama.cpp to 
+     ensure this is smooth? Create two slots? Is there a way to set slot number 
+     for each sidecar, or does llama.cpp handle this automatically?
+
+● Both fixes it is, plus two-sidecars for the gauntlet. And good instinct on the
+   win attribution — the JSONL winner comes from the actual game outcome, not
+  the dashboard, but the corrupted _own_archetype could have made the pilot
+  misplay; we'll see the true result after the fix. Let me answer your llama.cpp
+   question first, then implement.
+
+  llama.cpp slots for two sidecars
+
+  Two sidecars pointing at the same llama-server share one model, so:
+  - Yes, start llama-server with --parallel 2 (a.k.a. -np 2) so it has 2 slots
+  and can process both sidecars' requests concurrently. With the default
+  --parallel 1, the two sidecars' calls serialize (queue behind each other) —
+  still correct, just no concurrency, so a gauntlet turn pair takes ~2× as long.
+  - Slot assignment is automatic — llama.cpp picks a free slot per request; you
+  do not set a slot number per sidecar. (There's an optional id_slot request
+  param to pin a request to a slot for KV-cache continuity, but the OpenAI
+  /v1/chat/completions path doesn't expose it and you don't need it.)
+  - Context is split across slots: with --parallel 2, each slot gets n_ctx/2.
+  Your model reports ~156k max, so each slot still has ~78k — far more than our
+  small prompts need. If you'd set a small -c, bump it so n_ctx/2 stays
+  comfortably above a few k.
+  - Keep continuous batching on (--cont-batching, default on in recent builds)
+  so the two streams interleave efficiently. Throughput for 2 concurrent
+  requests on a 27B won't be a full 2× (they share GPU compute), but it's much
+  better than serialized.
+
+  Net: just relaunch llama-server with --parallel 2; everything else is
+  automatic.
+
+  Now let me implement the three code fixes. Starting with the seat-aware
+  sidecar caches (Python).
+
+● Let me verify the /recognize initial state and whether opponent_seat is
+  already threaded.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● opponent_seat only exists on the request model. Let me thread it into the
+  graph state, cache key, and the seat-aware caches. First, GraphState:
+
+● Update(forge-llm-sidecar/app/schema.py)
+  ⎿  Added 4 lines
+      395  class GraphState(TypedDict, total=False):
+      396      # inputs
+      397      game_id: str
+      398 +    # Seat identifier for the AI making the request. Two AI se
+          +ats in one game                                               
+      399 +    # share a game_id but have different own decks, so per-gam
+          +e caches key on                                               
+      400 +    # (game_id, opponent_seat) to avoid cross-contamination.  
+      401 +    opponent_seat: int                                        
+      402      format: str
+      403      turn: int
+      404      observations: list[dict]
+
+● Now thread opponent_seat into both initial dicts and the cache key in main.py:
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Four graph-init sites. Let me confirm which functions own lines 337 and 504
+  before editing (their req may not be a RecognitionRequest).
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Line 504 is a dashboard store record, not graph state. So only the recognize
+  (377) and mulligan (550) dicts need opponent_seat. Both share the same 8-space
+   block:
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 2 lines
+      375      graph = get_graph()
+      376      initial = {
+      377          "game_id": req.game_id,
+      378 +        "opponent_seat": req.opponent_seat,                   
+      379          "format": req.format,
+      380          "turn": req.turn,
+      381          "observations": [o.model_dump() for o in req.observati
+           ons],
+     ...
+      549      graph = get_graph()
+      550      initial = {
+      551          "game_id": req.game_id,
+      552 +        "opponent_seat": req.opponent_seat,                   
+      553          "format": req.format,
+      554          "turn": req.turn,
+      555          "observations": [o.model_dump() for o in req.observati
+           ons],
+
+● Now add opponent_seat to the cache key:
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 1 line
+      136  def _recognize_cache_key(req: RecognitionRequest) -> str:
+      137      payload = {
+      138          "g": req.game_id,
+      139 +        "seat": req.opponent_seat,                            
+      140          "t": req.turn,
+      141          "o": [
+      142              (o.turn, o.event, o.card, o.cmc, list(o.colors), l
+           ist(o.types))
+
+● Now make the per-game caches in game_advisor.py seat-aware. Let me read the
+  exact lines for _resolve_own_archetype and the lock:
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/nodes/game_advisor.py)
+  ⎿  Added 15 lines, removed 5 lines
+      463      return slug
+      464  
+      465  
+      466 +def _seat_cache_key(state: GraphState) -> str:                
+      467 +    """Per-game, per-seat cache key. Two AI seats in one game 
+          +share a game_id                                               
+      468 +    but pilot different decks (mirror match, or a single share
+          +d sidecar), so                                                
+      469 +    own-archetype and the recognition lock must be keyed per s
+          +eat to avoid one                                              
+      470 +    seat's identity leaking into the other's."""              
+      471 +    return f"{state.get('game_id', '')}#{state.get('opponent_s
+          +eat', 0)}"                                                    
+      472 +                                                              
+      473 +                                                              
+      474  def _resolve_own_archetype(state: GraphState, slug: str) -> tu
+           ple[str | None, StrategyType]:
+      467 -    """Identify the AI's own archetype once per game (determin
+          -istic, no LLM)."""                                            
+      475 +    """Identify the AI's own archetype once per game/seat (det
+          +erministic, no LLM)."""                                       
+      476      game_id = state.get("game_id", "")
+      469 -    if game_id in _own_archetype:                             
+      470 -        return _own_archetype[game_id]                        
+      477 +    key = _seat_cache_key(state)                              
+      478 +    if key in _own_archetype:                                 
+      479 +        return _own_archetype[key]                            
+      480  
+      481      result = piloting.identify_own_archetype(state.get("deck_c
+           ards", []), slug)
+      482      if game_id:
+      474 -        _own_archetype[game_id] = result                      
+      475 -    log.info("game_advisor: game %s -> own archetype %s", game
+          -_id, result[0])                                               
+      483 +        _own_archetype[key] = result                          
+      484 +    log.info("game_advisor: game %s seat %s -> own archetype %
+          +s",                                                           
+      485 +             game_id, state.get("opponent_seat", 0), result[0]
+          +)                                                             
+      486      return result
+      487  
+      488  
+
+● Now the _locked_archetype usage. Let me read those lines:
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/nodes/game_advisor.py)
+  ⎿  Added 2 lines, removed 1 line
+      632      state["guide_source"] = guide_source
+      633  
+      634      game_id = state.get("game_id", "")
+      635 -    locked = _locked_archetype.get(game_id) if game_id else No
+          -ne                                                            
+      635 +    lock_key = _seat_cache_key(state)                         
+      636 +    locked = _locked_archetype.get(lock_key) if game_id else N
+          +one                                                           
+      637      if locked:
+      638          # Deck identity is settled; reuse it and skip the reco
+           gnition LLM call.
+      639          result = locked
+
+● Update(forge-llm-sidecar/app/nodes/game_advisor.py)
+  ⎿  Added 1 line, removed 1 line
+      666          and confidence >= _LOCK_CONFIDENCE
+      667          and archetype not in ("Unknown", "")
+      668      ):
+      669 -        _locked_archetype[game_id] = {                        
+      669 +        _locked_archetype[lock_key] = {                       
+      670              "archetype": archetype,
+      671              "confidence": confidence,
+      672              "reasoning": str(result.get("reasoning", "")),
+
+● Let me verify the Python changes with a quick seat-isolation test plus the
+  suite.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● One test failed — likely it asserts on the old game_id cache key. Let me look.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The behavior is correct — the key is now seat-aware ("t#0"). The test asserts
+  the old "t" key, so I'll update it to match the intentional new contract.
+
+● Update(forge-llm-sidecar/tests/test_graph.py)
+  ⎿  File must be read first
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/tests/test_graph.py)
+  ⎿  Added 3 lines, removed 2 lines
+      87      monkeypatch.setattr(game_advisor, "generate_json", fake_gen
+          erate_json)
+      88      await get_graph().ainvoke(sample_state)
+      89      # Ragavan is a Boros Energy signature card -> deterministic
+           match, cached.
+      90 -    assert "t" in game_advisor._own_archetype                  
+      91 -    assert game_advisor._own_archetype["t"][0] == "Boros Energy
+         -"                                                              
+      90 +    # The cache is keyed per (game_id, seat); sample_state has 
+         +no seat -> "t#0".                                              
+      91 +    assert "t#0" in game_advisor._own_archetype                
+      92 +    assert game_advisor._own_archetype["t#0"][0] == "Boros Ener
+         +gy"                                                            
+      93  
+      94  
+      95  @pytest.mark.asyncio
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● All 203 pass — seat-aware caches done. Now the Java side: disable the passive
+  seat (#9) and per-seat URLs (#10). First, DeckRecognitionFeature:
+
+● Update(forge-ai/src/main/java/forge/ai/llm/DeckRecognitionFeature.java)
+  ⎿  Added 33 lines
+      43          }
+      44      }
+      45  
+      46 +    /** System property listing seat/player ids (comma-separate
+         +d) for which                                                   
+      47 +     *  recognition should be skipped — used by the self-play g
+         +oldfish runner to                                              
+      48 +     *  silence the passive opponent seat. */                  
+      49 +    public static final String DISABLE_SEATS_SYS_PROP = "forge.
+         +ai.deckRecognition.disableSeats";                              
+      50 +                                                               
+      51 +    /** @return seat/player ids for which recognition should be
+         + skipped. */                                                   
+      52 +    public static java.util.Set<Integer> disabledSeats() {     
+      53 +        final String raw = System.getProperty(DISABLE_SEATS_SYS
+         +_PROP, "");                                                    
+      54 +        if (raw == null || raw.isBlank()) {                    
+      55 +            return java.util.Set.of();                         
+      56 +        }                                                      
+      57 +        final java.util.Set<Integer> out = new java.util.HashSe
+         +t<>();                                                         
+      58 +        for (final String tok : raw.split(",")) {              
+      59 +            try {                                              
+      60 +                out.add(Integer.parseInt(tok.trim()));         
+      61 +            } catch (final NumberFormatException ignored) {    
+      62 +                // skip non-numeric tokens                     
+      63 +            }                                                  
+      64 +        }                                                      
+      65 +        return out;                                            
+      66 +    }                                                          
+      67 +                                                               
+      68 +    /** Per-seat sidecar URL: checks {@code forge.ai.deckRecogn
+         +ition.url.<seat>}                                              
+      69 +     *  first (so the self-play runner can point each mirror se
+         +at at its own                                                  
+      70 +     *  sidecar/dashboard), then falls back to the global resol
+         +ver. */                                                        
+      71 +    public static String sidecarUrl(final AiController ai, fina
+         +l int seat) {                                                  
+      72 +        final String perSeat = System.getProperty("forge.ai.dec
+         +kRecognition.url." + seat);                                    
+      73 +        if (perSeat != null && !perSeat.isBlank()) {           
+      74 +            return perSeat.trim();                             
+      75 +        }                                                      
+      76 +        return sidecarUrl(ai);                                 
+      77 +    }                                                          
+      78 +                                                               
+      79      /** @return the base URL of the LLM sidecar service. */
+      80      public static String sidecarUrl(final AiController ai) {
+      81          final String fromSys = System.getProperty("forge.ai.dec
+          kRecognition.url");
+
+● Now DeckRecognitionManager.attach — add the disable check and use the per-seat
+   URL:
+
+● Update(forge-ai/src/main/java/forge/ai/llm/DeckRecognitionManager.java)
+  ⎿  Added 6 lines, removed 1 line
+      48                          + sysProp + ")");
+      49                  return;
+      50              }
+      51 +            if (DeckRecognitionFeature.disabledSeats().contains
+         +(player.getId())) {                                            
+      52 +                Logger.info("DeckRecognition.attach: skipped (s
+         +eat " + player.getId()                                         
+      53 +                        + " disabled via " + DeckRecognitionFea
+         +ture.DISABLE_SEATS_SYS_PROP + ")");                            
+      54 +                return;                                        
+      55 +            }                                                  
+      56              final String key = game.getId() + ":" + player.getI
+          d();
+      57              if (!ATTACHED_PLAYERS.add(key)) {
+      58                  Logger.info("DeckRecognition.attach: skipped (k
+          ey already attached: " + key + ")");
+      59                  return;
+      60              }
+      56 -            final String url = DeckRecognitionFeature.sidecarUr
+         -l(ai);                                                         
+      61 +            final String url = DeckRecognitionFeature.sidecarUr
+         +l(ai, player.getId());                                         
+      62              final DeckRecognitionClient client = new DeckRecogn
+          itionClient(url);
+      63              final boolean healthy = client.isSidecarHealthy();
+      64              // Tell the controller so waitForSidecar() can skip
+           the blocking wait
+  ⎿  You've hit your session limit · resets 3:10am (America/New_York)
+     /upgrade to increase your usage limit.
+
+✻ Crunched for 8m 39s
+
+❯ /usage 
+  ⎿  Config dialog dismissed
+❯ continue                                                                      
+
+● Now the runner — disable the passive seat for goldfish and add per-seat URLs
+  for mirror. Let me update SelfPlayRunner.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-gui-desktop/src/main/java/forge/view/SelfPlayRunner.java)
+  ⎿  Added 16 lines, removed 3 lines
+      79          final String p2Name = first(params, "p2", null);
+      80          final String outPath = first(params, "out", "selfplay-r
+          uns.jsonl");
+      81          final String url = first(params, "url", "http://localho
+          st:18970");
+      82 +        // Per-seat sidecar URLs for the two-sidecar gauntlet (
+         +mirror). Default                                               
+      83 +        // each to the shared url so a single sidecar still wor
+         +ks.                                                            
+      84 +        final String url1 = first(params, "url1", url);        
+      85 +        final String url2 = first(params, "url2", url);        
+      86  
+      87          if (p1Name == null || p2Name == null) {
+      88              help();
+     ...
+       95          // authoritative switch — setting the system property 
+           alone is not enough.
+       96          FModel.getPreferences().setPref(FPref.UI_ENABLE_DECK_R
+           ECOGNITION, true);
+       97          System.setProperty(RECOGNITION_SYS_PROP, "true");
+       94 -        // Quarantined solve prompt for goldfish only; mirror 
+          -stays "normal".                                               
+       95 -        // pilotMode and url system properties are not clobber
+          -ed by createAiPlayer.                                         
+       98 +        System.setProperty(SIDECAR_URL_SYS_PROP, url);        
+       99          if (goldfish) {
+      100 +            // Quarantined solve prompt; pilotMode/url props s
+          +urvive createAiPlayer.                                        
+      101              System.setProperty(PILOT_MODE_SYS_PROP, "solve");
+      102 +            // The passive opponent (P2, player id 1) has noth
+          +ing to pilot and no                                           
+      103 +            // threats to read — silence its sidecar calls so 
+          +only the pilot hits                                           
+      104 +            // the sidecar (clean dashboard, ~2x fewer LLM cal
+          +ls, no own-archetype                                          
+      105 +            // cross-contamination).                          
+      106 +            System.setProperty("forge.ai.deckRecognition.disab
+          +leSeats", "1");                                               
+      107          } else {
+      108              System.clearProperty(PILOT_MODE_SYS_PROP);
+      109 +            System.clearProperty("forge.ai.deckRecognition.dis
+          +ableSeats");                                                  
+      110 +            // Mirror: both seats are real pilots — point each
+          + at its own sidecar                                           
+      111 +            // (run sidecar #2 on another port) for separate d
+          +ashboards.                                                    
+      112 +            System.setProperty("forge.ai.deckRecognition.url.0
+          +", url1);                                                     
+      113 +            System.setProperty("forge.ai.deckRecognition.url.1
+          +", url2);                                                     
+      114          }
+      101 -        System.setProperty(SIDECAR_URL_SYS_PROP, url);        
+      115  
+      116          final GameType type = GameType.Constructed;
+      117          final Deck p1Deck = loadDeck(p1Name, type);
+
+● Now update the help text to document the new flags:
+
+● Update(forge-gui-desktop/src/main/java/forge/view/SelfPlayRunner.java)
+  ⎿  Added 4 lines, removed 2 lines
+      281      }
+      282  
+      283      private static void help() {
+      284 -        System.out.println("Syntax: forge selfplay -config <go
+          -ldfish|mirror> -p1 <deck[.dck]> -p2 <deck[.dck]> -n <N> -out <
+          -file.jsonl> [-url <sidecar>] [-c <timeout_s>]");              
+      285 -        System.out.println("  goldfish: P1 sidecar (solve mode
+          -) vs passive P2; one record/game.");                          
+      284 +        System.out.println("Syntax: forge selfplay -config <go
+          +ldfish|mirror> -p1 <deck[.dck]> -p2 <deck[.dck]> -n <N> -out <
+          +file.jsonl> [-url <sidecar>] [-url1 <s1>] [-url2 <s2>] [-c <ti
+          +meout_s>]");                                                  
+      285 +        System.out.println("  goldfish: P1 sidecar (solve mode
+          +) vs passive P2 (recognition disabled); one record/game.");   
+      286          System.out.println("  mirror:   both seats sidecar (no
+           rmal mode); two records/game.");
+      287 +        System.out.println("  -url:     shared sidecar URL (de
+          +fault http://localhost:18970).");                             
+      288 +        System.out.println("  -url1/-url2: per-seat sidecar UR
+          +Ls for the mirror gauntlet (two dashboards). Default to -url."
+          +);                                                            
+      289      }
+      290  }
+
+● Now rebuild the jar with all Java changes. Background.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Build running. I'll mark tasks complete once it compiles and the re-run
+  confirms the clean behavior. Holding for the build.
+
+✻ Baked for 49s
+
+● Background command "Rebuild jar with seat fixes" completed (exit code 0)
+
+  Read 1 file (ctrl+o to expand)
+
+● Build succeeded, classes fresh (06:30 > source 23:42). Re-running goldfish —
+  expecting a clean single-deck dashboard (passive seat silenced), the pilot
+  resolving its own archetype, and a real outcome.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● I'll await the run and report: whether the passive seat is now silenced (only
+  the pilot's /recognize calls appear), the pilot resolves its own Burn
+  archetype + guide, and the real game outcome with turn count.
+
+✻ Worked for 14s
+
+● Background command "Re-run goldfish with seat fixes" completed (exit code 0)
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● All three fixes verified end-to-end — and a real milestone:
+
+  - No exceptions (0).
+  - Passive seat silenced: log shows seat 1 disabled — only the pilot calls the
+  sidecar.
+  - Clean dashboard: every /recognize now observes only [Island, Island, …] (the
+   pilot watching its islands opponent). No more Mountain/burn interleaving —
+  the flip-flop is gone.
+  - The pilot WON: {"won":true,"win_turn":15,...}, winner = the Burn deck. You
+  were right — the earlier "loss" was a symptom of the cross-contaminated
+  _own_archetype; with seat-isolated state the pilot plays its own deck and
+  closes the game.
+
+● Task tracker seems to have reset — no matter, the work is done. Let me record
+  the non-obvious operational gotchas in memory for future sessions, then
+  summarize.
+
+  Recalled 1 memory, wrote 1 memory (ctrl+o to expand)
+
+● The goldfish harness now works end to end. Summary of where we landed:
+
+  ✅ Working end-to-end
+
+  A forge selfplay -config goldfish run produces a clean game and a valid
+  record:
+  {"archetype":"…Burn…","opponent":"60 
+  Islands","pilot_mode":"solve","won":true,"win_turn":15,"turns":15}
+  - Passive seat silenced (one dashboard, no flip-flop), pilot resolves its own
+  deck, no crashes.
+  - All five fixes from this session verified: lazy decklist read, null-safe
+  getRegisteredPlayer, null-safe mulligan phase, seat-aware sidecar caches,
+  passive-seat disable.
+  - 203 Python tests pass; Java builds clean.
+
+  One quality observation (not a bug)
+
+  The Burn deck won in 15 turns vs a do-nothing opponent — that's slow for burn
+  (a tuned list kills in ~4–5). So the harness is correct, but the AI's piloting
+   of this genetic deck is suboptimal. That's exactly the signal the
+  goldfishing→reflection loop exists to expose and improve — feed this JSONL to
+  /selfplay/reflect and the turn count becomes the optimization target.
+
+  Suggested next steps (your call on order)
+
+  1. Reflection loop smoke test: POST a small batch of goldfish JSONL to
+  /selfplay/reflect, confirm a lesson stages, then promote_learning.py.
+  2. mtggoldfish → .dck pipeline — extend app/knowledge/scraper.py (it already
+  maps archetype→URL) to grab /deck/download/<id> and convert to .dck, giving
+  real pilot/gauntlet decks.
+  3. Mirror gauntlet — two real decks, -config mirror -url1 … -url2 …, after you
+   relaunch llama-server with --parallel 2.
+
+  Want me to start on the mtggoldfish deck pipeline, or run the reflection-loop
+  smoke test first?
+
+✻ Crunched for 1m 3s
+
+❯ /context 
+  ⎿  Context Usage
+     ⛀ ⛀ ⛀ ⛀ ⛁   Opus 4.7
+     ⛁ ⛁ ⛁ ⛁ ⛁   claude-opus-4-7
+     ⛁ ⛁ ⛁ ⛁ ⛁   352.7k/1m tokens (35%)
+     ⛁ ⛁ ⛁ ⛁ ⛁ 
+     ⛁ ⛁ ⛶ ⛶ ⛶   Estimated usage by category
+     ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ System prompt: 3.2k tokens (0.3%)
+     ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ System tools: 11.9k tokens (1.2%)
+     ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ Memory files: 132 tokens (0.0%)
+     ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ Skills: 1.2k tokens (0.1%)
+     ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ Messages: 356.5k tokens (35.6%)
+                 ⛶ Free space: 627.1k (62.7%)
+
+     MCP tools · /mcp (loaded on-demand)
+     └ 100 tools · 0 tokens
+
+     Memory files · /memory
+     └ 1 file · 132 tokens
+
+     Skills · /skills
+     └ 12 skills · 1.2k tokens
+
+     /context all to expand

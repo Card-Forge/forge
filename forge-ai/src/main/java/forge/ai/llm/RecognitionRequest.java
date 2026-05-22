@@ -39,6 +39,14 @@ public record RecognitionRequest(
         @SerializedName("your_graveyard") List<String> yourGraveyard,
         /** Card names in the opponent's graveyard. */
         @SerializedName("opponent_graveyard") List<String> opponentGraveyard,
+        /** Full opponent main-deck card names, preserving duplicates. */
+        @SerializedName("opponent_deck_cards") List<String> opponentDeckCards,
+        /** Card names in the AI's exile zone. */
+        @SerializedName("your_exile") List<String> yourExile,
+        /** Card names in the opponent's exile zone. */
+        @SerializedName("opponent_exile") List<String> opponentExile,
+        /** Opponent hand cards the AI has seen through reveal effects. */
+        @SerializedName("opponent_seen_hand") List<String> opponentSeenHand,
         /** Player name/seat -> life total. */
         @SerializedName("life_totals") Map<String, Integer> lifeTotals,
         /** Current game phase string, e.g. "MAIN1". */
@@ -80,7 +88,11 @@ public record RecognitionRequest(
         /** v8: number of cards to return after keeping a London mulligan. */
         @SerializedName("cards_to_return") int cardsToReturn,
         /** v8: global sidecar influence weight, 0=no influence, 100=force if legal. */
-        @SerializedName("sidecar_influence") int sidecarInfluence) {
+        @SerializedName("sidecar_influence") int sidecarInfluence,
+        /** Pilot mode. "normal" is the production path; "solve" is set ONLY by
+         *  the self-play goldfishing runner and tells the sidecar to assume the
+         *  opponent has zero interaction and chase the fastest line. */
+        @SerializedName("pilot_mode") String pilotMode) {
 
     /** Identifier this (Forge) adapter sends as the {@code client} field. */
     public static final String CLIENT = "forge";
@@ -93,10 +105,11 @@ public record RecognitionRequest(
                               final int opponentSeat, final int turn,
                               final List<Observation> observations, final List<String> deckCards) {
         this(client, gameId, format, opponentSeat, turn, observations, deckCards,
-                List.of(), List.of(), List.of(), List.of(), List.of(), Map.of(),
+                List.of(), List.of(), List.of(), List.of(), List.of(),
+                List.of(), List.of(), List.of(), List.of(), Map.of(),
                 "", List.of(), Map.of(),
                 0, 0, 0, 0, List.of(), List.of(), List.of(),
-                0, 0, "", List.of(), List.of(), 0, 50);
+                0, 0, "", List.of(), List.of(), 0, 50, "normal");
     }
 
     /**
@@ -107,9 +120,10 @@ public record RecognitionRequest(
                               final List<Observation> observations, final List<String> deckCards,
                               final Map<String, Object> personality) {
         this(client, gameId, format, opponentSeat, turn, observations, deckCards,
-                List.of(), List.of(), List.of(), List.of(), List.of(), Map.of(),
+                List.of(), List.of(), List.of(), List.of(), List.of(),
+                List.of(), List.of(), List.of(), List.of(), Map.of(),
                 "", List.of(), personality,
                 0, 0, 0, 0, List.of(), List.of(), List.of(),
-                0, 0, "", List.of(), List.of(), 0, 50);
+                0, 0, "", List.of(), List.of(), 0, 50, "normal");
     }
 }

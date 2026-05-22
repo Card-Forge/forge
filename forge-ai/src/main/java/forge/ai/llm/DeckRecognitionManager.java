@@ -48,12 +48,17 @@ public final class DeckRecognitionManager {
                         + sysProp + ")");
                 return;
             }
+            if (DeckRecognitionFeature.disabledSeats().contains(player.getId())) {
+                Logger.info("DeckRecognition.attach: skipped (seat " + player.getId()
+                        + " disabled via " + DeckRecognitionFeature.DISABLE_SEATS_SYS_PROP + ")");
+                return;
+            }
             final String key = game.getId() + ":" + player.getId();
             if (!ATTACHED_PLAYERS.add(key)) {
                 Logger.info("DeckRecognition.attach: skipped (key already attached: " + key + ")");
                 return;
             }
-            final String url = DeckRecognitionFeature.sidecarUrl(ai);
+            final String url = DeckRecognitionFeature.sidecarUrl(ai, player.getId());
             final DeckRecognitionClient client = new DeckRecognitionClient(url);
             final boolean healthy = client.isSidecarHealthy();
             // Tell the controller so waitForSidecar() can skip the blocking wait

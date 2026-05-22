@@ -87,8 +87,9 @@ async def test_own_archetype_identified_and_cached(monkeypatch, sample_state):
     monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
     await get_graph().ainvoke(sample_state)
     # Ragavan is a Boros Energy signature card -> deterministic match, cached.
-    assert "t" in game_advisor._own_archetype
-    assert game_advisor._own_archetype["t"][0] == "Boros Energy"
+    # The cache is keyed per (game_id, seat); sample_state has no seat -> "t#0".
+    assert "t#0" in game_advisor._own_archetype
+    assert game_advisor._own_archetype["t#0"][0] == "Boros Energy"
 
 
 @pytest.mark.asyncio

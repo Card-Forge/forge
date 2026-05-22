@@ -21,6 +21,7 @@ from app.config import CONFIG
 from app.knowledge import (
     archetype_signals as arch_signals_lib,
     format_detect,
+    learnings as learnings_lib,
     loader,
     metagame,
     piloting,
@@ -149,6 +150,13 @@ def _format_guide(guide: dict | None) -> str:
         parts.append("Matchup notes: " + mu)
     if guide.get("common_threats"):
         parts.append("Threats to watch for: " + "; ".join(guide["common_threats"]))
+    if guide.get("learnings"):
+        rendered = "; ".join(
+            (f"when {lsn.get('trigger')}, " if lsn.get("trigger") else "")
+            + (lsn.get("recommendation") or "")
+            for lsn in guide["learnings"]
+        )
+        parts.append("Self-play learnings (conditional): " + rendered)
     return "\n".join(parts)
 
 
@@ -455,16 +463,26 @@ async def _resolve_meta_slug(state: GraphState) -> str:
     return slug
 
 
+def _seat_cache_key(state: GraphState) -> str:
+    """Per-game, per-seat cache key. Two AI seats in one game share a game_id
+    but pilot different decks (mirror match, or a single shared sidecar), so
+    own-archetype and the recognition lock must be keyed per seat to avoid one
+    seat's identity leaking into the other's."""
+    return f"{state.get('game_id', '')}#{state.get('opponent_seat', 0)}"
+
+
 def _resolve_own_archetype(state: GraphState, slug: str) -> tuple[str | None, StrategyType]:
-    """Identify the AI's own archetype once per game (deterministic, no LLM)."""
+    """Identify the AI's own archetype once per game/seat (deterministic, no LLM)."""
     game_id = state.get("game_id", "")
-    if game_id in _own_archetype:
-        return _own_archetype[game_id]
+    key = _seat_cache_key(state)
+    if key in _own_archetype:
+        return _own_archetype[key]
 
     result = piloting.identify_own_archetype(state.get("deck_cards", []), slug)
     if game_id:
-        _own_archetype[game_id] = result
-    log.info("game_advisor: game %s -> own archetype %s", game_id, result[0])
+        _own_archetype[key] = result
+    log.info("game_advisor: game %s seat %s -> own archetype %s",
+             game_id, state.get("opponent_seat", 0), result[0])
     return result
 
 
@@ -614,7 +632,8 @@ async def game_advisor_node(state: GraphState) -> GraphState:
     state["guide_source"] = guide_source
 
     game_id = state.get("game_id", "")
-    locked = _locked_archetype.get(game_id) if game_id else None
+    lock_key = _seat_cache_key(state)
+    locked = _locked_archetype.get(lock_key) if game_id else None
     if locked:
         # Deck identity is settled; reuse it and skip the recognition LLM call.
         result = locked
@@ -647,7 +666,7 @@ async def game_advisor_node(state: GraphState) -> GraphState:
         and confidence >= _LOCK_CONFIDENCE
         and archetype not in ("Unknown", "")
     ):
-        _locked_archetype[game_id] = {
+        _locked_archetype[lock_key] = {
             "archetype": archetype,
             "confidence": confidence,
             "reasoning": str(result.get("reasoning", "")),
@@ -714,6 +733,13 @@ async def game_advisor_node(state: GraphState) -> GraphState:
         state.get("turn", 0),
         opp_hand_size=role.get("opp_hand_size") if isinstance(role, dict) else None,
     )
+    # Goldfishing quarantine: in "solve" mode the opponent is known to have zero
+    # interaction, so we drop all inferred-hand signals. This collapses the
+    # play-around math (counterspell/wrath/removal risk) to 0 in advice.py and
+    # lets the engine chase the fastest line. Only the self-play runner sets
+    # this; production leaves pilot_mode="normal" so behavior is unchanged.
+    if state.get("pilot_mode") == "solve":
+        opp_hand = []
     hand_values = advice.score_hand(
         state.get("hand", []) or [],
         guide_dict,
@@ -745,6 +771,26 @@ async def game_advisor_node(state: GraphState) -> GraphState:
         or has_opp_spells
         or bool(state.get("opponent_graveyard") or [])
     )
+
+    # Attach gated self-play learnings to the guide so both the deterministic
+    # advice/planner (combo_strategist, early_plan read state["piloting_guide"])
+    # and _format_guide see them. "no_interaction" lessons inject only when the
+    # opponent has shown no interaction — the anti-poisoning gate.
+    opp_hand_cats = {(g.get("category") or "").lower() for g in (opp_hand or [])}
+    observed_interaction = has_opp_spells or bool(
+        opp_hand_cats & {"counterspell", "removal", "wrath"}
+    )
+    guide_for_learnings = state.get("piloting_guide")
+    if guide_for_learnings is not None and own_name:
+        all_lessons = learnings_lib.get_learnings(slug, own_name)
+        selected = learnings_lib.select_for_injection(
+            all_lessons, observed_interaction=observed_interaction
+        )
+        if selected:
+            guide_for_learnings["learnings"] = [lsn.model_dump() for lsn in selected]
+        baseline = learnings_lib.fastest_line(all_lessons)
+        if baseline is not None:
+            guide_for_learnings["fastest_line"] = baseline.model_dump()
     # Detect whether the AI's own deck is a token strategy so the wrath-
     # avoidance gate doesn't suppress its plays (tokens want to flood).
     ai_own_signals = arch_signals_lib.signals_for(own_name)

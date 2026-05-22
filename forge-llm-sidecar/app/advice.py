@@ -246,14 +246,22 @@ def opponent_lands_dropped(state: dict) -> int:
 def opponent_missed_drops(state: dict) -> int:
     """How many turns the opponent has missed a land drop.
 
-    On the play, by turn N a player should have N land drops. Cap at the
-    current turn so this is a strict non-negative integer.
+    Forge's event turn numbers are global game turns: player A's turns are
+    1/3/5... and player B's turns are 2/4/6.... The request's ``turn`` can also
+    be from the AI player's perspective. Count the opponent's own observed
+    turns instead of comparing observed lands to either of those counters.
     """
-    turn = int(state.get("turn") or 0)
-    if turn <= 0:
+    opponent_turns_seen = {
+        int(o.get("turn") or 0)
+        for o in state.get("observations") or []
+        if isinstance(o, dict)
+        and o.get("event") in ("spell", "land", "permanent")
+        and int(o.get("turn") or 0) > 0
+    }
+    if not opponent_turns_seen:
         return 0
     dropped = opponent_lands_dropped(state)
-    return max(0, turn - dropped)
+    return max(0, len(opponent_turns_seen) - dropped)
 
 
 _COLOR_LETTERS = ("W", "U", "B", "R", "G")

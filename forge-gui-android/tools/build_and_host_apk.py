@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Build, sign, and locally host a Forge Android APK for phone download."""
+"""Build, sign, and locally host a Forge Android APK for phone download.
+
+The hosted page also exposes one-tap buttons to rebuild the desktop app and
+sidecar, restart the sidecar, and import every format's MTGGoldfish meta decks
+into a downloadable ZIP (organized as per-format deck folders).
+"""
 
 from __future__ import annotations
 
@@ -26,6 +31,13 @@ REBUILD_LOG = "rebuild.log"
 DEFAULT_ANDROID_HOME = Path.home() / "Android" / "Sdk"
 DEFAULT_BUILD_TOOLS = "35.0.0"
 
+# Meta-deck import: scrape every tracked format into <format>/<slug>.dck, then
+# zip the tree (folder structure preserved) into the serve dir so the phone can
+# download it and unzip into Forge's decks folder.
+DECKS_STAGE_DIR = TARGET_DIR / "meta-decks"
+DECKS_ZIP = "forge-meta-decks.zip"
+META_FORMATS = ("standard", "pioneer", "modern", "legacy", "vintage", "pauper", "commander")
+
 
 class BuildState:
     def __init__(self) -> None:
@@ -43,25 +55,30 @@ ACTION_STATES: dict[str, BuildState] = {
     "desktop": BuildState(),
     "sidecar": BuildState(),
     "sidecar-restart": BuildState(),
+    "import-decks": BuildState(),
 }
 ACTION_LABELS = {
     "apk": "Android APK",
     "desktop": "Desktop App",
     "sidecar": "Sidecar",
     "sidecar-restart": "Sidecar App",
+    "import-decks": "Meta Decks",
 }
 ACTION_LOGS = {
     "apk": REBUILD_LOG,
     "desktop": "desktop-build.log",
     "sidecar": "sidecar-build.log",
     "sidecar-restart": "sidecar-restart.log",
+    "import-decks": "import-decks.log",
 }
 ACTION_VERBS = {
     "apk": "Rebuild",
     "desktop": "Rebuild",
     "sidecar": "Rebuild",
     "sidecar-restart": "Restart",
+    "import-decks": "Import",
 }
+ACTION_ORDER = ("apk", "desktop", "sidecar", "sidecar-restart", "import-decks")
 
 
 def run(
@@ -127,6 +144,59 @@ def build_sidecar(*, output=None) -> None:
     venv_python = sidecar_dir / ".venv" / "bin" / "python"
     python = str(venv_python) if venv_python.exists() else sys.executable
     run([python, "-m", "pip", "install", "-e", "."], cwd=sidecar_dir, output=output)
+
+
+def build_meta_decks(*, output=None) -> Path:
+    """Scrape every tracked format's meta decks and zip them for phone download.
+
+    Writes ``<stage>/<format>/<slug>.dck`` (the importer's native layout, which
+    Forge shows as per-format deck folders), then archives the tree into the
+    serve dir as ``forge-meta-decks.zip``. Best-effort per format: a format whose
+    scrape fails (network blip, empty page) is logged and skipped, not fatal.
+    """
+    sidecar_dir = REPO_ROOT / "forge-llm-sidecar"
+    venv_python = sidecar_dir / ".venv" / "bin" / "python"
+    python = str(venv_python) if venv_python.exists() else sys.executable
+
+    if DECKS_STAGE_DIR.exists():
+        shutil.rmtree(DECKS_STAGE_DIR)
+    DECKS_STAGE_DIR.mkdir(parents=True, exist_ok=True)
+
+    imported = 0
+    for fmt in META_FORMATS:
+        cmd = [python, "-m", "scripts.import_goldfish_decks", fmt, "--out", str(DECKS_STAGE_DIR), "--force"]
+        line = "+ " + " ".join(cmd)
+        if output:
+            output.write(line + "\n")
+            output.flush()
+        # check=False: the importer exits non-zero when a format yields no decks;
+        # that shouldn't abort the other formats.
+        result = subprocess.run(
+            cmd,
+            cwd=sidecar_dir,
+            stdout=output if output else None,
+            stderr=subprocess.STDOUT if output else None,
+        )
+        if result.returncode == 0:
+            imported += 1
+        elif output:
+            output.write(f"WARN: import returned {result.returncode} for {fmt}; continuing\n")
+            output.flush()
+
+    dck_count = sum(1 for _ in DECKS_STAGE_DIR.rglob("*.dck"))
+    if dck_count == 0:
+        raise RuntimeError("No decks were imported for any format (network down or markup changed?)")
+
+    SERVE_DIR.mkdir(parents=True, exist_ok=True)
+    archive = shutil.make_archive(
+        str(SERVE_DIR / "forge-meta-decks"), "zip", root_dir=DECKS_STAGE_DIR
+    )
+    if output:
+        output.write(
+            f"Zipped {dck_count} decks from {imported}/{len(META_FORMATS)} formats -> {archive}\n"
+        )
+        output.flush()
+    return Path(archive)
 
 
 def sidecar_uvicorn_command() -> list[str]:
@@ -331,9 +401,22 @@ def render_index(apk_path: Path, base_urls: list[str]) -> str:
         f'<li><a href="{html.escape(url)}/{LATEST_APK}">{html.escape(url)}/{LATEST_APK}</a></li>'
         for url in base_urls
     )
-    action_cards = "\n".join(
-        render_action_card(target) for target in ("apk", "desktop", "sidecar", "sidecar-restart")
-    )
+    action_cards = "\n".join(render_action_card(target) for target in ACTION_ORDER)
+    decks_zip = SERVE_DIR / DECKS_ZIP
+    if decks_zip.exists():
+        zip_stat = decks_zip.stat()
+        decks_download = (
+            f'<p><a class="button" href="/{DECKS_ZIP}">Download meta decks (ZIP)</a> '
+            f"&middot; {zip_stat.st_size / 1024 / 1024:.1f} MB &middot; built "
+            f'{time.strftime("%Y-%m-%d %H:%M", time.localtime(zip_stat.st_mtime))}</p>'
+            "<p>Unzip into Forge's <code>decks/constructed</code> folder on your phone; "
+            "each format becomes its own deck folder.</p>"
+        )
+    else:
+        decks_download = (
+            '<p>Use the <b>Import Meta Decks</b> button below to fetch every format’s '
+            "meta decks, then a download link appears here.</p>"
+        )
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -355,6 +438,8 @@ def render_index(apk_path: Path, base_urls: list[str]) -> str:
   <main>
     <h1>Forge Android APK</h1>
     <p><a class="button" href="/{LATEST_APK}">Download latest APK</a></p>
+    <h2>Meta decks</h2>
+    {decks_download}
     {action_cards}
     <p>Built: {time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stat.st_mtime))}</p>
     <p>Size: {stat.st_size / 1024 / 1024:.1f} MB</p>
@@ -412,6 +497,8 @@ def run_target_build(target: str, server: "ApkServer") -> None:
                 build_sidecar(output=log)
             elif target == "sidecar-restart":
                 restart_sidecar(output=log)
+            elif target == "import-decks":
+                build_meta_decks(output=log)
             else:
                 raise ValueError(f"Unknown build target: {target}")
             log.write(f"Finished: {format_timestamp(time.time())}\n")

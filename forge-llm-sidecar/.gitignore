@@ -15,6 +15,9 @@ guidance/progress.json
 cache/
 logs/
 
+# Self-play results store (local runtime data, like selfplay/runs/)
+selfplay/*.db
+
 # Local secrets
 .env
 .env.local

@@ -60,3 +60,74 @@ To simulate a swiss tournament; best of three, all decks in a directory, 3 playe
 ***
 
 Each game ends with an announcement of the winner, and the current status of the match. 
+
+# LLM Sidecar (optional AI assist)
+
+This build can optionally consult an external **LLM sidecar** — a standalone
+Python service in [`forge-llm-sidecar/`](../forge-llm-sidecar/) — to recognize
+the opponent's deck and advise the heuristic AI on how to play its own. It is
+**off by default**, **fully fail-soft**, and changes nothing about a stock build
+when it is not enabled or the sidecar is unreachable. The heuristic AI described
+above remains the decision-maker; the sidecar only *biases* its existing scoring.
+
+## How it fits together
+
+Forge (JVM) talks to the sidecar over local HTTP. All of the Java glue lives in
+`forge-ai/src/main/java/forge/ai/llm/`:
+
+| Class | Role |
+|---|---|
+| `DeckRecognitionManager` | Attached from `LobbyPlayerAi` when an AI player is created. Self-gating and fail-soft: probes `GET /health` once and attaches nothing if the feature is off or the sidecar is down. |
+| `DeckRecognitionObserver` | Subscribes to the game's Guava `EventBus`, records the opponent's public plays, and re-runs recognition on every opponent action and turn boundary. Uses latest-wins coalescing so a slow LLM call never queues up. |
+| `DeckRecognitionClient` | Async HTTP client (`HttpURLConnection`, so it also works on Android). Every transport/parse error is swallowed and surfaced as an empty result. |
+| `RecognitionRequest` / `RecognitionResult` | The snake_case JSON wire contract (see the sidecar's `docs/ADAPTERS.md`). The request carries observations plus optional live state (hand, boards, graveyards, life) for piloting advice. |
+| `SidecarInfluence` | Holds the latest sidecar response and applies it — with personality weighting — at the AI's decision points. This is the bridge that lets the sidecar actually affect play. |
+| `SidecarStatusBus` | Process-wide pub/sub fired around blocking sidecar calls; `forge-gui-desktop`'s `CMatchUI` subscribes to show a transient "AI is thinking…" indicator. |
+
+The sidecar runs a LangGraph chain (`game_advisor → mulligan_planner →
+combo_strategist → opponent_strategist`) and exposes `/recognize`,
+`/mulligan-plan`, `/identify-own-archetype`, and more. See
+[`forge-llm-sidecar/README.md`](../forge-llm-sidecar/README.md) and its `docs/`.
+
+## Two layers, gated separately
+
+1. **Recognition** — the observer fires `/recognize` and writes the deck guess
+   to the game log. Controlled by `DECK_RECOGNITION_ENABLE` (or
+   `-Dforge.ai.deckRecognition=true`) and `DECK_RECOGNITION_SIDECAR_URL`.
+2. **Influence** — `SidecarInfluence` feeds the response back into AI decisions
+   (piloting, mulligan, discard, targeting, combat role). Each `/recognize`
+   result reaches it via `AiController.onSidecarResult(...)`. With influence off,
+   the guess is **log-only** and play is unchanged.
+
+These are configured through `AiProps` (set per AI profile `.ai` file, or via a
+matching system property). Key properties:
+
+- `SIDECAR_INFLUENCE_ENABLE` / `SIDECAR_INFLUENCE_WEIGHT` (0 = advisory only,
+  100 = force legal sidecar choices) — the master switch.
+- `SIDECAR_BIAS_*` — per-action max boost (spell, land, attack, block, ability, pass).
+- `SIDECAR_ROLE_ASSESSMENT_ENABLE`, `SIDECAR_HAND_VALUATION_ENABLE`,
+  `SIDECAR_OPPONENT_INFERENCE_ENABLE`, `SIDECAR_TARGETING_ENABLE`,
+  `SIDECAR_MULLIGAN_ENABLE`, `SIDECAR_DISCARD_ENABLE` — toggle individual uses.
+- `SIDECAR_WAIT_MS` and per-phase `SIDECAR_WAIT_MS_{MULLIGAN,COMBAT,PRIORITY,CRITICAL}`
+  — how long a decision will block waiting for an in-flight LLM call.
+
+## Running it
+
+The repo's `run-forge.sh` wires the desktop build to a sidecar. Point it at a
+local or remote (e.g. Tailscale) sidecar with `FORGE_SIDECAR_URL`:
+
+```sh
+FORGE_SIDECAR_URL=http://localhost:18970 ./run-forge.sh
+```
+
+Note: the on/off **toggle** is the *"Enable AI Deck Recognition"* checkbox under
+Settings → Preferences, not a system property — `GamePlayerUtil` overwrites
+`-Dforge.ai.deckRecognition` from that UI preference at game start. Only the
+sidecar *URL* property is honored from the command line.
+
+## Self-play mode
+
+`Main.java` adds a `selfplay` launch mode (alongside `sim`/`parse`) backed by
+`forge.view.SelfPlayRunner`. It drives AI-vs-AI games to exercise and tune the
+sidecar (the sidecar's `/selfplay/reflect` endpoint summarizes the results into
+learnings). Like `sim`, it runs headless from the command line.

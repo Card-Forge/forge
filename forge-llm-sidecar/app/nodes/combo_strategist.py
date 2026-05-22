@@ -27,6 +27,40 @@ _SYSTEM_PROMPT = (
 )
 
 
+def _learnings_block(state: GraphState) -> str:
+    """Render the self-play baseline + learnings for the combo prompt.
+
+    The fastest line is the deck's *unobstructed* clock — an upper bound the
+    pilot anchors to and degrades from based on the opponent's observed
+    interaction. It is explicitly NOT a directive to ignore interaction.
+    """
+    guide = state.get("piloting_guide") or {}
+    if not isinstance(guide, dict):
+        return ""
+    parts: list[str] = []
+    fastest = guide.get("fastest_line")
+    if isinstance(fastest, dict) and fastest.get("recommendation"):
+        trigger = f"when {fastest['trigger']}, " if fastest.get("trigger") else ""
+        parts.append(
+            "FASTEST UNOBSTRUCTED LINE (self-play baseline — assumes ZERO "
+            "opponent interaction; this is the upper-bound clock to anchor to "
+            "and degrade FROM based on the opponent's observed interaction, NOT "
+            "a directive to ignore countermagic):\n"
+            f"  {trigger}{fastest['recommendation']}"
+        )
+    learnings = guide.get("learnings")
+    if isinstance(learnings, list) and learnings:
+        rendered = "; ".join(
+            (f"when {lsn.get('trigger')}, " if lsn.get("trigger") else "")
+            + (lsn.get("recommendation") or "")
+            for lsn in learnings
+            if isinstance(lsn, dict)
+        )
+        if rendered:
+            parts.append("SELF-PLAY LEARNINGS (conditional):\n  " + rendered)
+    return ("\n\n" + "\n\n".join(parts)) if parts else ""
+
+
 def _prompt(state: GraphState, profile: dict, deterministic: dict) -> str:
     return (
         f"AI deck: {state.get('own_archetype') or 'Unknown'}\n"
@@ -40,7 +74,8 @@ def _prompt(state: GraphState, profile: dict, deterministic: dict) -> str:
         f"Opponent open mana sources: {json.dumps(state.get('opp_untapped_sources') or [])}\n"
         f"Opponent inferred hand: {json.dumps(state.get('opponent_hand') or [])}\n\n"
         f"COMBO PROFILE\n{json.dumps(profile, indent=2)}\n\n"
-        f"DETERMINISTIC ANALYSIS\n{json.dumps(deterministic, indent=2)}\n\n"
+        f"DETERMINISTIC ANALYSIS\n{json.dumps(deterministic, indent=2)}"
+        f"{_learnings_block(state)}\n\n"
         "Return exactly these keys:\n"
         '  "line_name": string,\n'
         '  "go_for_it_now": boolean,\n'
