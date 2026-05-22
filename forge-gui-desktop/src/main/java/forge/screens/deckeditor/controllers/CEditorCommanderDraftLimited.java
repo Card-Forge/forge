@@ -258,12 +258,27 @@ public final class CEditorCommanderDraftLimited extends CEditorLimited {
     /** Build catalog for Commander section: legal commanders from pool + free options. */
     private ItemPool<PaperCard> buildCommanderCatalog() {
         final CardPool sideboard = getHumanDeck().getOrCreate(DeckSection.Sideboard);
+        final CardPool cmdSection = getHumanDeck().get(DeckSection.Commander);
         final ItemPool<PaperCard> catalog = new ItemPool<>(PaperCard.class);
 
+        // Determine if the already-chosen commander allows a Background as partner.
+        // If so, include Background enchantments in the catalog.
+        final boolean hasChooseBackground = cmdSection != null
+                && !cmdSection.isEmpty()
+                && cmdSection.toFlatList().stream()
+                        .anyMatch(c -> c.getRules().hasKeyword("Choose a Background"));
+        // Also true when no commander is chosen yet (Backgrounds can be primary commanders).
+        final boolean noCommanderYet = cmdSection == null || cmdSection.isEmpty();
+
         for (final PaperCard card : sideboard.toFlatList()) {
-            if (card.getRules().canBeCommander()) {
-                catalog.add(card, 1);
+            if (!card.getRules().canBeCommander()) { continue; }
+            // Only include Background enchantments when they are valid here:
+            // - as a first commander (no commander chosen), or
+            // - as a partner when the existing commander has "Choose a Background"
+            if (card.getRules().canBeBackground() && !noCommanderYet && !hasChooseBackground) {
+                continue;
             }
+            catalog.add(card, 1);
         }
         addFreeOption(catalog, sideboard, freeCommanderName);
         for (final String fallback : CommanderDraftUtil.FREE_COMMANDER_FALLBACKS) {

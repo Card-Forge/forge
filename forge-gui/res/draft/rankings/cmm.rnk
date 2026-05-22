@@ -1,0 +1,318 @@
+//Rank|Name|Rarity|Set
+#1|Exsanguinate|U|CMM
+#2|Capture of Jingzhou|R|CMM
+#3|Toxic Deluge|R|CMM
+#4|Cyclonic Rift|R|CMM
+#5|Bribery|M|CMM
+#6|Craterhoof Behemoth|M|CMM
+#7|Kirtar's Wrath|U|CMM
+#8|Hellkite Charger|R|CMM
+#9|Mystic Confluence|R|CMM
+#10|Scourge of the Throne|R|CMM
+#11|Tooth and Nail|R|CMM
+#12|Decree of Pain|R|CMM
+#13|Rune-Scarred Demon|R|CMM
+#14|Commandeer|R|CMM
+#15|Demonic Tutor|R|CMM
+#16|Wrath of God|R|CMM
+#17|Kindred Dominance|R|CMM
+#18|Jeweled Lotus|M|CMM
+#19|The Great Henge|M|CMM
+#20|Twilight Prophet|M|CMM
+#21|Balefire Dragon|M|CMM
+#22|Deflecting Swat|R|CMM
+#23|Extinguish All Hope|U|CMM
+#24|Skyline Despot|U|CMM
+#25|Tempt with Vengeance|R|CMM
+#26|Arachnogenesis|R|CMM
+#27|Star of Extinction|M|CMM
+#28|Grave Pact|M|CMM
+#29|Doubling Season|M|CMM
+#30|Sol Ring|U|CMM
+#31|Palace Jailer|U|CMM
+#32|Path to Exile|U|CMM
+#33|Champion's Helm|R|CMM
+#34|Stormsurge Kraken|R|CMM
+#35|Ogre Slumlord|R|CMM
+#36|Song of the Dryads|R|CMM
+#37|Freyalise, Llanowar's Fury|R|CMM
+#38|Deadly Rollick|R|CMM
+#39|Evacuation|R|CMM
+#40|Loyal Retainers|M|CMM
+#41|Lightning Greaves|U|CMM
+#42|Angelic Field Marshal|R|CMM
+#43|Inferno Titan|R|CMM
+#44|Righteous Confluence|R|CMM
+#45|Nahiri, the Lithomancer|R|CMM
+#46|Darksteel Mutation|U|CMM
+#47|Reality Shift|U|CMM
+#48|Body Double|U|CMM
+#49|Meteor Golem|U|CMM
+#50|Wretched Confluence|R|CMM
+#51|Savage Beating|R|CMM
+#52|Sower of Discord|R|CMM
+#53|Gilded Lotus|R|CMM
+#54|Bloodspore Thrinax|R|CMM
+#55|Sword of the Animist|R|CMM
+#56|Ezuri's Predation|R|CMM
+#57|Sevinne's Reclamation|R|CMM
+#58|Nesting Dragon|R|CMM
+#59|Ohran Frostfang|R|CMM
+#60|Smothering Tithe|M|CMM
+#61|Finale of Devastation|M|CMM
+#62|Feast of Succession|U|CMM
+#63|Magus of the Wheel|R|CMM
+#64|Heavenly Blademaster|R|CMM
+#65|Fiery Confluence|R|CMM
+#66|Burnished Hart|U|CMM
+#67|Teferi, Temporal Archmage|R|CMM
+#68|Wakening Sun's Avatar|R|CMM
+#69|Vindictive Lich|R|CMM
+#70|Stonehoof Chieftain|R|CMM
+#71|Day's Undoing|R|CMM
+#72|Spellseeker|R|CMM
+#73|The Immortal Sun|M|CMM
+#74|Torrential Gearhulk|M|CMM
+#75|Archfiend of Despair|M|CMM
+#76|Ob Nixilis of the Black Oath|M|CMM
+#77|Eternal Witness|U|CMM
+#78|Curtains' Call|R|CMM
+#79|Faerie Artisans|R|CMM
+#80|Flawless Maneuver|R|CMM
+#81|Regal Behemoth|R|CMM
+#82|Unstable Obelisk|C|CMM
+#83|Thran Dynamo|U|CMM
+#84|Arcane Signet|U|CMM
+#85|Cartographer's Hawk|U|CMM
+#86|Ashnod's Altar|U|CMM
+#87|Fact or Fiction|U|CMM
+#88|Aether Gale|U|CMM
+#89|Corpse Augur|U|CMM
+#90|Goremand|U|CMM
+#91|Acidic Slime|U|CMM
+#92|Disrupt Decorum|R|CMM
+#93|Hammer of Nazahn|R|CMM
+#94|Treasure Nabber|R|CMM
+#95|Daretti, Scrap Savant|R|CMM
+#96|Alms Collector|R|CMM
+#97|Verdant Confluence|R|CMM
+#98|Fierce Guardianship|R|CMM
+#99|Chromatic Lantern|R|CMM
+#100|Insurrection|R|CMM
+#101|Skyshroud Claim|C|CMM
+#102|Ash Barrens|C|CMM
+#103|Abrade|C|CMM
+#104|Elvish Mystic|C|CMM
+#105|Storm-Kiln Artist|U|CMM
+#106|Scytheclaw|R|CMM
+#107|Training Center|R|CMM
+#108|Rejuvenating Springs|R|CMM
+#109|Spectator Seating|R|CMM
+#110|Undergrowth Stadium|R|CMM
+#111|Vault of Champions|R|CMM
+#112|Command Tower|C|CMM
+#113|Path of Ancestry|C|CMM
+#114|Kodama's Reach|C|CMM
+#115|Entourage of Trest|C|CMM
+#116|Battle Screech|C|CMM
+#117|Fellwar Stone|U|CMM
+#118|Rogue's Passage|U|CMM
+#119|Geode Golem|U|CMM
+#120|Thought Vessel|U|CMM
+#121|Rise from the Tides|U|CMM
+#122|Bastion of Remembrance|U|CMM
+#123|Heartless Act|U|CMM
+#124|Loyal Subordinate|U|CMM
+#125|Loyal Apprentice|U|CMM
+#126|Beanstalk Giant|U|CMM
+#127|Personal Tutor|R|CMM
+#128|Sublime Exhalation|R|CMM
+#129|Heroic Intervention|R|CMM
+#130|Ilysian Caryatid|C|CMM
+#131|Thraben Inspector|C|CMM
+#132|Exclude|C|CMM
+#133|Fall from Favor|C|CMM
+#134|Mire Triton|C|CMM
+#135|Phyrexian Gargantua|C|CMM
+#136|Thorn of the Black Rose|C|CMM
+#137|Whirler Rogue|U|CMM
+#138|Priest of the Blood Rite|U|CMM
+#139|Havoc Jester|U|CMM
+#140|Hoarding Dragon|U|CMM
+#141|Meteoric Mace|U|CMM
+#142|Slice and Dice|U|CMM
+#143|Jade Mage|U|CMM
+#144|Rampaging Brontodon|U|CMM
+#145|Forebear's Blade|U|CMM
+#146|Blood Aspirant|C|CMM
+#147|Ulamog's Crusher|C|CMM
+#148|Thriving Grove|C|CMM
+#149|Thriving Isle|C|CMM
+#150|Thriving Heath|C|CMM
+#151|Thriving Bluff|C|CMM
+#152|Thriving Moor|C|CMM
+#153|Palace Sentinels|C|CMM
+#154|Spectral Grasp|C|CMM
+#155|Counterspell|C|CMM
+#156|Deep Analysis|C|CMM
+#157|Murmuring Mystic|C|CMM
+#158|Dread Return|C|CMM
+#159|Crimson Fleet Commodore|C|CMM
+#160|Spitebellows|C|CMM
+#161|Sulfurous Blast|C|CMM
+#162|Kozilek's Predator|C|CMM
+#163|Krosan Tusker|C|CMM
+#164|Ram Through|C|CMM
+#165|Commander's Sphere|C|CMM
+#166|Firemind Vessel|C|CMM
+#167|Foundry Inspector|C|CMM
+#168|Pilgrim's Eye|C|CMM
+#169|Prismatic Lens|C|CMM
+#170|Elite Scaleguard|U|CMM
+#171|Herald of the Host|U|CMM
+#172|Loyal Unicorn|U|CMM
+#173|Victimize|U|CMM
+#174|Frontier Warmonger|U|CMM
+#175|Ravaging Blaze|U|CMM
+#176|Loyal Guardian|U|CMM
+#177|Predatory Rampage|U|CMM
+#178|Minds Aglow|R|CMM
+#179|Avatar of Slaughter|R|CMM
+#180|Obscuring Haze|R|CMM
+#181|Brass Knuckles|C|CMM
+#182|Ainok Bond-Kin|C|CMM
+#183|Ministrant of Obligation|C|CMM
+#184|Swift Response|C|CMM
+#185|Wanderer's Strike|C|CMM
+#186|Looter il-Kor|C|CMM
+#187|Shipwreck Dowser|C|CMM
+#188|Windcaller Aven|C|CMM
+#189|Cadaver Imp|C|CMM
+#190|Carrier Thrall|C|CMM
+#191|Dread Drone|C|CMM
+#192|Drown in Sorrow|C|CMM
+#193|Feed the Swarm|C|CMM
+#194|Tragic Slip|C|CMM
+#195|Twisted Abomination|C|CMM
+#196|Cyclops Electromancer|C|CMM
+#197|Dwarven Hammer|C|CMM
+#198|Guttersnipe|C|CMM
+#199|Living Lightning|C|CMM
+#200|Rapacious Dragon|C|CMM
+#201|Fierce Empath|C|CMM
+#202|Tuskguard Captain|C|CMM
+#203|Prophetic Prism|C|CMM
+#204|Loyal Drake|U|CMM
+#205|Phyrexian Ingester|U|CMM
+#206|Reassembling Skeleton|U|CMM
+#207|Wildwood Scourge|U|CMM
+#208|Lifeblood Hydra|R|CMM
+#209|Windrider Wizard|C|CMM
+#210|Shelter|C|CMM
+#211|Ancestral Blade|C|CMM
+#212|Myrsmith|C|CMM
+#213|Supply Runners|C|CMM
+#214|Deranged Assistant|C|CMM
+#215|Filigree Attendant|C|CMM
+#216|Reverse Engineer|C|CMM
+#217|Vizier of Tumbling Sands|C|CMM
+#218|Witching Well|C|CMM
+#219|Carrion Grub|C|CMM
+#220|Demon's Disciple|C|CMM
+#221|Legion Vanguard|C|CMM
+#222|Nadier's Nightblade|C|CMM
+#223|Read the Bones|C|CMM
+#224|Witch's Cauldron|C|CMM
+#225|Dragon Fodder|C|CMM
+#226|Gargadon|C|CMM
+#227|Rapacious One|C|CMM
+#228|Crash of Rhino Beetles|C|CMM
+#229|Deadly Recluse|C|CMM
+#230|Pollenbright Druid|C|CMM
+#231|Skysnare Spider|C|CMM
+#232|Snakeskin Veil|C|CMM
+#233|Bonder's Ornament|C|CMM
+#234|Letter of Acceptance|C|CMM
+#235|Myr Sire|C|CMM
+#236|Staunch Throneguard|C|CMM
+#237|Terramorphic Expanse|C|CMM
+#238|Reliquary Tower|U|CMM
+#239|Fencing Ace|U|CMM
+#240|Intangible Virtue|U|CMM
+#241|Mace of the Valiant|U|CMM
+#242|Coveted Peacock|U|CMM
+#243|Efficient Construction|U|CMM
+#244|Murder of Crows|U|CMM
+#245|Portal Mage|U|CMM
+#246|Armorcraft Judge|U|CMM
+#247|Fungal Plots|U|CMM
+#248|Hero's Blade|U|CMM
+#249|Sandstone Oracle|U|CMM
+#250|Pathrazer of Ulamog|U|CMM
+#251|Steelshaper's Gift|R|CMM
+#252|Extraplanar Lens|R|CMM
+#253|Grand Abolisher|R|CMM
+#254|Aminatou's Augury|R|CMM
+#255|Idol of Oblivion|R|CMM
+#256|Divergent Transformations|R|CMM
+#257|Inspiring Statuary|R|CMM
+#258|Wayward Swordtooth|R|CMM
+#259|Jet Medallion|R|CMM
+#260|Emerald Medallion|R|CMM
+#261|Pearl Medallion|R|CMM
+#262|Ruby Medallion|R|CMM
+#263|Sapphire Medallion|R|CMM
+#264|Land Tax|M|CMM
+#265|Gavony Silversmith|C|CMM
+#266|Generous Gift|C|CMM
+#267|Knighted Myr|C|CMM
+#268|Sunblade Angel|C|CMM
+#269|Sunspear Shikari|C|CMM
+#270|Cryptic Serpent|C|CMM
+#271|Frantic Search|C|CMM
+#272|Ghostly Flicker|C|CMM
+#273|Renowned Weaponsmith|C|CMM
+#274|Faithless Looting|C|CMM
+#275|Fists of Flame|C|CMM
+#276|Makeshift Munitions|C|CMM
+#277|Spikeshot Goblin|C|CMM
+#278|Temur Battle Rage|C|CMM
+#279|Abundant Harvest|C|CMM
+#280|Crawling Infestation|C|CMM
+#281|Rot Shambler|C|CMM
+#282|Darksteel Ingot|C|CMM
+#283|Haunted Cloak|C|CMM
+#284|Opal Palace|C|CMM
+#285|Final Parting|U|CMM
+#286|Fiendlash|U|CMM
+#287|Furious Rise|U|CMM
+#288|Assault Suit|U|CMM
+#289|Shimmer Myr|U|CMM
+#290|Spectral Searchlight|U|CMM
+#291|Bloodchief Ascension|R|CMM
+#292|All That Glitters|C|CMM
+#293|Custodi Squire|C|CMM
+#294|Unbounded Potential|C|CMM
+#295|Goliath Sphinx|C|CMM
+#296|Lotleth Giant|C|CMM
+#297|Champion of the Flame|C|CMM
+#298|Impulsive Pilferer|C|CMM
+#299|Campfire|C|CMM
+#300|Explorer's Scope|C|CMM
+#301|Vial of Dragonfire|C|CMM
+#302|Vulshok Battlegear|C|CMM
+#303|Myriad Landscape|C|CMM
+#304|Vandalblast|U|CMM
+#305|Return to Dust|U|CMM
+#306|Hunter's Insight|U|CMM
+#307|Puresteel Paladin|R|CMM
+#308|Wake the Dead|R|CMM
+#309|Boompile|R|CMM
+#310|Imp's Mischief|R|CMM
+#311|Resculpt|C|CMM
+#312|Serrated Scorpion|C|CMM
+#313|Supernatural Stamina|C|CMM
+#314|Heart-Piercer Bow|C|CMM
+#315|Courage in Crisis|C|CMM
+#316|Broken Wings|C|CMM
+#317|Animal Magnetism|U|CMM

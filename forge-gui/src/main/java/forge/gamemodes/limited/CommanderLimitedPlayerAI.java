@@ -19,7 +19,6 @@ package forge.gamemodes.limited;
 
 import forge.card.ColorSet;
 import forge.deck.Deck;
-import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
@@ -136,16 +135,25 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
             return picked;
         }
 
-        // Rank candidates by raw score (higher = better); pick the top one
-        candidates.sort((a, b) -> Double.compare(
-                CardRanker.getRawScore(b), CardRanker.getRawScore(a)));
+        // Sort: non-Background cards first (Backgrounds are partners, not primary commanders),
+        // and among equals prefer higher raw score.
+        candidates.sort((a, b) -> {
+            final boolean aIsBg = a.getRules().canBeBackground();
+            final boolean bIsBg = b.getRules().canBeBackground();
+            if (aIsBg != bIsBg) {
+                return aIsBg ? 1 : -1; // non-Background first
+            }
+            return Double.compare(CardRanker.getRawScore(b), CardRanker.getRawScore(a));
+        });
         final PaperCard picked = candidates.get(0);
 
         commander = picked;
         final ColorSet identity = commander.getRules().getColorIdentity();
         ((CommanderDeckColors) deckCols).lockToColorIdentity(identity);
 
-        // Commander Draft rule: treat commanders with ≤1 color as having Partner
+        // Partner-eligible: ≤1-color Commander Draft rule, explicit Partner keyword,
+        // "Choose a Background" (pairs with Background enchantments), or Background
+        // itself (pairs with a "Choose a Background" legend).
         partnerEligible = identity.countColors() <= 1
                 || commander.getRules().canBePartnerCommander();
 
@@ -212,14 +220,21 @@ public class CommanderLimitedPlayerAI extends LimitedPlayerAI {
             draftedCards.remove(partner);
         }
 
-        final Deck result = new CardThemedCommanderDeckBuilder(
-                resolvedCommander, partner, draftedCards, true, DeckFormat.CommanderDraft)
-                .buildDeck();
+        final Deck result = new CommanderDraftDeckBuilder(
+                draftedCards,
+                (CommanderDeckColors) deckCols,
+                resolvedCommander,
+                partner)
+                .buildDeck(landSetCode);
 
-        // Place commander(s) in the dedicated Commander section
-        result.getOrCreate(DeckSection.Commander).add(resolvedCommander);
-        if (partner != null) {
-            result.getOrCreate(DeckSection.Commander).add(partner);
+        // Ensure commanders are in the Commander section (builder sets this,
+        // but be defensive in case the pool was empty)
+        if (result.get(DeckSection.Commander) == null
+                || result.get(DeckSection.Commander).isEmpty()) {
+            result.getOrCreate(DeckSection.Commander).add(resolvedCommander);
+            if (partner != null) {
+                result.getOrCreate(DeckSection.Commander).add(partner);
+            }
         }
 
         if (ForgePreferences.DEV_MODE) {

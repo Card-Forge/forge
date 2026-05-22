@@ -127,8 +127,18 @@ public final class CommanderDraftUtil {
     /**
      * Commander Draft rule: a commander is partner-eligible when it has ≤1 color
      * in its color identity, or when it already has some form of the Partner keyword.
+     *
+     * <p>Background enchantments are explicitly excluded here: they are always the
+     * <em>second</em> slot in a "Choose a Background" pair.  Their eligibility as a
+     * partner is handled by {@link forge.card.CardRules#canBePartnerCommanders}
+     * and must not leak into the generic Commander Draft partner rule.</p>
      */
     public static boolean isPartnerEligible(final PaperCard commander) {
+        // Backgrounds are valid second commanders but never drive the partner
+        // decision themselves via the generic ≤1-color Commander Draft rule.
+        if (commander.getRules().canBeBackground()) {
+            return false;
+        }
         return commander.getRules().getColorIdentity().countColors() <= 1
                 || commander.getRules().canBePartnerCommander();
     }
