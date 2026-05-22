@@ -40,6 +40,7 @@ Commands themselves are case-sensitive. Arguments with spaces need double quotes
 | debug collision | Displays bounding boxes around entities |
 | debug map | Enables drag gestures on the overworld's mini map (while it's small) to fast travel where the gesture is released |
 | debug off | Turns off debugging |
+| reset map | Resets the current POI map (not overworld) after you leave it, restoring all deteted POI map objects like enemies |
 | resetMapQuests | Resets the current POI map's local side quest flags; all quest progress within that location will be lost |
 | resetQuests | Resets the player's global quest flags; current quests won't be abandoned or restarted, but they will lose track of what had been done; POI side quests will be unaffected. |
 | sanitize editions | Replaces all cards from non-allowed editions in decks and inventory with printings from allowed editions (if configured for the Adventure plane) |
