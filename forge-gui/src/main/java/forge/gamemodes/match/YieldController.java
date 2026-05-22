@@ -269,22 +269,6 @@ public class YieldController {
         activeStore().onGameEnd(owner.getGame() == null || owner.getGame().getView().isMatchOver());
     }
 
-    /** Reset per-game transient state between games of a match. {@link #clearAutoYields} drops
-     *  stored yields but per-tick flags (lastSeenStackNonEmpty, wasAutoPassingLastTick, the
-     *  yield-just-ended edge, autoPassInterrupted) would otherwise bleed into game 2 and
-     *  mis-fire suggestions at its first prompt. */
-    public synchronized void resetForNewGame() {
-        autoPassUntilEOT = false;
-        autoPassUntilStackEmpty = false;
-        stackYieldRespectsInterrupts = false;
-        clearMarker();
-        declinedSuggestionTurn.clear();
-        lastSeenStackNonEmpty = false;
-        wasAutoPassingLastTick = false;
-        yieldJustEndedFlag = false;
-        autoPassInterrupted = false;
-    }
-
     public boolean getDisableAutoYields() {
         return activeStore().isDisabled();
     }
