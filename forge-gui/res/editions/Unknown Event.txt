@@ -441,7 +441,7 @@ UB11 U Delve too Deep @
 UB11a U Would You Have Done the Same? @
 UR11a U Nevermind @
 UR11b U Tax Bolt @
-UU11 U Where We're Going... @
+UU11 U Where We're Going . . . @
 UU11a U Clear, the Mind @
 UU11b U Elemental, My Dear @
 UW11 U Echoing Echo @
