@@ -1,6 +1,6 @@
 package forge.card;
 
-public record StateChangedType(CardTypeView type) implements ICardChangedType, ResetChangedText {
+public record StateChangedType(CardTypeView type) implements ICardChangedType {
 
     @Override
     public CardType applyChanges(CardType newType) {
