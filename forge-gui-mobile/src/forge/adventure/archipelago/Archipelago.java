@@ -2,6 +2,7 @@ package forge.adventure.archipelago;
 
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.adventure.util.ArchipelagoClient;
+import io.github.archipelagomw.ClientStatus;
 
 import java.net.URISyntaxException;
 
@@ -33,5 +34,13 @@ public class Archipelago {
         } catch (URISyntaxException e) {
             //TODO: Handle incorrect address
         }
+    }
+
+    public void CheckLocation(Long id) {
+        APClient.checkLocation(id);
+    }
+
+    public void Goal(Long id) {
+        APClient.setGameState(ClientStatus.CLIENT_GOAL);
     }
 }
