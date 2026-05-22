@@ -41,6 +41,12 @@ def test_generic_guides_load_and_validate(strategy):
     assert guide.strategy_type.value == strategy
 
 
+def test_general_guidance_is_added_to_runtime_guide():
+    guide = piloting.get_piloting_guide("Nonexistent Archetype", "modern", "midrange")
+    payload = piloting.guide_with_general_guidance(guide)
+    assert piloting.GENERAL_SEQUENCING_TIPS[0] in payload["sequencing_tips"]
+
+
 def test_fallback_to_midrange_for_unknown_strategy():
     guide = piloting.get_piloting_guide("Whatever", "modern", strategy_type=None)
     assert guide is not None

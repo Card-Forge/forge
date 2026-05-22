@@ -42,6 +42,10 @@ _GENERIC_DIR = _PILOTING_DIR / "generic"
 _BANLIST_PATH = Path(__file__).parent / "banlist_events.json"
 _ARCHIVE_DIR_NAME = "_archive"
 _FALLBACK_STRATEGY = StrategyType.MIDRANGE
+GENERAL_SEQUENCING_TIPS = (
+    "Do not attack with creature lands when you have spells to play unless "
+    "the opponent's death clock is two turns or less after counting blockers.",
+)
 
 
 def slugify(name: str) -> str:
@@ -205,6 +209,16 @@ def get_piloting_guide(
     if strat is not _FALLBACK_STRATEGY:
         return _load_guide(str(_GENERIC_DIR / f"{_FALLBACK_STRATEGY.value}.json"))
     return None
+
+
+def guide_with_general_guidance(guide: PilotingGuide) -> dict:
+    """Return a guide dict with shared runtime sequencing guidance attached."""
+    data = guide.model_dump()
+    tips = data.setdefault("sequencing_tips", [])
+    for tip in GENERAL_SEQUENCING_TIPS:
+        if tip not in tips:
+            tips.append(tip)
+    return data
 
 
 def _coerce_strategy(value: StrategyType | str | None) -> StrategyType:

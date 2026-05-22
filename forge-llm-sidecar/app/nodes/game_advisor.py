@@ -602,7 +602,7 @@ async def game_advisor_node(state: GraphState) -> GraphState:
     own_name, own_strategy = _resolve_own_archetype(state, slug)
     state["own_archetype"] = own_name
     guide = piloting.get_piloting_guide(own_name or "", slug, own_strategy)
-    state["piloting_guide"] = guide.model_dump() if guide else None
+    state["piloting_guide"] = piloting.guide_with_general_guidance(guide) if guide else None
     guide_source = ""
     if guide:
         is_specific = own_name and piloting.slugify(guide.archetype) == piloting.slugify(own_name)
