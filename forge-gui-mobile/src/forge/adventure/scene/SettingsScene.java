@@ -8,6 +8,7 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.Graphics;
+import forge.adventure.data.RewardData;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.assets.ImageCache;
@@ -237,6 +238,7 @@ public class SettingsScene extends UIScene {
             public void changed(ChangeEvent event, Actor actor) {
                 Config.instance().getSettingData().useAllCardVariants = ((CheckBox) actor).isChecked();
                 Config.instance().saveSettings();
+                RewardData.invalidateCardPool();
             }
         });
         addSettingField(Forge.getLocalizer().getMessage("lblPreferEraMatchedTokenArt"), Config.instance().getSettingData().preferEraMatchedTokenArt, new ChangeListener() {
@@ -253,6 +255,7 @@ public class SettingsScene extends UIScene {
             public void changed(ChangeEvent event, Actor actor) {
                 Config.instance().getSettingData().excludeAlchemyVariants = ((CheckBox) actor).isChecked();
                 Config.instance().saveSettings();
+                RewardData.invalidateCardPool();
             }
         });
         addSettingField(Forge.getLocalizer().getMessage("lblGenerateLDADecks"), Config.instance().getSettingData().generateLDADecks, new ChangeListener() {
@@ -295,6 +298,7 @@ public class SettingsScene extends UIScene {
                 boolean enabled = ((CheckBox) actor).isChecked();
                 cbAnteMatchRarity.setDisabled(!enabled);
                 cbAnteIncludeBasicLands.setDisabled(!enabled);
+                RewardData.invalidateCardPool();
             }
         });
         addCheckBox(Forge.getLocalizer().getMessage("lblPromptAutoSell"), ForgePreferences.FPref.PROMPT_FOR_AUTOSELL);
