@@ -5,10 +5,12 @@ import forge.ai.ComputerUtilAbility;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardCopyService;
 import forge.game.card.CounterEnumType;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
@@ -26,6 +28,43 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class GameSimulationTest extends SimulationTest {
+
+    @Test
+    public void testSwitchedPowerToughnessSurvivesLKICopy() {
+        // Inside Out switches a creature's P/T via a HIDDEN extrinsic keyword
+        // ("CARDNAME's power and toughness are switched"). Effects that read a
+        // creature's last-known information after it leaves the battlefield --
+        // e.g. Fling's NumDmg$ X = Sacrificed$CardPower -- must see the switched
+        // value. Card.copyFrom (used by CardCopyService.getLKICopy) copied every
+        // sibling continuous-effect keyword store except hiddenExtrinsicKeywords,
+        // so the LKI copy dropped the switch and Fling dealt the unswitched base
+        // power instead of the switched value.
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card spider = addCard("Giant Spider", p); // 2/4
+        addCardToZone("Island", p, ZoneType.Library); // for Inside Out's "Draw a card"
+        Card insideOut = addCardToZone("Inside Out", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility io = insideOut.getFirstSpellAbility();
+        io.setActivatingPlayer(p);
+        io.getTargets().add(spider);
+        AbilityUtils.resolve(io);
+        game.getAction().checkStateEffects(true);
+
+        // 2/4 with power and toughness switched -> 4/2 (toughness 2, survives).
+        AssertJUnit.assertEquals(4, spider.getNetPower());
+        AssertJUnit.assertEquals(2, spider.getNetToughness());
+
+        // The last-known-information copy must preserve the switch keyword;
+        // this is exactly the value Fling's Sacrificed$CardPower reads.
+        Card lki = CardCopyService.getLKICopy(spider);
+        AssertJUnit.assertEquals("LKI copy must preserve switched power",
+                4, lki.getNetPower());
+    }
 
     @Test
     public void testActivateAbilityTriggers() {

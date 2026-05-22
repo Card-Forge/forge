@@ -8108,6 +8108,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         setChangedCardKeywords(in.getChangedCardKeywords());
 
+        // Hidden extrinsic keywords (e.g. Inside Out's "power and toughness are
+        // switched", added via Pump's KW$ HIDDEN) are continuous-effect keyword
+        // changes just like changedCardKeywords above. Copying them keeps the
+        // last-known-information copy (CardCopyService.getLKICopy) faithful so
+        // that effects reading a creature's last-known P/T after it leaves the
+        // battlefield -- e.g. Fling's Sacrificed$CardPower -- see the switched
+        // value instead of the unswitched base.
+        for (Table.Cell<Long, Long, List<String>> cell : in.hiddenExtrinsicKeywords.cellSet()) {
+            this.hiddenExtrinsicKeywords.put(cell.getRowKey(), cell.getColumnKey(),
+                    Lists.newArrayList(cell.getValue()));
+        }
+
         this.changedCardTypes.putAll(in.changedCardTypes);
         this.changedCardTypesCharacterDefining.putAll(in.changedCardTypesCharacterDefining);
         updateTypeCache();
