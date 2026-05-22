@@ -63,4 +63,9 @@ public class TextChanges implements ITextChanges {
     public TextChangesView getView() {
         return new TextChangesView(colorChanges(), typeChanges());
     }
+
+    @Override
+    public ITextChanges combine(ITextChanges output) {
+        return getView().combine(output);
+    }
 }
