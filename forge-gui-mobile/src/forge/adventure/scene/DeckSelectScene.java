@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.IntMap;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
-import forge.adventure.data.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.util.Controls;

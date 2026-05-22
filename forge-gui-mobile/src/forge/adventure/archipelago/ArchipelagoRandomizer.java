@@ -1,0 +1,53 @@
+package forge.adventure.archipelago;
+import forge.adventure.util.Current;
+import java.util.*;
+
+public class ArchipelagoRandomizer extends ArchipelagoData {
+    protected static ArchipelagoRandomizer archipelagoRandomizerInstance = null;
+
+    public ArchipelagoRandomizer() {
+        archipelagoRandomizerInstance = this;
+    }
+
+    public static ArchipelagoRandomizer getInstance() {
+        if (archipelagoDataInstance == null) {
+            ArchipelagoData.getInstance();
+        }
+        return archipelagoRandomizerInstance == null ? archipelagoRandomizerInstance = new ArchipelagoRandomizer() : archipelagoRandomizerInstance;
+    }
+
+    /// Todo: Add custom pop-up message to be shown upon receiving a check.
+    public void unlockManaCrystalReward(Integer amount) {
+        Current.player().addShards(amount);
+        addShards(amount);
+    }
+
+    public void unlockGoldReward(int amount) {
+        Current.player().giveGold(amount);
+        addGold(amount);
+    }
+
+    // Todo: Verify that this is actually what we want and it's working
+    public void unlockChallengeCoinReward(Map<String, Integer> itemNamesAndAmounts) {
+        for (Map.Entry<String, Integer> item : itemNamesAndAmounts.entrySet()) {
+            for (int i = 0; i < item.getValue(); i++) {
+                Current.player().addItem(item.getKey());
+                addItem(item.getKey());
+            }
+        }
+    }
+
+    public void unlockItemReward(String itemName) {
+        Current.player().addItem(itemName);
+        addItem(itemName);
+    }
+
+    // Todo: This should be called by the networked part of the AP implementation when we receive a reward.
+    public void incrementLastArchipelagoRewardIndex() {
+        lastArchipelagoRewardIndex++;
+    }
+
+    public int getLastArchipelagoRewardIndex() {
+        return lastArchipelagoRewardIndex;
+    }
+}

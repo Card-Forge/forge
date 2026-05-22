@@ -9,6 +9,9 @@ import com.github.tommyettinger.textra.TextraLabel;
 import com.google.common.collect.Lists;
 
 import forge.Forge;
+import forge.adventure.archipelago.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoMode;
+import forge.adventure.archipelago.LocalRandomizer;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.AdventureDeckEditor;
@@ -165,7 +168,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         cards.addAllFlat(deck.getAllCardsInASinglePool(true, true).toFlatList());
         ArchipelagoData archipelagoData = ArchipelagoData.getInstance();
         // Initial archipelago setup
-        archipelagoData.setupFreshSaveFile(archipelagoMode);
+        if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
+            LocalRandomizer.getInstance().setupFreshSaveFile();
+        } else {
+            archipelagoData.setupFreshSaveFile(archipelagoMode);
+        }
         for (PaperCard card : cards.toFlatList()) {
             archipelagoData.addCardUnlockedByName(card.getCardName());
         }

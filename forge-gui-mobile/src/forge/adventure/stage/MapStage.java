@@ -25,6 +25,9 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.archipelago.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoMode;
+import forge.adventure.archipelago.LocalRandomizer;
 import forge.adventure.character.*;
 import forge.adventure.data.*;
 import forge.adventure.player.AdventurePlayer;
@@ -738,7 +741,7 @@ public class MapStage extends GameStage {
                                 //  Also, there's code duplication here, you should fix that by making a function.
                                 if (data.name.toLowerCase().contains("equipment") || data.name.toLowerCase().contains("items")) {
                                     // Get list of items for specific shop.
-                                    Object[] randomizedEquipmentList = ArchipelagoData.getInstance().getItemsForEquipmentShop(data.name);
+                                    Object[] randomizedEquipmentList = LocalRandomizer.getInstance().getItemsForEquipmentShop(data.name);
                                     // Swap the shop's rewards
                                     if (randomizedEquipmentList != null && randomizedEquipmentList.length <= data.rewards.size) {
                                         for (int i = 0; i < randomizedEquipmentList.length; i++) {

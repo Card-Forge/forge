@@ -1,9 +1,7 @@
-package forge.adventure.data;
+package forge.adventure.archipelago;
 
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Json;
 import forge.StaticData;
+import forge.adventure.data.WorldData;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.util.*;
@@ -17,16 +15,16 @@ import java.util.*;
 // This class will keep track of data relevant for the Archipelago implementation
 // Persists and loads data inside/from the user's save file
 public class ArchipelagoData implements SaveFileContent {
-    private static ArchipelagoData instance = null;
-    private ArchipelagoMode archipelagoMode = ArchipelagoMode.disabled;
+    protected static ArchipelagoData archipelagoDataInstance = null;
+    protected ArchipelagoMode archipelagoMode = ArchipelagoMode.disabled;
 
     // Data we need from Forge
     private final CardEdition.Collection allEditions = StaticData.instance().getEditions();
     private final Iterable<CardEdition> allOrderedEditions = allEditions.getOrderedEditions();
     // Todo: This works fine for singleplayer even when updates come out but the fact that the list of all sets can grow will cause problems in Archipelago due to a variable amount of checks.
-    private final Set<String> allCardSets = new HashSet<>();
+    protected final Set<String> allCardSets = new HashSet<>();
     // List of teleportation runes that we use to gate regions
-    private final Set<String> regionTeleportingRunes = new HashSet<>(Arrays.asList("White rune","Black rune","Blue rune","Red rune","Green rune"));
+    protected final Set<String> regionTeleportingRunes = new HashSet<>(Arrays.asList("White rune","Black rune","Blue rune","Red rune","Green rune"));
     // List of known main bosses that contribute to APWorld completion
     private final Set<String> mainBosses = new HashSet<>(Arrays.asList("Lorthos","Emrakul","Lathliss","Ghalta","Griselbrand","Akroma","Sliver Queen"));
 
@@ -34,27 +32,15 @@ public class ArchipelagoData implements SaveFileContent {
     private final Map<String, Long> completedTownInnEvents = new HashMap<>();
     private final Map<String, Long> completedTownQuests = new HashMap<>();
     private final Map<String, Long> cardsEarnedByRarity = new HashMap<>();
-    private final Map<String, Long> itemsGainedByName = new HashMap<>();
+    protected final Map<String, Long> itemsGainedByName = new HashMap<>();
     private final Map<String, Long> packsEarnedBySet = new HashMap<>();
     private final Set<String> cardsUnlockedByName = new HashSet<>();
-    private final Set<String> setsUnlockedByCode = new HashSet<>();
+    protected final Set<String> setsUnlockedByCode = new HashSet<>();
     private final Set<String> bossesDefeatedByName = new HashSet<>();
     private final Set<String> miniBossesDefeatedByName = new HashSet<>();
-    private final Set<String> lockedWorldRegionsByName = new HashSet<>();
+    protected final Set<String> lockedWorldRegionsByName = new HashSet<>();
     // Todo: Replace the String with another serializable object that is compatible with Archipelago i.e. `NetworkItem.java`
-    private final Set<String> colorlessEquipmentShopList = new HashSet<>();
-    private final Set<String> whiteEquipmentShopList = new HashSet<>();
-    private final Set<String> blueEquipmentShopList = new HashSet<>();
-    private final Set<String> blackEquipmentShopList = new HashSet<>();
-    private final Set<String> redEquipmentShopList = new HashSet<>();
-    private final Set<String> greenEquipmentShopList = new HashSet<>();
-    private final Set<String> whiteItemShopList = new HashSet<>();
-    private final Set<String> blueItemShopList = new HashSet<>();
-    private final Set<String> blackItemShopList = new HashSet<>();
-    private final Set<String> redItemShopList = new HashSet<>();
-    private final Set<String> greenItemShopList = new HashSet<>();
-    private final Set<String> remainingEquipmentPool = new HashSet<>();
-    private int lastArchipelagoRewardIndex = 0;
+    protected int lastArchipelagoRewardIndex = 0;
     private int totalGoldEarned = 0;
     private int totalExtraMaxLifeEarned = 0;
     private int totalShardsEarned = 0;
@@ -62,10 +48,10 @@ public class ArchipelagoData implements SaveFileContent {
 
     // List of unlockable checks
     // Todo: Fill list based on archipelago xml contents
-    private int receivedAmountOfSetUnlockChecks = 0;
-    private float setUnlockChecksRestAmount = 0;
+    protected int receivedAmountOfSetUnlockChecks = 0;
+    protected float setUnlockChecksRestAmount = 0;
 
-    private int totalAmountOfSetUnlockChecks = 100; // This is set based on the value we receive in the APWorld
+    protected int totalAmountOfSetUnlockChecks = 100; // This is set based on the value we receive in the APWorld
     private final int totalBattlesWonBreakpoint = 3; // Reward for every 3 battles won.
     private final int totalTownQuestsAndEventsBreakpoint = 2; // Reward for every 2 town events or quests done.
     private final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
@@ -73,11 +59,13 @@ public class ArchipelagoData implements SaveFileContent {
     public enum ARCHIPELAGO_CHECK_TYPES {BATTLES_WON, TOWN_QUESTS_AND_EVENTS_DONE, TOTAL_CARDS_EARNED, BOSS_WHITE_DEFEATED, BOSS_BLUE_DEFEATED, BOSS_BLACK_DEFEATED, BOSS_RED_DEFEATED, BOSS_GREEN_DEFEATED, BOSS_COLORLESS_DEFEATED, BOSS_WUBRG_DEFEATED, WIN_CONDITION_CLEARED};
 
     public ArchipelagoData() {
-        instance = this;
+        if (getClass() == ArchipelagoData.class) {
+            archipelagoDataInstance = this;
+        }
     }
 
     public static ArchipelagoData getInstance() {
-        return instance == null ? instance = new ArchipelagoData() : instance;
+        return archipelagoDataInstance == null ? archipelagoDataInstance = new ArchipelagoData() : archipelagoDataInstance;
     }
 
     // Keep this updated to reset any sets/maps/variables
@@ -114,60 +102,12 @@ public class ArchipelagoData implements SaveFileContent {
 
         this.archipelagoMode = archipelagoMode;
 
-        randomizeLocalEquipment();
-        loadAllAvailableSets();
-    }
-
-    // Todo: Make the max life upgrades available through another method (more checks perhaps)
-    // Todo: Figure out what to do with the "overpowered" equipment.
-    // Each reward has a RewardType of "item" and comes pre-defined with an itemName.
-    //  They are defined in Shandalar/Shops.json as Equipment, <Color>Item and <Color>Equipment. We can dynamically detect those names and replace their items if AP mode is enabled here.
-    //  Equipment: 6 slots to randomize
-    //  <Color>Equipment: 6 slots to randomize
-    //  <Color>Items: 8 slots to randomize including 1 slot that is not equipment but rather a max health upgrade
-    private void randomizeLocalEquipment() {
-        // First we get the names of all the items in the pool.
-        ArrayList<String> equipmentNames = new ArrayList<>();
-        // We also filter out the "overpowered" cards into this separate list, they might be fun to throw in later.
-        ArrayList<String> powerEquipmentNames = new ArrayList<>();
-        FileHandle handle = Config.instance().getFile(Paths.ITEMS);
-        if (handle.exists()) {
-            Json json = new Json();
-            Array<ItemData> shopList = json.fromJson(Array.class, ItemData.class, handle);
-
-            // First we read all the items from `adventure/common/world/items.json`
-            for (int i = 0; i < shopList.size; i++) {
-                if (shopList.get(i).equipmentSlot != null && !shopList.get(i).equipmentSlot.isEmpty()) {
-                    // We've found an equipment item, add it to the list but exclude the "overpowered" items.
-                    if (shopList.get(i).name.toLowerCase().contains("rune")) continue;
-                    if (shopList.get(i).name.toLowerCase().contains("mox") || shopList.get(i).name.toLowerCase().contains("black lotus") || shopList.get(i).name.toLowerCase().contains("sol ring") || shopList.get(i).name.toLowerCase().contains("cheat")) {
-                        powerEquipmentNames.add(shopList.get(i).name);
-                        continue;
-                    }
-                    equipmentNames.add(shopList.get(i).name);
-                }
-            }
+        // Todo: Swap with ArchipelagoRandomizer implementation if that's enabled
+        if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
+            LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
+            localRandomizer.randomizeLocalEquipment();
         }
-
-        // Scramble the equipment names
-        Collections.shuffle(equipmentNames);
-        // Return if we didn't find enough items.
-        if (equipmentNames.size() < 72) return;
-        // Redistribute the items over each list.
-        colorlessEquipmentShopList.addAll(equipmentNames.subList(0, 6));
-        whiteEquipmentShopList.addAll(equipmentNames.subList(6, 12));
-        blueEquipmentShopList.addAll(equipmentNames.subList(12, 18));
-        blackEquipmentShopList.addAll(equipmentNames.subList(18, 24));
-        redEquipmentShopList.addAll(equipmentNames.subList(24, 30));
-        greenEquipmentShopList.addAll(equipmentNames.subList(30, 36));
-        whiteItemShopList.addAll(equipmentNames.subList(36, 43));
-        blueItemShopList.addAll(equipmentNames.subList(43, 50));
-        blackItemShopList.addAll(equipmentNames.subList(50, 57));
-        redItemShopList.addAll(equipmentNames.subList(57, 64));
-        greenItemShopList.addAll(equipmentNames.subList(64, 71));
-        // Remove the first 72 items from the equipment list so we can use the remaining ones for future equipment rewards.
-        equipmentNames.removeAll(equipmentNames.subList(0, 71));
-        remainingEquipmentPool.addAll(equipmentNames);
+        loadAllAvailableSets();
     }
 
     private void updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES type) {
@@ -188,7 +128,7 @@ public class ArchipelagoData implements SaveFileContent {
                     totalTownQuestsAndEventsDone += (int) count;
                 }
                 if (totalTownQuestsAndEventsDone > 0 && totalTownQuestsAndEventsDone % totalTownQuestsAndEventsBreakpoint == 0) {
-                    unlockRandomRegion();
+                    LocalRandomizer.getInstance().unlockRandomRegion();
                 }
                 // Todo: Signal the APWorld that the next quest/event location is triggered
             }
@@ -292,7 +232,7 @@ public class ArchipelagoData implements SaveFileContent {
         return true;
     }
 
-    /// --- The checks below are mostly functional offline and should not be called from the networked part of the AP implementation. ---
+    /// --- The checks below can be called from the networked part of the AP implementation. Note that `setLastArchipelagoRewardIndex` must be called manually. ---
     private void unlockSetByName(String setToUnlock) {
         addSetUnlockedByCode(setToUnlock);
         String setUnlockedText = "FORGE_ARCHIPELAGO: CARD SET REWARD: " + setToUnlock;
@@ -338,130 +278,12 @@ public class ArchipelagoData implements SaveFileContent {
         receivedAmountOfSetUnlockChecks++;
     }
 
-    // Todo: Expand this function to be able to return a list of rewards so that we can award the player gold, shards & a pack in place of their item.
-    // Returns & rewards the player a random item from the remainingEquipmentPool and then removes it from the list. If no item is left, the player is instead rewarded with gold or shards.
-    // This produces a different result each time it's rolled, the RNG isn't seeded.
-    public Reward takeSingleEquipmentOutOfRemainingPool() {
-        Random random = new Random();
-        while (true) {
-            if (!remainingEquipmentPool.isEmpty()) {
-                List<String> remainingEquipmentList = new ArrayList<>(remainingEquipmentPool);
-                String equipmentCandidate = remainingEquipmentList.get(random.nextInt(remainingEquipmentList.size()));
-                remainingEquipmentPool.remove(equipmentCandidate);
-                return ArchipelagoUtil.generateReward("item", 1, equipmentCandidate);
-            } else {
-                // Generate a random standard reward in place of the item.
-                int chosenItemType = random.nextInt(2);
-                switch (chosenItemType) {
-                    case 0:
-                        return new Reward(Reward.Type.Gold, 3000);
-                    case 1:
-                        return new Reward(Reward.Type.Shards, 75);
-                }
-            }
-        }
-    }
-
-    // Todo: Create a function that returns a list of equipment for any given shop to sell based on the previously randomized lists.
-    public Object[] getItemsForEquipmentShop(String shopName) {
-        if (shopName.toLowerCase().contains("items")) {
-            // Items shop name
-            if (shopName.toLowerCase().contains("white")) {
-                return whiteItemShopList.toArray();
-            } else if (shopName.toLowerCase().contains("blue")) {
-                return blueItemShopList.toArray();
-            } else if (shopName.toLowerCase().contains("black")) {
-                return blackItemShopList.toArray();
-            } else if (shopName.toLowerCase().contains("red")) {
-                return redItemShopList.toArray();
-            } else if (shopName.toLowerCase().contains("green")) {
-                return greenItemShopList.toArray();
-            }
-        } else {
-            // Equipment shop name
-            if (shopName.toLowerCase().contains("white")) {
-                return whiteItemShopList.toArray();
-            } else if (shopName.toLowerCase().contains("blue")) {
-                return blueItemShopList.toArray();
-            } else if (shopName.toLowerCase().contains("black")) {
-                return blackItemShopList.toArray();
-            } else if (shopName.toLowerCase().contains("red")) {
-                return redItemShopList.toArray();
-            } else if (shopName.toLowerCase().contains("green")) {
-                return greenItemShopList.toArray();
-            } else {
-                return colorlessEquipmentShopList.toArray();
-            }
-        }
-        return null;
-    }
-
-    public void unlockRegionByName(String regionName) {
-        lockedWorldRegionsByName.remove(regionName);
-    }
-
-    public void unlockRandomRegion() {
-        if (lockedWorldRegionsByName.isEmpty()) {
-            return;
-        }
-
-        int targetRegionIndex = new Random().nextInt(lockedWorldRegionsByName.size());
-        int setIndex = 0;
-        for (String region : lockedWorldRegionsByName) {
-            if (setIndex++ == targetRegionIndex) {
-                for (String runeName : regionTeleportingRunes) {
-                    if (runeName.toLowerCase().contains(region.toLowerCase())) {
-                        Current.player().addItem(runeName);
-                        return;
-                    }
-                }
-            }
-        }
-    }
-    /// --- End ---
-
-    /// --- The checks below can be called from the networked part of the AP implementation. Note that `setLastArchipelagoRewardIndex` must be called manually. ---
-    /// Todo: Add custom pop-up message to be shown upon receiving a check.
-    public void unlockManaCrystalReward(Integer amount) {
-        Current.player().addShards(amount);
-        addShards(amount);
-    }
-
-    public void unlockGoldReward(int amount) {
-        Current.player().giveGold(amount);
-        addGold(amount);
-    }
-
-    // Todo: Verify that this is actually what we want and it's working
-    public void unlockChallengeCoinReward(Map<String, Integer> itemNamesAndAmounts) {
-        for (Map.Entry<String, Integer> item : itemNamesAndAmounts.entrySet()) {
-            for (int i = 0; i < item.getValue(); i++) {
-                Current.player().addItem(item.getKey());
-                addItem(item.getKey());
-            }
-        }
-    }
-
-    public void unlockItemReward(String itemName) {
-        Current.player().addItem(itemName);
-        addItem(itemName);
-    }
-
-    // Todo: This should be called by the networked part of the AP implementation when we receive a reward.
-    public void incrementLastArchipelagoRewardIndex() {
-        lastArchipelagoRewardIndex++;
-    }
-
-    public int getLastArchipelagoRewardIndex() {
-        return lastArchipelagoRewardIndex;
-    }
-
     public void generateGameNotification(String message) {
         GameHUD.getInstance().addNotification(message, 0.5f, 3f, 0.5f);
     }
     /// --- End ---
 
-    /// --- The functions below are responsible for mutating the user data we store in the save file ---
+    /// --- The functions below are responsible for mutating the user data we store in the save file for both modes ---
     // Todo: Make the functions below private where possible, rewrite other code to account for this.
     // Todo: Make sure the functions below trigger all related checks in `updatePlayerChecks` when applicable.
     // Todo: Defeating a (mini-)boss should probably count as a check.
@@ -529,21 +351,25 @@ public class ArchipelagoData implements SaveFileContent {
         System.out.println("FORGE_ARCHIPELAGO: GOLD REWARD DETECTED: " + amount);
     }
 
+    private void addUnlockedRegionByName(String regionName) {
+        lockedWorldRegionsByName.remove(regionName);
+    }
+
     // Due to MapDialog.SetEffects() using just a name string to add items to the player's inventory, it's likely that the name is unique.
     // Todo: Verify that item names are unique.
     public void addItem(String itemName) {
         if (regionTeleportingRunes.contains(itemName)) {
             // Unlock the region based on the color found in the itemName
             if (itemName.toLowerCase().contains("white")) {
-                unlockRegionByName("white");
+                addUnlockedRegionByName("white");
             } else if (itemName.toLowerCase().contains("blue")) {
-                unlockRegionByName("blue");
+                addUnlockedRegionByName("blue");
             } else if (itemName.toLowerCase().contains("black")) {
-                unlockRegionByName("black");
+                addUnlockedRegionByName("black");
             } else if (itemName.toLowerCase().contains("red")) {
-                unlockRegionByName("red");
+                addUnlockedRegionByName("red");
             } else if (itemName.toLowerCase().contains("green")) {
-                unlockRegionByName("green");
+                addUnlockedRegionByName("green");
             }
             String regionUnlockMessage = "FORGE_ARCHIPELAGO: REGION REWARD DETECTED: " + itemName;
             System.out.println(regionUnlockMessage);
@@ -638,6 +464,7 @@ public class ArchipelagoData implements SaveFileContent {
             return;
         }
         loadAllAvailableSets();
+        LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
 
         // Load save data
         loadStringLongMap(data, "townEvents", completedTownInnEvents);
@@ -650,18 +477,22 @@ public class ArchipelagoData implements SaveFileContent {
         loadStringSet(data, "cardsUnlocked", cardsUnlockedByName);
         loadStringSet(data, "setsUnlocked", setsUnlockedByCode);
         loadStringSet(data, "lockedRegions", lockedWorldRegionsByName);
-        loadStringSet(data, "colorlessEquipmentShop", colorlessEquipmentShopList);
-        loadStringSet(data, "whiteEquipmentShop", whiteEquipmentShopList);
-        loadStringSet(data, "blueEquipmentShop", blueEquipmentShopList);
-        loadStringSet(data, "blackEquipmentShop", blackEquipmentShopList);
-        loadStringSet(data, "redEquipmentShop", redEquipmentShopList);
-        loadStringSet(data, "greenEquipmentShop", greenEquipmentShopList);
-        loadStringSet(data, "whiteItemShop", whiteItemShopList);
-        loadStringSet(data, "blueEquipmentShop", blueItemShopList);
-        loadStringSet(data, "blackEquipmentShop", blackItemShopList);
-        loadStringSet(data, "redEquipmentShop", redItemShopList);
-        loadStringSet(data, "greenItemShop", greenItemShopList);
-        loadStringSet(data, "remainingEquipment", remainingEquipmentPool);
+        // Todo: Swap this for the ArchipelagoRandomizer data when that's enabled
+        if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
+            WorldData.resetShopLists();
+            loadStringSet(data, "colorlessEquipmentShop", localRandomizer.colorlessEquipmentShopList);
+            loadStringSet(data, "whiteEquipmentShop", localRandomizer.whiteEquipmentShopList);
+            loadStringSet(data, "blueEquipmentShop", localRandomizer.blueEquipmentShopList);
+            loadStringSet(data, "blackEquipmentShop", localRandomizer.blackEquipmentShopList);
+            loadStringSet(data, "redEquipmentShop", localRandomizer.redEquipmentShopList);
+            loadStringSet(data, "greenEquipmentShop", localRandomizer.greenEquipmentShopList);
+            loadStringSet(data, "whiteItemShop", localRandomizer.whiteItemShopList);
+            loadStringSet(data, "blueEquipmentShop", localRandomizer.blueItemShopList);
+            loadStringSet(data, "blackEquipmentShop", localRandomizer.blackItemShopList);
+            loadStringSet(data, "redEquipmentShop", localRandomizer.redItemShopList);
+            loadStringSet(data, "greenItemShop", localRandomizer.greenItemShopList);
+            loadStringSet(data, "remainingEquipment", localRandomizer.remainingEquipmentPool);
+        }
 
         setUnlockChecksRestAmount = data.containsKey("setUnlocksReceivedRest") ? data.readFloat("setUnlocksReceivedRest") : 0;
         receivedAmountOfSetUnlockChecks = data.containsKey("setUnlocksReceived") ? data.readInt("setUnlocksReceived") : 0;
@@ -684,6 +515,7 @@ public class ArchipelagoData implements SaveFileContent {
     @Override
     public SaveFileData save() {
         SaveFileData data = new SaveFileData();
+        LocalRandomizer localRandomizer = LocalRandomizer.getInstance();
 
         saveStringLongMap(data, "townEvents", completedTownInnEvents);
         saveStringLongMap(data, "townQuests", completedTownQuests);
@@ -695,18 +527,21 @@ public class ArchipelagoData implements SaveFileContent {
         saveStringSet(data, "cardsUnlocked", cardsUnlockedByName);
         saveStringSet(data, "setsUnlocked", setsUnlockedByCode);
         saveStringSet(data, "lockedRegions", lockedWorldRegionsByName);
-        saveStringSet(data, "colorlessEquipmentShop", colorlessEquipmentShopList);
-        saveStringSet(data, "whiteEquipmentShop", whiteEquipmentShopList);
-        saveStringSet(data, "blueEquipmentShop", blueEquipmentShopList);
-        saveStringSet(data, "blackEquipmentShop", blackEquipmentShopList);
-        saveStringSet(data, "redEquipmentShop", redEquipmentShopList);
-        saveStringSet(data, "greenEquipmentShop", greenEquipmentShopList);
-        saveStringSet(data, "whiteItemShop", whiteItemShopList);
-        saveStringSet(data, "blueEquipmentShop", blueItemShopList);
-        saveStringSet(data, "blackEquipmentShop", blackItemShopList);
-        saveStringSet(data, "redEquipmentShop", redItemShopList);
-        saveStringSet(data, "greenItemShop", greenItemShopList);
-        saveStringSet(data, "remainingEquipment", remainingEquipmentPool);
+        // Todo: Swap this for the ArchipelagoRandomizer data when that's enabled
+        if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
+            saveStringSet(data, "colorlessEquipmentShop", localRandomizer.colorlessEquipmentShopList);
+            saveStringSet(data, "whiteEquipmentShop", localRandomizer.whiteEquipmentShopList);
+            saveStringSet(data, "blueEquipmentShop", localRandomizer.blueEquipmentShopList);
+            saveStringSet(data, "blackEquipmentShop", localRandomizer.blackEquipmentShopList);
+            saveStringSet(data, "redEquipmentShop", localRandomizer.redEquipmentShopList);
+            saveStringSet(data, "greenEquipmentShop", localRandomizer.greenEquipmentShopList);
+            saveStringSet(data, "whiteItemShop", localRandomizer.whiteItemShopList);
+            saveStringSet(data, "blueEquipmentShop", localRandomizer.blueItemShopList);
+            saveStringSet(data, "blackEquipmentShop", localRandomizer.blackItemShopList);
+            saveStringSet(data, "redEquipmentShop", localRandomizer.redItemShopList);
+            saveStringSet(data, "greenItemShop", localRandomizer.greenItemShopList);
+            saveStringSet(data, "remainingEquipment", localRandomizer.remainingEquipmentPool);
+        }
 
         data.store("setUnlocksReceivedRest", setUnlockChecksRestAmount);
         data.store("setUnlocksReceived", receivedAmountOfSetUnlockChecks);

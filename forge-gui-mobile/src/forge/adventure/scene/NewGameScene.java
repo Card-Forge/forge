@@ -10,10 +10,11 @@ import com.badlogic.gdx.utils.Array;
 
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
-import forge.adventure.data.ArchipelagoMode;
+import forge.adventure.archipelago.ArchipelagoMode;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
+import forge.adventure.data.WorldData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
@@ -351,6 +352,7 @@ public class NewGameScene extends MenuScene {
         Runnable runnable = () -> {
             started = false;
             //FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
+            WorldData.resetShopLists();
             WorldSave.generateNewWorld(selectedName.getText(),
                     gender.getCurrentIndex() == 0,
                     race.getCurrentIndex(),

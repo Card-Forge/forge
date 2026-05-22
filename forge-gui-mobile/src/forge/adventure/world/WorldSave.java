@@ -1,7 +1,7 @@
 package forge.adventure.world;
 
-import forge.adventure.data.ArchipelagoData;
-import forge.adventure.data.ArchipelagoMode;
+import forge.adventure.archipelago.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoMode;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterest;

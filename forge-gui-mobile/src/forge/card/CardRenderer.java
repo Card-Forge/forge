@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.ImageKeys;
-import forge.adventure.data.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoData;
 import forge.adventure.util.ArchipelagoUtil;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;

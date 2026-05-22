@@ -1,19 +1,15 @@
 package forge.adventure.util;
 
 import com.github.tommyettinger.textra.TypingLabel;
-import forge.StaticData;
 import forge.adventure.archipelago.SlotData;
 import forge.adventure.archipelago.events.ConnectResult;
 import forge.adventure.archipelago.events.LocationChecked;
 import forge.adventure.archipelago.events.OnDeathLink;
 import forge.adventure.archipelago.events.ReceiveItem;
-import forge.adventure.data.ArchipelagoData;
-import forge.card.CardEdition;
 import io.github.archipelagomw.Client;
 import io.github.archipelagomw.flags.ItemsHandling;
 
 import javax.annotation.Nullable;
-import java.util.*;
 
 public class ArchipelagoClient extends Client {
 

@@ -2,15 +2,10 @@ package forge.adventure.archipelago.events;
 
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.adventure.archipelago.SlotData;
-import forge.adventure.data.ArchipelagoData;
 import forge.adventure.util.ArchipelagoClient;
-import io.github.archipelagomw.Utils;
 import io.github.archipelagomw.events.ArchipelagoEventListener;
 import io.github.archipelagomw.events.ConnectionResultEvent;
 import io.github.archipelagomw.network.ConnectionResult;
-
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 public class ConnectResult {
 

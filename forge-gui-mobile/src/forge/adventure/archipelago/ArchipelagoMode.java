@@ -1,4 +1,4 @@
-package forge.adventure.data;
+package forge.adventure.archipelago;
 
 public enum ArchipelagoMode {
     disabled,

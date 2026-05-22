@@ -13,9 +13,10 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.archipelago.LocalRandomizer;
 import forge.adventure.character.ShopActor;
-import forge.adventure.data.ArchipelagoData;
-import forge.adventure.data.ArchipelagoMode;
+import forge.adventure.archipelago.ArchipelagoData;
+import forge.adventure.archipelago.ArchipelagoMode;
 import forge.adventure.data.RewardData;
 import forge.adventure.data.ShopData;
 import forge.adventure.player.AdventurePlayer;
@@ -508,7 +509,7 @@ public class RewardScene extends UIScene {
 
             // Todo: Add logic so this works with the networked archipelago as well.
             if (ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled && type == Type.Loot && reward.getType() == Reward.Type.Item && reward.getItem().equipmentSlot != null && !reward.getItem().equipmentSlot.isEmpty()) {
-                reward = ArchipelagoData.getInstance().takeSingleEquipmentOutOfRemainingPool();
+                reward = LocalRandomizer.getInstance().takeSingleEquipmentOutOfRemainingPool();
             }
             RewardActor actor = new RewardActor(reward, type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
 
