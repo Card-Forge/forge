@@ -24,17 +24,17 @@
 
 # Requirements
 
-| Requirement | Details |
-|---|---|
-| **Platforms** | Desktop and Mobile. **Cross-platform play is supported** — any platform can host or join. |
-| **Players** | Up to **8 players** per game (1 host + up to 7 remote players) |
-| **Roles** | **Host** runs Forge as the server; **Client** connects to it |
-| **Game Types** | **Constructed** formats only (no Draft or Sealed). Supported variants: Commander, Oathbreaker, Tiny Leaders, Brawl, Archenemy, Planechase, Vanguard. |
-| **Network** | Local (same Wi-Fi, Wi-Fi Direct, Ethernet) or Remote (IPv4 internet) |
-| **Port** | Default: **36743** (TCP). Can be changed in Forge's network preferences. |
-| **Firewall** | Host must allow Forge or the server port through its firewall. Do **not** disable the firewall entirely. |
-| **Port Forward** | Required for remote play — forward the server port on the host's router, or use UPnP (see below) |
-| **IP Version** | IPv4 required. IPv6 with full Dual Stack works; Dual Stack Lite does **not**. |
+| Requirement | Details                                                                                                                                                                                                                  |
+|---|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Platforms** | Desktop and Mobile. **Cross-platform play is supported** — any platform can host or join.                                                                                                                                |
+| **Players** | Up to **8 players** per game (1 host + up to 7 remote players)                                                                                                                                                           |
+| **Roles** | **Host** runs Forge as the server; **Client** connects to it                                                                                                                                                             |
+| **Game Types** | **Constructed** formats. Supported variants: Commander, Oathbreaker, Tiny Leaders, Brawl, Archenemy, Planechase, Vanguard.<br>**Limited** formats: Draft and Sealed modes available on desktop (mobile support planned). |
+| **Network** | Local (same Wi-Fi, Wi-Fi Direct, Ethernet) or Remote (IPv4 internet)                                                                                                                                                     |
+| **Port** | Default: **36743** (TCP). Can be changed in Forge's network preferences.                                                                                                                                                 |
+| **Firewall** | Host must allow Forge or the server port through its firewall. Do **not** disable the firewall entirely.                                                                                                                 |
+| **Port Forward** | Required for remote play — forward the server port on the host's router, or use UPnP (see below)                                                                                                                         |
+| **IP Version** | IPv4 required. IPv6 with full Dual Stack works; Dual Stack Lite does **not**.                                                                                                                                            |
 
 ---
 
@@ -273,9 +273,6 @@ A common cause for this is that the client and server resource (res) folder cont
 
 ## Version Compatibility
 Forge automatically warns in the lobby chat when a client's version differs from the host's but **does not block the connection**. While network play between different versions of Forge can be possible, mismatched versions may cause desync or crashes mid-game. If possible always use the same version on all devices to avoid network compatibility issues.
-
-## Lag / High Bandwidth
-Network play currently lacks traffic optimization. A single game can transfer hundreds of megabytes. Slow connections will experience significant lag.
 
 ---
 

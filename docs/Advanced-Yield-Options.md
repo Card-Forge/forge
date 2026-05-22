@@ -23,13 +23,17 @@ These features are highly configurable through the **Yield Settings** dialog, an
 
 ## Auto-Pass
 
-**Auto-Pass** is a persistent toggle (**P** on desktop, or the Auto-Pass icon on the dock) that automatically passes priority whenever you have no playable actions available. It's the simplest way to speed up games where you often have nothing to do — enable it once and Forge stops asking for input you'd only use to pass. The same **P** key also doubles as a "stop everything" shortcut: if any yield is currently active (transient yield or Auto-Pass itself), pressing P clears them all in one shot without dismissing any prompt that's up.
+**Auto-Pass** is a persistent toggle that automatically passes priority whenever you have no playable actions available. It's the simplest way to speed up games where you often have nothing to do — enable it once and Forge stops asking for input you'd only use to pass.
+
+**How to enable/disable:**
+- **Desktop**: **P** hotkey, auto-pass button on the dock, or "Enable auto-pass" in the Game menu.
+- **Mobile**: **P** hotkey, or "Auto-Pass: ON/OFF" button in the Game menu.
+- The **P** hotkey doubles as a "stop everything" shortcut: if any yield is currently active (transient yield or Auto-Pass itself), pressing P clears them all in one shot without dismissing any prompt that's up.
 
 **How it works:**
 - When enabled, Forge scans your hand, battlefield, and external zones (graveyard, exile, command) for castable spells, playable lands, and activatable abilities.
 - If you have any available action, you keep priority as usual.
 - If you have no available action, Forge passes priority on your behalf without prompting.
-- On desktop, the Auto-Pass dock icon's background lights up gold while active. On mobile, the menu entry text reads `Auto-Pass: ON` / `Auto-Pass: OFF`.
 
 **Interaction with interrupts:** By default, Auto-Pass ignores your interrupt settings — it keeps passing as long as you have no actions, regardless of attackers, opponent spells, mass-removal, etc. Enable **Auto-pass respects interrupts** in the Yield Interrupt Settings section if you want interrupts to break Auto-Pass too.
 
@@ -38,7 +42,7 @@ These features are highly configurable through the **Yield Settings** dialog, an
 **Performance and timeout:** The action-availability scan can be expensive in complex board states. The scan is subject to the **Auto-pass calculation timeout** setting in the Yield Settings dialog. On timeout the system prompts you instead of auto-passing, so a false positive means an extra prompt rather than a long stall. The default is **Dynamic** — the budget scales with the number of playable cards (approximately 50ms per card, clamped between 50ms and 1500ms). Set your own value in the Yield Settings dialog to override.
 
 > [!NOTE]
-> **The Auto-pass AI is not perfect.** It is designed to avoid false negatives (passing priority when there is action you can take) as much as possible. There may be times it produces a false positive (giving you priority when there is nothing you can do). Use with appropriate caution.
+> **The Auto-pass AI is not perfect and should be used with caution.** It is designed to avoid false negatives (passing priority when there is action you can take) as much as possible. There may be times it produces a false positive (giving you priority when there is nothing you can do).
 
 ## Yield markers
 
@@ -54,7 +58,6 @@ A fast-forward symbol will appear on the targeted cell to show the marker is act
 
 **Cancelling:**
 - Right-click (or long-press) the marker again to cancel it.
-- Press **ESC** (desktop) to cancel any active marker.
 - An enabled interrupt firing (see [Yield Interrupt Settings](#yield-interrupt-settings)) cancels the marker and hands priority back to you.
 
 **Re-targeting:** Right-clicking (or long-pressing) a different phase indicator while a marker is active moves the marker to the new cell. Only one marker is active at a time.
@@ -62,7 +65,7 @@ A fast-forward symbol will appear on the targeted cell to show the marker is act
 ## Yield Settings Menu
 
 The **Yield Settings** dialog is the central configuration UI for yield behavior. It's accessible from:
-- **Desktop:** the cog button on the dock, the Game menu > **Yield Settings** entry, or Ctrl+Y.
+- **Desktop:** the Yield Settings button on the dock, the Game menu > **Yield Settings** entry, or Ctrl+Y.
 - **Mobile:** Game menu > **Yield Options**.
 
 The dialog has three sections:
