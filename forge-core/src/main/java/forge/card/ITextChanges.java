@@ -7,4 +7,6 @@ public interface ITextChanges {
     Map<String, String> typeChanges();
 
     boolean isEmpty();
+
+    ITextChanges combine(ITextChanges output);
 }
