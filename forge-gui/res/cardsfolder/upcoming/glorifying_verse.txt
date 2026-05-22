@@ -1,0 +1,7 @@
+Name:Glorifying Verse
+ManaCost:WB
+Types:Enchantment
+K:Exalted
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigConjure | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TargetsValid$ Creature.inZoneBattlefield | TriggerDescription$ Repartee — Whenever you cast an instant or sorcery spell that targets a creature, conjure a card named Glorifying Verse into your hand.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Glorifying Verse | Zone$ Hand
+Oracle:Exalted\nRepartee — Whenever you cast an instant or sorcery spell that targets a creature, conjure a card named Glorifying Verse into your hand.
