@@ -5,6 +5,7 @@ from pydantic import ValidationError
 
 from app.graph import get_graph
 from app.knowledge import format_detect, loader, metagame
+from app.nodes import combo_strategist
 from app.nodes import game_advisor
 from app.schema import ActionScore, RecognitionRequest
 
@@ -165,6 +166,82 @@ async def test_prompt_keeps_recognition_and_piloting_separate(monkeypatch, sampl
     assert "ai hand:" not in captured["recognition"].lower()
     assert "ai battlefield:" not in captured["recognition"].lower()
     assert captured["calls"] == 1
+
+
+@pytest.mark.asyncio
+async def test_combo_node_runs_for_ai_combo_deck(monkeypatch):
+    async def fake_recognition(prompt, system=None):
+        return {"archetype": "Boros Energy", "confidence": 0.8, "reasoning": "", "alternatives": []}
+
+    combo_calls = {"count": 0}
+
+    async def fake_combo(prompt, system=None, model=None, temperature=0.2):
+        combo_calls["count"] += 1
+        return {
+            "line_name": "Normal storm turn",
+            "go_for_it_now": True,
+            "readiness_score": 91,
+            "needed_cards": [],
+            "needed_mana": "RR",
+            "sequence": ["Cast rituals", "Cast Grapeshot"],
+            "protection_plan": "No protection needed.",
+            "risk_assessment": "Low risk.",
+            "action_adjustments": [
+                {
+                    "action_type": "PLAY_SPELL",
+                    "target": "Desperate Ritual",
+                    "targets": None,
+                    "percentage": 97,
+                    "reasoning": "Starts the combo line.",
+                }
+            ],
+        }
+
+    monkeypatch.setattr(game_advisor, "generate_json", fake_recognition)
+    monkeypatch.setattr(combo_strategist, "generate_json", fake_combo)
+    state = {
+        "game_id": "t",
+        "format": "Modern",
+        "turn": 3,
+        "observations": [],
+        "deck_cards": ["Ruby Medallion", "Pyretic Ritual", "Ral, Monsoon Mage"],
+        "hand": ["Desperate Ritual", "Pyretic Ritual", "Wrenn's Resolve", "Grapeshot"],
+        "own_board": ["Ruby Medallion"],
+        "your_graveyard": [],
+        "available_mana": ["R", "R", "C"],
+        "alternatives": [],
+    }
+    result = await get_graph().ainvoke(state)
+    assert combo_calls["count"] == 1
+    assert result["combo_plan"]["line_name"] == "Normal storm turn"
+    assert any(a.get("target") == "Desperate Ritual" and a.get("percentage") == 97 for a in result["actions"])
+
+
+@pytest.mark.asyncio
+async def test_combo_node_llm_failure_falls_back(monkeypatch):
+    async def fake_recognition(prompt, system=None):
+        return {"archetype": "Boros Energy", "confidence": 0.8, "reasoning": "", "alternatives": []}
+
+    async def boom(prompt, system=None, model=None, temperature=0.2):
+        raise combo_strategist.LLMError("offline")
+
+    monkeypatch.setattr(game_advisor, "generate_json", fake_recognition)
+    monkeypatch.setattr(combo_strategist, "generate_json", boom)
+    state = {
+        "game_id": "t",
+        "format": "Modern",
+        "turn": 3,
+        "observations": [],
+        "deck_cards": ["Ruby Medallion", "Pyretic Ritual", "Ral, Monsoon Mage"],
+        "hand": ["Desperate Ritual", "Pyretic Ritual", "Wrenn's Resolve", "Grapeshot"],
+        "own_board": ["Ruby Medallion"],
+        "your_graveyard": [],
+        "available_mana": ["R", "R", "C"],
+        "alternatives": [],
+    }
+    result = await get_graph().ainvoke(state)
+    assert result["combo_plan"]["go_for_it_now"] is True
+    assert any(a.get("target") == "Desperate Ritual" for a in result["actions"])
 
 
 @pytest.mark.asyncio
@@ -394,9 +471,58 @@ class TestActionsInGraphOutput:
         actions = result["actions"]
         types = {a.get("action_type") for a in actions}
         assert "MULLIGAN" in types
-        # MULLIGAN should be the only action on turn 0
-        assert len(actions) == 1
-        assert actions[0]["action_type"] == "MULLIGAN"
+        assert result["early_game_plan"]["decision"] in {"keep", "mulligan"}
+        assert [t["turn"] for t in result["early_game_plan"]["planned_turns"]] == [1, 2, 3, 4]
+
+    @pytest.mark.asyncio
+    async def test_early_plan_rolls_forward_after_opening_hand(self, monkeypatch):
+        state = {
+            "game_id": "rolling-plan",
+            "format": "Constructed",
+            "turn": 2,
+            "observations": [],
+            "deck_cards": ["Lightning Bolt", "Mountain", "Mountain", "Ragavan, Nimble Pilferer"],
+            "hand": ["Mountain", "Lightning Bolt", "Ragavan, Nimble Pilferer"],
+            "own_board": ["Mountain"],
+            "alternatives": [],
+        }
+        game_advisor._resolved_format["rolling-plan"] = "modern"
+
+        async def fake_generate_json(prompt, system=None):
+            return {"archetype": "Unknown", "confidence": 0.0, "reasoning": "", "alternatives": []}
+
+        monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
+        result = await get_graph().ainvoke(state)
+        assert [t["turn"] for t in result["early_game_plan"]["planned_turns"]] == [3, 4, 5, 6]
+
+    @pytest.mark.asyncio
+    async def test_early_plan_filters_current_actions_to_legal_options(self, monkeypatch):
+        state = {
+            "game_id": "legal-plan",
+            "format": "Constructed",
+            "turn": 1,
+            "observations": [],
+            "deck_cards": ["Lightning Bolt", "Mountain", "Ragavan, Nimble Pilferer"],
+            "hand": ["Mountain", "Lightning Bolt", "Ragavan, Nimble Pilferer"],
+            "own_board": [],
+            "alternatives": [],
+            "legal_actions": [
+                {"action_type": "PLAY_LAND", "card": "Mountain"},
+                {"action_type": "PLAY_SPELL", "card": "Ragavan, Nimble Pilferer"},
+            ],
+        }
+        game_advisor._resolved_format["legal-plan"] = "modern"
+
+        async def fake_generate_json(prompt, system=None):
+            return {"archetype": "Unknown", "confidence": 0.0, "reasoning": "", "alternatives": []}
+
+        monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
+        result = await get_graph().ainvoke(state)
+        illegal = [
+            a for a in result["actions"]
+            if a.get("action_type") == "PLAY_SPELL" and a.get("target") == "Lightning Bolt"
+        ]
+        assert illegal == []
 
     @pytest.mark.asyncio
     async def test_personality_influences_aggro_action_percentages(self, monkeypatch):

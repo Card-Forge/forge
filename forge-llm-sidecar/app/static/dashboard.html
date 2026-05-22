@@ -569,6 +569,81 @@
             `;
           });
         }
+        let comboHtml = '';
+        const cp = p.combo_plan;
+        if (cp) {
+          const ready = Math.round(cp.readiness_score || 0);
+          const readyColor = cp.go_for_it_now ? 'var(--green)' : ready >= 55 ? 'var(--yellow)' : 'var(--red)';
+          const status = cp.go_for_it_now ? 'Go now' : 'Set up';
+          const needed = (cp.needed_cards || cp.missing_pieces || []).slice(0, 6)
+            .map(c => `<span class="alt-chip">${escapeHtml(c)}</span>`).join('');
+          const sequence = (cp.sequence || []).slice(0, 5)
+            .map(s => `<li style="margin:1px 0">${escapeHtml(s)}</li>`).join('');
+          comboHtml = `
+            <div class="piloting-label" style="margin-top:10px">Combo Plan<span class="llm-tag">Strategist</span></div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;flex-wrap:wrap">
+              <b>${escapeHtml(cp.line_name || cp.preferred_line || 'Combo line')}</b>
+              <span style="color:${readyColor};font-weight:600">${status}</span>
+              <span class="alt-chip">${ready}% ready</span>
+              ${cp.needed_mana ? `<span class="alt-chip">${escapeHtml(cp.needed_mana)}</span>` : ''}
+            </div>
+            <div style="height:4px;background:var(--bg);border-radius:2px;overflow:hidden;margin-top:4px">
+              <div style="height:100%;width:${ready}%;background:${readyColor};border-radius:2px"></div>
+            </div>
+            ${needed ? `<div class="alternatives" style="margin-top:6px">${needed}</div>` : ''}
+            ${cp.wait_reason ? `<div class="reasoning">${escapeHtml(cp.wait_reason)}</div>` : ''}
+            ${sequence ? `<ul style="margin:6px 0 2px 18px;padding:0;font-size:12px">${sequence}</ul>` : ''}
+            ${cp.protection_plan ? `<div class="reasoning"><b>Protection:</b> ${escapeHtml(cp.protection_plan)}</div>` : ''}
+            ${cp.risk_assessment ? `<div class="reasoning"><b>Risk:</b> ${escapeHtml(cp.risk_assessment)}</div>` : ''}
+          `;
+        }
+        let earlyPlanHtml = '';
+        const ep = p.early_game_plan;
+        if (ep) {
+          const confidence = Math.round((ep.confidence || 0) * 100);
+          const decisionColor = (ep.decision || '').toLowerCase() === 'keep' ? 'var(--green)' : 'var(--yellow)';
+          const turns = (ep.planned_turns || []).slice(0, 4).map(t => {
+            const spells = (t.spells || []).length
+              ? t.spells.map(s => `<span class="alt-chip">${escapeHtml(s)}</span>`).join('')
+              : '<span style="color:var(--text-dim)">No spell planned</span>';
+            const land = t.land ? escapeHtml(t.land) : '<span style="color:var(--text-dim)">No land planned</span>';
+            return `
+              <div style="padding:5px 0;border-top:1px solid var(--border);font-size:12px">
+                <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                  <span style="font-family:var(--mono);font-size:11px;text-transform:uppercase;color:var(--text-dim)">AI T${t.turn}</span>
+                  <span><b>Land:</b> ${land}</span>
+                  <span><b>Spells:</b> ${spells}</span>
+                </div>
+                ${t.mana_rationale ? `<div class="reasoning">${escapeHtml(t.mana_rationale)}</div>` : ''}
+                ${t.opponent_adjustment ? `<div class="reasoning">${escapeHtml(t.opponent_adjustment)}</div>` : ''}
+              </div>
+            `;
+          }).join('');
+          const fetches = (ep.fetch_plan || []).slice(0, 4).map(s => `<li style="margin:1px 0">${escapeHtml(s)}</li>`).join('');
+          const assumptions = (ep.draw_assumptions || []).slice(0, 3).map(s => `<span class="alt-chip">${escapeHtml(s)}</span>`).join('');
+          const bottoms = (ep.bottom_cards || []).map(s => `<span class="alt-chip">${escapeHtml(s)}</span>`).join('');
+          const contingencies = (ep.contingencies || []).slice(0, 4).map(s => `<li style="margin:1px 0">${escapeHtml(s)}</li>`).join('');
+          const estimates = [
+            ep.estimated_win_turn ? `Win ~AI T${ep.estimated_win_turn}` : '',
+            ep.estimated_loss_turn ? `Loss risk ~AI T${ep.estimated_loss_turn}` : '',
+            typeof ep.influence_weight === 'number' ? `Influence ${ep.influence_weight}` : ''
+          ].filter(Boolean).map(s => `<span class="alt-chip">${escapeHtml(s)}</span>`).join('');
+          earlyPlanHtml = `
+            <div class="piloting-label" style="margin-top:10px">Early Game Plan<span class="llm-tag">Planner</span></div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px;flex-wrap:wrap">
+              <b style="color:${decisionColor}">${escapeHtml(ep.decision || 'plan')}</b>
+              <span class="alt-chip">${confidence}% confidence</span>
+              ${estimates}
+            </div>
+            ${(ep.keep_reason || ep.mulligan_reason) ? `<div class="reasoning">${escapeHtml(ep.keep_reason || ep.mulligan_reason)}</div>` : ''}
+            ${bottoms ? `<div style="margin-top:4px;font-size:12px"><b>Bottom:</b> <span class="alternatives">${bottoms}</span></div>` : ''}
+            ${assumptions ? `<div class="alternatives" style="margin-top:6px">${assumptions}</div>` : ''}
+            ${ep.probability_notes ? `<div class="reasoning">${escapeHtml(ep.probability_notes)}</div>` : ''}
+            ${fetches ? `<div style="margin-top:6px;font-size:12px"><b>Fetch plan:</b><ul style="margin:2px 0 2px 18px;padding:0">${fetches}</ul></div>` : ''}
+            ${turns}
+            ${contingencies ? `<div style="margin-top:6px;font-size:12px"><b>Contingencies:</b><ul style="margin:2px 0 2px 18px;padding:0">${contingencies}</ul></div>` : ''}
+          `;
+        }
         // --- v4 board-aware panels ------------------------------------------
         let roleHtml = '';
         if (p.role) {
@@ -777,6 +852,8 @@
             <div class="piloting-label" style="margin-top:6px">Own Archetype: ${escapeHtml(p.own_archetype)}${guideSrc}</div>
             ${roleHtml}
             ${guidePlanHtml}
+            ${earlyPlanHtml}
+            ${comboHtml}
             ${actionsHtml}
             ${handValuesHtml}
             ${oppHandHtml}

@@ -103,6 +103,38 @@ class MatchupNote(BaseModel):
     watch_for: list[str] = Field(default_factory=list)
 
 
+class ComboLine(BaseModel):
+    """One known line in a combo deck."""
+
+    name: str
+    required_categories: list[str] = Field(default_factory=list)
+    key_cards: list[str] = Field(default_factory=list)
+    mana_requirement: str = ""
+    sequence: list[str] = Field(default_factory=list)
+    payoff: str = ""
+    notes: str = ""
+
+
+class ComboMatchupPosture(BaseModel):
+    """How aggressively to pursue the combo against a matchup family."""
+
+    opponent_type: str
+    posture: str = ""
+    go_threshold: float = 75.0
+    notes: str = ""
+
+
+class ComboProfile(BaseModel):
+    """Structured combo-deck data consumed by the runtime combo strategist."""
+
+    profile_version: int = 1
+    required_setup_categories: list[str] = Field(default_factory=list)
+    category_cards: dict[str, list[str]] = Field(default_factory=dict)
+    known_lines: list[ComboLine] = Field(default_factory=list)
+    matchup_posture: list[ComboMatchupPosture] = Field(default_factory=list)
+    visible_hate_cards: list[str] = Field(default_factory=list)
+
+
 class Provenance(BaseModel):
     """Where a piece of guidance came from."""
 
@@ -163,6 +195,7 @@ class PilotingGuide(BaseModel):
     sequencing_tips: list[str] = Field(default_factory=list)
     matchups: list[MatchupNote] = Field(default_factory=list)
     common_threats: list[str] = Field(default_factory=list)
+    combo_profile: Optional[ComboProfile] = None
     metadata: GuideMetadata = Field(default_factory=GuideMetadata)
 
     # v2 additions

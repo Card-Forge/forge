@@ -1,0 +1,398 @@
+╭─── Claude Code v2.1.145 ─────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│                  Welcome back Lou!                 │ started                 │
+│                                                    │ Run /init to create a … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ What's new              │
+│                        ▘▘ ▝▝                       │ Added `claude agents -… │
+│    Opus 4.7 · Claude Pro · loud1990@gmail.com's    │ Added `agent_id` and `… │
+│    Organization                                    │ Status line JSON input… │
+│                ~/Development/forge-1               │ /release-notes for more │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+❯ /clear                                                                        
+  ⎿  (no content)
+
+❯ Could we extract only the guidance from each guidance document that pertains  
+  to our current matchup once we reach a level of                               
+    confidence? And maybe have a small generic early game guidance per format?  
+  Would that keep the prompt lower? How would we only                           
+    and the information we need into the context rather than the whole          
+  modern.json file for example? And could we pop up some sort of                
+    "Thinking" bubble or something on the Forge game screen so that the user    
+  knows the AI is thinking before it plays a                                    
+
+● Explore(Explore sidecar guidance system)
+  ⎿  Done (29 tool uses · 110.6k tokens · 1m 39s)
+  (ctrl+o to expand)
+
+● Explore(Verify current prompt payload)
+  ⎿  Done (22 tool uses · 89.9k tokens · 1m 5s)
+  (ctrl+o to expand)
+
+● I've explored the system. Key findings before I ask a couple of clarifying
+  questions:
+
+  - guidance/<format>.json (~300KB each) is currently dead code — never loaded
+  at runtime. The live archetype data lives in
+  app/knowledge/archetypes/<format>.json and the per-archetype piloting guides
+  under app/knowledge/piloting/<format>/<slug>.json.
+  - Today's /recognize prompt is ~1,700–2,500 tokens: ~150–500 for the archetype
+   list, ~40–120 for observations, ~30 for style scores, and ~1,500–1,800 tokens
+   of ranking rules/instructions (the dominant cost).
+  - No confidence gate exists — the full trimmed archetype list is sent every
+  call, even after high-confidence recognition.
+  - No "thinking" UI hook — sidecar communication is pure HTTP request/response.
+   SidecarInfluence.awaitLatest() blocks at decision points; nothing pushes
+  status to the Swing UI.
+
+  A few things to clarify before I write the plan:
+
+● User answered Claude's questions:
+  ⎿  · When you say "each guidance document" / "the whole modern.json", which 
+     file(s) do you mean? → Maybe I mistunderstood how these were getting 
+     loaded. I thought that the whole modern format prompt was getting loaded, 
+     then it was searching through it to pull out something like "Boros Energy 
+     archetype guide". If not then it seems ok as is. I could use a faster model
+      and disable thinking to speed it up on the inference service side and not 
+     touch the software yet.
+     · What should drive the "once we reach confidence" switch? → Confidence >= 
+     0.65
+     · Scope of the "AI is thinking" UI indicator? → Generic spinner during AI 
+     turn (Recommended)
+
+● Got it — guidance is already trimmed, so no prompt-shrinking work needed. Let
+  me look at the Forge UI side to figure out where the spinner should live, then
+   write the plan.
+
+● Explore(Locate AI turn UI hooks in Forge)
+  ⎿  Done (38 tool uses · 83.1k tokens · 1m 18s)
+  (ctrl+o to expand)
+
+● Updated plan
+  ⎿  /plan to preview
+
+● User approved Claude's plan
+  ⎿  Plan saved to: ~/.claude/plans/could-we-extract-only-shimmying-giraffe.md ·
+      /plan to edit
+     Plan: "AI is Thinking" indicator + clarification on guidance prompt size
+
+     Context
+
+     The user had two related concerns:
+
+     1. Prompt size from guidance docs — worry that the whole
+     guidance/modern.json was being injected into the LLM prompt and that we
+     should extract only the matchup-relevant slice once recognition confidence
+     is high.
+     2. No visible feedback during sidecar waits — when the AI pauses to call
+     the sidecar, the user has no signal that the AI is actually thinking vs.
+     hung.
+
+     Finding on (1) — no code change needed
+
+     Investigation showed the forge-llm-sidecar/guidance/<format>.json files
+     (the ~300KB hand-authored docs) are dead code today — never loaded at
+     runtime. The live pipeline already does the equivalent of what the user
+     proposed:
+
+     - app/knowledge/loader.py:34 loads only the lean
+     app/knowledge/archetypes/<format>.json (name, colors, signature_cards,
+     strategy, tells).
+     - app/nodes/game_advisor.py::_trim_to_meta_coverage (lines 466–500) shrinks
+      the archetype list to the smallest set covering 90% of metagame share
+     (floor 15, ceiling 40).
+     - Per-archetype piloting guides
+     (app/knowledge/piloting/<format>/<slug>.json) are loaded only after the
+     AI's own archetype is identified deterministically (piloting.py:219-250),
+     and _format_guide (game_advisor.py:111) compresses them to ~240 tokens.
+     - The /recognize prompt totals ~1,700–2,500 tokens, of which the archetype 
+     list is only 150–500 tokens; the dominant cost (~1,500–1,800 tokens) is the
+      ranking-rules instruction block.
+
+     So a confidence-gated "switch to one archetype's guidance" optimization
+     would save ~200–400 tokens at most, and the user agreed this isn't worth
+     touching code for. Faster inference (smaller model or
+     enable_thinking=false) on the service side is the better lever — already
+     configurable via llm_disable_thinking in llm_client.py:32-50. No sidecar 
+     code changes in scope.
+
+     Scope of this plan
+
+     Only the "AI is thinking…" UI indicator on the Forge game screen, plus a
+     one-line ack that the guidance extraction work was dropped.
+
+     Approach
+
+     Hook into the central sidecar-wait method (AiController.waitForSidecar) to
+     publish a "thinking" status message into the existing prompt panel (CPrompt
+      / VPrompt), then clear it when the wait returns. All UI updates marshalled
+      to the EDT.
+
+     This avoids any new endpoint, WebSocket, or sidecar protocol change. The
+     spinner appears whenever the AI thread is blocked on
+     SidecarInfluence.awaitLatest(), regardless of which decision point
+     triggered it (mulligan, declare attackers, declare blockers, choose spell
+     ability).
+
+     Critical files
+
+     - forge-ai/src/main/java/forge/ai/AiController.java (around line 146,
+     waitForSidecar) — the single chokepoint for sidecar waits. Add notify-start
+      / notify-end calls around the existing SidecarInfluence.awaitLatest(...)
+     invocation.
+     - forge-ai/src/main/java/forge/ai/llm/SidecarInfluence.java — already
+     exposes the future state; reuse awaitLatest semantics.
+     - forge-gui-desktop/src/main/java/forge/screens/match/CMatchUI.java (around
+      line 1064, showPromptMessageNoCancel) — the existing reusable channel for
+     transient status text in the prompt area.
+     - forge-gui-desktop/src/main/java/forge/screens/match/controllers/CPrompt.j
+     ava:50 and views/VPrompt.java:54 — the prompt panel the message renders
+     into; no UI surgery required.
+     - forge/util/FThreads (invokeInEdtNowOrLater) — used throughout CMatchUI;
+     must wrap any UI mutation since the caller is on the AI worker thread.
+
+     Implementation steps
+
+     1. Add a small, package-private interface SidecarStatusListener (or reuse
+     an existing event) in forge-ai/src/main/java/forge/ai/llm/ with
+     onThinkingStart() / onThinkingEnd(). Keep it dependency-free so forge-ai
+     doesn't have to import desktop UI.
+     2. In AiController.waitForSidecar, before calling awaitLatest, fire
+     onThinkingStart; in a finally block, fire onThinkingEnd. Use a static
+     registry (SidecarInfluence already has module-static state — same pattern).
+     3. In forge-gui-desktop, register a listener from CMatchUI at match start
+     that calls showPromptMessageNoCancel("AI is thinking…") on start and
+     restores the prior prompt text on end. Marshal both via
+     FThreads.invokeInEdtNowOrLater.
+     4. Guard against rapid start/end churn by only showing the message once the
+      wait exceeds ~250 ms (use a Timer scheduled at start, cancelled on end).
+     This avoids flicker for cache-hit /recognize calls (<100 ms).
+     5. Restore the previously-shown prompt message on onThinkingEnd so we don't
+      clobber game-flow prompts (getPromptMessage() save/restore).
+
+     Out of scope (recorded for future)
+
+     - Phase-level status (e.g. "recognizing opponent", "choosing line") — would
+      need a new sidecar status endpoint/SSE, deferred.
+     - Confidence-gated archetype-only mode (was suggested at threshold 0.65) —
+     dropped because the savings (~200–400 tokens) don't justify the code churn;
+      revisit if prompts grow.
+     - Activating the guidance/<format>.json long-form docs — separate
+     initiative, not blocking anything today.
+
+     Verification
+
+     1. Build forge-ai + forge-gui-desktop: mvn -pl forge-ai,forge-gui-desktop 
+     -am install -DskipTests.
+     2. Launch desktop: mvn -pl forge-gui-desktop exec:java (or via the run
+     skill for this project).
+     3. Start a match against an AI opponent in Modern with the sidecar running.
+      Confirm:
+       - At the start of an AI mulligan and on each AI turn, the prompt panel
+     briefly shows "AI is thinking…" while the sidecar call is in flight.
+       - The message disappears as soon as the AI makes its decision; the prior
+     prompt text returns.
+       - With sidecar stopped (or SIDECAR_BASE_URL pointing at a dead host), no
+     spinner appears (DeckRecognitionClient short-circuits on health check) and
+     the game still plays.
+       - Fast cache hits (re-recognize on same state) do NOT flash the spinner
+     because of the 250 ms grace.
+     4. Confirm no UI freezes by running an entire AI turn and watching the
+     prompt update via the EDT (no off-EDT Swing access warnings in the logs).
+
+● Starting implementation. Let me create tasks and read the relevant files.
+
+  Searched for 5 patterns, read 4 files (ctrl+o to expand)
+● Now creating the listener interface + registry.
+
+● Write(forge-ai/src/main/java/forge/ai/llm/SidecarStatusBus.java)
+  ⎿  Wrote 61 lines to
+     forge-ai/src/main/java/forge/ai/llm/SidecarStatusBus.java
+       2 package forge.ai.llm;
+       3 import java.util.concurrent.CopyOnWriteArrayList;
+       4 import java.util.List;
+       5 
+       6 import org.tinylog.Logger;
+       7 
+       8 /**
+       9  * Process-wide pub/sub for "AI is waiting on the sidecar" statu
+         s events.
+      10  *
+     … +59 lines (ctrl+o to expand)
+
+● Now wiring the events into AiController.waitForSidecar.
+
+● Update(forge-ai/src/main/java/forge/ai/AiController.java)
+  ⎿  Added 6 lines, removed 1 line
+      151          if (budget <= 0) {
+      152              return;
+      153          }
+      154 -        sidecarInfluence.awaitLatest(budget);                 
+      154 +        forge.ai.llm.SidecarStatusBus.fireThinkingStart();    
+      155 +        try {                                                 
+      156 +            sidecarInfluence.awaitLatest(budget);             
+      157 +        } finally {                                           
+      158 +            forge.ai.llm.SidecarStatusBus.fireThinkingEnd();  
+      159 +        }                                                     
+      160      }
+      161  
+      162      public int getAttackAggression() {
+
+● Now hook the listener in CMatchUI to show "AI is thinking…" with a 250 ms
+  grace and restore the previous message on end.
+
+  Searched for 2 patterns, read 1 file (ctrl+o to expand)
+
+● Update(forge-gui-desktop/src/main/java/forge/screens/match/CMatchUI.java)
+  ⎿  Added 7 lines
+      177      private int nextNotifiableStackIndex = 0;
+      178      private String lastPromptMessage = "";
+      179  
+      180 +    private static final int SIDECAR_THINKING_GRACE_MS = 250; 
+      181 +    private final java.util.concurrent.atomic.AtomicInteger si
+          +decarThinkingDepth = new java.util.concurrent.atomic.AtomicInt
+          +eger(0);                                                      
+      182 +    private volatile javax.swing.Timer sidecarThinkingTimer;  
+      183 +    private volatile String sidecarSavedPromptMessage;        
+      184 +    private volatile boolean sidecarIndicatorShown;           
+      185 +    private forge.ai.llm.SidecarStatusBus.Listener sidecarStat
+          +usListener;                                                   
+      186 +                                                              
+      187      public CMatchUI() {
+      188          this.view = new VMatchUI(this);
+      189          this.screen = FScreen.getMatchScreen(this, view);
+
+● Now register the listener in the constructor and add the listener
+  implementation methods.
+
+● Update(forge-gui-desktop/src/main/java/forge/screens/match/CMatchUI.java)
+  ⎿  Added 49 lines
+      203          this.myDocs.put(EDocID.REPORT_LOG, cLog.getView());
+      204          this.myDocs.put(EDocID.DEV_MODE, getCDev().getView());
+      205          this.myDocs.put(EDocID.BUTTON_DOCK, getCDock().getView
+           ());
+      206 +                                                              
+      207 +        this.sidecarStatusListener = new forge.ai.llm.SidecarS
+          +tatusBus.Listener() {                                         
+      208 +            @Override public void onThinkingStart() { onSideca
+          +rThinkingStart(); }                                           
+      209 +            @Override public void onThinkingEnd()   { onSideca
+          +rThinkingEnd();   }                                           
+      210 +        };                                                    
+      211 +        forge.ai.llm.SidecarStatusBus.addListener(this.sidecar
+          +StatusListener);                                              
+      212      }
+      213  
+      214 +    /**                                                       
+      215 +     * Show "AI is thinking…" in the prompt panel while the AI
+          + is blocked waiting                                           
+      216 +     * on the sidecar. A 250 ms grace prevents the indicator f
+          +rom flashing for                                              
+      217 +     * fast cache hits. Re-entrant: nested start/end calls onl
+          +y update the UI on                                            
+      218 +     * the outermost transition.                              
+      219 +     */                                                       
+      220 +    private void onSidecarThinkingStart() {                   
+      221 +        if (sidecarThinkingDepth.getAndIncrement() != 0) {    
+      222 +            return;                                           
+      223 +        }                                                     
+      224 +        final javax.swing.Timer timer = new javax.swing.Timer(
+          +SIDECAR_THINKING_GRACE_MS, e -> {                             
+      225 +            // Fires on the EDT. Only show if still in-flight.
+      226 +            if (sidecarThinkingDepth.get() <= 0) {            
+      227 +                return;                                       
+      228 +            }                                                 
+      229 +            sidecarSavedPromptMessage = lastPromptMessage;    
+      230 +            sidecarIndicatorShown = true;                     
+      231 +            cPrompt.setMessage("AI is thinking…");            
+      232 +        });                                                   
+      233 +        timer.setRepeats(false);                              
+      234 +        sidecarThinkingTimer = timer;                         
+      235 +        FThreads.invokeInEdtNowOrLater(timer::start);         
+      236 +    }                                                         
+      237 +                                                              
+      238 +    private void onSidecarThinkingEnd() {                     
+      239 +        if (sidecarThinkingDepth.decrementAndGet() != 0) {    
+      240 +            return;                                           
+      241 +        }                                                     
+      242 +        final javax.swing.Timer timer = sidecarThinkingTimer; 
+      243 +        sidecarThinkingTimer = null;                          
+      244 +        FThreads.invokeInEdtNowOrLater(() -> {                
+      245 +            if (timer != null) {                              
+      246 +                timer.stop();                                 
+      247 +            }                                                 
+      248 +            if (sidecarIndicatorShown) {                      
+      249 +                final String restore = sidecarSavedPromptMessa
+          +ge;                                                           
+      250 +                sidecarIndicatorShown = false;                
+      251 +                sidecarSavedPromptMessage = null;             
+      252 +                cPrompt.setMessage(restore == null ? "" : rest
+          +ore);                                                         
+      253 +            }                                                 
+      254 +        });                                                   
+      255 +    }                                                         
+      256 +                                                              
+      257      private void registerDocs() {
+      258          for (final Entry<EDocID, IVDoc<? extends ICDoc>> doc :
+            myDocs.entrySet()) {
+      259              doc.getKey().setDoc(doc.getValue());
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● Update(forge-gui-desktop/src/main/java/forge/screens/match/CMatchUI.java)
+  ⎿  Added 4 lines
+      982          if (showOverlay) {
+      983              SOverlayUtils.showOverlay();
+      984          }
+      985 +        if (gameView.isMatchOver() && sidecarStatusListener !=
+          + null) {                                                      
+      986 +            forge.ai.llm.SidecarStatusBus.removeListener(sidec
+          +arStatusListener);                                            
+      987 +            sidecarStatusListener = null;                     
+      988 +        }                                                     
+      989      }
+      990  
+      991      @Override
+
+● Let me verify the build compiles.
+
+● Bash(mvn -pl forge-ai,forge-gui-desktop -am -q compile -DskipTests 2>&1 | tail
+       -40)
+  ⎿  Using changelog from tag: forge-2.0.12
+  ⎿  (timeout 5m)
+
+● Bash(mvn -pl forge-ai,forge-gui-desktop -am compile -DskipTests 2>&1 | tail
+      -50)
+  ⎿  [INFO]
+     [INFO] ----------------------< forge:forge-gui-desktop >--------------
+     ---------
+     … +58 lines (ctrl+o to expand)
+  ⎿  (timeout 5m)
+
+● Build succeeds with zero Checkstyle violations.
+
+  Summary of changes:
+
+  - New: forge-ai/src/main/java/forge/ai/llm/SidecarStatusBus.java —
+  process-wide listener bus with Listener interface and fail-soft fire methods.
+  - AiController.waitForSidecar (forge-ai) — wraps
+  sidecarInfluence.awaitLatest(budget) in a try/finally that fires
+  SidecarStatusBus.fireThinkingStart() and fireThinkingEnd().
+  - CMatchUI (forge-gui-desktop) — registers a listener in the constructor and
+  implements onSidecarThinkingStart / onSidecarThinkingEnd. The indicator only
+  appears after a 250 ms grace (avoids flicker on cache hits), saves and
+  restores lastPromptMessage, and is reentrant via an AtomicInteger depth
+  counter. Listener is unregistered in finishGame when the match is over.
+
+  Net behavior: when the AI blocks on a sidecar /recognize call longer than 250
+  ms (mulligan, declare attackers/blockers, choose spell ability), the prompt
+  panel shows "AI is thinking…" and reverts when the wait completes. No sidecar
+  protocol or prompt-size changes — the guidance-extraction work was dropped
+  because investigation showed guidance/<format>.json is dead code today, and
+  the live pipeline already trims to ~150–500 tokens of archetype data (with
+  ~1,500 of fixed instructions dominating the prompt).
+
+  To try it: mvn -pl forge-gui-desktop exec:java -am with the sidecar running.
+
+✻ Baked for 9m 32s

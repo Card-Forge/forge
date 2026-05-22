@@ -34,7 +34,6 @@ public final class DeckRecognitionClient {
     private static final int CONNECT_TIMEOUT_MS = 3_000;
     private static final int HEALTH_TIMEOUT_MS = 2_000;
     private static final int RECOGNIZE_TIMEOUT_MS = 90_000;
-    private static final int IDENTIFY_TIMEOUT_MS = 5_000;
 
     private final String baseUrl;
     private final Gson gson = new GsonBuilder().create();
@@ -76,61 +75,10 @@ public final class DeckRecognitionClient {
         return CompletableFuture.supplyAsync(() -> doRecognize(request), executor);
     }
 
-    /** Asynchronously POST an opening-hand mulligan planning request. */
-    public CompletableFuture<Optional<RecognitionResult>> mulliganPlanAsync(final RecognitionRequest request) {
-        return CompletableFuture.supplyAsync(() -> doMulliganPlan(request), executor);
-    }
-
-    /**
-     * Asynchronously POST a heuristic own-archetype request. The sidecar runs a
-     * deterministic decklist -> archetype match (no LLM), so this is fast.
-     * Never completes exceptionally — failures resolve to an empty {@link Optional}.
-     */
-    public CompletableFuture<Optional<OwnArchetypeResult>> identifyOwnArchetypeAsync(
-            final OwnArchetypeRequest request) {
-        return CompletableFuture.supplyAsync(() -> doIdentifyOwnArchetype(request), executor);
-    }
-
-    private Optional<OwnArchetypeResult> doIdentifyOwnArchetype(final OwnArchetypeRequest request) {
-        HttpURLConnection conn = null;
-        try {
-            conn = open("/identify-own-archetype", "POST", IDENTIFY_TIMEOUT_MS);
-            conn.setDoOutput(true);
-            conn.setRequestProperty("Content-Type", "application/json");
-            final byte[] body = gson.toJson(request).getBytes(StandardCharsets.UTF_8);
-            try (OutputStream os = conn.getOutputStream()) {
-                os.write(body);
-            }
-            final int status = conn.getResponseCode();
-            if (status != 200) {
-                Logger.debug("DeckRecognition: /identify-own-archetype returned HTTP " + status);
-                return Optional.empty();
-            }
-            try (InputStream is = conn.getInputStream();
-                 BufferedReader reader = new BufferedReader(
-                         new InputStreamReader(is, StandardCharsets.UTF_8))) {
-                return Optional.ofNullable(gson.fromJson(reader, OwnArchetypeResult.class));
-            }
-        } catch (final IOException | RuntimeException ex) {
-            Logger.debug("DeckRecognition: /identify-own-archetype failed: " + ex.getMessage());
-            return Optional.empty();
-        } finally {
-            disconnect(conn);
-        }
-    }
-
     private Optional<RecognitionResult> doRecognize(final RecognitionRequest request) {
-        return doRecognitionPath("/recognize", request);
-    }
-
-    private Optional<RecognitionResult> doMulliganPlan(final RecognitionRequest request) {
-        return doRecognitionPath("/mulligan-plan", request);
-    }
-
-    private Optional<RecognitionResult> doRecognitionPath(final String path, final RecognitionRequest request) {
         HttpURLConnection conn = null;
         try {
-            conn = open(path, "POST", RECOGNIZE_TIMEOUT_MS);
+            conn = open("/recognize", "POST", RECOGNIZE_TIMEOUT_MS);
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/json");
             final byte[] body = gson.toJson(request).getBytes(StandardCharsets.UTF_8);
@@ -139,7 +87,7 @@ public final class DeckRecognitionClient {
             }
             final int status = conn.getResponseCode();
             if (status != 200) {
-                Logger.debug("DeckRecognition: " + path + " returned HTTP " + status);
+                Logger.debug("DeckRecognition: sidecar returned HTTP " + status);
                 return Optional.empty();
             }
             try (InputStream is = conn.getInputStream();
@@ -148,7 +96,7 @@ public final class DeckRecognitionClient {
                 return Optional.ofNullable(gson.fromJson(reader, RecognitionResult.class));
             }
         } catch (final IOException | RuntimeException ex) {
-            Logger.debug("DeckRecognition: " + path + " failed: " + ex.getMessage());
+            Logger.debug("DeckRecognition: request failed: " + ex.getMessage());
             return Optional.empty();
         } finally {
             disconnect(conn);

@@ -1,0 +1,107 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - heading "Forge LLM SidecarDashboard" [level=1] [ref=e3]
+    - generic [ref=e4]:
+      - generic [ref=e7]: LLM Connected
+      - generic [ref=e9]: 3m 53s
+      - generic [ref=e11]: 0 requests
+  - generic [ref=e12]:
+    - generic [ref=e13]:
+      - generic [ref=e14]: System Status
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - generic [ref=e17]: Model
+          - generic [ref=e18]: local-model
+        - generic [ref=e19]:
+          - generic [ref=e20]: LLM Base URL
+          - generic [ref=e21]: "--"
+        - generic [ref=e22]:
+          - generic [ref=e23]: Port
+          - generic [ref=e24]: "--"
+        - generic [ref=e25]:
+          - generic [ref=e26]: Metagame
+          - generic [ref=e27]: Enabled
+        - generic [ref=e28]:
+          - generic [ref=e29]: Format Detect
+          - generic [ref=e30]: Disabled
+        - generic [ref=e31]:
+          - generic [ref=e32]: Default Format
+          - generic [ref=e33]: "--"
+        - generic [ref=e34]:
+          - generic [ref=e35]: LLM Timeout
+          - generic [ref=e36]: "--"
+    - generic [ref=e37]:
+      - generic [ref=e38]: Last Recognition
+      - generic [ref=e40]: No recognition requests yet
+    - generic [ref=e41]:
+      - generic [ref=e42]: Metagame Breakdown
+      - combobox [ref=e43]:
+        - option "Standard" [selected]
+        - option "Pioneer"
+        - option "Modern"
+        - option "Legacy"
+        - option "Vintage"
+        - option "Commander"
+        - option "Pauper"
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - generic [ref=e49]: Boros Energy
+          - generic [ref=e52]: 18.2%
+        - generic [ref=e53]:
+          - generic [ref=e57]: Affinity
+          - generic [ref=e60]: 10.4%
+        - generic [ref=e61]:
+          - generic [ref=e66]: Ruby Storm
+          - generic [ref=e69]: 5.6%
+        - generic [ref=e70]:
+          - generic [ref=e75]: Amulet Titan
+          - generic [ref=e78]: 5.3%
+        - generic [ref=e79]:
+          - generic [ref=e84]: Jeskai Blink
+          - generic [ref=e87]: 5.2%
+        - generic [ref=e88]:
+          - generic [ref=e93]: Goryo's Vengeance
+          - generic [ref=e96]: 5.2%
+        - generic [ref=e97]:
+          - generic [ref=e104]: Domain Zoo
+          - generic [ref=e107]: 4.3%
+        - generic [ref=e108]:
+          - generic [ref=e111]: Belcher
+          - generic [ref=e114]: 4%
+        - generic [ref=e115]:
+          - generic [ref=e122]: Neobrand
+          - generic [ref=e125]: 3.4%
+        - generic [ref=e126]:
+          - generic [ref=e132]: Living End
+          - generic [ref=e135]: 3.1%
+        - generic [ref=e136]:
+          - generic [ref=e140]: Izzet Prowess
+          - generic [ref=e143]: 3%
+        - generic [ref=e144]:
+          - generic [ref=e148]: Eldrazi Ramp
+          - generic [ref=e151]: 2.7%
+    - generic [ref=e152]:
+      - generic [ref=e153]: Piloting Guides
+      - generic [ref=e155]:
+        - generic [ref=e156]:
+          - generic [ref=e157]: generic
+          - text: aggro
+        - generic [ref=e158]:
+          - generic [ref=e159]: generic
+          - text: combo
+        - generic [ref=e160]:
+          - generic [ref=e161]: generic
+          - text: control
+        - generic [ref=e162]:
+          - generic [ref=e163]: generic
+          - text: midrange
+        - generic [ref=e164]:
+          - generic [ref=e165]: generic
+          - text: ramp
+        - generic [ref=e166]:
+          - generic [ref=e167]: generic
+          - text: tempo
+    - generic [ref=e168]:
+      - generic [ref=e169]: Request History (0)
+      - generic [ref=e171]: No requests yet
+  - generic [ref=e172]: "Auto-refreshes every 5s · last update: 9:50:05 PM"

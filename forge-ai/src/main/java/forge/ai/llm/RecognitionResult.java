@@ -68,6 +68,92 @@ public record RecognitionResult(
         }
     }
 
+    /** Combo-line recommendation for the AI's own deck (v7). */
+    public record ComboPlan(
+            @SerializedName("line_name") String lineName,
+            @SerializedName("go_for_it_now") boolean goForItNow,
+            @SerializedName("readiness_score") double readinessScore,
+            @SerializedName("missing_pieces") List<String> missingPieces,
+            @SerializedName("needed_cards") List<String> neededCards,
+            @SerializedName("needed_mana") String neededMana,
+            @SerializedName("preferred_line") String preferredLine,
+            @SerializedName("wait_reason") String waitReason,
+            List<String> sequence,
+            @SerializedName("protection_plan") String protectionPlan,
+            @SerializedName("risk_assessment") String riskAssessment,
+            @SerializedName("action_adjustments") List<ActionScore> actionAdjustments) {
+
+        public ComboPlan {
+            if (missingPieces == null) {
+                missingPieces = List.of();
+            }
+            if (neededCards == null) {
+                neededCards = List.of();
+            }
+            if (sequence == null) {
+                sequence = List.of();
+            }
+            if (actionAdjustments == null) {
+                actionAdjustments = List.of();
+            }
+        }
+    }
+
+    /** One turn in the rolling early-game plan (v8). */
+    public record PlannedTurn(
+            int turn,
+            String land,
+            List<String> spells,
+            @SerializedName("mana_rationale") String manaRationale,
+            @SerializedName("draw_assumption") String drawAssumption,
+            @SerializedName("opponent_adjustment") String opponentAdjustment) {
+        public PlannedTurn {
+            if (spells == null) {
+                spells = List.of();
+            }
+        }
+    }
+
+    /** Opening-hand and rolling early-game plan (v8). */
+    public record EarlyGamePlan(
+            String decision,
+            double confidence,
+            @SerializedName("influence_weight") int influenceWeight,
+            @SerializedName("keep_reason") String keepReason,
+            @SerializedName("mulligan_reason") String mulliganReason,
+            @SerializedName("bottom_cards") List<String> bottomCards,
+            @SerializedName("land_sequence") List<String> landSequence,
+            @SerializedName("fetch_plan") List<String> fetchPlan,
+            @SerializedName("planned_turns") List<PlannedTurn> plannedTurns,
+            @SerializedName("draw_assumptions") List<String> drawAssumptions,
+            @SerializedName("probability_notes") String probabilityNotes,
+            List<String> contingencies,
+            @SerializedName("estimated_win_turn") Integer estimatedWinTurn,
+            @SerializedName("estimated_loss_turn") Integer estimatedLossTurn,
+            String reasoning,
+            @SerializedName("last_updated_turn") int lastUpdatedTurn) {
+        public EarlyGamePlan {
+            if (bottomCards == null) {
+                bottomCards = List.of();
+            }
+            if (landSequence == null) {
+                landSequence = List.of();
+            }
+            if (fetchPlan == null) {
+                fetchPlan = List.of();
+            }
+            if (plannedTurns == null) {
+                plannedTurns = List.of();
+            }
+            if (drawAssumptions == null) {
+                drawAssumptions = List.of();
+            }
+            if (contingencies == null) {
+                contingencies = List.of();
+            }
+        }
+    }
+
     /**
      * Piloting advice for the AI's own deck. Nested in the {@code /recognize}
      * response under the {@code piloting} key.
@@ -84,7 +170,9 @@ public record RecognitionResult(
             RoleAssessment role,
             @SerializedName("hand_values") List<HandValuation> handValues,
             @SerializedName("opponent_hand") List<OpponentHandGuess> opponentHand,
-            @SerializedName("target_priorities") List<TargetPriority> targetPriorities) {
+            @SerializedName("target_priorities") List<TargetPriority> targetPriorities,
+            @SerializedName("combo_plan") ComboPlan comboPlan,
+            @SerializedName("early_game_plan") EarlyGamePlan earlyGamePlan) {
 
         public PilotingAdvice {
             if (actions == null) {
@@ -134,6 +222,25 @@ public record RecognitionResult(
                 sb.append(" | ");
             }
             sb.append("Actions: ").append(actionLine);
+        }
+        if (piloting.comboPlan() != null && piloting.comboPlan().lineName() != null
+                && !piloting.comboPlan().lineName().isEmpty()) {
+            if (sb.length() > 0) {
+                sb.append(" | ");
+            }
+            sb.append(String.format("Combo: %s (%s, %.0f%% ready)",
+                    piloting.comboPlan().lineName(),
+                    piloting.comboPlan().goForItNow() ? "go now" : "setup",
+                    piloting.comboPlan().readinessScore()));
+        }
+        if (piloting.earlyGamePlan() != null && piloting.earlyGamePlan().decision() != null
+                && !piloting.earlyGamePlan().decision().isEmpty()) {
+            if (sb.length() > 0) {
+                sb.append(" | ");
+            }
+            sb.append(String.format("Plan: %s (%.0f%% confidence)",
+                    piloting.earlyGamePlan().decision(),
+                    piloting.earlyGamePlan().confidence() * 100.0));
         }
         return sb.length() > 0 ? sb.toString() : null;
     }

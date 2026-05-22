@@ -1,0 +1,3054 @@
+╭─── Claude Code v2.1.145 ─────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│                  Welcome back Lou!                 │ started                 │
+│                                                    │ Run /init to create a … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ What's new              │
+│                        ▘▘ ▝▝                       │ Added `claude agents -… │
+│    Opus 4.7 · Claude Pro · loud1990@gmail.com's    │ Added `agent_id` and `… │
+│    Organization                                    │ Status line JSON input… │
+│                ~/Development/forge-1               │ /release-notes for more │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+❯ /clear                                                                        
+  ⎿  (no content)
+
+❯ I want the Forge AI player to make actual plays based off of the knowledge    
+  and guidance they have via the sidecar llm. How can we implement this? Is it  
+  currently being implemented in any way? Come up with a plan to add this to    
+  guide everything from which lands the AI player plays at what time, to what   
+  spells they play at what time, to what cards they value the most in their     
+  hand, to what cards they think are in the human players hand. They should     
+  also factor in the board state, cards in hand, life total, cards in the       
+  graveyard and more when making decisions.                                     
+
+● I'll start by exploring the codebase to understand how Forge AI decisions work
+   today and where the sidecar LLM hooks in.
+
+● 2 Explore agents finished (ctrl+o to expand)
+   ├ Map Forge AI decision points · 29 tool uses · 83.7k tokens
+   │ ⎿  Done
+   └ Map sidecar LLM capabilities · 29 tool uses · 94.1k tokens
+     ⎿  Done
+
+● Excellent context. There's already a SidecarInfluence scaffold in place. Let
+  me read the key existing integration points before planning the expansion.
+
+  Searched for 3 patterns, read 4 files, listed 1 directory (ctrl+o to expand)
+
+● I have enough context. Before I write the final plan, two real design choices
+  affect the scope and shape of it. Let me ask.
+
+● User answered Claude's questions:
+  ⎿  · The existing piloting advice in app/nodes/game_advisor.py is 
+     deterministic (no LLM call) — it produces static action percentages like 
+     'PLAY_SPELL=65 if aggro'. For a sidecar that actually guides specific plays
+      (which lands, which spells, which targets), how should the new 
+     game-state-aware logic work? → Deterministic, board-aware (Recommended)
+     · Which decision dimensions should this first pass cover? Today only 
+     PLAY_SPELL/PLAY_LAND/ATTACK/BLOCK/PASS/ACTIVATE_ABILITY are wired (and even
+      those use coarse percentages, not specific cards). Anything we don't pick 
+     now I'll leave as a noted follow-up. → Card-specific land + spell picks, 
+     Hand card valuation, Opponent hand inference, Targeting priorities, All of 
+     this information should be included in the dashboard, so I know what the AI
+      is thinking and can better debug
+
+● Let me peek at the dashboard so I can plan the new debug surfaces correctly.
+
+  Searched for 1 pattern, listed 1 directory (ctrl+o to expand)
+
+● I have everything I need. Writing the plan now.
+
+● Updated plan
+  ⎿  /plan to preview
+
+● Plan is ready. Exiting plan mode for your review.
+  ⎿  User rejected Claude's plan:
+     ╭─────────────────────────────────────────────────────────────────────────╮
+     │ Sidecar-Driven AI Decisions in Forge                                    │
+     │                                                                         │
+     │ Context                                                                 │
+     │                                                                         │
+     │ The Forge AI today is fully heuristic (forge-ai package). A sidecar LLM │
+     │  was added to recognize the human's archetype and emit "piloting        │
+     │ advice", but the advice is currently:                                   │
+     │                                                                         │
+     │ - Static — _local_piloting_advice() in                                  │
+     │ forge-llm-sidecar/app/nodes/game_advisor.py produces fixed percentages  │
+     │ (e.g. PLAY_SPELL=65 if aggro) with no knowledge of the actual board,    │
+     │ hand, or graveyard.                                                     │
+     │ - Untargeted — ActionScore.target for PLAY_SPELL/PLAY_LAND is currently │
+     │  a sentence of English prose from the guide phase plan, not a card      │
+     │ name. The Java-side match-by-name in                                    │
+     │ AiController.trySidecarRecommendedPlay() therefore almost never fires.  │
+     │ - Partial — only PLAY_SPELL / PLAY_LAND / ATTACK / BLOCK / PASS /       │
+     │ ACTIVATE_ABILITY are modeled. There is nothing on hand valuation,       │
+     │ target selection, mulligan, discard, or what the human likely holds.    │
+     │ - State-blind — the RecognitionRequest Pydantic schema already declares │
+     │  hand, own_board, opponent_board, your_graveyard, opponent_graveyard,   │
+     │ life_totals, but the Java caller (DeckRecognitionObserver.fireCall())   │
+     │ only fills observations + deckCards. The fields exist on the wire but   │
+     │ never get populated.                                                    │
+     │                                                                         │
+     │ Goal: make the sidecar's guidance the actual brain behind Forge's AI    │
+     │ plays — choosing which lands and spells to play and when, valuing cards │
+     │  in hand, anticipating what the human holds, and picking targets —      │
+     │ based on the live game state, while keeping the existing /recognize to  │
+     │ one LLM call per turn (deterministic on the piloting side, per user     │
+     │ direction). Everything is fail-soft: if the sidecar is off, the         │
+     │ heuristic AI runs unchanged.                                            │
+     │                                                                         │
+     │ ---                                                                     │
+     │ Approach (high level)                                                   │
+     │                                                                         │
+     │ Three coordinated changes:                                              │
+     │                                                                         │
+     │ 1. Java → sidecar: ship the full game snapshot that the schema already  │
+     │ advertises (hand, both boards, graveyards, life totals, mana available, │
+     │  current phase).                                                        │
+     │ 2. Sidecar reasoning: keep the recognition LLM call as-is; rewrite      │
+     │ _local_piloting_advice() to be a board-aware deterministic engine that  │
+     │ produces card-specific actions, hand valuations, opponent-hand          │
+     │ inference, and target priorities — all derived from game state ∩        │
+     │ piloting guide ∩ candidate-archetype knowledge.                         │
+     │ 3. Sidecar → Java: extend the response schema, expose typed accessors   │
+     │ on SidecarInfluence, and wire new consumption points in AiController /  │
+     │ PlayerControllerAi / AiAttackController / AiBlockController.            │
+     │                                                                         │
+     │ Existing infrastructure to reuse:                                       │
+     │ - SidecarInfluence (forge-ai/.../llm/SidecarInfluence.java) — already   │
+     │ does second-pass personality weighting and is consulted in 7 places in  │
+     │ AiController. Extend, don't replace.                                    │
+     │ - AiCardMemory (forge-ai/.../AiCardMemory.java) — existing memory layer │
+     │  for known opponent cards. Opponent-hand inference plugs in next to it  │
+     │ (the sidecar guess, alongside the memory of revealed cards).            │
+     │ - ComputerUtilCard.evaluateCreature/evaluateCard, CreatureEvaluator —   │
+     │ keep as the floor; sidecar value is an additive tie-breaker on top, not │
+     │  a replacement.                                                         │
+     │ - piloting.get_piloting_guide() and curated archetype JSON in           │
+     │ forge-llm-sidecar/app/knowledge/ — already the knowledge base for what  │
+     │ the AI's deck wants to do and what the opponent's likely deck holds.    │
+     │ Re-used by the new advice engine.                                       │
+     │ - Dashboard renderer in forge-llm-sidecar/app/static/dashboard.html     │
+     │ (already renders piloting actions as bars) — new sections slot in.      │
+     │                                                                         │
+     │ ---                                                                     │
+     │ File-by-file changes                                                    │
+     │                                                                         │
+     │ Python sidecar                                                          │
+     │                                                                         │
+     │ app/schema.py — extend PilotingAdvice (no breaking changes; everything  │
+     │ additive, default empty):                                               │
+     │ class HandValuation(BaseModel):                                         │
+     │     card: str                                                           │
+     │     value: float           # 0-100, higher = more valuable to keep/play │
+     │     role: str              # "threat", "answer", "ramp", "card_draw",   │
+     │ "win_con", "filler"                                                     │
+     │     reasoning: str                                                      │
+     │                                                                         │
+     │ class OpponentHandGuess(BaseModel):                                     │
+     │     category: str          # "counterspell", "removal", "wrath",        │
+     │ "threat", "combo_piece"                                                 │
+     │     example_cards: list[str]                                            │
+     │     probability: float     # 0-1                                        │
+     │     reasoning: str                                                      │
+     │                                                                         │
+     │ class TargetPriority(BaseModel):                                        │
+     │     spell: str             # AI's spell whose targets we're ranking ("" │
+     │  = generic)                                                             │
+     │     targets: list[str]     # ordered card names on opponent's board,    │
+     │ best first                                                              │
+     │     reasoning: str                                                      │
+     │                                                                         │
+     │ class PilotingAdvice(BaseModel):                                        │
+     │     ...existing fields...                                               │
+     │     hand_values: list[HandValuation] = []                               │
+     │     opponent_hand: list[OpponentHandGuess] = []                         │
+     │     target_priorities: list[TargetPriority] = []                        │
+     │ Bump schema_version to 4.                                               │
+     │                                                                         │
+     │ app/nodes/game_advisor.py — rewrite _local_piloting_advice(state) to be │
+     │  board-aware. The function already has state["piloting_guide"] and      │
+     │ state["candidate_archetypes"]; now also read state["hand"],             │
+     │ state["own_board"], state["opponent_board"], state["your_graveyard"],   │
+     │ state["opponent_graveyard"], state["life_totals"]. New deterministic    │
+     │ helpers (all in game_advisor.py, or split into app/advice/ if it grows  │
+     │ past ~200 lines):                                                       │
+     │                                                                         │
+     │ - _score_hand(hand, guide, phase, available_mana) →                     │
+     │ list[HandValuation]. Uses guide.key_cards roles, CMC vs available mana, │
+     │  redundancy in hand, and phase. Lands score by color need (cross-ref    │
+     │ ComputerUtilMana-style color requirements derivable from hand).         │
+     │ Win-cons get a phase-dependent boost.                                   │
+     │ - _card_specific_actions(hand, guide, phase, opponent_board,            │
+     │ life_totals) → list of ActionScore with concrete card names in target.  │
+     │ Picks the single highest-valued playable card per category (land,       │
+     │ threat, answer) given current mana and board. Multiple PLAY_SPELL       │
+     │ entries are allowed (with distinct targets) so the Java side can fall   │
+     │ through if its first pick is unplayable.                                │
+     │ - _infer_opponent_hand(observations, opponent_archetype,                │
+     │ candidate_archetypes, turn, opponent_graveyard, opponent_board) →       │
+     │ list[OpponentHandGuess]. For the inferred archetype, take its           │
+     │ signature_cards and tells, subtract what's already been seen (board +   │
+     │ graveyard + revealed), and bucket by category. Probability scales with  │
+     │ archetype confidence × remaining copies × turn (more copies still       │
+     │ buried = higher probability of being in hand).                          │
+     │ - _target_priorities(opponent_board, opponent_archetype_record, guide)  │
+     │ → list[TargetPriority]. Cross-ref opponent's permanents against         │
+     │ archetype.signature_cards (high priority) and guide.common_threats      │
+     │ (matchup-specific priority). One generic entry plus per-spell entries   │
+     │ for spells in the AI's hand that have targets (removal/damage).         │
+     │                                                                         │
+     │ _local_piloting_advice returns the existing fields plus the three new   │
+     │ lists. The existing static action percentages stay as a fallback        │
+     │ baseline; card-specific actions override them when present.             │
+     │                                                                         │
+     │ The recognition LLM call is unchanged.                                  │
+     │                                                                         │
+     │ app/store.py — HistoryEntry already snapshots the piloting payload;     │
+     │ just confirm the new lists ride along (they will, since                 │
+     │ record_recognition already calls .model_dump() on the result).          │
+     │                                                                         │
+     │ app/static/dashboard.html — add three rendered panels under the         │
+     │ existing "Piloting Advice" section:                                     │
+     │ - Hand Valuation: bar chart per card with role tag.                     │
+     │ - Opponent Likely Holds: list of category × probability bars + example  │
+     │ cards.                                                                  │
+     │ - Target Priorities: ordered list per spell, with reasoning tooltip.    │
+     │ Reuses the existing piloting-value/piloting-label styles and the        │
+     │ action-bar renderer pattern (dashboard.html:526–541).                   │
+     │                                                                         │
+     │ Java forge-ai                                                           │
+     │                                                                         │
+     │ forge-ai/.../llm/RecognitionRequest.java — already has the fields; add  │
+     │ a convenience constructor that takes the full state and is what the     │
+     │ observer will call. Backwards compat: keep the existing two ctors.      │
+     │                                                                         │
+     │ forge-ai/.../llm/DeckRecognitionObserver.java — in fireCall()           │
+     │ (currently line 207), populate the full snapshot from aiPlayer / game:  │
+     │ - hand from aiPlayer.getCardsIn(ZoneType.Hand) → card names.            │
+     │ - own_board / opponent_board from each player's ZoneType.Battlefield.   │
+     │ - your_graveyard / opponent_graveyard from ZoneType.Graveyard.          │
+     │ - life_totals map of playerId → life.                                   │
+     │ - Add phase (string from game.getPhaseHandler().getPhase()) and         │
+     │ available_mana summary (from ComputerUtilMana.getAvailableManaSources)  │
+     │ as new optional fields in the schema.                                   │
+     │                                                                         │
+     │ Refresh trigger broadens slightly: also rerun on                        │
+     │ GameEventPlayerLivesChanged and GameEventZone (currently only           │
+     │ spell-cast / land-played / turn-end fire requestRecognition()). The     │
+     │ existing latest-wins coalescing protects against churn.                 │
+     │                                                                         │
+     │ forge-ai/.../llm/RecognitionResult.java — mirror the new Pydantic types │
+     │  as Java records: HandValuation, OpponentHandGuess, TargetPriority. Add │
+     │  corresponding fields on PilotingAdvice Java record. Keep               │
+     │ toPilotingLogMessage() and add toHandValuesLogMessage() etc. for game   │
+     │ log output.                                                             │
+     │                                                                         │
+     │ forge-ai/.../llm/SidecarInfluence.java — extend with thread-safe        │
+     │ accessors:                                                              │
+     │ - Optional<Double> handValue(String cardName) — lookup in the latest    │
+     │ hand_values.                                                            │
+     │ - List<OpponentHandGuess> opponentLikelyHas() — sorted by probability   │
+     │ desc.                                                                   │
+     │ - List<String> targetPriorityFor(String spellName) — falls back to the  │
+     │ generic entry if no spell-specific match.                               │
+     │ - Optional<String> bestPlayLandName(), List<String>                     │
+     │ bestPlaySpellNames() — convenience over the existing bestAction(...)    │
+     │ for card-name actions.                                                  │
+     │ Personality weighting in applyPersonalityWeight() stays; new fields are │
+     │  passed through without weighting (they're already board-conditioned).  │
+     │                                                                         │
+     │ forge-ai/.../AiProps.java — add granular toggles defaulting to follow   │
+     │ SIDECAR_INFLUENCE_ENABLE:                                               │
+     │ - SIDECAR_HAND_VALUATION_ENABLE, SIDECAR_OPPONENT_INFERENCE_ENABLE,     │
+     │ SIDECAR_TARGETING_ENABLE, SIDECAR_MULLIGAN_ENABLE,                      │
+     │ SIDECAR_DISCARD_ENABLE.                                                 │
+     │                                                                         │
+     │ Decision wiring — new consumption points (all guarded by feature flags, │
+     │  all fail-soft):                                                        │
+     │                                                                         │
+     │ Decision: Pick which land to play                                       │
+     │ File: AiController.java chooseBestLandToPlay() (~line 495)              │
+     │ Method: Already partially wired (line 669) — make                       │
+     │ sidecarRecommendedLand                                                  │
+     │   actually add to the score lambda (score += 50 when the candidate's    │
+     │ name                                                                    │
+     │   matches), not just be a string.                                       │
+     │ New behavior:                                                           │
+     │ ────────────────────────────────────────                                │
+     │ Decision: Pick which spell to play                                      │
+     │ File: AiController.java trySidecarRecommendedPlay() (line 1643)         │
+     │ Method: Iterate over bestPlaySpellNames() (now potentially multiple)    │
+     │ and pick                                                                │
+     │   the first playable; current code only tries bestAction("PLAY_SPELL"). │
+     │ New behavior:                                                           │
+     │ ────────────────────────────────────────                                │
+     │ Decision: Choose targets                                                │
+     │ File: PlayerControllerAi.java chooseTargetsFor() (line 1368)            │
+     │ Method: Before delegating to ability AI, consult                        │
+     │   SidecarInfluence.targetPriorityFor(spellName). If a listed target is  │
+     │ valid,                                                                  │
+     │   pre-bias selection.                                                   │
+     │ New behavior:                                                           │
+     │ ────────────────────────────────────────                                │
+     │ Decision: Mulligan                                                      │
+     │ File: PlayerControllerAi.java mulliganKeepHand() (line 768)             │
+     │ Method: Sum handValue across the 7-card hand; combine with existing     │
+     │   land/spell-ratio heuristic. Also consult bestAction("MULLIGAN") for   │
+     │ the                                                                     │
+     │   keep/ship signal.                                                     │
+     │ New behavior:                                                           │
+     │ ────────────────────────────────────────                                │
+     │ Decision: Discard                                                       │
+     │ File: AiController.java getCardsToDiscard() (~line 1099)                │
+     │ Method: Discard ascending by handValue (lowest value first) instead of  │
+     │ the                                                                     │
+     │   current heuristic, with the heuristic as fallback.                    │
+     │ New behavior:                                                           │
+     │ ────────────────────────────────────────                                │
+     │ Decision: Attack                                                        │
+     │ File: AiAttackController.java declareAttackers() (line 86)              │
+     │ Method: Use opponentLikelyHas() for counterspell/removal probability to │
+     │  scale                                                                  │
+     │   the existing aggression curve down when interaction is likely.        │
+     │ New behavior:                                                           │
+     │ ────────────────────────────────────────                                │
+     │ Decision: Block                                                         │
+     │ File: AiBlockController.java assignBlockersGivenAttackers() (line 69)   │
+     │ Method: Use opponentLikelyHas() for combat tricks to bias toward        │
+     │ conservative                                                            │
+     │   blocks when a pump/protection spell is probable.                      │
+     │ New behavior:                                                           │
+     │ ────────────────────────────────────────                                │
+     │ Decision: Card valuation generally                                      │
+     │ File: ComputerUtilCard.java evaluateCard()                              │
+     │ Method: Optional additive blend: base + sidecarHandValue * weight. Pure │
+     │                                                                         │
+     │   tiebreaker — the floor remains the existing evaluator.                │
+     │ New behavior:                                                           │
+     │                                                                         │
+     │ Each new wire-in is ≤15 lines and fully guarded by the per-feature      │
+     │ toggle + hasData().                                                     │
+     │                                                                         │
+     │ ---                                                                     │
+     │ Critical files (touch list)                                             │
+     │                                                                         │
+     │ New behavior — modify:                                                  │
+     │ - forge-llm-sidecar/app/schema.py                                       │
+     │ - forge-llm-sidecar/app/nodes/game_advisor.py                           │
+     │ - forge-llm-sidecar/app/static/dashboard.html                           │
+     │ - forge-ai/src/main/java/forge/ai/llm/RecognitionRequest.java           │
+     │ - forge-ai/src/main/java/forge/ai/llm/RecognitionResult.java            │
+     │ - forge-ai/src/main/java/forge/ai/llm/DeckRecognitionObserver.java      │
+     │ - forge-ai/src/main/java/forge/ai/llm/SidecarInfluence.java             │
+     │ - forge-ai/src/main/java/forge/ai/AiProps.java                          │
+     │ - forge-ai/src/main/java/forge/ai/AiController.java                     │
+     │ - forge-ai/src/main/java/forge/ai/PlayerControllerAi.java               │
+     │ - forge-ai/src/main/java/forge/ai/AiAttackController.java               │
+     │ - forge-ai/src/main/java/forge/ai/AiBlockController.java                │
+     │ - forge-ai/src/main/java/forge/ai/ComputerUtilCard.java (small additive │
+     │  blend)                                                                 │
+     │                                                                         │
+     │ Reuse, do not modify:                                                   │
+     │ - forge-ai/.../AiCardMemory.java — read alongside the new opponent      │
+     │ inference; AI now has both "what we saw" and "what we guess".           │
+     │ - forge-llm-sidecar/app/knowledge/piloting.py, metagame.py, loader.py — │
+     │  knowledge sources untouched.                                           │
+     │ - forge-llm-sidecar/app/store.py — snapshot logic already passes the    │
+     │ full piloting payload through.                                          │
+     │                                                                         │
+     │ ---                                                                     │
+     │ Verification                                                            │
+     │                                                                         │
+     │ End-to-end smoke test:                                                  │
+     │                                                                         │
+     │ 1. Sidecar unit: in forge-llm-sidecar/, add unit tests for the four new │
+     │  helpers in game_advisor.py with synthetic state fixtures (one aggro,   │
+     │ one control, one combo). Run pytest. Assert: hand values exist for      │
+     │ every card in hand, action targets are real card names from hand,       │
+     │ opponent guesses sum to plausible totals.                               │
+     │ 2. Sidecar live: start the sidecar (uvicorn app.main:app). POST a       │
+     │ /recognize payload with a populated hand/board/graveyard. Confirm       │
+     │ response contains the three new lists. Open /dashboard and confirm the  │
+     │ new panels render.                                                      │
+     │ 3. Java unit: add a small JUnit test in forge-ai for SidecarInfluence   │
+     │ covering the new accessors with a stub RecognitionResult.               │
+     │ 4. In-game: launch Forge, enable SIDECAR_INFLUENCE_ENABLE + the new     │
+     │ feature flags in the AI profile, run an AI-vs-human game. Watch the     │
+     │ game log for the new "AI hand value: ..." / "AI thinks opponent holds:  │
+     │ ..." lines and the dashboard for live updates per turn. Sanity-check:   │
+     │ with the sidecar killed mid-game, the AI continues playing normally     │
+     │ (fail-soft).                                                            │
+     │ 5. Regression: run any existing forge-ai test classes to confirm        │
+     │ heuristic AI behavior is unchanged when the sidecar is disabled.        │
+     ╰─────────────────────────────────────────────────────────────────────────╯
+
+● Good addition — "Who's the Beatdown" is the meta-decision that should color
+  the rest of the advice. Let me also save a small memory about this preference,
+   then update the plan.
+
+  Wrote 2 memories (ctrl+o to expand)
+
+● Updated plan
+  ⎿  /plan to preview
+
+● Updated plan
+  ⎿  /plan to preview
+
+● Updated plan
+  ⎿  /plan to preview
+● Updated plan
+  ⎿  /plan to preview
+
+● Updated plan
+  ⎿  /plan to preview
+
+● Updated plan
+  ⎿  /plan to preview
+
+● Updated plan
+  ⎿  /plan to preview
+
+  Recalled 1 memory, wrote 1 memory (ctrl+o to expand)
+
+● Plan updated to put "Who's the Beatdown?" at the top of the reasoning chain
+  (it colors hand valuation, action selection, targeting, attack, and block).
+  Exiting plan mode.
+
+● User approved Claude's plan
+  ⎿  Plan saved to: ~/.claude/plans/i-want-the-forge-mighty-peach.md · /plan to 
+     edit
+     Sidecar-Driven AI Decisions in Forge
+
+     Context
+
+     The Forge AI today is fully heuristic (forge-ai package). A sidecar LLM was
+      added to recognize the human's archetype and emit "piloting advice", but
+     the advice is currently:
+
+     - Static — _local_piloting_advice() in
+     forge-llm-sidecar/app/nodes/game_advisor.py produces fixed percentages
+     (e.g. PLAY_SPELL=65 if aggro) with no knowledge of the actual board, hand, 
+     or graveyard.
+     - Untargeted — ActionScore.target for PLAY_SPELL/PLAY_LAND is currently a
+     sentence of English prose from the guide phase plan, not a card name. The
+     Java-side match-by-name in AiController.trySidecarRecommendedPlay()
+     therefore almost never fires.
+     - Partial — only PLAY_SPELL / PLAY_LAND / ATTACK / BLOCK / PASS /
+     ACTIVATE_ABILITY are modeled. There is nothing on hand valuation, target
+     selection, mulligan, discard, or what the human likely holds.
+     - State-blind — the RecognitionRequest Pydantic schema already declares
+     hand, own_board, opponent_board, your_graveyard, opponent_graveyard,
+     life_totals, but the Java caller (DeckRecognitionObserver.fireCall()) only
+     fills observations + deckCards. The fields exist on the wire but never get
+     populated.
+
+     Goal: make the sidecar's guidance the actual brain behind Forge's AI plays
+     — choosing which lands and spells to play and when, valuing cards in hand,
+     anticipating what the human holds, picking targets, and assigning the
+     beatdown / control role per Mike Flores's classical doctrine ("Who's the
+     Beatdown?", StarCityGames) so all of the above is colored by who is the
+     aggressor in the current matchup right now. Based on live game state. The
+     existing /recognize stays at one LLM call per turn (deterministic on the
+     piloting side, per user direction). Everything is fail-soft: if the sidecar
+      is off, the heuristic AI runs unchanged.
+
+     ---
+     Approach (high level)
+
+     Three coordinated changes:
+
+     1. Java → sidecar: ship the full game snapshot that the schema already
+     advertises (hand, both boards, graveyards, life totals, mana available,
+     current phase).
+     2. Sidecar reasoning: keep the recognition LLM call as-is; rewrite
+     _local_piloting_advice() to be a board-aware deterministic engine that
+     produces card-specific actions, hand valuations, opponent-hand inference,
+     and target priorities — all derived from game state ∩ piloting guide ∩
+     candidate-archetype knowledge.
+     3. Sidecar → Java: extend the response schema, expose typed accessors on
+     SidecarInfluence, and wire new consumption points in AiController /
+     PlayerControllerAi / AiAttackController / AiBlockController.
+
+     Existing infrastructure to reuse:
+     - SidecarInfluence (forge-ai/.../llm/SidecarInfluence.java) — already does
+     second-pass personality weighting and is consulted in 7 places in
+     AiController. Extend, don't replace.
+     - AiCardMemory (forge-ai/.../AiCardMemory.java) — existing memory layer for
+      known opponent cards. Opponent-hand inference plugs in next to it (the
+     sidecar guess, alongside the memory of revealed cards).
+     - ComputerUtilCard.evaluateCreature/evaluateCard, CreatureEvaluator — keep
+     as the floor; sidecar value is an additive tie-breaker on top, not a
+     replacement.
+     - piloting.get_piloting_guide() and curated archetype JSON in
+     forge-llm-sidecar/app/knowledge/ — already the knowledge base for what the
+     AI's deck wants to do and what the opponent's likely deck holds. Re-used by
+      the new advice engine.
+     - Dashboard renderer in forge-llm-sidecar/app/static/dashboard.html
+     (already renders piloting actions as bars) — new sections slot in.
+
+     ---
+     File-by-file changes
+
+     Python sidecar
+
+     app/schema.py — extend PilotingAdvice (no breaking changes; everything
+     additive, default empty):
+     class HandValuation(BaseModel):
+         card: str
+         value: float           # 0-100, higher = more valuable to keep/play
+         role: str              # "threat", "answer", "ramp", "card_draw",
+     "win_con", "filler"
+         reasoning: str
+
+     class OpponentHandGuess(BaseModel):
+         category: str          # "counterspell", "removal", "wrath", "threat",
+     "combo_piece"
+         example_cards: list[str]
+         probability: float     # 0-1
+         reasoning: str
+
+     class TargetPriority(BaseModel):
+         spell: str             # AI's spell whose targets we're ranking ("" =
+     generic)
+         targets: list[str]     # ordered card names on opponent's board, best
+     first
+         reasoning: str
+
+     class RoleAssessment(BaseModel):
+         """Who's the Beatdown? Per Mike Flores's doctrine, role assignment is
+         matchup- and state-dependent and can flip during a game."""
+         ai_role: str           # "beatdown" | "control" | "contested"
+         opponent_role: str     # same set
+         winning_side: str      # "ai" | "human" | "even"
+         margin: float          # 0-1, how decisively one side is ahead
+         role_flipped: bool     # true when the natural role from the archetype
+                                # is overridden by the current board state
+         reasoning: str         # one or two sentences citing life, board, card
+                                # advantage, clock
+
+     class PilotingAdvice(BaseModel):
+         ...existing fields...
+         role: RoleAssessment | None = None
+         hand_values: list[HandValuation] = []
+         opponent_hand: list[OpponentHandGuess] = []
+         target_priorities: list[TargetPriority] = []
+     Bump schema_version to 4.
+
+     app/nodes/game_advisor.py — rewrite _local_piloting_advice(state) to be
+     board-aware. The function already has state["piloting_guide"] and
+     state["candidate_archetypes"]; now also read state["hand"],
+     state["own_board"], state["opponent_board"], state["your_graveyard"],
+     state["opponent_graveyard"], state["life_totals"]. New deterministic
+     helpers (all in game_advisor.py, or split into app/advice/ if it grows past
+      ~200 lines):
+
+     - _assess_role(state, ai_strategy, opp_strategy) → RoleAssessment.
+     Implements Mike Flores's "Who's the Beatdown?" doctrine deterministically:
+       - Natural role from archetype strategy: aggro/burn/tempo → beatdown;
+     control/ramp → control; combo/midrange → context-dependent.
+       - Board pressure score per side: sum of power on board + haste/evasion
+     bonus + clock (turns to lethal at current life given current attackers).
+       - Card advantage score per side: hand size + permanents − graveyard rate,
+      with a phase scaling factor.
+       - Role flip rule (this is the crux of the article): if the natural-aggro
+     side is behind on board pressure AND behind on card advantage, it flips to
+     control role; if the natural-control side has clear board+card-advantage
+     dominance and a finite clock to lethal, it flips to beatdown.
+       - winning_side and margin come from a weighted combination of (life
+     delta, board pressure delta, card advantage delta, clock asymmetry).
+       - This is consulted by the other helpers below so a single role decision
+     colors the rest of the advice.
+     - _score_hand(hand, guide, phase, available_mana, role) →
+     list[HandValuation]. Uses guide.key_cards roles, CMC vs available mana,
+     redundancy in hand, and phase. Lands score by color need. Win-cons get a
+     phase-dependent boost. Role modulation: when AI is beatdown, threats and
+     burn outrank answers; when AI is control, answers and card draw outrank
+     threats; when role-flipped, the modulation flips.
+     - _card_specific_actions(hand, guide, phase, opponent_board, life_totals, 
+     role) → list of ActionScore with concrete card names in target. Picks the
+     single highest-valued playable card per category given current mana and
+     board. Role modulation: beatdown mode raises PLAY_SPELL/ATTACK percentages
+     and lowers PASS; control mode raises PASS and ACTIVATE_ABILITY (hold-up);
+     role flips override the deck's natural defaults. Multiple PLAY_SPELL
+     entries allowed so the Java side can fall through if its first pick is
+     unplayable.
+     - _infer_opponent_hand(observations, opponent_archetype, 
+     candidate_archetypes, turn, opponent_graveyard, opponent_board) →
+     list[OpponentHandGuess]. For the inferred archetype, take its
+     signature_cards and tells, subtract what's already been seen (board +
+     graveyard + revealed), and bucket by category. Probability scales with
+     archetype confidence × remaining copies × turn (more copies still buried =
+     higher probability of being in hand).
+     - _target_priorities(opponent_board, opponent_archetype_record, guide, 
+     role) → list[TargetPriority]. Cross-ref opponent's permanents against
+     archetype.signature_cards (high priority) and guide.common_threats
+     (matchup-specific priority). Role modulation: when AI is control (or
+     flipped to control), target the opponent's clock; when AI is beatdown,
+     target opponent's interaction/blockers.
+
+     _local_piloting_advice returns the existing fields plus the four new
+     structures (role + three lists). The existing static action percentages
+     stay as a fallback baseline; card-specific actions override them when
+     present.
+
+     The recognition LLM call is unchanged.
+
+     app/store.py — HistoryEntry already snapshots the piloting payload; just
+     confirm the new lists ride along (they will, since record_recognition
+     already calls .model_dump() on the result).
+
+     app/static/dashboard.html — add four rendered panels under the existing
+     "Piloting Advice" section:
+     - Who's the Beatdown? (top — colors the rest): AI role + opponent role,
+     winning side and margin bar, "role flipped" badge when the natural role has
+      been overridden, reasoning text.
+     - Hand Valuation: bar chart per card with role tag.
+     - Opponent Likely Holds: list of category × probability bars + example
+     cards.
+     - Target Priorities: ordered list per spell, with reasoning tooltip.
+     Reuses the existing piloting-value/piloting-label styles and the action-bar
+      renderer pattern (dashboard.html:526–541).
+
+     Java forge-ai
+
+     forge-ai/.../llm/RecognitionRequest.java — already has the fields; add a
+     convenience constructor that takes the full state and is what the observer
+     will call. Backwards compat: keep the existing two ctors.
+
+     forge-ai/.../llm/DeckRecognitionObserver.java — in fireCall() (currently
+     line 207), populate the full snapshot from aiPlayer / game:
+     - hand from aiPlayer.getCardsIn(ZoneType.Hand) → card names.
+     - own_board / opponent_board from each player's ZoneType.Battlefield.
+     - your_graveyard / opponent_graveyard from ZoneType.Graveyard.
+     - life_totals map of playerId → life.
+     - Add phase (string from game.getPhaseHandler().getPhase()) and
+     available_mana summary (from ComputerUtilMana.getAvailableManaSources) as
+     new optional fields in the schema.
+
+     Refresh trigger broadens slightly: also rerun on
+     GameEventPlayerLivesChanged and GameEventZone (currently only spell-cast /
+     land-played / turn-end fire requestRecognition()). The existing latest-wins
+      coalescing protects against churn.
+
+     forge-ai/.../llm/RecognitionResult.java — mirror the new Pydantic types as
+     Java records: RoleAssessment, HandValuation, OpponentHandGuess,
+     TargetPriority. Add corresponding fields on PilotingAdvice Java record.
+     Keep toPilotingLogMessage() and add toRoleLogMessage(),
+     toHandValuesLogMessage() etc. for game log output.
+
+     forge-ai/.../llm/SidecarInfluence.java — extend with thread-safe accessors:
+     - Optional<RoleAssessment> role() — current role assessment from the latest
+      payload.
+     - boolean isAiBeatdown() / boolean isAiControl() / boolean isAiAhead() —
+     convenience checks used to gate aggression in attack/block hooks.
+     - Optional<Double> handValue(String cardName) — lookup in the latest
+     hand_values.
+     - List<OpponentHandGuess> opponentLikelyHas() — sorted by probability desc.
+     - List<String> targetPriorityFor(String spellName) — falls back to the
+     generic entry if no spell-specific match.
+     - Optional<String> bestPlayLandName(), List<String> bestPlaySpellNames() —
+     convenience over the existing bestAction(...) for card-name actions.
+     Personality weighting in applyPersonalityWeight() stays; new fields are
+     passed through without weighting (they're already board- and
+     role-conditioned).
+
+     forge-ai/.../AiProps.java — add granular toggles defaulting to follow
+     SIDECAR_INFLUENCE_ENABLE:
+     - SIDECAR_ROLE_ASSESSMENT_ENABLE, SIDECAR_HAND_VALUATION_ENABLE,
+     SIDECAR_OPPONENT_INFERENCE_ENABLE, SIDECAR_TARGETING_ENABLE,
+     SIDECAR_MULLIGAN_ENABLE, SIDECAR_DISCARD_ENABLE.
+
+     Decision wiring — new consumption points (all guarded by feature flags, all
+      fail-soft):
+
+     Decision: Pick which land to play
+     File: AiController.java chooseBestLandToPlay() (~line 495)
+     Method: Already partially wired (line 669) — make sidecarRecommendedLand
+       actually add to the score lambda (score += 50 when the candidate's name
+       matches), not just be a string.
+     New behavior:
+     ────────────────────────────────────────
+     Decision: Pick which spell to play
+     File: AiController.java trySidecarRecommendedPlay() (line 1643)
+     Method: Iterate over bestPlaySpellNames() (now potentially multiple) and
+     pick
+       the first playable; current code only tries bestAction("PLAY_SPELL").
+     New behavior:
+     ────────────────────────────────────────
+     Decision: Choose targets
+     File: PlayerControllerAi.java chooseTargetsFor() (line 1368)
+     Method: Before delegating to ability AI, consult
+       SidecarInfluence.targetPriorityFor(spellName). If a listed target is
+     valid,
+       pre-bias selection.
+     New behavior:
+     ────────────────────────────────────────
+     Decision: Mulligan
+     File: PlayerControllerAi.java mulliganKeepHand() (line 768)
+     Method: Sum handValue across the 7-card hand; combine with existing
+       land/spell-ratio heuristic. Also consult bestAction("MULLIGAN") for the
+       keep/ship signal.
+     New behavior:
+     ────────────────────────────────────────
+     Decision: Discard
+     File: AiController.java getCardsToDiscard() (~line 1099)
+     Method: Discard ascending by handValue (lowest value first) instead of the
+       current heuristic, with the heuristic as fallback.
+     New behavior:
+     ────────────────────────────────────────
+     Decision: Attack
+     File: AiAttackController.java declareAttackers() (line 86)
+     Method: (a) When isAiBeatdown() is true, lower the existing aggression
+       threshold; when isAiControl() is true, raise it — this is the actual
+     "Who's
+       the Beatdown?" decision applied to combat. (b) Use opponentLikelyHas() to
+
+       scale further down when interaction is likely.
+     New behavior:
+     ────────────────────────────────────────
+     Decision: Block
+     File: AiBlockController.java assignBlockersGivenAttackers() (line 69)
+     Method: (a) When isAiBeatdown() is true the AI is willing to take damage
+     (the
+       race is on); when isAiControl() is true block conservatively to preserve
+       life. (b) Use opponentLikelyHas() for combat tricks to bias toward
+       conservative blocks when a pump/protection spell is probable.
+     New behavior:
+     ────────────────────────────────────────
+     Decision: Card valuation generally
+     File: ComputerUtilCard.java evaluateCard()
+     Method: Optional additive blend: base + sidecarHandValue * weight. Pure
+       tiebreaker — the floor remains the existing evaluator.
+     New behavior:
+
+     Each new wire-in is ≤15 lines and fully guarded by the per-feature toggle +
+      hasData().
+
+     ---
+     Critical files (touch list)
+
+     New behavior — modify:
+     - forge-llm-sidecar/app/schema.py
+     - forge-llm-sidecar/app/nodes/game_advisor.py
+     - forge-llm-sidecar/app/static/dashboard.html
+     - forge-ai/src/main/java/forge/ai/llm/RecognitionRequest.java
+     - forge-ai/src/main/java/forge/ai/llm/RecognitionResult.java
+     - forge-ai/src/main/java/forge/ai/llm/DeckRecognitionObserver.java
+     - forge-ai/src/main/java/forge/ai/llm/SidecarInfluence.java
+     - forge-ai/src/main/java/forge/ai/AiProps.java
+     - forge-ai/src/main/java/forge/ai/AiController.java
+     - forge-ai/src/main/java/forge/ai/PlayerControllerAi.java
+     - forge-ai/src/main/java/forge/ai/AiAttackController.java
+     - forge-ai/src/main/java/forge/ai/AiBlockController.java
+     - forge-ai/src/main/java/forge/ai/ComputerUtilCard.java (small additive
+     blend)
+
+     Reuse, do not modify:
+     - forge-ai/.../AiCardMemory.java — read alongside the new opponent
+     inference; AI now has both "what we saw" and "what we guess".
+     - forge-llm-sidecar/app/knowledge/piloting.py, metagame.py, loader.py —
+     knowledge sources untouched.
+     - forge-llm-sidecar/app/store.py — snapshot logic already passes the full
+     piloting payload through.
+
+     ---
+     Verification
+
+     End-to-end smoke test:
+
+     1. Sidecar unit: in forge-llm-sidecar/, add unit tests for the four new
+     helpers in game_advisor.py with synthetic state fixtures (one aggro, one
+     control, one combo). Run pytest. Assert: hand values exist for every card
+     in hand, action targets are real card names from hand, opponent guesses sum
+      to plausible totals.
+     2. Sidecar live: start the sidecar (uvicorn app.main:app). POST a
+     /recognize payload with a populated hand/board/graveyard. Confirm response
+     contains the three new lists. Open /dashboard and confirm the new panels
+     render.
+     3. Java unit: add a small JUnit test in forge-ai for SidecarInfluence
+     covering the new accessors with a stub RecognitionResult.
+     4. In-game: launch Forge, enable SIDECAR_INFLUENCE_ENABLE + the new feature
+      flags in the AI profile, run an AI-vs-human game. Watch the game log for
+     the new "AI hand value: ..." / "AI thinks opponent holds: ..." lines and
+     the dashboard for live updates per turn. Sanity-check: with the sidecar
+     killed mid-game, the AI continues playing normally (fail-soft).
+     5. Regression: run any existing forge-ai test classes to confirm heuristic
+     AI behavior is unchanged when the sidecar is disabled.
+
+● Setting up tasks to track this multi-file implementation, then starting with
+  the schema changes that the rest depend on.
+● Starting with task #1 — the schema. Let me read the current schema to extend
+  it.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/schema.py)
+  ⎿  Added 4 lines, removed 1 line
+       8  
+       9  # v2 adds the piloting advice block to the response (see Piloti
+          ngAdvice).
+      10  # v3 adds structured ActionScore with personality weighting.
+      11 -SCHEMA_VERSION = 3                                             
+      11 +# v4 adds board-aware advice: RoleAssessment (Who's the Beatdow
+         +n), hand                                                       
+      12 +# valuations, opponent-hand inference, target priorities, and r
+         +icher state on                                                 
+      13 +# the request (phase, available_mana).                         
+      14 +SCHEMA_VERSION = 4                                             
+      15  
+      16  
+      17  class Observation(BaseModel):
+
+● Update(forge-llm-sidecar/app/schema.py)
+  ⎿  Added 6 lines
+      57      your_graveyard: list[str] = Field(default_factory=list)
+      58      opponent_graveyard: list[str] = Field(default_factory=list)
+      59      life_totals: dict[str, int] = Field(default_factory=dict)
+      60 +    # Current game phase (e.g. "MAIN1", "COMBAT_DECLARE_ATTACKE
+         +RS"). Optional —                                               
+      61 +    # board-aware advice uses it to pick phase-appropriate acti
+         +ons.                                                           
+      62 +    phase: str = ""                                            
+      63 +    # Mana available to the AI right now, in WUBRGC order or as
+         + a list of color                                               
+      64 +    # strings. Used to filter actions to ones the AI can actual
+         +ly pay for.                                                    
+      65 +    available_mana: list[str] = Field(default_factory=list)    
+      66      # AI personality profile. Sent so the LLM can factor it int
+          o action scoring.
+      67      personality: dict[str, str | int | float | bool] = Field(de
+          fault_factory=dict)
+      68  
+
+● Update(forge-llm-sidecar/app/schema.py)
+  ⎿  Added 53 lines
+       67      personality: dict[str, str | int | float | bool] = Field(d
+           efault_factory=dict)
+       68  
+       69  
+       70 +class RoleAssessment(BaseModel):                              
+       71 +    """Who's the Beatdown? Mike Flores's role-assignment doctr
+          +ine.                                                          
+       72 +                                                              
+       73 +    Role is matchup- and state-dependent and can flip mid-game
+          +; the wrong                                                   
+       74 +    role assignment is a known losing pattern. The sidecar con
+          +sults the                                                     
+       75 +    natural role of each deck's strategy, the current board pr
+          +essure, card                                                  
+       76 +    advantage, and clock, and decides who should be the aggres
+          +sor right now.                                                
+       77 +    """                                                       
+       78 +                                                              
+       79 +    ai_role: str = "contested"  # "beatdown" | "control" | "co
+          +ntested"                                                      
+       80 +    opponent_role: str = "contested"                          
+       81 +    winning_side: str = "even"  # "ai" | "human" | "even"     
+       82 +    margin: float = 0.0  # 0-1, how decisively the winning sid
+          +e is ahead                                                    
+       83 +    role_flipped: bool = False  # true when current state over
+          +rode the deck's natural role                                  
+       84 +    reasoning: str = ""  # one or two sentences citing life/bo
+          +ard/card-advantage/clock                                      
+       85 +                                                              
+       86 +                                                              
+       87 +class HandValuation(BaseModel):                               
+       88 +    """Per-card score for cards currently in the AI's hand."""
+       89 +                                                              
+       90 +    card: str                                                 
+       91 +    value: float = 0.0  # 0-100, higher = more valuable to kee
+          +p / prioritize playing                                        
+       92 +    role: str = "filler"  # "threat" | "answer" | "ramp" | "ca
+          +rd_draw" | "win_con" | "land" | "filler"                      
+       93 +    reasoning: str = ""                                       
+       94 +                                                              
+       95 +                                                              
+       96 +class OpponentHandGuess(BaseModel):                           
+       97 +    """Inferred category of card the human likely still holds,
+          + based on                                                     
+       98 +    observed plays minus what's been seen, weighted by archety
+          +pe confidence."""                                             
+       99 +                                                              
+      100 +    category: str = ""  # "counterspell" | "removal" | "wrath"
+          + | "threat" | "combo_piece" | ...                             
+      101 +    example_cards: list[str] = Field(default_factory=list)    
+      102 +    probability: float = 0.0  # 0-1                           
+      103 +    reasoning: str = ""                                       
+      104 +                                                              
+      105 +                                                              
+      106 +class TargetPriority(BaseModel):                              
+      107 +    """Ordered target preference for a spell/ability with sele
+          +ctable targets.                                               
+      108 +                                                              
+      109 +    ``spell`` is the AI's spell whose targets we are ranking; 
+          +an empty string                                               
+      110 +    means generic priority that applies when no spell-specific
+          + entry matches.                                               
+      111 +    """                                                       
+      112 +                                                              
+      113 +    spell: str = ""                                           
+      114 +    targets: list[str] = Field(default_factory=list)          
+      115 +    reasoning: str = ""                                       
+      116 +                                                              
+      117 +                                                              
+      118  class PilotingAdvice(BaseModel):
+      119      """Advice on how the AI should play its own deck this turn
+           ."""
+      120  
+     ...
+      127      actions: list[ActionScore] = Field(
+      128          default_factory=list
+      129      )  # structured action recommendations with percentages
+      130 +    # Board-aware additions (v4):                             
+      131 +    role: RoleAssessment | None = None                        
+      132 +    hand_values: list[HandValuation] = Field(default_factory=l
+          +ist)                                                          
+      133 +    opponent_hand: list[OpponentHandGuess] = Field(default_fac
+          +tory=list)                                                    
+      134 +    target_priorities: list[TargetPriority] = Field(default_fa
+          +ctory=list)                                                   
+      135  
+      136  
+      137  class TrainingExample(BaseModel):
+
+● Update(forge-llm-sidecar/app/schema.py)
+  ⎿  Added 2 lines
+      181      your_graveyard: list[str]
+      182      opponent_graveyard: list[str]
+      183      life_totals: dict[str, int]
+      184 +    phase: str                                                
+      185 +    available_mana: list[str]                                 
+      186      personality: dict[str, str | int | float | bool]
+      187      # resolved by the game_advisor node
+      188      resolved_format: str | None
+
+● Update(forge-llm-sidecar/app/schema.py)
+  ⎿  Added 4 lines
+      201      mulligan_advice: str | None
+      202      guide_source: str | None
+      203      actions: list[dict]
+      204 +    role: dict | None                                         
+      205 +    hand_values: list[dict]                                   
+      206 +    opponent_hand: list[dict]                                 
+      207 +    target_priorities: list[dict]                             
+
+● Now let me check how the response gets built in main.py so I know I'm wiring
+  the new fields correctly.
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 19 lines
+      249          "your_graveyard": req.your_graveyard,
+      250          "opponent_graveyard": req.opponent_graveyard,
+      251          "life_totals": req.life_totals,
+      252 +        "phase": req.phase,                                   
+      253 +        "available_mana": req.available_mana,                 
+      254          "personality": req.personality,
+      255          "alternatives": [],
+      256      }
+      257      final = await graph.ainvoke(initial)
+      258      raw_actions = final.get("actions") or []
+      259      actions = [ActionScore(**a) for a in raw_actions if isinst
+           ance(a, dict)]
+      260 +    role_raw = final.get("role")                              
+      261 +    role_obj = RoleAssessment(**role_raw) if isinstance(role_r
+          +aw, dict) else None                                           
+      262 +    hand_values = [                                           
+      263 +        HandValuation(**hv) for hv in (final.get("hand_values"
+          +) or []) if isinstance(hv, dict)                              
+      264 +    ]                                                         
+      265 +    opponent_hand = [                                         
+      266 +        OpponentHandGuess(**g) for g in (final.get("opponent_h
+          +and") or []) if isinstance(g, dict)                           
+      267 +    ]                                                         
+      268 +    target_priorities = [                                     
+      269 +        TargetPriority(**t)                                   
+      270 +        for t in (final.get("target_priorities") or [])       
+      271 +        if isinstance(t, dict)                                
+      272 +    ]                                                         
+      273      piloting_advice = PilotingAdvice(
+      274          own_archetype=final.get("own_archetype") or "Unknown",
+      275          guide_source=final.get("guide_source") or "",
+     ...
+      278          alternatives=final.get("play_alternatives") or [],
+      279          mulligan_advice=final.get("mulligan_advice") or "",
+      280          actions=actions,
+      281 +        role=role_obj,                                        
+      282 +        hand_values=hand_values,                              
+      283 +        opponent_hand=opponent_hand,                          
+      284 +        target_priorities=target_priorities,                  
+      285      )
+      286  
+      287      _store = get_store()
+
+● Need to import the new types in main.py.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 4 lines
+      17  from app.nodes import game_advisor
+      18  from app.schema import (
+      19      ActionScore,
+      20 +    HandValuation,                                             
+      21 +    OpponentHandGuess,                                         
+      22      PilotingAdvice,
+      23      RecognitionRequest,
+      24      RecognitionResponse,
+      25 +    RoleAssessment,                                            
+      26 +    TargetPriority,                                            
+      27      TrainingExample,
+      28  )
+      29  from app.store import get_store
+
+● Bash(cd /home/lou/Development/forge-1/forge-llm-sidecar && python -c "from
+      app.schema import RoleAssessment, HandValuation, OpponentHandGuess,
+      TargetPriority, Piloti…)
+  ⎿  schema OK, version= 4
+
+  Read 1 file (ctrl+o to expand)
+
+  Listed 1 directory (ctrl+o to expand)
+  ⎿  You've hit your session limit · resets 3:30am (America/New_York)
+     /upgrade or /usage-credits to finish what you’re working on.
+
+✻ Brewed for 9m 49s
+
+❯ continue with the implementation of the plan                                  
+  Read 1 file (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/app/advice.py)
+  ⎿  Wrote 575 lines to forge-llm-sidecar/app/advice.py
+      2 """Board-aware deterministic advice helpers for ``game_advisor``.
+      3 Each helper consumes the GraphState that the recognition node alr
+        eady has
+        hetypes forplus the AI's own piloting guide and the candidate arc
+      5 the format. They produce structured advice that the Java side con
+        sumes
+      7 through ``SidecarInfluence``.
+      8 No LLM calls. Everything here is deterministic so it adds no late
+        ncy on top
+      9 of the existing ``/recognize`` call.
+     … +653 lines (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/nodes/game_advisor.py)
+  ⎿  Added 1 line
+      16  import json
+      17  import logging
+      18  
+      19 +from app import advice                                         
+      20  from app.config import CONFIG
+      21  from app.knowledge import format_detect, loader, metagame, pilo
+          ting
+      22  from app.knowledge.piloting_schema import StrategyType
+
+● Update(forge-llm-sidecar/app/nodes/game_advisor.py)
+  ⎿  Added 48 lines
+      446          "play_alternatives": [],
+      447          "mulligan_advice": "",
+      448          "actions": [],
+      449 +        "role": None,                                         
+      450 +        "hand_values": [],                                    
+      451 +        "opponent_hand": [],                                  
+      452 +        "target_priorities": [],                              
+      453      }
+      454  
+      455  
+      456 +def _phase_bucket(turn: int) -> str:                          
+      457 +    if turn <= 3:                                             
+      458 +        return "early_game"                                   
+      459 +    if turn <= 7:                                             
+      460 +        return "mid_game"                                     
+      461 +    return "late_game"                                        
+      462 +                                                              
+      463 +                                                              
+      464 +def _opp_strategy_for(name: str, candidates: list[dict]) -> st
+          +r | None:                                                     
+      465 +    n = (name or "").strip().lower()                          
+      466 +    if not n:                                                 
+      467 +        return None                                           
+      468 +    for a in candidates or []:                                
+      469 +        if (a.get("name", "") or "").strip().lower() == n:    
+      470 +            return (a.get("strategy") or "").strip() or None  
+      471 +    return None                                               
+      472 +                                                              
+      473 +                                                              
+      474 +def _opp_record_for(name: str, candidates: list[dict]) -> dict
+          + | None:                                                      
+      475 +    n = (name or "").strip().lower()                          
+      476 +    for a in candidates or []:                                
+      477 +        if (a.get("name", "") or "").strip().lower() == n:    
+      478 +            return a                                          
+      479 +    return None                                               
+      480 +                                                              
+      481 +                                                              
+      482 +def _merge_actions(                                           
+      483 +    base: list[dict],                                         
+      484 +    card_specific: list[dict],                                
+      485 +) -> list[dict]:                                              
+      486 +    """Card-specific actions override the static base on confl
+          +ict, except for                                               
+      487 +    PLAY_SPELL where we keep up to three card-specific entries
+          + so the Java                                                  
+      488 +    side can fall through if its first pick is unplayable.    
+      489 +    """                                                       
+      490 +    if not card_specific:                                     
+      491 +        return base                                           
+      492 +    # Action types in card_specific other than PLAY_SPELL repl
+          +ace the base                                                  
+      493 +    # entry of the same type. Multiple PLAY_SPELL entries are 
+          +kept.                                                         
+      494 +    cs_types = {a["action_type"] for a in card_specific if a.g
+          +et("action_type") != "PLAY_SPELL"}                            
+      495 +    merged: list[dict] = [a for a in base if a.get("action_typ
+          +e") not in cs_types and a.get("action_type") != "PLAY_SPELL"] 
+      496 +    merged.extend(card_specific)                              
+      497 +    return merged                                             
+      498 +                                                              
+      499 +                                                              
+      500  async def game_advisor_node(state: GraphState) -> GraphState:
+      501      """LangGraph node: opponent recognition plus local own-dec
+           k guidance.
+      502  
+
+● Now wire the new helpers into the node return.
+
+● Update(forge-llm-sidecar/app/nodes/game_advisor.py)
+  ⎿  Added 35 lines, removed 4 lines
+      568          play_alternatives = []
+      569      play_alternatives = [str(x) for x in play_alternatives][:3
+           ]
+      570  
+      571 -    raw_actions = piloting_result.get("actions", [])          
+      572 -    if not isinstance(raw_actions, list):                     
+      573 -        raw_actions = []                                      
+      571 +    base_actions = piloting_result.get("actions", [])         
+      572 +    if not isinstance(base_actions, list):                    
+      573 +        base_actions = []                                     
+      574  
+      575 +    # --- v4 board-aware advice ------------------------------
+          +---------------                                               
+      576 +    guide_dict = state.get("piloting_guide") or {}            
+      577 +    ai_strategy = guide_dict.get("strategy_type") if guide_dic
+          +t else None                                                   
+      578 +    opp_strategy = _opp_strategy_for(archetype, archetypes)   
+      579 +    role = advice.assess_role(state, ai_strategy, opp_strategy
+          +)                                                             
+      580 +    phase_bucket = _phase_bucket(state.get("turn", 0))        
+      581 +    hand_values = advice.score_hand(                          
+      582 +        state.get("hand", []) or [], guide_dict, phase_bucket,
+          + role                                                         
+      583 +    )                                                         
+      584 +    card_actions = advice.card_specific_actions(hand_values, r
+          +ole, phase_bucket)                                            
+      585 +    actions = _merge_actions(base_actions, card_actions)      
+      586 +    opp_hand = advice.infer_opponent_hand(                    
+      587 +        archetype,                                            
+      588 +        archetypes,                                           
+      589 +        state.get("observations", []) or [],                  
+      590 +        state.get("opponent_board", []) or [],                
+      591 +        state.get("opponent_graveyard", []) or [],            
+      592 +        confidence,                                           
+      593 +        state.get("turn", 0),                                 
+      594 +    )                                                         
+      595 +    target_pri = advice.target_priorities(                    
+      596 +        state.get("opponent_board", []) or [],                
+      597 +        _opp_record_for(archetype, archetypes),               
+      598 +        guide_dict,                                           
+      599 +        role,                                                 
+      600 +    )                                                         
+      601 +                                                              
+      602      return {
+      603          **state,
+      604          "archetype": archetype,
+     ...
+      609          "play_reasoning": str(piloting_result.get("play_reason
+           ing", "")).strip(),
+      610          "play_alternatives": play_alternatives,
+      611          "mulligan_advice": str(piloting_result.get("mulligan_a
+           dvice", "")).strip(),
+      585 -        "actions": raw_actions,                               
+      612 +        "actions": actions,                                   
+      613 +        "role": role,                                         
+      614 +        "hand_values": hand_values,                           
+      615 +        "opponent_hand": opp_hand,                            
+      616 +        "target_priorities": target_pri,                      
+      617      }
+
+● Bash(python -c "
+      import asyncio…)
+  ⎿    "margin": 0.54,
+       "role_flipped": false,
+       "reasoning": "AI beatdown (natural contested); life 18-20; board 4-1
+     … +40 lines (ctrl+o to expand)
+
+● Helpers working end-to-end. Marking task done and moving to dashboard.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/static/dashboard.html)
+  ⎿  Added 88 lines
+      540              `;
+      541            });
+      542          }
+      543 +        // --- v4 board-aware panels -------------------------
+          +-----------------                                             
+      544 +        let roleHtml = '';                                    
+      545 +        if (p.role) {                                         
+      546 +          const r = p.role;                                   
+      547 +          const sideColor = r.winning_side === 'ai'           
+      548 +            ? 'var(--green)'                                  
+      549 +            : r.winning_side === 'human' ? 'var(--red)' : 'var
+          +(--text-dim)';                                                
+      550 +          const sideLabel = r.winning_side === 'ai'           
+      551 +            ? 'AI ahead' : r.winning_side === 'human' ? 'Human
+          + ahead' : 'Even';                                             
+      552 +          const flipBadge = r.role_flipped                    
+      553 +            ? '<span style="margin-left:8px;padding:1px 6px;fo
+          +nt-size:10px;border-radius:8px;background:var(--yellow);color:
+          +#000">role flipped</span>'                                    
+      554 +            : '';                                             
+      555 +          const marginPct = Math.round((r.margin || 0) * 100);
+      556 +          roleHtml = `                                        
+      557 +            <div class="piloting-label" style="margin-top:10px
+          +">Who's the Beatdown?${flipBadge}</div>                       
+      558 +            <div style="display:flex;gap:16px;font-size:12px;m
+          +argin-top:4px">                                               
+      559 +              <span><b>AI:</b> ${escapeHtml(r.ai_role)}</span>
+      560 +              <span><b>Opp:</b> ${escapeHtml(r.opponent_role)}
+          +</span>                                                       
+      561 +              <span style="color:${sideColor}"><b>${escapeHtml
+          +(sideLabel)}</b> (${marginPct}%)</span>                       
+      562 +            </div>                                            
+      563 +            <div style="height:4px;background:var(--bg);border
+          +-radius:2px;overflow:hidden;margin-top:4px">                  
+      564 +              <div style="height:100%;width:${marginPct}%;back
+          +ground:${sideColor};border-radius:2px"></div>                 
+      565 +            </div>                                            
+      566 +            ${r.reasoning ? `<div class="reasoning">${escapeHt
+          +ml(r.reasoning)}</div>` : ''}                                 
+      567 +          `;                                                  
+      568 +        }                                                     
+      569 +                                                              
+      570 +        let handValuesHtml = '';                              
+      571 +        if (p.hand_values && p.hand_values.length > 0) {      
+      572 +          handValuesHtml = '<div class="piloting-label" style=
+          +"margin-top:10px">Hand Valuation</div>';                      
+      573 +          p.hand_values.slice(0, 10).forEach(hv => {          
+      574 +            const pct = Math.round(hv.value || 0);            
+      575 +            const barColor = pct >= 70 ? 'var(--green)' : pct 
+          +>= 40 ? 'var(--yellow)' : 'var(--red)';                       
+      576 +            handValuesHtml += `                               
+      577 +              <div style="display:flex;align-items:center;gap:
+          +6px;padding:2px 0;font-size:12px"                             
+      578 +                   title="${escapeHtml(hv.reasoning || '')}"> 
+      579 +                <span style="min-width:140px">${escapeHtml(hv.
+          +card)}</span>                                                 
+      580 +                <span style="font-family:var(--mono);font-size
+          +:10px;text-transform:uppercase;color:var(--text-dim);min-width
+          +:64px">${escapeHtml(hv.role || '')}</span>                    
+      581 +                <div style="flex:1;height:4px;background:var(-
+          +-bg);border-radius:2px;overflow:hidden">                      
+      582 +                  <div style="height:100%;width:${pct}%;backgr
+          +ound:${barColor};border-radius:2px"></div>                    
+      583 +                </div>                                        
+      584 +                <span style="min-width:32px;text-align:right;f
+          +ont-family:var(--mono);color:var(--text-dim)">${pct}</span>   
+      585 +              </div>                                          
+      586 +            `;                                                
+      587 +          });                                                 
+      588 +        }                                                     
+      589 +                                                              
+      590 +        let oppHandHtml = '';                                 
+      591 +        if (p.opponent_hand && p.opponent_hand.length > 0) {  
+      592 +          oppHandHtml = '<div class="piloting-label" style="ma
+          +rgin-top:10px">Opponent Likely Holds</div>';                  
+      593 +          p.opponent_hand.slice(0, 8).forEach(g => {          
+      594 +            const pct = Math.round((g.probability || 0) * 100)
+          +;                                                             
+      595 +            const barColor = pct >= 60 ? 'var(--red)' : pct >=
+          + 30 ? 'var(--yellow)' : 'var(--text-dim)';                    
+      596 +            const examples = (g.example_cards || []).slice(0, 
+          +3).join(', ');                                                
+      597 +            oppHandHtml += `                                  
+      598 +              <div style="padding:3px 0;font-size:12px" title=
+          +"${escapeHtml(g.reasoning || '')}">                           
+      599 +                <div style="display:flex;align-items:center;ga
+          +p:6px">                                                       
+      600 +                  <span style="min-width:120px;font-family:var
+          +(--mono);font-size:11px;text-transform:uppercase">${escapeHtml
+          +(g.category)}</span>                                          
+      601 +                  <div style="flex:1;height:4px;background:var
+          +(--bg);border-radius:2px;overflow:hidden">                    
+      602 +                    <div style="height:100%;width:${pct}%;back
+          +ground:${barColor};border-radius:2px"></div>                  
+      603 +                  </div>                                      
+      604 +                  <span style="min-width:32px;text-align:right
+          +;font-family:var(--mono);color:var(--text-dim)">${pct}%</span>
+      605 +                </div>                                        
+      606 +                ${examples ? `<div style="margin-left:126px;co
+          +lor:var(--text-dim);font-size:11px">e.g. ${escapeHtml(examples
+          +)}</div>` : ''}                                               
+      607 +              </div>                                          
+      608 +            `;                                                
+      609 +          });                                                 
+      610 +        }                                                     
+      611 +                                                              
+      612 +        let targetsHtml = '';                                 
+      613 +        if (p.target_priorities && p.target_priorities.length 
+          +> 0) {                                                        
+      614 +          targetsHtml = '<div class="piloting-label" style="ma
+          +rgin-top:10px">Target Priorities</div>';                      
+      615 +          p.target_priorities.forEach(tp => {                 
+      616 +            const label = tp.spell ? `for ${escapeHtml(tp.spel
+          +l)}` : 'generic';                                             
+      617 +            const targets = (tp.targets || []).map(c => `<span
+          + class="alt-chip">${escapeHtml(c)}</span>`).join('');         
+      618 +            targetsHtml += `                                  
+      619 +              <div style="font-size:12px;padding:3px 0" title=
+          +"${escapeHtml(tp.reasoning || '')}">                          
+      620 +                <span style="color:var(--text-dim);font-size:1
+          +1px;text-transform:uppercase">${label}:</span>                
+      621 +                <div class="alternatives" style="margin-top:2p
+          +x">${targets || '<span class="empty-state" style="padding:0">n
+          +o targets</span>'}</div>                                      
+      622 +              </div>                                          
+      623 +            `;                                                
+      624 +          });                                                 
+      625 +        }                                                     
+      626 +                                                              
+      627          pilotingHtml = `
+      628            <div class="piloting-section">
+      629              <div class="piloting-label">Piloting Advice</div>
+      630              <div class="piloting-value">${escapeHtml(p.recomme
+           nded_play || p.mulligan_advice || 'No advice')}</div>
+      631              ${p.reasoning ? `<div class="reasoning">${escapeHt
+           ml(p.reasoning)}</div>` : ''}
+      632              <div class="piloting-label" style="margin-top:6px"
+           >Own Archetype: ${escapeHtml(p.own_archetype)}</div>
+      633 +            ${roleHtml}                                       
+      634              ${actionsHtml}
+      635 +            ${handValuesHtml}                                 
+      636 +            ${oppHandHtml}                                    
+      637 +            ${targetsHtml}                                    
+      638            </div>
+      639          `;
+      640        }
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-ai/src/main/java/forge/ai/llm/RecognitionResult.java)
+  ⎿  Added 64 lines, removed 1 line
+      20          @SerializedName("schema_version") int schemaVersion) {
+      21  
+      22      /**
+      23 +     * "Who's the Beatdown?" assessment from the sidecar. Tells
+         + the AI whether                                                
+      24 +     * it should currently behave as the aggressor or the contr
+         +oller in this                                                  
+      25 +     * matchup, even when that contradicts the deck's natural s
+         +trategy.                                                       
+      26 +     */                                                        
+      27 +    public record RoleAssessment(                              
+      28 +            @SerializedName("ai_role") String aiRole,          
+      29 +            @SerializedName("opponent_role") String opponentRol
+         +e,                                                             
+      30 +            @SerializedName("winning_side") String winningSide,
+      31 +            double margin,                                     
+      32 +            @SerializedName("role_flipped") boolean roleFlipped
+         +,                                                              
+      33 +            String reasoning) {                                
+      34 +    }                                                          
+      35 +                                                               
+      36 +    /** Per-card value score for a card in the AI's hand. */   
+      37 +    public record HandValuation(                               
+      38 +            String card,                                       
+      39 +            double value,                                      
+      40 +            String role,                                       
+      41 +            String reasoning) {                                
+      42 +    }                                                          
+      43 +                                                               
+      44 +    /** Inferred category of card the human likely still holds.
+         + */                                                            
+      45 +    public record OpponentHandGuess(                           
+      46 +            String category,                                   
+      47 +            @SerializedName("example_cards") List<String> examp
+         +leCards,                                                       
+      48 +            double probability,                                
+      49 +            String reasoning) {                                
+      50 +                                                               
+      51 +        public OpponentHandGuess {                             
+      52 +            if (exampleCards == null) {                        
+      53 +                exampleCards = List.of();                      
+      54 +            }                                                  
+      55 +        }                                                      
+      56 +    }                                                          
+      57 +                                                               
+      58 +    /** Ordered target preference for a spell/ability. */      
+      59 +    public record TargetPriority(                              
+      60 +            String spell,                                      
+      61 +            List<String> targets,                              
+      62 +            String reasoning) {                                
+      63 +                                                               
+      64 +        public TargetPriority {                                
+      65 +            if (targets == null) {                             
+      66 +                targets = List.of();                           
+      67 +            }                                                  
+      68 +        }                                                      
+      69 +    }                                                          
+      70 +                                                               
+      71 +    /**                                                        
+      72       * Piloting advice for the AI's own deck. Nested in the {@c
+          ode /recognize}
+      73       * response under the {@code piloting} key.
+      74       */
+     ...
+       79              String reasoning,
+       80              List<String> alternatives,
+       81              @SerializedName("mulligan_advice") String mulligan
+           Advice,
+       33 -            List<ActionScore> actions) {                      
+       82 +            List<ActionScore> actions,                        
+       83 +            /** Board-aware additions (v4). All nullable / emp
+          +ty on older sidecars. */                                      
+       84 +            RoleAssessment role,                              
+       85 +            @SerializedName("hand_values") List<HandValuation>
+          + handValues,                                                  
+       86 +            @SerializedName("opponent_hand") List<OpponentHand
+          +Guess> opponentHand,                                          
+       87 +            @SerializedName("target_priorities") List<TargetPr
+          +iority> targetPriorities) {                                   
+       88  
+       89          public PilotingAdvice {
+       90              if (actions == null) {
+       91                  actions = List.of();
+       92              }
+       93 +            if (handValues == null) {                         
+       94 +                handValues = List.of();                       
+       95 +            }                                                 
+       96 +            if (opponentHand == null) {                       
+       97 +                opponentHand = List.of();                     
+       98 +            }                                                 
+       99 +            if (targetPriorities == null) {                   
+      100 +                targetPriorities = List.of();                 
+      101 +            }                                                 
+      102          }
+      103      }
+      104  
+
+● Update(forge-ai/src/main/java/forge/ai/llm/RecognitionResult.java)
+  ⎿  Added 37 lines
+      137          }
+      138          return sb.length() > 0 ? sb.toString() : null;
+      139      }
+      140 +                                                              
+      141 +    /** Game-log line summarizing the role assessment, or null
+          + when absent. */                                              
+      142 +    public String toRoleLogMessage() {                        
+      143 +        if (piloting == null || piloting.role() == null) {    
+      144 +            return null;                                      
+      145 +        }                                                     
+      146 +        final RoleAssessment r = piloting.role();             
+      147 +        return String.format(                                 
+      148 +                "Who's the Beatdown? AI=%s, opp=%s, winning=%s
+          + (margin %.0f%%)%s%s",                                        
+      149 +                r.aiRole(), r.opponentRole(), r.winningSide(),
+          + r.margin() * 100.0,                                          
+      150 +                r.roleFlipped() ? " [ROLE FLIPPED]" : "",     
+      151 +                r.reasoning() != null && !r.reasoning().isEmpt
+          +y() ? " — " + r.reasoning() : "");                            
+      152 +    }                                                         
+      153 +                                                              
+      154 +    /** Game-log line summarizing the top hand valuations, or 
+          +null when absent. */                                          
+      155 +    public String toHandValuesLogMessage() {                  
+      156 +        if (piloting == null || piloting.handValues() == null 
+          +|| piloting.handValues().isEmpty()) {                         
+      157 +            return null;                                      
+      158 +        }                                                     
+      159 +        final String top = piloting.handValues().stream()     
+      160 +                .limit(5)                                     
+      161 +                .map(hv -> String.format("%s=%.0f(%s)", hv.car
+          +d(), hv.value(), hv.role()))                                  
+      162 +                .collect(Collectors.joining(", "));           
+      163 +        return "AI hand value: " + top;                       
+      164 +    }                                                         
+      165 +                                                              
+      166 +    /** Game-log line summarizing inferred opponent hand conte
+          +nts, or null. */                                              
+      167 +    public String toOpponentHandLogMessage() {                
+      168 +        if (piloting == null || piloting.opponentHand() == nul
+          +l || piloting.opponentHand().isEmpty()) {                     
+      169 +            return null;                                      
+      170 +        }                                                     
+      171 +        final String top = piloting.opponentHand().stream()   
+      172 +                .limit(3)                                     
+      173 +                .map(g -> String.format("%s ~%.0f%%", g.catego
+          +ry(), g.probability() * 100.0))                               
+      174 +                .collect(Collectors.joining(", "));           
+      175 +        return "AI thinks opponent holds: " + top;            
+      176 +    }                                                         
+      177  }
+
+  Searched for 1 pattern (ctrl+o to expand)
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-ai/src/main/java/forge/ai/llm/RecognitionRequest.java)
+  ⎿  Added 9 lines, removed 3 lines
+      41          @SerializedName("opponent_graveyard") List<String> oppo
+          nentGraveyard,
+      42          /** Player name/seat -> life total. */
+      43          @SerializedName("life_totals") Map<String, Integer> lif
+          eTotals,
+      44 +        /** Current game phase string, e.g. "MAIN1". */        
+      45 +        String phase,                                          
+      46 +        /** Mana sources the AI can tap right now, as color str
+         +ings (W/U/B/R/G/C). */                                         
+      47 +        @SerializedName("available_mana") List<String> availabl
+         +eMana,                                                         
+      48          /** AI personality traits from the AI profile. */
+      49          Map<String, Object> personality) {
+      50  
+     ...
+      59                                final int opponentSeat, final int
+           turn,
+      60                                final List<Observation> observati
+          ons, final List<String> deckCards) {
+      61          this(client, gameId, format, opponentSeat, turn, observ
+          ations, deckCards,
+      58 -                List.of(), List.of(), List.of(), List.of(), Lis
+         -t.of(), Map.of(), Map.of());                                   
+      62 +                List.of(), List.of(), List.of(), List.of(), Lis
+         +t.of(), Map.of(),                                              
+      63 +                "", List.of(), Map.of());                      
+      64      }
+      65  
+      66      /**
+      62 -     * Full constructor including personality.                 
+      67 +     * Convenience constructor including personality but no liv
+         +e-state fields.                                                
+      68       */
+      69      public RecognitionRequest(final String client, final String
+           gameId, final String format,
+      70                                final int opponentSeat, final int
+           turn,
+      71                                final List<Observation> observati
+          ons, final List<String> deckCards,
+      72                                final Map<String, Object> persona
+          lity) {
+      73          this(client, gameId, format, opponentSeat, turn, observ
+          ations, deckCards,
+      69 -                List.of(), List.of(), List.of(), List.of(), Lis
+         -t.of(), Map.of(), personality);                                
+      74 +                List.of(), List.of(), List.of(), List.of(), Lis
+         +t.of(), Map.of(),                                              
+      75 +                "", List.of(), personality);                   
+      76      }
+      77  }
+
+● Now update the observer to populate the full state.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-ai/src/main/java/forge/ai/llm/DeckRecognitionObserver.java)
+  ⎿  Added 4 lines
+      1  package forge.ai.llm;
+      2  
+      3  import java.util.ArrayList;
+      4 +import java.util.LinkedHashMap;                                 
+      5  import java.util.LinkedHashSet;
+      6  import java.util.List;
+      7  import java.util.Map;
+     ...
+      19  import forge.game.card.CardView;
+      20  import forge.game.event.GameEvent;
+      21  import forge.game.event.GameEventLandPlayed;
+      22 +import forge.game.event.GameEventPlayerLivesChanged;           
+      23  import forge.game.event.GameEventSpellAbilityCast;
+      24  import forge.game.event.GameEventTurnBegan;
+      25 +import forge.game.event.GameEventZone;                         
+      26  import forge.game.player.Player;
+      27  import forge.game.player.PlayerView;
+      28  import forge.game.player.RegisteredPlayer;
+      29 +import forge.game.zone.ZoneType;                               
+      30  import forge.item.PaperCard;
+      31  import org.tinylog.Logger;
+      32  
+
+● Update(forge-ai/src/main/java/forge/ai/llm/DeckRecognitionObserver.java)
+  ⎿  Added 5 lines
+      144                  // A turn boundary is itself information (e.g.
+            a turn the
+      145                  // opponent passed without acting), so always 
+           re-evaluate.
+      146                  requestRecognition();
+      147 +            } else if (ev instanceof GameEventPlayerLivesChang
+          +ed                                                            
+      148 +                    || ev instanceof GameEventZone) {         
+      149 +                // Life changes and zone churn (cards entering
+          + / leaving a zone)                                            
+      150 +                // can flip the role assessment without spell/
+          +land traffic.                                                 
+      151 +                requestRecognition();                         
+      152              }
+      153          } catch (final RuntimeException ex) {
+      154              // Never let observation bookkeeping disrupt the g
+           ame.
+
+● Update(forge-ai/src/main/java/forge/ai/llm/DeckRecognitionObserver.java)
+  ⎿  Added 18 lines
+      214  
+      215      /** Send one request; on completion, post the guess and ho
+           nor any rerun. */
+      216      private void fireCall() {
+      217 +        final List<String> hand = zoneNames(aiPlayer, ZoneType
+          +.Hand);                                                       
+      218 +        final List<String> ownBoard = zoneNames(aiPlayer, Zone
+          +Type.Battlefield);                                            
+      219 +        final List<String> ownGy = zoneNames(aiPlayer, ZoneTyp
+          +e.Graveyard);                                                 
+      220 +        final Player opponent = firstOpponent();              
+      221 +        final List<String> oppBoard = opponent == null ? List.
+          +of() : zoneNames(opponent, ZoneType.Battlefield);             
+      222 +        final List<String> oppGy = opponent == null ? List.of(
+          +) : zoneNames(opponent, ZoneType.Graveyard);                  
+      223 +        final Map<String, Integer> lifeTotals = buildLifeTotal
+          +s(opponent);                                                  
+      224 +        final String phase = currentPhaseName();              
+      225 +        final List<String> availableMana = availableManaColors
+          +();                                                           
+      226 +                                                              
+      227          final RecognitionRequest request = new RecognitionRequ
+           est(
+      228                  RecognitionRequest.CLIENT,
+      229                  String.valueOf(game.getId()),
+     ...
+      232                  game.getPhaseHandler().getTurn(),
+      233                  new ArrayList<>(observations),
+      234                  deckCards,
+      235 +                hand,                                         
+      236 +                ownBoard,                                     
+      237 +                oppBoard,                                     
+      238 +                ownGy,                                        
+      239 +                oppGy,                                        
+      240 +                lifeTotals,                                   
+      241 +                phase,                                        
+      242 +                availableMana,                                
+      243                  buildPersonality());
+      244  
+      245          Logger.info("DeckRecognition: POST /recognize game=" +
+            game.getId()
+
+● Now add the snapshot helper methods. Let me find a good place to insert them.
+
+● Update(forge-ai/src/main/java/forge/ai/llm/DeckRecognitionObserver.java)
+  ⎿  Added 78 lines
+      201          }
+      202      }
+      203  
+      204 +    /** Collect card names in a player's zone. Returns an empt
+          +y list on failure. */                                         
+      205 +    private List<String> zoneNames(final Player p, final ZoneT
+          +ype zone) {                                                   
+      206 +        try {                                                 
+      207 +            final List<String> names = new ArrayList<>();     
+      208 +            for (final Card c : p.getCardsIn(zone)) {         
+      209 +                if (c != null && c.getName() != null) {       
+      210 +                    names.add(c.getName());                   
+      211 +                }                                             
+      212 +            }                                                 
+      213 +            return names;                                     
+      214 +        } catch (final RuntimeException ex) {                 
+      215 +            return List.of();                                 
+      216 +        }                                                     
+      217 +    }                                                         
+      218 +                                                              
+      219 +    /** First opposing player relative to the AI, or {@code nu
+          +ll}. */                                                       
+      220 +    private Player firstOpponent() {                          
+      221 +        try {                                                 
+      222 +            for (final Player p : game.getPlayers()) {        
+      223 +                if (p != null && !p.equals(aiPlayer)) {       
+      224 +                    return p;                                 
+      225 +                }                                             
+      226 +            }                                                 
+      227 +        } catch (final RuntimeException ex) {                 
+      228 +            // ignore                                         
+      229 +        }                                                     
+      230 +        return null;                                          
+      231 +    }                                                         
+      232 +                                                              
+      233 +    /** Life totals keyed "ai"/"human" so the sidecar can read
+          + them generically. */                                         
+      234 +    private Map<String, Integer> buildLifeTotals(final Player 
+          +opponent) {                                                   
+      235 +        final Map<String, Integer> out = new LinkedHashMap<>()
+          +;                                                             
+      236 +        try {                                                 
+      237 +            out.put("ai", aiPlayer.getLife());                
+      238 +            if (opponent != null) {                           
+      239 +                out.put("human", opponent.getLife());         
+      240 +            }                                                 
+      241 +        } catch (final RuntimeException ex) {                 
+      242 +            return Map.of();                                  
+      243 +        }                                                     
+      244 +        return out;                                           
+      245 +    }                                                         
+      246 +                                                              
+      247 +    /** Current phase name string, or empty when unavailable. 
+          +*/                                                            
+      248 +    private String currentPhaseName() {                       
+      249 +        try {                                                 
+      250 +            return game.getPhaseHandler().getPhase().name();  
+      251 +        } catch (final RuntimeException ex) {                 
+      252 +            return "";                                        
+      253 +        }                                                     
+      254 +    }                                                         
+      255 +                                                              
+      256 +    /** Color letters (W/U/B/R/G/C) producible by the AI's unt
+          +apped lands. */                                               
+      257 +    private List<String> availableManaColors() {              
+      258 +        final Set<String> colors = new LinkedHashSet<>();     
+      259 +        try {                                                 
+      260 +            for (final Card land : aiPlayer.getCardsIn(ZoneTyp
+          +e.Battlefield)) {                                             
+      261 +                if (land == null || !land.isLand() || land.isT
+          +apped()) {                                                    
+      262 +                    continue;                                 
+      263 +                }                                             
+      264 +                final var cs = land.getRules() != null ? land.
+          +getRules().getColorIdentity() : null;                         
+      265 +                if (cs == null) {                             
+      266 +                    colors.add("C");                          
+      267 +                    continue;                                 
+      268 +                }                                             
+      269 +                if (cs.hasWhite()) { colors.add("W"); }       
+      270 +                if (cs.hasBlue())  { colors.add("U"); }       
+      271 +                if (cs.hasBlack()) { colors.add("B"); }       
+      272 +                if (cs.hasRed())   { colors.add("R"); }       
+      273 +                if (cs.hasGreen()) { colors.add("G"); }       
+      274 +                if (cs.isColorless()) { colors.add("C"); }    
+      275 +            }                                                 
+      276 +        } catch (final RuntimeException ex) {                 
+      277 +            // fall through with whatever we have             
+      278 +        }                                                     
+      279 +        return new ArrayList<>(colors);                       
+      280 +    }                                                         
+      281 +                                                              
+      282      /** Build the personality map from AI profile properties, 
+           or empty map. */
+      283      private Map<String, Object> buildPersonality() {
+      284          try {
+
+● Update(forge-ai/src/main/java/forge/ai/llm/DeckRecognitionObserver.java)
+  ⎿  Added 12 lines
+      358              if (pilotingMsg != null && !pilotingMsg.isEmpty())
+            {
+      359                  game.getGameLog().add(GameLogEntryType.INFORMA
+           TION, pilotingMsg);
+      360              }
+      361 +            final String roleMsg = result.toRoleLogMessage(); 
+      362 +            if (roleMsg != null && !roleMsg.isEmpty()) {      
+      363 +                game.getGameLog().add(GameLogEntryType.INFORMA
+          +TION, roleMsg);                                               
+      364 +            }                                                 
+      365 +            final String handMsg = result.toHandValuesLogMessa
+          +ge();                                                         
+      366 +            if (handMsg != null && !handMsg.isEmpty()) {      
+      367 +                game.getGameLog().add(GameLogEntryType.INFORMA
+          +TION, handMsg);                                               
+      368 +            }                                                 
+      369 +            final String oppHandMsg = result.toOpponentHandLog
+          +Message();                                                    
+      370 +            if (oppHandMsg != null && !oppHandMsg.isEmpty()) {
+      371 +                game.getGameLog().add(GameLogEntryType.INFORMA
+          +TION, oppHandMsg);                                            
+      372 +            }                                                 
+      373          } catch (final RuntimeException ex) {
+      374              Logger.debug("DeckRecognition: failed to write gue
+           ss to log: " + ex.getMessage());
+      375          }
+
+  Listed 1 directory (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1 && mvn -pl forge-ai -am -q compile 2>&1
+      | tail -40)
+  ⎿  (No output)
+  ⎿  (timeout 5m)
+
+● Build clean. Moving to the next task.
+
+● Update(forge-ai/src/main/java/forge/ai/llm/SidecarInfluence.java)
+  ⎿  Added 8 lines
+       1  package forge.ai.llm;
+       2  
+       3 +import java.util.ArrayList;                                    
+       4  import java.util.Collections;
+       5 +import java.util.HashMap;                                      
+       6  import java.util.List;
+       7 +import java.util.Locale;                                       
+       8  import java.util.Map;
+       9  import java.util.Optional;
+      10  import java.util.concurrent.ConcurrentHashMap;
+     ...
+      14  
+      15  import forge.ai.AiController;
+      16  import forge.ai.AiProps;
+      17 +import forge.ai.llm.RecognitionResult.HandValuation;           
+      18 +import forge.ai.llm.RecognitionResult.OpponentHandGuess;       
+      19 +import forge.ai.llm.RecognitionResult.PilotingAdvice;          
+      20 +import forge.ai.llm.RecognitionResult.RoleAssessment;          
+      21 +import forge.ai.llm.RecognitionResult.TargetPriority;          
+      22  
+      23  /**
+      24   * Stores the latest structured action recommendations from the
+           LLM sidecar
+
+● Update(forge-ai/src/main/java/forge/ai/llm/SidecarInfluence.java)
+  ⎿  Added 12 lines
+      36  
+      37      /** Latest actions from the sidecar, keyed by action_type. 
+          */
+      38      private volatile Map<String, ActionScore> latestActions = M
+          ap.of();
+      39 +    /** Multiple PLAY_SPELL recommendations in priority order. 
+         +*/                                                             
+      40 +    private volatile List<ActionScore> latestPlaySpells = List.
+         +of();                                                          
+      41 +    /** Multiple PLAY_LAND recommendations in priority order. *
+         +/                                                              
+      42 +    private volatile List<ActionScore> latestPlayLands = List.o
+         +f();                                                           
+      43 +    /** Latest hand valuations, keyed by lower-case card name. 
+         +*/                                                             
+      44 +    private volatile Map<String, HandValuation> latestHandValue
+         +s = Map.of();                                                  
+      45 +    /** Latest opponent-hand inferences sorted by probability d
+         +esc. */                                                        
+      46 +    private volatile List<OpponentHandGuess> latestOpponentHand
+         + = List.of();                                                  
+      47 +    /** Latest target priorities. Key is lower-case spell name,
+         + "" for generic. */                                            
+      48 +    private volatile Map<String, TargetPriority> latestTargetPr
+         +iorities = Map.of();                                           
+      49 +    /** Latest role assessment, or null. */                    
+      50 +    private volatile RoleAssessment latestRole = null;         
+      51  
+      52      /** The AI controller, used to read personality properties.
+           */
+      53      private final AiController ai;
+
+● Update(forge-ai/src/main/java/forge/ai/llm/SidecarInfluence.java)
+  ⎿  Added 78 lines, removed 16 lines
+       66          if (result == null || result.piloting() == null) {
+       67              return;
+       68          }
+       69 -        final List<ActionScore> raw = result.piloting().action
+          -s();                                                          
+       69 +        final PilotingAdvice piloting = result.piloting();    
+       70 +        final List<ActionScore> raw = piloting.actions();     
+       71          if (raw == null || raw.isEmpty()) {
+       72              latestActions = Map.of();
+       72 -            return;                                           
+       73 +            latestPlaySpells = List.of();                     
+       74 +            latestPlayLands = List.of();                      
+       75 +        } else {                                              
+       76 +            // For single-instance action types (BLOCK, ATTACK
+          +, PASS, MULLIGAN,                                             
+       77 +            // ACTIVATE_ABILITY) we keep just the best entry. 
+          +For PLAY_SPELL and                                            
+       78 +            // PLAY_LAND we keep them all so the Java side can
+          + fall through if                                              
+       79 +            // the first pick is unplayable.                  
+       80 +            final Map<String, ActionScore> weighted = new Conc
+          +urrentHashMap<>();                                            
+       81 +            final List<ActionScore> spells = new ArrayList<>()
+          +;                                                             
+       82 +            final List<ActionScore> lands = new ArrayList<>();
+       83 +            for (final ActionScore action : raw) {            
+       84 +                final double adjusted = applyPersonalityWeight
+          +(action);                                                     
+       85 +                final ActionScore weightedAction = new ActionS
+          +core(                                                         
+       86 +                        action.actionType(),                  
+       87 +                        action.target(),                      
+       88 +                        action.targets(),                     
+       89 +                        adjusted,                             
+       90 +                        action.reasoning()                    
+       91 +                );                                            
+       92 +                if ("PLAY_SPELL".equals(action.actionType())) 
+          +{                                                             
+       93 +                    spells.add(weightedAction);               
+       94 +                } else if ("PLAY_LAND".equals(action.actionTyp
+          +e())) {                                                       
+       95 +                    lands.add(weightedAction);                
+       96 +                }                                             
+       97 +                // bestAction(...) consumers see the highest-p
+          +ercentage entry                                               
+       98 +                // per action type; preserve current behavior 
+          +by overwriting                                                
+       99 +                // only when the new score is higher.         
+      100 +                final ActionScore prev = weighted.get(action.a
+          +ctionType());                                                 
+      101 +                if (prev == null || adjusted > prev.percentage
+          +()) {                                                         
+      102 +                    weighted.put(action.actionType(), weighted
+          +Action);                                                      
+      103 +                }                                             
+      104 +            }                                                 
+      105 +            spells.sort((a, b) -> Double.compare(b.percentage(
+          +), a.percentage()));                                          
+      106 +            lands.sort((a, b) -> Double.compare(b.percentage()
+          +, a.percentage()));                                           
+      107 +            latestActions = Collections.unmodifiableMap(weight
+          +ed);                                                          
+      108 +            latestPlaySpells = Collections.unmodifiableList(sp
+          +ells);                                                        
+      109 +            latestPlayLands = Collections.unmodifiableList(lan
+          +ds);                                                          
+      110          }
+      111  
+       75 -        final Map<String, ActionScore> weighted = new Concurre
+          -ntHashMap<>();                                                
+       76 -        for (final ActionScore action : raw) {                
+       77 -            final double adjusted = applyPersonalityWeight(act
+          -ion);                                                         
+       78 -            final ActionScore weightedAction = new ActionScore
+          -(                                                             
+       79 -                    action.actionType(),                      
+       80 -                    action.target(),                          
+       81 -                    action.targets(),                         
+       82 -                    adjusted,                                 
+       83 -                    action.reasoning()                        
+       84 -            );                                                
+       85 -            weighted.put(action.actionType(), weightedAction);
+      112 +        // Role / hand / opponent / targeting payloads (v4). A
+          +ll nullable on                                                
+      113 +        // older sidecars or when state is too thin to compute
+          +.                                                             
+      114 +        latestRole = piloting.role();                         
+      115 +        final List<HandValuation> hvList = piloting.handValues
+          +();                                                           
+      116 +        if (hvList == null || hvList.isEmpty()) {             
+      117 +            latestHandValues = Map.of();                      
+      118 +        } else {                                              
+      119 +            final Map<String, HandValuation> hv = new HashMap<
+          +>();                                                          
+      120 +            for (final HandValuation v : hvList) {            
+      121 +                if (v != null && v.card() != null) {          
+      122 +                    hv.put(v.card().toLowerCase(Locale.ROOT), 
+          +v);                                                           
+      123 +                }                                             
+      124 +            }                                                 
+      125 +            latestHandValues = Collections.unmodifiableMap(hv)
+          +;                                                             
+      126          }
+       87 -        latestActions = Collections.unmodifiableMap(weighted);
+       88 -        enabled = true;                                       
+      127 +        final List<OpponentHandGuess> oh = piloting.opponentHa
+          +nd();                                                         
+      128 +        if (oh == null || oh.isEmpty()) {                     
+      129 +            latestOpponentHand = List.of();                   
+      130 +        } else {                                              
+      131 +            final List<OpponentHandGuess> sorted = new ArrayLi
+          +st<>(oh);                                                     
+      132 +            sorted.sort((a, b) -> Double.compare(b.probability
+          +(), a.probability()));                                        
+      133 +            latestOpponentHand = Collections.unmodifiableList(
+          +sorted);                                                      
+      134 +        }                                                     
+      135 +        final List<TargetPriority> tps = piloting.targetPriori
+          +ties();                                                       
+      136 +        if (tps == null || tps.isEmpty()) {                   
+      137 +            latestTargetPriorities = Map.of();                
+      138 +        } else {                                              
+      139 +            final Map<String, TargetPriority> tpMap = new Hash
+          +Map<>();                                                      
+      140 +            for (final TargetPriority tp : tps) {             
+      141 +                if (tp == null) continue;                     
+      142 +                final String key = tp.spell() == null ? "" : t
+          +p.spell().toLowerCase(Locale.ROOT);                           
+      143 +                tpMap.put(key, tp);                           
+      144 +            }                                                 
+      145 +            latestTargetPriorities = Collections.unmodifiableM
+          +ap(tpMap);                                                    
+      146 +        }                                                     
+      147  
+       90 -        Logger.debug("SidecarInfluence: updated with %d weight
+          -ed actions", weighted.size());                                
+      148 +        enabled = true;                                       
+      149 +        Logger.debug("SidecarInfluence: updated actions=%d, ha
+          +nd=%d, opp=%d, targets=%d, role=%s",                          
+      150 +                latestActions.size(), latestHandValues.size(),
+      151 +                latestOpponentHand.size(), latestTargetPriorit
+          +ies.size(),                                                   
+      152 +                latestRole != null ? latestRole.aiRole() : "no
+          +ne");                                                         
+      153      }
+      154  
+      155      /**
+
+● Now add the new accessor methods near the existing ones.
+
+● Update(forge-ai/src/main/java/forge/ai/llm/SidecarInfluence.java)
+  ⎿  Added 99 lines
+      230      public boolean hasData() {
+      231          return enabled && !latestActions.isEmpty();
+      232      }
+      233 +                                                              
+      234 +    // -------------------------------------------------------
+          +-----------------                                             
+      235 +    // v4 board-aware accessors                               
+      236 +    // -------------------------------------------------------
+          +-----------------                                             
+      237 +                                                              
+      238 +    /** @return the latest role assessment, or empty if none. 
+          +*/                                                            
+      239 +    public Optional<RoleAssessment> role() {                  
+      240 +        return Optional.ofNullable(latestRole);               
+      241 +    }                                                         
+      242 +                                                              
+      243 +    /** @return true if the sidecar says the AI should current
+          +ly play the beatdown role. */                                 
+      244 +    public boolean isAiBeatdown() {                           
+      245 +        return latestRole != null && "beatdown".equalsIgnoreCa
+          +se(latestRole.aiRole());                                      
+      246 +    }                                                         
+      247 +                                                              
+      248 +    /** @return true if the sidecar says the AI should current
+          +ly play the control role. */                                  
+      249 +    public boolean isAiControl() {                            
+      250 +        return latestRole != null && "control".equalsIgnoreCas
+          +e(latestRole.aiRole());                                       
+      251 +    }                                                         
+      252 +                                                              
+      253 +    /** @return true if the sidecar says the AI is the winning
+          + side right now. */                                           
+      254 +    public boolean isAiAhead() {                              
+      255 +        return latestRole != null && "ai".equalsIgnoreCase(lat
+          +estRole.winningSide());                                       
+      256 +    }                                                         
+      257 +                                                              
+      258 +    /** @return the sidecar's value score for a card by name, 
+          +or empty. */                                                  
+      259 +    public Optional<Double> handValue(final String cardName) {
+      260 +        if (cardName == null || cardName.isEmpty()) {         
+      261 +            return Optional.empty();                          
+      262 +        }                                                     
+      263 +        final HandValuation hv = latestHandValues.get(cardName
+          +.toLowerCase(Locale.ROOT));                                   
+      264 +        return hv == null ? Optional.empty() : Optional.of(hv.
+          +value());                                                     
+      265 +    }                                                         
+      266 +                                                              
+      267 +    /** @return all hand valuations sorted by value desc. */  
+      268 +    public List<HandValuation> getHandValues() {              
+      269 +        return latestHandValues.values().stream()             
+      270 +                .sorted((a, b) -> Double.compare(b.value(), a.
+          +value()))                                                     
+      271 +                .collect(Collectors.toList());                
+      272 +    }                                                         
+      273 +                                                              
+      274 +    /** @return inferred opponent-hand categories sorted by pr
+          +obability desc. */                                            
+      275 +    public List<OpponentHandGuess> opponentLikelyHas() {      
+      276 +        return latestOpponentHand;                            
+      277 +    }                                                         
+      278 +                                                              
+      279 +    /**                                                       
+      280 +     * Probability that the opponent currently holds at least 
+          +one card of the                                               
+      281 +     * given category (e.g. "counterspell", "removal", "wrath"
+          +).                                                            
+      282 +     */                                                       
+      283 +    public double opponentHoldsProbability(final String catego
+          +ry) {                                                         
+      284 +        if (category == null) return 0.0;                     
+      285 +        for (final OpponentHandGuess g : latestOpponentHand) {
+      286 +            if (category.equalsIgnoreCase(g.category())) {    
+      287 +                return g.probability();                       
+      288 +            }                                                 
+      289 +        }                                                     
+      290 +        return 0.0;                                           
+      291 +    }                                                         
+      292 +                                                              
+      293 +    /**                                                       
+      294 +     * Ordered target priority for the given spell name; falls
+          + back to the                                                  
+      295 +     * generic entry when no spell-specific list exists.      
+      296 +     */                                                       
+      297 +    public List<String> targetPriorityFor(final String spellNa
+          +me) {                                                         
+      298 +        if (spellName != null) {                              
+      299 +            final TargetPriority tp = latestTargetPriorities.g
+          +et(spellName.toLowerCase(Locale.ROOT));                       
+      300 +            if (tp != null && tp.targets() != null && !tp.targ
+          +ets().isEmpty()) {                                            
+      301 +                return tp.targets();                          
+      302 +            }                                                 
+      303 +        }                                                     
+      304 +        final TargetPriority generic = latestTargetPriorities.
+          +get("");                                                      
+      305 +        return generic == null ? List.of() : generic.targets()
+          +;                                                             
+      306 +    }                                                         
+      307 +                                                              
+      308 +    /** @return the best PLAY_LAND card name, or empty if the 
+          +sidecar gave none. */                                         
+      309 +    public Optional<String> bestPlayLandName() {              
+      310 +        if (!latestPlayLands.isEmpty()) {                     
+      311 +            final String t = latestPlayLands.get(0).target(); 
+      312 +            return Optional.ofNullable(t).filter(s -> !s.isEmp
+          +ty());                                                        
+      313 +        }                                                     
+      314 +        final ActionScore land = latestActions.get("PLAY_LAND"
+          +);                                                            
+      315 +        return land == null ? Optional.empty() : Optional.ofNu
+          +llable(land.target()).filter(s -> !s.isEmpty());              
+      316 +    }                                                         
+      317 +                                                              
+      318 +    /** @return all PLAY_SPELL card names in priority order, p
+          +ossibly empty. */                                             
+      319 +    public List<String> bestPlaySpellNames() {                
+      320 +        if (!latestPlaySpells.isEmpty()) {                    
+      321 +            return latestPlaySpells.stream()                  
+      322 +                    .map(ActionScore::target)                 
+      323 +                    .filter(t -> t != null && !t.isEmpty())   
+      324 +                    .collect(Collectors.toList());            
+      325 +        }                                                     
+      326 +        final ActionScore spell = latestActions.get("PLAY_SPEL
+          +L");                                                          
+      327 +        if (spell == null || spell.target() == null || spell.t
+          +arget().isEmpty()) {                                          
+      328 +            return List.of();                                 
+      329 +        }                                                     
+      330 +        return List.of(spell.target());                       
+      331 +    }                                                         
+      332  }
+
+● Bash(mvn -pl forge-ai -am -q compile 2>&1 | tail -30)
+  ⎿  (No output)
+  ⎿  (timeout 5m)
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-ai/src/main/java/forge/ai/AiProps.java)
+  ⎿  Added 9 lines, removed 1 line
+      156      SIDECAR_BIAS_BLOCK("50"),                       // max % b
+           oost when sidecar recommends blocking
+      157      SIDECAR_BIAS_ABILITY("30"),                     // max % b
+           oost when sidecar recommends an ability
+      158      SIDECAR_BIAS_PASS("40"),                        // how muc
+           h sidecar PASS recommendation affects do-nothing
+      159 -    SIDECAR_PERSONALITY_WEIGHT("100");              // 0=no pe
+          -rsonality effect, 100=full effect                             
+      159 +    SIDECAR_PERSONALITY_WEIGHT("100"),              // 0=no pe
+          +rsonality effect, 100=full effect                             
+      160 +    // v4 per-feature toggles for board-aware sidecar advice  
+      161 +    SIDECAR_ROLE_ASSESSMENT_ENABLE("true"),         // honor "
+          +Who's the Beatdown?" role in attack/block                     
+      162 +    SIDECAR_HAND_VALUATION_ENABLE("true"),          // use per
+          +-card hand value as a discard/eval tiebreaker                 
+      163 +    SIDECAR_OPPONENT_INFERENCE_ENABLE("true"),     // bias com
+          +bat / play by inferred opponent hand                          
+      164 +    SIDECAR_TARGETING_ENABLE("true"),               // consult
+          + sidecar target priority lists                                
+      165 +    SIDECAR_MULLIGAN_ENABLE("true"),                // factor 
+          +sidecar advice into mulligan decisions                        
+      166 +    SIDECAR_DISCARD_ENABLE("true"),                 // discard
+          + lowest-handValue cards first                                 
+      167 +    SIDECAR_HAND_VALUE_WEIGHT("30");                // weight 
+          +applied to handValue in evaluateCard blend                    
+      168      // Experimental features, must be promoted or removed afte
+           r extensive testing and, ideally, defaulting
+      169      // <-- There are no experimental options here -->
+      170  
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-ai/src/main/java/forge/ai/AiController.java)
+  ⎿  Added 1 line, removed 1 line
+      668          // use the evaluation plus a modifier for each new col
+           or pip and basic type
+      669          final String sidecarRecommendedLand = getBoolProperty(
+           AiProps.SIDECAR_INFLUENCE_ENABLE)
+      670                  && sidecarInfluence.hasData()
+      671 -                ? sidecarInfluence.bestAction("PLAY_LAND").map
+          -(a -> a.target()).orElse("")                                  
+      671 +                ? sidecarInfluence.bestPlayLandName().orElse("
+          +")                                                            
+      672                  : "";
+      673          Card toReturn = Aggregates.itemWithMax(IterableUtil.fi
+           lter(landList, Card::hasPlayableLandFace),
+      674                  (card -> {
+
+● Update(forge-ai/src/main/java/forge/ai/AiController.java)
+  ⎿  Added 13 lines, removed 14 lines
+      1644          if (!getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE
+            ) || !sidecarInfluence.hasData()) {
+      1645              return null;
+      1646          }
+      1647 -        // Check PLAY_SPELL recommendations                  
+      1648 -        var spellAction = sidecarInfluence.bestAction("PLAY_S
+           -PELL");                                                      
+      1649 -        if (spellAction.isPresent()) {                       
+      1650 -            final String targetCard = spellAction.get().targe
+           -t();                                                         
+      1651 -            if (targetCard != null && !targetCard.isEmpty()) 
+           -{                                                            
+      1652 -                for (final SpellAbility sa : ComputerUtilAbil
+           -ity.getOriginalAndAltCostAbilities(all, player)) {           
+      1653 -                    if (skipCounter && sa.getApi() == ApiType
+           -.Counter) continue;                                          
+      1654 -                    sa.setActivatingPlayer(player);          
+      1655 -                    final String cardName = sa.getHostCard() 
+           -!= null ? sa.getHostCard().getName() : "";                   
+      1656 -                    if (cardName.equalsIgnoreCase(targetCard)
+           - || cardName.contains(targetCard)) {                         
+      1657 -                        if (canPlayAndPayFor(sa) == AiPlayDec
+           -ision.WillPlay) {                                            
+      1658 -                            return sa;                       
+      1659 -                        }                                    
+      1647 +        // PLAY_SPELL: try each recommended card in priority 
+           +order; pick the                                              
+      1648 +        // first one we can legally play and pay for.        
+      1649 +        for (final String targetCard : sidecarInfluence.bestP
+           +laySpellNames()) {                                           
+      1650 +            if (targetCard == null || targetCard.isEmpty()) c
+           +ontinue;                                                     
+      1651 +            for (final SpellAbility sa : ComputerUtilAbility.
+           +getOriginalAndAltCostAbilities(all, player)) {               
+      1652 +                if (skipCounter && sa.getApi() == ApiType.Cou
+           +nter) continue;                                              
+      1653 +                sa.setActivatingPlayer(player);              
+      1654 +                final String cardName = sa.getHostCard() != n
+           +ull ? sa.getHostCard().getName() : "";                       
+      1655 +                if (cardName.equalsIgnoreCase(targetCard) || 
+           +cardName.contains(targetCard)) {                             
+      1656 +                    if (canPlayAndPayFor(sa) == AiPlayDecisio
+           +n.WillPlay) {                                                
+      1657 +                        return sa;                           
+      1658                      }
+      1659                  }
+      1660              }
+      1661          }
+      1664 -        // Check ACTIVATE_ABILITY recommendations            
+      1662 +        // ACTIVATE_ABILITY: single best entry (rare, the sid
+           +ecar usually emits                                           
+      1663 +        // PLAY_SPELL).                                      
+      1664          var abilityAction = sidecarInfluence.bestAction("ACTI
+            VATE_ABILITY");
+      1665          if (abilityAction.isPresent()) {
+      1666              final String targetCard = abilityAction.get().tar
+            get();
+
+  Searched for 1 pattern, read 2 files (ctrl+o to expand)
+
+● Update(forge-ai/src/main/java/forge/ai/PlayerControllerAi.java)
+  ⎿  Added 18 lines, removed 4 lines
+      766  
+      767      @Override
+      768      public boolean mulliganKeepHand(Player firstPlayer, int ca
+           rdsToReturn)  {
+      769 -        // Sidecar influence: check MULLIGAN action           
+      769 +        // Sidecar influence: explicit MULLIGAN action wins; o
+          +therwise consult                                              
+      770 +        // the hand-value sum as a tiebreaker against the heur
+          +istic.                                                        
+      771          if (brains.getBoolProperty(AiProps.SIDECAR_INFLUENCE_E
+           NABLE)
+      772 +                && brains.getBoolProperty(AiProps.SIDECAR_MULL
+          +IGAN_ENABLE)                                                  
+      773                  && brains.getSidecarInfluence().hasData()) {
+      772 -            var mullAction = brains.getSidecarInfluence().best
+          -Action("MULLIGAN");                                           
+      774 +            var influence = brains.getSidecarInfluence();     
+      775 +            var mullAction = influence.bestAction("MULLIGAN");
+      776              if (mullAction.isPresent()) {
+      777                  final String target = mullAction.get().target(
+           );
+      778                  if ("keep".equalsIgnoreCase(target)) {
+      776 -                    return true; // sidecar says keep         
+      779 +                    return true;                              
+      780                  } else if ("mulligan".equalsIgnoreCase(target)
+           ) {
+      778 -                    return false; // sidecar says mulligan    
+      781 +                    return false;                             
+      782                  }
+      783              }
+      784 +            // Secondary signal: if the per-card valuations ar
+          +e available, use                                              
+      785 +            // their average as a soft tiebreaker. Hands avera
+          +ging > 50 keep,                                               
+      786 +            // < 30 ship; in between defer to the heuristic.  
+      787 +            var values = influence.getHandValues();           
+      788 +            if (!values.isEmpty()) {                          
+      789 +                final double avg = values.stream()            
+      790 +                        .mapToDouble(forge.ai.llm.RecognitionR
+          +esult.HandValuation::value)                                   
+      791 +                        .average().orElse(0.0);               
+      792 +                if (avg >= 50.0) return true;                 
+      793 +                if (avg <= 30.0) return false;                
+      794 +            }                                                 
+      795          }
+      796          return !ComputerUtil.wantMulligan(player, cardsToRetur
+           n);
+      797      }
+
+● Now the discard hook in AiController:
+
+● Update(forge-ai/src/main/java/forge/ai/AiController.java)
+  ⎿  Added 30 lines
+      1099              return validCards; //return all valid cards since
+             they will be discarded without filtering needed
+      1100          }
+      1101  
+      1102 +        // Sidecar discard bias: drop the lowest hand-value c
+           +ards first when                                              
+      1103 +        // the sidecar has populated valuations for the curre
+           +nt hand. Only                                                
+      1104 +        // honors a clean signal — falls through to the heuri
+           +stic otherwise.                                              
+      1105 +        if (getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE)
+      1106 +                && getBoolProperty(AiProps.SIDECAR_DISCARD_EN
+           +ABLE)                                                        
+      1107 +                && sidecarInfluence.hasData() && !validCards.
+           +isEmpty()) {                                                 
+      1108 +            final java.util.List<Card> ranked = new java.util
+           +.ArrayList<>(validCards);                                    
+      1109 +            ranked.sort((a, b) -> {                          
+      1110 +                final double va = sidecarInfluence.handValue(
+           +a.getName()).orElse(50.0);                                   
+      1111 +                final double vb = sidecarInfluence.handValue(
+           +b.getName()).orElse(50.0);                                   
+      1112 +                return Double.compare(va, vb); // ascending →
+           + worst first                                                 
+      1113 +            });                                              
+      1114 +            // Only act when we actually had at least one cac
+           +hed valuation                                                
+      1115 +            // among the candidates; otherwise the sort is me
+           +aningless.                                                   
+      1116 +            final boolean anyKnown = ranked.stream()         
+      1117 +                    .anyMatch(c -> sidecarInfluence.handValue
+           +(c.getName()).isPresent());                                  
+      1118 +            if (anyKnown && min > 0) {                       
+      1119 +                final CardCollection picked = new CardCollect
+           +ion();                                                       
+      1120 +                for (Card c : ranked) {                      
+      1121 +                    if (c.hasSVar("DoNotDiscardIfAble")) cont
+           +inue;                                                        
+      1122 +                    picked.add(c);                           
+      1123 +                    if (picked.size() >= min) break;         
+      1124 +                }                                            
+      1125 +                if (picked.size() >= min) {                  
+      1126 +                    org.tinylog.Logger.debug("AiController: s
+           +idecar discard picked %s", picked);                          
+      1127 +                    return picked;                           
+      1128 +                }                                            
+      1129 +            }                                                
+      1130 +        }                                                    
+      1131 +                                                             
+      1132          Card sourceCard = null;
+      1133          final CardCollection discardList = new CardCollection
+            ();
+      1134          int count = 0;
+
+● Light-touch targeting log hook:
+
+● Update(forge-ai/src/main/java/forge/ai/PlayerControllerAi.java)
+  ⎿  Added 17 lines
+      1380  
+      1381      @Override
+      1382      public boolean chooseTargetsFor(SpellAbility currentAbili
+            ty) {
+      1383 +        // Surface the sidecar's target priorities to the abi
+           +lity AI via a                                                
+      1384 +        // SpellAbility SVar. Ability handlers that opt into 
+           +it can read                                                  
+      1385 +        // "SidecarTargets" and bias their search toward thos
+           +e names. Today                                               
+      1386 +        // this is informational only; deeper ability-level w
+           +iring is a                                                   
+      1387 +        // follow-up.                                        
+      1388 +        if (brains.getBoolProperty(AiProps.SIDECAR_INFLUENCE_
+           +ENABLE)                                                      
+      1389 +                && brains.getBoolProperty(AiProps.SIDECAR_TAR
+           +GETING_ENABLE)                                               
+      1390 +                && brains.getSidecarInfluence().hasData()    
+      1391 +                && currentAbility != null && currentAbility.g
+           +etHostCard() != null) {                                      
+      1392 +            final String spellName = currentAbility.getHostCa
+           +rd().getName();                                              
+      1393 +            final java.util.List<String> pref = brains.getSid
+           +ecarInfluence().targetPriorityFor(spellName);                
+      1394 +            if (!pref.isEmpty()) {                           
+      1395 +                currentAbility.setSVar("SidecarTargets", Stri
+           +ng.join(";", pref));                                         
+      1396 +                org.tinylog.Logger.debug("PlayerControllerAi:
+           + sidecar target hint for %s -> %s",                          
+      1397 +                        spellName, pref);                    
+      1398 +            }                                                
+      1399 +        }                                                    
+      1400          return brains.doTrigger(currentAbility, true);
+      1401      }
+      1402  
+
+● Bash(mvn -pl forge-ai -am -q compile 2>&1 | tail -20)
+  ⎿  (No output)
+  ⎿  (timeout 5m)
+● Update(forge-ai/src/main/java/forge/ai/AiController.java)
+  ⎿  Added 17 lines
+      1357              if (blockAction.isPresent()) {
+      1358                  double biasPct = getIntProperty(AiProps.SIDEC
+            AR_BIAS_BLOCK) / 100.0;
+      1359                  double effectivePct = blockAction.get().perce
+            ntage() * biasPct;
+      1360 +                // Role modulation: in the beatdown role take
+           + more damage to                                              
+      1361 +                // race; in the control role block more conse
+           +rvatively.                                                   
+      1362 +                if (getBoolProperty(AiProps.SIDECAR_ROLE_ASSE
+           +SSMENT_ENABLE)) {                                            
+      1363 +                    if (sidecarInfluence.isAiBeatdown()) {   
+      1364 +                        effectivePct *= 0.65;                
+      1365 +                    } else if (sidecarInfluence.isAiControl()
+           +) {                                                          
+      1366 +                        effectivePct *= 1.25;                
+      1367 +                    }                                        
+      1368 +                }                                            
+      1369 +                // Combat-trick threat: if the opponent likel
+           +y holds a pump or                                            
+      1370 +                // protection spell, blocking becomes more ri
+           +sky.                                                         
+      1371 +                if (getBoolProperty(AiProps.SIDECAR_OPPONENT_
+           +INFERENCE_ENABLE)) {                                         
+      1372 +                    final double trick = sidecarInfluence.opp
+           +onentHoldsProbability("combat_trick");                       
+      1373 +                    if (trick > 0.0) {                       
+      1374 +                        effectivePct *= Math.max(0.5, 1.0 - t
+           +rick * 0.5);                                                 
+      1375 +                    }                                        
+      1376 +                }                                            
+      1377                  if (effectivePct < 20.0 && defender == player
+            ) {
+      1378                      // Sidecar strongly discourages blocking 
+            — don't block
+      1379                      return;
+
+● Update(forge-ai/src/main/java/forge/ai/AiController.java)
+  ⎿  Added 20 lines
+      1396              if (attackAction.isPresent()) {
+      1397                  double biasPct = getIntProperty(AiProps.SIDEC
+            AR_BIAS_ATTACK) / 100.0;
+      1398                  double effectivePct = attackAction.get().perc
+            entage() * biasPct;
+      1399 +                // Role modulation: beatdown role pushes thro
+           +ugh, control role                                            
+      1400 +                // holds back. This is the actual "Who's the 
+           +Beatdown?"                                                   
+      1401 +                // decision applied to combat.               
+      1402 +                if (getBoolProperty(AiProps.SIDECAR_ROLE_ASSE
+           +SSMENT_ENABLE)) {                                            
+      1403 +                    if (sidecarInfluence.isAiBeatdown()) {   
+      1404 +                        effectivePct *= 1.3;                 
+      1405 +                    } else if (sidecarInfluence.isAiControl()
+           +) {                                                          
+      1406 +                        effectivePct *= 0.7;                 
+      1407 +                    }                                        
+      1408 +                }                                            
+      1409 +                // If the opponent likely holds removal or a 
+           +wrath, attacking                                             
+      1410 +                // (and committing more creatures) gets riski
+           +er.                                                          
+      1411 +                if (getBoolProperty(AiProps.SIDECAR_OPPONENT_
+           +INFERENCE_ENABLE)) {                                         
+      1412 +                    final double interaction = Math.max(     
+      1413 +                            sidecarInfluence.opponentHoldsPro
+           +bability("removal"),                                         
+      1414 +                            sidecarInfluence.opponentHoldsPro
+           +bability("wrath"));                                          
+      1415 +                    if (interaction > 0.0) {                 
+      1416 +                        effectivePct *= Math.max(0.5, 1.0 - i
+           +nteraction * 0.4);                                           
+      1417 +                    }                                        
+      1418 +                }                                            
+      1419                  if (effectivePct < 25.0 && !combat.getAttacke
+            rs().isEmpty()) {
+      1420                      // Sidecar discourages attacking — clear 
+            attackers
+      1421                      combat.clearAttackers();
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● Update(forge-ai/src/main/java/forge/ai/ComputerUtilCard.java)
+  ⎿  Added 28 lines
+      769      public static int evaluateCreature(final Card c) {
+      770          return creatureEvaluator.evaluateCreature(c);
+      771      }
+      772 +                                                              
+      773 +    /**                                                       
+      774 +     * Heuristic creature score blended with the sidecar's per
+          +-card hand value                                              
+      775 +     * for tiebreaking. The static heuristic remains the floor
+          +; the sidecar                                                 
+      776 +     * value contributes a configurable additive bonus. Caller
+          +s that have an                                                
+      777 +     * {@link AiController} on hand can opt in to this variant
+          + when picking                                                 
+      778 +     * one creature out of many otherwise equally-valued optio
+          +ns.                                                           
+      779 +     */                                                       
+      780 +    public static int evaluateCreatureWithSidecar(final Card c
+          +, final AiController ai) {                                    
+      781 +        final int base = creatureEvaluator.evaluateCreature(c)
+          +;                                                             
+      782 +        if (ai == null || c == null || c.getName() == null) { 
+      783 +            return base;                                      
+      784 +        }                                                     
+      785 +        if (!ai.getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENAB
+          +LE)                                                           
+      786 +                || !ai.getBoolProperty(AiProps.SIDECAR_HAND_VA
+          +LUATION_ENABLE)) {                                            
+      787 +            return base;                                      
+      788 +        }                                                     
+      789 +        final var influence = ai.getSidecarInfluence();       
+      790 +        if (influence == null || !influence.hasData()) {      
+      791 +            return base;                                      
+      792 +        }                                                     
+      793 +        final double v = influence.handValue(c.getName()).orEl
+          +se(0.0);                                                      
+      794 +        final int weight = ai.getIntProperty(AiProps.SIDECAR_H
+          +AND_VALUE_WEIGHT);                                            
+      795 +        // weight is 0-100; the bonus tops out at +value*weigh
+          +t/100, which                                                  
+      796 +        // sits well below typical creature scores (in the hun
+          +dreds) so it                                                  
+      797 +        // stays a tiebreaker.                                
+      798 +        return base + (int) Math.round(v * (weight / 100.0)); 
+      799 +    }                                                         
+      800      public static int evaluateCreature(final Card c, final boo
+           lean considerPT, final boolean considerCMC) {
+      801          return creatureEvaluator.evaluateCreature(c, considerP
+           T, considerCMC);
+      802      }
+
+● Bash(mvn -pl forge-ai -am -q compile 2>&1 | tail -20)
+  ⎿  (No output)
+  ⎿  (timeout 5m)
+
+● Bash(cd /home/lou/Development/forge-1/forge-llm-sidecar && ls tests/
+      2>/dev/null && python -m pytest tests/ -x -q 2>&1 | tail -25)
+  ⎿  __pycache__
+     test_dashboard.py
+     test_forge_log.py
+     … +23 lines (ctrl+o to expand)
+
+● Bash(git status tests/ && echo "---" && git stash && python -m pytest
+      tests/test_dashboard.py::TestDashboardRoot::test_root_returns_html -x -q
+      2>&1 | tail -10 && git…)
+  ⎿  On branch feature/sidecar-actions
+     nothing to commit, working tree clean
+     ---
+     … +20 lines (ctrl+o to expand)
+
+● Pre-existing failure (also fails on the stashed baseline). Running the rest of
+   the suite:
+
+● Bash(python -m pytest tests/ --deselect
+      tests/test_dashboard.py::TestDashboardRoot::test_root_returns_html -q 2>&1
+       | tail -15)
+  ⎿          aggro_result = await get_graph().ainvoke(aggro_state)
+             non_aggro_result = await get_graph().ainvoke(non_aggro_state)
+     … +18 lines (ctrl+o to expand)
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/nodes/game_advisor.py)
+  ⎿  Added 24 lines, removed 2 lines
+      576      guide_dict = state.get("piloting_guide") or {}
+      577      ai_strategy = guide_dict.get("strategy_type") if guide_dic
+           t else None
+      578      opp_strategy = _opp_strategy_for(archetype, archetypes)
+      579 +    turn = state.get("turn", 0)                               
+      580      role = advice.assess_role(state, ai_strategy, opp_strategy
+           )
+      580 -    phase_bucket = _phase_bucket(state.get("turn", 0))        
+      581 +    phase_bucket = _phase_bucket(turn)                        
+      582      hand_values = advice.score_hand(
+      583          state.get("hand", []) or [], guide_dict, phase_bucket,
+            role
+      584      )
+      584 -    card_actions = advice.card_specific_actions(hand_values, r
+          -ole, phase_bucket)                                            
+      585 +    # On turn 0 the only action should be MULLIGAN; the in-gam
+          +e card-specific                                               
+      586 +    # actions and role-derived combat overrides are not yet me
+          +aningful.                                                     
+      587 +    # If opponent state is empty we also withhold combat overr
+          +ides so the                                                   
+      588 +    # static personality-driven percentages can do their job. 
+      589 +    has_opp_state = bool(                                     
+      590 +        (state.get("opponent_board") or [])                   
+      591 +        or (state.get("opponent_graveyard") or [])            
+      592 +        or (state.get("observations") or [])                  
+      593 +    )                                                         
+      594 +    if turn <= 0:                                             
+      595 +        card_actions: list[dict] = []                         
+      596 +    elif not has_opp_state:                                   
+      597 +        # Keep card-specific PLAY_LAND/PLAY_SPELL recommendati
+          +ons but drop                                                  
+      598 +        # the combat overrides since the role signal is specul
+          +ative without                                                 
+      599 +        # an opponent on board.                               
+      600 +        card_actions = [                                      
+      601 +            a                                                 
+      602 +            for a in advice.card_specific_actions(hand_values,
+          + role, phase_bucket)                                          
+      603 +            if a.get("action_type") in ("PLAY_LAND", "PLAY_SPE
+          +LL")                                                          
+      604 +        ]                                                     
+      605 +    else:                                                     
+      606 +        card_actions = advice.card_specific_actions(hand_value
+          +s, role, phase_bucket)                                        
+      607      actions = _merge_actions(base_actions, card_actions)
+      608      opp_hand = advice.infer_opponent_hand(
+      609          archetype,
+
+● Bash(python -m pytest tests/ --deselect
+      tests/test_dashboard.py::TestDashboardRoot::test_root_returns_html -q 2>&1
+       | tail -10)
+  ⎿          non_aggro_actions = {a["action_type"]: a for a in non_aggro_re
+     sult["actions"]}
+     … +11 lines (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/advice.py)
+  ⎿  Added 9 lines, removed 5 lines
+      145  
+      146  
+      147  def _board_pressure(board: list[str]) -> float:
+      148 -    """Crude board pressure: count of permanents with a small 
+          -boost for any                                                 
+      149 -    creature-like name. Without a card db we cannot read P/T, 
+          -so this is a                                                  
+      150 -    permanent count weighted by hand-known signature cards. It
+          - is good                                                      
+      151 -    enough for relative comparison between the two players."""
+      152 -    return float(len(board or []))                            
+      148 +    """Crude board pressure: count of *non-land* permanents.  
+      149  
+      150 +    Without a card db we cannot read P/T, so the count of thre
+          +ats on board                                                  
+      151 +    is the closest proxy. Lands are intentionally excluded so 
+          +that two                                                      
+      152 +    players who have only played lands so far register as even
+          +ly contested.                                                 
+      153 +    """                                                       
+      154 +    if not board:                                             
+      155 +        return 0.0                                            
+      156 +    return float(sum(1 for c in board if c and not _is_land_na
+          +me(c)))                                                       
+      157  
+      158 +                                                              
+      159  def _card_advantage(hand: list[str], board: list[str], graveya
+           rd: list[str]) -> float:
+      160      """A coarse card-advantage proxy: live cards minus expende
+           d ones."""
+      161      return float(len(hand or []) + len(board or [])) - 0.25 * 
+           float(len(graveyard or []))
+● Bash(python -m pytest tests/ --deselect
+      tests/test_dashboard.py::TestDashboardRoot::test_root_returns_html -q 2>&1
+       | tail -8)
+  ⎿          # Aggro should have higher ATTACK percentage than non-aggro
+     >       assert aggro_actions["ATTACK"]["percentage"] > non_aggro_actio
+     ns["ATTACK"]["percentage"]
+     … +8 lines (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/nodes/game_advisor.py)
+  ⎿  Added 11 lines, removed 6 lines
+      584      )
+      585      # On turn 0 the only action should be MULLIGAN; the in-gam
+           e card-specific
+      586      # actions and role-derived combat overrides are not yet me
+           aningful.
+      587 -    # If opponent state is empty we also withhold combat overr
+          -ides so the                                                   
+      588 -    # static personality-driven percentages can do their job. 
+      589 -    has_opp_state = bool(                                     
+      590 -        (state.get("opponent_board") or [])                   
+      591 -        or (state.get("opponent_graveyard") or [])            
+      592 -        or (state.get("observations") or [])                  
+      587 +    # If opponent state is empty (or only contains land observ
+          +ations) we also                                               
+      588 +    # withhold combat overrides so the static personality-driv
+          +en percentages                                                
+      589 +    # can do their job.                                       
+      590 +    has_opp_threats = bool(state.get("opponent_board") or []) 
+      591 +    has_opp_spells = any(                                     
+      592 +        (o or {}).get("event") == "spell" for o in (state.get(
+          +"observations") or [])                                        
+      593      )
+      594 +    has_opp_state = (                                         
+      595 +        has_opp_threats                                       
+      596 +        or has_opp_spells                                     
+      597 +        or bool(state.get("opponent_graveyard") or [])        
+      598 +    )                                                         
+      599      if turn <= 0:
+      600          card_actions: list[dict] = []
+      601      elif not has_opp_state:
+
+● Bash(python -m pytest tests/ --deselect
+      tests/test_dashboard.py::TestDashboardRoot::test_root_returns_html -q 2>&1
+       | tail -8)
+  ⎿              > non_aggro_actions["PLAY_SPELL"]["percentage"]
+             )
+     E       assert 35.0 > 35.0
+     … +7 lines (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/nodes/game_advisor.py)
+  ⎿  Added 17 lines, removed 6 lines
+      483      base: list[dict],
+      484      card_specific: list[dict],
+      485  ) -> list[dict]:
+      486 -    """Card-specific actions override the static base on confl
+          -ict, except for                                               
+      487 -    PLAY_SPELL where we keep up to three card-specific entries
+          - so the Java                                                  
+      488 -    side can fall through if its first pick is unplayable.    
+      486 +    """Combine the static personality-driven base with board-a
+          +ware additions.                                               
+      487 +                                                              
+      488 +    Behavior:                                                 
+      489 +    - Card-specific entries other than PLAY_SPELL replace the 
+          +base entry of                                                 
+      490 +      the same type (e.g. role-derived ATTACK overrides static
+          + ATTACK).                                                     
+      491 +    - For PLAY_SPELL, we want both: the card-specific entries 
+          +carry concrete                                                
+      492 +      card-name targets for the Java side, while the base entr
+          +y carries the                                                 
+      493 +      personality-driven percentage. The base PLAY_SPELL is ap
+          +pended *last*                                                 
+      494 +      so action-type maps (which keep the last entry) still se
+          +e the                                                         
+      495 +      personality value, while iterators that walk all entries
+          + also see the                                                 
+      496 +      targeted picks.                                         
+      497      """
+      498      if not card_specific:
+      499          return base
+      492 -    # Action types in card_specific other than PLAY_SPELL repl
+          -ace the base                                                  
+      493 -    # entry of the same type. Multiple PLAY_SPELL entries are 
+          -kept.                                                         
+      500      cs_types = {a["action_type"] for a in card_specific if a.g
+           et("action_type") != "PLAY_SPELL"}
+      495 -    merged: list[dict] = [a for a in base if a.get("action_typ
+          -e") not in cs_types and a.get("action_type") != "PLAY_SPELL"] 
+      501 +    base_non_replaced = [                                     
+      502 +        a for a in base if a.get("action_type") not in cs_type
+          +s and a.get("action_type") != "PLAY_SPELL"                    
+      503 +    ]                                                         
+      504 +    base_play_spell = [a for a in base if a.get("action_type")
+          + == "PLAY_SPELL"]                                             
+      505 +    merged: list[dict] = list(base_non_replaced)              
+      506      merged.extend(card_specific)
+      507 +    merged.extend(base_play_spell)                            
+      508      return merged
+      509  
+      510  
+
+● Bash(python -m pytest tests/ --deselect
+      tests/test_dashboard.py::TestDashboardRoot::test_root_returns_html -q 2>&1
+       | tail -8)
+  ⎿  ......................................................................
+     .. [ 64%]
+     .......................................
+     … +2 lines (ctrl+o to expand)
+
+● All tests pass. Now let me do a final live smoke test of the sidecar +
+  dashboard, and verify the Java side compiles clean.
+
+● Bash(python -c "
+      import asyncio, json…)
+  ⎿  role: {'ai_role': 'beatdown', 'opponent_role': 'control', 'winning_sid
+     e': 'human', 'margin': 0.211, 'role_flipped': False, 'reasoning': 'AI
+     beatdown (natural contested); life 14-20; board 0-2; hand 4 vs ~3'}
+     … +19 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1 && mvn -pl forge-ai -am -q compile 2>&1
+      | tail -5)
+  ⎿  (No output)
+  ⎿  (timeout 5m)
+
+● All 12 tasks complete. Implementation summary:
+
+  Sidecar (Python)
+  - app/schema.py: bumped to v4 with RoleAssessment, HandValuation,
+  OpponentHandGuess, TargetPriority; added phase and available_mana to the
+  request.
+  - app/advice.py (new): deterministic helpers — assess_role implements Mike
+  Flores's "Who's the Beatdown?" doctrine including the role-flip rule;
+  score_hand, card_specific_actions, infer_opponent_hand, target_priorities.
+  - app/nodes/game_advisor.py: wires all helpers into game_advisor_node; merge
+  logic preserves the personality-driven static PLAY_SPELL percentage while also
+   exposing card-specific picks.
+  - app/main.py: response builder populates the new fields; new imports.
+  - app/static/dashboard.html: four new panels (Who's the Beatdown, Hand
+  Valuation, Opponent Likely Holds, Target Priorities).
+
+  Java (forge-ai)
+  - RecognitionRequest: new phase and available_mana fields, updated ctors.
+  - RecognitionResult: new nested records
+  RoleAssessment/HandValuation/OpponentHandGuess/TargetPriority; new log-line
+  helpers.
+  - DeckRecognitionObserver: fireCall() now snapshots
+  hand/own_board/opponent_board/graveyards/life totals/phase/available_mana;
+  refresh trigger broadened to GameEventPlayerLivesChanged and GameEventZone;
+  new log lines for role/hand/opponent.
+  - SidecarInfluence: new accessors — role(), isAiBeatdown(), isAiControl(),
+  isAiAhead(), handValue(), opponentLikelyHas(), opponentHoldsProbability(),
+  targetPriorityFor(), bestPlayLandName(), bestPlaySpellNames().
+  - AiProps: 7 new toggles (role, hand valuation, opponent inference, targeting,
+   mulligan, discard, hand-value weight).
+  - AiController: land selection uses bestPlayLandName(); spell selection
+  iterates bestPlaySpellNames(); declareAttackers/declareBlockersFor apply role
+  modulation and opponent-inference scaling; getCardsToDiscard drops
+  lowest-value cards when the sidecar has valuations.
+  - PlayerControllerAi: mulliganKeepHand consults hand-value average as a
+  secondary signal; chooseTargetsFor surfaces priority list as an SVar
+  (SidecarTargets) for opt-in ability handlers.
+  - ComputerUtilCard: new evaluateCreatureWithSidecar() blend (opt-in via
+  AiController).
+
+  Verification: 111 tests pass (the one pre-existing dashboard root failure
+  exists on master); mvn -pl forge-ai compile clean; live smoke test against a
+  Modern UW vs Burn state shows correct role assessment ("AI beatdown" because
+  behind on life with no creatures while opp has Goblin Guide + Eidolon),
+  card-specific PLAY_SPELL targets emitted, and target priorities ordered.
+
+  Follow-up worth noting: opponent-hand inference relies on the recognized
+  archetype matching a curated entry — when the LLM returns a non-curated name,
+  no inference is emitted. The deeper targeting integration (ability handlers
+  reading the SidecarTargets SVar) is currently informational only; integrating
+  it into specific ability AI classes (damage, removal) is the next natural
+  extension.
+
+✻ Brewed for 14m 49s
+
+❯ can you use playwright combined with viewing the forge logs to see if this    
+  feature addition worked? I'm not seeing anything new in the dashboard         
+
+● Let me check current sidecar state, restart it with new code, view the
+  dashboard, and tail the forge logs.
+
+● Bash(ps aux | grep -E "uvicorn|fastapi|forge-llm|sidecar" | grep -v grep |
+      head -10)
+  ⎿  lou      1430562  0.7  0.1 1593808 98168 pts/3   S+   08:26   0:00 git
+      log --graph --color=always --abbrev-commit --decorate --date=relative
+      --pretty=medium refs/heads/feature/sidecar-actions --
+
+  Searched for 1 pattern, listed 1 directory (ctrl+o to expand)
+
+● Bash(systemctl --user status forge-sidecar 2>&1 | head -10; systemctl status
+      forge-sidecar 2>&1 | head -10)
+  ⎿  Unit forge-sidecar.service could not be found.
+     Unit forge-sidecar.service could not be found.
+
+● Bash(curl -s http://localhost:18970/health 2>&1 | head -5; echo "---listen
+      check---"; ss -tlnp 2>/dev/null | grep 18970)
+  ⎿  {"status":"ok","model":"local-model","llm_reachable":true,"metagame_en
+     abled":true}---listen check---
+     LISTEN 0      2048                     127.0.0.1:18970      0.0.0.0:*
+        users:(("python",pid=1388923,fd=13))
+
+● Bash(ps -fp 1388923 2>&1; echo "---"; ls -la /proc/1388923/cwd 2>&1)
+  ⎿  UID          PID    PPID  C STIME TTY          TIME CMD
+     lou      1388923  243527  1 08:15 pts/5    00:00:11 python -m app.main
+     ---
+     … +2 lines (ctrl+o to expand)
+
+● Bash(kill 1388923 2>&1; sleep 2; ss -tlnp 2>/dev/null | grep 18970 || echo
+      "stopped")
+  ⎿  stopped
+
+● Bash(cd /home/lou/Development/forge-1/forge-llm-sidecar && python -m app.main
+      2>&1 | tee /tmp/sidecar.log)  ⎿  Running in the background (↓ to manage)
+
+● Bash(until curl -fs http://localhost:18970/health >/dev/null 2>&1; do sleep 1;
+       done; echo "ready"; curl -s http://localhost:18970/health)
+  ⎿  ready
+     {
+       "status": "ok",
+     … +4 lines (ctrl+o to expand)
+
+● Sidecar back up with new code. Let me POST a populated /recognize to seed
+  history, then open the dashboard in Playwright.
+
+● Bash(curl -s -X POST http://localhost:18970/recognize -H 'Content-Type:
+      application/json' -d '{
+        "client":"forge","game_id":"verify-1","format":"Modern","turn":4,…)
+  ⎿  schema_version= 4
+     has_role= True
+     hand_values= 4
+     … +2 lines (ctrl+o to expand)
+  ⎿  (timeout 2m)
+
+● Sidecar v4 working. Now let me open the dashboard in Playwright to verify
+  rendering.
+
+  Searched for 1 pattern, read 2 files, called playwright 3 times (ctrl+o to expand)
+
+● Dashboard now shows the new sections: Who's the Beatdown, Hand Valuation,
+  Target Priorities. "Opponent Likely Holds" is hidden because the LLM returned
+  "Off-meta Aggro" (a generic fallback that has no signature_cards to subtract
+  observations from — that's a known limitation noted in the plan).
+
+  Now let me check what's in the Forge logs and whether Forge itself is hitting
+  the new code path.
+
+  Searched for 1 pattern, listed 1 directory (ctrl+o to expand)
+
+● Bash(tail -20 /tmp/sidecar.log 2>/dev/null; echo "---"; curl -s
+      http://localhost:18970/api/stats | python -c "
+      import sys, json…)
+  ⎿  INFO:     127.0.0.1:37694 - "GET /metagame?format=standard HTTP/1.1" 2
+     00 OK
+     INFO:forge-llm-sidecar:HTTP GET /piloting -> 200 (from 127.0.0.1)
+     … +21 lines (ctrl+o to expand)
+
+● Bash(ps aux | grep -E "java.*forge|forge-gui" | grep -v grep | head -3)
+  ⎿  lou      1389360 26.4  2.1 19529736 1404480 pts/6 SLl+ 08:16   3:25 ja
+     va -Xmx4096m -Dio.netty.tryReflectionSetAccessible=true -Dfile.encodin
+     g=UTF-8 -Dforge.ai.deckRecognition.url=http://localhost:18970 --add-op
+     … +17 lines (ctrl+o to expand)
+
+● Diagnosed. Both pieces work, but they were running stale binaries. Here's what
+   I found:
+
+  The dashboard is now showing the new sections — see the screenshot at
+  /home/lou/Development/forge-1/dashboard-v4.png (full page). Visible:
+  - "Who's the Beatdown?" — AI: beatdown, Opp: control, "Human ahead 21%"
+  - "Action Scores" — PLAY_LAND, ATTACK, PLAY_SPELL (multiple), BLOCK, PASS
+  - "Hand Valuation" — Island 55 (land), Counterspell 35, Cryptic Command 35,
+  Snapcaster Mage 35 (all filler — would be higher with a real UW Control
+  piloting guide loaded)
+  - "Target Priorities" — Goblin Guide, Eidolon of the Great Revel
+
+  That entry came from a curl I just POSTed against the freshly-restarted
+  sidecar.
+
+  Why you weren't seeing anything new:
+  1. The sidecar process you had running (PID 1388923, started 08:15) was the
+  old code from before my edits. I killed it and started a fresh one — it now
+  serves schema_version=4 with the new fields. Confirmed via /api/stats.
+  2. Your running Forge (PID 1389360) is launched from
+  forge-gui-desktop-2.0.13-SNAPSHOT-jar-with-dependencies.jar — that fat-jar was
+   packaged before my Java changes. Look at the recent /recognize log lines:
+  every call from that Forge process only ships observations and deck_cards,
+  never the new hand/board/graveyard/life snapshot. So even with the new
+  sidecar, the deterministic helpers have no live state to chew on.
+
+  To see it work end-to-end in a real game:
+
+  1. Quit your current Forge window.
+  2. Rebuild the desktop fat-jar so it picks up the recompiled forge-ai classes:
+   mvn -pl forge-gui-desktop -am package -DskipTests (or your usual build
+  command).
+  3. Relaunch Forge.
+  4. Make sure SIDECAR_INFLUENCE_ENABLE (and the v4 toggles I added —
+  SIDECAR_ROLE_ASSESSMENT_ENABLE, SIDECAR_HAND_VALUATION_ENABLE, etc., all
+  default true) are on in the AI profile.
+
+  Once that's done, every /recognize from Forge will include the live
+  hand/board/graveyards, and the dashboard's new sections will populate with
+  real game state. The game log will also start showing Who's the Beatdown? 
+  AI=..., AI hand value: ..., and AI thinks opponent holds: ... lines that you
+  can correlate with each turn.
+
+  Want me to kick off the forge-gui-desktop rebuild in the background?
+
+✻ Crunched for 2m 53s
+
+❯ yes rebuild it                                                                
+
+● Bash(mvn -pl forge-gui-desktop -am package -DskipTests 2>&1 | tail -100)
+  ⎿  Running in the background (↓ to manage)
+
+● Build started in background (PID b5mo3ilsk). It's a multi-module Maven build
+  packaging the fat-jar, so it typically takes a few minutes. I'll be notified
+  when it finishes — no need to poll.
+
+✻ Baked for 12s
+
+● Background command "Build forge-gui-desktop fat-jar" completed (exit code 0)
+
+  Searched for 1 pattern, read 1 file, listed 2 directories (ctrl+o to expand)
+
+● Bash(mvn -pl forge-gui-desktop -am clean package -DskipTests -X 2>&1 | grep -A
+       2 -E "empty|FAILURE|ERROR.*assembly|Building jar|java\.io|tmpfile" | head
+       -60)
+  ⎿  Running in the background (↓ to manage)
+
+● Clean rebuild started with verbose output. I'll wait for it to finish.
+
+✻ Crunched for 41s
+● Background command "Retry build with -X to see what's empty" completed (exit
+code 0)
+
+  Read 1 file, listed 1 directory (ctrl+o to expand)
+
+● Bash(unzip -l /home/lou/Development/forge-1/forge-gui-desktop/target/forge-gui
+      -desktop-2.0.13-SNAPSHOT-jar-with-dependencies.jar 2>/dev/null | grep -E
+      "SidecarInflue…)
+  ⎿       1978  2026-05-20 08:31   forge/ai/llm/RecognitionResult$HandValua
+     tion.class
+         13134  2026-05-20 08:31   forge/ai/llm/SidecarInfluence.class
+     … +2 lines (ctrl+o to expand)
+
+● Fat-jar rebuilt successfully (39MB, contains my new classes —
+  SidecarInfluence, RoleAssessment, HandValuation). Ready to launch.
+
+  To see it work live:
+  1. Quit your current Forge window.
+  2. Launch from the new jar: /home/lou/Development/forge-1/forge-gui-desktop/ta
+  rget/forge-gui-desktop-2.0.13-SNAPSHOT-jar-with-dependencies.jar (same path
+  the running process uses, so your existing launch script should pick it up
+  automatically).
+  3. Start an AI game with SIDECAR_INFLUENCE_ENABLE=true in the AI profile.
+
+  When the next /recognize fires you should see:
+  - The dashboard's new sections populated with real hand/board/graveyard data
+  from your actual game.
+  - The game log gain three new lines per turn: Who's the Beatdown? AI=... 
+  opp=..., AI hand value: ..., and AI thinks opponent holds: ....
+
+  If the dashboard still looks empty after the relaunch, the most likely
+  culprits are: (a) the AI profile doesn't have SIDECAR_INFLUENCE_ENABLE=true,
+  or (b) the game is still in turn 0 / pre-mulligan — combat overrides and
+  card-specific picks only emit once there's some opponent action observed.
+
+✻ Worked for 35s
+
+❯ can i use the ./run-forge script to run it again? I see the dashboard showing 
+   now that you refreshed and populated it with mono red modern burn/aggro data 
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● Yes — ./run-forge.sh is exactly right. It picks the newest
+  forge-gui-desktop-*-jar-with-dependencies.jar by mtime (line 17: ls -t ... | 
+  head -n 1), which is now the 2.0.13 jar from 08:31 with my changes in it.
+
+  So:
+  1. Quit your current Forge window.
+  2. Run ./run-forge.sh (optionally FORGE_LOG_LEVEL=debug ./run-forge.sh if you
+  want to see the DeckRecognition: debug lines inline).
+  3. Start a game. Make sure "Enable AI Deck Recognition" is checked in Settings
+   > Preferences (per the comment on line 67 — Forge ignores the system
+  property, it reads the UI toggle).
+
+  Once the first /recognize fires, the dashboard's new sections should populate
+  with your real game state instead of my seeded mono-red sample.
+
+✻ Baked for 14s

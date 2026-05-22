@@ -3,6 +3,7 @@
 import pytest
 from pydantic import ValidationError
 
+from app.combo import analyze_combo_state
 from app.knowledge import piloting
 from app.knowledge.piloting_schema import PilotingGuide, StrategyType
 
@@ -18,6 +19,7 @@ def test_schema_accepts_minimal_guide():
     assert guide.archetype == "Test Deck"
     assert guide.strategy_type is StrategyType.AGGRO
     assert guide.metadata.schema_version == 2
+    assert guide.combo_profile is None
 
 
 def test_schema_rejects_missing_required_field():
@@ -78,3 +80,106 @@ def test_available_guides_lists_generic():
     # v2: shape is {"live": [...], "archive": [...]}
     assert set(GENERIC_STRATEGIES).issubset(set(guides["generic"]["live"]))
     assert guides["generic"]["archive"] == []
+
+
+def test_ruby_storm_combo_profile_loads():
+    guide = piloting.get_piloting_guide("Ruby Storm", "modern", "combo")
+    assert guide is not None
+    assert guide.combo_profile is not None
+    assert "reducers" in guide.combo_profile.required_setup_categories
+    assert {line.name for line in guide.combo_profile.known_lines} >= {
+        "Normal storm turn",
+        "Past in Flames reload",
+        "Wish/payoff line",
+    }
+
+
+def test_combo_analyzer_high_readiness_with_reducer_rituals_payoff():
+    guide = piloting.get_piloting_guide("Ruby Storm", "modern", "combo")
+    profile = guide.combo_profile.model_dump()
+    state = {
+        "hand": ["Desperate Ritual", "Pyretic Ritual", "Wrenn's Resolve", "Grapeshot"],
+        "own_board": ["Ruby Medallion"],
+        "your_graveyard": [],
+        "available_mana": ["R", "R", "C"],
+        "archetype": "Boros Energy",
+        "opponent_board": [],
+        "opponent_hand": [],
+        "opp_untapped_sources": [],
+    }
+    plan = analyze_combo_state(state, profile)
+    assert plan["go_for_it_now"] is True
+    assert plan["readiness_score"] >= 75
+    assert plan["preferred_line"] == "Normal storm turn"
+
+
+def test_combo_analyzer_past_in_flames_reload_high_readiness():
+    guide = piloting.get_piloting_guide("Ruby Storm", "modern", "combo")
+    profile = guide.combo_profile.model_dump()
+    state = {
+        "hand": ["Past in Flames", "Grapeshot", "Pyretic Ritual"],
+        "own_board": ["Ruby Medallion"],
+        "your_graveyard": ["Desperate Ritual", "Manamorphose", "Wrenn's Resolve"],
+        "available_mana": ["R", "R", "R", "C"],
+        "archetype": "Boros Energy",
+        "opponent_board": [],
+        "opponent_hand": [],
+        "opp_untapped_sources": [],
+    }
+    plan = analyze_combo_state(state, profile)
+    assert plan["go_for_it_now"] is True
+    assert plan["preferred_line"] == "Past in Flames reload"
+
+
+def test_combo_analyzer_low_readiness_prefers_setup():
+    guide = piloting.get_piloting_guide("Ruby Storm", "modern", "combo")
+    profile = guide.combo_profile.model_dump()
+    state = {
+        "hand": ["Mountain", "Grapeshot", "Spell Pierce"],
+        "own_board": [],
+        "your_graveyard": [],
+        "available_mana": ["R"],
+        "archetype": "Boros Energy",
+        "opponent_board": [],
+        "opponent_hand": [],
+        "opp_untapped_sources": [],
+    }
+    plan = analyze_combo_state(state, profile)
+    assert plan["go_for_it_now"] is False
+    assert plan["readiness_score"] < 50
+    assert "reducers" in plan["missing_pieces"]
+
+
+def test_combo_analyzer_control_open_blue_raises_risk():
+    guide = piloting.get_piloting_guide("Ruby Storm", "modern", "combo")
+    profile = guide.combo_profile.model_dump()
+    state = {
+        "hand": ["Desperate Ritual", "Pyretic Ritual", "Wrenn's Resolve", "Grapeshot"],
+        "own_board": ["Ruby Medallion"],
+        "your_graveyard": [],
+        "available_mana": ["R", "R", "C"],
+        "archetype": "Azorius Control",
+        "opponent_board": [],
+        "opponent_hand": [],
+        "opp_untapped_sources": [["U"], ["W"]],
+    }
+    plan = analyze_combo_state(state, profile)
+    assert "countermagic" in plan["risk_assessment"]
+    assert plan["bucket_state"]["go_threshold"] >= 85
+
+
+def test_combo_analyzer_aggro_lowers_threshold():
+    guide = piloting.get_piloting_guide("Ruby Storm", "modern", "combo")
+    profile = guide.combo_profile.model_dump()
+    state = {
+        "hand": ["Desperate Ritual", "Pyretic Ritual", "Wrenn's Resolve", "Grapeshot"],
+        "own_board": ["Ruby Medallion"],
+        "your_graveyard": [],
+        "available_mana": ["R", "R"],
+        "archetype": "Mono-Red Aggro",
+        "opponent_board": ["Goblin Guide"],
+        "opponent_hand": [],
+        "opp_untapped_sources": [],
+    }
+    plan = analyze_combo_state(state, profile)
+    assert plan["bucket_state"]["go_threshold"] == 65.0

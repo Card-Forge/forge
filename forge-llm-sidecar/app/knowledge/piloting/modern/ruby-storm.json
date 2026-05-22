@@ -121,6 +121,157 @@
     "Field of the Dead",
     "Lightning Helix"
   ],
+  "combo_profile": {
+    "profile_version": 1,
+    "required_setup_categories": [
+      "reducers",
+      "rituals",
+      "draw_engine",
+      "recursion",
+      "payoff",
+      "protection"
+    ],
+    "category_cards": {
+      "reducers": [
+        "Ruby Medallion",
+        "Ral, Monsoon Mage",
+        "Birgi, God of Storytelling",
+        "Goblin Electromancer"
+      ],
+      "rituals": [
+        "Desperate Ritual",
+        "Pyretic Ritual",
+        "Manamorphose"
+      ],
+      "draw_engine": [
+        "Wrenn's Resolve",
+        "Light Up the Stage",
+        "Reckless Impulse",
+        "Mishra's Bauble",
+        "Bitter Reunion"
+      ],
+      "recursion": [
+        "Past in Flames",
+        "Ral, Monsoon Mage"
+      ],
+      "payoff": [
+        "Grapeshot",
+        "Ral, Monsoon Mage"
+      ],
+      "tutor": [
+        "Wish",
+        "Glittering Wish"
+      ],
+      "protection": [
+        "Veil of Summer",
+        "Spell Pierce",
+        "Defense Grid",
+        "Pyroblast"
+      ]
+    },
+    "known_lines": [
+      {
+        "name": "Normal storm turn",
+        "required_categories": [
+          "reducers",
+          "rituals",
+          "draw_engine",
+          "payoff"
+        ],
+        "key_cards": [
+          "Ruby Medallion",
+          "Desperate Ritual",
+          "Pyretic Ritual",
+          "Wrenn's Resolve",
+          "Grapeshot"
+        ],
+        "mana_requirement": "At least two mana, preferably RR, with a reducer on battlefield.",
+        "sequence": [
+          "Resolve a cost reducer before rituals.",
+          "Cast rituals and Manamorphose to grow mana and storm.",
+          "Use impulse draw to find more rituals or payoff.",
+          "Finish with Grapeshot or transformed Ral."
+        ],
+        "payoff": "Grapeshot",
+        "notes": "Prefer this when a reducer is already on board and the hand has rituals plus draw."
+      },
+      {
+        "name": "Past in Flames reload",
+        "required_categories": [
+          "rituals",
+          "draw_engine",
+          "recursion",
+          "payoff"
+        ],
+        "key_cards": [
+          "Past in Flames",
+          "Desperate Ritual",
+          "Pyretic Ritual",
+          "Manamorphose",
+          "Grapeshot"
+        ],
+        "mana_requirement": "Enough mana to cast Past in Flames, then flash back at least one ritual.",
+        "sequence": [
+          "Stock the graveyard with rituals and draw spells.",
+          "Cast Past in Flames once the first wave stalls.",
+          "Flash back rituals before draw spells.",
+          "Use the rebuilt storm count to find or cast Grapeshot."
+        ],
+        "payoff": "Grapeshot",
+        "notes": "This is the strongest reload line when the graveyard contains multiple rituals/cantrips."
+      },
+      {
+        "name": "Wish/payoff line",
+        "required_categories": [
+          "reducers",
+          "rituals",
+          "tutor",
+          "payoff"
+        ],
+        "key_cards": [
+          "Wish",
+          "Glittering Wish",
+          "Grapeshot"
+        ],
+        "mana_requirement": "Mana to cast Wish plus the fetched payoff or answer.",
+        "sequence": [
+          "Build mana and storm with reducer plus rituals.",
+          "Cast Wish for the missing payoff or protection.",
+          "Resolve the fetched finisher or answer before passing priority."
+        ],
+        "payoff": "Grapeshot or sideboard payoff",
+        "notes": "Treat Wish as the missing piece when mana is sufficient."
+      }
+    ],
+    "matchup_posture": [
+      {
+        "opponent_type": "control",
+        "posture": "cautious",
+        "go_threshold": 85,
+        "notes": "Against open countermagic, prefer protection, bait, or additional setup unless the line already includes protection."
+      },
+      {
+        "opponent_type": "aggro",
+        "posture": "faster",
+        "go_threshold": 65,
+        "notes": "Against pressure, accept less perfect setup and try to combo before lethal damage arrives."
+      },
+      {
+        "opponent_type": "fast_combo",
+        "posture": "faster",
+        "go_threshold": 65,
+        "notes": "Against another combo deck, push earlier attempts rather than waiting for a perfect hand."
+      }
+    ],
+    "visible_hate_cards": [
+      "Rest in Peace",
+      "Damping Sphere",
+      "Rule of Law",
+      "Deafening Silence",
+      "Eidolon of Rhetoric",
+      "Chalice of the Void"
+    ]
+  },
   "metadata": {
     "source": "build_piloting_guides.py",
     "source_url": "",

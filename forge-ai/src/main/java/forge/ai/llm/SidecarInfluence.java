@@ -18,6 +18,7 @@ import org.tinylog.Logger;
 import forge.ai.AiController;
 import forge.ai.AiProps;
 import forge.ai.llm.RecognitionResult.HandValuation;
+import forge.ai.llm.RecognitionResult.EarlyGamePlan;
 import forge.ai.llm.RecognitionResult.OpponentHandGuess;
 import forge.ai.llm.RecognitionResult.PilotingAdvice;
 import forge.ai.llm.RecognitionResult.RoleAssessment;
@@ -51,6 +52,8 @@ public final class SidecarInfluence {
     private volatile Map<String, TargetPriority> latestTargetPriorities = Map.of();
     /** Latest role assessment, or null. */
     private volatile RoleAssessment latestRole = null;
+    /** Latest opening/rolling plan, or null. */
+    private volatile EarlyGamePlan latestEarlyGamePlan = null;
 
     /** The AI controller, used to read personality properties. */
     private final AiController ai;
@@ -161,6 +164,7 @@ public final class SidecarInfluence {
         // Role / hand / opponent / targeting payloads (v4). All nullable on
         // older sidecars or when state is too thin to compute.
         latestRole = piloting.role();
+        latestEarlyGamePlan = piloting.earlyGamePlan();
         final List<HandValuation> hvList = piloting.handValues();
         if (hvList == null || hvList.isEmpty()) {
             latestHandValues = Map.of();
@@ -195,10 +199,11 @@ public final class SidecarInfluence {
         }
 
         enabled = true;
-        Logger.debug("SidecarInfluence: updated actions=%d, hand=%d, opp=%d, targets=%d, role=%s",
+        Logger.debug("SidecarInfluence: updated actions=%d, hand=%d, opp=%d, targets=%d, role=%s, plan=%s",
                 latestActions.size(), latestHandValues.size(),
                 latestOpponentHand.size(), latestTargetPriorities.size(),
-                latestRole != null ? latestRole.aiRole() : "none");
+                latestRole != null ? latestRole.aiRole() : "none",
+                latestEarlyGamePlan != null ? latestEarlyGamePlan.decision() : "none");
     }
 
     /**
@@ -316,6 +321,16 @@ public final class SidecarInfluence {
         return latestHandValues.values().stream()
                 .sorted((a, b) -> Double.compare(b.value(), a.value()))
                 .collect(Collectors.toList());
+    }
+
+    /** @return latest opening/rolling early-game plan, if any. */
+    public Optional<EarlyGamePlan> earlyGamePlan() {
+        return Optional.ofNullable(latestEarlyGamePlan);
+    }
+
+    /** @return cards the sidecar recommends returning after a mulligan keep. */
+    public List<String> bottomCards() {
+        return latestEarlyGamePlan == null ? List.of() : latestEarlyGamePlan.bottomCards();
     }
 
     /** @return inferred opponent-hand categories sorted by probability desc. */

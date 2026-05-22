@@ -146,38 +146,17 @@ public enum AiProps { /** */
     SIDEBOARDING_IN_LIMITED_FORMATS("false"),
     SIDEBOARDING_SHARED_TYPE_ONLY("false"),
     SIDEBOARDING_PLANESWALKER_EQ_CREATURE("false"),
-    DECK_RECOGNITION_ENABLE("false"),
+    DECK_RECOGNITION_ENABLE("true"),
     DECK_RECOGNITION_SIDECAR_URL("http://100.110.52.69:18970"),
-    // Sidecar action influence feature flags
-    SIDECAR_INFLUENCE_ENABLE("true"),               // master switch for sidecar -> AI influence
-    SIDECAR_INFLUENCE_WEIGHT("100"),                // 0=no influence, 100=force legal sidecar choices
+    // Sidecar action influence feature flags (all off by default)
+    SIDECAR_INFLUENCE_ENABLE("true"),              // master switch for sidecar -> AI influence
     SIDECAR_BIAS_SPELL_PLAY("50"),                  // max % boost when sidecar recommends a spell
     SIDECAR_BIAS_LAND("30"),                        // max % boost when sidecar recommends a land
     SIDECAR_BIAS_ATTACK("50"),                      // max % boost when sidecar recommends attack
     SIDECAR_BIAS_BLOCK("50"),                       // max % boost when sidecar recommends blocking
     SIDECAR_BIAS_ABILITY("30"),                     // max % boost when sidecar recommends an ability
     SIDECAR_BIAS_PASS("40"),                        // how much sidecar PASS recommendation affects do-nothing
-    SIDECAR_PERSONALITY_WEIGHT("100"),              // 0=no personality effect, 100=full effect
-    // v4 per-feature toggles for board-aware sidecar advice
-    SIDECAR_ROLE_ASSESSMENT_ENABLE("true"),         // honor "Who's the Beatdown?" role in attack/block
-    SIDECAR_HAND_VALUATION_ENABLE("true"),          // use per-card hand value as a discard/eval tiebreaker
-    SIDECAR_OPPONENT_INFERENCE_ENABLE("true"),     // bias combat / play by inferred opponent hand
-    SIDECAR_TARGETING_ENABLE("true"),               // consult sidecar target priority lists
-    SIDECAR_MULLIGAN_ENABLE("true"),                // factor sidecar advice into mulligan decisions
-    SIDECAR_DISCARD_ENABLE("true"),                 // discard lowest-handValue cards first
-    SIDECAR_HAND_VALUE_WEIGHT("30"),                // weight applied to handValue in evaluateCard blend
-    // Synchronous "thinking" budget: at key decision points (mulligan, start of
-    // AI main phase, declareAttackers), the AI blocks up to this many ms for
-    // any in-flight /recognize to settle before deciding. 0 = fire-and-forget.
-    // Used as the fallback when a per-decision-type budget below is unset/0.
-    SIDECAR_WAIT_MS("10000"),
-    // Per-decision-type budgets. The deeper opponent-strategist reasoning is
-    // worth a longer pause on the highest-impact decisions; routine priority
-    // passes stay snappy. 0 falls back to SIDECAR_WAIT_MS.
-    SIDECAR_WAIT_MS_MULLIGAN("10000"),
-    SIDECAR_WAIT_MS_COMBAT("5000"),
-    SIDECAR_WAIT_MS_PRIORITY("3000"),
-    SIDECAR_WAIT_MS_CRITICAL("10000");
+    SIDECAR_PERSONALITY_WEIGHT("100");              // 0=no personality effect, 100=full effect
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 
@@ -194,3 +173,4 @@ public enum AiProps { /** */
         return strDefaultVal;
     }
 }
+

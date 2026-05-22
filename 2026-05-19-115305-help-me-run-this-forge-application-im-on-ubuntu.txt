@@ -1,0 +1,1218 @@
+╭─── Claude Code v2.1.144 ─────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│                  Welcome back Lou!                 │ started                 │
+│                                                    │ Run /init to create a … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ What's new              │
+│                        ▘▘ ▝▝                       │ Added `/resume` suppor… │
+│    Opus 4.7 · Claude Pro · loud1990@gmail.com's    │ Added elapsed duration… │
+│    Organization                                    │ The `/plugin` browse a… │
+│                ~/Development/forge-1               │ /release-notes for more │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+❯ help me run this forge application. im on ubuntu 24.04 (within tmux right     
+  now). i have built it successfully, but when i try to run ./forge.sh, nothing 
+   seems to happen. you try to run it and resolve any errors that arise         
+
+  Listed 1 directory (ctrl+o to expand)
+
+● Bash(java -version 2>&1 && echo "---DISPLAY---" && echo "DISPLAY=$DISPLAY" &&
+      echo "WAYLAND=$WAYLAND_DISPLAY")
+  ⎿  openjdk version "17.0.18" 2026-01-20
+     OpenJDK Runtime Environment (build 17.0.18+8-Ubuntu-124.04.1)
+     OpenJDK 64-Bit Server VM (build 17.0.18+8-Ubuntu-124.04.1, mixed mode,
+     … +4 lines (ctrl+o to expand)
+
+  Read 1 file, listed 1 directory (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1/forge-gui-desktop/target && timeout 30
+      java -Xmx4096m -Dio.netty.tryReflectionSetAccessible=true
+      -Dfile.encoding=UTF-8 -jar for…)
+  ⎿  EXIT:
+
+● Bash(timeout 25 java -Xmx4096m -Dio.netty.tryReflectionSetAccessible=true
+      -Dfile.encoding=UTF-8 -jar
+      forge-gui-desktop-2.0.07-SNAPSHOT-jar-with-dependencies.jar > /t…)
+  ⎿  EXIT=1
+     --- output size: 0 bytes ---
+
+● Bash(echo "--- X sockets ---"; ls /tmp/.X11-unix/ 2>/dev/null; echo "---
+      wayland ---"; ls /run/user/$(id -u)/ 2>/dev/null | grep -i wayland; echo
+      "--- sessions ---";…)
+  ⎿  --- X sockets ---
+     X1
+     --- wayland ---
+     … +22 lines (ctrl+o to expand)
+
+● Bash(DISPLAY=:1 timeout 20 java -Xmx4096m
+      -Dio.netty.tryReflectionSetAccessible=true -Dfile.encoding=UTF-8 -jar
+      forge-gui-desktop-2.0.07-SNAPSHOT-jar-with-dependenci…)
+  ⎿  EXIT=1
+     --- size 108 ---
+     … +3 lines (ctrl+o to expand)
+
+● Bash(echo "--- xauth files ---"; ls -la ~/.Xauthority 2>/dev/null; find
+      /run/user/$(id -u) -maxdepth 2 -name "*auth*" 2>/dev/null; find
+      /run/user/$(id -u) -maxdepth…)
+  ⎿  --- xauth files ---
+     /run/user/1000/ICEauthority
+     /run/user/1000/gdm/Xauthority
+     … +13 lines (ctrl+o to expand)
+
+● Bash(DISPLAY=:1 XAUTHORITY=/run/user/1000/gdm/Xauthority timeout 20 java
+      -Xmx4096m -Dio.netty.tryReflectionSetAccessible=true -Dfile.encoding=UTF-8
+       -jar forge-gui-de…)
+  ⎿  EXIT=1
+     --- size 108 ---
+     … +2 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; unzip -p forge-gui-desktop/target/forge
+      -gui-desktop-2.0.07-SNAPSHOT-jar-with-dependencies.jar
+      META-INF/MANIFEST.MF | head -20;…)
+  ⎿  Manifest-Version: 1.0
+     Created-By: Maven Archiver 3.5.0
+     Build-Jdk-Spec: 17
+     … +18 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; unzip -p forge-gui-desktop/target/forge
+      -gui-desktop-2.0.07-SNAPSHOT-jar-with-dependencies.jar
+      META-INF/MANIFEST.MF | grep -i m…)
+  ⎿  Main-Class: forge.view.Main
+     === handler ===
+     forge-gui-desktop/src/main/java/forge/view/Main.java
+     … +2 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; cat
+      forge-gui-desktop/src/main/java/forge/view/Main.java; echo "=====
+      ExceptionHandler ====="; cat forge-gui/src/main/java/for…)
+  ⎿  /*
+      * Forge: Play Magic: the Gathering.
+      * Copyright (C) 2011  Forge Team
+     … +107 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; sed -n '1,90p'
+      forge-gui/src/main/java/forge/gui/error/BugReporter.java)
+  ⎿  /*
+      * Forge: Play Magic: the Gathering.
+      * Copyright (C) 2011  Forge Team
+     … +46 lines (ctrl+o to expand)
+
+● Bash(cd /tmp; mkdir -p forgedbg; cat > forgedbg/Debug.java <<'EOF'
+      public class Debug {…)
+  ⎿  compiled OK
+  ⎿  Shell cwd was reset to /home/lou/Development/forge-1
+
+● Bash(cd /home/lou/Development/forge-1/forge-gui-desktop/target;
+      JAR=forge-gui-desktop-2.0.07-SNAPSHOT-jar-with-dependencies.jar;
+      DISPLAY=:1 XAUTHORITY=/run/user/1000…)  ⎿  EXIT=2
+     === CAUGHT REAL EXCEPTION ===
+     java.lang.ExceptionInInitializerError
+     … +12 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; ls -d forge-gui/res 2>/dev/null && echo
+       "forge-gui/res EXISTS"; ls forge-gui/res/skins/default/bg_splash.png
+      2>/dev/null && ec…)
+  ⎿  forge-gui/res
+     forge-gui/res EXISTS
+     forge-gui/res/skins/default/bg_splash.png
+     … +29 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1/forge-gui; JAR=../forge-gui-desktop/targ
+      et/forge-gui-desktop-2.0.07-SNAPSHOT-jar-with-dependencies.jar; DISPLAY=:1
+       XAUTHORITY=/…)
+  ⎿  EXIT=124
+        at
+     com.thoughtworks.xstream.core.TreeUnmarshaller.convert(TreeUnmarsha
+     ller.java:74)
+     … +50 lines (ctrl+o to expand)
+
+  Listed 1 directory (ctrl+o to expand)
+
+❯ it tried to run, but got this error: com.thoughtworks.xstream.converters.ConversionException:                                                     
+  ---- Debugging information ----                                                                                                                   
+  cause-exception     : java.lang.NullPointerException                                                                                              
+  cause-message       : Cannot invoke "Object.toString()" because the return value of "java.util.Map$Entry.getValue()" is null                      
+  class               : forge.deck.Deck                                                                                                             
+  required-type       : forge.deck.Deck                                                                                                             
+  converter-type      : com.thoughtworks.xstream.converters.reflection.ReflectionConverter                                                          
+  line number         : 116                                                                                                                         
+  class[1]            : java.util.ArrayList                                                                                                         
+  required-type[1]    : java.util.ArrayList                                                                                                         
+  converter-type[1]   : com.thoughtworks.xstream.converters.collections.CollectionConverter                                                         
+  class[2]            : forge.gamemodes.gauntlet.GauntletData                                                                                       
+  required-type[2]    : forge.gamemodes.gauntlet.GauntletData                                                                                       
+  version             : 2.0.07-SNAPSHOT-05.19                                                                                                       
+  -------------------------------                                                                                                                   
+      at com.thoughtworks.xstream.core.TreeUnmarshaller.convert(TreeUnmarshaller.java:81)                                                           
+      at com.thoughtworks.xstream.core.TreeUnmarshaller.convertAnother(TreeUnmarshaller.java:68)                                                    
+      at com.thoughtworks.xstream.core.TreeUnmarshaller.convertAnother(TreeUnmarshaller.java:52)                                                    
+      at com.thoughtworks.xstream.converters.collections.AbstractCollectionConverter.readBareItem(AbstractCollectionConverter.java:132)             
+      at com.thoughtworks.xstream.converters.collections.AbstractCollectionConverter.readItem(AbstractCollectionConverter.java:117)                 
+      at com.thoughtworks.xstream.converters.collections.CollectionConverter.addCurrentElementToCollection(CollectionConverter.java:99)             
+      at com.thoughtworks.xstream.converters.collections.CollectionConverter.populateCollection(CollectionConverter.java:92)                        
+      at com.thoughtworks.xstream.converters.collections.CollectionConverter.populateCollection(CollectionConverter.java:86)                        
+      at com.thoughtworks.xstream.converters.collections.CollectionConverter.unmarshal(CollectionConverter.java:81)                                 
+      at com.thoughtworks.xstream.core.TreeUnmarshaller.convert(TreeUnmarshaller.java:74)                                                           
+      at com.thoughtworks.xstream.core.TreeUnmarshaller.convertAnother(TreeUnmarshaller.java:68)                                                    
+      at com.thoughtworks.xstream.converters.reflection.AbstractReflectionConverter.unmarshallField(AbstractReflectionConverter.java:496)           
+      at com.thoughtworks.xstream.converters.reflection.AbstractReflectionConverter.doUnmarshal(AbstractReflectionConverter.java:420)               
+      at com.thoughtworks.xstream.converters.reflection.AbstractReflectionConverter.unmarshal(AbstractReflectionConverter.java:277)                 
+      at com.thoughtworks.xstream.core.TreeUnmarshaller.convert(TreeUnmarshaller.java:74)                                                           
+      at com.thoughtworks.xstream.core.TreeUnmarshaller.convertAnother(TreeUnmarshaller.java:68)                                                    
+      at com.thoughtworks.xstream.core.TreeUnmarshaller.convertAnother(TreeUnmarshaller.java:52)                                                    
+      at com.thoughtworks.xstream.core.TreeUnmarshaller.start(TreeUnmarshaller.java:136)                                                            
+      at com.thoughtworks.xstream.core.AbstractTreeMarshallingStrategy.unmarshal(AbstractTreeMarshallingStrategy.java:32)                           
+      at com.thoughtworks.xstream.XStream.unmarshal(XStream.java:1468)                                                                              
+      at com.thoughtworks.xstream.XStream.unmarshal(XStream.java:1445)                                                                              
+      at com.thoughtworks.xstream.XStream.fromXML(XStream.java:1325)                                                                                
+      at forge.gamemodes.gauntlet.GauntletIO.loadGauntlet(GauntletIO.java:103)                                                                      
+      at forge.screens.home.gauntlet.CSubmenuGauntletContests.updateData(CSubmenuGauntletContests.java:64)                                          
+      at forge.screens.home.gauntlet.CSubmenuGauntletContests.initialize(CSubmenuGauntletContests.java:54)                                          
+      at forge.view.FView.initialize(FView.java:144)                                                                                                
+      at forge.control.FControl.lambda$initialize$0(FControl.java:311)                                                                              
+      at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:318)                                                             
+      at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:773)                                                                    
+      at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:720)                                                                                
+      at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:714)                                                                                
+      at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)                                                           
+      at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)                          
+      at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:742)                                                                        
+      at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)                                             
+      at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)                                                
+      at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)                                             
+      at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)                                                         
+      at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)                                                         
+      at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)                                                                 
+  Caused by: java.lang.NullPointerException: Cannot invoke "Object.toString()" because the return value of "java.util.Map$Entry.getValue()" is null 
+      at com.thoughtworks.xstream.core.DefaultConverterLookup.lookupConverterForType(DefaultConverterLookup.java:96)                                
+      at com.thoughtworks.xstream.XStream$1.lookupConverterForType(XStream.java:480)                                                                
+      at com.thoughtworks.xstream.core.TreeUnmarshaller.convertAnother(TreeUnmarshaller.java:58)                                                    
+      at com.thoughtworks.xstream.converters.reflection.AbstractReflectionConverter.unmarshallField(AbstractReflectionConverter.java:496)           
+      at com.thoughtworks.xstream.converters.reflection.AbstractReflectionConverter.doUnmarshal(AbstractReflectionConverter.java:420)               
+      at com.thoughtworks.xstream.converters.reflection.AbstractReflectionConverter.unmarshal(AbstractReflectionConverter.java:277)                 
+      at com.thoughtworks.xstream.core.TreeUnmarshaller.convert(TreeUnmarshaller.java:74)                                                           
+      ... 39 more                                                                                                                                   
+
+● Bash(cd /home/lou/Development/forge-1; sed -n '40,120p'
+      forge-gui/src/main/java/forge/gamemodes/gauntlet/GauntletIO.java)
+  ⎿      public static final String PREFIX_COMMANDER = "Commander_";
+         /** Regex for locked gauntlet save files. */
+         public static final String PREFIX_LOCKED = "LOCKED_";
+     … +50 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; echo "--- res/gauntlet ---"; ls -la
+      forge-gui/res/gauntlet/ 2>/dev/null; echo "--- GAUNTLET_DIR defs ---";
+      grep -n "GAUNTLET_D…)
+  ⎿  --- res/gauntlet ---
+     --- GAUNTLET_DIR defs ---
+     --- CSubmenuGauntletContests updateData ---
+     … +29 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; grep -rn "GAUNTLET_DIR"
+      forge-core/src/main/java/forge/localinstance/properties/*.java; echo "===
+      locked dir contents ==="; ls…)
+  ⎿  Error: Exit code 1
+     (eval):1: no matches found: 
+     forge-core/src/main/java/forge/localinstance/properties/*.java
+
+● Bash(cd /home/lou/Development/forge-1; grep -rn "GAUNTLET_DIR\s*="
+      --include=*.java . | head; echo "=== suffix ==="; grep -rn
+      "SUFFIX_DATA\s*=" --include=*.java forg…)
+  ⎿  Error: Exit code 1
+     (eval):1: no matches found: --include=*.java
+     === suffix ===
+     (eval):1: no matches found: --include=*.java
+
+● Bash(cd /home/lou/Development/forge-1; grep -rn 'GAUNTLET_DIR'
+      --include='*.java' forge-core forge-gui 2>/dev/null | grep -i 'new\|=' |
+      head; echo "=== dat files in…)
+  ⎿  forge-gui/src/main/java/forge/gamemodes/gauntlet/GauntletData.java:57:
+             File newpath = new File(ForgeConstants.GAUNTLET_DIR.userPrefLo
+     c, newName + ".dat");
+     … +35 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; ls forge-gui/res/defaults/gauntlet/ |
+      head -30; echo "TOTAL: $(ls forge-gui/res/defaults/gauntlet/ | wc -l)";
+      echo "--- peek o…)
+  ⎿  LOCKED_DotP Preconstructed.dat
+     LOCKED_Starting Magic - Core Set 2020 Welcome Decks.dat
+     LOCKED_Swimming With Sharks.dat
+     … +20 lines (ctrl+o to expand)
+
+● Bash(cd /tmp/forgedbg; mkdir -p forge/gamemodes/gauntlet; cat >
+      forge/gamemodes/gauntlet/GDebug.java <<'EOF'
+      package forge.gamemodes.gauntlet;…)
+  ⎿  compiled
+  ⎿  Shell cwd was reset to /home/lou/Development/forge-1
+
+● Bash(cd /home/lou/Development/forge-1/forge-gui; JAR=../forge-gui-desktop/targ
+      et/forge-gui-desktop-2.0.07-SNAPSHOT-jar-with-dependencies.jar; java -cp
+      "/tmp/forgedbg…)
+  ⎿  FAIL LOCKED_Swimming With Sharks.dat : com.thoughtworks.xstream.conver
+     ters.ConversionException:
+     ---- Debugging information ----
+     … +38 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1/forge-gui; JAR=../forge-gui-desktop/targ
+      et/forge-gui-desktop-2.0.07-SNAPSHOT-jar-with-dependencies.jar; echo "===
+      WITH --add-op…)
+  ⎿  === WITH --add-opens java.base/java.util ===
+     FAIL LOCKED_Swimming With Sharks.dat : java.lang.ExceptionInInitialize
+     rError
+     … +37 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; mkdir -p /tmp/mf; unzip -o -q
+      forge-gui-desktop/target/forge-gui-desktop-2.0.07-SNAPSHOT-jar-with-depend
+      encies.jar META-INF/MA…)
+  ⎿  Manifest-Version: 1.0^M$
+     Created-By: Maven Archiver 3.5.0^M$
+     Build-Jdk-Spec: 17^M$
+     … +32 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1/forge-gui; JAR=../forge-gui-desktop/targ
+      et/forge-gui-desktop-2.0.07-SNAPSHOT-jar-with-dependencies.jar; DISPLAY=:1
+       XAUTHORITY=/…)
+  ⎿  EXIT=0
+     === gauntlet errors in forge.log ===
+     0
+     === sample ===
+  Read 1 file (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; grep -nE "Splash|splash|main window|Mai
+      nWindow|Controller|initialize|Exception|FileNotFound|cardcreator"
+      /tmp/forgejar.log | h…)
+  ⎿  46:java.util.MissingResourceException: Can't find resource for bundle
+     java.util.PropertyResourceBundle, key lblCardCreator
+     58:        at forge.view.FView.initialize(FView.java:99)
+     … +15 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; echo "=== cardcreator refs ==="; grep
+      -rln 'cardcreator\|CardCreator\|lblCardCreator' --include='*.java'
+      --include='*.xml' --i…)
+  ⎿  Interrupted · What should Claude do instead?
+
+❯ ok, it did run but crashed as soon as i tried to open up my gauntlet          
+  extension in my fork of forge. Is there any way to disable that for now so    
+  that it doesn't crash?                                                        
+
+● Before I disable anything — that crash probably isn't a bug in your extension
+  at all. The stack trace you pasted is a JVM module-access problem, not broken
+  gauntlet code.
+
+  Here's what I found by reproducing it:
+
+  - The gauntlet .dat files are XStream-serialized and contain a
+  java.util.EnumMap. On Java 17, XStream needs --add-opens 
+  java.base/java.util=ALL-UNNAMED to deserialize that.
+  - When I ran Forge via the assembled jar (-jar ...jar-with-dependencies.jar),
+  the manifest supplies that flag and the gauntlet files load with zero errors.
+  - When I ran via classpath (the way IDEs and mvn exec:java launch), the
+  manifest is ignored, the flag is missing, and I get the exact
+  ConversionException / Map$Entry.getValue() NPE you saw.
+
+  So the gauntlet screen crashes only because the --add-opens flag is missing
+  from how you're launching. Adding it makes the feature work instead of just
+  hiding it.
+
+● User answered Claude's questions:
+  ⎿  · The gauntlet crash is a missing JVM flag, not broken code. How do you 
+     want to handle it? → Both
+     · How are you launching Forge right now? → I don't know, I couldn't get it 
+     to run, but you did. I was trying via forge.sh/the jar but failing. check 
+     this chat history for what you used.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-gui/src/main/java/forge/gamemodes/gauntlet/GauntletIO.java)
+  ⎿  Added 5 lines, removed 1 line
+      108          } catch (final IOException e) {
+      109              e.printStackTrace();
+      110          } catch (final ConversionException e) {
+      111 -            BugReporter.reportException(e);                   
+      111 +            // Skip gauntlet files that fail to deserialize (f
+          +ormat/version                                                 
+      112 +            // mismatch, or a missing JVM "--add-opens java.ba
+          +se/java.util")                                                
+      113 +            // instead of crashing the UI with a modal bug rep
+          +ort.                                                          
+      114 +            System.err.println("Skipping gauntlet file (could 
+          +not load): "                                                  
+      115 +                    + xmlSaveFile.getName() + " - " + e.getMes
+          +sage());                                                      
+      116          } catch (final Exception e) { //if there's a non-IO ex
+           ception, delete the corrupt file
+      117              e.printStackTrace();
+      118              isCorrupt = true;
+
+● Bash(cd /home/lou/Development/forge-1; grep -rn 'BugReporter'
+      --include='*.java' forge-gui/src/main/java/forge/gamemodes/gauntlet/)
+  ⎿  forge-gui/src/main/java/forge/gamemodes/gauntlet/GauntletIO.java:16:im
+     port forge.gui.error.BugReporter;
+
+● Update(forge-gui/src/main/java/forge/gamemodes/gauntlet/GauntletIO.java)
+  ⎿  Removed 1 line
+      13  import forge.deck.CardPool;
+      14  import forge.deck.Deck;
+      15  import forge.deck.DeckSection;
+      16 -import forge.gui.error.BugReporter;                            
+      16  import forge.item.PaperCard;
+      17  import forge.localinstance.properties.ForgeConstants;
+      18  import forge.model.FModel;
+
+● Write(run-forge.sh)
+  ⎿  Wrote 66 lines to run-forge.sh
+       2 # Launches the Forge desktop GUI from a source build.
+       3 #
+         ning from aee things the stock forge.sh does not handle when run
+       5 # build tree (especially inside tmux / SSH):
+       6 #   1. Runs from forge-gui/ so the "res" resource folder is foun
+       7 #   2. Sets DISPLAY (tmux does not inherit it) so the Swing GUI 
+         can open.
+         auntlet load).the --add-opens flags XStream needs on Java 17+ (g
+       9 
+      10 set -e
+     … +67 lines (ctrl+o to expand)
+
+● Bash(chmod +x run-forge.sh && echo "script executable" && git stash list
+      >/dev/null 2>&1; echo "starting build...")
+  ⎿  script executable
+     starting build...
+
+● Bash(cd /home/lou/Development/forge-1; mvn -q -pl forge-gui,forge-gui-desktop
+      -am -DskipTests -o package 2>&1 | tail -35)
+  ⎿  Using changelog from tag: forge-1.6.61
+  ⎿  (timeout 10m)
+
+● Bash(cd /home/lou/Development/forge-1; ls -la --time-style=+%H:%M:%S
+      forge-gui-desktop/target/forge-gui-desktop-*-jar-with-dependencies.jar
+      forge-gui/target/forge-gu…)
+  ⎿  -rwxrwxr-x 1 lou lou 38612200 10:52:47 forge-gui-desktop/target/forge-
+     gui-desktop-2.0.07-SNAPSHOT-jar-with-dependencies.jar
+     -rw-rw-r-- 1 lou lou  1488764 10:52:40 forge-gui/target/forge-gui-2.0.
+     … +2 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; timeout 45 ./run-forge.sh >
+      /tmp/runforge.log 2>&1; echo "EXIT=$?"; echo "=== launcher stdout head
+      ==="; head -3 /tmp/runforge…)
+  ⎿  EXIT=124
+     === launcher stdout head ===
+     DISPLAY was empty; using :1
+     … +5 lines (ctrl+o to expand)
+
+  Searched for 1 pattern (ctrl+o to expand)
+● Done. Forge now launches and the gauntlet screen no longer crashes. Here's
+  what was wrong and what I changed.
+
+  Why ./forge.sh did nothing
+
+  Three separate problems, and the first one hid the others:
+
+  1. No display. You're in tmux, which doesn't inherit $DISPLAY. The Swing GUI
+  had nowhere to draw.
+  2. Wrong working directory. Stock forge.sh does cd into
+  forge-gui-desktop/target/, which has no res/ folder. Forge crashed with Cannot
+   find default skin .../res/skins/default/bg_splash.png. The res/ resources
+  actually live in forge-gui/.
+  3. Silent failure. Forge's own error handler (BugReporter) failed its static
+  initializer when the crash happened, so the JVM printed only
+  ExceptionInInitializerError thrown from the UncaughtExceptionHandler — no
+  useful detail. That's why "nothing happened."
+
+  Why the gauntlet screen crashed
+
+  Not your extension code. Gauntlet .dat files are XStream-serialized and
+  contain a java.util.EnumMap. On Java 17, XStream needs --add-opens 
+  java.base/java.util=ALL-UNNAMED to deserialize that. Without it you get
+  exactly the ConversionException / Map$Entry.getValue() NPE you pasted. The
+  assembled jar's manifest intends to supply this, but it's lost the moment
+  anything launches via classpath instead of -jar.
+
+  What I changed (you chose "Both")
+
+  1. New launcher: run-forge.sh (repo root) — run Forge with this from now on:
+  ./run-forge.sh
+  It auto-detects DISPLAY (found :1), sets XAUTHORITY to GDM's cookie, cds into
+  forge-gui/ so res/ is found, and passes the full set of --add-opens flags
+  explicitly so it works whether launched as a jar, from Maven, or from an IDE.
+
+  2. Graceful gauntlet loading — forge-gui/.../gauntlet/GauntletIO.java: a
+  gauntlet file that fails to deserialize now logs one line and is skipped,
+  instead of popping a modal bug-report dialog. Safety net if a file is ever
+  genuinely incompatible. (Also removed the now-unused BugReporter import.)
+
+  3. Rebuilt the jar with mvn -pl forge-gui,forge-gui-desktop -am -DskipTests -o
+   package.
+
+  Verified
+
+  Ran ./run-forge.sh — Forge launched, GUI opened, stayed alive, and forge.log
+  shows zero gauntlet/ConversionException/EnumMap errors. The gauntlet contests
+  loaded cleanly.
+
+  One unrelated minor note: the log shows Translation missing: lblCardCreator —
+  a missing localization key for a "Card Creator" feature in your fork. Cosmetic
+   only (a menu item shows the raw key); it won't crash anything. Say the word
+  if you want me to add that key.
+
+✻ Sautéed for 4m 6s
+
+❯ how do i pull the latest snapshot from the forge github repo, while keeping   
+  my local changes?                                                             
+
+● Bash(cd /home/lou/Development/forge-1; echo "=== remotes ==="; git remote -v;
+      echo "=== branch ==="; git branch -vv | head; echo "=== status summary
+      ==="; git status…)
+  ⎿  === remotes ===
+     origin     https://github.com/loud1990/forge-1.git (fetch)
+     origin     https://github.com/loud1990/forge-1.git (push)
+     … +13 lines (ctrl+o to expand)
+
+● Your origin is your own fork (loud1990/forge-1). The official Forge repo isn't
+   a remote yet — you'll add it as upstream, then merge from it. You have 42 
+  uncommitted/untracked files, so the key is to protect those first.
+
+  One-time setup
+
+  git remote add upstream https://github.com/Card-Forge/forge.git
+
+  Each time you want the latest
+
+  1. Protect your local changes. Pick one:
+
+  - Commit them (recommended — it's real work, the LLM sidecar stuff):
+  git add -A
+  git commit -m "wip: local changes before upstream sync"
+  - Or stash them (if you don't want a commit yet — -u includes untracked
+  files):
+  git stash push -u -m "before upstream sync"
+
+  2. Fetch and merge upstream:
+  git fetch upstream
+  git merge upstream/master
+  You're on feature/dashboard, so this merges the latest official Forge directly
+   into your feature branch. Resolve any conflicts, then git commit.
+
+  3. If you stashed, bring your changes back:
+  git stash pop
+  (Skip this if you committed in step 1 — they're already in the branch.)
+
+  Notes / decisions
+
+  - Merge vs rebase: I suggested merge — it's safer with a large uncommitted
+  changeset and never rewrites history. If you'd rather keep a linear history,
+  use git rebase upstream/master instead (more conflict-prompts, but cleaner
+  log).
+  - Keeping master clean: If you'd prefer your local master to mirror upstream
+  and merge into the feature branch from there:
+  git checkout master && git merge upstream/master
+  git checkout feature/dashboard && git merge master
+  - After merging, rebuild (mvn -DskipTests install) since upstream may have
+  touched modules you use.
+
+  Want me to run the sequence for you? If so, tell me commit or stash for step
+  1, and merge or rebase for step 2 — I'll do it and walk through any conflicts.
+
+✻ Churned for 35s
+
+❯ do this for me                                                                
+
+● Bash(cd /home/lou/Development/forge-1; git remote add upstream
+      https://github.com/Card-Forge/forge.git 2>&1 || git remote set-url
+      upstream https://github.com/Card-Fo…)
+  ⎿  upstream   https://github.com/Card-Forge/forge.git (fetch)
+     upstream   https://github.com/Card-Forge/forge.git (push)
+     === current head ===
+     2cda799d8e
+
+● Bash(cd /home/lou/Development/forge-1; git add -A && git commit -q -m "$(cat
+      <<'EOF'
+      wip: local sidecar/dashboard changes + Forge launcher before upstream
+      sync…)
+  ⎿  committed: a3912be6d8
+
+● Bash(cd /home/lou/Development/forge-1; git fetch upstream 2>&1 | tail -5; echo
+       "=== behind/ahead vs upstream/master ==="; git rev-list --left-right
+      --count HEAD...up…)
+  ⎿   * [new branch]              untapRework            -> upstream/untapR
+     ework
+      * [new tag]                 daily-snapshots        -> daily-snapshots
+     … +5 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; git merge upstream/master --no-edit
+      2>&1 | tail -30; echo "=== MERGE EXIT: ${pipestatus[1]} ===")
+  ⎿  Auto-merging docs/_sidebar.md
+     CONFLICT (content): Merge conflict in docs/_sidebar.md
+     Auto-merging forge-ai/src/main/java/forge/ai/AiController.java
+     … +16 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; echo "=== conflicted files ==="; git
+      diff --name-only --diff-filter=U)
+  ⎿  === conflicted files ===
+     docs/_sidebar.md
+
+● Bash(cd /home/lou/Development/forge-1; cat docs/_sidebar.md)
+  ⎿  ### [Forge Wiki Home](Home.md)
+
+     - [User Guide](User-Guide.md)
+     … +41 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1/docs; ls | grep -iE
+      'custom.set|card.creator|fantasy')
+  ⎿  Card-Creator-GUI.md
+     Creating-a-custom-Set.md
+     fantasy-blocks.md
+
+● Update(docs/_sidebar.md)
+  ⎿  File must be read first
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(docs/_sidebar.md)
+  ⎿  Removed 4 lines
+      58    - [Sounds & Music](Custom-Audio.md)
+      59    - [Card Images](Card-Images.md)
+      60    - [File Formats](File-Formats.md)
+      61 -<<<<<<< HEAD                                                   
+      61    - [Card Creator GUI](Card-Creator-GUI.md)
+      63 -  - [Creating your first custom set](Creating-a-custom-set.md) 
+      64 -=======                                                        
+      62    - [Tutorial: creating your first custom set](Creating-a-custo
+          m-Set.md)
+      63    - [Fantasy Blocks](fantasy-blocks.md)
+      67 ->>>>>>> upstream/master                                        
+      64  
+      65  - [Missing Cards in Forge](Missing-Cards-in-Forge.md)
+      66    - [Un‐cards, Playtest Cards, and Other Funny Cards](Un‐cards,
+          -Playtest-Cards,-and-Other-Funny-Cards.md)
+
+● Bash(cd /home/lou/Development/forge-1; git add docs/_sidebar.md; git diff
+      --name-only --diff-filter=U | head; echo "remaining conflicts above (none
+      = good)"; git com…)
+  ⎿  remaining conflicts above (none = good)
+     MERGE COMMITTED: fd474b14b39
+
+● Bash(cd /home/lou/Development/forge-1; echo "=== log ==="; git log --oneline
+      -4; echo "=== GauntletIO change present? ==="; grep -n "Skipping gauntlet
+      file" forge-gu…)  ⎿  === log ===
+     fd474b14b39 Merge remote-tracking branch 'upstream/master' into featur
+     e/dashboard
+     … +10 lines (ctrl+o to expand)
+
+● Done — upstream merged in, all your local work preserved.
+
+  What happened
+
+  ┌────────────────────────────────────┬────────────────────────────────────┐
+  │                Step                │               Result               │
+  ├────────────────────────────────────┼────────────────────────────────────┤
+  │ Added upstream →                   │ ✅                                 │
+  │ Card-Forge/forge.git               │                                    │
+  ├────────────────────────────────────┼────────────────────────────────────┤
+  │ Committed your 42 local files      │ a3912be6d8d                        │
+  ├────────────────────────────────────┼────────────────────────────────────┤
+  │ Fetched upstream                   │ you were 1556 commits behind, 25   │
+  │                                    │ ahead                              │
+  ├────────────────────────────────────┼────────────────────────────────────┤
+  │ Merged upstream/master             │ 1 conflict                         │
+  ├────────────────────────────────────┼────────────────────────────────────┤
+  │ Resolved conflict                  │ docs/_sidebar.md                   │
+  ├────────────────────────────────────┼────────────────────────────────────┤
+  │ Merge commit                       │ fd474b14b39                        │
+  └────────────────────────────────────┴────────────────────────────────────┘
+
+  The one conflict was in docs/_sidebar.md — both you and upstream added entries
+   under "Customization & Themes". I kept all three: your Card Creator GUI link,
+   plus upstream's custom set and Fantasy Blocks links. I also corrected your
+  link target — yours pointed at Creating-a-custom-set.md, but the actual file
+  is Creating-a-custom-Set.md (capital S), so that link was broken; it's now
+  fixed.
+
+  Verified: working tree is clean, and your GauntletIO graceful-loading change
+  survived the merge intact.
+
+  One thing changed upstream: versioning now uses a ${revision} property (the
+  version bumped past 2.0.07). run-forge.sh globs the jar name, so it'll still
+  find the new jar with no edits.
+
+  Next step — rebuild
+
+  1556 commits touched a lot of modules, so your current target/ jars are stale.
+   You need:
+  mvn -DskipTests install
+  This is a full rebuild — a few minutes. Want me to run it now and check it
+  compiles cleanly against the merged code? (If it fails, I'll fix the
+  breakage.)
+
+✻ Baked for 1m 32s
+
+❯ yes run it now and check it                                                   
+
+● Bash(cd /home/lou/Development/forge-1; mvn -q -DskipTests install 2>&1 | tail
+      -60)
+  ⎿  [ERROR] /home/lou/Development/forge-1/forge-ai/src/main/java/forge/ai/
+     llm/DeckRecognitionObserver.java:[81,13] cannot find symbol
+       symbol:   variable Log
+     … +80 lines (ctrl+o to expand)
+  ⎿  (timeout 10m)
+
+● Bash(cd /home/lou/Development/forge-1; echo "=== minlog still referenced
+      anywhere? ==="; grep -rl "com.esotericsoftware.minlog" --include='*.java'
+      . 2>/dev/null | he…)
+  ⎿  === minlog still referenced anywhere? ===
+     forge-ai/src/main/java/forge/ai/llm/DeckRecognitionClient.java
+     forge-ai/src/main/java/forge/ai/llm/DeckRecognitionObserver.java
+     … +7 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; for f in DeckRecognitionObserver
+      DeckRecognitionManager DeckRecognitionClient; do echo "===== $f ($(wc -l <
+       forge-ai/src/main/…)
+  ⎿  ===== DeckRecognitionObserver (212 lines) =====
+     11:import com.esotericsoftware.minlog.Log;
+     81:            Log.debug("DeckRecognition: could not read AI deck: " +
+     … +15 lines (ctrl+o to expand)
+
+  Read 1 file (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; echo "=== GameEventSpellAbilityCast
+      ==="; find . -name GameEventSpellAbilityCast.java | head -1 | xargs cat;
+      echo; echo "=== G…)
+  ⎿  === GameEventSpellAbilityCast ===
+     package forge.game.event;
+     … +27 lines (ctrl+o to expand)
+
+  Read 1 file (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; echo "=== Game: card lookup methods
+      ==="; grep -nE "public .*Card .*\(.*CardView|getCard\("
+      forge-game/src/main/java/forge/gam…)
+  ⎿  === Game: card lookup methods ===
+     698:    public Card findByView(CardView view) {
+     === CardView: useful getters ===
+     … +7 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; echo "===
+      StackItemView.getActivatingPlayer ==="; grep -n "getActivatingPlayer"
+      forge-game/src/main/java/forge/game/spellabili…)
+  ⎿  === StackItemView.getActivatingPlayer ===
+     134:    public PlayerView getActivatingPlayer() {
+     138:        set(TrackableProperty.ActivatingPlayer, PlayerView.get(si.
+     … +19 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; echo "=== a forge-ai file using tinylog
+       - its import block ==="; f=$(grep -rl "org.tinylog.Logger"
+      forge-ai/src/main/java --in…)
+  ⎿  === a forge-ai file using tinylog - its import block ===
+     forge-ai/src/main/java/forge/ai/LobbyPlayerAi.java
+     3:import java.util.Set;
+     … +8 lines (ctrl+o to expand)
+
+● Update(forge-ai/src/main/java/forge/ai/llm/DeckRecognitionObserver.java)
+  ⎿  Added 3 lines, removed 1 line
+       8  import java.util.concurrent.CopyOnWriteArrayList;
+       9  import java.util.concurrent.atomic.AtomicBoolean;
+      10  
+      11 -import com.esotericsoftware.minlog.Log;                        
+      11  import com.google.common.eventbus.Subscribe;
+      12  
+      13  import forge.game.Game;
+      14  import forge.game.GameLogEntryType;
+      15  import forge.game.card.Card;
+      16 +import forge.game.card.CardView;                               
+      17  import forge.game.event.GameEvent;
+      18  import forge.game.event.GameEventLandPlayed;
+      19  import forge.game.event.GameEventSpellAbilityCast;
+      20  import forge.game.event.GameEventTurnBegan;
+      21  import forge.game.player.Player;
+      22 +import forge.game.player.PlayerView;                           
+      23  import forge.game.player.RegisteredPlayer;
+      24  import forge.item.PaperCard;
+      25 +import org.tinylog.Logger;                                     
+      26  
+      27  /**
+      28   * Subscribes to the game's event bus and records the opponent'
+          s public plays
+
+● Bash(cd /home/lou/Development/forge-1; sed -i
+      's/\bLog\.debug(/Logger.debug(/g'
+      forge-ai/src/main/java/forge/ai/llm/DeckRecognitionObserver.java && echo
+      "DeckRecogni…)
+  ⎿  DeckRecognitionObserver Log->Logger done
+
+● Now the View-to-model fixes in the two handlers:
+
+● Update(forge-ai/src/main/java/forge/ai/llm/DeckRecognitionObserver.java)
+  ⎿  Added 12 lines, removed 6 lines
+      108          if (cast.sa() == null || !cast.sa().isSpell()) {
+      109              return;
+      110          }
+      111 -        final Player caster = cast.sa().getActivatingPlayer();
+      112 -        if (caster == null || caster.equals(aiPlayer)) {      
+      111 +        final PlayerView caster = cast.si() == null ? null : c
+          +ast.si().getActivatingPlayer();                               
+      112 +        if (caster == null || caster.equals(aiPlayer.getView()
+          +)) {                                                          
+      113              return; // ignore the AI's own plays
+      114          }
+      115 -        final Card host = cast.sa().getHostCard();            
+      115 +        final Card host = resolveCard(cast.sa().getHostCard())
+          +;                                                             
+      116          if (host != null) {
+      117              observations.add(toObservation(host, "spell"));
+      118              requestRecognition();
+     ...
+      120      }
+      121  
+      122      private void handleLandPlayed(final GameEventLandPlayed la
+           nd) {
+      123 -        if (land.player() == null || land.player().equals(aiPl
+          -ayer)) {                                                      
+      123 +        if (land.player() == null || land.player().equals(aiPl
+          +ayer.getView())) {                                            
+      124              return;
+      125          }
+      126 -        if (land.land() != null) {                            
+      127 -            observations.add(toObservation(land.land(), "land"
+          -));                                                           
+      126 +        final Card landCard = resolveCard(land.land());       
+      127 +        if (landCard != null) {                               
+      128 +            observations.add(toObservation(landCard, "land"));
+      129              requestRecognition();
+      130          }
+      131      }
+      132  
+      133 +    /** Resolve a {@link CardView} carried by a game event bac
+          +k to its model card. */                                       
+      134 +    private Card resolveCard(final CardView view) {           
+      135 +        return view == null ? null : game.findByView(view);   
+      136 +    }                                                         
+      137 +                                                              
+      138      /**
+      139       * Kick off a recognition call, or queue a rerun if one is
+            already running.
+      140       */
+
+● Bash(cd /home/lou/Development/forge-1/forge-ai/src/main/java/forge/ai/llm; for
+       f in DeckRecognitionManager.java DeckRecognitionClient.java; do sed -i
+      's#import com.e…)
+  ⎿  --- DeckRecognitionManager.java ---
+     3:import org.tinylog.Logger;
+     37:                Logger.debug("DeckRecognition: sidecar at " + url
+     … +12 lines (ctrl+o to expand)
+● Bash(cd /home/lou/Development/forge-1; mvn -q -DskipTests install -rf
+      :forge-ai 2>&1 | tail -40)
+  ⎿  [ERROR] Failed to execute goal on project forge-ai: Could not resolve 
+     dependencies for project forge:forge-ai:jar:2.0.13-SNAPSHOT: Failed to
+      collect dependencies at forge:forge-core:jar:2.0.13-SNAPSHOT: Failed
+     … +12 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; mvn -q -DskipTests install 2>&1 | tail
+      -45)
+  ⎿  Using changelog from tag: forge-2.0.12
+  ⎿  (timeout 10m)
+
+● Bash(cd /home/lou/Development/forge-1; ls -la --time-style=+%H:%M:%S
+      forge-gui-desktop/target/forge-gui-desktop-*-jar-with-dependencies.jar
+      forge-ai/target/forge-ai-…)
+  ⎿  -rw-rw-r-- 1 lou lou  1040813 10:52:38 forge-ai/target/forge-ai-2.0.07
+     -SNAPSHOT.jar
+     -rw-rw-r-- 1 lou lou  1070227 11:06:28 forge-ai/target/forge-ai-2.0.13
+     … +6 lines (ctrl+o to expand)
+
+● Update(run-forge.sh)
+  ⎿  Added 2 lines, removed 1 line
+      13  REPO_DIR=$(cd "$(dirname "$0")" && pwd)
+      14  RES_DIR="$REPO_DIR/forge-gui"
+      15  
+      16 -JAR=$(ls "$REPO_DIR"/forge-gui-desktop/target/forge-gui-desktop
+         --*-jar-with-dependencies.jar 2>/dev/null | head -n 1)          
+      16 +# -t: newest first, so a stale jar from an older version is nev
+         +er picked                                                      
+      17 +JAR=$(ls -t "$REPO_DIR"/forge-gui-desktop/target/forge-gui-desk
+         +top-*-jar-with-dependencies.jar 2>/dev/null | head -n 1)       
+      18  if [ -z "$JAR" ]; then
+      19      echo "ERROR: built jar not found. Build first with: mvn -Ds
+          kipTests install" >&2
+      20      exit 1
+
+● Bash(cd /home/lou/Development/forge-1; timeout 45 ./run-forge.sh >
+      /tmp/runforge2.log 2>&1; echo "EXIT=$? (124=ran full time, good)"; echo
+      "=== jar picked ==="; grep…)
+  ⎿  EXIT=124 (124=ran full time, good)
+     === jar picked ===
+     === errors in forge.log ===
+     … +7 lines (ctrl+o to expand)
+
+● Build succeeded and the app runs. Here's the full picture.
+
+  The merge broke forge-ai — fixed
+
+  The 1556 upstream commits changed two APIs that your LLM deck-recognition code
+   depended on. Three files in forge-ai/.../llm/ failed to compile; all fixed:
+
+  Problem: package com.esotericsoftware.minlog does not exist
+  Cause: Upstream dropped minlog, switched to tinylog
+  Fix: Swapped com.esotericsoftware.minlog.Log → org.tinylog.Logger in all 3
+    files (DeckRecognitionObserver/Manager/Client)
+  ────────────────────────────────────────
+  Problem: SpellAbilityView.getActivatingPlayer() not found
+  Cause: GameEventSpellAbilityCast now carries View objects, not model objects
+  Fix: Get the player from cast.si().getActivatingPlayer() (a PlayerView);
+    compare against aiPlayer.getView()
+  ────────────────────────────────────────
+  Problem: CardView cannot be converted to Card
+  Cause: Same — getHostCard() / land() now return CardView
+  Fix: Added a resolveCard() helper that calls game.findByView(cardView) to get
+    the model Card back, so your Observation-building logic is untouched
+
+  Build result
+
+  mvn -DskipTests install — success. Version is now 2.0.13-SNAPSHOT (was
+  2.0.07). Verified by launching: Forge v2.0.13 came up, ran clean, zero
+  gauntlet/conversion errors.
+
+  One follow-up I caught: the build leaves both the old 2.0.07 and new 2.0.13
+  jars in target/, and run-forge.sh was picking the alphabetically first one
+  (the stale 2.0.07). I changed it to ls -t (newest first) so it always runs the
+   freshest build. (A mvn clean install would also clear the old jars.)
+
+  Uncommitted
+
+  These post-merge fixes are not yet committed (the merge commit fd474b14b39
+  predates them):
+  - forge-ai/.../llm/DeckRecognition{Observer,Manager,Client}.java — API fixes
+  - run-forge.sh — the ls -t fix
+
+  Want me to commit them? Suggested message: fix: adapt LLM deck recognition to 
+  upstream View-based game events.
+
+✻ Cooked for 5m 12s
+
+❯ now im getting this error when i try to download net decks from the current   
+  modern metagame: java.lang.NullPointerException: Cannot read field "width"    
+  because "this.componentInnards" is null                                       
+      at java.desktop/javax.swing.plaf.basic.BasicProgressBarUI.updateSizes(Bas 
+  icProgressBarUI.java:542)                                                     
+      at java.desktop/javax.swing.plaf.basic.BasicProgressBarUI.getBox(BasicPro 
+  gressBarUI.java:499)                                                          
+      at java.desktop/javax.swing.plaf.basic.BasicProgressBarUI.paintString(Bas 
+  icProgressBarUI.java:782)                                                     
+      at java.desktop/javax.swing.plaf.basic.BasicProgressBarUI.paintDeterminat 
+  e(BasicProgressBarUI.java:758)                                                
+      at java.desktop/javax.swing.plaf.metal.MetalProgressBarUI.paintDeterminat 
+  e(MetalProgressBarUI.java:75)                                                 
+      at java.desktop/javax.swing.plaf.basic.BasicProgressBarUI.paint(BasicProg 
+  ressBarUI.java:466)                                                           
+      at java.desktop/javax.swing.plaf.ComponentUI.update(ComponentUI.java:161) 
+      at                                                                        
+  java.desktop/javax.swing.JComponent.paintComponent(JComponent.java:842)       
+      at java.desktop/javax.swing.JComponent.paint(JComponent.java:1119)        
+      at                                                                        
+  java.desktop/javax.swing.JComponent.paintToOffscreen(JComponent.java:5311)    
+      at java.desktop/javax.swing.RepaintManager$PaintManager.paintDoubleBuffer 
+  edImpl(RepaintManager.java:1657)                                              
+      at java.desktop/javax.swing.RepaintManager$PaintManager.paintDoubleBuffer 
+  ed(RepaintManager.java:1632)                                                  
+      at java.desktop/javax.swing.RepaintManager$PaintManager.paint(RepaintMana 
+  ger.java:1570)                                                                
+      at java.desktop/javax.swing.BufferStrategyPaintManager.paint(BufferStrate 
+  gyPaintManager.java:271)                                                      
+      at                                                                        
+  java.desktop/javax.swing.RepaintManager.paint(RepaintManager.java:1337)       
+      at                                                                        
+  java.desktop/javax.swing.JComponent._paintImmediately(JComponent.java:5259)   
+      at                                                                        
+  java.desktop/javax.swing.JComponent.paintImmediately(JComponent.java:5069)    
+      at java.desktop/javax.swing.RepaintManager$4.run(RepaintManager.java:879) 
+      at java.desktop/javax.swing.RepaintManager$4.run(RepaintManager.java:862) 
+      at java.base/java.security.AccessController.doPrivileged(AccessController 
+  .java:399)                                                                    
+      at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doInte 
+  rsectionPrivilege(ProtectionDomain.java:86)                                   
+      at java.desktop/javax.swing.RepaintManager.paintDirtyRegions(RepaintManag 
+  er.java:862)                                                                  
+      at java.desktop/javax.swing.RepaintManager.paintDirtyRegions(RepaintManag 
+  er.java:835)                                                                  
+      at java.desktop/javax.swing.RepaintManager.prePaintDirtyRegions(RepaintMa 
+  nager.java:784)                                                               
+      at java.desktop/javax.swing.RepaintManager$ProcessingRunnable.run(Repaint 
+  Manager.java:1898)                                                            
+      at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.j 
+  ava:318)                                                                      
+      at                                                                        
+  java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:773)       
+      at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:720)            
+      at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:714)            
+      at java.base/java.security.AccessController.doPrivileged(AccessController 
+  .java:399)                                                                    
+      at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doInte 
+  rsectionPrivilege(ProtectionDomain.java:86)                                   
+      at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:742)    
+      at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(Event 
+  DispatchThread.java:203)                                                      
+      at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDis 
+  patchThread.java:124)                                                         
+      at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(Event 
+  DispatchThread.java:113)                                                      
+      at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThre 
+  ad.java:109)                                                                  
+      at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThre 
+  ad.java:101)                                                                  
+      at                                                                        
+  java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)    
+                                                                                
+
+● Bash(cd /home/lou/Development/forge-1; echo "=== net deck / download classes
+      ==="; grep -rln "NetDeck\|metagame\|MetaGame" --include='*.java'
+      forge-gui-desktop/src f…)
+  ⎿  === net deck / download classes ===
+     forge-gui-desktop/src/main/java/forge/deckchooser/FDeckChooser.java
+     forge-gui-desktop/src/test/java/forge/deck/DeckRecognizerTest.java
+     … +15 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; echo "=== FProgressBar ==="; cat
+      forge-gui-desktop/src/main/java/forge/toolbox/FProgressBar.java)
+  ⎿  === FProgressBar ===
+     package forge.toolbox;
+     … +38 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; echo "=== NetDeckCategory:
+      progress/loading ==="; grep -n
+      "Progress\|progress\|Thread\|SwingUtilities\|invokeLater\|EDT" forge…)
+  ⎿  === NetDeckCategory: progress/loading ===
+
+     === who calls FProgressBar setValue/setDescription/reset off the helpe
+     … +7 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; echo "=== NetDeckCategory full ===";
+      cat forge-gui/src/main/java/forge/deck/NetDeckCategory.java)
+  ⎿  === NetDeckCategory full ===
+     package forge.deck;
+     … +40 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1;
+      f=forge-gui/src/main/java/forge/deck/NetDeckStorageBase.java; [ -f "$f" ]
+      && cat "$f" || find . -name NetDeckStorageBase.java…)
+  ⎿  package forge.deck;
+
+     import forge.deck.io.DeckSerializer;
+     … +81 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; echo "=== GuiDownloader.java ==="; cat
+      forge-gui-desktop/src/main/java/forge/download/GuiDownloader.java | head
+      -120)
+  ⎿  === GuiDownloader.java ===
+     /*
+      * Forge: Play Magic: the Gathering.
+     … +68 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; f=$(find . -name
+      GuiDownloadService.java -path '*main*'); echo "FILE: $f"; grep -nE
+      "progressBar|ProgressBar|setValue|setMaxim…)
+  ⎿  FILE: ./forge-gui/src/main/java/forge/gui/download/GuiDownloadService.
+     java
+     22:import forge.gui.FThreads;
+     … +19 lines (ctrl+o to expand)
+
+  Read 1 file (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; f=$(find . -name
+      GuiDownloadZipService.java -path '*main*'); echo "FILE: $f"; grep -nE
+      "progressBar|setValue|setMaximum|reset|…)
+  ⎿  FILE: ./forge-gui/src/main/java/forge/gui/download/GuiDownloadZipServi
+     ce.java
+     6:import forge.gui.FThreads;
+     … +26 lines (ctrl+o to expand)
+  Read 1 file (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; echo "=== upstream commits touching
+      these since user's pre-merge wip ==="; git log --oneline a3912be6d8d..HEAD
+       -- forge-gui/sr…)
+  ⎿  === upstream commits touching these since user's pre-merge wip ===
+     f5b641cbff2 Migrate minlog to tinylog (#9915)
+     (empty = merge did not change them)
+
+● Update(forge-gui-desktop/src/main/java/forge/toolbox/FProgressBar.java)
+  ⎿  File must be read first
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-gui-desktop/src/main/java/forge/toolbox/FProgressBar.java)
+  ⎿  Added 4 lines, removed 4 lines
+      14  public class FProgressBar extends JProgressBar implements IProg
+          ressBar {
+      15      private long startMillis = 0;
+      16      private int tempVal = 0, etaSecs = 0;
+      17 -    private String desc = "";                                  
+      18 -    private boolean showETA = true;                            
+      19 -    private boolean showCount = true;                          
+      17 +    private volatile String desc = "";                         
+      18 +    private volatile boolean showETA = true;                   
+      19 +    private volatile boolean showCount = true;                 
+      20  
+      21 -    private boolean percentMode = false;                       
+      21 +    private volatile boolean percentMode = false;              
+      22  
+      23      public FProgressBar() {
+      24          super();
+
+● Update(forge-gui-desktop/src/main/java/forge/toolbox/FProgressBar.java)
+  ⎿  Added 18 lines, removed 2 lines
+      26          setStringPainted(true);
+      27      }
+      28  
+      29 +    /**                                                        
+      30 +     * Runs {@code r} on the Swing event dispatch thread. Downl
+         +oad services                                                   
+      31 +     * drive this progress bar from background threads; mutatin
+         +g a                                                            
+      32 +     * {@link JProgressBar} off-EDT races with painting and can
+         + NPE deep in                                                   
+      33 +     * {@code BasicProgressBarUI}, so every mutator funnels thr
+         +ough here.                                                     
+      34 +     */                                                        
+      35 +    private static void runOnEdt(final Runnable r) {           
+      36 +        if (SwingUtilities.isEventDispatchThread()) {          
+      37 +            r.run();                                           
+      38 +        } else {                                               
+      39 +            SwingUtilities.invokeLater(r);                     
+      40 +        }                                                      
+      41 +    }                                                          
+      42 +                                                               
+      43      @Override
+      44      public void setDescription(final String s0) {
+      31 -        desc = s0;                                             
+      32 -        setString(s0);                                         
+      45 +        runOnEdt(() -> {                                       
+      46 +            desc = s0;                                         
+      47 +            setString(s0);                                     
+      48 +        });                                                    
+      49      }
+      50  
+      51      /** Increments bar, thread safe. Calculations executed on s
+          eparate thread. */
+
+● Update(forge-gui-desktop/src/main/java/forge/toolbox/FProgressBar.java)
+  ⎿  Added 4 lines
+      61  
+      62      @Override
+      63      public void setValue(final int progress) {
+      64 +        if (!SwingUtilities.isEventDispatchThread()) {         
+      65 +            runOnEdt(() -> setValue(progress));                
+      66 +            return;                                            
+      67 +        }                                                      
+      68          super.setValue(progress);
+      69  
+      70          // String.format leads to StringBuilder anyway. Direct 
+          calls will be faster
+
+● Update(forge-gui-desktop/src/main/java/forge/toolbox/FProgressBar.java)
+  ⎿  Added 13 lines
+      90      /** Resets the various values required for this class. */
+      91      @Override
+      92      public void reset() {
+      93 +        if (!SwingUtilities.isEventDispatchThread()) {         
+      94 +            runOnEdt(this::reset);                             
+      95 +            return;                                            
+      96 +        }                                                      
+      97          setIndeterminate(true);
+      98          setValue(0);
+      99          tempVal = 0;
+     ...
+      104      }
+      105  
+      106      @Override
+      107 +    public void setMaximum(final int n) {                     
+      108 +        if (!SwingUtilities.isEventDispatchThread()) {        
+      109 +            runOnEdt(() -> setMaximum(n));                    
+      110 +            return;                                           
+      111 +        }                                                     
+      112 +        super.setMaximum(n);                                  
+      113 +    }                                                         
+      114 +                                                              
+      115 +    @Override                                                 
+      116      public void setShowETA(final boolean b0) {
+      117          showETA = b0;
+      118      }
+
+● Bash(cd /home/lou/Development/forge-1; mvn -q -pl forge-gui-desktop
+      -DskipTests install 2>&1 | tail -25; echo "EXIT=${pipestatus[1]}")
+  ⎿  [ERROR] Failed to execute goal on project forge-gui-desktop: Could not
+      resolve dependencies for project forge:forge-gui-desktop:jar:2.0.13-S
+     NAPSHOT: Failed to collect dependencies at forge:forge-core:jar:2.0.13
+     … +15 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1; mvn -q -DskipTests install 2>&1 | tail
+      -25; echo "EXIT=${pipestatus[1]}"; ls -la --time-style=+%H:%M:%S
+      forge-gui-desktop/targ…)
+  ⎿  Using changelog from tag: forge-2.0.12
+     EXIT=0
+     -rw-rw-r-- 1 lou lou 39489511 11:19:12 forge-gui-desktop/target/forge-
+     … +2 lines (ctrl+o to expand)
+  ⎿  (timeout 10m)
+
+● Bash(cd /home/lou/Development/forge-1; timeout 35 ./run-forge.sh >
+      /tmp/rf3.log 2>&1; echo "EXIT=$? (124=ran fine)"; grep -cE
+      "Exception|Error" ~/.forge/forge.log; e…)
+  ⎿  EXIT=124 (124=ran fine)
+     3
+     errors above
+     11:19:27 [INFO ] GuiBase: APP: Forge v.2.0.13-SNAPSHOT-05.19
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Fixed. The crash was a thread-safety bug, and it's pre-existing — not from the
+   merge (I checked: the only upstream commit touching these files was the
+  minlog→tinylog migration).
+
+  Root cause
+
+  Downloading net decks runs on a background thread (GuiDownloadZipService). As
+  it downloads and extracts the zip, it calls reset(), setMaximum(), setValue(),
+   setDescription() directly on FProgressBar — a Swing JProgressBar — from that
+  background thread. Meanwhile the EDT is painting the same bar. Mutating a
+  Swing component off the EDT during paint corrupts BasicProgressBarUI's
+  internal cache, so componentInnards is seen as null mid-paint → the NPE you
+  got. It's timing-dependent, which is why it didn't always show up.
+
+  The base GuiDownloadService carefully wraps its updates in invokeInEdtLater,
+  but GuiDownloadZipService (the net-deck path) never did.
+
+  The fix
+
+  Made FProgressBar itself thread-safe — the right place, since it implements
+  IProgressBar and is explicitly driven by background download services. In
+  forge-gui-desktop/.../toolbox/FProgressBar.java:
+
+  - Added a runOnEdt() helper — runs immediately if already on the EDT, else
+  invokeLater.
+  - setValue(), setDescription(), reset(), and a new setMaximum() override now
+  funnel through it, so any off-EDT caller is automatically marshaled.
+  invokeLater preserves call order, so progress still advances correctly.
+  - Marked the display-state fields (desc, percentMode, showETA, showCount)
+  volatile for cross-thread visibility.
+
+  This fixes the bug for every download flow (net decks, card images, skins,
+  etc.), not just this one.
+
+  Status
+
+  - Full rebuild: success, 2.0.13-SNAPSHOT.
+  - Sanity launch: app starts and runs clean (the only log noise is the
+  pre-existing lblCardCreator missing-translation, unrelated).
+
+  Go ahead and retry the modern metagame download — the progress bar should now
+  update without crashing.
+
+  Uncommitted changes piling up
+
+  Still uncommitted since the merge:
+  - forge-ai/.../llm/DeckRecognition{Observer,Manager,Client}.java — upstream
+  API fixes
+  - forge-gui-desktop/.../toolbox/FProgressBar.java — this thread-safety fix
+  - run-forge.sh — the ls -t fix
+
+  Want me to commit them now? I'd suggest two commits: fix: adapt LLM deck 
+  recognition to upstream View-based game events and fix: make FProgressBar 
+  thread-safe to prevent download crash.
+
+✻ Worked for 5m 18s

@@ -1,0 +1,637 @@
+╭─── Claude Code v2.1.145 ─────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│                  Welcome back Lou!                 │ started                 │
+│                                                    │ Run /init to create a … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ What's new              │
+│                        ▘▘ ▝▝                       │ Added `claude agents -… │
+│    Opus 4.7 · Claude Pro · loud1990@gmail.com's    │ Added `agent_id` and `… │
+│    Organization                                    │ Status line JSON input… │
+│       ~/Development/forge-1/forge-llm-sidecar      │ /release-notes for more │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+❯ /clear                                                                        
+  ⎿  (no content)
+
+❯ The AI currently does not calculate who the beatdown is correctly. This       
+  reasoning needs to be refactored. It should focus heavily on board score. If  
+  AI player is winning on board, they are the beatdown. If not, human player is 
+   the beatdown. It does not appear to work this way at the moment              
+
+● Let me look at how beatdown is currently calculated in the sidecar.
+
+  Read 1 file (ctrl+o to expand)
+
+● The beatdown is currently fully delegated to the LLM (task 4, free-form). The
+  user wants it driven by board score deterministically. Let me check what
+  board-state signals are available in the schema.
+
+  Read 1 file (ctrl+o to expand)
+
+● The role state (a RoleAssessment) already carries board_score, winning_side,
+  and margin, computed earlier in game_advisor. The strategist currently ignores
+   all of that and asks the LLM to free-form decide the beatdown. Let me see how
+   board_score is computed upstream.
+
+● Bash(cd /home/lou/Development/forge-1/forge-llm-sidecar && ls app/nodes/ &&
+      grep -rln "board_score\|winning_side\|RoleAssessment\|beatdown" app/ |
+      head -40)
+  ⎿  game_advisor.py
+     __init__.py
+     opponent_strategist.py
+     … +11 lines (ctrl+o to expand)
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● Now let me see which beatdown value is actually surfaced to the user
+  (Forge/dashboard).
+
+  Searched for 2 patterns (ctrl+o to expand)
+
+● I have the full picture. Two separate "beatdown" signals exist:
+
+  - role.ai_role (in advice.py:assess_role) — uses Mike Flores natural-role +
+  flip rules. Nuanced, can stay "contested."
+  - beatdown_assessment.who_is_beatdown (in opponent_strategist.py) — currently
+  free-form LLM guess (prompt task 4). This is the one surfaced explicitly as
+  "who is the beatdown" in both the Forge response and dashboard.
+
+  The LLM free-form call is what's unreliable. I'll make it deterministic and
+  board-score-driven per your rule: AI ahead on board → AI is beatdown;
+  otherwise the opponent is. board_score is already computed upstream and
+  available as state["role"]["board_score"].
+
+  Let me make the changes.
+
+● Update(app/nodes/opponent_strategist.py)
+  ⎿  Added 2 lines, removed 4 lines
+      201          "2. Predict their NEXT turn assuming they untap with o
+           ne more mana than "
+      202          "they have now. Pick the most fitting known line or de
+           scribe one.\n"
+      203          "3. Rank their permanents (and imminent threats) by ho
+           w urgently the AI "
+      204 -        "should remove/answer them, using the kill priority an
+          -d the board.\n"                                               
+      205 -        "4. State who is the beatdown (the aggressor who shoul
+          -d be racing).\n\n"                                            
+      204 +        "should remove/answer them, using the kill priority an
+          +d the board.\n\n"                                             
+      205          "Respond with exactly these keys:\n"
+      206          '  "bucket_probabilities": object mapping bucket name 
+           -> {"prob": number, '
+      207          '"top_cards": [string]},\n'
+      208          '  "predicted_opp_line": {"primary_play": string, "sup
+           porting_plays": '
+      209          '[string], "mana_required": string, "reasoning": strin
+           g},\n'
+      210          '  "threat_priorities": [{"name": string, "score": num
+           ber, "reason": '
+      212 -        "string}] ordered most-dangerous-first,\n"            
+      213 -        '  "beatdown": {"who_is_beatdown": "ai" | "opponent", 
+          -"reasoning": string}'                                         
+      211 +        "string}] ordered most-dangerous-first"               
+      212      )
+      213  
+      214  
+
+● Now add a deterministic beatdown helper and wire it into the node:
+
+● Update(app/nodes/opponent_strategist.py)
+  ⎿  Added 33 lines
+      236          return 0.0
+      237  
+      238  
+      239 +def _beatdown_from_board(state: GraphState) -> dict:          
+      240 +    """Decide the beatdown deterministically from the board sc
+          +ore.                                                          
+      241 +                                                              
+      242 +    The beatdown is whoever is ahead on board and should be ra
+          +cing. We trust                                                
+      243 +    the upstream board_score (AI's perspective, [-1, +1]) rath
+          +er than a                                                     
+      244 +    free-form LLM guess: if the AI is ahead on board it is the
+          + beatdown,                                                    
+      245 +    otherwise the human opponent is. An even/empty board defau
+          +lts to the                                                    
+      246 +    opponent so the AI assumes the control role until it pulls
+          + ahead.                                                       
+      247 +    """                                                       
+      248 +    role = state.get("role") or {}                            
+      249 +    board_score = role.get("board_score")                     
+      250 +    try:                                                      
+      251 +        board_score = float(board_score)                      
+      252 +    except (TypeError, ValueError):                           
+      253 +        board_score = 0.0                                     
+      254 +    if board_score > 0.0:                                     
+      255 +        return {                                              
+      256 +            "who_is_beatdown": "ai",                          
+      257 +            "reasoning": (                                    
+      258 +                f"AI is ahead on board (board score {board_sco
+          +re:+.2f}); the side "                                         
+      259 +                "ahead on board is the beatdown and should rac
+          +e to close the game."                                         
+      260 +            ),                                                
+      261 +        }                                                     
+      262 +    return {                                                  
+      263 +        "who_is_beatdown": "opponent",                        
+      264 +        "reasoning": (                                        
+      265 +            f"Opponent is ahead or even on board (board score 
+          +{board_score:+.2f}); "                                        
+      266 +            "the AI is not winning the board, so the human is 
+          +the beatdown and the "                                        
+      267 +            "AI should take the control role."                
+      268 +        ),                                                    
+      269 +    }                                                         
+      270 +                                                              
+      271 +                                                              
+      272  async def opponent_strategist_node(state: GraphState) -> Graph
+           State:
+      273      archetype = state.get("archetype") or ""
+      274      fmt = (state.get("resolved_format") or state.get("format")
+            or "").lower()
+
+● Update(app/nodes/opponent_strategist.py)
+  ⎿  Added 3 lines, removed 3 lines
+      355              }
+      356          ]
+      357  
+      358 -    # --- predicted next turn + beatdown (informational, surfa
+          -ced to UI/logs)                                               
+      358 +    # --- predicted next turn (informational, surfaced to UI/l
+          +ogs)                                                          
+      359      predicted = result.get("predicted_opp_line")
+      360      predicted_opp_line = predicted if isinstance(predicted, di
+           ct) else None
+      361 -    beat = result.get("beatdown")                             
+      362 -    beatdown_assessment = beat if isinstance(beat, dict) else 
+          -None                                                          
+      361 +    # Beatdown is decided deterministically from board score, 
+          +not the LLM.                                                  
+      362 +    beatdown_assessment = _beatdown_from_board(state)         
+      363  
+      364      out: GraphState = {**state}
+      365      if opponent_hand:
+
+● The node has early-return paths. Since beatdown no longer needs the LLM, the
+  LLM-error path should still emit it. Let me update that path:
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(app/nodes/opponent_strategist.py)
+  ⎿  Added 2 lines, removed 1 line
+      297          )
+      298      except LLMError as exc:
+      299          log.warning("opponent_strategist: LLM call failed (%s)
+           ; keeping deterministic inference", exc)
+      300 -        return state                                          
+      300 +        # Beatdown is board-score driven, so emit it even when
+          + the LLM is down.                                             
+      301 +        return {**state, "beatdown_assessment": _beatdown_from
+          +_board(state)}                                                
+      302  
+      303      pool = _valid_card_pool(profile, revealed, fmt, archetype)
+      304  
+
+● Now let me check the existing tests to see what behavior they assert about
+  beatdown, and update accordingly.
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● _base_state has no role, so board_score defaults to 0.0 → "opponent", and the
+  existing assertion still holds. But the test's fake beatdown key is now dead.
+  Let me update the test to reflect the deterministic board-driven behavior and
+  add explicit coverage.
+
+● Update(tests/test_opponent_strategist.py)
+  ⎿  Added 34 lines, removed 1 line
+      86                  {"name": "Ruby Medallion", "score": 0.9, "reaso
+          n": "engine"},
+      87                  {"name": "Not On Board", "score": 0.2, "reason"
+          : "n/a"},
+      88              ],
+      89 -            "beatdown": {"who_is_beatdown": "opponent", "reason
+         -ing": "faster clock"},                                         
+      89          }
+      90  
+      91      monkeypatch.setattr(strat, "generate_json", fake_generate_j
+          son)
+     ...
+       98      # Threats are filtered to permanents actually on the oppon
+           ent board.
+       99      assert out["target_priorities"][0]["targets"] == ["Ruby Me
+           dallion"]
+      100      assert out["predicted_opp_line"]["primary_play"] == "Grape
+           shot kill"
+      101 +    # Beatdown is board-score driven; no role/board_score -> n
+          +ot winning -> opponent.                                       
+      102      assert out["beatdown_assessment"]["who_is_beatdown"] == "o
+           pponent"
+      103  
+      104  
+      105  @pytest.mark.asyncio
+      106 +async def test_beatdown_follows_board_score(monkeypatch):     
+      107 +    async def fake_generate_json(prompt, **kw):               
+      108 +        return {"bucket_probabilities": {}, "threat_priorities
+          +": []}                                                        
+      109 +                                                              
+      110 +    monkeypatch.setattr(strat, "generate_json", fake_generate_
+          +json)                                                         
+      111 +                                                              
+      112 +    ahead = await strat.opponent_strategist_node(             
+      113 +        _base_state(role={"board_score": 0.42})               
+      114 +    )                                                         
+      115 +    assert ahead["beatdown_assessment"]["who_is_beatdown"] == 
+          +"ai"                                                          
+      116 +                                                              
+      117 +    behind = await strat.opponent_strategist_node(            
+      118 +        _base_state(role={"board_score": -0.3})               
+      119 +    )                                                         
+      120 +    assert behind["beatdown_assessment"]["who_is_beatdown"] ==
+          + "opponent"                                                   
+      121 +                                                              
+      122 +    even = await strat.opponent_strategist_node(              
+      123 +        _base_state(role={"board_score": 0.0})                
+      124 +    )                                                         
+      125 +    assert even["beatdown_assessment"]["who_is_beatdown"] == "
+          +opponent"                                                     
+      126 +                                                              
+      127 +                                                              
+      128 +@pytest.mark.asyncio                                          
+      129 +async def test_beatdown_emitted_on_llm_error(monkeypatch):    
+      130 +    async def boom(prompt, **kw):                             
+      131 +        raise strat.LLMError("down")                          
+      132 +                                                              
+      133 +    monkeypatch.setattr(strat, "generate_json", boom)         
+      134 +    out = await strat.opponent_strategist_node(_base_state(rol
+          +e={"board_score": 0.5}))                                      
+      135 +    assert out["beatdown_assessment"]["who_is_beatdown"] == "a
+          +i"                                                            
+      136 +                                                              
+      137 +                                                              
+      138 +@pytest.mark.asyncio                                          
+      139  async def test_no_profile_keeps_existing_inference(monkeypatch
+           ):
+      140      called = {"n": 0}
+      141  
+● Bash(python -m pytest tests/test_opponent_strategist.py -q 2>&1 | tail -20)
+  ⎿  ...........
+        [100%]
+     11 passed in 0.05s
+
+● All 11 pass. Let me run the full sidecar suite to confirm nothing else
+  depended on the removed prompt task.
+
+● Bash(python -m pytest -q 2>&1 | tail -15)
+  ⎿  _dashboard_app = <fastapi.applications.FastAPI object at 0x7925b9e6b9b
+     0>
+     … +16 lines (ctrl+o to expand)
+
+● The one failure is test_dashboard.py::test_root_returns_html (404 on /) —
+  unrelated to beatdown logic. Let me confirm it's pre-existing by checking
+  against a clean tree.
+
+● Bash(git stash && python -m pytest
+      tests/test_dashboard.py::TestDashboardRoot::test_root_returns_html -q 2>&1
+       | tail -5; git stash pop)
+  ⎿  Saved working directory and index state WIP on feature/sidecar-actions
+     : 6f51e87df45 Add opponent strategist sidecar node
+     … +22 lines (ctrl+o to expand)
+
+● Confirmed pre-existing and unrelated (fails on the clean tree too — a
+  static-path/cwd issue in the dashboard root route).
+
+  Summary
+
+  The "who is the beatdown" call was a free-form LLM guess (prompt task 4 in
+  opponent_strategist.py), which is why it was unreliable. I made it
+  deterministic and board-score-driven per your rule.
+
+  Changes in forge-llm-sidecar/app/nodes/opponent_strategist.py:
+  - Removed task 4 and the beatdown key from the LLM prompt — the model no
+  longer decides this.
+  - Added _beatdown_from_board(state): reads the upstream board_score (AI's
+  perspective, already computed by game_advisor/assess_role). board_score > 0 →
+  AI is the beatdown; otherwise (behind or even) → opponent is the beatdown,
+  defaulting the AI to the control role until it pulls ahead.
+  - The node now sets beatdown_assessment from this helper, and still emits it
+  even on the LLM-error path since it no longer needs the model.
+
+  Tests (tests/test_opponent_strategist.py): dropped the now-dead beatdown fake
+  key, and added test_beatdown_follows_board_score (ahead/behind/even) and
+  test_beatdown_emitted_on_llm_error. All 11 pass.
+
+  One note: there are two distinct beatdown signals in the codebase. I changed
+  the explicit one surfaced as "who is the beatdown" (the strategist's
+  beatdown_assessment, shown in both the Forge response and dashboard). The
+  separate role.ai_role in advice.py:assess_role still uses the fuller Mike
+  Flores natural-role + flip doctrine (can read "contested"). If you also want
+  that one collapsed to the same strict board-score rule, say so and I'll align
+  it.
+
+✻ Churned for 3m 7s
+
+❯ how does the fuller mike flores natural-role + flip doctrine assess who is    
+  the beatdown, and why was it so wrong in this game?                           
+
+● Good question. Let me trace exactly how assess_role decides the role, then
+  point at where it diverges from your "winning on board = beatdown" rule.
+
+  How the Flores doctrine computes the role
+
+  From advice.py:assess_role (lines 603–789), there are really three separate
+  outputs, and they don't agree with each other:
+
+  1. The role itself (ai_role) — starts from the deck's natural role and only
+  flips under narrow conditions (lines 719–735):
+
+  ai_role = ai_natural                       # from _natural_role(strategy_type)
+  if ai_natural == "beatdown" and board_score < 0 and cards_score < 0:
+      ai_role = "control"          # aggro deck behind on BOTH board AND cards
+  elif ai_natural == "control" and board_score > 0.25 and cards_score >= 0 and
+  human_life <= 12:
+      ai_role = "beatdown"         # control deck only flips if life <= 12 too
+  elif ai_natural == "contested":
+      if board_score >= 0.25 or cards_score >= 0.25: ai_role = "beatdown"
+      elif board_score <= -0.25 or cards_score <= -0.25: ai_role = "control"
+
+  2. winning_side — a weighted blend of five axes, where board is only 30%
+  (lines 738–750):
+
+  score = 0.30*board + 0.25*cards + 0.25*clock + 0.10*tempo + 0.10*life
+
+  3. board_score itself (lines 658–665) — power-sum delta / 6 (or count delta /
+  4 if no P/T), clamped to [-1, 1].
+
+  Why it gets the beatdown wrong
+
+  The core problem: ai_role is anchored to the deck's natural role, not the 
+  board. The board only matters at the margins, and the thresholds are
+  asymmetric and harsh:
+
+  - A control deck stays "control" even when crushing the board. To flip to
+  beatdown it needs board_score > 0.25 AND cards_score >= 0 AND human_life <= 12
+   (line 724). So an AI control deck that's way ahead on board but the human is
+  still at 15 life → still labeled control, i.e. not the beatdown. Your rule
+  says it should be the beatdown.
+  - An aggro deck stays "beatdown" even when losing the board, unless it's
+  behind on board AND cards simultaneously (line 721). Behind on board but even
+  on cards → still "beatdown" while getting run over.
+  - board_score >= 0.25 threshold means a real-but-modest board lead (say +0.15)
+   registers as neither winning nor flipping — the dead zone keeps the natural
+  role.
+  - The dashboard/Forge can show conflicting signals: board_score positive (AI
+  ahead on board) while ai_role says "control" and winning_side says "even"
+  because the 30%-weighted blend got dragged down by clock/cards/tempo. That
+  contradiction is probably what looked "so wrong" in the game.
+
+  So "why was it so wrong": the doctrine is doing something more elaborate than
+  "who's ahead on board" — it's preserving deck identity and requiring
+  multi-axis agreement to flip. Whenever the board diverges from
+  cards/clock/life, or sits in the ±0.25 dead zone, the role label stops
+  tracking the board.
+
+  Caveat
+
+  I'm reasoning from the code, not the actual game log — I don't have this
+  game's board_score, ai_role, and winning_side values in front of me. If you
+  can point me at the game's recognition request/response (or the dashboard
+  snapshot), I can confirm exactly which branch fired and which axis dragged the
+   call the wrong way.
+
+  Want me to align assess_role's ai_role to the same strict board-score rule the
+   strategist now uses, or keep the Flores nuance for ai_role and just make sure
+   the board-driven beatdown_assessment is the signal Forge actually consumes?
+
+✻ Baked for 21s
+
+❯ comment out the flores nuance in case we want to return to it later, but      
+  align assess_role's ai_role to the same strict board-score rule the           
+  strategist now uses. It does consider creature power/toughness and number of  
+  creatures, in addition to permanents, correct?                                
+
+● Yes — confirmed. board_score (lines 658–665) folds in all three:
+
+  - Creature P/T: when own_board_details/opponent_board_details carry
+  power/toughness, it uses _power_sum(creatures) (sum of creature power).
+  - Number of creatures: more creatures → larger power sum; and in the no-P/T
+  fallback it uses _board_pressure/count_possible_attackers, which are
+  count-based.
+  - Noncreature permanents: _noncreature_permanents_pressure(...) adds
+  planeswalkers/key enchantments/artifacts (ai_nonc/opp_nonc) into the totals.
+
+  So board_score = (ai_total − opp_total) / divisor, clamped to [-1, 1], from
+  the AI's perspective. Now the edit.
+
+● Update(app/advice.py)
+  ⎿  Added 29 lines, removed 20 lines
+      712      life_delta = ai_life - human_life
+      713      life_signal = _clamp(life_delta / 10.0)
+      714  
+      715 -    # ---- Role decision (uses dimension scores) -------------
+          ---------------                                                
+      716 -    # Flip rule: aggro side that is behind on BOTH board and c
+          -ards becomes                                                  
+      717 -    # control. Control side that is ahead on board AND cards A
+          -ND has a finite                                               
+      718 -    # clock takes over beatdown.                              
+      719 -    ai_role = ai_natural                                      
+      720 -    role_flipped = False                                      
+      721 -    if ai_natural == "beatdown" and board_score < 0 and cards_
+          -score < 0:                                                    
+      722 -        ai_role = "control"                                   
+      723 -        role_flipped = True                                   
+      724 -    elif ai_natural == "control" and board_score > 0.25 and ca
+          -rds_score >= 0 and human_life <= 12:                          
+      725 -        ai_role = "beatdown"                                  
+      726 -        role_flipped = True                                   
+      727 -    elif ai_natural == "contested":                           
+      728 -        if board_score >= 0.25 or cards_score >= 0.25:        
+      729 -            ai_role = "beatdown"                              
+      730 -        elif board_score <= -0.25 or cards_score <= -0.25:    
+      731 -            ai_role = "control"                               
+      715 +    # ---- Role decision (strict board-score rule) -----------
+          +--------------                                                
+      716 +    # The side ahead on board is the beatdown and should be ra
+          +cing. We trust                                                
+      717 +    # board_score (creature power/toughness + creature count +
+          + noncreature                                                  
+      718 +    # permanent pressure, AI's perspective) over the deck's na
+          +tural role: AI                                                
+      719 +    # ahead on board -> AI beatdown; even or behind -> AI cont
+          +rol and the human                                             
+      720 +    # is the beatdown. This mirrors opponent_strategist._beatd
+          +own_from_board.                                               
+      721 +    ai_role = "beatdown" if board_score > 0.0 else "control"  
+      722 +    opp_role = "control" if ai_role == "beatdown" else "beatdo
+          +wn"                                                           
+      723 +    role_flipped = ai_role != ai_natural                      
+      724  
+      733 -    opp_role = "control" if ai_role == "beatdown" else (      
+      734 -        "beatdown" if ai_role == "control" else opp_natural   
+      735 -    )                                                         
+      725 +    # --- Former Mike Flores "Who's the Beatdown?" natural-rol
+          +e + flip doctrine.                                            
+      726 +    # Kept commented in case we want to return to role-identit
+          +y-aware flipping.                                             
+      727 +    # Flip rule: aggro side behind on BOTH board and cards bec
+          +omes control;                                                 
+      728 +    # control side ahead on board AND cards with a fast clock 
+          +takes beatdown.                                               
+      729 +    # ai_role = ai_natural                                    
+      730 +    # role_flipped = False                                    
+      731 +    # if ai_natural == "beatdown" and board_score < 0 and card
+          +s_score < 0:                                                  
+      732 +    #     ai_role = "control"                                 
+      733 +    #     role_flipped = True                                 
+      734 +    # elif ai_natural == "control" and board_score > 0.25 and 
+          +cards_score >= 0 and human_life <= 12:                        
+      735 +    #     ai_role = "beatdown"                                
+      736 +    #     role_flipped = True                                 
+      737 +    # elif ai_natural == "contested":                         
+      738 +    #     if board_score >= 0.25 or cards_score >= 0.25:      
+      739 +    #         ai_role = "beatdown"                            
+      740 +    #     elif board_score <= -0.25 or cards_score <= -0.25:  
+      741 +    #         ai_role = "control"                             
+      742 +    # opp_role = "control" if ai_role == "beatdown" else (    
+      743 +    #     "beatdown" if ai_role == "control" else opp_natural 
+      744 +    # )                                                       
+      745  
+      746      # ---- Winning side: weighted combination ----------------
+           --------------
+      747      score = (
+
+● Now let me check whether opp_natural is still used anywhere (it was referenced
+   in the now-commented block).
+
+  Searched for 1 pattern, listed 1 directory (ctrl+o to expand)
+
+● Bash(ruff check app/advice.py 2>&1 | head -20)
+  ⎿  E501 Line too long (109 > 100)
+        --> app/advice.py:393:101
+         |
+     … +19 lines (ctrl+o to expand)
+
+● The E501 is pre-existing. Let me fix the opp_natural F841 by moving its
+  assignment into the commented block (it's only needed by the doctrine).
+
+● Update(app/advice.py)
+  ⎿  Added 2 lines, removed 1 line
+      626      ai_life, human_life = _ai_human_life(state.get("life_total
+           s", {}))
+      627  
+      628      ai_natural = _natural_role(ai_strategy)
+      629 -    opp_natural = _natural_role(opp_strategy)                 
+      629 +    # opp_natural retained for the commented-out Flores doctri
+          +ne below.                                                     
+      630 +    # opp_natural = _natural_role(opp_strategy)               
+      631  
+      632      # Detailed creatures with P/T when available.
+      633      ai_creatures = _creatures_from_details(state.get("own_boar
+           d_details") or [])
+
+● Bash(ruff check app/advice.py 2>&1 | grep -A4
+      "advice.py:6[23]\|F841\|opp_natural" | head; echo "---tests---"; python -m
+       pytest tests/ -q -k "role or advice or oppon…)
+  ⎿  ---tests---
+     ...........
+        [100%]
+     11 passed, 171 deselected in 0.36s
+
+● F841 resolved. Let me find and run any tests that assert on
+  assess_role/ai_role to catch fallout from the rule change.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● No existing coverage for the role decision. Let me check the test layout and
+  helpers so I can add a focused test.
+  Read 1 file, listed 1 directory (ctrl+o to expand)
+
+● Now I'll add a focused test for the strict board-score role rule, including
+  the key case the old doctrine got wrong (a control deck crushing the board
+  while the human is at high life).
+
+● Write(tests/test_role_assessment.py)
+  ⎿  Wrote 68 lines to tests/test_role_assessment.py
+      2 """Tests for assess_role's strict board-score role rule.
+      3 The role (beatdown vs control) now tracks board_score directly ra
+        ther than the
+      4 deck's natural Flores role: whoever is ahead on board is the beat
+        down.
+      5 """
+      6 
+      7 from __future__ import annotations
+      8 
+      9 from app import advice
+     … +67 lines (ctrl+o to expand)
+
+● Bash(python -m pytest tests/test_role_assessment.py
+      tests/test_opponent_strategist.py -q 2>&1 | tail -20)
+  ⎿  ...............
+        [100%]
+     15 passed in 0.04s
+
+● All 15 pass. Quick lint check on the touched files.
+
+● Bash(ruff check app/advice.py tests/test_role_assessment.py
+      tests/test_opponent_strategist.py app/nodes/opponent_strategist.py 2>&1 |
+      tail -20)
+  ⎿  298 |     except LLMError as exc:
+     299 |         log.warning("opponent_strategist: LLM call failed (%s);
+     keeping deterministic inference", exc)
+     … +17 lines (ctrl+o to expand)
+
+● Bash(ruff check app/advice.py tests/test_role_assessment.py
+      app/nodes/opponent_strategist.py 2>&1 | grep -E "^\w+[0-9]|-->" | head
+      -40)
+  ⎿  E501 Line too long (109 > 100)
+        --> app/advice.py:393:101
+     391 |                 cmc = 0
+     … +25 lines (ctrl+o to expand)
+
+● Most are pre-existing. Let me verify the json unused import in
+  opponent_strategist isn't something I caused.
+
+● Bash(git stash && ruff check app/nodes/opponent_strategist.py 2>&1 | grep -c
+      "F401\|json"; git stash pop)
+  ⎿  Saved working directory and index state WIP on feature/sidecar-actions
+     : 6f51e87df45 Add opponent strategist sidecar node
+     3
+     … +21 lines (ctrl+o to expand)
+
+● All lint findings (including the unused json import) are pre-existing on the
+  clean tree — none introduced by my changes. The new test file is clean.
+
+  Summary
+
+  In forge-llm-sidecar/app/advice.py:assess_role, I replaced the Flores
+  natural-role + flip logic with a strict board-score rule, matching the
+  strategist:
+
+  ai_role = "beatdown" if board_score > 0.0 else "control"
+  opp_role = "control" if ai_role == "beatdown" else "beatdown"
+  role_flipped = ai_role != ai_natural
+
+  - The old doctrine is commented out directly below (with a note) so we can
+  return to it. Its opp_natural dependency was also commented out to avoid an
+  unused-variable lint.
+  - board_score already incorporates creature power/toughness (_power_sum),
+  creature count (count fallback / power totals), and noncreature permanent 
+  pressure (planeswalkers, key artifacts/enchantments) — so the rule is driven
+  by all three, AI's perspective, clamped to [-1, 1].
+
+  Now ai_role, the strategist's beatdown_assessment, and board_score all agree:
+  whoever is ahead on board is the beatdown; even/behind → AI is control and the
+   human is the beatdown.
+
+  Added tests/test_role_assessment.py covering the key case the old rule got
+  wrong (a control deck crushing the board at high opponent life now correctly
+  reads "beatdown"), the behind/even cases, and role_flipped. All 15 related
+  tests pass.
+
+  Note: winning_side/margin still use the 5-axis weighted blend (board 30%,
+  cards/clock 25% each, tempo/life 10%) — I left that untouched since you asked
+  specifically about the role. If you want the dashboard's "AI ahead/Even/Human
+  ahead" banner to also key off board score, that's a separate one-line change.
+
+✻ Cooked for 3m 5s

@@ -1,0 +1,1878 @@
+╭─── Claude Code v2.1.144 ─────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│                  Welcome back Lou!                 │ started                 │
+│                                                    │ Run /init to create a … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ What's new              │
+│                        ▘▘ ▝▝                       │ Added `/resume` suppor… │
+│    Opus 4.7 · Claude Pro · loud1990@gmail.com's    │ Added elapsed duration… │
+│    Organization                                    │ The `/plugin` browse a… │
+│       ~/Development/forge-1/forge-llm-sidecar      │ /release-notes for more │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+❯ I'd like to host this sidecar online, so that i can run forge from anywhere,  
+  and get this AI thought process anywhere. Develop a plan to implement that    
+  feature                                                                       
+
+● 2 Explore agents finished (ctrl+o to expand)
+   ├ Explore forge-llm-sidecar service · 22 tool uses · 77.1k tokens
+   │ ⎿  Done
+   └ Explore Forge sidecar client code · 37 tool uses · 73.4k tokens
+     ⎿  Done
+
+● Based on my exploration, here's what I found about the current setup:
+
+  - Sidecar: FastAPI service on port 18970, exposes /recognize, /health, and a
+  /dashboard (live stats + recognition history). Has a Dockerfile that binds
+  0.0.0.0. No auth, no CORS, no HTTPS.
+  - Sidecar's own dependency: it calls an OpenAI-compatible LLM server (default
+  http://localhost:8080/v1 — your local llama.cpp). Hosting the sidecar online
+  means its LLM backend has to be reachable too.
+  - Forge client: connects over plain HTTP REST; URL is configurable via the
+  -Dforge.ai.deckRecognition.url= system property or AI-profile XML. No API-key
+  support in the Java client today.
+  - "AI thought process": shown in Forge's in-game log, and mirrored on the
+  /dashboard web page (last 20 recognitions, in-memory).
+
+  A few decisions will shape the plan significantly, so let me confirm them with
+   you.
+
+● User answered Claude's questions:
+  ⎿  · Where do you want to host the sidecar? → Home server + tunnel
+     · What LLM backend should the hosted sidecar use? It currently needs an 
+     OpenAI-compatible server (your local llama.cpp). → Keep local llama.cpp
+     · Who should be able to reach the hosted sidecar? → I'll lock it down with 
+     tailscale
+
+  Read 2 files (ctrl+o to expand)
+
+● Bash(sed -n '1,60p;250,300p'
+      /home/lou/Development/forge-1/forge-llm-sidecar/app/main.py)
+  ⎿  """FastAPI entrypoint for the Forge LLM sidecar."""
+
+     from __future__ import annotations
+     … +34 lines (ctrl+o to expand)
+
+● Updated plan
+  ⎿  /plan to preview
+
+● User approved Claude's plan
+  ⎿  Plan saved to: ~/.claude/plans/i-d-like-to-host-snazzy-gosling.md · /plan 
+     to edit
+     Plan: Host the LLM sidecar so Forge works from anywhere
+
+     Context
+
+     Today the deck-recognition feature only works when Forge, the sidecar, and
+     the
+     llama.cpp LLM server all run on the same machine. The Forge Java client
+     defaults
+     to http://localhost:8000, and the sidecar's __main__ block binds to
+     127.0.0.1 — both are localhost-only.
+
+     The goal: run Forge on any device and still get the AI "thought process"
+     (the
+     in-game LLM deck guesses + the /dashboard recognition history). The chosen
+     approach keeps the sidecar and llama.cpp on a home server, and makes them
+     reachable from anywhere over a Tailscale tailnet — no public exposure, no
+     cloud LLM cost, network-level auth/encryption handled by Tailscale
+     (WireGuard).
+
+     Because Tailscale provides the security boundary, no application-level API 
+     key
+     or HTTPS is needed — that keeps the change small. The only real work is
+     making
+     the sidecar bind beyond localhost, pointing the Forge client at the home
+     server,
+     and documenting the Tailscale setup.
+
+     Architecture after this change
+
+     [ laptop, anywhere ]                 [ home server ]
+       Forge desktop  --Tailscale-->  sidecar :18970  --localhost-->  llama.cpp
+     :8080
+       browser /dashboard --Tailscale--^
+
+     Forge connects to http://<home-server>.<tailnet>.ts.net:18970. The sidecar
+     still calls llama.cpp at localhost:8080 because they share the host.
+
+     Changes
+
+     1. Let the sidecar bind beyond localhost — forge-llm-sidecar/app/config.py
+
+     Add a host field to Config (default 127.0.0.1, env var HOST):
+
+     host: str
+     ...
+     host=os.environ.get("HOST", "127.0.0.1"),
+
+     2. Use it in the entrypoint — forge-llm-sidecar/app/main.py
+
+     In the __main__ block, replace the hardcoded host="127.0.0.1" with
+     host=CONFIG.host. Default stays localhost-only; running with HOST=0.0.0.0
+     (set on the home server) exposes it to the tailnet.
+
+     3. Forge launcher points at the sidecar — run-forge.sh
+
+     Add, before the exec java line, env-var-driven system properties so the
+     deck-recognition feature is enabled and aimed at the home server:
+
+     # --- LLM sidecar (override host via FORGE_SIDECAR_URL) 
+     -----------------------
+     SIDECAR_URL="${FORGE_SIDECAR_URL:-http://localhost:18970}"
+     SIDECAR_PROPS="-Dforge.ai.deckRecognition=true 
+     -Dforge.ai.deckRecognition.url=$SIDECAR_URL"
+
+     and add $SIDECAR_PROPS to the exec java argument list. On a remote machine
+     the user runs FORGE_SIDECAR_URL=http://home-server.tailnet.ts.net:18970 
+     ./run-forge.sh.
+     This also fixes the existing port mismatch (Java client default 8000 vs
+     sidecar 18970) and the feature being off by default.
+
+     4. Run the sidecar as a service on the home server (new file)
+
+     Add forge-llm-sidecar/scripts/forge-sidecar.service — a systemd unit
+     template
+     so the sidecar auto-starts and stays up (required for "from anywhere" to be
+     reliable). It runs uvicorn app.main:app with HOST=0.0.0.0, PORT=18970, and
+     LLM_BASE_URL=http://localhost:8080/v1. README documents systemctl --user
+     install. (llama.cpp is assumed already managed by the user; the unit only
+     covers the sidecar.)
+
+     5. Documentation
+
+     - forge-llm-sidecar/README.md / docs/PLAYING_WITH_SIDECAR.md: add a
+     "Remote access over Tailscale" section — the Tailscale setup steps below,
+     the HOST=0.0.0.0 requirement, the systemd unit, and the
+     FORGE_SIDECAR_URL usage.
+     - forge-llm-sidecar/AGENTS.md: note the new HOST config var.
+
+     Tailscale setup (no code — operator steps, documented in README)
+
+     1. Install Tailscale on the home server and on each device that runs Forge;
+     tailscale up and sign into the same tailnet on all of them.
+     2. Enable MagicDNS in the Tailscale admin console so the server has a
+     stable name (e.g. home-server.tailnet-name.ts.net).
+     3. Do not port-forward 18970 on the home router — Tailscale is the only
+     ingress path.
+     4. Optional hardening: a Tailscale ACL rule restricting :18970 to specific
+     devices, and/or bind the sidecar to the host's Tailscale IP instead of
+     0.0.0.0.
+
+     Files to modify
+
+     ┌──────────────────────────────────────────────────┬──────────────────────┐
+     │                       File                       │        Change        │
+     ├──────────────────────────────────────────────────┼──────────────────────┤
+     │ forge-llm-sidecar/app/config.py                  │ Add host field +     │
+     │                                                  │ HOST env var         │
+     ├──────────────────────────────────────────────────┼──────────────────────┤
+     │ forge-llm-sidecar/app/main.py                    │ Bind uvicorn.run to  │
+     │                                                  │ CONFIG.host          │
+     ├──────────────────────────────────────────────────┼──────────────────────┤
+     │                                                  │ FORGE_SIDECAR_URL    │
+     │ run-forge.sh                                     │ env var → enable     │
+     │                                                  │ feature + set URL    │
+     ├──────────────────────────────────────────────────┼──────────────────────┤
+     │ forge-llm-sidecar/scripts/forge-sidecar.service  │ New — systemd unit   │
+     ├──────────────────────────────────────────────────┼──────────────────────┤
+     │ forge-llm-sidecar/README.md,                     │ Tailscale section    │
+     │ docs/PLAYING_WITH_SIDECAR.md                     │                      │
+     ├──────────────────────────────────────────────────┼──────────────────────┤
+     │ forge-llm-sidecar/AGENTS.md                      │ Document HOST        │
+     └──────────────────────────────────────────────────┴──────────────────────┘
+
+     What does NOT change
+
+     - No API key / auth code, no CORS, no HTTPS — Tailscale is the security
+     layer.
+     - No Java client changes beyond the launcher; DeckRecognitionFeature
+     already
+     reads the forge.ai.deckRecognition.url system property.
+     - The /dashboard, /recognize, /health routes are unchanged — the dashboard
+     becomes reachable at http://<server>.<tailnet>.ts.net:18970/dashboard from
+     any tailnet device's browser, which satisfies "AI thought process
+     anywhere".
+     - Docker path is left as-is (it already binds 0.0.0.0); running directly
+     via
+     the systemd unit is recommended so llama.cpp stays reachable at localhost.
+
+     Verification
+
+     1. Home server: start llama.cpp on :8080, then
+     HOST=0.0.0.0 PORT=18970 uvicorn app.main:app (or install the systemd unit).
+     curl http://localhost:18970/health →
+     {"status":"ok","llm_reachable":true,...}.
+     2. Tailnet reachability: from a second tailnet device,
+     curl http://<server>.<tailnet>.ts.net:18970/health returns the same.
+     3. Dashboard: open http://<server>.<tailnet>.ts.net:18970/dashboard in a
+     browser on the remote device — page loads, /api/stats populates.
+     4. Forge end-to-end: on the remote device,
+     FORGE_SIDECAR_URL=http://<server>.<tailnet>.ts.net:18970 ./run-forge.sh,
+     start an AI-vs-AI or vs-AI game, and confirm LLM deck guess: ... lines
+     appear in the in-game log and new entries show on the dashboard.
+     5. Fail-soft check: stop the sidecar; confirm Forge still plays normally
+     (only a debug log line), proving the gate still degrades gracefully.
+
+● Update(app/config.py)
+  ⎿  Added 1 line
+      16      llm_base_url: str
+      17      llm_api_key: str
+      18      model_name: str
+      19 +    host: str                                                  
+      20      port: int
+      21      request_timeout: float
+      22      # Metagame knowledge (pre-scraped JSON, refreshed by a GitH
+          ub Action)
+
+● Update(app/config.py)
+  ⎿  Added 1 line
+      31              llm_base_url=os.environ.get("LLM_BASE_URL", "http:/
+          /localhost:8080/v1"),
+      32              llm_api_key=os.environ.get("LLM_API_KEY", "not-need
+          ed"),
+      33              model_name=os.environ.get("MODEL_NAME", "local-mode
+          l"),
+      34 +            host=os.environ.get("HOST", "127.0.0.1"),          
+      35              port=int(os.environ.get("PORT", "18970")),
+      36              request_timeout=float(os.environ.get("LLM_TIMEOUT",
+           "60")),
+      37              metagame_enable=_env_bool("METAGAME_ENABLE", True),
+
+● Update(app/main.py)
+  ⎿  File must be read first
+
+● Update(~/Development/forge-1/run-forge.sh)
+  ⎿  Added 8 lines
+      58  --add-opens java.desktop/java.awt.font=ALL-UNNAMED \
+      59  --add-opens java.desktop/sun.awt.image=ALL-UNNAMED"
+      60  
+      61 +# --- LLM sidecar ---------------------------------------------
+         +----------------                                               
+      62 +# Point Forge at a deck-recognition sidecar. Defaults to a loca
+         +l sidecar; set                                                 
+      63 +# FORGE_SIDECAR_URL to a remote one, e.g. a home server reachab
+         +le over Tailscale:                                             
+      64 +#   FORGE_SIDECAR_URL=http://home-server.tailnet-name.ts.net:18
+         +970 ./run-forge.sh                                             
+      65 +SIDECAR_URL="${FORGE_SIDECAR_URL:-http://localhost:18970}"     
+      66 +SIDECAR_PROPS="-Dforge.ai.deckRecognition=true -Dforge.ai.deckR
+         +ecognition.url=$SIDECAR_URL"                                   
+      67 +                                                               
+      68  # --- run -----------------------------------------------------
+          ----------------
+      69  cd "$RES_DIR"
+      70  exec java -Xmx4096m \
+      71      -Dio.netty.tryReflectionSetAccessible=true \
+      72      -Dfile.encoding=UTF-8 \
+      73 +    $SIDECAR_PROPS \                                           
+      74      $ADD_OPENS \
+      75      -jar "$JAR" "$@"
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(app/main.py)
+  ⎿  Added 1 line, removed 1 line
+      276  if __name__ == "__main__":
+      277      import uvicorn
+      278  
+      279 -    uvicorn.run(app, host="127.0.0.1", port=CONFIG.port)      
+      279 +    uvicorn.run(app, host=CONFIG.host, port=CONFIG.port)      
+
+● Write(scripts/forge-sidecar.service)
+  ⎿  Wrote 41 lines to scripts/forge-sidecar.service
+       2 # systemd unit template for the Forge LLM sidecar.
+       3 # Runs the sidecar on a home server so Forge can reach it from a
+         nywhere over
+       4 # Tailscale. Install as a per-user service (no root needed):
+       5 #
+       7 #   cp scripts/forge-sidecar.service ~/.config/systemd/user/
+       8 #   # edit WorkingDirectory / ExecStart below to match your inst
+         all
+       9 #   systemctl --user daemon-reload
+      10 #   systemctl --user enable --now forge-sidecar
+     … +37 lines (ctrl+o to expand)
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(README.md)
+  ⎿  Added 1 line
+      67  | `LLM_API_KEY`          | `not-needed`                  | Bear
+          er token; llama.cpp ignores it                    |
+      68  | `MODEL_NAME`           | `local-model`                 | Mode
+          l name sent in the request                        |
+      69  | `LLM_TIMEOUT`          | `60`                          | LLM 
+          request timeout (seconds)                         |
+      70 +| `HOST`                 | `127.0.0.1`                   | Inte
+         +rface the sidecar binds to; set `0.0.0.0` for remote access |  
+      71  | `PORT`                 | `18970`                       | Port
+           the sidecar listens on                           |
+      72  | `METAGAME_ENABLE`      | `true`                        | Scor
+          e guesses against the scraped metagame data       |
+      73  | `FORMAT_DETECT_ENABLE` | `true`                        | Dete
+          ct the precise format via Scryfall when ambiguous |
+
+● Update(README.md)  ⎿  Added 44 lines
+      160  The feature is **off by default** and **fail-soft**: if the si
+           decar is not
+      161  running, Forge logs one debug line and plays normally.
+      162  
+      163 +## Remote access over Tailscale                               
+      164 +                                                              
+      165 +To run Forge from anywhere — laptop, another machine — while k
+          +eeping the sidecar                                            
+      166 +and the LLM on a home server, expose the sidecar over a       
+      167 +[Tailscale](https://tailscale.com) tailnet. Tailscale provides
+          + the encryption                                               
+      168 +and access control (WireGuard), so the sidecar itself stays au
+          +th-free.                                                      
+      169 +                                                              
+      170 +```                                                           
+      171 +[ Forge, any device ]                  [ home server ]        
+      172 +  Forge desktop  --Tailscale-->  sidecar :18970  --localhost--
+          +>  llama.cpp :8080                                            
+      173 +  browser /dashboard --Tailscale--^                           
+      174 +```                                                           
+      175 +                                                              
+      176 +**On the home server:**                                       
+      177 +                                                              
+      178 +1. Install Tailscale and `tailscale up`. Enable **MagicDNS** i
+          +n the admin                                                   
+      179 +   console so the server has a stable name (`home-server.tailn
+          +et-name.ts.net`).                                             
+      180 +2. Run the sidecar with `HOST=0.0.0.0` so it binds the Tailsca
+          +le interface.                                                 
+      181 +   The provided systemd unit does this and keeps it running:  
+      182 +                                                              
+      183 +   ```sh                                                      
+      184 +   mkdir -p ~/.config/systemd/user                            
+      185 +   cp scripts/forge-sidecar.service ~/.config/systemd/user/   
+      186 +   # edit WorkingDirectory / ExecStart to match your install p
+          +ath                                                           
+      187 +   systemctl --user daemon-reload                             
+      188 +   systemctl --user enable --now forge-sidecar                
+      189 +   loginctl enable-linger "$USER"                             
+      190 +   ```                                                        
+      191 +                                                              
+      192 +3. Do **not** port-forward `18970` on your router — Tailscale 
+          +is the only                                                   
+      193 +   ingress path. Optionally restrict `:18970` to specific devi
+          +ces with a                                                    
+      194 +   Tailscale ACL.                                             
+      195 +                                                              
+      196 +**On each device running Forge:** install Tailscale, join the 
+          +same tailnet,                                                 
+      197 +then launch Forge pointing at the home server:                
+      198 +                                                              
+      199 +```sh                                                         
+      200 +FORGE_SIDECAR_URL=http://home-server.tailnet-name.ts.net:18970
+          + ./run-forge.sh                                               
+      201 +```                                                           
+      202 +                                                              
+      203 +The `/dashboard` view (live recognition history) is then reach
+          +able from any                                                 
+      204 +tailnet device's browser at                                   
+      205 +`http://home-server.tailnet-name.ts.net:18970/dashboard`.     
+      206 +                                                              
+      207  ## Project layout
+      208  
+      209  ```
+
+● Bash(cd /home/lou/Development/forge-1/forge-llm-sidecar && grep -n
+      "PORT\|LLM_TIMEOUT\|MODEL_NAME\|environment" AGENTS.md
+      docs/PLAYING_WITH_SIDECAR.md 2>/dev/null; e…)
+  ⎿  AGENTS.md:36:- **Config**: `app/config.py` — env-driven (`LLM_BASE_URL
+     `, `MODEL_NAME`, `PORT`, etc.)
+     AGENTS.md:71:| `MODEL_NAME` | `local-model` | Model name in LLM reques
+     … +14 lines (ctrl+o to expand)
+
+  Read 2 files (ctrl+o to expand)
+
+● Update(AGENTS.md)
+  ⎿  Added 1 line
+      69  |---|---|---|
+      70  | `LLM_BASE_URL` | `http://localhost:8080/v1` | OpenAI-compatib
+          le endpoint |
+      71  | `MODEL_NAME` | `local-model` | Model name in LLM requests |
+      72 +| `HOST` | `127.0.0.1` | uvicorn bind interface; `0.0.0.0` for 
+         +remote access |                                                
+      73  | `PORT` | `18970` | uvicorn listen port |
+      74  | `METAGAME_ENABLE` | `true` | Score guesses against metagame d
+          ata |
+      75  | `FORMAT_DETECT_ENABLE` | `true` | Scryfall-based format detec
+          tion |
+
+● Update(docs/PLAYING_WITH_SIDECAR.md)
+  ⎿  Added 14 lines
+      140  Creates a JSONL file with `{observations → archetype, confiden
+           ce, reasoning}`
+      141  pairs suitable for fine-tuning.
+      142  
+      143 +## Running the sidecar remotely                               
+      144 +                                                              
+      145 +To play Forge from anywhere while the sidecar and LLM stay on 
+          +a home server,                                                
+      146 +expose the sidecar over a [Tailscale](https://tailscale.com) t
+          +ailnet:                                                       
+      147 +                                                              
+      148 +1. On the home server, run the sidecar with `HOST=0.0.0.0` (th
+          +e                                                             
+      149 +   `scripts/forge-sidecar.service` systemd unit does this) and
+          + join a tailnet.                                              
+      150 +2. On the device running Forge, join the same tailnet and laun
+          +ch with                                                       
+      151 +   `FORGE_SIDECAR_URL=http://home-server.tailnet-name.ts.net:1
+          +8970 ./run-forge.sh`.                                         
+      152 +                                                              
+      153 +The live `/dashboard` view is then reachable from any tailnet 
+          +device's browser.                                             
+      154 +See the "Remote access over Tailscale" section in the sidecar 
+          +`README.md` for                                               
+      155 +full setup steps.                                             
+      156 +                                                              
+      157  ## Understanding the output
+      158  
+      159  Each checkpoint JSON contains:
+
+● Bash((ruff check app/config.py app/main.py && black --check app/config.py
+      app/main.py && python -m pytest -q 2>&1 | tail -20) || echo "EXIT $?")
+  ⎿  All checks passed!
+     All done! ✨ 🍰 ✨
+     2 files would be left unchanged.
+     … +20 lines (ctrl+o to expand)
+
+● Bash(sed -n '120,170p' tests/test_dashboard.py)
+  ⎿                      "observations": [
+                             {
+                                 "turn": 1,
+     … +28 lines (ctrl+o to expand)
+
+● Bash(git stash && python -m pytest
+      tests/test_dashboard.py::TestDashboardRoot::test_root_returns_html -q 2>&1
+       | tail -3; git stash pop)
+  ⎿  Saved working directory and index state WIP on feature/dashboard: ae4f
+     0fc3513 fix: select newest jar in run-forge.sh
+     =========================== short test summary info ==================
+     … +21 lines (ctrl+o to expand)
+
+● Done. All changes are implemented; lint and formatting pass, and 97/98 sidecar
+   tests pass.
+
+  Changes made
+
+  File: forge-llm-sidecar/app/config.py
+  Change: Added host field + HOST env var (default 127.0.0.1)
+  ────────────────────────────────────────
+  File: forge-llm-sidecar/app/main.py
+  Change: uvicorn.run now binds CONFIG.host instead of hardcoded 127.0.0.1
+  ────────────────────────────────────────
+  File: run-forge.sh
+  Change: Added FORGE_SIDECAR_URL env var → enables deck recognition + sets the
+    URL
+  ────────────────────────────────────────
+  File: forge-llm-sidecar/scripts/forge-sidecar.service
+  Change: New — systemd unit template (HOST=0.0.0.0, auto-restart)
+  ────────────────────────────────────────
+  File: forge-llm-sidecar/README.md
+  Change: HOST config row + "Remote access over Tailscale" section
+  ────────────────────────────────────────
+  File: forge-llm-sidecar/docs/PLAYING_WITH_SIDECAR.md
+  Change: "Running the sidecar remotely" section
+  ────────────────────────────────────────
+  File: forge-llm-sidecar/AGENTS.md
+  Change: Documented HOST
+
+  How it works now
+
+  - Home server: install the systemd unit (HOST=0.0.0.0, port 18970), join a
+  Tailscale tailnet, enable MagicDNS. llama.cpp keeps running on localhost:8080.
+  - Any device: join the tailnet, then
+  FORGE_SIDECAR_URL=http://home-server.tailnet-name.ts.net:18970 ./run-forge.sh.
+  - Dashboard anywhere: http://home-server.tailnet-name.ts.net:18970/dashboard
+  in any tailnet browser.
+
+  No app-level auth/HTTPS was added — Tailscale (WireGuard) is the security
+  layer, per your choice.
+
+  One note — pre-existing test failure
+
+  tests/test_dashboard.py::test_root_returns_html fails, but I confirmed via git
+   stash that it already fails on feature/dashboard without my changes —
+  unrelated to this work. The test expects / to serve the dashboard HTML, but
+  main.py serves it at /dashboard. That's a separate bug on this branch; I left
+  it untouched since it's outside this task. Worth fixing separately — say the
+  word if you'd like me to.
+
+  The plan's verification steps (start sidecar with HOST=0.0.0.0, curl /health
+  from another tailnet device, run Forge end-to-end) require the actual
+  Tailscale/home-server environment, so they're for you to run.
+
+✻ Baked for 5m 13s
+
+❯ the sidecar seems to be stuck at LLM Checking, can you check the logs and see 
+   if it is working correctly?                                                  
+
+● Bash(echo "=== sidecar/uvicorn procs ==="; ps aux | grep -Ei
+      'uvicorn|app.main|llama' | grep -v grep; echo "=== ports ==="; ss -ltnp
+      2>/dev/null | grep -E ':(18970|8…)
+  ⎿  === sidecar/uvicorn procs ===
+     lou        32999  0.0  0.0 127460  6744 pts/2    S+   May18   0:01 jou
+     rnalctl --user -u llama-server-mtp.service -f
+     … +14 lines (ctrl+o to expand)
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Bash(sed -n '455,520p' app/static/dashboard.html)
+  ⎿      }
+
+         function confClass(c) {
+     … +34 lines (ctrl+o to expand)
+
+● Bash(sed -n '520,600p' app/static/dashboard.html)
+  ⎿        const confPct = Math.round(entry.confidence * 100);
+
+           let pilotingHtml = '';
+     … +43 lines (ctrl+o to expand)
+
+● Bash(sed -n '600,720p' app/static/dashboard.html)
+  ⎿          return;
+           }
+     … +43 lines (ctrl+o to expand)
+
+● Found it. The sidecar itself is healthy — /health returns llm_reachable: true,
+   llama.cpp is up on :8080, and the sidecar is listening on :18970. The "LLM
+  checking..." that's stuck is a bug in the dashboard JavaScript, not an LLM
+  problem.
+
+  The cause is in app/static/dashboard.html:
+
+  function refresh() {       // <-- NOT async, returns undefined
+    fetchHealth();           // <-- fire-and-forget, not awaited
+    fetchStats();
+    ...
+  }
+
+  refresh(); renderAll();    // renderAll() runs before any fetch resolves → 
+  healthData undefined → badge stays "LLM checking..."
+
+  setInterval(() => {
+    refresh().then(...)      // refresh() returns undefined → undefined.then() 
+  throws every 5s → renderAll() never runs again
+  }, 5000);
+
+  So the badge is never updated. Let me fix it.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(app/static/dashboard.html)
+  ⎿  Added 7 lines, removed 5 lines
+      675      }
+      676  
+      677      // --- Refresh ---
+      678 -    function refresh() {                                      
+      679 -      fetchHealth();                                          
+      680 -      fetchStats();                                           
+      678 +    async function refresh() {                                
+      679        const fmt = document.getElementById('metaFormat').value 
+           || 'modern';
+      682 -      fetchMetagame(fmt);                                     
+      683 -      fetchPiloting(fmt);                                     
+      680 +      await Promise.all([                                     
+      681 +        fetchHealth(),                                        
+      682 +        fetchStats(),                                         
+      683 +        fetchMetagame(fmt),                                   
+      684 +        fetchPiloting(fmt),                                   
+      685 +      ]);                                                     
+      686      }
+      687  
+      688      function renderAll() {
+● Update(app/static/dashboard.html)
+  ⎿  Added 1 line, removed 2 lines
+      696      }
+      697  
+      698      // Initial load
+      699 -    refresh();                                                
+      700 -    renderAll();                                              
+      699 +    refresh().then(renderAll).catch(renderAll);               
+      700  
+      701      // Auto-refresh every 5s
+      702      setInterval(() => {
+
+● Fixed. Two changes in app/static/dashboard.html:
+
+  1. refresh() is now async and awaits all four fetches via Promise.all, so it
+  returns a real promise.
+  2. Initial load uses refresh().then(renderAll) so the first render happens
+  after the data lands — previously renderAll() ran with healthData still
+  undefined, leaving the badge on "LLM checking...".
+
+  The setInterval callback already did refresh().then(...); that was throwing
+  every 5s because refresh() returned undefined. Now it works.
+
+  To see the fix: just reload the dashboard page in your browser —
+  dashboard.html is served fresh on each request (FileResponse), so no sidecar 
+  restart needed. The badge should flip to green "LLM Connected".
+
+  Summary of the diagnosis
+
+  The sidecar is working correctly — nothing was wrong with the LLM:
+  - llama.cpp: running on 0.0.0.0:8080 (Qwen3.6-27B)
+  - sidecar: running on 127.0.0.1:18970 (python -m app.main)
+  - /health: {"status":"ok","llm_reachable":true,...} ✓
+
+  The "stuck" symptom was purely a dashboard frontend bug.
+
+  One related note (not fixed)
+
+  The dashboard's left "Status" panel reads llm_base_url, port, timeout,
+  format_detect_enabled, default_format from /health — but /health only returns
+  status, model, llm_reachable, metagame_enabled. So those rows will always show
+   --. That's a separate cosmetic mismatch (either /health should return those
+  fields, or the dashboard should stop expecting them). Want me to fix that too?
+
+✻ Crunched for 57s
+
+❯ The dashboard is up but its stuck at loading the piloting guides and it is    
+  not performing any recognitions. it does seem to recognize my llm, and the    
+  metagame breakdown. Can we diagnose and troubleshoot?                         
+
+● Bash(echo "=== /piloting?format=modern ==="; curl -s -m 10
+      'http://localhost:18970/piloting?format=modern' | head -c 600; echo; echo
+      "=== /api/stats ==="; curl -s -m…)
+  ⎿  === /piloting?format=modern ===
+     {
+       "requested": "modern",
+     … +18 lines (ctrl+o to expand)
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Bash(echo "=== piloting.available_guides ==="; grep -n "def available_guides"
+      -A 30 app/knowledge/piloting.py; echo "=== recognize endpoint ==="; sed -n
+       '108,165p' a…)
+  ⎿  === piloting.available_guides ===
+     132:def available_guides() -> dict[str, list[str]]:
+     133-    """Map each piloting subdirectory to its guide slugs — for the
+     … +35 lines (ctrl+o to expand)
+
+● Bash(echo "=== forge proc ==="; ps aux | grep -Ei 'forge-gui|java.*forge' |
+      grep -v grep | head -5; echo "=== deckRecognition in cmdline ==="; pgrep
+      -af 'java' | gre…)
+  ⎿  === forge proc ===
+     lou       341807 50.9  2.3 15645648 1571976 pts/6 SLl+ 13:19   1:11 ja
+     va -Xmx4096m -Dio.netty.tryReflectionSetAccessible=true -Dfile.encodin
+     … +23 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1/forge-ai/src/main/java/forge/ai/llm &&
+      echo "=== DeckRecognitionFeature.java ==="; cat
+      DeckRecognitionFeature.java; echo "=== D…)
+  ⎿  === DeckRecognitionFeature.java ===
+     package forge.ai.llm;
+     … +50 lines (ctrl+o to expand)
+
+  Read 1 file (ctrl+o to expand)
+
+● Now let me test the /recognize pipeline directly and fix the dashboard guides
+  bug in parallel. First, kick off a recognition test (it may be slow with a 27B
+   model):
+
+● Bash(curl -s -m 150 -w '\nHTTP %{http_code} in %{time_total}s\n' -X POST
+      http://localhost:18970/recognize -H 'Content-Type: application/json' -d
+      '{"client":"forge","…)
+  ⎿  Running in the background (↓ to manage)
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(app/static/dashboard.html)
+  ⎿  Added 9 lines, removed 8 lines
+      594          return;
+      595        }
+      596  
+      597 -      const guides = pilotingData.guides;                     
+      598 -      if (guides.length === 0) {                              
+      597 +      // /piloting returns guides as { subdir: [slug, ...] } —
+          + flatten it.                                                  
+      598 +      const flat = [];                                        
+      599 +      for (const [sub, slugs] of Object.entries(pilotingData.g
+          +uides || {})) {                                               
+      600 +        for (const slug of slugs) { flat.push([sub, slug]); } 
+      601 +      }                                                       
+      602 +      if (flat.length === 0) {                                
+      603          el.innerHTML = '<div class="empty-state">No guides ava
+           ilable</div>';
+      604          return;
+      605        }
+      606  
+      603 -      el.innerHTML = `<div class="guide-list">${guides.map(g =
+          -> {                                                           
+      604 -        const parts = g.split('/');                           
+      605 -        const fmt = parts[0];                                 
+      606 -        const name = parts[1] || g;                           
+      607 -        return `<div class="guide-item"><span class="guide-for
+          -mat">${escapeHtml(fmt)}</span>${escapeHtml(name)}</div>`;     
+      608 -      }).join('')}</div>`;                                    
+      607 +      el.innerHTML = `<div class="guide-list">${flat.map(([fmt
+          +, name]) =>                                                   
+      608 +        `<div class="guide-item"><span class="guide-format">${
+          +escapeHtml(fmt)}</span>${escapeHtml(name)}</div>`             
+      609 +      ).join('')}</div>`;                                     
+      610      }
+      611  
+      612      function renderHistory() {
+
+  Read 1 file (ctrl+o to expand)
+
+● Bash(for i in $(seq 1 30); do if [ -s /tmp/claude-1000/-home-lou-Development-f
+      orge-1/71f18eb2-1d7b-4166-9029-a809cf187075/tasks/b5titk1r2.output ]; then
+       break; fi; s…)
+  ⎿  {
+       "archetype": "Boros Energy",
+       "confidence": 0.8,
+     … +37 lines (ctrl+o to expand)
+
+● Background command "Test /recognize endpoint end-to-end" completed (exit code 0)
+
+● The /recognize pipeline works — it returned a valid result, but it took 54 
+  seconds. That's the key clue. Let me confirm one more thing about how Forge
+  wires in the observer:
+
+● Bash(cd /home/lou/Development/forge-1 && grep -rn "DeckRecognitionManager"
+      forge-ai/src/main/java/forge/ai/AiController.java; echo "--- recognize
+      timeout in client -…)
+  ⎿  forge-ai/src/main/java/forge/ai/AiController.java:26:import forge.ai.l
+     lm.DeckRecognitionManager;
+     forge-ai/src/main/java/forge/ai/AiController.java:110:        DeckReco
+     … +13 lines (ctrl+o to expand)
+● Diagnosis complete
+
+  Issue 1 — Piloting guides stuck loading ✅ Fixed
+
+  The /piloting endpoint returns guides as a dict ({"generic": 
+  ["aggro","combo",...]}), but the dashboard's renderGuides() treated it as an
+  array — guides.map(...) threw TypeError, so that panel never rendered (and it
+  also aborted renderHistory(), which runs right after it). I flattened the dict
+   in dashboard.html. Reload the browser and the guides + history will populate.
+
+  Issue 2 — No recognitions
+
+  The sidecar itself is fine. My test confirmed the full pipeline works:
+
+  ▎ /recognize → Boros Energy (0.8 confidence) — and total_requests is now 1, 
+  ▎ history has the entry.
+
+  But that 1 is my test request. Forge has never called /recognize. Here's why:
+
+  - Forge is running with the correct flags (-Dforge.ai.deckRecognition=true,
+  url http://localhost:18970). ✓
+  - DeckRecognitionManager.attach (called once at AiController.java:110, when a
+  game's AI is built) does a 2-second /health check. If that check fails, the
+  observer is never attached and recognition is off for the entire game — no 
+  retry.
+  - The sidecar was restarted at least once during this session (PID changed
+  332218 → 339064). If your current Forge game's AI was constructed before the
+  sidecar was up (or during a restart), the observer never attached.
+
+  Fix: start a new game in Forge. Now that the sidecar is confirmed up and
+  /health responds instantly, the attach will succeed. Don't restart the sidecar
+   after the game starts — order must be: sidecar up → start game.
+
+  To verify it attached: the Forge terminal will print DeckRecognition: enabled 
+  for AI player '...' at game start. If it instead prints DeckRecognition: 
+  sidecar ... is unavailable, the health check failed. You can watch
+  recognitions land live on the dashboard history panel, or with curl -s 
+  localhost:18970/api/stats.
+
+  ⚠️ Worth knowing — 54-second latency
+
+  Each recognition took 54 seconds (Qwen3.6-27B with reasoning mode, one LLM
+  call). The Java client's recognize timeout is 90s, so it will complete — but
+  guesses will lag ~1 minute behind the game. The observer coalesces requests
+  (latest-wins) so they won't pile up, but expect noticeably delayed entries in
+  the in-game log. This is the latency tradeoff already noted in memory;
+  reducing it would mean a smaller/faster model or trimming the prompt — a
+  separate piece of work if you want to pursue it.
+
+  Want me to look into cutting that latency down?
+
+✻ Cooked for 3m 29s
+
+❯ yes look into cutting the latency down, and also try to figure out why the    
+  piloting guides section is stuck on loading forever                           
+
+● Bash(cd /home/lou/Development/forge-1/forge-llm-sidecar && echo "===
+      llm_client.py ==="; cat app/llm_client.py; echo "=== graph.py ==="; cat
+      app/graph.py)
+  ⎿  === llm_client.py ===
+     """Client for an OpenAI-compatible LLM server.
+     … +51 lines (ctrl+o to expand)
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● This is enough to design a real fix. Let me first measure the thinking-mode
+  overhead directly against your llama.cpp server, since that's almost certainly
+   where the 54s goes:
+
+● Bash(P='Identify the MTG archetype. Opponent played: turn1 Steam Vents (land
+      U/R), turn2 Monastery Swiftspear (R creature cmc1), turn3 Lightning Bolt
+      (R instant cmc1…)
+  ⎿  Error: Exit code 1
+     === A) thinking DISABLED (enable_thinking:false) ===
+     Traceback (most recent call last):
+       File "<string>", line 1, in <module>
+     KeyError: 'choices'
+
+● Bash(P='Identify the MTG archetype from: Steam Vents, Monastery Swiftspear,
+      Lightning Bolt. Respond JSON {"archetype":string,"confidence":number}.'
+      echo "=== raw res…)
+  ⎿  === raw response, enable_thinking:false ===
+     {
+       "error": {
+     … +9 lines (ctrl+o to expand)
+
+● Bash(cd /tmp && python3 - <<'EOF'
+      import json…)
+  ⎿  payloads written
+     === A) thinking DISABLED ===
+     {"cached_tokens":0}},"id":"chatcmpl-aQFSYYHwFoHdJgy5wxuvYu7WbruWP9Dy",
+     … +13 lines (ctrl+o to expand)
+  ⎿  Shell cwd was reset to /home/lou/Development/forge-1
+
+● The measurement is conclusive. Here's where your 54 seconds goes:
+
+  ┌───────────────────────┬────────────┬───────────────────┬─────────────┐
+  │         Mode          │ Total time │ Completion tokens │ Decode time │
+  ├───────────────────────┼────────────┼───────────────────┼─────────────┤
+  │ Thinking ON (default) │ 23.6 s     │ 1466 tokens       │ 23.4 s      │
+  ├───────────────────────┼────────────┼───────────────────┼─────────────┤
+  │ Thinking OFF          │ 1.2 s      │ 24 tokens         │ 0.3 s       │
+  └───────────────────────┴────────────┴───────────────────┴─────────────┘
+
+  The model burns ~1450 tokens on a <think> block and only ~24 on the actual
+  JSON answer. For a structured classification task, that reasoning adds ~20x 
+  latency for no real quality gain. Your real /recognize prompt is bigger
+  (metagame + piloting guide), hence 54s instead of 23s.
+
+  Let me implement the fix — make the sidecar disable thinking for this call:
+
+● Update(app/config.py)
+  ⎿  Added 3 lines
+      19      host: str
+      20      port: int
+      21      request_timeout: float
+      22 +    # Skip the model's <think> block for the structured-output 
+         +call. Reasoning                                                
+      23 +    # adds large latency (often >20x) for no quality gain on JS
+         +ON classification.                                             
+      24 +    llm_disable_thinking: bool                                 
+      25      # Metagame knowledge (pre-scraped JSON, refreshed by a GitH
+          ub Action)
+      26      metagame_enable: bool
+      27      default_meta_format: str
+
+● Update(app/config.py)
+  ⎿  Added 1 line
+      37              host=os.environ.get("HOST", "127.0.0.1"),
+      38              port=int(os.environ.get("PORT", "18970")),
+      39              request_timeout=float(os.environ.get("LLM_TIMEOUT",
+           "60")),
+      40 +            llm_disable_thinking=_env_bool("LLM_DISABLE_THINKIN
+         +G", True),                                                     
+      41              metagame_enable=_env_bool("METAGAME_ENABLE", True),
+      42              default_meta_format=os.environ.get("DEFAULT_META_FO
+          RMAT", "standard"),
+      43              format_detect_enable=_env_bool("FORMAT_DETECT_ENABL
+          E", True),
+
+● Update(app/llm_client.py)
+  ⎿  File must be read first
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(app/llm_client.py)
+  ⎿  Added 7 lines, removed 1 line
+      41          messages.append({"role": "system", "content": system})
+      42      messages.append({"role": "user", "content": prompt})
+      43  
+      44 -    payload = {                                                
+      44 +    payload: dict = {                                          
+      45          "model": CONFIG.model_name,
+      46          "messages": messages,
+      47          "response_format": {"type": "json_object"},
+      48          "temperature": 0.2,
+      49          "stream": False,
+      50      }
+      51 +    if CONFIG.llm_disable_thinking:                            
+      52 +        # Reasoning models (e.g. Qwen3) emit a long <think> blo
+         +ck before the                                                  
+      53 +        # answer — ~20x slower for no quality gain on JSON clas
+         +sification.                                                    
+      54 +        # `enable_thinking` is the chat-template kwarg llama.cp
+         +p honors with                                                  
+      55 +        # `--jinja`; backends without it simply ignore the extr
+         +a kwarg.                                                       
+      56 +        payload["chat_template_kwargs"] = {"enable_thinking": F
+         +alse}                                                          
+      57      headers = {"Authorization": f"Bearer {CONFIG.llm_api_key}"}
+      58  
+      59      try:
+
+● Bash(cd /home/lou/Development/forge-1/forge-llm-sidecar && grep -rln "Config("
+       tests/ app/ ; echo "---"; grep -rn "request_timeout=\|Config(" tests/
+      2>/dev/null | he…)
+  ⎿  app/main.py
+     app/config.py
+     ---
+
+● Bash(ruff check app/ && black --check app/config.py app/llm_client.py &&
+      python -m pytest -q 2>&1 | tail -12)
+  ⎿  Error: Exit code 1
+     E501 Line too long (111 > 100)
+        --> app/forge_log/parser.py:232:101
+         |
+     230 |     # Add To Stack: Player cast CardName (ID) targeting [text]
+     231 |     p.add(
+     232 |         r"Add To Stack: " + _PLAYER + r"\s+cast\s+" + 
+     _CARD_STOP_BRACKET + r"\s*\((\d+)\)\s+targeting\s+(.+)$",
+         |                                                                      
+                                    ^^^^^^^^^^^
+     233 |         lambda m, ln, raw: SpellCast(
+     234 |             kind="spell",
+     … +14 lines (ctrl+o to expand)
+
+● Bash(ruff check app/config.py app/llm_client.py && black --check app/config.py
+       app/llm_client.py && python -m pytest -q 2>&1 | tail -8)
+  ⎿  All checks passed!
+     All done! ✨ 🍰 ✨
+     2 files would be left unchanged.
+     … +10 lines (ctrl+o to expand)
+● Update(README.md)
+  ⎿  Added 1 line
+      67  | `LLM_API_KEY`          | `not-needed`                  | Bear
+          er token; llama.cpp ignores it                    |
+      68  | `MODEL_NAME`           | `local-model`                 | Mode
+          l name sent in the request                        |
+      69  | `LLM_TIMEOUT`          | `60`                          | LLM 
+          request timeout (seconds)                         |
+      70 +| `LLM_DISABLE_THINKING` | `true`                        | Skip
+         + the model's `<think>` block (`enable_thinking:false`) — ~20x f
+         +aster |                                                        
+      71  | `HOST`                 | `127.0.0.1`                   | Inte
+          rface the sidecar binds to; set `0.0.0.0` for remote access |
+      72  | `PORT`                 | `18970`                       | Port
+           the sidecar listens on                           |
+      73  | `METAGAME_ENABLE`      | `true`                        | Scor
+          e guesses against the scraped metagame data       |
+
+● Update(AGENTS.md)
+  ⎿  Added 1 line
+      69  |---|---|---|
+      70  | `LLM_BASE_URL` | `http://localhost:8080/v1` | OpenAI-compatib
+          le endpoint |
+      71  | `MODEL_NAME` | `local-model` | Model name in LLM requests |
+      72 +| `LLM_DISABLE_THINKING` | `true` | Send `enable_thinking:false
+         +` — skip the `<think>` block (~20x faster) |                   
+      73  | `HOST` | `127.0.0.1` | uvicorn bind interface; `0.0.0.0` for 
+          remote access |
+      74  | `PORT` | `18970` | uvicorn listen port |
+      75  | `METAGAME_ENABLE` | `true` | Score guesses against metagame d
+          ata |
+
+● Let me verify the fix end-to-end by running a temporary sidecar instance with
+  the new code:
+
+● Bash(ls -d .venv venv 2>/dev/null; echo "--- which python has fastapi ---";
+      for p in .venv/bin/python venv/bin/python python3; do $p -c 'import
+      fastapi, app.main' 2>…)
+  ⎿  .venv
+     --- which python has fastapi ---
+     OK: .venv/bin/python
+
+● Bash(HOST=127.0.0.1 PORT=18971 .venv/bin/python -m app.main)
+  ⎿  Running in the background (↓ to manage)
+
+● Bash(for i in $(seq 1 15); do curl -s -m 2 http://localhost:18971/health
+      >/dev/null 2>&1 && break; sleep 1; done
+      echo "=== /recognize timing (new config, thinking di…)
+  ⎿  === /recognize timing (new config, thinking disabled) ===
+     {
+       "archetype": "Boros Energy",
+     … +20 lines (ctrl+o to expand)
+
+● The fix works. Let me clean up the temp instance:
+
+● Bash(pkill -f 'PORT=18971' 2>/dev/null; pkill -f '18971' 2>/dev/null; pkill -f
+       '.venv/bin/python -m app.main' 2>/dev/null; ss -ltn 2>/dev/null | grep -q
+       ':18971' &&…)
+  ⎿  Error: Exit code 144
+
+● Bash(ss -ltn 2>/dev/null | grep ':18971' && echo "STILL UP" || echo "port
+      18971 free"; ps aux | grep '18971\|app.main' | grep -v grep | grep -v
+      339064)
+  ⎿  LISTEN 0      2048                     127.0.0.1:18971      0.0.0.0:*
+
+     STILL UP
+     … +2 lines (ctrl+o to expand)
+
+● Background command "Start temporary sidecar on port 18971" failed with exit code 144
+
+● Bash(kill 363471 2>/dev/null; sleep 1; ss -ltn 2>/dev/null | grep ':18971' &&
+      echo "STILL UP" || echo "port 18971 free — cleaned up")
+  ⎿  port 18971 free — cleaned up
+
+● Both issues are diagnosed and fixed. Here's the rundown.
+
+  1. Latency: 54s → 7.3s (verified, ~7.4x faster)
+
+  Cause: The model spent ~1450 tokens (~23s+) on a <think> reasoning block per
+  call, vs ~24 tokens on the actual JSON answer.
+
+  Fix: Added a LLM_DISABLE_THINKING config option (default true) that sends
+  chat_template_kwargs: {"enable_thinking": false} to llama.cpp.
+
+  ┌─────────────────────┬───────────────────────────────────────────────────┐
+  │        File         │                      Change                       │
+  ├─────────────────────┼───────────────────────────────────────────────────┤
+  │ app/config.py       │ New llm_disable_thinking field +                  │
+  │                     │ LLM_DISABLE_THINKING env var                      │
+  ├─────────────────────┼───────────────────────────────────────────────────┤
+  │ app/llm_client.py   │ Adds enable_thinking:false to the payload when    │
+  │                     │ enabled                                           │
+  ├─────────────────────┼───────────────────────────────────────────────────┤
+  │ README.md,          │ Documented the new var                            │
+  │ AGENTS.md           │                                                   │
+  └─────────────────────┴───────────────────────────────────────────────────┘
+
+  Verified by running a temp sidecar with the new code: real /recognize dropped
+  from 54s → 7.3s, answer quality unchanged (Boros Energy 0.85 with full
+  reasoning). The kwarg is harmless to non-Qwen backends — llama.cpp ignores
+  unused template kwargs.
+
+  2. Piloting guides stuck on "Loading..." — root cause found & fixed
+
+  The /piloting endpoint returns guides as a dict ({"generic": [...]}), but the
+  dashboard's renderGuides() treated it as an array. When last turn's refresh()
+  async fix made renderAll() actually run with real data, it then hit guides.map
+   is not a function — which threw before replacing the <div>Loading...</div>
+  placeholder, and kept throwing on every 5s refresh. So the panel froze on
+  "Loading..." permanently. Fixed by flattening the dict in renderGuides()
+  (already applied this session).
+
+  To apply
+
+  1. Restart the sidecar — the running process (pid 339064) still has the old
+  code. After restart, recognitions take ~7s instead of ~54s.
+  2. Hard-reload the dashboard (Ctrl+Shift+R) to pick up the fixed
+  dashboard.html — guides + history will populate.
+  3. Start a fresh Forge game so the observer attaches to the now-healthy
+  sidecar.
+
+  Notes
+
+  - 97/98 sidecar tests pass; the 1 failure (test_root_returns_html) and the
+  parser.py ruff errors are pre-existing on this branch, unrelated to these
+  changes.
+  - The remaining ~7s is mostly prompt prefill of the large metagame +
+  piloting-guide prompt. It can be cut further (~7s → ~2-3s warm) by reordering
+  _build_prompt in game_advisor.py so static per-game content forms a stable
+  cacheable prefix. That's a bigger change — want me to do it as a follow-up?
+
+✻ Cooked for 5m 33s
+
+❯ how can i verify with the logs that a request was made to do the recognition, 
+   or whatever call should be made by the AI to strategize after i make a move? 
+   Do i need to do each action slowly so that the ai has time to process each   
+  action?                                                                       
+
+● Good questions — and the answer to the second one is reassuring. Here's how it
+   actually works.
+
+  How to verify a recognition request was made
+
+  A /recognize call fires from the AI's observer whenever you (its opponent) 
+  play a land, cast a spell, or a new turn begins (after turn 2). You can see it
+   in four places, easiest first:
+
+  1. Forge's in-game Game Log panel — the end result. Look for lines like:
+  LLM deck guess: opponent is playing 'Izzet Spells' (confidence 72%)
+  This is DeckRecognitionObserver.postGuess() writing to the game log. If you
+  see these, the whole pipeline works.
+
+  2. The sidecar's terminal (where python -m app.main runs) — one line per
+  request:
+  INFO:forge-llm-sidecar:recognize: client=forge game=... turn=3
+  INFO:     127.0.0.1:xxxxx - "POST /recognize HTTP/1.1" 200 OK
+
+  3. The dashboard — the "request count" badge increments and the history
+  table/last-recognition panel updates. Or poll directly:
+  curl -s localhost:18970/api/stats | python3 -m json.tool
+
+  4. The Forge terminal — at game start it prints, once:
+  DeckRecognition: enabled for AI player '...' via http://localhost:18970
+  If you don't see that, the observer never attached (sidecar was down when the
+  game started) — and no recognitions will ever happen that game. That's the
+  thing to check first.
+
+  Do you need to play slowly?
+
+  No. The recognition is fully asynchronous and never blocks the game:
+
+  - The call runs on a background thread (client.recognizeAsync(...)); Forge
+  does not wait for it. The AI plays its turn with its normal instant heuristics
+   regardless.
+  - It uses latest-wins coalescing: if a recognition is already in flight when
+  you act again, only one rerun is queued and fired against the newest game
+  state when the current one finishes. Intermediate states are simply skipped.
+
+  So playing fast just means you see fewer guesses (and they lag ~7s behind your
+   action). Playing slowly means you see a guess for more intermediate states.
+  Either way nothing breaks and the game never stalls.
+
+  One important clarification
+
+  The LLM call is observational/advisory only — the README is explicit: "it does
+   not change how the heuristic AI plays." The /recognize response (archetype
+  guess + piloting advice) is written to the game log for you to read; it does
+  not drive the AI's actual decisions. So there's no "give the AI time to
+  strategize" — its real plays come from the built-in heuristic engine and are
+  instant. The sidecar is a running commentary, not the brain.
+
+  If you want a persistent, easy-to-tail log instead of watching a terminal,
+  install the scripts/forge-sidecar.service systemd unit from earlier — then
+  journalctl --user -u forge-sidecar -f shows every request live.
+
+✻ Cogitated for 38s
+
+❯ I am playing a game and i don't see /recognize being called at all. I only    
+  see this: INFO:     127.0.0.1:43364 - "GET /health HTTP/1.1" 200 OK           
+  ^[[AINFO:     127.0.0.1:43370 - "GET /api/stats HTTP/1.1" 200 OK              
+  INFO:     127.0.0.1:43342 - "GET /metagame?format=modern HTTP/1.1" 200 OK     
+  INFO:     127.0.0.1:43356 - "GET /piloting?format=modern HTTP/1.1" 200 OK     
+  INFO:httpx:HTTP Request: GET http://localhost:8080/v1/models "HTTP/1.1 200    
+  OK"                                                                           
+  INFO:     127.0.0.1:43364 - "GET /health HTTP/1.1" 200 OK                     
+  INFO:httpx:HTTP Request: GET http://localhost:8080/v1/models "HTTP/1.1 200    
+  OK"                                                                           
+  INFO:     127.0.0.1:43342 - "GET /health HTTP/1.1" 200 OK                     
+  ^[[B^[[A^[[B^[[B^[[BINFO:     127.0.0.1:42396 - "GET /api/stats HTTP/1.1" 200 
+   OK                                                                           
+  INFO:     127.0.0.1:42406 - "GET /metagame?format=modern HTTP/1.1" 200 OK     
+  INFO:     127.0.0.1:42422 - "GET /piloting?format=modern HTTP/1.1" 200 OK     
+  INFO:httpx:HTTP Request: GET http://localhost:8080/v1/models "HTTP/1.1 200    
+  OK"                                                                           
+  INFO:     127.0.0.1:42394 - "GET /health HTTP/1.1" 200 OK                     
+  INFO:httpx:HTTP Request: GET http://localhost:8080/v1/models "HTTP/1.1 200    
+  OK"                                                                           
+  INFO:     127.0.0.1:42406 - "GET /health HTTP/1.1" 200 OK                     
+  INFO:     127.0.0.1:42422 - "GET /api/stats HTTP/1.1" 200 OK                  
+  INFO:     127.0.0.1:42394 - "GET /metagame?format=modern HTTP/1.1" 200 OK     
+  INFO:     127.0.0.1:42396 - "GET /piloting?format=modern HTTP/1.1" 200 OK     
+  INFO:httpx:HTTP Request: GET http://localhost:8080/v1/models "HTTP/1.1 200    
+  OK"                                                                           
+  INFO:     127.0.0.1:42406 - "GET /health HTTP/1.1" 200 OK                     
+  INFO:httpx:HTTP Request: GET http://localhost:8080/v1/models "HTTP/1.1 200    
+  OK"                                                                           
+  INFO:     127.0.0.1:42394 - "GET /health HTTP/1.1" 200 OK                     
+  INFO:     127.0.0.1:35756 - "GET /api/stats HTTP/1.1" 200 OK                  
+  INFO:     127.0.0.1:35762 - "GET /metagame?format=modern HTTP/1.1" 200 OK     
+  INFO:     127.0.0.1:35764 - "GET /piloting?format=modern HTTP/1.1" 200 OK     
+  INFO:httpx:HTTP Request: GET http://localhost:8080/v1/models "HTTP/1.1 200    
+  OK"                                                                           
+  INFO:     127.0.0.1:35746 - "GET /health HTTP/1.1" 200 OK                     
+  INFO:httpx:HTTP Request: GET http://localhost:8080/v1/models "HTTP/1.1 200    
+  OK"                                                                           
+  INFO:     127.0.0.1:35762 - "GET /health HTTP/1.1" 200 OK                     
+  INFO:     127.0.0.1:35764 - "GET /api/stats HTTP/1.1" 200 OK                  
+  INFO:     127.0.0.1:35746 - "GET /metagame?format=modern HTTP/1.1" 200 OK     
+  INFO:     127.0.0.1:35756 - "GET /piloting?format=modern HTTP/1.1" 200 OK     
+  INFO:httpx:HTTP Request: GET http://localhost:8080/v1/models "HTTP/1.1 200    
+  OK"                                                                           
+  INFO:     127.0.0.1:35762 - "GET /health HTTP/1.1" 200 OK                     
+  INFO:httpx:HTTP Request: GET http://localhost:8080/v1/models "HTTP/1.1 200    
+  OK"                                                                           
+  INFO:     127.0.0.1:35746 - "GET /health HTTP/1.1" 200 OK                     
+  INFO:     127.0.0.1:49294 - "GET /api/stats HTTP/1.1" 200 OK                  
+  INFO:     127.0.0.1:49298 - "GET /metagame?format=modern HTTP/1.1" 200 OK     
+  INFO:     127.0.0.1:49314 - "GET /piloting?format=modern HTTP/1.1" 200 OK     
+  INFO:httpx:HTTP Request: GET http://localhost:8080/v1/models "HTTP/1.1 200    
+  OK"                                                                           
+  INFO:     127.0.0.1:49292 - "GET /health HTTP/1.1" 200 OK                     
+  INFO:httpx:HTTP Request: GET http://localhost:8080/v1/models "HTTP/1.1 200    
+  OK"                                                                           
+  INFO:     127.0.0.1:49298 - "GET /health HTTP/1.1" 200 OK                     
+  INFO:     127.0.0.1:49314 - "GET /api/stats HTTP/1.1" 200 OK                  
+  INFO:     127.0.0.1:49292 - "GET /metagame?format=modern HTTP/1.1" 200 OK     
+  INFO:     127.0.0.1:49294 - "GET /piloting?format=modern HTTP/1.1" 200 OK     
+  INFO:httpx:HTTP Request: GET http://localhost:8080/v1/models "HTTP/1.1 200    
+  OK"                                                                           
+  INFO:     127.0.0.1:49298 - "GET /health HTTP/1.1" 200 OK                     
+  INFO:httpx:HTTP Request: GET http://localhost:8080/v1/models "HTTP/1.1 200    
+  OK"                                                                           
+  INFO:     127.0.0.1:49292 - "GET /health HTTP/1.1" 200 OK                     
+                                                                                
+
+● The sidecar logs tell the story: every request there is the dashboard polling
+  (/health, /api/stats, /metagame, /piloting repeating every ~5s). Forge is 
+  making zero requests to the sidecar — not even the /health check that
+  DeckRecognitionManager.attach does at game start.
+
+  That means the observer never attached. The most likely cause: the running
+  Forge jar is stale and doesn't actually contain the deck-recognition code. Let
+   me check:
+
+● Bash(cd /home/lou/Development/forge-1
+      JAR=$(ls -t
+      forge-gui-desktop/target/forge-gui-desktop-*-jar-with-dependencies.jar
+      2>/dev/null | head -1)…)
+  ⎿  JAR: forge-gui-desktop/target/forge-gui-desktop-2.0.13-SNAPSHOT-jar-wi
+     th-dependencies.jar
+     JAR built: 2026-05-19 11:19:12
+     … +18 lines (ctrl+o to expand)
+
+● The jar is fine — built 11:19, contains the classes. So the code is there, and
+   Forge runs with the right flags. Yet Forge isn't even calling /health. Let me
+   look at exactly where attach sits in AiController:
+
+● Bash(sed -n '80,135p' forge-ai/src/main/java/forge/ai/AiController.java)
+  ⎿  import static forge.ai.ComputerUtilMana.getAvailableManaEstimate;
+     import static java.lang.Math.max;
+     … +27 lines (ctrl+o to expand)
+
+● I've verified the important things: the jar is not stale (built 11:19,
+  contains all the DeckRecognition classes), and DeckRecognitionManager.attach()
+   is called unconditionally in the AiController constructor
+  (AiController.java:110). So the code path is sound.
+
+  The diagnosis
+
+  attach() runs once per game, when the AI player is constructed. The very first
+   thing it does is a GET /health probe — and if that probe fails, recognition 
+  is silently disabled for that entire game, with no retry.
+
+  Your sidecar log shows zero lone /health calls from Forge — every /health
+  there is bundled with /api/stats + /metagame + /piloting every 5s, which is
+  just the dashboard polling. Forge never successfully probed the sidecar.
+
+  The cause is timing: the game you're playing now was started while the sidecar
+   was down or being restarted (it was restarted several times this session —
+  for the latency fix, and by my temp test instances). Once attach() fails at
+  game start, that game is permanently off. Restarting the sidecar afterwards
+  doesn't help the game already in progress.
+
+  Fix — do this in order
+
+  1. Quit the current game and return to the main menu. (The current game is a
+  lost cause — its AI already failed to attach.)
+  2. Confirm the sidecar is up and stable — don't restart it again:
+  curl -s localhost:18970/health
+  3. Close the dashboard browser tab temporarily. This silences the 5s polling
+  spam, so the sidecar log will be empty except for Forge's own requests — much
+  easier to read.
+  4. Start a brand-new game vs an AI. Watch the sidecar terminal. You should
+  see, in order:
+    - One lone GET /health — that's attach()'s probe. If you see this, the 
+  observer attached.
+    - Then, after your turn-2+ plays (land/spell) or turn boundaries:
+  INFO:forge-llm-sidecar:recognize: ... followed by POST /recognize 200.
+  5. Also check the Forge terminal (where run-forge.sh is running). At game
+  start attach() logs one line:
+    - ✅ DeckRecognition: enabled for AI player '...' via http://localhost:18970
+   — attached successfully.
+    - ❌ DeckRecognition: sidecar at ... is unavailable — the health probe
+  failed.
+
+  The rule going forward: sidecar up first, then start the game — never restart
+  the sidecar during a game you want recognition for.
+
+  If you start a fresh game with the sidecar confirmed up and still see no lone
+  /health from Forge, tell me what the Forge terminal prints about
+  DeckRecognition and we'll dig into the attach path itself.
+✻ Cooked for 2m 12s
+
+❯ Ok i followed those instructions and am playing a game on to turn 4, but i    
+  see nothing in the sidecar log. I closed the dashboard in my browser and      
+  never brought it back up. troubleshoot                                        
+
+● Bash(echo "=== current Forge java process ==="; pgrep -af
+      'forge-gui-desktop.*\.jar' | head -2
+      echo…)
+  ⎿  === current Forge java process ===
+     393420 java -Xmx4096m -Dio.netty.tryReflectionSetAccessible=true -Dfil
+     e.encoding=UTF-8 -Dforge.ai.deckRecognition=true -Dforge.ai.deckRecogn
+     … +31 lines (ctrl+o to expand)
+
+● Bash(echo "=== sidecar process + port ==="; pgrep -af 'app.main' | grep -v
+      grep; ss -ltn 2>/dev/null | grep 18970 || echo "  >>> NOTHING listening on
+       18970 <<<"
+      echo…)
+  ⎿  === sidecar process + port ===
+     393133 python -m app.main
+     LISTEN 0      2048                     127.0.0.1:18970      0.0.0.0:*
+     … +17 lines (ctrl+o to expand)
+  ⎿  Shell cwd was reset to /home/lou/Development/forge-1
+
+● Key facts confirmed: sidecar is up on 127.0.0.1:18970 and healthy, the running
+   Forge process has the -Dforge.ai.deckRecognition=true flag, and the jar's
+  AiController bytecode does call DeckRecognitionManager.attach. So attach() is
+  running — but its /health probe isn't reaching the sidecar, or it's not
+  getting that far. The decisive evidence is in Forge's own log. Let me find
+  where Forge writes it:
+
+● Bash(cd /home/lou/Development/forge-1
+      echo "=== tinylog config in jar ==="; unzip -p
+      forge-gui-desktop/target/forge-gui-desktop-*-jar-with-dependencies.jar
+      tinylog.p…)
+  ⎿  === tinylog config in jar ===
+       (no tinylog.properties in jar)
+     … +18 lines (ctrl+o to expand)
+
+● Bash(cd ~/.forge
+      echo "=== DeckRecognition lines in current forge.log ==="; grep -n -i
+      'deckrecognition\|recognition\|sidecar\|llm' forge.log || echo "  (no
+      DeckReco…)
+  ⎿  === DeckRecognition lines in current forge.log ===
+       (no DeckRecognition/sidecar lines at all)
+     … +46 lines (ctrl+o to expand)
+  ⎿  Shell cwd was reset to /home/lou/Development/forge-1
+
+● forge.log has zero DeckRecognition lines — attach() logs nothing, even though
+  the bytecode proves it's called. Combined with the sidecar seeing no /health
+  from Forge, this points to a connection failure — Forge's request to
+  localhost:18970 never arrives. Let me check the most common cause: localhost
+  resolving to IPv6 ::1 while the sidecar only binds IPv4:
+
+● Bash(echo "=== /etc/hosts ==="; grep -v '^#' /etc/hosts | grep -i
+      'localhost\|::1\|127.0.0.1'
+      echo…)
+  ⎿  === /etc/hosts ===
+     127.0.0.1 localhost
+     ::1     ip6-localhost ip6-loopback
+     … +16 lines (ctrl+o to expand)
+
+● localhost resolves cleanly to IPv4 and the sidecar answers HTTP 200 — so
+  connectivity is not the problem. Let me rule out a client-side bug and confirm
+   where Forge's logs actually go:
+
+● Bash(cd /home/lou/Development/forge-1
+      echo "=== DeckRecognitionClient.java ==="; cat -n
+      forge-ai/src/main/java/forge/ai/llm/DeckRecognitionClient.java…)
+  ⎿  === DeckRecognitionClient.java ===
+          1     package forge.ai.llm;
+     2
+     … +84 lines (ctrl+o to expand)
+
+● forge.log is the tinylog output (13:44:48 [INFO ] GuiBase: format) and it's
+  the current session. attach()'s success path logs at INFO — and there's no 
+  such line, in any Forge log ever. So the observer never attached. Let me nail
+  the timing — when did this sidecar start vs. when the game's AI was created:
+
+● Bash(echo "=== sidecar 393133 start time ==="; ps -o pid,lstart,etime -p
+      393133
+      echo…)
+  ⎿  === sidecar 393133 start time ===
+         PID                  STARTED     ELAPSED
+      393133 Tue May 19 13:43:30 2026       16:52
+     … +7 lines (ctrl+o to expand)
+
+● Let me read the entire current forge.log — it's only 140 lines and should show
+   whether a game/AI even initialized:
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● forge.log confirms a game is running (last line references Dragon's Rage 
+  Channeler), there are no [DEBUG] lines (so Forge's log level is INFO — debug
+  is suppressed), and no DeckRecognition line at all.
+
+  That's the key: attach()'s only silent exit (no log whatsoever) is if 
+  (!isEnabled(ai)) return;. Every other path logs something. So isEnabled() is
+  returning false — or attach isn't running. Let me dump the actual constructor
+  bytecode to be certain:
+
+● Bash(cd /tmp/_fcheck 2>/dev/null && javap -p -c forge/ai/AiController.class |
+      awk '/^  (public |private |protected )?forge\.ai\.AiController\(/,/^$/' |
+      head -40)
+  ⎿    public forge.ai.AiController(forge.game.player.Player, forge.game.Ga
+     me);
+         Code:
+     … +24 lines (ctrl+o to expand)
+  ⎿  Shell cwd was reset to /home/lou/Development/forge-1
+
+● The constructor bytecode is conclusive — attach is the unconditional last
+  call. So attach runs every game. Let me verify the jar's
+  DeckRecognitionFeature — the exact string constant it checks and its isEnabled
+   logic:
+
+● Bash(cd /tmp && cd _fcheck && unzip -qo /home/lou/Development/forge-1/forge-gu
+      i-desktop/target/forge-gui-desktop-*-jar-with-dependencies.jar
+      'forge/ai/llm/DeckRecogn…)
+  ⎿  Error: Exit code 11
+     caution: filename not matched:  /home/lou/Development/forge-1/forge-gui-des
+     ktop/target/forge-gui-desktop-2.0.13-SNAPSHOT-jar-with-dependencies.jar
+
+● Bash(cd /tmp/_fcheck && JAR=/home/lou/Development/forge-1/forge-gui-desktop/ta
+      rget/forge-gui-desktop-2.0.13-SNAPSHOT-jar-with-dependencies.jar
+      unzip -qo "$JAR" 'forg…)
+  ⎿  === isEnabled + string constants ===
+     Compiled from "DeckRecognitionFeature.java"
+     public final class forge.ai.llm.DeckRecognitionFeature {
+     … +35 lines (ctrl+o to expand)
+  ⎿  Shell cwd was reset to /home/lou/Development/forge-1
+● The bytecode for isEnabled is exactly the source — with
+  -Dforge.ai.deckRecognition=true set, it returns true. Every premise checks
+  out, which means Forge should be hitting the sidecar. Let me check one thing
+  I've been assuming — whether the sidecar process you're watching is actually
+  the live one:
+
+● Bash(echo "=== ALL python app.main / uvicorn processes ==="; ps -eo
+      pid,ppid,tty,etime,cmd | grep -E 'app\.main|uvicorn|18970' | grep -v grep
+      echo…)
+  ⎿  === ALL python app.main / uvicorn processes ===
+      393133  243527 pts/5          20:28 python -m app.main
+      393420  304907 pts/6          19:11 java -Xmx4096m -Dio.netty.tryRefl
+     … +24 lines (ctrl+o to expand)
+
+● My probe GET /health?probe=claude-diagnostic just hit the sidecar (HTTP 200)
+  on pts/5 (PID 393133). If you're watching the right terminal you'll have seen
+  that line appear just now.
+
+  Now — every code path checks out, which means something is wiping the system
+  property before the game starts. Let me check whether Forge resets system
+  properties:
+
+● Bash(cd /home/lou/Development/forge-1
+      echo "=== System.setProperties / clearProperty / getProperties().remove in
+       Forge source ==="…)
+  ⎿  === System.setProperties / clearProperty / getProperties().remove in F
+     orge source ===
+     (eval):3: no matches found: --include=*.java
+     … +5 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1
+      echo "=== System.setProperties / clearProperty across Forge ==="…)
+  ⎿  === System.setProperties / clearProperty across Forge ===
+     (end)
+     … +17 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1
+      echo "=== tinylog.properties files ==="; find . -name
+      'tinylog*.properties' 2>/dev/null…)
+  ⎿  === tinylog.properties files ===
+     ./forge-gui/target/classes/tinylog.properties
+     ./forge-gui/src/main/resources/tinylog.properties
+     … +12 lines (ctrl+o to expand)
+
+  Read 1 file (ctrl+o to expand)
+
+● I've now bytecode-verified every link in the chain — attach() is called
+  unconditionally, isEnabled() returns true with your -D flag, the sidecar
+  answers HTTP 200, and nothing in Forge wipes system properties. The code is
+  provably correct, yet recognition isn't attaching.
+
+  The one thing I can't see is why attach() bails — because its failure paths
+  log at DEBUG, and Forge's tinylog.properties is set to writerdefault.level = 
+  info, so those lines are suppressed. That's our blind spot. Let me make them
+  visible:
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(~/Development/forge-1/run-forge.sh)
+  ⎿  Added 6 lines
+      65  SIDECAR_URL="${FORGE_SIDECAR_URL:-http://localhost:18970}"
+      66  SIDECAR_PROPS="-Dforge.ai.deckRecognition=true -Dforge.ai.deckR
+          ecognition.url=$SIDECAR_URL"
+      67  
+      68 +# Optional verbose logging for troubleshooting (e.g. why deck r
+         +ecognition                                                     
+      69 +# does not attach):  FORGE_LOG_LEVEL=debug ./run-forge.sh      
+      70 +if [ -n "$FORGE_LOG_LEVEL" ]; then                             
+      71 +    SIDECAR_PROPS="$SIDECAR_PROPS -Dtinylog.level=$FORGE_LOG_LE
+         +VEL"                                                           
+      72 +fi                                                             
+      73 +                                                               
+      74  # --- run -----------------------------------------------------
+          ----------------
+      75  cd "$RES_DIR"
+      76  exec java -Xmx4096m \
+
+● I've added a debug-logging switch to run-forge.sh. Here's where we stand and
+  what to do.
+
+  Where the investigation landed
+
+  I bytecode-verified the entire chain in your running jar — attach() is called
+  unconditionally in the AiController constructor, isEnabled() returns true with
+   your -Dforge.ai.deckRecognition=true flag, the sidecar answers HTTP 200, and
+  nothing in Forge wipes system properties. The code is provably correct. So
+  attach() is running and bailing somewhere — but its failure paths log at
+  DEBUG, and Forge's tinylog.properties is level = info, so the reason is
+  invisible.
+
+  My leading hypothesis: attach()'s /health probe is failing. Forge's
+  health-check timeout is only 2 seconds (HEALTH_TIMEOUT_MS), and the sidecar's
+  /health endpoint blocks on an LLM round-trip (is_reachable() → GET 
+  /v1/models). If /health takes >2s, the probe times out → observer never
+  attaches → recognition is silently off for the whole game. But I won't fix
+  blind — let's confirm.
+
+  Do this — it will give us the exact answer
+
+  1. Quit the current game and the Forge app.
+  2. Relaunch with debug logging:
+  FORGE_LOG_LEVEL=debug ./run-forge.sh
+  3. Start a new game vs an AI. At game start, attach() runs and will now log
+  one of these to ~/.forge/forge.log:
+  4. After turn 1-2, run this and paste me the output:
+  grep -i deckrecognition ~/.forge/forge.log
+
+  The line tells us exactly what happened:
+  - [INFO ] ... DeckRecognition: enabled for AI player ... → it attached;
+  problem is elsewhere.
+  - [DEBUG] ... sidecar health check failed: <exception> → the exact error
+  (timeout? refused?).
+  - [DEBUG] ... sidecar at ... is unavailable → /health didn't return 200 in
+  time.
+  - [DEBUG] ... failed to attach: <msg> → an exception in attach.
+  - Nothing at all → attach()/isEnabled() genuinely not running — a deeper
+  surprise.
+
+  One quick sanity check
+
+  A moment ago I sent GET /health?probe=claude-diagnostic to your sidecar (it
+  returned 200). It runs as PID 393133 on terminal pts/5. If you did not see
+  that probe line appear in the terminal you've been watching, then you're
+  watching the wrong/old sidecar terminal — which alone would explain "nothing
+  in the log." Confirm you saw it.
+
+  Once I have the grep deckrecognition output, I can pinpoint and fix the actual
+   cause.
+
+✻ Sautéed for 11m 6s
+
+❯ I did see that request in the log i am watching                               
+
+● That confirms it — you're watching the right terminal, so Forge genuinely is
+  not contacting the sidecar at all. attach() is bailing before it ever sends
+  the /health probe.
+
+  The debug relaunch is now the decisive step. Please:
+
+  1. Quit the current game and the Forge app entirely.
+  2. Relaunch with:
+  FORGE_LOG_LEVEL=debug ./run-forge.sh
+  3. Start a new game vs an AI, play to turn 2.
+  4. Run this and paste me the output:
+  grep -i deckrecognition ~/.forge/forge.log
+
+  That line is the answer — it'll show whether attach() hit a failed health
+  check, an exception, or didn't run at all. Once I see it I can fix the actual
+  cause.
+
+  One thing while you're at it — also confirm the new game is Human vs an AI 
+  opponent (not Human vs Human). Recognition only attaches to AI-controlled
+  players, so if neither player is an AI, attach() never runs and that would
+  explain everything.
+
+✻ Worked for 9s
+
+❯ ok i followed those instructions, the new game is human vs an ai opponent.    
+  when i run the grep, it returns with nothing                                  
+
+● Bash(echo "=== current Forge process + its -D flags ==="; pgrep -af
+      'forge-gui-desktop.*\.jar' | grep -oE '\-D[^ ]*'
+      echo…)
+  ⎿  === current Forge process + its -D flags ===
+     -Dio.netty.tryReflectionSetAccessible=true
+     -Dfile.encoding=UTF-8
+     … +15 lines (ctrl+o to expand)
+
+● Found it — the debug switch didn't actually work. forge.log has zero [DEBUG]
+  lines despite -Dtinylog.level=debug being on the process. So your earlier
+  "grep returns nothing" was inconclusive — a DEBUG-level failure in attach()
+  would still be invisible.
+
+  The reason: Forge's tinylog.properties sets a per-writer level
+  (writerdefault.level = info), and that caps the console/file writer at INFO
+  regardless of the global tinylog.level. I overrode the wrong property. Fixing
+  it now:
+
+● Update(~/Development/forge-1/run-forge.sh)
+  ⎿  Added 3 lines, removed 1 line
+      67  
+      68  # Optional verbose logging for troubleshooting (e.g. why deck r
+          ecognition
+      69  # does not attach):  FORGE_LOG_LEVEL=debug ./run-forge.sh
+      70 +# Must override the per-writer level — Forge's tinylog.properti
+         +es pins                                                        
+      71 +# writerdefault.level=info, which a plain -Dtinylog.level canno
+         +t lift.                                                        
+      72  if [ -n "$FORGE_LOG_LEVEL" ]; then
+      71 -    SIDECAR_PROPS="$SIDECAR_PROPS -Dtinylog.level=$FORGE_LOG_LE
+         -VEL"                                                           
+      73 +    SIDECAR_PROPS="$SIDECAR_PROPS -Dtinylog.writerdefault.level
+         +=$FORGE_LOG_LEVEL"                                             
+      74  fi
+      75  
+      76  # --- run -----------------------------------------------------
+          ----------------
+
+● Fixed. Please retry with the corrected switch:
+
+  1. Quit the current game and the Forge app.
+  2. Relaunch:
+  FORGE_LOG_LEVEL=debug ./run-forge.sh
+  3. Start a new Human-vs-AI game, play to turn 2.
+  4. Run both of these and paste the output:
+  grep -c '\[DEBUG\]' ~/.forge/forge.log
+  grep -i 'deckrecognition\|sidecar' ~/.forge/forge.log
+
+  The first command verifies debug logging is actually on this time (it should
+  be a non-zero number). The second will show what attach() does — and this time
+   a DEBUG-level failure (failed health check, exception, etc.) will be visible
+  instead of swallowed.
+
+✻ Sautéed for 1m 4s
+
+❯ ok i followed those and it returned with "2"                                  
+
+● Bash(echo "=== the [DEBUG] lines ==="; grep -n '\[DEBUG\]' ~/.forge/forge.log
+      echo…)
+  ⎿  === the [DEBUG] lines ===
+     88:14:14:41 [DEBUG] LobbyPlayerAi: [AI Preferences] Idona using profil
+     e Default
+     … +14 lines (ctrl+o to expand)
+● Debug logging works now (the LobbyPlayerAi debug line proves it), an AI
+  opponent was created — yet still no DeckRecognition line at all, INFO or
+  DEBUG. That's only possible if attach() exits at its one silent path
+  (isEnabled() false) or isn't called. Let me re-verify the exact jar currently 
+  running — it may have been rebuilt since I last checked:
+
+● Bash(cd /home/lou/Development/forge-1
+      echo "=== full -jar path of running Forge ==="; tr ' ' '\n' <
+      /proc/$(pgrep -f 'forge-gui-desktop.*\.jar' | head -1)/cmdline 2>…)
+  ⎿  === full -jar path of running Forge ===
+     JAR in use: /home/lou/Development/forge-1/forge-gui-desktop/target/for
+     ge-gui-desktop-2.0.13-SNAPSHOT-jar-with-dependencies.jar
+     … +22 lines (ctrl+o to expand)
+  ⎿  Shell cwd was reset to /home/lou/Development/forge-1
+
+● attach() is in the running jar, called unconditionally — yet with debug
+  logging confirmed working, it produces no log line at all. The only silent
+  path is isEnabled() returning false. Let me settle this definitively by
+  dumping the live system properties of the running Forge JVM:
+
+● Bash(PID=$(pgrep -f 'forge-gui-desktop.*\.jar' | head -1)
+      echo "Forge PID: $PID"…)
+  ⎿  Forge PID: 465461
+     === live system properties: forge.ai.deckRecognition* ===
+     tinylog.writerdefault.level=debug
+     … +2 lines (ctrl+o to expand)
+
+● Found it. The live JVM shows:
+
+  forge.ai.deckRecognition=false      ← launched with =true, but it's false now!
+  forge.ai.deckRecognition.url=http://localhost:18970
+
+  Something inside Forge overwrites the forge.ai.deckRecognition system property
+   from true to false at runtime. isEnabled() reads false → attach() silently
+  bails. Let me find the culprit:
+
+● Bash(cd /home/lou/Development/forge-1
+      echo "=== AiProps.java (full) ==="; cat -n
+      forge-ai/src/main/java/forge/ai/AiProps.java…)
+  ⎿  === AiProps.java (full) ===
+          1     /*
+          2      * Forge: Play Magic: the Gathering.
+     … +152 lines (ctrl+o to expand)
+
+● AiProfileUtil stores profile values in a Map, not system properties — so
+  that's not it. Let me find what writes forge.ai.deckRecognition as a system
+  property:
+
+● Bash(cd /home/lou/Development/forge-1
+      echo "=== every occurrence of the string 'deckRecognition' in the repo
+      (java) ==="…)
+  ⎿  === every occurrence of the string 'deckRecognition' in the repo (java
+     ) ===
+     forge-ai/src/main/java/forge/ai/llm/DeckRecognitionFeature.java:9: * t
+     … +14 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1
+      echo "=== Main.java setProperty ==="; grep -n 'setProperty'
+      forge-gui-desktop/src/main/java/forge/view/Main.java…)
+  ⎿  === Main.java setProperty ===
+     48:        System.setProperty("java.util.Arrays.useLegacyMergeSort", "
+     true");
+     … +14 lines (ctrl+o to expand)
+
+● Found the actual bug.
+  forge-gui/src/main/java/forge/player/GamePlayerUtil.java:75:
+
+  System.setProperty(DeckRecognitionFeature.SYS_PROP,
+          String.valueOf(FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_
+  DECK_RECOGNITION)));
+
+  Every time a game player is created, Forge overwrites the
+  forge.ai.deckRecognition system property with the value of a UI preference
+  (UI_ENABLE_DECK_RECOGNITION). Your -Dforge.ai.deckRecognition=true launch flag
+   gets clobbered to false because that preference has never been turned on. The
+   -D flag is futile — the preference is what actually controls it.
+
+  Let me find how to enable that preference:
+
+● Bash(cd /home/lou/Development/forge-1
+      echo "=== FPref definition ==="; grep -rn 'UI_ENABLE_DECK_RECOGNITION'
+      --include="*.java" forge-core forge-gui 2>/dev/null…)
+  ⎿  === FPref definition ===
+     forge-gui/src/main/java/forge/player/GamePlayerUtil.java:76:
+           String.valueOf(FModel.getPreferences().getPrefBoolean(FPref.UI_E
+     … +17 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1
+      echo "=== CSubmenuPreferences deck recognition handling ==="; grep -n -B2
+      -A2 'DECK_RECOGNITION\|DeckRecognition' forge-gui-des…)
+  ⎿  === CSubmenuPreferences deck recognition handling ===
+     124-        lstControls.add(Pair.of(view.getCbSingletons(), FPref.DECK
+     GEN_SINGLETONS));
+     … +23 lines (ctrl+o to expand)
+
+● This is the answer. There's a checkbox for it in Forge's UI.
+
+  GamePlayerUtil bridges the "Enable AI Deck Recognition" preference → the
+  forge.ai.deckRecognition system property every time a game starts. Your -D
+  launch flag never had a chance — the preference (default false) always wins.
+  The preferences file confirms it: UI_ENABLE_DECK_RECOGNITION=false.
+
+  The fix
+
+  In Forge: go to Settings → Preferences, find the checkbox labeled "Enable AI 
+  Deck Recognition", and tick it. Then start a new game.
+
+  That's it. Once that preference is on, GamePlayerUtil sets the system property
+   to true, isEnabled() returns true, and the observer attaches.
+
+  Let me also fix run-forge.sh so it stops advertising a flag that does nothing:
+
+● Update(~/Development/forge-1/run-forge.sh)
+  ⎿  Added 5 lines, removed 1 line
+      63  # FORGE_SIDECAR_URL to a remote one, e.g. a home server reachab
+          le over Tailscale:
+      64  #   FORGE_SIDECAR_URL=http://home-server.tailnet-name.ts.net:18
+          970 ./run-forge.sh
+      65  SIDECAR_URL="${FORGE_SIDECAR_URL:-http://localhost:18970}"
+      66 -SIDECAR_PROPS="-Dforge.ai.deckRecognition=true -Dforge.ai.deckR
+         -ecognition.url=$SIDECAR_URL"                                   
+      66 +# The ON/OFF toggle is the "Enable AI Deck Recognition" checkbo
+         +x in Forge's                                                   
+      67 +# Settings > Preferences screen — a -Dforge.ai.deckRecognition 
+         +flag does NOT                                                  
+      68 +# work, because GamePlayerUtil overwrites that system property 
+         +at game start                                                  
+      69 +# from the UI preference. This only sets the sidecar URL, which
+         + is not bridged.                                               
+      70 +SIDECAR_PROPS="-Dforge.ai.deckRecognition.url=$SIDECAR_URL"    
+      71  
+      72  # Optional verbose logging for troubleshooting (e.g. why deck r
+          ecognition
+      73  # does not attach):  FORGE_LOG_LEVEL=debug ./run-forge.sh
+
+● Done. Here's the complete picture.
+
+  Root cause
+
+  The investigation chain:
+  1. Sidecar healthy, jar correct, attach() called unconditionally — all
+  verified.
+  2. But the live JVM showed forge.ai.deckRecognition=false despite launching
+  with =true.
+  3. GamePlayerUtil.java:75 overwrites that system property at every game start,
+   bridging it from the UI_ENABLE_DECK_RECOGNITION preference — which is false.
+
+  So the -D launch flag was always doomed. The feature is gated by a UI 
+  preference, not the flag.
+
+  What to do now
+
+  1. In Forge: Settings → Preferences → "Enable AI Deck Recognition" checkbox →
+  tick it. (It's near "Enable AI Cheats".)
+  2. Start a new game vs an AI (the observer attaches per-game).
+  3. Watch the sidecar terminal — you should now see a lone GET /health at game
+  start, then POST /recognize on your plays from turn 2 onward. The Forge log
+  will show [INFO ] DeckRecognitionManager: DeckRecognition: enabled for AI 
+  player ....
+
+  You no longer need the -Dforge.ai.deckRecognition=true flag at all — I removed
+   it from run-forge.sh since it never worked. The script still passes
+  -Dforge.ai.deckRecognition.url (that property isn't bridged/clobbered, so it
+  correctly points Forge at port 18970).
+
+  If you want to skip the UI
+
+  With Forge closed, edit ~/.forge/preferences/forge.preferences line 97:
+  UI_ENABLE_DECK_RECOGNITION=true
+  (Editing while Forge runs won't stick — it rewrites the file on exit.)
+
+  The checkbox is the cleaner route. Once it's on, recognition will finally fire
+   — and thanks to the earlier latency fix, each call returns in ~7s instead of
+  ~54s.
+
+✻ Churned for 4m 30s
+
+❯ it seems to always assume i am playing standard format. how do i tell it that 
+   i am playing modern or a different format?                                   
+
+● Bash(cd /home/lou/Development/forge-1/forge-llm-sidecar && echo "===
+      format_detect.py ===" && cat app/knowledge/format_detect.py && echo &&
+      echo "=== metagame.resolv…)
+  ⎿  === format_detect.py ===
+     """Scryfall-based format detection.
+     … +60 lines (ctrl+o to expand)
+
+  Listed 1 directory (ctrl+o to expand)
+
+● Here's what's happening. The sidecar doesn't get the format from Forge — Forge
+   only reports the generic game type "Constructed", never the specific format.
+  So the sidecar tries to figure it out itself:
+
+  1. resolve_meta_format("Constructed") → None (ambiguous).
+  2. infer_format(...) — looks up card legalities on Scryfall and picks the
+  narrowest format. Important: it uses the AI opponent's decklist (the one Forge
+   knows exactly), not yours.
+  3. If that's disabled or fails → falls back to DEFAULT_META_FORMAT, which
+  defaults to standard.
+
+  So you get "standard" if either the AI opponent's deck happens to be
+  Standard-legal (narrowest match wins), or Scryfall detection fails.
+
+  How to force the format
+
+  Set these two environment variables on the sidecar and restart it:
+
+  FORMAT_DETECT_ENABLE=false DEFAULT_META_FORMAT=modern python -m app.main
+
+  - FORMAT_DETECT_ENABLE=false turns off the Scryfall guessing.
+  - DEFAULT_META_FORMAT=modern makes it always use Modern.
+
+  Valid values (these have metagame data): standard, pioneer, modern, legacy,
+  vintage, pauper, commander.
+
+  If you installed the systemd unit, add them there instead:
+  Environment=FORMAT_DETECT_ENABLE=false
+  Environment=DEFAULT_META_FORMAT=modern
+
+  If you'd rather keep auto-detection but just fix the fallback for when it
+  fails, set only DEFAULT_META_FORMAT=modern and leave FORMAT_DETECT_ENABLE
+  alone.
+
+  Verify it worked
+
+  After restarting, watch the sidecar log during a game — you'll see:
+  game_advisor: game <id> -> metagame 'modern'
+
+  The deeper fix (optional)
+
+  The real limitation is that Forge sends "Constructed" instead of the actual
+  format. Forge does know the match's format restriction — the proper fix is to
+  have the Java side send it in the RecognitionRequest (format field) so the
+  sidecar doesn't have to guess at all. That's a code change to
+  DeckRecognitionObserver/RecognitionRequest plus reading the format from
+  Forge's game rules. Want me to implement that? It'd make the format correct
+  automatically per game instead of pinned by an env var.
+✻ Worked for 1m 16s

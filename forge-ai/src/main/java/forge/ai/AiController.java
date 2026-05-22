@@ -23,7 +23,9 @@ import com.google.common.collect.Sets;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
+import forge.ai.llm.DeckRecognitionClient;
 import forge.ai.llm.RecognitionResult;
+import forge.ai.llm.RecognitionRequest;
 import forge.ai.llm.SidecarInfluence;
 import forge.ai.simulation.GameStateEvaluator;
 import forge.ai.simulation.SpellAbilityPicker;
@@ -103,6 +105,8 @@ public class AiController {
     private List<SpellAbility> skipped;
     private boolean timeoutReached;
     private final SidecarInfluence sidecarInfluence;
+    private volatile DeckRecognitionClient sidecarClient;
+    private volatile List<String> sidecarDeckCards = List.of();
     // Set once at attach time from the sidecar /health probe. When the sidecar
     // is known-unreachable we skip the synchronous wait entirely so an offline
     // sidecar can never stall the game for the full per-decision budget.
@@ -168,12 +172,120 @@ public class AiController {
         this.sidecarHealthy = healthy;
     }
 
+    /** Store sidecar transport context for synchronous high-impact requests. */
+    public void setSidecarClient(final DeckRecognitionClient client, final List<String> deckCards) {
+        this.sidecarClient = client;
+        this.sidecarDeckCards = deckCards == null ? List.of() : List.copyOf(deckCards);
+    }
+
     /** @return whether sidecar influence is active (AI prop or system property). */
     private boolean sidecarInfluenceEnabled() {
         if (Boolean.getBoolean("forge.ai.sidecarInfluence")) {
             return true;
         }
         return getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE);
+    }
+
+    public int getSidecarInfluenceWeight() {
+        return Math.max(0, Math.min(100, getIntProperty(AiProps.SIDECAR_INFLUENCE_WEIGHT)));
+    }
+
+    private boolean sidecarCanInfluence() {
+        return sidecarInfluenceEnabled() && getSidecarInfluenceWeight() > 0;
+    }
+
+    private double sidecarOverrideThreshold() {
+        final int influence = getSidecarInfluenceWeight();
+        return influence >= 100 ? 0.0 : 100.0 - (influence * 0.5);
+    }
+
+    /** Request an opening-hand planner result before the mulligan decision. */
+    public boolean requestSidecarMulliganPlan(final int cardsToReturn) {
+        if (!sidecarCanInfluence()) {
+            Logger.info("DeckRecognition: skipping /mulligan-plan (sidecar influence disabled or weight=0)");
+            return false;
+        }
+        if (sidecarClient == null) {
+            Logger.info("DeckRecognition: skipping /mulligan-plan (sidecar client not attached)");
+            return false;
+        }
+        if (sidecarDeckCards.isEmpty()) {
+            Logger.info("DeckRecognition: skipping /mulligan-plan (AI decklist unavailable)");
+            return false;
+        }
+        final RecognitionRequest request = new RecognitionRequest(
+                RecognitionRequest.CLIENT,
+                String.valueOf(game.getId()),
+                game.getRules().getGameType().name(),
+                player.getId(),
+                currentAiTurnNumber(),
+                List.of(),
+                sidecarDeckCards,
+                currentZoneNames(ZoneType.Hand),
+                currentZoneNames(ZoneType.Battlefield),
+                player.getOpponents().isEmpty() ? List.of() : currentZoneNames(player.getOpponents().get(0), ZoneType.Battlefield),
+                currentZoneNames(ZoneType.Graveyard),
+                player.getOpponents().isEmpty() ? List.of() : currentZoneNames(player.getOpponents().get(0), ZoneType.Graveyard),
+                Map.of(),
+                game.getPhaseHandler().getPhase().name(),
+                List.of(),
+                Map.of("play_aggro", getBoolProperty(AiProps.PLAY_AGGRO)),
+                player.getCardsIn(ZoneType.Hand).size(),
+                player.getOpponents().isEmpty() ? 0 : player.getOpponents().get(0).getCardsIn(ZoneType.Hand).size(),
+                player.getCardsIn(ZoneType.Library).size(),
+                player.getOpponents().isEmpty() ? 0 : player.getOpponents().get(0).getCardsIn(ZoneType.Library).size(),
+                List.of(),
+                List.of(),
+                List.of(),
+                0,
+                0,
+                "mulligan",
+                List.of(),
+                List.of(),
+                cardsToReturn,
+                getSidecarInfluenceWeight());
+        Logger.info("DeckRecognition: POST /mulligan-plan game=" + game.getId()
+                + " aiTurn=" + currentAiTurnNumber()
+                + " cardsToReturn=" + cardsToReturn
+                + " influence=" + getSidecarInfluenceWeight()
+                + " health=" + sidecarHealthy);
+        final var future = sidecarClient.mulliganPlanAsync(request);
+        sidecarInfluence.setLatestCall(future);
+        future.whenComplete((result, err) -> {
+            if (err == null && result != null && result.isPresent()) {
+                Logger.info("DeckRecognition: /mulligan-plan returned result");
+                onSidecarResult(result.get());
+            } else {
+                Logger.info("DeckRecognition: /mulligan-plan returned no usable result");
+            }
+        });
+        return true;
+    }
+
+    /** The turn count from the AI player's perspective, not the global game turn. */
+    public int currentAiTurnNumber() {
+        return Math.max(0, player.getTurn());
+    }
+
+    private List<String> currentZoneNames(final ZoneType zone) {
+        return currentZoneNames(player, zone);
+    }
+
+    private static List<String> currentZoneNames(final Player p, final ZoneType zone) {
+        if (p == null) {
+            return List.of();
+        }
+        final List<String> names = new ArrayList<>();
+        try {
+            for (final Card c : p.getCardsIn(zone)) {
+                if (c != null && c.getName() != null) {
+                    names.add(c.getName());
+                }
+            }
+        } catch (final RuntimeException ignored) {
+            return List.of();
+        }
+        return names;
     }
 
     /** Back-compat overload: routine priority decisions. */
@@ -188,7 +300,16 @@ public class AiController {
      * or the budget is 0.
      */
     public void waitForSidecar(final DecisionType type) {
-        if (!sidecarInfluenceEnabled() || !sidecarHealthy) {
+        waitForSidecar(type, false);
+    }
+
+    /**
+     * Block for a sidecar result. {@code ignoreHealth} is used when this call
+     * just fired a concrete request; the health probe may have been stale or
+     * raced sidecar startup, but the request future is still fail-soft.
+     */
+    public void waitForSidecar(final DecisionType type, final boolean ignoreHealth) {
+        if (!sidecarInfluenceEnabled() || (!ignoreHealth && !sidecarHealthy)) {
             return;
         }
         int budget = getIntProperty(type.budgetProp());
@@ -736,8 +857,8 @@ public class AiController {
 
         // pick the land with the best score.
         // use the evaluation plus a modifier for each new color pip and basic type
-        final String sidecarRecommendedLand = getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE)
-                && sidecarInfluence.hasData()
+        final int sidecarInfluenceWeight = getSidecarInfluenceWeight();
+        final String sidecarRecommendedLand = sidecarCanInfluence() && sidecarInfluence.hasData()
                 ? sidecarInfluence.bestPlayLandName().orElse("")
                 : "";
         Card toReturn = Aggregates.itemWithMax(IterableUtil.filter(landList, Card::hasPlayableLandFace),
@@ -778,8 +899,9 @@ public class AiController {
                     if (!sidecarRecommendedLand.isEmpty()
                             && (card.getName().equalsIgnoreCase(sidecarRecommendedLand)
                                     || card.getName().contains(sidecarRecommendedLand))) {
-                        int landBias = getIntProperty(AiProps.SIDECAR_BIAS_LAND);
-                        score += landBias;
+                        score += sidecarInfluenceWeight >= 100
+                                ? 10_000
+                                : sidecarInfluenceWeight;
                     }
 
                     // TODO utility lands only if we have enough to pay their costs
@@ -1777,46 +1899,36 @@ public class AiController {
      * If sidecar influence is enabled, check if it recommends a specific
      * PLAY_SPELL or ACTIVATE_ABILITY action for a card we can play.
      *
-     * <p>The bias flags ({@link AiProps#SIDECAR_BIAS_SPELL_PLAY},
-     * {@link AiProps#SIDECAR_BIAS_ABILITY}) gate how confident the sidecar must
-     * be before we override the heuristic's pick. The check is
-     * {@code percentage * bias/100 > 50}, mirroring {@link #sidecarRecommendsPass}.
-     * Bias=100 trusts the sidecar fully; bias=0 disables the override entirely;
-     * the default of 50 requires the sidecar to score the action above 100% raw
-     * confidence (effectively "only when the sidecar is very sure").</p>
+     * <p>{@link AiProps#SIDECAR_INFLUENCE_WEIGHT} controls how much the sidecar
+     * can override the heuristic. 0 disables sidecar picks; 100 takes the first
+     * legal sidecar recommendation.</p>
      */
     private SpellAbility trySidecarRecommendedPlay(final List<SpellAbility> all, boolean skipCounter) {
-        if (!getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE) || !sidecarInfluence.hasData()) {
+        if (!sidecarCanInfluence() || !sidecarInfluence.hasData()) {
             return null;
         }
+        final double threshold = sidecarOverrideThreshold();
         // PLAY_SPELL: try each recommended card in priority order; pick the
-        // first one we can legally play and pay for, IF the sidecar's confidence
-        // (after applying the spell-play bias) clears the threshold.
-        final double spellBias = getIntProperty(AiProps.SIDECAR_BIAS_SPELL_PLAY) / 100.0;
-        if (spellBias > 0.0) {
-            for (final var spellAction : sidecarInfluence.getActions()) {
-                if (!"PLAY_SPELL".equals(spellAction.actionType())) continue;
-                if (spellAction.percentage() * spellBias <= 50.0) continue;
-                final String targetCard = spellAction.target();
-                if (targetCard == null || targetCard.isEmpty()) continue;
-                for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
-                    if (skipCounter && sa.getApi() == ApiType.Counter) continue;
-                    sa.setActivatingPlayer(player);
-                    final String cardName = sa.getHostCard() != null ? sa.getHostCard().getName() : "";
-                    if (cardName.equalsIgnoreCase(targetCard) || cardName.contains(targetCard)) {
-                        if (canPlayAndPayFor(sa) == AiPlayDecision.WillPlay) {
-                            return sa;
-                        }
+        // first one we can legally play and pay for.
+        for (final var spellAction : sidecarInfluence.getActions()) {
+            if (!"PLAY_SPELL".equals(spellAction.actionType())) continue;
+            if (spellAction.percentage() < threshold) continue;
+            final String targetCard = spellAction.target();
+            if (targetCard == null || targetCard.isEmpty()) continue;
+            for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
+                if (skipCounter && sa.getApi() == ApiType.Counter) continue;
+                sa.setActivatingPlayer(player);
+                final String cardName = sa.getHostCard() != null ? sa.getHostCard().getName() : "";
+                if (cardName.equalsIgnoreCase(targetCard) || cardName.contains(targetCard)) {
+                    if (canPlayAndPayFor(sa) == AiPlayDecision.WillPlay) {
+                        return sa;
                     }
                 }
             }
         }
-        // ACTIVATE_ABILITY: single best entry (rare, the sidecar usually emits
-        // PLAY_SPELL). Same bias gate.
-        final double abilityBias = getIntProperty(AiProps.SIDECAR_BIAS_ABILITY) / 100.0;
+        // ACTIVATE_ABILITY: single best entry (rare, the sidecar usually emits PLAY_SPELL).
         var abilityAction = sidecarInfluence.bestAction("ACTIVATE_ABILITY");
-        if (abilityBias > 0.0 && abilityAction.isPresent()
-                && abilityAction.get().percentage() * abilityBias > 50.0) {
+        if (abilityAction.isPresent() && abilityAction.get().percentage() >= threshold) {
             final String targetCard = abilityAction.get().target();
             if (targetCard != null && !targetCard.isEmpty()) {
                 for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -1838,15 +1950,11 @@ public class AiController {
      * confidence to skip looking for plays.
      */
     private boolean sidecarRecommendsPass() {
-        if (!getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE) || !sidecarInfluence.hasData()) {
+        if (!sidecarCanInfluence() || !sidecarInfluence.hasData()) {
             return false;
         }
         var passAction = sidecarInfluence.bestAction("PASS");
-        if (passAction.isPresent()) {
-            double biasPct = getIntProperty(AiProps.SIDECAR_BIAS_PASS) / 100.0;
-            return passAction.get().percentage() * biasPct > 50.0;
-        }
-        return false;
+        return passAction.isPresent() && passAction.get().percentage() >= sidecarOverrideThreshold();
     }
 
     private SpellAbility chooseSpellAbilityToPlayFromList(final List<SpellAbility> all, boolean skipCounter) {

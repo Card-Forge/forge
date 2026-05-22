@@ -17,7 +17,11 @@ from pydantic import BaseModel, Field
 # v6 adds the opponent_strategist node: archetype-profile-driven hand inference
 # (role buckets), a predicted opponent next-turn line, archetype-aware threat
 # priorities, and opponent resource signals + decision_type on the request.
-SCHEMA_VERSION = 6
+# v7 adds combo_plan: deterministic combo readiness plus a strategist-selected
+# combo line that can adjust the existing action scores.
+# v8 adds early_game_plan, legal_actions, cards_to_return, and a global
+# sidecar influence weight.
+SCHEMA_VERSION = 8
 
 
 class Observation(BaseModel):
@@ -56,6 +60,17 @@ class ActionScore(BaseModel):
     targets: list[str] | None = None  # secondary / multiple targets
     percentage: float = 0.0  # 0.0–100.0 — how good this action is
     reasoning: str = ""
+
+
+class LegalAction(BaseModel):
+    """One legal action candidate Forge says the AI can choose right now."""
+
+    action_type: str = ""
+    card: str = ""
+    target: str = ""
+    colors: list[str] = Field(default_factory=list)
+    enters_tapped: bool = False
+    produces: list[str] = Field(default_factory=list)
 
 
 class RecognitionRequest(BaseModel):
@@ -108,6 +123,13 @@ class RecognitionRequest(BaseModel):
     # on high-impact decisions. One of: "mulligan" | "combat" | "priority" |
     # "critical". Empty defaults to a routine priority decision.
     decision_type: str = ""
+    # v8: optional legal action gate. The sidecar may plan broadly, but action
+    # scores that influence Forge should be drawn from these current candidates.
+    legal_actions: list[LegalAction] = Field(default_factory=list)
+    # v8: London mulligan cards to return if this hand is kept.
+    cards_to_return: int = 0
+    # v8: global sidecar influence weight, 0=no influence, 100=force if legal.
+    sidecar_influence: int = 50
 
 
 class RoleAssessment(BaseModel):
@@ -189,6 +211,51 @@ class BeatdownAssessment(BaseModel):
     reasoning: str = ""
 
 
+class ComboPlan(BaseModel):
+    """Combo-line recommendation for the AI's own deck."""
+
+    line_name: str = ""
+    go_for_it_now: bool = False
+    readiness_score: float = 0.0  # 0-100
+    missing_pieces: list[str] = Field(default_factory=list)
+    needed_cards: list[str] = Field(default_factory=list)
+    needed_mana: str = ""
+    preferred_line: str = ""
+    wait_reason: str = ""
+    sequence: list[str] = Field(default_factory=list)
+    protection_plan: str = ""
+    risk_assessment: str = ""
+    action_adjustments: list[ActionScore] = Field(default_factory=list)
+
+
+class PlannedTurn(BaseModel):
+    turn: int = 0
+    land: str = ""
+    spells: list[str] = Field(default_factory=list)
+    mana_rationale: str = ""
+    draw_assumption: str = ""
+    opponent_adjustment: str = ""
+
+
+class EarlyGamePlan(BaseModel):
+    decision: str = ""  # keep | mulligan | none
+    confidence: float = 0.0
+    influence_weight: int = 50
+    keep_reason: str = ""
+    mulligan_reason: str = ""
+    bottom_cards: list[str] = Field(default_factory=list)
+    land_sequence: list[str] = Field(default_factory=list)
+    fetch_plan: list[str] = Field(default_factory=list)
+    planned_turns: list[PlannedTurn] = Field(default_factory=list)
+    draw_assumptions: list[str] = Field(default_factory=list)
+    probability_notes: str = ""
+    contingencies: list[str] = Field(default_factory=list)
+    estimated_win_turn: int | None = None
+    estimated_loss_turn: int | None = None
+    reasoning: str = ""
+    last_updated_turn: int = 0
+
+
 class PilotingAdvice(BaseModel):
     """Advice on how the AI should play its own deck this turn."""
 
@@ -216,6 +283,10 @@ class PilotingAdvice(BaseModel):
     # v6 opponent_strategist outputs (None when no profile / strategist skipped).
     predicted_opp_line: PredictedOppLine | None = None
     beatdown_assessment: BeatdownAssessment | None = None
+    # v7 combo_strategist output (None for non-combo decks / no combo data).
+    combo_plan: ComboPlan | None = None
+    # v8 rolling mulligan / early-game plan.
+    early_game_plan: EarlyGamePlan | None = None
 
 
 class TrainingExample(BaseModel):
@@ -281,6 +352,9 @@ class GraphState(TypedDict, total=False):
     opp_mana_spent_this_turn: int
     opp_untapped_sources: list[list[str]]
     decision_type: str
+    legal_actions: list[dict]
+    cards_to_return: int
+    sidecar_influence: int
     # resolved by the game_advisor node
     resolved_format: str | None
     candidate_archetypes: list[dict]
@@ -305,3 +379,7 @@ class GraphState(TypedDict, total=False):
     # v6 opponent_strategist outputs
     predicted_opp_line: dict | None
     beatdown_assessment: dict | None
+    # v7 combo_strategist outputs
+    combo_plan: dict | None
+    # v8 mulligan planner outputs
+    early_game_plan: dict | None

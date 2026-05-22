@@ -273,3 +273,22 @@ def available_guides() -> dict[str, dict]:
         )
         out[sub.name] = {"live": live, "archive": archive}
     return out
+
+
+def combo_profiles_version() -> str:
+    """Aggregate cache-busting token over guides that define combo profiles."""
+    paths: list[Path] = []
+    try:
+        for path in _PILOTING_DIR.rglob("*.json"):
+            try:
+                payload = json.loads(path.read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                continue
+            if isinstance(payload, dict) and payload.get("combo_profile"):
+                paths.append(path)
+    except OSError:
+        return "0:0"
+    if not paths:
+        return "0:0"
+    newest = max(int(p.stat().st_mtime) for p in paths)
+    return f"{len(paths)}:{newest}"

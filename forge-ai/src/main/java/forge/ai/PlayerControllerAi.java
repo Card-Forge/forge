@@ -770,13 +770,17 @@ public class PlayerControllerAi extends PlayerController {
         // the hand-value sum as a tiebreaker against the heuristic.
         // Give the sidecar a budget to settle before we decide — mulligan is
         // the single highest-impact decision in a game.
-        brains.waitForSidecar(AiController.DecisionType.MULLIGAN);
+        final boolean requestedMulliganPlan = brains.requestSidecarMulliganPlan(cardsToReturn);
+        brains.waitForSidecar(AiController.DecisionType.MULLIGAN, requestedMulliganPlan);
+        final int sidecarWeight = brains.getSidecarInfluenceWeight();
         if (brains.getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE)
                 && brains.getBoolProperty(AiProps.SIDECAR_MULLIGAN_ENABLE)
+                && sidecarWeight > 0
                 && brains.getSidecarInfluence().hasData()) {
             var influence = brains.getSidecarInfluence();
             var mullAction = influence.bestAction("MULLIGAN");
-            if (mullAction.isPresent()) {
+            final double threshold = sidecarWeight >= 100 ? 0.0 : 100.0 - (sidecarWeight * 0.5);
+            if (mullAction.isPresent() && mullAction.get().percentage() >= threshold) {
                 final String target = mullAction.get().target();
                 if ("keep".equalsIgnoreCase(target)) {
                     return true;
@@ -806,8 +810,26 @@ public class PlayerControllerAi extends PlayerController {
         int numLandsDesired = (player.getStartingHandSize() - cardsToReturn) / 2;
 
         CardCollection toReturn = new CardCollection();
+        if (brains.getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE)
+                && brains.getBoolProperty(AiProps.SIDECAR_MULLIGAN_ENABLE)
+                && brains.getSidecarInfluenceWeight() > 0) {
+            for (final String cardName : brains.getSidecarInfluence().bottomCards()) {
+                if (toReturn.size() >= cardsToReturn) {
+                    break;
+                }
+                for (final Card c : hand) {
+                    if (!toReturn.contains(c) && c.getName().equalsIgnoreCase(cardName)) {
+                        toReturn.add(c);
+                        break;
+                    }
+                }
+            }
+        }
         for (int i = 0; i < cardsToReturn; i++) {
             hand.removeAll(toReturn);
+            if (toReturn.size() >= cardsToReturn) {
+                break;
+            }
 
             CardCollection landsInHand = CardLists.filter(hand, CardPredicates.LANDS);
             int numLandsInHand = landsInHand.size() - CardLists.count(toReturn, CardPredicates.LANDS);

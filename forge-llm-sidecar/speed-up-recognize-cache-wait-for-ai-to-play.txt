@@ -1,0 +1,1734 @@
+╭─── Claude Code v2.1.145 ─────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│                  Welcome back Lou!                 │ started                 │
+│                                                    │ Run /init to create a … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ What's new              │
+│                        ▘▘ ▝▝                       │ Added `claude agents -… │
+│    Opus 4.7 · Claude Pro · loud1990@gmail.com's    │ Added `agent_id` and `… │
+│    Organization                                    │ Status line JSON input… │
+│       ~/Development/forge-1/forge-llm-sidecar      │ /release-notes for more │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+✻ Conversation compacted (ctrl+o for history)
+
+
+● Diagnosis confirmed and patched
+
+  Root cause: Android 9+ blocks cleartext (plain HTTP) traffic from apps by
+  default. Your manifest had targetSdkVersion=35 with no exemption, so Forge's
+  Java HttpURLConnection was being silently denied at the OS layer — connections
+   never reached the sidecar. The dashboard view worked because Chrome is a
+  different app with its own policy.
+
+  The proof from your log:
+  - attach() ran correctly: enabled=true sysprop=true
+  - /health check failed at attach: did not respond to /health
+  - 4288 POST /recognize attempts, ALL returned empty Optional → silent
+  IOExceptions logged at DEBUG (not visible in your log file)
+
+  Patch applied (two files):
+  1. forge-gui-android/src/main/AndroidManifest.xml — added
+  android:networkSecurityConfig="@xml/network_security_config"
+  2. forge-gui-android/res/xml/network_security_config.xml (new) — allows
+  cleartext only to Tailscale IPs (your sidecar 100.110.52.69, plus loopback for
+   testing). Everything else still requires HTTPS, preserving Android's default
+  safety.
+
+  Next steps
+
+  cd /home/lou/Development/forge-1
+  mvn -pl forge-gui-android -am -DskipTests package
+  # install the new APK on your phone (adb / sideload)
+
+  After install:
+  - Open Forge → start a new constructed match against the AI
+  - Watch the sidecar log (tail -F 
+  /home/lou/Development/forge-1/forge-llm-sidecar/logs/sidecar.log)
+  - You should immediately see POST /identify-own-archetype followed by POST 
+  /recognize once the AI's opponent (you) plays a card
+
+  If for some reason you still don't see traffic after this rebuild, the next
+  thing to check is whether the sidecar's localhost resolution is somehow
+  specific (we shouldn't have that issue since you're using a direct IP, but
+  worth flagging).
+
+✻ Sautéed for 2m 34s
+
+! cd /home/lou/Development/forge-1                                              
+    mvn -pl forge-gui-android -am -DskipTests package                           
+  ⎿  [INFO] Scanning for projects...
+     [INFO]
+     ------------------------------------------------------------------------
+     [INFO] Reactor Build Order:
+     [INFO]
+     [INFO] Forge Parent
+     [pom]
+     [INFO] Forge Core
+     [jar]
+     [INFO] Forge Game
+     [jar]
+     [INFO] Forge AI
+     [jar]
+     [INFO] Forge Gui
+     [jar]
+     [INFO] Forge Mobile
+     [jar]
+     [INFO] Forge Android
+     [jar]
+     [INFO]
+     [INFO] ----------------------------< forge:forge 
+     >-----------------------------
+     [INFO] Building Forge Parent 2.0.13-SNAPSHOT                              
+     [1/7]
+     [INFO] --------------------------------[ pom 
+     ]---------------------------------
+     [INFO]
+     [INFO] --- maven-enforcer-plugin:3.3.0:enforce (enforce-versions) @ forge 
+     ---
+     [INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion
+     passed
+     [INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireJavaVersion
+     passed
+     [INFO] Rule 2: org.apache.maven.enforcer.rules.RequirePluginVersions passed
+     [INFO]
+     [INFO] --- maven-checkstyle-plugin:3.1.2:check (checkstyle-validation) @
+     forge ---
+     [INFO] Starting audit...
+     Audit done.
+     [INFO] You have 0 Checkstyle violations.
+     [INFO]
+     [INFO] --------------------------< forge:forge-core 
+     >--------------------------
+     [INFO] Building Forge Core 2.0.13-SNAPSHOT                                
+     [2/7]
+     [INFO] --------------------------------[ jar 
+     ]---------------------------------
+     [INFO]
+     [INFO] --- maven-enforcer-plugin:3.3.0:enforce (enforce-versions) @
+     forge-core ---
+     [INFO] Rule 2: org.apache.maven.enforcer.rules.RequirePluginVersions passed
+     [INFO]
+     [INFO] --- maven-checkstyle-plugin:3.1.2:check (checkstyle-validation) @
+     forge-core ---
+     [INFO] Starting audit...
+     Audit done.
+     [INFO] You have 0 Checkstyle violations.
+     [INFO]
+     [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @
+     forge-core ---
+     [INFO] skip non existing resourceDirectory
+     /home/lou/Development/forge-1/forge-core/src/main/resources
+     [INFO]
+     [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @
+     forge-core ---
+     [INFO] Changes detected - recompiling the module!
+     [INFO] Compiling 148 source files to
+     /home/lou/Development/forge-1/forge-core/target/classes
+     [INFO] /home/lou/Development/forge-1/forge-core/src/main/java/forge/card/Ca
+     rdRules.java: Some input files use or override a deprecated API.
+     [INFO] /home/lou/Development/forge-1/forge-core/src/main/java/forge/card/Ca
+     rdRules.java: Recompile with -Xlint:deprecation for details.
+     [INFO] /home/lou/Development/forge-1/forge-core/src/main/java/forge/util/Ba
+     gRandomizer.java: Some input files use unchecked or unsafe operations.
+     [INFO] /home/lou/Development/forge-1/forge-core/src/main/java/forge/util/Ba
+     gRandomizer.java: Recompile with -Xlint:unchecked for details.
+     [INFO]
+     [INFO] --- maven-resources-plugin:3.3.1:testResources
+     (default-testResources) @ forge-core ---
+     [INFO] skip non existing resourceDirectory
+     /home/lou/Development/forge-1/forge-core/src/test/resources
+     [INFO]
+     [INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @
+     forge-core ---
+     [INFO] No sources to compile
+     [INFO]
+     [INFO] --- maven-surefire-plugin:3.1.2:test (default-test) @ forge-core ---
+     [INFO] Tests are skipped.
+     [INFO]
+     [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ forge-core ---
+     [INFO] Building jar: /home/lou/Development/forge-1/forge-core/target/forge-
+     core-2.0.13-SNAPSHOT.jar
+     [INFO]
+     [INFO] --------------------------< forge:forge-game 
+     >--------------------------
+     [INFO] Building Forge Game 2.0.13-SNAPSHOT                                
+     [3/7]
+     [INFO] --------------------------------[ jar 
+     ]---------------------------------
+     [INFO]
+     [INFO] --- maven-enforcer-plugin:3.3.0:enforce (enforce-versions) @
+     forge-game ---
+     [INFO] Rule 2: org.apache.maven.enforcer.rules.RequirePluginVersions passed
+     [INFO]
+     [INFO] --- maven-checkstyle-plugin:3.1.2:check (checkstyle-validation) @
+     forge-game ---
+     [INFO] Starting audit...
+     Audit done.
+     [INFO] You have 0 Checkstyle violations.
+     [INFO]
+     [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @
+     forge-game ---
+     [INFO] skip non existing resourceDirectory
+     /home/lou/Development/forge-1/forge-game/src/main/resources
+     [INFO]
+     [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @
+     forge-game ---
+     [INFO] Changes detected - recompiling the module!
+     [INFO] Compiling 794 source files to
+     /home/lou/Development/forge-1/forge-game/target/classes
+     [INFO] /home/lou/Development/forge-1/forge-game/src/main/java/forge/game/tr
+     igger/Trigger.java: Some input files use or override a deprecated API.
+     [INFO] /home/lou/Development/forge-1/forge-game/src/main/java/forge/game/tr
+     igger/Trigger.java: Recompile with -Xlint:deprecation for details.
+     [INFO] /home/lou/Development/forge-1/forge-game/src/main/java/forge/trackab
+     le/TrackableObject.java: Some input files use unchecked or unsafe
+     operations.
+     [INFO] /home/lou/Development/forge-1/forge-game/src/main/java/forge/trackab
+     le/TrackableObject.java: Recompile with -Xlint:unchecked for details.
+     [INFO]
+     [INFO] --- maven-resources-plugin:3.3.1:testResources
+     (default-testResources) @ forge-game ---
+     [INFO] skip non existing resourceDirectory
+     /home/lou/Development/forge-1/forge-game/src/test/resources
+     [INFO]
+     [INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @
+     forge-game ---
+     [INFO] Changes detected - recompiling the module!
+     [INFO] Compiling 2 source files to
+     /home/lou/Development/forge-1/forge-game/target/test-classes
+     [INFO]
+     [INFO] --- maven-surefire-plugin:3.1.2:test (default-test) @ forge-game ---
+     [INFO] Tests are skipped.
+     [INFO]
+     [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ forge-game ---
+     [INFO] Building jar: /home/lou/Development/forge-1/forge-game/target/forge-
+     game-2.0.13-SNAPSHOT.jar
+     [INFO]
+     [INFO] ---------------------------< forge:forge-ai 
+     >---------------------------
+     [INFO] Building Forge AI 2.0.13-SNAPSHOT                                  
+     [4/7]
+     [INFO] --------------------------------[ jar 
+     ]---------------------------------
+     [INFO]
+     [INFO] --- maven-enforcer-plugin:3.3.0:enforce (enforce-versions) @
+     forge-ai ---
+     [INFO] Rule 2: org.apache.maven.enforcer.rules.RequirePluginVersions passed
+     [INFO]
+     [INFO] --- maven-checkstyle-plugin:3.1.2:check (checkstyle-validation) @
+     forge-ai ---
+     [INFO] Starting audit...
+     Audit done.
+     [INFO] You have 0 Checkstyle violations.
+     [INFO]
+     [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @
+     forge-ai ---
+     [INFO] skip non existing resourceDirectory
+     /home/lou/Development/forge-1/forge-ai/src/main/resources
+     [INFO]
+     [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ forge-ai
+      ---
+     [INFO] Changes detected - recompiling the module!
+     [INFO] Compiling 201 source files to
+     /home/lou/Development/forge-1/forge-ai/target/classes
+     [INFO] /home/lou/Development/forge-1/forge-ai/src/main/java/forge/ai/simula
+     tion/GameCopier.java: Some input files use or override a deprecated API.
+     [INFO] /home/lou/Development/forge-1/forge-ai/src/main/java/forge/ai/simula
+     tion/GameCopier.java: Recompile with -Xlint:deprecation for details.
+     [INFO] /home/lou/Development/forge-1/forge-ai/src/main/java/forge/ai/abilit
+     y/ChangeCombatantsAi.java: Some input files use unchecked or unsafe
+     operations.
+     [INFO] /home/lou/Development/forge-1/forge-ai/src/main/java/forge/ai/abilit
+     y/ChangeCombatantsAi.java: Recompile with -Xlint:unchecked for details.
+     [INFO]
+     [INFO] --- maven-resources-plugin:3.3.1:testResources
+     (default-testResources) @ forge-ai ---
+     [INFO] skip non existing resourceDirectory
+     /home/lou/Development/forge-1/forge-ai/src/test/resources
+     [INFO]
+     [INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @
+     forge-ai ---
+     [INFO] No sources to compile
+     [INFO]
+     [INFO] --- maven-surefire-plugin:3.1.2:test (default-test) @ forge-ai ---
+     [INFO] Tests are skipped.
+     [INFO]
+     [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ forge-ai ---
+     [INFO] Building jar:
+     /home/lou/Development/forge-1/forge-ai/target/forge-ai-2.0.13-SNAPSHOT.jar
+     [INFO]
+     [INFO] --------------------------< forge:forge-gui 
+     >---------------------------
+     [INFO] Building Forge Gui 2.0.13-SNAPSHOT                                 
+     [5/7]
+     [INFO] --------------------------------[ jar 
+     ]---------------------------------
+     [INFO]
+     [INFO] --- maven-enforcer-plugin:3.3.0:enforce (enforce-versions) @
+     forge-gui ---
+     [INFO] Rule 2: org.apache.maven.enforcer.rules.RequirePluginVersions passed
+     [INFO]
+     [INFO] --- maven-checkstyle-plugin:3.1.2:check (checkstyle-validation) @
+     forge-gui ---
+     [INFO] Starting audit...
+     Audit done.
+     [INFO] You have 0 Checkstyle violations.
+     [INFO]
+     [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @
+     forge-gui ---
+     [INFO] Copying 3 resources from src/main/resources to target/classes
+     [INFO]
+     [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @
+     forge-gui ---
+     [INFO] Changes detected - recompiling the module!
+     [INFO] Compiling 414 source files to
+     /home/lou/Development/forge-1/forge-gui/target/classes
+     [INFO] /home/lou/Development/forge-1/forge-gui/src/main/java/forge/gui/cont
+     rol/GameEventForwarder.java: Some input files use or override a deprecated
+     API.
+     [INFO] /home/lou/Development/forge-1/forge-gui/src/main/java/forge/gui/cont
+     rol/GameEventForwarder.java: Recompile with -Xlint:deprecation for details.
+     [INFO] /home/lou/Development/forge-1/forge-gui/src/main/java/forge/gamemode
+     s/net/NetworkGuiGame.java: Some input files use unchecked or unsafe
+     operations.
+     [INFO] /home/lou/Development/forge-1/forge-gui/src/main/java/forge/gamemode
+     s/net/NetworkGuiGame.java: Recompile with -Xlint:unchecked for details.
+     [INFO]
+     [INFO] --- maven-resources-plugin:3.3.1:testResources
+     (default-testResources) @ forge-gui ---
+     [INFO] skip non existing resourceDirectory
+     /home/lou/Development/forge-1/forge-gui/src/test/resources
+     [INFO]
+     [INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @
+     forge-gui ---
+     [INFO] No sources to compile
+     [INFO]
+     [INFO] --- maven-surefire-plugin:3.1.2:test (default-test) @ forge-gui ---
+     [INFO] Tests are skipped.
+     [INFO]
+     [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ forge-gui ---
+     [INFO] Building jar: /home/lou/Development/forge-1/forge-gui/target/forge-g
+     ui-2.0.13-SNAPSHOT.jar
+     [INFO]
+     [INFO] -----------------------< forge:forge-gui-mobile 
+     >-----------------------
+     [INFO] Building Forge Mobile 2.0.13-SNAPSHOT                              
+     [6/7]
+     [INFO] --------------------------------[ jar 
+     ]---------------------------------
+     [INFO]
+     [INFO] --- maven-enforcer-plugin:3.3.0:enforce (enforce-versions) @
+     forge-gui-mobile ---
+     [INFO] Rule 2: org.apache.maven.enforcer.rules.RequirePluginVersions passed
+     [INFO]
+     [INFO] --- maven-checkstyle-plugin:3.1.2:check (checkstyle-validation) @
+     forge-gui-mobile ---
+     [INFO] Starting audit...
+     Audit done.
+     [INFO] You have 0 Checkstyle violations.
+     [INFO]
+     [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @
+     forge-gui-mobile ---
+     [INFO] skip non existing resourceDirectory
+     /home/lou/Development/forge-1/forge-gui-mobile/src/main/resources
+     [INFO]
+     [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @
+     forge-gui-mobile ---
+     [INFO] Nothing to compile - all classes are up to date
+     [INFO]
+     [INFO] --- maven-resources-plugin:3.3.1:testResources
+     (default-testResources) @ forge-gui-mobile ---
+     [INFO] skip non existing resourceDirectory
+     /home/lou/Development/forge-1/forge-gui-mobile/src/test/resources
+     [INFO]
+     [INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @
+     forge-gui-mobile ---
+     [INFO] No sources to compile
+     [INFO]
+     [INFO] --- maven-surefire-plugin:3.1.2:test (default-test) @
+     forge-gui-mobile ---
+     [INFO] Tests are skipped.
+     [INFO]
+     [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ forge-gui-mobile ---
+     [INFO]
+     [INFO] ----------------------< forge:forge-gui-android 
+     >-----------------------
+     [INFO] Building Forge Android 2.0.13-SNAPSHOT                             
+     [7/7]
+     [INFO] --------------------------------[ jar 
+     ]---------------------------------
+     [INFO]
+     [INFO] --- maven-enforcer-plugin:3.3.0:enforce (enforce-versions) @
+     forge-gui-android ---
+     [INFO] Rule 2: org.apache.maven.enforcer.rules.RequirePluginVersions passed
+     [INFO]
+     [INFO] --- maven-checkstyle-plugin:3.1.2:check (checkstyle-validation) @
+     forge-gui-android ---
+     [INFO] Starting audit...
+     Audit done.
+     [INFO] You have 0 Checkstyle violations.
+     [INFO]
+     [INFO] --- build-helper-maven-plugin:3.6.0:timestamp-property
+     (timestamp-property) @ forge-gui-android ---
+     [WARNING] Using platform locale (en_US actually) to format date/time, i.e.
+     build is platform dependent!
+     [INFO]
+     [INFO] --- build-helper-maven-plugin:3.6.0:regex-property (regex-property)
+     @ forge-gui-android ---
+     [INFO]
+     [INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @
+     forge-gui-android ---
+     [INFO] Copying 2 resources from filters to target/classes/assets
+     [INFO] Copying 7 resources from src/main/resources to target/classes
+     [INFO]
+     [INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @
+     forge-gui-android ---
+     [INFO] Nothing to compile - all classes are up to date
+     [INFO]
+     [INFO] --- maven-resources-plugin:3.3.1:testResources
+     (default-testResources) @ forge-gui-android ---
+     [INFO] skip non existing resourceDirectory
+     /home/lou/Development/forge-1/forge-gui-android/src/test/resources
+     [INFO]
+     [INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @
+     forge-gui-android ---
+     [INFO] No sources to compile
+     [INFO]
+     [INFO] --- maven-surefire-plugin:3.1.2:test (default-test) @
+     forge-gui-android ---
+     [INFO] Tests are skipped.
+     [INFO]
+     [INFO] --- maven-jar-plugin:3.3.0:jar (default-jar) @ forge-gui-android ---
+     [INFO] Building jar: /home/lou/Development/forge-1/forge-gui-android/target
+     /forge-android-2.0.13-SNAPSHOT-05.21.jar
+     [INFO]
+     ------------------------------------------------------------------------
+     [INFO] Reactor Summary for Forge Parent 2.0.13-SNAPSHOT:
+     [INFO]
+     [INFO] Forge Parent ....................................... SUCCESS [
+     0.672 s]
+     [INFO] Forge Core ......................................... SUCCESS [
+     2.572 s]
+     [INFO] Forge Game ......................................... SUCCESS [
+     3.022 s]
+     [INFO] Forge AI ........................................... SUCCESS [
+     1.262 s]
+     [INFO] Forge Gui .......................................... SUCCESS [
+     1.777 s]
+     [INFO] Forge Mobile ....................................... SUCCESS [
+     0.097 s]
+     [INFO] Forge Android ...................................... SUCCESS [
+     0.072 s]
+     [INFO]
+     ------------------------------------------------------------------------
+     [INFO] BUILD SUCCESS
+     [INFO]
+     ------------------------------------------------------------------------
+     [INFO] Total time:  9.634 s
+     [INFO] Finished at: 2026-05-21T11:34:46-04:00
+     [INFO]
+     ------------------------------------------------------------------------
+
+❯ /export                                                                       
+  ⎿  Conversation exported to:
+     /home/lou/Development/forge-1/primer-pipeline-update-youtube-scraping.txt
+
+❯ /compact                                                                      
+  ⎿  Compacted (ctrl+o to see full summary)
+     Tip: You have access to Opus 1M with 5x more context
+  ⎿  Read forge-gui-android/src/main/AndroidManifest.xml (106 lines)
+  ⎿  Read forge-gui-android/res/xml/network_security_config.xml (28 lines)
+  ⎿  Read ../../Downloads/forge-logs-20260521-105325(Copy)/forge.20260521-005343.log (43 lines)
+  ⎿  Read forge-llm-sidecar/tests/test_youtube_match_identify.py (272 lines)
+  ⎿  Read forge-llm-sidecar/scripts/identify_tournament_archetypes.py (200 lines)
+  ⎿  Plan file referenced (~/.claude/plans/use-the-following-research-cozy-stonebraker.md)
+
+❯ /context 
+  ⎿  Context Usage
+     ⛀ ⛀ ⛀ ⛀ ⛁   Opus 4.7
+     ⛁ ⛶ ⛶ ⛶ ⛶   claude-opus-4-7
+     ⛶ ⛶ ⛶ ⛶ ⛶   0/1m tokens (0%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ 
+     ⛶ ⛶ ⛶ ⛶ ⛶   Estimated usage by category
+     ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ System prompt: 8.5k tokens (0.8%)
+     ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ System tools: 13.5k tokens (1.4%)
+     ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ Memory files: 132 tokens (0.0%)
+     ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ Skills: 1.2k tokens (0.1%)
+     ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ Messages: 39.3k tokens (3.9%)
+                 ⛶ Free space: 937.4k (93.7%)
+
+     MCP tools · /mcp (loaded on-demand)
+
+     Available
+     ├ mcp__claude_ai_Figma__add_code_connect_map
+     ├ mcp__claude_ai_Figma__create_new_file
+     ├ mcp__claude_ai_Figma__generate_diagram
+     ├ mcp__claude_ai_Figma__get_code_connect_map
+     ├ mcp__claude_ai_Figma__get_code_connect_suggestions
+     ├ mcp__claude_ai_Figma__get_context_for_code_connect
+     ├ mcp__claude_ai_Figma__get_design_context
+     ├ mcp__claude_ai_Figma__get_figjam
+     ├ mcp__claude_ai_Figma__get_libraries
+     ├ mcp__claude_ai_Figma__get_metadata
+     ├ mcp__claude_ai_Figma__get_screenshot
+     ├ mcp__claude_ai_Figma__get_variable_defs
+     ├ mcp__claude_ai_Figma__search_design_system
+     ├ mcp__claude_ai_Figma__send_code_connect_mappings
+     ├ mcp__claude_ai_Figma__upload_assets
+     ├ mcp__claude_ai_Figma__use_figma
+     ├ mcp__claude_ai_Figma__whoami
+     ├ mcp__claude_ai_Gmail__authenticate
+     ├ mcp__claude_ai_Gmail__complete_authentication
+     ├ mcp__claude_ai_Google_Calendar__authenticate
+     ├ mcp__claude_ai_Google_Calendar__complete_authentication
+     ├ mcp__claude_ai_Google_Drive__authenticate
+     ├ mcp__claude_ai_Google_Drive__complete_authentication
+     ├ mcp__claude_ai_Hugging_Face__authenticate
+     ├ mcp__claude_ai_Hugging_Face__complete_authentication
+     ├ mcp__claude_ai_Jam__authenticate
+     ├ mcp__claude_ai_Jam__complete_authentication
+     ├ mcp__claude_ai_Langchain_Docs__query_docs_filesystem_docs_by_lang_chain
+     ├ mcp__claude_ai_Langchain_Docs__search_docs_by_lang_chain
+     ├ mcp__claude_ai_Mermaid_Chart__create_issue
+     ├ mcp__claude_ai_Mermaid_Chart__create_pr
+     ├ mcp__claude_ai_Mermaid_Chart__get_diagram_summary
+     ├ mcp__claude_ai_Mermaid_Chart__get_diagram_title
+     ├ mcp__claude_ai_Mermaid_Chart__get_issue_comments
+     ├ mcp__claude_ai_Mermaid_Chart__get_mermaid_syntax_document
+     ├ mcp__claude_ai_Mermaid_Chart__get_pull_comments
+     ├ mcp__claude_ai_Mermaid_Chart__list_branches
+     ├ mcp__claude_ai_Mermaid_Chart__list_issues
+     ├ mcp__claude_ai_Mermaid_Chart__list_mermaid_files
+     ├ mcp__claude_ai_Mermaid_Chart__list_pulls
+     ├ mcp__claude_ai_Mermaid_Chart__list_repos
+     ├ mcp__claude_ai_Mermaid_Chart__list_tools
+     ├ mcp__claude_ai_Mermaid_Chart__push_file
+     ├ mcp__claude_ai_Mermaid_Chart__read_mermaid_file
+     ├ mcp__claude_ai_Mermaid_Chart__search_mermaid_icons
+     ├ mcp__claude_ai_Mermaid_Chart__validate_and_render_mermaid_diagram
+     ├ mcp__claude_ai_Morningstar__authenticate
+     ├ mcp__claude_ai_Morningstar__complete_authentication
+     ├ mcp__claude_ai_Notion__notion-create-comment
+     ├ mcp__claude_ai_Notion__notion-create-database
+     ├ mcp__claude_ai_Notion__notion-create-pages
+     ├ mcp__claude_ai_Notion__notion-create-view
+     ├ mcp__claude_ai_Notion__notion-duplicate-page
+     ├ mcp__claude_ai_Notion__notion-fetch
+     ├ mcp__claude_ai_Notion__notion-get-comments
+     ├ mcp__claude_ai_Notion__notion-get-teams
+     ├ mcp__claude_ai_Notion__notion-get-users
+     ├ mcp__claude_ai_Notion__notion-move-pages
+     ├ mcp__claude_ai_Notion__notion-search
+     ├ mcp__claude_ai_Notion__notion-update-data-source
+     ├ mcp__claude_ai_Notion__notion-update-page
+     ├ mcp__claude_ai_Notion__notion-update-view
+     ├ mcp__claude_ai_PubMed__convert_article_ids
+     ├ mcp__claude_ai_PubMed__find_related_articles
+     ├ mcp__claude_ai_PubMed__get_article_metadata
+     ├ mcp__claude_ai_PubMed__get_copyright_status
+     ├ mcp__claude_ai_PubMed__get_full_text_article
+     ├ mcp__claude_ai_PubMed__lookup_article_by_citation
+     ├ mcp__claude_ai_PubMed__search_articles
+     ├ mcp__claude_ai_S_P_Global__authenticate
+     ├ mcp__claude_ai_S_P_Global__complete_authentication
+     ├ mcp__claude_ai_Scholar_Gateway__authenticate
+     ├ mcp__claude_ai_Scholar_Gateway__complete_authentication
+     ├ mcp__claude_ai_Sentry__authenticate
+     ├ mcp__claude_ai_Sentry__complete_authentication
+     ├ mcp__claude_ai_Vercel__authenticate
+     ├ mcp__claude_ai_Vercel__complete_authentication
+     ├ mcp__playwright__browser_click
+     ├ mcp__playwright__browser_close
+     ├ mcp__playwright__browser_console_messages
+     ├ mcp__playwright__browser_drag
+     ├ mcp__playwright__browser_drop
+     ├ mcp__playwright__browser_evaluate
+     ├ mcp__playwright__browser_file_upload
+     ├ mcp__playwright__browser_fill_form
+     ├ mcp__playwright__browser_handle_dialog
+     ├ mcp__playwright__browser_hover
+     ├ mcp__playwright__browser_navigate
+     ├ mcp__playwright__browser_navigate_back
+     ├ mcp__playwright__browser_network_request
+     ├ mcp__playwright__browser_network_requests
+     ├ mcp__playwright__browser_press_key
+     ├ mcp__playwright__browser_resize
+     ├ mcp__playwright__browser_run_code_unsafe
+     ├ mcp__playwright__browser_select_option
+     ├ mcp__playwright__browser_snapshot
+     ├ mcp__playwright__browser_tabs
+     ├ mcp__playwright__browser_take_screenshot
+     ├ mcp__playwright__browser_type
+     └ mcp__playwright__browser_wait_for
+
+     Memory files · /memory
+     └ ~/.claude/projects/-home-lou-Development-forge-1/memory/MEMORY.md: 132 tokens
+
+     Skills · /skills
+
+     Built-in
+     ├ claude-api: ~250 tokens
+     ├ update-config: ~240 tokens
+     ├ schedule: ~130 tokens
+     ├ run: ~120 tokens
+     ├ loop: ~110 tokens
+     ├ verify: ~90 tokens
+     ├ keybindings-help: ~80 tokens
+     ├ fewer-permission-prompts: ~60 tokens
+     ├ simplify: ~30 tokens
+     ├ security-review: ~30 tokens
+     ├ init: ~20 tokens
+     └ review: < 20 tokens
+
+❯ ok the sidecar is working on the phone! A couple of things to look at: the    
+  piloting guide takes way too long to load. i will be through multiple games   
+  before it finishes loading. Let's troubleshoot that first. Also, I wanted to  
+  look into whether the information and guidance the sidecar provides actually  
+  influences the decisions the AI makes. I looked at the AIProps.java file and  
+  there seem to be a lot of potentially conflicting flags for decision-making   
+  in there. Also the computer player reacts almost instantly, so he may need    
+  more time to reflect on guidance before making a play                         
+
+● Great that it's reaching the sidecar now. Two real problems to dig into. Let
+  me start by looking at how the piloting guide load currently flows, and how
+  (or whether) the sidecar's output actually feeds the AI's decision logic.
+
+  Searched for 3 patterns, read 1 file, listed 1 directory (ctrl+o to expand)
+
+● Now I have enough to dig into both questions. Let me check the AI side of the
+  influence loop and the AIProps flags.
+
+  Read 1 file (ctrl+o to expand)
+
+● Now I need to see where SidecarInfluence is actually consumed by decision
+  points, and find the call-site count.
+
+  Searched for 6 patterns (ctrl+o to expand)
+
+● Bash(find forge-gui-mobile/src forge-gui-android/src -name "*.java"
+      2>/dev/null | xargs grep -l -i "piloting\|guide" 2>/dev/null | head -20)
+  ⎿  forge-gui-mobile/src/forge/screens/online/OnlineLobbyScreen.java
+     forge-gui-android/src/com/badlogic/gdx/backends/android/DefaultAndroid
+     Input.java
+
+  Searched for 5 patterns (ctrl+o to expand)
+
+● Good — POST /recognize is working. Now let me check what the dashboard is
+  doing and what /piloting actually returns. The user might be referring to
+  either the dashboard's piloting view, or to the in-game guide loading.
+
+  Searched for 2 patterns, read 3 files (ctrl+o to expand)
+
+● Let me see what's making /recognize slow, and check whether the dashboard's
+  "piloting guide load" lag is the LLM call.
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+● Let me look at the graph (number of LLM calls per /recognize) and the AI's
+  wait-on-sidecar story:
+
+  Searched for 8 patterns, read 2 files (ctrl+o to expand)
+
+● Let me check whether the SIDECAR_BIAS_* flags actually do anything, and look
+  at the AI think-time settings:
+
+  Searched for 3 patterns (ctrl+o to expand)
+
+● Let me also check how often /recognize is being triggered and confirm the
+  timing path:
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● I have a clear picture now. Let me also confirm one more thing: how the
+  dashboard surfaces "piloting" — is it from the latest /recognize result, or is
+   the /piloting endpoint slow itself?
+
+● Bash(cd forge-llm-sidecar && time curl -s
+      "http://localhost:18970/piloting?format=modern" -o /dev/null 2>&1 | head
+      -5
+      echo "---"…)
+  ⎿  curl -s "http://localhost:18970/piloting?format=modern" -o /dev/null 2
+     >&1  0.00s user 0.00s system 72% cpu 0.007 total
+     head -5  0.00s user 0.00s system 17% cpu 0.007 total
+     … +4 lines (ctrl+o to expand)
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Bash(curl -s http://localhost:8080/v1/models 2>/dev/null | head -c 400)
+  ⎿  {
+       "object": "list",
+       "data": [
+     … +18 lines (ctrl+o to expand)
+
+● I have enough to give you a clean diagnosis. Let me write it up.
+
+  Findings
+
+  Piloting guide is slow because /recognize is slow, not /piloting
+
+  - /piloting returns in 5 ms — the dashboard's directory listing isn't the
+  issue.
+  - The "Piloting Advice" panel on the dashboard reads the latest /recognize 
+  result via /api/stats → store.history.
+  - Every /recognize makes one LLM call to Qwen3.6-27B — a thinking model on
+  llama.cpp. That's where the 10–30+ second pauses come from.
+  - DeckRecognitionObserver only triggers /recognize once turn >= 2 and an
+  opponent spell/land/zone-change has fired. So you don't see piloting advice at
+   all until well into game 1.
+
+  The AI doesn't actually wait for sidecar input
+
+  This is the bigger problem. Looking at DeckRecognitionObserver.fireCall():
+  - client.recognizeAsync(request) is fire-and-forget. inFlight prevents
+  overlap, but the AI's makeMove / chooseTargets / declareAttackers paths all
+  run without ever blocking on the sidecar.
+  - Every consumer in AiController / PlayerControllerAi / ComputerUtilCard gates
+   on sidecarInfluence.hasData() — so on turn 1 they all bail and the heuristic
+  AI decides as if the sidecar didn't exist.
+  - By turn 3–4 the sidecar has delivered data, but by then mulligans, opening
+  plays, and early combat are already done. The AI never "reflects" — it just
+  gets late advice.
+
+  AIProps flag audit
+
+  Reading every reference site:
+
+  Flag: SIDECAR_INFLUENCE_ENABLE
+  Status: Master switch — checked by the 5 hottest paths (land pick, blocks,
+    attacks, target priority, PASS)
+  ────────────────────────────────────────
+  Flag: SIDECAR_BIAS_LAND
+  Status: ✅ used (land scoring)
+  ────────────────────────────────────────
+  Flag: SIDECAR_BIAS_ATTACK / SIDECAR_BIAS_BLOCK / SIDECAR_BIAS_PASS
+  Status: ✅ used
+  ────────────────────────────────────────
+  Flag: SIDECAR_BIAS_SPELL_PLAY
+  Status: dead flag — declared, never read
+  ────────────────────────────────────────
+  Flag: SIDECAR_BIAS_ABILITY
+  Status: dead flag — declared, never read
+  ────────────────────────────────────────
+  Flag: SIDECAR_ROLE_ASSESSMENT_ENABLE
+  Status: ✅ used (combat)
+  ────────────────────────────────────────
+  Flag: SIDECAR_HAND_VALUATION_ENABLE
+  Status: ✅ used but not gated by master switch (fires in ComputerUtilCard even
+
+    if master is off)
+  ────────────────────────────────────────
+  Flag: SIDECAR_OPPONENT_INFERENCE_ENABLE
+  Status: ✅ used
+  ────────────────────────────────────────
+  Flag: SIDECAR_TARGETING_ENABLE
+  Status: ✅ used
+  ────────────────────────────────────────
+  Flag: SIDECAR_MULLIGAN_ENABLE
+  Status: ✅ used
+  ────────────────────────────────────────
+  Flag: SIDECAR_DISCARD_ENABLE
+  Status: ✅ used
+  ────────────────────────────────────────
+  Flag: SIDECAR_HAND_VALUE_WEIGHT
+  Status: ✅ used
+  ────────────────────────────────────────
+  Flag: SIDECAR_PERSONALITY_WEIGHT (0–100)
+  Status: ✅ used — but it compounds with SIDECAR_BIAS_*. An ATTACK score gets
+    multiplied twice for an aggro AI. That's the "potential conflict" you
+    noticed.
+
+  So the conflicts are real but minor: two dead flags, one master-switch hole,
+  and a compounding interaction between bias and personality multipliers.
+
+  What I'd do, in priority order
+
+  The slow-load and the no-reflection issues both root in the same place: a slow
+   LLM that the AI never waits for. Two clean fixes attack both at once.
+
+● User answered Claude's questions:
+  ⎿  · How would you like to attack the slow /recognize problem? → Both 
+     (recommended)
+     · How should the AI handle slow sidecar advice? → Synchronous wait at key 
+     moments (recommended)
+     · Clean up the flag situation? → Gate sub-flags under 
+     SIDECAR_INFLUENCE_ENABLE, Decouple personality from bias, Why are the bias 
+     spell play and bias ability never read? shouldn't they be used in some way
+
+● Good, clear direction. Quick answer to the BIAS_SPELL_PLAY / BIAS_ABILITY
+  question, then I'll start.
+
+  Why those two are dead: when the sidecar says PLAY_SPELL, the code path in
+  AiController.tryPlaySidecarRecommendedSpell() doesn't score candidates — it
+  just walks bestPlaySpellNames() in priority order and plays the first one
+  that's legal. There's no per-candidate score where a "+50%" boost would slot
+  in. Same for activated abilities. So those two were modeled after the
+  LAND/ATTACK/BLOCK pattern but never got an integration point. Two options: (a)
+   delete them, or (b) wire them in so e.g. a sidecar-recommended spell beats a
+  higher-CMC alternative the heuristic would otherwise prefer. I'll wire them in
+   — that's more useful than deleting, and matches your intent.
+
+  Now let me dig into the code and start.
+
+  Searched for 1 pattern, read 2 files, listed 1 directory (ctrl+o to expand)
+● Disable_thinking is on by default — but the user is still seeing slow loads.
+  Let me check if it's actually working and look at the prompt size.
+
+● Bash(cd forge-llm-sidecar && time curl -s -X POST
+      http://localhost:18970/recognize \
+        -H "Content-Type: application/json" \…)
+  ⎿  (eval):cd:1: no such file or directory: forge-llm-sidecar
+     ---
+     thinking field present?
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Bash(pwd && ls)
+  ⎿  /home/lou/Development/forge-1/forge-llm-sidecar
+     AGENTS.md
+     app
+     … +18 lines (ctrl+o to expand)
+
+● Bash(time curl -s -X POST http://localhost:18970/recognize \
+        -H "Content-Type: application/json" \…)
+  ⎿  curl -s -X POST http://localhost:18970/recognize -H  -d  -o  2>&1  0.0
+     0s user 0.00s system 0% cpu 10.803 total
+     tail -5  0.00s user 0.00s system 0% cpu 10.803 total
+     … +2 lines (ctrl+o to expand)
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● 10.8s baseline per /recognize — that confirms the bottleneck. Let me add
+  caching now.
+
+  Read 1 file (ctrl+o to expand)
+
+● Now I'll add a small in-process cache for /recognize. The cache will hash the
+  inputs that meaningfully affect the result and skip the LLM call when
+  unchanged.
+
+● Update(app/main.py)
+  ⎿  Added 3 lines
+       2  
+       3  from __future__ import annotations
+       4  
+       5 +import hashlib                                                 
+       6 +import json as _json                                           
+       7  import logging
+       8 +from collections import OrderedDict                            
+       9  from contextlib import asynccontextmanager
+      10  
+      11  from fastapi import FastAPI, Request
+
+● Now add the cache helpers and wire them into /recognize. The observer fires a
+  recognize on every life change and zone churn — most of those don't change the
+   meaningful inputs, so a per-game LRU keyed on the digest of observations +
+  boards + life + phase will short-circuit almost all of them.
+
+● Update(app/main.py)
+  ⎿  Added 72 lines
+       93      }
+       94  
+       95  
+       96 +# --- Recognize cache ----------------------------------------
+          +----------------                                              
+       97 +#                                                             
+       98 +# Per-game LRU keyed on a digest of inputs that meaningfully a
+          +ffect the result.                                             
+       99 +# The observer fires /recognize on every life change and zone 
+          +churn — most of                                               
+      100 +# those don't change the inputs the model actually reasons abo
+          +ut, so a hit                                                  
+      101 +# returns the previous response in <1ms instead of waiting on 
+          +the LLM.                                                      
+      102 +#                                                             
+      103 +# Cache key inputs (deliberately limited):                    
+      104 +#   game_id, turn, observations, hand, own/opp board, own/opp 
+          +graveyard,                                                    
+      105 +#   life totals, phase, available mana, opp mana colors, board
+          + details.                                                     
+      106 +#                                                             
+      107 +# Excluded (don't influence the recognizer / advisor in a mean
+          +ingful way):                                                  
+      108 +#   library sizes, personality (handled client-side post-hoc),
+          + ai_hand_size                                                 
+      109 +#   (already in `hand`).                                      
+      110 +_RECOGNIZE_CACHE: "OrderedDict[str, dict]" = OrderedDict()    
+      111 +_RECOGNIZE_CACHE_LIMIT = 256                                  
+      112 +_recognize_cache_hits = 0                                     
+      113 +_recognize_cache_misses = 0                                   
+      114 +                                                              
+      115 +                                                              
+      116 +def _recognize_cache_key(req: RecognitionRequest) -> str:     
+      117 +    payload = {                                               
+      118 +        "g": req.game_id,                                     
+      119 +        "t": req.turn,                                        
+      120 +        "o": [                                                
+      121 +            (o.turn, o.event, o.card, o.cmc, list(o.colors), l
+          +ist(o.types))                                                 
+      122 +            for o in req.observations                         
+      123 +        ],                                                    
+      124 +        "h": sorted(req.hand),                                
+      125 +        "ob": sorted(req.own_board),                          
+      126 +        "pb": sorted(req.opponent_board),                     
+      127 +        "og": sorted(req.your_graveyard),                     
+      128 +        "pg": sorted(req.opponent_graveyard),                 
+      129 +        "l": sorted(req.life_totals.items()),                 
+      130 +        "p": req.phase,                                       
+      131 +        "m": sorted(req.available_mana),                      
+      132 +        "om": sorted(req.opponent_mana_colors_seen),          
+      133 +        "obd": [                                              
+      134 +            (bc.name, bc.power, bc.toughness, sorted(bc.types)
+          +, bc.is_creature, bc.tapped)                                  
+      135 +            for bc in req.own_board_details                   
+      136 +        ],                                                    
+      137 +        "opd": [                                              
+      138 +            (bc.name, bc.power, bc.toughness, sorted(bc.types)
+          +, bc.is_creature, bc.tapped)                                  
+      139 +            for bc in req.opponent_board_details              
+      140 +        ],                                                    
+      141 +    }                                                         
+      142 +    encoded = _json.dumps(payload, sort_keys=True, default=str
+          +).encode("utf-8")                                             
+      143 +    return hashlib.blake2b(encoded, digest_size=16).hexdigest(
+          +)                                                             
+      144 +                                                              
+      145 +                                                              
+      146 +def _cache_get(key: str) -> dict | None:                      
+      147 +    global _recognize_cache_hits, _recognize_cache_misses     
+      148 +    cached = _RECOGNIZE_CACHE.get(key)                        
+      149 +    if cached is None:                                        
+      150 +        _recognize_cache_misses += 1                          
+      151 +        return None                                           
+      152 +    _RECOGNIZE_CACHE.move_to_end(key)                         
+      153 +    _recognize_cache_hits += 1                                
+      154 +    return cached                                             
+      155 +                                                              
+      156 +                                                              
+      157 +def _cache_put(key: str, value: dict) -> None:                
+      158 +    _RECOGNIZE_CACHE[key] = value                             
+      159 +    _RECOGNIZE_CACHE.move_to_end(key)                         
+      160 +    while len(_RECOGNIZE_CACHE) > _RECOGNIZE_CACHE_LIMIT:     
+      161 +        _RECOGNIZE_CACHE.popitem(last=False)                  
+      162 +                                                              
+      163 +                                                              
+      164  @app.post("/api/stats/reset")
+      165  async def api_stats_reset() -> dict:
+      166      """Clear request history and counters (uptime preserved)."
+           ""
+      167      get_store().reset()
+      168 +    global _recognize_cache_hits, _recognize_cache_misses     
+      169 +    _RECOGNIZE_CACHE.clear()                                  
+      170 +    _recognize_cache_hits = 0                                 
+      171 +    _recognize_cache_misses = 0                               
+      172      return {"status": "ok", "cleared": True}
+      173  
+      174  
+
+● Now wire the cache into /recognize:
+
+● Update(app/main.py)
+  ⎿  Added 11 lines
+      315  async def recognize(req: RecognitionRequest) -> RecognitionRes
+           ponse:
+      316      """Run the game-advisor graph: opponent recognition + own-
+           deck piloting advice."""
+      317      log.info("recognize: client=%s game=%s turn=%s", req.clien
+           t, req.game_id, req.turn)
+      318 +    cache_key = _recognize_cache_key(req)                     
+      319 +    cached = _cache_get(cache_key)                            
+      320 +    if cached is not None:                                    
+      321 +        log.info(                                             
+      322 +            "recognize: cache hit game=%s turn=%s (hits=%d mis
+          +ses=%d)",                                                     
+      323 +            req.game_id,                                      
+      324 +            req.turn,                                         
+      325 +            _recognize_cache_hits,                            
+      326 +            _recognize_cache_misses,                          
+      327 +        )                                                     
+      328 +        return RecognitionResponse(**cached)                  
+      329      graph = get_graph()
+      330      initial = {
+      331          "game_id": req.game_id,
+
+● And store the result in the cache before returning:
+
+● Update(app/main.py)
+  ⎿  Added 3 lines, removed 1 line
+      424          }
+      425      )
+      426  
+      427 -    return RecognitionResponse(                               
+      427 +    response = RecognitionResponse(                           
+      428          archetype=final.get("archetype") or "Unknown",
+      429          confidence=final.get("confidence") or 0.0,
+      430          reasoning=final.get("reasoning") or "",
+      431          alternatives=final.get("alternatives") or [],
+      432          piloting=piloting_advice,
+      433      )
+      434 +    _cache_put(cache_key, response.model_dump())              
+      435 +    return response                                           
+      436  
+      437  
+      438  class ForgeLogAnalyzeRequest(BaseModel):
+
+● Cache wired. Now expose it on /api/stats so we can confirm it's working, then
+  test.
+
+● Update(app/main.py)
+  ⎿  Added 5 lines
+      182          "history": store.history,
+      183          "raw_hits_total": store.raw_hits_total,
+      184          "raw_hits": store.raw_hits,
+      185 +        "recognize_cache": {                                  
+      186 +            "size": len(_RECOGNIZE_CACHE),                    
+      187 +            "hits": _recognize_cache_hits,                    
+      188 +            "misses": _recognize_cache_misses,                
+      189 +        },                                                    
+      190      }
+      191  
+      192  
+
+● Bash(uv run python -c "from app import main; print('main imports ok')" 2>&1 |
+      tail -20)
+  ⎿  warning: `yarl==1.24.1` is yanked (reason: "Missing some wheels due to
+      conflicting windows wheel builder jobs writing over each other")
+     error: Distribution `yarl==1.24.1 @ registry+https://pypi.org/simple`
+     … +5 lines (ctrl+o to expand)
+
+● Bash(python3 -c "
+      import sys…)
+  ⎿  main imports ok
+     cache helpers present: True True
+
+● Bash(ps aux | grep -E "uvicorn|sidecar" | grep -v grep | head -5)
+  ⎿  lou      2752611  0.1  0.1 470536 83704 ?        SNl  10:23   0:19 /ho
+     me/lou/Development/forge-1/forge-llm-sidecar/.venv/bin/python3.12 .ven
+     v/bin/uvicorn app.main:app --host 0.0.0.0 --port 18970
+
+● Bash(kill -HUP 2752611 2>&1; sleep 1; ps -p 2752611 > /dev/null && echo "still
+       running (no reload on HUP)" || echo "died")
+  ⎿  still running (no reload on HUP)
+
+● I'll leave the running sidecar alone for now (you can restart it when ready).
+  Let me verify the cache logic with a quick test, then move on.
+
+● Bash(python3 - <<'EOF'
+      import sys; sys.path.insert(0, '.')…)  ⎿  OK - cache logic correct
+
+● Cache works. Marking #32 done, on to #33 (trim prompt + confirm thinking
+  really is off).
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● Bash(curl -s -X POST http://localhost:8080/v1/chat/completions \
+        -H "Content-Type: application/json" \…)
+  ⎿  {
+       "choices": [
+         {
+     … +33 lines (ctrl+o to expand)
+
+● Good — thinking IS off when the kwarg is sent, and the sidecar default sends
+  it. But /recognize is still ~10s. Let me measure the prompt size, that's the
+  real culprit.
+
+● Bash(python3 - <<'EOF'
+      import sys; sys.path.insert(0, '.')…)
+  ⎿  # of archetypes after trim: 26
+     system prompt chars: 244
+     user prompt chars: 8844
+     approx tokens (chars/3.5): 2596
+
+● The prompt is ~2600 tokens — that's the real cost. Let me trim the static
+  heuristics (the model already knows MTG strategy archetypes) and the
+  per-archetype tells field.
+
+● Update(app/nodes/game_advisor.py)
+  ⎿  Added 5 lines, removed 5 lines
+      48  
+      49  
+      50  def _format_archetypes(archetypes: list[dict]) -> str:
+      51 +    # One line per archetype: name + colors + strategy + signat
+         +ure cards.                                                     
+      52 +    # `tells` was previously included but adds ~30% prompt size
+         + for low signal                                                
+      53 +    # (signature cards already convey deck identity). Re-add if
+         + recall drops.                                                 
+      54      lines = []
+      55      for a in archetypes:
+      56          colors = "/".join(a.get("colors", [])) or "?"
+      57          sig = ", ".join(a.get("signature_cards", [])) or "(none
+           listed)"
+      55 -        tells = "; ".join(a.get("tells", [])) or "(none listed)
+         -"                                                              
+      58          share = a.get("meta_share")
+      57 -        share_str = f" — {share:.1f}% of the current metagame" 
+         -if share else ""                                               
+      59 +        share_str = f" {share:.1f}%" if share else ""          
+      60          lines.append(
+      59 -            f"- {a.get('name', '?')} [{colors}]{share_str}: {a.
+         -get('strategy', '')}\n"                                        
+      60 -            f"    signature cards: {sig}\n"                    
+      61 -            f"    tells: {tells}"                              
+      61 +            f"- {a.get('name', '?')} [{colors}]{share_str} ({a.
+         +get('strategy', '')}): {sig}"                                  
+      62          )
+      63      return "\n".join(lines)
+      64  
+
+● Update(app/nodes/game_advisor.py)
+  ⎿  Added 5 lines, removed 20 lines
+      187          f"{k}={v:.2f}" for k, v in style_scores.items()
+      188      )
+      189  
+      190 +    # The strategy archetypes are well-known to any MTG-traine
+          +d model; the long                                             
+      191 +    # descriptive heuristics block was kept only as a recall-s
+          +afety net. Trimmed                                            
+      192 +    # to the off-meta label set since that's the only thing th
+          +e model needs the                                             
+      193 +    # taxonomy for.                                           
+      194      heuristics = (
+      191 -        "STRATEGY HEURISTICS for off-meta classification:\n"  
+      192 -        "- Aggro: cheap (CMC<=2) creatures on turns 1-2, fast 
+          -clock, "                                                      
+      193 -        "rarely casts spells with CMC>=4. Red is commonly aggr
+          -essive.\n"                                                    
+      194 -        "- Control: counterspells, board wipes (Wrath of God, 
+          -Damnation, "                                                  
+      195 -        "Supreme Verdict, Sunfall, Farewell, Toxic Deluge, Swe
+          -ltering Suns, "                                               
+      196 -        "Anger of the Gods, ...), big card-draw (Sphinx's Reve
+          -lation, Memory "                                              
+      197 -        "Deluge, ...), passes early turns with mana up (esp. b
+          -lue), late "                                                  
+      198 -        "first spell. Blue is commonly controlling.\n"        
+      199 -        "- Combo: known combo pieces (Goryo's Vengeance, Splin
+          -ter Twin, "                                                   
+      200 -        "Through the Breach, Scapeshift, Grapeshot/Storm piece
+          -s, Goblin "                                                   
+      201 -        "Charbelcher, Amulet of Vigor + Primeval Titan, Living
+          - End + "                                                      
+      202 -        "cascade, Devoted Druid + Vizier, ...), heavy cheap ca
+          -rd selection "                                                
+      203 -        "(Brainstorm/Ponder/Preordain/Manamorphose), few or no
+          - creatures.\n"                                                
+      204 -        "- Midrange: planeswalkers, mid-CMC threats (3-5 CMC),
+          - targeted "                                                   
+      205 -        "removal that produces 2-for-1s (Lightning Bolt + crea
+          -ture trade, "                                                 
+      206 -        "Fatal Push, Path to Exile, etc.). Black/Green is the 
+          -classic "                                                     
+      207 -        "midrange color pair.\n"                              
+      208 -        "- Tempo: cheap creatures plus interaction (counterspe
+          -lls, bounce, "                                                
+      209 -        "cheap removal); U/R Delver-like is canonical tempo. D
+          -istinguished "                                                
+      210 -        "from aggro by having interaction, from control by hav
+          -ing a clock.\n"                                               
+      195 +        "Off-meta labels available: " + ", ".join(OFF_META_NAM
+          +ES) + "."                                                     
+      196      )
+      197  
+      198      rules = (
+
+● Bash(python3 - <<'EOF'
+      import sys; sys.path.insert(0, '.')…)
+  ⎿  modern: 26 archetypes, 6072 chars, ~1735 tokens
+     standard: 23 archetypes, 5612 chars, ~1603 tokens
+     pioneer: 15 archetypes, 4865 chars, ~1390 tokens
+
+● Prompt trimmed from ~2600 to ~1735 tokens (33% reduction). Now check the
+  existing tests still pass.
+
+● Bash(.venv/bin/python -m pytest tests/test_game_advisor.py tests/test_main.py
+      -x -q 2>&1 | tail -30)
+  ⎿  ERROR: file or directory not found: tests/test_game_advisor.py
+
+
+     no tests ran in 0.00s
+
+  Listed 1 directory (ctrl+o to expand)
+
+● Bash(.venv/bin/python -m pytest tests/test_graph.py tests/test_dashboard.py -x
+       -q 2>&1 | tail -25)
+  ⎿  .................................F
+     =================================== FAILURES =========================
+     ==========
+     … +19 lines (ctrl+o to expand)
+
+● Bash(git -C /home/lou/Development/forge-1 log --oneline -1 --
+      forge-llm-sidecar/tests/test_dashboard.py forge-llm-sidecar/app/main.py
+      2>&1 | head; git -C /home/lou/D…)
+  ⎿  0f88a46f763 feat: v5 dimension scores, P/T board details, threat-aware
+      valuation, tempo/graveyard metrics
+     stash@{0}: On feature/sidecar-actions: uncommitted sidecar changes
+
+● Bash(git -C /home/lou/Development/forge-1 stash 2>&1 | tail -3
+      .venv/bin/python -m pytest
+      tests/test_dashboard.py::TestDashboardRoot::test_root_returns_html -x -q
+      2>…)
+  ⎿  Saved working directory and index state WIP on feature/sidecar-actions
+     : 5ca24d92370 feat: add primer ingestion, staleness detection, and pil
+     oting schema v2
+     … +16 lines (ctrl+o to expand)
+
+● Pre-existing failure, unrelated to my changes. Continuing.
+
+● Bash(.venv/bin/python -m pytest tests/test_graph.py tests/test_dashboard.py
+      --deselect
+      tests/test_dashboard.py::TestDashboardRoot::test_root_returns_html -q 2>&1
+       | t…)
+  ⎿  ..................................
+        [100%]
+     34 passed, 1 deselected in 0.37s
+
+● Tests green. Marking #33 done. Now the big one — synchronous wait at key AI
+  decisions.
+  Searched for 2 patterns, read 3 files (ctrl+o to expand)
+
+● Plan: add awaitLatest(long ms) to SidecarInfluence. Observer pushes the
+  in-flight future to it. AiController exposes waitForSidecar(long ms). Sprinkle
+   that at mulligan + start of main phase + declareAttackers.
+
+● Update(~/Development/forge-1/forge-ai/src/main/java/forge/ai/llm/SidecarInflue
+        nce.java)
+  ⎿  Added 3 lines
+       7  import java.util.Locale;
+       8  import java.util.Map;
+       9  import java.util.Optional;
+      10 +import java.util.concurrent.CompletableFuture;                 
+      11  import java.util.concurrent.ConcurrentHashMap;
+      12 +import java.util.concurrent.TimeUnit;                          
+      13 +import java.util.concurrent.TimeoutException;                  
+      14  import java.util.stream.Collectors;
+      15  
+      16  import org.tinylog.Logger;
+
+● Update(~/Development/forge-1/forge-ai/src/main/java/forge/ai/llm/SidecarInflue
+        nce.java)
+  ⎿  Added 46 lines
+       57  
+       58      private volatile boolean enabled = false;
+       59  
+       60 +    /**                                                       
+       61 +     * Latest in-flight /recognize future, pushed by the obser
+          +ver when it fires                                             
+       62 +     * a call. {@link #awaitLatest(long)} blocks on this so de
+          +cision points can                                             
+       63 +     * give the LLM a budget to finish before the heuristic AI
+          + commits.                                                     
+       64 +     */                                                       
+       65 +    private volatile CompletableFuture<?> latestCall = Complet
+          +ableFuture.completedFuture(null);                             
+       66 +                                                              
+       67      public SidecarInfluence(final AiController ai) {
+       68          this.ai = ai;
+       69      }
+       70  
+       71 +    /** Called by the observer when it fires a /recognize call
+          +. */                                                          
+       72 +    public void setLatestCall(final CompletableFuture<?> futur
+          +e) {                                                          
+       73 +        if (future != null) {                                 
+       74 +            latestCall = future;                              
+       75 +        }                                                     
+       76 +    }                                                         
+       77 +                                                              
+       78      /**
+       79 +     * Block up to {@code timeoutMs} for the most recent /reco
+          +gnize to settle.                                              
+       80 +     * Used at key decision points (mulligan, start of main, d
+          +eclare-attackers)                                             
+       81 +     * so the AI gives the sidecar a budget to deliver fresh a
+          +dvice before                                                  
+       82 +     * committing. Returns immediately if no call is in flight
+          + or it's already                                              
+       83 +     * done.                                                  
+       84 +     *                                                        
+       85 +     * @return true if the call completed within the budget, f
+          +alse on timeout.                                              
+       86 +     */                                                       
+       87 +    public boolean awaitLatest(final long timeoutMs) {        
+       88 +        if (timeoutMs <= 0) {                                 
+       89 +            return latestCall.isDone();                       
+       90 +        }                                                     
+       91 +        final CompletableFuture<?> f = latestCall;            
+       92 +        if (f.isDone()) {                                     
+       93 +            return true;                                      
+       94 +        }                                                     
+       95 +        try {                                                 
+       96 +            f.get(timeoutMs, TimeUnit.MILLISECONDS);          
+       97 +            return true;                                      
+       98 +        } catch (final TimeoutException ex) {                 
+       99 +            Logger.debug("SidecarInfluence: awaitLatest timed 
+          +out after %d ms", timeoutMs);                                 
+      100 +            return false;                                     
+      101 +        } catch (final InterruptedException ex) {             
+      102 +            Thread.currentThread().interrupt();               
+      103 +            return false;                                     
+      104 +        } catch (final Exception ex) {                        
+      105 +            // Future never throws (fail-soft); any unexpected
+          + exception is harmless here.                                  
+      106 +            return true;                                      
+      107 +        }                                                     
+      108 +    }                                                         
+      109 +                                                              
+      110 +    /**                                                       
+      111       * Called when a new sidecar result arrives. Stores the ac
+           tions and applies
+      112       * personality weighting (second pass).
+      113       */
+
+● Now wire the observer to push the in-flight future, and have AiController
+  expose a wait helper.
+
+● Update(~/Development/forge-1/forge-ai/src/main/java/forge/ai/llm/DeckRecogniti
+        onObserver.java)
+  ⎿  Added 4 lines, removed 1 line
+      442                  + " observations=" + observations.size()
+      443                  + " cards=" + observations.stream().map(Observ
+           ation::card).toList());
+      444  
+      445 -        client.recognizeAsync(request).whenComplete((result, e
+          -rr) -> {                                                      
+      445 +        final var future = client.recognizeAsync(request);    
+      446 +        // Expose to the influence object so decision sites ca
+          +n wait on it.                                                 
+      447 +        aiController.getSidecarInfluence().setLatestCall(futur
+          +e);                                                           
+      448 +        future.whenComplete((result, err) -> {                
+      449              if (err != null) {
+      450                  Logger.info("DeckRecognition: /recognize faile
+           d: " + err.getMessage());
+      451              } else if (result == null || result.isEmpty()) {
+
+● Now add the AiProps flag and the AiController helper.
+
+● Update(~/Development/forge-1/forge-ai/src/main/java/forge/ai/AiProps.java)
+  ⎿  File must be read first
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(~/Development/forge-1/forge-ai/src/main/java/forge/ai/AiProps.java)
+  ⎿  Added 5 lines, removed 1 line
+      164      SIDECAR_TARGETING_ENABLE("true"),               // consult
+            sidecar target priority lists
+      165      SIDECAR_MULLIGAN_ENABLE("true"),                // factor 
+           sidecar advice into mulligan decisions
+      166      SIDECAR_DISCARD_ENABLE("true"),                 // discard
+            lowest-handValue cards first
+      167 -    SIDECAR_HAND_VALUE_WEIGHT("30");                // weight 
+          -applied to handValue in evaluateCard blend                    
+      167 +    SIDECAR_HAND_VALUE_WEIGHT("30"),                // weight 
+          +applied to handValue in evaluateCard blend                    
+      168 +    // Synchronous "thinking" budget: at key decision points (
+          +mulligan, start of                                            
+      169 +    // AI main phase, declareAttackers), the AI blocks up to t
+          +his many ms for                                               
+      170 +    // any in-flight /recognize to settle before deciding. 0 =
+          + fire-and-forget.                                             
+      171 +    SIDECAR_WAIT_MS("3000");                                  
+      172      // Experimental features, must be promoted or removed afte
+           r extensive testing and, ideally, defaulting
+      173      // <-- There are no experimental options here -->
+      174  
+
+● Now add waitForSidecar to AiController and find the call sites.
+
+● Update(~/Development/forge-1/forge-ai/src/main/java/forge/ai/AiController.java
+        )
+  ⎿  Added 17 lines
+      137          return sidecarInfluence;
+      138      }
+      139  
+      140 +    /**                                                       
+      141 +     * Block up to {@link AiProps#SIDECAR_WAIT_MS} for any in-
+          +flight /recognize                                             
+      142 +     * to settle. Call at high-impact decision points (mulliga
+          +n, start of main,                                             
+      143 +     * declareAttackers) so the sidecar's advice is current be
+          +fore the AI                                                   
+      144 +     * commits. No-op when the influence is disabled or the bu
+          +dget is 0.                                                    
+      145 +     */                                                       
+      146 +    public void waitForSidecar() {                            
+      147 +        if (!getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE)
+          +) {                                                           
+      148 +            return;                                           
+      149 +        }                                                     
+      150 +        final int budget = getIntProperty(AiProps.SIDECAR_WAIT
+          +_MS);                                                         
+      151 +        if (budget <= 0) {                                    
+      152 +            return;                                           
+      153 +        }                                                     
+      154 +        sidecarInfluence.awaitLatest(budget);                 
+      155 +    }                                                         
+      156 +                                                              
+      157      public int getAttackAggression() {
+      158          return lastAttackAggression;
+      159      }
+
+● Now find the key decision points: mulligan, start of AI main phase, declare
+  attackers.
+
+  Searched for 3 patterns, read 1 file (ctrl+o to expand)
+
+● Update(~/Development/forge-1/forge-ai/src/main/java/forge/ai/PlayerControllerA
+        i.java)
+  ⎿  Added 3 lines
+      768      public boolean mulliganKeepHand(Player firstPlayer, int ca
+           rdsToReturn)  {
+      769          // Sidecar influence: explicit MULLIGAN action wins; o
+           therwise consult
+      770          // the hand-value sum as a tiebreaker against the heur
+           istic.
+      771 +        // Give the sidecar a budget to settle before we decid
+          +e — mulligan is                                               
+      772 +        // the single highest-impact decision in a game.      
+      773 +        brains.waitForSidecar();                              
+      774          if (brains.getBoolProperty(AiProps.SIDECAR_INFLUENCE_E
+           NABLE)
+      775                  && brains.getBoolProperty(AiProps.SIDECAR_MULL
+           IGAN_ENABLE)
+      776                  && brains.getSidecarInfluence().hasData()) {
+
+● Update(~/Development/forge-1/forge-ai/src/main/java/forge/ai/PlayerControllerA
+        i.java)
+  ⎿  Added 3 lines
+      845  
+      846      @Override
+      847      public void declareAttackers(Player attacker, Combat comba
+           t) {
+      848 +        // Combat is the second highest-impact decision; let t
+          +he sidecar finish                                             
+      849 +        // before we commit attackers.                        
+      850 +        brains.waitForSidecar();                              
+      851          brains.declareAttackers(attacker, combat);
+      852      }
+      853  
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(~/Development/forge-1/forge-ai/src/main/java/forge/ai/PlayerControllerA
+        i.java)
+  ⎿  Added 4 lines
+      853  
+      854      @Override
+      855      public void declareBlockers(Player defender, Combat combat
+           ) {
+      856 +        brains.waitForSidecar();                              
+      857          brains.declareBlockersFor(defender, combat);
+      858      }
+      859  
+      860      @Override
+      861      public List<SpellAbility> chooseSpellAbilityToPlay() {
+      862 +        // Main-phase decisions: pause once at the start of ea
+          +ch picker run so                                              
+      863 +        // the sidecar's PLAY_SPELL / target priority advice i
+          +s current.                                                    
+      864 +        brains.waitForSidecar();                              
+      865          return brains.chooseSpellAbilityToPlay();
+      866      }
+      867  
+
+● Bash(cd /home/lou/Development/forge-1 && mvn -pl forge-ai -am -DskipTests -q
+      compile 2>&1 | tail -30)
+  ⎿  (No output)
+
+● Clean compile. Now task #35 — wire BIAS_SPELL_PLAY and BIAS_ABILITY into real
+  decision sites.
+
+  Read 1 file (ctrl+o to expand)
+● Update(~/Development/forge-1/forge-ai/src/main/java/forge/ai/AiController.java
+        )
+  ⎿  Added 29 lines, removed 12 lines
+      1723      /**
+      1724       * If sidecar influence is enabled, check if it recommend
+            s a specific
+      1725       * PLAY_SPELL or ACTIVATE_ABILITY action for a card we ca
+            n play.
+      1726 +     *                                                       
+      1727 +     * <p>The bias flags ({@link AiProps#SIDECAR_BIAS_SPELL_P
+           +LAY},                                                        
+      1728 +     * {@link AiProps#SIDECAR_BIAS_ABILITY}) gate how confide
+           +nt the sidecar must                                          
+      1729 +     * be before we override the heuristic's pick. The check 
+           +is                                                           
+      1730 +     * {@code percentage * bias/100 > 50}, mirroring {@link #
+           +sidecarRecommendsPass}.                                      
+      1731 +     * Bias=100 trusts the sidecar fully; bias=0 disables the
+           + override entirely;                                          
+      1732 +     * the default of 50 requires the sidecar to score the ac
+           +tion above 100% raw                                          
+      1733 +     * confidence (effectively "only when the sidecar is very
+           + sure").</p>                                                 
+      1734       */
+      1735      private SpellAbility trySidecarRecommendedPlay(final List
+            <SpellAbility> all, boolean skipCounter) {
+      1736          if (!getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE
+            ) || !sidecarInfluence.hasData()) {
+      1737              return null;
+      1738          }
+      1739          // PLAY_SPELL: try each recommended card in priority 
+            order; pick the
+      1732 -        // first one we can legally play and pay for.        
+      1733 -        for (final String targetCard : sidecarInfluence.bestP
+           -laySpellNames()) {                                           
+      1734 -            if (targetCard == null || targetCard.isEmpty()) c
+           -ontinue;                                                     
+      1735 -            for (final SpellAbility sa : ComputerUtilAbility.
+           -getOriginalAndAltCostAbilities(all, player)) {               
+      1736 -                if (skipCounter && sa.getApi() == ApiType.Cou
+           -nter) continue;                                              
+      1737 -                sa.setActivatingPlayer(player);              
+      1738 -                final String cardName = sa.getHostCard() != n
+           -ull ? sa.getHostCard().getName() : "";                       
+      1739 -                if (cardName.equalsIgnoreCase(targetCard) || 
+           -cardName.contains(targetCard)) {                             
+      1740 -                    if (canPlayAndPayFor(sa) == AiPlayDecisio
+           -n.WillPlay) {                                                
+      1741 -                        return sa;                           
+      1740 +        // first one we can legally play and pay for, IF the 
+           +sidecar's confidence                                         
+      1741 +        // (after applying the spell-play bias) clears the th
+           +reshold.                                                     
+      1742 +        final double spellBias = getIntProperty(AiProps.SIDEC
+           +AR_BIAS_SPELL_PLAY) / 100.0;                                 
+      1743 +        if (spellBias > 0.0) {                               
+      1744 +            for (final var spellAction : sidecarInfluence.get
+           +Actions()) {                                                 
+      1745 +                if (!"PLAY_SPELL".equals(spellAction.actionTy
+           +pe())) continue;                                             
+      1746 +                if (spellAction.percentage() * spellBias <= 5
+           +0.0) continue;                                               
+      1747 +                final String targetCard = spellAction.target(
+           +);                                                           
+      1748 +                if (targetCard == null || targetCard.isEmpty(
+           +)) continue;                                                 
+      1749 +                for (final SpellAbility sa : ComputerUtilAbil
+           +ity.getOriginalAndAltCostAbilities(all, player)) {           
+      1750 +                    if (skipCounter && sa.getApi() == ApiType
+           +.Counter) continue;                                          
+      1751 +                    sa.setActivatingPlayer(player);          
+      1752 +                    final String cardName = sa.getHostCard() 
+           +!= null ? sa.getHostCard().getName() : "";                   
+      1753 +                    if (cardName.equalsIgnoreCase(targetCard)
+           + || cardName.contains(targetCard)) {                         
+      1754 +                        if (canPlayAndPayFor(sa) == AiPlayDec
+           +ision.WillPlay) {                                            
+      1755 +                            return sa;                       
+      1756 +                        }                                    
+      1757                      }
+      1758                  }
+      1759              }
+      1760          }
+      1761          // ACTIVATE_ABILITY: single best entry (rare, the sid
+            ecar usually emits
+      1747 -        // PLAY_SPELL).                                      
+      1762 +        // PLAY_SPELL). Same bias gate.                      
+      1763 +        final double abilityBias = getIntProperty(AiProps.SID
+           +ECAR_BIAS_ABILITY) / 100.0;                                  
+      1764          var abilityAction = sidecarInfluence.bestAction("ACTI
+            VATE_ABILITY");
+      1749 -        if (abilityAction.isPresent()) {                     
+      1765 +        if (abilityBias > 0.0 && abilityAction.isPresent()   
+      1766 +                && abilityAction.get().percentage() * ability
+           +Bias > 50.0) {                                               
+      1767              final String targetCard = abilityAction.get().tar
+            get();
+      1768              if (targetCard != null && !targetCard.isEmpty()) 
+            {
+      1769                  for (final SpellAbility sa : ComputerUtilAbil
+            ity.getOriginalAndAltCostAbilities(all, player)) {
+
+  Searched for 2 patterns, read 2 files (ctrl+o to expand)
+
+● All sub-flags are already gated correctly under the master switch — my earlier
+   diagnosis was wrong. Marking #36 done with that note, and moving to #37
+  (decouple personality from bias).
+
+  Read 1 file (ctrl+o to expand)
+
+● I'll remove the personality multiplication in applyPersonalityWeight — bias
+  values are already configured per AI profile, so personality was
+  double-counting. Personality flag stays as a no-op for back-compat but the
+  comment explains why.
+
+● Update(~/Development/forge-1/forge-ai/src/main/java/forge/ai/llm/SidecarInflue
+        nce.java)
+  ⎿  Added 26 lines, removed 28 lines
+      202      }
+      203  
+      204      /**
+      205 -     * Apply second-pass personality weighting from AiProps.  
+      206 -     * Aggressive profiles boost ATTACK/PLAY_SPELL; defensive 
+          -ones boost BLOCK/PASS.                                        
+      205 +     * Apply personality weighting as a soft DOWN-weight only.
+      206 +     *                                                        
+      207 +     * <p>Historically this was a two-sided multiplier (boost 
+          +favored actions,                                              
+      208 +     * dampen disfavored ones). That compounded with the      
+      209 +     * {@link AiProps#SIDECAR_BIAS_ATTACK}/...{@code _BLOCK}/.
+          +..{@code _PASS}                                               
+      210 +     * multipliers applied at the decision sites — an aggressi
+          +ve AI's ATTACK                                                
+      211 +     * could get boosted twice. Bias is already the user-tunab
+          +le knob per                                                   
+      212 +     * profile, so personality is now restricted to DOWN-weigh
+          +ting                                                          
+      213 +     * actions that conflict with the personality. That preser
+          +ves the                                                       
+      214 +     * "aggressive AI doesn't sandbag" intent without re-boost
+          +ing actions the                                               
+      215 +     * profile already favors.</p>                            
+      216 +     *                                                        
+      217 +     * <p>{@link AiProps#SIDECAR_PERSONALITY_WEIGHT} = 0 disab
+          +les personality                                               
+      218 +     * entirely. Higher values mean stronger dampening (cap 0.
+          +5x).</p>                                                      
+      219       */
+      220      private double applyPersonalityWeight(final ActionScore ac
+           tion) {
+      209 -        double pct = action.percentage();                     
+      221 +        final double pct = action.percentage();               
+      222  
+      211 -        final boolean isAggro = ai.getBoolProperty(AiProps.PLA
+          -Y_AGGRO);                                                     
+      223          final int weight = ai.getIntProperty(AiProps.SIDECAR_P
+           ERSONALITY_WEIGHT);
+      213 -                                                              
+      224          if (weight <= 0) {
+      215 -            return pct; // personality weighting disabled     
+      225 +            return pct;                                       
+      226          }
+      227 +        final boolean isAggro = ai.getBoolProperty(AiProps.PLA
+          +Y_AGGRO);                                                     
+      228 +        // Dampening factor ranges from 1.0 (weight=0) down to
+          + 0.5 (weight=100).                                            
+      229 +        final double damp = Math.max(0.5, 1.0 - (weight / 100.
+          +0) * 0.5);                                                    
+      230  
+      218 -        final double factor = 1.0 + (weight / 100.0 - 1.0) * 0
+          -.5; // normalize to 0.5x-1.5x                                 
+      219 -                                                              
+      231          switch (action.actionType()) {
+      221 -            case "PLAY_SPELL":                                
+      222 -            case "ACTIVATE_ABILITY":                          
+      223 -                if (isAggro) {                                
+      224 -                    pct *= Math.min(factor * 1.2, 1.5);       
+      232 +            case "ATTACK":                                    
+      233 +                if (!isAggro) {                               
+      234 +                    return pct * damp;                        
+      235                  }
+      236                  break;
+      227 -            case "ATTACK":                                    
+      237 +            case "PASS":                                      
+      238                  if (isAggro) {
+      229 -                    pct *= Math.min(factor * 1.3, 1.6);       
+      230 -                } else {                                      
+      231 -                    pct *= 0.85;                              
+      239 +                    return pct * damp;                        
+      240                  }
+      241                  break;
+      242              case "BLOCK":
+      235 -                if (!isAggro) {                               
+      236 -                    pct *= Math.min(factor * 1.15, 1.4);      
+      237 -                } else {                                      
+      238 -                    pct *= 0.8;                               
+      239 -                }                                             
+      240 -                break;                                        
+      241 -            case "PASS":                                      
+      243                  if (isAggro) {
+      243 -                    pct *= 0.7;                               
+      244 -                } else {                                      
+      245 -                    pct *= Math.min(factor * 1.1, 1.3);       
+      244 +                    return pct * damp;                        
+      245                  }
+      246                  break;
+      247              default:
+      248                  break;
+      249          }
+      251 -                                                              
+      252 -        return Math.max(0.0, Math.min(100.0, pct));           
+      250 +        return pct;                                           
+      251      }
+      252  
+      253      /** @return the best action of a given type, or empty if n
+           one. */
+
+● Bash(mvn -pl forge-ai -am -DskipTests -q compile 2>&1 | tail -20)
+  ⎿  (No output)
+
+● Clean compile. Now finish: build the full APK and verify the sidecar tests
+  pass.
+
+● Bash(.venv/bin/python -m pytest tests/test_graph.py tests/test_piloting.py
+      --deselect
+      tests/test_dashboard.py::TestDashboardRoot::test_root_returns_html -q 2>&1
+       | ta…)
+  ⎿  (eval):1: no such file or directory: .venv/bin/python
+
+● Bash(mvn -pl forge-gui-android -am -DskipTests -q package 2>&1 | tail -15)
+  ⎿  (No output)
+
+● Bash(cd /home/lou/Development/forge-1/forge-llm-sidecar && .venv/bin/python -m
+       pytest tests/test_graph.py tests/test_piloting.py -q 2>&1 | tail -10
+      echo "---"…)
+  ⎿  .....................................
+        [100%]
+     37 passed in 0.23s
+     … +9 lines (ctrl+o to expand)
+
+● All green. APK built. Here's the wrap-up:
+
+  What changed
+
+  Sidecar (forge-llm-sidecar) — restart needed to pick up:
+  - app/main.py — Per-game LRU cache on /recognize keyed on (game_id, turn, 
+  observations, boards, gys, life, phase, mana, board details). Repeat calls
+  with identical inputs return in <1ms. Stats exposed under recognize_cache on
+  /api/stats.
+  - app/nodes/game_advisor.py — Trimmed recognition prompt: dropped
+  per-archetype tells field and the long static strategy-heuristics block (the
+  model already knows MTG taxonomy). Modern prompt: 2596 → 1735 tokens (33%
+  reduction).
+
+  Forge AI (Java) — APK rebuilt to
+  forge-gui-android/target/forge-android-2.0.13-SNAPSHOT-05.21-debug-signed.apk:
+  - SidecarInfluence — New awaitLatest(timeoutMs): blocks on the most recent
+  /recognize future. New setLatestCall(future) so the observer hands its
+  in-flight future to the influence object.
+  - DeckRecognitionObserver.fireCall() — Pushes each recognizeAsync future to
+  SidecarInfluence.setLatestCall so decision points can wait on it.
+  - AiController.waitForSidecar() — Reads SIDECAR_WAIT_MS, blocks up to that
+  budget; no-op when master switch off or budget=0.
+  - PlayerControllerAi — Calls waitForSidecar() at the four high-impact decision
+   points: mulliganKeepHand, chooseSpellAbilityToPlay, declareAttackers,
+  declareBlockers.
+  - AiController.trySidecarRecommendedPlay — Wired SIDECAR_BIAS_SPELL_PLAY and
+  SIDECAR_BIAS_ABILITY: only override the heuristic when percentage × bias/100 >
+   50. Bias=0 disables override; bias=100 trusts the sidecar fully.
+  - SidecarInfluence.applyPersonalityWeight — Personality is now DOWN-weight
+  only (caps at 0.5x). Removes the double-counting with bias multipliers at
+  decision sites. SIDECAR_PERSONALITY_WEIGHT=0 disables it entirely.
+  - AiProps.SIDECAR_WAIT_MS — New flag, default 3000.
+
+  Note on the master-switch gating concern I flagged earlier: I was wrong —
+  every sub-flag IS already gated under SIDECAR_INFLUENCE_ENABLE. No fix needed.
+
+  Next steps for you
+
+  1. Restart the sidecar to pick up the cache + trimmed prompt:
+  kill 2752611 && cd forge-llm-sidecar && .venv/bin/uvicorn app.main:app --host
+  0.0.0.0 --port 18970 &
+  2. Reinstall the new APK on your phone (the one at forge-gui-android/target/fo
+  rge-android-2.0.13-SNAPSHOT-05.21-debug-signed.apk).
+  3. Play a game. You should see:
+    - First /recognize per turn: ~5–7s (smaller prompt, no thinking)
+    - Subsequent calls during the same turn: <100ms (cache hits)
+    - A visible ~1–3s pause before mulligan / attack / block while the AI
+  "thinks"
+    - On the dashboard, recognize_cache.hits climbs quickly — that's your signal
+   the cache is doing work.
+
+✻ Crunched for 14m 51s

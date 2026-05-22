@@ -21,6 +21,8 @@ from app.nodes import game_advisor
 from app.schema import (
     ActionScore,
     BeatdownAssessment,
+    ComboPlan,
+    EarlyGamePlan,
     HandValuation,
     OpponentHandGuess,
     PilotingAdvice,
@@ -78,6 +80,12 @@ async def _log_every_request(request: Request, call_next):
 app.mount("/static", StaticFiles(directory=str(_static_dir)), name="static")
 
 
+@app.get("/")
+async def root_dashboard() -> FileResponse:
+    """Serve the dashboard HTML at the root for browser convenience."""
+    return FileResponse(str(_static_dir / "dashboard.html"))
+
+
 @app.get("/dashboard")
 async def dashboard_root() -> FileResponse:
     """Serve the dashboard HTML."""
@@ -115,6 +123,7 @@ _recognize_cache_hits = 0
 _recognize_cache_misses = 0
 # Computed once at startup; busts the cache when any archetype profile changes.
 _PROFILES_VERSION = loader.all_profiles_version()
+_COMBO_PROFILES_VERSION = piloting.combo_profiles_version()
 
 
 def _recognize_cache_key(req: RecognitionRequest) -> str:
@@ -142,13 +151,18 @@ def _recognize_cache_key(req: RecognitionRequest) -> str:
             (bc.name, bc.power, bc.toughness, sorted(bc.types), bc.is_creature, bc.tapped)
             for bc in req.opponent_board_details
         ],
-        # v6: strategist inputs. decision_type changes how hard the sidecar
-        # reasons; opp mana feeds the next-turn prediction. _PROFILES_VERSION
-        # busts the cache whenever any archetype profile file is edited.
+        # v6/v7: strategist inputs. decision_type changes how hard the sidecar
+        # reasons; opp mana feeds disruption and next-turn prediction. Profile
+        # tokens bust cache whenever archetype or combo profile files change.
         "dt": req.decision_type,
         "oma": req.opp_mana_available,
         "oms": req.opp_mana_spent_this_turn,
+        "ous": req.opp_untapped_sources,
+        "la": [a.model_dump() for a in req.legal_actions],
+        "ctr": req.cards_to_return,
+        "si": req.sidecar_influence,
         "pv": _PROFILES_VERSION,
+        "cv": _COMBO_PROFILES_VERSION,
     }
     encoded = _json.dumps(payload, sort_keys=True, default=str).encode("utf-8")
     return hashlib.blake2b(encoded, digest_size=16).hexdigest()
@@ -370,8 +384,17 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         "opp_mana_spent_this_turn": req.opp_mana_spent_this_turn,
         "opp_untapped_sources": req.opp_untapped_sources,
         "decision_type": req.decision_type,
+        "legal_actions": [a.model_dump() for a in req.legal_actions],
+        "cards_to_return": req.cards_to_return,
+        "sidecar_influence": req.sidecar_influence,
     }
     final = await graph.ainvoke(initial)
+    response = _response_from_final(req, final)
+    _cache_put(cache_key, response.model_dump())
+    return response
+
+
+def _response_from_final(req: RecognitionRequest, final: dict) -> RecognitionResponse:
     raw_actions = final.get("actions") or []
     actions = [ActionScore(**a) for a in raw_actions if isinstance(a, dict)]
     role_raw = final.get("role")
@@ -395,6 +418,10 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
     beatdown_assessment = (
         BeatdownAssessment(**beatdown_raw) if isinstance(beatdown_raw, dict) else None
     )
+    combo_raw = final.get("combo_plan")
+    combo_plan = ComboPlan(**combo_raw) if isinstance(combo_raw, dict) else None
+    early_raw = final.get("early_game_plan")
+    early_game_plan = EarlyGamePlan(**early_raw) if isinstance(early_raw, dict) else None
     guide = final.get("piloting_guide") or {}
     phase_bucket = (
         "early_game" if req.turn <= 3 else "mid_game" if req.turn <= 7 else "late_game"
@@ -434,6 +461,8 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         matchup_advice=matchup_advice,
         predicted_opp_line=predicted_opp_line,
         beatdown_assessment=beatdown_assessment,
+        combo_plan=combo_plan,
+        early_game_plan=early_game_plan,
     )
 
     _store = get_store()
@@ -458,13 +487,65 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         }
     )
 
-    response = RecognitionResponse(
+    return RecognitionResponse(
         archetype=final.get("archetype") or "Unknown",
         confidence=final.get("confidence") or 0.0,
         reasoning=final.get("reasoning") or "",
         alternatives=final.get("alternatives") or [],
         piloting=piloting_advice,
     )
+
+
+@app.post("/mulligan-plan", response_model=RecognitionResponse)
+async def mulligan_plan(req: RecognitionRequest) -> RecognitionResponse:
+    """Synchronous opening-hand planner for Forge mulligan decisions."""
+    req.decision_type = "mulligan"
+    log.info(
+        "mulligan-plan: client=%s game=%s ai_turn=%s cards_to_return=%s influence=%s",
+        req.client,
+        req.game_id,
+        req.turn,
+        req.cards_to_return,
+        req.sidecar_influence,
+    )
+    cache_key = _recognize_cache_key(req)
+    cached = _cache_get(cache_key)
+    if cached is not None:
+        return RecognitionResponse(**cached)
+    graph = get_graph()
+    initial = {
+        "game_id": req.game_id,
+        "format": req.format,
+        "turn": req.turn,
+        "observations": [o.model_dump() for o in req.observations],
+        "deck_cards": req.deck_cards,
+        "hand": req.hand,
+        "own_board": req.own_board,
+        "opponent_board": req.opponent_board,
+        "your_graveyard": req.your_graveyard,
+        "opponent_graveyard": req.opponent_graveyard,
+        "life_totals": req.life_totals,
+        "phase": req.phase,
+        "available_mana": req.available_mana,
+        "personality": req.personality,
+        "alternatives": [],
+        "ai_hand_size": req.ai_hand_size,
+        "opp_hand_size": req.opp_hand_size,
+        "ai_library_size": req.ai_library_size,
+        "opp_library_size": req.opp_library_size,
+        "own_board_details": [bc.model_dump() for bc in req.own_board_details],
+        "opponent_board_details": [bc.model_dump() for bc in req.opponent_board_details],
+        "opponent_mana_colors_seen": req.opponent_mana_colors_seen,
+        "opp_mana_available": req.opp_mana_available,
+        "opp_mana_spent_this_turn": req.opp_mana_spent_this_turn,
+        "opp_untapped_sources": req.opp_untapped_sources,
+        "decision_type": "mulligan",
+        "legal_actions": [a.model_dump() for a in req.legal_actions],
+        "cards_to_return": req.cards_to_return,
+        "sidecar_influence": req.sidecar_influence,
+    }
+    final = await graph.ainvoke(initial)
+    response = _response_from_final(req, final)
     _cache_put(cache_key, response.model_dump())
     return response
 
@@ -537,6 +618,8 @@ async def forge_log_analyze(req: ForgeLogAnalyzeRequest) -> ForgeLogAnalyzeRespo
 
         raw_actions = final.get("actions") or []
         actions = [ActionScore(**a) for a in raw_actions if isinstance(a, dict)]
+        combo_raw = final.get("combo_plan")
+        combo_plan = ComboPlan(**combo_raw) if isinstance(combo_raw, dict) else None
         piloting_advice = PilotingAdvice(
             own_archetype=final.get("own_archetype") or "Unknown",
             guide_source=final.get("guide_source") or "",
@@ -545,6 +628,7 @@ async def forge_log_analyze(req: ForgeLogAnalyzeRequest) -> ForgeLogAnalyzeRespo
             alternatives=final.get("play_alternatives") or [],
             mulligan_advice=final.get("mulligan_advice") or "",
             actions=actions,
+            combo_plan=combo_plan,
         )
         resp = RecognitionResponse(
             archetype=final.get("archetype") or "Unknown",

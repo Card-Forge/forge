@@ -74,7 +74,13 @@ public record RecognitionRequest(
         /** v6: one entry per untapped opponent mana source, each the colors that
          *  source can produce (W/U/B/R/G/C). Lets the sidecar reason about which
          *  color combinations the opponent has open this turn. */
-        @SerializedName("opp_untapped_sources") List<List<String>> oppUntappedSources) {
+        @SerializedName("opp_untapped_sources") List<List<String>> oppUntappedSources,
+        /** v8: legal current actions the sidecar may directly influence. */
+        @SerializedName("legal_actions") List<LegalAction> legalActions,
+        /** v8: number of cards to return after keeping a London mulligan. */
+        @SerializedName("cards_to_return") int cardsToReturn,
+        /** v8: global sidecar influence weight, 0=no influence, 100=force if legal. */
+        @SerializedName("sidecar_influence") int sidecarInfluence) {
 
     /** Identifier this (Forge) adapter sends as the {@code client} field. */
     public static final String CLIENT = "forge";
@@ -90,7 +96,7 @@ public record RecognitionRequest(
                 List.of(), List.of(), List.of(), List.of(), List.of(), Map.of(),
                 "", List.of(), Map.of(),
                 0, 0, 0, 0, List.of(), List.of(), List.of(),
-                0, 0, "", List.of());
+                0, 0, "", List.of(), List.of(), 0, 50);
     }
 
     /**
@@ -104,6 +110,6 @@ public record RecognitionRequest(
                 List.of(), List.of(), List.of(), List.of(), List.of(), Map.of(),
                 "", List.of(), personality,
                 0, 0, 0, 0, List.of(), List.of(), List.of(),
-                0, 0, "", List.of());
+                0, 0, "", List.of(), List.of(), 0, 50);
     }
 }

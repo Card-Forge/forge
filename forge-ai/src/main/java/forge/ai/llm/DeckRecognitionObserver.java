@@ -70,6 +70,9 @@ public final class DeckRecognitionObserver {
     /** Last message written to the log, to suppress identical consecutive guesses. */
     private volatile String lastPostedMessage = null;
 
+    /** AI-player turn count. This is intentionally separate from the global game turn. */
+    private volatile int aiTurnNumber = 0;
+
     public DeckRecognitionObserver(final Player aiPlayer, final Game game,
                                    final DeckRecognitionClient client,
                                    final AiController aiController) {
@@ -78,6 +81,7 @@ public final class DeckRecognitionObserver {
         this.client = client;
         this.aiController = aiController;
         this.deckCards = extractDeckCards(aiPlayer);
+        this.aiTurnNumber = Math.max(0, aiPlayer.getTurn());
         identifyOwnArchetypeUpFront();
     }
 
@@ -119,21 +123,28 @@ public final class DeckRecognitionObserver {
     }
 
     /** Read the AI's own decklist (main deck card names) once, up front. */
-    private static List<String> extractDeckCards(final Player aiPlayer) {
-        final Set<String> names = new LinkedHashSet<>();
+    static List<String> extractDeckCards(final Player aiPlayer) {
+        final List<String> names = new ArrayList<>();
         try {
             final RegisteredPlayer rp = aiPlayer.getRegisteredPlayer();
             if (rp != null && rp.getDeck() != null) {
                 for (final Map.Entry<PaperCard, Integer> e : rp.getDeck().getMain()) {
                     if (e.getKey() != null) {
-                        names.add(e.getKey().getName());
+                        for (int i = 0; i < Math.max(1, e.getValue()); i++) {
+                            names.add(e.getKey().getName());
+                        }
                     }
                 }
             }
         } catch (final RuntimeException ex) {
             Logger.debug("DeckRecognition: could not read AI deck: " + ex.getMessage());
         }
-        return new ArrayList<>(names);
+        return names;
+    }
+
+    /** @return full AI main-deck card names, preserving duplicate copies. */
+    List<String> deckCards() {
+        return List.copyOf(deckCards);
     }
 
     /** Single handler — Guava delivers every {@link GameEvent} subtype here. */
@@ -144,7 +155,10 @@ public final class DeckRecognitionObserver {
                 handleSpellCast(cast);
             } else if (ev instanceof GameEventLandPlayed land) {
                 handleLandPlayed(land);
-            } else if (ev instanceof GameEventTurnBegan) {
+            } else if (ev instanceof GameEventTurnBegan turnBegan) {
+                if (turnBegan.turnOwner() != null && turnBegan.turnOwner().equals(aiPlayer.getView())) {
+                    aiTurnNumber = Math.max(aiTurnNumber + 1, aiPlayer.getTurn() + 1);
+                }
                 // A turn boundary is itself information (e.g. a turn the
                 // opponent passed without acting), so always re-evaluate.
                 requestRecognition();
@@ -501,7 +515,7 @@ public final class DeckRecognitionObserver {
                 String.valueOf(game.getId()),
                 game.getRules().getGameType().name(),
                 aiPlayer.getId(),
-                game.getPhaseHandler().getTurn(),
+                currentAiTurnNumber(),
                 new ArrayList<>(observations),
                 deckCards,
                 hand,
@@ -523,10 +537,14 @@ public final class DeckRecognitionObserver {
                 oppMana.available(),
                 oppMana.spent(),
                 decisionType,
-                oppMana.untappedSources());
+                oppMana.untappedSources(),
+                List.of(),
+                0,
+                aiController.getIntProperty(AiProps.SIDECAR_INFLUENCE_WEIGHT));
 
         Logger.info("DeckRecognition: POST /recognize game=" + game.getId()
-                + " turn=" + game.getPhaseHandler().getTurn()
+                + " aiTurn=" + currentAiTurnNumber()
+                + " gameTurn=" + game.getPhaseHandler().getTurn()
                 + " observations=" + observations.size()
                 + " cards=" + observations.stream().map(Observation::card).toList());
 
@@ -551,6 +569,10 @@ public final class DeckRecognitionObserver {
                 requestRecognition();
             }
         });
+    }
+
+    private int currentAiTurnNumber() {
+        return Math.max(aiTurnNumber, aiPlayer.getTurn());
     }
 
     private void postGuess(final RecognitionResult result) {
