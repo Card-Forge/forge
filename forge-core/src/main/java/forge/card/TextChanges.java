@@ -32,7 +32,7 @@ public class TextChanges implements ITextChanges {
     }
 
     @Override
-    boolean isEmpty() {
+    public boolean isEmpty() {
         return map.isEmpty();
     }
 
@@ -54,7 +54,7 @@ public class TextChanges implements ITextChanges {
             typeChanges.clear();
             for (final IChangedText changes : this.map.values()) {
                 changes.applyColorChanges(colorChanges);
-                changes.applyTextChanges(typeChanges);
+                changes.applyTypeChanges(typeChanges);
             }
             isDirty = false;
         }
