@@ -20,7 +20,7 @@ public record TextChangesView(Map<MagicColor.Color, MagicColor.Color> colorChang
 
         return new TextChangesView(
             _combineChangedMap(colorChanges(), output.colorChanges()),
-            _combineChangedMap(typeChanges(), output.typeChanges()),
+            _combineChangedMap(typeChanges(), output.typeChanges())
         );
     }
 
