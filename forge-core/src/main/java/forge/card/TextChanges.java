@@ -1,5 +1,9 @@
 package forge.card;
 
+import com.google.common.collect.Maps;
+import com.google.common.collect.Table;
+import com.google.common.collect.TreeBasedTable;
+
 import java.util.Map;
 
 public class TextChanges implements ITextChanges {
