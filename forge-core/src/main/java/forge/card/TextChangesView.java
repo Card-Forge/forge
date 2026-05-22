@@ -1,5 +1,7 @@
 package forge.card;
 
+import com.google.common.collect.Maps;
+
 import java.util.Map;
 
 public record TextChangesView(Map<MagicColor.Color, MagicColor.Color> colorChanges, Map<String, String> typeChanges) implements ITextChanges {
