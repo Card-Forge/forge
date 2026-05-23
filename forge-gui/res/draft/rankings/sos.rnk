@@ -200,7 +200,7 @@
 #199|Bulk Up|U|SOA
 #200|Dig Site Inventory|C|SOS
 #201|Soaring Stoneglider|U|SOS
-#202|chase inspiration|C|SOS
+#202|Chase Inspiration|C|SOS
 #203|Run Behind|C|SOS
 #204|Rabid Attack|U|SOS
 #205|Scathing Shadelock|U|SOS
@@ -331,10 +331,12 @@
 #330|Crop Rotation|R|SOA
 #331|Veil of Summer|R|SOA
 #332|Pox Plague|R|SOS
-#333|Forest|C|SOS
-#334|Island|C|SOS
-#335|Mountain|C|SOS
-#336|Plains|C|SOS
-#337|Swamp|C|SOS
+#333|Melancholic Poet|C|SOS
+#334|Masterful Flourish|C|SOS
+#335|Forest|C|SOS
+#336|Island|C|SOS
+#337|Mountain|C|SOS
+#338|Plains|C|SOS
+#339|Swamp|C|SOS
 
 
