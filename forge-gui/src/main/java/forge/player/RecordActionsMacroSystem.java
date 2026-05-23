@@ -2,14 +2,10 @@ package forge.player;
 
 import com.google.common.collect.Lists;
 import forge.card.MagicColor;
-import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
-import forge.game.player.PlayerView;
 import forge.game.player.actions.ActivateAbilityAction;
 import forge.game.player.actions.ColorChoiceAction;
 import forge.game.player.actions.ConfirmAction;
@@ -24,8 +20,6 @@ import forge.game.player.actions.SelectCardAction;
 import forge.game.player.actions.SelectPlayerAction;
 import forge.game.player.actions.ScryAction;
 import forge.game.player.actions.StackOrderAction;
-import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.Input;
 import forge.gamemodes.match.input.InputAttack;
 import forge.gamemodes.match.input.InputConfirm;
@@ -36,7 +30,6 @@ import forge.gamemodes.match.input.InputSelectEntitiesFromList;
 import forge.gamemodes.match.input.InputSelectTargets;
 import forge.gui.FThreads;
 import forge.interfaces.IMacroSystem;
-import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -63,8 +56,8 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s+");
 
     private final PlayerControllerHuman playerControllerHuman;
+    private final MacroActionReplayer actionReplayer;
     private final Localizer localizer = Localizer.getInstance();
-    private final ITriggerEvent replayTriggerEvent = new DummyTriggerEvent();
 
     private final List<PlayerAction> actions = Lists.newArrayList();
     private final List<PlayerAction> playbackActions = Lists.newArrayList();
@@ -81,6 +74,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
 
     public RecordActionsMacroSystem(final PlayerControllerHuman playerControllerHuman) {
         this.playerControllerHuman = playerControllerHuman;
+        this.actionReplayer = new MacroActionReplayer(playerControllerHuman, this::debug);
     }
 
     @Override
@@ -921,8 +915,8 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         if (actionIndex < 0 || actionIndex >= playbackActions.size()) {
             return null;
         }
-        final Card card = findCard(playbackActions.get(actionIndex).getSelectedCardView());
-        return isControlledByPlayer(card) ? card : null;
+        final Card card = actionReplayer.findCard(playbackActions.get(actionIndex).getSelectedCardView());
+        return actionReplayer.isControlledByPlayer(card) ? card : null;
     }
 
     private int findNextAction(final Class<?>... actionClasses) {
@@ -984,7 +978,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         final int size = findLeadingManaSourceSearchSize();
         for (int i = 0; i < size; i++) {
             final PlayerAction action = playbackActions.get(i);
-            if (activateRecordedManaSource(findCard(action.getSelectedCardView()), action)) {
+            if (actionReplayer.selectManaSource(actionReplayer.findCard(action.getSelectedCardView()), action)) {
                 return i;
             }
         }
@@ -1005,7 +999,8 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         final int start = findLeadingManaSourceSearchSize();
         for (int i = start; i < playbackActions.size(); i++) {
             final PlayerAction action = playbackActions.get(i);
-            if (activateRecordedManaSource(exactRecordedLandManaSource(action.getSelectedCardView()), action)) {
+            if (actionReplayer.selectManaSource(
+                    actionReplayer.exactRecordedLandManaSource(action.getSelectedCardView()), action)) {
                 return true;
             }
         }
@@ -1015,29 +1010,11 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     private boolean hasFutureUsableRecordedLandSelection() {
         final int start = findLeadingManaSourceSearchSize();
         for (int i = start; i < playbackActions.size(); i++) {
-            if (exactRecordedLandManaSource(playbackActions.get(i).getSelectedCardView()) != null) {
+            if (actionReplayer.exactRecordedLandManaSource(playbackActions.get(i).getSelectedCardView()) != null) {
                 return true;
             }
         }
         return false;
-    }
-
-    private Card exactRecordedLandManaSource(final CardView recordedCard) {
-        final Card card = playerControllerHuman.getCard(recordedCard);
-        return isControlledByPlayer(card) && !card.isTapped() && card.isLand() ? card : null;
-    }
-
-    private boolean activateRecordedManaSource(final Card card, final PlayerAction action) {
-        if (card == null || card.isTapped() || card.getManaAbilities().isEmpty()
-                || !playerControllerHuman.selectCard(card.getView(), null, replayTriggerEvent)) {
-            return false;
-        }
-        debug("using future mana source " + action.describe());
-        return true;
-    }
-
-    private boolean isControlledByPlayer(final Card card) {
-        return card != null && playerControllerHuman.getPlayer().equals(card.getController());
     }
 
     private int findNextActionBefore(final int endIndex, final Class<?>... actionClasses) {
@@ -1107,57 +1084,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         if (DEBUG) {
             debug("try " + action.describe());
         }
-        final Input input = playerControllerHuman.getInputProxy().getInput();
-        if (action instanceof ActivateAbilityAction activateAbilityAction) {
-            if (input instanceof InputPassPriority passPriorityInput) {
-                return debugResult(action, activateAbility(passPriorityInput, activateAbilityAction));
-            }
-        } else if (action instanceof PassPriorityAction passPriorityAction) {
-            if (input instanceof InputPassPriority && passPriorityAction.canReplay(isStackEmpty(), getCurrentPhase())) {
-                input.selectButtonOK();
-                return debugResult(action, true);
-            }
-            if (input instanceof InputAttack && passPriorityAction.canReplayDuringAttack(getCurrentPhase())) {
-                input.selectButtonOK();
-                return debugResult(action, true);
-            }
-        } else if (action instanceof FinishTargetingAction) {
-            if (input instanceof InputSelectTargets || input instanceof InputAttack) {
-                input.selectButtonOK();
-                return debugResult(action, true);
-            }
-        } else if (action instanceof PayManaFromPoolAction payManaFromPoolAction) {
-            if (input instanceof InputPayMana manaInput) {
-                manaInput.useManaFromPool(payManaFromPoolAction.getSelectedColor());
-                return debugResult(action, true);
-            }
-        } else if (action instanceof PayCostAction) {
-            if (input instanceof InputConfirm) {
-                input.selectButtonOK();
-                return debugResult(action, true);
-            }
-        } else if (action instanceof ConfirmAction confirmAction) {
-            if (!confirmAction.isConfirmed() && input instanceof InputPayMana manaInput
-                    && manaInput.canCancelPaymentForMacro()) {
-                input.selectButtonCancel();
-                return debugResult(action, true);
-            }
-            if (input instanceof InputConfirm confirmInput
-                    && confirmAction.matchesPrompt(confirmInput.getCardViewForMacro(),
-                            confirmInput.getMessageForMacro())) {
-                if (confirmAction.isConfirmed()) {
-                    input.selectButtonOK();
-                } else {
-                    input.selectButtonCancel();
-                }
-                return debugResult(action, true);
-            }
-        } else if (action.getGameEntityView() instanceof CardView cardView) {
-            return debugResult(action, selectCard(cardView));
-        } else if (action.getGameEntityView() instanceof PlayerView playerView) {
-            return debugResult(action, selectPlayer(playerView));
-        }
-        return debugResult(action, false);
+        return debugResult(action, actionReplayer.replay(action));
     }
 
     private boolean canAcceptImplicitTriggerConfirm(final InputConfirm input) {
@@ -1166,193 +1093,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             return false;
         }
         return findNextAction(SelectCardAction.class, SelectPlayerAction.class) >= 0;
-    }
-
-    private boolean activateAbility(final InputPassPriority input, final ActivateAbilityAction action) {
-        final GameEntityView view = action.getGameEntityView();
-        if (!(view instanceof CardView cardView)) {
-            return false;
-        }
-
-        final Card card = findCard(cardView);
-        return card != null && activateAbility(input, action, card);
-    }
-
-    private boolean activateAbility(final InputPassPriority input, final ActivateAbilityAction action, final Card card) {
-        for (final SpellAbility ability : card.getAllPossibleAbilities(playerControllerHuman.getPlayer(), true)) {
-            if (ability.toUnsuppressedString().equals(action.getAbilityDescription())) {
-                return input.selectAbility(ability);
-            }
-        }
-        return false;
-    }
-
-    private boolean selectPlayer(final PlayerView playerView) {
-        final Input inp = playerControllerHuman.getInputProxy().getInput();
-        if (!(inp instanceof InputSelectTargets targetInput)) {
-            return false;
-        }
-        final Player player = playerControllerHuman.getGame().getPlayer(playerView);
-        return player != null && targetInput.selectPlayerForMacro(player, replayTriggerEvent);
-    }
-
-    private boolean selectCard(final CardView cardView) {
-        final Input inp = playerControllerHuman.getInputProxy().getInput();
-        if (inp instanceof InputSelectEntitiesFromList<?> selectInput) {
-            final Card choice = findListChoice(cardView, selectInput);
-            return choice != null && playerControllerHuman.selectCard(choice.getView(), null, replayTriggerEvent);
-        }
-
-        final Card directCard = findCard(cardView);
-        if (inp instanceof InputSelectTargets targetInput) {
-            final Card targetChoice = findTargetChoice(cardView, directCard, targetInput);
-            return targetChoice != null && targetInput.selectCardForMacro(targetChoice, replayTriggerEvent);
-        }
-
-        if (inp instanceof InputPassPriority passPriorityInput) {
-            if (directCard == null) {
-                return false;
-            }
-            final List<SpellAbility> abilities = directCard.getAllPossibleAbilities(playerControllerHuman.getPlayer(), true);
-            if (abilities.size() == 1) {
-                return passPriorityInput.selectAbility(abilities.get(0));
-            }
-            return playerControllerHuman.selectCard(directCard.getView(), null, replayTriggerEvent)
-                    && passPriorityInput.getChosenSa() != null;
-        }
-        if (inp instanceof InputAttack attackInput && directCard != null
-                && attackInput.isDeclaredAttackerForMacro(directCard)) {
-            return false;
-        }
-        if (directCard != null && playerControllerHuman.selectCard(directCard.getView(), null, replayTriggerEvent)) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private Card findTargetChoice(final CardView recordedChoice, final Card exactChoice,
-                                  final InputSelectTargets targetInput) {
-        final Card choice = findCardChoice(recordedChoice, exactChoice, targetInput.getValidCardsForMacro());
-        debugNoMatch(choice, "target", recordedChoice, null);
-        return choice;
-    }
-
-    private Card findListChoice(final CardView recordedChoice, final InputSelectEntitiesFromList<?> selectInput) {
-        final Card exactChoice = playerControllerHuman.getCard(recordedChoice);
-        if (recordedChoice == null) {
-            return null;
-        }
-        final Card exactListChoice = findExactCardChoice(exactChoice, selectInput.getValidChoices());
-        if (exactListChoice != null) {
-            return exactListChoice;
-        }
-        if (isRecordedBattlefieldLandChoice(recordedChoice, selectInput)) {
-            return null;
-        }
-        final Card choice = findCardChoice(recordedChoice, exactChoice, selectInput.getValidChoices());
-        debugNoMatch(choice, "list", recordedChoice, selectInput.getValidChoices());
-        return choice;
-    }
-
-    private Card findCardChoice(final CardView recordedChoice, final Card exactChoice, final Iterable<?> choices) {
-        final Card exactListChoice = findExactCardChoice(exactChoice, choices);
-        if (exactListChoice != null) {
-            return exactListChoice;
-        }
-        if (recordedChoice == null) {
-            return null;
-        }
-        final Card equivalent = findCardChoice(recordedChoice, choices, false);
-        return equivalent == null ? findCardChoice(recordedChoice, choices, true) : equivalent;
-    }
-
-    private Card findExactCardChoice(final Card exactChoice, final Iterable<?> choices) {
-        if (exactChoice == null) {
-            return null;
-        }
-        for (final Object choice : choices) {
-            if (choice == exactChoice) {
-                return exactChoice;
-            }
-        }
-        return null;
-    }
-
-    private Card findCardChoice(final CardView recordedChoice, final Iterable<?> choices, final boolean tokenMatch) {
-        for (final Object choice : choices) {
-            if (choice instanceof Card card
-                    && (tokenMatch ? isEquivalentToken(recordedChoice, card) : isEquivalentCard(recordedChoice, card))) {
-                return card;
-            }
-        }
-        return null;
-    }
-
-    private void debugNoMatch(final Card choice, final String choiceType, final CardView recordedChoice,
-                              final Object choices) {
-        if (choice == null && recordedChoice != null) {
-            debug("no " + choiceType + " match for " + recordedChoice
-                    + (choices == null ? "" : " choices=" + choices));
-        }
-    }
-
-    private boolean isRecordedBattlefieldLandChoice(final CardView recordedChoice,
-                                                    final InputSelectEntitiesFromList<?> selectInput) {
-        if (exactRecordedLandManaSource(recordedChoice) == null) {
-            return false;
-        }
-        for (final GameEntity validChoice : selectInput.getValidChoices()) {
-            if (validChoice instanceof Card card && card.isInZone(ZoneType.Battlefield)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isEquivalentToken(final CardView original, final Card candidate) {
-        return isTokenLike(original)
-                && isTokenLike(candidate.getView())
-                && hasSameController(original, candidate)
-                && normalizeTokenName(original.getName()).equals(normalizeTokenName(candidate.getView().getName()));
-    }
-
-    private boolean isTokenLike(final CardView card) {
-        return card.isToken() || card.getName().endsWith(" Token");
-    }
-
-    private String normalizeTokenName(final String name) {
-        String normalized = name;
-        while (normalized.endsWith(" Token")) {
-            normalized = normalized.substring(0, normalized.length() - " Token".length());
-        }
-        return normalized;
-    }
-
-    private boolean hasSameController(final CardView original, final Card candidate) {
-        return original.getController() == null || original.getController().equals(candidate.getView().getController());
-    }
-
-    private Card findCard(final CardView cardView) {
-        if (cardView == null) {
-            return null;
-        }
-        final Card directCard = playerControllerHuman.getCard(cardView);
-        if (directCard != null) {
-            return directCard;
-        }
-        for (final Card card : playerControllerHuman.getGame().getCardsInGame()) {
-            if (isEquivalentCard(cardView, card)) {
-                return card;
-            }
-        }
-        return null;
-    }
-
-    private boolean isEquivalentCard(final CardView original, final Card candidate) {
-        return original.getName().equals(candidate.getView().getName())
-                && original.isToken() == candidate.isToken()
-                && hasSameController(original, candidate);
     }
 
     private boolean debugResult(final PlayerAction action, final boolean result) {
@@ -1412,20 +1152,4 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         return sb.toString();
     }
 
-    private class DummyTriggerEvent implements ITriggerEvent {
-        @Override
-        public int getButton() {
-            return 1; // Emulate left mouse button
-        }
-
-        @Override
-        public int getX() {
-            return 0;
-        }
-
-        @Override
-        public int getY() {
-            return 0;
-        }
-    }
 }
