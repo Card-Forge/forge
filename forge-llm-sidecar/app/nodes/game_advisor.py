@@ -42,7 +42,11 @@ _own_archetype: dict[str, tuple[str | None, StrategyType]] = {}
 # Once recognition is highly confident, lock the archetype for the game so
 # later turns skip the recognition LLM call entirely (the opponent's deck does
 # not change). Steady-state cost then drops to just the strategist call.
-_LOCK_CONFIDENCE = 0.95
+# Lowered from 0.95: the per-action strategist now adds an LLM call every turn,
+# so we lock the opponent's identity sooner to stop spending recognition calls
+# once the deck is reasonably clear. The strategist keeps adapting to the board
+# after the archetype label is fixed, so an early lock costs little.
+_LOCK_CONFIDENCE = 0.85
 _locked_archetype: dict[str, dict] = {}
 
 _RECOGNITION_SYSTEM_PROMPT = (

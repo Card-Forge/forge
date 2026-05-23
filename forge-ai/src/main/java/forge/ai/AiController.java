@@ -722,6 +722,27 @@ public class AiController {
             return null;
         }
 
+        // Sidecar manabase plan: play the LLM-chosen land from hand when it is
+        // actually available this turn. Falls through to stock land selection
+        // when there is no plan or the named land isn't a current option.
+        final Optional<RecognitionResult.ManaPlan> sideMana = sidecarInfluence.manaPlan();
+        if (sideMana.isPresent()) {
+            final List<String> wanted = new ArrayList<>();
+            wanted.add(sideMana.get().landToPlay());
+            wanted.addAll(sideMana.get().landAlternatives());
+            for (final String want : wanted) {
+                if (want == null || want.isBlank()) {
+                    continue;
+                }
+                for (final Card land : landList) {
+                    if (land.getName().equalsIgnoreCase(want.trim())) {
+                        Logger.debug("AiController: sidecar land-to-play '{}'", land.getName());
+                        return land;
+                    }
+                }
+            }
+        }
+
         CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.NON_LANDS);
 
         // Some considerations for Momir/MoJhoSto
@@ -1937,6 +1958,45 @@ public class AiController {
      * can override the heuristic. 0 disables sidecar picks; 100 takes the first
      * legal sidecar recommendation.</p>
      */
+    /**
+     * If the sidecar's mana plan endorses cracking a fetchland now (or at end
+     * of turn, when we're in the end step), return that fetchland's
+     * sacrifice-to-search ability from {@code all} so it is played as a
+     * first-class recommended action. Returns null when there is no such plan
+     * or no crackable fetch is available. Honored even when the sidecar would
+     * otherwise recommend PASS, because the fetch develops the mana the
+     * recommended spells need.
+     */
+    private SpellAbility trySidecarFetchCrack(final List<SpellAbility> all) {
+        final Optional<RecognitionResult.ManaPlan> planOpt = sidecarInfluence.manaPlan();
+        if (planOpt.isEmpty()) {
+            return null;
+        }
+        final String when = planOpt.get().crackFetch();
+        final boolean endStep = game.getPhaseHandler().getPhase() == PhaseType.END_OF_TURN;
+        final boolean wantNow = "now".equals(when) || ("end_of_turn".equals(when) && endStep);
+        if (!wantNow) {
+            return null;
+        }
+        for (final SpellAbility sa : all) {
+            if (sa.getApi() != ApiType.ChangeZone) {
+                continue;
+            }
+            final Card host = sa.getHostCard();
+            if (host == null || !host.isLand()
+                    || !"Battlefield".equals(sa.getParam("Destination"))
+                    || !sa.getParamOrDefault("Origin", "").contains("Library")
+                    || !ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
+                continue;
+            }
+            sa.setActivatingPlayer(player);
+            if (canPlayAndPayFor(sa) == AiPlayDecision.WillPlay) {
+                return sa;
+            }
+        }
+        return null;
+    }
+
     private SpellAbility trySidecarRecommendedPlay(final List<SpellAbility> all, boolean skipCounter) {
         if (!sidecarCanInfluence() || !sidecarInfluence.hasData()) {
             return null;
@@ -2014,6 +2074,15 @@ public class AiController {
                 if (sidecarPick != null) {
                     Logger.debug("AiController: sidecar recommended play %s", sidecarPick);
                     return sidecarPick;
+                }
+                // A fetchland crack endorsed by the mana plan is itself a
+                // sidecar-recommended play: do it before honoring PASS, so the
+                // AI develops the mana its recommended spells need (otherwise it
+                // passes forever, never cracks, and never has colored mana).
+                SpellAbility fetchCrack = trySidecarFetchCrack(all);
+                if (fetchCrack != null) {
+                    Logger.debug("AiController: sidecar fetch crack %s", fetchCrack);
+                    return fetchCrack;
                 }
                 // If sidecar strongly recommends PASS, skip looking for plays
                 if (sidecarRecommendsPass()) {

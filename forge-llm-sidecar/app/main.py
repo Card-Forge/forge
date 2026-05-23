@@ -29,6 +29,7 @@ from app.schema import (
     LegalAction,
     Lesson,
     LessonEvidence,
+    ManaPlan,
     OpponentCardProbability,
     OpponentHandGuess,
     PilotingAdvice,
@@ -539,6 +540,8 @@ def _response_from_final(req: RecognitionRequest, final: dict) -> RecognitionRes
     combo_plan = ComboPlan(**combo_raw) if isinstance(combo_raw, dict) else None
     early_raw = final.get("early_game_plan")
     early_game_plan = EarlyGamePlan(**early_raw) if isinstance(early_raw, dict) else None
+    mana_plan_raw = final.get("mana_plan")
+    mana_plan = ManaPlan(**mana_plan_raw) if isinstance(mana_plan_raw, dict) else None
     guide = final.get("piloting_guide") or {}
     phase_bucket = (
         "early_game" if req.turn <= 3 else "mid_game" if req.turn <= 7 else "late_game"
@@ -582,6 +585,7 @@ def _response_from_final(req: RecognitionRequest, final: dict) -> RecognitionRes
         beatdown_assessment=beatdown_assessment,
         combo_plan=combo_plan,
         early_game_plan=early_game_plan,
+        mana_plan=mana_plan,
     )
 
     _store = get_store()

@@ -16,11 +16,11 @@ place — it only ever enriches, never regresses.
 
 from __future__ import annotations
 
-import json
+import asyncio
 import logging
 
 from app.config import CONFIG
-from app.knowledge import loader
+from app.knowledge import loader, mana_profile
 from app.llm_client import LLMError, generate_json
 from app.schema import GraphState
 
@@ -87,7 +87,9 @@ def _bayesian_prior(
     return {b: round((r / total) * hand_factor, 3) for b, r in remaining.items()}
 
 
-def _format_profile_block(profile: dict, prior: dict[str, float], revealed: set[str], fmt: str, archetype: str) -> str:
+def _format_profile_block(
+    profile: dict, prior: dict[str, float], revealed: set[str], fmt: str, archetype: str
+) -> str:
     buckets = profile.get("buckets") or {}
     lines: list[str] = []
     for bucket in loader.PROFILE_BUCKETS:
@@ -105,24 +107,36 @@ def _format_profile_block(profile: dict, prior: dict[str, float], revealed: set[
         card_str = ", ".join(dict.fromkeys(cards)) or "(none listed)"
         p = prior.get(bucket)
         p_str = f" prior={p}" if p is not None else ""
-        lines.append(f"- {bucket}: target {target}, seen {seen_n}, remaining {remaining}{p_str} -> {card_str}")
+        lines.append(
+            f"- {bucket}: target {target}, seen {seen_n}, "
+            f"remaining {remaining}{p_str} -> {card_str}"
+        )
     combos = (buckets.get("combo_pieces") or {}).get("pairs") or []
     combo_str = "; ".join(" + ".join(pair) for pair in combos) if combos else "(none)"
-    dual = "; ".join(
-        f"{d.get('card')} = {'/'.join(d.get('roles', []))}"
-        for d in (profile.get("dual_role_cards") or [])
-    ) or "(none)"
-    pred = "; ".join(
-        f"if [{p.get('trigger')}] -> {p.get('line')}" for p in (profile.get("predicted_lines") or [])
-    ) or "(none)"
+    dual = (
+        "; ".join(
+            f"{d.get('card')} = {'/'.join(d.get('roles', []))}"
+            for d in (profile.get("dual_role_cards") or [])
+        )
+        or "(none)"
+    )
+    pred = (
+        "; ".join(
+            f"if [{p.get('trigger')}] -> {p.get('line')}"
+            for p in (profile.get("predicted_lines") or [])
+        )
+        or "(none)"
+    )
     return (
         f"Archetype macro plan: {profile.get('macro_plan', '')}\n"
         f"Win-turn window: {profile.get('win_turn_window', [])}\n"
         f"Role buckets (many-to-many; a card can be in several):\n" + "\n".join(lines) + "\n"
         f"Key combos: {combo_str}\n"
         f"Multi-role cards: {dual}\n"
-        f"Kill priority (most dangerous first): {', '.join(profile.get('kill_priority', [])) or '(none)'}\n"
-        f"Their interaction to play around: {', '.join(profile.get('interaction_to_disrupt', [])) or '(none)'}\n"
+        f"Kill priority (most dangerous first): "
+        f"{', '.join(profile.get('kill_priority', [])) or '(none)'}\n"
+        f"Their interaction to play around: "
+        f"{', '.join(profile.get('interaction_to_disrupt', [])) or '(none)'}\n"
         f"Known lines: {pred}"
     )
 
@@ -172,7 +186,9 @@ def _format_mana_pool(state: GraphState) -> str:
     )
 
 
-def _build_prompt(state: GraphState, profile: dict, prior: dict[str, float], revealed: set[str]) -> str:
+def _build_prompt(
+    state: GraphState, profile: dict, prior: dict[str, float], revealed: set[str]
+) -> str:
     archetype = state.get("archetype") or ""
     fmt = (state.get("resolved_format") or state.get("format") or "").lower()
     opp_hand_size = int(state.get("opp_hand_size") or 0)
@@ -214,7 +230,7 @@ def _build_prompt(state: GraphState, profile: dict, prior: dict[str, float], rev
 
 def _valid_card_pool(profile: dict, revealed: set[str], fmt: str, archetype: str) -> set[str]:
     pool = set(revealed)
-    for bucket, payload in (profile.get("buckets") or {}).items():
+    for _bucket, payload in (profile.get("buckets") or {}).items():
         if not isinstance(payload, dict):
             continue
         for c in payload.get("cards") or []:
@@ -269,20 +285,18 @@ def _beatdown_from_board(state: GraphState) -> dict:
     }
 
 
-async def opponent_strategist_node(state: GraphState) -> GraphState:
-    archetype = state.get("archetype") or ""
-    fmt = (state.get("resolved_format") or state.get("format") or "").lower()
-    if not archetype or archetype.lower().startswith("off-meta") or archetype == "Unknown":
-        return state
-
-    profile = loader.load_archetype_profile(archetype, fmt)
-    if not profile:
-        return state  # graceful: keep deterministic opponent_hand
-
+async def _run_opponent_inference(
+    state: GraphState, profile: dict, fmt: str, archetype: str
+) -> GraphState:
+    """The original opponent-reading LLM call: hand inference, threats, next
+    line. Gated on a recognized, profiled, confident-enough opponent. Returns
+    only the keys it wants to update (merged by the node)."""
     confidence = state.get("confidence") or 0.0
     decision = _norm(state.get("decision_type") or "")
     if confidence < _MIN_CONFIDENCE and decision not in _ALWAYS_RUN_DECISIONS:
-        return state
+        # Not worth the call; keep deterministic inference, but still emit the
+        # board-driven beatdown assessment.
+        return {"beatdown_assessment": _beatdown_from_board(state)}
 
     revealed = _revealed_cards(state)
     opp_hand_size = int(state.get("opp_hand_size") or 0)
@@ -308,9 +322,11 @@ async def opponent_strategist_node(state: GraphState) -> GraphState:
             fmt,
         )
     except LLMError as exc:
-        log.warning("opponent_strategist: LLM call failed (%s); keeping deterministic inference", exc)
+        log.warning(
+            "opponent_strategist: LLM call failed (%s); keeping deterministic inference", exc
+        )
         # Beatdown is board-score driven, so emit it even when the LLM is down.
-        return {**state, "beatdown_assessment": _beatdown_from_board(state)}
+        return {"beatdown_assessment": _beatdown_from_board(state)}
 
     pool = _valid_card_pool(profile, revealed, fmt, archetype)
 
@@ -322,7 +338,8 @@ async def opponent_strategist_node(state: GraphState) -> GraphState:
             if bucket not in loader.PROFILE_BUCKETS or not isinstance(payload, dict):
                 continue
             cards = [
-                c for c in (payload.get("top_cards") or [])
+                c
+                for c in (payload.get("top_cards") or [])
                 if isinstance(c, str) and _norm(c) in pool
             ][:3]
             prob = _clamp(payload.get("prob"))
@@ -374,7 +391,7 @@ async def opponent_strategist_node(state: GraphState) -> GraphState:
     # Beatdown is decided deterministically from board score, not the LLM.
     beatdown_assessment = _beatdown_from_board(state)
 
-    out: GraphState = {**state}
+    out: GraphState = {}
     if opponent_hand:
         out["opponent_hand"] = opponent_hand
     out["target_priorities"] = target_priorities
@@ -382,4 +399,231 @@ async def opponent_strategist_node(state: GraphState) -> GraphState:
         out["predicted_opp_line"] = predicted_opp_line
     if beatdown_assessment:
         out["beatdown_assessment"] = beatdown_assessment
+    return out
+
+
+# --------------------------------------------------------------------------
+# Mana planner: own-deck manabase decisions (fetch / land / utility lands).
+# Runs every in-game action regardless of opponent recognition, since the AI
+# must sequence its own mana whether or not it has read the opponent yet.
+# --------------------------------------------------------------------------
+
+_MANA_SYSTEM_PROMPT = (
+    "You are a Pro Tour-level Magic: The Gathering player sequencing your own "
+    "manabase. Decide whether to crack a fetchland and what to fetch, which land "
+    "to play from hand, and how to use utility lands — using only cards that are "
+    "actually in your hand or remaining in your library. Always answer with a "
+    "single JSON object and nothing else."
+)
+
+
+def _remaining_library(state: GraphState) -> list[str]:
+    """Cards still in the AI's library = deck minus the zones we can see.
+
+    deck_cards preserves duplicates, so we subtract one occurrence per known
+    card. The AI legitimately knows its own library contents (not order)."""
+    from collections import Counter
+
+    deck = Counter(_norm(c) for c in (state.get("deck_cards") or []) if c)
+    for zone in ("hand", "own_board", "your_graveyard", "your_exile"):
+        for c in state.get(zone) or []:
+            n = _norm(c)
+            if deck.get(n, 0) > 0:
+                deck[n] -= 1
+    out: list[str] = []
+    for name, n in deck.items():
+        out.extend([name] * n)
+    return out
+
+
+def _land_names(cards: list[str]) -> list[str]:
+    from app.advice import _is_land_name
+
+    seen: dict[str, int] = {}
+    for c in cards:
+        if c and _is_land_name(c):
+            seen[c] = seen.get(c, 0) + 1
+    return [f"{name} x{n}" if n > 1 else name for name, n in seen.items()]
+
+
+def _format_mana_profile(profile: dict | None) -> str:
+    if not profile:
+        return "(no deck mana profile yet — reason from the decklist directly)"
+    parts = [
+        f"Primary colors: {'/'.join(profile.get('primary_colors') or []) or '?'}",
+        f"Color requirements: {profile.get('color_requirements', '')}",
+        f"Fetch priority: {profile.get('fetch_priority', '')}",
+        f"Default crack timing: {profile.get('crack_timing_default', 'now')}",
+    ]
+    if profile.get("utility_land_notes"):
+        parts.append(f"Utility lands: {profile['utility_land_notes']}")
+    lands = profile.get("lands") or []
+    if lands:
+        ll = "; ".join(
+            f"{land.get('card')} ({land.get('role')}"
+            + (", tapped" if land.get("enters_tapped") else "")
+            + (f": {land.get('play_timing')}" if land.get("play_timing") else "")
+            + ")"
+            for land in lands
+            if isinstance(land, dict) and land.get("card")
+        )
+        parts.append("Per-land guidance: " + ll)
+    return "\n".join(p for p in parts if p)
+
+
+def _build_mana_prompt(state: GraphState, profile: dict | None) -> str:
+    hand = state.get("hand") or []
+    hand_lands = [c for c in hand if _land_names([c])]
+    hand_spells = [c for c in hand if c and c not in hand_lands]
+    own_board = state.get("own_board") or []
+    board_lands = _land_names(own_board)
+    remaining = _remaining_library(state)
+    remaining_lands = _land_names(remaining)
+    life = state.get("life_totals") or {}
+    avail = state.get("available_mana") or []
+    return (
+        f"Turn: {state.get('turn', 0)}  Phase: {state.get('phase', '?')}\n"
+        f"Your life totals (by seat/name): {life}\n"
+        f"Mana you can make right now: {'/'.join(avail) or '(unknown)'}\n\n"
+        f"DECK MANA PROFILE\n{_format_mana_profile(profile)}\n\n"
+        f"CURRENT STATE\n"
+        f"Lands you control: {', '.join(board_lands) or '(none)'}\n"
+        f"Spells in hand: {', '.join(hand_spells) or '(none)'}\n"
+        f"Lands in hand: {', '.join(hand_lands) or '(none)'}\n"
+        f"Fetchable / remaining lands in your library: "
+        f"{', '.join(remaining_lands) or '(none)'}\n\n"
+        "TASK\n"
+        "Plan this turn's mana. Consider what colors your hand needs THIS turn "
+        "and over the next couple of turns, whether to crack a fetchland now (to "
+        "use the mana) or hold it, what exact land to fetch (a real card from the "
+        "remaining library), whether it should enter untapped (pay life on a "
+        "shock when tempo matters and life is safe), which land to play from "
+        "hand, and which utility lands to hold for later value.\n\n"
+        "Respond with exactly these keys:\n"
+        '  "crack_fetch": "now" | "end_of_turn" | "hold" | "auto",\n'
+        '  "fetch_target": string (exact card name, or "" if not fetching),\n'
+        '  "fetch_alternatives": [string] (ranked fallbacks, real library cards),\n'
+        '  "enter_untapped": boolean,\n'
+        '  "land_to_play": string (exact land from hand, or ""),\n'
+        '  "land_alternatives": [string],\n'
+        '  "color_needs": [string] (colors needed soon, priority order, W/U/B/R/G/C),\n'
+        '  "hold_utility_lands": [string],\n'
+        '  "reasoning": string'
+    )
+
+
+def _valid_library_pool(state: GraphState) -> set[str]:
+    """Names the LLM may legally fetch/play: remaining library + current hand."""
+    pool = {_norm(c) for c in _remaining_library(state)}
+    pool.update(_norm(c) for c in (state.get("hand") or []))
+    pool.discard("")
+    return pool
+
+
+def _coerce_mana_plan(raw: dict, state: GraphState) -> dict | None:
+    """Validate the LLM's mana plan against cards actually available. Drops any
+    fetch/land target that isn't in the remaining library or hand so the engine
+    never gets a phantom card. Returns None if nothing usable remains."""
+    if not isinstance(raw, dict):
+        return None
+    pool = _valid_library_pool(state)
+    hand_pool = {_norm(c) for c in (state.get("hand") or [])}
+
+    def _keep(name: str, allowed: set[str]) -> str:
+        return name if _norm(name) in allowed else ""
+
+    crack = str(raw.get("crack_fetch", "auto")).strip().lower()
+    if crack not in ("now", "end_of_turn", "hold", "auto"):
+        crack = "auto"
+    fetch_target = _keep(str(raw.get("fetch_target", "")).strip(), pool)
+    fetch_alts = [
+        a
+        for a in (str(x).strip() for x in raw.get("fetch_alternatives", []) or [])
+        if a and _norm(a) in pool
+    ][:5]
+    land_to_play = _keep(str(raw.get("land_to_play", "")).strip(), hand_pool)
+    land_alts = [
+        a
+        for a in (str(x).strip() for x in raw.get("land_alternatives", []) or [])
+        if a and _norm(a) in hand_pool
+    ][:5]
+    color_needs = [
+        c.strip().upper()
+        for c in (str(x) for x in raw.get("color_needs", []) or [])
+        if c.strip().upper() in ("W", "U", "B", "R", "G", "C")
+    ]
+    hold_util = [str(x).strip() for x in (raw.get("hold_utility_lands") or []) if str(x).strip()][
+        :6
+    ]
+    plan = {
+        "crack_fetch": crack,
+        "fetch_target": fetch_target,
+        "fetch_alternatives": fetch_alts,
+        "enter_untapped": bool(raw.get("enter_untapped", True)),
+        "land_to_play": land_to_play,
+        "land_alternatives": land_alts,
+        "color_needs": color_needs,
+        "hold_utility_lands": hold_util,
+        "reasoning": str(raw.get("reasoning", "")).strip(),
+    }
+    # Nothing actionable -> let the engine use stock heuristics.
+    if not (fetch_target or land_to_play or color_needs or crack in ("now", "end_of_turn", "hold")):
+        return None
+    return plan
+
+
+async def _run_mana_planner(state: GraphState) -> GraphState:
+    """One focused LLM call that plans the AI's manabase for this action. Runs
+    every in-game turn; fail-soft to no plan (engine uses stock heuristics)."""
+    if int(state.get("turn", 0) or 0) <= 0:
+        return {}
+    deck = state.get("deck_cards") or []
+    if not mana_profile.has_analyzable_manabase(deck):
+        return {}  # basics-only deck: stock land logic is fine
+    fmt = (state.get("resolved_format") or state.get("format") or "").lower()
+    profile_obj = mana_profile.get_or_schedule(deck, state.get("own_archetype") or "", fmt)
+    profile = profile_obj.model_dump() if profile_obj is not None else None
+    try:
+        log.info(
+            "llm_call node=opponent_strategist purpose=mana_plan turn=%s have_profile=%s",
+            state.get("turn", 0),
+            profile is not None,
+        )
+        raw = await generate_json(
+            _build_mana_prompt(state, profile),
+            system=_MANA_SYSTEM_PROMPT,
+            model=CONFIG.strategist_model_name,
+            temperature=0.2,
+        )
+    except LLMError as exc:
+        log.warning(
+            "opponent_strategist: mana planner failed (%s); engine uses stock heuristics", exc
+        )
+        return {}
+    plan = _coerce_mana_plan(raw, state)
+    return {"mana_plan": plan} if plan else {}
+
+
+async def opponent_strategist_node(state: GraphState) -> GraphState:
+    """Broadened strategist: opponent inference (when recognized) AND own-deck
+    mana planning, as two focused LLM calls run concurrently so total latency is
+    the slower of the two, not their sum. Either branch is independently
+    fail-soft; the node only ever enriches state."""
+    archetype = state.get("archetype") or ""
+    fmt = (state.get("resolved_format") or state.get("format") or "").lower()
+
+    opp_profile = None
+    if archetype and not archetype.lower().startswith("off-meta") and archetype != "Unknown":
+        opp_profile = loader.load_archetype_profile(archetype, fmt)
+
+    async def _opp() -> GraphState:
+        if not opp_profile:
+            return {}
+        return await _run_opponent_inference(state, opp_profile, fmt, archetype)
+
+    opp_update, mana_update = await asyncio.gather(_opp(), _run_mana_planner(state))
+
+    out: GraphState = {**state}
+    out.update(opp_update or {})
+    out.update(mana_update or {})
     return out

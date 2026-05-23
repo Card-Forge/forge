@@ -3,6 +3,8 @@ package forge.ai.ability;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.*;
+import forge.ai.llm.RecognitionResult.ManaPlan;
+import org.tinylog.Logger;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -397,6 +399,16 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
+        // Sidecar manabase plan: for fetchlands, honor the LLM's crack-timing
+        // decision (crack now / hold / wait for end of turn). "auto" or no plan
+        // falls through to the stock heuristics below.
+        if (isLandFetchToBattlefield(sa)) {
+            final AiAbilityDecision sidecarTiming = sidecarFetchTiming(ai, sa);
+            if (sidecarTiming != null) {
+                return sidecarTiming;
+            }
+        }
+
         if (ComputerUtil.playImmediately(ai, sa)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
@@ -569,6 +581,101 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         return list.get(0);
+    }
+
+    // ------------------------------------------------------------------------
+    // Sidecar manabase plan integration (fetchlands). The LLM strategist may
+    // hand the engine a per-action mana plan: whether/when to crack a fetch and
+    // exactly what to fetch. All of this is advisory and validated against the
+    // real fetch list — when absent or unusable, stock heuristics take over.
+    // ------------------------------------------------------------------------
+
+    /** The AI's latest sidecar mana plan, or null when the sidecar isn't
+     *  influencing this player (feature off, unreachable, or no plan yet).
+     *  Package-visible so sibling ability handlers (e.g. {@link TapAi} for
+     *  shockland pay-life) can share the same plan. */
+    static ManaPlan sidecarManaPlan(final Player ai) {
+        if (ai == null || !ai.isAI() || !(ai.getController() instanceof PlayerControllerAi pcai)) {
+            return null;
+        }
+        final AiController aic = pcai.getAi();
+        if (aic == null) {
+            return null;
+        }
+        return aic.getSidecarInfluence().manaPlan().orElse(null);
+    }
+
+    /** True for a fetchland-style activation: a land that sacrifices itself to
+     *  put another land from the library onto the battlefield. */
+    private static boolean isLandFetchToBattlefield(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        if (host == null || !host.isLand()) {
+            return false;
+        }
+        if (!"Battlefield".equals(sa.getParam("Destination"))) {
+            return false;
+        }
+        if (!sa.getParamOrDefault("Origin", "").contains("Library")) {
+            return false;
+        }
+        return ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts());
+    }
+
+    /** Apply the sidecar's crack-timing decision to a fetchland activation.
+     *  Returns a decision to override the stock logic, or null to defer. */
+    private static AiAbilityDecision sidecarFetchTiming(final Player ai, final SpellAbility sa) {
+        final ManaPlan plan = sidecarManaPlan(ai);
+        if (plan == null) {
+            return null;
+        }
+        switch (plan.crackFetch()) {
+            case "now":
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            case "hold":
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            case "end_of_turn":
+                final boolean endStep =
+                        ai.getGame().getPhaseHandler().getPhase() == PhaseType.END_OF_TURN;
+                return endStep
+                        ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+                        : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            default: // "auto" or anything unrecognized -> stock heuristics decide.
+                return null;
+        }
+    }
+
+    /** Honor a sidecar-recommended fetch target, validated against the cards
+     *  actually fetchable. Tries the explicit target then ranked alternatives,
+     *  then any land that makes a needed color. Returns null to defer to stock. */
+    private static Card sidecarFetchChoice(final Player decider, final List<Card> fetchList) {
+        final ManaPlan plan = sidecarManaPlan(decider);
+        if (plan == null || fetchList.isEmpty()) {
+            return null;
+        }
+        for (final String name : plan.fetchPriority()) {
+            if (name == null || name.isBlank()) {
+                continue;
+            }
+            for (final Card c : fetchList) {
+                if (c.getName().equalsIgnoreCase(name.trim())) {
+                    Logger.debug("ChangeZoneAi: sidecar fetch target '{}'", c.getName());
+                    return c;
+                }
+            }
+        }
+        for (final String color : plan.colorNeeds()) {
+            if (color == null || color.isBlank()) {
+                continue;
+            }
+            final Set<String> want = Set.of(color.trim().toUpperCase());
+            for (final Card c : fetchList) {
+                if (c.isLand() && c.canProduceColorMana(want)) {
+                    Logger.debug("ChangeZoneAi: sidecar color-need {} -> '{}'", color, c.getName());
+                    return c;
+                }
+            }
+        }
+        return null;
     }
 
     /**
@@ -1514,6 +1621,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (fetchList.isEmpty()) {
             return null;
         }
+
+        // Sidecar manabase plan: honor an LLM-chosen fetch target (validated
+        // against the actual fetchable cards) before the stock heuristics.
+        final Card sidecarPick = sidecarFetchChoice(decider, fetchList);
+        if (sidecarPick != null) {
+            return sidecarPick;
+        }
+
         String type = sa.getParamOrDefault("ChangeType", "");
 
         Card c = null;

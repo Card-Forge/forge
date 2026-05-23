@@ -1,0 +1,2634 @@
+╭─── Claude Code v2.1.146 ─────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│                  Welcome back Lou!                 │ started                 │
+│                                                    │ ✔ Run /init to create … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ What's new              │
+│                        ▘▘ ▝▝                       │ Fixed the Bash tool re… │
+│    Opus 4.7 · Claude Pro · loud1990@gmail.com's    │ Pinned background sess… │
+│    Organization                                    │ Renamed `/simplify` to… │
+│                ~/Development/forge-1               │ /release-notes for more │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+❯ /clear                                                                        
+  ⎿  (no content)
+
+❯ /plan                                                                         
+  ⎿  Enabled plan mode
+
+❯ We need a solid system for recording and saving our simulator results. should 
+   we utilize a database? i have used supabase, but that may be overkill. i     
+  want a way to baseline each deckd performance, and see how the self           
+  improvement system works over time.                                           
+
+● I'll explore the current self-play results system before proposing a storage
+  approach. Let me launch parallel Explore agents.
+
+● 2 Explore agents finished (ctrl+o to expand)
+   ├ Explore self-play result recording · 36 tool uses · 84.0k tokens
+   │ ⎿  Done
+   └ Explore self-improvement learning system · 16 tool uses · 102.1k tokens
+     ⎿  Done
+
+● I have a thorough picture of the current system. Let me read a few key files
+  directly to ground the storage design.
+
+  Searched for 1 pattern, read 2 files, ran 1 shell command (ctrl+o to expand)
+
+● The current system writes ad-hoc JSONL files (gitignored, user-named) and
+  aggregates them only at query time via selfplay_report.py — there's no
+  persistent, timestamped history, no recorded baseline, and no link between a
+  run's results and the state of the learnings store at that time. That last
+  point is the crux of "see how the self-improvement system works over time":
+  each run should capture the learnings_version() token so you can correlate
+  win-rate movement with learnings changes.
+
+  Let me confirm a couple of design decisions that shape the plan.
+
+● User answered Claude's questions:
+  ⎿  · What storage backend should the results system use? → SQLite 
+     (Recommended)
+     · How should results be surfaced for baselining and over-time tracking? → 
+     CLI + dashboard panel
+     · How should runs get into the store? → Ingestion script (Recommended)
+
+● Good choices. Let me read the dashboard and stats endpoint to ground the
+  dashboard-panel design.
+
+  Searched for 1 pattern, read 2 files, listed 1 directory (ctrl+o to expand)
+
+● I have enough to design. Let me peek at the dashboard structure to scope the
+  panel addition.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● I now have everything needed. Writing the plan.
+
+● Updated plan
+  ⎿  /plan to preview
+
+● User approved Claude's plan
+  ⎿  Plan saved to: ~/.claude/plans/we-need-a-solid-validated-platypus.md · 
+     /plan to edit
+     Self-Play Results Store: baselining + over-time tracking
+
+     Context
+
+     Self-play results today are ephemeral and disconnected from time.
+     SelfPlayRunner
+     writes per-seat JSONL to a user-named, gitignored file
+     (selfplay/runs/*.jsonl), and
+     scripts/selfplay_report.py aggregates whatever files you point it at into a
+      win-rate
+     table at query time. Nothing is persisted with a timestamp, nothing records
+      a deck's
+     baseline, and — critically — nothing links a run's results to the state of 
+     the
+     learnings store when that run happened.
+
+     That last gap is the whole point of "see how the self-improvement system
+     works over time":
+     the sidecar already computes a learnings_version() cache-bust token
+     (app/knowledge/learnings.py) that changes whenever lessons are staged. If
+     every run
+     captures that token alongside its win rate, you can answer "did win-rate / 
+     turns-to-win
+     move after the learnings changed?" — the self-improvement signal.
+
+     Decisions (confirmed with user): SQLite (stdlib, single local file,
+     offline-first —
+     not Supabase); ingest via a script (Java runner stays unchanged, keeps
+     emitting JSONL as
+     the raw artifact); surface via a CLI trend report and a dashboard panel.
+
+     Approach
+
+     Keep the existing pipeline as-is (runner → JSONL → selfplay_report.py for
+     one-shot
+     file aggregation). Add a persistent layer on top:
+
+     SelfPlayRunner → runs/*.jsonl  (raw artifact, unchanged)
+                           │  scripts/record_run.py  (ingest + metadata capture)
+                           ▼
+                   selfplay/results.db  (SQLite)
+                      ├── scripts/selfplay_trends.py     (CLI: baseline vs
+     latest, trend)
+                      └── GET /api/selfplay/trends → dashboard "Self-play
+     trends" panel
+
+     1. SQLite store module — app/selfplay_store.py (new)
+
+     Importable by both the ingestion script and the sidecar endpoint. Uses
+     stdlib sqlite3
+     (no new dependency). DB path defaults to selfplay/results.db, overridable
+     via env
+     FORGE_SELFPLAY_DB (mirrors the config-via-env pattern in app/config.py).
+
+     Two tables — a run = one ingested JSONL batch (one runner invocation); a
+     game =
+     one seat-record:
+
+     CREATE TABLE runs (
+       run_id INTEGER PRIMARY KEY AUTOINCREMENT,
+       created_at TEXT NOT NULL,        -- ISO8601 ingestion time
+       config TEXT,                     -- "goldfish" | "mirror"
+       format TEXT,                     -- "standard", "modern", ... (from 
+     --format flag)
+       learnings_version TEXT,          -- learnings.learnings_version() at 
+     ingest time
+       git_sha TEXT,                    -- `git rev-parse --short HEAD`, 
+     best-effort
+       source_file TEXT,                -- ingested JSONL path
+       label TEXT                       -- optional note / "baseline" pin
+     );
+     CREATE TABLE games (
+       id INTEGER PRIMARY KEY AUTOINCREMENT,
+       run_id INTEGER NOT NULL REFERENCES runs(run_id),
+       archetype TEXT, opponent TEXT, pilot_mode TEXT,
+       won INTEGER, win_turn INTEGER, turns INTEGER
+     );
+     CREATE INDEX idx_games_run ON games(run_id);
+
+     Functions:
+     - connect(path=None) — open DB, run CREATE TABLE IF NOT EXISTS (idempotent
+     migration).
+     - insert_run(meta, records) — write one run row + its game rows in a
+     transaction; returns run_id.
+     - archetype_trend(archetype=None) — per (archetype, opponent, pilot_mode),
+     return the
+     time-ordered series of runs with created_at, learnings_version, and
+     aggregates
+     (n_games, n_wins, win_rate, fastest_win, mean_win_turn, median_win_turn).
+     Aggregates
+     computed in SQL so the store is the single source of truth.
+     - baseline_vs_latest() — per group, the baseline (run flagged
+     label='baseline',
+     else the earliest run) and the latest run, with deltas (win_rate,
+     mean_win_turn).
+     This is the headline baselining view.
+
+     Reuse the existing turn-stat math shape from selfplay_report._summarize
+     (win_turn only counted when won and numeric) so DB aggregates match the
+     file report.
+
+     2. Ingestion script — scripts/record_run.py (new)
+
+     python -m scripts.record_run runs/ruby.jsonl --format modern --config
+     goldfish [--label baseline]
+     - Parse JSONL reusing selfplay_report._iter_records (avoid duplicate
+     parsing).
+     - Capture metadata the JSONL lacks: --format, --config, --label;
+     auto-capture
+     learnings_version() (import from app.knowledge.learnings) and git_sha
+     (git rev-parse --short HEAD, swallow failure).
+     - Call selfplay_store.insert_run(...); print the new run_id and a one-line
+     summary.
+
+     3. CLI trend report — scripts/selfplay_trends.py (new)
+
+     python -m scripts.selfplay_trends                 # baseline-vs-latest 
+     table, all decks
+     python -m scripts.selfplay_trends --archetype "Ruby Storm"   # full time 
+     series for one deck
+     python -m scripts.selfplay_trends --json
+     Renders, per deck: baseline win% → latest win%, Δwin%, Δmean-turn, #runs,
+     and (for the
+     single-archetype view) the per-run series with learnings_version so
+     learnings changes
+     line up against performance. Table-formatting mirrors selfplay_report.py's
+     style.
+
+     4. Sidecar endpoint — GET /api/selfplay/trends in app/main.py
+
+     Sibling to /api/stats (around app/main.py:217). Returns
+     selfplay_store.baseline_vs_latest() (and optional ?archetype= →
+     archetype_trend) as
+     JSON. Fail-soft: if the DB file doesn't exist yet, return {"groups": []}
+     (empty panel,
+     no error) — matches the dashboard's tolerant fetch pattern.
+
+     5. Dashboard panel — app/static/dashboard.html
+
+     Add a "Self-play trends" <section> and a fetchTrends() that polls
+     /api/selfplay/trends, wired into the existing refresh() / setInterval loop
+     (dashboard.html:1129, :1153). Render a per-deck table: deck, baseline →
+     latest win%,
+     Δ (green/red), mean turns trend, #runs. Pure DOM/table like the existing
+     panels — no chart
+     library. (A small inline sparkline of win% per run is a nice-to-have if
+     cheap.)
+
+     6. Wiring / housekeeping
+
+     - .gitignore (forge-llm-sidecar/.gitignore): add selfplay/*.db (results are
+      local
+     runtime data, like runs/). Not bundled as package-data.
+     - No pyproject.toml dependency change — sqlite3 is stdlib.
+     record_run/selfplay_trends
+     join the other scripts/ tools (not on the runtime request path).
+     - Docs: short subsection in forge-llm-sidecar/AGENTS.md (and a line in
+     README.md)
+     documenting the record → trend → dashboard flow.
+
+     Files
+
+     - New: app/selfplay_store.py, scripts/record_run.py,
+     scripts/selfplay_trends.py,
+     tests/test_selfplay_store.py
+     - Edit: app/main.py (new endpoint), app/static/dashboard.html (panel),
+     forge-llm-sidecar/.gitignore, AGENTS.md, README.md
+     - Unchanged: SelfPlayRunner.java, selfplay_report.py (still the one-shot
+     file tool)
+
+     Verification
+
+     1. tests/test_selfplay_store.py (offline, tmp_path DB): insert two runs for
+      one
+     archetype with different learnings_version and win rates; assert insert_run
+     round-trips game rows, archetype_trend returns them time-ordered, and
+     baseline_vs_latest computes the correct Δwin% / Δmean-turn (incl. the
+     label='baseline'
+     pin overriding earliest-run). Run: cd forge-llm-sidecar && pytest 
+     tests/test_selfplay_store.py.
+     2. Endpoint test (in-process httpx.AsyncClient + ASGITransport, like
+     existing dashboard
+     tests): GET /api/selfplay/trends returns empty groups with no DB, and
+     populated groups
+     after seeding a temp DB via FORGE_SELFPLAY_DB.
+     3. End-to-end smoke: ingest the committed sample
+     python -m scripts.record_run selfplay/runs/smoke-fixed.jsonl --format 
+     standard --config goldfish,
+     then python -m scripts.selfplay_trends shows the deck; ingest a second
+     JSONL and
+     confirm the trend/Δ updates.
+     4. Dashboard: uvicorn app.main:app --port 18970, open /, confirm the
+     "Self-play trends"
+     panel renders the seeded decks and refreshes on the existing poll interval.
+     5. ruff check . && black --check . clean.
+● Let me check learnings_version and the config env pattern before writing the
+  store.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Now writing the store module.
+
+● Write(forge-llm-sidecar/app/selfplay_store.py)
+  ⎿  Wrote 252 lines to forge-llm-sidecar/app/selfplay_store.py
+       1 """SQLite-backed persistent store for self-play run results.
+       3 The Java ``SelfPlayRunner`` emits per-seat JSONL (one record per
+          sidecar seat
+         this store,
+         nfig, the
+       6 ``learnings_version()`` token, and the code revision. This turns
+       7 files into a queryable history so each deck has a **baseline** a
+         nd its
+         rnings changes.
+      10 Two tables:
+     … +280 lines (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/scripts/record_run.py)
+  ⎿  Wrote 85 lines to forge-llm-sidecar/scripts/record_run.py
+       1 #!/usr/bin/env python3
+         ore.
+       4 The Java runner keeps emitting per-seat JSONL as the raw artifac
+         t; this script
+         uring the
+         urrent
+          ad-hoc run
+       8 files into a queryable history (see ``scripts/selfplay_trends.py
+       9 
+          --config goldfish
+     … +90 lines (ctrl+o to expand)
+
+  Searched for 2 patterns, listed 1 directory (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/scripts/record_run.py)
+  ⎿  Added 5 lines, removed 2 lines
+      14  from __future__ import annotations
+      15  
+      16  import argparse
+      17 +import pathlib                                                 
+      18  import subprocess
+      19  import sys
+      20  
+      20 -from app import selfplay_store                                 
+      21 -from scripts.selfplay_report import _iter_records              
+      21 +sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.
+         +parent))                                                       
+      22  
+      23 +from app import selfplay_store  # noqa: E402                   
+      24 +from scripts.selfplay_report import _iter_records  # noqa: E402
+      25  
+      26 +                                                               
+      27  def _git_sha() -> str:
+      28      try:
+      29          out = subprocess.run(
+
+● Write(forge-llm-sidecar/scripts/selfplay_trends.py)
+  ⎿  Wrote 113 lines to forge-llm-sidecar/scripts/selfplay_trends.py
+       1 #!/usr/bin/env python3
+         sults store.
+       3 
+          one shot, this
+         .py``) and adds
+       6 the *time* dimension: each deck's **baseline** vs its **latest**
+       7 and turns-to-win deltas, and — per run — the ``learnings_version
+         `` token so
+       9 
+          baseline-vs-latest, all decks
+     … +126 lines (ctrl+o to expand)
+
+● Now the endpoint. Let me check the imports at top of main.py.
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 1 line
+      40      TrainingExample,
+      41  )
+      42  from app.opponent_hand_probability import ai_draw_probabilities
+          , opponent_card_probabilities
+      43 +from app import selfplay_store                                 
+      44  from app.store import get_store
+      45  
+      46  logging.basicConfig(level=logging.INFO)
+
+● Update(forge-llm-sidecar/app/main.py)  ⎿  Added 19 lines
+      233      }
+      234  
+      235  
+      236 +@app.get("/api/selfplay/trends")                              
+      237 +async def api_selfplay_trends(archetype: str | None = None) ->
+          + dict:                                                        
+      238 +    """Self-play results over time for the dashboard panel.   
+      239 +                                                              
+      240 +    Default: per-deck baseline-vs-latest with deltas. With ``?
+          +archetype=`` the                                              
+      241 +    full per-run series for one deck. Fail-soft: if no results
+          + DB exists yet,                                               
+      242 +    returns empty groups so the panel renders blank rather tha
+          +n erroring.                                                   
+      243 +    """                                                       
+      244 +    if not selfplay_store.db_exists():                        
+      245 +        return {"groups": []}                                 
+      246 +    conn = selfplay_store.connect()                           
+      247 +    try:                                                      
+      248 +        if archetype:                                         
+      249 +            return {"groups": selfplay_store.archetype_trend(c
+          +onn, archetype)}                                              
+      250 +        return {"groups": selfplay_store.baseline_vs_latest(co
+          +nn)}                                                          
+      251 +    finally:                                                  
+      252 +        conn.close()                                          
+      253 +                                                              
+      254 +                                                              
+      255  @app.get("/metagame")
+      256  async def get_metagame(format: str = "modern") -> dict:
+      257      """Debug endpoint: show the loaded metagame breakdown for 
+           a format.
+
+● The dashboard polls this endpoint; exclude it from hit-logging like
+  /api/stats.
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 5 lines, removed 1 line
+      65      # when validation fails (422) or the request never reaches 
+          /recognize.
+      66      response = await call_next(request)
+      67      path = request.url.path
+      68 -    if path not in ("/api/stats", "/dashboard") and not path.st
+         -artswith("/static"):                                           
+      68 +    if path not in (                                           
+      69 +        "/api/stats",                                          
+      70 +        "/api/selfplay/trends",                                
+      71 +        "/dashboard",                                          
+      72 +    ) and not path.startswith("/static"):                      
+      73          client_host = request.client.host if request.client els
+          e "?"
+      74          log.info(
+      75              "HTTP %s %s -> %d (from %s)",
+
+● Now the dashboard panel. Let me look at the panel structure and refresh
+  wiring.
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● Now I'll add the panel HTML, state, fetch, render, and wiring.
+
+● Update(forge-llm-sidecar/app/static/dashboard.html)
+  ⎿  Added 8 lines
+      434        </div>
+      435      </div>
+      436  
+      437 +    <!-- Self-play Trends -->                                 
+      438 +    <div class="card full-width">                             
+      439 +      <div class="card-title">Self-play Trends <span id="trend
+          +sCount" style="color: var(--accent)"> (0)</span></div>        
+      440 +      <div id="trendsTable">                                  
+      441 +        <div class="empty-state">No self-play runs recorded ye
+          +t</div>                                                       
+      442 +      </div>                                                  
+      443 +    </div>                                                    
+      444 +                                                              
+      445      <!-- Request History -->
+      446      <div class="card full-width">
+      447        <div class="card-title">Request History <span id="histor
+           yCount" style="color: var(--accent)"> (0)</span></div>
+
+● Update(forge-llm-sidecar/app/static/dashboard.html)
+  ⎿  Added 1 line
+      464      let statsData = null;
+      465      let metagameData = null;
+      466      let pilotingData = null;
+      467 +    let trendsData = null;                                    
+      468  
+      469      // --- Helpers ---
+      470      function fmtUptime(seconds) {
+
+● Update(forge-llm-sidecar/app/static/dashboard.html)
+  ⎿  Added 8 lines
+      1134        }
+      1135      }
+      1136  
+      1137 +    async function fetchTrends() {                           
+      1138 +      try {                                                  
+      1139 +        trendsData = await fetch(`${API}/api/selfplay/trends`
+           +).then(r => r.json());                                       
+      1140 +      } catch (e) {                                          
+      1141 +        console.error('Trends fetch failed', e);             
+      1142 +      }                                                      
+      1143 +    }                                                        
+      1144 +                                                             
+      1145      // --- Refresh ---
+      1146      async function refresh() {
+      1147        const fmt = document.getElementById('metaFormat').value
+             || 'modern';
+
+● Now the render function and wiring:
+
+● Update(forge-llm-sidecar/app/static/dashboard.html)
+  ⎿  Added 46 lines
+      1101        `;
+      1102      }
+      1103  
+      1104 +    function fmtTurn(v) { return (v === null || v === undefin
+           +ed) ? '-' : v; }                                             
+      1105 +                                                             
+      1106 +    function deltaCell(v, lowerIsBetter) {                   
+      1107 +      if (v === null || v === undefined) return '<td>-</td>';
+      1108 +      const good = lowerIsBetter ? v < 0 : v > 0;            
+      1109 +      const color = v === 0 ? 'inherit' : (good ? 'var(--ok, 
+           +#4caf50)' : 'var(--bad, #e57373)');                          
+      1110 +      const sign = v > 0 ? '+' : '';                         
+      1111 +      return `<td style="color:${color}">${sign}${v}</td>`;  
+      1112 +    }                                                        
+      1113 +                                                             
+      1114 +    function renderTrends() {                                
+      1115 +      const el = document.getElementById('trendsTable');     
+      1116 +      const groups = (trendsData && trendsData.groups) ? tren
+           +dsData.groups : [];                                          
+      1117 +      document.getElementById('trendsCount').textContent = ` 
+           +(${groups.length})`;                                         
+      1118 +                                                             
+      1119 +      if (groups.length === 0) {                             
+      1120 +        el.innerHTML = '<div class="empty-state">No self-play
+           + runs recorded yet</div>';                                   
+      1121 +        return;                                              
+      1122 +      }                                                      
+      1123 +                                                             
+      1124 +      el.innerHTML = `                                       
+      1125 +        <table>                                              
+      1126 +          <thead>                                            
+      1127 +            <tr><th>Deck / Opponent / Mode</th><th>Runs</th><
+           +th>Base win%</th><th>Last win%</th><th>Δwin%</th><th>Base tur
+           +n</th><th>Last turn</th><th>Δturn</th></tr>                  
+      1128 +          </thead>                                           
+      1129 +          <tbody>                                            
+      1130 +            ${groups.map(g => {                              
+      1131 +              const dwin = (g.delta_win_rate === null || g.de
+           +lta_win_rate === undefined)                                  
+      1132 +                ? null : Math.round(g.delta_win_rate * 1000) 
+           +/ 10;                                                        
+      1133 +              return `                                       
+      1134 +              <tr>                                           
+      1135 +                <td>${escapeHtml(g.label)}</td>              
+      1136 +                <td>${g.n_runs}</td>                         
+      1137 +                <td>${Math.round(g.baseline.win_rate * 100)}%
+           +</td>                                                        
+      1138 +                <td>${Math.round(g.latest.win_rate * 100)}%</
+           +td>                                                          
+      1139 +                ${deltaCell(dwin, false)}                    
+      1140 +                <td>${fmtTurn(g.baseline.mean_win_turn)}</td>
+      1141 +                <td>${fmtTurn(g.latest.mean_win_turn)}</td>  
+      1142 +                ${deltaCell(g.delta_mean_win_turn, true)}    
+      1143 +              </tr>`;                                        
+      1144 +            }).join('')}                                     
+      1145 +          </tbody>                                           
+      1146 +        </table>                                             
+      1147 +      `;                                                     
+      1148 +    }                                                        
+      1149 +                                                             
+      1150      // --- Fetch ---
+      1151      async function fetchHealth() {
+      1152        try {
+
+● Update(forge-llm-sidecar/app/static/dashboard.html)
+  ⎿  Added 1 line
+      1196          fetchStats(),
+      1197          fetchMetagame(fmt),
+      1198          fetchPiloting(fmt),
+      1199 +        fetchTrends(),                                       
+      1200        ]);
+      1201      }
+      1202  
+
+● Update(forge-llm-sidecar/app/static/dashboard.html)
+  ⎿  Added 1 line
+      1206        renderLastRecognition();
+      1207        renderMetagame();
+      1208        renderGuides();
+      1209 +      renderTrends();                                        
+      1210        renderHistory();
+      1211        document.getElementById('lastUpdate').textContent = new
+             Date().toLocaleTimeString();
+      1212      }
+
+● Now housekeeping: .gitignore and tests. Let me update .gitignore and write the
+   tests.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/.gitignore)
+  ⎿  Added 3 lines
+      15  cache/
+      16  logs/
+      17  
+      18 +# Self-play results store (local runtime data, like selfplay/ru
+         +ns/)                                                           
+      19 +selfplay/*.db                                                  
+      20 +                                                               
+      21  # Local secrets
+      22  .env
+      23  .env.local
+
+● Now let me look at an existing dashboard test to mirror the in-process HTTP
+  pattern.
+
+  Read 1 file, listed 1 directory (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/tests/test_selfplay_store.py)  ⎿  Wrote 119 lines to forge-llm-sidecar/tests/test_selfplay_store.py
+       1 """Tests for the SQLite self-play results store and /api/selfpla
+         y/trends."""
+       2 
+       4 from httpx import ASGITransport, AsyncClient
+       5 
+       6 from app import selfplay_store
+       7 
+       8 
+      10     """Build per-seat records: won_turns is a list of win_turn i
+         nts (None = loss)."""
+     … +132 lines (ctrl+o to expand)
+
+● Now run the new tests, lint, and format check.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● All 6 pass. Now lint, format, and end-to-end smoke.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Let me auto-fix with black and ruff, then re-check the remaining E501s.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The B023 closure warning is the only real issue. Let me fix it by binding the
+  loop variables as default args.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/selfplay_store.py)
+  ⎿  Added 2 lines, removed 2 lines
+      225          baseline = pinned[0] if pinned else series[0]
+      226          latest = series[-1]
+      227  
+      228 -        def _delta(key: str) -> float | None:                 
+      229 -            b, latest_v = baseline.get(key), latest.get(key)  
+      228 +        def _delta(key: str, base=baseline, last=latest) -> fl
+          +oat | None:                                                   
+      229 +            b, latest_v = base.get(key), last.get(key)        
+      230              if b is None or latest_v is None:
+      231                  return None
+      232              return round(latest_v - b, 3)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The remaining ruff errors are pre-existing in main.py (line 841, the reflect
+  endpoint). Let me confirm none are in my added code.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● My new files pass cleanly. Let me confirm the main.py errors are pre-existing
+  (not introduced by my import placement).
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● The committed main.py is clean, so these errors come from uncommitted changes.
+   Let me verify which are mine vs. pre-existing edits.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The I001/F401/UP037/E501 in main.py are pre-existing from the user's other
+  uncommitted edits (the block was already unsorted —
+  app.opponent_hand_probability sits after app.schema). My new files are clean.
+  Let me reposition my import to the conventional top-of-block spot so I'm not
+  adding to the disorder, then run the full suite and the e2e smoke.
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 1 line, removed 1 line
+      39      TargetPriority,
+      40      TrainingExample,
+      41  )
+      42 -from app.opponent_hand_probability import ai_draw_probabilities
+         -, opponent_card_probabilities                                  
+      42  from app import selfplay_store
+      43 +from app.opponent_hand_probability import ai_draw_probabilities
+         +, opponent_card_probabilities                                  
+      44  from app.store import get_store
+      45  
+      46  logging.basicConfig(level=logging.INFO)
+
+● Now the end-to-end smoke test and full sidecar test suite.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● End-to-end works — baseline pinned, second run tracked, deltas computed. Now
+  the full sidecar suite to confirm no regressions.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● All 213 tests pass. Now the docs. Let me find the right spots in AGENTS.md and
+   README.
+
+  Searched for 2 patterns, read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/AGENTS.md)
+  ⎿  Added 15 lines
+      68  - `scripts/scrape_metagame.py` — scrapes MTGGoldfish, writes `a
+          pp/knowledge/metagame_data/*.json`
+      69  - `scripts/build_piloting_guides.py` — generates piloting guide
+           JSON from archetype data
+      70  - `scripts/analyze_forge_log.py` — CLI for parsing Forge game l
+          ogs via `app.forge_log`
+      71 +- `scripts/selfplay_report.py` — one-shot aggregation of runner
+         + JSONL (win-rate / turns table)                                
+      72 +- `scripts/record_run.py` — ingest a runner JSONL batch into th
+         +e persistent results DB,                                       
+      73 +  capturing timestamp + format + config + `learnings_version()`
+         + + git sha                                                     
+      74 +- `scripts/selfplay_trends.py` — read the results DB: per-deck 
+         +baseline-vs-latest and the                                     
+      75 +  per-run series, so win-rate / turns-to-win track over time ag
+         +ainst learnings changes                                        
+      76  
+      77  These use separate LLM env vars (`BUILDER_LLM_BASE_URL`, etc.) 
+          defaulting to the main `LLM_*` values.
+      78  
+      79 +### Self-play results store                                    
+      80 +                                                               
+      81 +`app/selfplay_store.py` is a SQLite store (stdlib, no deps) at 
+         +`selfplay/results.db`                                          
+      82 +(gitignored; override with `FORGE_SELFPLAY_DB`). Flow: `SelfPla
+         +yRunner → runs/*.jsonl`                                        
+      83 +(raw artifact, unchanged) → `record_run.py` (ingest) → `selfpla
+         +y_trends.py` /                                                 
+      84 +`GET /api/selfplay/trends` (dashboard "Self-play Trends" panel)
+         +. A run = one ingested JSONL                                   
+      85 +batch; a game = one seat-record. Each run snapshots `learnings_
+         +version()` so the                                              
+      86 +self-improvement signal (did win-rate/turns move after learning
+         +s changed?) is recoverable.                                    
+      87 +Baseline = the run labelled `baseline` (else the earliest run f
+         +or that deck).                                                 
+      88 +                                                               
+      89  ## Environment variables
+      90  
+      91  | Variable | Default | Notes |
+
+● Now add the env var to the AGENTS.md table and a README line. Let me check the
+   README scripts/endpoints area.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/README.md)
+  ⎿  Added 3 lines
+      139  - `POST /forge-log/analyze` — parse a Forge game log into stru
+           ctured events
+      140    (used by tooling and post-game analysis).
+      141  - `POST /selfplay/reflect` — summarize a batch of self-play ga
+           mes into learnings.
+      142 +- `GET /api/selfplay/trends` — per-deck baseline-vs-latest sel
+          +f-play results over time                                      
+      143 +  (powers the dashboard's "Self-play Trends" panel; `?archetyp
+          +e=` for one deck's full                                       
+      144 +  per-run series). Backed by the `selfplay/results.db` store —
+          + see below.                                                   
+      145  - `GET /metagame?format=modern` — debug: shows the loaded meta
+           game breakdown.
+      146  - `GET /piloting?format=modern&archetype=...` — debug: shows t
+           he resolved
+      147    piloting guide (omit `archetype` to list available guides).
+● Let me add the FORGE_SELFPLAY_DB env var to the AGENTS.md table and check
+  where self-play tracking belongs in README.
+
+● Update(forge-llm-sidecar/AGENTS.md)
+  ⎿  Added 1 line
+       98  | `METAGAME_ENABLE` | `true` | Score guesses against metagame 
+           data |
+       99  | `FORMAT_DETECT_ENABLE` | `true` | Scryfall-based format dete
+           ction |
+      100  | `DEFAULT_META_FORMAT` | `standard` | Fallback when detection
+            fails |
+      101 +| `FORGE_SELFPLAY_DB` | `selfplay/results.db` | SQLite path fo
+          +r the self-play results store |                               
+      102  
+      103  ## Docker
+      104  
+
+  Searched for 1 pattern (ctrl+o to expand)
+
+● I referenced "see below" but there's no self-play section yet. Let me add a
+  concise one. Let me find a good anchor point after the manual test block.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/README.md)
+  ⎿  Added 23 lines
+      169    }'
+      170  ```
+      171  
+      172 +## Self-play results tracking                                 
+      173 +                                                              
+      174 +The Java `SelfPlayRunner` writes per-seat JSONL (one record pe
+          +r sidecar seat per game).                                     
+      175 +To baseline each deck and track the self-improvement system ov
+          +er time, ingest those runs                                    
+      176 +into a small SQLite store (`selfplay/results.db`, gitignored; 
+          +override with                                                 
+      177 +`FORGE_SELFPLAY_DB`):                                         
+      178 +                                                              
+      179 +```sh                                                         
+      180 +# Record the first run as the baseline, then later runs as the
+          +y happen                                                      
+      181 +python -m scripts.record_run selfplay/runs/ruby.jsonl --format
+          + modern --config goldfish --label baseline                    
+      182 +python -m scripts.record_run selfplay/runs/ruby-2.jsonl --form
+          +at modern --config goldfish                                   
+      183 +                                                              
+      184 +# Per-deck baseline-vs-latest win% and turns-to-win deltas    
+      185 +python -m scripts.selfplay_trends                             
+      186 +# Full per-run series for one deck (each run shows its learnin
+          +gs_version)                                                   
+      187 +python -m scripts.selfplay_trends --archetype "Ruby Storm"    
+      188 +```                                                           
+      189 +                                                              
+      190 +Each run snapshots the `learnings_version()` token, so win-rat
+          +e / turns-to-win movements                                    
+      191 +line up against learnings changes. The same data renders live 
+          +in the dashboard's                                            
+      192 +**Self-play Trends** panel via `GET /api/selfplay/trends`. `sc
+          +ripts/selfplay_report.py`                                     
+      193 +remains the quick one-shot aggregator over raw JSONL files.   
+      194 +                                                              
+      195  ## Connecting Forge
+      196  
+      197  Forge integrates the sidecar through `forge.ai.llm.*` (see For
+           ge's
+
+● Let me verify the dashboard panel markup is actually served and do a final
+  lint pass on touched files.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Done. Here's what I built — a SQLite-backed results store on top of your
+  existing self-play pipeline, with baselining and over-time tracking.
+
+  Why SQLite, not Supabase
+
+  Supabase (hosted Postgres) would add a network dependency, auth, and hosting
+  that directly contradict this repo's offline-first design — and it's overkill
+  for single-user local self-play data. SQLite is Python stdlib (zero new deps),
+   a single local file, and SQL makes the baseline/trend queries trivial.
+  Confirmed with you before building.
+
+  What changed
+
+  New files:
+  - app/selfplay_store.py — the store. Two tables: runs (one ingested JSONL
+  batch + metadata) and games (one seat-record). Key functions: insert_run,
+  archetype_trend, baseline_vs_latest. Aggregation math matches
+  selfplay_report._summarize so numbers are consistent.
+  - scripts/record_run.py — ingest a runner JSONL file, capturing what the JSONL
+   lacks: timestamp, --format, --config, --label, the learnings_version() token,
+   and git sha.
+  - scripts/selfplay_trends.py — CLI: per-deck baseline-vs-latest table
+  (default), or full per-run series with --archetype.
+  - tests/test_selfplay_store.py — 6 tests (store round-trip, time ordering,
+  deltas, baseline-pin override, endpoint empty + seeded).
+
+  Edited: app/main.py (GET /api/selfplay/trends, fail-soft empty when no DB,
+  excluded from hit-logging); app/static/dashboard.html ("Self-play Trends"
+  panel wired into the 5s refresh loop); .gitignore (selfplay/*.db); AGENTS.md +
+   README.md.
+
+  Unchanged: SelfPlayRunner.java and selfplay_report.py (still your quick
+  one-shot file aggregator).
+
+  The core idea for "improvement over time"
+
+  Each run snapshots learnings_version() — the token that changes whenever
+  lessons are staged. So selfplay_trends.py --archetype X shows win% and
+  turns-to-win per run next to the learnings version, letting you see whether
+  performance moved after the learnings changed. Baseline = the run you tag
+  --label baseline (else the earliest run for that deck).
+
+  Verified
+
+  - All 213 sidecar tests pass; ruff + black clean on new files.
+  - End-to-end smoke: ingested both committed sample JSONLs (one pinned
+  baseline), confirmed the trend table and per-run series render with correct
+  deltas.
+  - Confirmed the dashboard serves the panel markup + JS.
+
+  $ python -m scripts.selfplay_trends
+  deck / opponent / mode                  runs  base_win%  last_win%  Δwin%
+  base_turn  last_turn  Δturn
+  Selesnya Landfall / 60 Islands / solve     2       100        100    0.0
+    8.5       16.0    +7.5
+
+  Usage:
+  python -m scripts.record_run selfplay/runs/ruby.jsonl --format modern --config
+   goldfish --label baseline
+  python -m scripts.record_run selfplay/runs/ruby-2.jsonl --format modern
+  --config goldfish
+  python -m scripts.selfplay_trends --archetype "Ruby Storm"
+
+  One note: the I001/F401/UP037/E501 ruff warnings in app/main.py are
+  pre-existing from other uncommitted edits in your working tree (the committed
+  main.py is clean) — I left them alone since they're outside this change.
+
+  One thing worth deciding later: ingestion is currently a manual step. If you'd
+   rather have SelfPlayRunner auto-record at the end of a run, that's a small
+  follow-up (a sidecar POST endpoint) — I kept it manual per our discussion so
+  the Java side stays untouched.
+
+✻ Cooked for 11m 18s
+
+❯ this needs to be auto-recorded. make the change necessary                     
+
+● The user wants the runner to auto-record. Let me read SelfPlayRunner.java and
+  the existing sidecar HTTP client to wire it cleanly.
+
+  Read 1 file (ctrl+o to expand)
+
+● I understand the structure. The runner accumulates per-seat records and writes
+   them to JSONL; I'll have it also POST them to a new POST /selfplay/record
+  endpoint at the end of the run (fail-soft — JSONL still written if the sidecar
+   is down). Since goldfish/mirror runs already require the sidecar to be up
+  (the pilot calls it), recording to it at the end is natural.
+
+  Let me first add shared metadata helpers to the store, then the endpoint, then
+   wire the Java runner.
+
+● Update(forge-llm-sidecar/app/selfplay_store.py)
+  ⎿  Added 1 line
+      25  import os
+      26  import sqlite3
+      27  import statistics
+      28 +import subprocess                                              
+      29  from datetime import datetime, timezone
+      30  from pathlib import Path
+      31  from typing import Any
+
+● Update(forge-llm-sidecar/app/selfplay_store.py)
+  ⎿  Added 25 lines
+      57  """
+      58  
+      59  
+      60 +def current_git_sha() -> str:                                  
+      61 +    """Best-effort short git revision of this repo (empty strin
+         +g on failure)."""                                              
+      62 +    try:                                                       
+      63 +        out = subprocess.run(                                  
+      64 +            ["git", "rev-parse", "--short", "HEAD"],           
+      65 +            capture_output=True,                               
+      66 +            text=True,                                         
+      67 +            timeout=5,                                         
+      68 +            cwd=str(Path(__file__).resolve().parent.parent),   
+      69 +        )                                                      
+      70 +        return out.stdout.strip() if out.returncode == 0 else "
+         +"                                                              
+      71 +    except (OSError, subprocess.SubprocessError):              
+      72 +        return ""                                              
+      73 +                                                               
+      74 +                                                               
+      75 +def current_learnings_version() -> str:                        
+      76 +    """The learnings cache-bust token, snapshotted so runs line
+         + up with learnings state."""                                   
+      77 +    try:                                                       
+      78 +        from app.knowledge.learnings import learnings_version  
+      79 +                                                               
+      80 +        return learnings_version()                             
+      81 +    except Exception:  # noqa: BLE001 — best-effort metadata, n
+         +ever block a record                                            
+      82 +        return ""                                              
+      83 +                                                               
+      84 +                                                               
+      85  def db_path(path: str | os.PathLike[str] | None = None) -> Path
+          :
+      86      """Resolve the DB path: explicit arg > ``FORGE_SELFPLAY_DB`
+          ` > default."""
+      87      if path is not None:
+
+● Now refactor record_run.py to use the shared helpers:
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/scripts/record_run.py)
+  ⎿  Removed 22 lines
+      24  from scripts.selfplay_report import _iter_records  # noqa: E402
+      25  
+      26  
+      27 -def _git_sha() -> str:                                         
+      28 -    try:                                                       
+      29 -        out = subprocess.run(                                  
+      30 -            ["git", "rev-parse", "--short", "HEAD"],           
+      31 -            capture_output=True,                               
+      32 -            text=True,                                         
+      33 -            timeout=5,                                         
+      34 -        )                                                      
+      35 -        return out.stdout.strip() if out.returncode == 0 else "
+         -"                                                              
+      36 -    except (OSError, subprocess.SubprocessError):              
+      37 -        return ""                                              
+      38 -                                                               
+      39 -                                                               
+      40 -def _learnings_version() -> str:                               
+      41 -    try:                                                       
+      42 -        from app.knowledge.learnings import learnings_version  
+      43 -                                                               
+      44 -        return learnings_version()                             
+      45 -    except Exception:  # noqa: BLE001 — best-effort metadata, n
+         -ever block ingest                                              
+      46 -        return ""                                              
+      47 -                                                               
+      48 -                                                               
+      27  def main() -> int:
+      28      ap = argparse.ArgumentParser(description="Record a self-pla
+          y run into the results DB.")
+      29      ap.add_argument("paths", nargs="+", help="JSONL files, glob
+          s, or directories")
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/scripts/record_run.py)
+  ⎿  Added 2 lines, removed 2 lines
+      47              records=records,
+      48              config=args.config,
+      49              format=args.format,
+      50 -            learnings_version=_learnings_version(),            
+      51 -            git_sha=_git_sha(),                                
+      50 +            learnings_version=selfplay_store.current_learnings_
+         +version(),                                                     
+      51 +            git_sha=selfplay_store.current_git_sha(),          
+      52              source_file=" ".join(args.paths),
+      53              label=args.label,
+      54          )
+
+● record_run.py no longer uses subprocess; remove the import.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/scripts/record_run.py)
+  ⎿  Removed 1 line
+      15  
+      16  import argparse
+      17  import pathlib
+      18 -import subprocess                                              
+      18  import sys
+      19  
+      20  sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.
+          parent))
+
+● Now add the schema models and the POST /selfplay/record endpoint. Let me check
+   the ReflectRequest location in schema.py.
+  Searched for 3 patterns (ctrl+o to expand)
+
+● The Reflect models are inline in main.py. I'll mirror that. Let me read the
+  reflect models and endpoint.
+
+  Read 1 file (ctrl+o to expand)
+
+● Now add the record endpoint and its models, placed with the trends endpoint:
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 60 lines
+      237      }
+      238  
+      239  
+      240 +class RecordRunRequest(BaseModel):                            
+      241 +    """One self-play run (one runner invocation) to persist in
+          +to the results DB.                                            
+      242 +                                                              
+      243 +    ``records`` are the runner's per-seat dicts (archetype, op
+          +ponent, pilot_mode,                                           
+      244 +    won, win_turn, turns) — the same objects it writes to JSON
+          +L.                                                            
+      245 +    """                                                       
+      246 +                                                              
+      247 +    records: list[dict] = Field(default_factory=list)         
+      248 +    format: str = ""                                          
+      249 +    config: str = ""                                          
+      250 +    label: str = ""                                           
+      251 +    source_file: str = ""                                     
+      252 +                                                              
+      253 +                                                              
+      254 +class RecordRunResponse(BaseModel):                           
+      255 +    run_id: int                                               
+      256 +    n_games: int                                              
+      257 +    n_wins: int                                               
+      258 +    db_path: str                                              
+      259 +                                                              
+      260 +                                                              
+      261 +@app.post("/selfplay/record", response_model=RecordRunResponse
+          +)                                                             
+      262 +async def selfplay_record(req: RecordRunRequest) -> RecordRunR
+          +esponse:                                                      
+      263 +    """Persist a finished self-play run so it can be baselined
+          + and tracked over time.                                       
+      264 +                                                              
+      265 +    Called by the Java ``SelfPlayRunner`` at the end of a run 
+          +(it also keeps                                                
+      266 +    writing JSONL as the raw artifact). The server snapshots `
+          +`learnings_version``                                          
+      267 +    and the git sha so the run lines up against the learnings 
+          +state at that moment.                                         
+      268 +    """                                                       
+      269 +    conn = selfplay_store.connect()                           
+      270 +    try:                                                      
+      271 +        run_id = selfplay_store.insert_run(                   
+      272 +            conn,                                             
+      273 +            records=req.records,                              
+      274 +            config=req.config,                                
+      275 +            format=req.format,                                
+      276 +            learnings_version=selfplay_store.current_learnings
+          +_version(),                                                   
+      277 +            git_sha=selfplay_store.current_git_sha(),         
+      278 +            source_file=req.source_file,                      
+      279 +            label=req.label,                                  
+      280 +        )                                                     
+      281 +    finally:                                                  
+      282 +        conn.close()                                          
+      283 +    n_wins = sum(1 for r in req.records if r.get("won"))      
+      284 +    log.info(                                                 
+      285 +        "Recorded self-play run #%d: %d games, %d wins (%s / %
+          +s)",                                                          
+      286 +        run_id,                                               
+      287 +        len(req.records),                                     
+      288 +        n_wins,                                               
+      289 +        req.format or "?",                                    
+      290 +        req.config or "?",                                    
+      291 +    )                                                         
+      292 +    return RecordRunResponse(                                 
+      293 +        run_id=run_id,                                        
+      294 +        n_games=len(req.records),                             
+      295 +        n_wins=n_wins,                                        
+      296 +        db_path=str(selfplay_store.db_path()),                
+      297 +    )                                                         
+      298 +                                                              
+      299 +                                                              
+      300  @app.get("/api/selfplay/trends")
+      301  async def api_selfplay_trends(archetype: str | None = None) ->
+            dict:
+      302      """Self-play results over time for the dashboard panel.
+
+● Now update the docs for the new endpoint, then wire the Java runner. First the
+   docs:
+
+● Update(forge-llm-sidecar/README.md)
+  ⎿  Added 2 lines
+      139  - `POST /forge-log/analyze` — parse a Forge game log into stru
+           ctured events
+      140    (used by tooling and post-game analysis).
+      141  - `POST /selfplay/reflect` — summarize a batch of self-play ga
+           mes into learnings.
+      142 +- `POST /selfplay/record` — persist a finished self-play run i
+          +nto the results store                                         
+      143 +  (the runner calls this automatically at the end of a run).  
+      144  - `GET /api/selfplay/trends` — per-deck baseline-vs-latest sel
+           f-play results over time
+      145    (powers the dashboard's "Self-play Trends" panel; `?archetyp
+           e=` for one deck's full
+      146    per-run series). Backed by the `selfplay/results.db` store —
+            see below.
+
+● Update(forge-llm-sidecar/README.md)
+  ⎿  Added 19 lines, removed 6 lines
+      173  
+      174  ## Self-play results tracking
+      175  
+      176 -The Java `SelfPlayRunner` writes per-seat JSONL (one record pe
+          -r sidecar seat per game).                                     
+      177 -To baseline each deck and track the self-improvement system ov
+          -er time, ingest those runs                                    
+      178 -into a small SQLite store (`selfplay/results.db`, gitignored; 
+          -override with                                                 
+      179 -`FORGE_SELFPLAY_DB`):                                         
+      176 +The Java `SelfPlayRunner` writes per-seat JSONL (one record pe
+          +r sidecar seat per game) and                                  
+      177 +records each finished run into a small SQLite store (`selfplay
+          +/results.db`, gitignored;                                     
+      178 +override with `FORGE_SELFPLAY_DB`) so every deck has a baselin
+          +e and its performance can be                                  
+      179 +tracked over time.                                            
+      180  
+      181 +**Automatic** — at the end of a run the runner POSTs its recor
+          +ds to `POST /selfplay/record`                                 
+      182 +(fail-soft: the JSONL is still written if the sidecar is unrea
+          +chable). Pass `-format` and an                                
+      183 +optional `-label baseline` to tag the run; disable recording w
+          +ith `-record false`:                                          
+      184 +                                                              
+      185  ```sh
+      182 -# Record the first run as the baseline, then later runs as the
+          -y happen                                                      
+      186 +forge selfplay -config goldfish -p1 ruby.dck -p2 60-islands.dc
+          +k -n 50 \                                                     
+      187 +  -out runs/ruby.jsonl -format modern -label baseline         
+      188 +```                                                           
+      189 +                                                              
+      190 +**Manual** — ingest existing JSONL files after the fact with t
+          +he same store:                                                
+      191 +                                                              
+      192 +```sh                                                         
+      193  python -m scripts.record_run selfplay/runs/ruby.jsonl --format
+            modern --config goldfish --label baseline
+      184 -python -m scripts.record_run selfplay/runs/ruby-2.jsonl --form
+          -at modern --config goldfish                                   
+      194 +```                                                           
+      195  
+      196 +Read the results back:                                        
+      197 +                                                              
+      198 +```sh                                                         
+      199  # Per-deck baseline-vs-latest win% and turns-to-win deltas
+      200  python -m scripts.selfplay_trends
+      201  # Full per-run series for one deck (each run shows its learnin
+           gs_version)
+
+● Update(forge-llm-sidecar/AGENTS.md)
+  ⎿  Added 7 lines, removed 5 lines
+      80  
+      81  `app/selfplay_store.py` is a SQLite store (stdlib, no deps) at 
+          `selfplay/results.db`
+      82  (gitignored; override with `FORGE_SELFPLAY_DB`). Flow: `SelfPla
+          yRunner → runs/*.jsonl`
+      83 -(raw artifact, unchanged) → `record_run.py` (ingest) → `selfpla
+         -y_trends.py` /                                                 
+      84 -`GET /api/selfplay/trends` (dashboard "Self-play Trends" panel)
+         -. A run = one ingested JSONL                                   
+      85 -batch; a game = one seat-record. Each run snapshots `learnings_
+         -version()` so the                                              
+      86 -self-improvement signal (did win-rate/turns move after learning
+         -s changed?) is recoverable.                                    
+      87 -Baseline = the run labelled `baseline` (else the earliest run f
+         -or that deck).                                                 
+      83 +(raw artifact) **and** `POST /selfplay/record` (auto, end of ru
+         +n) → store →                                                   
+      84 +`selfplay_trends.py` / `GET /api/selfplay/trends` (dashboard "S
+         +elf-play Trends" panel).                                       
+      85 +`record_run.py` does the same ingest manually for existing JSON
+         +L. A run = one runner                                          
+      86 +invocation; a game = one seat-record. The server snapshots `lea
+         +rnings_version()` (and git                                     
+      87 +sha) on record so the self-improvement signal (did win-rate/tur
+         +ns move after learnings                                        
+      88 +changed?) is recoverable. Baseline = the run labelled `baseline
+         +` (else the earliest run for                                   
+      89 +that deck). The runner's `-record false` disables auto-record; 
+         +`-format`/`-label` tag it.                                     
+      90  
+      91  ## Environment variables
+      92  
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/AGENTS.md)
+  ⎿  Added 1 line, removed 1 line
+      36  
+      37  So a request makes 1–3 LLM calls depending on the deck and deci
+          sion point. Each later node only enriches the state and never r
+          egresses it.
+      38  
+      39 -- **Entrypoint**: `app/main.py` — FastAPI routes (`/health`, `/
+         -recognize`, `/identify-own-archetype`, `/mulligan-plan`, `/meta
+         -game`, `/piloting`, `/forge-log/analyze`, `/selfplay/reflect`, 
+         -`/` + `/dashboard`)                                            
+      39 +- **Entrypoint**: `app/main.py` — FastAPI routes (`/health`, `/
+         +recognize`, `/identify-own-archetype`, `/mulligan-plan`, `/meta
+         +game`, `/piloting`, `/forge-log/analyze`, `/selfplay/reflect`, 
+         +`/selfplay/record`, `/api/selfplay/trends`, `/` + `/dashboard`)
+      40  - **Graph**: `app/graph.py` — `get_graph()` returns the compile
+          d LangGraph (cached for the process)
+      41  - **Nodes**: `app/nodes/` — `game_advisor.py`, `mulligan_planne
+          r.py`, `combo_strategist.py`, `opponent_strategist.py`
+      42  - **Knowledge**: `app/knowledge/` — metagame JSON, archetype JS
+          ON, piloting guides, Scryfall format detection, self-play learn
+          ings
+
+● Now the Java runner. Let me wire the record collection and the POST.
+
+● Update(forge-gui-desktop/src/main/java/forge/view/SelfPlayRunner.java)
+  ⎿  Added 5 lines
+      79          final String p1Name = first(params, "p1", null);
+      80          final String p2Name = first(params, "p2", null);
+      81          final String outPath = first(params, "out", "selfplay-r
+          uns.jsonl");
+      82 +        // Results-store metadata. format/label tag the run; re
+         +cord toggles the                                               
+      83 +        // auto-POST to the sidecar's /selfplay/record (JSONL i
+         +s written either way).                                         
+      84 +        final String format = first(params, "format", "");     
+      85 +        final String label = first(params, "label", "");       
+      86 +        final boolean record = !"false".equalsIgnoreCase(first(
+         +params, "record", "true"));                                    
+      87          final String url = first(params, "url", "http://localho
+          st:18970");
+      88          // Per-seat sidecar URLs for the two-sidecar gauntlet (
+          mirror). Default
+      89          // each to the shared url so a single sidecar still wor
+          ks.
+
+● Now collect records and POST after the loop:
+
+● Update(forge-gui-desktop/src/main/java/forge/view/SelfPlayRunner.java)
+  ⎿  Added 11 lines, removed 2 lines
+      155          System.out.printf("Self-play: config=%s games=%d p1=%s
+            p2=%s out=%s%n",
+      156                  config, nGames, p1Deck.getName(), p2Deck.getNa
+           me(), out);
+      157  
+      158 +        // Per-seat records accumulate here so the whole run c
+          +an be recorded into                                           
+      159 +        // the sidecar's results store in one POST after all g
+          +ames finish.                                                  
+      160 +        final List<Map<String, Object>> recorded = new ArrayLi
+          +st<>();                                                       
+      161 +                                                              
+      162          final Match mc = new Match(rules, players, "SelfPlay")
+           ;
+      163          for (int i = 0; i < nGames; i++) {
+      160 -            playOne(mc, rules, i, p1Deck, p2Deck, p1Seat, p2Se
+          -at, pilotMode, out);                                          
+      164 +            playOne(mc, rules, i, p1Deck, p2Deck, p1Seat, p2Se
+          +at, pilotMode, out, recorded);                                
+      165          }
+      166          System.out.flush();
+      167 +                                                              
+      168 +        if (record && !recorded.isEmpty()) {                  
+      169 +            recordRun(url, config, format, label, outPath, rec
+          +orded);                                                       
+      170 +        }                                                     
+      171      }
+      172  
+      173      private static void playOne(final Match mc, final GameRule
+           s rules, final int iGame,
+      174                                  final Deck p1Deck, final Deck 
+           p2Deck,
+      175                                  final boolean p1Seat, final bo
+           olean p2Seat,
+      168 -                                final String pilotMode, final 
+          -Path out) {                                                   
+      176 +                                final String pilotMode, final 
+          +Path out,                                                     
+      177 +                                final List<Map<String, Object>
+          +> recorded) {                                                 
+      178          final Game game = mc.createGame();
+      179          try {
+      180              TimeLimitedCodeBlock.runWithTimeout(() -> mc.start
+           Game(game),
+
+● Update(forge-gui-desktop/src/main/java/forge/view/SelfPlayRunner.java)
+  ⎿  Added 2 lines, removed 2 lines
+      192          final String winnerName = winnerName(game);
+      193  
+      194          if (p1Seat) {
+      195 -            writeRecord(out, game, p1Deck.getName(), p2Deck.ge
+          -tName(), pilotMode, winnerName);                              
+      195 +            recorded.add(writeRecord(out, game, p1Deck.getName
+          +(), p2Deck.getName(), pilotMode, winnerName));                
+      196          }
+      197          if (p2Seat) {
+      198 -            writeRecord(out, game, p2Deck.getName(), p1Deck.ge
+          -tName(), pilotMode, winnerName);                              
+      198 +            recorded.add(writeRecord(out, game, p2Deck.getName
+          +(), p1Deck.getName(), pilotMode, winnerName));                
+      199          }
+      200  
+      201          // Report the winner's OWN turn count, not the global 
+           game turn.
+
+● Now make writeRecord return the record map, and add the recordRun HTTP POST
+  method:
+
+● Update(forge-gui-desktop/src/main/java/forge/view/SelfPlayRunner.java)
+  ⎿  Added 43 lines, removed 1 line
+      204                  winnerName == null ? "(none)" : winnerName, wi
+           nTurn);
+      205      }
+      206  
+      207 -    private static void writeRecord(final Path out, final Game
+          - game,                                                        
+      207 +    private static Map<String, Object> writeRecord(final Path 
+          +out, final Game game,                                         
+      208                                      final String deckName, fin
+           al String opponentName,
+      209                                      final String pilotMode, fi
+           nal String winnerName) {
+      210          final boolean won = winnerName != null && winnerName.c
+           ontains(deckName);
+     ...
+      223          } catch (final IOException ex) {
+      224              System.out.println("Failed to write record: " + ex
+           .getMessage());
+      225          }
+      226 +        return rec;                                           
+      227      }
+      228  
+      229 +    /**                                                       
+      230 +     * POST the finished run's per-seat records to the sidecar
+          +'s                                                            
+      231 +     * {@code /selfplay/record} endpoint so it lands in the re
+          +sults store for                                               
+      232 +     * baselining and over-time tracking. Fail-soft: the JSONL
+          + artifact is always                                           
+      233 +     * written, so a missing/erroring sidecar only skips the p
+          +ersistent record.                                             
+      234 +     */                                                       
+      235 +    private static void recordRun(final String url, final Stri
+          +ng config, final String format,                               
+      236 +                                  final String label, final St
+          +ring sourceFile,                                              
+      237 +                                  final List<Map<String, Objec
+          +t>> recorded) {                                               
+      238 +        final Map<String, Object> body = new LinkedHashMap<>()
+          +;                                                             
+      239 +        body.put("records", recorded);                        
+      240 +        body.put("format", format);                           
+      241 +        body.put("config", config);                           
+      242 +        body.put("label", label);                             
+      243 +        body.put("source_file", sourceFile);                  
+      244 +        final String endpoint = url.replaceAll("/+$", "") + "/
+          +selfplay/record";                                             
+      245 +        try {                                                 
+      246 +            final java.net.http.HttpClient client = java.net.h
+          +ttp.HttpClient.newHttpClient();                               
+      247 +            final java.net.http.HttpRequest request = java.net
+          +.http.HttpRequest.newBuilder()                                
+      248 +                    .uri(java.net.URI.create(endpoint))       
+      249 +                    .timeout(java.time.Duration.ofSeconds(15))
+      250 +                    .header("Content-Type", "application/json"
+          +)                                                             
+      251 +                    .POST(java.net.http.HttpRequest.BodyPublis
+          +hers.ofString(                                                
+      252 +                            GSON.toJson(body), StandardCharset
+          +s.UTF_8))                                                     
+      253 +                    .build();                                 
+      254 +            final java.net.http.HttpResponse<String> resp = cl
+          +ient.send(                                                    
+      255 +                    request, java.net.http.HttpResponse.BodyHa
+          +ndlers.ofString());                                           
+      256 +            if (resp.statusCode() / 100 == 2) {               
+      257 +                System.out.println("Recorded run to results st
+          +ore: " + resp.body());                                        
+      258 +            } else {                                          
+      259 +                System.out.println("Run record skipped (sideca
+          +r returned HTTP "                                             
+      260 +                        + resp.statusCode() + "): " + resp.bod
+          +y());                                                         
+      261 +            }                                                 
+      262 +        } catch (final IOException | InterruptedException ex) 
+          +{                                                             
+      263 +            System.out.println("Run record skipped (sidecar un
+          +reachable): " + ex.getMessage());                             
+      264 +            if (ex instanceof InterruptedException) {         
+      265 +                Thread.currentThread().interrupt();           
+      266 +            }                                                 
+      267 +        }                                                     
+      268 +    }                                                         
+      269 +                                                              
+      270      private static int safeTurn(final Game game) {
+      271          try {
+      272              return game.getPhaseHandler().getTurn();
+
+● Now update the help text:
+
+● Update(forge-gui-desktop/src/main/java/forge/view/SelfPlayRunner.java)
+  ⎿  Added 4 lines, removed 1 line
+      361      }
+      362  
+      363      private static void help() {
+      364 -        System.out.println("Syntax: forge selfplay -config <go
+          -ldfish|mirror> -p1 <deck[.dck]> -p2 <deck[.dck]> -n <N> -out <
+          -file.jsonl> [-url <sidecar>] [-url1 <s1>] [-url2 <s2>] [-c <ti
+          -meout_s>]");                                                  
+      364 +        System.out.println("Syntax: forge selfplay -config <go
+          +ldfish|mirror> -p1 <deck[.dck]> -p2 <deck[.dck]> -n <N> -out <
+          +file.jsonl> [-format <fmt>] [-label <tag>] [-record <true|fals
+          +e>] [-url <sidecar>] [-url1 <s1>] [-url2 <s2>] [-c <timeout_s>
+          +]");                                                          
+      365          System.out.println("  goldfish: P1 sidecar (solve mode
+           ) vs passive P2 (recognition disabled); one record/game.");
+      366          System.out.println("  mirror:   both seats sidecar (no
+           rmal mode); two records/game.");
+      367 +        System.out.println("  -format:  format tag stored with
+          + the run (e.g. modern); used by the results store.");         
+      368 +        System.out.println("  -label:   optional run tag; use 
+          +'baseline' to pin this run as the deck's baseline.");         
+      369 +        System.out.println("  -record:  POST the run to the si
+          +decar results store on finish (default true).");              
+      370          System.out.println("  -url:     shared sidecar URL (de
+           fault http://localhost:18970).");
+      371          System.out.println("  -url1/-url2: per-seat sidecar UR
+           Ls for the mirror gauntlet (two dashboards). Default to -url."
+           );
+      372      }
+
+● Now add a test for the record endpoint and run the Python checks:
+
+● Update(forge-llm-sidecar/tests/test_selfplay_store.py)
+  ⎿  Added 29 lines
+      132  
+      133  
+      134  @pytest.mark.asyncio
+      135 +async def test_record_endpoint_persists_and_shows_in_trends(mo
+          +nkeypatch, tmp_path):                                         
+      136 +    monkeypatch.setenv("FORGE_SELFPLAY_DB", str(tmp_path / "re
+          +sults.db"))                                                   
+      137 +    from app.main import app                                  
+      138 +                                                              
+      139 +    transport = ASGITransport(app=app)                        
+      140 +    async with AsyncClient(transport=transport, base_url="http
+          +://test") as client:                                          
+      141 +        resp = await client.post(                             
+      142 +            "/selfplay/record",                               
+      143 +            json={                                            
+      144 +                "records": _games([4, 5]),                    
+      145 +                "format": "modern",                           
+      146 +                "config": "goldfish",                         
+      147 +                "label": "baseline",                          
+      148 +                "source_file": "runs/ruby.jsonl",             
+      149 +            },                                                
+      150 +        )                                                     
+      151 +        assert resp.status_code == 200                        
+      152 +        data = resp.json()                                    
+      153 +        assert data["run_id"] == 1                            
+      154 +        assert data["n_games"] == 2                           
+      155 +        assert data["n_wins"] == 2                            
+      156 +                                                              
+      157 +        trends = await client.get("/api/selfplay/trends")     
+      158 +        groups = trends.json()["groups"]                      
+      159 +        assert len(groups) == 1                               
+      160 +        assert groups[0]["baseline"]["label"] == "baseline"   
+      161 +                                                              
+      162 +                                                              
+      163 +@pytest.mark.asyncio                                          
+      164  async def test_trends_endpoint_returns_seeded_groups(monkeypat
+           ch, tmp_path):
+      165      db = tmp_path / "results.db"
+      166      monkeypatch.setenv("FORGE_SELFPLAY_DB", str(db))
+
+  Ran 3 shell commands (ctrl+o to expand)
+● My files are clean. Now compile the Java module to verify the runner builds.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Java compiles. Let me run the full sidecar suite to confirm no regressions,
+  then verify the live endpoint end-to-end with a real server.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● 214 passed. Now an end-to-end test with a live server simulating the runner's
+  exact POST:
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The full auto-record path works end-to-end: the endpoint persisted the run
+  (capturing learnings_version and the real git sha cb2615dc184), and it shows
+  in both the trends API and the CLI. Let me clean up the test artifact and mark
+   complete.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Done. Self-play runs now auto-record into the results store at the end of each
+   run.
+
+  What changed
+
+  Java runner — SelfPlayRunner.java:
+  - Accumulates each per-seat record (alongside the existing JSONL write), then
+  POSTs the whole batch to the sidecar's new POST /selfplay/record endpoint when
+   all games finish.
+  - New flags: -format <fmt> and -label <tag> (use baseline to pin a deck's
+  baseline) tag the run; -record false opts out. Auto-record is on by default.
+  - Fail-soft: the JSONL artifact is always written first, so an
+  unreachable/erroring sidecar only skips the persistent record and prints a
+  notice — the run never fails. Uses the JDK's built-in java.net.http.HttpClient
+   (no new deps).
+
+  Sidecar — app/main.py:
+  - New POST /selfplay/record endpoint: takes the runner's records +
+  format/config/label/source_file, persists via selfplay_store.insert_run, and
+  server-side snapshots learnings_version() and the git sha so each run lines up
+   against the learnings state at that moment.
+
+  Store — app/selfplay_store.py:
+  - Added shared current_git_sha() / current_learnings_version() helpers; both
+  the endpoint and record_run.py now use them (removed the duplicated helpers
+  from the script).
+
+  Docs: README (auto vs. manual recording), AGENTS.md (routes + store flow + env
+   var), and the runner -help text.
+
+  Verified
+
+  - mvn -pl forge-gui-desktop -am compile → BUILD SUCCESS.
+  - All 214 sidecar tests pass (added a test for POST /selfplay/record →
+  persisted → shows in trends with the baseline pin); ruff + black clean on
+  new/touched files.
+  - Live end-to-end: ran a real uvicorn server, POSTed a run exactly as the Java
+   client does — it persisted (capturing the real git sha cb2615dc184) and
+  appeared in both GET /api/selfplay/trends and scripts/selfplay_trends.
+
+  So the flow is now: a forge selfplay … -format modern -label baseline run
+  writes its JSONL and records itself into selfplay/results.db automatically —
+  no manual ingest step. scripts/record_run.py still exists for backfilling
+  pre-existing JSONL files.
+
+  One thing worth noting: the -format value is whatever you pass on the CLI (the
+   runner doesn't infer it from the decks). If you omit it, the run still
+  records and groups correctly by archetype — format just stays blank. Let me
+  know if you'd rather have it default to something or derive it.
+
+✻ Worked for 5m 7s
+
+❯ run a sidecar vs sidecar match using the top two decks in standard, and       
+  analyze the results, and make sure they align with the new reported results   
+
+● I'll need to (1) find the top two Standard decks, (2) get their .dck files,
+  (3) run the sidecar + a mirror self-play match, then (4) verify the recorded
+  results match the trends store. Let me first gather the lay of the land.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Top two by meta_share: Izzet Spells (10.4%) and Selesnya Landfall (10.2%). We
+  have a Selesnya deck but need Izzet Spells. Let me check deck availability and
+   all the run prerequisites (built jar, DISPLAY, sidecar + LLM reachability).
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Key findings: jar is built but predates my SelfPlayRunner auto-record changes
+  (it's from before — mvn compile only built classes, not the
+  jar-with-dependencies), DISPLAY is empty (X11 socket :1 exists — self-play
+  needs this set per the known gotcha), sidecar + LLM are both up. I have
+  Selesnya Landfall but need an Izzet Spells deck. Let me inspect the existing
+  deck and look for an Izzet source.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The decks use current Standard cards (real Forge cards). There's an
+  izzet-spells.json archetype and an importer script. Let me check both.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The importer fetches real decklists from MTGGoldfish. Let me try importing
+  Izzet Spells (this needs network — the importer is an offline/manual tool, so
+  that's allowed).
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Got the Izzet Spells deck. Let me verify its contents are real, playable
+  cards.
+
+  Read 1 file (ctrl+o to expand)
+
+● This is a valid current-Standard Izzet Spells list. Now I must rebuild the
+  jar-with-dependencies so the runner includes my auto-record code (the on-disk
+  jar predates it). Let me kick that off in the background.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● While the build runs, let me check run-forge.sh for the exact
+  DISPLAY/XAUTHORITY/--add-opens launch setup and confirm thinking is disabled
+  (for LLM speed).
+
+  Ran 1 shell command (ctrl+o to expand)
+  ⎿  You've hit your session limit · resets 11:20am (America/New_York)
+     /upgrade to increase your usage limit.
+✻ Sautéed for 1m 46s
+
+● Background command "Rebuild forge-gui-desktop jar with auto-record" completed
+(exit code 0)
+  ⎿  You've hit your session limit · resets 11:20am (America/New_York)
+     /upgrade to increase your usage limit.
+
+✻ Brewed for 0s
+
+❯ continue                                                                      
+
+● The build finished (exit 0), but SelfPlayRunner.java was modified again (now
+  matching winners by explicit player name — a robustness improvement). Let me
+  read the current full file, then rebuild to ensure the jar includes the latest
+   version before running.
+
+  Read 1 file (ctrl+o to expand)
+
+● The file now records seat/player fields and matches winners by exact name —
+  robustness improvements that don't affect the store (it only reads
+  archetype/opponent/pilot_mode/won/win_turn/turns). I need to rebuild so the
+  jar includes these latest edits.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Build succeeded and the jar is rebuilt. Before running, I must confirm the
+  already-running sidecar on :18970 actually has my new /selfplay/record
+  endpoint (it may have been started before my edits).
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The running sidecar is stale (predates my endpoints). Rather than disturb the
+  user's process, I'll start a second sidecar instance on :18971 with the
+  current code and point the match at it. Let me launch it and confirm the
+  endpoints are live.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The real store already exists. Let me wait for my sidecar to come up, confirm
+  the endpoints, and inspect the current store contents so I know the
+  before-state.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● My sidecar on :18971 has both endpoints. The store already holds 2
+  pre-existing runs (12 games, labeled gauntlet-20260522) — I'll treat those as
+  the before-state. Now let me launch the mirror match (Izzet Spells vs Selesnya
+   Landfall) with DISPLAY set, pointed at :18971, in the background.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Match launched. Let me give it a moment and check that it started cleanly
+  (decks loaded, no immediate exit-1 from the DISPLAY gotcha).
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● I'll use a monitor loop to wait for startup output to appear.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Clean start — both seats attached to the sidecar on :18971, decks loaded,
+  mulligan planning underway. One note: Izzet's Roaring Furnace/Steaming Sauna
+  isn't in Forge's card DB, so that 1 copy is dropped (I'll factor that into
+  analysis). Mirror games with the LLM in the loop are slow; let me wait for
+  completion in the background (it prints Recorded run to results store: when
+  the auto-record fires).
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The monitor will notify me when the match exits. Let me do a single interim
+  check to confirm it's actively progressing (sidecar calls flowing), then wait.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● It's progressing well — game 1 is at the pilot's turn 7, and ~1300 sidecar
+  calls in 20s confirms the recognize cache is serving most hits (LLM only on
+  misses). I'll wait for the monitor to notify me when both games finish.
+
+● I'll wait for the match to complete. The monitor (bf4a5wnzs) will notify me
+  when both games finish, with a 30-minute fallback wakeup as backup.
+
+✻ Cogitated for 2m 48s
+● Background command "Wait for match to finish" completed (exit code 0)
+
+● The match finished. Let me read the results.
+
+  Read 1 file (ctrl+o to expand)
+
+● The match completed cleanly — Selesnya Landfall beat Izzet Spells 2-0 (won on
+  its turns 8 and 10). But the auto-record failed: sidecar returned HTTP 400: 
+  Invalid HTTP request received. That's a telltale sign of Java's HttpClient
+  defaulting to HTTP/2 (h2c upgrade) which uvicorn/h11 rejects. Let me confirm
+  against the sidecar log and inspect the JSONL that was written.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Confirmed the root cause: the sidecar log shows Unsupported upgrade request →
+  Invalid HTTP request received. Java's HttpClient defaults to HTTP/2 and
+  attempts an h2c upgrade that uvicorn rejects. The fix is to pin the client to
+  HTTP/1.1.
+
+  Two important observations from the JSONL:
+  1. Fail-soft worked — the match completed and the raw JSONL is intact despite
+  the record failing.
+  2. The winner turn counts are correct per-player (8, 10), but the loser's
+  turns reads the global count (15, 20 ≈ 2×) — the losing player is removed from
+   game.getPlayers() at game-over, so playerTurn() falls back to the global
+  turn. This doesn't affect any win metric (the store only counts win_turn on
+  wins), but it's a real data-quality quirk. I'll flag it.
+
+  Let me fix the HTTP/1.1 issue:
+
+● Update(forge-gui-desktop/src/main/java/forge/view/SelfPlayRunner.java)
+  ⎿  Added 5 lines, removed 1 line
+      254          body.put("source_file", sourceFile);
+      255          final String endpoint = url.replaceAll("/+$", "") + "/
+           selfplay/record";
+      256          try {
+      257 -            final java.net.http.HttpClient client = java.net.h
+          -ttp.HttpClient.newHttpClient();                               
+      257 +            // Pin HTTP/1.1: the JDK client defaults to HTTP/2
+          + and attempts an                                              
+      258 +            // h2c upgrade that uvicorn/h11 rejects ("Invalid 
+          +HTTP request").                                               
+      259 +            final java.net.http.HttpClient client = java.net.h
+          +ttp.HttpClient.newBuilder()                                   
+      260 +                    .version(java.net.http.HttpClient.Version.
+          +HTTP_1_1)                                                     
+      261 +                    .build();                                 
+      262              final java.net.http.HttpRequest request = java.net
+           .http.HttpRequest.newBuilder()
+      263                      .uri(java.net.URI.create(endpoint))
+      264                      .timeout(java.time.Duration.ofSeconds(15))
+
+● Rebuilding with the fix:
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Build succeeded. Re-running the match with the fix (sidecar on :18971 still
+  up):
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● I'll wait for the re-run to complete; the monitor will notify me.
+
+● Waiting for the re-run to finish (monitor bv6wf5mpa will notify me; 20-min
+  fallback set).
+
+✻ Sautéed for 2m 23s
+
+● Background command "Wait for re-run to finish" completed (exit code 0)
+
+  Read 1 file (ctrl+o to expand)
+
+● The auto-record worked this time: Recorded run to results store: run_id 3, 
+  n_games 4, n_wins 2. Selesnya again won both (turns 9 and 7). Now let me
+  verify the store and JSONL agree, and that the trends/CLI report aligns with
+  the raw match results.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The store rows mirror the JSONL exactly. Now the key check: do the reported
+  trends (CLI + API, which compute aggregates independently in SQL) match what
+  I'd compute by hand from the raw match?
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The Selesnya-vs-Izzet group shows last_win% 100, last_turn 8.0 = (9+7)/2 —
+  exactly my match. Let me do one airtight, focused cross-check: compute
+  aggregates straight from this match's JSONL and assert they equal what the API
+   reports as run #3's contribution.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Perfect alignment — the store's SQL-computed aggregates exactly equal the raw
+  match outcome. Let me stop the sidecar instance I started for the run.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Done. Here's the full picture.
+
+  What I ran
+
+  A sidecar-vs-sidecar (mirror) match between Standard's top two decks by meta
+  share:
+  - Izzet Spells (10.4%) — imported a real current list from MTGGoldfish via
+  scripts/import_goldfish_decks.py
+  - Selesnya Landfall (10.2%) — the existing deck
+
+  Both seats were LLM-piloted in normal mode against a fresh sidecar built from
+  the current code (on :18971, so your running :18970 was untouched).
+
+  Match result
+
+  Selesnya Landfall won 2–0, on its turns 9 and 7. Izzet lost both.
+
+  Alignment verification (the core ask)
+
+  The auto-record fired and persisted as run #3 (n_games:4, n_wins:2). I then
+  cross-checked three independent representations and they agree exactly:
+
+  ┌───────────────────────────────┬──────────────────────────┬───────────────┐
+  │            Source             │    Selesnya vs Izzet     │   Izzet vs    │
+  │                               │                          │   Selesnya    │
+  ├───────────────────────────────┼──────────────────────────┼───────────────┤
+  │ Raw JSONL (ground truth)      │ 2-0, win% 100, mean turn │ 0-2, win% 0   │
+  │                               │  8.0, fastest 7          │               │
+  ├───────────────────────────────┼──────────────────────────┼───────────────┤
+  │ Store, re-aggregated in SQL   │ 2-0, win% 100, mean turn │ 0-2, win% 0   │
+  │                               │  8.0, fastest 7          │               │
+  ├───────────────────────────────┼──────────────────────────┼───────────────┤
+  │ selfplay_trends /             │ last_win% 100, last_turn │ last_win% 0   │
+  │ /api/selfplay/trends          │  8.0                     │               │
+  └───────────────────────────────┴──────────────────────────┴───────────────┘
+
+  mean turn 8.0 = (9+7)/2 — the reported numbers match the actual games. The new
+   reported results are accurate.
+
+  Two real issues I found and handled
+
+  1. Auto-record was broken (now fixed). The first run failed with 400 Invalid 
+  HTTP request. Java's HttpClient defaults to HTTP/2 and tries an h2c upgrade
+  that uvicorn rejects. I pinned the client to HTTP/1.1 in
+  SelfPlayRunner.recordRun(), rebuilt, and re-ran — it now records cleanly.
+  Notably, fail-soft worked: the first match still completed and wrote its JSONL
+   despite the record POST failing.
+  2. Loser's turns field is the global turn count, not per-player (e.g. Izzet
+  showed turns:17/14 ≈ 2× the winner's). When a player loses they're dropped
+  from game.getPlayers(), so playerTurn() can't find them and falls back to the
+  global counter — the exact doubling the codebase warns about. This does not 
+  affect any reported metric (win-rate and turns-to-win only use win_turn on
+  wins), so alignment is unaffected. I left it as-is rather than expand scope —
+  want me to fix it (capture per-player turns before game-over)?
+
+  Notes / caveats
+
+  - Izzet's Roaring Furnace/Steaming Sauna isn't in Forge's card DB, so that 1
+  maindeck copy was dropped — Izzet effectively played 59 cards. Minor, but it
+  slightly disadvantaged an already-losing deck.
+  - 2 games is a small sample; the 2-0 is suggestive, not conclusive. The
+  matchup group now has a baseline in the store, so re-running later will show
+  movement over time.
+  - The result landed in the real selfplay/results.db as run #3 (label
+  top2-mirror). Your store also had two pre-existing gauntlet-20260522 runs,
+  which the trend view aggregates alongside it.
+
+  One operational thing worth flagging: your long-running :18970 sidecar 
+  predates these endpoints — it doesn't expose /selfplay/record or
+  /api/selfplay/trends. It needs a restart to pick them up before live games
+  will auto-record.
+
+✻ Churned for 1m 21s
+
+✻ Claude resuming /loop wakeup (May 22 12:27pm)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The match work is complete and verified (store aligns with the raw match,
+  auto-record fixed), there's no PR for this branch, and the only open thread is
+   the loser-turns fix I asked you about — which I'm leaving for your call
+  rather than acting on unprompted. Nothing actionable this tick.
+● Idle — nothing actionable. Rescheduled a heartbeat check in 30 minutes.
+
+✻ Sautéed for 31s
+
+✻ Claude resuming /loop wakeup (May 22 12:58pm)
+
+● Still nothing actionable — work remains complete and verified, awaiting your
+  decision on the loser-turns fix.
+
+● Idle. Rescheduled.
+
+✻ Sautéed for 10s
+
+✻ Claude resuming /loop wakeup (May 22 1:29pm)
+
+● Quiet — no PR/CI for this branch and all work complete. Stopping here.
+
+● Idle; backed off to an hourly check.
+
+✻ Brewed for 12s
+
+✻ Claude resuming /loop wakeup (May 22 2:29pm)
+
+● Quiet; all work complete, no PR/CI to maintain. Ending the loop.
+
+✻ Cooked for 9s
+
+❯ roaring furnace/steaming sauna IS in forges card db. we may need a better way 
+   to search if we cant find cards. we should assume all cards are in the forge 
+   db by default. it is located in the forge res cardsfolder probably under the 
+   r folder. it is a room card which is kind of a doublesided card from tge     
+  duskmourn set. can we develop a better system to identify cards that we cant  
+  find on the first pass? or figure out a map from mtggoldfish's card names to  
+  forge card names when they dont fit?                                          
+
+● Good catch — Room cards (Duskmourn) are double-faced and Forge stores them
+  with a // separator. The importer likely wrote a single /. Let me find how
+  Forge actually names this card.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The card exists. Let me see the exact Name/AltName and how Forge's deck parser
+   matches names for these multi-face cards.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● This is a Split-mode card: Forge's full name is Roaring Furnace // Steaming 
+  Sauna (// with spaces), but the importer wrote Roaring Furnace/Steaming Sauna
+  (bare slash). Let me see how the importer parses MTGGoldfish names and writes
+  the .dck.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The conversion lives in scraper.fetch_deck_as_dck. Let me read it and how
+  MTGGoldfish formats card names.
+
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+
+● The names come verbatim from MTGGoldfish text. Let me check the card-line
+  regex and confirm exactly what Forge expects as the canonical name for split
+  cards (so I build the right target format).
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Confirmed: Forge's canonical split-card name is "Front // Back" (with spaces)
+  — CardRules.java:203,220. The .dck has the bare-slash form MTGGoldfish
+  emitted. Let me check exactly which AlternateMode types compose a // name vs.
+  just the front (adventures/flip differ), so I build the index correctly.
+
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+● Decisive detail: only Split-type cards (Rooms, splits, aftermath) get the "A 
+  // B" combined name — CardSplitType.java:10. Transform/Modal/Adventure/Flip
+  use the front name only. So my resolver must compose // only for
+  AlternateMode:Split. Let me confirm the card-file markers across the DB.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Clear now. Let me set up tasks and build the resolver.
+
+● Write(forge-llm-sidecar/app/knowledge/forge_cards.py)
+  ⎿  Wrote 161 lines to forge-llm-sidecar/app/knowledge/forge_cards.py
+       1 """Resolve scraped card names to canonical Forge card names.
+       3 MTGGoldfish (and other sources) spell some cards differently fro
+         m Forge — most
+         e // Steaming
+          slash), which
+       6 Forge's deck loader rejects with "unsupported card", silently dr
+       7 
+       8 The fix: treat **Forge's own card database as ground truth**. We
+       9 ``cardsfolder`` once, build a normalized name index, and map eac
+      10 the exact string Forge expects. Resolution order per name:
+     … +192 lines (ctrl+o to expand)
+
+● Let me smoke-test the resolver against the real card DB before wiring it in.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The resolver works perfectly — the Room card now maps to Roaring Furnace // 
+  Steaming Sauna. Now let me check the existing scraper test before wiring
+  resolution into decklist_to_dck (so I don't break expectations).
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The test cards all resolve to themselves, so wiring resolution in is safe. Let
+   me update decklist_to_dck to resolve names (with a flag, fail-soft) and log
+  unresolved cards.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/knowledge/scraper.py)
+  ⎿  Added 39 lines, removed 2 lines
+      274      return main, side
+      275  
+      276  
+      277 -def decklist_to_dck(name: str, main: list[tuple[int, str]], si
+          -de: list[tuple[int, str]]) -> str:                            
+      277 +def _resolve_cards(cards: list[tuple[int, str]]) -> tuple[list
+          +[tuple[int, str]], list[str]]:                                
+      278 +    """Map scraped names to canonical Forge names; return ``(r
+          +esolved, unresolved)``.                                       
+      279 +                                                              
+      280 +    Unmatched names are kept verbatim (Forge still tries them)
+          + and reported so the                                          
+      281 +    importer can flag cards its database doesn't recognize on 
+          +the first pass.                                               
+      282 +    """                                                       
+      283 +    resolved: list[tuple[int, str]] = []                      
+      284 +    unresolved: list[str] = []                                
+      285 +    for qty, card in cards:                                   
+      286 +        canonical, matched = forge_cards.resolve_or_keep(card)
+      287 +        if not matched:                                       
+      288 +            unresolved.append(card)                           
+      289 +        resolved.append((qty, canonical))                     
+      290 +    return resolved, unresolved                               
+      291 +                                                              
+      292 +                                                              
+      293 +def decklist_to_dck(                                          
+      294 +    name: str,                                                
+      295 +    main: list[tuple[int, str]],                              
+      296 +    side: list[tuple[int, str]],                              
+      297 +    *,                                                        
+      298 +    resolve_names: bool = True,                               
+      299 +) -> str:                                                     
+      300      """Render parsed ``(qty, name)`` lists as Forge ``.dck`` t
+           ext.
+      301  
+      302      Card names are emitted bare (no ``|SET``) so Forge resolve
+           s a default
+      281 -    printing, which is the most robust mapping from MTGGoldfis
+          -h names.                                                      
+      303 +    printing, which is the most robust mapping from MTGGoldfis
+          +h names. With                                                 
+      304 +    ``resolve_names`` (default), each name is first mapped to 
+          +the exact string                                              
+      305 +    Forge's database uses — e.g. a Room card ``Roaring Furnace
+          +/Steaming Sauna``                                             
+      306 +    becomes ``Roaring Furnace // Steaming Sauna`` so Forge sto
+          +ps dropping it.                                               
+      307 +    Names Forge doesn't recognize are kept as-is and logged.  
+      308      """
+      309 +    if resolve_names:                                         
+      310 +        main, main_unresolved = _resolve_cards(main)          
+      311 +        side, side_unresolved = _resolve_cards(side)          
+      312 +        unresolved = main_unresolved + side_unresolved        
+      313 +        if unresolved:                                        
+      314 +            log.warning(                                      
+      315 +                "scraper: %d card name(s) not found in Forge D
+          +B for %r (kept as-is): %s",                                   
+      316 +                len(unresolved),                              
+      317 +                name,                                         
+      318 +                ", ".join(sorted(set(unresolved))),           
+      319 +            )                                                 
+      320      lines = ["[metadata]", f"Name={name}", "[Main]"]
+      321      lines += [f"{qty} {card}" for qty, card in main]
+      322      if side:
+
+❯ lets also build a button on my "utilities" webpage wgere i can trigger rebuilds of app and things. id like an additional button to run the mtggoldfish decklist importer to download to my phone's forge decks folder so that i can use them right away. this should download all meta decks from all formats. if theres a way to put them in folders for organization, do tgat. if not dont worry about it. do this after you have completed your tasklist 
+
+● Noted — I'll finish the current resolver tasklist first, then build the
+  utilities-page buttons (rebuild + import-all-meta-decks). Let me add the
+  forge_cards import to the scraper.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/knowledge/scraper.py)
+  ⎿  Added 2 lines
+      16  
+      17  import httpx
+      18  
+      19 +from app.knowledge import forge_cards                          
+      20 +                                                               
+      21  log = logging.getLogger(__name__)
+      22  
+      23  # MTGGoldfish format slugs to scrape.
+
+● Now create the (empty) override map and update tasks:
+
+● Write(forge-llm-sidecar/app/knowledge/card_name_overrides.json)
+  ⎿  Wrote 1 lines to
+     forge-llm-sidecar/app/knowledge/card_name_overrides.json
+      1 {}
+● Now the tests. Let me write an offline test using a fake cardsfolder.
+
+● Write(forge-llm-sidecar/tests/test_forge_cards.py)
+  ⎿  Wrote 100 lines to forge-llm-sidecar/tests/test_forge_cards.py
+       1 """Tests for canonical Forge card-name resolution (offline, fake
+          cardsfolder)."""
+       2 
+       3 import pytest
+       4 
+       6 
+       7 _SPLIT_CARD = """Name:Roaring Furnace
+       8 ManaCost:1 R
+       9 Types:Enchantment Room
+      10 AlternateMode:Split
+     … +104 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The MDFC combined form isn't indexed — for non-Split cards I only added the
+  front name, but MTGGoldfish writes MDFCs as Front // Back. Let me index the
+  combined form as an alias for all multi-face cards (pointing to the canonical,
+   which is front-only for non-Split).
+
+● Update(forge-llm-sidecar/app/knowledge/forge_cards.py)
+  ⎿  Added 5 lines, removed 3 lines
+      131          canonical = _canonical_name(alt_mode, faces)
+      132          # Primary face name -> canonical is authoritative.
+      133          index[normalize(faces[0])] = canonical
+      134 -        # Aliases: the combined string and any back faces, fil
+          -led in later.                                                 
+      135 -        if canonical != faces[0]:                             
+      136 -            aliases.append((normalize(canonical), canonical)) 
+      134 +        # Aliases (filled in only where they don't shadow a pr
+          +imary name):                                                  
+      135 +        # the "Front // Back" combined spelling sources use ev
+          +en for non-Split                                              
+      136 +        # MDFCs, plus each back face on its own.              
+      137 +        if len(faces) >= 2:                                   
+      138 +            aliases.append((normalize(f"{faces[0]} // {faces[1
+          +]}"), canonical))                                             
+      139          for face in faces[1:]:
+      140              aliases.append((normalize(face), canonical))
+      141  
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● All 15 pass. Now fix the existing izzet-spells.dck in place by resolving its
+  names against the Forge DB.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The izzet deck is fixed. Let me register the override JSON as package-data and
+   run lint + the full suite.
+
+● Update(forge-llm-sidecar/pyproject.toml)
+  ⎿  Added 1 line, removed 1 line
+      48  packages = ["app", "app.nodes", "app.knowledge", "app.forge_log
+          ", "app.static"]
+      49  
+      50  [tool.setuptools.package-data]
+      51 -"app.knowledge" = ["archetypes/*.json", "metagame_data/*.json",
+         - "piloting/*/*.json"]                                          
+      51 +"app.knowledge" = ["archetypes/*.json", "metagame_data/*.json",
+         + "piloting/*/*.json", "card_name_overrides.json"]              
+      52  "app.static" = ["*.html"]
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● All 225 pass. Let me auto-format the test file (one long line).
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Resolver work is complete (15 new tests, 225 total passing, lint clean, izzet
+  deck fixed). Now to your utilities-page request. Let me first find the
+  existing utilities page and any rebuild/restart controls so I build on what's
+  there.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● No dedicated utilities page yet, but the "restart control" lives in
+  forge-gui-android/tools/build_and_host_apk.py — and you mention your phone's
+  Forge decks folder, so you're on Android. Let me look at that tool; it may
+  host the page you mean.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● This is your utilities page — build_and_host_apk.py runs a small HTTP server
+  with action-card buttons (Build APK / Desktop / Sidecar / Restart Sidecar)
+  plus a "Download latest APK" link the phone fetches over the network. I'll add
+   an importer button here. Let me read the full file to match its patterns and
+  see how delivery-to-phone works.
+
+  Read 1 file (ctrl+o to expand)
+
+● I now understand the page fully — it's a threaded HTTP server with action-card
+   buttons that dispatch background builds and serve files (APK, logs) for the
+  phone to download. The natural fit: an Import Meta Decks button that runs the
+  importer across all formats into format subfolders, zips the tree into the
+  serve dir, and adds a download link — mirroring the APK download UX (works
+  over wifi/Tailscale, no adb or device-path knowledge needed). Let me confirm
+  which formats to cover.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Seven formats — I'll cover all. Let me track this and implement.
+● Update(forge-gui-android/tools/build_and_host_apk.py)
+  ⎿  Added 7 lines
+      26  DEFAULT_ANDROID_HOME = Path.home() / "Android" / "Sdk"
+      27  DEFAULT_BUILD_TOOLS = "35.0.0"
+      28  
+      29 +# Meta-deck import: scrape every tracked format into <format>/<
+         +slug>.dck, then                                                
+      30 +# zip the tree (folder structure preserved) into the serve dir 
+         +so the phone can                                               
+      31 +# download it and unzip into Forge's decks folder.             
+      32 +DECKS_STAGE_DIR = TARGET_DIR / "meta-decks"                    
+      33 +DECKS_ZIP = "forge-meta-decks.zip"                             
+      34 +META_FORMATS = ("standard", "pioneer", "modern", "legacy", "vin
+         +tage", "pauper", "commander")                                  
+      35  
+      36 +                                                               
+      37  class BuildState:
+      38      def __init__(self) -> None:
+      39          self.lock = threading.Lock()
+
+● Update(forge-gui-android/tools/build_and_host_apk.py)
+  ⎿  Added 5 lines
+      50      "desktop": BuildState(),
+      51      "sidecar": BuildState(),
+      52      "sidecar-restart": BuildState(),
+      53 +    "import-decks": BuildState(),                              
+      54  }
+      55  ACTION_LABELS = {
+      56      "apk": "Android APK",
+      57      "desktop": "Desktop App",
+      58      "sidecar": "Sidecar",
+      59      "sidecar-restart": "Sidecar App",
+      60 +    "import-decks": "Meta Decks",                              
+      61  }
+      62  ACTION_LOGS = {
+      63      "apk": REBUILD_LOG,
+      64      "desktop": "desktop-build.log",
+      65      "sidecar": "sidecar-build.log",
+      66      "sidecar-restart": "sidecar-restart.log",
+      67 +    "import-decks": "import-decks.log",                        
+      68  }
+      69  ACTION_VERBS = {
+      70      "apk": "Rebuild",
+      71      "desktop": "Rebuild",
+      72      "sidecar": "Rebuild",
+      73      "sidecar-restart": "Restart",
+      74 +    "import-decks": "Import",                                  
+      75  }
+      76 +ACTION_ORDER = ("apk", "desktop", "sidecar", "sidecar-restart",
+         + "import-decks")                                               
+      77  
+      78  
+      79  def run(
+
+● Now add the build_meta_decks function (after build_sidecar):
+
+● Update(forge-gui-android/tools/build_and_host_apk.py)
+  ⎿  Added 53 lines
+      141      run([python, "-m", "pip", "install", "-e", "."], cwd=sidec
+           ar_dir, output=output)
+      142  
+      143  
+      144 +def build_meta_decks(*, output=None) -> Path:                 
+      145 +    """Scrape every tracked format's meta decks and zip them f
+          +or phone download.                                            
+      146 +                                                              
+      147 +    Writes ``<stage>/<format>/<slug>.dck`` (the importer's nat
+          +ive layout, which                                             
+      148 +    Forge shows as per-format deck folders), then archives the
+          + tree into the                                                
+      149 +    serve dir as ``forge-meta-decks.zip``. Best-effort per for
+          +mat: a format whose                                           
+      150 +    scrape fails (network blip, empty page) is logged and skip
+          +ped, not fatal.                                               
+      151 +    """                                                       
+      152 +    sidecar_dir = REPO_ROOT / "forge-llm-sidecar"             
+      153 +    venv_python = sidecar_dir / ".venv" / "bin" / "python"    
+      154 +    python = str(venv_python) if venv_python.exists() else sys
+          +.executable                                                   
+      155 +                                                              
+      156 +    if DECKS_STAGE_DIR.exists():                              
+      157 +        shutil.rmtree(DECKS_STAGE_DIR)                        
+      158 +    DECKS_STAGE_DIR.mkdir(parents=True, exist_ok=True)        
+      159 +                                                              
+      160 +    imported = 0                                              
+      161 +    for fmt in META_FORMATS:                                  
+      162 +        cmd = [python, "-m", "scripts.import_goldfish_decks", 
+          +fmt, "--out", str(DECKS_STAGE_DIR), "--force"]                
+      163 +        line = "+ " + " ".join(cmd)                           
+      164 +        if output:                                            
+      165 +            output.write(line + "\n")                         
+      166 +            output.flush()                                    
+      167 +        # check=False: the importer exits non-zero when a form
+          +at yields no decks;                                           
+      168 +        # that shouldn't abort the other formats.             
+      169 +        result = subprocess.run(                              
+      170 +            cmd,                                              
+      171 +            cwd=sidecar_dir,                                  
+      172 +            stdout=output if output else None,                
+      173 +            stderr=subprocess.STDOUT if output else None,     
+      174 +        )                                                     
+      175 +        if result.returncode == 0:                            
+      176 +            imported += 1                                     
+      177 +        elif output:                                          
+      178 +            output.write(f"WARN: import returned {result.retur
+          +ncode} for {fmt}; continuing\n")                              
+      179 +            output.flush()                                    
+      180 +                                                              
+      181 +    dck_count = sum(1 for _ in DECKS_STAGE_DIR.rglob("*.dck"))
+      182 +    if dck_count == 0:                                        
+      183 +        raise RuntimeError("No decks were imported for any for
+          +mat (network down or markup changed?)")                       
+      184 +                                                              
+      185 +    SERVE_DIR.mkdir(parents=True, exist_ok=True)              
+      186 +    archive = shutil.make_archive(                            
+      187 +        str(SERVE_DIR / "forge-meta-decks"), "zip", root_dir=D
+          +ECKS_STAGE_DIR                                                
+      188 +    )                                                         
+      189 +    if output:                                                
+      190 +        output.write(                                         
+      191 +            f"Zipped {dck_count} decks from {imported}/{len(ME
+          +TA_FORMATS)} formats -> {archive}\n"                          
+      192 +        )                                                     
+      193 +        output.flush()                                        
+      194 +    return Path(archive)                                      
+      195 +                                                              
+      196 +                                                              
+      197  def sidecar_uvicorn_command() -> list[str]:
+      198      sidecar_dir = REPO_ROOT / "forge-llm-sidecar"
+      199      venv_uvicorn = sidecar_dir / ".venv" / "bin" / "uvicorn"
+
+● Now wire the dispatch in run_target_build:
+
+● Update(forge-gui-android/tools/build_and_host_apk.py)
+  ⎿  Added 2 lines
+      477                  build_sidecar(output=log)
+      478              elif target == "sidecar-restart":
+      479                  restart_sidecar(output=log)
+      480 +            elif target == "import-decks":                    
+      481 +                build_meta_decks(output=log)                  
+      482              else:
+      483                  raise ValueError(f"Unknown build target: {targ
+           et}")
+      484              log.write(f"Finished: {format_timestamp(time.time(
+           ))}\n")
+
+● Now update render_index to use ACTION_ORDER and add a decks-download link when
+   the zip exists:
+
+● Update(forge-gui-android/tools/build_and_host_apk.py)
+  ⎿  Added 16 lines, removed 3 lines
+      396          f'<li><a href="{html.escape(url)}/{LATEST_APK}">{html.
+           escape(url)}/{LATEST_APK}</a></li>'
+      397          for url in base_urls
+      398      )
+      399 -    action_cards = "\n".join(                                 
+      400 -        render_action_card(target) for target in ("apk", "desk
+          -top", "sidecar", "sidecar-restart")                           
+      401 -    )                                                         
+      399 +    action_cards = "\n".join(render_action_card(target) for ta
+          +rget in ACTION_ORDER)                                         
+      400 +    decks_zip = SERVE_DIR / DECKS_ZIP                         
+      401 +    if decks_zip.exists():                                    
+      402 +        zip_stat = decks_zip.stat()                           
+      403 +        decks_download = (                                    
+      404 +            f'<p><a class="button" href="/{DECKS_ZIP}">Downloa
+          +d meta decks (ZIP)</a> '                                      
+      405 +            f"&middot; {zip_stat.st_size / 1024 / 1024:.1f} MB
+          + &middot; built "                                             
+      406 +            f'{time.strftime("%Y-%m-%d %H:%M", time.localtime(
+          +zip_stat.st_mtime))}</p>'                                     
+      407 +            "<p>Unzip into Forge's <code>decks/constructed</co
+          +de> folder on your phone; "                                   
+      408 +            "each format becomes its own deck folder.</p>"    
+      409 +        )                                                     
+      410 +    else:                                                     
+      411 +        decks_download = (                                    
+      412 +            '<p>Use the <b>Import Meta Decks</b> button below 
+          +to fetch every format’s '                                     
+      413 +            "meta decks, then a download link appears here.</p
+          +>"                                                            
+      414 +        )                                                     
+      415      return f"""<!doctype html>
+      416  <html lang="en">
+      417  <head>
+
+● Update(forge-gui-android/tools/build_and_host_apk.py)
+  ⎿  Added 2 lines
+      433    <main>
+      434      <h1>Forge Android APK</h1>
+      435      <p><a class="button" href="/{LATEST_APK}">Download latest 
+           APK</a></p>
+      436 +    <h2>Meta decks</h2>                                       
+      437 +    {decks_download}                                          
+      438      {action_cards}
+      439      <p>Built: {time.strftime("%Y-%m-%d %H:%M:%S", time.localti
+           me(stat.st_mtime))}</p>
+      440      <p>Size: {stat.st_size / 1024 / 1024:.1f} MB</p>
+
+● Let me validate: syntax-check, render the page, and confirm the importer (with
+   the new resolver) writes format-folder decks and zips correctly — using a
+  small --limit so I don't trigger a full multi-format scrape during
+  verification.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Let me debug what the rendered HTML actually contains.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The HTML is correct (the earlier failure was a quirk of my throwaway test
+  expression). Everything's present. Now let me validate the importer path the
+  button uses — run it for one format with a small --limit (to avoid a full
+  scrape) and confirm format-folder layout, the resolver fix flowing through,
+  and zipping.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Format-folder layout and zip structure are correct. Let me confirm resolution
+  fires in the actual import path on a deck containing the Room card (Izzet
+  Spells):
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● End-to-end confirmed — the importer now emits Roaring Furnace // Steaming 
+  Sauna with no "not found" warning. Let me update the tool's docstring and the
+  Android guide doc to mention the new button.
+
+● Update(forge-gui-android/tools/build_and_host_apk.py)
+  ⎿  Added 6 lines, removed 1 line
+       1  #!/usr/bin/env python3
+       2 -"""Build, sign, and locally host a Forge Android APK for phone 
+         -download."""                                                   
+       2 +"""Build, sign, and locally host a Forge Android APK for phone 
+         +download.                                                      
+       3  
+       4 +The hosted page also exposes one-tap buttons to rebuild the des
+         +ktop app and                                                   
+       5 +sidecar, restart the sidecar, and import every format's MTGGold
+         +fish meta decks                                                
+       6 +into a downloadable ZIP (organized as per-format deck folders).
+       7 +"""                                                            
+       8 +                                                               
+       9  from __future__ import annotations
+      10  
+      11  import argparse
+
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+
+● Update(docs/android-apk-adb-build-install-guide.md)
+  ⎿  Added 2 lines
+      75  
+      76  The page also has action buttons for the Android APK, desktop a
+          pp, and sidecar. Tap one from the phone to start that task on t
+          his PC. Each task runs in the background, and the page shows st
+          atus plus a log link. Use **Restart Sidecar App** after rebuild
+          ing the sidecar package so the running `uvicorn` process picks 
+          up the new code. Refresh the page after Android reports `Build 
+          complete`, then download the latest APK if you rebuilt Android.
+      77  
+      78 +**Import Meta Decks** scrapes every tracked format's current MT
+         +GGoldfish meta decks (standard, pioneer, modern, legacy, vintag
+         +e, pauper, commander) and bundles them into a `forge-meta-decks
+         +.zip` with one folder per format. When it finishes, a **Downloa
+         +d meta decks (ZIP)** link appears at the top of the page — down
+         +load it on the phone and unzip into Forge's `decks/constructed`
+         + folder, and each format shows up as its own deck folder. Card 
+         +names are normalized to Forge's database on import (e.g. Room c
+         +ards like `Roaring Furnace // Steaming Sauna`), so decks load w
+         +ithout dropped cards. The full scrape across all formats can ta
+         +ke several minutes; watch the log link for per-format progress.
+      79 +                                                               
+      80  Useful variants:
+      81  
+      82  ```bash
+
+● Let me run the sidecar suite once more (scraper now imports forge_cards at
+  module load) and tidy temp dirs.
+
+  Ran 2 shell commands (ctrl+o to expand)
+● Both pieces are done and verified.
+
+  1. Card-name resolution (your "Roaring Furnace" finding)
+
+  You were right — it is in Forge's DB. It's a Duskmourn Room (Split-type) card,
+   and Forge's canonical name is Roaring Furnace // Steaming Sauna (// with
+  spaces). The importer wrote MTGGoldfish's bare-slash spelling, which Forge
+  silently dropped.
+
+  I built a resolver that treats Forge's card database as ground truth:
+
+  - app/knowledge/forge_cards.py — scans the cardsfolder once (indexed 33,673
+  names), builds a normalized lookup, and maps any scraped name to the exact
+  string Forge expects. It correctly composes A // B only for Split cards (per
+  CardSplitType.COMBINE) and uses the front-face name for
+  Transform/Modal/Adventure/Flip. Resolution order: exact → normalized
+  (separator/accent/punctuation-insensitive, so A/B, A // B, accents,
+  apostrophes all match) → an optional hand-maintained card_name_overrides.json.
+   Fails soft if the cardsfolder isn't found.
+  - Wired into the importer (scraper.decklist_to_dck): every imported name is
+  now resolved, and anything Forge genuinely doesn't recognize is logged loudly
+  instead of silently dropped — directly answering "a better way when we can't
+  find a card on the first pass."
+  - 15 new tests, full suite 225 passing, lint clean. Confirmed end-to-end: a
+  fresh Izzet Spells import now writes Roaring Furnace // Steaming Sauna, and I
+  fixed the existing izzet-spells.dck in place.
+  - Request-path safe: importing the module doesn't trigger the 33k-file scan;
+  the index builds lazily only when the offline importer actually resolves a
+  name.
+
+  2. "Import Meta Decks" button on the utilities page
+
+  Your utilities page is forge-gui-android/tools/build_and_host_apk.py (the HTTP
+   server with the Rebuild/Restart buttons + APK download). I added a new Import
+   Meta Decks action that:
+
+  - Runs the importer across all 7 tracked formats (standard, pioneer, modern,
+  legacy, vintage, pauper, commander), best-effort per format (one format
+  failing doesn't abort the rest).
+  - Writes them as per-format folders (standard/…, modern/…) — Forge shows each
+  as its own deck group, which is the organization you asked for.
+  - Zips the tree into the serve dir and surfaces a Download meta decks (ZIP)
+  link at the top of the page, exactly like the existing APK download.
+
+  I verified the importer→folder-layout→zip path (with a small --limit to avoid
+  a full scrape during testing) and that the Room-card fix flows through. Docs
+  updated in the Android guide.
+
+  One delivery decision I made for you: I used the ZIP-over-HTTP model (download
+   on the phone, unzip into decks/constructed) because it mirrors how you
+  already get the APK and works over wifi/Tailscale without needing the phone
+  plugged in or knowing its exact data path. If you'd rather it adb-push 
+  straight onto a connected phone (truly zero manual steps, but requires
+  USB/adb-over-wifi and the device's Forge path), say so and I'll add that as an
+   alternative.
+
+  Two notes: the full all-formats scrape takes several minutes (it's background
+  with a live log link), and none of this is committed — all changes are in your
+   working tree for you to review.
+
+✻ Churned for 11m 38s
+
+❯ ok commit and push the changes and test out the health of the http request to 
+   do the deck download from the server. do i need to rebuikd the desktop app   
+  to see the nea button? i dont curreny see it?                                 
+
+● Good questions. Let me first check the git scope and whether your utilities
+  server is even running (that's the key to why you don't see the button).
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The utilities server is running (pid 2941702) but with the old code — and
+  http.server doesn't hot-reload. That's why you don't see the button.
+
+  Answer to your question: No, you do not need to rebuild the desktop app. The
+  "Import Meta Decks" button isn't part of the desktop app or the APK at all —
+  it's rendered by the build_and_host_apk.py Python process itself. You just
+  need to restart that script (it's running with --no-build, so the restart is
+  instant). I'll do that as part of testing the download.
+
+  First let me check exactly what would be committed (especially that build
+  artifacts under target/ are ignored):
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● target/ artifacts and results.db are correctly ignored. The
+  selfplay/runs/*.jsonl are match outputs, but several smoke-*.jsonl are
+  referenced as fixtures in your docs, so I'll commit the set as-is (it's your
+  branch WIP). Committing everything now:
+
+  Pushed to fix-dashboard-recognition-card-cutoff, ran 1 shell command (ctrl+o to expand)
+
+● Pushed to origin/fix-dashboard-recognition-card-cutoff (new branch, upstream
+  set).
+
+  Now let me restart your utilities server with the new code and test the
+  deck-download. First I'll generate a real (small) ZIP into the serve dir so
+  the download link is live, then restart and exercise the HTTP path.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Now restart the utilities server with the new code (instant — it uses
+  --no-build):
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● Clean up the test artifact:
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● All three things are done.
+
+  1. Committed & pushed
+
+  Commit b075cae (54 files, +8592) pushed to a new
+  origin/fix-dashboard-recognition-card-cutoff with upstream tracking set. Build
+   artifacts (target/) and results.db were correctly excluded by .gitignore.
+  GitHub offered a PR link:
+  https://github.com/loud1990/forge-1/pull/new/fix-dashboard-recognition-card-cu
+  toff
+
+  2. Why you didn't see the button — no desktop rebuild needed
+
+  The button has nothing to do with the desktop app or the APK. It's drawn by
+  the build_and_host_apk.py Python server itself (pid 2941702 was running the
+  old code, and http.server doesn't hot-reload). I restarted that process with
+  the same --no-build flag (instant), and the page now serves it. So the rule
+  going forward: after editing build_and_host_apk.py, just restart that script —
+   never a desktop build.
+
+  3. Deck-download HTTP health — verified healthy
+
+  Confirmed against the live server on :8090:
+  - Page now shows ✓ Import Meta Decks button, ✓ Download meta decks (ZIP) link,
+   ✓ the "unzip into decks/constructed" hint.
+  - GET /forge-meta-decks.zip → HTTP 200, Content-Type: application/zip,
+  Content-Length: 1648, downloaded bytes matched exactly, and unzip -t passed
+  with the per-format folder layout intact (standard/selesnya-landfall.dck,
+  etc.).
+
+  One thing to know: the ZIP sitting there right now is a 3-deck test sample I
+  generated to exercise the download path. When you tap Import Meta Decks, it
+  scrapes all 7 formats and overwrites it with the full set (that runs a few
+  minutes — watch the log link on the page). The download endpoint you just saw
+  working is the same one it'll serve.
+
+  Note: I restarted your utilities server (now running detached with the new
+  code on :8090). If you normally launch it a specific way (e.g. with a
+  --host-url for Tailscale), relaunch it however you prefer — the code change is
+   what matters, and it's now committed.
+
+✻ Brewed for 3m 19s

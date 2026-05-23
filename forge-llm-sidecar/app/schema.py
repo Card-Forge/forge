@@ -290,6 +290,78 @@ class EarlyGamePlan(BaseModel):
     last_updated_turn: int = 0
 
 
+class ManaLandGuidance(BaseModel):
+    """Per-land guidance within a deck's mana profile.
+
+    Generated once per decklist by the mana_profile builder. Covers fetchlands,
+    duals, basics, and utility lands (Otawara, Boseiju, etc.) so the strategist
+    and the Java engine know how each land should be used.
+    """
+
+    card: str
+    # "fetch" | "dual" | "shock" | "basic" | "fast" | "utility" | "creature_land" | "other"
+    role: str = "other"
+    colors: list[str] = Field(default_factory=list)  # colors this land can produce
+    # When to play / crack / hold. Free text, but a few conventional phrasings:
+    # "play_early", "hold_for_channel", "crack_now", "crack_end_of_turn", "sac_for_value".
+    play_timing: str = ""
+    enters_tapped: bool = False
+    notes: str = ""
+
+
+class ManaProfile(BaseModel):
+    """One-time, LLM-generated manabase analysis for a specific decklist.
+
+    Keyed by a hash of the deck's main-deck card list, persisted to disk, and
+    reused across every game (and restart) that uses the same list. Because a
+    post-sideboard configuration hashes differently, sideboarded games get a
+    fresh profile automatically. This is the deck-specific knowledge that
+    hand-authored archetype guides do not carry.
+    """
+
+    deck_hash: str = ""
+    archetype: str = "Unknown"
+    format: str = ""
+    primary_colors: list[str] = Field(default_factory=list)
+    # Prose summary of color/pip requirements over the curve (e.g. "needs RR by
+    # turn 2 for the one-drops; splashes W from turn 3 for sideboard answers").
+    color_requirements: str = ""
+    # How to choose what to fetch: priorities, basic-vs-dual bias, Wasteland fear.
+    fetch_priority: str = ""
+    # Default crack timing when nothing else dictates: "now" | "end_of_turn" | "hold".
+    crack_timing_default: str = "now"
+    lands: list[ManaLandGuidance] = Field(default_factory=list)
+    # Utility-land policy that doesn't fit a single land entry (sequencing
+    # between Otawara/Boseiju, when to channel vs play as a land, etc.).
+    utility_land_notes: str = ""
+    reasoning: str = ""
+    generated_by: str = ""  # model name that produced this profile
+    schema_version: int = 1
+
+
+class ManaPlan(BaseModel):
+    """Per-action manabase decision the strategist hands to the Java engine.
+
+    The LLM owns this outright (validated Java-side against the cards actually
+    available). Fail-soft: when absent, the engine uses its stock heuristics.
+    """
+
+    # --- fetchland / search-to-battlefield ---
+    # "now" | "end_of_turn" | "hold" | "auto" (auto = let the engine decide).
+    crack_fetch: str = "auto"
+    fetch_target: str = ""  # exact card to fetch (the LLM knows the remaining library)
+    fetch_alternatives: list[str] = Field(default_factory=list)  # ranked fallbacks
+    enter_untapped: bool = True  # pay life on a shock / choose untapped when offered
+    # --- from-hand land sequencing ---
+    land_to_play: str = ""  # which land to play from hand this turn
+    land_alternatives: list[str] = Field(default_factory=list)
+    # --- shared deterministic fallback ---
+    color_needs: list[str] = Field(default_factory=list)  # colors needed soon, priority order
+    # Utility lands the engine should NOT spend yet (hold for channel / late value).
+    hold_utility_lands: list[str] = Field(default_factory=list)
+    reasoning: str = ""
+
+
 class PilotingAdvice(BaseModel):
     """Advice on how the AI should play its own deck this turn."""
 
@@ -323,6 +395,8 @@ class PilotingAdvice(BaseModel):
     combo_plan: ComboPlan | None = None
     # v8 rolling mulligan / early-game plan.
     early_game_plan: EarlyGamePlan | None = None
+    # v10 per-action manabase decision (fetch/land/utility). LLM-owned, fail-soft.
+    mana_plan: ManaPlan | None = None
 
 
 class TrainingExample(BaseModel):
@@ -463,3 +537,6 @@ class GraphState(TypedDict, total=False):
     combo_plan: dict | None
     # v8 mulligan planner outputs
     early_game_plan: dict | None
+    # v10 per-deck mana profile (lazy/offline, disk-cached) + per-action plan
+    mana_profile: dict | None
+    mana_plan: dict | None

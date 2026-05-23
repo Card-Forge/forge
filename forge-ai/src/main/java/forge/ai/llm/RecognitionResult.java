@@ -155,6 +155,59 @@ public record RecognitionResult(
     }
 
     /**
+     * Per-action manabase decision (v10): whether/what to fetch, which land to
+     * play, untapped/pay-life, and which utility lands to hold. LLM-owned on the
+     * sidecar; validated there against cards actually available. All fields are
+     * advisory — the engine falls back to stock heuristics when this is null or
+     * a named card is no longer present.
+     */
+    public record ManaPlan(
+            @SerializedName("crack_fetch") String crackFetch,
+            @SerializedName("fetch_target") String fetchTarget,
+            @SerializedName("fetch_alternatives") List<String> fetchAlternatives,
+            @SerializedName("enter_untapped") boolean enterUntapped,
+            @SerializedName("land_to_play") String landToPlay,
+            @SerializedName("land_alternatives") List<String> landAlternatives,
+            @SerializedName("color_needs") List<String> colorNeeds,
+            @SerializedName("hold_utility_lands") List<String> holdUtilityLands,
+            String reasoning) {
+        public ManaPlan {
+            if (crackFetch == null || crackFetch.isBlank()) {
+                crackFetch = "auto";
+            }
+            if (fetchTarget == null) {
+                fetchTarget = "";
+            }
+            if (fetchAlternatives == null) {
+                fetchAlternatives = List.of();
+            }
+            if (landToPlay == null) {
+                landToPlay = "";
+            }
+            if (landAlternatives == null) {
+                landAlternatives = List.of();
+            }
+            if (colorNeeds == null) {
+                colorNeeds = List.of();
+            }
+            if (holdUtilityLands == null) {
+                holdUtilityLands = List.of();
+            }
+        }
+
+        /** Fetch targets in priority order: explicit target first, then alternatives. */
+        public List<String> fetchPriority() {
+            if (fetchTarget == null || fetchTarget.isBlank()) {
+                return fetchAlternatives;
+            }
+            final List<String> out = new java.util.ArrayList<>();
+            out.add(fetchTarget);
+            out.addAll(fetchAlternatives);
+            return out;
+        }
+    }
+
+    /**
      * Piloting advice for the AI's own deck. Nested in the {@code /recognize}
      * response under the {@code piloting} key.
      */
@@ -172,7 +225,8 @@ public record RecognitionResult(
             @SerializedName("opponent_hand") List<OpponentHandGuess> opponentHand,
             @SerializedName("target_priorities") List<TargetPriority> targetPriorities,
             @SerializedName("combo_plan") ComboPlan comboPlan,
-            @SerializedName("early_game_plan") EarlyGamePlan earlyGamePlan) {
+            @SerializedName("early_game_plan") EarlyGamePlan earlyGamePlan,
+            @SerializedName("mana_plan") ManaPlan manaPlan) {
 
         public PilotingAdvice {
             if (actions == null) {

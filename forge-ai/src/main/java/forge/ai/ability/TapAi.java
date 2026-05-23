@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.*;
+import forge.ai.llm.RecognitionResult.ManaPlan;
 import forge.card.ColorSet;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -94,6 +95,19 @@ public class TapAi extends TapAiBase {
                 if (part instanceof CostPayLife) {
                     final CostPayLife lifeCost = (CostPayLife) part;
                     Integer amount = lifeCost.convertAmount();
+                    // Sidecar manabase plan: honor the LLM's untapped/pay-life
+                    // call for this land. enter_untapped=false means deliberately
+                    // enter tapped (don't pay); true pays the life if it's safe.
+                    final ManaPlan plan = ChangeZoneAi.sidecarManaPlan(payer);
+                    if (plan != null) {
+                        if (!plan.enterUntapped()) {
+                            return false;
+                        }
+                        if (amount != null && payer.getLife() > (amount + 1)
+                                && payer.canPayLife(amount, true, sa)) {
+                            return true;
+                        }
+                    }
                     if (payer.getLife() > (amount + 1) && payer.canPayLife(amount, true, sa)) {
                         final int landsize = payer.getLandsInPlay().size() + 1;
                         for (Card c : payer.getCardsIn(ZoneType.Hand)) {

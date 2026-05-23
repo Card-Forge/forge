@@ -19,6 +19,7 @@ import forge.ai.AiController;
 import forge.ai.AiProps;
 import forge.ai.llm.RecognitionResult.HandValuation;
 import forge.ai.llm.RecognitionResult.EarlyGamePlan;
+import forge.ai.llm.RecognitionResult.ManaPlan;
 import forge.ai.llm.RecognitionResult.OpponentHandGuess;
 import forge.ai.llm.RecognitionResult.PilotingAdvice;
 import forge.ai.llm.RecognitionResult.RoleAssessment;
@@ -54,6 +55,8 @@ public final class SidecarInfluence {
     private volatile RoleAssessment latestRole = null;
     /** Latest opening/rolling plan, or null. */
     private volatile EarlyGamePlan latestEarlyGamePlan = null;
+    /** Latest per-action manabase plan (fetch/land/utility), or null. */
+    private volatile ManaPlan latestManaPlan = null;
 
     /** The AI controller, used to read personality properties. */
     private final AiController ai;
@@ -165,6 +168,7 @@ public final class SidecarInfluence {
         // older sidecars or when state is too thin to compute.
         latestRole = piloting.role();
         latestEarlyGamePlan = piloting.earlyGamePlan();
+        latestManaPlan = piloting.manaPlan();
         final List<HandValuation> hvList = piloting.handValues();
         if (hvList == null || hvList.isEmpty()) {
             latestHandValues = Map.of();
@@ -326,6 +330,11 @@ public final class SidecarInfluence {
     /** @return latest opening/rolling early-game plan, if any. */
     public Optional<EarlyGamePlan> earlyGamePlan() {
         return Optional.ofNullable(latestEarlyGamePlan);
+    }
+
+    /** @return latest per-action manabase plan (fetch/land/utility), if any. */
+    public Optional<ManaPlan> manaPlan() {
+        return Optional.ofNullable(latestManaPlan);
     }
 
     /** @return cards the sidecar recommends returning after a mulligan keep. */
