@@ -9,6 +9,7 @@ import com.google.common.collect.Maps;
 import forge.card.CardType;
 import forge.card.CardTypeView;
 import forge.card.ColorSet;
+import forge.card.TextChangesView;
 import forge.card.mana.ManaCost;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
@@ -312,6 +313,13 @@ public class TrackableTypes {
         @Override
         public KeywordCollectionView getDefaultValue() {
             return KeywordCollectionView.EMPTY;
+        }
+    };
+
+    public static final TrackableType<TextChangesView> TextChangesViewType = new TrackableType<TextChangesView>() {
+        @Override
+        public TextChangesView getDefaultValue() {
+            return TextChangesView.EMPTY;
         }
     };
 }

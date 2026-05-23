@@ -33,6 +33,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
+import forge.card.ITextChanges;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.CardTraitBase;
@@ -2311,27 +2312,24 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.CardTraitBase#changeTextIntrinsic(java.util.Map, java.util.Map)
-     */
     @Override
-    public void changeTextIntrinsic(Map<String, String> colorMap, Map<String, String> typeMap) {
-        super.changeTextIntrinsic(colorMap, typeMap);
+    public void changeTextIntrinsic(ITextChanges textChanges) {
+        super.changeTextIntrinsic(textChanges);
 
         if (subAbility != null) {
             // if the parent of the subability is not this,
             // then there might be a loop
             if (subAbility.getParent() == this) {
-                subAbility.changeTextIntrinsic(colorMap, typeMap);
+                subAbility.changeTextIntrinsic(textChanges);
             }
         }
         for (SpellAbility sa : additionalAbilities.values()) {
-            sa.changeTextIntrinsic(colorMap, typeMap);
+            sa.changeTextIntrinsic(textChanges);
         }
 
         for (List<AbilitySub> list : additionalAbilityLists.values()) {
             for (AbilitySub sa : list) {
-                sa.changeTextIntrinsic(colorMap, typeMap);
+                sa.changeTextIntrinsic(textChanges);
             }
         }
     }

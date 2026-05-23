@@ -136,10 +136,9 @@ public enum TrackableProperty {
     Loyalty(TrackableTypes.StringType),
     Defense(TrackableTypes.StringType),
     AttractionLights(TrackableTypes.IntegerSetType),
-    ChangedColorWords(TrackableTypes.StringMapType),
     HasChangedColors(TrackableTypes.BooleanType),
     HasPrintedPT(TrackableTypes.BooleanType),
-    ChangedTypes(TrackableTypes.StringMapType),
+    TextChanges(TrackableTypes.TextChangesViewType),
 
     //check produce mana for BG
     OrigProduceMana(TrackableTypes.ColorSetType),

@@ -12,7 +12,9 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Lists;
 
 import forge.card.CardStateName;
+import forge.card.ITextChanges;
 import forge.card.MagicColor;
+import forge.card.TextChanges;
 import forge.card.mana.ManaAtom;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -55,10 +57,8 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
 
     protected Map<String, String> sVars = Maps.newTreeMap();
 
-    protected Map<String, String> intrinsicChangedTextColors = Maps.newHashMap();
-    protected Map<String, String> intrinsicChangedTextTypes = Maps.newHashMap();
-    protected Map<String, String> changedTextColors = Maps.newHashMap();
-    protected Map<String, String> changedTextTypes = Maps.newHashMap();
+    protected ITextChanges intrinsicTextChanges = TextChanges.EMPTY;
+    protected ITextChanges textChanges = TextChanges.EMPTY;
 
     /** Keys of descriptive (text) parameters. */
     private static final ImmutableList<String> descriptiveKeys = ImmutableList.<String>builder()
@@ -658,45 +658,24 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         return !getHostCard().equals(getCardState().getCard());
     }
 
-    public Map<String, String> getChangedTextColors() {
-        return _combineChangedMap(intrinsicChangedTextColors, changedTextColors);
-    }
-    public Map<String, String> getChangedTextTypes() {
-        return _combineChangedMap(intrinsicChangedTextTypes, changedTextTypes);
+    public ITextChanges getTextChanges() {
+        return intrinsicTextChanges.combine(textChanges);
     }
 
-    private Map<String, String> _combineChangedMap(Map<String, String> input, Map<String, String> output) {
-        // no need to do something, just return hash
-        if (input.isEmpty()) {
-            return output;
-        }
-        if (output.isEmpty()) {
-            return input;
-        }
-        // magic combine them
-        Map<String, String> result = Maps.newHashMap(output);
-        for (Map.Entry<String, String> e : input.entrySet()) {
-            String value = e.getValue();
-            result.put(e.getKey(), output.getOrDefault(value, value));
-        }
-        return result;
-    }
-
-    public void changeTextIntrinsic(Map<String,String> colorMap, Map<String,String> typeMap) {
-        intrinsicChangedTextColors = colorMap;
-        intrinsicChangedTextTypes = typeMap;
+    public void changeTextIntrinsic(ITextChanges textChanges) {
+        this.intrinsicTextChanges = textChanges.getView();
         for (final String key : this.mapParams.keySet()) {
             final String value = this.originalMapParams.get(key), newValue;
             if (noChangeKeys.contains(key)) {
                 continue;
             } else if (descriptiveKeys.contains(key)) {
                 // change descriptions differently
-                newValue = AbilityUtils.applyTextChangeEffects(value, true, colorMap, typeMap);
+                newValue = AbilityUtils.applyTextChangeEffects(value, true, textChanges);
             } else if (this.getHostCard().hasSVar(value)) {
                 // don't change literal SVar names!
                 continue;
             } else {
-                newValue = AbilityUtils.applyTextChangeEffects(value, false, colorMap, typeMap);
+                newValue = AbilityUtils.applyTextChangeEffects(value, false, textChanges);
             }
 
             if (newValue != null) {
@@ -709,8 +688,7 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
 
     public void changeText() {
         // copy changed text words into card trait there
-        this.changedTextColors = getHostCard().getChangedTextColorWords();
-        this.changedTextTypes = getHostCard().getChangedTextTypeWords();
+        this.textChanges = getHostCard().getTextChanges().getView();
 
         for (final String key : this.mapParams.keySet()) {
             final String value = this.originalMapParams.get(key), newValue;

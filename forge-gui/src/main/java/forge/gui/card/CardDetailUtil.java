@@ -1,9 +1,9 @@
 package forge.gui.card;
 
-import com.google.common.collect.Sets;
 import forge.card.CardRarity;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
+import forge.card.ITextChanges;
 import forge.card.MagicColor;
 import forge.game.GameView;
 import forge.game.card.Card;
@@ -330,26 +330,27 @@ public class CardDetailUtil {
         }
 
         // text changes
-        final Map<String, String> changedColorWords = card.getChangedColorWords();
-        final Map<String, String> changedTypes = card.getChangedTypes();
-        if (changedColorWords != null && changedTypes != null) {
-            if (!(changedColorWords.isEmpty() && changedTypes.isEmpty())) {
-                area.append("\n");
-            }
-
-            for (final Entry<String, String> e : Sets.union(changedColorWords.entrySet(), changedTypes.entrySet())) {
+        final ITextChanges textChanges = card.getTextChanges();
+        if (!textChanges.isEmpty()) {
+            area.append("\n");
+            if (textChanges.colorChanges().size() == 5) {
                 area.append("Text changed: all instances of ");
-                if (e.getKey().equals("Any")) {
-                    if (changedColorWords.containsKey(e.getValue())) {
-                        area.append("color words");
-                    } else if (forge.card.CardType.getBasicTypes().contains(e.getValue())) {
-                        area.append("basic land types");
-                    } else {
-                        area.append("creature types");
-                    }
-                } else {
-                    area.append(e.getKey());
+                area.append("color words");
+                area.append(" are replaced by ");
+                area.append(textChanges.colorChanges().get(MagicColor.Color.WHITE).getTranslatedName());
+                area.append(".\n");
+            } else {
+                for (Map.Entry<MagicColor.Color, MagicColor.Color> e : textChanges.colorChanges().entrySet()) {
+                    area.append("Text changed: all instances of ");
+                    area.append(e.getKey().getTranslatedName());
+                    area.append(" are replaced by ");
+                    area.append(e.getValue().getTranslatedName());
+                    area.append(".\n");
                 }
+            }
+            for (Map.Entry<String, String> e : textChanges.typeChanges().entrySet()) {
+                area.append("Text changed: all instances of ");
+                area.append(e.getKey());
                 area.append(" are replaced by ");
                 area.append(e.getValue());
                 area.append(".\n");
